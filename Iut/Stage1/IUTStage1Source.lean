@@ -1140,6 +1140,93 @@ theorem toCapsuleAction_normalizedLogVolume
 
 end IUTStage1TensorDirectSummandFamilyAction
 
+/--
+Nonarchimedean `Ism` action surface for Theorem 3.11 `(Ind2)`.
+
+The actual `Ism` group is not yet constructed; this record isolates the
+nonarchimedean case and requires the associated direct-summand action.
+-/
+structure IUTStage1NonarchimedeanIsmDirectSummandAction
+    {capsuleFamily :
+      IUTStage1TypedCapsuleFamilyLogVolume
+        IUTStage1PlaceKind.nonarchimedean}
+    (family : IUTStage1TensorDirectSummandFamily capsuleFamily) where
+  place : IUTStage1PlaceId IUTStage1PlaceKind.nonarchimedean
+  symmetry_kind_eq :
+    family.symmetryKind =
+      IUTStage1TensorSummandSymmetryKind.nonarchimedeanIsm
+  action : IUTStage1TensorDirectSummandFamilyAction family
+
+/--
+Archimedean order-two action surface for Theorem 3.11 `(Ind2)`.
+
+The actual order-two automorphism is not yet constructed; this record isolates
+the archimedean case and requires the associated direct-summand action.
+-/
+structure IUTStage1ArchimedeanOrderTwoDirectSummandAction
+    {capsuleFamily :
+      IUTStage1TypedCapsuleFamilyLogVolume
+        IUTStage1PlaceKind.archimedean}
+    (family : IUTStage1TensorDirectSummandFamily capsuleFamily) where
+  place : IUTStage1PlaceId IUTStage1PlaceKind.archimedean
+  symmetry_kind_eq :
+    family.symmetryKind =
+      IUTStage1TensorSummandSymmetryKind.archimedeanOrderTwo
+  action : IUTStage1TensorDirectSummandFamilyAction family
+
+namespace IUTStage1NonarchimedeanIsmDirectSummandAction
+
+variable
+  {capsuleFamily :
+    IUTStage1TypedCapsuleFamilyLogVolume
+      IUTStage1PlaceKind.nonarchimedean}
+variable {family : IUTStage1TensorDirectSummandFamily capsuleFamily}
+
+def toDirectSummandAction
+    (data : IUTStage1NonarchimedeanIsmDirectSummandAction family) :
+    IUTStage1TensorDirectSummandFamilyAction family :=
+  data.action
+
+theorem symmetryKind_eq
+    (data : IUTStage1NonarchimedeanIsmDirectSummandAction family) :
+    family.symmetryKind =
+      IUTStage1TensorSummandSymmetryKind.nonarchimedeanIsm :=
+  data.symmetry_kind_eq
+
+theorem capsuleTotalLogVolume_eq
+    (data : IUTStage1NonarchimedeanIsmDirectSummandAction family) :
+    data.toDirectSummandAction.toCapsuleAction.transformedFamily.totalLogVolume =
+      capsuleFamily.totalLogVolume :=
+  data.toDirectSummandAction.toCapsuleAction_totalLogVolume
+
+end IUTStage1NonarchimedeanIsmDirectSummandAction
+
+namespace IUTStage1ArchimedeanOrderTwoDirectSummandAction
+
+variable
+  {capsuleFamily :
+    IUTStage1TypedCapsuleFamilyLogVolume IUTStage1PlaceKind.archimedean}
+variable {family : IUTStage1TensorDirectSummandFamily capsuleFamily}
+
+def toDirectSummandAction
+    (data : IUTStage1ArchimedeanOrderTwoDirectSummandAction family) :
+    IUTStage1TensorDirectSummandFamilyAction family :=
+  data.action
+
+theorem symmetryKind_eq
+    (data : IUTStage1ArchimedeanOrderTwoDirectSummandAction family) :
+    family.symmetryKind =
+      IUTStage1TensorSummandSymmetryKind.archimedeanOrderTwo :=
+  data.symmetry_kind_eq
+
+theorem capsuleTotalLogVolume_eq
+    (data : IUTStage1ArchimedeanOrderTwoDirectSummandAction family) :
+    data.toDirectSummandAction.toCapsuleAction.transformedFamily.totalLogVolume =
+      capsuleFamily.totalLogVolume :=
+  data.toDirectSummandAction.toCapsuleAction_totalLogVolume
+
+end IUTStage1ArchimedeanOrderTwoDirectSummandAction
+
 /-- Local nonarchimedean inclusion datum from the upper-semi-compatibility step. -/
 structure IUTStage1NonarchimedeanInclusionData where
   place : IUTStage1PlaceId IUTStage1PlaceKind.nonarchimedean

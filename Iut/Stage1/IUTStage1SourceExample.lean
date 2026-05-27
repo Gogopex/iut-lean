@@ -515,6 +515,61 @@ theorem tensorDirectSummandAction_totalLogVolume_example
       capsuleFamily.totalLogVolume :=
   action.toCapsuleAction_totalLogVolume
 
+def nonarchimedeanIsmAction_to_directSummandAction_example
+    {capsuleFamily :
+      IUTStage1TypedCapsuleFamilyLogVolume
+        IUTStage1PlaceKind.nonarchimedean}
+    {family : IUTStage1TensorDirectSummandFamily capsuleFamily}
+    (data : IUTStage1NonarchimedeanIsmDirectSummandAction family) :
+    IUTStage1TensorDirectSummandFamilyAction family :=
+  data.toDirectSummandAction
+
+theorem nonarchimedeanIsmAction_symmetryKind_example
+    {capsuleFamily :
+      IUTStage1TypedCapsuleFamilyLogVolume
+        IUTStage1PlaceKind.nonarchimedean}
+    {family : IUTStage1TensorDirectSummandFamily capsuleFamily}
+    (data : IUTStage1NonarchimedeanIsmDirectSummandAction family) :
+    family.symmetryKind =
+      IUTStage1TensorSummandSymmetryKind.nonarchimedeanIsm :=
+  data.symmetryKind_eq
+
+theorem nonarchimedeanIsmAction_totalLogVolume_example
+    {capsuleFamily :
+      IUTStage1TypedCapsuleFamilyLogVolume
+        IUTStage1PlaceKind.nonarchimedean}
+    {family : IUTStage1TensorDirectSummandFamily capsuleFamily}
+    (data : IUTStage1NonarchimedeanIsmDirectSummandAction family) :
+    data.toDirectSummandAction.toCapsuleAction.transformedFamily.totalLogVolume =
+      capsuleFamily.totalLogVolume :=
+  data.capsuleTotalLogVolume_eq
+
+def archimedeanOrderTwoAction_to_directSummandAction_example
+    {capsuleFamily :
+      IUTStage1TypedCapsuleFamilyLogVolume IUTStage1PlaceKind.archimedean}
+    {family : IUTStage1TensorDirectSummandFamily capsuleFamily}
+    (data : IUTStage1ArchimedeanOrderTwoDirectSummandAction family) :
+    IUTStage1TensorDirectSummandFamilyAction family :=
+  data.toDirectSummandAction
+
+theorem archimedeanOrderTwoAction_symmetryKind_example
+    {capsuleFamily :
+      IUTStage1TypedCapsuleFamilyLogVolume IUTStage1PlaceKind.archimedean}
+    {family : IUTStage1TensorDirectSummandFamily capsuleFamily}
+    (data : IUTStage1ArchimedeanOrderTwoDirectSummandAction family) :
+    family.symmetryKind =
+      IUTStage1TensorSummandSymmetryKind.archimedeanOrderTwo :=
+  data.symmetryKind_eq
+
+theorem archimedeanOrderTwoAction_totalLogVolume_example
+    {capsuleFamily :
+      IUTStage1TypedCapsuleFamilyLogVolume IUTStage1PlaceKind.archimedean}
+    {family : IUTStage1TensorDirectSummandFamily capsuleFamily}
+    (data : IUTStage1ArchimedeanOrderTwoDirectSummandAction family) :
+    data.toDirectSummandAction.toCapsuleAction.transformedFamily.totalLogVolume =
+      capsuleFamily.totalLogVolume :=
+  data.capsuleTotalLogVolume_eq
+
 def localTensorPacket_to_localTensorState_example
     {kind : IUTStage1PlaceKind}
     (state : IUTStage1LocalTensorPacketLogVolumeState kind) :

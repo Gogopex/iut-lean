@@ -577,3 +577,76 @@ The direct-summand action itself is still an abstract source-facing action. The
 next serious mathematical refinement is to replace this action by typed
 nonarchimedean `Ism` actions and archimedean order-two actions, or at least by
 separate records for those two cases.
+
+## 7. Nonarchimedean and Archimedean `(Ind2)` Action Surfaces
+
+### Goal
+
+We separated the two source cases of Theorem 3.11 `(Ind2)` into typed Lean
+records.
+
+### Source Check
+
+Theorem 3.11 `(Ind2)` names:
+
+```text
+vQ in Vnon_Q: independent copies of Ism
+vQ in Varc_Q: order-two automorphisms
+```
+
+The Lean layer now has one record for each case:
+
+```text
+IUTStage1NonarchimedeanIsmDirectSummandAction
+IUTStage1ArchimedeanOrderTwoDirectSummandAction
+```
+
+Each record is specialized to the appropriate `IUTStage1PlaceKind`.
+
+### Lean/API Check
+
+Each source-specific action record carries:
+
+```text
+place
+symmetry_kind_eq
+action : IUTStage1TensorDirectSummandFamilyAction family
+```
+
+The symmetry-kind equality prevents a nonarchimedean `Ism` action from being
+used on a family tagged as archimedean order-two, and conversely.
+
+Both records expose:
+
+```text
+toDirectSummandAction
+capsuleTotalLogVolume_eq
+```
+
+so the previously checked finite-sum preservation path remains reusable.
+
+### Trap Avoided
+
+We still have not formalized the `Ism` group or the order-two automorphism
+itself.  The purpose of this milestone is to prevent the two cases from being
+merged too early.  The actual group/action construction remains a separate
+mathematical obligation.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+nonarchimedeanIsmAction_to_directSummandAction_example
+nonarchimedeanIsmAction_symmetryKind_example
+nonarchimedeanIsmAction_totalLogVolume_example
+archimedeanOrderTwoAction_to_directSummandAction_example
+archimedeanOrderTwoAction_symmetryKind_example
+archimedeanOrderTwoAction_totalLogVolume_example
+```
+
+### Remaining Gap
+
+The next step should use these two source-specific action records to build
+source-specific direct-summand packet `(Ind2)` steps, then compare them with the
+generic direct-summand step.
