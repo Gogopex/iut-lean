@@ -5810,3 +5810,75 @@ chain.
 The next milestone should expose the toy `Stage1Comparison` record as the same
 signed-pilot packaging plus the q-positivity proof, again keeping the
 comparison field tied to the q-to-Theta chain.
+
+## Milestone 66: Toy Stage1Comparison Packaging
+
+Lean file:
+
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+`Stage1Comparison` is the record form of the Corollary 3.12-shaped output. It
+stores the tagged Theta and q pilot log-volumes, side-label proofs, positivity
+of the q pilot magnitude, and the Corollary 3.12 comparison field.
+
+This record should not introduce another mathematical comparison. In the toy
+source-obligation path, its `comparison` field is the same signed-pilot
+Corollary 3.12 packaging from the previous milestone, and its `q_positive` field
+is the elementary positivity of the q-side pilot magnitude.
+
+### Purpose
+
+This milestone exposes the toy `Stage1Comparison` fields:
+
+```text
+theta = signedPilotLogVolume PilotSide.theta (-(2 * h) + epsilonBound)
+q = signedPilotLogVolume PilotSide.q
+      (Transport.map unitQToTheta (qAssignment h)).coord
+theta.side = PilotSide.theta
+q.side = PilotSide.q
+0 < q.value
+comparison = ledger.corollary312
+comparison = corollary312_of_signed_le qSigned_le_thetaSigned
+```
+
+### Lean Declarations
+
+In `ToySourceObligations.lean`:
+
+```text
+unitThetaToyStage1Comparison_theta_eq_signed_from_sourceObligations
+unitThetaToyStage1Comparison_q_eq_signed_from_sourceObligations
+unitThetaToyStage1Comparison_theta_side_from_sourceObligations
+unitThetaToyStage1Comparison_q_side_from_sourceObligations
+unitThetaToyStage1Comparison_q_positive_from_sourceObligations
+unitThetaToyStage1Comparison_comparison_eq_corollary312_from_sourceObligations
+unitThetaToyStage1Comparison_comparison_eq_qThetaChain
+```
+
+### What This Tests
+
+The final toy `Stage1Comparison` record is now auditable field-by-field:
+
+```text
+signed pilot packaging
+side labels
+q positivity
+corollary comparison from the q-to-Theta chain
+```
+
+This makes clear that `Stage1Comparison` is a packaging layer over the source
+obligations rather than a new proof source.
+
+### Design Trap Avoided
+
+The trap would be to inspect only the final record type and lose the dependency
+from its comparison field back to the two-leg q-to-target-to-Theta chain. These
+projections keep the dependency visible.
+
+### Next Step
+
+The next milestone should expose the toy final comparison's recovered
+Corollary 3.12 statement via `corollary312_from_stage1_comparison`, confirming
+that unpacking the final record returns the same corollary proof.

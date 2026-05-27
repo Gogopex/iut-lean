@@ -659,6 +659,109 @@ theorem unitThetaToyCorollary312_eq_qThetaChain_from_sourceObligations
           measure hnormalized hh hbound hholds) :=
   rfl
 
+theorem unitThetaToyStage1Comparison_theta_eq_signed_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyStage1Comparison_from_sourceObligations
+      measure hnormalized hh hbound hholds).theta =
+      signedPilotLogVolume PilotSide.theta (-(2 * h) + epsilonBound) :=
+  rfl
+
+theorem unitThetaToyStage1Comparison_q_eq_signed_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyStage1Comparison_from_sourceObligations
+      measure hnormalized hh hbound hholds).q =
+      signedPilotLogVolume PilotSide.q
+        (Transport.map unitQToTheta (qAssignment h)).coord :=
+  rfl
+
+theorem unitThetaToyStage1Comparison_theta_side_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyStage1Comparison_from_sourceObligations
+      measure hnormalized hh hbound hholds).theta.side =
+      PilotSide.theta :=
+  rfl
+
+theorem unitThetaToyStage1Comparison_q_side_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyStage1Comparison_from_sourceObligations
+      measure hnormalized hh hbound hholds).q.side =
+      PilotSide.q :=
+  rfl
+
+theorem unitThetaToyStage1Comparison_q_positive_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    0 <
+      (unitThetaToyStage1Comparison_from_sourceObligations
+        measure hnormalized hh hbound hholds).q.value :=
+  (unitThetaToyStage1Comparison_from_sourceObligations
+    measure hnormalized hh hbound hholds).q_positive
+
+theorem unitThetaToyStage1Comparison_comparison_eq_corollary312_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyStage1Comparison_from_sourceObligations
+      measure hnormalized hh hbound hholds).comparison =
+      (unitThetaToySourceObligationLedger
+        measure hnormalized hh hbound hholds).corollary312 :=
+  rfl
+
+theorem unitThetaToyStage1Comparison_comparison_eq_qThetaChain
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyStage1Comparison_from_sourceObligations
+      measure hnormalized hh hbound hholds).comparison =
+      corollary312_of_signed_le
+        (unitThetaToy_qSigned_le_thetaSigned_from_sourceObligations
+          measure hnormalized hh hbound hholds) :=
+  rfl
+
 theorem unitThetaToy_theta_commonBound_from_sourceObligations
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
