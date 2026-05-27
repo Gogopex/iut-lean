@@ -580,3 +580,67 @@ hull+det bridge, common container context, resulting common target bound, and
 all-targets-at-most statement. That will identify the next exact abstraction
 standing between the formalized route and a genuine IUT proof of the 3.12
 comparison.
+
+## Periodic Review: HDD/SHE Bridge Decomposition
+
+Date: 2026-05-27
+
+This checkpoint reviews the recent work on the common-container and
+HDD-after-SHE bridge.
+
+### Current Lean Chain
+
+The final charted comparison boundary now exposes:
+
+```text
+CommonContainerData.BoundAudit
+HDDSHECompositeData.DecompositionAudit
+HDDCompositeData.DecompositionAudit
+HullDetBridgeData.BoundAudit
+```
+
+The route from the final charted comparison to the bridge is:
+
+```text
+AuditedChartedComparisonBoundary
+-> AuditedThetaChartBound
+-> IUTStage1Theorem311AuditedHDDSHEBound
+-> CommonContainerData.BoundAudit
+-> HDDSHECompositeData.DecompositionAudit
+-> HDDCompositeData.DecompositionAudit
+-> HullDetBridgeData.BoundAudit
+```
+
+### Positive Alignment
+
+This is still on the actual 3.11-to-3.12 path. The Theta-side bound is no
+longer just a number in an audit record; it is traceable through the common
+container, the `(HDD) o (SHE)` composite, the HDD decomposition, and the
+hull+det bridge.
+
+This is useful for the disputed point because it keeps SHE, common-container
+context, history separation, and the target-volume estimates visible at the
+same boundary where the charted q-to-Theta inequality is stated.
+
+### Remaining Gaps
+
+The key remaining abstraction is now sharply localized:
+
+* `HullDetBridgeData.BoundAudit` still records a supplied structured bridge.
+* The bridge does not yet formalize a concrete common target, hull operation,
+  determinant construction, or log-volume estimate.
+* The current decomposition equalities are definitional bookkeeping, not the
+  full IUT mathematics.
+
+This is acceptable as a staging point because the missing object has a name
+and a small API.
+
+### Global 3.12 Check
+
+The formalization has not proven Corollary 3.12 from Mochizuki's papers.
+What it has done is make it harder for a formal proof to hide the disputed
+comparison behind a single real inequality or a single opaque bridge.
+
+The next useful mathematical step is to refine the hull+det bridge audit. A
+reasonable first target is a named common-target/hull datum with a measured
+bound, before attempting determinant or log-volume content.
