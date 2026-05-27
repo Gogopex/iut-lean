@@ -149,6 +149,8 @@ Current modules:
   comparison families, modeling the post-hull upper-bound interface.
 * `Iut.Foundations.TransportedRegionFamily`: comparison-family presentation with
   explicit choice-dependent transports and target regions.
+* `Iut.Foundations.AlgorithmicOutput`: opaque IPL/SHE/APT qualitative-property
+  interface for transported algorithmic outputs.
 * `Iut.Stage1.PilotComparison`: first neutral interface for the Corollary 3.12
   target shape.
 * `Iut.Stage1.ToyModel`: Lean tests for Mochizuki's real-valued toy model from
@@ -159,6 +161,8 @@ Current modules:
   controlled by an explicit common epsilon bound.
 * `Iut.Stage1.ToyAPTTransport`: toy APT-style transported output data before
   passage to common targets and measured bounds.
+* `Iut.Stage1.ToyQualitativeOutput`: toy algorithmic output with explicit
+  IPL/SHE/APT certificates plus separate common-target bound data.
 
 Useful commands:
 

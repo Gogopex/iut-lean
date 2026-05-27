@@ -1312,3 +1312,119 @@ of an algorithmic output, such as toy `HasIPL`, `HasSHE`, and `HasAPT` fields,
 without making them mathematically powerful. That will let future milestones
 state which hypotheses are used when passing from algorithmic output to
 common-target bounds.
+
+## Milestone 13: Qualitative Algorithmic Output
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicOutput.lean`
+* `Iut/Stage1/ToyQualitativeOutput.lean`
+
+### Source Check
+
+This milestone follows IUT III, Remark 3.11.1, where Mochizuki names IPL
+(`Input prime-strip link`), SHE (`Simultaneous holomorphic expressibility`), and
+APT (`Algorithmic parallel transport`) as qualitative properties of the output
+of the multiradial construction algorithm. The source says that IPL links the
+output data to the input q-pilot prime-strip, SHE says the construction is
+simultaneously meaningful relative to the two arithmetic holomorphic
+structures, and APT is explicitly not just transport of a set-theoretic region by
+a set-theoretic map.
+
+Step (xi) in the proof of Corollary 3.12 then takes a qualitative-logical view
+of Theorem 3.11 as an algorithm that transforms input data into output data
+satisfying IPL and SHE, while temporarily forgetting hidden theta-function
+internals. Mochizuki's recent progress report says the RIMS formalization work
+is focused on the APT part of the second/third triangles. Scholze-Stix's critique
+again motivates explicit bookkeeping: they object to hidden identifications when
+real inequalities are extracted.
+
+### Purpose
+
+The previous milestone made the transported-output family explicit. This
+milestone adds a wrapper:
+
+```text
+AlgorithmicOutput source target index
+```
+
+with fields:
+
+```text
+family : TransportedRegionFamily source target index
+ipl    : Prop
+she    : Prop
+apt    : Prop
+```
+
+The point is not to make these names prove anything. They are opaque
+propositions that future source-specific modules must instantiate.
+
+### Lean Declarations
+
+In `AlgorithmicOutput.lean`:
+
+```text
+AlgorithmicOutput.HasIPL
+AlgorithmicOutput.HasSHE
+AlgorithmicOutput.HasAPT
+AlgorithmicOutput.Certified
+AlgorithmicOutput.comparison
+AlgorithmicOutput.comparisons
+AlgorithmicOutput.Holds
+AlgorithmicOutput.CommonTargetBound
+AlgorithmicOutput.CertifiedCommonTargetBound
+```
+
+`Certified` stores evidence for the named qualitative properties. A
+`CertifiedCommonTargetBound` stores both this evidence and the separate
+common-target bound. Theorems such as
+
+```text
+CertifiedCommonTargetBound.choice_targetVolume_le
+CertifiedCommonTargetBound.allTargetsAtMost
+```
+
+use the common-target bound field, not the names IPL/SHE/APT alone.
+
+In `ToyQualitativeOutput.lean`:
+
+```text
+thetaToyAlgorithmOutput
+thetaToyAlgorithmOutput_certified
+thetaToyCertifiedCommonTargetBound
+thetaToyAlgorithmOutput_choice_targetVolume_le_bound
+unitThetaToyAlgorithmOutput_bound_of_choice_holds
+```
+
+The toy output sets IPL/SHE/APT to `True`, only to test the interface. The
+numerical estimate still needs the explicit epsilon cap, upper-ray normalization,
+and common-target bound construction.
+
+### What This Tests
+
+The formal dependency is now visible:
+
+1. A transported output family is present.
+2. Qualitative properties can be named and certified.
+3. Certification alone does not produce containment or a volume estimate.
+4. The real bound is obtained only when a `CommonTargetBound` is also supplied.
+
+This matters for the IUT formalization because the contested Corollary 3.12 step
+cannot be allowed to turn labels such as IPL, SHE, or APT into the desired real
+inequality without intermediate formal data.
+
+### Design Trap Avoided
+
+The trap would be to implement `HasAPT -> CommonTargetBound` as an axiom-like
+bridge. This milestone refuses that bridge. It provides only names and explicit
+packaging, so future work must prove any bridge from source-specific
+constructions.
+
+### Next Step
+
+The next milestone should add a first bridge-shaped theorem schema, still
+abstract: if a certified algorithmic output is accompanied by an explicit
+common-target-bound constructor, then the chosen target-volume bound follows.
+This will make the future "3.11 => 3.11.5" obligation visible as a separate
+function/hypothesis rather than as an implicit consequence of APT.
