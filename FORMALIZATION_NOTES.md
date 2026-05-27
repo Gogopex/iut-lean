@@ -3922,3 +3922,78 @@ projection lemmas for the signed-to-positive conversion.
 The next milestone should expose the remaining side-label fields of
 `stage1Comparison`, confirming definitionally that the exported `theta` side is
 `PilotSide.theta` and the exported `q` side is `PilotSide.q`.
+
+## Milestone 41: Stage 1 Side-Label Projections
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+The final Corollary 3.12 comparison distinguishes the `Theta`-pilot side from
+the `q`-pilot side. Mochizuki's April 2026 report describes this as the
+simultaneous comparison of the `Theta`-pilot and `q`-pilot objects in a common
+container. IUT III, Step `(xi-d)`, likewise presents separate `Theta` and `q`
+log-volume expressions after they have been made comparable in `R`.
+
+Since Scholze-Stix's critique stresses that the real-number identifications must
+be explicit, the bookkeeping labels on the exported `Stage1Comparison` should
+also be explicit: the final record should not leave room for the two pilot sides
+to be interchanged silently.
+
+### Purpose
+
+Milestone 40 exposed the signed pilot-volume values. This milestone exposes the
+side-label fields:
+
+```text
+ledger.stage1Comparison.theta_side = rfl
+ledger.stage1Comparison.q_side = rfl
+
+ledger.stage1Comparison.theta.side = PilotSide.theta
+ledger.stage1Comparison.q.side = PilotSide.q
+```
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.stage1Comparison_theta_side_eq_ledger
+SourceObligationLedger.stage1Comparison_q_side_eq_ledger
+SourceObligationLedger.stage1Comparison_theta_side_value
+SourceObligationLedger.stage1Comparison_q_side_value
+```
+
+All four proofs are `rfl`, so the side labels in the exported Stage 1 object
+are definitionally the labels assigned by `stage1Comparison_of_signed_le`.
+
+### What This Tests
+
+The exported endpoint now has explicit projections for:
+
+```text
+theta side label
+q side label
+theta signed value
+q signed value
+positivity proof
+comparison proof
+```
+
+This gives a fully named audit trail for the current Stage 1 packaging layer.
+
+### Design Trap Avoided
+
+The trap would be to regard side labels as harmless metadata. In this project,
+labels matter because the disputed comparison distinguishes which side carries
+the `Theta`-pilot upper ray and which side carries the `q`-pilot value. The
+projection lemmas keep that distinction checkable in Lean.
+
+### Next Step
+
+The next milestone should turn this package audit into a compact theorem that
+recovers `corollary312_from_stage1_comparison ledger.stage1Comparison` as the
+same proof as `ledger.corollary312`, so users of the exported Stage 1 interface
+can move back to the ledger proof without unfolding the record manually.

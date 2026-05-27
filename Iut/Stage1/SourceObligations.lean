@@ -182,6 +182,26 @@ theorem stage1Comparison_q_value_eq_neg (ledger :
     ledger.stage1Comparison.q.value = -qSigned :=
   rfl
 
+theorem stage1Comparison_theta_side_eq_ledger (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.stage1Comparison.theta_side = rfl :=
+  rfl
+
+theorem stage1Comparison_q_side_eq_ledger (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.stage1Comparison.q_side = rfl :=
+  rfl
+
+theorem stage1Comparison_theta_side_value (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.stage1Comparison.theta.side = PilotSide.theta :=
+  rfl
+
+theorem stage1Comparison_q_side_value (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.stage1Comparison.q.side = PilotSide.q :=
+  rfl
+
 theorem stage1Comparison_q_positive_eq_ledger (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     ledger.stage1Comparison.q_positive = ledger.q_positive :=
