@@ -3525,3 +3525,88 @@ The next milestone should add a toy projection theorem showing that
 `threeTermComparison.q_le_target` is the same proof as the ledger's packaged
 membership inequality, and `threeTermComparison.target_le_theta` is the common
 bound applied to the chosen output.
+
+## Milestone 36: Toy Three-Term Chain Projections
+
+Lean file:
+
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+Mochizuki's April 2026 formalization report isolates the final part of
+`Theorem 3.11 => Corollary 3.12` as the simultaneous comparison of the
+`q`- and `Theta`-pilot objects in a common container. IUT III, Corollary 3.12,
+Step `(xi-d)` then emphasizes that the comparable objects are obtained only
+after forming the correct determinant/log-volume data and landing in a common
+real setting:
+
+```text
+R_{<= -|log(Theta)|} subset R; -|log(q)| in R
+```
+
+Scholze-Stix's critique identifies this as exactly the place where all
+identifications of ordered one-dimensional real vector spaces must be spelled
+out before concluding a numerical inequality. For our toy endpoint, this means
+that a named three-term comparison is not enough: we also want projection
+theorems showing where each field of the chain came from.
+
+### Purpose
+
+Milestone 35 introduced:
+
+```text
+ThreeTermComparison qSigned targetSigned thetaSigned
+```
+
+This milestone proves that, in the toy source ledger, the two fields of the
+three-term comparison are not hiding any extra argument:
+
+```text
+qSigned <= targetSigned
+targetSigned <= thetaSigned
+```
+
+The first field is exactly the ledger's membership inequality. The second field
+is exactly the common target bound applied to the chosen output, after rewriting
+the charted target signed value to the selected output's measured target volume.
+
+### Lean Declarations
+
+In `ToySourceObligations.lean`:
+
+```text
+unitThetaToy_threeTerm_q_le_target_from_sourceObligations
+unitThetaToy_threeTerm_target_le_theta_from_sourceObligations
+```
+
+Both proofs are `rfl`. This is intentional: Lean confirms that the toy chain
+fields are definitionally the expected proof fields, not merely propositionally
+equivalent after proof irrelevance.
+
+### What This Tests
+
+The toy endpoint now exposes the final chain in three audit layers:
+
+```text
+membership.holds
+membership.q_le_target
+threeTermComparison.q_le_target
+threeTermComparison.target_le_theta
+```
+
+This makes the final `q <= theta` proof traceable through the selected target
+volume rather than collapsing immediately to a two-term inequality.
+
+### Design Trap Avoided
+
+The trap would be to introduce a named chain but then make its fields opaque.
+That would give us cleaner Lean terms while losing the audit trail that matters
+for the Corollary 3.12 dispute. Here the projection lemmas keep the chain
+transparent and ready to be replaced later by source-level IUT lemmas.
+
+### Next Step
+
+The next milestone should promote the same field-origin projections from the
+toy endpoint to general source-ledger theorems, so every future source module
+gets the same audit hooks without having to reprove them.

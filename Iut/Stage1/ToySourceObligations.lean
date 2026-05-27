@@ -129,6 +129,39 @@ theorem unitThetaToy_membership_holds_from_sourceObligations
           using hholds) :=
   rfl
 
+theorem unitThetaToy_threeTerm_q_le_target_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let ledger := unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds
+    ledger.threeTermComparison.q_le_target =
+      ledger.membership.q_le_target :=
+  rfl
+
+theorem unitThetaToy_threeTerm_target_le_theta_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let ledger := unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds
+    ledger.threeTermComparison.target_le_theta =
+      (by
+        rw [ledger.targetVolume.targetSigned_eq]
+        exact TransportedRegionFamily.choice_targetVolume_le_of_commonBound
+          ledger.theta_commonBound ledger.chosenOutput.choice) :=
+  rfl
+
 end ToyModel
 end Stage1
 end Iut
