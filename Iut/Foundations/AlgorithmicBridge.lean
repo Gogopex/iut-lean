@@ -350,6 +350,20 @@ structure ChartedQValueData
   qSigned_eq : (Transport.map chart.qToTarget qPoint).coord = qSigned
 
 /--
+The Theta-side bound as read through a specific real-comparison chart.
+
+The point lives on the target side; the explicit chart transport prevents the
+Theta-side bound from being silently read in an unnamed copy of the reals.
+-/
+structure ChartedThetaBoundData
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target)
+    (chart : output.RealComparisonChartData measure)
+    (thetaSigned : Real) where
+  thetaPoint : Point target
+  thetaSigned_eq : (Transport.map chart.thetaToTarget thetaPoint).coord = thetaSigned
+
+/--
 A common container together with the real-line comparison chart used to read its
 final q- and Theta-side real numbers in the target copy.
 -/

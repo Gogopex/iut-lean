@@ -41,6 +41,15 @@ def unitThetaToySourceObligationLedger
       thetaToyChartedCommonContainerData measure hnormalized unitQToTheta h hbound,
     she_matches_certificate := rfl,
     qValue := { qPoint := qAssignment h, qSigned_eq := rfl },
+    thetaBound :=
+      { thetaPoint := point thetaLine (-(2 * h) + epsilonBound),
+        thetaSigned_eq := by
+          simp [thetaToyChartedCommonContainerData,
+            thetaToyRealComparisonChartData] },
+    theta_commonBound :=
+      (thetaToyChartedCommonContainerData
+        measure hnormalized unitQToTheta h hbound).apply
+        (thetaToyStructuredCertificate unitQToTheta h epsilon),
     choice := choice,
     q_le_choice :=
       unitThetaToy_qSigned_le_choiceTargetVolume measure hnormalized h epsilon choice hholds,

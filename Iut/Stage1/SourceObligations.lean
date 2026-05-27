@@ -35,6 +35,10 @@ structure SourceObligationLedger
   she_matches_certificate :
     chartedContainer.commonContainer.hddShe.sheArrow.datum = certificate.she
   qValue : output.ChartedQValueData measure chartedContainer.chart qSigned
+  thetaBound :
+    output.ChartedThetaBoundData measure chartedContainer.chart thetaSigned
+  theta_commonBound :
+    output.CommonTargetBound measure thetaSigned
   choice : index
   q_le_choice :
     qSigned <= RegionMeasure.targetVolume measure (output.comparison choice)
@@ -89,6 +93,17 @@ theorem qSigned_eq_chartedQ (ledger :
     (Transport.map ledger.chartedContainer.chart.qToTarget
       ledger.qValue.qPoint).coord = qSigned :=
   ledger.qValue.qSigned_eq
+
+theorem thetaSigned_eq_chartedTheta (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    (Transport.map ledger.chartedContainer.chart.thetaToTarget
+      ledger.thetaBound.thetaPoint).coord = thetaSigned :=
+  ledger.thetaBound.thetaSigned_eq
+
+def thetaCommonBound (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    output.CommonTargetBound measure thetaSigned :=
+  ledger.theta_commonBound
 
 theorem hasNormalization (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :

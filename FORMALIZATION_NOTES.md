@@ -2829,3 +2829,100 @@ The next milestone should add the analogous charted Theta bound record: the
 target-side upper-bound coordinate, the proof that it is the `thetaSigned`
 bound in the ledger, and the connection to the common-target bound produced by
 the charted container.
+
+## Milestone 28: Charted Theta Bound
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/SourceObligations.lean`
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III, Corollary 3.12, Step `(xi-d)` identifies the Theta-side output as the
+upper ray `R <= -|log(Theta)|`, where `-|log(Theta)|` is the negative
+log-volume of the holomorphic hull under consideration. Earlier explanatory
+material in IUT III says the computation of the holomorphic-hull log-volume
+amounts to computing an upper bound for the q-side log-volume.
+
+Mochizuki's 2026 report describes the final triangle as a simultaneous
+comparison between the Theta-pilot corresponding to HDD and the q-pilot
+corresponding to SHE. Scholze-Stix's criticism again makes the formal
+requirement sharper: the Theta-side real bound must be tied to the real-line
+chart, not left as an unlabelled scalar.
+
+### Purpose
+
+Milestone 27 charted the q-side scalar. This milestone adds the analogous
+Theta-side chart record:
+
+```text
+ChartedThetaBoundData
+```
+
+It stores:
+
+```text
+thetaPoint : Point target
+thetaSigned_eq :
+  (Transport.map chart.thetaToTarget thetaPoint).coord = thetaSigned
+```
+
+The source ledger also now stores:
+
+```text
+theta_commonBound : output.CommonTargetBound measure thetaSigned
+```
+
+This keeps two facts separate: the charted Theta point determines the real
+number `thetaSigned`, while the common-target-bound witness says that
+`thetaSigned` is the upper bound produced by the charted container.
+
+### Lean Declarations
+
+In `AlgorithmicBridge.lean`:
+
+```text
+ChartedThetaBoundData.thetaPoint
+ChartedThetaBoundData.thetaSigned_eq
+```
+
+In `SourceObligations.lean`, the ledger now has:
+
+```text
+thetaBound :
+  output.ChartedThetaBoundData measure chartedContainer.chart thetaSigned
+theta_commonBound :
+  output.CommonTargetBound measure thetaSigned
+```
+
+and provides:
+
+```text
+thetaSigned_eq_chartedTheta
+thetaCommonBound
+```
+
+In `ToySourceObligations.lean`, the toy ledger supplies the target-side point
+with coordinate `-(2 * h) + epsilonBound` and obtains `theta_commonBound` by
+applying the charted container to the toy structured certificate.
+
+### What This Tests
+
+The toy source-obligation endpoint still proves the signed Stage 1 inequality
+after adding a charted Theta-bound point and a separate common-target-bound
+witness. Lean checks that the identity Theta chart sends the toy Theta point to
+the `thetaSigned` coordinate used in the ledger.
+
+### Design Trap Avoided
+
+The trap would be to treat the upper bound `thetaSigned` as merely the bound
+parameter of a bridge. This milestone makes it both a charted target-side real
+coordinate and the bound of a common-target-bound witness.
+
+### Next Step
+
+The next milestone should use the new `theta_commonBound` field directly in the
+source ledger's derivation of `qSigned <= thetaSigned`, replacing the current
+route through `chartedContainer.structuredBridge` where possible.
