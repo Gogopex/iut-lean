@@ -159,6 +159,39 @@ theorem unitThetaToyGeneratedIndeterminacyQuotient_profile_example :
   IUTStage1IndeterminacyQuotient.generated_profile
     (unitThetaToyIndeterminacyGenerators (index := index))
 
+theorem coordinateIndeterminacy_generated_coric_eq_example
+    {coric ind1State ind2State ind3State : Type u}
+    {choice₁ choice₂ :
+      IUTStage1IndeterminacyChoice coric ind1State ind2State ind3State}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1IndeterminacyChoice.coordinateGenerators
+          (coric := coric) (ind1State := ind1State)
+          (ind2State := ind2State) (ind3State := ind3State))
+        choice₁ choice₂) :
+    choice₁.coric = choice₂.coric :=
+  IUTStage1IndeterminacyChoice.generated_coric_eq hrel
+
+theorem coordinateIndeterminacy_image_invariant_of_coric_example
+    {coric ind1State ind2State ind3State : Type u}
+    (images :
+      RegionFamily thetaLine
+        (IUTStage1IndeterminacyChoice coric ind1State ind2State ind3State))
+    (hcoric :
+      ∀ choice₁ choice₂,
+        choice₁.coric = choice₂.coric ->
+          images.region choice₁ = images.region choice₂)
+    {choice₁ choice₂ :
+      IUTStage1IndeterminacyChoice coric ind1State ind2State ind3State}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1IndeterminacyChoice.coordinateGenerators
+          (coric := coric) (ind1State := ind1State)
+          (ind2State := ind2State) (ind3State := ind3State))
+        choice₁ choice₂) :
+    images.region choice₁ = images.region choice₂ :=
+  IUTStage1IndeterminacyChoice.image_invariant_of_coric images hcoric hrel
+
 def unitThetaToyMultiradialThetaImages
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
