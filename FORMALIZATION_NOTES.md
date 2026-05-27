@@ -14429,3 +14429,101 @@ Pi_CK / Pi_XK
 
 to the finite Galois automorphism group of an actual function-field extension,
 rather than supplying `deckEquivAlgAut` directly.
+
+## Math Milestone 56: Theta Quotient Acting on a Finite Galois Function Field
+
+### Source Check
+
+IUT I, Remark 3.1.2, says that the `Theta`-approach reconstructs the function
+field of `X_K` with the natural action
+
+```text
+Gal(X_K / C_K) ~= Pi_CK / Pi_XK.
+```
+
+Milestones 54 and 55 separately formalized:
+
+* an algebra-automorphism source for deck actions;
+* the finite-Galois fixed-field theorem.
+
+This milestone combines those two pieces at the theta quotient boundary: if the
+theta deck quotient `Pi_CK/Pi_XK` is identified with the algebra automorphism
+group of a finite Galois extension `L/B`, then the theta function-field package
+is built from that finite Galois extension.
+
+This remains strictly on the reconstruction side. It does not transport ring
+structures across the log-link and does not assert the Corollary 3.12
+inequality.
+
+### Lean Move
+
+The theta function-field namespace now has:
+
+```text
+ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+```
+
+It takes:
+
+```text
+FiniteDimensional B L
+IsGalois B L
+quotientEquivAlgAut :
+  ThetaApproachQuotientData.deckQuotient thetaApproach ~= (L equiv_alg[B] L)
+```
+
+and produces:
+
+```text
+ThetaApproachFunctionFieldData thetaApproach
+```
+
+The supporting theorems are:
+
+```text
+ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv_deckRingAut_apply
+ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv_fixed_iff_in_base
+```
+
+The first says that the deck action is exactly the transported algebra
+automorphism. The second says that the elements fixed by the theta deck quotient
+are exactly the base-field elements of the finite Galois extension.
+
+### Lean Decisions
+
+The quotient-to-automorphism equivalence is still an input:
+
+```text
+Pi_CK/Pi_XK ~= L equiv_alg[B] L
+```
+
+But once this equivalence is supplied, Lean no longer needs arbitrary action,
+faithfulness, or fixed-field assumptions for the theta function-field package.
+Those are derived from mathlib's algebra automorphism action and finite Galois
+fixed-field theorem.
+
+### What This Tests
+
+The example file checks:
+
+* a theta function-field package can be built from a finite Galois extension and
+  a quotient-to-automorphism equivalence;
+* the resulting deck automorphism is the transported algebra automorphism;
+* the fixed-by-deck statement is the finite-Galois base-field statement;
+* the induced `Pi_CK -> RingAut` kernel is still exactly the image of `Pi_XK`.
+
+### Design Trap Avoided
+
+The trap would be to let the theta quotient act on a field without tying that
+action to a finite Galois extension. This milestone forces the action to pass
+through `L ≃ₐ[B] L` in the finite-Galois case.
+
+The remaining trap is also explicit: the equivalence between the group-theoretic
+quotient and the finite-Galois automorphism group is not yet derived from a
+finite etale cover of orbicurves.
+
+### Remaining Gap
+
+The next step is to introduce a typed finite-etale/Galois-cover interface for
+`X_K -> C_K` whose output supplies the quotient-to-automorphism equivalence,
+instead of taking that equivalence as a naked field.

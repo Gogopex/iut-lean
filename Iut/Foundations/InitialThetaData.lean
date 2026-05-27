@@ -1951,6 +1951,66 @@ noncomputable def ofAlgebraicDeckFunctionField
   deckActionMatchesGalQuotient := deckActionMatchesGalQuotient
   deckActionMatchesGalQuotient_holds := hDeck
 
+/--
+Build a theta function-field package from a finite Galois extension whose
+automorphism group has been identified with the theta deck quotient.
+-/
+noncomputable def ofFiniteGaloisAlgAutEquiv
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L))
+    (reconstructedFunctionFieldOfXK : Prop)
+    (hReconstructed : reconstructedFunctionFieldOfXK)
+    (deckActionMatchesGalQuotient : Prop)
+    (hDeck : deckActionMatchesGalQuotient) :
+    ThetaApproachFunctionFieldData thetaApproach :=
+  ThetaApproachFunctionFieldData.ofAlgebraicDeckFunctionField
+    (AlgebraicDeckFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+      (deckGroup := ThetaApproachQuotientData.deckQuotient thetaApproach)
+      (B := B) (L := L) quotientEquivAlgAut)
+    reconstructedFunctionFieldOfXK hReconstructed deckActionMatchesGalQuotient hDeck
+
+theorem ofFiniteGaloisAlgAutEquiv_deckRingAut_apply
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L))
+    (reconstructedFunctionFieldOfXK : Prop)
+    (hReconstructed : reconstructedFunctionFieldOfXK)
+    (deckActionMatchesGalQuotient : Prop)
+    (hDeck : deckActionMatchesGalQuotient)
+    (q : ThetaApproachQuotientData.deckQuotient thetaApproach) (x : L) :
+    (ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+      quotientEquivAlgAut reconstructedFunctionFieldOfXK hReconstructed
+      deckActionMatchesGalQuotient hDeck).reconstructedFunctionField.deckRingAut q x =
+      quotientEquivAlgAut q x :=
+  rfl
+
+theorem ofFiniteGaloisAlgAutEquiv_fixed_iff_in_base
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L))
+    (reconstructedFunctionFieldOfXK : Prop)
+    (hReconstructed : reconstructedFunctionFieldOfXK)
+    (deckActionMatchesGalQuotient : Prop)
+    (hDeck : deckActionMatchesGalQuotient)
+    (x : L) :
+    (∀ q : ThetaApproachQuotientData.deckQuotient thetaApproach,
+        (ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+          quotientEquivAlgAut reconstructedFunctionFieldOfXK hReconstructed
+          deckActionMatchesGalQuotient hDeck).reconstructedFunctionField.deckRingAut q x = x) ↔
+      ∃ b : B, algebraMap B L b = x := by
+  constructor
+  · intro hfixed
+    exact (IsGalois.mem_range_algebraMap_iff_fixed x).mpr (by
+      intro σ
+      rcases quotientEquivAlgAut.surjective σ with ⟨q, rfl⟩
+      simpa [ofFiniteGaloisAlgAutEquiv_deckRingAut_apply] using hfixed q)
+  · rintro ⟨b, rfl⟩ q
+    exact (quotientEquivAlgAut q).commutes b
+
 def baseToFunctionField :
     functionFieldData.baseFunctionField →+* functionFieldData.functionField :=
   functionFieldData.reconstructedFunctionField.baseToFunctionField

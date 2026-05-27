@@ -326,6 +326,78 @@ noncomputable example
     data reconstructedFunctionFieldOfXK hReconstructed
     deckActionMatchesGalQuotient hDeck).deckRingAutHom_injective
 
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L))
+    (reconstructedFunctionFieldOfXK deckActionMatchesGalQuotient : Prop)
+    (hReconstructed : reconstructedFunctionFieldOfXK)
+    (hDeck : deckActionMatchesGalQuotient) :
+    ThetaApproachFunctionFieldData thetaApproach :=
+  ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+    quotientEquivAlgAut reconstructedFunctionFieldOfXK hReconstructed
+    deckActionMatchesGalQuotient hDeck
+
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L))
+    (reconstructedFunctionFieldOfXK deckActionMatchesGalQuotient : Prop)
+    (hReconstructed : reconstructedFunctionFieldOfXK)
+    (hDeck : deckActionMatchesGalQuotient)
+    (q : ThetaApproachQuotientData.deckQuotient thetaApproach) (x : L) :
+    (ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+      quotientEquivAlgAut reconstructedFunctionFieldOfXK hReconstructed
+      deckActionMatchesGalQuotient hDeck).reconstructedFunctionField.deckRingAut q x =
+      quotientEquivAlgAut q x :=
+  ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv_deckRingAut_apply
+    quotientEquivAlgAut reconstructedFunctionFieldOfXK hReconstructed
+    deckActionMatchesGalQuotient hDeck q x
+
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L))
+    (reconstructedFunctionFieldOfXK deckActionMatchesGalQuotient : Prop)
+    (hReconstructed : reconstructedFunctionFieldOfXK)
+    (hDeck : deckActionMatchesGalQuotient)
+    (x : L) :
+    (∀ q : ThetaApproachQuotientData.deckQuotient thetaApproach,
+        (ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+          quotientEquivAlgAut reconstructedFunctionFieldOfXK hReconstructed
+          deckActionMatchesGalQuotient hDeck).reconstructedFunctionField.deckRingAut q x = x) ↔
+      ∃ b : B, algebraMap B L b = x :=
+  ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv_fixed_iff_in_base
+    quotientEquivAlgAut reconstructedFunctionFieldOfXK hReconstructed
+    deckActionMatchesGalQuotient hDeck x
+
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L))
+    (reconstructedFunctionFieldOfXK deckActionMatchesGalQuotient : Prop)
+    (hReconstructed : reconstructedFunctionFieldOfXK)
+    (hDeck : deckActionMatchesGalQuotient) :
+    let functionFieldData :=
+      ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+        quotientEquivAlgAut reconstructedFunctionFieldOfXK hReconstructed
+        deckActionMatchesGalQuotient hDeck
+    (functionFieldData.piCKRingAutHom).ker =
+      thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup := by
+  let functionFieldData :=
+    ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+      quotientEquivAlgAut reconstructedFunctionFieldOfXK hReconstructed
+      deckActionMatchesGalQuotient hDeck
+  exact functionFieldData.piCKRingAutHom_ker
+
 example :
     (zmodOneNonzeroQuotientElement primeFive).element ≠
       (zmodPointedQuotient primeFive).zero :=
