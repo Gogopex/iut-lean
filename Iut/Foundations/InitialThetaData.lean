@@ -514,6 +514,64 @@ def zmodSignUnitCompatibility (l : PrimeGeFive) :
     intro x
     simp [zmodUnitActionData, zmodSignAction]
 
+/-- The subgroup `{1, -1}` of `(ZMod l)^x` controlling the sign ambiguity. -/
+def zmodSignUnitSubgroup (l : PrimeGeFive) :
+    Subgroup (ZMod l.value)ˣ where
+  carrier := {a | a = 1 ∨ a = (-1 : (ZMod l.value)ˣ)}
+  one_mem' := Or.inl rfl
+  mul_mem' := by
+    intro a b ha hb
+    rcases ha with rfl | rfl <;> rcases hb with rfl | rfl <;> simp
+  inv_mem' := by
+    intro a ha
+    rcases ha with rfl | rfl <;> simp
+
+@[simp]
+theorem mem_zmodSignUnitSubgroup_iff
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ) :
+    a ∈ zmodSignUnitSubgroup l ↔
+      a = 1 ∨ a = (-1 : (ZMod l.value)ˣ) :=
+  Iff.rfl
+
+theorem one_mem_zmodSignUnitSubgroup (l : PrimeGeFive) :
+    (1 : (ZMod l.value)ˣ) ∈ zmodSignUnitSubgroup l :=
+  Or.inl rfl
+
+theorem neg_one_mem_zmodSignUnitSubgroup (l : PrimeGeFive) :
+    (-1 : (ZMod l.value)ˣ) ∈ zmodSignUnitSubgroup l :=
+  Or.inr rfl
+
+theorem zmodSignUnitSubgroup_smul_eq_self_or_neg
+    (l : PrimeGeFive) {a : (ZMod l.value)ˣ}
+    (ha : a ∈ zmodSignUnitSubgroup l) (x : ZMod l.value) :
+    (zmodUnitActionData l).smul a x = x ∨
+      (zmodUnitActionData l).smul a x = (zmodSignAction l).neg x := by
+  rcases ha with rfl | rfl
+  · left
+    simp [zmodUnitActionData]
+  · right
+    simp [zmodUnitActionData, zmodSignAction]
+
+theorem zmodSignUnitSubgroup_orbit_iff_signOrbit
+    (l : PrimeGeFive) (x generator : ZMod l.value) :
+    (∃ a : (ZMod l.value)ˣ,
+      a ∈ zmodSignUnitSubgroup l ∧
+        (zmodUnitActionData l).smul a generator = x) ↔
+      (zmodSignAction l).InSignOrbit x generator := by
+  constructor
+  · rintro ⟨a, ha, hax⟩
+    rcases ha with rfl | rfl
+    · left
+      simpa [zmodUnitActionData] using hax.symm
+    · right
+      rw [← hax]
+      simp [zmodUnitActionData, zmodSignAction]
+  · intro hx
+    rcases hx with rfl | rfl
+    · exact ⟨1, one_mem_zmodSignUnitSubgroup l, by simp [zmodUnitActionData]⟩
+    · exact ⟨-1, neg_one_mem_zmodSignUnitSubgroup l,
+        by simp [zmodUnitActionData, zmodSignAction]⟩
+
 /-- A witness that a cusp arises from a nonzero element of an EtTh quotient. -/
 structure NonzeroQuotientElement where
   quotient : PointedEtaleQuotient.{u}

@@ -180,6 +180,24 @@ example (x : ZMod primeFive.value) :
   (zmodSignUnitCompatibility primeFive).signUnit_smul_eq_neg x
 
 example :
+    (-1 : (ZMod primeFive.value)ˣ) ∈ zmodSignUnitSubgroup primeFive :=
+  neg_one_mem_zmodSignUnitSubgroup primeFive
+
+example (a : (ZMod primeFive.value)ˣ) (x : ZMod primeFive.value)
+    (ha : a ∈ zmodSignUnitSubgroup primeFive) :
+    (zmodUnitActionData primeFive).smul a x = x ∨
+      (zmodUnitActionData primeFive).smul a x =
+        (zmodSignAction primeFive).neg x :=
+  zmodSignUnitSubgroup_smul_eq_self_or_neg primeFive ha x
+
+example (x generator : ZMod primeFive.value) :
+    (∃ a : (ZMod primeFive.value)ˣ,
+      a ∈ zmodSignUnitSubgroup primeFive ∧
+        (zmodUnitActionData primeFive).smul a generator = x) ↔
+      (zmodSignAction primeFive).InSignOrbit x generator :=
+  zmodSignUnitSubgroup_orbit_iff_signOrbit primeFive x generator
+
+example :
     (zmodCanonicalGeneratorUpToSignElement primeFive).canonicalGeneratorUpToSign :=
   (zmodCanonicalGeneratorUpToSignElement primeFive).canonicalGeneratorUpToSign_holds
 

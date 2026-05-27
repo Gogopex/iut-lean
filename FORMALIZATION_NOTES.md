@@ -11390,3 +11390,86 @@ API level: the summary is a wrapper around the existing structured route audit.
 The next milestone should start moving from endpoint packaging back into the
 source-side mathematical content by adding a compact checklist for the
 structured Theorem 3.11 input claims used by the route.
+
+## Math Milestone 26: The `{1,-1}` Unit Subgroup and Sign Orbits
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Definition 3.1(f), says that at bad places the cusp `epsilon_v` comes
+from the canonical generator, up to sign `±1`, of the local quotient `Z`.
+
+IUT I, Definition 4.1(ii), says that `LabCusp` has a natural `F_l`-torsor
+structure arising from the natural action of `F_l^×` on the quotient `Q`.
+The later `LabCusp±` discussion states that the corresponding `±`-canonical
+element is well-defined up to multiplication by `±1`, and explicitly relates
+`LabCusp± \ {zero} / {±1}` to `LabCusp`.
+
+The formal step below keeps these two source phrases connected: "up to sign"
+is now the orbit under the concrete two-element unit subgroup, not merely an
+uninterpreted involution.
+
+### Lean/API Check
+
+Mathlib's `Subgroup` works directly for the bundled unit group
+`(ZMod l.value)^x`. The subgroup closure conditions for `{1,-1}` are discharged
+by case analysis and `simp`.
+
+### Lean Decisions
+
+The new subgroup is:
+
+```text
+zmodSignUnitSubgroup l : Subgroup (ZMod l.value)^x
+```
+
+with membership characterized by:
+
+```text
+a in zmodSignUnitSubgroup l <-> a = 1 or a = -1
+```
+
+The main bridge theorem is:
+
+```text
+zmodSignUnitSubgroup_orbit_iff_signOrbit
+```
+
+It proves that the orbit of a generator under the `{1,-1}` unit subgroup is
+equivalent to the existing `QuotientSignAction.InSignOrbit` predicate.
+
+### Lean Declarations
+
+```text
+zmodSignUnitSubgroup
+mem_zmodSignUnitSubgroup_iff
+one_mem_zmodSignUnitSubgroup
+neg_one_mem_zmodSignUnitSubgroup
+zmodSignUnitSubgroup_smul_eq_self_or_neg
+zmodSignUnitSubgroup_orbit_iff_signOrbit
+```
+
+### What This Tests
+
+The example file now checks:
+
+* `-1` belongs to the sign unit subgroup;
+* every subgroup action is either the identity action or the sign action;
+* subgroup-orbit membership is equivalent to the sign-orbit predicate.
+
+### Design Trap Avoided
+
+The trap would be to talk about quotienting by `{±1}` while the formal orbit
+condition still only mentioned a separately defined sign action. This milestone
+forces the quotient-orbit language to pass through the unit action on `ZMod l`.
+
+### Remaining Gap
+
+The subgroup orbit is now formal, but the full `LabCusp±` structure is not.
+The next mathematical step should introduce a small typed model of pointed
+`F_l`-label data with a zero element, a nonzero/sign quotient, and the projection
+from `±`-labels to ordinary cusp labels.
