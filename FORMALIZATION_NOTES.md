@@ -4528,3 +4528,74 @@ milestone makes the final chain easy to cite and hard to misread.
 The next milestone should add the analogous compact theorem for
 `ledger.corollary312`, showing that the packaged Corollary-3.12-shaped
 inequality is obtained directly from this complete audited chain.
+
+## Milestone 49: Corollary from Complete Audited Chain
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+The April 2026 formalization report isolates the final `3.11.5 => 3.12`
+endpoint as the simultaneous comparison of the `q`- and `Theta`-pilot objects
+in a common container. IUT III, Step `(xi-d)`, writes the endpoint as a real
+comparison between the `Theta`-side upper ray and the `q`-side signed
+log-volume value. Scholze-Stix's critique requires the identifications behind
+that numerical comparison to remain explicit.
+
+Milestone 48 named the complete real inequality proof. This milestone connects
+the packaged `Corollary312Inequality` proof directly to that same audited chain.
+
+### Purpose
+
+This milestone adds:
+
+```text
+ledger.corollary312
+  =
+corollary312_of_signed_le
+  (le_trans ledger.membership.q_le_target
+    (common target bound applied to ledger.chosenOutput.choice))
+```
+
+### Lean Declaration
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.corollary312_eq_membership_commonBound
+```
+
+The proof is `rfl`, so Lean verifies that the packaged Corollary-3.12-shaped
+statement is produced directly from the audited membership-plus-common-bound
+chain.
+
+### What This Tests
+
+The current endpoint can now be audited at three levels:
+
+```text
+qSigned <= thetaSigned
+Corollary312Inequality
+Stage1Comparison
+```
+
+and each level points back to the same source chain:
+
+```text
+membership.q_le_target
+common Theta-side bound on chosen output
+```
+
+### Design Trap Avoided
+
+The trap would be to audit the real inequality but leave the packaged
+Corollary-3.12-shaped theorem as a black box. This theorem makes the package
+transparent too.
+
+### Next Step
+
+The next milestone should add the analogous compact theorem for
+`ledger.stage1Comparison.comparison`, showing that the exported Stage 1 record
+also carries the exact same audited chain.
