@@ -2748,6 +2748,185 @@ theorem union_eq_targetUnion
 end IUTStage1Theorem311RefinedMultiradialSubclaim
 
 /--
+Generator-wise refined multiradial invariance for direct-summand packet
+Theorem 3.11 choices.
+
+This decomposes refined image invariance into the three source generators
+`(Ind1)`, `(Ind2)`, and `(Ind3)`.
+-/
+structure IUTStage1RefinedThetaImageGeneratorInvariance
+    {source target : Copy} {coric : Type u}
+    {kind : IUTStage1PlaceKind}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)) :
+    Prop where
+  ind1_region_eq :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind},
+      IUTStage1DirectSummandPacketTheorem311Choice.ProcessionAutomorphismStep
+        choice₁ choice₂ ->
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂
+  ind2_region_eq :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind},
+      IUTStage1DirectSummandPacketTheorem311Choice.LocalTensorDirectSummandActionStep
+        choice₁ choice₂ ->
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂
+  ind3_region_eq :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind},
+      IUTStage1DirectSummandPacketTheorem311Choice.UpperSemiCompatibilityStep
+        choice₁ choice₂ ->
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂
+
+namespace IUTStage1RefinedThetaImageGeneratorInvariance
+
+variable {source target : Copy} {coric : Type u}
+variable {kind : IUTStage1PlaceKind}
+variable
+  {package :
+    IUTStage1SourcePackage source target
+      (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+
+theorem generatedImageInvariant
+    (invariance : IUTStage1RefinedThetaImageGeneratorInvariance package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1DirectSummandPacketTheorem311Choice.indeterminacySourceData
+          (coric := coric) (kind := kind)).generators choice₁ choice₂) :
+    (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₁ =
+      (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₂ :=
+  IUTStage1GeneratedIndeterminacyRelation.image_invariant
+    (IUTStage1ThetaPilotPossibleImages.ofPackage package).images
+    invariance.ind1_region_eq
+    invariance.ind2_region_eq
+    invariance.ind3_region_eq
+    hrel
+
+def toRefinedMultiradialThetaImages
+    (invariance : IUTStage1RefinedThetaImageGeneratorInvariance package) :
+    IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package :=
+  { multiradialOutput := package.multiradialOutput,
+    possibleImages := IUTStage1ThetaPilotPossibleImages.ofPackage package,
+    refinedImages :=
+      { possibleImages :=
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images,
+        quotient :=
+          (IUTStage1DirectSummandPacketTheorem311Choice.indeterminacySourceData
+            (coric := coric) (kind := kind)).quotient,
+        quotient_eq_generated := rfl,
+        image_invariant := by
+          intro choice₁ choice₂ hrel
+          exact invariance.generatedImageInvariant hrel },
+    multiradial_output_eq := rfl,
+    refined_possibleImages_eq := rfl }
+
+theorem imageInvariant
+    (invariance : IUTStage1RefinedThetaImageGeneratorInvariance package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind}
+    (hrel :
+      invariance.toRefinedMultiradialThetaImages.refinedImages.quotient.relation
+        choice₁ choice₂) :
+    (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₁ =
+      (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₂ :=
+  invariance.toRefinedMultiradialThetaImages.region_eq_of_related hrel
+
+theorem quotientProfile
+    (invariance : IUTStage1RefinedThetaImageGeneratorInvariance package) :
+    invariance.toRefinedMultiradialThetaImages.refinedImages.quotient.profile =
+      theorem311IndeterminacyProfile :=
+  invariance.toRefinedMultiradialThetaImages.quotient_profile
+
+theorem union_eq_targetUnion
+    (invariance : IUTStage1RefinedThetaImageGeneratorInvariance package) :
+    invariance.toRefinedMultiradialThetaImages.possibleImages.union =
+      package.preLedger.output.comparisons.targetUnion :=
+  invariance.toRefinedMultiradialThetaImages.union_eq_targetUnion
+
+end IUTStage1RefinedThetaImageGeneratorInvariance
+
+/--
+Named source subclaim that proves refined multiradiality generator by
+generator.
+-/
+structure IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim
+    {source target : Copy} {coric : Type u}
+    {kind : IUTStage1PlaceKind}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)) :
+    Prop where
+  generator_invariance :
+    IUTStage1RefinedThetaImageGeneratorInvariance package
+
+namespace IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim
+
+variable {source target : Copy} {coric : Type u}
+variable {kind : IUTStage1PlaceKind}
+variable
+  {package :
+    IUTStage1SourcePackage source target
+      (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+
+def toRefinedThetaImageGeneratorInvariance
+    (subclaim :
+      IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim package) :
+    IUTStage1RefinedThetaImageGeneratorInvariance package :=
+  subclaim.generator_invariance
+
+def toRefinedMultiradialThetaImages
+    (subclaim :
+      IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim package) :
+    IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package :=
+  subclaim.toRefinedThetaImageGeneratorInvariance.toRefinedMultiradialThetaImages
+
+theorem imageInvariant
+    (subclaim :
+      IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind}
+    (hrel : subclaim.toRefinedMultiradialThetaImages.refinedImages.quotient.relation
+      choice₁ choice₂) :
+    (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₁ =
+      (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₂ :=
+  subclaim.toRefinedMultiradialThetaImages.region_eq_of_related hrel
+
+theorem quotientProfile
+    (subclaim :
+      IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim package) :
+    subclaim.toRefinedMultiradialThetaImages.refinedImages.quotient.profile =
+      theorem311IndeterminacyProfile :=
+  subclaim.toRefinedMultiradialThetaImages.quotient_profile
+
+theorem union_eq_targetUnion
+    (subclaim :
+      IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim package) :
+    subclaim.toRefinedMultiradialThetaImages.possibleImages.union =
+      package.preLedger.output.comparisons.targetUnion :=
+  subclaim.toRefinedMultiradialThetaImages.union_eq_targetUnion
+
+end IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim
+
+/--
 Multiradial possible images of the Theta-pilot, recorded together with the
 indeterminacy quotient on choices.
 

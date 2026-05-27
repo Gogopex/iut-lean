@@ -1079,3 +1079,99 @@ The refined subclaim is still an assumption.  The next mathematical refinement
 should decompose it into source-specific ingredients: algorithmic construction
 of the refined representation, functoriality under procession isomorphisms, and
 compatibility of direct-summand actions with the refined possible-image family.
+
+## 14. Generator-Wise Refined Image Invariance
+
+### Goal
+
+We decomposed the refined multiradiality obligation one level further: instead
+of requiring coric-dependence directly, a source proof may now supply image
+invariance separately for the three refined generators `(Ind1)`, `(Ind2)`, and
+`(Ind3)`.
+
+### Source Check
+
+IUT III, Theorem 3.11 first describes the relevant data up to `(Ind1)` and
+`(Ind2)`, then discusses the log-Kummer/upper-semi behavior as `(Ind3)`.  It
+also says the construction is functorial with respect to isomorphisms of
+processions.  The generator-wise record follows this source shape more closely
+than the coric-only obligation:
+
+```text
+Ind1: procession automorphism invariance
+Ind2: direct-summand action invariance
+Ind3: upper-semi compatibility invariance
+```
+
+### Lean/API Check
+
+The new record is:
+
+```text
+IUTStage1RefinedThetaImageGeneratorInvariance
+```
+
+It has fields:
+
+```text
+ind1_region_eq
+ind2_region_eq
+ind3_region_eq
+```
+
+Lean then applies the existing generated-relation induction theorem:
+
+```text
+IUTStage1GeneratedIndeterminacyRelation.image_invariant
+```
+
+to prove:
+
+```text
+generatedImageInvariant
+```
+
+and construct:
+
+```text
+toRefinedMultiradialThetaImages
+```
+
+The named source subclaim is:
+
+```text
+IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim
+```
+
+### Mathematical Point
+
+This is a better target for the eventual proof of Theorem 3.11.  The future
+formalization can prove the three generator invariance fields separately from
+the corresponding source constructions, while Lean handles closure under
+reflexivity, symmetry, and transitivity.
+
+### Trap Avoided
+
+We did not infer coric-dependence from generator invariance.  Generator
+invariance gives invariance under the generated quotient, which is exactly what
+the refined multiradial package needs.  Coric-dependence remains a separate,
+stronger-looking route.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+refinedThetaImageGeneratorInvariance_to_multiradial_example
+refinedThetaImageGeneratorInvariance_region_eq_example
+refinedThetaImageGeneratorInvariance_profile_example
+theorem311RefinedGeneratorInvarianceSubclaim_to_invariance_example
+theorem311RefinedGeneratorInvarianceSubclaim_to_multiradial_example
+theorem311RefinedGeneratorInvarianceSubclaim_union_eq_example
+```
+
+### Remaining Gap
+
+The next refinement should split the `(Ind2)` generator field into its
+nonarchimedean `Ism` and archimedean order-two cases, using the source-specific
+steps already defined.

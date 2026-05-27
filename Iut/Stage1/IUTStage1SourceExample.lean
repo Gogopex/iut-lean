@@ -998,6 +998,73 @@ theorem theorem311RefinedMultiradialSubclaim_profile_example
       theorem311IndeterminacyProfile :=
   subclaim.quotientProfile
 
+def refinedThetaImageGeneratorInvariance_to_multiradial_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+    (invariance : IUTStage1RefinedThetaImageGeneratorInvariance package) :
+    IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package :=
+  invariance.toRefinedMultiradialThetaImages
+
+theorem refinedThetaImageGeneratorInvariance_region_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+    (invariance : IUTStage1RefinedThetaImageGeneratorInvariance package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind}
+    (hrel :
+      invariance.toRefinedMultiradialThetaImages.refinedImages.quotient.relation
+        choice₁ choice₂) :
+    (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₁ =
+      (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₂ :=
+  invariance.imageInvariant hrel
+
+theorem refinedThetaImageGeneratorInvariance_profile_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+    (invariance : IUTStage1RefinedThetaImageGeneratorInvariance package) :
+    invariance.toRefinedMultiradialThetaImages.refinedImages.quotient.profile =
+      theorem311IndeterminacyProfile :=
+  invariance.quotientProfile
+
+def theorem311RefinedGeneratorInvarianceSubclaim_to_invariance_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+    (subclaim :
+      IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim package) :
+    IUTStage1RefinedThetaImageGeneratorInvariance package :=
+  subclaim.toRefinedThetaImageGeneratorInvariance
+
+def theorem311RefinedGeneratorInvarianceSubclaim_to_multiradial_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+    (subclaim :
+      IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim package) :
+    IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package :=
+  subclaim.toRefinedMultiradialThetaImages
+
+theorem theorem311RefinedGeneratorInvarianceSubclaim_union_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+    (subclaim :
+      IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim package) :
+    subclaim.toRefinedMultiradialThetaImages.possibleImages.union =
+      package.preLedger.output.comparisons.targetUnion :=
+  subclaim.union_eq_targetUnion
+
 theorem upperSemi_logVolumeCompatibility_upperBound_example
     (data : IUTStage1LogVolumeCompatibilityData) :
     data.sourceLogVolume <= data.targetLogVolume :=
