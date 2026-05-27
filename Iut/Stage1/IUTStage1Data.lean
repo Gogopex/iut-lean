@@ -152,6 +152,67 @@ theorem audit (data : IUTStage1PreLedgerData source target index) :
     q_le_target := data.qSigned_le_targetSigned,
     target_le_theta := data.targetSigned_le_thetaSigned }
 
+/--
+Remaining obligations required to promote pre-ledger data to a full source
+ledger.
+
+The opaque `certified` field is intentionally separate from the structured
+certificate: a structured family-level certificate is not automatically evidence
+for the opaque propositions stored by `AlgorithmicOutput`.
+-/
+structure LedgerPromotionObligations
+    (data : IUTStage1PreLedgerData source target index) : Prop where
+  certified : data.output.Certified
+  she_matches_certificate :
+    data.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      data.certificate.she
+  q_positive : 0 < -data.qSigned
+  normalization_proof : data.normalization
+
+def toSourceObligationLedger
+    (data : IUTStage1PreLedgerData source target index)
+    (obligations : LedgerPromotionObligations data) :
+    SourceObligationLedger
+      data.output data.measure data.thetaSigned data.qSigned data.normalization :=
+  { certificate := data.certificate,
+    chartedContainer := data.chartedContainer,
+    she_matches_certificate := obligations.she_matches_certificate,
+    qValue := data.qValue,
+    thetaBound := data.thetaBound,
+    theta_commonBound := data.chartedContainer.apply data.certificate,
+    chosenOutput := data.chosenOutput,
+    targetVolume := data.targetVolume,
+    membership := data.membership,
+    q_positive := obligations.q_positive,
+    normalization_proof := obligations.normalization_proof }
+
+def toSourceObligationProvider
+    (data : IUTStage1PreLedgerData source target index)
+    (obligations : LedgerPromotionObligations data) :
+    IUTSourceObligationProvider
+      data.output data.measure data.thetaSigned data.qSigned data.normalization :=
+  { ledger := data.toSourceObligationLedger obligations }
+
+theorem toSourceObligationLedger_audit
+    (data : IUTStage1PreLedgerData source target index)
+    (obligations : LedgerPromotionObligations data) :
+    SourceObligationLedger.Audit
+      (data.toSourceObligationLedger obligations) :=
+  (data.toSourceObligationLedger obligations).audit
+
+theorem toSourceObligationProvider_publicAudit
+    (data : IUTStage1PreLedgerData source target index)
+    (obligations : LedgerPromotionObligations data) :
+    data.qSigned <= data.thetaSigned ∧
+      Corollary312Inequality
+        (signedPilotLogVolume PilotSide.theta data.thetaSigned)
+        (signedPilotLogVolume PilotSide.q data.qSigned) ∧
+      (corollary312_from_stage1_comparison
+          (data.toSourceObligationProvider obligations).stage1Comparison =
+        corollary312_of_signed_le
+          (data.toSourceObligationProvider obligations).ledger.qSigned_le_thetaSigned) :=
+  (data.toSourceObligationProvider obligations).publicAudit
+
 end IUTStage1PreLedgerData
 
 end Stage1

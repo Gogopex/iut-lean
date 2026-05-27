@@ -6619,3 +6619,80 @@ The next milestone should add a controlled promotion interface from
 `IUTStage1PreLedgerData` to `SourceObligationLedger`, listing exactly the
 remaining obligations: opaque output certification alignment, SHE/certificate
 alignment, q-positivity, and normalization evidence.
+
+## Milestone 77: Controlled Promotion from Pre-Ledger Data
+
+Lean file:
+
+* `Iut/Stage1/IUTStage1Data.lean`
+
+### Source Check
+
+The pre-ledger data from Milestone 76 records structured source information, but
+it should not become a full `SourceObligationLedger` by definitional accident.
+The missing ingredients are precisely the obligations that a future
+source-specific formalization must discharge.
+
+This matches the IUT Stage 1 discipline: qualitative labels such as IPL/SHE and
+multiradial output are not enough by themselves; one must also supply the
+alignment and positivity/normalization data needed by the final comparison.
+
+### Purpose
+
+This milestone introduces:
+
+```text
+IUTStage1PreLedgerData.LedgerPromotionObligations
+```
+
+with fields:
+
+```text
+certified : data.output.Certified
+she_matches_certificate :
+  data.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+    data.certificate.she
+q_positive : 0 < -data.qSigned
+normalization_proof : data.normalization
+```
+
+It then defines:
+
+```text
+IUTStage1PreLedgerData.toSourceObligationLedger
+IUTStage1PreLedgerData.toSourceObligationProvider
+```
+
+and exposes audit/public-audit projections for the promoted data.
+
+### Lean Declarations
+
+In `IUTStage1Data.lean`:
+
+```text
+IUTStage1PreLedgerData.LedgerPromotionObligations
+IUTStage1PreLedgerData.toSourceObligationLedger
+IUTStage1PreLedgerData.toSourceObligationProvider
+IUTStage1PreLedgerData.toSourceObligationLedger_audit
+IUTStage1PreLedgerData.toSourceObligationProvider_publicAudit
+```
+
+### What This Tests
+
+Promotion from pre-ledger data to the public Stage 1 endpoint now has an
+explicit proof boundary. The structured certificate remains distinct from
+`data.output.Certified`; the promotion obligation must supply that opaque
+certification separately.
+
+### Design Trap Avoided
+
+The trap would be to silently convert pre-ledger bookkeeping into a full source
+ledger. This milestone forces the remaining obligations to be named and supplied
+explicitly.
+
+### Next Step
+
+The next milestone should add a toy regression example for this promotion path:
+package the existing toy ledger ingredients as `IUTStage1PreLedgerData`, supply
+the promotion obligations, and verify that the promoted provider reaches the
+same public endpoint.
