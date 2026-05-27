@@ -8128,3 +8128,82 @@ that must prove the same fields from IUT mathematics.
 The next milestone should add a compact gap audit record collecting these four
 gap projections, parallel to the source package audit but intentionally stopping
 before the public endpoint.
+
+## Milestone 98: Source Gap Audit Checklist
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The source-obligation gap remains below the public endpoint. Its four fields are
+the current source-facing placeholders for:
+
+```text
+Theorem 3.11 algorithm certification
+SHE alignment
+q-pilot positivity
+source normalization
+```
+
+This matches the local Stage 1 reading strategy: isolate the proof obligations
+that must eventually be justified from the IUT source material before allowing
+the formalization to promote a source package to the public Corollary 3.12-style
+audit interface.
+
+### Purpose
+
+This milestone adds a compact audit checklist for
+`IUTStage1SourceObligationGap`. The checklist gathers the four gap projections
+without producing a public endpoint and without claiming the Corollary 3.12
+inequality.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourceObligationGap.Audit
+IUTStage1SourceObligationGap.audit
+IUTStage1SourceObligationGap.Audit.theorem311AlgorithmCertified
+IUTStage1SourceObligationGap.Audit.sheAlignment
+IUTStage1SourceObligationGap.Audit.qPilotPositive
+IUTStage1SourceObligationGap.Audit.sourceNormalization
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_gap_audit_example
+unitThetaToy_source_gap_audit_algorithm_certified_example
+unitThetaToy_source_gap_audit_she_alignment_example
+unitThetaToy_source_gap_audit_qPilot_positive_example
+unitThetaToy_source_gap_audit_normalization_example
+```
+
+### What This Tests
+
+The toy examples verify that a source-gap audit can be obtained from the toy gap
+and that each audit projection can be used by downstream code without unpacking
+the original gap record.
+
+### Design Trap Avoided
+
+The trap would be to make the gap audit look like a proof of the public
+Corollary 3.12 endpoint. This milestone deliberately stops at the checklist of
+source obligations. The path to the public endpoint still factors through:
+
+```text
+gap audit
+  -> source gap
+  -> source obligations
+  -> source package audit/public endpoint
+```
+
+### Next Step
+
+The next milestone should relate the compact gap audit back to the existing
+`toSourceObligations` promotion, then start splitting the algorithm
+certification placeholder into smaller source-facing subclaims.

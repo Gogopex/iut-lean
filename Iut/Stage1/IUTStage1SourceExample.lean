@@ -213,6 +213,80 @@ theorem unitThetaToy_source_gap_normalization_example
   (unitThetaToyIUTStage1SourceObligationGap
     measure hnormalized hh hbound hholds).sourceNormalization
 
+theorem unitThetaToy_source_gap_audit_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1SourceObligationGap.Audit
+      (unitThetaToyIUTStage1SourceObligationGap
+        measure hnormalized hh hbound hholds) :=
+  (unitThetaToyIUTStage1SourceObligationGap
+    measure hnormalized hh hbound hholds).audit
+
+theorem unitThetaToy_source_gap_audit_algorithm_certified_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds).preLedger.output.Certified :=
+  (unitThetaToy_source_gap_audit_example
+    measure hnormalized hh hbound hholds).theorem311AlgorithmCertified
+
+theorem unitThetaToy_source_gap_audit_she_alignment_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  (unitThetaToy_source_gap_audit_example
+    measure hnormalized hh hbound hholds).sheAlignment
+
+theorem unitThetaToy_source_gap_audit_qPilot_positive_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    0 < - (unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds).preLedger.qSigned :=
+  (unitThetaToy_source_gap_audit_example
+    measure hnormalized hh hbound hholds).qPilotPositive
+
+theorem unitThetaToy_source_gap_audit_normalization_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds).preLedger.normalization :=
+  (unitThetaToy_source_gap_audit_example
+    measure hnormalized hh hbound hholds).sourceNormalization
+
 theorem unitThetaToy_source_publicAudit_q_le_theta_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

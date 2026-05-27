@@ -208,6 +208,56 @@ def toSourceObligations
     q_pilot_positive := gap.qPilotPositive,
     normalization := gap.sourceNormalization }
 
+/--
+Compact audit checklist for the source-level obligation gap.
+
+This record gathers the four named source-gap projections before they are
+promoted to `IUTStage1SourceObligations`.
+-/
+structure Audit
+    (gap : IUTStage1SourceObligationGap package) : Prop where
+  theorem311_algorithm_certified : package.preLedger.output.Certified
+  she_alignment :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she
+  q_pilot_positive : 0 < -package.preLedger.qSigned
+  source_normalization : package.preLedger.normalization
+
+theorem audit
+    (gap : IUTStage1SourceObligationGap package) :
+    Audit gap :=
+  { theorem311_algorithm_certified := gap.theorem311AlgorithmCertified,
+    she_alignment := gap.sheAlignment,
+    q_pilot_positive := gap.qPilotPositive,
+    source_normalization := gap.sourceNormalization }
+
+namespace Audit
+
+variable {gap : IUTStage1SourceObligationGap package}
+
+theorem theorem311AlgorithmCertified
+    (gapAudit : Audit gap) :
+    package.preLedger.output.Certified :=
+  gapAudit.theorem311_algorithm_certified
+
+theorem sheAlignment
+    (gapAudit : Audit gap) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  gapAudit.she_alignment
+
+theorem qPilotPositive
+    (gapAudit : Audit gap) :
+    0 < -package.preLedger.qSigned :=
+  gapAudit.q_pilot_positive
+
+theorem sourceNormalization
+    (gapAudit : Audit gap) :
+    package.preLedger.normalization :=
+  gapAudit.source_normalization
+
+end Audit
+
 end IUTStage1SourceObligationGap
 
 namespace IUTStage1SourceObligations
