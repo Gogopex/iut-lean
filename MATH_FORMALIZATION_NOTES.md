@@ -7521,3 +7521,81 @@ copy bookkeeping visible at that same public layer.
 The next refinement should state more explicitly which chart identifications
 are allowed at the common-container level and which remain forbidden history
 identifications.
+
+## Math Milestone 76: Chart/History Discipline Checkpoint
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The central risk in the Corollary 3.12 dispute is not simply that real numbers
+are compared, but that the comparison might silently identify histories or
+containers that should remain distinct. The formal route now has public chart
+facts and history-separation facts, but they lived as separate projections.
+
+This milestone introduces a checkpoint that deliberately pairs them.
+
+### Lean/API Check
+
+The new record is:
+
+```text
+IUTStage1SourcePackage.AuditedChartHistoryDiscipline
+```
+
+It contains:
+
+```text
+public_audit
+theta_chart_trivial
+q_charted
+theta_charted
+common_container_context_matches
+histories_not_identified
+```
+
+The constructor:
+
+```text
+AuditedChartHistoryDiscipline.ofStructuredInputsWithSHE
+```
+
+derives the chart facts from the public audit, the common-container context
+match from the structured SHE bundle, and the history-separation proof from the
+same structured SHE data.
+
+### Lean Decisions
+
+This is intentionally not a new endpoint. It is an audit checkpoint for the
+kind of statement a human reader will want to inspect when asking whether the
+common target has erased Hodge-theater history.
+
+The record says:
+
+* q is read through the q-to-target chart;
+* Theta is read through the Theta-to-target chart;
+* the Theta chart is trivial;
+* the common-container context matches the structured SHE context;
+* the domain and codomain Hodge-theater histories remain non-identified.
+
+### What This Tests
+
+The source example constructs the chart/history discipline checkpoint and
+extracts its history-separation theorem. The full source example still builds
+through public audit and route summary.
+
+### Design Trap Avoided
+
+The trap would be to check charts in one part of the route and history
+separation in another, leaving no single object that states both. This
+milestone provides exactly that object.
+
+### Remaining Gap
+
+The chart/history discipline is still an audit record. The next mathematical
+step should refine the chart data itself: which transports are allowed, what
+triviality means, and why these chart readings do not amount to ring- or
+scheme-history identification.

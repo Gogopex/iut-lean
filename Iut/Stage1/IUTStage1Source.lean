@@ -2124,6 +2124,99 @@ theorem auditedPublicAudit
   AuditedPublicAudit.ofStructuredInputsWithSHE bundle sideConditions
 
 /--
+Audit object pairing the real-line chart readings with the non-identification
+of Hodge-theater histories.
+
+This is not a new comparison endpoint. It records the discipline needed around
+the final common-target reading: q and Theta are charted into the target real
+copy, while the domain and codomain Hodge-theater histories remain distinct.
+-/
+structure AuditedChartHistoryDiscipline
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) : Prop where
+  public_audit : AuditedPublicAudit package bundle sideConditions
+  theta_chart_trivial :
+    Transport.TrivialMonodromy
+      package.preLedger.chartedContainer.chart.thetaToTarget
+  q_charted :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord = package.preLedger.qSigned
+  theta_charted :
+    (Transport.map package.preLedger.chartedContainer.chart.thetaToTarget
+      package.preLedger.thetaBound.thetaPoint).coord =
+      package.preLedger.thetaSigned
+  common_container_context_matches :
+    package.preLedger.chartedContainer.commonContainer.context =
+      bundle.structuredSHE.context.sharedContext
+  histories_not_identified :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side
+
+namespace AuditedChartHistoryDiscipline
+
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+variable {sideConditions : IUTStage1SourceSideConditions package}
+
+theorem ofStructuredInputsWithSHE
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedChartHistoryDiscipline package bundle sideConditions :=
+  { public_audit := package.auditedPublicAudit bundle sideConditions,
+    theta_chart_trivial :=
+      (package.auditedPublicAudit bundle sideConditions).thetaChartTrivial,
+    q_charted := (package.auditedPublicAudit bundle sideConditions).qCharted,
+    theta_charted :=
+      (package.auditedPublicAudit bundle sideConditions).thetaCharted,
+    common_container_context_matches := bundle.commonContainerContextMatches,
+    histories_not_identified := bundle.domainHistory_ne_codomainHistory }
+
+theorem publicAudit
+    (discipline :
+      AuditedChartHistoryDiscipline package bundle sideConditions) :
+    AuditedPublicAudit package bundle sideConditions :=
+  discipline.public_audit
+
+theorem qCharted
+    (discipline :
+      AuditedChartHistoryDiscipline package bundle sideConditions) :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord = package.preLedger.qSigned :=
+  discipline.q_charted
+
+theorem thetaCharted
+    (discipline :
+      AuditedChartHistoryDiscipline package bundle sideConditions) :
+    (Transport.map package.preLedger.chartedContainer.chart.thetaToTarget
+      package.preLedger.thetaBound.thetaPoint).coord =
+      package.preLedger.thetaSigned :=
+  discipline.theta_charted
+
+theorem commonContainerContextMatches
+    (discipline :
+      AuditedChartHistoryDiscipline package bundle sideConditions) :
+    package.preLedger.chartedContainer.commonContainer.context =
+      bundle.structuredSHE.context.sharedContext :=
+  discipline.common_container_context_matches
+
+theorem domainHistory_ne_codomainHistory
+    (discipline :
+      AuditedChartHistoryDiscipline package bundle sideConditions) :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side :=
+  discipline.histories_not_identified
+
+end AuditedChartHistoryDiscipline
+
+theorem auditedChartHistoryDiscipline
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedChartHistoryDiscipline package bundle sideConditions :=
+  AuditedChartHistoryDiscipline.ofStructuredInputsWithSHE bundle sideConditions
+
+/--
 Compact checkpoint summary for the audited structured-SHE route.
 
 The summary is proof-only: it does not create a new endpoint or hide any
