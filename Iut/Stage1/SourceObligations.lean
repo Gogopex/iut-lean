@@ -39,9 +39,9 @@ structure SourceObligationLedger
     output.ChartedThetaBoundData measure chartedContainer.chart thetaSigned
   theta_commonBound :
     output.CommonTargetBound measure thetaSigned
-  choice : index
+  chosenOutput : output.ChosenOutputData
   targetVolume :
-    output.ChartedTargetVolumeData measure chartedContainer.chart choice
+    output.ChartedTargetVolumeData measure chartedContainer.chart chosenOutput.choice
   q_le_choice :
     qSigned <= targetVolume.targetSigned
   q_positive : 0 < -qSigned
@@ -62,12 +62,13 @@ theorem qSigned_le_thetaSigned (ledger :
     (by
       rw [ledger.targetVolume.targetSigned_eq]
       exact TransportedRegionFamily.choice_targetVolume_le_of_commonBound
-        ledger.theta_commonBound ledger.choice)
+        ledger.theta_commonBound ledger.chosenOutput.choice)
 
 theorem targetSigned_eq_choiceTargetVolume (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     ledger.targetVolume.targetSigned =
-      RegionMeasure.targetVolume measure (output.comparison ledger.choice) :=
+      RegionMeasure.targetVolume measure
+        (output.comparison ledger.chosenOutput.choice) :=
   ledger.targetVolume.targetSigned_eq
 
 theorem targetSigned_le_thetaSigned (ledger :
@@ -75,7 +76,20 @@ theorem targetSigned_le_thetaSigned (ledger :
     ledger.targetVolume.targetSigned <= thetaSigned := by
   rw [ledger.targetVolume.targetSigned_eq]
   exact TransportedRegionFamily.choice_targetVolume_le_of_commonBound
-    ledger.theta_commonBound ledger.choice
+    ledger.theta_commonBound ledger.chosenOutput.choice
+
+theorem chosenComparison_eq_outputComparison (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.chosenOutput.comparison =
+      output.comparison ledger.chosenOutput.choice :=
+  ledger.chosenOutput.comparison_eq
+
+theorem targetSigned_eq_chosenComparisonVolume (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.targetVolume.targetSigned =
+      RegionMeasure.targetVolume measure ledger.chosenOutput.comparison := by
+  rw [ledger.chosenOutput.comparison_eq]
+  exact ledger.targetVolume.targetSigned_eq
 
 theorem corollary312 (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :

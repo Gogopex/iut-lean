@@ -3112,3 +3112,98 @@ links membership in a chosen output region to the common Theta upper bound.
 The next milestone should make the selected comparison itself explicit by
 storing a named `ChosenOutputData` record with the choice index, the comparison
 object, and the equality to `output.comparison choice`.
+
+## Milestone 31: Chosen Output Data
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/SourceObligations.lean`
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III, Corollary 3.12, Step `(xi-d)` refers to a collection of possible
+output data produced by the multiradial construction, followed by holomorphic
+hull formation. The final real comparison uses a selected member of this
+collection before passing to its measured target volume.
+
+This matches the critique-driven discipline we are enforcing: a formal proof
+should not silently pass from a family of possibilities to a chosen measured
+region. The selected comparison object should be named before its target volume
+is measured.
+
+### Purpose
+
+Milestone 30 named the measured middle real. This milestone names the selected
+output comparison itself:
+
+```text
+ChosenOutputData
+```
+
+It stores:
+
+```text
+choice : index
+comparison : RegionComparison source target
+comparison_eq : comparison = output.comparison choice
+```
+
+The source ledger now stores `chosenOutput` instead of a bare `choice`, and the
+charted target-volume record depends on `chosenOutput.choice`.
+
+### Lean Declarations
+
+In `AlgorithmicBridge.lean`:
+
+```text
+ChosenOutputData.choice
+ChosenOutputData.comparison
+ChosenOutputData.comparison_eq
+```
+
+In `SourceObligations.lean`, the ledger now has:
+
+```text
+chosenOutput : output.ChosenOutputData
+targetVolume :
+  output.ChartedTargetVolumeData measure chartedContainer.chart chosenOutput.choice
+```
+
+and proves:
+
+```text
+chosenComparison_eq_outputComparison
+targetSigned_eq_chosenComparisonVolume
+```
+
+The existing final inequality now factors through:
+
+```text
+qSigned
+  <= targetVolume.targetSigned
+  = targetVolume(output.comparison chosenOutput.choice)
+  <= thetaSigned
+```
+
+with the chosen comparison itself available as a named object.
+
+### What This Tests
+
+The toy source-obligation endpoint still proves the same signed Stage 1
+inequality after replacing the bare choice index with a chosen-output record.
+The toy record uses the definitional selected comparison
+`(thetaToyAlgorithmOutput unitQToTheta h epsilon).comparison choice`.
+
+### Design Trap Avoided
+
+The trap would be to name the measured target volume without naming which
+possible output comparison was selected from the family. This milestone makes
+the passage from possible outputs to a selected comparison explicit.
+
+### Next Step
+
+The next milestone should connect the selected comparison to the q-side point by
+storing a charted membership witness: the chosen comparison holds for the
+charted q-point, and this membership is the source of `q_le_choice`.

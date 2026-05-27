@@ -364,6 +364,18 @@ structure ChartedThetaBoundData
   thetaSigned_eq : (Transport.map chart.thetaToTarget thetaPoint).coord = thetaSigned
 
 /--
+The selected output comparison from the transported output family.
+
+This names the chosen possibility before any target-volume measurement is
+applied.
+-/
+structure ChosenOutputData
+    (output : AlgorithmicOutput source target index) where
+  choice : index
+  comparison : RegionComparison source target
+  comparison_eq : comparison = output.comparison choice
+
+/--
 The chosen output target volume as a named middle term in the final comparison.
 
 The `chart` parameter records that this target-side real is being read in the
