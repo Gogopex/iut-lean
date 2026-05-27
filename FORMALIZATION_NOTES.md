@@ -4303,3 +4303,72 @@ The next milestone should expose field-origin projections for the membership
 witness in the general source ledger: `chosenComparisonHoldsQ` should be exactly
 `membership.holds`, and `qSigned_le_targetSigned` should be exactly
 `membership.q_le_target`.
+
+## Milestone 46: Membership Witness Projections
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+The April 2026 formalization report identifies the final comparison as involving
+both the output of the multiradial algorithm and the input-prime-strip-link
+relationship between input data and output data. In the current abstraction, the
+q-point's membership in the selected output comparison is represented by
+`ChartedMembershipData.holds`.
+
+IUT III, Step `(xi-d)`, then converts the relevant output data into comparable
+real log-volume data. The ledger records the current abstraction boundary:
+membership of the q-point and the real inequality from `qSigned` to the selected
+target volume are stored together, because in a concrete upper-ray model the
+inequality follows from membership and normalization.
+
+### Purpose
+
+This milestone exposes the two fields of the membership witness:
+
+```text
+ledger.chosenComparisonHoldsQ = ledger.membership.holds
+ledger.qSigned_le_targetSigned = ledger.membership.q_le_target
+```
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.chosenComparisonHoldsQ_eq_membership
+SourceObligationLedger.qSigned_le_targetSigned_eq_membership
+```
+
+Both proofs are `rfl`, so the ledger's public membership and left-inequality
+theorems are definitionally the fields stored in `ChartedMembershipData`.
+
+### What This Tests
+
+The left side of the three-term chain is now traceable through:
+
+```text
+membership.holds
+membership.q_le_target
+threeTermComparison.q_le_target
+qSigned_le_thetaSigned
+```
+
+This keeps the membership-to-left-inequality boundary explicit for later
+replacement by genuine source-specific IUT lemmas.
+
+### Design Trap Avoided
+
+The trap would be to let `qSigned <= targetSigned` look like an independent
+real inequality unrelated to q-point membership in the selected output
+comparison. These projections keep the left inequality attached to the
+membership witness.
+
+### Next Step
+
+The next milestone should expose source-ledger projections for the common
+Theta-side bound, including that `thetaCommonBound` is exactly
+`theta_commonBound` and that the target-to-Theta inequality uses this bound on
+the chosen output.

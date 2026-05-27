@@ -101,10 +101,20 @@ theorem chosenComparisonHoldsQ (ledger :
     ledger.chosenOutput.comparison.Holds ledger.qValue.qPoint :=
   ledger.membership.holds
 
+theorem chosenComparisonHoldsQ_eq_membership (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.chosenComparisonHoldsQ = ledger.membership.holds :=
+  rfl
+
 theorem qSigned_le_targetSigned (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     qSigned <= ledger.targetVolume.targetSigned :=
   ledger.membership.q_le_target
+
+theorem qSigned_le_targetSigned_eq_membership (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.qSigned_le_targetSigned = ledger.membership.q_le_target :=
+  rfl
 
 theorem targetSigned_eq_choiceTargetVolume (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
