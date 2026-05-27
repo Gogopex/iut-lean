@@ -1023,3 +1023,66 @@ The next step should define typed state records for the three abstract
 coordinates, especially the upper-semi-compatibility state, because that is
 where the source text distinguishes inclusions, surjections, and log-volume
 compatibility.
+
+## Periodic Review: Local Log-Volume Path
+
+Date: 2026-05-28
+
+This checkpoint reviews the local log-volume objects added after the typed
+upper-semi place split.
+
+### Current Lean Chain
+
+The local upper-semi route now has:
+
+```text
+IUTStage1PlaceKind
+IUTStage1LocalObjectId
+IUTStage1LocalLogVolumeObject
+IUTStage1FiniteLocalLogVolumeObject
+IUTStage1CapsuleLogVolumeObject
+IUTStage1TypedCapsuleFamilyLogVolume
+IUTStage1ProcessionNormalizedLogVolume
+```
+
+The strongest current equation is:
+
+```text
+totalLogVolume = Finset.univ.sum fun i => (capsule i).logVolume
+normalizedLogVolume = totalLogVolume / capsuleCount
+```
+
+### Source Alignment
+
+This is aligned with IUT III Proposition 3.9 at the interface level. The source
+text separates packet-normalized local log-volumes from
+procession-normalized log-volumes obtained by averaging over capsules in a
+procession. The Lean code now has explicit places, local objects, capsules,
+finite sums, and an average.
+
+### Risks Found
+
+The analytic construction is still absent. In particular, the code does not yet
+formalize:
+
+```text
+M(IQ(-))
+compact-open or compact-closure regions
+direct summand local fields
+mono-analytic log-shells
+the actual packet-normalized log-volume maps
+```
+
+So the current records are a typed audit interface, not a proof of Proposition
+3.9.
+
+### Global 3.12 Check
+
+This remains relevant to the 3.11 -> 3.12 route because Corollary 3.12 depends
+on log-volume estimates after passing through the multiradial/upper-semi
+indeterminacy layer. The current API makes it harder to hide the log-volume
+calculation as a bare real number.
+
+The next mathematical target should connect capsule objects to the local tensor
+packet/log-shell state in `IUTStage1Theorem311Choice`, then later replace the
+log-volume fields by actual maps on typed local regions.
