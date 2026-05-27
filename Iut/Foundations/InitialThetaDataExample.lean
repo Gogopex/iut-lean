@@ -565,12 +565,16 @@ noncomputable example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuatio
   theta.badLocalOpenSubgroups v hv
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
-    (theta.badLocalOpenSubgroups v hv).piXbar_open_in_piCbar :=
+    (theta.badLocalOpenSubgroups v hv).piXbar_to_piCbar.isOpenImage :=
   theta.badLocalPiXbarOpenInPiCbar v hv
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
-    (theta.badLocalOpenSubgroups v hv).piCbar_open_in_piCv :=
+    (theta.badLocalOpenSubgroups v hv).piCbar_to_piCv.isOpenImage :=
   theta.badLocalPiCbarOpenInPiCv v hv
+
+example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    Function.Injective (theta.badLocalOpenSubgroups v hv).piXbar_to_piCv :=
+  theta.badLocalPiXbarToPiCvInjective v hv
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.selected) :
     theta.cuspLocalData.localCusp_determinedByGlobal v hv :=

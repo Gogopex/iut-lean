@@ -1063,37 +1063,84 @@ def zmodBadLocalQuotientZData (l : PrimeGeFive) :
   canonicalSignLabelZ_eq := rfl
 
 /--
+An abstract fundamental group object.
+
+This keeps the local subgroup chain typed as group-like data while postponing
+the choice between profinite and tempered group structures.
+-/
+structure AbstractFundamentalGroup where
+  carrier : Type u
+  group : Group carrier
+  topologyKind : String
+
+namespace AbstractFundamentalGroup
+
+instance (G : AbstractFundamentalGroup) : Group G.carrier :=
+  G.group
+
+end AbstractFundamentalGroup
+
+/--
+An abstract open embedding of fundamental group objects.
+
+The map is currently a group homomorphism plus injectivity and openness
+obligations. Later milestones can replace the `isOpenImage` proposition with a
+mathlib topological-group statement.
+-/
+structure OpenEmbeddingData (source target : AbstractFundamentalGroup) where
+  hom : MonoidHom source.carrier target.carrier
+  injective : Function.Injective hom
+  isOpenImage : Prop
+  isOpenImage_holds : isOpenImage
+
+namespace OpenEmbeddingData
+
+variable {source target : AbstractFundamentalGroup}
+variable (embedding : OpenEmbeddingData source target)
+
+theorem openImage : embedding.isOpenImage :=
+  embedding.isOpenImage_holds
+
+theorem injective_holds : Function.Injective embedding.hom :=
+  embedding.injective
+
+end OpenEmbeddingData
+
+/--
 The chain of open subgroups produced by the bad local theta-root models.
 
-The actual groups are placeholders until the relevant profinite/tempered
-fundamental groups are formalized. The inclusion propositions record the source
-shape `Pi_Xbar_v <= Pi_Cbar_v <= Pi_C_v` from IUT I, Definition 3.1(e).
+The actual groups are abstract until the relevant profinite/tempered
+fundamental groups are formalized. The open embeddings record the source shape
+`Pi_Xbar_v <= Pi_Cbar_v <= Pi_C_v` from IUT I, Definition 3.1(e).
 -/
 structure BadLocalOpenSubgroupData where
-  piXbar : Type u
-  piCbar : Type u
-  piCv : Type u
-  piXbar_to_piCbar : piXbar -> piCbar
-  piCbar_to_piCv : piCbar -> piCv
-  piXbar_open_in_piCbar : Prop
-  piXbar_open_in_piCbar_holds : piXbar_open_in_piCbar
-  piCbar_open_in_piCv : Prop
-  piCbar_open_in_piCv_holds : piCbar_open_in_piCv
+  piXbar : AbstractFundamentalGroup
+  piCbar : AbstractFundamentalGroup
+  piCv : AbstractFundamentalGroup
+  piXbar_to_piCbar : OpenEmbeddingData piXbar piCbar
+  piCbar_to_piCv : OpenEmbeddingData piCbar piCv
 
 namespace BadLocalOpenSubgroupData
 
 variable (openData : BadLocalOpenSubgroupData)
 
-def piXbar_to_piCv : openData.piXbar -> openData.piCv :=
-  openData.piCbar_to_piCv ∘ openData.piXbar_to_piCbar
+def piXbar_to_piCv : MonoidHom openData.piXbar.carrier openData.piCv.carrier :=
+  openData.piCbar_to_piCv.hom.comp openData.piXbar_to_piCbar.hom
+
+theorem piXbar_to_piCv_injective :
+    Function.Injective openData.piXbar_to_piCv := by
+  intro x y hxy
+  apply openData.piXbar_to_piCbar.injective_holds
+  apply openData.piCbar_to_piCv.injective_holds
+  exact hxy
 
 theorem piXbarOpenInPiCbar :
-    openData.piXbar_open_in_piCbar :=
-  openData.piXbar_open_in_piCbar_holds
+    openData.piXbar_to_piCbar.isOpenImage :=
+  openData.piXbar_to_piCbar.openImage
 
 theorem piCbarOpenInPiCv :
-    openData.piCbar_open_in_piCv :=
-  openData.piCbar_open_in_piCv_holds
+    openData.piCbar_to_piCv.isOpenImage :=
+  openData.piCbar_to_piCv.openImage
 
 end BadLocalOpenSubgroupData
 
@@ -1130,12 +1177,16 @@ theorem thetaRootCType_holds :
   thetaRootData.thetaRootCType.holds
 
 theorem piXbarOpenInPiCbar :
-    thetaRootData.openSubgroups.piXbar_open_in_piCbar :=
+    thetaRootData.openSubgroups.piXbar_to_piCbar.isOpenImage :=
   thetaRootData.openSubgroups.piXbarOpenInPiCbar
 
 theorem piCbarOpenInPiCv :
-    thetaRootData.openSubgroups.piCbar_open_in_piCv :=
+    thetaRootData.openSubgroups.piCbar_to_piCv.isOpenImage :=
   thetaRootData.openSubgroups.piCbarOpenInPiCv
+
+theorem piXbarToPiCvInjective :
+    Function.Injective thetaRootData.openSubgroups.piXbar_to_piCv :=
+  thetaRootData.openSubgroups.piXbar_to_piCv_injective
 
 theorem quotientZDataSource :
     thetaRootData.quotientZData_constructedFromThetaRoot :=
@@ -1193,12 +1244,16 @@ def openSubgroups : BadLocalOpenSubgroupData :=
   typeData.thetaRootData.openSubgroups
 
 theorem piXbarOpenInPiCbar :
-    typeData.openSubgroups.piXbar_open_in_piCbar :=
+    typeData.openSubgroups.piXbar_to_piCbar.isOpenImage :=
   typeData.thetaRootData.piXbarOpenInPiCbar
 
 theorem piCbarOpenInPiCv :
-    typeData.openSubgroups.piCbar_open_in_piCv :=
+    typeData.openSubgroups.piCbar_to_piCv.isOpenImage :=
   typeData.thetaRootData.piCbarOpenInPiCv
+
+theorem piXbarToPiCvInjective :
+    Function.Injective typeData.openSubgroups.piXbar_to_piCv :=
+  typeData.thetaRootData.piXbarToPiCvInjective
 
 theorem canonicalGeneratorEqModel :
     typeData.canonicalGenerator =
@@ -1441,13 +1496,18 @@ noncomputable def badLocalOpenSubgroups
 
 theorem badLocalPiXbarOpenInPiCbar
     (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
-    (localData.badLocalOpenSubgroups v hv).piXbar_open_in_piCbar :=
+    (localData.badLocalOpenSubgroups v hv).piXbar_to_piCbar.isOpenImage :=
   (localData.badLocalCType v hv).piXbarOpenInPiCbar
 
 theorem badLocalPiCbarOpenInPiCv
     (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
-    (localData.badLocalOpenSubgroups v hv).piCbar_open_in_piCv :=
+    (localData.badLocalOpenSubgroups v hv).piCbar_to_piCv.isOpenImage :=
   (localData.badLocalCType v hv).piCbarOpenInPiCv
+
+theorem badLocalPiXbarToPiCvInjective
+    (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
+    Function.Injective (localData.badLocalOpenSubgroups v hv).piXbar_to_piCv :=
+  (localData.badLocalCType v hv).piXbarToPiCvInjective
 
 end ThetaBadLocalData
 
@@ -1855,13 +1915,18 @@ noncomputable def badLocalOpenSubgroups
 
 theorem badLocalPiXbarOpenInPiCbar
     (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
-    (theta.badLocalOpenSubgroups v hv).piXbar_open_in_piCbar :=
-  theta.badLocalData.badLocalPiXbarOpenInPiCbar v hv
+    (theta.badLocalOpenSubgroups v hv).piXbar_to_piCbar.isOpenImage :=
+  ThetaBadLocalData.badLocalPiXbarOpenInPiCbar theta.badLocalData v hv
 
 theorem badLocalPiCbarOpenInPiCv
     (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
-    (theta.badLocalOpenSubgroups v hv).piCbar_open_in_piCv :=
-  theta.badLocalData.badLocalPiCbarOpenInPiCv v hv
+    (theta.badLocalOpenSubgroups v hv).piCbar_to_piCv.isOpenImage :=
+  ThetaBadLocalData.badLocalPiCbarOpenInPiCv theta.badLocalData v hv
+
+theorem badLocalPiXbarToPiCvInjective
+    (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    Function.Injective (theta.badLocalOpenSubgroups v hv).piXbar_to_piCv :=
+  ThetaBadLocalData.badLocalPiXbarToPiCvInjective theta.badLocalData v hv
 
 /-- The local cusp `epsilon_v` attached to a selected finite place. -/
 def localCusp

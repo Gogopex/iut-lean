@@ -12802,3 +12802,112 @@ The three group carriers and the two maps are still abstract placeholders. A
 later milestone should replace these carriers with actual profinite/tempered
 fundamental group objects, or at least a reusable typed interface for such
 groups and open embeddings.
+
+## Math Milestone 41: Abstract Open Embeddings for Bad Local Groups
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Definition 3.1(e), does not merely assert an untyped existence statement.
+At each bad place, the theta-root local models determine a two-step chain of
+open subgroups
+
+```text
+Pi_Xbar_v <= Pi_Cbar_v <= Pi_C_v
+```
+
+Remark 3.1.2 describes this sort of open subgroup as part of the
+group-theoretic reconstruction mechanism in the `Theta` approach. IUT II later
+uses inclusions between theta-related fundamental-group objects functorially.
+So the Lean representation should not treat the arrows as arbitrary functions.
+
+This milestone still remains before the Corollary 3.12 dispute. It is local
+bad-place scaffolding for the theta-root situation, not a Hodge-theater
+comparison and not a claim about log-volume inequalities.
+
+### Lean/API Check
+
+The new reusable interfaces are:
+
+```text
+AbstractFundamentalGroup
+OpenEmbeddingData
+```
+
+`AbstractFundamentalGroup` stores a carrier, a group instance, and a temporary
+`topologyKind` label. `OpenEmbeddingData` stores a monoid homomorphism, an
+injectivity proof, and an openness proposition.
+
+`BadLocalOpenSubgroupData` now stores:
+
+```text
+piXbar : AbstractFundamentalGroup
+piCbar : AbstractFundamentalGroup
+piCv : AbstractFundamentalGroup
+piXbar_to_piCbar : OpenEmbeddingData piXbar piCbar
+piCbar_to_piCv : OpenEmbeddingData piCbar piCv
+```
+
+The composite
+
+```text
+piXbar_to_piCv
+```
+
+is now a monoid homomorphism, and Lean proves its injectivity from the two
+open embeddings.
+
+### Lean Decisions
+
+The previous milestone represented the arrows as raw functions plus separate
+openness propositions. That captured the shape of the chain but lost the fact
+that these are maps of group-like fundamental-group objects. The new interface
+keeps the group-homomorphism obligation explicit while postponing the exact
+choice of profinite versus tempered topology.
+
+This is intentionally conservative. We do not yet assert that these are actual
+mathlib `OpenEmbedding`s or open subgroups in a topological group, because the
+project has not yet chosen the final formal model for the relevant fundamental
+groups.
+
+### Lean Declarations
+
+```text
+AbstractFundamentalGroup
+OpenEmbeddingData
+OpenEmbeddingData.openImage
+OpenEmbeddingData.injective_holds
+BadLocalOpenSubgroupData.piXbar_to_piCv
+BadLocalOpenSubgroupData.piXbar_to_piCv_injective
+BadLocalThetaRootData.piXbarToPiCvInjective
+BadLocalOrbicurveTypeData.piXbarToPiCvInjective
+ThetaBadLocalData.badLocalPiXbarToPiCvInjective
+InitialThetaData.badLocalPiXbarToPiCvInjective
+```
+
+### What This Tests
+
+The example file now checks:
+
+* full initial theta data exposes the bad local open-embedding package;
+* the first arrow `Pi_Xbar_v -> Pi_Cbar_v` is open;
+* the second arrow `Pi_Cbar_v -> Pi_C_v` is open;
+* the composite `Pi_Xbar_v -> Pi_C_v` is injective.
+
+### Design Trap Avoided
+
+The trap would be to let the open subgroup chain decay into arbitrary maps.
+That would be too weak for later anabelian reconstruction work, where the maps
+must preserve group structure and inclusion-like behavior. This milestone makes
+the minimal group-theoretic obligations visible to Lean.
+
+### Remaining Gap
+
+`isOpenImage` is still a proposition field, and `topologyKind` is only a label.
+Later milestones should replace this placeholder with real topology:
+`TopologicalSpace`, continuity, open image, and eventually whichever profinite
+or tempered group category best matches the IUT source material.
