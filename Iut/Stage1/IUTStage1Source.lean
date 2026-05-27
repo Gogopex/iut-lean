@@ -897,6 +897,122 @@ theorem auditedTargetSigned_le_theta
 end IUTStage1Theorem311StructuredInputsWithSHE
 
 /--
+Audited lower-middle bridge from the charted q-side datum to the charted
+target-volume middle term.
+
+This records the membership/charting contribution to the eventual inequality
+chain. It is intentionally separate from the `HDD o SHE` upper bound and from
+the final signed q-to-Theta packaging.
+-/
+structure IUTStage1Theorem311AuditedMembershipMiddle
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) : Prop where
+  target_volume_middle :
+    IUTStage1Theorem311AuditedTargetVolumeMiddle package bundle
+  q_charted :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord =
+      package.preLedger.qSigned
+  chosen_holds :
+    package.preLedger.chosenOutput.comparison.Holds
+      package.preLedger.qValue.qPoint
+  q_signed_le_target :
+    package.preLedger.qSigned <=
+      package.preLedger.targetVolume.targetSigned
+  histories_not_identified :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side
+
+namespace IUTStage1Theorem311AuditedMembershipMiddle
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+
+theorem ofTargetVolumeMiddle
+    (middle : IUTStage1Theorem311AuditedTargetVolumeMiddle package bundle) :
+    IUTStage1Theorem311AuditedMembershipMiddle package bundle :=
+  { target_volume_middle := middle,
+    q_charted := package.preLedger.qSigned_eq_chartedQ,
+    chosen_holds := package.preLedger.chosenComparisonHoldsQ,
+    q_signed_le_target := package.preLedger.qSigned_le_targetSigned,
+    histories_not_identified := middle.domainHistory_ne_codomainHistory }
+
+theorem ofStructuredInputsWithSHE
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    IUTStage1Theorem311AuditedMembershipMiddle package bundle :=
+  ofTargetVolumeMiddle bundle.auditedTargetVolumeMiddle
+
+theorem targetVolumeMiddle
+    (middle :
+      IUTStage1Theorem311AuditedMembershipMiddle package bundle) :
+    IUTStage1Theorem311AuditedTargetVolumeMiddle package bundle :=
+  middle.target_volume_middle
+
+theorem qCharted
+    (middle :
+      IUTStage1Theorem311AuditedMembershipMiddle package bundle) :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord =
+      package.preLedger.qSigned :=
+  middle.q_charted
+
+theorem chosenHolds
+    (middle :
+      IUTStage1Theorem311AuditedMembershipMiddle package bundle) :
+    package.preLedger.chosenOutput.comparison.Holds
+      package.preLedger.qValue.qPoint :=
+  middle.chosen_holds
+
+theorem qSigned_le_targetSigned
+    (middle :
+      IUTStage1Theorem311AuditedMembershipMiddle package bundle) :
+    package.preLedger.qSigned <=
+      package.preLedger.targetVolume.targetSigned :=
+  middle.q_signed_le_target
+
+theorem domainHistory_ne_codomainHistory
+    (middle :
+      IUTStage1Theorem311AuditedMembershipMiddle package bundle) :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side :=
+  middle.histories_not_identified
+
+end IUTStage1Theorem311AuditedMembershipMiddle
+
+namespace IUTStage1Theorem311StructuredInputsWithSHE
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+theorem auditedMembershipMiddle
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    IUTStage1Theorem311AuditedMembershipMiddle package bundle :=
+  IUTStage1Theorem311AuditedMembershipMiddle.ofStructuredInputsWithSHE bundle
+
+theorem auditedQCharted
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord =
+      package.preLedger.qSigned :=
+  bundle.auditedMembershipMiddle.qCharted
+
+theorem auditedChosenHolds
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    package.preLedger.chosenOutput.comparison.Holds
+      package.preLedger.qValue.qPoint :=
+  bundle.auditedMembershipMiddle.chosenHolds
+
+theorem auditedQSigned_le_targetSigned
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    package.preLedger.qSigned <=
+      package.preLedger.targetVolume.targetSigned :=
+  bundle.auditedMembershipMiddle.qSigned_le_targetSigned
+
+end IUTStage1Theorem311StructuredInputsWithSHE
+
+/--
 Source-facing side conditions needed for Stage 1 ledger promotion.
 
 These conditions are intentionally separate from the Theorem 3.11 subclaims:

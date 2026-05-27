@@ -664,3 +664,105 @@ The next milestone should add an audited lower-middle bridge for
 `qSigned <= targetSigned`, explicitly sourced from the charted membership datum.
 Only after both middle bridges are present should we consider a separate
 packaging theorem that assembles the signed q-to-Theta inequality.
+
+## Math Milestone 7: Audited q-to-Target Membership Bridge
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The previous milestone covered the upper half of the eventual real inequality
+chain, namely `targetSigned <= thetaSigned`. The lower half,
+`qSigned <= targetSigned`, has a different source: it comes from the charted
+membership datum for the selected output comparison, not from `HDD o SHE`.
+
+This distinction matters for the Corollary 3.12 dispute. If the lower bound,
+upper bound, chart identifications, and final packaging are collapsed into one
+opaque theorem, then Lean would no longer help us locate the exact mathematical
+move being used. This milestone therefore isolates the lower-middle bridge.
+
+### Purpose
+
+This milestone adds:
+
+```text
+IUTStage1Theorem311AuditedMembershipMiddle
+```
+
+The record packages:
+
+* the audited target-volume middle term from Milestone 6;
+* the q-side chart reading;
+* the fact that the selected output comparison holds at the q-point;
+* the lower-middle inequality `qSigned <= targetSigned`;
+* the history-separation guard.
+
+The lower-middle inequality is sourced from:
+
+```text
+package.preLedger.qSigned_le_targetSigned
+```
+
+and the chart/membership facts are sourced from:
+
+```text
+package.preLedger.qSigned_eq_chartedQ
+package.preLedger.chosenComparisonHoldsQ
+```
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1Theorem311AuditedMembershipMiddle
+IUTStage1Theorem311AuditedMembershipMiddle.ofTargetVolumeMiddle
+IUTStage1Theorem311AuditedMembershipMiddle.ofStructuredInputsWithSHE
+IUTStage1Theorem311AuditedMembershipMiddle.targetVolumeMiddle
+IUTStage1Theorem311AuditedMembershipMiddle.qCharted
+IUTStage1Theorem311AuditedMembershipMiddle.chosenHolds
+IUTStage1Theorem311AuditedMembershipMiddle.qSigned_le_targetSigned
+IUTStage1Theorem311AuditedMembershipMiddle.domainHistory_ne_codomainHistory
+IUTStage1Theorem311StructuredInputsWithSHE.auditedMembershipMiddle
+IUTStage1Theorem311StructuredInputsWithSHE.auditedQCharted
+IUTStage1Theorem311StructuredInputsWithSHE.auditedChosenHolds
+IUTStage1Theorem311StructuredInputsWithSHE.auditedQSigned_le_targetSigned
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_audited_membership_middle_example
+unitThetaToy_source_theorem311_audited_membership_q_charted_example
+unitThetaToy_source_theorem311_audited_membership_chosen_holds_example
+unitThetaToy_source_theorem311_audited_membership_q_le_target_example
+```
+
+### What This Tests
+
+The toy model verifies that the lower-middle bridge recovers the q-side chart
+identity, the selected-output membership fact, and `qSigned <= targetSigned`.
+These are intentionally tested without invoking the final signed inequality.
+
+### Design Trap Avoided
+
+The dangerous shortcut would be to immediately compose:
+
+```text
+qSigned <= targetSigned
+targetSigned <= thetaSigned
+```
+
+and call this Corollary 3.12. We did not do that. The lower and upper bridges
+now exist as separate audited objects, which lets us review exactly which source
+datum supports each half of the chain.
+
+### Next Step
+
+The next milestone may add a deliberately named chain-composition record that
+derives only the raw real inequality `qSigned <= thetaSigned` from the two
+middle bridges. It should still avoid `Corollary312Inequality` until
+q-positivity and source normalization are explicitly present.
