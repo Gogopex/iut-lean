@@ -143,6 +143,8 @@ Current modules:
   the scalar insertion obstruction.
 * `Iut.Foundations.IndeterminacyRelation`: region-valued comparison interface
   separating exact equality from indeterminacy membership.
+* `Iut.Foundations.RegionMeasure`: abstract monotone real-valued measures for
+  log-volume-shaped estimates.
 * `Iut.Stage1.PilotComparison`: first neutral interface for the Corollary 3.12
   target shape.
 * `Iut.Stage1.ToyModel`: Lean tests for Mochizuki's real-valued toy model from

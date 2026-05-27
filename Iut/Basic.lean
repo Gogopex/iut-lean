@@ -7,6 +7,7 @@ import Iut.Foundations.Species
 import Iut.Foundations.RealLineCopy
 import Iut.Foundations.TransportDiagram
 import Iut.Foundations.IndeterminacyRelation
+import Iut.Foundations.RegionMeasure
 import Iut.Stage1.PilotComparison
 import Iut.Stage1.ToyModel
 

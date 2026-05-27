@@ -745,3 +745,116 @@ It should not try to define the analytic log-volume. It should only express the
 monotonicity shape needed for upper-ray toy regions and later hull estimates:
 when `small subset large`, the chosen numerical measure is ordered in the
 appropriate direction.
+
+## Milestone 8: Abstract Region Measures
+
+Lean file: `Iut/Foundations/RegionMeasure.lean`
+
+### Source Check
+
+This milestone follows IUT III, Remark 3.9.5, where log-volume estimates are
+discussed in the presence of hulls and possible regions. The relevant source
+pattern is:
+
+```text
+mu_log(phi(P)) >= mu_log(H) >= mu_log(P)
+```
+
+for hull-approximants `H` associated to a region `P`, together with the
+discussion in (Ob6) that one is ultimately interested in estimating log-volumes
+but cannot simply replace the region-level construction by log-volumes too
+early.
+
+The proof of Corollary 3.12 also says that log-volumes are invariant under some
+indeterminacies and convert the upper semi-compatibility indeterminacy `(Ind3)`
+into an inequality from above. That is a later target. For this milestone we
+only encode the monotonicity shape of region inclusion.
+
+### Purpose
+
+The goal is to introduce a numerical layer without pretending to define IUT
+log-volume. We need a controlled interface that can support statements of the
+form:
+
+```text
+small subset large  ->  volume(small) <= volume(large)
+```
+
+and then derive the consequences for hulls and common targets.
+
+This keeps the formalization honest: if later we introduce an actual IUT
+log-volume, it will have to instantiate this interface by proving monotonicity.
+
+### Lean Declarations
+
+`RegionMeasure line` is a real-valued function on regions of a labeled real-line
+copy, together with a monotonicity proof.
+
+Core lemmas:
+
+```text
+RegionMeasure.le_of_subset
+RegionMeasure.le_hull
+RegionMeasure.le_common_of_choice
+RegionMeasure.le_commonHull_of_choice
+```
+
+These say that volumes are monotone under ordinary inclusion, passage to an
+abstract hull, and passage from any chosen possible region to a common region or
+common hull.
+
+`RegionMeasure.HasVolumeAtMost measure region bound` is the proposition
+`volume(region) <= bound`.
+
+The theorem
+
+```text
+RegionMeasure.atMost_of_subset_of_atMost
+```
+
+says that an upper bound on a larger region gives an upper bound on any
+contained smaller region. This is the direction needed when an estimate is
+proved for a hull/common target and then applied to a specific possible region.
+
+The theorem
+
+```text
+RegionMeasure.choice_atMost_of_common_atMost
+```
+
+specializes this to a family of possible regions contained in a common target.
+
+For region comparisons, `RegionMeasure.targetVolume` measures the target region
+of a comparison. The lemmas
+
+```text
+RegionMeasure.targetVolume_le_enlarge
+RegionMeasure.targetVolume_le_hullTarget
+RegionMeasure.choice_targetVolume_le_common
+RegionMeasure.choice_targetVolume_le_commonHull
+```
+
+transfer the same monotonicity facts to comparison targets.
+
+### What This Tests
+
+This milestone tests that the numerical estimate layer depends only on explicit
+containment hypotheses. No volume inequality is available merely because a
+region is called a hull or an indeterminacy region. Lean requires the inclusion
+or hull-extensiveness proof.
+
+### Design Trap Avoided
+
+The trap would be to make "log-volume" a magic function with the inequalities
+needed for Corollary 3.12 already built into theorem statements. Here the only
+built-in property is monotonicity under inclusion. This is intentionally too
+weak to prove IUT-level conclusions by itself.
+
+### Next Step
+
+The next milestone should connect the toy model's upper-ray regions to this
+measure abstraction by creating a toy measure or bound functional where the
+upper-ray bound itself is the measured value. That will provide a small
+end-to-end test: upper-ray enlargement corresponds to numerical inequality, and
+the `h <= epsilon` bound can be read as a region membership statement rather
+than as an assumed conclusion.
