@@ -4668,3 +4668,79 @@ the internal source-obligation proof path.
 The next milestone should audit the `q_positive` proof in the same compact
 style, tying the exported positivity field back to the ledger field and the
 signed q-coordinate convention.
+
+## Milestone 51: Q-Positivity Sign Transport
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+The Stage 1 schema stores the signed q-value `qSigned` as a positive
+`PilotLogVolume.value` by using:
+
+```text
+signedPilotLogVolume PilotSide.q qSigned
+```
+
+so the record field satisfies:
+
+```text
+stage1Comparison.q.value = -qSigned
+```
+
+IUT III, Step `(xi-d)`, uses signed log-volume expressions such as
+`-|log(q)|`, so this sign convention is part of the final real-number audit.
+Scholze-Stix's concern about explicit real-number identifications applies here
+as well: the positivity proof should remain connected to the signed coordinate
+that produced the stored positive magnitude.
+
+### Purpose
+
+This milestone adds two transport theorems for q-positivity:
+
+```text
+0 < ledger.stage1Comparison.q.value
+0 < -qSigned
+```
+
+The first rewrites the Stage 1 q-value by
+`stage1Comparison_q_value_eq_neg` and uses `ledger.q_positive`. The second goes
+the other way, recovering `0 < -qSigned` from the exported
+`stage1Comparison.q_positive` field.
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.stage1Comparison_q_positive_from_signed
+SourceObligationLedger.q_positive_from_stage1Comparison
+```
+
+These are small rewrite theorems rather than new assumptions. They make the
+existing positivity proof usable on either side of the signed q-value equality.
+
+### What This Tests
+
+The exported positivity field is now tied to:
+
+```text
+ledger.q_positive : 0 < -qSigned
+ledger.stage1Comparison.q.value = -qSigned
+```
+
+so positivity cannot drift away from the signed q-coordinate convention.
+
+### Design Trap Avoided
+
+The trap would be to treat `q_positive` as a standalone condition on the
+exported record while forgetting that it originates from the signed q-log-volume
+coordinate. These rewrite theorems keep the sign convention visible.
+
+### Next Step
+
+The next milestone should audit the remaining certificate/common-container
+alignment fields, starting with the SHE datum equality
+`she_matches_certificate`.
