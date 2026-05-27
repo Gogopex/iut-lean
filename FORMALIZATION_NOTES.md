@@ -16024,3 +16024,91 @@ The source package still does not require this evidence to produce the older
 public comparison endpoint. Eventually the non-toy IUT source obligations
 should include this split hull+det datum as part of the route from Theorem 3.11
 to the Corollary 3.12 comparison.
+
+## Stage 1 Math Milestone 108: Strengthened Source Obligations with Hull+Det Evidence
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The previous milestone made split hull+det data available at the source-package
+level, but it was still separate from the obligations used to promote the
+package to the public Stage 1 endpoint. This milestone adds a strengthened
+obligation package that requires both the older promotion obligations and the
+split hull+det evidence.
+
+This follows the source discipline from IUT III and Mochizuki's formalization
+report: the final comparison should be backed by SHE/common-container data and
+by the `(hull+det)` construction, not merely by a terminal target-volume bound.
+
+### Lean/API Check
+
+The source layer now defines:
+
+```text
+IUTStage1SourceHullDetObligations
+```
+
+with fields:
+
+```text
+sourceObligations : IUTStage1SourceObligations package
+hullDetData : IUTStage1SourceHullDetData package
+```
+
+It exposes:
+
+```text
+toSourceObligations
+algorithmCertified
+sheArrowMatchesCertificate
+qPilotPositive
+normalization
+targetUnion_subset_hull
+determinantVolumeBound
+choiceTargetVolume_le_thetaSigned
+allTargetsAtMost
+```
+
+The toy source example now defines:
+
+```text
+unitThetaToyIUTStage1SourceHullDetObligations
+```
+
+and verifies that it forgets to the previous obligations while retaining the
+union-containment and determinant/log-volume bound:
+
+```text
+unitThetaToy_source_hullDetObligations_to_sourceObligations_example
+unitThetaToy_source_hullDetObligations_targetUnion_subset_hull_example
+unitThetaToy_source_hullDetObligations_determinantVolumeBound_example
+```
+
+### Lean Decisions
+
+The strengthened obligations are a new structure rather than a modification of
+`IUTStage1SourceObligations`. This avoids breaking the existing public endpoint
+while providing a stricter target for future non-toy IUT proofs.
+
+### What This Tests
+
+Lean verifies that the toy source can satisfy the stricter obligation shape and
+that this stricter shape still projects to the old obligations. The focused
+build for `Iut.Stage1.IUTStage1SourceExample` passes.
+
+### Design Trap Avoided
+
+The trap would be to keep the hull+det provenance as optional data forever,
+with no path toward making it part of the source obligations. This milestone
+creates the stronger obligation package explicitly.
+
+### Remaining Gap
+
+The public endpoint constructors still consume the older obligations. A future
+milestone can either add parallel endpoint constructors for
+`IUTStage1SourceHullDetObligations` or gradually make the hull+det evidence a
+required component of the main source-obligation route.

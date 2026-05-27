@@ -203,6 +203,79 @@ def unitThetaToyIUTStage1SourceObligations
     q_pilot_positive := obligations.q_positive,
     normalization := obligations.normalization_proof }
 
+def unitThetaToyIUTStage1SourceHullDetObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1SourceHullDetObligations
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  { sourceObligations :=
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds,
+    hullDetData :=
+      unitThetaToyIUTStage1SourceHullDetData
+        measure hnormalized hh hbound hholds }
+
+theorem unitThetaToy_source_hullDetObligations_to_sourceObligations_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyIUTStage1SourceHullDetObligations
+      measure hnormalized hh hbound hholds).toSourceObligations =
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds :=
+  rfl
+
+theorem unitThetaToy_source_hullDetObligations_targetUnion_subset_hull_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    Region.Subset package.preLedger.output.comparisons.targetUnion
+      ((unitThetaToyIUTStage1SourceHullDetObligations
+        measure hnormalized hh hbound hholds).hullDetData.sourceData.structuredHullDet.applyHull
+          package.preLedger.certificate).hull :=
+  (unitThetaToyIUTStage1SourceHullDetObligations
+    measure hnormalized hh hbound hholds).targetUnion_subset_hull
+
+theorem unitThetaToy_source_hullDetObligations_determinantVolumeBound_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      ((unitThetaToyIUTStage1SourceHullDetObligations
+        measure hnormalized hh hbound hholds).hullDetData.sourceData.structuredHullDet.applyHull
+          package.preLedger.certificate).hull
+      package.preLedger.thetaSigned :=
+  (unitThetaToyIUTStage1SourceHullDetObligations
+    measure hnormalized hh hbound hholds).determinantVolumeBound
+
 def unitThetaToyIUTStage1SourceObligationGap
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

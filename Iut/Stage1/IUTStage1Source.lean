@@ -308,6 +308,81 @@ theorem allTargetsAtMost
 end IUTStage1SourceHullDetData
 
 /--
+Strengthened source obligations that include split hull+det provenance.
+
+The older `IUTStage1SourceObligations` are still enough to build the public
+comparison endpoint. This record is the stricter route a source-level IUT proof
+should target when it wants the final comparison to remember its
+union-of-possible-images hull.
+-/
+structure IUTStage1SourceHullDetObligations
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index) where
+  sourceObligations : IUTStage1SourceObligations package
+  hullDetData : IUTStage1SourceHullDetData package
+
+namespace IUTStage1SourceHullDetObligations
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+def toSourceObligations
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    IUTStage1SourceObligations package :=
+  obligations.sourceObligations
+
+theorem algorithmCertified
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    package.preLedger.output.Certified :=
+  obligations.sourceObligations.algorithm_certified
+
+theorem sheArrowMatchesCertificate
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  obligations.sourceObligations.she_arrow_matches_certificate
+
+theorem qPilotPositive
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    0 < -package.preLedger.qSigned :=
+  obligations.sourceObligations.q_pilot_positive
+
+theorem normalization
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    package.preLedger.normalization :=
+  obligations.sourceObligations.normalization
+
+theorem targetUnion_subset_hull
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    Region.Subset package.preLedger.output.comparisons.targetUnion
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull :=
+  obligations.hullDetData.targetUnion_subset_hull
+
+theorem determinantVolumeBound
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+      package.preLedger.thetaSigned :=
+  obligations.hullDetData.determinantVolumeBound
+
+theorem choiceTargetVolume_le_thetaSigned
+    (obligations : IUTStage1SourceHullDetObligations package) (choice : index) :
+    RegionMeasure.targetVolume package.preLedger.measure
+        (package.preLedger.output.comparison choice) <=
+      package.preLedger.thetaSigned :=
+  obligations.hullDetData.choiceTargetVolume_le_thetaSigned choice
+
+theorem allTargetsAtMost
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    RegionComparisonFamily.AllTargetsAtMost package.preLedger.measure
+      package.preLedger.output.comparisons package.preLedger.thetaSigned :=
+  obligations.hullDetData.allTargetsAtMost
+
+end IUTStage1SourceHullDetObligations
+
+/--
 Strengthened source-facing SHE input for the Theorem 3.11 route.
 
 This records a non-inert structured SHE context and only connects it to the
