@@ -338,6 +338,24 @@ theorem audit
     stage_recovers_corollary312 :=
       package.stage1Comparison_recovers_corollary312 obligations }
 
+theorem auditedPublicEndpoint
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceObligations package) :
+    ∃ sourceAudit : Audit package obligations,
+      (⟨sourceAudit.qSigned_le_thetaSigned,
+          sourceAudit.corollary312,
+          sourceAudit.stage_recovers_qSigned_le_thetaSigned⟩ :
+        package.preLedger.qSigned <= package.preLedger.thetaSigned ∧
+          Corollary312Inequality
+            (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+            (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) ∧
+          (corollary312_from_stage1_comparison
+              (package.promotedProvider obligations).stage1Comparison =
+            corollary312_of_signed_le
+              (package.promotedProvider obligations).ledger.qSigned_le_thetaSigned)) =
+        package.publicAudit obligations :=
+  ⟨package.audit obligations, Subsingleton.elim _ _⟩
+
 namespace Audit
 
 variable {package : IUTStage1SourcePackage source target index}

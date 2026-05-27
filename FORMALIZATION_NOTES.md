@@ -7855,3 +7855,67 @@ The next milestone should introduce a named source-stage endpoint theorem that
 combines `IUTStage1SourcePackage.audit` and `Audit.publicAuditEq`, so downstream
 modules have one theorem for "source obligations imply the audited public
 endpoint".
+
+## Milestone 94: Combined Source Audited Endpoint
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The source-facing package now has two complementary views: a compact audit
+record and the public Stage 1 endpoint. Future source modules should be able to
+ask for both at once after supplying source obligations.
+
+This remains an API theorem over the already explicit obligation boundary. It
+does not provide any new source proof of the obligations themselves.
+
+### Purpose
+
+This milestone adds a theorem that packages:
+
+```text
+IUTStage1SourcePackage.audit
+Audit/publicAudit compatibility
+```
+
+as a single existential endpoint:
+
+```text
+source obligations -> exists audit, audit endpoint fields = publicAudit
+```
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.auditedPublicEndpoint
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_auditedPublicEndpoint_example
+```
+
+### What This Tests
+
+The toy example verifies that consumers can obtain the audit witness and the
+public endpoint compatibility through one source-facing theorem.
+
+### Design Trap Avoided
+
+The trap would be to make downstream modules manually assemble the audit and
+compatibility theorem every time they need to inspect the public endpoint. This
+theorem is a convenience wrapper, but it still requires explicit
+`IUTStage1SourceObligations`.
+
+### Next Step
+
+The next milestone should start an explicit "source obligation gap" record that
+names the still-unproved mathematical tasks underneath
+`IUTStage1SourceObligations`, beginning with algorithm certification and SHE
+alignment.
