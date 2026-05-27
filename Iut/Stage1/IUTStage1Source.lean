@@ -2614,6 +2614,8 @@ structure AuditedStructuredSHERouteSummary
   signed_payload_boundary :
     IUTStage1Theorem311AuditedSignedPayloadBoundary
       package bundle sideConditions
+  charted_comparison_boundary :
+    AuditedChartedComparisonBoundary package bundle sideConditions
   public_audit : AuditedPublicAudit package bundle sideConditions
   comparison_data_eq_payload_inputs :
     bundle.auditedComparisonData sideConditions =
@@ -2645,6 +2647,8 @@ theorem ofStructuredInputsWithSHE
     raw_inequality := bundle.auditedRawInequality,
     signed_payload_boundary :=
       bundle.auditedSignedPayloadBoundary sideConditions,
+    charted_comparison_boundary :=
+      package.auditedChartedComparisonBoundary bundle sideConditions,
     public_audit := package.auditedPublicAudit bundle sideConditions,
     comparison_data_eq_payload_inputs :=
       package.auditedComparisonData_eq_payloadInputs bundle sideConditions,
@@ -2671,6 +2675,21 @@ theorem rawInequality
       AuditedStructuredSHERouteSummary package bundle sideConditions) :
     IUTStage1Theorem311AuditedRawInequality package bundle :=
   summary.raw_inequality
+
+theorem chartedComparisonBoundary
+    (summary :
+      AuditedStructuredSHERouteSummary package bundle sideConditions) :
+    AuditedChartedComparisonBoundary package bundle sideConditions :=
+  summary.charted_comparison_boundary
+
+theorem chartedQ_le_chartedTheta
+    (summary :
+      AuditedStructuredSHERouteSummary package bundle sideConditions) :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord <=
+      (Transport.map package.preLedger.chartedContainer.chart.thetaToTarget
+        package.preLedger.thetaBound.thetaPoint).coord :=
+  summary.charted_comparison_boundary.chartedQ_le_chartedTheta
 
 theorem comparisonDataEqPayloadInputs
     (summary :
@@ -2736,6 +2755,8 @@ structure AuditedTheorem311ToCorollary312Checkpoints
   signed_payload_boundary :
     IUTStage1Theorem311AuditedSignedPayloadBoundary
       package bundle sideConditions
+  charted_comparison_boundary :
+    AuditedChartedComparisonBoundary package bundle sideConditions
   public_audit : AuditedPublicAudit package bundle sideConditions
   histories_not_identified :
     bundle.structuredSHE.context.domainStructure.theater.side ≠
@@ -2762,6 +2783,8 @@ theorem ofStructuredInputsWithSHE
     target_volume_chain := bundle.auditedRawInequality,
     signed_payload_boundary :=
       bundle.auditedSignedPayloadBoundary sideConditions,
+    charted_comparison_boundary :=
+      package.auditedChartedComparisonBoundary bundle sideConditions,
     public_audit := package.auditedPublicAudit bundle sideConditions,
     histories_not_identified := bundle.domainHistory_ne_codomainHistory }
 
@@ -2815,6 +2838,23 @@ theorem signedPayloadBoundary
     IUTStage1Theorem311AuditedSignedPayloadBoundary
       package bundle sideConditions :=
   checkpoints.signed_payload_boundary
+
+theorem chartedComparisonBoundary
+    (checkpoints :
+      AuditedTheorem311ToCorollary312Checkpoints
+        package bundle sideConditions) :
+    AuditedChartedComparisonBoundary package bundle sideConditions :=
+  checkpoints.charted_comparison_boundary
+
+theorem chartedQ_le_chartedTheta
+    (checkpoints :
+      AuditedTheorem311ToCorollary312Checkpoints
+        package bundle sideConditions) :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord <=
+      (Transport.map package.preLedger.chartedContainer.chart.thetaToTarget
+        package.preLedger.thetaBound.thetaPoint).coord :=
+  checkpoints.charted_comparison_boundary.chartedQ_le_chartedTheta
 
 theorem publicAudit
     (checkpoints :

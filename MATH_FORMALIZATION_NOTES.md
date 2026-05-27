@@ -8050,3 +8050,86 @@ the charted inequality its own audited type.
 
 The charted q and Theta points are still abstract pre-ledger data. Later work
 should connect them to concrete q-pilot and Theta/HDD log-volume constructions.
+
+## Math Milestone 83: Charted Comparison Exposed in Route Summaries
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The charted q-to-Theta comparison should not live only as an internal lemma.
+The public route objects are the records a human reader will inspect when
+checking the Theorem 3.11 to Corollary 3.12 transition. They therefore need to
+expose the charted comparison boundary directly.
+
+### Lean/API Check
+
+The compact route record:
+
+```text
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary
+```
+
+now stores:
+
+```text
+charted_comparison_boundary :
+  AuditedChartedComparisonBoundary package bundle sideConditions
+```
+
+and exposes:
+
+```text
+chartedComparisonBoundary
+chartedQ_le_chartedTheta
+```
+
+The named transition record:
+
+```text
+IUTStage1SourcePackage.AuditedTheorem311ToCorollary312Checkpoints
+```
+
+carries the same charted comparison boundary and exposes the same charted
+q-to-Theta inequality.
+
+### Lean Decisions
+
+This milestone does not add a second comparison route. Both summaries fill the
+field by calling:
+
+```text
+package.auditedChartedComparisonBoundary bundle sideConditions
+```
+
+Thus the route summary, named checkpoints, public audit, signed payload
+boundary, and raw inequality all still point back to the same structured-SHE
+bundle and side conditions.
+
+### What This Tests
+
+The source example extracts the charted boundary and the charted inequality
+from both:
+
+```text
+unitThetaToy_source_theorem311_audited_route_summary_example
+unitThetaToy_source_theorem311_transition_checkpoints_example
+```
+
+The focused Stage 1 source example build passes.
+
+### Design Trap Avoided
+
+The trap would be to prove the charted comparison but leave the public
+checkpoint surface showing only `qSigned <= thetaSigned`. This milestone makes
+the charted inequality part of the visible 3.11-to-3.12 audit surface.
+
+### Remaining Gap
+
+The charted comparison is still derived from abstract pre-ledger chart data.
+The next mathematical work should begin replacing those abstract chart inputs
+with more specific q-pilot and Theta/HDD constructions, or at least isolate the
+next pre-ledger object that must become less abstract.
