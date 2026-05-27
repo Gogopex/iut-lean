@@ -375,6 +375,25 @@ theorem upperSemi_finiteLocalLogVolume_eq_example
     data.localObject.logVolume = data.finiteLogVolume :=
   data.logVolume_eq
 
+theorem upperSemi_processionNormalizedLogVolume_eq_example
+    {kind : IUTStage1PlaceKind}
+    (data : IUTStage1ProcessionNormalizedLogVolume kind) :
+    data.normalizedLogVolume =
+      data.totalLogVolume / (data.capsuleCount : Real) :=
+  data.normalized_eq
+
+theorem upperSemi_processionNormalizedLogVolume_capsuleCount_pos_example
+    {kind : IUTStage1PlaceKind}
+    (data : IUTStage1ProcessionNormalizedLogVolume kind) :
+    0 < data.capsuleCount :=
+  data.capsuleCount_pos
+
+def upperSemi_processionNormalized_to_finite_example
+    {kind : IUTStage1PlaceKind}
+    (data : IUTStage1ProcessionNormalizedLogVolume kind) :
+    IUTStage1FiniteLocalLogVolumeObject kind :=
+  data.toFiniteLocalLogVolumeObject
+
 theorem upperSemi_logVolumeCompatibility_upperBound_example
     (data : IUTStage1LogVolumeCompatibilityData) :
     data.sourceLogVolume <= data.targetLogVolume :=

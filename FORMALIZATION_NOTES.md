@@ -17542,3 +17542,69 @@ The analytic construction of local objects is still absent. The next refinement
 should separate packet-normalized and procession-normalized log-volume data
 more explicitly, especially the averaging over capsules/processions described
 in Proposition 3.9.
+
+## 125. Procession-Normalized Log Volume
+
+### Goal
+
+We added a source-facing record for procession-normalized local log-volume.
+This captures the averaging step in Proposition 3.9 without yet constructing
+the full family of capsules.
+
+### Source Check
+
+Proposition 3.9 says that, for collections of capsules in a procession, the
+local log-volumes are normalized by taking the average over the capsules under
+consideration. This is the source of the name "procession-normalization".
+
+### Lean/API Check
+
+The source layer now defines:
+
+```text
+IUTStage1ProcessionNormalizedLogVolume
+```
+
+with fields:
+
+```text
+localObject
+capsuleCount
+positive_capsule_count
+totalLogVolume
+normalizedLogVolume
+normalized_eq_average
+```
+
+The key equation is:
+
+```text
+normalizedLogVolume = totalLogVolume / capsuleCount
+```
+
+with `capsuleCount` coerced to `Real` and a proof that `0 < capsuleCount`.
+
+### Lean Decisions
+
+The capsule family is not yet represented. We record only the finite count and
+the average equation. This is enough to prevent the procession-normalized
+quantity from being treated as an arbitrary real, while keeping the next
+mathematical refinement clear: replace the total with a finite sum over typed
+capsule log-volume objects.
+
+### Toy Check
+
+The source example now checks:
+
+```text
+upperSemi_processionNormalizedLogVolume_eq_example
+upperSemi_processionNormalizedLogVolume_capsuleCount_pos_example
+upperSemi_processionNormalized_to_finite_example
+```
+
+The focused build for `Iut.Stage1.IUTStage1SourceExample` passes.
+
+### Remaining Gap
+
+The next refinement should introduce an indexed finite capsule family and prove
+that the recorded `totalLogVolume` is the sum of the capsule log-volumes.

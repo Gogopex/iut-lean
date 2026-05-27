@@ -750,6 +750,22 @@ structure IUTStage1FiniteLocalLogVolumeObject
   finiteLogVolume : Real
   finite_log_volume_eq : localObject.logVolume = finiteLogVolume
 
+/--
+Procession-normalized local log-volume datum.
+
+This records the finite capsule count and the normalized average used in
+Proposition 3.9, without yet formalizing the capsule family itself.
+-/
+structure IUTStage1ProcessionNormalizedLogVolume
+    (kind : IUTStage1PlaceKind) where
+  localObject : IUTStage1FiniteLocalLogVolumeObject kind
+  capsuleCount : Nat
+  positive_capsule_count : 0 < capsuleCount
+  totalLogVolume : Real
+  normalizedLogVolume : Real
+  normalized_eq_average :
+    normalizedLogVolume = totalLogVolume / (capsuleCount : Real)
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}
@@ -765,6 +781,28 @@ def place
   data.localObject.object.place
 
 end IUTStage1FiniteLocalLogVolumeObject
+
+namespace IUTStage1ProcessionNormalizedLogVolume
+
+variable {kind : IUTStage1PlaceKind}
+
+theorem normalized_eq
+    (data : IUTStage1ProcessionNormalizedLogVolume kind) :
+    data.normalizedLogVolume =
+      data.totalLogVolume / (data.capsuleCount : Real) :=
+  data.normalized_eq_average
+
+theorem capsuleCount_pos
+    (data : IUTStage1ProcessionNormalizedLogVolume kind) :
+    0 < data.capsuleCount :=
+  data.positive_capsule_count
+
+def toFiniteLocalLogVolumeObject
+    (data : IUTStage1ProcessionNormalizedLogVolume kind) :
+    IUTStage1FiniteLocalLogVolumeObject kind :=
+  data.localObject
+
+end IUTStage1ProcessionNormalizedLogVolume
 
 /-- Local nonarchimedean inclusion datum from the upper-semi-compatibility step. -/
 structure IUTStage1NonarchimedeanInclusionData where
