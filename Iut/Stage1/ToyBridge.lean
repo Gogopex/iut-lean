@@ -46,6 +46,9 @@ def thetaToyStructuredCommonTargetBoundBridge
 def thetaToyHullDetOperation : AlgorithmicOutput.HullDetOperationId :=
   { label := "toy-upper-ray-hull-det" }
 
+def thetaToyDescentOperation : AlgorithmicOutput.DescentOperationId :=
+  { label := "toy-upper-ray-descent" }
+
 def thetaToyHullDetBridgeData
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -56,6 +59,18 @@ def thetaToyHullDetBridgeData
       measure (-(2 * h) + epsilonBound) :=
   { operation := thetaToyHullDetOperation,
     bridge := thetaToyStructuredCommonTargetBoundBridge
+      measure hnormalized f h hbound }
+
+def thetaToyHDDCompositeData
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    (thetaToyAlgorithmOutput f h epsilon).HDDCompositeData
+      measure (-(2 * h) + epsilonBound) :=
+  { descent := thetaToyDescentOperation,
+    hullDetBridge := thetaToyHullDetBridgeData
       measure hnormalized f h hbound }
 
 def thetaToyCertifiedBridgeBound
@@ -108,6 +123,19 @@ theorem thetaToyHullDet_choice_targetVolume_le_bound
   (thetaToyHullDetBridgeData measure hnormalized f h hbound).choice_targetVolume_le
     (thetaToyStructuredCertificate f h epsilon) choice
 
+theorem thetaToyHDD_choice_targetVolume_le_bound
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    (choice : index) :
+    RegionMeasure.targetVolume measure
+        ((thetaToyAlgorithmOutput f h epsilon).comparison choice) <=
+      -(2 * h) + epsilonBound :=
+  (thetaToyHDDCompositeData measure hnormalized f h hbound).choice_targetVolume_le
+    (thetaToyStructuredCertificate f h epsilon) choice
+
 theorem thetaToyBridge_allTargetsAtMost
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -139,6 +167,17 @@ theorem thetaToyHullDet_allTargetsAtMost
     RegionComparisonFamily.AllTargetsAtMost measure
       (thetaToyAlgorithmOutput f h epsilon).comparisons (-(2 * h) + epsilonBound) :=
   (thetaToyHullDetBridgeData measure hnormalized f h hbound).allTargetsAtMost
+    (thetaToyStructuredCertificate f h epsilon)
+
+theorem thetaToyHDD_allTargetsAtMost
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    RegionComparisonFamily.AllTargetsAtMost measure
+      (thetaToyAlgorithmOutput f h epsilon).comparisons (-(2 * h) + epsilonBound) :=
+  (thetaToyHDDCompositeData measure hnormalized f h hbound).allTargetsAtMost
     (thetaToyStructuredCertificate f h epsilon)
 
 theorem thetaToyBridge_hasAPT

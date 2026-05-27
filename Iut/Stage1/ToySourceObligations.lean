@@ -10,7 +10,7 @@ import Iut.Stage1.ToyCorollarySchema
 Toy completion of the Stage 1 source-obligation ledger.
 
 The toy ledger uses upper-ray normalization as its normalization obligation and
-the named toy hull+det bridge as its bridge obligation.
+the named toy HDD composite as its bridge obligation.
 -/
 
 namespace Iut
@@ -37,8 +37,8 @@ def unitThetaToySourceObligationLedger
       (Transport.map unitQToTheta (qAssignment h)).coord
       (RegionMeasure.NormalizesUpperRays measure) :=
   { certificate := thetaToyStructuredCertificate unitQToTheta h epsilon,
-    hullDetBridge :=
-      thetaToyHullDetBridgeData measure hnormalized unitQToTheta h hbound,
+    hdd :=
+      thetaToyHDDCompositeData measure hnormalized unitQToTheta h hbound,
     choice := choice,
     q_le_choice :=
       unitThetaToy_qSigned_le_choiceTargetVolume measure hnormalized h epsilon choice hholds,

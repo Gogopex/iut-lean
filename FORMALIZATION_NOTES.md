@@ -2280,3 +2280,107 @@ The next milestone should split the current hull+det bridge name into the
 composition emphasized in Mochizuki's report: introduce a descent-operation
 identifier, a hull+det-operation identifier, and an inert `HDD` composite record
 that links descent plus hull+det to the structured bridge obligation.
+
+## Milestone 23: HDD Composite Data
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/ToyBridge.lean`
+* `Iut/Stage1/SourceObligations.lean`
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+Mochizuki's April 2026 report distinguishes the second and third triangles in
+the Stage 1 decomposition. The second triangle is the descent arrow `(dsc)`,
+which concerns regarding the multiradial representation as constructed from
+weaker BPS plus etale-Hodge-theater data up to indeterminacies. The third
+triangle defines
+
+```text
+(HDD) := (hull+det) o (dsc)
+```
+
+as the composite of descent with the elementary `hull+det` operation. The
+report then identifies the fourth triangle, `(HDD) o (SHE)`, as the final
+simultaneous comparison step leading toward Corollary 3.12.
+
+IUT III, Corollary 3.12, Step `(xi-d)` remains the matching technical passage:
+the multiradial output is enlarged by holomorphic hulls, converted through
+determinants of localized arithmetic vector bundles, and then measured by
+normalized log-volume so that q- and Theta-pilot quantities become comparable.
+
+### Purpose
+
+Milestone 22 made hull+det visible in the bridge layer. This milestone prevents
+that name from absorbing the descent step. The new declarations make the source
+decomposition visible:
+
+```text
+DescentOperationId
+HDDCompositeData
+```
+
+`HDDCompositeData` stores a descent identifier together with a named hull+det
+bridge. It still does not assert that descent is valid, that hull+det is valid,
+or that their composition has been mathematically constructed.
+
+### Lean Declarations
+
+In `AlgorithmicBridge.lean`:
+
+```text
+DescentOperationId.label
+HDDCompositeData.descent
+HDDCompositeData.hullDetBridge
+HDDCompositeData.structuredBridge
+HDDCompositeData.apply
+HDDCompositeData.choice_targetVolume_le
+HDDCompositeData.allTargetsAtMost
+```
+
+In `ToyBridge.lean`:
+
+```text
+thetaToyDescentOperation
+thetaToyHDDCompositeData
+thetaToyHDD_choice_targetVolume_le_bound
+thetaToyHDD_allTargetsAtMost
+```
+
+In `SourceObligations.lean`, the ledger field
+
+```text
+hullDetBridge : output.HullDetBridgeData measure thetaSigned
+```
+
+was replaced by:
+
+```text
+hdd : output.HDDCompositeData measure thetaSigned
+```
+
+The final inequality now accesses the structured bridge through
+`ledger.hdd.structuredBridge`.
+
+### What This Tests
+
+The toy source-obligation endpoint still proves the signed Stage 1 inequality
+after the final ledger is strengthened from a hull+det bridge to an HDD
+composite. This tests that the extra source-level bookkeeping does not change
+the current toy arithmetic proof.
+
+### Design Trap Avoided
+
+The trap would be to treat descent as a harmless label already included in
+hull+det. In the source decomposition, descent is the place where weaker data
+and indeterminacy-controlled construction enter. It needs its own future proof
+slot.
+
+### Next Step
+
+The next milestone should expose the fourth triangle by adding an inert
+`SHEArrowId` or `SHEBridgeData` and a record for the restricted composite
+`HDD o SHE`, then make the source ledger depend on that final composite rather
+than directly on HDD.

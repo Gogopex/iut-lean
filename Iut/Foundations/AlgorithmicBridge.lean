@@ -124,6 +124,13 @@ structure HullDetOperationId where
   label : String
 
 /--
+Inert identifier for the descent operation that precedes hull+det in the HDD
+composite.
+-/
+structure DescentOperationId where
+  label : String
+
+/--
 A named hull+det operation together with the structured bridge it supplies.
 
 The bridge remains explicit data: this record does not derive a bound from the
@@ -161,6 +168,48 @@ theorem allTargetsAtMost
   data.bridge.allTargetsAtMost certificate
 
 end HullDetBridgeData
+
+/--
+The named HDD composite, modeled as descent followed by a named hull+det bridge.
+
+This record exposes the source decomposition `(HDD) = (hull+det) o (dsc)` while
+still requiring the structured bridge as explicit data.
+-/
+structure HDDCompositeData
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target) (bound : Real) where
+  descent : DescentOperationId
+  hullDetBridge : output.HullDetBridgeData measure bound
+
+namespace HDDCompositeData
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+
+def structuredBridge (data : HDDCompositeData output measure bound) :
+    output.StructuredCommonTargetBoundBridge measure bound :=
+  data.hullDetBridge.bridge
+
+def apply (data : HDDCompositeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    output.CommonTargetBound measure bound :=
+  data.hullDetBridge.apply certificate
+
+theorem choice_targetVolume_le
+    (data : HDDCompositeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family)
+    (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  data.hullDetBridge.choice_targetVolume_le certificate choice
+
+theorem allTargetsAtMost
+    (data : HDDCompositeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  data.hullDetBridge.allTargetsAtMost certificate
+
+end HDDCompositeData
 
 end AlgorithmicOutput
 
