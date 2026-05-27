@@ -249,6 +249,14 @@ theorem publicAudit_stage1Comparison_recovers_qSigned_le_thetaSigned
         (data.toSourceObligationProvider obligations).ledger.qSigned_le_thetaSigned :=
   (data.publicAudit obligations).2.2
 
+theorem stage1Comparison_recovers_corollary312
+    (data : IUTStage1PreLedgerData source target index)
+    (obligations : LedgerPromotionObligations data) :
+    corollary312_from_stage1_comparison
+        (data.toSourceObligationProvider obligations).stage1Comparison =
+      (data.toSourceObligationProvider obligations).ledger.corollary312 :=
+  (data.toSourceObligationProvider obligations).stage1Comparison_recovers_corollary312
+
 end IUTStage1PreLedgerData
 
 end Stage1

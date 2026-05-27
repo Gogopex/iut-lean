@@ -6989,3 +6989,77 @@ obligations.
 The next milestone should introduce a named pre-ledger recovery theorem whose
 right-hand side is the promoted ledger's `corollary312` field itself, parallel
 to `IUTSourceObligationProvider.stage1Comparison_recovers_corollary312`.
+
+## Milestone 82: Pre-Ledger Recovery to Promoted Corollary Field
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Data.lean`
+* `Iut/Stage1/IUTStage1DataExample.lean`
+
+### Source Check
+
+The public audit equality in Milestone 81 targets the constructed proof:
+
+```text
+corollary312_of_signed_le ...qSigned_le_thetaSigned
+```
+
+The provider layer also has a more structural theorem saying that the
+`Stage1Comparison` projection recovers the promoted ledger's named
+`corollary312` field. Keeping both views matters because future source-specific
+formalization should be able to audit either the explicit q-to-Theta proof path
+or the named ledger field without changing the underlying argument.
+
+This remains an API-alignment milestone. It does not assert any new IUT
+mathematics beyond the already promoted source-obligation ledger.
+
+### Purpose
+
+This milestone adds the pre-ledger analogue of:
+
+```text
+IUTSourceObligationProvider.stage1Comparison_recovers_corollary312
+```
+
+The theorem is parameterized by the explicit promotion obligations, so the
+pre-ledger data still cannot claim the promoted Corollary 3.12 endpoint until
+the missing source obligations have been supplied.
+
+### Lean Declarations
+
+In `IUTStage1Data.lean`:
+
+```text
+IUTStage1PreLedgerData.stage1Comparison_recovers_corollary312
+```
+
+In `IUTStage1DataExample.lean`:
+
+```text
+unitThetaToy_preLedger_stage_recovers_corollary_example
+```
+
+### What This Tests
+
+The toy example verifies that the pre-ledger data, once promoted, has the same
+ledger-field recovery shape as the provider layer:
+
+```text
+corollary312_from_stage1_comparison promoted.stage1Comparison
+  = promoted.ledger.corollary312
+```
+
+### Design Trap Avoided
+
+The trap would be to expose only the normalized public-audit equality to
+`corollary312_of_signed_le`. That is useful, but it hides the ledger field that
+future source modules are likely to discuss by name. This theorem keeps the
+formal API closer to the mathematical prose while still routing through the
+explicit promoted provider.
+
+### Next Step
+
+The next milestone should add named accessors for the promoted provider and
+ledger produced by a pre-ledger package, if that makes subsequent source
+placeholder modules easier to state without repeating promotion expressions.

@@ -189,6 +189,26 @@ theorem unitThetaToy_promotedProvider_recovers_corollary_example
   (unitThetaToyPromotedProvider
     measure hnormalized hh hbound hholds).stage1Comparison_recovers_corollary312
 
+theorem unitThetaToy_preLedger_stage_recovers_corollary_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    corollary312_from_stage1_comparison
+      ((unitThetaToyPreLedgerData measure hnormalized hh hbound hholds).toSourceObligationProvider
+        (unitThetaToyPromotionObligations
+          measure hnormalized hh hbound hholds)).stage1Comparison =
+      ((unitThetaToyPreLedgerData measure hnormalized hh hbound hholds).toSourceObligationProvider
+        (unitThetaToyPromotionObligations
+          measure hnormalized hh hbound hholds)).ledger.corollary312 :=
+  (unitThetaToyPreLedgerData
+    measure hnormalized hh hbound hholds).stage1Comparison_recovers_corollary312
+      (unitThetaToyPromotionObligations measure hnormalized hh hbound hholds)
+
 theorem unitThetaToy_preLedger_publicAudit_recovery_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
