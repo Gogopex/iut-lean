@@ -1755,3 +1755,49 @@ placeAuditedDirectSummandPacketChoice_generated_logVolumeCompatible_example
 The next refinement should connect place-audited generated relations to
 multiradial image invariance, either by projecting to the underlying refined
 choice relation or by defining audited image packages directly.
+
+## 23. Audited Coric Image Invariance
+
+### Goal
+
+We connected the generated relation on place-audited choices to multiradial
+image invariance.
+
+### Lean/API Check
+
+The new theorem is:
+
+```text
+IUTStage1PlaceAuditedDirectSummandPacketChoice.image_invariant_of_coric
+```
+
+It states that if a region family indexed by place-audited refined choices
+depends only on the underlying choice's coric coordinate, then the region is
+invariant under the generated audited `(Ind1)/(Ind2)/(Ind3)` relation.
+
+The proof uses:
+
+```text
+generated_preserves_coric
+```
+
+for the audited relation.
+
+### Mathematical Point
+
+This is the multiradiality bridge for the audited choice layer.  It says that
+adding a place-family compatibility audit does not break the usual coric-based
+invariance pattern, provided the audited generator steps preserve the audit.
+
+### Toy Check
+
+The source example now checks:
+
+```text
+placeAuditedDirectSummandPacketChoice_image_invariant_of_coric_example
+```
+
+### Remaining Gap
+
+The next refinement should package audited multiradial images in the same way
+as the unaudited refined source packages.

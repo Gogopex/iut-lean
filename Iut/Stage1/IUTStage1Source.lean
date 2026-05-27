@@ -3086,6 +3086,24 @@ theorem generated_preserves_upperSemiLogVolumeCompatible
     audited₂.choice.upper_semi_state.logVolumeCompatible :=
   audited₂.upperSemi_logVolumeCompatible
 
+theorem image_invariant_of_coric
+    {target : Copy}
+    (images :
+      RegionFamily target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind))
+    (hcoric :
+      ∀ audited₁ audited₂,
+        audited₁.choice.coric = audited₂.choice.coric ->
+          images.region audited₁ = images.region audited₂) :
+    ∀ {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind},
+      IUTStage1GeneratedIndeterminacyRelation
+        (indeterminacySourceData (coric := coric) (kind := kind)).generators
+        audited₁ audited₂ ->
+        images.region audited₁ = images.region audited₂ := by
+  intro audited₁ audited₂ hrel
+  exact hcoric audited₁ audited₂ (generated_preserves_coric hrel)
+
 end IUTStage1PlaceAuditedDirectSummandPacketChoice
 
 /--

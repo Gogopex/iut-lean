@@ -1166,6 +1166,26 @@ theorem placeAuditedDirectSummandPacketChoice_generated_logVolumeCompatible_exam
   IUTStage1PlaceAuditedDirectSummandPacketChoice.generated_preserves_upperSemiLogVolumeCompatible
     hrel
 
+theorem placeAuditedDirectSummandPacketChoice_image_invariant_of_coric_example
+    {target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    (images :
+      RegionFamily target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind))
+    (hcoric :
+      ∀ audited₁ audited₂,
+        audited₁.choice.coric = audited₂.choice.coric ->
+          images.region audited₁ = images.region audited₂)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice.indeterminacySourceData
+          (coric := coric) (kind := kind)).generators
+        audited₁ audited₂) :
+    images.region audited₁ = images.region audited₂ :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.image_invariant_of_coric
+    images hcoric hrel
+
 def refinedThetaImagesDependOnlyOnCoric_to_multiradial_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
