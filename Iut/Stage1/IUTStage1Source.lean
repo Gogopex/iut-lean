@@ -193,6 +193,52 @@ theorem hodgeTheaterSHEAlignment
 end IUTStage1Theorem311Subclaims
 
 /--
+Theorem 3.11 source inputs paired with the local pre-ledger audit.
+
+The pre-ledger audit exposes structured IPL/SHE/APT data and chart/membership
+facts. The subclaims record the separate opaque output certificate and SHE
+alignment still needed for ledger promotion.
+-/
+structure IUTStage1Theorem311StructuredInputs
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index) : Prop where
+  preledger_audit : IUTStage1PreLedgerData.Audit package.preLedger
+  theorem311_subclaims : IUTStage1Theorem311Subclaims package
+
+namespace IUTStage1Theorem311StructuredInputs
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+theorem hasStructuredIPL
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    QualitativeData.HasStructuredIPL package.preLedger.output.family :=
+  inputs.preledger_audit.has_structured_ipl
+
+theorem hasStructuredSHE
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    QualitativeData.HasStructuredSHE package.preLedger.output.family :=
+  inputs.preledger_audit.has_structured_she
+
+theorem hasStructuredAPT
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    QualitativeData.HasStructuredAPT package.preLedger.output.family :=
+  inputs.preledger_audit.has_structured_apt
+
+theorem algorithmOutputCertified
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    package.preLedger.output.Certified :=
+  inputs.theorem311_subclaims.algorithmOutputCertified
+
+theorem hodgeTheaterSHEAlignment
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  inputs.theorem311_subclaims.hodgeTheaterSHEAlignment
+
+end IUTStage1Theorem311StructuredInputs
+
+/--
 Named source-level gap below `IUTStage1SourceObligations`.
 
 The fields use source-facing names for the mathematical work still needed to
@@ -239,6 +285,12 @@ def theorem311Subclaims
     IUTStage1Theorem311Subclaims package :=
   { algorithm_output_certified := gap.theorem311AlgorithmCertified,
     hodge_theater_she_alignment := gap.sheAlignment }
+
+def theorem311StructuredInputs
+    (gap : IUTStage1SourceObligationGap package) :
+    IUTStage1Theorem311StructuredInputs package :=
+  { preledger_audit := package.preLedger.audit,
+    theorem311_subclaims := gap.theorem311Subclaims }
 
 def toSourceObligations
     (gap : IUTStage1SourceObligationGap package) :
@@ -301,6 +353,12 @@ def theorem311Subclaims
     IUTStage1Theorem311Subclaims package :=
   { algorithm_output_certified := gapAudit.theorem311AlgorithmCertified,
     hodge_theater_she_alignment := gapAudit.sheAlignment }
+
+def theorem311StructuredInputs
+    (gapAudit : Audit gap) :
+    IUTStage1Theorem311StructuredInputs package :=
+  { preledger_audit := package.preLedger.audit,
+    theorem311_subclaims := gapAudit.theorem311Subclaims }
 
 def toSourceObligations
     (gapAudit : Audit gap) :

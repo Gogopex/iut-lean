@@ -231,6 +231,69 @@ theorem unitThetaToy_source_theorem311_she_alignment_example
   (unitThetaToy_source_theorem311_subclaims_example
     measure hnormalized hh hbound hholds).hodgeTheaterSHEAlignment
 
+theorem unitThetaToy_source_theorem311_structured_inputs_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1Theorem311StructuredInputs
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  (unitThetaToyIUTStage1SourceObligationGap
+    measure hnormalized hh hbound hholds).theorem311StructuredInputs
+
+theorem unitThetaToy_source_theorem311_structured_hasIPL_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    QualitativeData.HasStructuredIPL package.preLedger.output.family :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).hasStructuredIPL
+
+theorem unitThetaToy_source_theorem311_structured_hasSHE_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    QualitativeData.HasStructuredSHE package.preLedger.output.family :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).hasStructuredSHE
+
+theorem unitThetaToy_source_theorem311_structured_hasAPT_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    QualitativeData.HasStructuredAPT package.preLedger.output.family :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).hasStructuredAPT
+
 theorem unitThetaToy_source_gap_qPilot_positive_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -319,6 +382,21 @@ theorem unitThetaToy_source_gap_audit_theorem311_subclaims_example
         measure hnormalized hh hbound hholds) :=
   (unitThetaToy_source_gap_audit_example
     measure hnormalized hh hbound hholds).theorem311Subclaims
+
+theorem unitThetaToy_source_gap_audit_theorem311_structured_inputs_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1Theorem311StructuredInputs
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  (unitThetaToy_source_gap_audit_example
+    measure hnormalized hh hbound hholds).theorem311StructuredInputs
 
 theorem unitThetaToy_source_gap_audit_qPilot_positive_example
     (measure : RegionMeasure thetaLine)

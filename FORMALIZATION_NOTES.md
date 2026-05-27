@@ -8344,3 +8344,80 @@ The next milestone should connect these subclaims to the already existing
 structured IPL/SHE/APT certificates in `IUTStage1PreLedgerData.Audit`, without
 allowing structured IPL/SHE/APT names alone to produce common-target bounds or
 Corollary 3.12.
+
+## Milestone 101: Theorem 3.11 Structured Inputs
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Mochizuki's formalization report separates the fourth triangle
+`3.11.5 => 3.12` from the earlier first/second/third triangles, and explicitly
+names SHE, IPL, and APT as parts of the surrounding decomposition. Our existing
+pre-ledger audit already exposes structured IPL/SHE/APT evidence as inert
+bookkeeping.
+
+This milestone links the new Theorem 3.11 subclaim record to that pre-ledger
+audit. It does not state that structured IPL/SHE/APT imply a common-target bound
+or a Corollary 3.12 inequality.
+
+### Purpose
+
+This milestone introduces a source-facing structured-input record for Theorem
+3.11. It pairs:
+
+```text
+the local pre-ledger audit
+the Theorem 3.11 subclaims
+```
+
+This makes the relevant structured IPL/SHE/APT evidence available beside the
+opaque algorithmic output certificate and SHE alignment.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1Theorem311StructuredInputs
+IUTStage1Theorem311StructuredInputs.hasStructuredIPL
+IUTStage1Theorem311StructuredInputs.hasStructuredSHE
+IUTStage1Theorem311StructuredInputs.hasStructuredAPT
+IUTStage1Theorem311StructuredInputs.algorithmOutputCertified
+IUTStage1Theorem311StructuredInputs.hodgeTheaterSHEAlignment
+IUTStage1SourceObligationGap.theorem311StructuredInputs
+IUTStage1SourceObligationGap.Audit.theorem311StructuredInputs
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_structured_inputs_example
+unitThetaToy_source_theorem311_structured_hasIPL_example
+unitThetaToy_source_theorem311_structured_hasSHE_example
+unitThetaToy_source_theorem311_structured_hasAPT_example
+unitThetaToy_source_gap_audit_theorem311_structured_inputs_example
+```
+
+### What This Tests
+
+The toy examples verify that structured IPL/SHE/APT evidence can be projected
+from the new structured-input record, while algorithm certification still comes
+from the explicit Theorem 3.11 subclaims.
+
+### Design Trap Avoided
+
+The trap would be to let structured IPL/SHE/APT names become hidden axioms for
+the numerical comparison. This milestone only exposes the names. The existing
+bridge and source-obligation layers remain responsible for bounds and endpoint
+promotion.
+
+### Next Step
+
+The next milestone should add compatibility lemmas from structured inputs back
+to the older Theorem 3.11 subclaim projections, then consider a separate
+source-facing record for the q-pilot positivity and normalization side
+conditions.
