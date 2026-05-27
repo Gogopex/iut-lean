@@ -13795,3 +13795,108 @@ The Galois/deck group is still supplied abstractly. Later milestones should
 construct it from finite etale covering data or field automorphism data, then
 connect the local/decomposition-group reconstruction data to this global
 quotient interface.
+
+## Math Milestone 50: Deck and Galois Actions as Ring Automorphisms
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Remark 3.1.2, says that the `Theta`-approach reconstructs the function
+field of `X_K` equipped with its natural
+
+```text
+Gal(X_K/C_K) ~= Pi_CK / Pi_XK
+```
+
+action. A natural Galois action on a function field should act by field
+automorphisms. Milestones 44-49 encoded this as a `MulSemiringAction` and a
+quotient/Galois interface. This milestone exposes the corresponding
+automorphism homomorphisms using mathlib's `MulSemiringAction.toRingAut`.
+
+This is still the IUT I reconstruction layer. It does not make any
+Hodge-theater comparison and does not assert any Corollary 3.12 numerical
+inequality.
+
+### Lean/API Check
+
+The reconstructed field package now exposes:
+
+```text
+ReconstructedFunctionFieldData.deckRingAutHom
+ReconstructedFunctionFieldData.deckRingAut
+ReconstructedFunctionFieldData.deckRingAut_apply
+```
+
+The theta function-field package now exposes:
+
+```text
+ThetaApproachFunctionFieldData.deckRingAutHom
+ThetaApproachFunctionFieldData.deckRingAut
+ThetaApproachFunctionFieldData.piCKRingAutHom
+ThetaApproachFunctionFieldData.piCKRingAut
+ThetaApproachFunctionFieldData.deckRingAut_apply
+ThetaApproachFunctionFieldData.piCKRingAut_apply
+```
+
+The Galois quotient interface now exposes:
+
+```text
+ThetaApproachGaloisQuotientData.galRingAutHom
+ThetaApproachGaloisQuotientData.galRingAut
+ThetaApproachGaloisQuotientData.galRingAut_apply
+ThetaApproachGaloisQuotientData.piCKRingAut_eq_galRingAut
+```
+
+The cover and initial-theta layers expose corresponding projections:
+
+```text
+ThetaOrbicurveCoverData.thetaApproachDeckRingAutHom
+ThetaOrbicurveCoverData.thetaApproachPiCKRingAutHom
+ThetaOrbicurveCoverData.thetaApproachGalRingAutHom
+InitialThetaData.thetaApproachDeckRingAutHom
+InitialThetaData.thetaApproachPiCKRingAutHom
+InitialThetaData.thetaApproachGalRingAutHom
+```
+
+### Lean Decisions
+
+We used mathlib's standard `RingAut` and
+`MulSemiringAction.toRingAut`. This avoids introducing a custom "field
+automorphism" record and lets Lean inherit the usual group homomorphism API for
+automorphisms under composition.
+
+The theorem
+
+```text
+ThetaApproachGaloisQuotientData.piCKRingAut_eq_galRingAut
+```
+
+states that the automorphism of the reconstructed function field obtained from
+`Pi_CK` is exactly the automorphism obtained by first projecting to the Galois
+group `Gal(X_K/C_K)`.
+
+### What This Tests
+
+The example file now checks:
+
+* deck quotient elements act through `RingAut`;
+* `Pi_CK` elements act through `RingAut`;
+* Galois elements act through `RingAut`;
+* the `Pi_CK` automorphism equals the Galois automorphism after quotienting.
+
+### Design Trap Avoided
+
+The trap would be to leave the action only as a pointwise semiring action and
+then later speak informally about Galois automorphisms. This milestone makes the
+automorphism content explicit in Lean.
+
+### Remaining Gap
+
+The reconstructed function field is still abstract. Later milestones should
+connect the `RingAut` action to an actual field-extension automorphism group or
+finite etale cover/deck transformation construction, rather than supplying the
+deck action as an abstract field action.

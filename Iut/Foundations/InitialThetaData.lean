@@ -1658,6 +1658,16 @@ instance : MulSemiringAction deckGroup functionField.carrier :=
 def deckRingHom (g : deckGroup) : functionField.carrier →+* functionField.carrier :=
   MulSemiringAction.toRingHom deckGroup functionField.carrier g
 
+def deckRingAutHom : deckGroup →* RingAut functionField.carrier :=
+  MulSemiringAction.toRingAut deckGroup functionField.carrier
+
+def deckRingAut (g : deckGroup) : RingAut functionField.carrier :=
+  functionField.deckRingAutHom g
+
+theorem deckRingAut_apply (g : deckGroup) (x : functionField.carrier) :
+    functionField.deckRingAut g x = g • x :=
+  rfl
+
 theorem one_smul_element (x : functionField.carrier) :
     (1 : deckGroup) • x = x :=
   one_smul deckGroup x
@@ -1727,6 +1737,15 @@ def deckRingHom (g : ThetaApproachQuotientData.deckQuotient thetaApproach) :
     functionFieldData.functionField →+* functionFieldData.functionField :=
   functionFieldData.reconstructedFunctionField.deckRingHom g
 
+def deckRingAutHom :
+    ThetaApproachQuotientData.deckQuotient thetaApproach →*
+      RingAut functionFieldData.functionField :=
+  functionFieldData.reconstructedFunctionField.deckRingAutHom
+
+def deckRingAut (g : ThetaApproachQuotientData.deckQuotient thetaApproach) :
+    RingAut functionFieldData.functionField :=
+  functionFieldData.deckRingAutHom g
+
 instance piCKAction :
     MulSemiringAction thetaApproach.piCK.carrier functionFieldData.functionField :=
   MulSemiringAction.compHom
@@ -1739,6 +1758,15 @@ def piCKRingHom (g : thetaApproach.piCK.carrier) :
     functionFieldData.functionField →+* functionFieldData.functionField :=
   MulSemiringAction.toRingHom thetaApproach.piCK.carrier
     functionFieldData.functionField g
+
+def piCKRingAutHom :
+    thetaApproach.piCK.carrier →* RingAut functionFieldData.functionField :=
+  MulSemiringAction.toRingAut thetaApproach.piCK.carrier
+    functionFieldData.functionField
+
+def piCKRingAut (g : thetaApproach.piCK.carrier) :
+    RingAut functionFieldData.functionField :=
+  functionFieldData.piCKRingAutHom g
 
 theorem piCK_smul_eq_deck_smul
     (g : thetaApproach.piCK.carrier) (x : functionFieldData.functionField) :
@@ -1778,6 +1806,12 @@ theorem deck_smul_mul
     g • (x * y) = g • x * g • y :=
   MulSemiringAction.smul_mul g x y
 
+theorem deckRingAut_apply
+    (g : ThetaApproachQuotientData.deckQuotient thetaApproach)
+    (x : functionFieldData.functionField) :
+    functionFieldData.deckRingAut g x = g • x :=
+  rfl
+
 theorem piCK_smul_one (g : thetaApproach.piCK.carrier) :
     g • (1 : functionFieldData.functionField) = 1 :=
   smul_one g
@@ -1791,6 +1825,11 @@ theorem piCK_smul_mul
     (g : thetaApproach.piCK.carrier) (x y : functionFieldData.functionField) :
     g • (x * y) = g • x * g • y :=
   MulSemiringAction.smul_mul g x y
+
+theorem piCKRingAut_apply
+    (g : thetaApproach.piCK.carrier) (x : functionFieldData.functionField) :
+    functionFieldData.piCKRingAut g x = g • x :=
+  rfl
 
 theorem piXK_smul_trivial
     (g : thetaApproach.piXK.carrier) (x : functionFieldData.functionField) :
@@ -1820,6 +1859,18 @@ theorem gal_smul_eq_deck_smul
     γ • x = ThetaApproachGaloisQuotientData.toDeckHom galData γ • x :=
   rfl
 
+def galRingAutHom : galData.galXKCK →* RingAut functionFieldData.functionField :=
+  MulSemiringAction.toRingAut galData.galXKCK functionFieldData.functionField
+
+def galRingAut (γ : galData.galXKCK) : RingAut functionFieldData.functionField :=
+  ThetaApproachGaloisQuotientData.galRingAutHom galData functionFieldData γ
+
+theorem galRingAut_apply
+    (γ : galData.galXKCK) (x : functionFieldData.functionField) :
+    ThetaApproachGaloisQuotientData.galRingAut galData functionFieldData γ x =
+      γ • x :=
+  rfl
+
 theorem piCK_smul_eq_gal_smul
     (g : thetaApproach.piCK.carrier) (x : functionFieldData.functionField) :
     g • x =
@@ -1832,6 +1883,15 @@ theorem piCK_smul_eq_gal_smul
             (ThetaApproachQuotientData.quotientHom thetaApproach g)) • x
   simp [ThetaApproachGaloisQuotientData.toDeckHom,
     ThetaApproachGaloisQuotientData.fromDeckHom]
+
+theorem piCKRingAut_eq_galRingAut
+    (g : thetaApproach.piCK.carrier) :
+    functionFieldData.piCKRingAut g =
+      ThetaApproachGaloisQuotientData.galRingAut galData functionFieldData
+        (ThetaApproachGaloisQuotientData.piCKToGalHom galData g) := by
+  ext x
+  exact ThetaApproachGaloisQuotientData.piCK_smul_eq_gal_smul
+    galData functionFieldData g x
 
 end ThetaApproachGaloisQuotientData
 
@@ -1890,6 +1950,9 @@ theorem xKType :
 
 def deckQuotient : Type _ :=
   ThetaApproachQuotientData.deckQuotient coverData.thetaApproachQuotient
+
+instance deckQuotientGroup : Group coverData.deckQuotient :=
+  ThetaApproachQuotientData.deckQuotientGroup coverData.thetaApproachQuotient
 
 theorem thetaApproachPiXKOpenInPiCK :
     coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.isOpenImage :=
@@ -1967,6 +2030,53 @@ theorem thetaApproachFunctionFieldOfXK :
 theorem thetaApproachDeckActionMatchesQuotient :
     coverData.thetaApproachFunctionField.deckActionMatchesGalQuotient :=
   coverData.thetaApproachFunctionField.deckActionMatchesQuotient
+
+def thetaApproachDeckRingAutHom :
+    ThetaApproachQuotientData.deckQuotient coverData.thetaApproachQuotient →*
+      RingAut coverData.thetaApproachFunctionField.functionField :=
+  coverData.thetaApproachFunctionField.deckRingAutHom
+
+def thetaApproachPiCKRingAutHom :
+    coverData.thetaApproachQuotient.piCK.carrier →*
+      RingAut coverData.thetaApproachFunctionField.functionField :=
+  coverData.thetaApproachFunctionField.piCKRingAutHom
+
+def thetaApproachGalRingAutHom
+    (galData :
+      ThetaApproachGaloisQuotientData coverData.thetaApproachQuotient) :
+    galData.galXKCK →* RingAut coverData.thetaApproachFunctionField.functionField :=
+  ThetaApproachGaloisQuotientData.galRingAutHom galData
+    coverData.thetaApproachFunctionField
+
+theorem thetaApproachDeckRingAut_apply
+    (g : ThetaApproachQuotientData.deckQuotient coverData.thetaApproachQuotient)
+    (x : coverData.thetaApproachFunctionField.functionField) :
+    ThetaOrbicurveCoverData.thetaApproachDeckRingAutHom coverData g x = g • x :=
+  rfl
+
+theorem thetaApproachPiCKRingAut_apply
+    (g : coverData.thetaApproachQuotient.piCK.carrier)
+    (x : coverData.thetaApproachFunctionField.functionField) :
+    ThetaOrbicurveCoverData.thetaApproachPiCKRingAutHom coverData g x = g • x :=
+  rfl
+
+theorem thetaApproachGalRingAut_apply
+    (galData :
+      ThetaApproachGaloisQuotientData coverData.thetaApproachQuotient)
+    (γ : galData.galXKCK)
+    (x : coverData.thetaApproachFunctionField.functionField) :
+    ThetaOrbicurveCoverData.thetaApproachGalRingAutHom coverData galData γ x = γ • x :=
+  rfl
+
+theorem thetaApproachPiCKRingAut_eq_galRingAut
+    (galData :
+      ThetaApproachGaloisQuotientData coverData.thetaApproachQuotient)
+    (g : coverData.thetaApproachQuotient.piCK.carrier) :
+    ThetaOrbicurveCoverData.thetaApproachPiCKRingAutHom coverData g =
+      ThetaOrbicurveCoverData.thetaApproachGalRingAutHom coverData galData
+        (ThetaOrbicurveCoverData.thetaApproachGalPiCKHom coverData galData g) :=
+  ThetaApproachGaloisQuotientData.piCKRingAut_eq_galRingAut galData
+    coverData.thetaApproachFunctionField g
 
 theorem thetaApproachPiXK_smul_trivial
     (g : coverData.thetaApproachQuotient.piXK.carrier)
@@ -2754,6 +2864,51 @@ theorem thetaApproachFunctionFieldOfXK :
 theorem thetaApproachDeckActionMatchesQuotient :
     theta.coverData.thetaApproachFunctionField.deckActionMatchesGalQuotient :=
   theta.coverData.thetaApproachDeckActionMatchesQuotient
+
+def thetaApproachDeckRingAutHom :
+    ThetaApproachQuotientData.deckQuotient theta.coverData.thetaApproachQuotient →*
+      RingAut theta.coverData.thetaApproachFunctionField.functionField :=
+  ThetaOrbicurveCoverData.thetaApproachDeckRingAutHom theta.coverData
+
+def thetaApproachPiCKRingAutHom :
+    theta.coverData.thetaApproachQuotient.piCK.carrier →*
+      RingAut theta.coverData.thetaApproachFunctionField.functionField :=
+  ThetaOrbicurveCoverData.thetaApproachPiCKRingAutHom theta.coverData
+
+def thetaApproachGalRingAutHom
+    (galData :
+      ThetaApproachGaloisQuotientData theta.coverData.thetaApproachQuotient) :
+    galData.galXKCK →* RingAut theta.coverData.thetaApproachFunctionField.functionField :=
+  ThetaOrbicurveCoverData.thetaApproachGalRingAutHom theta.coverData galData
+
+theorem thetaApproachDeckRingAut_apply
+    (g : ThetaApproachQuotientData.deckQuotient theta.coverData.thetaApproachQuotient)
+    (x : theta.coverData.thetaApproachFunctionField.functionField) :
+    InitialThetaData.thetaApproachDeckRingAutHom theta g x = g • x :=
+  theta.coverData.thetaApproachDeckRingAut_apply g x
+
+theorem thetaApproachPiCKRingAut_apply
+    (g : theta.coverData.thetaApproachQuotient.piCK.carrier)
+    (x : theta.coverData.thetaApproachFunctionField.functionField) :
+    InitialThetaData.thetaApproachPiCKRingAutHom theta g x = g • x :=
+  theta.coverData.thetaApproachPiCKRingAut_apply g x
+
+theorem thetaApproachGalRingAut_apply
+    (galData :
+      ThetaApproachGaloisQuotientData theta.coverData.thetaApproachQuotient)
+    (γ : galData.galXKCK)
+    (x : theta.coverData.thetaApproachFunctionField.functionField) :
+    InitialThetaData.thetaApproachGalRingAutHom theta galData γ x = γ • x :=
+  theta.coverData.thetaApproachGalRingAut_apply galData γ x
+
+theorem thetaApproachPiCKRingAut_eq_galRingAut
+    (galData :
+      ThetaApproachGaloisQuotientData theta.coverData.thetaApproachQuotient)
+    (g : theta.coverData.thetaApproachQuotient.piCK.carrier) :
+    InitialThetaData.thetaApproachPiCKRingAutHom theta g =
+      InitialThetaData.thetaApproachGalRingAutHom theta galData
+        (InitialThetaData.thetaApproachGalPiCKHom theta galData g) :=
+  theta.coverData.thetaApproachPiCKRingAut_eq_galRingAut galData g
 
 theorem thetaApproachPiXK_smul_trivial
     (g : theta.coverData.thetaApproachQuotient.piXK.carrier)

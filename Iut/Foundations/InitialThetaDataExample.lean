@@ -782,6 +782,33 @@ example
   ThetaApproachGaloisQuotientData.piCK_smul_eq_gal_smul galData
     theta.coverData.thetaApproachFunctionField g x
 
+example
+    (g : ThetaApproachQuotientData.deckQuotient theta.coverData.thetaApproachQuotient)
+    (x : ThetaApproachFunctionFieldData.functionField
+      theta.coverData.thetaApproachFunctionField) :
+    InitialThetaData.thetaApproachDeckRingAutHom theta g x = g • x :=
+  theta.thetaApproachDeckRingAut_apply g x
+
+example
+    (g : theta.coverData.thetaApproachQuotient.piCK.carrier)
+    (x : ThetaApproachFunctionFieldData.functionField
+      theta.coverData.thetaApproachFunctionField) :
+    InitialThetaData.thetaApproachPiCKRingAutHom theta g x = g • x :=
+  theta.thetaApproachPiCKRingAut_apply g x
+
+example
+    (γ : galData.galXKCK)
+    (x : ThetaApproachFunctionFieldData.functionField
+      theta.coverData.thetaApproachFunctionField) :
+    InitialThetaData.thetaApproachGalRingAutHom theta galData γ x = γ • x :=
+  theta.thetaApproachGalRingAut_apply galData γ x
+
+example (g : theta.coverData.thetaApproachQuotient.piCK.carrier) :
+    InitialThetaData.thetaApproachPiCKRingAutHom theta g =
+      InitialThetaData.thetaApproachGalRingAutHom theta galData
+        (InitialThetaData.thetaApproachGalPiCKHom theta galData g) :=
+  theta.thetaApproachPiCKRingAut_eq_galRingAut galData g
+
 example :
     theta.coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
   theta.thetaApproachGalQuotientIdentification
