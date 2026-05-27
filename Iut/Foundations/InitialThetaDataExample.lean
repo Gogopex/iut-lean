@@ -139,6 +139,38 @@ example {source target : HyperbolicOrbicurveModel F}
   (abstractFunctionFieldExtensionOfOrbicurveCoverData
     (B := B) (L := L) morphism extensionOfCover hExtension).extensionOfCover_proof
 
+/--
+A constructor smoke test for the quotient action on an indexed function-field
+extension.
+-/
+noncomputable def abstractDeckQuotientFunctionFieldActionData
+    (thetaApproach : ThetaApproachQuotientData)
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (functionFieldExtension :
+      FunctionFieldExtensionOfOrbicurveCoverData morphism B L)
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L)) :
+    DeckQuotientFunctionFieldActionData thetaApproach functionFieldExtension where
+  quotientEquivAlgAut := quotientEquivAlgAut
+
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (functionFieldExtension :
+      FunctionFieldExtensionOfOrbicurveCoverData morphism B L)
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L)) :
+    (abstractDeckQuotientFunctionFieldActionData
+      thetaApproach functionFieldExtension quotientEquivAlgAut).toAlgAutEquiv =
+      quotientEquivAlgAut :=
+  rfl
+
 /-- A constructor smoke test for a pointed EtTh quotient. -/
 def abstractPointedEtaleQuotient (Q : Type u) (zero : Q) :
     PointedEtaleQuotient where
@@ -474,8 +506,8 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
       FiniteEtaleGaloisOrbicurveMorphismData coverMorphism)
     (functionFieldExtension :
       FunctionFieldExtensionOfOrbicurveCoverData coverMorphism B L)
-    (quotientEquivAlgAut :
-      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L)) :
+    (quotientAction :
+      DeckQuotientFunctionFieldActionData thetaApproach functionFieldExtension) :
     ThetaFiniteEtaleGaloisCoverCertificate thetaApproach B L where
   baseField := baseField
   baseFieldField := inferInstance
@@ -484,7 +516,7 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
   coverMorphism := coverMorphism
   coverProperties := coverProperties
   functionFieldExtension := functionFieldExtension
-  quotientEquivAlgAut := quotientEquivAlgAut
+  quotientAction := quotientAction
 
 /-- A constructor smoke test for a typed finite Galois theta function-field cover. -/
 noncomputable def abstractThetaFiniteGaloisFunctionFieldCoverData

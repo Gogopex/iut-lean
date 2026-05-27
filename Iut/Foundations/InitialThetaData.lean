@@ -2302,6 +2302,45 @@ theorem piXK_smul_trivial
 end ThetaApproachFunctionFieldData
 
 /--
+A typed certificate that the theta deck quotient acts on the function-field
+extension attached to a fixed orbicurve cover.
+
+The equivalence is still supplied as data, but it is no longer a loose field on
+the cover certificate: it is indexed by the same function-field extension
+certificate that records the `B -> L` extension induced by the cover.
+-/
+structure DeckQuotientFunctionFieldActionData
+    (thetaApproach : ThetaApproachQuotientData)
+    {F : Type u} [Field F]
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (functionFieldExtension :
+      FunctionFieldExtensionOfOrbicurveCoverData morphism B L) where
+  quotientEquivAlgAut :
+    ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L)
+
+namespace DeckQuotientFunctionFieldActionData
+
+variable {thetaApproach : ThetaApproachQuotientData}
+variable {F : Type u} [Field F]
+variable {source target : HyperbolicOrbicurveModel F}
+variable {morphism : HyperbolicOrbicurveMorphismData source target}
+variable {B L : Type} [Field B] [Field L] [Algebra B L]
+variable [FiniteDimensional B L] [IsGalois B L]
+variable {functionFieldExtension :
+  FunctionFieldExtensionOfOrbicurveCoverData morphism B L}
+variable (quotientAction :
+  DeckQuotientFunctionFieldActionData thetaApproach functionFieldExtension)
+
+def toAlgAutEquiv :
+    ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L) :=
+  quotientAction.quotientEquivAlgAut
+
+end DeckQuotientFunctionFieldActionData
+
+/--
 A typed certificate for the finite etale Galois cover that underlies a
 theta-approach function-field extension.
 
@@ -2328,8 +2367,8 @@ structure ThetaFiniteEtaleGaloisCoverCertificate
     @FunctionFieldExtensionOfOrbicurveCoverData baseField baseFieldField
       sourceOrbicurve targetOrbicurve coverMorphism
       B L _ _ _ _ _
-  quotientEquivAlgAut :
-    ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L)
+  quotientAction :
+    DeckQuotientFunctionFieldActionData thetaApproach functionFieldExtension
 
 namespace ThetaFiniteEtaleGaloisCoverCertificate
 
@@ -2362,6 +2401,10 @@ def functionFieldExtensionOfCover : Prop :=
 theorem functionFieldExtensionOfCover_proof :
     certificate.functionFieldExtensionOfCover :=
   certificate.functionFieldExtension.extensionOfCover_proof
+
+def quotientEquivAlgAut :
+    ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L) :=
+  certificate.quotientAction.toAlgAutEquiv
 
 theorem coverMorphismExists :
     certificate.coverMorphism.morphismExists :=

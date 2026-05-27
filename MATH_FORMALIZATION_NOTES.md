@@ -6234,3 +6234,103 @@ The record still accepts `extensionOfCover` as a supplied proposition. The next
 step is to bind the deck quotient/automorphism equivalence to the same
 function-field extension certificate, so the quotient action can no longer be
 attached to an unrelated `B -> L` model.
+
+## Math Milestone 62: Deck Quotient Action Indexed by the Function-Field Extension
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Remark 3.1.2, states that the theta approach reconstructs the function
+field of `X_K` from `Pi_XK <= Pi_CK` together with its natural
+`Gal(X_K/C_K) = Pi_CK/Pi_XK` action. The action is therefore not independent of
+the reconstructed function field: it belongs to the same cover/function-field
+package.
+
+The source also uses quotient descriptions such as `Gal(X/C) = Pi_C/Pi_X` in
+the reconstruction discussion around Corollary 1.2. Scholze-Stix emphasize that
+Mochizuki's anabelian equivalence lets one pass between finite-etale geometry
+and fundamental-group data. Our formalization should keep the quotient action
+visibly tied to the reconstructed field instead of treating it as an arbitrary
+automorphism equivalence.
+
+### Lean/API Check
+
+The new record is:
+
+```text
+DeckQuotientFunctionFieldActionData thetaApproach functionFieldExtension
+```
+
+where:
+
+```text
+functionFieldExtension :
+  FunctionFieldExtensionOfOrbicurveCoverData morphism B L
+```
+
+It contains:
+
+```text
+quotientEquivAlgAut :
+  ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L)
+```
+
+and exposes:
+
+```text
+toAlgAutEquiv
+```
+
+The cover certificate now stores:
+
+```text
+quotientAction :
+  DeckQuotientFunctionFieldActionData thetaApproach functionFieldExtension
+```
+
+instead of storing the bare quotient-to-automorphism equivalence directly.
+The old public accessor remains as a derived definition:
+
+```text
+ThetaFiniteEtaleGaloisCoverCertificate.quotientEquivAlgAut
+```
+
+### Lean Decisions
+
+The quotient-to-automorphism equivalence is still supplied as data. What changed
+is the dependency: it is now indexed by the function-field extension certificate
+that already names the cover morphism and the finite Galois extension `B -> L`.
+
+This lets existing downstream constructors continue to use the old accessor,
+while the certificate itself now records that the quotient action is the action
+on the specified function-field extension.
+
+### What This Tests
+
+The example file checks:
+
+* construction of a quotient action certificate for a fixed indexed
+  function-field extension;
+* recovery of the underlying algebra automorphism equivalence;
+* construction of the theta finite-etale Galois cover certificate from the
+  indexed quotient action;
+* all downstream finite-Galois function-field cover consequences still compile.
+
+### Design Trap Avoided
+
+The trap would be to attach an arbitrary equivalence
+`deckQuotient thetaApproach ≃* (L ≃ₐ[B] L)` to a cover certificate without
+forcing it to act on the specific function-field extension produced by that
+cover. The new action certificate removes that extra degree of freedom.
+
+### Remaining Gap
+
+The equivalence is still an input, not derived from the finite-etale Galois
+cover. A later milestone should express the compatibility between this quotient
+action and the already formalized `Pi_CK` action through the quotient hom, then
+work toward deriving the equivalence from concrete cover/deck transformation
+data.
