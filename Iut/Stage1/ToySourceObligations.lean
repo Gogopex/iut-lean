@@ -400,6 +400,54 @@ theorem unitThetaToy_membership_coord_le_choiceBound_from_sourceObligations
     unitThetaToy_membership_holds_thetaComparison_from_sourceObligations
       measure hnormalized hh hbound hholds
 
+theorem unitThetaToy_qSigned_le_targetSigned_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (Transport.map unitQToTheta (qAssignment h)).coord <=
+      (unitThetaToySourceObligationLedger
+        measure hnormalized hh hbound hholds).targetVolume.targetSigned :=
+  (unitThetaToySourceObligationLedger
+    measure hnormalized hh hbound hholds).membership.q_le_target
+
+theorem unitThetaToy_qSigned_le_thetaTargetVolume_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (Transport.map unitQToTheta (qAssignment h)).coord <=
+      RegionMeasure.targetVolume measure
+        (thetaIndeterminacyComparison unitQToTheta h (epsilon choice)) := by
+  simpa using
+    unitThetaToy_qSigned_le_targetSigned_from_sourceObligations
+      measure hnormalized hh hbound hholds
+
+theorem unitThetaToy_qSigned_le_thetaTargetVolume_from_membership
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (Transport.map unitQToTheta (qAssignment h)).coord <=
+      RegionMeasure.targetVolume measure
+        (thetaIndeterminacyComparison unitQToTheta h (epsilon choice)) :=
+  (thetaIndeterminacy_holds_iff_coord_le_targetVolume measure hnormalized
+    unitQToTheta h (epsilon choice)).mp
+    (unitThetaToy_membership_holds_thetaComparison_from_sourceObligations
+      measure hnormalized hh hbound hholds)
+
 theorem unitThetaToy_theta_commonBound_from_sourceObligations
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

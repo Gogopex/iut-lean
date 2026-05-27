@@ -5491,3 +5491,84 @@ actual transported q-coordinate.
 The next milestone should expose the toy q-to-target inequality as both the
 stored membership field and the elementary upper-ray/target-volume comparison
 used to form the first leg of the three-term chain.
+
+## Milestone 62: Toy Q-to-Target Volume First Leg
+
+Lean file:
+
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III, Step `(xi-d)`, obtains comparable real quantities by applying
+log-volume to the relevant output regions. In the toy model, this is represented
+by the theorem
+
+```text
+thetaIndeterminacy_holds_iff_coord_le_targetVolume
+```
+
+which says that membership in a Theta indeterminacy upper ray is equivalent to
+the transported q-coordinate being bounded by that region's measured target
+volume. This is the elementary toy analogue of passing from membership in a
+possible output region to the first numerical inequality in the comparison
+chain.
+
+### Purpose
+
+This milestone exposes the first leg of the toy three-term chain:
+
+```text
+(Transport.map unitQToTheta (qAssignment h)).coord <=
+  ledger.targetVolume.targetSigned
+```
+
+and the same inequality after unfolding the target volume to the selected Theta
+indeterminacy comparison:
+
+```text
+(Transport.map unitQToTheta (qAssignment h)).coord <=
+  RegionMeasure.targetVolume measure
+    (thetaIndeterminacyComparison unitQToTheta h (epsilon choice))
+```
+
+It also records the independent route from concrete membership through
+`thetaIndeterminacy_holds_iff_coord_le_targetVolume`.
+
+### Lean Declarations
+
+In `ToySourceObligations.lean`:
+
+```text
+unitThetaToy_qSigned_le_targetSigned_from_sourceObligations
+unitThetaToy_qSigned_le_thetaTargetVolume_from_sourceObligations
+unitThetaToy_qSigned_le_thetaTargetVolume_from_membership
+```
+
+### What This Tests
+
+The toy source ledger's first numerical inequality is now visible in three
+compatible forms:
+
+```text
+membership.q_le_target
+qSigned <= ledger.targetVolume.targetSigned
+qSigned <= measured volume of the selected thetaIndeterminacyComparison
+```
+
+The last theorem shows that the concrete inequality can also be recovered from
+the membership theorem for upper rays, rather than only by projecting the stored
+ledger field.
+
+### Design Trap Avoided
+
+The trap would be to use `membership.q_le_target` as a black-box inequality.
+Here we keep the proof connected to the selected output region and to the
+normalization theorem that turns upper-ray membership into a target-volume
+comparison.
+
+### Next Step
+
+The next milestone should expose the second leg of the toy three-term chain:
+the target volume of the selected output is bounded by the common Theta bound
+coming from the charted common container.
