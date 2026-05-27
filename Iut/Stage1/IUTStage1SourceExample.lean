@@ -1617,6 +1617,22 @@ theorem unitThetaToy_source_theorem311_allowed_chart_transport_forbids_history_e
   (unitThetaToy_source_theorem311_allowed_chart_transport_example
     measure hnormalized hh hbound hholds).forbiddenHistoryIdentification
 
+theorem unitThetaToy_source_theorem311_allowed_chart_transport_chart_discipline_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    package.preLedger.chartedContainer.chart.TransportDiscipline :=
+  (unitThetaToy_source_theorem311_allowed_chart_transport_example
+    measure hnormalized hh hbound hholds).chartTransportDiscipline
+
 theorem unitThetaToy_source_theorem311_audited_route_summary_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

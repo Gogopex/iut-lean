@@ -7679,3 +7679,97 @@ the type API.
 The allowed chart readings are still equations involving abstract transports.
 Future milestones should refine `Transport` and `RealComparisonChartData` so
 that the allowed transformations themselves have more mathematical content.
+
+## Math Milestone 78: Chart-Level Transport Discipline
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The previous milestone named allowed chart transport at the source-audit layer.
+This milestone moves part of that discipline down to the chart itself. The
+reason is that real-line-copy transport should not be justified only after the
+public audit has been assembled; the chart data should already say which
+transports are being used as readings.
+
+### Lean/API Check
+
+The namespace:
+
+```text
+AlgorithmicOutput.RealComparisonChartData
+```
+
+now defines:
+
+```text
+QToTargetAllowedReading
+ThetaToTargetAllowedReading
+TransportDiscipline
+transportDiscipline
+qToTargetAllowedReading
+thetaToTargetAllowedReading
+```
+
+The q-side allowed reading is modeled as pointwise equality of the named
+q-to-target transport with itself. This is deliberately minimal: it states that
+we are using the named chart transport as a chart reading, not replacing it by
+some hidden map.
+
+The Theta-side allowed reading is the existing explicit trivial-monodromy
+condition on the target-side transport.
+
+The source-level record:
+
+```text
+AuditedAllowedChartTransport
+```
+
+now carries:
+
+```text
+chart_transport_discipline :
+  package.preLedger.chartedContainer.chart.TransportDiscipline
+```
+
+and exposes it via:
+
+```text
+chartTransportDiscipline
+qToTargetAllowedAtChart
+thetaToTargetAllowedAtChart
+```
+
+### Lean Decisions
+
+This remains intentionally conservative. The q-side permission is not a claim
+that the q-side Hodge-theater history is identified with the target-side
+history. It is only a statement that the chart's own q-to-target transport is
+the permitted reading map.
+
+The Theta-side permission is stronger because the target-to-target transport
+must be trivial. This matches the existing chart API and keeps the triviality
+proof explicit.
+
+### What This Tests
+
+The source example now extracts the chart transport discipline from the audited
+allowed-chart-transport checkpoint. The source example build verifies the new
+chart-level API threads through the Stage 1 route.
+
+### Design Trap Avoided
+
+The trap would be to put all "allowed chart transport" language only in a
+late-stage source audit. This milestone anchors the allowed-reading discipline
+in the chart object itself, then carries it upward.
+
+### Remaining Gap
+
+The q-side allowed-reading predicate is still minimal. Later milestones should
+make it more informative, for example by recording preservation properties
+that are appropriate for real-line-copy readings but still do not identify
+Hodge-theater histories.

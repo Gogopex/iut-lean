@@ -335,6 +335,54 @@ structure RealComparisonChartData
   thetaToTarget : Transport target target
   theta_trivial : Transport.TrivialMonodromy thetaToTarget
 
+namespace RealComparisonChartData
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+
+/-- The q-to-target map is being used as a chart reading, not as a history map. -/
+def QToTargetAllowedReading
+    (chartData : RealComparisonChartData output measure) : Prop :=
+  Transport.PointwiseEqual chartData.qToTarget chartData.qToTarget
+
+/--
+The Theta-side target transport is allowed as a chart reading only together
+with its explicit triviality proof.
+-/
+def ThetaToTargetAllowedReading
+    (chartData : RealComparisonChartData output measure) : Prop :=
+  Transport.TrivialMonodromy chartData.thetaToTarget
+
+/--
+Chart-level discipline for the real-comparison transports.
+
+This record belongs to the chart itself. It does not identify Hodge-theater
+histories; it only records which real-line-copy transports are allowed as chart
+readings.
+-/
+structure TransportDiscipline
+    (chartData : RealComparisonChartData output measure) where
+  q_to_target_allowed : chartData.QToTargetAllowedReading
+  theta_to_target_allowed : chartData.ThetaToTargetAllowedReading
+
+def transportDiscipline
+    (chartData : RealComparisonChartData output measure) :
+    chartData.TransportDiscipline :=
+  { q_to_target_allowed := Transport.pointwiseEqual_of_scale_eq rfl,
+    theta_to_target_allowed := chartData.theta_trivial }
+
+theorem qToTargetAllowedReading
+    (chartData : RealComparisonChartData output measure) :
+    chartData.QToTargetAllowedReading :=
+  chartData.transportDiscipline.q_to_target_allowed
+
+theorem thetaToTargetAllowedReading
+    (chartData : RealComparisonChartData output measure) :
+    chartData.ThetaToTargetAllowedReading :=
+  chartData.transportDiscipline.theta_to_target_allowed
+
+end RealComparisonChartData
+
 /--
 The q-side value as read through a specific real-comparison chart.
 

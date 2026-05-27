@@ -2231,6 +2231,8 @@ structure AuditedAllowedChartTransport
     (sideConditions : IUTStage1SourceSideConditions package) : Prop where
   chart_history_discipline :
     AuditedChartHistoryDiscipline package bundle sideConditions
+  chart_transport_discipline :
+    package.preLedger.chartedContainer.chart.TransportDiscipline
   allowed_q_to_target_reading :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord = package.preLedger.qSigned
@@ -2256,6 +2258,8 @@ theorem ofChartHistoryDiscipline
       AuditedChartHistoryDiscipline package bundle sideConditions) :
     AuditedAllowedChartTransport package bundle sideConditions :=
   { chart_history_discipline := discipline,
+    chart_transport_discipline :=
+      package.preLedger.chartedContainer.chart.transportDiscipline,
     allowed_q_to_target_reading := discipline.qCharted,
     allowed_theta_to_target_reading := discipline.thetaCharted,
     theta_target_transport_trivial := discipline.publicAudit.thetaChartTrivial,
@@ -2274,6 +2278,24 @@ theorem chartHistoryDiscipline
       AuditedAllowedChartTransport package bundle sideConditions) :
     AuditedChartHistoryDiscipline package bundle sideConditions :=
   transport.chart_history_discipline
+
+theorem chartTransportDiscipline
+    (transport :
+      AuditedAllowedChartTransport package bundle sideConditions) :
+    package.preLedger.chartedContainer.chart.TransportDiscipline :=
+  transport.chart_transport_discipline
+
+theorem qToTargetAllowedAtChart
+    (transport :
+      AuditedAllowedChartTransport package bundle sideConditions) :
+    package.preLedger.chartedContainer.chart.QToTargetAllowedReading :=
+  transport.chartTransportDiscipline.q_to_target_allowed
+
+theorem thetaToTargetAllowedAtChart
+    (transport :
+      AuditedAllowedChartTransport package bundle sideConditions) :
+    package.preLedger.chartedContainer.chart.ThetaToTargetAllowedReading :=
+  transport.chartTransportDiscipline.theta_to_target_allowed
 
 theorem allowedQToTargetReading
     (transport :
