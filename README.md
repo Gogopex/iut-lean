@@ -167,6 +167,10 @@ Current modules:
   IPL/SHE/APT certificates plus separate common-target bound data.
 * `Iut.Stage1.ToyBridge`: toy bridge from qualitative certification to
   common-target bounds via the epsilon-cap construction.
+* `Iut.Stage1.CorollarySchema`: signed-real schema for producing the
+  Corollary-3.12-shaped pilot inequality from bridge output.
+* `Iut.Stage1.ToyCorollarySchema`: toy specialization deriving the signed
+  inequality from membership in a chosen upper-ray output.
 
 Useful commands:
 

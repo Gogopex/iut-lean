@@ -19,6 +19,8 @@ import Iut.Stage1.ToyFamilyBounds
 import Iut.Stage1.ToyAPTTransport
 import Iut.Stage1.ToyQualitativeOutput
 import Iut.Stage1.ToyBridge
+import Iut.Stage1.CorollarySchema
+import Iut.Stage1.ToyCorollarySchema
 
 /-!
 Root module for the IUT formalization scaffold.

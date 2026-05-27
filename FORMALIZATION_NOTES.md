@@ -1529,3 +1529,120 @@ a certified output, a bridge, and a measured q-pilot value to produce a
 Corollary-3.12-shaped real inequality. This should still be a theorem schema:
 the nontrivial work remains in the bridge and in the real-line/log-volume
 identifications supplied to it.
+
+## Milestone 15: Stage 1 Corollary Schema
+
+Lean files:
+
+* `Iut/Stage1/CorollarySchema.lean`
+* `Iut/Stage1/ToyCorollarySchema.lean`
+
+### Source Check
+
+This milestone follows the end of IUT III, Corollary 3.12, Step (xi), where
+Mochizuki writes the comparable real objects as
+
+```text
+R_{<= -|log(Theta)|};  -|log(q)| in R.
+```
+
+The displayed conclusion discussed by Scholze-Stix is the signed real
+inequality
+
+```text
+-|log(q)| <= -|log(Theta)|.
+```
+
+This sign convention is easy to mishandle in a formalization because our
+`PilotLogVolume.value` field stores the unsigned magnitude. Scholze-Stix's
+warning that all copies and identifications of real ordered one-dimensional
+spaces must be explicit applies directly here.
+
+The milestone also follows Mochizuki's progress report: after the bridge-shaped
+`3.11 => 3.11.5` obligation, the final `3.11.5 => 3.12` step should be the
+simultaneous comparison that turns the bridge output into the displayed real
+inequality.
+
+### Purpose
+
+The previous milestone supplied an explicit bridge from certified algorithmic
+output to a common-target bound. This milestone adds the signed-real final step:
+
+```text
+qSigned <= thetaSigned
+```
+
+implies
+
+```text
+Corollary312Inequality
+  (signedPilotLogVolume theta thetaSigned)
+  (signedPilotLogVolume q qSigned)
+```
+
+where `signedPilotLogVolume side signedValue` stores the positive magnitude
+`-signedValue`.
+
+### Lean Declarations
+
+In `CorollarySchema.lean`:
+
+```text
+signedPilotLogVolume
+corollary312_of_signed_le
+stage1Comparison_of_signed_le
+corollary312_from_bridge
+stage1Comparison_from_bridge
+```
+
+The bridge theorem takes:
+
+```text
+bridge       : output.CommonTargetBoundBridge measure thetaSigned
+certified    : output.Certified
+choice       : index
+hq_le_choice : qSigned <= targetVolume(choice)
+```
+
+and combines `hq_le_choice` with the bridge-produced target-volume bound to get
+the Corollary-3.12-shaped inequality.
+
+In `ToyCorollarySchema.lean`:
+
+```text
+unitThetaToy_qSigned_le_choiceTargetVolume
+unitThetaToyCorollary312
+unitThetaToyStage1Comparison
+```
+
+The first theorem extracts the q-side signed value from actual membership in the
+chosen toy upper-ray target. The final theorem packages the result as a
+`Stage1Comparison` when `0 < h`, so the stored q-pilot magnitude is positive.
+
+### What This Tests
+
+The dependency chain is now complete for the toy model:
+
+1. A chosen output membership gives a q-side signed value below the chosen
+   target volume.
+2. A certified output plus bridge gives the chosen target volume below the
+   Theta-side signed bound.
+3. Transitivity gives the signed inequality.
+4. Only then is the signed inequality converted into the existing
+   `Corollary312Inequality` over unsigned pilot magnitudes.
+
+This keeps the exact place of the sign conversion visible in Lean.
+
+### Design Trap Avoided
+
+The trap would be to state the final comparison directly as an inequality of
+unsigned magnitudes and let Lean's arithmetic hide the negations. This milestone
+uses signed real inputs and an explicit conversion to `PilotLogVolume`.
+
+### Next Step
+
+The next milestone should start replacing the toy `True` IPL/SHE/APT
+certificates with structured but still abstract records: for example, a named
+input link datum for IPL and a named common-ring/holomorphic-structure datum for
+SHE. These records should remain inert until a separate bridge theorem consumes
+them.
