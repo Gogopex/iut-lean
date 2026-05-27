@@ -139,6 +139,8 @@ Current modules:
   bookkeeping.
 * `Iut.Foundations.RealLineCopy`: explicit labeled real-line copies and
   positive-scale transports.
+* `Iut.Foundations.TransportDiagram`: coherent parallel transport diagrams and
+  the scalar insertion obstruction.
 * `Iut.Stage1.PilotComparison`: first neutral interface for the Corollary 3.12
   target shape.
 

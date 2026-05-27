@@ -104,3 +104,105 @@ The dangerous shortcut would be to represent every log-volume target simply as
 coordinates before we have proved that such erasure is legitimate. This file does
 the opposite: it makes every erasure or comparison pass through an explicit
 transport.
+
+## Milestone 2: Coherent Transport Diagrams
+
+Lean file: `Iut/Foundations/TransportDiagram.lean`
+
+### Source Check
+
+Before implementing this milestone, we rechecked the local primary texts.
+
+Scholze-Stix say that, because the argument compares real numbers and several
+ordered one-dimensional real vector spaces arise, it is critical to spell out all
+identifications of copies of real numbers. In their diagnosis, adding `j^2`
+scalars to the left side of the diagram produces monodromy; with consistent
+identifications, those scalars must be omitted.
+
+Mochizuki's IUT III, Remark 3.12.2, gives a toy model with two distinct labeled
+copies `qR` and `ThetaR` of the real numbers. He emphasizes that forgetting the
+distinct labels makes the assignments incompatible, while the labels and the
+abstract symbol make simultaneous logical consideration possible. Later, an
+assignment with indeterminacies is supposed to be intrinsically associated to the
+q-side assignment even after the copies are identified.
+
+Mochizuki's April 2026 progress report says that the Stage 1 Lean target should
+focus on the simultaneous comparison of the q-pilot and Theta-pilot, with SHE
+and IPL as part of the `3.11.5 => 3.12` package.
+
+The formal move below captures only the elementary "consistent identification"
+side of this discussion. It does not model the claimed indeterminacy/hull escape
+route yet.
+
+### Purpose
+
+Milestone 1 handled a single loop. Milestone 2 handles two parallel comparison
+paths between the same labeled real-line copies. This is closer to the diagrams
+in the Scholze-Stix discussion: one path is a baseline comparison, while another
+path is the same comparison with an extra scalar inserted.
+
+The intended control theorem is:
+
+```text
+if a transport and its scalar-rescaled version form a coherent parallel diagram,
+then the inserted scalar is 1.
+```
+
+Equivalently:
+
+```text
+if the inserted scalar is not 1, the parallel diagram is not coherent.
+```
+
+### Lean Declarations
+
+`Transport.rescale s f` takes a transport `f` and multiplies its scale by the
+positive scale `s`.
+
+`Transport.ParallelPair source target` is a pair of parallel transports between
+the same labeled copies.
+
+`Transport.ParallelPair.Coherent p` means that the two paths are pointwise equal
+as maps on coordinates.
+
+`Transport.ParallelPair.coherent_iff_scale_eq` proves that, in this model,
+coherence of parallel paths is equivalent to equality of their scale factors.
+
+`Transport.coherent_rescale_iff_scale_eq_one` proves the central theorem of this
+milestone:
+
+```text
+Coherent(f, rescale s f) iff s = 1.
+```
+
+`Transport.incoherent_rescale_of_scale_ne_one` packages the contrapositive:
+nontrivial scalar insertion prevents coherence.
+
+### Design Trap Avoided
+
+The trap would be to define a "commutative diagram" as a proposition field and
+then freely use it without understanding what it forces. Here we define
+coherence as pointwise equality of transports, then prove Lean's reduction of
+that condition to equality of scales. This keeps the mathematical content small
+and inspectable.
+
+### Next Step
+
+The next milestone should introduce q-side and Theta-side log-volume assignments
+as points in labeled real-line copies. Then we can express Mochizuki's toy model
+directly:
+
+```text
+star |-> q(-h) in qR
+star |-> Theta(-2h) in ThetaR
+```
+
+and separately express the indeterminacy version:
+
+```text
+star |-> Theta(R_{<= -2h + epsilon}) in ThetaR.
+```
+
+That will let us distinguish three things in Lean: labeled simultaneous
+assignments, forced unlabeled identification, and comparison through an explicit
+transport or indeterminacy relation.
