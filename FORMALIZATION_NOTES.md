@@ -12056,3 +12056,84 @@ instead of reassembling quotient, sign, and torsor facts manually.
 The field is still a supplied model at each bad place, not a reconstruction
 algorithm from the local orbicurve or fundamental group. A later milestone must
 replace this supplied model by data derived from the EtTh type conditions.
+
+## Math Milestone 33: Model-Derived Bad Local Cusps
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Definition 4.1(ii), describes the canonical cusp label class as
+constructed from the local object, while Definition 3.1(f) says the bad local
+cusp arises from the canonical generator up to sign. After Milestone 32, the
+bad-place local cusp record stored a `LocalLabCuspModel` plus compatibility
+equalities. The next source-facing refinement is to let the model build the
+local cusp witness itself.
+
+### Lean/API Check
+
+`CuspData` is a two-field structure: a string label and a nonzero quotient
+origin. Lean proves equality of two `CuspData` values from equality of quotient
+origins when the label is kept fixed.
+
+### Lean Decisions
+
+The new constructor is:
+
+```text
+LocalLabCuspModel.toCuspData
+```
+
+It builds a `CuspData C` from a local label model, a target orbicurve placeholder
+`C`, and a string label.
+
+The new equality theorem is:
+
+```text
+ThetaCuspLocalData.badLocalCuspEqModelCusp
+```
+
+It states that the existing bad local cusp is equal to the cusp built from the
+bad-place local label model using the existing cusp's label.
+
+The corresponding full initial-theta projection is:
+
+```text
+InitialThetaData.badLocalCusp_eq_modelCusp
+```
+
+### Lean Declarations
+
+```text
+CuspData.eq_of_quotientOrigin_eq
+LocalLabCuspModel.toCuspData
+LocalLabCuspModel.toCuspData_quotientOrigin
+LocalLabCuspModel.toCuspData_arisesFromNonzeroQuotientElement
+ThetaCuspLocalData.badLocalCuspEqModelCusp
+InitialThetaData.badLocalCusp_eq_modelCusp
+```
+
+### What This Tests
+
+The example file now checks:
+
+* a concrete `zmodLocalLabCuspModel` builds a cusp arising from a nonzero
+  quotient element;
+* the bad local cusp in full initial theta data is exactly the model-built cusp,
+  using its existing label.
+
+### Design Trap Avoided
+
+The trap would be to keep the local label model merely adjacent to the cusp
+record. This milestone makes the cusp itself reconstructible from the model,
+so future formalization can move toward replacing supplied cusp witnesses with
+model-derived ones.
+
+### Remaining Gap
+
+The label string is still bookkeeping, not a mathematically reconstructed cusp
+label. The next refinement should reduce reliance on string labels by replacing
+or supplementing them with structured label-class data.

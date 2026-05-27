@@ -1214,7 +1214,38 @@ theorem arisesFromNonzeroQuotientElement_holds :
     epsilon.arisesFromNonzeroQuotientElement :=
   epsilon.quotientOrigin.element_ne_zero
 
+theorem eq_of_quotientOrigin_eq
+    {l : PrimeGeFive} (model : LocalLabCuspModel l)
+    (h : epsilon.quotientOrigin = model.canonicalNonzeroQuotientElement) :
+    epsilon =
+      { label := epsilon.label
+        quotientOrigin := model.canonicalNonzeroQuotientElement } := by
+  cases epsilon
+  simp only [mk.injEq, true_and] at h ⊢
+  exact h
+
 end CuspData
+
+namespace LocalLabCuspModel
+
+variable {l : PrimeGeFive} (model : LocalLabCuspModel l)
+variable {F : Type u} [Field F] (C : HyperbolicOrbicurveModel F)
+
+/-- Build a cusp on a specified orbicurve from the local label model. -/
+def toCuspData (label : String) : CuspData C where
+  label := label
+  quotientOrigin := model.canonicalNonzeroQuotientElement
+
+theorem toCuspData_quotientOrigin (label : String) :
+    (model.toCuspData C label).quotientOrigin =
+      model.canonicalNonzeroQuotientElement :=
+  rfl
+
+theorem toCuspData_arisesFromNonzeroQuotientElement (label : String) :
+    (model.toCuspData C label).arisesFromNonzeroQuotientElement :=
+  (model.toCuspData C label).arisesFromNonzeroQuotientElement_holds
+
+end LocalLabCuspModel
 
 /--
 The local cusp data from IUT I, Definition 3.1(f).
@@ -1296,6 +1327,14 @@ theorem badLocalCuspQuotientOriginEqModel
     (cuspLocalData.badLocalCusp v hv).quotientOrigin =
       (cuspLocalData.badLocalLabCuspModel v hv).canonicalNonzeroQuotientElement :=
   cuspLocalData.badLocalCusp_quotientOrigin_eq_model v hv
+
+theorem badLocalCuspEqModelCusp
+    (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
+    cuspLocalData.badLocalCusp v hv =
+      (cuspLocalData.badLocalLabCuspModel v hv).toCuspData
+        (badLocalData.localC v hv.1) (cuspLocalData.badLocalCusp v hv).label := by
+  apply CuspData.eq_of_quotientOrigin_eq
+  exact cuspLocalData.badLocalCuspQuotientOriginEqModel v hv
 
 theorem badLocalCanonicalGeneratorEqModel
     (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
@@ -1503,6 +1542,13 @@ theorem badLocalCusp_quotientOrigin_eq_model
     (theta.badLocalCusp v hv).quotientOrigin =
       (theta.badLocalLabCuspModel v hv).canonicalNonzeroQuotientElement :=
   theta.cuspLocalData.badLocalCuspQuotientOriginEqModel v hv
+
+theorem badLocalCusp_eq_modelCusp
+    (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    theta.badLocalCusp v hv =
+      (theta.badLocalLabCuspModel v hv).toCuspData
+        (theta.badLocalData.localC v hv.1) (theta.badLocalCusp v hv).label :=
+  theta.cuspLocalData.badLocalCuspEqModelCusp v hv
 
 theorem badLocalCanonicalGenerator_eq_model
     (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :

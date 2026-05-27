@@ -306,6 +306,11 @@ example :
         (zmodLocalLabCuspModel primeFive).canonicalNonzeroLabel :=
   (zmodLocalLabCuspModel primeFive).canonicalSignLabelEq
 
+example (C : HyperbolicOrbicurveModel F) :
+    ((zmodLocalLabCuspModel primeFive).toCuspData C "epsilon").arisesFromNonzeroQuotientElement :=
+  CuspData.arisesFromNonzeroQuotientElement_holds
+    ((zmodLocalLabCuspModel primeFive).toCuspData C "epsilon")
+
 /-- A constructor smoke test for the finite-place valuation section. -/
 def abstractThetaValuationData
     (toModuli : NumberField.FinitePlace K -> NumberField.FinitePlace Fmod)
@@ -570,6 +575,12 @@ example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
     (theta.badLocalCusp v hv).quotientOrigin =
       (theta.badLocalLabCuspModel v hv).canonicalNonzeroQuotientElement :=
   theta.badLocalCusp_quotientOrigin_eq_model v hv
+
+example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    theta.badLocalCusp v hv =
+      (theta.badLocalLabCuspModel v hv).toCuspData
+        (theta.badLocalData.localC v hv.1) (theta.badLocalCusp v hv).label :=
+  theta.badLocalCusp_eq_modelCusp v hv
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
     theta.cuspLocalData.badLocalCanonicalGenerator v hv =
