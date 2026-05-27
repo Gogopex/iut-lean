@@ -9708,3 +9708,69 @@ only provide the Theorem 3.11 components.
 The next milestone should expose this structured-input obligation route at the
 `IUTStage1SourcePackage` level, parallel to `obligationsFromParts` and
 `obligationsFromHypotheses`.
+
+## Milestone 122: Package-Level Structured Obligation Route
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Mochizuki's recent formalization overview explicitly presents Stage 1 as the
+route from `[IUTchIII] Theorem 3.11` to Corollary 3.12. The Scholze-Stix note
+focuses its criticism on the Corollary 3.12 passage and the interpretation of
+pilot objects across Hodge theaters.
+
+This milestone remains on the source-obligation side of that route. It exposes
+the structured Theorem 3.11 input route at the package level, but it does not
+add a new public audit or endpoint theorem.
+
+### Purpose
+
+This milestone adds package-level obligation constructors parallel to the
+existing `obligationsFromParts` and `obligationsFromHypotheses` constructors.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.obligationsFromStructuredInputs
+IUTStage1SourcePackage.obligationsFromStructuredInputs_eq_parts
+IUTStage1SourcePackage.obligationsFromStructuredInputs_eq_ofStructuredInputs
+IUTStage1SourcePackage.obligationsFromStructuredHypotheses
+IUTStage1SourcePackage.obligationsFromStructuredHypotheses_eq_parts
+IUTStage1SourcePackage.obligationsFromStructuredHypotheses_eq_hypotheses
+IUTStage1SourcePackage.obligationsFromStructuredHypotheses_eq_ofStructuredHypotheses
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_package_obligations_from_structured_inputs_example
+unitThetaToy_source_package_obligations_from_structured_inputs_eq_parts_example
+unitThetaToy_source_package_obligations_from_structured_hypotheses_example
+unitThetaToy_source_package_obligations_from_structured_hypotheses_eq_parts_example
+unitThetaToy_source_package_obligations_from_structured_hypotheses_eq_hypotheses_example
+```
+
+### What This Tests
+
+The toy examples verify that package-level structured-input routes recover the
+same unit-theta source obligations and reduce to the earlier package-level
+subclaim routes.
+
+### Design Trap Avoided
+
+The trap would be to expose structured inputs at the package level as if they
+were a new route to Corollary 3.12. The new declarations only assemble source
+obligations, and the compatibility lemmas show that they are wrappers around the
+existing obligation constructors.
+
+### Next Step
+
+The next milestone should add package-level public audits for the structured
+routes, still keeping them definitionally tied to the existing public audits
+from parts and hypotheses.

@@ -952,6 +952,66 @@ theorem obligationsFromHypotheses_eq_ofHypotheses
         subclaims hypotheses :=
   rfl
 
+def obligationsFromStructuredInputs
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    IUTStage1SourceObligations package :=
+  IUTStage1SourceObligations.ofStructuredInputsAndSideConditions
+    inputs sideConditions
+
+theorem obligationsFromStructuredInputs_eq_parts
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    package.obligationsFromStructuredInputs inputs sideConditions =
+      package.obligationsFromParts
+        inputs.theorem311Subclaims sideConditions :=
+  rfl
+
+theorem obligationsFromStructuredInputs_eq_ofStructuredInputs
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    package.obligationsFromStructuredInputs inputs sideConditions =
+      IUTStage1SourceObligations.ofStructuredInputsAndSideConditions
+        inputs sideConditions :=
+  rfl
+
+def obligationsFromStructuredHypotheses
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    IUTStage1SourceObligations package :=
+  package.obligationsFromStructuredInputs inputs hypotheses.toSideConditions
+
+theorem obligationsFromStructuredHypotheses_eq_parts
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    package.obligationsFromStructuredHypotheses inputs hypotheses =
+      package.obligationsFromStructuredInputs
+        inputs hypotheses.toSideConditions :=
+  rfl
+
+theorem obligationsFromStructuredHypotheses_eq_hypotheses
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    package.obligationsFromStructuredHypotheses inputs hypotheses =
+      package.obligationsFromHypotheses
+        inputs.theorem311Subclaims hypotheses :=
+  rfl
+
+theorem obligationsFromStructuredHypotheses_eq_ofStructuredHypotheses
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    package.obligationsFromStructuredHypotheses inputs hypotheses =
+      IUTStage1SourceObligations.ofStructuredInputsAndSideConditionHypotheses
+        inputs hypotheses :=
+  rfl
+
 theorem publicAuditOfParts
     (package : IUTStage1SourcePackage source target index)
     (subclaims : IUTStage1Theorem311Subclaims package)
