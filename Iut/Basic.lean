@@ -11,6 +11,7 @@ import Iut.Foundations.RegionMeasure
 import Iut.Foundations.CommonTargetBound
 import Iut.Foundations.TransportedRegionFamily
 import Iut.Foundations.QualitativeData
+import Iut.Foundations.InitialThetaData
 import Iut.Foundations.AlgorithmicOutput
 import Iut.Foundations.AlgorithmicBridge
 import Iut.Stage1.PilotComparison
@@ -31,6 +32,7 @@ import Iut.Stage1.ToyPublicAuditExample
 import Iut.Stage1.IUTSourceScaffoldExample
 import Iut.Stage1.IUTStage1DataExample
 import Iut.Stage1.IUTStage1SourceExample
+import Iut.Foundations.InitialThetaDataExample
 
 /-!
 Root module for the IUT formalization scaffold.

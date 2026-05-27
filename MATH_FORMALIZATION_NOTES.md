@@ -1315,3 +1315,118 @@ boundary remain distinct fields.
 The source file is now large. The next milestone should split the audited
 Theorem 3.11 to Corollary 3.12 route into a dedicated module, preserving public
 imports and avoiding any change to theorem statements.
+
+## Math Milestone 14: First Initial Theta Data Layer
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+* `Iut/Basic.lean`
+
+### Source Check
+
+This milestone starts the actual mathematical implementation from IUT I,
+Definition 3.1. The source defines initial theta data as
+
+```text
+(Fbar/F, X_F, l, C_K, V, Vbad_mod, epsilon)
+```
+
+subject to conditions (a)-(f): `F` is a number field containing `sqrt(-1)`,
+`Fbar` is an algebraic closure, `X_F` is a once-punctured elliptic curve over
+`F`, `l` is a prime at least `5`, `K/F` is the finite Galois extension
+determined by the `l`-torsion representation, `V -> Vmod` is a valuation
+section, `Vbad_mod` is a nonempty bad nonarchimedean set of odd residue
+characteristic prime to `l`, `C_K` is the associated hyperbolic orbicurve, and
+`epsilon` is a specified cusp.
+
+### Lean Decisions
+
+The formalization now uses mathlib for the mathematical objects that are
+available:
+
+```text
+NumberField F
+AlgebraicClosure F
+FiniteDimensional F K
+IsGalois F K
+Nat.Prime l.value
+WeierstrassCurve F
+WeierstrassCurve.IsElliptic
+```
+
+This is a deliberate shift away from pure labels. In particular,
+`PuncturedEllipticCurve.ofJ` uses mathlib's `WeierstrassCurve.ofJ`, and Lean
+checks the theorem that its `j`-invariant is the chosen input.
+
+The pieces not yet implemented in full IUT form are kept as explicit named
+obligations rather than hidden inside an opaque label:
+
+```text
+stableReductionOverNonarchimedean
+torsion23RationalOverF
+lTorsionImageContainsSL2
+qParameterOrdersPrimeToL
+HyperbolicOrbicurveModel
+CuspData
+```
+
+This lets the next milestones replace each obligation with real definitions
+without changing the outer shape of initial theta data.
+
+### Lean Declarations
+
+```text
+PrimeGeFive
+SqrtMinusOneData
+PuncturedEllipticCurve
+PuncturedEllipticCurve.jInvariant
+PuncturedEllipticCurve.ofJ
+PuncturedEllipticCurve.jInvariant_ofJ
+ThetaValuationData
+ThetaValuationData.bad
+ThetaValuationData.goodMod
+ThetaValuationData.good
+ThetaValuationData.bad_nonempty
+ThetaValuationData.badLift_has_multiplicative_reduction
+HyperbolicOrbicurveModel
+CuspData
+InitialThetaData
+InitialThetaData.algebraicClosure_isAlgClosure
+InitialThetaData.prime_is_prime
+InitialThetaData.prime_ge_five
+InitialThetaData.badValuations_nonempty
+InitialThetaData.badValuation_has_multiplicative_reduction
+InitialThetaData.sqrtMinusOne_square
+InitialThetaData.cusp_arisesFromNonzeroQuotientElement
+```
+
+### What This Tests
+
+The example file verifies:
+
+* the prime `5` satisfies the IUT lower-bound wrapper;
+* a small two-point model has a bijective valuation section `V -> Vmod`;
+* the bad set is nonempty and bad lifts have the recorded multiplicative
+  reduction property;
+* a full abstract `InitialThetaData` constructor works under the exact field
+  typeclass assumptions;
+* mathlib's `ofJ` elliptic curve model supplies a checked `j`-invariant theorem.
+
+### Design Trap Avoided
+
+The trap here would be to keep "initial theta data" as a single inert label and
+thereby postpone all mathematical pressure. We did not do that. The prime,
+number-field, Galois-extension, algebraic-closure, elliptic-curve, and valuation
+section components are real Lean data. The still-missing IUT-specific geometry
+is isolated as named obligations that must be discharged or refined in later
+milestones.
+
+### Next Step
+
+The next milestone should expand one obligation from Definition 3.1 instead of
+adding more audit infrastructure. The most natural target is the field condition
+`sqrt(-1) in F`, either by constructing concrete examples via a cyclotomic or
+Gaussian number field, or by defining the field-of-moduli/extension layer that
+will later support `Fmod`, `F`, and `K`.
