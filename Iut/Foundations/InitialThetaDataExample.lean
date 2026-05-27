@@ -113,6 +113,30 @@ example (Q : PointedEtaleQuotient)
     signAction.InSignOrbit (signAction.neg generator) generator :=
   signAction.neg_generator_mem_signOrbit generator
 
+/-- A constructor smoke test for compatibility between sign and unit actions. -/
+def abstractQuotientSignUnitCompatibility
+    (Q : PointedEtaleQuotient)
+    (unitAction : QuotientUnitActionData Q)
+    (signAction : QuotientSignAction Q)
+    (signUnit : unitAction.units)
+    (hSign : ∀ x, unitAction.smul signUnit x = signAction.neg x) :
+    QuotientSignUnitCompatibility Q unitAction signAction where
+  signUnit := signUnit
+  signUnit_smul_eq_neg := hSign
+
+example (Q : PointedEtaleQuotient)
+    (unitAction : QuotientUnitActionData Q)
+    (signAction : QuotientSignAction Q)
+    (signUnit : unitAction.units)
+    (hSign : ∀ x, unitAction.smul signUnit x = signAction.neg x)
+    (x : Q.carrier) :
+    unitAction.smul
+        (abstractQuotientSignUnitCompatibility Q unitAction signAction
+          signUnit hSign).signUnit x =
+      signAction.neg x :=
+  (abstractQuotientSignUnitCompatibility Q unitAction signAction
+    signUnit hSign).signUnit_smul_eq_neg x
+
 /-- A constructor smoke test for a canonical-generator-up-to-sign witness. -/
 def abstractCanonicalGeneratorUpToSignElement
     (Z : PointedEtaleQuotient)
@@ -148,6 +172,12 @@ example :
     (zmodSignAction primeFive).InSignOrbit
       (-(1 : ZMod primeFive.value)) (1 : ZMod primeFive.value) :=
   (zmodSignAction primeFive).neg_generator_mem_signOrbit (1 : ZMod primeFive.value)
+
+example (x : ZMod primeFive.value) :
+    (zmodUnitActionData primeFive).smul
+        (zmodSignUnitCompatibility primeFive).signUnit x =
+      (zmodSignAction primeFive).neg x :=
+  (zmodSignUnitCompatibility primeFive).signUnit_smul_eq_neg x
 
 example :
     (zmodCanonicalGeneratorUpToSignElement primeFive).canonicalGeneratorUpToSign :=

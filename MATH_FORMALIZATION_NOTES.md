@@ -2486,3 +2486,98 @@ The sign action is still a separate `QuotientSignAction`; it is not yet
 constructed as the restriction of the `(ZMod l.value)^x` action along the
 subgroup `{±1}`. The next refinement should introduce that compatibility
 between unit action and sign action.
+
+## Math Milestone 25: Sign as the Minus-One Unit
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Definition 3.1(f), describes the bad local `epsilon_v` data as arising
+from a canonical generator of the relevant local quotient, with an unavoidable
+`±1` indeterminacy. The later discussion of cusp labels says that the label
+classes inherit an `F_l`-torsor structure from the natural `F_l^×` action on
+the quotient `Q`.
+
+This means the formal sign operation should not remain merely an independent
+involution forever. At the first concrete quotient model, it should be tied to
+the same unit action that models the `F_l^×` action.
+
+### Lean/API Check
+
+Mathlib's bundled units accept:
+
+```text
+(-1 : (ZMod n)^x)
+```
+
+and Lean proves by simplification that multiplication by this unit on
+`ZMod n` is additive negation:
+
+```text
+((-1 : (ZMod n)^x) : ZMod n) * x = -x
+```
+
+The concrete compatibility for our quotient model therefore needs no custom
+finite-field lemma at this stage.
+
+### Lean Decisions
+
+The new structure is:
+
+```text
+QuotientSignUnitCompatibility
+```
+
+It packages:
+
+* a distinguished unit `signUnit`;
+* a proof that acting by `signUnit` is the same operation as the sign action.
+
+For the current `ZMod l` quotient model, the distinguished unit is:
+
+```text
+(-1 : (ZMod l.value)^x)
+```
+
+and the proof is:
+
+```text
+zmodSignUnitCompatibility l
+```
+
+This keeps the current abstraction honest: the sign orbit used for canonical
+generators is now visibly compatible with the unit action used for the
+`F_l^×`-language.
+
+### Lean Declarations
+
+```text
+QuotientSignUnitCompatibility
+zmodSignUnitCompatibility
+abstractQuotientSignUnitCompatibility
+```
+
+### What This Tests
+
+The example file now checks:
+
+* the generic constructor and projection for sign/unit compatibility;
+* in `ZMod 5`, acting by the distinguished sign unit is exactly the sign
+  operation.
+
+### Design Trap Avoided
+
+The trap would be to let the `±1` language and the `F_l^×` language evolve in
+parallel as unrelated APIs. This milestone forces their first intersection:
+in the concrete finite-quotient model, `-1` as a unit is the sign operation.
+
+### Remaining Gap
+
+We still have not formalized the subgroup `{±1} ⊆ (ZMod l)^x`, nor the full
+torsor structure on nonzero quotient elements. This milestone only proves the
+specific compatibility needed before that subgroup/torsor layer can be added
+cleanly.

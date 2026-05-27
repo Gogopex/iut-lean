@@ -468,6 +468,15 @@ theorem neg_generator_mem_signOrbit (generator : Q.carrier) :
 
 end QuotientSignAction
 
+/-- Compatibility between a sign action and a distinguished unit action. -/
+structure QuotientSignUnitCompatibility
+    (Q : PointedEtaleQuotient.{u})
+    (unitAction : QuotientUnitActionData Q)
+    (signAction : QuotientSignAction Q) where
+  signUnit : unitAction.units
+  signUnit_smul_eq_neg :
+    ∀ x, unitAction.smul signUnit x = signAction.neg x
+
 /-- The pointed quotient with carrier `ZMod l`, used as the current `F_l` model. -/
 abbrev zmodPointedQuotient (l : PrimeGeFive) : PointedEtaleQuotient where
   carrier := ZMod l.value
@@ -495,6 +504,15 @@ def zmodSignAction (l : PrimeGeFive) :
   neg_involutive := by
     intro x
     simp
+
+/-- Compatibility of the `ZMod l` sign action with multiplication by the unit `-1`. -/
+def zmodSignUnitCompatibility (l : PrimeGeFive) :
+    QuotientSignUnitCompatibility
+      (zmodPointedQuotient l) (zmodUnitActionData l) (zmodSignAction l) where
+  signUnit := (-1 : (ZMod l.value)ˣ)
+  signUnit_smul_eq_neg := by
+    intro x
+    simp [zmodUnitActionData, zmodSignAction]
 
 /-- A witness that a cusp arises from a nonzero element of an EtTh quotient. -/
 structure NonzeroQuotientElement where
