@@ -212,6 +212,43 @@ example {source target : HyperbolicOrbicurveModel F}
         deckData deckAutomorphism realizesDeckTransformations hRealizes) g
 
 /--
+A constructor smoke test for group-law compatibility of a deck automorphism
+realization.
+-/
+def abstractOrbicurveCoverDeckAutomorphismGroupLawData
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+    {deckData : OrbicurveCoverDeckTransformationData coverProperties}
+    (realization : OrbicurveCoverDeckAutomorphismRealizationData deckData)
+    (identityCompatible multiplicationCompatible : Prop)
+    (hIdentity : identityCompatible)
+    (hMultiplication : multiplicationCompatible) :
+    OrbicurveCoverDeckAutomorphismGroupLawData realization where
+  identityCompatible := identityCompatible
+  identityCompatible_holds := hIdentity
+  multiplicationCompatible := multiplicationCompatible
+  multiplicationCompatible_holds := hMultiplication
+
+example {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+    {deckData : OrbicurveCoverDeckTransformationData coverProperties}
+    (realization : OrbicurveCoverDeckAutomorphismRealizationData deckData)
+    (identityCompatible multiplicationCompatible : Prop)
+    (hIdentity : identityCompatible)
+    (hMultiplication : multiplicationCompatible) :
+    (abstractOrbicurveCoverDeckAutomorphismGroupLawData
+      realization identityCompatible multiplicationCompatible
+      hIdentity hMultiplication).identityCompatible ∧
+      (abstractOrbicurveCoverDeckAutomorphismGroupLawData
+        realization identityCompatible multiplicationCompatible
+        hIdentity hMultiplication).multiplicationCompatible :=
+  (abstractOrbicurveCoverDeckAutomorphismGroupLawData
+    realization identityCompatible multiplicationCompatible
+    hIdentity hMultiplication).compatible
+
+/--
 A constructor smoke test for a function-field extension attached to a fixed
 orbicurve cover morphism.
 -/
@@ -683,6 +720,8 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
       OrbicurveCoverDeckTransformationData coverProperties)
     (coverDeckAutomorphisms :
       OrbicurveCoverDeckAutomorphismRealizationData coverDeckTransformations)
+    (coverDeckAutomorphismGroupLaw :
+      OrbicurveCoverDeckAutomorphismGroupLawData coverDeckAutomorphisms)
     (coverDeckQuotient :
       OrbicurveCoverDeckQuotientData thetaApproach coverDeckTransformations)
     (functionFieldExtension :
@@ -698,6 +737,7 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
   coverProperties := coverProperties
   coverDeckTransformations := coverDeckTransformations
   coverDeckAutomorphisms := coverDeckAutomorphisms
+  coverDeckAutomorphismGroupLaw := coverDeckAutomorphismGroupLaw
   coverDeckQuotient := coverDeckQuotient
   functionFieldExtension := functionFieldExtension
   quotientAction := quotientAction
@@ -771,6 +811,15 @@ example
     (g : certificate.coverDeckGroup) :
     (certificate.coverDeckAutomorphism g).overTarget :=
   certificate.coverDeckAutomorphism_overTarget g
+
+example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (certificate : ThetaFiniteEtaleGaloisCoverCertificate thetaApproach B L) :
+    certificate.coverDeckAutomorphismGroupLaw.identityCompatible ∧
+      certificate.coverDeckAutomorphismGroupLaw.multiplicationCompatible :=
+  certificate.coverDeckAutomorphism_groupLawCompatible
 
 noncomputable example
     (thetaApproach : ThetaApproachQuotientData)

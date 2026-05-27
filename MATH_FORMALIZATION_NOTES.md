@@ -6793,3 +6793,95 @@ The next step is to formalize the compatibility between deck-group
 multiplication and composition of the over-target automorphism placeholders, or
 to introduce a more concrete category of orbicurve morphisms where that
 composition can be expressed directly.
+
+## Math Milestone 68: Group-Law Compatibility for Deck Automorphism Realization
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I treats `Gal(X_K/C_K) = Pi_CK/Pi_XK` as a group acting naturally on the
+reconstructed function field. The cover automorphism discussions also use
+groups such as `Aut_K(X_K)` and `Gal(X/C)`, where the group law is composition
+of automorphisms. Thus a realization of a deck group by automorphisms of the
+source over the target must eventually respect identity and multiplication.
+
+At our current abstraction level, orbicurve morphism composition is not yet
+formalized. This milestone records the group-law obligations without inventing
+a fake composition operation.
+
+### Lean/API Check
+
+The new record is:
+
+```text
+OrbicurveCoverDeckAutomorphismGroupLawData realization
+```
+
+where:
+
+```text
+realization :
+  OrbicurveCoverDeckAutomorphismRealizationData deckData
+```
+
+It contains:
+
+```text
+identityCompatible : Prop
+identityCompatible_holds : identityCompatible
+multiplicationCompatible : Prop
+multiplicationCompatible_holds : multiplicationCompatible
+```
+
+and exposes:
+
+```text
+identityCompatible_proof
+multiplicationCompatible_proof
+compatible
+```
+
+The cover certificate now stores:
+
+```text
+coverDeckAutomorphismGroupLaw :
+  OrbicurveCoverDeckAutomorphismGroupLawData coverDeckAutomorphisms
+```
+
+### Lean Decisions
+
+The compatibility is a separate record indexed by the realization, rather than
+extra fields on the deck group. This keeps the distinction clear:
+
+* `OrbicurveCoverDeckTransformationData` names the abstract deck group;
+* `OrbicurveCoverDeckAutomorphismRealizationData` assigns over-target
+  automorphisms to group elements;
+* `OrbicurveCoverDeckAutomorphismGroupLawData` states that the assignment
+  respects the group law.
+
+### What This Tests
+
+The example file checks:
+
+* construction of group-law compatibility data for a realization;
+* extraction of identity and multiplication compatibility together;
+* construction of the cover certificate with the group-law field;
+* certificate-level recovery of the compatibility conjunction.
+
+### Design Trap Avoided
+
+The trap would be to regard any function from the abstract deck group to
+over-target automorphism placeholders as a group realization. This milestone
+separates mere assignment from group-law compatibility.
+
+### Remaining Gap
+
+The identity and multiplication compatibility assertions are still propositions.
+To make them mathematical the next step is either to define a concrete
+composition interface for `HyperbolicOrbicurveAutomorphismOverData`, or to
+replace the placeholder orbicurve model with a category-theoretic model where
+automorphism composition is already available.

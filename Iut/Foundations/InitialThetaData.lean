@@ -583,6 +583,51 @@ theorem deckAutomorphism_overTarget (g : deckData.deckGroup) :
 end OrbicurveCoverDeckAutomorphismRealizationData
 
 /--
+Group-law compatibility for realizing the abstract deck group by over-target
+automorphisms.
+
+The actual identity automorphism and composition of orbicurve automorphisms are
+not yet implemented.  These propositions keep the group-law obligations visible
+and indexed by the realization that assigns automorphisms to deck-group
+elements.
+-/
+structure OrbicurveCoverDeckAutomorphismGroupLawData
+    {F : Type u} [Field F]
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+    {deckData : OrbicurveCoverDeckTransformationData coverProperties}
+    (realization : OrbicurveCoverDeckAutomorphismRealizationData deckData) where
+  identityCompatible : Prop
+  identityCompatible_holds : identityCompatible
+  multiplicationCompatible : Prop
+  multiplicationCompatible_holds : multiplicationCompatible
+
+namespace OrbicurveCoverDeckAutomorphismGroupLawData
+
+variable {F : Type u} [Field F]
+variable {source target : HyperbolicOrbicurveModel F}
+variable {morphism : HyperbolicOrbicurveMorphismData source target}
+variable {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+variable {deckData : OrbicurveCoverDeckTransformationData coverProperties}
+variable {realization : OrbicurveCoverDeckAutomorphismRealizationData deckData}
+variable (groupLaw : OrbicurveCoverDeckAutomorphismGroupLawData realization)
+
+theorem identityCompatible_proof :
+    groupLaw.identityCompatible :=
+  groupLaw.identityCompatible_holds
+
+theorem multiplicationCompatible_proof :
+    groupLaw.multiplicationCompatible :=
+  groupLaw.multiplicationCompatible_holds
+
+theorem compatible :
+    groupLaw.identityCompatible ∧ groupLaw.multiplicationCompatible :=
+  ⟨groupLaw.identityCompatible_holds, groupLaw.multiplicationCompatible_holds⟩
+
+end OrbicurveCoverDeckAutomorphismGroupLawData
+
+/--
 A typed assertion that a finite Galois field extension is the function-field
 extension induced by a fixed orbicurve cover morphism.
 
@@ -2579,6 +2624,10 @@ structure ThetaFiniteEtaleGaloisCoverCertificate
     @OrbicurveCoverDeckAutomorphismRealizationData baseField baseFieldField
       sourceOrbicurve targetOrbicurve coverMorphism coverProperties
       coverDeckTransformations
+  coverDeckAutomorphismGroupLaw :
+    @OrbicurveCoverDeckAutomorphismGroupLawData baseField baseFieldField
+      sourceOrbicurve targetOrbicurve coverMorphism coverProperties
+      coverDeckTransformations coverDeckAutomorphisms
   coverDeckQuotient :
     OrbicurveCoverDeckQuotientData thetaApproach coverDeckTransformations
   functionFieldExtension :
@@ -2653,6 +2702,19 @@ theorem coverDeckAutomorphism_overTarget
     (g : certificate.coverDeckGroup) :
     (certificate.coverDeckAutomorphism g).overTarget :=
   certificate.coverDeckAutomorphisms.deckAutomorphism_overTarget g
+
+theorem coverDeckAutomorphism_identityCompatible :
+    certificate.coverDeckAutomorphismGroupLaw.identityCompatible :=
+  certificate.coverDeckAutomorphismGroupLaw.identityCompatible_proof
+
+theorem coverDeckAutomorphism_multiplicationCompatible :
+    certificate.coverDeckAutomorphismGroupLaw.multiplicationCompatible :=
+  certificate.coverDeckAutomorphismGroupLaw.multiplicationCompatible_proof
+
+theorem coverDeckAutomorphism_groupLawCompatible :
+    certificate.coverDeckAutomorphismGroupLaw.identityCompatible ∧
+      certificate.coverDeckAutomorphismGroupLaw.multiplicationCompatible :=
+  certificate.coverDeckAutomorphismGroupLaw.compatible
 
 def coverDeckEquivThetaQuotient :
     certificate.coverDeckGroup ≃*
