@@ -1226,6 +1226,68 @@ theorem unitThetaToy_source_theorem311_audited_payload_normalization_example
   (unitThetaToy_source_theorem311_audited_signed_payload_boundary_example
     measure hnormalized hh hbound hholds).sourceNormalization
 
+theorem unitThetaToy_source_theorem311_audited_comparison_data_eq_payload_inputs_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let bundle :=
+      unitThetaToy_source_theorem311_structured_inputs_with_she_example
+        measure hnormalized hh hbound hholds
+    let sideConditions :=
+      unitThetaToy_source_side_conditions_example
+        measure hnormalized hh hbound hholds
+    bundle.auditedComparisonData sideConditions =
+      package.comparisonDataFromPayloadInputs
+        (package.auditedComparisonSourceObligations
+          bundle sideConditions) :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  package.auditedComparisonData_eq_payloadInputs
+    (unitThetaToy_source_theorem311_structured_inputs_with_she_example
+      measure hnormalized hh hbound hholds)
+    (unitThetaToy_source_side_conditions_example
+      measure hnormalized hh hbound hholds)
+
+theorem unitThetaToy_source_theorem311_audited_stage_comparison_eq_payload_inputs_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let bundle :=
+      unitThetaToy_source_theorem311_structured_inputs_with_she_example
+        measure hnormalized hh hbound hholds
+    let sideConditions :=
+      unitThetaToy_source_side_conditions_example
+        measure hnormalized hh hbound hholds
+    (bundle.auditedComparisonData sideConditions).stage1Comparison =
+      (package.comparisonDataFromPayloadInputs
+        (package.auditedComparisonSourceObligations
+          bundle sideConditions)).stage1Comparison :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  package.auditedComparisonData_stage1Comparison_eq_payloadInputs
+    (unitThetaToy_source_theorem311_structured_inputs_with_she_example
+      measure hnormalized hh hbound hholds)
+    (unitThetaToy_source_side_conditions_example
+      measure hnormalized hh hbound hholds)
+
 theorem unitThetaToy_source_side_condition_hypotheses_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

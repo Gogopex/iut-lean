@@ -1823,6 +1823,37 @@ theorem comparisonDataFromPayloadInputs_corollary312_eq
       (package.comparisonData obligations).corollary312 :=
   Subsingleton.elim _ _
 
+def auditedComparisonSourceObligations
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    IUTStage1SourceObligations package :=
+  IUTStage1SourceObligations.ofStructuredInputsAndSideConditions
+    bundle.inputs sideConditions
+
+theorem auditedComparisonData_eq_payloadInputs
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    bundle.auditedComparisonData sideConditions =
+      package.comparisonDataFromPayloadInputs
+        (package.auditedComparisonSourceObligations
+          bundle sideConditions) := by
+  simp [IUTStage1Theorem311StructuredInputsWithSHE.auditedComparisonData,
+    IUTStage1Theorem311AuditedSignedPayloadBoundary.comparisonData,
+    IUTStage1SourcePackage.comparisonDataFromPayloadInputs,
+    IUTStage1PreLedgerData.ComparisonPayloadInputs.comparisonData]
+
+theorem auditedComparisonData_stage1Comparison_eq_payloadInputs
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    (bundle.auditedComparisonData sideConditions).stage1Comparison =
+      (package.comparisonDataFromPayloadInputs
+        (package.auditedComparisonSourceObligations
+          bundle sideConditions)).stage1Comparison := by
+  rw [package.auditedComparisonData_eq_payloadInputs bundle sideConditions]
+
 theorem comparisonData_thetaSigned
     (package : IUTStage1SourcePackage source target index)
     (obligations : IUTStage1SourceObligations package) :

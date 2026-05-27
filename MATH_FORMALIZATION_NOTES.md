@@ -969,3 +969,79 @@ The next milestone should compare this audited signed payload with the older
 public-audit route already present in `IUTStage1Source.lean`. The goal is not a
 new endpoint, but a theorem saying that the newly audited payload agrees with
 the existing comparison-data packaging when supplied the same side conditions.
+
+## Math Milestone 10: Audited Payload Route Equality
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The source file already had an older packaging route:
+
+```text
+comparisonPayloadInputs
+comparisonDataFromPayloadInputs
+```
+
+The new audited route starts earlier, at the structured SHE context, and passes
+through the explicit SHE/HDD bound, target middle term, membership middle term,
+raw inequality, and signed-payload boundary. This milestone checks that the new
+audited payload is not a parallel endpoint: when supplied the same side
+conditions, it agrees with the older comparison-data packaging.
+
+### Purpose
+
+This milestone adds package-level route comparison declarations:
+
+```text
+IUTStage1SourcePackage.auditedComparisonSourceObligations
+IUTStage1SourcePackage.auditedComparisonData_eq_payloadInputs
+IUTStage1SourcePackage.auditedComparisonData_stage1Comparison_eq_payloadInputs
+```
+
+The source obligations used for the old route are built from:
+
+```text
+IUTStage1SourceObligations.ofStructuredInputsAndSideConditions
+  bundle.inputs sideConditions
+```
+
+The equality then states that:
+
+```text
+bundle.auditedComparisonData sideConditions
+=
+package.comparisonDataFromPayloadInputs
+  (package.auditedComparisonSourceObligations bundle sideConditions)
+```
+
+### What This Tests
+
+The toy model verifies both comparison-data equality and stage-comparison
+equality:
+
+```text
+unitThetaToy_source_theorem311_audited_comparison_data_eq_payload_inputs_example
+unitThetaToy_source_theorem311_audited_stage_comparison_eq_payload_inputs_example
+```
+
+This confirms that the audited route integrates with the existing Stage 1
+comparison-data API.
+
+### Design Trap Avoided
+
+The trap would be to leave two independent ways to manufacture signed comparison
+data. That would make later reviews ambiguous: a theorem could use the older
+payload path while appearing to rely on the audited SHE/HDD/membership path. The
+route-equality theorem makes the relationship explicit.
+
+### Next Step
+
+The next milestone should decide how much of the public audit route should be
+re-exposed through the newly audited path. A conservative step would prove only
+that the public audit obtained from the audited comparison data has the same
+Corollary 3.12 proof term up to proof irrelevance, while keeping the route
+checklist visible.
