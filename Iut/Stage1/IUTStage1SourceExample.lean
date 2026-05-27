@@ -316,6 +316,87 @@ theorem unitThetaToy_source_hullDetObligations_comparisonData_corollary_example
       (unitThetaToyIUTStage1SourceHullDetObligations
         measure hnormalized hh hbound hholds)
 
+theorem unitThetaToy_source_hullDetComparisonEndpoint_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    package.HullDetComparisonEndpoint
+      (unitThetaToyIUTStage1SourceHullDetObligations
+        measure hnormalized hh hbound hholds) :=
+  (unitThetaToyIUTStage1SourcePackage
+    measure hnormalized hh hbound hholds).auditedHullDetComparisonEndpoint
+      (unitThetaToyIUTStage1SourceHullDetObligations
+        measure hnormalized hh hbound hholds)
+
+theorem unitThetaToy_source_hullDetComparisonEndpoint_corollary_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  (unitThetaToy_source_hullDetComparisonEndpoint_example
+    measure hnormalized hh hbound hholds).corollary312Endpoint
+
+theorem unitThetaToy_source_hullDetComparisonEndpoint_targetUnion_subset_hull_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let obligations :=
+      unitThetaToyIUTStage1SourceHullDetObligations
+        measure hnormalized hh hbound hholds
+    Region.Subset package.preLedger.output.comparisons.targetUnion
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull :=
+  (unitThetaToy_source_hullDetComparisonEndpoint_example
+    measure hnormalized hh hbound hholds).targetUnion_subset_hull
+
+theorem unitThetaToy_source_hullDetComparisonEndpoint_determinantVolumeBound_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let obligations :=
+      unitThetaToyIUTStage1SourceHullDetObligations
+        measure hnormalized hh hbound hholds
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+      package.preLedger.thetaSigned :=
+  (unitThetaToy_source_hullDetComparisonEndpoint_example
+    measure hnormalized hh hbound hholds).determinantVolumeBound
+
 def unitThetaToyIUTStage1SourceObligationGap
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

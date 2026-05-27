@@ -3792,6 +3792,100 @@ theorem publicAudit_eq_package_publicAudit
 
 end ComparisonDataEndpoint
 
+/--
+Endpoint audit for the strengthened hull+det obligation route.
+
+This packages the old comparison endpoint together with the source-facing hull
+facts, so the public comparison and the union-of-possible-images provenance are
+checked at the same boundary.
+-/
+structure HullDetComparisonEndpoint
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceHullDetObligations package) : Prop where
+  comparison_endpoint :
+    package.ComparisonDataEndpoint obligations.toSourceObligations
+  public_audit :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned ∧
+      Corollary312Inequality
+        (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+        (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) ∧
+      (corollary312_from_stage1_comparison
+          (package.promotedProvider
+            obligations.toSourceObligations).stage1Comparison =
+        corollary312_of_signed_le
+          (package.promotedProvider
+            obligations.toSourceObligations).ledger.qSigned_le_thetaSigned)
+  target_union_subset_hull :
+    Region.Subset package.preLedger.output.comparisons.targetUnion
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+  determinant_volume_bound :
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+      package.preLedger.thetaSigned
+  all_targets_at_most :
+    RegionComparisonFamily.AllTargetsAtMost package.preLedger.measure
+      package.preLedger.output.comparisons package.preLedger.thetaSigned
+
+theorem auditedHullDetComparisonEndpoint
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    package.HullDetComparisonEndpoint obligations :=
+  { comparison_endpoint :=
+      package.auditedComparisonDataEndpoint obligations.toSourceObligations,
+    public_audit := package.publicAuditOfHullDetObligations obligations,
+    target_union_subset_hull := obligations.targetUnion_subset_hull,
+    determinant_volume_bound := obligations.determinantVolumeBound,
+    all_targets_at_most := obligations.allTargetsAtMost }
+
+namespace HullDetComparisonEndpoint
+
+variable {package : IUTStage1SourcePackage source target index}
+variable {obligations : IUTStage1SourceHullDetObligations package}
+
+theorem corollary312Endpoint
+    (endpoint : package.HullDetComparisonEndpoint obligations) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  endpoint.public_audit.2.1
+
+theorem qSignedLeThetaSigned
+    (endpoint : package.HullDetComparisonEndpoint obligations) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  endpoint.public_audit.1
+
+theorem targetUnion_subset_hull
+    (endpoint : package.HullDetComparisonEndpoint obligations) :
+    Region.Subset package.preLedger.output.comparisons.targetUnion
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull :=
+  endpoint.target_union_subset_hull
+
+theorem determinantVolumeBound
+    (endpoint : package.HullDetComparisonEndpoint obligations) :
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+      package.preLedger.thetaSigned :=
+  endpoint.determinant_volume_bound
+
+theorem allTargetsAtMost
+    (endpoint : package.HullDetComparisonEndpoint obligations) :
+    RegionComparisonFamily.AllTargetsAtMost package.preLedger.measure
+      package.preLedger.output.comparisons package.preLedger.thetaSigned :=
+  endpoint.all_targets_at_most
+
+theorem comparisonEndpointCorollary312
+    (endpoint : package.HullDetComparisonEndpoint obligations) :
+    Corollary312Inequality
+      (package.comparisonData obligations.toSourceObligations).thetaPilot
+      (package.comparisonData obligations.toSourceObligations).qPilot :=
+  endpoint.comparison_endpoint.corollary312Endpoint
+
+end HullDetComparisonEndpoint
+
 theorem auditOfParts
     (package : IUTStage1SourcePackage source target index)
     (subclaims : IUTStage1Theorem311Subclaims package)

@@ -16180,3 +16180,107 @@ The endpoint still does not inspect the hull evidence directly. A later audit
 object should package both facts together: the public comparison and the
 source-facing proof that the Theta-side bound came from a measured hull of the
 union of possible images.
+
+## Stage 1 Math Milestone 110: Hull+Det Comparison Endpoint
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The strengthened hull+det obligations could already project to the old public
+endpoint. The remaining audit issue was ergonomic but important: the public
+comparison and the hull provenance were still inspected through separate
+objects. For the Corollary 3.12 dispute, a useful endpoint should display both
+at once.
+
+This milestone packages the final Corollary-3.12-shaped comparison together
+with the statement that the Theta-side bound comes from a measured hull
+containing the union of possible target images.
+
+### Lean/API Check
+
+The source package namespace now defines:
+
+```text
+IUTStage1SourcePackage.HullDetComparisonEndpoint
+IUTStage1SourcePackage.auditedHullDetComparisonEndpoint
+```
+
+The endpoint stores:
+
+```text
+comparison_endpoint
+public_audit
+target_union_subset_hull
+determinant_volume_bound
+all_targets_at_most
+```
+
+and exposes:
+
+```text
+HullDetComparisonEndpoint.corollary312Endpoint
+HullDetComparisonEndpoint.qSignedLeThetaSigned
+HullDetComparisonEndpoint.targetUnion_subset_hull
+HullDetComparisonEndpoint.determinantVolumeBound
+HullDetComparisonEndpoint.allTargetsAtMost
+HullDetComparisonEndpoint.comparisonEndpointCorollary312
+```
+
+The toy source example now checks:
+
+```text
+unitThetaToy_source_hullDetComparisonEndpoint_example
+unitThetaToy_source_hullDetComparisonEndpoint_corollary_example
+unitThetaToy_source_hullDetComparisonEndpoint_targetUnion_subset_hull_example
+unitThetaToy_source_hullDetComparisonEndpoint_determinantVolumeBound_example
+```
+
+### Lean Decisions
+
+The endpoint is a proposition-valued structure rather than a new computation.
+It packages already verified facts:
+
+```text
+old comparison endpoint
+public audit
+union containment in the hull
+measured bound on that hull
+all-targets-at-most
+```
+
+This keeps the final comparison and hull provenance synchronized without
+changing the existing comparison-data construction.
+
+### What This Tests
+
+Lean verifies that the toy source package has a single endpoint object from
+which one can extract both:
+
+```text
+Corollary312Inequality ...
+```
+
+and:
+
+```text
+targetUnion <= constructed hull
+measure constructed hull <= thetaSigned
+```
+
+The focused build for `Iut.Stage1.IUTStage1SourceExample` passes.
+
+### Design Trap Avoided
+
+The trap would be to let users inspect the public comparison while missing the
+fact that the Theta-side bound is supposed to come from the union/hull route.
+The new endpoint object puts these facts together at the same boundary.
+
+### Remaining Gap
+
+The endpoint still uses the toy upper-ray hull. The next non-toy step should
+begin replacing the toy possible-image family with a source-level
+Theta-pilot-image family indexed by indeterminacy choices.
