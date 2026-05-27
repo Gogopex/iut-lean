@@ -176,3 +176,101 @@ Phase 2 should proceed in small milestones:
 The main invariant for Phase 2: no theorem may turn IPL, SHE, APT, or HIS into
 the Corollary 3.12 endpoint unless every transport, comparison target, and
 real-line-copy identification is visible in its statement.
+
+## Periodic Review: Cover/Deck Reconstruction Layer
+
+Date: 2026-05-27
+
+This checkpoint reviews the recent Lean work around finite etale Galois
+orbicurve covers, deck transformations, and the reconstructed function field.
+It is math-facing work, not endpoint infrastructure, but it remains below the
+IUT III Theorem 3.11 to Corollary 3.12 comparison.
+
+### Current Lean Chain
+
+The current cover certificate records the following dependency chain:
+
+```text
+cover morphism
+-> finite etale and Galois cover properties
+-> deck group of the cover
+-> realization by source automorphisms over the target
+-> group-law compatibility of this realization
+-> comparison with the theta-approach deck quotient
+-> function-field extension attached to the cover
+-> quotient action on the reconstructed function field
+```
+
+The important Lean object is:
+
+```lean
+ThetaFiniteEtaleGaloisCoverCertificate
+```
+
+It now exposes, among other accessors:
+
+```lean
+coverDeckAutomorphism
+coverDeckAutomorphism_overTarget
+coverDeckAutomorphism_groupLawCompatible
+coverDeckEquivThetaQuotient
+quotientEquivAlgAut
+```
+
+This is aligned with the IUT I reconstruction layer around Definition 3.1(d)
+and Remark 3.1.2: finite etale orbicurve covers correspond to subgroup data,
+and the theta approach reconstructs the function field of `X_K` from the
+subgroup `Pi_XK <= Pi_CK`, equipped with the natural deck/Galois quotient
+action.
+
+### Positive Alignment
+
+The formalization no longer treats the cover, its quotient group, and the
+field action as independent loose inputs. The deck group is attached to the
+finite etale Galois cover; its realization is indexed by that exact cover; the
+group-law obligations are indexed by that realization; and the quotient action
+is attached to the resulting function-field extension.
+
+This is the right direction for the global project because the Scholze-Stix
+diagnostic risk is precisely that identifications become invisible. The Lean
+records now force a proposed identification to say which cover, which deck
+group, which quotient, and which reconstructed field it belongs to.
+
+### Remaining Gaps
+
+The current layer still contains abstract propositions. In particular:
+
+* `HyperbolicOrbicurveModel` is not yet a concrete orbicurve or a mathlib
+  algebraic-geometric object.
+* `HyperbolicOrbicurveMorphismData` does not yet carry an actual composition
+  law.
+* finite etaleness, Galoisness, and realization by automorphisms are named
+  propositions rather than derived theorems.
+* the deck automorphism group law is visible, but not yet expressed using a
+  concrete composition operation on over-target automorphisms.
+* the quotient equivalence and reconstructed-field action are supplied data,
+  not yet consequences of an EtTh reconstruction theorem.
+
+These are acceptable gaps at this stage only because the records are explicit
+about them. They should not be used as hidden shortcuts to produce a
+Corollary 3.12-style numerical comparison.
+
+### Global 3.12 Check
+
+This layer is necessary for IUT-style anabelian reconstruction, but it is not
+where the 3.11/3.12 disagreement is decided. The disputed step concerns the
+later Hodge-theater and common-container comparison: which histories are
+forgotten, which structures remain visible, which real-line copies are being
+compared, and whether a collapse to a trivial identification has been smuggled
+in.
+
+Therefore the next mathematical milestones should either:
+
+* make the cover/deck realization less opaque by adding a concrete
+  over-target automorphism composition interface; or
+* move back toward the Stage 1 SHE/HDD/common-container structures, with the
+  same explicit-history discipline.
+
+In either direction, a theorem must not infer a comparison endpoint from a
+mere name such as `Galois`, `SHE`, `APT`, or `reconstructed`. The required
+transport and identification data must remain visible in the type.
