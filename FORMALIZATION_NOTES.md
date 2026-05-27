@@ -4599,3 +4599,72 @@ transparent too.
 The next milestone should add the analogous compact theorem for
 `ledger.stage1Comparison.comparison`, showing that the exported Stage 1 record
 also carries the exact same audited chain.
+
+## Milestone 50: Stage 1 Comparison from Complete Audited Chain
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+The exported `Stage1Comparison` record is our current interface for the final
+`3.11.5 => 3.12` comparison identified in the April 2026 formalization report.
+IUT III, Step `(xi-d)`, treats the final endpoint as a comparison of the
+`Theta`-side upper ray and the `q`-side signed value in a common real setting.
+Scholze-Stix's critique asks that this comparison not hide the real-line
+identifications used to obtain it.
+
+Milestone 49 showed that `ledger.corollary312` comes directly from the complete
+audited chain. This milestone extends the same audit to the public
+`Stage1Comparison.comparison` field.
+
+### Purpose
+
+This milestone adds:
+
+```text
+ledger.stage1Comparison.comparison
+  =
+corollary312_of_signed_le
+  (le_trans ledger.membership.q_le_target
+    (common target bound applied to ledger.chosenOutput.choice))
+```
+
+### Lean Declaration
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.stage1Comparison_comparison_eq_membership_commonBound
+```
+
+The proof is `rfl`, so the exported Stage 1 comparison field is definitionally
+the same proof obtained from the membership inequality and the chosen-output
+instance of the common `Theta` bound.
+
+### What This Tests
+
+The public Stage 1 record now carries the same audited proof chain as the
+internal ledger:
+
+```text
+membership.q_le_target
+common bound on chosen output
+corollary312_of_signed_le
+stage1Comparison.comparison
+```
+
+This is useful for downstream users who consume only `Stage1Comparison`.
+
+### Design Trap Avoided
+
+The trap would be to finish the audit at the ledger API while leaving the
+exported record opaque. This milestone keeps the public endpoint aligned with
+the internal source-obligation proof path.
+
+### Next Step
+
+The next milestone should audit the `q_positive` proof in the same compact
+style, tying the exported positivity field back to the ledger field and the
+signed q-coordinate convention.

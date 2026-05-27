@@ -296,6 +296,17 @@ theorem stage1Comparison_comparison_eq_threeTermComparison (ledger :
       corollary312_of_signed_le ledger.threeTermComparison.q_le_theta :=
   rfl
 
+theorem stage1Comparison_comparison_eq_membership_commonBound (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.stage1Comparison.comparison =
+      corollary312_of_signed_le
+        (le_trans ledger.membership.q_le_target
+          (by
+            rw [ledger.targetVolume.targetSigned_eq]
+            exact TransportedRegionFamily.choice_targetVolume_le_of_commonBound
+              ledger.theta_commonBound ledger.chosenOutput.choice)) :=
+  rfl
+
 theorem stage1Comparison_recovers_corollary312 (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     corollary312_from_stage1_comparison ledger.stage1Comparison =
