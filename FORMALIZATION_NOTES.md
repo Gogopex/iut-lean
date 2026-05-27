@@ -9575,3 +9575,70 @@ principle, and not a Corollary 3.12 proof.
 The next milestone should thread the two named Theorem 3.11 components into
 `IUTStage1Theorem311StructuredInputs`, so structured inputs expose the same
 component-level API as raw subclaim bundles.
+
+## Milestone 120: Structured-Input Component Projections
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The previous two milestones split the Theorem 3.11 subclaim bundle into
+algorithmic-output and Hodge-theater/SHE-alignment components. Structured
+inputs pair that subclaim bundle with the local pre-ledger audit.
+
+This milestone exposes the same component-level API through structured inputs.
+It does not change what structured inputs assume: they still consist of a
+pre-ledger audit plus the existing Theorem 3.11 subclaim bundle.
+
+### Purpose
+
+This milestone lets downstream code work with structured Theorem 3.11 inputs at
+the component level without bypassing the subclaim bundle.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1Theorem311StructuredInputs.algorithmicOutput
+IUTStage1Theorem311StructuredInputs.sheAlignment
+IUTStage1Theorem311StructuredInputs.algorithmicOutput_eq_subclaims
+IUTStage1Theorem311StructuredInputs.sheAlignment_eq_subclaims
+IUTStage1Theorem311StructuredInputs.components_rebuild_subclaims
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_structured_algorithmic_component_example
+unitThetaToy_source_theorem311_structured_algorithmic_eq_subclaims_example
+unitThetaToy_source_theorem311_structured_she_component_example
+unitThetaToy_source_theorem311_structured_she_component_eq_subclaims_example
+unitThetaToy_source_theorem311_structured_components_rebuild_example
+```
+
+### What This Tests
+
+The toy examples verify that structured inputs expose:
+
+* the algorithmic-output component;
+* the Hodge-theater/SHE-alignment component;
+* definitional agreement between these projections and the underlying subclaim
+  projections;
+* reconstruction of the subclaim bundle from the two projected components.
+
+### Design Trap Avoided
+
+The trap would be to introduce a second component source at the structured-input
+level. The new projections are only views of `theorem311Subclaims`, and the
+rebuild lemma records that the component split is packaging rather than an
+additional assumption.
+
+### Next Step
+
+The next milestone should use these structured-input components when assembling
+source obligations, so the path from structured Theorem 3.11 data to source
+obligations names each dependency separately.

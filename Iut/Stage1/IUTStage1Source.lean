@@ -378,11 +378,21 @@ theorem algorithmOutputCertified
     package.preLedger.output.Certified :=
   inputs.theorem311_subclaims.algorithmOutputCertified
 
+def algorithmicOutput
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    IUTStage1Theorem311AlgorithmicOutput package :=
+  inputs.theorem311Subclaims.algorithmicOutput
+
 theorem hodgeTheaterSHEAlignment
     (inputs : IUTStage1Theorem311StructuredInputs package) :
     package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
       package.preLedger.certificate.she :=
   inputs.theorem311_subclaims.hodgeTheaterSHEAlignment
+
+def sheAlignment
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    IUTStage1Theorem311SHEAlignment package :=
+  inputs.theorem311Subclaims.sheAlignment
 
 theorem algorithmOutputCertified_eq_subclaims
     (inputs : IUTStage1Theorem311StructuredInputs package) :
@@ -390,11 +400,30 @@ theorem algorithmOutputCertified_eq_subclaims
       inputs.theorem311Subclaims.algorithmOutputCertified :=
   rfl
 
+theorem algorithmicOutput_eq_subclaims
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    inputs.algorithmicOutput =
+      inputs.theorem311Subclaims.algorithmicOutput :=
+  rfl
+
 theorem hodgeTheaterSHEAlignment_eq_subclaims
     (inputs : IUTStage1Theorem311StructuredInputs package) :
     inputs.hodgeTheaterSHEAlignment =
       inputs.theorem311Subclaims.hodgeTheaterSHEAlignment :=
   rfl
+
+theorem sheAlignment_eq_subclaims
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    inputs.sheAlignment =
+      inputs.theorem311Subclaims.sheAlignment :=
+  rfl
+
+theorem components_rebuild_subclaims
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    IUTStage1Theorem311Subclaims.ofComponents
+      inputs.algorithmicOutput inputs.sheAlignment =
+      inputs.theorem311Subclaims :=
+  Subsingleton.elim _ _
 
 end IUTStage1Theorem311StructuredInputs
 

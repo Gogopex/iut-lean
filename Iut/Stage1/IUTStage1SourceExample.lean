@@ -558,6 +558,38 @@ theorem unitThetaToy_source_theorem311_structured_algorithm_eq_subclaims_example
   (unitThetaToy_source_theorem311_structured_inputs_example
     measure hnormalized hh hbound hholds).algorithmOutputCertified_eq_subclaims
 
+theorem unitThetaToy_source_theorem311_structured_algorithmic_component_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1Theorem311AlgorithmicOutput
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).algorithmicOutput
+
+theorem unitThetaToy_source_theorem311_structured_algorithmic_eq_subclaims_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let inputs :=
+      unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds
+    inputs.algorithmicOutput =
+      inputs.theorem311Subclaims.algorithmicOutput :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).algorithmicOutput_eq_subclaims
+
 theorem unitThetaToy_source_theorem311_structured_she_eq_subclaims_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -574,6 +606,56 @@ theorem unitThetaToy_source_theorem311_structured_she_eq_subclaims_example
       inputs.theorem311Subclaims.hodgeTheaterSHEAlignment :=
   (unitThetaToy_source_theorem311_structured_inputs_example
     measure hnormalized hh hbound hholds).hodgeTheaterSHEAlignment_eq_subclaims
+
+theorem unitThetaToy_source_theorem311_structured_she_component_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1Theorem311SHEAlignment
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).sheAlignment
+
+theorem unitThetaToy_source_theorem311_structured_she_component_eq_subclaims_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let inputs :=
+      unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds
+    inputs.sheAlignment =
+      inputs.theorem311Subclaims.sheAlignment :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).sheAlignment_eq_subclaims
+
+theorem unitThetaToy_source_theorem311_structured_components_rebuild_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let inputs :=
+      unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds
+    IUTStage1Theorem311Subclaims.ofComponents
+      inputs.algorithmicOutput inputs.sheAlignment =
+      inputs.theorem311Subclaims :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).components_rebuild_subclaims
 
 theorem unitThetaToy_source_gap_qPilot_positive_example
     (measure : RegionMeasure thetaLine)
