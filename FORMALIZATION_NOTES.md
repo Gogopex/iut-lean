@@ -15942,3 +15942,85 @@ The pre-ledger does not yet require `HullDetSourceData`; it only permits it.
 A future source-specific proof of the IUT route should supply such data as one
 of its obligations, with a non-toy holomorphic hull and determinant/log-volume
 bound.
+
+## Stage 1 Math Milestone 107: Source-Package Split Hull+Det Evidence
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The previous milestone placed split hull+det evidence at the pre-ledger
+boundary. The source-facing package is the boundary intended to represent the
+IUT III Theorem 3.11 to Corollary 3.12 situation. The hull evidence therefore
+needs to be recoverable from that source package, not just from the toy
+pre-ledger constructor.
+
+### Lean/API Check
+
+The source layer now defines:
+
+```text
+IUTStage1SourceHullDetData
+```
+
+with field:
+
+```text
+sourceData : package.preLedger.HullDetSourceData
+```
+
+and accessors:
+
+```text
+stepAudit
+targetUnion_subset_hull
+determinantVolumeBound
+hullDetBridge_eq
+choiceTargetVolume_le_thetaSigned
+allTargetsAtMost
+```
+
+The toy source example now defines:
+
+```text
+unitThetaToyIUTStage1SourceHullDetData
+```
+
+and checks:
+
+```text
+unitThetaToy_source_hullDet_targetUnion_subset_hull_example
+unitThetaToy_source_hullDet_determinantVolumeBound_example
+```
+
+### Lean Decisions
+
+This is again optional source evidence, not a required field of
+`IUTStage1SourcePackage`. That keeps the old public endpoint stable while
+letting stronger source packages expose the exact hull provenance of their
+charted comparison.
+
+### What This Tests
+
+Lean verifies that the toy source package carries a split hull+det datum whose
+hull contains the whole union of possible target images and whose determinant/
+log-volume-style bound is the package's `thetaSigned` bound.
+
+Focused builds for `Iut.Stage1.IUTStage1Source` and
+`Iut.Stage1.IUTStage1SourceExample` pass.
+
+### Design Trap Avoided
+
+The trap would be to have a strong pre-ledger audit but lose it when passing to
+the source-facing IUT package. The source package now has its own explicit
+wrapper for the split hull+det evidence.
+
+### Remaining Gap
+
+The source package still does not require this evidence to produce the older
+public comparison endpoint. Eventually the non-toy IUT source obligations
+should include this split hull+det datum as part of the route from Theorem 3.11
+to the Corollary 3.12 comparison.

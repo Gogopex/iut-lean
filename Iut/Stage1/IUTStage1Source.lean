@@ -252,6 +252,62 @@ theorem hodgeTheaterSHEAlignment
 end IUTStage1Theorem311SHEAlignment
 
 /--
+Source-facing split hull+det evidence for a Stage 1 source package.
+
+This records that the hull+det bridge used by the package is backed by a
+separate common-hull construction and determinant/log-volume bound.
+-/
+structure IUTStage1SourceHullDetData
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index) where
+  sourceData : package.preLedger.HullDetSourceData
+
+namespace IUTStage1SourceHullDetData
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+def stepAudit (data : IUTStage1SourceHullDetData package) :
+    data.sourceData.structuredHullDet.StepAudit package.preLedger.certificate :=
+  data.sourceData.stepAudit
+
+theorem targetUnion_subset_hull
+    (data : IUTStage1SourceHullDetData package) :
+    Region.Subset package.preLedger.output.comparisons.targetUnion
+      (data.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull :=
+  data.sourceData.targetUnion_subset_hull
+
+theorem determinantVolumeBound
+    (data : IUTStage1SourceHullDetData package) :
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      (data.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+      package.preLedger.thetaSigned :=
+  data.sourceData.determinantVolumeBound
+
+theorem hullDetBridge_eq
+    (data : IUTStage1SourceHullDetData package) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge =
+      data.sourceData.structuredHullDet.toHullDetHullBridgeData.toHullDetBridgeData :=
+  data.sourceData.hullDetBridge_eq
+
+theorem choiceTargetVolume_le_thetaSigned
+    (data : IUTStage1SourceHullDetData package) (choice : index) :
+    RegionMeasure.targetVolume package.preLedger.measure
+        (package.preLedger.output.comparison choice) <=
+      package.preLedger.thetaSigned :=
+  data.sourceData.choiceTargetVolume_le_thetaSigned choice
+
+theorem allTargetsAtMost
+    (data : IUTStage1SourceHullDetData package) :
+    RegionComparisonFamily.AllTargetsAtMost package.preLedger.measure
+      package.preLedger.output.comparisons package.preLedger.thetaSigned :=
+  data.sourceData.allTargetsAtMost
+
+end IUTStage1SourceHullDetData
+
+/--
 Strengthened source-facing SHE input for the Theorem 3.11 route.
 
 This records a non-inert structured SHE context and only connects it to the
