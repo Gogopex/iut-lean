@@ -218,6 +218,18 @@ theorem stage1Comparison_comparison_eq_threeTermComparison (ledger :
       corollary312_of_signed_le ledger.threeTermComparison.q_le_theta :=
   rfl
 
+theorem stage1Comparison_recovers_corollary312 (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    corollary312_from_stage1_comparison ledger.stage1Comparison =
+      ledger.corollary312 :=
+  rfl
+
+theorem stage1Comparison_recovers_threeTermComparison (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    corollary312_from_stage1_comparison ledger.stage1Comparison =
+      corollary312_of_signed_le ledger.threeTermComparison.q_le_theta :=
+  rfl
+
 theorem sheMatchesCertificate (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     ledger.chartedContainer.commonContainer.hddShe.sheArrow.datum =

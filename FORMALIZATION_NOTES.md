@@ -3997,3 +3997,73 @@ The next milestone should turn this package audit into a compact theorem that
 recovers `corollary312_from_stage1_comparison ledger.stage1Comparison` as the
 same proof as `ledger.corollary312`, so users of the exported Stage 1 interface
 can move back to the ledger proof without unfolding the record manually.
+
+## Milestone 42: Stage 1 Corollary Recovery
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+The formalization report separates the final `3.11.5 => 3.12` comparison from
+the earlier source obligations, while IUT III, Step `(xi-d)`, presents the final
+endpoint as a comparison of the `Theta`-side upper ray and the `q`-side signed
+value in a common real setting. Our `Stage1Comparison` record is the exported
+interface for precisely that endpoint.
+
+Scholze-Stix's criticism makes it important that passing through an exported
+interface does not lose the explicit proof path through the chosen real-line
+comparison. A user who has only the `Stage1Comparison` should be able to recover
+the same Corollary-3.12-shaped proof as the source ledger produced.
+
+### Purpose
+
+This milestone adds compact recovery theorems:
+
+```text
+corollary312_from_stage1_comparison ledger.stage1Comparison
+  = ledger.corollary312
+
+corollary312_from_stage1_comparison ledger.stage1Comparison
+  = corollary312_of_signed_le ledger.threeTermComparison.q_le_theta
+```
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.stage1Comparison_recovers_corollary312
+SourceObligationLedger.stage1Comparison_recovers_threeTermComparison
+```
+
+Both proofs are `rfl`. This confirms that the exported Stage 1 interface is a
+transparent wrapper around the same comparison proof, not a second route to the
+final inequality.
+
+### What This Tests
+
+The current Stage 1 packaging audit now runs in both directions:
+
+```text
+ledger -> stage1Comparison fields
+stage1Comparison -> ledger.corollary312
+stage1Comparison -> threeTermComparison.q_le_theta
+```
+
+That gives downstream modules a stable theorem to cite when moving from the
+public Stage 1 record back to the internal source-obligation ledger.
+
+### Design Trap Avoided
+
+The trap would be to allow the final exported API to become detached from the
+ledger proof path. The recovery theorems make the exported API and the ledger
+API definitionally aligned.
+
+### Next Step
+
+The next milestone should step back from final packaging and add source-ledger
+projection theorems for the charted `q` and `Theta` numeric values, connecting
+`qSigned` and `thetaSigned` back to the transported chart data that supplies the
+real-line coordinates.
