@@ -120,6 +120,40 @@ def unitThetaToyIUTStage1SourceObligations
     q_pilot_positive := obligations.q_positive,
     normalization := obligations.normalization_proof }
 
+def unitThetaToyIUTStage1SourceObligationGap
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1SourceObligationGap
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  let obligations :=
+    unitThetaToyPromotionObligations measure hnormalized hh hbound hholds
+  { theorem311_algorithm_certified := obligations.certified,
+    she_alignment := obligations.she_matches_certificate,
+    q_pilot_positive := obligations.q_positive,
+    source_normalization := obligations.normalization_proof }
+
+theorem unitThetaToy_source_gap_to_obligations_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyIUTStage1SourceObligationGap
+      measure hnormalized hh hbound hholds).toSourceObligations =
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds :=
+  rfl
+
 theorem unitThetaToy_source_publicAudit_q_le_theta_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

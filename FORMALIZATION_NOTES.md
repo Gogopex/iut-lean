@@ -7919,3 +7919,79 @@ The next milestone should start an explicit "source obligation gap" record that
 names the still-unproved mathematical tasks underneath
 `IUTStage1SourceObligations`, beginning with algorithm certification and SHE
 alignment.
+
+## Milestone 95: Source Obligation Gap Record
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+IUT III, Step `(xi-b)` treats the multiradial construction qualitatively as an
+algorithm satisfying IPL/SHE/APT, while Step `(xi-d)` uses the subsequent
+holomorphic-hull, determinant, and log-volume comparison. The current Lean
+source package cannot prove those source facts. It can only name the gap that a
+future source-specific formalization must close.
+
+This milestone makes that gap explicit below `IUTStage1SourceObligations`.
+
+### Purpose
+
+This milestone introduces:
+
+```text
+IUTStage1SourceObligationGap
+```
+
+with source-facing names for the still-unproved tasks:
+
+```text
+Theorem 3.11 algorithm certification
+SHE alignment
+q-pilot positivity
+source normalization
+```
+
+The gap can be converted into `IUTStage1SourceObligations`, but only by
+supplying all four fields.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourceObligationGap
+IUTStage1SourceObligationGap.theorem311AlgorithmCertified
+IUTStage1SourceObligationGap.sheAlignment
+IUTStage1SourceObligationGap.qPilotPositive
+IUTStage1SourceObligationGap.sourceNormalization
+IUTStage1SourceObligationGap.toSourceObligations
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToyIUTStage1SourceObligationGap
+unitThetaToy_source_gap_to_obligations_example
+```
+
+### What This Tests
+
+The toy example verifies that the gap record is exactly strong enough to recover
+the existing toy source obligations, without changing the promoted public
+endpoint API.
+
+### Design Trap Avoided
+
+The trap would be to leave `IUTStage1SourceObligations` as the first visible
+source boundary. The new gap record names the mathematical subgoals that remain
+open before those obligations can be honestly supplied in a genuine IUT source
+module.
+
+### Next Step
+
+The next milestone should add a theorem that derives the audited public endpoint
+directly from `IUTStage1SourceObligationGap`, via
+`IUTStage1SourceObligationGap.toSourceObligations`.

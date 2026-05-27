@@ -158,6 +158,58 @@ structure IUTStage1SourceObligations
   q_pilot_positive : 0 < -package.preLedger.qSigned
   normalization : package.preLedger.normalization
 
+/--
+Named source-level gap below `IUTStage1SourceObligations`.
+
+The fields use source-facing names for the mathematical work still needed to
+turn a source package into a promoted source-obligation ledger.
+-/
+structure IUTStage1SourceObligationGap
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index) : Prop where
+  theorem311_algorithm_certified : package.preLedger.output.Certified
+  she_alignment :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she
+  q_pilot_positive : 0 < -package.preLedger.qSigned
+  source_normalization : package.preLedger.normalization
+
+namespace IUTStage1SourceObligationGap
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+theorem theorem311AlgorithmCertified
+    (gap : IUTStage1SourceObligationGap package) :
+    package.preLedger.output.Certified :=
+  gap.theorem311_algorithm_certified
+
+theorem sheAlignment
+    (gap : IUTStage1SourceObligationGap package) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  gap.she_alignment
+
+theorem qPilotPositive
+    (gap : IUTStage1SourceObligationGap package) :
+    0 < -package.preLedger.qSigned :=
+  gap.q_pilot_positive
+
+theorem sourceNormalization
+    (gap : IUTStage1SourceObligationGap package) :
+    package.preLedger.normalization :=
+  gap.source_normalization
+
+def toSourceObligations
+    (gap : IUTStage1SourceObligationGap package) :
+    IUTStage1SourceObligations package :=
+  { algorithm_certified := gap.theorem311AlgorithmCertified,
+    she_arrow_matches_certificate := gap.sheAlignment,
+    q_pilot_positive := gap.qPilotPositive,
+    normalization := gap.sourceNormalization }
+
+end IUTStage1SourceObligationGap
+
 namespace IUTStage1SourceObligations
 
 variable {source target : Copy} {index : Type u}
