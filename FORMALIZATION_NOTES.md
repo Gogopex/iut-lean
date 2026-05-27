@@ -11068,3 +11068,68 @@ The next milestone should expose individual fields of the structured route
 payload summary, especially the equalities from structured route source audit to
 comparison data, so downstream proof scripts can cite named facts without
 unfolding the compact summary.
+
+## Milestone 140: Structured Route Payload Projection Theorems
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The source issue is unchanged from Milestone 139: the final Stage 1 boundary
+must keep visible how structured Theorem 3.11 data reaches the
+Corollary-3.12-shaped comparison. The local paper trail points to IUT III,
+Corollary 3.12, Step `(xi)`, where Theorem 3.11 output is fed into the final
+comparison, and to Scholze-Stix's warning that real-valued comparisons should
+not hide identifications. Named projections are a small but important response:
+they let later proof steps cite each equality in the route explicitly.
+
+### Purpose
+
+Milestone 139 exposed the compact payload summary at the structured route. This
+milestone adds named projection theorems for its fields. The compact summary is
+still useful as one package, but individual fields are now available without
+manual record projection.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.StructuredHypothesisRouteAudit.payloadInputsEqPackage
+IUTStage1SourcePackage.StructuredHypothesisRouteAudit.payloadDataEqComparisonData
+IUTStage1SourcePackage.StructuredHypothesisRouteAudit.comparisonDataEqPackage
+IUTStage1SourcePackage.StructuredHypothesisRouteAudit.stage1ComparisonEqProvider
+IUTStage1SourcePackage.StructuredHypothesisRouteAudit.corollary312EqProvider
+IUTStage1SourcePackage.StructuredHypothesisRouteAudit.comparisonDataRecovers
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_structured_route_payloadData_eq_comparisonData_example
+unitThetaToy_source_structured_route_comparisonData_eq_package_example
+unitThetaToy_source_structured_route_comparisonData_recovers_example
+```
+
+### What This Tests
+
+The toy examples verify the most important downstream uses: recovering the
+payload-built comparison data, identifying the route audit's comparison data
+with the package comparison data, and recovering the final
+Corollary-3.12-shaped statement from the route audit's `Stage1Comparison`.
+
+### Design Trap Avoided
+
+The trap would be to make all later proofs unfold
+`Audit.PayloadRouteSummary`. That would work in Lean but would make human
+review harder. The named projections keep the audit route readable while
+preserving the compact summary as the canonical package.
+
+### Next Step
+
+The next milestone should add the analogous named projection layer at the
+comparison endpoint itself, so endpoint-level consumers can cite the payload
+route fields directly.

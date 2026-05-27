@@ -2306,6 +2306,50 @@ theorem comparisonDataEndpointPayloadRouteSummary
     simpa [IUTStage1SourcePackage.publicAuditOfStructuredHypotheses] using
       hpublic⟩
 
+theorem payloadInputsEqPackage
+    (routeAudit : StructuredHypothesisRouteAudit package inputs hypotheses) :
+    routeAudit.sourceAudit.comparisonPayloadInputs =
+      package.comparisonPayloadInputs :=
+  routeAudit.payloadRouteSummary.payload_inputs_eq_package
+
+theorem payloadDataEqComparisonData
+    (routeAudit : StructuredHypothesisRouteAudit package inputs hypotheses) :
+    package.comparisonDataFromPayloadInputs
+        (package.obligationsFromStructuredHypotheses inputs hypotheses) =
+      routeAudit.sourceAudit.comparisonData :=
+  routeAudit.payloadRouteSummary.payload_data_eq_comparison_data
+
+theorem comparisonDataEqPackage
+    (routeAudit : StructuredHypothesisRouteAudit package inputs hypotheses) :
+    routeAudit.sourceAudit.comparisonData =
+      package.comparisonData
+        (package.obligationsFromStructuredHypotheses inputs hypotheses) :=
+  routeAudit.payloadRouteSummary.comparison_data_eq_package
+
+theorem stage1ComparisonEqProvider
+    (routeAudit : StructuredHypothesisRouteAudit package inputs hypotheses) :
+    routeAudit.sourceAudit.comparisonData.stage1Comparison =
+      (package.promotedProvider
+        (package.obligationsFromStructuredHypotheses
+          inputs hypotheses)).stage1Comparison :=
+  routeAudit.payloadRouteSummary.stage1Comparison_eq_provider
+
+theorem corollary312EqProvider
+    (routeAudit : StructuredHypothesisRouteAudit package inputs hypotheses) :
+    routeAudit.sourceAudit.comparisonData.corollary312 =
+      (package.promotedProvider
+        (package.obligationsFromStructuredHypotheses
+          inputs hypotheses)).corollary312 :=
+  routeAudit.payloadRouteSummary.corollary312_eq_provider
+
+theorem comparisonDataRecovers
+    (routeAudit : StructuredHypothesisRouteAudit package inputs hypotheses) :
+    corollary312_from_stage1_comparison
+        routeAudit.sourceAudit.comparisonData.stage1Comparison =
+      corollary312_of_signed_le
+        routeAudit.sourceAudit.comparisonData.qSigned_le_thetaSigned :=
+  routeAudit.payloadRouteSummary.comparison_data_recovers
+
 end StructuredHypothesisRouteAudit
 
 end IUTStage1SourcePackage
