@@ -498,3 +498,85 @@ The next useful direction is to refine the abstract membership-to-volume
 inequality. The toy upper-ray model already proves a concrete instance of this
 step; the formalization should inspect that proof and extract a reusable
 lemma or interface that can later be replaced by genuine IUT log-volume data.
+
+## Periodic Review: q-to-Theta Chain Provenance
+
+Date: 2026-05-27
+
+This checkpoint reviews the recent move from final charted comparison
+statements into the proof ingredients of the local chain.
+
+### Current Lean Chain
+
+The current charted comparison route now exposes:
+
+```text
+RegionComparison.MembershipControlsTargetVolume
+AlgorithmicOutput.ChartedMembershipData
+IUTStage1PreLedgerData.ChartedComparisonChain
+AuditedChartedComparisonBoundary
+```
+
+The pre-ledger chain records:
+
+```text
+charted q <= targetSigned <= charted Theta
+```
+
+and now carries the immediate provenance for both sides:
+
+```text
+q chart transport = chosen comparison transport
+chosen comparison membership controls target volume
+targetSigned = chosen target volume
+chosen target volume <= thetaSigned
+Theta chart equation
+```
+
+The audited charted boundary exposes this chain, plus the HDD-after-SHE audit
+that supplies the Theta-side target-volume bound.
+
+### Positive Alignment
+
+This is directly on the disputed 3.11-to-3.12 route. The Lean code no longer
+allows the final charted q-to-Theta inequality to appear as a detached raw real
+comparison. The route now shows:
+
+* how q membership controls the measured target-volume middle term;
+* why the q chart transport is the same transport used by the chosen
+  comparison;
+* where the target-volume middle term is defined;
+* where the Theta-side bound enters;
+* which HDD-after-SHE/structured-SHE audit object carries that bound.
+
+This remains impartial. The code does not assert that Mochizuki's full
+construction exists, and it does not encode the Scholze-Stix collapse. It
+localizes the exact data that must eventually decide whether the comparison is
+legitimate.
+
+### Remaining Gaps
+
+The remaining serious abstractions are now clearer:
+
+* `MembershipControlsTargetVolume` is general and only has a toy upper-ray
+  instance so far.
+* The HDD-after-SHE target-volume bound is supplied by the common-container
+  bridge; that bridge is still explicit data rather than a derived theorem
+  from a formal Hodge-theater construction.
+* The structured SHE validity fields are present, but they are still
+  abstract propositions.
+* The real-line chart model remains positive scaling/trivial transport, not
+  a full formalization of Mochizuki's log-volume apparatus.
+
+### Global 3.12 Check
+
+The recent work was mathematical implementation, not framework polishing. It
+tightened the actual chain that leads from q-side membership to the final
+charted q-to-Theta comparison.
+
+The next useful direction is to open the common-container/HDD-after-SHE bridge
+and add a more explicit audit object for its construction: SHE arrow, descent,
+hull+det bridge, common container context, resulting common target bound, and
+all-targets-at-most statement. That will identify the next exact abstraction
+standing between the formalized route and a genuine IUT proof of the 3.12
+comparison.
