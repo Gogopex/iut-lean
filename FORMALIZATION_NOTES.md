@@ -9642,3 +9642,69 @@ additional assumption.
 The next milestone should use these structured-input components when assembling
 source obligations, so the path from structured Theorem 3.11 data to source
 obligations names each dependency separately.
+
+## Milestone 121: Structured-Input Obligation Assembly
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Structured inputs now expose the algorithmic-output component and the
+Hodge-theater/SHE-alignment component. Source obligations also require the
+side-condition data: q-pilot positivity and source normalization.
+
+This milestone assembles source obligations from structured inputs plus side
+conditions. The construction is deliberately equivalent to the earlier
+subclaim-based constructor.
+
+### Purpose
+
+This milestone gives us a named route:
+
+```text
+structured Theorem 3.11 inputs + source side conditions
+  -> source obligations
+```
+
+It also gives the corresponding route from side-condition hypotheses.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourceObligations.ofStructuredInputsAndSideConditions
+IUTStage1SourceObligations.ofStructuredInputsAndSideConditions_eq_subclaims
+IUTStage1SourceObligations.ofStructuredInputsAndSideConditionHypotheses
+IUTStage1SourceObligations.ofStructuredInputsAndSideConditionHypotheses_eq_sideConditions
+IUTStage1SourceObligations.ofStructuredInputsAndSideConditionHypotheses_eq_subclaims
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_obligations_from_structured_inputs_example
+unitThetaToy_source_obligations_from_structured_hypotheses_example
+```
+
+### What This Tests
+
+The toy examples verify that assembling obligations from structured inputs
+recovers the same unit-theta source obligations as the older subclaim route,
+both with raw side conditions and with side-condition hypotheses.
+
+### Design Trap Avoided
+
+The trap would be to let structured inputs silently become a new assumption
+source for the q-pilot positivity or normalization side conditions. The new
+constructors still require side conditions separately. The structured inputs
+only provide the Theorem 3.11 components.
+
+### Next Step
+
+The next milestone should expose this structured-input obligation route at the
+`IUTStage1SourcePackage` level, parallel to `obligationsFromParts` and
+`obligationsFromHypotheses`.

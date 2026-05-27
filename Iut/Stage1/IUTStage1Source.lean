@@ -568,11 +568,50 @@ def ofSubclaimsAndSideConditions
     q_pilot_positive := sideConditions.qPilotPositive,
     normalization := sideConditions.sourceNormalization }
 
+def ofStructuredInputsAndSideConditions
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    IUTStage1SourceObligations package :=
+  { algorithm_certified :=
+      inputs.algorithmicOutput.algorithmOutputCertified,
+    she_arrow_matches_certificate :=
+      inputs.sheAlignment.hodgeTheaterSHEAlignment,
+    q_pilot_positive := sideConditions.qPilotPositive,
+    normalization := sideConditions.sourceNormalization }
+
+theorem ofStructuredInputsAndSideConditions_eq_subclaims
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    ofStructuredInputsAndSideConditions inputs sideConditions =
+      ofSubclaimsAndSideConditions inputs.theorem311Subclaims sideConditions :=
+  rfl
+
 def ofSubclaimsAndSideConditionHypotheses
     (subclaims : IUTStage1Theorem311Subclaims package)
     (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
     IUTStage1SourceObligations package :=
   ofSubclaimsAndSideConditions subclaims hypotheses.toSideConditions
+
+def ofStructuredInputsAndSideConditionHypotheses
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    IUTStage1SourceObligations package :=
+  ofStructuredInputsAndSideConditions inputs hypotheses.toSideConditions
+
+theorem ofStructuredInputsAndSideConditionHypotheses_eq_sideConditions
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    ofStructuredInputsAndSideConditionHypotheses inputs hypotheses =
+      ofStructuredInputsAndSideConditions inputs hypotheses.toSideConditions :=
+  rfl
+
+theorem ofStructuredInputsAndSideConditionHypotheses_eq_subclaims
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    ofStructuredInputsAndSideConditionHypotheses inputs hypotheses =
+      ofSubclaimsAndSideConditionHypotheses
+        inputs.theorem311Subclaims hypotheses :=
+  rfl
 
 theorem ofSubclaimsAndSideConditionHypotheses_eq_sideConditions
     (subclaims : IUTStage1Theorem311Subclaims package)

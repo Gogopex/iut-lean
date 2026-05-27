@@ -893,6 +893,49 @@ theorem unitThetaToy_source_obligations_from_parts_example
       unitThetaToy_source_gap_to_obligations_example
         measure hnormalized hh hbound hholds
 
+theorem unitThetaToy_source_obligations_from_structured_inputs_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1SourceObligations.ofStructuredInputsAndSideConditions
+      (unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds)
+      (unitThetaToy_source_side_conditions_example
+        measure hnormalized hh hbound hholds) =
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds := by
+  calc
+    IUTStage1SourceObligations.ofStructuredInputsAndSideConditions
+        (unitThetaToy_source_theorem311_structured_inputs_example
+          measure hnormalized hh hbound hholds)
+        (unitThetaToy_source_side_conditions_example
+          measure hnormalized hh hbound hholds) =
+        IUTStage1SourceObligations.ofSubclaimsAndSideConditions
+          (unitThetaToy_source_theorem311_structured_inputs_example
+            measure hnormalized hh hbound hholds).theorem311Subclaims
+          (unitThetaToy_source_side_conditions_example
+            measure hnormalized hh hbound hholds) :=
+      IUTStage1SourceObligations.ofStructuredInputsAndSideConditions_eq_subclaims
+        (unitThetaToy_source_theorem311_structured_inputs_example
+          measure hnormalized hh hbound hholds)
+        (unitThetaToy_source_side_conditions_example
+          measure hnormalized hh hbound hholds)
+    _ = IUTStage1SourceObligations.ofSubclaimsAndSideConditions
+          (unitThetaToy_source_theorem311_subclaims_example
+            measure hnormalized hh hbound hholds)
+          (unitThetaToy_source_side_conditions_example
+            measure hnormalized hh hbound hholds) := by
+      rw [unitThetaToy_source_theorem311_structured_subclaims_example]
+    _ = unitThetaToyIUTStage1SourceObligations
+          measure hnormalized hh hbound hholds :=
+      unitThetaToy_source_obligations_from_parts_example
+        measure hnormalized hh hbound hholds
+
 theorem unitThetaToy_source_obligations_from_hypotheses_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -934,6 +977,49 @@ theorem unitThetaToy_source_obligations_from_hypotheses_example
     _ = unitThetaToyIUTStage1SourceObligations
           measure hnormalized hh hbound hholds :=
       unitThetaToy_source_obligations_from_parts_example
+        measure hnormalized hh hbound hholds
+
+theorem unitThetaToy_source_obligations_from_structured_hypotheses_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1SourceObligations.ofStructuredInputsAndSideConditionHypotheses
+      (unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds)
+      (unitThetaToy_source_side_condition_hypotheses_example
+        measure hnormalized hh hbound hholds) =
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds := by
+  calc
+    IUTStage1SourceObligations.ofStructuredInputsAndSideConditionHypotheses
+        (unitThetaToy_source_theorem311_structured_inputs_example
+          measure hnormalized hh hbound hholds)
+        (unitThetaToy_source_side_condition_hypotheses_example
+          measure hnormalized hh hbound hholds) =
+        IUTStage1SourceObligations.ofSubclaimsAndSideConditionHypotheses
+          (unitThetaToy_source_theorem311_structured_inputs_example
+            measure hnormalized hh hbound hholds).theorem311Subclaims
+          (unitThetaToy_source_side_condition_hypotheses_example
+            measure hnormalized hh hbound hholds) :=
+      IUTStage1SourceObligations.ofStructuredInputsAndSideConditionHypotheses_eq_subclaims
+        (unitThetaToy_source_theorem311_structured_inputs_example
+          measure hnormalized hh hbound hholds)
+        (unitThetaToy_source_side_condition_hypotheses_example
+          measure hnormalized hh hbound hholds)
+    _ = IUTStage1SourceObligations.ofSubclaimsAndSideConditionHypotheses
+          (unitThetaToy_source_theorem311_subclaims_example
+            measure hnormalized hh hbound hholds)
+          (unitThetaToy_source_side_condition_hypotheses_example
+            measure hnormalized hh hbound hholds) := by
+      rw [unitThetaToy_source_theorem311_structured_subclaims_example]
+    _ = unitThetaToyIUTStage1SourceObligations
+          measure hnormalized hh hbound hholds :=
+      unitThetaToy_source_obligations_from_hypotheses_example
         measure hnormalized hh hbound hholds
 
 theorem unitThetaToy_source_obligations_from_hypotheses_eq_parts_example
