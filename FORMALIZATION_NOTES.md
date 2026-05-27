@@ -9428,3 +9428,75 @@ lemmas show that the combined route is only packaging.
 The next milestone should start separating the current monolithic
 `IUTStage1Theorem311Subclaims` record into smaller labeled components, beginning
 with the algorithmic-output certification component.
+
+## Milestone 118: Theorem 3.11 Algorithmic-Output Component
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Our Stage 1 skeleton currently represents the Theorem 3.11 input as one
+source-facing subclaim record with two fields: an algorithmic-output certificate
+and a Hodge-theater/SHE alignment datum. This milestone begins splitting that
+bundle into smaller components.
+
+The split is intentionally conservative. It does not assert any new
+mathematical content about Theorem 3.11. It only names the algorithmic-output
+certificate as its own component so that later milestones can track exactly
+which part of the Theorem 3.11 route supplies which obligation.
+
+### Purpose
+
+This milestone isolates the algorithmic-output certificate from the rest of the
+Theorem 3.11 subclaim bundle.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1Theorem311AlgorithmicOutput
+IUTStage1Theorem311AlgorithmicOutput.algorithmOutputCertified
+IUTStage1Theorem311Subclaims.algorithmicOutput
+IUTStage1Theorem311Subclaims.ofAlgorithmicOutputAndSHEAlignment
+IUTStage1Theorem311Subclaims.algorithmicOutput_certified_eq
+IUTStage1Theorem311Subclaims.ofAlgorithmicOutputAndSHEAlignment_algorithmicOutput_eq
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_algorithmic_output_component_example
+unitThetaToy_source_theorem311_algorithmic_output_component_certified_example
+unitThetaToy_source_theorem311_algorithmic_output_certified_eq_example
+unitThetaToy_source_theorem311_subclaims_from_algorithmic_output_example
+unitThetaToy_source_theorem311_subclaims_from_algorithmic_output_eq_example
+```
+
+### What This Tests
+
+The toy examples verify that:
+
+* a Theorem 3.11 subclaim bundle exposes its algorithmic-output component;
+* the component recovers the same output certification proof;
+* a subclaim bundle can be rebuilt from the algorithmic-output component plus
+  the existing SHE-alignment datum.
+
+### Design Trap Avoided
+
+The trap would be to keep treating Theorem 3.11 as a single opaque source of
+all Stage 1 obligations. This split makes one dependency explicit while keeping
+the endpoint unchanged.
+
+Just as importantly, this component does not say anything about Corollary 3.12.
+It only supplies the algorithmic-output certification needed before source
+obligations can be assembled.
+
+### Next Step
+
+The next milestone should isolate the Hodge-theater/SHE-alignment datum as a
+second small Theorem 3.11 component, then rebuild the subclaim bundle from the
+two named components.

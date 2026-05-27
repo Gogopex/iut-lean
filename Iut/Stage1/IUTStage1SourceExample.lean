@@ -228,6 +228,93 @@ theorem unitThetaToy_source_theorem311_subclaims_example
   (unitThetaToyIUTStage1SourceObligationGap
     measure hnormalized hh hbound hholds).theorem311Subclaims
 
+theorem unitThetaToy_source_theorem311_algorithmic_output_component_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1Theorem311AlgorithmicOutput
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  (unitThetaToy_source_theorem311_subclaims_example
+    measure hnormalized hh hbound hholds).algorithmicOutput
+
+theorem unitThetaToy_source_theorem311_algorithmic_output_component_certified_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds).preLedger.output.Certified :=
+  (unitThetaToy_source_theorem311_algorithmic_output_component_example
+    measure hnormalized hh hbound hholds).algorithmOutputCertified
+
+theorem unitThetaToy_source_theorem311_algorithmic_output_certified_eq_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let subclaims :=
+      unitThetaToy_source_theorem311_subclaims_example
+        measure hnormalized hh hbound hholds
+    subclaims.algorithmicOutput.algorithmOutputCertified =
+      subclaims.algorithmOutputCertified :=
+  (unitThetaToy_source_theorem311_subclaims_example
+    measure hnormalized hh hbound hholds).algorithmicOutput_certified_eq
+
+theorem unitThetaToy_source_theorem311_subclaims_from_algorithmic_output_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1Theorem311Subclaims
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  IUTStage1Theorem311Subclaims.ofAlgorithmicOutputAndSHEAlignment
+    (unitThetaToy_source_theorem311_algorithmic_output_component_example
+      measure hnormalized hh hbound hholds)
+    (unitThetaToy_source_theorem311_subclaims_example
+      measure hnormalized hh hbound hholds).hodgeTheaterSHEAlignment
+
+theorem unitThetaToy_source_theorem311_subclaims_from_algorithmic_output_eq_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let algorithmicOutput :=
+      unitThetaToy_source_theorem311_algorithmic_output_component_example
+        measure hnormalized hh hbound hholds
+    (IUTStage1Theorem311Subclaims.ofAlgorithmicOutputAndSHEAlignment
+      algorithmicOutput
+      (unitThetaToy_source_theorem311_subclaims_example
+        measure hnormalized hh hbound hholds).hodgeTheaterSHEAlignment).algorithmicOutput =
+      algorithmicOutput :=
+  IUTStage1Theorem311Subclaims.ofAlgorithmicOutputAndSHEAlignment_algorithmicOutput_eq
+    (unitThetaToy_source_theorem311_algorithmic_output_component_example
+      measure hnormalized hh hbound hholds)
+    (unitThetaToy_source_theorem311_subclaims_example
+      measure hnormalized hh hbound hholds).hodgeTheaterSHEAlignment
+
 theorem unitThetaToy_source_theorem311_algorithm_output_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

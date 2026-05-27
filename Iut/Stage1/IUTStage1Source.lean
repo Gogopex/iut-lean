@@ -190,6 +190,29 @@ structure IUTStage1SourceObligations
   normalization : package.preLedger.normalization
 
 /--
+Algorithmic-output component of the Theorem 3.11 source subclaims.
+
+This isolates the opaque certificate for the multiradial algorithm output from
+the later SHE-alignment datum.
+-/
+structure IUTStage1Theorem311AlgorithmicOutput
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index) : Prop where
+  certified : package.preLedger.output.Certified
+
+namespace IUTStage1Theorem311AlgorithmicOutput
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+theorem algorithmOutputCertified
+    (algorithmicOutput : IUTStage1Theorem311AlgorithmicOutput package) :
+    package.preLedger.output.Certified :=
+  algorithmicOutput.certified
+
+end IUTStage1Theorem311AlgorithmicOutput
+
+/--
 Source-facing subclaims for the Theorem 3.11 algorithmic certificate used in
 Stage 1.
 
@@ -215,11 +238,42 @@ theorem algorithmOutputCertified
     package.preLedger.output.Certified :=
   subclaims.algorithm_output_certified
 
+def algorithmicOutput
+    (subclaims : IUTStage1Theorem311Subclaims package) :
+    IUTStage1Theorem311AlgorithmicOutput package :=
+  { certified := subclaims.algorithmOutputCertified }
+
 theorem hodgeTheaterSHEAlignment
     (subclaims : IUTStage1Theorem311Subclaims package) :
     package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
       package.preLedger.certificate.she :=
   subclaims.hodge_theater_she_alignment
+
+def ofAlgorithmicOutputAndSHEAlignment
+    (algorithmicOutput : IUTStage1Theorem311AlgorithmicOutput package)
+    (sheAlignment :
+      package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+        package.preLedger.certificate.she) :
+    IUTStage1Theorem311Subclaims package :=
+  { algorithm_output_certified :=
+      algorithmicOutput.algorithmOutputCertified,
+    hodge_theater_she_alignment := sheAlignment }
+
+theorem algorithmicOutput_certified_eq
+    (subclaims : IUTStage1Theorem311Subclaims package) :
+    subclaims.algorithmicOutput.algorithmOutputCertified =
+      subclaims.algorithmOutputCertified :=
+  rfl
+
+theorem ofAlgorithmicOutputAndSHEAlignment_algorithmicOutput_eq
+    (algorithmicOutput : IUTStage1Theorem311AlgorithmicOutput package)
+    (sheAlignment :
+      package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+        package.preLedger.certificate.she) :
+    (ofAlgorithmicOutputAndSHEAlignment
+      algorithmicOutput sheAlignment).algorithmicOutput =
+      algorithmicOutput :=
+  Subsingleton.elim _ _
 
 end IUTStage1Theorem311Subclaims
 
