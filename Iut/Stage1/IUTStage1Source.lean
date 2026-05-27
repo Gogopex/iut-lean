@@ -778,11 +778,35 @@ theorem commonContainerCompatibility
       package bundle.structuredSHE :=
   audited.compatibility
 
+theorem sheArrowMatchesContext
+    (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      bundle.structuredSHE.context.sheDatum :=
+  audited.compatibility.sheArrowMatchesContext
+
+theorem sheDatumMatchesCertificate
+    (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
+    bundle.structuredSHE.context.sheDatum =
+      package.preLedger.certificate.she :=
+  audited.compatibility.sheDatumMatchesCertificate
+
 theorem commonContainerContextMatches
     (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
     package.preLedger.chartedContainer.commonContainer.context =
       bundle.structuredSHE.context.sharedContext :=
   audited.compatibility.commonContainerContextMatches
+
+theorem qPilotTheater_eq_codomain
+    (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
+    bundle.structuredSHE.context.qPilotStructure.theater =
+      bundle.structuredSHE.context.codomainStructure.theater :=
+  audited.compatibility.qPilotTheater_eq_codomain
+
+theorem thetaPilotTheater_eq_domain
+    (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
+    bundle.structuredSHE.context.thetaPilotStructure.theater =
+      bundle.structuredSHE.context.domainStructure.theater :=
+  audited.compatibility.thetaPilotTheater_eq_domain
 
 theorem localExpressionValid
     (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
@@ -2583,6 +2607,41 @@ theorem hddSHECommonContainerCompatibility
     IUTStage1Theorem311StructuredSHECommonContainerCompatibility
       package bundle.structuredSHE :=
   boundary.hddSHEBound.commonContainerCompatibility
+
+theorem hddSHESHEArrowMatchesContext
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      bundle.structuredSHE.context.sheDatum :=
+  boundary.hddSHEBound.sheArrowMatchesContext
+
+theorem hddSHESHEDatumMatchesCertificate
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    bundle.structuredSHE.context.sheDatum =
+      package.preLedger.certificate.she :=
+  boundary.hddSHEBound.sheDatumMatchesCertificate
+
+theorem hddSHECommonContainerContextMatches
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    package.preLedger.chartedContainer.commonContainer.context =
+      bundle.structuredSHE.context.sharedContext :=
+  boundary.hddSHEBound.commonContainerContextMatches
+
+theorem hddSHEQPilotTheater_eq_codomain
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    bundle.structuredSHE.context.qPilotStructure.theater =
+      bundle.structuredSHE.context.codomainStructure.theater :=
+  boundary.hddSHEBound.qPilotTheater_eq_codomain
+
+theorem hddSHEThetaPilotTheater_eq_domain
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    bundle.structuredSHE.context.thetaPilotStructure.theater =
+      bundle.structuredSHE.context.domainStructure.theater :=
+  boundary.hddSHEBound.thetaPilotTheater_eq_domain
 
 theorem hddSHELocalExpressionValid
     (boundary :

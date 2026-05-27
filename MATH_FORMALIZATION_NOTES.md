@@ -8681,3 +8681,67 @@ The HDD-after-SHE bound itself still uses an explicit common-container bridge
 as data. Future work should refine that bridge, especially the relation
 between structured SHE validity, the common container, and the measured
 target-volume estimate.
+
+## Math Milestone 91: SHE/Common-Container Alignment Exposed from HDD-after-SHE
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The HDD-after-SHE bound should not be inspected only as a numerical
+target-volume estimate. For the debated transition, the reader must also see
+how the SHE arrow, structured SHE datum, common container context, pilot
+placements, and history separation sit next to that bound.
+
+### Lean/API Check
+
+The audited HDD-after-SHE bound now exposes:
+
+```text
+sheArrowMatchesContext
+sheDatumMatchesCertificate
+qPilotTheater_eq_codomain
+thetaPilotTheater_eq_domain
+```
+
+The audited charted comparison boundary now exposes:
+
+```text
+hddSHESHEArrowMatchesContext
+hddSHESHEDatumMatchesCertificate
+hddSHECommonContainerContextMatches
+hddSHEQPilotTheater_eq_codomain
+hddSHEThetaPilotTheater_eq_domain
+```
+
+These are projections from the existing common-container compatibility
+checklist.
+
+### Lean Decisions
+
+This does not create a new theorem proving the bound from SHE. It makes the
+existing compatibility data inspectable from the final charted boundary. The
+numerical bound and the structured SHE/common-container alignment are now
+available at the same boundary layer.
+
+### What This Tests
+
+The toy source examples extract the SHE-arrow match, common-container context
+match, and q-pilot codomain placement from the audited charted comparison
+boundary. The focused Stage 1 source example build and the full project build
+both pass.
+
+### Design Trap Avoided
+
+The trap would be to treat the HDD-after-SHE object as just a source of a real
+inequality. This milestone keeps the SHE/common-container alignment data
+visible where the final charted comparison is audited.
+
+### Remaining Gap
+
+The compatibility checklist is still an audit of supplied data. Later work
+should refine the bridge construction itself: descent, hull+det, common target,
+and the measured target-volume estimate should become less abstract.
