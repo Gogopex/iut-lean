@@ -1078,6 +1078,54 @@ theorem placeAuditedDirectSummandPacketChoice_archPlaces_example
         entry.place :=
   audited.archimedeanPlaces_eq
 
+theorem placeAuditedDirectSummandPacketChoice_ind1_preserves_audit_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.ind1_preserves_placeFamilyCompatibility
+    hstep
+
+theorem placeAuditedDirectSummandPacketChoice_ind2_preserves_audit_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_preserves_placeFamilyCompatibility
+    hstep
+
+theorem placeAuditedDirectSummandPacketChoice_ind3_preserves_audit_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.UpperSemiCompatibilityStep
+        audited₁ audited₂) :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.ind3_preserves_placeFamilyCompatibility
+    hstep
+
+theorem placeAuditedDirectSummandPacketChoice_ind2_preserves_totalLogVolume_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.totalLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.totalLogVolume :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_preserves_capsuleTotalLogVolume
+    hstep
+
 def refinedThetaImagesDependOnlyOnCoric_to_multiradial_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

@@ -1624,3 +1624,75 @@ placeAuditedDirectSummandPacketChoice_archPlaces_example
 The next step should define how these place-audited choices behave under the
 refined indeterminacy steps, especially whether `(Ind2)` and `(Ind3)` preserve
 or update the place-family compatibility audit.
+
+## 21. Place-Audited Indeterminacy Steps
+
+### Goal
+
+We added refined `(Ind1)`, `(Ind2)`, and `(Ind3)` step wrappers for
+place-audited choices.
+
+### Lean/API Check
+
+Inside:
+
+```text
+IUTStage1PlaceAuditedDirectSummandPacketChoice
+```
+
+the new step records are:
+
+```text
+ProcessionAutomorphismStep
+LocalTensorDirectSummandActionStep
+UpperSemiCompatibilityStep
+```
+
+Each carries:
+
+```text
+choice_step
+place_family_compatibility_eq
+```
+
+where `choice_step` is the corresponding step on the underlying refined
+direct-summand packet choice, and `place_family_compatibility_eq` says that the
+place-family audit is preserved.
+
+Lean proves:
+
+```text
+ind1_preserves_placeFamilyCompatibility
+ind2_preserves_placeFamilyCompatibility
+ind3_preserves_placeFamilyCompatibility
+ind2_preserves_capsuleTotalLogVolume
+```
+
+### Mathematical Point
+
+This gives a clean way to lift refined indeterminacy steps to choices that also
+carry a place-family compatibility audit.  The extra audit is not silently
+discarded; preserving it is an explicit field of the audited step.
+
+### Trap Avoided
+
+We did not assume every refined step automatically preserves the place-family
+audit.  A proof using audited choices must supply the preservation proof as part
+of the audited step.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+placeAuditedDirectSummandPacketChoice_ind1_preserves_audit_example
+placeAuditedDirectSummandPacketChoice_ind2_preserves_audit_example
+placeAuditedDirectSummandPacketChoice_ind3_preserves_audit_example
+placeAuditedDirectSummandPacketChoice_ind2_preserves_totalLogVolume_example
+```
+
+### Remaining Gap
+
+The next step should build a generated indeterminacy relation for the
+place-audited choice type and prove that the audit is preserved under generated
+relations.

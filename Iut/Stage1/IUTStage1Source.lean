@@ -2955,6 +2955,75 @@ theorem archimedeanPlaces_eq
   rw [← audited.upperSemiState_eq]
   exact audited.placeFamilyCompatibility.archimedeanPlaces_eq
 
+/-- Audited `(Ind1)` step preserving the place-family compatibility audit. -/
+structure ProcessionAutomorphismStep
+    (audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    Prop where
+  choice_step :
+    IUTStage1DirectSummandPacketTheorem311Choice.ProcessionAutomorphismStep
+      audited₁.choice audited₂.choice
+  place_family_compatibility_eq :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility
+
+/-- Audited `(Ind2)` step preserving the place-family compatibility audit. -/
+structure LocalTensorDirectSummandActionStep
+    (audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    Prop where
+  choice_step :
+    IUTStage1DirectSummandPacketTheorem311Choice.LocalTensorDirectSummandActionStep
+      audited₁.choice audited₂.choice
+  place_family_compatibility_eq :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility
+
+/-- Audited `(Ind3)` step preserving the place-family compatibility audit. -/
+structure UpperSemiCompatibilityStep
+    (audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    Prop where
+  choice_step :
+    IUTStage1DirectSummandPacketTheorem311Choice.UpperSemiCompatibilityStep
+      audited₁.choice audited₂.choice
+  place_family_compatibility_eq :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility
+
+theorem ind1_preserves_placeFamilyCompatibility
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : ProcessionAutomorphismStep audited₁ audited₂) :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility :=
+  hstep.place_family_compatibility_eq
+
+theorem ind2_preserves_placeFamilyCompatibility
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : LocalTensorDirectSummandActionStep audited₁ audited₂) :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility :=
+  hstep.place_family_compatibility_eq
+
+theorem ind3_preserves_placeFamilyCompatibility
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : UpperSemiCompatibilityStep audited₁ audited₂) :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility :=
+  hstep.place_family_compatibility_eq
+
+theorem ind2_preserves_capsuleTotalLogVolume
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : LocalTensorDirectSummandActionStep audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.totalLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.totalLogVolume :=
+  IUTStage1DirectSummandPacketTheorem311Choice.ind2_preserves_capsuleTotalLogVolume
+    hstep.choice_step
+
 end IUTStage1PlaceAuditedDirectSummandPacketChoice
 
 /--
