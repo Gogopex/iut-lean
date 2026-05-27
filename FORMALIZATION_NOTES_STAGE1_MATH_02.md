@@ -852,3 +852,72 @@ directSummandPacketTheorem311_image_invariant_of_coric_example
 The next step is to package this as a refined multiradial theta-image object,
 so the Stage 1 source package can ask for the stronger refined quotient rather
 than only the older generic quotient.
+
+## 11. Refined Multiradial Image Package
+
+### Goal
+
+We packaged the refined direct-summand packet quotient together with
+region-valued possible images.
+
+### Lean/API Check
+
+The new package is:
+
+```text
+IUTStage1DirectSummandPacketMultiradialImages
+```
+
+It carries:
+
+```text
+possibleImages
+quotient
+quotient_eq_generated
+image_invariant
+```
+
+The constructor:
+
+```text
+ofCoricInvariant
+```
+
+builds the package from possible images whose regions depend only on the coric
+coordinate.  The quotient is the generated quotient of the refined
+direct-summand packet `(Ind1)/(Ind2)/(Ind3)` source data.
+
+### Lean Theorems
+
+The package exposes:
+
+```text
+region_eq_of_related
+quotient_profile
+```
+
+so downstream code can use the refined quotient without unfolding the generated
+relation.
+
+### Mathematical Point
+
+This is a stronger multiradial interface than the older generic one: the
+indeterminacies now include the direct-summand/capsule/log-volume `(Ind2)`
+surface.  Any later route from Theorem 3.11 to Corollary 3.12 can ask for this
+package when it needs the refined local tensor information.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+directSummandPacketMultiradialImages_of_coric_example
+directSummandPacketMultiradialImages_region_eq_example
+directSummandPacketMultiradialImages_profile_example
+```
+
+### Remaining Gap
+
+The package is still independent of the full `IUTStage1SourcePackage`.  The
+next step should define a bridge from a source package indexed by refined
+Theorem 3.11 choices into this refined multiradial image package.

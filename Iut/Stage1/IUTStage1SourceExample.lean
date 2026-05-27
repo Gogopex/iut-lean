@@ -864,6 +864,39 @@ theorem directSummandPacketTheorem311_image_invariant_of_coric_example
   IUTStage1DirectSummandPacketTheorem311Choice.image_invariant_of_coric
     images hcoric hrel
 
+def directSummandPacketMultiradialImages_of_coric_example
+    {target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    (images :
+      RegionFamily target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind))
+    (hcoric :
+      ∀ choice₁ choice₂,
+        choice₁.coric = choice₂.coric ->
+          images.region choice₁ = images.region choice₂) :
+    IUTStage1DirectSummandPacketMultiradialImages
+      (target := target) coric kind :=
+  IUTStage1DirectSummandPacketMultiradialImages.ofCoricInvariant
+    images hcoric
+
+theorem directSummandPacketMultiradialImages_region_eq_example
+    {target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    (data :
+      IUTStage1DirectSummandPacketMultiradialImages
+        (target := target) coric kind)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind}
+    (hrel : data.quotient.relation choice₁ choice₂) :
+    data.possibleImages.region choice₁ = data.possibleImages.region choice₂ :=
+  data.region_eq_of_related hrel
+
+theorem directSummandPacketMultiradialImages_profile_example
+    {target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    (data :
+      IUTStage1DirectSummandPacketMultiradialImages
+        (target := target) coric kind) :
+    data.quotient.profile = theorem311IndeterminacyProfile :=
+  data.quotient_profile
+
 theorem upperSemi_logVolumeCompatibility_upperBound_example
     (data : IUTStage1LogVolumeCompatibilityData) :
     data.sourceLogVolume <= data.targetLogVolume :=

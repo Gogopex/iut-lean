@@ -2475,6 +2475,77 @@ theorem image_invariant_of_coric
 end IUTStage1DirectSummandPacketTheorem311Choice
 
 /--
+Multiradial possible images indexed by refined direct-summand packet
+Theorem 3.11 choices.
+-/
+structure IUTStage1DirectSummandPacketMultiradialImages
+    {target : Copy}
+    (coric : Type u) (kind : IUTStage1PlaceKind) where
+  possibleImages :
+    RegionFamily target
+      (IUTStage1DirectSummandPacketTheorem311Choice coric kind)
+  quotient :
+    IUTStage1IndeterminacyQuotient
+      (IUTStage1DirectSummandPacketTheorem311Choice coric kind)
+  quotient_eq_generated :
+    quotient =
+      (IUTStage1DirectSummandPacketTheorem311Choice.indeterminacySourceData
+        (coric := coric) (kind := kind)).quotient
+  image_invariant :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind},
+      quotient.relation choice₁ choice₂ ->
+        possibleImages.region choice₁ = possibleImages.region choice₂
+
+namespace IUTStage1DirectSummandPacketMultiradialImages
+
+variable {target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+
+def ofCoricInvariant
+    (images :
+      RegionFamily target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind))
+    (hcoric :
+      ∀ choice₁ choice₂,
+        choice₁.coric = choice₂.coric ->
+          images.region choice₁ = images.region choice₂) :
+    IUTStage1DirectSummandPacketMultiradialImages
+      (target := target) coric kind :=
+  { possibleImages := images,
+    quotient :=
+      (IUTStage1DirectSummandPacketTheorem311Choice.indeterminacySourceData
+        (coric := coric) (kind := kind)).quotient,
+    quotient_eq_generated := rfl,
+    image_invariant := by
+      intro choice₁ choice₂ hrel
+      exact
+        IUTStage1DirectSummandPacketTheorem311Choice.image_invariant_of_coric
+          images hcoric hrel }
+
+theorem region_eq_of_related
+    (data :
+      IUTStage1DirectSummandPacketMultiradialImages
+        (target := target) coric kind)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind}
+    (hrel : data.quotient.relation choice₁ choice₂) :
+    data.possibleImages.region choice₁ = data.possibleImages.region choice₂ :=
+  data.image_invariant hrel
+
+theorem quotient_profile
+    (data :
+      IUTStage1DirectSummandPacketMultiradialImages
+        (target := target) coric kind) :
+    data.quotient.profile = theorem311IndeterminacyProfile := by
+  rw [data.quotient_eq_generated]
+  exact
+    IUTStage1Theorem311IndeterminacySourceData.quotient_profile
+      (IUTStage1DirectSummandPacketTheorem311Choice.indeterminacySourceData
+        (coric := coric) (kind := kind))
+
+end IUTStage1DirectSummandPacketMultiradialImages
+
+/--
 Multiradial possible images of the Theta-pilot, recorded together with the
 indeterminacy quotient on choices.
 
