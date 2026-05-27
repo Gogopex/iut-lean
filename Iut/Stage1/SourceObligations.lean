@@ -199,6 +199,16 @@ theorem qSigned_le_thetaSigned_eq_threeTerm (ledger :
       ledger.threeTermComparison.q_le_theta :=
   rfl
 
+theorem qSigned_le_thetaSigned_eq_membership_commonBound (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.qSigned_le_thetaSigned =
+      le_trans ledger.membership.q_le_target
+        (by
+          rw [ledger.targetVolume.targetSigned_eq]
+          exact TransportedRegionFamily.choice_targetVolume_le_of_commonBound
+            ledger.theta_commonBound ledger.chosenOutput.choice) :=
+  rfl
+
 theorem corollary312 (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     Corollary312Inequality

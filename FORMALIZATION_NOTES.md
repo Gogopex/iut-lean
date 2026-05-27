@@ -4450,3 +4450,81 @@ The next milestone should add a compact source-ledger theorem that names the
 complete audited chain from membership and common bound to
 `qSigned <= thetaSigned`, collecting the already exposed left and right
 projections into one theorem for downstream modules.
+
+## Milestone 48: Complete Audited Chain Projection
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+IUT III, Step `(xi-d)`, presents the final comparison after the relevant objects
+have been made comparable in a common real setting. IUT IV describes the
+`Theta` side as controlled by containers for possible images and upper bounds.
+Scholze-Stix's critique asks that the real-line identifications and resulting
+comparison be spelled out explicitly.
+
+At our current abstraction level, the complete real comparison is:
+
+```text
+qSigned <= targetSigned <= thetaSigned
+```
+
+where the left inequality is the membership inequality and the right inequality
+is the chosen-output instance of the common `Theta` bound.
+
+### Purpose
+
+This milestone adds a compact source-ledger theorem:
+
+```text
+ledger.qSigned_le_thetaSigned
+  =
+le_trans ledger.membership.q_le_target
+  (common target bound applied to ledger.chosenOutput.choice)
+```
+
+This theorem collects the left and right audit projections into one equality
+that downstream modules can cite when they need the entire source-to-final-real
+chain.
+
+### Lean Declaration
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.qSigned_le_thetaSigned_eq_membership_commonBound
+```
+
+The proof is `rfl`: Lean confirms that the final two-term inequality is
+definitionally the transitive composition of the membership inequality and the
+common-bound inequality.
+
+### What This Tests
+
+The ledger now exposes the full final real proof path:
+
+```text
+membership.q_le_target
+choice_targetVolume_le_of_commonBound theta_commonBound chosenOutput.choice
+le_trans
+qSigned_le_thetaSigned
+corollary312
+stage1Comparison
+```
+
+This gives the current Stage 1 abstraction a compact audit theorem before we
+replace toy obligations with genuine IUT source lemmas.
+
+### Design Trap Avoided
+
+The trap would be to have all pieces individually transparent but no single
+named theorem that says the final inequality is exactly their composition. This
+milestone makes the final chain easy to cite and hard to misread.
+
+### Next Step
+
+The next milestone should add the analogous compact theorem for
+`ledger.corollary312`, showing that the packaged Corollary-3.12-shaped
+inequality is obtained directly from this complete audited chain.
