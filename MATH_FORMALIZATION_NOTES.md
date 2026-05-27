@@ -9349,3 +9349,98 @@ holomorphic-hull/determinant construction. The next mathematical refinement is
 to expose a hull-producing bridge interface inside the named hull+det bridge,
 so that a bridge may provide a `CommonTargetHullBound` first and only then
 derive its `CommonTargetBound`.
+
+## Math Milestone 100: Hull-Producing Hull+Det Bridge Interface
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicOutput.lean`
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/ToyBridge.lean`
+
+### Source Check
+
+The previous milestone routed the toy upper-ray estimate through a measured
+common hull. The named hull+det bridge still accepted only a final
+common-target bridge. This milestone adds a source-facing bridge shape that
+produces a measured common hull first.
+
+This matches the direction needed for the IUT III 3.11-to-3.12 analysis:
+the debated step should not be represented merely as a terminal inequality.
+It should expose the intermediate hull-like object whose measurement leads to
+the comparison bound.
+
+### Lean/API Check
+
+`AlgorithmicOutput` now has:
+
+```text
+AlgorithmicOutput.CommonTargetHullBound
+AlgorithmicOutput.CertifiedCommonTargetHullBound
+CertifiedCommonTargetHullBound.toCertifiedCommonTargetBound
+```
+
+`AlgorithmicBridge` now has:
+
+```text
+AlgorithmicOutput.StructuredCommonTargetHullBridge
+StructuredCommonTargetHullBridge.toStructuredCommonTargetBoundBridge
+AlgorithmicOutput.HullDetHullBridgeData
+HullDetHullBridgeData.HullAudit
+```
+
+The new hull audit exposes:
+
+```text
+apply_eq_hull_to_common
+common_hull_contains_each
+common_hull_volume_bound
+choice_target_volume_le
+holds_common_hull
+all_targets_at_most
+```
+
+The toy bridge now defines:
+
+```text
+thetaToyStructuredCommonTargetHullBridge
+thetaToyHullDetHullBridgeData
+thetaToyHullDetHullAudit
+thetaToyHullDetHull_commonHull_volume_bound
+thetaToyHullDetHull_choice_targetVolume_le_bound
+thetaToyHullDetHull_allTargetsAtMost
+```
+
+### Lean Decisions
+
+The existing `HullDetBridgeData` remains available because downstream code
+already consumes common-target bridges. The new `HullDetHullBridgeData` can be
+forgotten to the old shape through:
+
+```text
+HullDetHullBridgeData.toHullDetBridgeData
+```
+
+This avoids breaking the already-audited 3.11-to-3.12 route while giving
+future real mathematical work a more precise target.
+
+### What This Tests
+
+Lean verifies that a structured hull bridge can be turned into the old
+structured common-target bridge, and that the toy hull+det bridge can expose
+common-hull containment, common-hull volume control, chosen-target volume
+control, and all-targets-at-most facts. The focused build for
+`Iut.Stage1.ToyBridge` passes.
+
+### Design Trap Avoided
+
+The trap would be to make "hull+det" a label on a final bound forever. This
+milestone separates the hull-producing interface from the final common-target
+consumer, so the next replacement can attack the missing mathematical content
+directly.
+
+### Remaining Gap
+
+The new bridge interface still does not construct Mochizuki's holomorphic
+hulls, determinant operation, or log-volume estimates. It only establishes the
+formal slot and audit shape where such a construction must eventually live.

@@ -82,11 +82,22 @@ abbrev CommonTargetBound (output : AlgorithmicOutput source target index)
     (measure : RegionMeasure target) (bound : Real) :=
   output.family.CommonTargetBound measure bound
 
+/-- A measured common-hull bound for the transported output family. -/
+abbrev CommonTargetHullBound (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target) (bound : Real) :=
+  output.family.CommonTargetHullBound measure bound
+
 /-- Certification together with the separate common-target bound data. -/
 structure CertifiedCommonTargetBound (output : AlgorithmicOutput source target index)
     (measure : RegionMeasure target) (bound : Real) where
   certified : output.Certified
   commonBound : output.CommonTargetBound measure bound
+
+/-- Certification together with the separate common-hull bound data. -/
+structure CertifiedCommonTargetHullBound (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target) (bound : Real) where
+  certified : output.Certified
+  commonHullBound : output.CommonTargetHullBound measure bound
 
 namespace CertifiedCommonTargetBound
 
@@ -116,6 +127,44 @@ theorem hasAPT (data : CertifiedCommonTargetBound output measure bound) :
   data.certified.hasAPT
 
 end CertifiedCommonTargetBound
+
+namespace CertifiedCommonTargetHullBound
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+
+def toCertifiedCommonTargetBound
+    (data : CertifiedCommonTargetHullBound output measure bound) :
+    output.CertifiedCommonTargetBound measure bound :=
+  { certified := data.certified,
+    commonBound := data.commonHullBound.toCommonTargetBound }
+
+theorem choice_targetVolume_le
+    (data : CertifiedCommonTargetHullBound output measure bound)
+    (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  TransportedRegionFamily.choice_targetVolume_le_of_commonHullBound
+    data.commonHullBound choice
+
+theorem allTargetsAtMost
+    (data : CertifiedCommonTargetHullBound output measure bound) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  TransportedRegionFamily.allTargetsAtMost_of_commonHullBound data.commonHullBound
+
+theorem hasIPL (data : CertifiedCommonTargetHullBound output measure bound) :
+    output.HasIPL :=
+  data.certified.hasIPL
+
+theorem hasSHE (data : CertifiedCommonTargetHullBound output measure bound) :
+    output.HasSHE :=
+  data.certified.hasSHE
+
+theorem hasAPT (data : CertifiedCommonTargetHullBound output measure bound) :
+    output.HasAPT :=
+  data.certified.hasAPT
+
+end CertifiedCommonTargetHullBound
 
 end AlgorithmicOutput
 

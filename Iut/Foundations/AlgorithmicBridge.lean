@@ -114,6 +114,55 @@ theorem allTargetsAtMost
 end StructuredCommonTargetBoundBridge
 
 /--
+A bridge whose source-specific construction first supplies a measured common
+hull for the transported family.
+
+This is the closer interface for a future hull+det construction. The older
+common-target bridge is recovered by forgetting the hull through
+`CommonTargetHullBound.toCommonTargetBound`.
+-/
+structure StructuredCommonTargetHullBridge
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target) (bound : Real) where
+  build :
+    QualitativeData.StructuredCertificate output.family ->
+      output.CommonTargetHullBound measure bound
+
+namespace StructuredCommonTargetHullBridge
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+
+def apply (bridge : StructuredCommonTargetHullBridge output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    output.CommonTargetHullBound measure bound :=
+  bridge.build certificate
+
+def toStructuredCommonTargetBoundBridge
+    (bridge : StructuredCommonTargetHullBridge output measure bound) :
+    output.StructuredCommonTargetBoundBridge measure bound :=
+  { build := fun certificate =>
+      (bridge.apply certificate).toCommonTargetBound }
+
+theorem choice_targetVolume_le
+    (bridge : StructuredCommonTargetHullBridge output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family)
+    (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  TransportedRegionFamily.choice_targetVolume_le_of_commonHullBound
+    (bridge.apply certificate) choice
+
+theorem allTargetsAtMost
+    (bridge : StructuredCommonTargetHullBridge output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  TransportedRegionFamily.allTargetsAtMost_of_commonHullBound
+    (bridge.apply certificate)
+
+end StructuredCommonTargetHullBridge
+
+/--
 Inert identifier for the hull+det operation used in the source-specific bridge.
 
 This name carries no mathematical content by itself. It only prevents the
@@ -154,6 +203,141 @@ structure HullDetBridgeData
     (measure : RegionMeasure target) (bound : Real) where
   operation : HullDetOperationId
   bridge : output.StructuredCommonTargetBoundBridge measure bound
+
+/--
+A named hull+det operation whose bridge produces a measured common hull first.
+
+This interface records the intended direction for replacing the current
+common-target bridge: produce a common hull, measure it, then forget it to the
+common-target bound consumed downstream.
+-/
+structure HullDetHullBridgeData
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target) (bound : Real) where
+  operation : HullDetOperationId
+  bridge : output.StructuredCommonTargetHullBridge measure bound
+
+namespace HullDetHullBridgeData
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+
+def applyHull (data : HullDetHullBridgeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    output.CommonTargetHullBound measure bound :=
+  data.bridge.apply certificate
+
+def commonTargetBridge (data : HullDetHullBridgeData output measure bound) :
+    output.StructuredCommonTargetBoundBridge measure bound :=
+  data.bridge.toStructuredCommonTargetBoundBridge
+
+def toHullDetBridgeData (data : HullDetHullBridgeData output measure bound) :
+    output.HullDetBridgeData measure bound :=
+  { operation := data.operation,
+    bridge := data.commonTargetBridge }
+
+def apply (data : HullDetHullBridgeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    output.CommonTargetBound measure bound :=
+  (data.applyHull certificate).toCommonTargetBound
+
+theorem choice_targetVolume_le
+    (data : HullDetHullBridgeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family)
+    (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  data.bridge.choice_targetVolume_le certificate choice
+
+theorem allTargetsAtMost
+    (data : HullDetHullBridgeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  data.bridge.allTargetsAtMost certificate
+
+/-- Audit view of a named hull+det bridge that produces a common hull first. -/
+structure HullAudit
+    (data : HullDetHullBridgeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) : Prop where
+  apply_eq_hull_to_common :
+    data.apply certificate = (data.applyHull certificate).toCommonTargetBound
+  common_hull_contains_each :
+    output.comparisons.CommonTarget
+      (data.applyHull certificate).commonHull.hull
+  common_hull_volume_bound :
+    RegionMeasure.HasVolumeAtMost measure
+      (data.applyHull certificate).commonHull.hull bound
+  choice_target_volume_le :
+    ∀ choice : index,
+      RegionMeasure.targetVolume measure (output.comparison choice) <= bound
+  holds_common_hull :
+    ∀ {choice : index} {sourcePoint : Point source},
+      (output.comparison choice).Holds sourcePoint ->
+        (RegionComparison.enlargeTarget
+          (output.comparison choice)
+          (data.applyHull certificate).commonHull.hull).Holds sourcePoint
+  all_targets_at_most :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound
+
+theorem hullAudit
+    (data : HullDetHullBridgeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    data.HullAudit certificate :=
+  { apply_eq_hull_to_common := rfl,
+    common_hull_contains_each :=
+      (data.applyHull certificate).commonHull.contains_each,
+    common_hull_volume_bound := (data.applyHull certificate).volume_bound,
+    choice_target_volume_le := data.choice_targetVolume_le certificate,
+    holds_common_hull := (data.applyHull certificate).holds_commonHull_of_choice,
+    all_targets_at_most := data.allTargetsAtMost certificate }
+
+namespace HullAudit
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+variable {data : HullDetHullBridgeData output measure bound}
+variable {certificate : QualitativeData.StructuredCertificate output.family}
+
+theorem apply_eq_hullToCommon
+    (audit : data.HullAudit certificate) :
+    data.apply certificate = (data.applyHull certificate).toCommonTargetBound :=
+  audit.apply_eq_hull_to_common
+
+theorem commonHullContainsEach
+    (audit : data.HullAudit certificate) :
+    output.comparisons.CommonTarget
+      (data.applyHull certificate).commonHull.hull :=
+  audit.common_hull_contains_each
+
+theorem commonHullVolumeBound
+    (audit : data.HullAudit certificate) :
+    RegionMeasure.HasVolumeAtMost measure
+      (data.applyHull certificate).commonHull.hull bound :=
+  audit.common_hull_volume_bound
+
+theorem choiceTargetVolume_le
+    (audit : data.HullAudit certificate) (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  audit.choice_target_volume_le choice
+
+theorem holdsCommonHull
+    (audit : data.HullAudit certificate)
+    {choice : index} {sourcePoint : Point source}
+    (hholds : (output.comparison choice).Holds sourcePoint) :
+    (RegionComparison.enlargeTarget
+      (output.comparison choice)
+      (data.applyHull certificate).commonHull.hull).Holds sourcePoint :=
+  audit.holds_common_hull hholds
+
+theorem allTargetsAtMost
+    (audit : data.HullAudit certificate) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  audit.all_targets_at_most
+
+end HullAudit
+
+end HullDetHullBridgeData
 
 namespace HullDetBridgeData
 
