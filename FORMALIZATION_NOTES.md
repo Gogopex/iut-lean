@@ -7134,3 +7134,101 @@ objects easier to name and audit.
 The next milestone should start a first non-toy source placeholder module that
 packages named IUT Stage 1 pre-ledger labels and states, without proof, the
 specific promotion obligations that future source mathematics must discharge.
+
+## Milestone 84: First Non-Toy IUT Stage 1 Source Package
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Basic.lean`
+* `README.md`
+
+### Source Check
+
+The local IUT III text states Corollary 3.12 under the situation of Theorem
+3.11. In Step `(xi-b)`, Mochizuki says that, for the final discussion, the
+multiradial construction may be treated qualitatively as "some" algorithm whose
+output satisfies IPL, SHE, and APT. Step `(xi-d)` then adds the holomorphic hull,
+determinant, and log-volume passage that makes the q-pilot and Theta-pilot
+objects comparable in a common real-valued setting.
+
+The April 2026 formalization report describes this same first target as Stage
+1: Theorem 3.11 implies Corollary 3.12, with the skeletal code currently focused
+on the final `3.11.5 => 3.12` comparison.
+
+Scholze-Stix remain the guardrail for this milestone: a source-facing package
+must not make the comparison automatic by silently identifying all histories or
+real-line copies.
+
+### Purpose
+
+This milestone starts the first non-toy source-facing module:
+
+```text
+Iut.Stage1.IUTStage1Source
+```
+
+It introduces inert source labels for:
+
+```text
+Theta-pilot object
+q-pilot object
+log-Kummer correspondence
+Ind1-Ind2-Ind3 profile
+```
+
+and packages them with an existing `IUTStage1PreLedgerData` value. The package
+does not prove the source obligations. It only states the exact promotion
+obligations that future IUT-specific mathematics must provide before the public
+Stage 1 endpoint is available.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+PilotObjectId
+LogKummerCorrespondenceId
+IndeterminacyProfileId
+IUTStage1SourceLabels
+theorem311ToCorollary312Labels
+IUTStage1SourcePackage
+IUTStage1SourceObligations
+IUTStage1SourceObligations.toLedgerPromotionObligations
+IUTStage1SourcePackage.promotedLedger
+IUTStage1SourcePackage.promotedProvider
+IUTStage1SourcePackage.promotedProvider_ledger
+IUTStage1SourcePackage.publicAudit
+```
+
+The root module `Iut.Basic` now imports `Iut.Stage1.IUTStage1Source`, and the
+README module list records the new non-toy source-facing layer.
+
+### What This Tests
+
+Lean verifies that a source-facing package can expose the public audit theorem
+only after converting explicitly supplied `IUTStage1SourceObligations` into the
+existing `IUTStage1PreLedgerData.LedgerPromotionObligations`.
+
+The route is:
+
+```text
+IUTStage1SourcePackage
+  + IUTStage1SourceObligations
+  -> IUTStage1PreLedgerData.LedgerPromotionObligations
+  -> promoted provider
+  -> public Stage 1 audit
+```
+
+### Design Trap Avoided
+
+The trap would be to introduce a non-toy IUT module that simply asserts a
+completed source provider. This milestone refuses that shortcut: the source
+package is inert until the future source proof supplies certification, SHE
+alignment, q-pilot positivity, and normalization.
+
+### Next Step
+
+The next milestone should add source-facing named projections for the four
+obligation fields, so future formalization notes can refer to these obligations
+without unpacking the source-obligation structure manually.

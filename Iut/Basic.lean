@@ -25,6 +25,7 @@ import Iut.Stage1.ToyCorollarySchema
 import Iut.Stage1.SourceObligations
 import Iut.Stage1.IUTSourceScaffold
 import Iut.Stage1.IUTStage1Data
+import Iut.Stage1.IUTStage1Source
 import Iut.Stage1.ToySourceObligations
 import Iut.Stage1.ToyPublicAuditExample
 import Iut.Stage1.IUTSourceScaffoldExample

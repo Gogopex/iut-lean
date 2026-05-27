@@ -181,6 +181,14 @@ Current modules:
 * `Iut.Stage1.SourceObligations`: source-obligation ledger for the structured
   Stage 1 final comparison, now requiring a charted common-container bridge and
   chosen output with charted q/membership/target/Theta values.
+* `Iut.Stage1.IUTSourceScaffold`: non-toy provider scaffold whose public Stage
+  1 endpoints are obtained only from a completed source-obligation ledger.
+* `Iut.Stage1.IUTStage1Data`: pre-ledger data layer for future IUT-specific
+  Stage 1 constructions, with explicit promotion obligations before the public
+  endpoint is available.
+* `Iut.Stage1.IUTStage1Source`: first source-facing non-toy package for the
+  Theorem 3.11 to Corollary 3.12 boundary, restating the promotion obligations
+  under IUT Stage 1 names.
 * `Iut.Stage1.ToySourceObligations`: toy completion of that ledger using
   upper-ray normalization and epsilon-cap bounds.
 
