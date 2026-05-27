@@ -9251,3 +9251,101 @@ replace it.
 The construction is still upper-ray specific. The next deeper refinement is to
 introduce a common-hull or hull-operation witness that is general enough to
 approximate the hull+det bridge without assuming all targets are upper rays.
+
+## Math Milestone 99: Upper-Ray Common-Hull Bound Route
+
+Lean files:
+
+* `Iut/Foundations/CommonTargetBound.lean`
+* `Iut/Foundations/TransportedRegionFamily.lean`
+* `Iut/Stage1/ToyFamilyBounds.lean`
+* `Iut/Stage1/ToyAPTTransport.lean`
+
+### Source Check
+
+The preceding milestone had a reusable upper-ray common target. The hull+det
+discussion, however, should not jump directly from possible target regions to
+a final numerical bound. At minimum, the formal route should expose a common
+hull or hull-like region before measuring it.
+
+This milestone therefore routes the toy upper-ray construction through:
+
+```text
+choice-dependent target regions
+-> common target hull
+-> measured common-hull bound
+-> common target bound
+-> all-targets-at-most
+```
+
+### Lean/API Check
+
+The foundation layer now defines:
+
+```text
+RegionComparisonFamily.upperRayFamily_commonTargetHull
+RegionComparisonFamily.upperRayFamily_commonTargetHullBound
+```
+
+The transported-family layer now exposes:
+
+```text
+TransportedRegionFamily.CommonTargetHull
+TransportedRegionFamily.holds_commonHull_of_choice
+TransportedRegionFamily.choice_targetVolume_le_of_commonHullBound
+TransportedRegionFamily.allTargetsAtMost_of_commonHullBound
+```
+
+The toy Theta family now defines:
+
+```text
+thetaIndeterminacyCommonTargetHull
+thetaIndeterminacyCommonTargetHullBound
+```
+
+and the old:
+
+```text
+thetaIndeterminacyCommonTargetBound
+thetaAPTOutputCommonTargetBound
+```
+
+are now obtained by applying `toCommonTargetBound` to the measured
+common-hull bound.
+
+### Lean Decisions
+
+The upper-ray common hull is currently the same region as the upper-ray common
+target:
+
+```text
+Region.upperRay target commonBound
+```
+
+This is intentionally conservative. We are not pretending that an IUT
+holomorphic hull, determinant line, or log-volume calculation has been
+formalized. The useful change is the typed route: later a genuine hull
+construction can replace this common-hull witness without changing the
+downstream common-target-bound consumers.
+
+### What This Tests
+
+Lean verifies that the common-hull bound can be constructed generically for
+upper-ray comparison families and then used by the toy APT output. Focused
+builds for `Iut.Stage1.ToyFamilyBounds` and `Iut.Stage1.ToyAPTTransport`
+pass.
+
+### Design Trap Avoided
+
+The trap would be to keep saying "hull+det" while the formal proof path
+contains only a direct common-target bound. This milestone inserts a visible
+common-hull datum into the toy construction, while still marking determinant
+and log-volume work as absent.
+
+### Remaining Gap
+
+The common hull is still an upper-ray cap, not Mochizuki's actual
+holomorphic-hull/determinant construction. The next mathematical refinement is
+to expose a hull-producing bridge interface inside the named hull+det bridge,
+so that a bridge may provide a `CommonTargetHullBound` first and only then
+derive its `CommonTargetBound`.

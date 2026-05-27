@@ -48,6 +48,13 @@ theorem upperRayFamily_commonTarget
   intro choice
   exact Region.upperRay_subset_upperRay (hbound choice)
 
+def upperRayFamily_commonTargetHull
+    (transport : index -> Transport source target) (bound : index -> Real)
+    {commonBound : Real} (hbound : ∀ choice : index, bound choice <= commonBound) :
+    (upperRayFamily transport bound).CommonTargetHull :=
+  { hull := Region.upperRay target commonBound,
+    contains_each := upperRayFamily_commonTarget transport bound hbound }
+
 /--
 A common target region for a comparison family, together with an upper bound for
 the measured volume of that common target.
@@ -79,6 +86,19 @@ structure CommonTargetHullBound (measure : RegionMeasure target)
     (family : RegionComparisonFamily source target index) (bound : Real) where
   commonHull : family.CommonTargetHull
   volume_bound : RegionMeasure.HasVolumeAtMost measure commonHull.hull bound
+
+def upperRayFamily_commonTargetHullBound
+    (measure : RegionMeasure target)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (transport : index -> Transport source target) (bound : index -> Real)
+    {commonBound : Real}
+    (hbound : ∀ choice : index, bound choice <= commonBound) :
+    CommonTargetHullBound measure (upperRayFamily transport bound) commonBound :=
+  { commonHull := upperRayFamily_commonTargetHull transport bound hbound,
+    volume_bound := by
+      unfold RegionMeasure.HasVolumeAtMost
+      change measure.volume (Region.upperRay target commonBound) <= commonBound
+      rw [RegionMeasure.upperRay_volume_eq_of_normalized measure hnormalized] }
 
 namespace CommonTargetBound
 

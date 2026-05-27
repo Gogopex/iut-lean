@@ -63,6 +63,23 @@ theorem thetaAPTOutput_commonTarget
       (thetaIndeterminacyCommonTarget h epsilonBound) :=
   thetaIndeterminacyFamily_commonTarget f h hbound
 
+def thetaAPTOutputCommonTargetHull
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    (thetaAPTOutput f h epsilon).CommonTargetHull :=
+  thetaIndeterminacyCommonTargetHull f h hbound
+
+def thetaAPTOutputCommonTargetHullBound
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    (thetaAPTOutput f h epsilon).CommonTargetHullBound
+      measure (-(2 * h) + epsilonBound) :=
+  thetaIndeterminacyCommonTargetHullBound measure hnormalized f h hbound
+
 def thetaAPTOutputCommonTargetBound
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -70,7 +87,7 @@ def thetaAPTOutputCommonTargetBound
     {epsilon : index -> Real} {epsilonBound : Real}
     (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
     (thetaAPTOutput f h epsilon).CommonTargetBound measure (-(2 * h) + epsilonBound) :=
-  thetaIndeterminacyCommonTargetBound measure hnormalized f h hbound
+  (thetaAPTOutputCommonTargetHullBound measure hnormalized f h hbound).toCommonTargetBound
 
 theorem thetaAPTOutput_choice_targetVolume_le_bound
     (measure : RegionMeasure thetaLine)

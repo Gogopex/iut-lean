@@ -59,6 +59,10 @@ def CommonTarget (family : TransportedRegionFamily source target index)
     (common : Region target) : Prop :=
   family.comparisons.CommonTarget common
 
+/-- A common target hull for the transported family after forgetting to comparisons. -/
+abbrev CommonTargetHull (family : TransportedRegionFamily source target index) :=
+  family.comparisons.CommonTargetHull
+
 /-- A measured common-target bound for the transported family. -/
 abbrev CommonTargetBound (measure : RegionMeasure target)
     (family : TransportedRegionFamily source target index) (bound : Real) :=
@@ -78,6 +82,15 @@ theorem holds_common_of_choice
       sourcePoint :=
   RegionComparisonFamily.holds_commonTarget_of_choice hcommon hholds
 
+theorem holds_commonHull_of_choice
+    {family : TransportedRegionFamily source target index}
+    (commonHull : family.CommonTargetHull)
+    {choice : index} {sourcePoint : Point source}
+    (hholds : family.Holds choice sourcePoint) :
+    (RegionComparison.enlargeTarget (family.comparison choice) commonHull.hull).Holds
+      sourcePoint :=
+  RegionComparisonFamily.holds_commonTargetHull_of_choice commonHull hholds
+
 theorem choice_targetVolume_le_of_commonBound
     {measure : RegionMeasure target}
     {family : TransportedRegionFamily source target index} {bound : Real}
@@ -89,6 +102,20 @@ theorem allTargetsAtMost_of_commonBound
     {measure : RegionMeasure target}
     {family : TransportedRegionFamily source target index} {bound : Real}
     (data : family.CommonTargetBound measure bound) :
+    RegionComparisonFamily.AllTargetsAtMost measure family.comparisons bound :=
+  data.allTargetsAtMost
+
+theorem choice_targetVolume_le_of_commonHullBound
+    {measure : RegionMeasure target}
+    {family : TransportedRegionFamily source target index} {bound : Real}
+    (data : family.CommonTargetHullBound measure bound) (choice : index) :
+    RegionMeasure.targetVolume measure (family.comparison choice) <= bound :=
+  data.choice_targetVolume_le choice
+
+theorem allTargetsAtMost_of_commonHullBound
+    {measure : RegionMeasure target}
+    {family : TransportedRegionFamily source target index} {bound : Real}
+    (data : family.CommonTargetHullBound measure bound) :
     RegionComparisonFamily.AllTargetsAtMost measure family.comparisons bound :=
   data.allTargetsAtMost
 

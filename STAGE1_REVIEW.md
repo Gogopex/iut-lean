@@ -644,3 +644,56 @@ comparison behind a single real inequality or a single opaque bridge.
 The next useful mathematical step is to refine the hull+det bridge audit. A
 reasonable first target is a named common-target/hull datum with a measured
 bound, before attempting determinant or log-volume content.
+
+## Periodic Review: Upper-Ray Hull Route
+
+Date: 2026-05-27
+
+This checkpoint reviews the new common-hull route for the toy upper-ray
+construction.
+
+### Current Lean Chain
+
+The toy Stage 1 common-target estimate now factors as:
+
+```text
+thetaAPTOutputCommonTargetHullBound
+-> thetaAPTOutputCommonTargetBound
+-> thetaToyStructuredCommonTargetBoundBridge
+-> HullDetBridgeData.BoundAudit
+-> HDD/SHE/common-container/charted audits
+-> final q-to-Theta charted comparison
+```
+
+At the comparison-family level, the generic upper-ray route is:
+
+```text
+upperRayFamily_commonTargetHull
+-> upperRayFamily_commonTargetHullBound
+-> CommonTargetHullBound.toCommonTargetBound
+```
+
+### Positive Alignment
+
+This remains focused on the 3.11-to-3.12 path. It does not add another
+administrative label. It changes the mathematical route that supplies the toy
+Theta target bound: the bound is now mediated by an explicit common-hull
+witness.
+
+That matters for the dispute because the formal path can no longer silently
+identify "common target" with "final inequality"; a common region/hull object
+is present before measurement.
+
+### Remaining Gaps
+
+The new common hull is still an upper-ray cap. It is not Mochizuki's
+holomorphic hull and it does not encode determinant or log-volume geometry.
+The named hull+det bridge still accepts a supplied structured bridge rather
+than constructing one from source-side IUT data.
+
+### Global 3.12 Check
+
+The formalization has still not reached the hard Mochizuki mathematics.
+However, the remaining abstraction has become more constrained: a serious
+replacement for the toy bridge should now supply a measured common-hull bound,
+not merely a terminal inequality.

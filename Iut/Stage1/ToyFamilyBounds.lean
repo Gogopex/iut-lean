@@ -44,6 +44,35 @@ theorem thetaIndeterminacyFamily_commonTarget
   intro choice
   linarith [hbound choice]
 
+def thetaIndeterminacyCommonTargetHull
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    (thetaIndeterminacyFamily f h epsilon).CommonTargetHull :=
+  by
+    unfold thetaIndeterminacyFamily
+    exact RegionComparisonFamily.upperRayFamily_commonTargetHull
+      (fun _ => f) (fun choice => -(2 * h) + epsilon choice)
+      (commonBound := -(2 * h) + epsilonBound) (by
+        intro choice
+        linarith [hbound choice])
+
+def thetaIndeterminacyCommonTargetHullBound
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    RegionComparisonFamily.CommonTargetHullBound measure
+      (thetaIndeterminacyFamily f h epsilon) (-(2 * h) + epsilonBound) :=
+  by
+    unfold thetaIndeterminacyFamily
+    exact RegionComparisonFamily.upperRayFamily_commonTargetHullBound
+      measure hnormalized (fun _ => f) (fun choice => -(2 * h) + epsilon choice)
+      (commonBound := -(2 * h) + epsilonBound) (by
+        intro choice
+        linarith [hbound choice])
+
 def thetaIndeterminacyCommonTargetBound
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -52,13 +81,7 @@ def thetaIndeterminacyCommonTargetBound
     (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
     RegionComparisonFamily.CommonTargetBound measure
       (thetaIndeterminacyFamily f h epsilon) (-(2 * h) + epsilonBound) :=
-  by
-    unfold thetaIndeterminacyFamily
-    exact RegionComparisonFamily.upperRayFamily_commonTargetBound
-      measure hnormalized (fun _ => f) (fun choice => -(2 * h) + epsilon choice)
-      (commonBound := -(2 * h) + epsilonBound) (by
-        intro choice
-        linarith [hbound choice])
+  (thetaIndeterminacyCommonTargetHullBound measure hnormalized f h hbound).toCommonTargetBound
 
 theorem thetaIndeterminacyFamily_allTargetsAtMost
     (measure : RegionMeasure thetaLine)
