@@ -2213,6 +2213,75 @@ theorem piXK_smul_trivial
 
 end ThetaApproachFunctionFieldData
 
+/--
+A typed finite Galois function-field cover for the `Theta`-approach.
+
+This packages the finite Galois extension together with the still-supplied
+identification between the theta deck quotient and the algebra automorphism
+group.  It is a stricter interface than a bare equivalence, but it still does not
+claim to construct the geometric finite etale cover itself.
+-/
+structure ThetaFiniteGaloisFunctionFieldCoverData
+    (thetaApproach : ThetaApproachQuotientData)
+    (B L : Type) [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L] where
+  quotientEquivAlgAut :
+    ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L)
+  finiteEtaleGaloisCover : Prop
+  finiteEtaleGaloisCover_holds : finiteEtaleGaloisCover
+  reconstructedFunctionFieldOfXK : Prop
+  reconstructedFunctionFieldOfXK_holds : reconstructedFunctionFieldOfXK
+  deckActionMatchesGalQuotient : Prop
+  deckActionMatchesGalQuotient_holds : deckActionMatchesGalQuotient
+
+namespace ThetaFiniteGaloisFunctionFieldCoverData
+
+variable {thetaApproach : ThetaApproachQuotientData}
+variable {B L : Type} [Field B] [Field L] [Algebra B L]
+variable [FiniteDimensional B L] [IsGalois B L]
+variable (cover : ThetaFiniteGaloisFunctionFieldCoverData thetaApproach B L)
+
+theorem finiteEtaleGaloisCover_proof :
+    cover.finiteEtaleGaloisCover :=
+  cover.finiteEtaleGaloisCover_holds
+
+noncomputable def toAlgebraicDeckFunctionFieldData :
+    AlgebraicDeckFunctionFieldData
+      (ThetaApproachQuotientData.deckQuotient thetaApproach) B L :=
+  AlgebraicDeckFunctionFieldData.ofFiniteGaloisAlgAutEquiv cover.quotientEquivAlgAut
+
+noncomputable def toThetaApproachFunctionFieldData :
+    ThetaApproachFunctionFieldData thetaApproach :=
+  ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+    cover.quotientEquivAlgAut cover.reconstructedFunctionFieldOfXK
+    cover.reconstructedFunctionFieldOfXK_holds cover.deckActionMatchesGalQuotient
+    cover.deckActionMatchesGalQuotient_holds
+
+theorem deckRingAut_apply
+    (q : ThetaApproachQuotientData.deckQuotient thetaApproach) (x : L) :
+    cover.toThetaApproachFunctionFieldData.reconstructedFunctionField.deckRingAut q x =
+      cover.quotientEquivAlgAut q x :=
+  ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv_deckRingAut_apply
+    cover.quotientEquivAlgAut cover.reconstructedFunctionFieldOfXK
+    cover.reconstructedFunctionFieldOfXK_holds cover.deckActionMatchesGalQuotient
+    cover.deckActionMatchesGalQuotient_holds q x
+
+theorem fixed_iff_in_base (x : L) :
+    (∀ q : ThetaApproachQuotientData.deckQuotient thetaApproach,
+        cover.toThetaApproachFunctionFieldData.reconstructedFunctionField.deckRingAut q x = x) ↔
+      ∃ b : B, algebraMap B L b = x :=
+  ThetaApproachFunctionFieldData.ofFiniteGaloisAlgAutEquiv_fixed_iff_in_base
+    cover.quotientEquivAlgAut cover.reconstructedFunctionFieldOfXK
+    cover.reconstructedFunctionFieldOfXK_holds cover.deckActionMatchesGalQuotient
+    cover.deckActionMatchesGalQuotient_holds x
+
+theorem piCKRingAutHom_ker :
+    (cover.toThetaApproachFunctionFieldData.piCKRingAutHom).ker =
+      thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup :=
+  cover.toThetaApproachFunctionFieldData.piCKRingAutHom_ker
+
+end ThetaFiniteGaloisFunctionFieldCoverData
+
 namespace ThetaApproachGaloisQuotientData
 
 variable {thetaApproach : ThetaApproachQuotientData}

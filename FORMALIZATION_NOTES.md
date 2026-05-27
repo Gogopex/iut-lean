@@ -14527,3 +14527,107 @@ finite etale cover of orbicurves.
 The next step is to introduce a typed finite-etale/Galois-cover interface for
 `X_K -> C_K` whose output supplies the quotient-to-automorphism equivalence,
 instead of taking that equivalence as a naked field.
+
+## Math Milestone 57: Typed Finite Galois Cover Package for the Theta Quotient
+
+### Source Check
+
+IUT I, Remark 3.1.2, says that one applies the reconstruction algorithm to the
+open subgroup
+
+```text
+Pi_XK <= Pi_CK
+```
+
+to reconstruct the function field of `X_K` with its natural action
+
+```text
+Gal(X_K / C_K) ~= Pi_CK / Pi_XK.
+```
+
+Later in IUT I, the discussion of automorphism groups around `X_K` describes
+such groups as reconstructible from the relevant categorical/orbicurve data.
+At our present level, we still do not have that geometric finite-etale cover
+formalized. The correct next step is therefore to stop passing the quotient
+identification as an isolated equivalence and package it as part of a typed
+finite Galois function-field cover interface.
+
+### Lean Move
+
+The new record is:
+
+```text
+ThetaFiniteGaloisFunctionFieldCoverData thetaApproach B L
+```
+
+under hypotheses:
+
+```text
+Field B, Field L, Algebra B L
+FiniteDimensional B L
+IsGalois B L
+```
+
+It contains:
+
+```text
+quotientEquivAlgAut :
+  ThetaApproachQuotientData.deckQuotient thetaApproach ~= (L equiv_alg[B] L)
+finiteEtaleGaloisCover : Prop
+reconstructedFunctionFieldOfXK : Prop
+deckActionMatchesGalQuotient : Prop
+```
+
+and proof fields for the three propositions.
+
+The namespace exposes:
+
+```text
+toAlgebraicDeckFunctionFieldData
+toThetaApproachFunctionFieldData
+deckRingAut_apply
+fixed_iff_in_base
+piCKRingAutHom_ker
+```
+
+### Lean Decisions
+
+This is a packaging milestone, but it is mathematically protective: the
+quotient-to-automorphism equivalence is no longer a loose argument to a
+constructor. It is now part of a named finite Galois cover object that also
+records the finite-etale/Galois-cover claim and the reconstruction claim.
+
+We still keep `finiteEtaleGaloisCover` as a proposition field. This avoids
+pretending that mathlib currently has the IUT-specific finite etale orbicurve
+cover construction that would produce the function-field extension and quotient
+identification.
+
+### What This Tests
+
+The example file checks:
+
+* construction of an abstract typed finite Galois theta function-field cover;
+* extraction of the theta function-field package from that cover;
+* access to the finite-etale/Galois-cover proof field;
+* the transported deck action formula;
+* the finite-Galois fixed-field theorem at the cover level;
+* the exact `Pi_CK -> RingAut` kernel remains `image(Pi_XK)`.
+
+### Design Trap Avoided
+
+The trap would be to treat
+
+```text
+Pi_CK/Pi_XK ~= L equiv_alg[B] L
+```
+
+as a free-floating identification that can be inserted anywhere. The new record
+forces it to live inside a finite Galois cover package and keeps the unproved
+geometric cover claim visible.
+
+### Remaining Gap
+
+The next milestone should start replacing `finiteEtaleGaloisCover : Prop` with
+typed finite-cover data: source/target orbicurves, a cover map, a deck group, and
+a theorem that the associated quotient gives the automorphism group of the
+function-field extension.

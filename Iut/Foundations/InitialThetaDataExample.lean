@@ -398,6 +398,73 @@ noncomputable example
       deckActionMatchesGalQuotient hDeck
   exact functionFieldData.piCKRingAutHom_ker
 
+/-- A constructor smoke test for a typed finite Galois theta function-field cover. -/
+noncomputable def abstractThetaFiniteGaloisFunctionFieldCoverData
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (quotientEquivAlgAut :
+      ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L))
+    (finiteEtaleGaloisCover reconstructedFunctionFieldOfXK
+      deckActionMatchesGalQuotient : Prop)
+    (hCover : finiteEtaleGaloisCover)
+    (hReconstructed : reconstructedFunctionFieldOfXK)
+    (hDeck : deckActionMatchesGalQuotient) :
+    ThetaFiniteGaloisFunctionFieldCoverData thetaApproach B L where
+  quotientEquivAlgAut := quotientEquivAlgAut
+  finiteEtaleGaloisCover := finiteEtaleGaloisCover
+  finiteEtaleGaloisCover_holds := hCover
+  reconstructedFunctionFieldOfXK := reconstructedFunctionFieldOfXK
+  reconstructedFunctionFieldOfXK_holds := hReconstructed
+  deckActionMatchesGalQuotient := deckActionMatchesGalQuotient
+  deckActionMatchesGalQuotient_holds := hDeck
+
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (cover : ThetaFiniteGaloisFunctionFieldCoverData thetaApproach B L) :
+    ThetaApproachFunctionFieldData thetaApproach :=
+  cover.toThetaApproachFunctionFieldData
+
+example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (cover : ThetaFiniteGaloisFunctionFieldCoverData thetaApproach B L) :
+    cover.finiteEtaleGaloisCover :=
+  cover.finiteEtaleGaloisCover_proof
+
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (cover : ThetaFiniteGaloisFunctionFieldCoverData thetaApproach B L)
+    (q : ThetaApproachQuotientData.deckQuotient thetaApproach) (x : L) :
+    cover.toThetaApproachFunctionFieldData.reconstructedFunctionField.deckRingAut q x =
+      cover.quotientEquivAlgAut q x :=
+  cover.deckRingAut_apply q x
+
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (cover : ThetaFiniteGaloisFunctionFieldCoverData thetaApproach B L)
+    (x : L) :
+    (∀ q : ThetaApproachQuotientData.deckQuotient thetaApproach,
+        cover.toThetaApproachFunctionFieldData.reconstructedFunctionField.deckRingAut q x = x) ↔
+      ∃ b : B, algebraMap B L b = x :=
+  cover.fixed_iff_in_base x
+
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (cover : ThetaFiniteGaloisFunctionFieldCoverData thetaApproach B L) :
+    (cover.toThetaApproachFunctionFieldData.piCKRingAutHom).ker =
+      thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup :=
+  cover.piCKRingAutHom_ker
+
 example :
     (zmodOneNonzeroQuotientElement primeFive).element ≠
       (zmodPointedQuotient primeFive).zero :=
