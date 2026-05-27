@@ -51,6 +51,30 @@ def HasStructuredSHE (family : TransportedRegionFamily source target index) : Pr
 def HasStructuredAPT (family : TransportedRegionFamily source target index) : Prop :=
   Nonempty (APTDatum family)
 
+/-- Structured evidence for all three qualitative properties of an output family. -/
+structure StructuredCertificate (family : TransportedRegionFamily source target index) where
+  ipl : IPLDatum family
+  she : SHEDatum family
+  apt : APTDatum family
+
+namespace StructuredCertificate
+
+variable {family : TransportedRegionFamily source target index}
+
+theorem hasStructuredIPL (certificate : StructuredCertificate family) :
+    HasStructuredIPL family :=
+  ⟨certificate.ipl⟩
+
+theorem hasStructuredSHE (certificate : StructuredCertificate family) :
+    HasStructuredSHE family :=
+  ⟨certificate.she⟩
+
+theorem hasStructuredAPT (certificate : StructuredCertificate family) :
+    HasStructuredAPT family :=
+  ⟨certificate.apt⟩
+
+end StructuredCertificate
+
 theorem apt_output_eq_family {family : TransportedRegionFamily source target index}
     (hapt : HasStructuredAPT family) :
     ∃ datum : APTDatum family, datum.outputFamily = family := by

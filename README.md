@@ -153,8 +153,8 @@ Current modules:
   for algorithmic output bookkeeping.
 * `Iut.Foundations.AlgorithmicOutput`: opaque IPL/SHE/APT qualitative-property
   interface for transported algorithmic outputs.
-* `Iut.Foundations.AlgorithmicBridge`: explicit bridge schema from certified
-  algorithmic output to measured common-target-bound data.
+* `Iut.Foundations.AlgorithmicBridge`: explicit bridge schemas from certified
+  or structured qualitative output to measured common-target-bound data.
 * `Iut.Stage1.PilotComparison`: first neutral interface for the Corollary 3.12
   target shape.
 * `Iut.Stage1.ToyModel`: Lean tests for Mochizuki's real-valued toy model from

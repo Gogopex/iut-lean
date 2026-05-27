@@ -1736,3 +1736,111 @@ The next milestone should refine the bridge schema so that its constructor
 explicitly consumes the structured qualitative data, rather than the generic
 `Certified` wrapper alone. It should still return a common-target-bound only as
 an explicitly supplied source-specific construction.
+
+## Milestone 17: Structured Bridge Schema
+
+Lean files:
+
+* `Iut/Foundations/QualitativeData.lean`
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/ToyQualitativeOutput.lean`
+* `Iut/Stage1/ToyBridge.lean`
+
+### Source Check
+
+This milestone again follows IUT III, Remark 3.11.1 and Corollary 3.12, Step
+(xi). IPL, SHE, and APT are not just flags: the source describes IPL as
+linking data by prime-strip isomorphisms, SHE as simultaneous expressibility
+relative to two arithmetic holomorphic structures, and APT as the construction
+mechanism by which gluings up to indeterminacies are expressed. Mochizuki's
+formalization progress report says this APT/hull part is exactly the
+second/third-triangle work before the final `3.11.5 => 3.12` comparison.
+
+Scholze-Stix's critique warns against jumping from qualitative identifications
+to real inequalities without spelling out the concrete comparison data. This
+milestone moves in that direction by making the bridge consume structured
+qualitative witnesses, while still refusing to make those witnesses powerful by
+themselves.
+
+### Purpose
+
+The previous bridge consumed `output.Certified`, which only proved the opaque
+properties `output.HasIPL`, `output.HasSHE`, and `output.HasAPT`. We now add a
+more explicit certificate:
+
+```text
+QualitativeData.StructuredCertificate family
+```
+
+with actual IPL, SHE, and APT datum fields. The new bridge schema is:
+
+```text
+AlgorithmicOutput.StructuredCommonTargetBoundBridge
+```
+
+whose builder has type:
+
+```text
+StructuredCertificate output.family -> output.CommonTargetBound measure bound
+```
+
+This is still an explicit bridge. Lean does not derive the common-target bound
+from the structured certificate alone.
+
+### Lean Declarations
+
+In `QualitativeData.lean`:
+
+```text
+StructuredCertificate
+StructuredCertificate.hasStructuredIPL
+StructuredCertificate.hasStructuredSHE
+StructuredCertificate.hasStructuredAPT
+```
+
+In `AlgorithmicBridge.lean`:
+
+```text
+AlgorithmicOutput.StructuredCommonTargetBoundBridge
+AlgorithmicOutput.StructuredCommonTargetBoundBridge.apply
+AlgorithmicOutput.StructuredCommonTargetBoundBridge.choice_targetVolume_le
+AlgorithmicOutput.StructuredCommonTargetBoundBridge.allTargetsAtMost
+```
+
+In the toy files:
+
+```text
+thetaToyStructuredCertificate
+thetaToyStructuredCommonTargetBoundBridge
+thetaToyStructuredBridge_choice_targetVolume_le_bound
+thetaToyStructuredBridge_allTargetsAtMost
+```
+
+The toy structured bridge ignores the certificate contents and uses the same
+explicit epsilon-cap construction as before. That is intentional: the point of
+this milestone is dependency shape, not a mathematical claim about IUT.
+
+### What This Tests
+
+The bridge can now be stated as a function of structured qualitative data, but
+the volume conclusion still depends on an explicitly supplied bridge. This
+preserves the intended separation:
+
+1. Structured IPL/SHE/APT data describe the algorithmic output.
+2. A bridge theorem consumes that data.
+3. Only the bridge theorem produces common-target-bound data.
+4. Only common-target-bound data yields target-volume estimates.
+
+### Design Trap Avoided
+
+The trap would be to add a theorem
+`StructuredCertificate -> CommonTargetBound`. We do not add such a theorem.
+Instead, `StructuredCommonTargetBoundBridge` is the named obligation that future
+IUT-specific work must prove.
+
+### Next Step
+
+The next milestone should connect the structured bridge to the signed
+Corollary-3.12 schema directly, adding a theorem parallel to
+`corollary312_from_bridge` that consumes a `StructuredCommonTargetBoundBridge`
+and a `StructuredCertificate`.

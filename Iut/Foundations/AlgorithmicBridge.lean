@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: IUT Lean formalization contributors
 -/
 import Iut.Foundations.AlgorithmicOutput
+import Iut.Foundations.QualitativeData
 
 /-!
 Bridge schema from certified algorithmic output to common-target bounds.
@@ -69,6 +70,48 @@ theorem preserves_hasAPT (bridge : CommonTargetBoundBridge output measure bound)
   (bridge.apply certified).hasAPT
 
 end CommonTargetBoundBridge
+
+/--
+A bridge whose source-specific construction consumes structured IPL/SHE/APT data
+for the transported family.
+
+This is still only a schema: the bridge is supplied explicitly and is not
+derived from the qualitative data by automation or axioms.
+-/
+structure StructuredCommonTargetBoundBridge
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target) (bound : Real) where
+  build :
+    QualitativeData.StructuredCertificate output.family ->
+      output.CommonTargetBound measure bound
+
+namespace StructuredCommonTargetBoundBridge
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+
+def apply (bridge : StructuredCommonTargetBoundBridge output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    output.CommonTargetBound measure bound :=
+  bridge.build certificate
+
+theorem choice_targetVolume_le
+    (bridge : StructuredCommonTargetBoundBridge output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family)
+    (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  TransportedRegionFamily.choice_targetVolume_le_of_commonBound
+    (bridge.apply certificate) choice
+
+theorem allTargetsAtMost
+    (bridge : StructuredCommonTargetBoundBridge output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  TransportedRegionFamily.allTargetsAtMost_of_commonBound
+    (bridge.apply certificate)
+
+end StructuredCommonTargetBoundBridge
 
 end AlgorithmicOutput
 

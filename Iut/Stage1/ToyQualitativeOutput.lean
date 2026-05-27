@@ -44,6 +44,13 @@ def thetaToyAPTD (f : Transport qLine thetaLine) (h : Real)
     outputFamily := thetaAPTOutput f h epsilon,
     output_eq_family := rfl }
 
+def thetaToyStructuredCertificate (f : Transport qLine thetaLine) (h : Real)
+    (epsilon : index -> Real) :
+    QualitativeData.StructuredCertificate (thetaAPTOutput f h epsilon) :=
+  { ipl := thetaToyIPLD "toy-input-link" epsilon f h,
+    she := thetaToySHED f h epsilon,
+    apt := thetaToyAPTD f h epsilon }
+
 /--
 Toy algorithmic output for the Theta upper-ray family.
 
@@ -61,9 +68,9 @@ def thetaToyAlgorithmOutput (f : Transport qLine thetaLine) (h : Real)
 theorem thetaToyAlgorithmOutput_certified
     (f : Transport qLine thetaLine) (h : Real) (epsilon : index -> Real) :
     (thetaToyAlgorithmOutput f h epsilon).Certified :=
-  { ipl := ⟨thetaToyIPLD "toy-input-link" epsilon f h⟩,
-    she := ⟨thetaToySHED f h epsilon⟩,
-    apt := ⟨thetaToyAPTD f h epsilon⟩ }
+  { ipl := (thetaToyStructuredCertificate f h epsilon).hasStructuredIPL,
+    she := (thetaToyStructuredCertificate f h epsilon).hasStructuredSHE,
+    apt := (thetaToyStructuredCertificate f h epsilon).hasStructuredAPT }
 
 theorem thetaToyAlgorithmOutput_has_structured_apt
     (f : Transport qLine thetaLine) (h : Real) (epsilon : index -> Real) :
