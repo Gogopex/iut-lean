@@ -921,3 +921,70 @@ directSummandPacketMultiradialImages_profile_example
 The package is still independent of the full `IUTStage1SourcePackage`.  The
 next step should define a bridge from a source package indexed by refined
 Theorem 3.11 choices into this refined multiradial image package.
+
+## 12. Source-Package Bridge for Refined Multiradial Images
+
+### Goal
+
+We connected the refined multiradial image package to an actual
+`IUTStage1SourcePackage` indexed by refined direct-summand packet choices.
+
+### Lean/API Check
+
+The new source-level package is:
+
+```text
+IUTStage1RefinedDirectSummandPacketMultiradialThetaImages
+```
+
+It carries:
+
+```text
+multiradialOutput
+possibleImages : IUTStage1ThetaPilotPossibleImages package
+refinedImages : IUTStage1DirectSummandPacketMultiradialImages
+multiradial_output_eq
+refined_possibleImages_eq
+```
+
+The constructor:
+
+```text
+ofPackageWithCoricInvariant
+```
+
+builds the refined package from a source package plus the obligation that its
+Theta-pilot possible images depend only on the coric coordinate.
+
+### Lean Theorems
+
+The package exposes:
+
+```text
+region_eq_of_related
+quotient_profile
+union_eq_targetUnion
+```
+
+### Mathematical Point
+
+This is the refined replacement for the older multiradial source package
+interface.  It asks for invariance under the generated direct-summand packet
+quotient, but still remains tied to the actual source package's possible images
+and target union.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+refinedDirectSummandPacketMultiradialThetaImages_of_package_example
+refinedDirectSummandPacketMultiradialThetaImages_region_eq_example
+refinedDirectSummandPacketMultiradialThetaImages_union_eq_example
+```
+
+### Remaining Gap
+
+This bridge still requires coric dependence as an external hypothesis.  The next
+task is to identify which Theorem 3.11 source subclaims should produce that
+coric-dependence hypothesis for the refined choice type.

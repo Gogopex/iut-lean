@@ -2546,6 +2546,81 @@ theorem quotient_profile
 end IUTStage1DirectSummandPacketMultiradialImages
 
 /--
+Source-package version of refined direct-summand packet multiradial theta
+images.
+-/
+structure IUTStage1RefinedDirectSummandPacketMultiradialThetaImages
+    {source target : Copy} {coric : Type u}
+    {kind : IUTStage1PlaceKind}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)) where
+  multiradialOutput : MultiradialOutputId
+  possibleImages : IUTStage1ThetaPilotPossibleImages package
+  refinedImages :
+    IUTStage1DirectSummandPacketMultiradialImages
+      (target := target) coric kind
+  multiradial_output_eq : multiradialOutput = package.multiradialOutput
+  refined_possibleImages_eq :
+    refinedImages.possibleImages = possibleImages.images
+
+namespace IUTStage1RefinedDirectSummandPacketMultiradialThetaImages
+
+variable {source target : Copy} {coric : Type u}
+variable {kind : IUTStage1PlaceKind}
+variable
+  {package :
+    IUTStage1SourcePackage source target
+      (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+
+def ofPackageWithCoricInvariant
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind))
+    (hcoric :
+      ∀ choice₁ choice₂,
+        choice₁.coric = choice₂.coric ->
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂) :
+    IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package :=
+  { multiradialOutput := package.multiradialOutput,
+    possibleImages := IUTStage1ThetaPilotPossibleImages.ofPackage package,
+    refinedImages :=
+      IUTStage1DirectSummandPacketMultiradialImages.ofCoricInvariant
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images
+        hcoric,
+    multiradial_output_eq := rfl,
+    refined_possibleImages_eq := rfl }
+
+theorem region_eq_of_related
+    (data :
+      IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind}
+    (hrel : data.refinedImages.quotient.relation choice₁ choice₂) :
+    data.possibleImages.images.region choice₁ =
+      data.possibleImages.images.region choice₂ := by
+  rw [← data.refined_possibleImages_eq]
+  exact data.refinedImages.region_eq_of_related hrel
+
+theorem quotient_profile
+    (data :
+      IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package) :
+    data.refinedImages.quotient.profile = theorem311IndeterminacyProfile :=
+  data.refinedImages.quotient_profile
+
+theorem union_eq_targetUnion
+    (data :
+      IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package) :
+    data.possibleImages.union =
+      package.preLedger.output.comparisons.targetUnion :=
+  data.possibleImages.union_eq_targetUnion
+
+end IUTStage1RefinedDirectSummandPacketMultiradialThetaImages
+
+/--
 Multiradial possible images of the Theta-pilot, recorded together with the
 indeterminacy quotient on choices.
 

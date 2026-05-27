@@ -897,6 +897,47 @@ theorem directSummandPacketMultiradialImages_profile_example
     data.quotient.profile = theorem311IndeterminacyProfile :=
   data.quotient_profile
 
+def refinedDirectSummandPacketMultiradialThetaImages_of_package_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind))
+    (hcoric :
+      ∀ choice₁ choice₂,
+        choice₁.coric = choice₂.coric ->
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂) :
+    IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package :=
+  IUTStage1RefinedDirectSummandPacketMultiradialThetaImages.ofPackageWithCoricInvariant
+    package hcoric
+
+theorem refinedDirectSummandPacketMultiradialThetaImages_region_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+    (data :
+      IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind}
+    (hrel : data.refinedImages.quotient.relation choice₁ choice₂) :
+    data.possibleImages.images.region choice₁ =
+      data.possibleImages.images.region choice₂ :=
+  data.region_eq_of_related hrel
+
+theorem refinedDirectSummandPacketMultiradialThetaImages_union_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice coric kind)}
+    (data :
+      IUTStage1RefinedDirectSummandPacketMultiradialThetaImages package) :
+    data.possibleImages.union =
+      package.preLedger.output.comparisons.targetUnion :=
+  data.union_eq_targetUnion
+
 theorem upperSemi_logVolumeCompatibility_upperBound_example
     (data : IUTStage1LogVolumeCompatibilityData) :
     data.sourceLogVolume <= data.targetLogVolume :=
