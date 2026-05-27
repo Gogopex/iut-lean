@@ -3041,6 +3041,314 @@ theorem union_eq_targetUnion
 end IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim
 
 /--
+Generator-wise image invariance for the nonarchimedean `Ism` refined quotient.
+-/
+structure IUTStage1NonarchimedeanIsmThetaImageGeneratorInvariance
+    {source target : Copy} {coric : Type u}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice
+          coric IUTStage1PlaceKind.nonarchimedean)) :
+    Prop where
+  ind1_region_eq :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean},
+      IUTStage1DirectSummandPacketTheorem311Choice.ProcessionAutomorphismStep
+        choice₁ choice₂ ->
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂
+  ind2_region_eq :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean},
+      IUTStage1DirectSummandPacketTheorem311Choice.NonarchimedeanIsmInd2Step
+        choice₁ choice₂ ->
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂
+  ind3_region_eq :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean},
+      IUTStage1DirectSummandPacketTheorem311Choice.UpperSemiCompatibilityStep
+        choice₁ choice₂ ->
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂
+
+/--
+Generator-wise image invariance for the archimedean order-two refined quotient.
+-/
+structure IUTStage1ArchimedeanOrderTwoThetaImageGeneratorInvariance
+    {source target : Copy} {coric : Type u}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice
+          coric IUTStage1PlaceKind.archimedean)) :
+    Prop where
+  ind1_region_eq :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean},
+      IUTStage1DirectSummandPacketTheorem311Choice.ProcessionAutomorphismStep
+        choice₁ choice₂ ->
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂
+  ind2_region_eq :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean},
+      IUTStage1DirectSummandPacketTheorem311Choice.ArchimedeanOrderTwoInd2Step
+        choice₁ choice₂ ->
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂
+  ind3_region_eq :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean},
+      IUTStage1DirectSummandPacketTheorem311Choice.UpperSemiCompatibilityStep
+        choice₁ choice₂ ->
+        (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₁ =
+          (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+            choice₂
+
+namespace IUTStage1NonarchimedeanIsmThetaImageGeneratorInvariance
+
+variable {source target : Copy} {coric : Type u}
+variable
+  {package :
+    IUTStage1SourcePackage source target
+      (IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean)}
+
+theorem generatedImageInvariant
+    (invariance :
+      IUTStage1NonarchimedeanIsmThetaImageGeneratorInvariance package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1DirectSummandPacketTheorem311Choice.nonarchimedeanIsmIndeterminacySourceData
+          (coric := coric)).generators choice₁ choice₂) :
+    (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₁ =
+      (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₂ :=
+  IUTStage1GeneratedIndeterminacyRelation.image_invariant
+    (IUTStage1ThetaPilotPossibleImages.ofPackage package).images
+    invariance.ind1_region_eq
+    invariance.ind2_region_eq
+    invariance.ind3_region_eq
+    hrel
+
+end IUTStage1NonarchimedeanIsmThetaImageGeneratorInvariance
+
+namespace IUTStage1ArchimedeanOrderTwoThetaImageGeneratorInvariance
+
+variable {source target : Copy} {coric : Type u}
+variable
+  {package :
+    IUTStage1SourcePackage source target
+      (IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean)}
+
+theorem generatedImageInvariant
+    (invariance :
+      IUTStage1ArchimedeanOrderTwoThetaImageGeneratorInvariance package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1DirectSummandPacketTheorem311Choice.archimedeanOrderTwoIndeterminacySourceData
+          (coric := coric)).generators choice₁ choice₂) :
+    (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₁ =
+      (IUTStage1ThetaPilotPossibleImages.ofPackage package).images.region
+        choice₂ :=
+  IUTStage1GeneratedIndeterminacyRelation.image_invariant
+    (IUTStage1ThetaPilotPossibleImages.ofPackage package).images
+    invariance.ind1_region_eq
+    invariance.ind2_region_eq
+    invariance.ind3_region_eq
+    hrel
+
+end IUTStage1ArchimedeanOrderTwoThetaImageGeneratorInvariance
+
+/-- Source-level multiradial image package for the nonarchimedean `Ism` quotient. -/
+structure IUTStage1NonarchimedeanIsmMultiradialThetaImages
+    {source target : Copy} {coric : Type u}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice
+          coric IUTStage1PlaceKind.nonarchimedean)) where
+  multiradialOutput : MultiradialOutputId
+  possibleImages : IUTStage1ThetaPilotPossibleImages package
+  quotient :
+    IUTStage1IndeterminacyQuotient
+      (IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean)
+  quotient_eq_generated :
+    quotient =
+      (IUTStage1DirectSummandPacketTheorem311Choice.nonarchimedeanIsmIndeterminacySourceData
+        (coric := coric)).quotient
+  multiradial_output_eq : multiradialOutput = package.multiradialOutput
+  image_invariant :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean},
+      quotient.relation choice₁ choice₂ ->
+        possibleImages.images.region choice₁ =
+          possibleImages.images.region choice₂
+
+/-- Source-level multiradial image package for the archimedean order-two quotient. -/
+structure IUTStage1ArchimedeanOrderTwoMultiradialThetaImages
+    {source target : Copy} {coric : Type u}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice
+          coric IUTStage1PlaceKind.archimedean)) where
+  multiradialOutput : MultiradialOutputId
+  possibleImages : IUTStage1ThetaPilotPossibleImages package
+  quotient :
+    IUTStage1IndeterminacyQuotient
+      (IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean)
+  quotient_eq_generated :
+    quotient =
+      (IUTStage1DirectSummandPacketTheorem311Choice.archimedeanOrderTwoIndeterminacySourceData
+        (coric := coric)).quotient
+  multiradial_output_eq : multiradialOutput = package.multiradialOutput
+  image_invariant :
+    ∀ {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean},
+      quotient.relation choice₁ choice₂ ->
+        possibleImages.images.region choice₁ =
+          possibleImages.images.region choice₂
+
+namespace IUTStage1NonarchimedeanIsmMultiradialThetaImages
+
+variable {source target : Copy} {coric : Type u}
+variable
+  {package :
+    IUTStage1SourcePackage source target
+      (IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean)}
+
+def ofGeneratorInvariance
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice
+          coric IUTStage1PlaceKind.nonarchimedean))
+    (invariance :
+      IUTStage1NonarchimedeanIsmThetaImageGeneratorInvariance package) :
+    IUTStage1NonarchimedeanIsmMultiradialThetaImages package :=
+  { multiradialOutput := package.multiradialOutput,
+    possibleImages := IUTStage1ThetaPilotPossibleImages.ofPackage package,
+    quotient :=
+      (IUTStage1DirectSummandPacketTheorem311Choice.nonarchimedeanIsmIndeterminacySourceData
+        (coric := coric)).quotient,
+    quotient_eq_generated := rfl,
+    multiradial_output_eq := rfl,
+    image_invariant := by
+      intro choice₁ choice₂ hrel
+      exact invariance.generatedImageInvariant hrel }
+
+theorem region_eq_of_related
+    (data : IUTStage1NonarchimedeanIsmMultiradialThetaImages package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (hrel : data.quotient.relation choice₁ choice₂) :
+    data.possibleImages.images.region choice₁ =
+      data.possibleImages.images.region choice₂ :=
+  data.image_invariant hrel
+
+theorem quotient_profile
+    (data : IUTStage1NonarchimedeanIsmMultiradialThetaImages package) :
+    data.quotient.profile = theorem311IndeterminacyProfile := by
+  rw [data.quotient_eq_generated]
+  exact
+    IUTStage1Theorem311IndeterminacySourceData.quotient_profile
+      (IUTStage1DirectSummandPacketTheorem311Choice.nonarchimedeanIsmIndeterminacySourceData
+        (coric := coric))
+
+theorem union_eq_targetUnion
+    (data : IUTStage1NonarchimedeanIsmMultiradialThetaImages package) :
+    data.possibleImages.union =
+      package.preLedger.output.comparisons.targetUnion :=
+  data.possibleImages.union_eq_targetUnion
+
+end IUTStage1NonarchimedeanIsmMultiradialThetaImages
+
+namespace IUTStage1ArchimedeanOrderTwoMultiradialThetaImages
+
+variable {source target : Copy} {coric : Type u}
+variable
+  {package :
+    IUTStage1SourcePackage source target
+      (IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean)}
+
+def ofGeneratorInvariance
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1DirectSummandPacketTheorem311Choice
+          coric IUTStage1PlaceKind.archimedean))
+    (invariance :
+      IUTStage1ArchimedeanOrderTwoThetaImageGeneratorInvariance package) :
+    IUTStage1ArchimedeanOrderTwoMultiradialThetaImages package :=
+  { multiradialOutput := package.multiradialOutput,
+    possibleImages := IUTStage1ThetaPilotPossibleImages.ofPackage package,
+    quotient :=
+      (IUTStage1DirectSummandPacketTheorem311Choice.archimedeanOrderTwoIndeterminacySourceData
+        (coric := coric)).quotient,
+    quotient_eq_generated := rfl,
+    multiradial_output_eq := rfl,
+    image_invariant := by
+      intro choice₁ choice₂ hrel
+      exact invariance.generatedImageInvariant hrel }
+
+theorem region_eq_of_related
+    (data : IUTStage1ArchimedeanOrderTwoMultiradialThetaImages package)
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean}
+    (hrel : data.quotient.relation choice₁ choice₂) :
+    data.possibleImages.images.region choice₁ =
+      data.possibleImages.images.region choice₂ :=
+  data.image_invariant hrel
+
+theorem quotient_profile
+    (data : IUTStage1ArchimedeanOrderTwoMultiradialThetaImages package) :
+    data.quotient.profile = theorem311IndeterminacyProfile := by
+  rw [data.quotient_eq_generated]
+  exact
+    IUTStage1Theorem311IndeterminacySourceData.quotient_profile
+      (IUTStage1DirectSummandPacketTheorem311Choice.archimedeanOrderTwoIndeterminacySourceData
+        (coric := coric))
+
+theorem union_eq_targetUnion
+    (data : IUTStage1ArchimedeanOrderTwoMultiradialThetaImages package) :
+    data.possibleImages.union =
+      package.preLedger.output.comparisons.targetUnion :=
+  data.possibleImages.union_eq_targetUnion
+
+end IUTStage1ArchimedeanOrderTwoMultiradialThetaImages
+
+/--
 Multiradial possible images of the Theta-pilot, recorded together with the
 indeterminacy quotient on choices.
 

@@ -1251,3 +1251,139 @@ archimedeanOrderTwo_generated_preserves_totalLogVolume_example
 The next refinement should package source-specific image invariance, just as
 the generic generator-wise invariance package does, so the nonarchimedean and
 archimedean quotients can drive multiradial image packages directly.
+
+## 16. Source-Specific Generator-Wise Image Invariance
+
+### Goal
+
+We added generator-wise image invariance records for the two source-specific
+refined quotients.
+
+### Lean/API Check
+
+The new records are:
+
+```text
+IUTStage1NonarchimedeanIsmThetaImageGeneratorInvariance
+IUTStage1ArchimedeanOrderTwoThetaImageGeneratorInvariance
+```
+
+The nonarchimedean record uses:
+
+```text
+NonarchimedeanIsmInd2Step
+nonarchimedeanIsmIndeterminacySourceData
+```
+
+The archimedean record uses:
+
+```text
+ArchimedeanOrderTwoInd2Step
+archimedeanOrderTwoIndeterminacySourceData
+```
+
+Both records have generator fields:
+
+```text
+ind1_region_eq
+ind2_region_eq
+ind3_region_eq
+```
+
+and both prove:
+
+```text
+generatedImageInvariant
+```
+
+by applying the general generated-relation induction theorem.
+
+### Mathematical Point
+
+The earlier generator-wise invariance package used the generic direct-summand
+action as `(Ind2)`.  This milestone provides the source-specific versions that
+future proofs of `Ism` and order-two automorphism invariance should target.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+nonarchimedeanIsmThetaImageGeneratorInvariance_region_eq_example
+archimedeanOrderTwoThetaImageGeneratorInvariance_region_eq_example
+```
+
+### Remaining Gap
+
+The next step should wrap these source-specific invariance records into
+source-specific multiradial image packages, rather than exposing only the raw
+generated-image-invariance theorem.
+
+## 17. Source-Specific Multiradial Image Packages
+
+### Goal
+
+We wrapped the source-specific generator-wise invariance records into
+source-level multiradial image packages.
+
+### Lean/API Check
+
+The new packages are:
+
+```text
+IUTStage1NonarchimedeanIsmMultiradialThetaImages
+IUTStage1ArchimedeanOrderTwoMultiradialThetaImages
+```
+
+Each carries:
+
+```text
+multiradialOutput
+possibleImages
+quotient
+quotient_eq_generated
+multiradial_output_eq
+image_invariant
+```
+
+The constructors are:
+
+```text
+IUTStage1NonarchimedeanIsmMultiradialThetaImages.ofGeneratorInvariance
+IUTStage1ArchimedeanOrderTwoMultiradialThetaImages.ofGeneratorInvariance
+```
+
+The packages expose:
+
+```text
+region_eq_of_related
+quotient_profile
+union_eq_targetUnion
+```
+
+### Mathematical Point
+
+The generic refined multiradial package remains useful for a common
+direct-summand action surface.  These new packages keep the source-specific
+`(Ind2)` quotients visible all the way to the source package interface.  This
+is closer to the source split in IUT III, Theorem 3.11.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+nonarchimedeanIsmMultiradialThetaImages_of_invariance_example
+nonarchimedeanIsmMultiradialThetaImages_region_eq_example
+nonarchimedeanIsmMultiradialThetaImages_profile_example
+archimedeanOrderTwoMultiradialThetaImages_of_invariance_example
+archimedeanOrderTwoMultiradialThetaImages_region_eq_example
+archimedeanOrderTwoMultiradialThetaImages_profile_example
+```
+
+### Remaining Gap
+
+The source-specific packages are not yet tied into a combined place-family
+package.  The next mathematical step should aggregate nonarchimedean and
+archimedean local data across the relevant places rather than treating each
+place kind as a separate one-kind package.
