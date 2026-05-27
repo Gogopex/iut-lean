@@ -271,6 +271,29 @@ noncomputable example :
     AlgebraicDeckFunctionFieldData (F ≃ₐ[F] F) F F :=
   AlgebraicDeckFunctionFieldData.identity F
 
+noncomputable example :
+    AlgebraicDeckFunctionFieldData (K ≃ₐ[F] K) F K :=
+  AlgebraicDeckFunctionFieldData.finiteGalois F K
+
+example (x : K) :
+    (∀ σ : K ≃ₐ[F] K, σ x = x) ↔
+      ∃ b : F, algebraMap F K b = x :=
+  AlgebraicDeckFunctionFieldData.finiteGalois_fixed_iff_in_base x
+
+noncomputable example :
+    let data := AlgebraicDeckFunctionFieldData.finiteGalois F K
+    Function.Injective data.toReconstructedFunctionFieldData.deckRingAutHom := by
+  let data := AlgebraicDeckFunctionFieldData.finiteGalois F K
+  exact data.toReconstructed_deckRingAutHom_injective
+
+noncomputable example (x : K) :
+    let data := AlgebraicDeckFunctionFieldData.finiteGalois F K
+    (∀ σ : K ≃ₐ[F] K, data.toReconstructedFunctionFieldData.deckRingAut σ x = x) ↔
+      ∃ b : F, algebraMap F K b = x :=
+  by
+    let data := AlgebraicDeckFunctionFieldData.finiteGalois F K
+    exact data.toReconstructed_fixed_iff_in_base x
+
 noncomputable example
     (thetaApproach : ThetaApproachQuotientData)
     {B L : Type} [Field B] [Field L] [Algebra B L]

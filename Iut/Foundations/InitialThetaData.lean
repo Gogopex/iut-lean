@@ -1844,6 +1844,38 @@ theorem toReconstructed_fixed_iff_in_base (x : L) :
   · rintro ⟨b, rfl⟩ g
     exact (data.deckEquivAlgAut g).commutes b
 
+/--
+Build an algebraic deck model from a finite Galois extension and an
+identification of the chosen deck group with the algebra automorphism group.
+-/
+noncomputable def ofFiniteGaloisAlgAutEquiv
+    [FiniteDimensional B L] [IsGalois B L]
+    (deckEquivAlgAut : deckGroup ≃* (L ≃ₐ[B] L)) :
+    AlgebraicDeckFunctionFieldData deckGroup B L where
+  deckEquivAlgAut := deckEquivAlgAut
+  fixedElementsFromBase := by
+    intro x hfixed
+    exact (IsGalois.mem_range_algebraMap_iff_fixed x).mpr hfixed
+
+/-- The canonical algebraic deck model of a finite Galois extension. -/
+noncomputable def finiteGalois
+    (B L : Type u) [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L] :
+    AlgebraicDeckFunctionFieldData (L ≃ₐ[B] L) B L :=
+  ofFiniteGaloisAlgAutEquiv (deckGroup := L ≃ₐ[B] L)
+    (B := B) (L := L) (MulEquiv.refl (L ≃ₐ[B] L))
+
+theorem finiteGalois_fixed_iff_in_base
+    {B L : Type u} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L] (x : L) :
+    (∀ σ : L ≃ₐ[B] L, σ x = x) ↔
+      ∃ b : B, algebraMap B L b = x := by
+  constructor
+  · intro hfixed
+    exact (IsGalois.mem_range_algebraMap_iff_fixed x).mpr hfixed
+  · rintro ⟨b, rfl⟩ σ
+    exact σ.commutes b
+
 /-- The tautological algebra-automorphism model for the trivial base extension. -/
 noncomputable def identity (B : Type u) [Field B] :
     AlgebraicDeckFunctionFieldData (B ≃ₐ[B] B) B B where

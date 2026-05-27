@@ -14320,3 +14320,112 @@ transport.
 The deck group is still supplied together with an equivalence to
 `L ≃ₐ[B] L`. Later milestones should derive this equivalence from a concrete
 finite etale or finite Galois cover associated to `X_K -> C_K`.
+
+## Math Milestone 55: Finite Galois Fixed-Field Constructor
+
+### Source Check
+
+IUT I, Remark 3.1.2, treats the reconstructed function field of `X_K` together
+with the natural action
+
+```text
+Gal(X_K / C_K) ~= Pi_CK / Pi_XK.
+```
+
+IUT I, Remark 3.1.5, also uses the surrounding finite Galois context for the
+initial-theta-data field tower, including the fact that `K` is Galois over
+`Fmod` in the relevant setting. This supports using standard finite-Galois
+fixed-field mathematics in the reconstruction layer, before any Hodge-theater or
+log-link transport.
+
+Mathlib supplies the theorem
+
+```text
+IsGalois.mem_range_algebraMap_iff_fixed
+```
+
+which states that, for a finite Galois extension `L/B`, the elements fixed by
+all `B`-algebra automorphisms of `L` are exactly the elements in the range of
+`algebraMap B L`.
+
+### Lean Move
+
+The algebraic deck model now has:
+
+```text
+AlgebraicDeckFunctionFieldData.ofFiniteGaloisAlgAutEquiv
+```
+
+This takes:
+
+```text
+deckEquivAlgAut : deckGroup ~= (L equiv_alg[B] L)
+FiniteDimensional B L
+IsGalois B L
+```
+
+and constructs an `AlgebraicDeckFunctionFieldData deckGroup B L`.
+
+It also exposes the canonical case:
+
+```text
+AlgebraicDeckFunctionFieldData.finiteGalois B L
+```
+
+where the deck group is exactly `L ≃ₐ[B] L`.
+
+The derived theorem is:
+
+```text
+AlgebraicDeckFunctionFieldData.finiteGalois_fixed_iff_in_base
+```
+
+with statement:
+
+```text
+(forall sigma : L equiv_alg[B] L, sigma x = x)
+  <-> exists b : B, algebraMap B L b = x
+```
+
+### Lean Decisions
+
+This milestone removes the fixed-field converse as an independent assumption in
+the finite-Galois case. The theorem is not reproved from scratch; it delegates to
+mathlib's Galois correspondence API.
+
+We still keep the more general `AlgebraicDeckFunctionFieldData` constructor,
+because later IUT objects may pass through reconstruction interfaces before a
+concrete finite Galois extension has been attached.
+
+### What This Tests
+
+The example file checks:
+
+* finite Galois `K/F` gives an algebraic deck model with deck group
+  `K ≃ₐ[F] K`;
+* fixed-by-all-automorphisms is equivalent to being in the image of
+  `algebraMap F K`;
+* the reconstructed deck automorphism homomorphism is injective;
+* the reconstructed fixed-field statement follows from the finite-Galois
+  constructor.
+
+### Design Trap Avoided
+
+The trap would be to keep treating the fixed-field converse as a black-box
+axiom even in the ordinary finite Galois situation where mathlib can prove it.
+This milestone uses Lean's existing Galois theory to discharge that part.
+
+We still do not claim that the geometric cover `X_K -> C_K` has been
+constructed as a finite etale cover. The equivalence between the IUT quotient
+`Pi_CK/Pi_XK` and the algebra-automorphism group remains supplied.
+
+### Remaining Gap
+
+The next gap is to connect the quotient
+
+```text
+Pi_CK / Pi_XK
+```
+
+to the finite Galois automorphism group of an actual function-field extension,
+rather than supplying `deckEquivAlgAut` directly.
