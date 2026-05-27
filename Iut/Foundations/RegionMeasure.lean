@@ -128,5 +128,34 @@ theorem choice_targetVolume_le_commonHull (measure : RegionMeasure target)
 
 end RegionMeasure
 
+namespace RegionComparison
+
+variable {source target : Copy}
+
+/--
+A comparison is membership-to-volume controlled when membership of a source
+point forces the transported coordinate to be bounded by the measured target
+volume.
+-/
+def MembershipControlsTargetVolume (measure : RegionMeasure target)
+    (comparison : RegionComparison source target) : Prop :=
+  ∀ point : Point source, comparison.Holds point ->
+    (Transport.map comparison.transport point).coord <=
+      RegionMeasure.targetVolume measure comparison
+
+theorem upperRay_membershipControlsTargetVolume_of_normalized
+    (measure : RegionMeasure target)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (transport : Transport source target) (bound : Real) :
+    (RegionComparison.upperRay transport bound).MembershipControlsTargetVolume
+      measure := by
+  intro point hholds
+  rw [RegionComparison.upperRay_holds_iff] at hholds
+  simpa [RegionMeasure.targetVolume, RegionComparison.upperRay,
+    RegionMeasure.upperRay_volume_eq_of_normalized measure hnormalized]
+    using hholds
+
+end RegionComparison
+
 end RealLineCopy
 end Iut

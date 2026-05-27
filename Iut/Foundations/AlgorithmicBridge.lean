@@ -459,7 +459,32 @@ structure ChartedMembershipData
     (targetVolume :
       output.ChartedTargetVolumeData measure chart chosenOutput.choice) where
   holds : chosenOutput.comparison.Holds qValue.qPoint
-  q_le_target : qSigned <= targetVolume.targetSigned
+  q_chart_transport_eq :
+    chart.qToTarget = chosenOutput.comparison.transport
+  volume_control :
+    chosenOutput.comparison.MembershipControlsTargetVolume measure
+
+namespace ChartedMembershipData
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {chart : output.RealComparisonChartData measure}
+variable {qSigned : Real}
+variable {qValue : output.ChartedQValueData measure chart qSigned}
+variable {chosenOutput : output.ChosenOutputData}
+variable {targetVolume :
+  output.ChartedTargetVolumeData measure chart chosenOutput.choice}
+
+theorem q_le_target
+    (data :
+      output.ChartedMembershipData measure chart qValue chosenOutput targetVolume) :
+    qSigned <= targetVolume.targetSigned := by
+  rw [← qValue.qSigned_eq, targetVolume.targetSigned_eq,
+    ← chosenOutput.comparison_eq]
+  rw [data.q_chart_transport_eq]
+  exact data.volume_control qValue.qPoint data.holds
+
+end ChartedMembershipData
 
 /--
 A common container together with the real-line comparison chart used to read its

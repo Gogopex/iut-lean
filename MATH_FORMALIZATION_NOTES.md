@@ -8296,3 +8296,112 @@ The pre-ledger chain still uses an abstract `q_le_target` membership-to-volume
 inequality. The next useful mathematical refinement is to inspect the toy
 upper-ray proof and decide which general lemma should eventually replace that
 abstract field.
+
+## Math Milestone 86: Membership-to-Volume Control for the q-Side Middle Step
+
+Lean files:
+
+* `Iut/Foundations/RegionMeasure.lean`
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/ToyMeasuredComparison.lean`
+* `Iut/Stage1/IUTStage1DataExample.lean`
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+The previous milestone isolated the local chain:
+
+```text
+charted q <= targetSigned <= charted Theta.
+```
+
+The left inequality was still stored as an abstract `q_le_target` field. The
+toy upper-ray proof shows the intended shape: membership of the q-side point
+in the chosen comparison, together with normalization of upper rays, implies
+that the transported q-coordinate is bounded by the measured target volume.
+
+### Lean/API Check
+
+The reusable predicate is:
+
+```text
+RegionComparison.MembershipControlsTargetVolume
+```
+
+It states that for every source point, comparison membership implies:
+
+```text
+(Transport.map comparison.transport point).coord <=
+  RegionMeasure.targetVolume measure comparison
+```
+
+For upper-ray comparisons, the theorem:
+
+```text
+RegionComparison.upperRay_membershipControlsTargetVolume_of_normalized
+```
+
+proves this from upper-ray normalization.
+
+The toy specialization is named as:
+
+```text
+thetaIndeterminacy_membershipControlsTargetVolume
+```
+
+The structure:
+
+```text
+AlgorithmicOutput.ChartedMembershipData
+```
+
+now stores:
+
+```text
+q_chart_transport_eq :
+  chart.qToTarget = chosenOutput.comparison.transport
+volume_control :
+  chosenOutput.comparison.MembershipControlsTargetVolume measure
+```
+
+and derives:
+
+```text
+q_le_target : qSigned <= targetVolume.targetSigned
+```
+
+from the chart equation, the transport compatibility, target-volume
+calibration, and membership.
+
+### Lean Decisions
+
+Lean exposed an important hidden assumption: membership controls the transport
+inside `chosenOutput.comparison`, while the q-side signed value is read through
+`chart.qToTarget`. These are not automatically the same map. The new
+`q_chart_transport_eq` field makes this compatibility explicit instead of
+letting it remain implicit in the old `q_le_target` proof.
+
+This is closer to the mathematical issue than the raw inequality field was:
+we now distinguish the chart transport, the comparison transport, and the fact
+that they agree at this membership step.
+
+### What This Tests
+
+The toy pre-ledger and toy source-obligation constructors now supply the
+upper-ray membership-control theorem and the chart/comparison transport
+compatibility. The examples extract both fields, and the focused Stage 1 data
+example build passes. The full project build also passes.
+
+### Design Trap Avoided
+
+The trap would be to store `qSigned <= targetSigned` without recording why the
+charted q-coordinate is the same coordinate controlled by comparison
+membership. This milestone forces that transport compatibility into the
+membership data.
+
+### Remaining Gap
+
+The membership-control predicate is still an abstract interface for genuine
+IUT data. For the toy model it is proved from upper rays and normalized
+measure. Later work must replace the toy upper-ray instance with the relevant
+IUT log-volume or region-membership construction.

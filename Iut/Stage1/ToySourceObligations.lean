@@ -63,9 +63,12 @@ def unitThetaToySourceObligationLedger
       { holds := by
           simpa [AlgorithmicOutput.Holds, TransportedRegionFamily.Holds]
             using hholds,
-        q_le_target :=
-          unitThetaToy_qSigned_le_choiceTargetVolume
-            measure hnormalized h epsilon choice hholds },
+        q_chart_transport_eq := rfl,
+        volume_control := by
+          simpa [thetaToyAlgorithmOutput, thetaAPTOutput,
+            TransportedRegionFamily.comparison]
+            using thetaIndeterminacy_membershipControlsTargetVolume
+              measure hnormalized unitQToTheta h (epsilon choice) },
     q_positive := by
       unfold qAssignment unitQToTheta Transport.map point PositiveScale.one
       linarith,

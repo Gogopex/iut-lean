@@ -71,9 +71,12 @@ def unitThetaToyPreLedgerData
       { holds := by
           simpa [AlgorithmicOutput.Holds, TransportedRegionFamily.Holds]
             using hholds,
-        q_le_target :=
-          unitThetaToy_qSigned_le_choiceTargetVolume
-            measure hnormalized h epsilon choice hholds } }
+        q_chart_transport_eq := rfl,
+        volume_control := by
+          simpa [thetaToyAlgorithmOutput, thetaAPTOutput,
+            TransportedRegionFamily.comparison]
+            using thetaIndeterminacy_membershipControlsTargetVolume
+              measure hnormalized unitQToTheta h (epsilon choice) } }
 
 def unitThetaToyPromotionObligations
     (measure : RegionMeasure thetaLine)
@@ -156,6 +159,35 @@ theorem unitThetaToy_comparisonPayloadInputs_chosenHolds_example
         measure hnormalized hh hbound hholds).qValue.qPoint :=
   (unitThetaToyComparisonPayloadInputs
     measure hnormalized hh hbound hholds).chosenHolds
+
+theorem unitThetaToy_preLedger_membership_q_chart_transport_eq_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let data := unitThetaToyPreLedgerData measure hnormalized hh hbound hholds
+    data.chartedContainer.chart.qToTarget =
+      data.chosenOutput.comparison.transport :=
+  (unitThetaToyPreLedgerData
+    measure hnormalized hh hbound hholds).membership.q_chart_transport_eq
+
+theorem unitThetaToy_preLedger_membership_volume_control_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let data := unitThetaToyPreLedgerData measure hnormalized hh hbound hholds
+    data.chosenOutput.comparison.MembershipControlsTargetVolume measure :=
+  (unitThetaToyPreLedgerData
+    measure hnormalized hh hbound hholds).membership.volume_control
 
 theorem unitThetaToy_preLedgerAudit_comparisonPayloadInputs_eq_example
     (measure : RegionMeasure thetaLine)

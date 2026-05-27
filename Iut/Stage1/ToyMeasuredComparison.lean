@@ -71,6 +71,14 @@ theorem thetaIndeterminacy_targetVolume_le_iff_epsilon_le
     thetaIndeterminacy_targetVolume_eq_bound measure hnormalized f h epsilon₂]
   constructor <;> intro hle <;> linarith
 
+theorem thetaIndeterminacy_membershipControlsTargetVolume
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h epsilon : Real) :
+    (thetaIndeterminacyComparison f h epsilon).MembershipControlsTargetVolume
+      measure :=
+  RegionComparison.upperRay_membershipControlsTargetVolume_of_normalized
+    measure hnormalized f (-(2 * h) + epsilon)
+
 theorem thetaIndeterminacy_holds_iff_coord_le_targetVolume
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
     (f : Transport qLine thetaLine) (h epsilon : Real) :
