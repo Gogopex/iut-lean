@@ -8999,3 +8999,51 @@ conversion through `toSideConditions` part of the API.
 
 The next milestone should add recovery and label projections for the
 hypothesis-based source audit, mirroring the parts-based audit coverage.
+
+## Milestone 111: Hypothesis-Based Audit Projection Coverage
+
+Lean file:
+
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Milestone 110 introduced package helpers that accept source-facing
+side-condition hypotheses. Those helpers are only wrappers around the existing
+parts route, but they should still expose the same audit projections.
+
+This milestone tests that the hypothesis-based audit route preserves both the
+public endpoint projections and source-label bookkeeping.
+
+### Purpose
+
+This milestone adds toy projection examples for the hypothesis-based source
+audit.
+
+### Lean Declarations
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_audit_from_hypotheses_corollary_projection_example
+unitThetaToy_source_audit_from_hypotheses_recovery_projection_example
+unitThetaToy_source_audit_from_hypotheses_thetaPilot_label_projection_example
+unitThetaToy_source_audit_from_hypotheses_qPilot_label_projection_example
+```
+
+### What This Tests
+
+The examples verify that the hypothesis-based audit path supports the
+Corollary-shaped endpoint, the Stage 1 recovery theorem, and the source labels
+for the Theta-pilot and q-pilot.
+
+### Design Trap Avoided
+
+The trap would be to provide a hypothesis-based audit wrapper that is tested
+only for the q-bound. This milestone checks that it behaves like the established
+source audit for both mathematical and label projections.
+
+### Next Step
+
+The next milestone should add an audited public endpoint from side-condition
+hypotheses, again factoring through `obligationsFromHypotheses`.
