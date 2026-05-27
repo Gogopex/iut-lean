@@ -884,6 +884,45 @@ theorem promotedProvider_ledger
       package.promotedLedger obligations :=
   package.preLedger.promotedProvider_ledger obligations.toLedgerPromotionObligations
 
+def comparisonPayloadInputs
+    (package : IUTStage1SourcePackage source target index) :
+    package.preLedger.ComparisonPayloadInputs :=
+  package.preLedger.comparisonPayloadInputs
+
+theorem comparisonPayloadInputs_qSigned_le_thetaSigned
+    (package : IUTStage1SourcePackage source target index) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  package.comparisonPayloadInputs.qSignedLeThetaSigned
+
+def comparisonDataFromPayloadInputs
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceObligations package) :
+    Corollary312ComparisonData :=
+  package.comparisonPayloadInputs.comparisonData obligations.qPilotPositive
+
+theorem comparisonDataFromPayloadInputs_thetaSigned
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceObligations package) :
+    (package.comparisonDataFromPayloadInputs obligations).thetaSigned =
+      package.preLedger.thetaSigned :=
+  rfl
+
+theorem comparisonDataFromPayloadInputs_qSigned
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceObligations package) :
+    (package.comparisonDataFromPayloadInputs obligations).qSigned =
+      package.preLedger.qSigned :=
+  rfl
+
+theorem comparisonDataFromPayloadInputs_corollary312
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceObligations package) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  package.comparisonPayloadInputs.comparisonData_corollary312
+    obligations.qPilotPositive
+
 def comparisonData
     (package : IUTStage1SourcePackage source target index)
     (obligations : IUTStage1SourceObligations package) :

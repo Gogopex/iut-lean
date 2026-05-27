@@ -94,6 +94,52 @@ def unitThetaToyPromotionObligations
       linarith,
     normalization_proof := hnormalized }
 
+def unitThetaToyComparisonPayloadInputs
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyPreLedgerData
+      measure hnormalized hh hbound hholds).ComparisonPayloadInputs :=
+  (unitThetaToyPreLedgerData
+    measure hnormalized hh hbound hholds).comparisonPayloadInputs
+
+theorem unitThetaToy_comparisonPayloadInputs_q_le_theta_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (Transport.map unitQToTheta (qAssignment h)).coord <=
+      -(2 * h) + epsilonBound :=
+  (unitThetaToyComparisonPayloadInputs
+    measure hnormalized hh hbound hholds).qSignedLeThetaSigned
+
+theorem unitThetaToy_comparisonPayloadInputs_corollary_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta (-(2 * h) + epsilonBound))
+      (signedPilotLogVolume PilotSide.q
+        (Transport.map unitQToTheta (qAssignment h)).coord) :=
+  (unitThetaToyComparisonPayloadInputs
+    measure hnormalized hh hbound hholds).comparisonData_corollary312
+      (unitThetaToyPromotionObligations
+        measure hnormalized hh hbound hholds).q_positive
+
 def unitThetaToyPromotedProvider
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

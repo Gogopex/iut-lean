@@ -2732,6 +2732,40 @@ theorem unitThetaToy_source_auditedComparisonDataEndpoint_example
     (unitThetaToyIUTStage1SourceObligations
       measure hnormalized hh hbound hholds)
 
+theorem unitThetaToy_source_comparisonPayloadInputs_q_le_theta_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (Transport.map unitQToTheta (qAssignment h)).coord <=
+      -(2 * h) + epsilonBound :=
+  (unitThetaToyIUTStage1SourcePackage
+    measure hnormalized hh hbound hholds).comparisonPayloadInputs_qSigned_le_thetaSigned
+
+theorem unitThetaToy_source_comparisonDataFromPayloadInputs_corollary_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta (-(2 * h) + epsilonBound))
+      (signedPilotLogVolume PilotSide.q
+        (Transport.map unitQToTheta (qAssignment h)).coord) :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  package.comparisonDataFromPayloadInputs_corollary312
+    (unitThetaToyIUTStage1SourceObligations
+      measure hnormalized hh hbound hholds)
+
 theorem unitThetaToy_source_comparisonDataEndpoint_q_le_theta_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

@@ -120,6 +120,89 @@ theorem targetSigned_le_thetaSigned
   rw [data.targetSigned_eq_choiceTargetVolume]
   exact data.choiceTargetVolume_le_thetaSigned
 
+/--
+Source-side inputs that determine the signed q-to-Theta comparison payload.
+
+This record deliberately stops before q-positivity and source normalization.
+Those are promotion obligations, not chart/membership data.
+-/
+structure ComparisonPayloadInputs
+    (data : IUTStage1PreLedgerData source target index) where
+  theta_chart_trivial :
+    Transport.TrivialMonodromy data.chartedContainer.chart.thetaToTarget
+  q_charted :
+    (Transport.map data.chartedContainer.chart.qToTarget
+      data.qValue.qPoint).coord = data.qSigned
+  theta_charted :
+    (Transport.map data.chartedContainer.chart.thetaToTarget
+      data.thetaBound.thetaPoint).coord = data.thetaSigned
+  chosen_holds :
+    data.chosenOutput.comparison.Holds data.qValue.qPoint
+  q_le_target :
+    data.qSigned <= data.targetVolume.targetSigned
+  target_le_theta :
+    data.targetVolume.targetSigned <= data.thetaSigned
+
+theorem comparisonPayloadInputs
+    (data : IUTStage1PreLedgerData source target index) :
+    data.ComparisonPayloadInputs :=
+  { theta_chart_trivial := data.thetaChartTrivial,
+    q_charted := data.qSigned_eq_chartedQ,
+    theta_charted := data.thetaSigned_eq_chartedTheta,
+    chosen_holds := data.chosenComparisonHoldsQ,
+    q_le_target := data.qSigned_le_targetSigned,
+    target_le_theta := data.targetSigned_le_thetaSigned }
+
+namespace ComparisonPayloadInputs
+
+variable {data : IUTStage1PreLedgerData source target index}
+
+theorem qSignedLeTargetSigned
+    (inputs : data.ComparisonPayloadInputs) :
+    data.qSigned <= data.targetVolume.targetSigned :=
+  inputs.q_le_target
+
+theorem targetSignedLeThetaSigned
+    (inputs : data.ComparisonPayloadInputs) :
+    data.targetVolume.targetSigned <= data.thetaSigned :=
+  inputs.target_le_theta
+
+theorem qSignedLeThetaSigned
+    (inputs : data.ComparisonPayloadInputs) :
+    data.qSigned <= data.thetaSigned :=
+  le_trans inputs.qSignedLeTargetSigned inputs.targetSignedLeThetaSigned
+
+def comparisonData
+    (inputs : data.ComparisonPayloadInputs)
+    (hq_positive : 0 < -data.qSigned) :
+    Corollary312ComparisonData :=
+  { thetaSigned := data.thetaSigned,
+    qSigned := data.qSigned,
+    q_positive := hq_positive,
+    qSigned_le_thetaSigned := inputs.qSignedLeThetaSigned }
+
+theorem comparisonData_thetaSigned
+    (inputs : data.ComparisonPayloadInputs)
+    (hq_positive : 0 < -data.qSigned) :
+    (inputs.comparisonData hq_positive).thetaSigned = data.thetaSigned :=
+  rfl
+
+theorem comparisonData_qSigned
+    (inputs : data.ComparisonPayloadInputs)
+    (hq_positive : 0 < -data.qSigned) :
+    (inputs.comparisonData hq_positive).qSigned = data.qSigned :=
+  rfl
+
+theorem comparisonData_corollary312
+    (inputs : data.ComparisonPayloadInputs)
+    (hq_positive : 0 < -data.qSigned) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta data.thetaSigned)
+      (signedPilotLogVolume PilotSide.q data.qSigned) :=
+  (inputs.comparisonData hq_positive).corollary312
+
+end ComparisonPayloadInputs
+
 /-- Local audit of pre-ledger data, before the remaining ledger obligations. -/
 structure Audit (data : IUTStage1PreLedgerData source target index) : Prop where
   has_structured_ipl : QualitativeData.HasStructuredIPL data.output.family

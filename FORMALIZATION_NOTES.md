@@ -10425,3 +10425,110 @@ The next milestone should start naming the source-side comparison payload
 inputs more explicitly, so future work can distinguish the signed real payload
 from the pre-ledger chart, selected output, and q-membership data that produce
 it.
+
+## Milestone 131: Source-Side Comparison Payload Inputs
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Data.lean`
+* `Iut/Stage1/IUTStage1DataExample.lean`
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The relevant source boundary is still the final `3.11.5 => 3.12` comparison
+identified in Mochizuki's formalization report. That passage treats the final
+comparison as something obtained after earlier source data have supplied a
+common-container setting, selected output data, and log-volume comparison data.
+
+Scholze-Stix's critique emphasizes that the crucial issue is not the formal
+shape of the final real inequality by itself, but whether the pilot-object data
+and the identifications leading to it have been legitimately produced. This
+milestone responds to that pressure by naming the pre-ledger inputs that feed
+the signed comparison payload, rather than letting them disappear behind the
+ledger promotion.
+
+### Purpose
+
+`Corollary312ComparisonData` is the final signed payload. It contains only the
+Theta signed real, the q signed real, q-positivity, and the signed comparison.
+It should not be confused with the source-side chart and membership data that
+produce the signed comparison.
+
+This milestone introduces `IUTStage1PreLedgerData.ComparisonPayloadInputs`.
+It records the pre-ledger facts used to derive the q-to-Theta signed inequality:
+
+* theta chart triviality;
+* q-side charting;
+* Theta-side charting;
+* the selected comparison object holding the q point;
+* the q-to-target-volume inequality;
+* the target-volume-to-Theta inequality.
+
+Q-positivity remains outside this record. That is deliberate: q-positivity is a
+promotion side condition, not a chart/membership input. Combining
+`ComparisonPayloadInputs` with q-positivity produces a
+`Corollary312ComparisonData` object.
+
+### Lean Declarations
+
+In `IUTStage1Data.lean`:
+
+```text
+IUTStage1PreLedgerData.ComparisonPayloadInputs
+IUTStage1PreLedgerData.comparisonPayloadInputs
+IUTStage1PreLedgerData.ComparisonPayloadInputs.qSignedLeTargetSigned
+IUTStage1PreLedgerData.ComparisonPayloadInputs.targetSignedLeThetaSigned
+IUTStage1PreLedgerData.ComparisonPayloadInputs.qSignedLeThetaSigned
+IUTStage1PreLedgerData.ComparisonPayloadInputs.comparisonData
+IUTStage1PreLedgerData.ComparisonPayloadInputs.comparisonData_corollary312
+```
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.comparisonPayloadInputs
+IUTStage1SourcePackage.comparisonPayloadInputs_qSigned_le_thetaSigned
+IUTStage1SourcePackage.comparisonDataFromPayloadInputs
+IUTStage1SourcePackage.comparisonDataFromPayloadInputs_thetaSigned
+IUTStage1SourcePackage.comparisonDataFromPayloadInputs_qSigned
+IUTStage1SourcePackage.comparisonDataFromPayloadInputs_corollary312
+```
+
+In the toy examples:
+
+```text
+unitThetaToyComparisonPayloadInputs
+unitThetaToy_comparisonPayloadInputs_q_le_theta_example
+unitThetaToy_comparisonPayloadInputs_corollary_example
+unitThetaToy_source_comparisonPayloadInputs_q_le_theta_example
+unitThetaToy_source_comparisonDataFromPayloadInputs_corollary_example
+```
+
+### What This Tests
+
+The toy pre-ledger examples verify that the new source-side input record
+recovers the q-to-Theta comparison and, with q-positivity from the promotion
+obligations, recovers the Corollary-3.12-shaped statement. The source-package
+examples verify that the same record is available through the public source API.
+
+### Design Trap Avoided
+
+The trap would be to treat the final signed payload as if it were the source
+construction itself. This milestone keeps the two layers separate:
+
+* `ComparisonPayloadInputs` records source-side chart, selected-output, and
+  membership facts;
+* `Corollary312ComparisonData` records the final signed real payload;
+* q-positivity remains a promotion obligation.
+
+This separation matters for the Corollary 3.12 debate because the hard question
+is exactly whether the source-side construction legitimately supplies the final
+payload.
+
+### Next Step
+
+The next milestone should add an audit namespace for `ComparisonPayloadInputs`,
+parallel to the endpoint projection namespace, so later modules can recover
+each source-side input without depending on the internal record field names.
