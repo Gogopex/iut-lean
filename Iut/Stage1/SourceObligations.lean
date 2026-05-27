@@ -160,6 +160,22 @@ def stage1Comparison (ledger :
     Stage1Comparison :=
   stage1Comparison_of_signed_le ledger.q_positive ledger.qSigned_le_thetaSigned
 
+theorem stage1Comparison_q_positive_eq_ledger (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.stage1Comparison.q_positive = ledger.q_positive :=
+  rfl
+
+theorem stage1Comparison_comparison_eq_corollary312 (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.stage1Comparison.comparison = ledger.corollary312 :=
+  rfl
+
+theorem stage1Comparison_comparison_eq_threeTermComparison (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.stage1Comparison.comparison =
+      corollary312_of_signed_le ledger.threeTermComparison.q_le_theta :=
+  rfl
+
 theorem sheMatchesCertificate (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     ledger.chartedContainer.commonContainer.hddShe.sheArrow.datum =

@@ -3771,3 +3771,78 @@ The next milestone should add the analogous projection for
 `Stage1Comparison.comparison` field is the same Corollary-3.12 proof produced
 from the named three-term chain and that `q_positive` is simply the ledger's
 recorded positivity obligation.
+
+## Milestone 39: Stage 1 Comparison Field Projections
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+The display in IUT III, Corollary 3.12, Step `(xi-d)` compares signed
+log-volume data of the form `-|log(Theta)|` and `-|log(q)|` after the relevant
+objects have been made comparable in `R`. Our `CorollarySchema.lean` file
+therefore stores signed values explicitly and turns them into positive
+`PilotLogVolume.value` fields via `signedPilotLogVolume`.
+
+The April 2026 formalization report separates this endpoint from the earlier
+APT/IPL/source-obligation work. Scholze-Stix's critique reinforces why this
+endpoint should not hide any real-line identification or sign convention inside
+a final record.
+
+### Purpose
+
+`Stage1Comparison` is the exported Stage 1 interface. This milestone exposes
+where its proof fields come from when constructed from a source ledger:
+
+```text
+ledger.stage1Comparison.q_positive
+  = ledger.q_positive
+
+ledger.stage1Comparison.comparison
+  = ledger.corollary312
+
+ledger.stage1Comparison.comparison
+  = corollary312_of_signed_le ledger.threeTermComparison.q_le_theta
+```
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.stage1Comparison_q_positive_eq_ledger
+SourceObligationLedger.stage1Comparison_comparison_eq_corollary312
+SourceObligationLedger.stage1Comparison_comparison_eq_threeTermComparison
+```
+
+All three proofs are `rfl`. Lean verifies that the exported `Stage1Comparison`
+record contains the ledger's positivity proof and the same final comparison
+proof already traced through the three-term chain.
+
+### What This Tests
+
+The exported Stage 1 object now has named audit projections for the fields that
+matter to the final inequality:
+
+```text
+q_positive
+comparison
+```
+
+This prevents the final API from becoming a place where sign conversion or
+proof assembly can disappear from view.
+
+### Design Trap Avoided
+
+The trap would be to treat `Stage1Comparison` as a harmless packaging layer.
+Packaging layers are exactly where hidden sign conventions become difficult to
+inspect. The new projection lemmas keep the packaging layer transparent.
+
+### Next Step
+
+The next milestone should expose the signed pilot-volume fields of
+`stage1Comparison`, namely that the exported `theta` and `q` values are exactly
+`signedPilotLogVolume PilotSide.theta thetaSigned` and
+`signedPilotLogVolume PilotSide.q qSigned`.
