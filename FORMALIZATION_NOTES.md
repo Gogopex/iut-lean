@@ -3012,3 +3012,103 @@ The next milestone should make the chosen target volume itself explicit as
 charted data: store the chosen output comparison, its target-volume real, and
 the equality connecting that real to the middle term in
 `qSigned <= targetVolume <= thetaSigned`.
+
+## Milestone 30: Charted Target Volume
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/SourceObligations.lean`
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III, Corollary 3.12, Step `(xi-d)` describes applying normalized
+log-volume to various regions in the common setting: the region coming from the
+Theta-side output and the region arising from the q-pilot representation. The
+final comparison is not just a two-number comparison; it passes through the
+measured output region selected from the collection of possibilities.
+
+The explanatory paragraph around the holomorphic hull says that computing the
+log-volume of the hull of possible Theta-pilot images yields an upper bound for
+the q-side log-volume. In Lean terms, this is exactly the middle term:
+
+```text
+qSigned <= targetVolume(choice) <= thetaSigned
+```
+
+Scholze-Stix's real-line-copy warning remains relevant: the middle real must be
+identified as the measured target-side value in the same charted comparison
+context.
+
+### Purpose
+
+Milestone 29 made the final proof use the stored common bound. This milestone
+names the middle target-volume real:
+
+```text
+ChartedTargetVolumeData
+```
+
+It stores:
+
+```text
+targetSigned : Real
+targetSigned_eq :
+  targetSigned = RegionMeasure.targetVolume measure (output.comparison choice)
+```
+
+The record is parameterized by the same real-comparison chart as the q- and
+Theta-side values, so the middle real is part of the same charted final
+comparison.
+
+### Lean Declarations
+
+In `AlgorithmicBridge.lean`:
+
+```text
+ChartedTargetVolumeData.targetSigned
+ChartedTargetVolumeData.targetSigned_eq
+```
+
+In `SourceObligations.lean`, the ledger now stores:
+
+```text
+targetVolume :
+  output.ChartedTargetVolumeData measure chartedContainer.chart choice
+q_le_choice :
+  qSigned <= targetVolume.targetSigned
+```
+
+and proves:
+
+```text
+targetSigned_eq_choiceTargetVolume
+targetSigned_le_thetaSigned
+qSigned_le_thetaSigned
+```
+
+The final inequality now factors through the named middle value.
+
+In `ToySourceObligations.lean`, the toy ledger sets `targetSigned` to the
+existing target-volume expression for the chosen comparison, with equality by
+`rfl`.
+
+### What This Tests
+
+The toy source-obligation endpoint still proves the same signed Stage 1
+inequality after the middle real is made explicit. The final proof chain now
+has three named pieces: charted q-value, charted chosen target volume, and
+charted Theta bound.
+
+### Design Trap Avoided
+
+The trap would be to make q and Theta charted while leaving the measured output
+volume as an anonymous expression. This milestone exposes the middle term that
+links membership in a chosen output region to the common Theta upper bound.
+
+### Next Step
+
+The next milestone should make the selected comparison itself explicit by
+storing a named `ChosenOutputData` record with the choice index, the comparison
+object, and the equality to `output.comparison choice`.

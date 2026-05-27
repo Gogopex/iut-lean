@@ -40,8 +40,10 @@ structure SourceObligationLedger
   theta_commonBound :
     output.CommonTargetBound measure thetaSigned
   choice : index
+  targetVolume :
+    output.ChartedTargetVolumeData measure chartedContainer.chart choice
   q_le_choice :
-    qSigned <= RegionMeasure.targetVolume measure (output.comparison choice)
+    qSigned <= targetVolume.targetSigned
   q_positive : 0 < -qSigned
   normalization_proof : normalization
 
@@ -57,8 +59,23 @@ theorem qSigned_le_thetaSigned (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     qSigned <= thetaSigned :=
   le_trans ledger.q_le_choice
-    (TransportedRegionFamily.choice_targetVolume_le_of_commonBound
-      ledger.theta_commonBound ledger.choice)
+    (by
+      rw [ledger.targetVolume.targetSigned_eq]
+      exact TransportedRegionFamily.choice_targetVolume_le_of_commonBound
+        ledger.theta_commonBound ledger.choice)
+
+theorem targetSigned_eq_choiceTargetVolume (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.targetVolume.targetSigned =
+      RegionMeasure.targetVolume measure (output.comparison ledger.choice) :=
+  ledger.targetVolume.targetSigned_eq
+
+theorem targetSigned_le_thetaSigned (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.targetVolume.targetSigned <= thetaSigned := by
+  rw [ledger.targetVolume.targetSigned_eq]
+  exact TransportedRegionFamily.choice_targetVolume_le_of_commonBound
+    ledger.theta_commonBound ledger.choice
 
 theorem corollary312 (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :

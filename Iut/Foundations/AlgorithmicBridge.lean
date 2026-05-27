@@ -364,6 +364,21 @@ structure ChartedThetaBoundData
   thetaSigned_eq : (Transport.map chart.thetaToTarget thetaPoint).coord = thetaSigned
 
 /--
+The chosen output target volume as a named middle term in the final comparison.
+
+The `chart` parameter records that this target-side real is being read in the
+same real-comparison chart as the q- and Theta-side values.
+-/
+structure ChartedTargetVolumeData
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target)
+    (chart : output.RealComparisonChartData measure)
+    (choice : index) where
+  targetSigned : Real
+  targetSigned_eq :
+    targetSigned = RegionMeasure.targetVolume measure (output.comparison choice)
+
+/--
 A common container together with the real-line comparison chart used to read its
 final q- and Theta-side real numbers in the target copy.
 -/

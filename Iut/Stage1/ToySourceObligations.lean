@@ -51,6 +51,11 @@ def unitThetaToySourceObligationLedger
         measure hnormalized unitQToTheta h hbound).apply
         (thetaToyStructuredCertificate unitQToTheta h epsilon),
     choice := choice,
+    targetVolume :=
+      { targetSigned :=
+          RegionMeasure.targetVolume measure
+            ((thetaToyAlgorithmOutput unitQToTheta h epsilon).comparison choice),
+        targetSigned_eq := rfl },
     q_le_choice :=
       unitThetaToy_qSigned_le_choiceTargetVolume measure hnormalized h epsilon choice hholds,
     q_positive := by
