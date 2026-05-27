@@ -305,6 +305,38 @@ theorem unitThetaToy_preLedger_target_le_charted_theta_example
   (unitThetaToy_preLedger_chartedComparisonChain_example
     measure hnormalized hh hbound hholds).targetSigned_le_thetaCharted
 
+theorem unitThetaToy_preLedger_chain_targetSigned_eq_choiceVolume_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let data := unitThetaToyPreLedgerData measure hnormalized hh hbound hholds
+    data.targetVolume.targetSigned =
+      RegionMeasure.targetVolume data.measure
+        (data.output.comparison data.chosenOutput.choice) :=
+  (unitThetaToy_preLedger_chartedComparisonChain_example
+    measure hnormalized hh hbound hholds).targetSigned_eq_choiceTargetVolume
+
+theorem unitThetaToy_preLedger_chain_choiceVolume_le_theta_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let data := unitThetaToyPreLedgerData measure hnormalized hh hbound hholds
+    RegionMeasure.targetVolume data.measure
+        (data.output.comparison data.chosenOutput.choice) <=
+      data.thetaSigned :=
+  (unitThetaToy_preLedger_chartedComparisonChain_example
+    measure hnormalized hh hbound hholds).choiceTargetVolume_le_thetaSigned
+
 theorem unitThetaToy_preLedger_charted_q_le_charted_theta_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

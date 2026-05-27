@@ -8474,3 +8474,83 @@ The right step, `targetSigned <= charted Theta`, still deserves the same kind
 of provenance refinement. It currently comes from the common-container bound
 and the Theta chart equation; later work should expose those proof ingredients
 inside the chain as well.
+
+## Math Milestone 88: Target-to-Theta Provenance in the Pre-Ledger Chain
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Data.lean`
+* `Iut/Stage1/IUTStage1DataExample.lean`
+
+### Source Check
+
+The right side of the pre-ledger chain is:
+
+```text
+targetSigned <= charted Theta.
+```
+
+This is not a primitive inequality. It comes from the definition of the
+chosen target-volume middle term, the common-container bound, and the Theta
+chart equation.
+
+### Lean/API Check
+
+The record:
+
+```text
+IUTStage1PreLedgerData.ChartedComparisonChain
+```
+
+now stores:
+
+```text
+target_signed_eq_choice_volume :
+  data.targetVolume.targetSigned =
+    RegionMeasure.targetVolume data.measure
+      (data.output.comparison data.chosenOutput.choice)
+choice_target_volume_le_theta :
+  RegionMeasure.targetVolume data.measure
+      (data.output.comparison data.chosenOutput.choice) <=
+    data.thetaSigned
+```
+
+and exposes:
+
+```text
+targetSigned_eq_choiceTargetVolume
+choiceTargetVolume_le_thetaSigned
+```
+
+### Lean Decisions
+
+This mirrors the previous provenance refinement for the q-side left step. The
+chain now carries both sides' immediate proof ingredients:
+
+```text
+q chart transport = comparison transport
+membership controls target volume
+targetSigned = chosen target volume
+chosen target volume <= thetaSigned
+```
+
+Together with the q and Theta chart equations, these fields explain the whole
+charted q-to-Theta chain.
+
+### What This Tests
+
+The toy pre-ledger examples extract both target-to-Theta provenance fields.
+The focused pre-ledger example build and the full project build both pass.
+
+### Design Trap Avoided
+
+The trap would be to expose provenance for `charted q <= targetSigned` while
+leaving `targetSigned <= charted Theta` as a raw inequality. This milestone
+keeps the middle-to-Theta step auditable as well.
+
+### Remaining Gap
+
+The common-container bound itself is still abstract at this point in the
+pre-ledger. Later work should refine where `choice_target_volume_le_theta`
+comes from: the HDD-after-SHE/common-container construction and the structured
+SHE context that is supposed to control it.

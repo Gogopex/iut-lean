@@ -139,6 +139,14 @@ structure ChartedComparisonChain
       data.chosenOutput.comparison.transport
   membership_volume_control :
     data.chosenOutput.comparison.MembershipControlsTargetVolume data.measure
+  target_signed_eq_choice_volume :
+    data.targetVolume.targetSigned =
+      RegionMeasure.targetVolume data.measure
+        (data.output.comparison data.chosenOutput.choice)
+  choice_target_volume_le_theta :
+    RegionMeasure.targetVolume data.measure
+        (data.output.comparison data.chosenOutput.choice) <=
+      data.thetaSigned
   q_charted_le_target :
     (Transport.map data.chartedContainer.chart.qToTarget
       data.qValue.qPoint).coord <= data.targetVolume.targetSigned
@@ -159,6 +167,8 @@ theorem chartedComparisonChain
     theta_charted := data.thetaSigned_eq_chartedTheta,
     q_chart_transport_eq := data.membership.q_chart_transport_eq,
     membership_volume_control := data.membership.volume_control,
+    target_signed_eq_choice_volume := data.targetSigned_eq_choiceTargetVolume,
+    choice_target_volume_le_theta := data.choiceTargetVolume_le_thetaSigned,
     q_charted_le_target := by
       rw [data.qSigned_eq_chartedQ]
       exact data.qSigned_le_targetSigned,
@@ -195,6 +205,20 @@ theorem membershipVolumeControl
     (chain : data.ChartedComparisonChain) :
     data.chosenOutput.comparison.MembershipControlsTargetVolume data.measure :=
   chain.membership_volume_control
+
+theorem targetSigned_eq_choiceTargetVolume
+    (chain : data.ChartedComparisonChain) :
+    data.targetVolume.targetSigned =
+      RegionMeasure.targetVolume data.measure
+        (data.output.comparison data.chosenOutput.choice) :=
+  chain.target_signed_eq_choice_volume
+
+theorem choiceTargetVolume_le_thetaSigned
+    (chain : data.ChartedComparisonChain) :
+    RegionMeasure.targetVolume data.measure
+        (data.output.comparison data.chosenOutput.choice) <=
+      data.thetaSigned :=
+  chain.choice_target_volume_le_theta
 
 theorem qCharted_le_targetSigned
     (chain : data.ChartedComparisonChain) :
