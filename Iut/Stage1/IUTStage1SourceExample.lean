@@ -1633,6 +1633,53 @@ theorem unitThetaToy_source_theorem311_allowed_chart_transport_chart_discipline_
   (unitThetaToy_source_theorem311_allowed_chart_transport_example
     measure hnormalized hh hbound hholds).chartTransportDiscipline
 
+theorem unitThetaToy_source_theorem311_q_pilot_chart_sign_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let bundle :=
+      unitThetaToy_source_theorem311_structured_inputs_with_she_example
+        measure hnormalized hh hbound hholds
+    let sideConditions :=
+      unitThetaToy_source_side_conditions_example
+        measure hnormalized hh hbound hholds
+    IUTStage1SourcePackage.AuditedQPilotChartSign
+      package bundle sideConditions :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  package.auditedQPilotChartSign
+    (unitThetaToy_source_theorem311_structured_inputs_with_she_example
+      measure hnormalized hh hbound hholds)
+    (unitThetaToy_source_side_conditions_example
+      measure hnormalized hh hbound hholds)
+
+theorem unitThetaToy_source_theorem311_q_pilot_charted_positive_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    0 < -
+      (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+        package.preLedger.qValue.qPoint).coord :=
+  (unitThetaToy_source_theorem311_q_pilot_chart_sign_example
+    measure hnormalized hh hbound hholds).chartedQPilotPositive
+
 theorem unitThetaToy_source_theorem311_audited_route_summary_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

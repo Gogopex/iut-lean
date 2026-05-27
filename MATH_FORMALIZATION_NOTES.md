@@ -7844,3 +7844,71 @@ while avoiding any claim about ring/scheme-history identification.
 The transport model is still only positive scaling between labeled real-line
 copies. Later work should decide whether additional chart properties are
 needed for the IUT log-volume comparison.
+
+## Math Milestone 80: q-Pilot Sign Tied to the Charted q Reading
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The q-pilot positivity side condition is part of the final signed Corollary
+3.12-style payload. It should be visibly about the q-side quantity read through
+the real-comparison chart, not merely about an unrelated stored real number.
+
+The pre-ledger already proves that the charted q-side point has coordinate
+`qSigned` after applying the q-to-target chart. This milestone packages that
+with the q-pilot positivity side condition.
+
+### Lean/API Check
+
+The new audit object is:
+
+```text
+IUTStage1SourcePackage.AuditedQPilotChartSign
+```
+
+It stores:
+
+```text
+allowed_chart_transport
+q_charted
+q_pilot_positive
+charted_q_pilot_positive
+```
+
+The final field states positivity directly for the charted q-side reading:
+
+```text
+0 < - (Transport.map qToTarget qPoint).coord
+```
+
+The proof rewrites the charted q coordinate by the audited q-chart equation and
+then applies the q-pilot positivity side condition.
+
+### Lean Decisions
+
+This is a small but important audit refinement. The final sign condition is no
+longer only a proposition about `preLedger.qSigned`; it is also available as a
+proposition about the charted q-side point.
+
+No new endpoint is introduced. The object is derived from the existing allowed
+chart transport and side conditions.
+
+### What This Tests
+
+The source example constructs the q-pilot chart/sign audit and extracts the
+charted q-positivity theorem. The source example build passes.
+
+### Design Trap Avoided
+
+The trap would be to prove q-positivity for a raw real while separately proving
+that some charted q-point equals that raw real. This milestone forces the two
+facts to meet in a single checkpoint.
+
+### Remaining Gap
+
+The q-side point is still part of the toy/pre-ledger chart model. Later work
+should connect this point to a more concrete q-pilot log-volume construction.

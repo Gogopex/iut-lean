@@ -2329,6 +2329,84 @@ theorem auditedAllowedChartTransport
   AuditedAllowedChartTransport.ofStructuredInputsWithSHE bundle sideConditions
 
 /--
+Audit object tying the q-pilot sign condition to the charted q-side reading.
+
+The sign condition in the final payload is about `preLedger.qSigned`; this
+record keeps the proof that `qSigned` is the real obtained by applying the
+q-to-target chart to the q-side point.
+-/
+structure AuditedQPilotChartSign
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) : Prop where
+  allowed_chart_transport :
+    AuditedAllowedChartTransport package bundle sideConditions
+  q_charted :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord = package.preLedger.qSigned
+  q_pilot_positive : 0 < -package.preLedger.qSigned
+  charted_q_pilot_positive :
+    0 < -
+      (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+        package.preLedger.qValue.qPoint).coord
+
+namespace AuditedQPilotChartSign
+
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+variable {sideConditions : IUTStage1SourceSideConditions package}
+
+theorem ofAllowedChartTransport
+    (transport :
+      AuditedAllowedChartTransport package bundle sideConditions) :
+    AuditedQPilotChartSign package bundle sideConditions :=
+  { allowed_chart_transport := transport,
+    q_charted := transport.allowedQToTargetReading,
+    q_pilot_positive := sideConditions.qPilotPositive,
+    charted_q_pilot_positive := by
+      rw [transport.allowedQToTargetReading]
+      exact sideConditions.qPilotPositive }
+
+theorem ofStructuredInputsWithSHE
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedQPilotChartSign package bundle sideConditions :=
+  ofAllowedChartTransport
+    (package.auditedAllowedChartTransport bundle sideConditions)
+
+theorem allowedChartTransport
+    (audit : AuditedQPilotChartSign package bundle sideConditions) :
+    AuditedAllowedChartTransport package bundle sideConditions :=
+  audit.allowed_chart_transport
+
+theorem qCharted
+    (audit : AuditedQPilotChartSign package bundle sideConditions) :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord = package.preLedger.qSigned :=
+  audit.q_charted
+
+theorem qPilotPositive
+    (audit : AuditedQPilotChartSign package bundle sideConditions) :
+    0 < -package.preLedger.qSigned :=
+  audit.q_pilot_positive
+
+theorem chartedQPilotPositive
+    (audit : AuditedQPilotChartSign package bundle sideConditions) :
+    0 < -
+      (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+        package.preLedger.qValue.qPoint).coord :=
+  audit.charted_q_pilot_positive
+
+end AuditedQPilotChartSign
+
+theorem auditedQPilotChartSign
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedQPilotChartSign package bundle sideConditions :=
+  AuditedQPilotChartSign.ofStructuredInputsWithSHE bundle sideConditions
+
+/--
 Compact checkpoint summary for the audited structured-SHE route.
 
 The summary is proof-only: it does not create a new endpoint or hide any
