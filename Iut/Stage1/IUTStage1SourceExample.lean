@@ -1988,6 +1988,47 @@ theorem unitThetaToy_source_theorem311_charted_boundary_hull_det_common_volume_b
   (unitThetaToy_source_theorem311_charted_comparison_boundary_example
     measure hnormalized hh hbound hholds).hullDetBoundAudit.commonTargetVolumeBound
 
+theorem unitThetaToy_source_theorem311_charted_boundary_hull_det_choice_region_atMost_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      (package.preLedger.output.comparison package.preLedger.chosenOutput.choice).targetRegion
+      package.preLedger.thetaSigned :=
+  (unitThetaToy_source_theorem311_charted_comparison_boundary_example
+    measure hnormalized hh hbound hholds).hullDetBoundAudit.choiceRegionAtMost
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds).preLedger.chosenOutput.choice
+
+theorem unitThetaToy_source_theorem311_charted_boundary_hull_det_holds_common_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    (RegionComparison.enlargeTarget
+      (package.preLedger.output.comparison package.preLedger.chosenOutput.choice)
+      (package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge.apply
+        package.preLedger.certificate).common).Holds package.preLedger.qValue.qPoint :=
+  (unitThetaToy_source_theorem311_charted_comparison_boundary_example
+    measure hnormalized hh hbound hholds).hullDetBoundAudit.holdsCommonTarget
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds).preLedger.chosenComparisonHoldsQ
+
 theorem unitThetaToy_source_theorem311_charted_boundary_hdd_she_local_valid_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

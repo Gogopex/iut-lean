@@ -189,9 +189,19 @@ structure BoundAudit
     output.comparisons.CommonTarget (data.apply certificate).common
   common_target_volume_bound :
     RegionMeasure.HasVolumeAtMost measure (data.apply certificate).common bound
+  choice_region_at_most :
+    ∀ choice : index,
+      RegionMeasure.HasVolumeAtMost measure
+        (output.comparison choice).targetRegion bound
   choice_target_volume_le :
     ∀ choice : index,
       RegionMeasure.targetVolume measure (output.comparison choice) <= bound
+  holds_common_target :
+    ∀ {choice : index} {sourcePoint : Point source},
+      (output.comparison choice).Holds sourcePoint ->
+        (RegionComparison.enlargeTarget
+          (output.comparison choice)
+          (data.apply certificate).common).Holds sourcePoint
   all_targets_at_most :
     RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound
 
@@ -202,7 +212,9 @@ theorem boundAudit
   { apply_eq_bridge_apply := rfl,
     common_target_contains_each := (data.apply certificate).contains_each,
     common_target_volume_bound := (data.apply certificate).volume_bound,
+    choice_region_at_most := (data.apply certificate).choice_region_atMost,
     choice_target_volume_le := data.choice_targetVolume_le certificate,
+    holds_common_target := (data.apply certificate).holds_common_of_choice,
     all_targets_at_most := data.allTargetsAtMost certificate }
 
 namespace BoundAudit
@@ -228,10 +240,25 @@ theorem commonTargetVolumeBound
     RegionMeasure.HasVolumeAtMost measure (data.apply certificate).common bound :=
   audit.common_target_volume_bound
 
+theorem choiceRegionAtMost
+    (audit : data.BoundAudit certificate) (choice : index) :
+    RegionMeasure.HasVolumeAtMost measure
+      (output.comparison choice).targetRegion bound :=
+  audit.choice_region_at_most choice
+
 theorem choiceTargetVolume_le
     (audit : data.BoundAudit certificate) (choice : index) :
     RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
   audit.choice_target_volume_le choice
+
+theorem holdsCommonTarget
+    (audit : data.BoundAudit certificate)
+    {choice : index} {sourcePoint : Point source}
+    (hholds : (output.comparison choice).Holds sourcePoint) :
+    (RegionComparison.enlargeTarget
+      (output.comparison choice)
+      (data.apply certificate).common).Holds sourcePoint :=
+  audit.holds_common_target hholds
 
 theorem allTargetsAtMost
     (audit : data.BoundAudit certificate) :

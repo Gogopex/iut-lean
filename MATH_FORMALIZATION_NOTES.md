@@ -9104,3 +9104,82 @@ separate auditable facts.
 The common target is still supplied by the bridge. Future work should refine
 how that common target is produced, likely by threading an explicit hull
 operation or common-hull object before determinant/log-volume estimates.
+
+## Math Milestone 97: Pointwise Common-Target Consequences in the Hull+Det Audit
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The previous milestone exposed the common target and its measured bound inside
+the hull+det audit. The next local consequences are pointwise: each chosen
+target region has bounded volume, and membership in a chosen comparison lifts
+to membership in the enlarged comparison with the common target.
+
+These facts are the concrete common-target content behind the later numerical
+target-volume bound.
+
+### Lean/API Check
+
+The audit:
+
+```text
+AlgorithmicOutput.HullDetBridgeData.BoundAudit
+```
+
+now stores:
+
+```text
+choice_region_at_most
+holds_common_target
+```
+
+and exposes:
+
+```text
+choiceRegionAtMost
+holdsCommonTarget
+```
+
+The chosen target-volume and all-targets-at-most fields remain available.
+
+### Lean Decisions
+
+The new fields are derived from the `CommonTargetBound` returned by the
+hull+det bridge:
+
+```text
+(data.apply certificate).choice_region_atMost
+(data.apply certificate).holds_common_of_choice
+```
+
+This keeps the audit close to the foundation API instead of storing only the
+final real inequality.
+
+### What This Tests
+
+The toy source examples extract:
+
+```text
+RegionMeasure.HasVolumeAtMost ... chosenTargetRegion thetaSigned
+```
+
+and the lifted membership statement for the q-point in the enlarged common
+target comparison. The focused Stage 1 source example build and the full
+project build both pass.
+
+### Design Trap Avoided
+
+The trap would be to expose the common target but never use it except through
+a final target-volume inequality. This milestone makes the containment and
+membership behavior inspectable.
+
+### Remaining Gap
+
+The common target is still produced by the supplied bridge. The next step is
+to decide whether the bridge should expose a common-hull object, or whether
+we should first refine the toy upper-ray common target into a reusable
+construction pattern.
