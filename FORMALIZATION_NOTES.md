@@ -1197,3 +1197,118 @@ inside "common target": a toy APT-style transport record should specify how a
 chosen output is carried through a named transport before it is compared with a
 common target. This keeps the future APT/IPL/SHE decomposition visible instead
 of compressing it into one containment hypothesis.
+
+## Milestone 12: Toy APT-Style Transported Outputs
+
+Lean files:
+
+* `Iut/Foundations/TransportedRegionFamily.lean`
+* `Iut/Stage1/ToyAPTTransport.lean`
+
+### Source Check
+
+This milestone follows IUT III, Remark 3.11.1, especially the discussion of IPL,
+SHE, and APT. Mochizuki says that SHE may be regarded as a kind of parallel
+transport mechanism for the Theta-pilot object, but immediately warns that APT
+is not simply transport of a set-theoretic region by a set-theoretic function.
+Rather, it is a construction algorithm that is simultaneously meaningful relative
+to the arithmetic holomorphic structures on both sides of the Theta-link.
+
+Step (xi) in the proof of Corollary 3.12 then says that, for the qualitative
+logical part of the argument, one may temporarily forget the hidden theta-
+function internals and regard Theorem 3.11 as "some" algorithm transforming
+input data into output data satisfying IPL and SHE. Mochizuki's recent
+formalization report identifies the APT aspect as the central work in the
+second/third triangles of the reorganized proof. Scholze-Stix's critique again
+pushes in the same formal direction: every real comparison must keep the
+identifications and transports explicit.
+
+### Purpose
+
+The previous toy family treated possible outputs only as a
+`RegionComparisonFamily`. That is enough for containment and volume bounds, but
+it hides the separate transport and target-region fields inside one comparison.
+
+This milestone introduces:
+
+```text
+TransportedRegionFamily source target index
+```
+
+with fields
+
+```text
+transport    : index -> Transport source target
+targetRegion : index -> Region target
+```
+
+and a forgetful map to `RegionComparisonFamily`. This is still only a toy
+bookkeeping layer. It does not claim to formalize Mochizuki's actual APT
+algorithm.
+
+### Lean Declarations
+
+In `TransportedRegionFamily.lean`:
+
+```text
+TransportedRegionFamily.comparison
+TransportedRegionFamily.comparisons
+TransportedRegionFamily.Holds
+TransportedRegionFamily.CommonTarget
+TransportedRegionFamily.CommonTargetBound
+TransportedRegionFamily.CommonTargetHullBound
+TransportedRegionFamily.holds_common_of_choice
+TransportedRegionFamily.choice_targetVolume_le_of_commonBound
+TransportedRegionFamily.allTargetsAtMost_of_commonBound
+```
+
+These declarations let us retain explicit transport data until the exact point
+where we intentionally forget to the older common-target interface.
+
+In `ToyAPTTransport.lean`:
+
+```text
+thetaAPTOutput
+thetaAPTOutput_comparison
+thetaAPTOutput_comparisons
+thetaAPTOutput_commonTarget
+thetaAPTOutputCommonTargetBound
+thetaAPTOutput_choice_targetVolume_le_bound
+thetaAPTOutput_holds_common_of_choice
+unitThetaAPTOutput_bound_of_choice_holds
+```
+
+`thetaAPTOutput` is the toy transported-output object: each choice uses the
+named transport `f`, and the chosen target region is the upper ray
+`R_{<= -2h + epsilon choice}`. The comparison and common-target theorems prove
+that this structured view agrees with the earlier toy family only after applying
+the forgetful map.
+
+### What This Tests
+
+The dependency chain is now more explicit:
+
+1. A choice supplies a named transport and a target region.
+2. These form a chosen `RegionComparison`.
+3. The transported family may be forgotten to a `RegionComparisonFamily`.
+4. Common-target containment and measured bounds are applied only after that
+   forgetful step.
+
+This catches a subtle bookkeeping error: a later proof should not be able to
+use a common-target estimate while suppressing the transport that produced the
+chosen output.
+
+### Design Trap Avoided
+
+The trap would be to call an ordinary map of regions "APT". This milestone uses
+"APT-style" only for the toy bookkeeping shape and explicitly models no more
+than choice-dependent transports and regions. The actual IUT APT construction
+remains a future source-specific obligation.
+
+### Next Step
+
+The next milestone should add a small interface for named qualitative properties
+of an algorithmic output, such as toy `HasIPL`, `HasSHE`, and `HasAPT` fields,
+without making them mathematically powerful. That will let future milestones
+state which hypotheses are used when passing from algorithmic output to
+common-target bounds.

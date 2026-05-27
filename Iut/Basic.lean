@@ -9,10 +9,12 @@ import Iut.Foundations.TransportDiagram
 import Iut.Foundations.IndeterminacyRelation
 import Iut.Foundations.RegionMeasure
 import Iut.Foundations.CommonTargetBound
+import Iut.Foundations.TransportedRegionFamily
 import Iut.Stage1.PilotComparison
 import Iut.Stage1.ToyModel
 import Iut.Stage1.ToyMeasuredComparison
 import Iut.Stage1.ToyFamilyBounds
+import Iut.Stage1.ToyAPTTransport
 
 /-!
 Root module for the IUT formalization scaffold.
