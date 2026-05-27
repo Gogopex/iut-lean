@@ -31,6 +31,14 @@ structure LogKummerCorrespondenceId where
 structure IndeterminacyProfileId where
   label : String
 
+/-- Inert identifier for the q-pilot log-volume sign datum. -/
+structure QPilotLogVolumeId where
+  label : String
+
+/-- Inert identifier for the source normalization datum. -/
+structure SourceNormalizationId where
+  label : String
+
 /--
 Source-facing labels for the IUT III Theorem 3.11 to Corollary 3.12 boundary.
 
@@ -45,6 +53,8 @@ structure IUTStage1SourceLabels where
   qPilot : PilotObjectId
   logKummer : LogKummerCorrespondenceId
   indeterminacies : IndeterminacyProfileId
+  qPilotLogVolume : QPilotLogVolumeId
+  sourceNormalization : SourceNormalizationId
 
 /-- Default inert labels for the current non-toy Stage 1 source placeholder. -/
 def theorem311ToCorollary312Labels : IUTStage1SourceLabels :=
@@ -54,7 +64,9 @@ def theorem311ToCorollary312Labels : IUTStage1SourceLabels :=
     thetaPilot := { label := "Theta-pilot object" },
     qPilot := { label := "q-pilot object" },
     logKummer := { label := "1-column log-Kummer correspondence" },
-    indeterminacies := { label := "Ind1-Ind2-Ind3 profile" } }
+    indeterminacies := { label := "Ind1-Ind2-Ind3 profile" },
+    qPilotLogVolume := { label := "q-pilot log-volume sign datum" },
+    sourceNormalization := { label := "source normalization datum" } }
 
 /--
 Non-toy source package for future IUT Stage 1 data.
@@ -104,6 +116,15 @@ def indeterminacies (package : IUTStage1SourcePackage source target index) :
     IndeterminacyProfileId :=
   package.labels.indeterminacies
 
+def qPilotLogVolume (package : IUTStage1SourcePackage source target index) :
+    QPilotLogVolumeId :=
+  package.labels.qPilotLogVolume
+
+def sourceNormalizationLabel
+    (package : IUTStage1SourcePackage source target index) :
+    SourceNormalizationId :=
+  package.labels.sourceNormalization
+
 theorem input_matches_labels
     (package : IUTStage1SourcePackage source target index) :
     package.input = package.labels.input :=
@@ -118,6 +139,16 @@ theorem logVolumeComparison_matches_labels
     (package : IUTStage1SourcePackage source target index) :
     package.logVolumeComparison = package.labels.logVolumeComparison :=
   package.logVolumeComparison_eq
+
+theorem qPilotLogVolume_matches_labels
+    (package : IUTStage1SourcePackage source target index) :
+    package.qPilotLogVolume = package.labels.qPilotLogVolume :=
+  rfl
+
+theorem sourceNormalization_matches_labels
+    (package : IUTStage1SourcePackage source target index) :
+    package.sourceNormalizationLabel = package.labels.sourceNormalization :=
+  rfl
 
 theorem thetaPilot_matches_labels
     (package : IUTStage1SourcePackage source target index) :
@@ -803,6 +834,10 @@ structure Audit
   logKummer_matches_labels : package.logKummer = package.labels.logKummer
   indeterminacies_matches_labels :
     package.indeterminacies = package.labels.indeterminacies
+  qPilotLogVolume_matches_labels :
+    package.qPilotLogVolume = package.labels.qPilotLogVolume
+  sourceNormalization_matches_labels :
+    package.sourceNormalizationLabel = package.labels.sourceNormalization
   algorithm_certified : package.preLedger.output.Certified
   she_arrow_matches_certificate :
     package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
@@ -842,6 +877,10 @@ theorem audit
     logKummer_matches_labels := package.logKummer_matches_labels,
     indeterminacies_matches_labels :=
       package.indeterminacies_matches_labels,
+    qPilotLogVolume_matches_labels :=
+      package.qPilotLogVolume_matches_labels,
+    sourceNormalization_matches_labels :=
+      package.sourceNormalization_matches_labels,
     algorithm_certified := obligations.algorithmCertified,
     she_arrow_matches_certificate := obligations.sheArrowMatchesCertificate,
     q_pilot_positive := obligations.qPilotPositive,
@@ -1013,6 +1052,16 @@ theorem indeterminaciesMatchesLabels
     (sourceAudit : Audit package obligations) :
     package.indeterminacies = package.labels.indeterminacies :=
   sourceAudit.indeterminacies_matches_labels
+
+theorem qPilotLogVolumeMatchesLabels
+    (sourceAudit : Audit package obligations) :
+    package.qPilotLogVolume = package.labels.qPilotLogVolume :=
+  sourceAudit.qPilotLogVolume_matches_labels
+
+theorem sourceNormalizationMatchesLabels
+    (sourceAudit : Audit package obligations) :
+    package.sourceNormalizationLabel = package.labels.sourceNormalization :=
+  sourceAudit.sourceNormalization_matches_labels
 
 theorem algorithmCertified
     (sourceAudit : Audit package obligations) :

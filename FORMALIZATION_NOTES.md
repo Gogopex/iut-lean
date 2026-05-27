@@ -9162,3 +9162,75 @@ These compatibility lemmas make the wrapping relationship machine-checkable.
 The next milestone should introduce source-facing names for the q-pilot
 log-volume and normalization objects themselves, so later non-toy hypotheses can
 refer to named source labels rather than only pre-ledger fields.
+
+## Milestone 114: Side-Condition Source Labels
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The side-condition hypotheses refer to q-pilot log-volume positivity and source
+normalization. Until this milestone, those hypotheses were attached only to raw
+pre-ledger fields. The source-facing API should also name the corresponding
+source objects, just as it already names the pilots, log-Kummer correspondence,
+and indeterminacy profile.
+
+These names remain inert labels. They add no proof of positivity,
+normalization, or Corollary 3.12.
+
+### Purpose
+
+This milestone adds source-facing labels for:
+
+```text
+q-pilot log-volume sign datum
+source normalization datum
+```
+
+and threads them through the compact source audit.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+QPilotLogVolumeId
+SourceNormalizationId
+IUTStage1SourceLabels.qPilotLogVolume
+IUTStage1SourceLabels.sourceNormalization
+IUTStage1SourcePackage.qPilotLogVolume
+IUTStage1SourcePackage.sourceNormalizationLabel
+IUTStage1SourcePackage.qPilotLogVolume_matches_labels
+IUTStage1SourcePackage.sourceNormalization_matches_labels
+IUTStage1SourcePackage.Audit.qPilotLogVolumeMatchesLabels
+IUTStage1SourcePackage.Audit.sourceNormalizationMatchesLabels
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_qPilotLogVolume_label_example
+unitThetaToy_source_sourceNormalization_label_example
+unitThetaToy_source_audit_qPilotLogVolume_label_projection_example
+unitThetaToy_source_audit_sourceNormalization_label_projection_example
+```
+
+### What This Tests
+
+The toy examples verify that the new labels are available on source packages and
+that the compact source audit preserves them.
+
+### Design Trap Avoided
+
+The trap would be to let side-condition hypotheses refer only to anonymous real
+or normalization fields. This milestone gives future non-toy modules stable
+source-facing names without assigning mathematical consequences to those names.
+
+### Next Step
+
+The next milestone should connect side-condition hypotheses to these labels in a
+small audit record, so source modules can state which labeled q-pilot log-volume
+and normalization data their hypotheses concern.
