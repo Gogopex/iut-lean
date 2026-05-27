@@ -92,6 +92,29 @@ example (source target : HyperbolicOrbicurveModel F)
   (abstractHyperbolicOrbicurveMorphismData source target
     label morphismExists hMorphism).exists_holds
 
+/-- A constructor smoke test for finite-etale/Galois properties of a fixed morphism. -/
+def abstractFiniteEtaleGaloisOrbicurveMorphismData
+    {source target : HyperbolicOrbicurveModel F}
+    (morphism : HyperbolicOrbicurveMorphismData source target)
+    (finiteEtale galois : Prop)
+    (hFiniteEtale : finiteEtale) (hGalois : galois) :
+    FiniteEtaleGaloisOrbicurveMorphismData morphism where
+  finiteEtale := finiteEtale
+  finiteEtale_holds := hFiniteEtale
+  galois := galois
+  galois_holds := hGalois
+
+example {source target : HyperbolicOrbicurveModel F}
+    (morphism : HyperbolicOrbicurveMorphismData source target)
+    (finiteEtale galois : Prop)
+    (hFiniteEtale : finiteEtale) (hGalois : galois) :
+    (abstractFiniteEtaleGaloisOrbicurveMorphismData
+      morphism finiteEtale galois hFiniteEtale hGalois).finiteEtale ∧
+      (abstractFiniteEtaleGaloisOrbicurveMorphismData
+        morphism finiteEtale galois hFiniteEtale hGalois).galois :=
+  (abstractFiniteEtaleGaloisOrbicurveMorphismData
+    morphism finiteEtale galois hFiniteEtale hGalois).finiteEtaleAndGalois
+
 /-- A constructor smoke test for a pointed EtTh quotient. -/
 def abstractPointedEtaleQuotient (Q : Type u) (zero : Q) :
     PointedEtaleQuotient where
@@ -423,9 +446,9 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
     (sourceOrbicurve targetOrbicurve : HyperbolicOrbicurveModel baseField)
     (coverMorphism :
       HyperbolicOrbicurveMorphismData sourceOrbicurve targetOrbicurve)
-    (finiteEtaleCover galoisCover functionFieldExtensionOfCover : Prop)
-    (hFiniteEtale : finiteEtaleCover)
-    (hGalois : galoisCover)
+    (coverProperties :
+      FiniteEtaleGaloisOrbicurveMorphismData coverMorphism)
+    (functionFieldExtensionOfCover : Prop)
     (hFunctionField : functionFieldExtensionOfCover)
     (quotientEquivAlgAut :
       ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L)) :
@@ -435,10 +458,7 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
   sourceOrbicurve := sourceOrbicurve
   targetOrbicurve := targetOrbicurve
   coverMorphism := coverMorphism
-  finiteEtaleCover := finiteEtaleCover
-  finiteEtaleCover_holds := hFiniteEtale
-  galoisCover := galoisCover
-  galoisCover_holds := hGalois
+  coverProperties := coverProperties
   functionFieldExtensionOfCover := functionFieldExtensionOfCover
   functionFieldExtensionOfCover_holds := hFunctionField
   quotientEquivAlgAut := quotientEquivAlgAut

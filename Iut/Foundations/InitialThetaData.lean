@@ -430,6 +430,42 @@ theorem exists_holds : morphism.morphismExists :=
 end HyperbolicOrbicurveMorphismData
 
 /--
+A typed property package saying that a fixed orbicurve morphism is the finite
+etale Galois cover relevant to the theta approach.
+
+The actual scheme-theoretic definitions of finite etale and Galois morphisms of
+IUT orbicurves are not yet available here.  The point of this record is that
+the finite-etale and Galois assertions are indexed by the morphism they are
+about, rather than floating as unrelated propositions.
+-/
+structure FiniteEtaleGaloisOrbicurveMorphismData
+    {F : Type u} [Field F]
+    {source target : HyperbolicOrbicurveModel F}
+    (morphism : HyperbolicOrbicurveMorphismData source target) where
+  finiteEtale : Prop
+  finiteEtale_holds : finiteEtale
+  galois : Prop
+  galois_holds : galois
+
+namespace FiniteEtaleGaloisOrbicurveMorphismData
+
+variable {F : Type u} [Field F]
+variable {source target : HyperbolicOrbicurveModel F}
+variable {morphism : HyperbolicOrbicurveMorphismData source target}
+variable (properties : FiniteEtaleGaloisOrbicurveMorphismData morphism)
+
+theorem finiteEtale_proof : properties.finiteEtale :=
+  properties.finiteEtale_holds
+
+theorem galois_proof : properties.galois :=
+  properties.galois_holds
+
+theorem finiteEtaleAndGalois : properties.finiteEtale ∧ properties.galois :=
+  ⟨properties.finiteEtale_holds, properties.galois_holds⟩
+
+end FiniteEtaleGaloisOrbicurveMorphismData
+
+/--
 An assertion that a placeholder orbicurve has one of the specific EtTh type
 labels used by Definition 3.1.
 -/
@@ -2252,10 +2288,9 @@ structure ThetaFiniteEtaleGaloisCoverCertificate
   coverMorphism :
     @HyperbolicOrbicurveMorphismData baseField baseFieldField
       sourceOrbicurve targetOrbicurve
-  finiteEtaleCover : Prop
-  finiteEtaleCover_holds : finiteEtaleCover
-  galoisCover : Prop
-  galoisCover_holds : galoisCover
+  coverProperties :
+    @FiniteEtaleGaloisOrbicurveMorphismData baseField baseFieldField
+      sourceOrbicurve targetOrbicurve coverMorphism
   functionFieldExtensionOfCover : Prop
   functionFieldExtensionOfCover_holds : functionFieldExtensionOfCover
   quotientEquivAlgAut :
@@ -2272,13 +2307,19 @@ variable (certificate :
 instance baseFieldInst : Field certificate.baseField :=
   certificate.baseFieldField
 
+def finiteEtaleCover : Prop :=
+  certificate.coverProperties.finiteEtale
+
 theorem finiteEtaleCover_proof :
     certificate.finiteEtaleCover :=
-  certificate.finiteEtaleCover_holds
+  certificate.coverProperties.finiteEtale_proof
+
+def galoisCover : Prop :=
+  certificate.coverProperties.galois
 
 theorem galoisCover_proof :
     certificate.galoisCover :=
-  certificate.galoisCover_holds
+  certificate.coverProperties.galois_proof
 
 theorem functionFieldExtensionOfCover_proof :
     certificate.functionFieldExtensionOfCover :=
@@ -2290,7 +2331,7 @@ theorem coverMorphismExists :
 
 theorem finiteEtaleAndGalois :
     certificate.finiteEtaleCover ∧ certificate.galoisCover :=
-  ⟨certificate.finiteEtaleCover_holds, certificate.galoisCover_holds⟩
+  certificate.coverProperties.finiteEtaleAndGalois
 
 end ThetaFiniteEtaleGaloisCoverCertificate
 

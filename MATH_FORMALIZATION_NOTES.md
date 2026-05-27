@@ -6034,3 +6034,99 @@ The next step is to replace `morphismExists`, `finiteEtaleCover`, and
 `galoisCover` with typed morphism properties, then eventually connect those
 properties to mathlib's finite etale morphism APIs when the orbicurve model is
 made concrete.
+
+## Math Milestone 60: Finite-Etale/Galois Properties Indexed by the Cover Morphism
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Remark 3.1.2, uses the open subgroup `Pi_XK <= Pi_CK` to reconstruct
+the function field of `X_K` with its natural
+`Gal(X_K/C_K) = Pi_CK/Pi_XK` action. The finite-etale/Galois language belongs
+to this specific cover relation. Earlier in IUT I, Mochizuki also states that
+finite-etale coverings of hyperbolic orbicurves and the corresponding open
+immersions of profinite groups are part of the basic setup.
+
+Scholze-Stix's exposition deliberately omits many such covers in its simplified
+discussion of initial theta data. That is useful as a warning: our formal model
+must keep clear which assertions are attached to the cover itself, so that later
+simplifications cannot silently identify unrelated data.
+
+### Lean/API Check
+
+The new record is:
+
+```text
+FiniteEtaleGaloisOrbicurveMorphismData morphism
+```
+
+It contains:
+
+```text
+finiteEtale : Prop
+finiteEtale_holds : finiteEtale
+galois : Prop
+galois_holds : galois
+```
+
+and exposes:
+
+```text
+finiteEtale_proof
+galois_proof
+finiteEtaleAndGalois
+```
+
+The cover certificate now stores:
+
+```text
+coverProperties :
+  FiniteEtaleGaloisOrbicurveMorphismData coverMorphism
+```
+
+instead of storing independent `finiteEtaleCover` and `galoisCover` fields.
+The old public accessors remain as derived certificate definitions:
+
+```text
+ThetaFiniteEtaleGaloisCoverCertificate.finiteEtaleCover
+ThetaFiniteEtaleGaloisCoverCertificate.galoisCover
+```
+
+### Lean Decisions
+
+This is still an abstract interface, not a completed scheme-theoretic finite
+etale morphism. The improvement is dependency: Lean now knows that the
+finite-etale and Galois assertions are about the same typed morphism that
+connects the source and target orbicurves in the certificate.
+
+The downstream `ThetaFiniteGaloisFunctionFieldCoverData` API remains stable
+because `finiteEtaleCover` and `galoisCover` are recovered from the indexed
+property package.
+
+### What This Tests
+
+The example file checks:
+
+* construction of finite-etale/Galois properties for a fixed orbicurve morphism;
+* extraction of the conjunction of those properties;
+* construction of the theta finite-etale Galois cover certificate from the
+  indexed property package;
+* all downstream finite-Galois function-field cover consequences still compile.
+
+### Design Trap Avoided
+
+The trap would be to allow one typed cover morphism but prove finite-etale and
+Galois facts about unrelated unnamed geometry. The new indexed property record
+prevents that: the assertions are parameterized by the morphism.
+
+### Remaining Gap
+
+`finiteEtale` and `galois` are still propositions supplied by the user of the
+interface. The next mathematical step is to bind the function-field extension
+claim to the same morphism and the same `B -> L` field extension, then later
+replace these propositions with mathlib-backed finite-etale and Galois-cover
+notions once the orbicurve category is made concrete.
