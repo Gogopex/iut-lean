@@ -8744,3 +8744,56 @@ parts.
 The next milestone should expose label and recovery projections from the
 parts-based audit, then start replacing toy-only side-condition proofs with
 source-facing hypotheses closer to the IUT III notation.
+
+## Milestone 107: Parts-Based Audit Projection Coverage
+
+Lean file:
+
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The compact audit record contains both public comparison data and source-label
+bookkeeping. Since the parts-based audit route is meant to be a transparent
+wrapper around the existing source audit, it should expose both kinds of fields.
+
+This milestone adds no new mathematical implication. It only checks that the
+parts-based route preserves the same recovery and label projections available
+from the older source-obligation audit.
+
+### Purpose
+
+This milestone extends the toy examples for the parts-based source audit by
+projecting:
+
+```text
+Stage 1 recovery of the Corollary 3.12 endpoint
+Theta-pilot source label
+q-pilot source label
+```
+
+### Lean Declarations
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_audit_from_parts_recovery_projection_example
+unitThetaToy_source_audit_from_parts_thetaPilot_label_projection_example
+unitThetaToy_source_audit_from_parts_qPilot_label_projection_example
+```
+
+### What This Tests
+
+The examples verify that the separated-input audit path is usable for both the
+mathematical endpoint recovery theorem and the source-facing label projections.
+
+### Design Trap Avoided
+
+The trap would be to test only the numerical-looking endpoint and leave the
+source-label bookkeeping unexercised. The label projections matter because they
+make explicit which Stage 1 source objects are being routed into the audit.
+
+### Next Step
+
+The next milestone should start replacing toy-only side-condition proofs with a
+source-facing side-condition hypothesis record closer to the IUT III notation.
