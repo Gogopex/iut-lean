@@ -1194,3 +1194,68 @@ local tensor symmetries as harmless labels. Downstream log-volume preservation
 now has a visible dependency chain through finite indexed data. The next major
 risk is the transition from this abstract action surface to actual
 Hodge-theater/local tensor objects.
+
+## Periodic Review: Refined Multiradial Quotient Packages
+
+Date: 2026-05-28
+
+This checkpoint reviews the refined multiradial quotient work built on the
+direct-summand packet choice type.
+
+### Current Lean Chain
+
+The current refined chain includes:
+
+```text
+IUTStage1RefinedThetaImagesDependOnlyOnCoric
+IUTStage1Theorem311RefinedMultiradialSubclaim
+IUTStage1RefinedThetaImageGeneratorInvariance
+IUTStage1Theorem311RefinedGeneratorInvarianceSubclaim
+nonarchimedeanIsmIndeterminacySourceData
+archimedeanOrderTwoIndeterminacySourceData
+IUTStage1NonarchimedeanIsmThetaImageGeneratorInvariance
+IUTStage1ArchimedeanOrderTwoThetaImageGeneratorInvariance
+IUTStage1NonarchimedeanIsmMultiradialThetaImages
+IUTStage1ArchimedeanOrderTwoMultiradialThetaImages
+```
+
+The important proof shape is:
+
+```text
+generator-wise invariance
+  -> generated quotient invariance
+  -> source-level multiradial image package
+```
+
+### Source Alignment
+
+This matches the source split in IUT III, Theorem 3.11 better than the earlier
+single generic quotient. The nonarchimedean `Ism` and archimedean order-two
+paths now have separate generated source data and separate image packages.
+
+The source text also says the construction is functorial with respect to
+isomorphisms of processions. In the current Lean API, that functoriality is
+still represented as the `(Ind1)` generator invariance field, not as an actual
+functor on a category of processions.
+
+### Risks Found
+
+The source-specific packages still work one place kind at a time. IUT III uses
+collections of places and distinguishes `Vnon_Q` and `Varc_Q`; the next layer
+should aggregate families of local place-kind packages rather than treating one
+kind as the whole story.
+
+The `Ism` and order-two automorphism actions are still abstract records with
+log-volume preservation obligations. They are not yet constructed from the
+local tensor product definitions.
+
+### Global 3.12 Check
+
+The work remains aligned with the Corollary 3.12 dispute because the refined
+multiradial image packages require explicit quotient invariance before possible
+images are identified. This helps prevent silently collapsing local tensor
+representatives or Hodge-theater histories into a single undifferentiated copy.
+
+The next mathematical target should aggregate nonarchimedean and archimedean
+local data across place families, while preserving the source-specific quotient
+invariance already proved for each kind.
