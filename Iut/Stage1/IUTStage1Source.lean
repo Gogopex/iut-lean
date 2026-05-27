@@ -2387,6 +2387,120 @@ theorem ind3_preserves_capsuleTotalLogVolume
       state.packetState.capsuleFamily.totalLogVolume)
     hstep.local_tensor_eq
 
+def nonarchimedeanIsmIndeterminacySourceData :
+    IUTStage1Theorem311IndeterminacySourceData
+      (IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean) :=
+  { procession_automorphism_step := ProcessionAutomorphismStep,
+    local_tensor_symmetry_step := NonarchimedeanIsmInd2Step,
+    upper_semi_compatibility_step := UpperSemiCompatibilityStep }
+
+def archimedeanOrderTwoIndeterminacySourceData :
+    IUTStage1Theorem311IndeterminacySourceData
+      (IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean) :=
+  { procession_automorphism_step := ProcessionAutomorphismStep,
+    local_tensor_symmetry_step := ArchimedeanOrderTwoInd2Step,
+    upper_semi_compatibility_step := UpperSemiCompatibilityStep }
+
+theorem nonarchimedeanIsm_generated_preserves_coric
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (nonarchimedeanIsmIndeterminacySourceData
+          (coric := coric)).generators
+        choice₁ choice₂) :
+    choice₁.coric = choice₂.coric := by
+  induction hrel with
+  | refl choice =>
+      rfl
+  | ind1 hstep =>
+      exact hstep.coric_eq
+  | ind2 hstep =>
+      exact hstep.coric_eq
+  | ind3 hstep =>
+      exact hstep.coric_eq
+  | symm _ ih =>
+      exact ih.symm
+  | trans _ _ ih₁₂ ih₂₃ =>
+      exact ih₁₂.trans ih₂₃
+
+theorem archimedeanOrderTwo_generated_preserves_coric
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (archimedeanOrderTwoIndeterminacySourceData
+          (coric := coric)).generators
+        choice₁ choice₂) :
+    choice₁.coric = choice₂.coric := by
+  induction hrel with
+  | refl choice =>
+      rfl
+  | ind1 hstep =>
+      exact hstep.coric_eq
+  | ind2 hstep =>
+      exact hstep.coric_eq
+  | ind3 hstep =>
+      exact hstep.coric_eq
+  | symm _ ih =>
+      exact ih.symm
+  | trans _ _ ih₁₂ ih₂₃ =>
+      exact ih₁₂.trans ih₂₃
+
+theorem nonarchimedeanIsm_generated_preserves_capsuleTotalLogVolume
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (nonarchimedeanIsmIndeterminacySourceData
+          (coric := coric)).generators
+        choice₁ choice₂) :
+    choice₁.local_tensor_state.packetState.capsuleFamily.totalLogVolume =
+      choice₂.local_tensor_state.packetState.capsuleFamily.totalLogVolume := by
+  induction hrel with
+  | refl choice =>
+      rfl
+  | ind1 hstep =>
+      exact ind1_preserves_capsuleTotalLogVolume hstep
+  | ind2 hstep =>
+      exact nonarchimedeanIsm_preserves_capsuleTotalLogVolume hstep
+  | ind3 hstep =>
+      exact ind3_preserves_capsuleTotalLogVolume hstep
+  | symm _ ih =>
+      exact ih.symm
+  | trans _ _ ih₁₂ ih₂₃ =>
+      exact ih₁₂.trans ih₂₃
+
+theorem archimedeanOrderTwo_generated_preserves_capsuleTotalLogVolume
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (archimedeanOrderTwoIndeterminacySourceData
+          (coric := coric)).generators
+        choice₁ choice₂) :
+    choice₁.local_tensor_state.packetState.capsuleFamily.totalLogVolume =
+      choice₂.local_tensor_state.packetState.capsuleFamily.totalLogVolume := by
+  induction hrel with
+  | refl choice =>
+      rfl
+  | ind1 hstep =>
+      exact ind1_preserves_capsuleTotalLogVolume hstep
+  | ind2 hstep =>
+      exact archimedeanOrderTwo_preserves_capsuleTotalLogVolume hstep
+  | ind3 hstep =>
+      exact ind3_preserves_capsuleTotalLogVolume hstep
+  | symm _ ih =>
+      exact ih.symm
+  | trans _ _ ih₁₂ ih₂₃ =>
+      exact ih₁₂.trans ih₂₃
+
 theorem generated_preserves_coric
     {choice₁ choice₂ :
       IUTStage1DirectSummandPacketTheorem311Choice coric kind}

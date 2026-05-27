@@ -1175,3 +1175,79 @@ theorem311RefinedGeneratorInvarianceSubclaim_union_eq_example
 The next refinement should split the `(Ind2)` generator field into its
 nonarchimedean `Ism` and archimedean order-two cases, using the source-specific
 steps already defined.
+
+## 15. Source-Specific Refined `(Ind2)` Quotients
+
+### Goal
+
+We made the refined generated quotient itself source-specific in the two
+Theorem 3.11 `(Ind2)` cases.
+
+### Source Check
+
+Theorem 3.11 distinguishes the local tensor-factor indeterminacies:
+
+```text
+nonarchimedean: independent copies of Ism
+archimedean: order-two automorphisms
+```
+
+The previous refined quotient used the generic direct-summand action step as
+its `(Ind2)` generator.  This milestone adds generated source data where the
+`(Ind2)` generator is the corresponding source-specific step.
+
+### Lean/API Check
+
+The new source data are:
+
+```text
+nonarchimedeanIsmIndeterminacySourceData
+archimedeanOrderTwoIndeterminacySourceData
+```
+
+inside:
+
+```text
+IUTStage1DirectSummandPacketTheorem311Choice
+```
+
+Lean proves for each source-specific generated relation:
+
+```text
+*_generated_preserves_coric
+*_generated_preserves_capsuleTotalLogVolume
+```
+
+The log-volume proof uses the same generated-relation induction as before, but
+the `(Ind2)` case now goes through:
+
+```text
+NonarchimedeanIsmInd2Step
+ArchimedeanOrderTwoInd2Step
+```
+
+rather than through the generic direct-summand action step directly.
+
+### Mathematical Point
+
+This gives the formalization two entry points for future source proofs: one for
+the nonarchimedean `Ism` construction and one for the archimedean order-two
+construction.  Both still descend to the common finite-sum log-volume
+bookkeeping once the source-specific action is supplied.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+nonarchimedeanIsm_generated_preserves_coric_example
+nonarchimedeanIsm_generated_preserves_totalLogVolume_example
+archimedeanOrderTwo_generated_preserves_coric_example
+archimedeanOrderTwo_generated_preserves_totalLogVolume_example
+```
+
+### Remaining Gap
+
+The next refinement should package source-specific image invariance, just as
+the generic generator-wise invariance package does, so the nonarchimedean and
+archimedean quotients can drive multiradial image packages directly.

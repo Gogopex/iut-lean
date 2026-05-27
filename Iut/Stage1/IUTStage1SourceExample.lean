@@ -20,6 +20,7 @@ namespace Stage1
 namespace ToyModel
 
 open RealLineCopy
+open IUTStage1DirectSummandPacketTheorem311Choice
 
 variable {index : Type u}
 
@@ -803,6 +804,62 @@ theorem archimedeanOrderTwoInd2_preserves_totalLogVolume_example
       choice₂.local_tensor_state.packetState.capsuleFamily.totalLogVolume :=
   IUTStage1DirectSummandPacketTheorem311Choice.archimedeanOrderTwo_preserves_capsuleTotalLogVolume
     hstep
+
+theorem nonarchimedeanIsm_generated_preserves_coric_example
+    {coric : Type u}
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1DirectSummandPacketTheorem311Choice.nonarchimedeanIsmIndeterminacySourceData
+          (coric := coric)).generators
+        choice₁ choice₂) :
+    choice₁.coric = choice₂.coric :=
+  IUTStage1DirectSummandPacketTheorem311Choice.nonarchimedeanIsm_generated_preserves_coric
+    hrel
+
+theorem nonarchimedeanIsm_generated_preserves_totalLogVolume_example
+    {coric : Type u}
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1DirectSummandPacketTheorem311Choice.nonarchimedeanIsmIndeterminacySourceData
+          (coric := coric)).generators
+        choice₁ choice₂) :
+      choice₁.local_tensor_state.packetState.capsuleFamily.totalLogVolume =
+      choice₂.local_tensor_state.packetState.capsuleFamily.totalLogVolume :=
+  nonarchimedeanIsm_generated_preserves_capsuleTotalLogVolume hrel
+
+theorem archimedeanOrderTwo_generated_preserves_coric_example
+    {coric : Type u}
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1DirectSummandPacketTheorem311Choice.archimedeanOrderTwoIndeterminacySourceData
+          (coric := coric)).generators
+        choice₁ choice₂) :
+    choice₁.coric = choice₂.coric :=
+  IUTStage1DirectSummandPacketTheorem311Choice.archimedeanOrderTwo_generated_preserves_coric
+    hrel
+
+theorem archimedeanOrderTwo_generated_preserves_totalLogVolume_example
+    {coric : Type u}
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice
+        coric IUTStage1PlaceKind.archimedean}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1DirectSummandPacketTheorem311Choice.archimedeanOrderTwoIndeterminacySourceData
+          (coric := coric)).generators
+        choice₁ choice₂) :
+      choice₁.local_tensor_state.packetState.capsuleFamily.totalLogVolume =
+      choice₂.local_tensor_state.packetState.capsuleFamily.totalLogVolume :=
+  archimedeanOrderTwo_generated_preserves_capsuleTotalLogVolume hrel
 
 theorem directSummandPacketTheorem311_generated_preserves_coric_example
     {coric : Type u} {kind : IUTStage1PlaceKind}
