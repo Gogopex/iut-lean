@@ -466,6 +466,42 @@ theorem finiteEtaleAndGalois : properties.finiteEtale ∧ properties.galois :=
 end FiniteEtaleGaloisOrbicurveMorphismData
 
 /--
+A typed deck-transformation group attached to a finite-etale Galois orbicurve
+cover.
+
+This is still abstract: we do not yet construct deck transformations as
+automorphisms over the target orbicurve.  The group is nevertheless indexed by
+the fixed cover-property package, so it cannot be detached from the cover whose
+deck transformations it is supposed to represent.
+-/
+structure OrbicurveCoverDeckTransformationData
+    {F : Type u} [Field F]
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    (coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism) where
+  deckGroup : Type u
+  deckGroupGroup : Group deckGroup
+  deckTransformationsOfCover : Prop
+  deckTransformationsOfCover_holds : deckTransformationsOfCover
+
+namespace OrbicurveCoverDeckTransformationData
+
+variable {F : Type u} [Field F]
+variable {source target : HyperbolicOrbicurveModel F}
+variable {morphism : HyperbolicOrbicurveMorphismData source target}
+variable {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+variable (deckData : OrbicurveCoverDeckTransformationData coverProperties)
+
+instance deckGroupInst : Group deckData.deckGroup :=
+  deckData.deckGroupGroup
+
+theorem deckTransformationsOfCover_proof :
+    deckData.deckTransformationsOfCover :=
+  deckData.deckTransformationsOfCover_holds
+
+end OrbicurveCoverDeckTransformationData
+
+/--
 A typed assertion that a finite Galois field extension is the function-field
 extension induced by a fixed orbicurve cover morphism.
 
@@ -2302,6 +2338,49 @@ theorem piXK_smul_trivial
 end ThetaApproachFunctionFieldData
 
 /--
+A comparison between the deck-transformation group of the cover and the theta
+quotient `Pi_CK / Pi_XK`.
+
+The equivalence is still supplied as data.  It is indexed by the deck group of
+the specific cover, so later replacement by a concrete deck-transformation
+construction has a precise attachment point.
+-/
+structure OrbicurveCoverDeckQuotientData
+    (thetaApproach : ThetaApproachQuotientData)
+    {F : Type u} [Field F]
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+    (deckData : OrbicurveCoverDeckTransformationData coverProperties) where
+  deckGroupEquivQuotient :
+    letI : Group deckData.deckGroup := deckData.deckGroupGroup
+    deckData.deckGroup ≃* ThetaApproachQuotientData.deckQuotient thetaApproach
+  deckGroupIdentifiesThetaQuotient : Prop
+  deckGroupIdentifiesThetaQuotient_holds : deckGroupIdentifiesThetaQuotient
+
+namespace OrbicurveCoverDeckQuotientData
+
+variable {thetaApproach : ThetaApproachQuotientData}
+variable {F : Type u} [Field F]
+variable {source target : HyperbolicOrbicurveModel F}
+variable {morphism : HyperbolicOrbicurveMorphismData source target}
+variable {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+variable {deckData : OrbicurveCoverDeckTransformationData coverProperties}
+variable (deckQuotientData :
+  OrbicurveCoverDeckQuotientData thetaApproach deckData)
+
+def toThetaDeckQuotientEquiv :
+    letI : Group deckData.deckGroup := deckData.deckGroupGroup
+    deckData.deckGroup ≃* ThetaApproachQuotientData.deckQuotient thetaApproach :=
+  deckQuotientData.deckGroupEquivQuotient
+
+theorem identifiesThetaQuotient :
+    deckQuotientData.deckGroupIdentifiesThetaQuotient :=
+  deckQuotientData.deckGroupIdentifiesThetaQuotient_holds
+
+end OrbicurveCoverDeckQuotientData
+
+/--
 A typed certificate that the theta deck quotient acts on the function-field
 extension attached to a fixed orbicurve cover.
 
@@ -2412,6 +2491,11 @@ structure ThetaFiniteEtaleGaloisCoverCertificate
   coverProperties :
     @FiniteEtaleGaloisOrbicurveMorphismData baseField baseFieldField
       sourceOrbicurve targetOrbicurve coverMorphism
+  coverDeckTransformations :
+    @OrbicurveCoverDeckTransformationData baseField baseFieldField
+      sourceOrbicurve targetOrbicurve coverMorphism coverProperties
+  coverDeckQuotient :
+    OrbicurveCoverDeckQuotientData thetaApproach coverDeckTransformations
   functionFieldExtension :
     @FunctionFieldExtensionOfOrbicurveCoverData baseField baseFieldField
       sourceOrbicurve targetOrbicurve coverMorphism
@@ -2450,6 +2534,25 @@ def functionFieldExtensionOfCover : Prop :=
 theorem functionFieldExtensionOfCover_proof :
     certificate.functionFieldExtensionOfCover :=
   certificate.functionFieldExtension.extensionOfCover_proof
+
+def coverDeckGroup : Type :=
+  certificate.coverDeckTransformations.deckGroup
+
+instance coverDeckGroupInst : Group certificate.coverDeckGroup :=
+  certificate.coverDeckTransformations.deckGroupGroup
+
+theorem deckTransformationsOfCover :
+    certificate.coverDeckTransformations.deckTransformationsOfCover :=
+  certificate.coverDeckTransformations.deckTransformationsOfCover_proof
+
+def coverDeckEquivThetaQuotient :
+    certificate.coverDeckGroup ≃*
+      ThetaApproachQuotientData.deckQuotient thetaApproach :=
+  certificate.coverDeckQuotient.toThetaDeckQuotientEquiv
+
+theorem coverDeckIdentifiesThetaQuotient :
+    certificate.coverDeckQuotient.deckGroupIdentifiesThetaQuotient :=
+  certificate.coverDeckQuotient.identifiesThetaQuotient
 
 def quotientEquivAlgAut :
     ThetaApproachQuotientData.deckQuotient thetaApproach ≃* (L ≃ₐ[B] L) :=

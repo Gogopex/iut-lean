@@ -15372,3 +15372,100 @@ These theorems still use the current algebraic action model. The next deeper
 step is to connect the finite-etale cover certificate to a typed deck
 transformation group of the cover itself, so the quotient action can eventually
 be derived rather than supplied.
+
+## Math Milestone 66: Typed Deck-Transformation Group for the Cover
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Remark 3.1.2, identifies the relevant action as the natural
+`Gal(X_K/C_K) = Pi_CK/Pi_XK` action on the reconstructed function field.
+Definition 3.1(d) frames the setup in terms of finite-etale coverings of
+hyperbolic orbicurves and corresponding open immersions of profinite groups.
+Elsewhere in IUT I, Mochizuki uses cover automorphism groups such as
+`Aut_K(X_K)` and Galois groups such as `Gal(X/C)` in the analysis of the cover
+geometry.
+
+Scholze-Stix emphasize that finite-etale geometry and fundamental-group data
+are equivalent in the relevant anabelian setting. For the formalization, this
+means the passage from cover geometry to `Pi_CK/Pi_XK` should have an explicit
+typed attachment point.
+
+### Lean/API Check
+
+The new cover-indexed deck group record is:
+
+```text
+OrbicurveCoverDeckTransformationData coverProperties
+```
+
+It contains:
+
+```text
+deckGroup : Type
+deckGroupGroup : Group deckGroup
+deckTransformationsOfCover : Prop
+deckTransformationsOfCover_holds : deckTransformationsOfCover
+```
+
+The new quotient-comparison record is:
+
+```text
+OrbicurveCoverDeckQuotientData thetaApproach deckData
+```
+
+It contains an equivalence:
+
+```text
+deckData.deckGroup ≃* ThetaApproachQuotientData.deckQuotient thetaApproach
+```
+
+and a proposition recording that this deck group is the theta quotient.
+
+The finite-etale Galois cover certificate now stores:
+
+```text
+coverDeckTransformations :
+  OrbicurveCoverDeckTransformationData coverProperties
+
+coverDeckQuotient :
+  OrbicurveCoverDeckQuotientData thetaApproach coverDeckTransformations
+```
+
+### Lean Decisions
+
+This milestone does not yet construct deck transformations as automorphisms of
+orbicurves over the target. It inserts a typed intermediate object between the
+cover certificate and the quotient action on the function field.
+
+The deck group is indexed by the finite-etale/Galois property package of the
+same cover morphism. The comparison to the theta quotient is indexed by that
+deck group, so later concrete deck-transformation constructions can replace the
+abstract proposition without changing the surrounding API.
+
+### What This Tests
+
+The example file checks:
+
+* construction of a deck-transformation group for a fixed finite-etale Galois
+  cover property package;
+* construction of a comparison between that deck group and the theta quotient;
+* construction of the theta finite-etale Galois cover certificate with the deck
+  group and quotient comparison;
+* extraction of the deck-transformation and quotient-identification proofs.
+
+### Design Trap Avoided
+
+The trap would be to move directly from the cover certificate to an automorphism
+equivalence on a field, with no object corresponding to deck transformations of
+the cover. The new records keep the geometric deck group visible.
+
+### Remaining Gap
+
+The deck group is still supplied abstractly. The next step is to add a typed
+interface for deck transformations as automorphisms of the source orbicurve over
+the target morphism, then connect that interface to this deck group.

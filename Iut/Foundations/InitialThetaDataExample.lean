@@ -115,6 +115,33 @@ example {source target : HyperbolicOrbicurveModel F}
   (abstractFiniteEtaleGaloisOrbicurveMorphismData
     morphism finiteEtale galois hFiniteEtale hGalois).finiteEtaleAndGalois
 
+/-- A constructor smoke test for the deck group of a finite-etale Galois cover. -/
+def abstractOrbicurveCoverDeckTransformationData
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    (coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism)
+    (deckGroup : Type u) [Group deckGroup]
+    (deckTransformationsOfCover : Prop)
+    (hDeckTransformations : deckTransformationsOfCover) :
+    OrbicurveCoverDeckTransformationData coverProperties where
+  deckGroup := deckGroup
+  deckGroupGroup := inferInstance
+  deckTransformationsOfCover := deckTransformationsOfCover
+  deckTransformationsOfCover_holds := hDeckTransformations
+
+example {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    (coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism)
+    (deckGroup : Type u) [Group deckGroup]
+    (deckTransformationsOfCover : Prop)
+    (hDeckTransformations : deckTransformationsOfCover) :
+    (abstractOrbicurveCoverDeckTransformationData
+      coverProperties deckGroup deckTransformationsOfCover
+      hDeckTransformations).deckTransformationsOfCover :=
+  (abstractOrbicurveCoverDeckTransformationData
+    coverProperties deckGroup deckTransformationsOfCover
+    hDeckTransformations).deckTransformationsOfCover_proof
+
 /--
 A constructor smoke test for a function-field extension attached to a fixed
 orbicurve cover morphism.
@@ -138,6 +165,41 @@ example {source target : HyperbolicOrbicurveModel F}
       (B := B) (L := L) morphism extensionOfCover hExtension).extensionOfCover :=
   (abstractFunctionFieldExtensionOfOrbicurveCoverData
     (B := B) (L := L) morphism extensionOfCover hExtension).extensionOfCover_proof
+
+/-- A constructor smoke test for comparing a cover deck group with the theta quotient. -/
+noncomputable def abstractOrbicurveCoverDeckQuotientData
+    (thetaApproach : ThetaApproachQuotientData)
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+    (deckData : OrbicurveCoverDeckTransformationData coverProperties)
+    (deckGroupEquivQuotient :
+      letI : Group deckData.deckGroup := deckData.deckGroupGroup
+      deckData.deckGroup ≃* ThetaApproachQuotientData.deckQuotient thetaApproach)
+    (deckGroupIdentifiesThetaQuotient : Prop)
+    (hIdentifies : deckGroupIdentifiesThetaQuotient) :
+    OrbicurveCoverDeckQuotientData thetaApproach deckData where
+  deckGroupEquivQuotient := deckGroupEquivQuotient
+  deckGroupIdentifiesThetaQuotient := deckGroupIdentifiesThetaQuotient
+  deckGroupIdentifiesThetaQuotient_holds := hIdentifies
+
+noncomputable example
+    (thetaApproach : ThetaApproachQuotientData)
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+    (deckData : OrbicurveCoverDeckTransformationData coverProperties)
+    (deckGroupEquivQuotient :
+      letI : Group deckData.deckGroup := deckData.deckGroupGroup
+      deckData.deckGroup ≃* ThetaApproachQuotientData.deckQuotient thetaApproach)
+    (deckGroupIdentifiesThetaQuotient : Prop)
+    (hIdentifies : deckGroupIdentifiesThetaQuotient) :
+    (abstractOrbicurveCoverDeckQuotientData
+      thetaApproach deckData deckGroupEquivQuotient
+      deckGroupIdentifiesThetaQuotient hIdentifies).deckGroupIdentifiesThetaQuotient :=
+  (abstractOrbicurveCoverDeckQuotientData
+    thetaApproach deckData deckGroupEquivQuotient
+    deckGroupIdentifiesThetaQuotient hIdentifies).identifiesThetaQuotient
 
 /--
 A constructor smoke test for the quotient action on an indexed function-field
@@ -548,6 +610,10 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
       HyperbolicOrbicurveMorphismData sourceOrbicurve targetOrbicurve)
     (coverProperties :
       FiniteEtaleGaloisOrbicurveMorphismData coverMorphism)
+    (coverDeckTransformations :
+      OrbicurveCoverDeckTransformationData coverProperties)
+    (coverDeckQuotient :
+      OrbicurveCoverDeckQuotientData thetaApproach coverDeckTransformations)
     (functionFieldExtension :
       FunctionFieldExtensionOfOrbicurveCoverData coverMorphism B L)
     (quotientAction :
@@ -559,6 +625,8 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
   targetOrbicurve := targetOrbicurve
   coverMorphism := coverMorphism
   coverProperties := coverProperties
+  coverDeckTransformations := coverDeckTransformations
+  coverDeckQuotient := coverDeckQuotient
   functionFieldExtension := functionFieldExtension
   quotientAction := quotientAction
 
@@ -597,6 +665,22 @@ example
     (certificate : ThetaFiniteEtaleGaloisCoverCertificate thetaApproach B L) :
     certificate.coverMorphism.morphismExists :=
   certificate.coverMorphismExists
+
+example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (certificate : ThetaFiniteEtaleGaloisCoverCertificate thetaApproach B L) :
+    certificate.coverDeckTransformations.deckTransformationsOfCover :=
+  certificate.deckTransformationsOfCover
+
+example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (certificate : ThetaFiniteEtaleGaloisCoverCertificate thetaApproach B L) :
+    certificate.coverDeckQuotient.deckGroupIdentifiesThetaQuotient :=
+  certificate.coverDeckIdentifiesThetaQuotient
 
 noncomputable example
     (thetaApproach : ThetaApproachQuotientData)
