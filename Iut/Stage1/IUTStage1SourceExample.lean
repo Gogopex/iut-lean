@@ -294,6 +294,57 @@ theorem unitThetaToy_source_theorem311_structured_hasAPT_example
   (unitThetaToy_source_theorem311_structured_inputs_example
     measure hnormalized hh hbound hholds).hasStructuredAPT
 
+theorem unitThetaToy_source_theorem311_structured_subclaims_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToy_source_theorem311_structured_inputs_example
+      measure hnormalized hh hbound hholds).theorem311Subclaims =
+      unitThetaToy_source_theorem311_subclaims_example
+        measure hnormalized hh hbound hholds :=
+  IUTStage1SourceObligationGap.theorem311StructuredInputs_subclaims
+    (unitThetaToyIUTStage1SourceObligationGap
+      measure hnormalized hh hbound hholds)
+
+theorem unitThetaToy_source_theorem311_structured_algorithm_eq_subclaims_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let inputs :=
+      unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds
+    inputs.algorithmOutputCertified =
+      inputs.theorem311Subclaims.algorithmOutputCertified :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).algorithmOutputCertified_eq_subclaims
+
+theorem unitThetaToy_source_theorem311_structured_she_eq_subclaims_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let inputs :=
+      unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds
+    inputs.hodgeTheaterSHEAlignment =
+      inputs.theorem311Subclaims.hodgeTheaterSHEAlignment :=
+  (unitThetaToy_source_theorem311_structured_inputs_example
+    measure hnormalized hh hbound hholds).hodgeTheaterSHEAlignment_eq_subclaims
+
 theorem unitThetaToy_source_gap_qPilot_positive_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -397,6 +448,23 @@ theorem unitThetaToy_source_gap_audit_theorem311_structured_inputs_example
         measure hnormalized hh hbound hholds) :=
   (unitThetaToy_source_gap_audit_example
     measure hnormalized hh hbound hholds).theorem311StructuredInputs
+
+theorem unitThetaToy_source_gap_audit_theorem311_structured_subclaims_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToy_source_gap_audit_theorem311_structured_inputs_example
+      measure hnormalized hh hbound hholds).theorem311Subclaims =
+      unitThetaToy_source_gap_audit_theorem311_subclaims_example
+        measure hnormalized hh hbound hholds :=
+  IUTStage1SourceObligationGap.Audit.theorem311StructuredInputs_subclaims
+    (unitThetaToy_source_gap_audit_example
+      measure hnormalized hh hbound hholds)
 
 theorem unitThetaToy_source_gap_audit_qPilot_positive_example
     (measure : RegionMeasure thetaLine)

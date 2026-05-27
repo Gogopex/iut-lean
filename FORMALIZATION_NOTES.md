@@ -8421,3 +8421,70 @@ The next milestone should add compatibility lemmas from structured inputs back
 to the older Theorem 3.11 subclaim projections, then consider a separate
 source-facing record for the q-pilot positivity and normalization side
 conditions.
+
+## Milestone 102: Structured Input Subclaim Compatibility
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+This milestone is a coherence step inside the formal API. It does not add a new
+mathematical assertion beyond the Stage 1 source-reading already recorded in
+Milestones 100 and 101: Theorem 3.11 is still being decomposed into named
+source-facing inputs, while the Corollary 3.12 public endpoint remains behind
+the source-obligation promotion.
+
+The Scholze-Stix warning about implicit identifications motivates this sort of
+bookkeeping. If a later module uses "structured inputs", Lean should expose
+exactly which Theorem 3.11 subclaims are being used instead of silently changing
+the proof path.
+
+### Purpose
+
+This milestone adds compatibility projections showing that
+`IUTStage1Theorem311StructuredInputs` contains the same
+`IUTStage1Theorem311Subclaims` object used by the source-gap and source-gap-audit
+layers.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1Theorem311StructuredInputs.theorem311Subclaims
+IUTStage1Theorem311StructuredInputs.algorithmOutputCertified_eq_subclaims
+IUTStage1Theorem311StructuredInputs.hodgeTheaterSHEAlignment_eq_subclaims
+IUTStage1SourceObligationGap.theorem311StructuredInputs_subclaims
+IUTStage1SourceObligationGap.Audit.theorem311StructuredInputs_subclaims
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_structured_subclaims_example
+unitThetaToy_source_theorem311_structured_algorithm_eq_subclaims_example
+unitThetaToy_source_theorem311_structured_she_eq_subclaims_example
+unitThetaToy_source_gap_audit_theorem311_structured_subclaims_example
+```
+
+### What This Tests
+
+The toy examples verify that both the gap-derived and audit-derived structured
+input records project back to the older subclaim records, and that their
+algorithm and SHE projections agree with those subclaims.
+
+### Design Trap Avoided
+
+The trap would be to introduce a second source-facing Theorem 3.11 interface and
+leave its relation to the first interface informal. This milestone makes that
+relation explicit and machine-checkable.
+
+### Next Step
+
+The next milestone should introduce a separate source-facing record for the
+q-pilot positivity and normalization side conditions, so that the Theorem 3.11
+subclaim story remains distinct from the arithmetic sign/normalization
+requirements needed for ledger promotion.

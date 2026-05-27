@@ -210,6 +210,11 @@ namespace IUTStage1Theorem311StructuredInputs
 variable {source target : Copy} {index : Type u}
 variable {package : IUTStage1SourcePackage source target index}
 
+theorem theorem311Subclaims
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    IUTStage1Theorem311Subclaims package :=
+  inputs.theorem311_subclaims
+
 theorem hasStructuredIPL
     (inputs : IUTStage1Theorem311StructuredInputs package) :
     QualitativeData.HasStructuredIPL package.preLedger.output.family :=
@@ -235,6 +240,18 @@ theorem hodgeTheaterSHEAlignment
     package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
       package.preLedger.certificate.she :=
   inputs.theorem311_subclaims.hodgeTheaterSHEAlignment
+
+theorem algorithmOutputCertified_eq_subclaims
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    inputs.algorithmOutputCertified =
+      inputs.theorem311Subclaims.algorithmOutputCertified :=
+  rfl
+
+theorem hodgeTheaterSHEAlignment_eq_subclaims
+    (inputs : IUTStage1Theorem311StructuredInputs package) :
+    inputs.hodgeTheaterSHEAlignment =
+      inputs.theorem311Subclaims.hodgeTheaterSHEAlignment :=
+  rfl
 
 end IUTStage1Theorem311StructuredInputs
 
@@ -291,6 +308,12 @@ def theorem311StructuredInputs
     IUTStage1Theorem311StructuredInputs package :=
   { preledger_audit := package.preLedger.audit,
     theorem311_subclaims := gap.theorem311Subclaims }
+
+theorem theorem311StructuredInputs_subclaims
+    (gap : IUTStage1SourceObligationGap package) :
+    gap.theorem311StructuredInputs.theorem311Subclaims =
+      gap.theorem311Subclaims :=
+  rfl
 
 def toSourceObligations
     (gap : IUTStage1SourceObligationGap package) :
@@ -359,6 +382,12 @@ def theorem311StructuredInputs
     IUTStage1Theorem311StructuredInputs package :=
   { preledger_audit := package.preLedger.audit,
     theorem311_subclaims := gapAudit.theorem311Subclaims }
+
+theorem theorem311StructuredInputs_subclaims
+    (gapAudit : Audit gap) :
+    gapAudit.theorem311StructuredInputs.theorem311Subclaims =
+      gapAudit.theorem311Subclaims :=
+  rfl
 
 def toSourceObligations
     (gapAudit : Audit gap) :
