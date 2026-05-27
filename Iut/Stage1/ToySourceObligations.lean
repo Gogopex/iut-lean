@@ -40,6 +40,7 @@ def unitThetaToySourceObligationLedger
     chartedContainer :=
       thetaToyChartedCommonContainerData measure hnormalized unitQToTheta h hbound,
     she_matches_certificate := rfl,
+    qValue := { qPoint := qAssignment h, qSigned_eq := rfl },
     choice := choice,
     q_le_choice :=
       unitThetaToy_qSigned_le_choiceTargetVolume measure hnormalized h epsilon choice hholds,

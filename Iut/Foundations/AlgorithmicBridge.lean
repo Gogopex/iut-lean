@@ -336,6 +336,20 @@ structure RealComparisonChartData
   theta_trivial : Transport.TrivialMonodromy thetaToTarget
 
 /--
+The q-side value as read through a specific real-comparison chart.
+
+This record keeps the q-side point and the target-coordinate real number tied
+by the chart transport.
+-/
+structure ChartedQValueData
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target)
+    (chart : output.RealComparisonChartData measure)
+    (qSigned : Real) where
+  qPoint : Point source
+  qSigned_eq : (Transport.map chart.qToTarget qPoint).coord = qSigned
+
+/--
 A common container together with the real-line comparison chart used to read its
 final q- and Theta-side real numbers in the target copy.
 -/

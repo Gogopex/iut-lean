@@ -2736,3 +2736,96 @@ The next milestone should connect `q_le_choice` to the chart more tightly by
 introducing a charted q-value record: the q-side point, its transport into the
 target real-line copy, and the proof that the transported coordinate is the
 `qSigned` value used in the final source ledger.
+
+## Milestone 27: Charted q-Value
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/SourceObligations.lean`
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III, Corollary 3.12, Step `(xi-d)` identifies `-|log(q)|` as the
+log-volume of the region arising from the representation of the q-pilot object
+at `(1,0)` in the relevant common setting. This is more specific than merely
+having an arbitrary real number on the q-side.
+
+Scholze-Stix's warning about ordered one-dimensional real vector spaces applies
+directly here: if a real number is used as the q-side term of the final
+inequality, the formalization should record which q-side point it came from and
+which chart moved it into the target real-line copy.
+
+### Purpose
+
+Milestone 26 recorded the real-comparison chart. This milestone ties the
+q-side scalar in the final ledger to that chart:
+
+```text
+ChartedQValueData
+```
+
+The record stores:
+
+```text
+qPoint : Point source
+qSigned_eq : (Transport.map chart.qToTarget qPoint).coord = qSigned
+```
+
+Thus `qSigned` is no longer just a bare `Real` parameter of the source ledger;
+it is explicitly the coordinate obtained by transporting a q-side point through
+the ledger's chart.
+
+### Lean Declarations
+
+In `AlgorithmicBridge.lean`:
+
+```text
+ChartedQValueData.qPoint
+ChartedQValueData.qSigned_eq
+```
+
+In `SourceObligations.lean`, the ledger now has:
+
+```text
+qValue : output.ChartedQValueData measure chartedContainer.chart qSigned
+```
+
+and proves:
+
+```text
+qSigned_eq_chartedQ
+```
+
+In `ToySourceObligations.lean`, the toy ledger supplies:
+
+```text
+qPoint := qAssignment h
+qSigned_eq := rfl
+```
+
+because the toy `qSigned` is already
+`(Transport.map unitQToTheta (qAssignment h)).coord`.
+
+### What This Tests
+
+The toy source-obligation endpoint still proves the signed Stage 1 inequality
+after the final ledger is strengthened with a charted q-value. This confirms
+that the q-side real term used by the final inequality is tied to the same
+transport chart used by the common container.
+
+### Design Trap Avoided
+
+The trap would be to record a real comparison chart but still allow `qSigned`
+to be chosen independently of that chart. This milestone separates two facts:
+the chart determines what `qSigned` is, while `q_le_choice` remains the
+mathematical inequality comparing that charted value with the chosen target
+volume.
+
+### Next Step
+
+The next milestone should add the analogous charted Theta bound record: the
+target-side upper-bound coordinate, the proof that it is the `thetaSigned`
+bound in the ledger, and the connection to the common-target bound produced by
+the charted container.
