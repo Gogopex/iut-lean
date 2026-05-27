@@ -742,6 +742,11 @@ example (g : theta.coverData.thetaApproachQuotient.piXK.carrier) :
   theta.thetaApproachQuotientHomPiXK_eq_one g
 
 example :
+    (ThetaApproachQuotientData.quotientHom theta.coverData.thetaApproachQuotient).ker =
+      theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.imageSubgroup :=
+  theta.thetaApproachQuotientHomKer
+
+example :
     theta.coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
   theta.thetaApproachGalQuotientIdentification
 

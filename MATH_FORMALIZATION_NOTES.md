@@ -4801,3 +4801,81 @@ ker (Pi_CK -> Pi_CK / Pi_XK) = image(Pi_XK)
 
 should still be added later. The present theorem gives the source-to-kernel
 direction needed for the action layer.
+
+## Math Milestone 48: Kernel of the Theta Quotient Hom
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Remark 3.1.2, identifies the acting deck group with
+
+```text
+Pi_CK / Pi_XK
+```
+
+For this quotient notation to mean what it says, the kernel of the canonical
+map from `Pi_CK` to the quotient must be the image of `Pi_XK`. This milestone
+formalizes that kernel statement for the concrete `Theta`-approach quotient.
+
+This remains a reconstruction-layer fact. It does not assert anything about
+Hodge-theater comparisons or the later Corollary 3.12 inequality.
+
+### Lean/API Check
+
+The new theorem is:
+
+```text
+ThetaApproachQuotientData.quotientHom_ker
+```
+
+with statement:
+
+```text
+ker (Pi_CK -> Pi_CK / Pi_XK) = image(Pi_XK)
+```
+
+The proof uses mathlib's quotient-group theorem:
+
+```text
+QuotientGroup.eq_one_iff
+```
+
+after unfolding the concrete quotient hom to `QuotientGroup.mk'`.
+
+### Lean Decisions
+
+We kept this theorem at the `ThetaApproachQuotientData` level rather than
+placing it in the fully generic `NormalOpenEmbeddingData` namespace. The
+generic version ran into dependent-universe noise earlier; the concrete
+Theta-approach statement is the one needed by the IUT source and remains
+readable.
+
+### Lean Declarations
+
+```text
+ThetaApproachQuotientData.quotientHom_ker
+ThetaOrbicurveCoverData.thetaApproachQuotientHomKer
+InitialThetaData.thetaApproachQuotientHomKer
+```
+
+### What This Tests
+
+The example file now checks the full kernel identity for the canonical
+Theta-approach quotient hom.
+
+### Design Trap Avoided
+
+The trap would be to rely only on the one-way fact that elements from `Pi_XK`
+map to `1`. This milestone adds the converse as well, so the quotient really
+has the intended kernel.
+
+### Remaining Gap
+
+The quotient is still abstractly attached to reconstructed function-field data.
+Later milestones should connect this to a more concrete covering/deck
+transformation formalization and eventually to the Frobenioid/prime-strip data
+used later in IUT.

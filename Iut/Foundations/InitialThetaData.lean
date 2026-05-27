@@ -1497,6 +1497,16 @@ theorem quotientHom_apply (g : thetaApproach.piCK.carrier) :
       ThetaApproachQuotientData.quotientMap thetaApproach g :=
   rfl
 
+theorem quotientHom_ker :
+    (ThetaApproachQuotientData.quotientHom thetaApproach).ker =
+      thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup := by
+  letI : (thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup).Normal :=
+    thetaApproach.piXK_to_piCK.imageNormal
+  ext g
+  change QuotientGroup.mk' thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup g = 1 ↔
+    g ∈ thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup
+  exact QuotientGroup.eq_one_iff g
+
 theorem quotientHom_piXK_eq_one (g : thetaApproach.piXK.carrier) :
     ThetaApproachQuotientData.quotientHom thetaApproach
         (thetaApproach.piXK_to_piCK.openEmbedding.hom g) = 1 := by
@@ -1772,6 +1782,11 @@ theorem thetaApproachQuotientHomPiXK_eq_one
         (coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g) = 1 :=
   ThetaApproachQuotientData.quotientHom_piXK_eq_one
     coverData.thetaApproachQuotient g
+
+theorem thetaApproachQuotientHomKer :
+    (ThetaApproachQuotientData.quotientHom coverData.thetaApproachQuotient).ker =
+      coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.imageSubgroup :=
+  coverData.thetaApproachQuotient.quotientHom_ker
 
 theorem thetaApproachGalQuotientIdentification :
     coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
@@ -2526,6 +2541,11 @@ theorem thetaApproachQuotientHomPiXK_eq_one
     ThetaApproachQuotientData.quotientHom theta.coverData.thetaApproachQuotient
         (theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g) = 1 :=
   theta.coverData.thetaApproachQuotientHomPiXK_eq_one g
+
+theorem thetaApproachQuotientHomKer :
+    (ThetaApproachQuotientData.quotientHom theta.coverData.thetaApproachQuotient).ker =
+      theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.imageSubgroup :=
+  theta.coverData.thetaApproachQuotientHomKer
 
 theorem thetaApproachGalQuotientIdentification :
     theta.coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
