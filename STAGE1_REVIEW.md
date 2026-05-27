@@ -954,3 +954,72 @@ prove the hull+det bound for the resulting union
 The next implementation should not add more endpoint packaging. It should move
 one level lower by modeling generated indeterminacy steps/actions and deriving
 an equivalence relation from them.
+
+## Periodic Review: Theorem 3.11 Choice Model
+
+Date: 2026-05-28
+
+This checkpoint reviews the transition from generic quotient infrastructure to
+Theorem 3.11-shaped indeterminacy choices.
+
+### Current Lean Chain
+
+The source-facing indeterminacy route now has:
+
+```text
+IUTStage1Theorem311IndeterminacySourceData
+IUTStage1Theorem311Choice
+ProcessionAutomorphismStep
+LocalTensorSymmetryStep
+UpperSemiCompatibilityStep
+```
+
+The generated relation for `IUTStage1Theorem311Choice` preserves:
+
+```text
+column
+coric
+```
+
+and Lean derives possible-image invariance when the image family depends only
+on `coric`.
+
+### Source Alignment
+
+This matches the statement of IUT III Theorem 3.11 at the level of roles:
+
+```text
+Ind1: automorphisms of the procession of D-prime-strips
+Ind2: local tensor-factor/order-two symmetry indeterminacies
+Ind3: upper semi-compatibility as m varies
+```
+
+The model correctly treats `Ind3` as allowed to vary the row coordinate `m`,
+while preserving the column `n` and coric data.
+
+### Risks Found
+
+The current relation records only which abstract coordinates may change. It
+does not yet encode the content of:
+
+```text
+processions of D-prime-strips
+local tensor packet direct summands
+inclusions at nonarchimedean places
+surjections at archimedean places
+log-link compatibility
+```
+
+So this is not yet a formalization of Theorem 3.11 itself. It is a typed target
+for the next layer of records.
+
+### Global 3.12 Check
+
+The work is still aligned with the Corollary 3.12 dispute: the route now makes
+explicit that the possible images must be invariant under the generated
+Theorem 3.11 indeterminacies before the hull endpoint can be used seriously.
+
+The next step should define typed state records for the three abstract
+coordinates, especially the upper-semi-compatibility state, because that is
+where the source text distinguishes inclusions, surjections, and log-volume
+compatibility.
