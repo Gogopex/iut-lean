@@ -285,6 +285,22 @@ theorem sourceNormalization
 
 end IUTStage1SourceSideConditions
 
+namespace IUTStage1SourceObligations
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+def ofSubclaimsAndSideConditions
+    (subclaims : IUTStage1Theorem311Subclaims package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    IUTStage1SourceObligations package :=
+  { algorithm_certified := subclaims.algorithmOutputCertified,
+    she_arrow_matches_certificate := subclaims.hodgeTheaterSHEAlignment,
+    q_pilot_positive := sideConditions.qPilotPositive,
+    normalization := sideConditions.sourceNormalization }
+
+end IUTStage1SourceObligations
+
 /--
 Named source-level gap below `IUTStage1SourceObligations`.
 
@@ -358,6 +374,13 @@ def toSourceObligations
     she_arrow_matches_certificate := gap.sheAlignment,
     q_pilot_positive := gap.qPilotPositive,
     normalization := gap.sourceNormalization }
+
+theorem toSourceObligations_eq_subclaimsAndSideConditions
+    (gap : IUTStage1SourceObligationGap package) :
+    gap.toSourceObligations =
+      IUTStage1SourceObligations.ofSubclaimsAndSideConditions
+        gap.theorem311Subclaims gap.sideConditions :=
+  rfl
 
 /--
 Compact audit checklist for the source-level obligation gap.
@@ -438,6 +461,13 @@ def toSourceObligations
     she_arrow_matches_certificate := gapAudit.sheAlignment,
     q_pilot_positive := gapAudit.qPilotPositive,
     normalization := gapAudit.sourceNormalization }
+
+theorem toSourceObligations_eq_subclaimsAndSideConditions
+    (gapAudit : Audit gap) :
+    gapAudit.toSourceObligations =
+      IUTStage1SourceObligations.ofSubclaimsAndSideConditions
+        gapAudit.theorem311Subclaims gapAudit.sideConditions :=
+  rfl
 
 theorem toSourceObligations_eq_gap
     (gapAudit : Audit gap) :

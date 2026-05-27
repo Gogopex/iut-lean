@@ -8556,3 +8556,65 @@ subclaims separate from arithmetic sign and normalization side conditions.
 The next milestone should add a clean constructor that combines Theorem 3.11
 subclaims with side conditions to rebuild `IUTStage1SourceObligations`, making
 the promotion boundary explicit.
+
+## Milestone 104: Source Obligation Constructor from Parts
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The formal boundary now has two named input layers:
+
+```text
+Theorem 3.11 subclaims
+source side conditions
+```
+
+This milestone adds the constructor that combines exactly these two layers into
+`IUTStage1SourceObligations`. This mirrors the Stage 1 reading discipline: only
+after both algorithmic/SHE data and side conditions are supplied may the package
+be promoted toward the public endpoint.
+
+### Purpose
+
+This milestone makes the promotion boundary explicit by adding a constructor
+from separated inputs to source obligations.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourceObligations.ofSubclaimsAndSideConditions
+IUTStage1SourceObligationGap.toSourceObligations_eq_subclaimsAndSideConditions
+IUTStage1SourceObligationGap.Audit.toSourceObligations_eq_subclaimsAndSideConditions
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_obligations_from_parts_example
+unitThetaToy_source_gap_audit_obligations_from_parts_example
+```
+
+### What This Tests
+
+The toy examples verify that rebuilding source obligations from Theorem 3.11
+subclaims and side conditions produces the same obligations as the older
+source-gap route.
+
+### Design Trap Avoided
+
+The trap would be to let a source gap remain the only way to construct source
+obligations. This milestone gives future non-toy modules a clearer target:
+prove the named Theorem 3.11 subclaims, prove the named side conditions, then
+combine them.
+
+### Next Step
+
+The next milestone should add public projection examples that pass through this
+constructor into the existing source audit/public endpoint, while still avoiding
+any direct route from Theorem 3.11 subclaims alone to Corollary 3.12.
