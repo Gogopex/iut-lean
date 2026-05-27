@@ -1928,3 +1928,78 @@ structured data part of the final theorem's interface.
 The next milestone should add a small "source obligation ledger" in Lean: named
 records for which future IUT-specific theorem must provide the structured
 bridge, the q-side signed comparison, and the normalization of the measure.
+
+## Milestone 19: Source Obligation Ledger
+
+Lean files:
+
+* `Iut/Stage1/SourceObligations.lean`
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+This milestone follows the same Corollary 3.12 Step (xi) display and the
+structured-proof decomposition from Mochizuki's formalization progress report.
+The source separates several operations before comparable real objects appear:
+the multiradial construction with IPL/SHE/APT properties, hull and determinant
+formation, normalized log-volume, and finally the signed real comparison. The
+Scholze-Stix critique specifically warns that extracting a real inequality
+without spelling out all identifications and comparisons is not acceptable.
+
+### Purpose
+
+The final structured schema now has enough moving parts that we need a ledger
+of completed obligations. `SourceObligationLedger` records:
+
+```text
+certificate          : structured IPL/SHE/APT data
+bridge               : structured bridge to common-target bound
+choice               : chosen output
+q_le_choice          : qSigned <= targetVolume(choice)
+q_positive           : positivity of the stored q magnitude
+normalization_proof  : proof of the selected normalization statement
+```
+
+The `normalization` field is a parameter of type `Prop`, because the real IUT
+normalization statement will not be the toy upper-ray normalization.
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger
+SourceObligationLedger.corollary312
+SourceObligationLedger.stage1Comparison
+SourceObligationLedger.hasNormalization
+```
+
+In `ToySourceObligations.lean`:
+
+```text
+unitThetaToySourceObligationLedger
+unitThetaToyCorollary312_from_sourceObligations
+unitThetaToyStage1Comparison_from_sourceObligations
+```
+
+The toy ledger uses `RegionMeasure.NormalizesUpperRays measure` as its
+normalization obligation.
+
+### What This Tests
+
+The final toy path now names every obligation before producing the Stage 1
+comparison. This is useful for future IUT work because a missing bridge,
+normalization, or q-side signed comparison will be visible as a missing field
+instead of being hidden inside a large theorem.
+
+### Design Trap Avoided
+
+The trap would be to bundle all obligations into one opaque assumption called
+"Theorem 3.11". The ledger breaks the final step into fields that can later be
+assigned to precise source lemmas.
+
+### Next Step
+
+The next milestone should begin replacing toy labels in `QualitativeData` with
+slightly richer abstract identifiers for prime strips, Hodge-theater sides, and
+holomorphic structures, still without giving them mathematical consequences.

@@ -173,6 +173,10 @@ Current modules:
   Corollary-3.12-shaped pilot inequality from bridge output.
 * `Iut.Stage1.ToyCorollarySchema`: toy specialization deriving the signed
   inequality from membership in a chosen upper-ray output.
+* `Iut.Stage1.SourceObligations`: source-obligation ledger for the structured
+  Stage 1 final comparison.
+* `Iut.Stage1.ToySourceObligations`: toy completion of that ledger using
+  upper-ray normalization and epsilon-cap bounds.
 
 Useful commands:
 

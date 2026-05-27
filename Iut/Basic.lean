@@ -22,6 +22,8 @@ import Iut.Stage1.ToyQualitativeOutput
 import Iut.Stage1.ToyBridge
 import Iut.Stage1.CorollarySchema
 import Iut.Stage1.ToyCorollarySchema
+import Iut.Stage1.SourceObligations
+import Iut.Stage1.ToySourceObligations
 
 /-!
 Root module for the IUT formalization scaffold.
