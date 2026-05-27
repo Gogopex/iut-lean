@@ -812,6 +812,116 @@ theorem unitThetaToyStage1Comparison_recovers_threeTermChain
           measure hnormalized hh hbound hholds) :=
   rfl
 
+/-- End-to-end audit summary for the unit-transport toy source ledger. -/
+structure UnitThetaToySourceObligationAudit
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) : Prop where
+  certificate_from_source :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).certificate =
+      thetaToyStructuredCertificate unitQToTheta h epsilon
+  chartedContainer_from_source :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).chartedContainer =
+      thetaToyChartedCommonContainerData
+        measure hnormalized unitQToTheta h hbound
+  qPoint_from_source :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).qValue.qPoint =
+      qAssignment h
+  thetaPoint_from_source :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).thetaBound.thetaPoint =
+      point thetaLine (-(2 * h) + epsilonBound)
+  chosenComparison_from_source :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).chosenOutput.comparison =
+      thetaIndeterminacyComparison unitQToTheta h (epsilon choice)
+  membership_from_source :
+    (thetaIndeterminacyComparison unitQToTheta h (epsilon choice)).Holds
+      (qAssignment h)
+  q_le_targetVolume_from_membership :
+    (Transport.map unitQToTheta (qAssignment h)).coord <=
+      RegionMeasure.targetVolume measure
+        (thetaIndeterminacyComparison unitQToTheta h (epsilon choice))
+  targetVolume_le_thetaBound_from_container :
+    RegionMeasure.targetVolume measure
+        (thetaIndeterminacyComparison unitQToTheta h (epsilon choice)) <=
+      -(2 * h) + epsilonBound
+  q_le_thetaBound_from_chain :
+    (Transport.map unitQToTheta (qAssignment h)).coord <=
+      -(2 * h) + epsilonBound
+  corollary_from_chain :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta (-(2 * h) + epsilonBound))
+      (signedPilotLogVolume PilotSide.q
+        (Transport.map unitQToTheta (qAssignment h)).coord)
+  stage_comparison_from_chain :
+    (unitThetaToyStage1Comparison_from_sourceObligations
+      measure hnormalized hh hbound hholds).comparison =
+      corollary312_of_signed_le
+        (unitThetaToy_qSigned_le_thetaSigned_from_sourceObligations
+          measure hnormalized hh hbound hholds)
+  stage_recovers_corollary :
+    corollary312_from_stage1_comparison
+      (unitThetaToyStage1Comparison_from_sourceObligations
+        measure hnormalized hh hbound hholds) =
+      (unitThetaToySourceObligationLedger
+        measure hnormalized hh hbound hholds).corollary312
+
+theorem unitThetaToy_endToEndAudit_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    UnitThetaToySourceObligationAudit measure hnormalized hh hbound hholds :=
+  { certificate_from_source :=
+      unitThetaToy_certificate_from_sourceObligations
+        measure hnormalized hh hbound hholds,
+    chartedContainer_from_source :=
+      unitThetaToy_chartedContainer_from_sourceObligations
+        measure hnormalized hh hbound hholds,
+    qPoint_from_source :=
+      unitThetaToy_qPoint_from_sourceObligations
+        measure hnormalized hh hbound hholds,
+    thetaPoint_from_source :=
+      unitThetaToy_thetaPoint_from_sourceObligations
+        measure hnormalized hh hbound hholds,
+    chosenComparison_from_source :=
+      unitThetaToy_chosenThetaComparison_from_sourceObligations
+        measure hnormalized hh hbound hholds,
+    membership_from_source :=
+      unitThetaToy_membership_holds_thetaComparison_from_sourceObligations
+        measure hnormalized hh hbound hholds,
+    q_le_targetVolume_from_membership :=
+      unitThetaToy_qSigned_le_thetaTargetVolume_from_membership
+        measure hnormalized hh hbound hholds,
+    targetVolume_le_thetaBound_from_container :=
+      unitThetaToy_thetaTargetVolume_le_thetaBound_from_sourceObligations
+        measure hnormalized hh hbound hholds,
+    q_le_thetaBound_from_chain :=
+      unitThetaToy_qSigned_le_thetaBound_via_thetaTargetVolume
+        measure hnormalized hh hbound hholds,
+    corollary_from_chain :=
+      unitThetaToyCorollary312_from_thetaTargetVolumeChain
+        measure hnormalized hh hbound hholds,
+    stage_comparison_from_chain :=
+      unitThetaToyStage1Comparison_comparison_eq_qThetaChain
+        measure hnormalized hh hbound hholds,
+    stage_recovers_corollary :=
+      unitThetaToyStage1Comparison_recovers_corollary312
+        measure hnormalized hh hbound hholds }
+
 theorem unitThetaToy_theta_commonBound_from_sourceObligations
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

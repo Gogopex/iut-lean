@@ -5952,3 +5952,78 @@ The next milestone should start consolidating the toy source-obligation audit
 into a named end-to-end theorem that states the complete dependency chain from
 certificate, chart, membership, common bound, and signed packaging to the final
 Stage 1 comparison.
+
+## Milestone 68: Toy End-to-End Source-Obligation Audit
+
+Lean file:
+
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III, Step `(xi-d)`, combines several logically distinct ingredients:
+possible output data from the multiradial construction, comparison with the
+q-pilot representation, common target-volume bounds, and signed log-volume
+packaging. Scholze-Stix's critique warns that losing track of identifications or
+silently replacing one comparison object by another is exactly where the proof
+must be audited most carefully.
+
+The toy model now has enough local projections to collect those ingredients in
+one named audit statement.
+
+### Purpose
+
+This milestone introduces an end-to-end audit summary:
+
+```text
+UnitThetaToySourceObligationAudit
+```
+
+and proves:
+
+```text
+unitThetaToy_endToEndAudit_from_sourceObligations
+```
+
+The audit records the main dependency chain:
+
+```text
+source certificate and charted container
+q and Theta source points
+selected thetaIndeterminacyComparison
+membership in the selected comparison
+q <= selected target volume
+selected target volume <= Theta bound
+q <= Theta bound
+Corollary312Inequality packaging
+Stage1Comparison comparison/recovery fields
+```
+
+### Lean Declarations
+
+In `ToySourceObligations.lean`:
+
+```text
+UnitThetaToySourceObligationAudit
+unitThetaToy_endToEndAudit_from_sourceObligations
+```
+
+### What This Tests
+
+The toy source-obligation path can now be consumed as a single named audit
+object without hiding the individual proof obligations. Each field points back
+to one of the previously audited projections, so the end-to-end theorem is a
+summary of dependencies rather than a new shortcut.
+
+### Design Trap Avoided
+
+The trap would be to publish only the final toy `Stage1Comparison` theorem and
+make a human reader reconstruct the dependency chain manually. This structure
+keeps the full chain visible and mechanically checked.
+
+### Next Step
+
+The next milestone should decide whether to extend this audit-summary pattern
+back to the general `SourceObligationLedger`, or to continue toy-side work by
+exposing the same audit in a shorter public theorem suitable for examples and
+future regression tests.
