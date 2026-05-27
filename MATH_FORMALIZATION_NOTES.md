@@ -2980,3 +2980,93 @@ The current torsor is a concrete finite-label model, not a reconstruction of
 actual cusp labels from orbicurves. The next step should connect the additive
 torsor coordinates with the sign-label quotient and the distinguished
 canonical-generator class.
+
+## Math Milestone 30: Coordinates to Sign-Label Classes
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Proposition 4.2 says that a canonical element together with the natural
+`F_l`-torsor structure determines a natural bijection from label classes to
+`F_l`. IUT I, Definition 6.1(iii), says that the `±`-label version is
+well-defined up to multiplication by `±1` and compares to ordinary label classes
+through the quotient of nonzero `±`-labels by `{±1}`.
+
+This milestone connects these two pieces in the concrete `ZMod l` model: a
+nonzero additive coordinate gives a nonzero label by translation from the base
+label, and then maps to a sign-label class.
+
+### Lean/API Check
+
+The needed Lean facts are elementary:
+
+```text
+t != 0 -> -t != 0
+zmodLabelTranslate l t 0 = t
+```
+
+The sign quotient then identifies the coordinate `t` with `-t`.
+
+### Lean Decisions
+
+The new coordinate-to-label construction is:
+
+```text
+zmodNonzeroLabelFromCoordinate l t ht
+```
+
+where `ht : t != 0`. Its value is obtained by translating the base label `0`
+by `t`.
+
+The sign-label class of a nonzero coordinate is:
+
+```text
+zmodSignLabelFromCoordinate l t ht
+```
+
+Lean proves:
+
+```text
+zmodSignLabelFromCoordinate l (-t) ... =
+zmodSignLabelFromCoordinate l t ht
+```
+
+and identifies coordinate `1` with the previously defined canonical sign-label
+class.
+
+### Lean Declarations
+
+```text
+zmod_neg_ne_zero_of_ne_zero
+zmodNonzeroLabelFromCoordinate
+zmodNonzeroLabelFromCoordinate_val
+zmodSignLabelFromCoordinate
+zmodSignLabelFromCoordinate_neg_eq
+zmodSignLabelFromCoordinate_one_eq_canonical
+```
+
+### What This Tests
+
+The example file now checks:
+
+* translating the base label by a nonzero coordinate yields that coordinate;
+* opposite nonzero coordinates have the same sign-label class;
+* coordinate `1` recovers the canonical sign-label class.
+
+### Design Trap Avoided
+
+The trap would be to conflate additive torsor coordinates with multiplicative
+sign ambiguity. This milestone keeps the operations separate: coordinates are
+additive translations, while sign ambiguity is imposed only after passing to the
+nonzero sign quotient.
+
+### Remaining Gap
+
+The bridge is still concrete and local to `ZMod l`. The next step should package
+the ordinary label coordinate, sign-label class, unit action, and additive
+torsor as one local `LabCusp` model so that bad-place cusp data can refer to a
+single structured object instead of separate helper declarations.

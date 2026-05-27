@@ -235,6 +235,22 @@ example :
       zmodCanonicalSignLabelQuotient primeFive :=
   zmodCanonicalSignLabelQuotient_neg_one_eq primeFive
 
+example (t : ZMod primeFive.value) (ht : t ≠ 0) :
+    (zmodNonzeroLabelFromCoordinate primeFive t ht).1 = t :=
+  zmodNonzeroLabelFromCoordinate_val primeFive t ht
+
+example (t : ZMod primeFive.value) (ht : t ≠ 0) :
+    zmodSignLabelFromCoordinate primeFive (-t)
+        (zmod_neg_ne_zero_of_ne_zero primeFive ht) =
+      zmodSignLabelFromCoordinate primeFive t ht :=
+  zmodSignLabelFromCoordinate_neg_eq primeFive t ht
+
+example :
+    zmodSignLabelFromCoordinate primeFive (1 : ZMod primeFive.value)
+        (zmodOneNonzeroLabel primeFive).2 =
+      zmodCanonicalSignLabelQuotient primeFive :=
+  zmodSignLabelFromCoordinate_one_eq_canonical primeFive
+
 example (a : (ZMod primeFive.value)ˣ)
     (x : (zmodPointedQuotient primeFive).NonzeroCarrier) :
     zmodUnitActionOnSignLabelQuotient primeFive a

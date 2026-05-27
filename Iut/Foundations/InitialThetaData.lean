@@ -743,6 +743,51 @@ theorem zmodCanonicalSignLabelQuotient_neg_one_eq (l : PrimeGeFive) :
       zmodCanonicalSignLabelQuotient l :=
   (zmodSignAction l).toSignLabelQuotient_neg_eq (zmodOneNonzeroLabel l)
 
+theorem zmod_neg_ne_zero_of_ne_zero
+    (l : PrimeGeFive) {t : ZMod l.value} (ht : t ≠ 0) :
+    -t ≠ 0 := by
+  intro h
+  exact ht (neg_eq_zero.mp h)
+
+/-- The nonzero label obtained by translating the base label by a nonzero coordinate. -/
+def zmodNonzeroLabelFromCoordinate (l : PrimeGeFive)
+    (t : ZMod l.value) (ht : t ≠ 0) :
+    (zmodPointedQuotient l).NonzeroCarrier where
+  val := zmodLabelTranslate l t 0
+  property := by
+    simpa [zmodLabelTranslate, zmodLabelAdditiveTorsorData] using ht
+
+theorem zmodNonzeroLabelFromCoordinate_val
+    (l : PrimeGeFive) (t : ZMod l.value) (ht : t ≠ 0) :
+    (zmodNonzeroLabelFromCoordinate l t ht).1 = t := by
+  simp [zmodNonzeroLabelFromCoordinate, zmodLabelTranslate, zmodLabelAdditiveTorsorData]
+
+/-- The sign-label class represented by a nonzero additive coordinate. -/
+def zmodSignLabelFromCoordinate (l : PrimeGeFive)
+    (t : ZMod l.value) (ht : t ≠ 0) :
+    (zmodSignAction l).SignLabelQuotient :=
+  (zmodSignAction l).toSignLabelQuotient
+    (zmodNonzeroLabelFromCoordinate l t ht)
+
+theorem zmodSignLabelFromCoordinate_neg_eq
+    (l : PrimeGeFive) (t : ZMod l.value) (ht : t ≠ 0) :
+    zmodSignLabelFromCoordinate l (-t) (zmod_neg_ne_zero_of_ne_zero l ht) =
+      zmodSignLabelFromCoordinate l t ht := by
+  apply Quotient.sound
+  right
+  simp [zmodNonzeroLabelFromCoordinate, zmodLabelTranslate,
+    zmodLabelAdditiveTorsorData, zmodSignAction]
+
+theorem zmodSignLabelFromCoordinate_one_eq_canonical
+    (l : PrimeGeFive) :
+    zmodSignLabelFromCoordinate l (1 : ZMod l.value)
+        (zmodOneNonzeroLabel l).2 =
+      zmodCanonicalSignLabelQuotient l := by
+  apply Quotient.sound
+  left
+  simp [zmodNonzeroLabelFromCoordinate, zmodOneNonzeroLabel,
+    zmodLabelTranslate, zmodLabelAdditiveTorsorData]
+
 /-- Multiplication by a unit sends nonzero `ZMod l` labels to nonzero labels. -/
 def zmodUnitSmulNonzeroLabel (l : PrimeGeFive)
     (a : (ZMod l.value)ˣ)
