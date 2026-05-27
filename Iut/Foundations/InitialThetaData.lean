@@ -430,6 +430,45 @@ theorem exists_holds : morphism.morphismExists :=
 end HyperbolicOrbicurveMorphismData
 
 /--
+A typed placeholder for an automorphism of the source orbicurve lying over a
+fixed cover morphism.
+
+This is the local shape of a deck transformation: an automorphism of the source
+whose composite with the cover map is again the cover map.  Since
+`HyperbolicOrbicurveModel` is still abstract, both the automorphism and the
+over-target condition are recorded as explicit propositions.
+-/
+structure HyperbolicOrbicurveAutomorphismOverData
+    {F : Type u} [Field F]
+    {source target : HyperbolicOrbicurveModel F}
+    (coverMorphism : HyperbolicOrbicurveMorphismData source target) where
+  label : String
+  automorphismExists : Prop
+  automorphismExists_holds : automorphismExists
+  inverseExists : Prop
+  inverseExists_holds : inverseExists
+  overTarget : Prop
+  overTarget_holds : overTarget
+
+namespace HyperbolicOrbicurveAutomorphismOverData
+
+variable {F : Type u} [Field F]
+variable {source target : HyperbolicOrbicurveModel F}
+variable {coverMorphism : HyperbolicOrbicurveMorphismData source target}
+variable (automorphism : HyperbolicOrbicurveAutomorphismOverData coverMorphism)
+
+theorem exists_holds : automorphism.automorphismExists :=
+  automorphism.automorphismExists_holds
+
+theorem inverse_holds : automorphism.inverseExists :=
+  automorphism.inverseExists_holds
+
+theorem overTarget_proof : automorphism.overTarget :=
+  automorphism.overTarget_holds
+
+end HyperbolicOrbicurveAutomorphismOverData
+
+/--
 A typed property package saying that a fixed orbicurve morphism is the finite
 etale Galois cover relevant to the theta approach.
 
@@ -500,6 +539,48 @@ theorem deckTransformationsOfCover_proof :
   deckData.deckTransformationsOfCover_holds
 
 end OrbicurveCoverDeckTransformationData
+
+/--
+A realization of the abstract cover deck group by source automorphisms over the
+cover morphism.
+-/
+structure OrbicurveCoverDeckAutomorphismRealizationData
+    {F : Type u} [Field F]
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+    (deckData : OrbicurveCoverDeckTransformationData coverProperties) where
+  deckAutomorphism :
+    deckData.deckGroup → HyperbolicOrbicurveAutomorphismOverData morphism
+  realizesDeckTransformations : Prop
+  realizesDeckTransformations_holds : realizesDeckTransformations
+
+namespace OrbicurveCoverDeckAutomorphismRealizationData
+
+variable {F : Type u} [Field F]
+variable {source target : HyperbolicOrbicurveModel F}
+variable {morphism : HyperbolicOrbicurveMorphismData source target}
+variable {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+variable {deckData : OrbicurveCoverDeckTransformationData coverProperties}
+variable (realization : OrbicurveCoverDeckAutomorphismRealizationData deckData)
+
+theorem realizesDeckTransformations_proof :
+    realization.realizesDeckTransformations :=
+  realization.realizesDeckTransformations_holds
+
+theorem deckAutomorphism_exists (g : deckData.deckGroup) :
+    (realization.deckAutomorphism g).automorphismExists :=
+  (realization.deckAutomorphism g).exists_holds
+
+theorem deckAutomorphism_inverse (g : deckData.deckGroup) :
+    (realization.deckAutomorphism g).inverseExists :=
+  (realization.deckAutomorphism g).inverse_holds
+
+theorem deckAutomorphism_overTarget (g : deckData.deckGroup) :
+    (realization.deckAutomorphism g).overTarget :=
+  (realization.deckAutomorphism g).overTarget_proof
+
+end OrbicurveCoverDeckAutomorphismRealizationData
 
 /--
 A typed assertion that a finite Galois field extension is the function-field
@@ -2494,6 +2575,10 @@ structure ThetaFiniteEtaleGaloisCoverCertificate
   coverDeckTransformations :
     @OrbicurveCoverDeckTransformationData baseField baseFieldField
       sourceOrbicurve targetOrbicurve coverMorphism coverProperties
+  coverDeckAutomorphisms :
+    @OrbicurveCoverDeckAutomorphismRealizationData baseField baseFieldField
+      sourceOrbicurve targetOrbicurve coverMorphism coverProperties
+      coverDeckTransformations
   coverDeckQuotient :
     OrbicurveCoverDeckQuotientData thetaApproach coverDeckTransformations
   functionFieldExtension :
@@ -2544,6 +2629,30 @@ instance coverDeckGroupInst : Group certificate.coverDeckGroup :=
 theorem deckTransformationsOfCover :
     certificate.coverDeckTransformations.deckTransformationsOfCover :=
   certificate.coverDeckTransformations.deckTransformationsOfCover_proof
+
+def coverDeckAutomorphism
+    (g : certificate.coverDeckGroup) :
+    HyperbolicOrbicurveAutomorphismOverData certificate.coverMorphism :=
+  certificate.coverDeckAutomorphisms.deckAutomorphism g
+
+theorem coverDeckAutomorphismsRealizeDeckTransformations :
+    certificate.coverDeckAutomorphisms.realizesDeckTransformations :=
+  certificate.coverDeckAutomorphisms.realizesDeckTransformations_proof
+
+theorem coverDeckAutomorphism_exists
+    (g : certificate.coverDeckGroup) :
+    (certificate.coverDeckAutomorphism g).automorphismExists :=
+  certificate.coverDeckAutomorphisms.deckAutomorphism_exists g
+
+theorem coverDeckAutomorphism_inverse
+    (g : certificate.coverDeckGroup) :
+    (certificate.coverDeckAutomorphism g).inverseExists :=
+  certificate.coverDeckAutomorphisms.deckAutomorphism_inverse g
+
+theorem coverDeckAutomorphism_overTarget
+    (g : certificate.coverDeckGroup) :
+    (certificate.coverDeckAutomorphism g).overTarget :=
+  certificate.coverDeckAutomorphisms.deckAutomorphism_overTarget g
 
 def coverDeckEquivThetaQuotient :
     certificate.coverDeckGroup ≃*

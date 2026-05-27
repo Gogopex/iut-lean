@@ -92,6 +92,38 @@ example (source target : HyperbolicOrbicurveModel F)
   (abstractHyperbolicOrbicurveMorphismData source target
     label morphismExists hMorphism).exists_holds
 
+/-- A constructor smoke test for a source automorphism over a cover morphism. -/
+def abstractHyperbolicOrbicurveAutomorphismOverData
+    {source target : HyperbolicOrbicurveModel F}
+    (coverMorphism : HyperbolicOrbicurveMorphismData source target)
+    (label : String)
+    (automorphismExists inverseExists overTarget : Prop)
+    (hAutomorphism : automorphismExists)
+    (hInverse : inverseExists)
+    (hOverTarget : overTarget) :
+    HyperbolicOrbicurveAutomorphismOverData coverMorphism where
+  label := label
+  automorphismExists := automorphismExists
+  automorphismExists_holds := hAutomorphism
+  inverseExists := inverseExists
+  inverseExists_holds := hInverse
+  overTarget := overTarget
+  overTarget_holds := hOverTarget
+
+example {source target : HyperbolicOrbicurveModel F}
+    (coverMorphism : HyperbolicOrbicurveMorphismData source target)
+    (label : String)
+    (automorphismExists inverseExists overTarget : Prop)
+    (hAutomorphism : automorphismExists)
+    (hInverse : inverseExists)
+    (hOverTarget : overTarget) :
+    (abstractHyperbolicOrbicurveAutomorphismOverData
+      coverMorphism label automorphismExists inverseExists overTarget
+      hAutomorphism hInverse hOverTarget).overTarget :=
+  (abstractHyperbolicOrbicurveAutomorphismOverData
+    coverMorphism label automorphismExists inverseExists overTarget
+    hAutomorphism hInverse hOverTarget).overTarget_holds
+
 /-- A constructor smoke test for finite-etale/Galois properties of a fixed morphism. -/
 def abstractFiniteEtaleGaloisOrbicurveMorphismData
     {source target : HyperbolicOrbicurveModel F}
@@ -141,6 +173,43 @@ example {source target : HyperbolicOrbicurveModel F}
   (abstractOrbicurveCoverDeckTransformationData
     coverProperties deckGroup deckTransformationsOfCover
     hDeckTransformations).deckTransformationsOfCover_proof
+
+/--
+A constructor smoke test for realizing a cover deck group by source
+automorphisms over the cover morphism.
+-/
+def abstractOrbicurveCoverDeckAutomorphismRealizationData
+    {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+    (deckData : OrbicurveCoverDeckTransformationData coverProperties)
+    (deckAutomorphism :
+      deckData.deckGroup → HyperbolicOrbicurveAutomorphismOverData morphism)
+    (realizesDeckTransformations : Prop)
+    (hRealizes : realizesDeckTransformations) :
+    OrbicurveCoverDeckAutomorphismRealizationData deckData where
+  deckAutomorphism := deckAutomorphism
+  realizesDeckTransformations := realizesDeckTransformations
+  realizesDeckTransformations_holds := hRealizes
+
+example {source target : HyperbolicOrbicurveModel F}
+    {morphism : HyperbolicOrbicurveMorphismData source target}
+    {coverProperties : FiniteEtaleGaloisOrbicurveMorphismData morphism}
+    (deckData : OrbicurveCoverDeckTransformationData coverProperties)
+    (deckAutomorphism :
+      deckData.deckGroup → HyperbolicOrbicurveAutomorphismOverData morphism)
+    (realizesDeckTransformations : Prop)
+    (hRealizes : realizesDeckTransformations)
+    (g : deckData.deckGroup) :
+    let realization :=
+      abstractOrbicurveCoverDeckAutomorphismRealizationData
+        deckData deckAutomorphism realizesDeckTransformations hRealizes
+    (realization.deckAutomorphism g).overTarget := by
+  dsimp
+  exact
+    OrbicurveCoverDeckAutomorphismRealizationData.deckAutomorphism_overTarget
+      (abstractOrbicurveCoverDeckAutomorphismRealizationData
+        deckData deckAutomorphism realizesDeckTransformations hRealizes) g
 
 /--
 A constructor smoke test for a function-field extension attached to a fixed
@@ -612,6 +681,8 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
       FiniteEtaleGaloisOrbicurveMorphismData coverMorphism)
     (coverDeckTransformations :
       OrbicurveCoverDeckTransformationData coverProperties)
+    (coverDeckAutomorphisms :
+      OrbicurveCoverDeckAutomorphismRealizationData coverDeckTransformations)
     (coverDeckQuotient :
       OrbicurveCoverDeckQuotientData thetaApproach coverDeckTransformations)
     (functionFieldExtension :
@@ -626,6 +697,7 @@ noncomputable def abstractThetaFiniteEtaleGaloisCoverCertificate
   coverMorphism := coverMorphism
   coverProperties := coverProperties
   coverDeckTransformations := coverDeckTransformations
+  coverDeckAutomorphisms := coverDeckAutomorphisms
   coverDeckQuotient := coverDeckQuotient
   functionFieldExtension := functionFieldExtension
   quotientAction := quotientAction
@@ -681,6 +753,24 @@ example
     (certificate : ThetaFiniteEtaleGaloisCoverCertificate thetaApproach B L) :
     certificate.coverDeckQuotient.deckGroupIdentifiesThetaQuotient :=
   certificate.coverDeckIdentifiesThetaQuotient
+
+example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (certificate : ThetaFiniteEtaleGaloisCoverCertificate thetaApproach B L)
+    (g : certificate.coverDeckGroup) :
+    (certificate.coverDeckAutomorphism g).automorphismExists :=
+  certificate.coverDeckAutomorphism_exists g
+
+example
+    (thetaApproach : ThetaApproachQuotientData)
+    {B L : Type} [Field B] [Field L] [Algebra B L]
+    [FiniteDimensional B L] [IsGalois B L]
+    (certificate : ThetaFiniteEtaleGaloisCoverCertificate thetaApproach B L)
+    (g : certificate.coverDeckGroup) :
+    (certificate.coverDeckAutomorphism g).overTarget :=
+  certificate.coverDeckAutomorphism_overTarget g
 
 noncomputable example
     (thetaApproach : ThetaApproachQuotientData)

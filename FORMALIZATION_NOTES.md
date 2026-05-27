@@ -15469,3 +15469,95 @@ the cover. The new records keep the geometric deck group visible.
 The deck group is still supplied abstractly. The next step is to add a typed
 interface for deck transformations as automorphisms of the source orbicurve over
 the target morphism, then connect that interface to this deck group.
+
+## Math Milestone 67: Deck Transformations as Over-Target Automorphisms
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I uses finite-etale coverings of hyperbolic orbicurves together with
+corresponding fundamental-group/open-immersion data. Remark 3.1.2 identifies the
+relevant action as `Gal(X_K/C_K) = Pi_CK/Pi_XK`, while the surrounding cover
+automorphism discussions use automorphism groups such as `Aut_K(X_K)` and
+Galois groups such as `Gal(X/C)`.
+
+For a geometric cover, a deck transformation is an automorphism of the source
+lying over the target cover morphism. Since our orbicurve model is still
+abstract, this milestone records that shape explicitly without claiming a
+scheme-theoretic construction.
+
+### Lean/API Check
+
+The new source-automorphism placeholder is:
+
+```text
+HyperbolicOrbicurveAutomorphismOverData coverMorphism
+```
+
+It records:
+
+```text
+automorphismExists : Prop
+inverseExists : Prop
+overTarget : Prop
+```
+
+The new deck-realization record is:
+
+```text
+OrbicurveCoverDeckAutomorphismRealizationData deckData
+```
+
+with:
+
+```text
+deckAutomorphism :
+  deckData.deckGroup -> HyperbolicOrbicurveAutomorphismOverData morphism
+realizesDeckTransformations : Prop
+```
+
+The finite-etale Galois cover certificate now stores:
+
+```text
+coverDeckAutomorphisms :
+  OrbicurveCoverDeckAutomorphismRealizationData coverDeckTransformations
+```
+
+and exposes accessors/proofs that a deck-group element gives an existing,
+invertible, over-target source automorphism.
+
+### Lean Decisions
+
+This is still a typed abstraction. We do not yet define composition of
+orbicurve morphisms or prove that these automorphisms form the deck group.
+Instead, we make the intended geometric meaning of the abstract deck group
+visible and type-indexed by the cover morphism.
+
+### What This Tests
+
+The example file checks:
+
+* construction of an over-target source automorphism for a cover morphism;
+* construction of a realization of the abstract deck group by such
+  automorphisms;
+* extraction of the over-target proof for a deck element;
+* construction of the cover certificate with the deck-realization field;
+* certificate-level access to existence and over-target facts.
+
+### Design Trap Avoided
+
+The trap would be to call a group a "deck group" while never connecting its
+elements to automorphisms of the source over the target. This milestone makes
+that connection explicit, even though the actual composition law remains
+abstract.
+
+### Remaining Gap
+
+The next step is to formalize the compatibility between deck-group
+multiplication and composition of the over-target automorphism placeholders, or
+to introduce a more concrete category of orbicurve morphisms where that
+composition can be expressed directly.
