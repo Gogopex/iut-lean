@@ -1013,6 +1013,100 @@ theorem auditedQSigned_le_targetSigned
 end IUTStage1Theorem311StructuredInputsWithSHE
 
 /--
+Audited composition of the lower and upper middle inequalities.
+
+This produces only the raw real inequality `qSigned <= thetaSigned`. It is not
+the Corollary 3.12 endpoint: no q-positivity, source normalization, signed pilot
+objects, or public comparison payload are introduced here.
+-/
+structure IUTStage1Theorem311AuditedRawInequality
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) : Prop where
+  membership_middle :
+    IUTStage1Theorem311AuditedMembershipMiddle package bundle
+  q_signed_le_target :
+    package.preLedger.qSigned <=
+      package.preLedger.targetVolume.targetSigned
+  target_signed_le_theta :
+    package.preLedger.targetVolume.targetSigned <=
+      package.preLedger.thetaSigned
+  q_signed_le_theta :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned
+  histories_not_identified :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side
+
+namespace IUTStage1Theorem311AuditedRawInequality
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+
+theorem ofMembershipMiddle
+    (middle : IUTStage1Theorem311AuditedMembershipMiddle package bundle) :
+    IUTStage1Theorem311AuditedRawInequality package bundle :=
+  { membership_middle := middle,
+    q_signed_le_target := middle.qSigned_le_targetSigned,
+    target_signed_le_theta := middle.targetVolumeMiddle.targetSigned_le_theta,
+    q_signed_le_theta :=
+      le_trans middle.qSigned_le_targetSigned
+        middle.targetVolumeMiddle.targetSigned_le_theta,
+    histories_not_identified := middle.domainHistory_ne_codomainHistory }
+
+theorem ofStructuredInputsWithSHE
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    IUTStage1Theorem311AuditedRawInequality package bundle :=
+  ofMembershipMiddle bundle.auditedMembershipMiddle
+
+theorem membershipMiddle
+    (raw : IUTStage1Theorem311AuditedRawInequality package bundle) :
+    IUTStage1Theorem311AuditedMembershipMiddle package bundle :=
+  raw.membership_middle
+
+theorem qSigned_le_targetSigned
+    (raw : IUTStage1Theorem311AuditedRawInequality package bundle) :
+    package.preLedger.qSigned <=
+      package.preLedger.targetVolume.targetSigned :=
+  raw.q_signed_le_target
+
+theorem targetSigned_le_theta
+    (raw : IUTStage1Theorem311AuditedRawInequality package bundle) :
+    package.preLedger.targetVolume.targetSigned <=
+      package.preLedger.thetaSigned :=
+  raw.target_signed_le_theta
+
+theorem qSigned_le_thetaSigned
+    (raw : IUTStage1Theorem311AuditedRawInequality package bundle) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  raw.q_signed_le_theta
+
+theorem domainHistory_ne_codomainHistory
+    (raw : IUTStage1Theorem311AuditedRawInequality package bundle) :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side :=
+  raw.histories_not_identified
+
+end IUTStage1Theorem311AuditedRawInequality
+
+namespace IUTStage1Theorem311StructuredInputsWithSHE
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+theorem auditedRawInequality
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    IUTStage1Theorem311AuditedRawInequality package bundle :=
+  IUTStage1Theorem311AuditedRawInequality.ofStructuredInputsWithSHE bundle
+
+theorem auditedRaw_qSigned_le_thetaSigned
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  bundle.auditedRawInequality.qSigned_le_thetaSigned
+
+end IUTStage1Theorem311StructuredInputsWithSHE
+
+/--
 Source-facing side conditions needed for Stage 1 ledger promotion.
 
 These conditions are intentionally separate from the Theorem 3.11 subclaims:

@@ -766,3 +766,110 @@ The next milestone may add a deliberately named chain-composition record that
 derives only the raw real inequality `qSigned <= thetaSigned` from the two
 middle bridges. It should still avoid `Corollary312Inequality` until
 q-positivity and source normalization are explicitly present.
+
+## Math Milestone 8: Audited Raw Inequality Chain
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+IUT III, Corollary 3.12 ultimately concerns a log-volume estimate comparing the
+q-pilot side to the Theta-pilot side. The introduction to IUT III describes this
+as a computation of an upper bound for the q-pilot log-volume via the
+Theta-pilot/hull computation. Mochizuki's later formalization report separates
+the final `3.11.5 => 3.12` portion into the simultaneous-comparison step around
+`(HDD) o (SHE)`.
+
+Our current code now has two audited middle bridges:
+
+```text
+qSigned <= targetSigned
+targetSigned <= thetaSigned
+```
+
+This milestone composes exactly these two inequalities and nothing more.
+
+### Purpose
+
+This milestone adds:
+
+```text
+IUTStage1Theorem311AuditedRawInequality
+```
+
+The record packages:
+
+* the audited membership middle from Milestone 7;
+* the lower inequality `qSigned <= targetSigned`;
+* the upper inequality `targetSigned <= thetaSigned`;
+* the composed raw inequality `qSigned <= thetaSigned`;
+* the history-separation guard.
+
+The composed inequality is proved by:
+
+```text
+le_trans middle.qSigned_le_targetSigned
+  middle.targetVolumeMiddle.targetSigned_le_theta
+```
+
+Thus the composition point is explicit and reviewable.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1Theorem311AuditedRawInequality
+IUTStage1Theorem311AuditedRawInequality.ofMembershipMiddle
+IUTStage1Theorem311AuditedRawInequality.ofStructuredInputsWithSHE
+IUTStage1Theorem311AuditedRawInequality.membershipMiddle
+IUTStage1Theorem311AuditedRawInequality.qSigned_le_targetSigned
+IUTStage1Theorem311AuditedRawInequality.targetSigned_le_theta
+IUTStage1Theorem311AuditedRawInequality.qSigned_le_thetaSigned
+IUTStage1Theorem311AuditedRawInequality.domainHistory_ne_codomainHistory
+IUTStage1Theorem311StructuredInputsWithSHE.auditedRawInequality
+IUTStage1Theorem311StructuredInputsWithSHE.auditedRaw_qSigned_le_thetaSigned
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_audited_raw_inequality_example
+unitThetaToy_source_theorem311_audited_raw_q_le_theta_example
+unitThetaToy_source_theorem311_audited_raw_explicit_q_le_theta_example
+```
+
+### What This Tests
+
+The toy model verifies that the raw chain produces:
+
+```text
+(Transport.map unitQToTheta (qAssignment h)).coord <= -(2 * h) + epsilonBound
+```
+
+through the source-facing audited route. This gives us a concrete sanity check
+that the lower and upper middle bridges compose as intended.
+
+### Design Trap Avoided
+
+The trap would be to make this theorem return `Corollary312Inequality`, or to
+silently use q-positivity and normalization. We did not do that. This milestone
+returns only a plain real inequality:
+
+```text
+package.preLedger.qSigned <= package.preLedger.thetaSigned
+```
+
+The signed pilot objects, q-positivity, source normalization, and public
+comparison packaging remain outside this record.
+
+### Next Step
+
+The next milestone should introduce an audited packaging boundary that states
+exactly which extra side conditions are needed to turn the raw real inequality
+into the existing signed comparison payload. That step should mention
+q-positivity and normalization explicitly and should remain separate from the
+SHE/HDD/membership derivation.
