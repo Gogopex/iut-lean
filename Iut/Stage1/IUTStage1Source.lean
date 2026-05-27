@@ -738,6 +738,8 @@ structure IUTStage1Theorem311AuditedHDDSHEBound
   compatibility :
     IUTStage1Theorem311StructuredSHECommonContainerCompatibility
       package bundle.structuredSHE
+  local_expression_valid :
+    bundle.structuredSHE.context.simultaneousExpression.AllLocalValid
   chosen_target_volume_le_theta :
     RegionMeasure.targetVolume package.preLedger.measure
         (package.preLedger.output.comparison
@@ -760,6 +762,8 @@ theorem ofStructuredInputsWithSHE
     (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
     IUTStage1Theorem311AuditedHDDSHEBound package bundle :=
   { compatibility := bundle.commonContainerCompatibility,
+    local_expression_valid :=
+      bundle.structuredSHE.context.allLocalExpressionValid,
     chosen_target_volume_le_theta :=
       package.preLedger.chartedContainer.choice_targetVolume_le
         package.preLedger.certificate package.preLedger.chosenOutput.choice,
@@ -779,6 +783,26 @@ theorem commonContainerContextMatches
     package.preLedger.chartedContainer.commonContainer.context =
       bundle.structuredSHE.context.sharedContext :=
   audited.compatibility.commonContainerContextMatches
+
+theorem localExpressionValid
+    (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
+    bundle.structuredSHE.context.simultaneousExpression.AllLocalValid :=
+  audited.local_expression_valid
+
+theorem qPilotExpressionValid
+    (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
+    bundle.structuredSHE.context.simultaneousExpression.q_pilot_expression_valid :=
+  audited.localExpressionValid.2.2.1
+
+theorem thetaPilotExpressionValid
+    (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
+    bundle.structuredSHE.context.simultaneousExpression.theta_pilot_expression_valid :=
+  audited.localExpressionValid.2.2.2.1
+
+theorem simultaneousValid
+    (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
+    bundle.structuredSHE.context.simultaneous_valid :=
+  audited.localExpressionValid.2.2.2.2
 
 theorem chosenTargetVolume_le_theta
     (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :

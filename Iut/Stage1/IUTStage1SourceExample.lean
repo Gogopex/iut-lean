@@ -908,6 +908,22 @@ theorem unitThetaToy_source_theorem311_audited_hdd_she_choice_bound_example
   (unitThetaToy_source_theorem311_structured_inputs_with_she_example
     measure hnormalized hh hbound hholds).auditedHDDSHE_chosenTargetVolume_le_theta
 
+theorem unitThetaToy_source_theorem311_audited_hdd_she_she_validity_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let bundle :=
+      unitThetaToy_source_theorem311_structured_inputs_with_she_example
+        measure hnormalized hh hbound hholds
+    bundle.structuredSHE.context.simultaneousExpression.AllLocalValid :=
+  (unitThetaToy_source_theorem311_audited_hdd_she_bound_example
+    measure hnormalized hh hbound hholds).localExpressionValid
+
 theorem unitThetaToy_source_theorem311_audited_hdd_she_all_targets_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

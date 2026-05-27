@@ -7281,3 +7281,87 @@ arithmetic definitions. The next refinement should either give one component a
 more concrete meaning, or connect the structured validity data more tightly to
 the HDD-after-SHE bridge while preserving the explicit real-line and history
 guards.
+
+## Math Milestone 73: SHE Validity Carried by the HDD-after-SHE Audit
+
+Lean files:
+
+* `Iut/Foundations/QualitativeData.lean`
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+* `Iut/Stage1/ToyQualitativeOutput.lean`
+
+### Source Check
+
+Mochizuki's formalization report isolates the final 3.11-to-3.12 transition
+around the fourth-triangle `(HDD) o (SHE)` comparison and the simultaneous
+common-container reading. If our formal route has an audited HDD-after-SHE
+bound, it should not be possible to inspect that bound while forgetting the
+SHE validity data that is supposed to restrict the comparison.
+
+Before this milestone, the audited HDD-after-SHE bound carried common-container
+compatibility and history separation, but it did not directly carry the full
+structured local SHE-validity witness.
+
+### Lean/API Check
+
+The local SHE-validity conjunction is now named as:
+
+```text
+SimultaneousHolomorphicExpressionData.AllLocalValid
+```
+
+The audited fourth-triangle object:
+
+```text
+IUTStage1Theorem311AuditedHDDSHEBound
+```
+
+now stores:
+
+```text
+local_expression_valid :
+  bundle.structuredSHE.context.simultaneousExpression.AllLocalValid
+```
+
+and exposes:
+
+```text
+localExpressionValid
+qPilotExpressionValid
+thetaPilotExpressionValid
+simultaneousValid
+```
+
+The constructor from structured SHE inputs fills this field from the
+`StructuredSHEContext`, not from the bound data.
+
+### Lean Decisions
+
+This does not make SHE imply a numerical bound. The bound still comes from the
+charted common-container/common-target machinery. The new field simply ensures
+that the audited `(HDD) o (SHE)` checkpoint keeps the SHE-local validity witness
+in scope at the same time as the target-volume bound.
+
+This is an anti-drift move in the mathematical layer: it keeps the fourth
+triangle from degenerating into a naked common-target bound detached from SHE.
+
+### What This Tests
+
+The source example proves that the toy audited HDD-after-SHE bound exposes
+`AllLocalValid` for the structured SHE context. The full route still builds,
+including the downstream target-volume, membership, raw inequality, and public
+audit layers.
+
+### Design Trap Avoided
+
+The trap would be to say "HDD after SHE" while the Lean object only contains an
+HDD/common-target bound. This milestone forces the audited object to carry the
+SHE-local expression witness as part of the same proof checkpoint.
+
+### Remaining Gap
+
+The common-target bound itself is still supplied by the bridge layer. Future
+work should make the bridge state more explicitly which SHE-validity component
+it consumes, or refine one local validity component so it is no longer an
+abstract proposition.

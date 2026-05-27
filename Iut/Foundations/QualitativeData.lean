@@ -114,15 +114,26 @@ theorem thetaPilotExpressionValid : expression.theta_pilot_expression_valid :=
 theorem simultaneousValid : expression.simultaneous_valid :=
   expression.simultaneous_valid_holds
 
+def AllLocalValid : Prop :=
+  expression.domain_expression_valid ∧
+    expression.codomain_expression_valid ∧
+    expression.q_pilot_expression_valid ∧
+    expression.theta_pilot_expression_valid ∧
+    expression.simultaneous_valid
+
 theorem allLocalValid :
+    expression.AllLocalValid :=
+  ⟨expression.domainExpressionValid, expression.codomainExpressionValid,
+    expression.qPilotExpressionValid, expression.thetaPilotExpressionValid,
+    expression.simultaneousValid⟩
+
+theorem allLocalValid_expanded :
     expression.domain_expression_valid ∧
       expression.codomain_expression_valid ∧
       expression.q_pilot_expression_valid ∧
       expression.theta_pilot_expression_valid ∧
       expression.simultaneous_valid :=
-  ⟨expression.domainExpressionValid, expression.codomainExpressionValid,
-    expression.qPilotExpressionValid, expression.thetaPilotExpressionValid,
-    expression.simultaneousValid⟩
+  expression.allLocalValid
 
 end SimultaneousHolomorphicExpressionData
 
@@ -203,12 +214,16 @@ theorem simultaneousValid (context : StructuredSHEContext family) :
   context.simultaneousExpression.simultaneousValid
 
 theorem allLocalExpressionValid (context : StructuredSHEContext family) :
+    context.simultaneousExpression.AllLocalValid :=
+  context.simultaneousExpression.allLocalValid
+
+theorem allLocalExpressionValid_expanded (context : StructuredSHEContext family) :
     context.simultaneousExpression.domain_expression_valid ∧
       context.simultaneousExpression.codomain_expression_valid ∧
       context.simultaneousExpression.q_pilot_expression_valid ∧
       context.simultaneousExpression.theta_pilot_expression_valid ∧
       context.simultaneous_valid :=
-  context.simultaneousExpression.allLocalValid
+  context.simultaneousExpression.allLocalValid_expanded
 
 theorem domainHistory_ne_codomainHistory
     (context : StructuredSHEContext family) :

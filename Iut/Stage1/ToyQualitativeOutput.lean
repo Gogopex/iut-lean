@@ -123,7 +123,7 @@ theorem thetaToyStructuredSHEContext_allLocalExpressionValid
       context.simultaneousExpression.q_pilot_expression_valid ∧
       context.simultaneousExpression.theta_pilot_expression_valid ∧
       context.simultaneous_valid :=
-  (thetaToyStructuredSHEContext f h epsilon).allLocalExpressionValid
+  (thetaToyStructuredSHEContext f h epsilon).allLocalExpressionValid_expanded
 
 def thetaToyAPTD (f : Transport qLine thetaLine) (h : Real)
     (epsilon : index -> Real) :
