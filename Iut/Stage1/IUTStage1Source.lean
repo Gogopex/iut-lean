@@ -1019,6 +1019,22 @@ theorem qSignedLeThetaSigned
 
 end HypothesisRouteAudit
 
+theorem hypothesisRouteAudit_sideConditionAudit_eq
+    (package : IUTStage1SourcePackage source target index)
+    (subclaims : IUTStage1Theorem311Subclaims package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    (package.hypothesisRouteAudit subclaims hypotheses).sideConditionAudit =
+      package.sideConditionAuditOfHypotheses hypotheses :=
+  rfl
+
+theorem hypothesisRouteAudit_sourceAudit_eq
+    (package : IUTStage1SourcePackage source target index)
+    (subclaims : IUTStage1Theorem311Subclaims package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    (package.hypothesisRouteAudit subclaims hypotheses).sourceAudit =
+      package.auditOfHypotheses subclaims hypotheses :=
+  rfl
+
 theorem auditOfHypotheses_eq_parts
     (package : IUTStage1SourcePackage source target index)
     (subclaims : IUTStage1Theorem311Subclaims package)

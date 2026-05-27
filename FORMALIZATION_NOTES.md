@@ -9371,3 +9371,60 @@ route projections agree definitionally with the standalone side-condition audit
 and the existing source audit from hypotheses. After that, we can begin
 splitting the Theorem 3.11 subclaims into more explicit algorithmic-output and
 SHE-input components.
+
+## Milestone 117: Hypothesis Route Projection Compatibility
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Milestone 116 introduced a combined route audit with two fields. This milestone
+checks that the fields are not new evidence paths. They are definitionally the
+same audits that were already available separately from the side-condition
+hypotheses and from the package-level source audit.
+
+### Purpose
+
+This milestone adds compatibility lemmas for rewriting between the compact
+hypothesis route audit and the older standalone audit constructors.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.hypothesisRouteAudit_sideConditionAudit_eq
+IUTStage1SourcePackage.hypothesisRouteAudit_sourceAudit_eq
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_hypothesis_route_side_condition_audit_eq_example
+unitThetaToy_source_hypothesis_route_source_audit_eq_example
+```
+
+### What This Tests
+
+The toy examples verify that the two projections from
+`HypothesisRouteAudit` reduce to:
+
+* `sideConditionAuditOfHypotheses`;
+* `auditOfHypotheses`.
+
+These are `rfl`-level compatibility facts in the abstract API.
+
+### Design Trap Avoided
+
+The trap would be to make the combined route object a second, independent
+construction that later has to be trusted separately. These compatibility
+lemmas show that the combined route is only packaging.
+
+### Next Step
+
+The next milestone should start separating the current monolithic
+`IUTStage1Theorem311Subclaims` record into smaller labeled components, beginning
+with the algorithmic-output certification component.
