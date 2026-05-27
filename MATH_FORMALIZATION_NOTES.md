@@ -8405,3 +8405,72 @@ The membership-control predicate is still an abstract interface for genuine
 IUT data. For the toy model it is proved from upper rays and normalized
 measure. Later work must replace the toy upper-ray instance with the relevant
 IUT log-volume or region-membership construction.
+
+## Math Milestone 87: Membership-Control Provenance in the Pre-Ledger Chain
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Data.lean`
+* `Iut/Stage1/IUTStage1DataExample.lean`
+
+### Source Check
+
+After deriving `qSigned <= targetSigned` from membership-control data, the
+pre-ledger charted comparison chain should expose that provenance. Otherwise a
+reader would still see only the endpoint inequality inside the chain.
+
+### Lean/API Check
+
+The record:
+
+```text
+IUTStage1PreLedgerData.ChartedComparisonChain
+```
+
+now stores:
+
+```text
+q_chart_transport_eq :
+  data.chartedContainer.chart.qToTarget =
+    data.chosenOutput.comparison.transport
+membership_volume_control :
+  data.chosenOutput.comparison.MembershipControlsTargetVolume data.measure
+```
+
+and exposes:
+
+```text
+qChartTransport_eq_comparisonTransport
+membershipVolumeControl
+```
+
+### Lean Decisions
+
+The pre-ledger chain remains the same numerical chain:
+
+```text
+charted q <= targetSigned <= charted Theta.
+```
+
+The change is that the left step now carries its proof ingredients as part of
+the chain: chart/comparison transport compatibility and membership-to-volume
+control.
+
+### What This Tests
+
+The toy pre-ledger examples extract both new provenance fields from the
+charted comparison chain. The focused pre-ledger example build and the full
+project build both pass.
+
+### Design Trap Avoided
+
+The trap would be to improve `ChartedMembershipData` but then hide those
+improvements when assembling the chain used by the audited charted boundary.
+This milestone keeps the chain itself auditable.
+
+### Remaining Gap
+
+The right step, `targetSigned <= charted Theta`, still deserves the same kind
+of provenance refinement. It currently comes from the common-container bound
+and the Theta chart equation; later work should expose those proof ingredients
+inside the chain as well.

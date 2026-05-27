@@ -134,6 +134,11 @@ structure ChartedComparisonChain
   theta_charted :
     (Transport.map data.chartedContainer.chart.thetaToTarget
       data.thetaBound.thetaPoint).coord = data.thetaSigned
+  q_chart_transport_eq :
+    data.chartedContainer.chart.qToTarget =
+      data.chosenOutput.comparison.transport
+  membership_volume_control :
+    data.chosenOutput.comparison.MembershipControlsTargetVolume data.measure
   q_charted_le_target :
     (Transport.map data.chartedContainer.chart.qToTarget
       data.qValue.qPoint).coord <= data.targetVolume.targetSigned
@@ -152,6 +157,8 @@ theorem chartedComparisonChain
     data.ChartedComparisonChain :=
   { q_charted := data.qSigned_eq_chartedQ,
     theta_charted := data.thetaSigned_eq_chartedTheta,
+    q_chart_transport_eq := data.membership.q_chart_transport_eq,
+    membership_volume_control := data.membership.volume_control,
     q_charted_le_target := by
       rw [data.qSigned_eq_chartedQ]
       exact data.qSigned_le_targetSigned,
@@ -177,6 +184,17 @@ theorem thetaCharted
     (Transport.map data.chartedContainer.chart.thetaToTarget
       data.thetaBound.thetaPoint).coord = data.thetaSigned :=
   chain.theta_charted
+
+theorem qChartTransport_eq_comparisonTransport
+    (chain : data.ChartedComparisonChain) :
+    data.chartedContainer.chart.qToTarget =
+      data.chosenOutput.comparison.transport :=
+  chain.q_chart_transport_eq
+
+theorem membershipVolumeControl
+    (chain : data.ChartedComparisonChain) :
+    data.chosenOutput.comparison.MembershipControlsTargetVolume data.measure :=
+  chain.membership_volume_control
 
 theorem qCharted_le_targetSigned
     (chain : data.ChartedComparisonChain) :
