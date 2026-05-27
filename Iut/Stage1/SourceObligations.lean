@@ -136,12 +136,24 @@ theorem qSigned_le_thetaSigned (ledger :
     qSigned <= thetaSigned :=
   ledger.threeTermComparison.q_le_theta
 
+theorem qSigned_le_thetaSigned_eq_threeTerm (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.qSigned_le_thetaSigned =
+      ledger.threeTermComparison.q_le_theta :=
+  rfl
+
 theorem corollary312 (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     Corollary312Inequality
       (signedPilotLogVolume PilotSide.theta thetaSigned)
       (signedPilotLogVolume PilotSide.q qSigned) :=
   corollary312_of_signed_le ledger.qSigned_le_thetaSigned
+
+theorem corollary312_eq_threeTermComparison (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.corollary312 =
+      corollary312_of_signed_le ledger.threeTermComparison.q_le_theta :=
+  rfl
 
 def stage1Comparison (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :

@@ -3687,3 +3687,87 @@ The next milestone should connect the final two-term inequality
 `qSigned <= thetaSigned` back to the named three-term comparison with a general
 projection theorem, then expose the same path for the packaged
 `Corollary312Inequality`.
+
+## Milestone 38: Final Inequality Packaging Projections
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+IUT III, Corollary 3.12, Step `(xi-d)` presents the final comparable objects as
+a `Theta`-side upper ray in `R` and a `q`-side signed log-volume value in `R`.
+The April 2026 formalization report isolates this final stage as the
+`3.11.5 => 3.12` comparison of the two pilot objects. Scholze-Stix's critique
+warns that the comparison is meaningful only when the real-line identifications
+and the resulting numerical inequality are explicitly accounted for.
+
+In the current Stage 1 schema, the final real-number proof has two last
+handoffs:
+
+```text
+qSigned <= targetSigned <= thetaSigned
+  gives qSigned <= thetaSigned
+
+qSigned <= thetaSigned
+  gives Corollary312Inequality
+```
+
+This milestone names both handoffs.
+
+### Purpose
+
+The source ledger already exposes the two fields of the three-term comparison.
+This milestone makes the final packaging path equally explicit:
+
+```text
+ledger.qSigned_le_thetaSigned
+  = ledger.threeTermComparison.q_le_theta
+
+ledger.corollary312
+  = corollary312_of_signed_le ledger.threeTermComparison.q_le_theta
+```
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.qSigned_le_thetaSigned_eq_threeTerm
+SourceObligationLedger.corollary312_eq_threeTermComparison
+```
+
+Both proofs are `rfl`, so Lean verifies that no extra comparison theorem or
+hidden sign manipulation is introduced between the three-term chain and the
+packaged Corollary-3.12-shaped inequality.
+
+### What This Tests
+
+The final general audit path is now:
+
+```text
+membership.q_le_target
+common target bound on chosen output
+ThreeTermComparison.q_le_theta
+corollary312_of_signed_le
+```
+
+This is still a Stage 1 abstraction. It does not prove the disputed IUT source
+obligations. It records exactly which obligations must be supplied before the
+Corollary-3.12-shaped inequality follows in Lean.
+
+### Design Trap Avoided
+
+The trap would be to leave the last abstraction boundary at
+`Corollary312Inequality`, where the reader sees only the final packaged
+statement. The new projections force the packaged theorem to point back to the
+named three-term chain.
+
+### Next Step
+
+The next milestone should add the analogous projection for
+`SourceObligationLedger.stage1Comparison`, showing that the exported
+`Stage1Comparison.comparison` field is the same Corollary-3.12 proof produced
+from the named three-term chain and that `q_positive` is simply the ledger's
+recorded positivity obligation.
