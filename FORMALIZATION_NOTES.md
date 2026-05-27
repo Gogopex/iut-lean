@@ -9047,3 +9047,60 @@ source audit for both mathematical and label projections.
 
 The next milestone should add an audited public endpoint from side-condition
 hypotheses, again factoring through `obligationsFromHypotheses`.
+
+## Milestone 112: Audited Public Endpoint from Hypotheses
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The hypothesis-based route now reaches public audit projections and compact
+audit projections. This milestone adds the audited public endpoint statement
+for that route.
+
+The formal path remains:
+
+```text
+Theorem 3.11 subclaims
+side-condition hypotheses
+  -> obligationsFromHypotheses
+  -> audited public endpoint
+```
+
+### Purpose
+
+This milestone adds the existential audited endpoint for package inputs stated
+using side-condition hypotheses.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.auditedPublicEndpointOfHypotheses
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_hypotheses_auditedPublicEndpoint_example
+```
+
+### What This Tests
+
+The toy example verifies that the hypothesis-based route can produce the same
+audited public endpoint shape as the source-obligation and gap routes.
+
+### Design Trap Avoided
+
+The trap would be to state an endpoint directly from hypotheses. This theorem
+uses `obligationsFromHypotheses`, so the promotion boundary remains explicit.
+
+### Next Step
+
+The next milestone should add compatibility lemmas showing that the
+hypothesis-based audited endpoint agrees with the parts-based endpoint after
+converting hypotheses to side conditions.

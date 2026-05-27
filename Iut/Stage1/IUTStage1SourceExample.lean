@@ -1377,6 +1377,54 @@ theorem unitThetaToy_source_gap_auditedPublicEndpoint_example
       measure hnormalized hh hbound hholds
   package.auditedPublicEndpointOfGap gap
 
+theorem unitThetaToy_source_hypotheses_auditedPublicEndpoint_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let subclaims :=
+      unitThetaToy_source_theorem311_subclaims_example
+        measure hnormalized hh hbound hholds
+    let hypotheses :=
+      unitThetaToy_source_side_condition_hypotheses_example
+        measure hnormalized hh hbound hholds
+    ∃ sourceAudit :
+        IUTStage1SourcePackage.Audit package
+          (package.obligationsFromHypotheses subclaims hypotheses),
+      (⟨sourceAudit.qSigned_le_thetaSigned,
+          sourceAudit.corollary312,
+          sourceAudit.stage_recovers_qSigned_le_thetaSigned⟩ :
+        package.preLedger.qSigned <= package.preLedger.thetaSigned ∧
+          Corollary312Inequality
+            (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+            (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) ∧
+          (corollary312_from_stage1_comparison
+              (package.promotedProvider
+                (package.obligationsFromHypotheses
+                  subclaims hypotheses)).stage1Comparison =
+            corollary312_of_signed_le
+              (package.promotedProvider
+                (package.obligationsFromHypotheses
+                  subclaims hypotheses)).ledger.qSigned_le_thetaSigned)) =
+        package.publicAuditOfHypotheses subclaims hypotheses :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  let subclaims :=
+    unitThetaToy_source_theorem311_subclaims_example
+      measure hnormalized hh hbound hholds
+  let hypotheses :=
+    unitThetaToy_source_side_condition_hypotheses_example
+      measure hnormalized hh hbound hholds
+  package.auditedPublicEndpointOfHypotheses subclaims hypotheses
+
 end ToyModel
 end Stage1
 end Iut

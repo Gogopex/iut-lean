@@ -915,6 +915,31 @@ theorem auditedPublicEndpointOfParts
   package.auditedPublicEndpoint
     (package.obligationsFromParts subclaims sideConditions)
 
+theorem auditedPublicEndpointOfHypotheses
+    (package : IUTStage1SourcePackage source target index)
+    (subclaims : IUTStage1Theorem311Subclaims package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    ∃ sourceAudit :
+        Audit package (package.obligationsFromHypotheses subclaims hypotheses),
+      (⟨sourceAudit.qSigned_le_thetaSigned,
+          sourceAudit.corollary312,
+          sourceAudit.stage_recovers_qSigned_le_thetaSigned⟩ :
+        package.preLedger.qSigned <= package.preLedger.thetaSigned ∧
+          Corollary312Inequality
+            (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+            (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) ∧
+          (corollary312_from_stage1_comparison
+              (package.promotedProvider
+                (package.obligationsFromHypotheses
+                  subclaims hypotheses)).stage1Comparison =
+            corollary312_of_signed_le
+              (package.promotedProvider
+                (package.obligationsFromHypotheses
+                  subclaims hypotheses)).ledger.qSigned_le_thetaSigned)) =
+        package.publicAuditOfHypotheses subclaims hypotheses :=
+  package.auditedPublicEndpoint
+    (package.obligationsFromHypotheses subclaims hypotheses)
+
 namespace Audit
 
 variable {package : IUTStage1SourcePackage source target index}
