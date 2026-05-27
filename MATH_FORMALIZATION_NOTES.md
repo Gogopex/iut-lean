@@ -8745,3 +8745,71 @@ visible where the final charted comparison is audited.
 The compatibility checklist is still an audit of supplied data. Later work
 should refine the bridge construction itself: descent, hull+det, common target,
 and the measured target-volume estimate should become less abstract.
+
+## Math Milestone 92: Combined HDD-after-SHE Certificate and Family Bound
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The previous milestone exposed SHE/common-container alignment fields
+separately. For auditing the route, it is also useful to have the composed
+statement that the SHE arrow datum used by the common container is the same as
+the pre-ledger structured certificate's SHE datum.
+
+The final boundary should also expose the family-level bound and history
+separation attached to the HDD-after-SHE audit.
+
+### Lean/API Check
+
+The audited HDD-after-SHE bound now exposes:
+
+```text
+sheArrowDatumMatchesCertificate
+```
+
+The audited charted comparison boundary now exposes:
+
+```text
+hddSHESHEArrowDatumMatchesCertificate
+hddSHEAllTargetsAtMost_theta
+hddSHEDomainHistory_ne_codomainHistory
+```
+
+### Lean Decisions
+
+The composed SHE-arrow-to-certificate theorem is just:
+
+```text
+sheArrowMatchesContext.trans sheDatumMatchesCertificate
+```
+
+This is not a new assumption. It packages an audit fact that human readers
+will otherwise have to reconstruct from two adjacent compatibility fields.
+
+The all-targets-at-most and history-separation projections keep the final
+charted boundary tied to the family-level target-volume estimate and the
+non-identification of domain/codomain histories.
+
+### What This Tests
+
+The toy source examples extract the SHE-arrow-to-certificate equality, the
+family-level all-targets-at-most bound, and the Hodge-theater history
+separation from the audited charted comparison boundary. The focused Stage 1
+source example build and the full project build both pass.
+
+### Design Trap Avoided
+
+The trap would be to check only the chosen target bound and miss that the
+HDD-after-SHE construction also claims a family-level bound and history
+separation. This milestone exposes those facts at the boundary.
+
+### Remaining Gap
+
+The family-level bound is still supplied by the bridge. The next refinement
+should inspect the bridge object itself and decide which part can be replaced
+by a less abstract construction first: the common target, the hull+det step,
+or the descent/HDD bookkeeping.

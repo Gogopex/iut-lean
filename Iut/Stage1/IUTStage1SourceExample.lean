@@ -1920,6 +1920,23 @@ theorem unitThetaToy_source_theorem311_charted_boundary_hdd_she_arrow_example
   (unitThetaToy_source_theorem311_charted_comparison_boundary_example
     measure hnormalized hh hbound hholds).hddSHESHEArrowMatchesContext
 
+theorem unitThetaToy_source_theorem311_charted_boundary_hdd_she_arrow_certificate_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  (unitThetaToy_source_theorem311_charted_comparison_boundary_example
+    measure hnormalized hh hbound hholds).hddSHESHEArrowDatumMatchesCertificate
+
 theorem unitThetaToy_source_theorem311_charted_boundary_hdd_she_common_context_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -1975,6 +1992,40 @@ theorem unitThetaToy_source_theorem311_charted_boundary_hdd_she_target_bound_exa
       package.preLedger.thetaSigned :=
   (unitThetaToy_source_theorem311_charted_comparison_boundary_example
     measure hnormalized hh hbound hholds).hddSHEChosenTargetVolume_le_theta
+
+theorem unitThetaToy_source_theorem311_charted_boundary_hdd_she_all_targets_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    RegionComparisonFamily.AllTargetsAtMost package.preLedger.measure
+      package.preLedger.output.comparisons package.preLedger.thetaSigned :=
+  (unitThetaToy_source_theorem311_charted_comparison_boundary_example
+    measure hnormalized hh hbound hholds).hddSHEAllTargetsAtMost_theta
+
+theorem unitThetaToy_source_theorem311_charted_boundary_hdd_she_history_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let bundle :=
+      unitThetaToy_source_theorem311_structured_inputs_with_she_example
+        measure hnormalized hh hbound hholds
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side :=
+  (unitThetaToy_source_theorem311_charted_comparison_boundary_example
+    measure hnormalized hh hbound hholds).hddSHEDomainHistory_ne_codomainHistory
 
 theorem unitThetaToy_source_theorem311_audited_route_summary_example
     (measure : RegionMeasure thetaLine)

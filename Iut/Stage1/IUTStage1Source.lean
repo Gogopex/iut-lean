@@ -790,6 +790,12 @@ theorem sheDatumMatchesCertificate
       package.preLedger.certificate.she :=
   audited.compatibility.sheDatumMatchesCertificate
 
+theorem sheArrowDatumMatchesCertificate
+    (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  audited.sheArrowMatchesContext.trans audited.sheDatumMatchesCertificate
+
 theorem commonContainerContextMatches
     (audited : IUTStage1Theorem311AuditedHDDSHEBound package bundle) :
     package.preLedger.chartedContainer.commonContainer.context =
@@ -2622,6 +2628,13 @@ theorem hddSHESHEDatumMatchesCertificate
       package.preLedger.certificate.she :=
   boundary.hddSHEBound.sheDatumMatchesCertificate
 
+theorem hddSHESHEArrowDatumMatchesCertificate
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  boundary.hddSHEBound.sheArrowDatumMatchesCertificate
+
 theorem hddSHECommonContainerContextMatches
     (boundary :
       AuditedChartedComparisonBoundary package bundle sideConditions) :
@@ -2657,6 +2670,20 @@ theorem hddSHEChosenTargetVolume_le_theta
           package.preLedger.chosenOutput.choice) <=
       package.preLedger.thetaSigned :=
   boundary.hddSHEBound.chosenTargetVolume_le_theta
+
+theorem hddSHEAllTargetsAtMost_theta
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    RegionComparisonFamily.AllTargetsAtMost package.preLedger.measure
+      package.preLedger.output.comparisons package.preLedger.thetaSigned :=
+  boundary.hddSHEBound.allTargetsAtMost_theta
+
+theorem hddSHEDomainHistory_ne_codomainHistory
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side :=
+  boundary.hddSHEBound.domainHistory_ne_codomainHistory
 
 theorem preLedgerChartedChain
     (boundary :
