@@ -13513,3 +13513,93 @@ The kernel of the quotient hom should eventually be exposed as exactly the
 image subgroup of `Pi_XK`. That is mathematically standard for quotient groups,
 but it should be added when the dependent quotient interface is stable enough
 to keep the theorem readable.
+
+## Math Milestone 47: Triviality on the Quotient Kernel
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Remark 3.1.2, uses the quotient
+
+```text
+Pi_CK / Pi_XK
+```
+
+as the group acting on the reconstructed function field of `X_K`. In ordinary
+quotient-group language, the subgroup `Pi_XK` maps to the identity element of
+this quotient. Therefore the action of `Pi_CK` on the reconstructed function
+field, when pulled back along `Pi_CK -> Pi_CK / Pi_XK`, is trivial on the image
+of `Pi_XK`.
+
+This is still part of the early `Theta`-approach reconstruction layer. It does
+not compare Hodge theaters or pilot objects and does not touch the
+Scholze-Stix criticism of the later Corollary 3.12 argument.
+
+### Lean/API Check
+
+The new quotient theorem is:
+
+```text
+ThetaApproachQuotientData.quotientHom_piXK_eq_one
+```
+
+It proves that any element coming from `Pi_XK` maps to `1` under the canonical
+quotient hom.
+
+The corresponding action theorem is:
+
+```text
+ThetaApproachFunctionFieldData.piXK_smul_trivial
+```
+
+It proves that the induced `Pi_CK` action on the reconstructed function field
+is trivial on the image of `Pi_XK`.
+
+### Lean Decisions
+
+This milestone avoids exposing a full kernel-equality theorem for the dependent
+quotient hom, but still proves the concrete direction needed for the action:
+elements from the embedded subgroup are killed by the quotient map. The proof
+uses mathlib's `QuotientGroup.eq_one_iff`.
+
+This keeps the API readable and source-directed while still adding a genuine
+group-theoretic fact.
+
+### Lean Declarations
+
+```text
+ThetaApproachQuotientData.quotientHom_piXK_eq_one
+ThetaApproachFunctionFieldData.piXK_smul_trivial
+ThetaOrbicurveCoverData.thetaApproachQuotientHomPiXK_eq_one
+ThetaOrbicurveCoverData.thetaApproachPiXK_smul_trivial
+InitialThetaData.thetaApproachQuotientHomPiXK_eq_one
+InitialThetaData.thetaApproachPiXK_smul_trivial
+```
+
+### What This Tests
+
+The example file now checks:
+
+* every `Pi_XK` element maps to `1` in `Pi_CK / Pi_XK`;
+* the induced `Pi_CK` action is trivial on the image of `Pi_XK`.
+
+### Design Trap Avoided
+
+The trap would be to have a quotient notation but no formal evidence that the
+subgroup is actually killed by the quotient map. This milestone makes that
+basic quotient semantics explicit in Lean.
+
+### Remaining Gap
+
+The full kernel theorem
+
+```text
+ker (Pi_CK -> Pi_CK / Pi_XK) = image(Pi_XK)
+```
+
+should still be added later. The present theorem gives the source-to-kernel
+direction needed for the action layer.

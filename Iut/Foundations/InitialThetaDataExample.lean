@@ -736,6 +736,11 @@ example :
       (ThetaApproachQuotientData.quotientHom theta.coverData.thetaApproachQuotient) :=
   theta.thetaApproachQuotientHomSurjective
 
+example (g : theta.coverData.thetaApproachQuotient.piXK.carrier) :
+    ThetaApproachQuotientData.quotientHom theta.coverData.thetaApproachQuotient
+        (theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g) = 1 :=
+  theta.thetaApproachQuotientHomPiXK_eq_one g
+
 example :
     theta.coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
   theta.thetaApproachGalQuotientIdentification
@@ -766,6 +771,13 @@ example
       theta.coverData.thetaApproachFunctionField) :
     g • (x * y) = g • x * g • y :=
   theta.coverData.thetaApproachFunctionField.piCK_smul_mul g x y
+
+example
+    (g : theta.coverData.thetaApproachQuotient.piXK.carrier)
+    (x : ThetaApproachFunctionFieldData.functionField
+      theta.coverData.thetaApproachFunctionField) :
+    theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g • x = x :=
+  theta.thetaApproachPiXK_smul_trivial g x
 
 example : theta.coverData.finiteEtaleCoveringDiagrams :=
   theta.finiteEtaleCoveringDiagrams

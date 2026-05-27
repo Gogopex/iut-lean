@@ -1497,6 +1497,15 @@ theorem quotientHom_apply (g : thetaApproach.piCK.carrier) :
       ThetaApproachQuotientData.quotientMap thetaApproach g :=
   rfl
 
+theorem quotientHom_piXK_eq_one (g : thetaApproach.piXK.carrier) :
+    ThetaApproachQuotientData.quotientHom thetaApproach
+        (thetaApproach.piXK_to_piCK.openEmbedding.hom g) = 1 := by
+  letI : (thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup).Normal :=
+    thetaApproach.piXK_to_piCK.imageNormal
+  change QuotientGroup.mk' thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup
+      (thetaApproach.piXK_to_piCK.openEmbedding.hom g) = 1
+  exact (QuotientGroup.eq_one_iff _).mpr ⟨g, rfl⟩
+
 theorem piXKOpenInPiCK :
     thetaApproach.piXK_to_piCK.openEmbedding.isOpenImage :=
   thetaApproach.piXK_to_piCK.openImage
@@ -1674,6 +1683,13 @@ theorem piCK_smul_mul
     g • (x * y) = g • x * g • y :=
   MulSemiringAction.smul_mul g x y
 
+theorem piXK_smul_trivial
+    (g : thetaApproach.piXK.carrier) (x : functionFieldData.functionField) :
+    thetaApproach.piXK_to_piCK.openEmbedding.hom g • x = x := by
+  rw [functionFieldData.piCK_smul_eq_deck_smul]
+  rw [ThetaApproachQuotientData.quotientHom_piXK_eq_one]
+  exact one_smul (ThetaApproachQuotientData.deckQuotient thetaApproach) x
+
 end ThetaApproachFunctionFieldData
 
 /--
@@ -1750,6 +1766,13 @@ theorem thetaApproachQuotientHomSurjective :
       (ThetaApproachQuotientData.quotientHom coverData.thetaApproachQuotient) :=
   ThetaApproachQuotientData.quotientHom_surjective coverData.thetaApproachQuotient
 
+theorem thetaApproachQuotientHomPiXK_eq_one
+    (g : coverData.thetaApproachQuotient.piXK.carrier) :
+    ThetaApproachQuotientData.quotientHom coverData.thetaApproachQuotient
+        (coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g) = 1 :=
+  ThetaApproachQuotientData.quotientHom_piXK_eq_one
+    coverData.thetaApproachQuotient g
+
 theorem thetaApproachGalQuotientIdentification :
     coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
   coverData.thetaApproachQuotient.galQuotientIdentification
@@ -1768,6 +1791,12 @@ theorem thetaApproachFunctionFieldOfXK :
 theorem thetaApproachDeckActionMatchesQuotient :
     coverData.thetaApproachFunctionField.deckActionMatchesGalQuotient :=
   coverData.thetaApproachFunctionField.deckActionMatchesQuotient
+
+theorem thetaApproachPiXK_smul_trivial
+    (g : coverData.thetaApproachQuotient.piXK.carrier)
+    (x : coverData.thetaApproachFunctionField.functionField) :
+    coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g • x = x :=
+  coverData.thetaApproachFunctionField.piXK_smul_trivial g x
 
 theorem finiteEtaleDiagrams :
     coverData.finiteEtaleCoveringDiagrams :=
@@ -2492,6 +2521,12 @@ theorem thetaApproachQuotientHomSurjective :
       (ThetaApproachQuotientData.quotientHom theta.coverData.thetaApproachQuotient) :=
   theta.coverData.thetaApproachQuotientHomSurjective
 
+theorem thetaApproachQuotientHomPiXK_eq_one
+    (g : theta.coverData.thetaApproachQuotient.piXK.carrier) :
+    ThetaApproachQuotientData.quotientHom theta.coverData.thetaApproachQuotient
+        (theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g) = 1 :=
+  theta.coverData.thetaApproachQuotientHomPiXK_eq_one g
+
 theorem thetaApproachGalQuotientIdentification :
     theta.coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
   theta.coverData.thetaApproachGalQuotientIdentification
@@ -2510,6 +2545,12 @@ theorem thetaApproachFunctionFieldOfXK :
 theorem thetaApproachDeckActionMatchesQuotient :
     theta.coverData.thetaApproachFunctionField.deckActionMatchesGalQuotient :=
   theta.coverData.thetaApproachDeckActionMatchesQuotient
+
+theorem thetaApproachPiXK_smul_trivial
+    (g : theta.coverData.thetaApproachQuotient.piXK.carrier)
+    (x : theta.coverData.thetaApproachFunctionField.functionField) :
+    theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g • x = x :=
+  theta.coverData.thetaApproachPiXK_smul_trivial g x
 
 theorem finiteEtaleCoveringDiagrams :
     theta.coverData.finiteEtaleCoveringDiagrams :=
