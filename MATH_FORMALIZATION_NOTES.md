@@ -1045,3 +1045,81 @@ re-exposed through the newly audited path. A conservative step would prove only
 that the public audit obtained from the audited comparison data has the same
 Corollary 3.12 proof term up to proof irrelevance, while keeping the route
 checklist visible.
+
+## Math Milestone 11: Audited Public-Audit Wrapper
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+At this point the formal route contains two layers:
+
+* the audited derivation layer, which starts at structured SHE and passes through
+  `HDD o SHE`, the charted target-volume middle term, q-membership, the raw
+  inequality, and the signed-payload boundary;
+* the older public-audit layer, which packages `Corollary312ComparisonData` for
+  the Stage 1 endpoint API.
+
+This milestone exposes the public-audit tuple through the audited derivation
+layer without making a new endpoint theorem.
+
+### Purpose
+
+This milestone adds:
+
+```text
+IUTStage1SourcePackage.AuditedPublicAudit
+```
+
+The wrapper records:
+
+* the signed-payload boundary from Milestone 9;
+* the equality with the older payload-input route from Milestone 10;
+* the public-audit raw inequality;
+* the public-audit Corollary 3.12-shaped proposition;
+* the stage-comparison recovery proof;
+* equality of the audited and payload-input stage comparisons;
+* source normalization;
+* history separation.
+
+It also adds projections:
+
+```text
+AuditedPublicAudit.qSigned_le_thetaSigned
+AuditedPublicAudit.corollary312Endpoint
+AuditedPublicAudit.publicAudit
+AuditedPublicAudit.comparisonDataEqPayloadInputs
+AuditedPublicAudit.sourceNormalization
+AuditedPublicAudit.domainHistory_ne_codomainHistory
+IUTStage1SourcePackage.auditedPublicAudit
+```
+
+### What This Tests
+
+The toy model verifies:
+
+```text
+unitThetaToy_source_theorem311_audited_public_audit_example
+unitThetaToy_source_theorem311_audited_public_audit_tuple_example
+unitThetaToy_source_theorem311_audited_public_audit_route_example
+unitThetaToy_source_theorem311_audited_public_audit_history_example
+```
+
+These examples check that the wrapper can recover the public-audit tuple, the
+route equality, and the history-separation guard.
+
+### Design Trap Avoided
+
+The trap would be to replace the existing public-audit endpoint with a second
+endpoint under a more audited-looking name. We did not do that. The new wrapper
+is explicitly a consistency layer: it exposes the existing public-audit facts
+while keeping the full audited route checklist available for review.
+
+### Next Step
+
+The next milestone should add a compact route summary for the audited
+structured-SHE path, similar in spirit to earlier endpoint summaries, so a human
+reader can inspect the major checkpoints without expanding every proof field.

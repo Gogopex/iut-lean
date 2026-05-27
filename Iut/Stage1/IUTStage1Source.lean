@@ -1854,6 +1854,132 @@ theorem auditedComparisonData_stage1Comparison_eq_payloadInputs
           bundle sideConditions)).stage1Comparison := by
   rw [package.auditedComparisonData_eq_payloadInputs bundle sideConditions]
 
+/--
+Public-audit view exposed through the audited Theorem 3.11 route.
+
+This is a consistency wrapper, not a new endpoint. It keeps the signed payload
+boundary and the equality with the existing payload-input route visible while
+reusing `Corollary312ComparisonData.publicAudit`.
+-/
+structure AuditedPublicAudit
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) : Prop where
+  signed_payload_boundary :
+    IUTStage1Theorem311AuditedSignedPayloadBoundary
+      package bundle sideConditions
+  comparison_data_eq_payload_inputs :
+    bundle.auditedComparisonData sideConditions =
+      package.comparisonDataFromPayloadInputs
+        (package.auditedComparisonSourceObligations bundle sideConditions)
+  q_signed_le_theta :
+    (bundle.auditedComparisonData sideConditions).qSigned <=
+      (bundle.auditedComparisonData sideConditions).thetaSigned
+  corollary312 :
+    Corollary312Inequality
+      (bundle.auditedComparisonData sideConditions).thetaPilot
+      (bundle.auditedComparisonData sideConditions).qPilot
+  stage_recovers_q_signed_le_theta :
+    corollary312_from_stage1_comparison
+        (bundle.auditedComparisonData sideConditions).stage1Comparison =
+      corollary312_of_signed_le
+        (bundle.auditedComparisonData
+          sideConditions).qSigned_le_thetaSigned
+  stage_comparison_eq_payload_inputs :
+    (bundle.auditedComparisonData sideConditions).stage1Comparison =
+      (package.comparisonDataFromPayloadInputs
+        (package.auditedComparisonSourceObligations
+          bundle sideConditions)).stage1Comparison
+  source_normalization : package.preLedger.normalization
+  histories_not_identified :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side
+
+namespace AuditedPublicAudit
+
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+variable {sideConditions : IUTStage1SourceSideConditions package}
+
+theorem ofStructuredInputsWithSHE
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedPublicAudit package bundle sideConditions :=
+  { signed_payload_boundary :=
+      bundle.auditedSignedPayloadBoundary sideConditions,
+    comparison_data_eq_payload_inputs :=
+      package.auditedComparisonData_eq_payloadInputs bundle sideConditions,
+    q_signed_le_theta :=
+      (bundle.auditedComparisonData sideConditions).publicAudit_qSigned_le_thetaSigned,
+    corollary312 :=
+      (bundle.auditedComparisonData sideConditions).publicAudit_corollary312,
+    stage_recovers_q_signed_le_theta :=
+      (bundle.auditedComparisonData
+        sideConditions).publicAudit_stage1Comparison_recovers,
+    stage_comparison_eq_payload_inputs :=
+      package.auditedComparisonData_stage1Comparison_eq_payloadInputs
+        bundle sideConditions,
+    source_normalization :=
+      (bundle.auditedSignedPayloadBoundary sideConditions).sourceNormalization,
+    histories_not_identified :=
+      (bundle.auditedSignedPayloadBoundary
+        sideConditions).domainHistory_ne_codomainHistory }
+
+theorem qSigned_le_thetaSigned
+    (audit : AuditedPublicAudit package bundle sideConditions) :
+    (bundle.auditedComparisonData sideConditions).qSigned <=
+      (bundle.auditedComparisonData sideConditions).thetaSigned :=
+  audit.q_signed_le_theta
+
+theorem corollary312Endpoint
+    (audit : AuditedPublicAudit package bundle sideConditions) :
+    Corollary312Inequality
+      (bundle.auditedComparisonData sideConditions).thetaPilot
+      (bundle.auditedComparisonData sideConditions).qPilot :=
+  audit.corollary312
+
+theorem publicAudit
+    (audit : AuditedPublicAudit package bundle sideConditions) :
+    (bundle.auditedComparisonData sideConditions).qSigned <=
+        (bundle.auditedComparisonData sideConditions).thetaSigned ∧
+      Corollary312Inequality
+        (bundle.auditedComparisonData sideConditions).thetaPilot
+        (bundle.auditedComparisonData sideConditions).qPilot ∧
+      corollary312_from_stage1_comparison
+          (bundle.auditedComparisonData sideConditions).stage1Comparison =
+        corollary312_of_signed_le
+          (bundle.auditedComparisonData
+            sideConditions).qSigned_le_thetaSigned :=
+  ⟨audit.qSigned_le_thetaSigned, audit.corollary312Endpoint,
+    audit.stage_recovers_q_signed_le_theta⟩
+
+theorem comparisonDataEqPayloadInputs
+    (audit : AuditedPublicAudit package bundle sideConditions) :
+    bundle.auditedComparisonData sideConditions =
+      package.comparisonDataFromPayloadInputs
+        (package.auditedComparisonSourceObligations bundle sideConditions) :=
+  audit.comparison_data_eq_payload_inputs
+
+theorem sourceNormalization
+    (audit : AuditedPublicAudit package bundle sideConditions) :
+    package.preLedger.normalization :=
+  audit.source_normalization
+
+theorem domainHistory_ne_codomainHistory
+    (audit : AuditedPublicAudit package bundle sideConditions) :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side :=
+  audit.histories_not_identified
+
+end AuditedPublicAudit
+
+theorem auditedPublicAudit
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedPublicAudit package bundle sideConditions :=
+  AuditedPublicAudit.ofStructuredInputsWithSHE bundle sideConditions
+
 theorem comparisonData_thetaSigned
     (package : IUTStage1SourcePackage source target index)
     (obligations : IUTStage1SourceObligations package) :
