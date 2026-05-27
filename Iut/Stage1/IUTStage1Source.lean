@@ -301,7 +301,99 @@ theorem domainHistory_ne_codomainHistory
       structuredSHE.context.codomainStructure.theater.side :=
   structuredSHE.context.domainHistory_ne_codomainHistory
 
+theorem commonContainerContextMatches
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) :
+    package.preLedger.chartedContainer.commonContainer.context =
+      structuredSHE.context.sharedContext := by
+  have hcontainer :
+      package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum.sharedContext =
+        package.preLedger.chartedContainer.commonContainer.context :=
+    package.preLedger.chartedContainer.commonContainer.she_context_matches
+  have harrow :
+      package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum.sharedContext =
+        structuredSHE.context.sheDatum.sharedContext := by
+    exact congrArg
+      (fun datum : QualitativeData.SHEDatum package.preLedger.output.family =>
+        datum.sharedContext)
+      structuredSHE.sheArrowMatchesContext
+  exact hcontainer.symm.trans
+    (harrow.trans structuredSHE.context.sheDatum_sharedContext)
+
 end IUTStage1Theorem311StructuredSHE
+
+/--
+Compatibility checklist between the strengthened SHE context and the common
+container used for the final `HDD o SHE` route.
+
+Every field is an equality or history-separation proof already forced by the
+structured SHE input and the common-container record. This checklist does not
+add a comparison endpoint or identify the two arithmetic histories.
+-/
+structure IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index)
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) : Prop where
+  she_arrow_matches_context :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      structuredSHE.context.sheDatum
+  she_datum_matches_certificate :
+    structuredSHE.context.sheDatum = package.preLedger.certificate.she
+  common_container_context_matches :
+    package.preLedger.chartedContainer.commonContainer.context =
+      structuredSHE.context.sharedContext
+  histories_not_identified :
+    structuredSHE.context.domainStructure.theater.side ≠
+      structuredSHE.context.codomainStructure.theater.side
+
+namespace IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+variable {structuredSHE : IUTStage1Theorem311StructuredSHE package}
+
+theorem ofStructuredSHE
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) :
+    IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+      package structuredSHE :=
+  { she_arrow_matches_context := structuredSHE.sheArrowMatchesContext,
+    she_datum_matches_certificate := structuredSHE.sheDatumMatchesCertificate,
+    common_container_context_matches :=
+      structuredSHE.commonContainerContextMatches,
+    histories_not_identified :=
+      structuredSHE.domainHistory_ne_codomainHistory }
+
+theorem sheArrowMatchesContext
+    (compatibility :
+      IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+        package structuredSHE) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      structuredSHE.context.sheDatum :=
+  compatibility.she_arrow_matches_context
+
+theorem sheDatumMatchesCertificate
+    (compatibility :
+      IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+        package structuredSHE) :
+    structuredSHE.context.sheDatum = package.preLedger.certificate.she :=
+  compatibility.she_datum_matches_certificate
+
+theorem commonContainerContextMatches
+    (compatibility :
+      IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+        package structuredSHE) :
+    package.preLedger.chartedContainer.commonContainer.context =
+      structuredSHE.context.sharedContext :=
+  compatibility.common_container_context_matches
+
+theorem domainHistory_ne_codomainHistory
+    (compatibility :
+      IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+        package structuredSHE) :
+    structuredSHE.context.domainStructure.theater.side ≠
+      structuredSHE.context.codomainStructure.theater.side :=
+  compatibility.histories_not_identified
+
+end IUTStage1Theorem311StructuredSHECommonContainerCompatibility
 
 /--
 Source-facing subclaims for the Theorem 3.11 algorithmic certificate used in
@@ -567,6 +659,19 @@ theorem domainHistory_ne_codomainHistory
     bundle.structuredSHE.context.domainStructure.theater.side ≠
       bundle.structuredSHE.context.codomainStructure.theater.side :=
   bundle.structuredSHE.domainHistory_ne_codomainHistory
+
+theorem commonContainerCompatibility
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+      package bundle.structuredSHE :=
+  IUTStage1Theorem311StructuredSHECommonContainerCompatibility.ofStructuredSHE
+    bundle.structuredSHE
+
+theorem commonContainerContextMatches
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    package.preLedger.chartedContainer.commonContainer.context =
+      bundle.structuredSHE.context.sharedContext :=
+  bundle.structuredSHE.commonContainerContextMatches
 
 end IUTStage1Theorem311StructuredInputsWithSHE
 

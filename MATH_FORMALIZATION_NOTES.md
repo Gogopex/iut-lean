@@ -358,3 +358,101 @@ The next milestone should define the first small SHE-to-common-container
 compatibility checklist: it should mention the SHE context, the common
 container's shared context, and the certificate SHE datum, but still avoid any
 real-valued endpoint conclusion.
+
+## Math Milestone 4: SHE/Common-Container Compatibility
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Mochizuki's formalization report describes the final triangle in the
+`3.11.5 => 3.12` route as the composite `(HDD) o (SHE)`, with SHE supplying the
+input situation in which HDD is applied. IUT III, Remark 3.11.1 describes SHE as
+the condition that the output data can be expressed in a form valid relative to
+both arithmetic holomorphic structures.
+
+For our purposes, the immediate formal question is not whether this already
+proves Corollary 3.12. The immediate question is whether the strengthened SHE
+context is the same SHE context used by the existing common-container/HDD-SHE
+composite. This is exactly the kind of bookkeeping where Lean is useful: it
+forces the shared-context equality to be proved from recorded fields, rather
+than silently assumed.
+
+### Purpose
+
+This milestone adds a proof-level compatibility checklist:
+
+```text
+IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+```
+
+The checklist records four facts:
+
+* the common-container SHE arrow datum is the strengthened SHE datum;
+* the strengthened SHE datum is the certificate SHE datum;
+* the common-container shared context is the strengthened SHE shared context;
+* the domain and codomain histories are still not identified.
+
+The third item is derived, not postulated. It follows from:
+
+```text
+CommonContainerData.she_context_matches
+IUTStage1Theorem311StructuredSHE.sheArrowMatchesContext
+StructuredSHEContext.sheDatum_sharedContext
+```
+
+This is intentionally only a compatibility statement. It does not bind a
+comparison endpoint, does not assert a target bound, and does not identify the
+two arithmetic histories.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1Theorem311StructuredSHE.commonContainerContextMatches
+IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+IUTStage1Theorem311StructuredSHECommonContainerCompatibility.ofStructuredSHE
+IUTStage1Theorem311StructuredSHECommonContainerCompatibility.sheArrowMatchesContext
+IUTStage1Theorem311StructuredSHECommonContainerCompatibility.sheDatumMatchesCertificate
+IUTStage1Theorem311StructuredSHECommonContainerCompatibility.commonContainerContextMatches
+IUTStage1Theorem311StructuredSHECommonContainerCompatibility.domainHistory_ne_codomainHistory
+IUTStage1Theorem311StructuredInputsWithSHE.commonContainerCompatibility
+IUTStage1Theorem311StructuredInputsWithSHE.commonContainerContextMatches
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_structured_she_common_container_compatibility_example
+unitThetaToy_source_theorem311_structured_she_common_context_example
+unitThetaToy_source_theorem311_structured_inputs_with_she_common_context_example
+```
+
+### What This Tests
+
+The toy source package now instantiates the compatibility checklist and proves
+that its charted common container uses the same shared context as the structured
+SHE context. In the toy model this is by definitional equality, but the
+source-level theorem is not `rfl`: it composes the equality stored in the
+common-container record with the equality stored in the structured SHE input.
+
+### Design Trap Avoided
+
+The tempting but dangerous shortcut would be to treat the common container as
+if it already supplied a global endpoint comparison. We did not do that. The
+new theorem merely aligns names and contexts. This keeps the Scholze-Stix
+diagnostic issue visible: a later theorem must still explain what is being
+compared, under which history discipline, and why the formal route is not a
+hidden collapse of the two structures.
+
+### Next Step
+
+The next milestone should expose the first audited entry point from this
+compatibility checklist into the existing `HDD o SHE` boundedness machinery.
+That step should remain proof-level and should explicitly state which
+certificate and common-container object are being used before any bound is
+transported.
