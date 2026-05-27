@@ -184,3 +184,91 @@ bridges state exactly what simultaneous validity and history separation mean.
 The next milestone should connect `StructuredSHEContext` to the source-facing
 `IUTStage1Theorem311SHEAlignment` field, again as a conservative projection
 rather than as an endpoint theorem.
+
+## Math Milestone 2: Source-Facing Structured SHE Alignment
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Milestone 1 strengthened SHE at the qualitative-data layer. The next source
+boundary is the existing Theorem 3.11 SHE-alignment field, which states that the
+common-container SHE arrow datum agrees with the structured certificate's SHE
+datum. This corresponds to the role of SHE in the fourth triangle described in
+Mochizuki's 2026 report: the SHE arrow supplies the q-pilot-side data used in
+the restricted `(HDD) o (SHE)` composite.
+
+The Scholze-Stix guardrail remains: this alignment is not a theorem that
+identifies histories or real lines. It is only a named equality between the SHE
+datum used by the common container and the SHE datum stored in the structured
+certificate.
+
+### Purpose
+
+This milestone adds a source-facing structure:
+
+```text
+IUTStage1Theorem311StructuredSHE
+```
+
+It contains:
+
+* a `QualitativeData.StructuredSHEContext`;
+* an equality from the context's `sheDatum` to the package certificate's SHE
+  datum;
+* an equality from the common-container SHE arrow datum to the context's
+  `sheDatum`.
+
+From these fields we recover the existing `IUTStage1Theorem311SHEAlignment`.
+No endpoint, payload route, common-target bound, or Corollary 3.12 statement is
+derived.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1Theorem311StructuredSHE
+IUTStage1Theorem311StructuredSHE.hasStructuredSHE
+IUTStage1Theorem311StructuredSHE.sheDatumMatchesCertificate
+IUTStage1Theorem311StructuredSHE.sheArrowMatchesContext
+IUTStage1Theorem311StructuredSHE.hodgeTheaterSHEAlignment
+IUTStage1Theorem311StructuredSHE.sheAlignment
+IUTStage1Theorem311StructuredSHE.sheAlignment_hodgeTheaterSHEAlignment_eq
+IUTStage1Theorem311StructuredSHE.domainHistory_ne_codomainHistory
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_structured_she_input_example
+unitThetaToy_source_theorem311_structured_she_input_hasStructuredSHE_example
+unitThetaToy_source_theorem311_structured_she_input_alignment_example
+unitThetaToy_source_theorem311_structured_she_input_history_example
+```
+
+### What This Tests
+
+The toy source package constructs a strengthened source-facing SHE input and
+checks that it recovers:
+
+* the old inert `HasStructuredSHE`;
+* the existing source-facing SHE alignment equality;
+* the explicit non-identification of domain and codomain Hodge-theater sides.
+
+### Design Trap Avoided
+
+The trap would be to strengthen SHE and immediately let it discharge the final
+comparison. Instead, this milestone connects stronger SHE data only to the
+pre-existing SHE alignment field. This keeps the next bridge honest: any future
+payload construction must state additional HDD/common-container and real-chart
+requirements explicitly.
+
+### Next Step
+
+The next milestone should expose a structured SHE input through
+`IUTStage1Theorem311StructuredInputs`, so the strengthened SHE context can be
+carried alongside the existing algorithmic-output and side-condition routes.

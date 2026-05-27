@@ -239,6 +239,71 @@ theorem hodgeTheaterSHEAlignment
 end IUTStage1Theorem311SHEAlignment
 
 /--
+Strengthened source-facing SHE input for the Theorem 3.11 route.
+
+This records a non-inert structured SHE context and only connects it to the
+existing certificate/alignment fields. It does not construct a comparison
+payload or endpoint.
+-/
+structure IUTStage1Theorem311StructuredSHE
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index) where
+  context :
+    QualitativeData.StructuredSHEContext package.preLedger.output.family
+  she_datum_matches_certificate :
+    context.sheDatum = package.preLedger.certificate.she
+  she_arrow_matches_context :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      context.sheDatum
+
+namespace IUTStage1Theorem311StructuredSHE
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+theorem hasStructuredSHE
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) :
+    QualitativeData.HasStructuredSHE package.preLedger.output.family :=
+  structuredSHE.context.hasStructuredSHE
+
+theorem sheDatumMatchesCertificate
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) :
+    structuredSHE.context.sheDatum = package.preLedger.certificate.she :=
+  structuredSHE.she_datum_matches_certificate
+
+theorem sheArrowMatchesContext
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      structuredSHE.context.sheDatum :=
+  structuredSHE.she_arrow_matches_context
+
+theorem hodgeTheaterSHEAlignment
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) :
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  structuredSHE.sheArrowMatchesContext.trans
+    structuredSHE.sheDatumMatchesCertificate
+
+def sheAlignment
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) :
+    IUTStage1Theorem311SHEAlignment package :=
+  { alignment := structuredSHE.hodgeTheaterSHEAlignment }
+
+theorem sheAlignment_hodgeTheaterSHEAlignment_eq
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) :
+    structuredSHE.sheAlignment.hodgeTheaterSHEAlignment =
+      structuredSHE.hodgeTheaterSHEAlignment :=
+  rfl
+
+theorem domainHistory_ne_codomainHistory
+    (structuredSHE : IUTStage1Theorem311StructuredSHE package) :
+    structuredSHE.context.domainStructure.theater.side ≠
+      structuredSHE.context.codomainStructure.theater.side :=
+  structuredSHE.context.domainHistory_ne_codomainHistory
+
+end IUTStage1Theorem311StructuredSHE
+
+/--
 Source-facing subclaims for the Theorem 3.11 algorithmic certificate used in
 Stage 1.
 

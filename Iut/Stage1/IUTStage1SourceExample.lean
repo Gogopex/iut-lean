@@ -622,6 +622,73 @@ theorem unitThetaToy_source_theorem311_structured_she_component_example
   (unitThetaToy_source_theorem311_structured_inputs_example
     measure hnormalized hh hbound hholds).sheAlignment
 
+def unitThetaToy_source_theorem311_structured_she_input_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    IUTStage1Theorem311StructuredSHE package :=
+  { context := thetaToyStructuredSHEContext unitQToTheta h epsilon,
+    she_datum_matches_certificate := rfl,
+    she_arrow_matches_context := rfl }
+
+theorem unitThetaToy_source_theorem311_structured_she_input_hasStructuredSHE_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    QualitativeData.HasStructuredSHE package.preLedger.output.family :=
+  (unitThetaToy_source_theorem311_structured_she_input_example
+    measure hnormalized hh hbound hholds).hasStructuredSHE
+
+theorem unitThetaToy_source_theorem311_structured_she_input_alignment_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    package.preLedger.chartedContainer.commonContainer.hddShe.sheArrow.datum =
+      package.preLedger.certificate.she :=
+  (unitThetaToy_source_theorem311_structured_she_input_example
+    measure hnormalized hh hbound hholds).hodgeTheaterSHEAlignment
+
+theorem unitThetaToy_source_theorem311_structured_she_input_history_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let structuredSHE :=
+      unitThetaToy_source_theorem311_structured_she_input_example
+        measure hnormalized hh hbound hholds
+    structuredSHE.context.domainStructure.theater.side ≠
+      structuredSHE.context.codomainStructure.theater.side :=
+  (unitThetaToy_source_theorem311_structured_she_input_example
+    measure hnormalized hh hbound hholds).domainHistory_ne_codomainHistory
+
 theorem unitThetaToy_source_theorem311_structured_she_component_eq_subclaims_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
