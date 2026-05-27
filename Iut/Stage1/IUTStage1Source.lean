@@ -2502,6 +2502,93 @@ theorem auditedThetaChartBound
   AuditedThetaChartBound.ofStructuredInputsWithSHE bundle sideConditions
 
 /--
+Audit object for the final inequality stated directly between charted q and
+charted Theta readings.
+
+This is the charted version of the raw `qSigned <= thetaSigned` comparison.
+It keeps both chart equations in the proof boundary.
+-/
+structure AuditedChartedComparisonBoundary
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) : Prop where
+  q_pilot_chart_sign :
+    AuditedQPilotChartSign package bundle sideConditions
+  theta_chart_bound :
+    AuditedThetaChartBound package bundle sideConditions
+  raw_inequality :
+    IUTStage1Theorem311AuditedRawInequality package bundle
+  q_signed_le_theta :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned
+  charted_q_le_charted_theta :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord <=
+      (Transport.map package.preLedger.chartedContainer.chart.thetaToTarget
+        package.preLedger.thetaBound.thetaPoint).coord
+
+namespace AuditedChartedComparisonBoundary
+
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+variable {sideConditions : IUTStage1SourceSideConditions package}
+
+theorem ofChartAudits
+    (qAudit : AuditedQPilotChartSign package bundle sideConditions)
+    (thetaAudit : AuditedThetaChartBound package bundle sideConditions) :
+    AuditedChartedComparisonBoundary package bundle sideConditions :=
+  { q_pilot_chart_sign := qAudit,
+    theta_chart_bound := thetaAudit,
+    raw_inequality := bundle.auditedRawInequality,
+    q_signed_le_theta := bundle.auditedRawInequality.qSigned_le_thetaSigned,
+    charted_q_le_charted_theta := by
+      rw [qAudit.qCharted, thetaAudit.thetaCharted]
+      exact bundle.auditedRawInequality.qSigned_le_thetaSigned }
+
+theorem ofStructuredInputsWithSHE
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedChartedComparisonBoundary package bundle sideConditions :=
+  ofChartAudits
+    (package.auditedQPilotChartSign bundle sideConditions)
+    (package.auditedThetaChartBound bundle sideConditions)
+
+theorem qPilotChartSign
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    AuditedQPilotChartSign package bundle sideConditions :=
+  boundary.q_pilot_chart_sign
+
+theorem thetaChartBound
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    AuditedThetaChartBound package bundle sideConditions :=
+  boundary.theta_chart_bound
+
+theorem qSigned_le_thetaSigned
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  boundary.q_signed_le_theta
+
+theorem chartedQ_le_chartedTheta
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord <=
+      (Transport.map package.preLedger.chartedContainer.chart.thetaToTarget
+        package.preLedger.thetaBound.thetaPoint).coord :=
+  boundary.charted_q_le_charted_theta
+
+end AuditedChartedComparisonBoundary
+
+theorem auditedChartedComparisonBoundary
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedChartedComparisonBoundary package bundle sideConditions :=
+  AuditedChartedComparisonBoundary.ofStructuredInputsWithSHE bundle sideConditions
+
+/--
 Compact checkpoint summary for the audited structured-SHE route.
 
 The summary is proof-only: it does not create a new endpoint or hide any

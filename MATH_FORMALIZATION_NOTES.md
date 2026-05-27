@@ -7980,3 +7980,73 @@ together at the Theta-side checkpoint.
 
 The Theta-side charted point is still abstract. Later milestones should connect
 it to a more concrete Theta/HDD or log-volume construction.
+
+## Math Milestone 82: Charted q-to-Theta Comparison Boundary
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The final public comparison should ultimately be a comparison of charted
+quantities, not merely an inequality between two stored real numbers. The
+previous two milestones tied q-positivity to the charted q reading and the
+Theta bound to the charted Theta reading. This milestone combines them into a
+single charted comparison boundary.
+
+### Lean/API Check
+
+The new audit object is:
+
+```text
+IUTStage1SourcePackage.AuditedChartedComparisonBoundary
+```
+
+It stores:
+
+```text
+q_pilot_chart_sign
+theta_chart_bound
+raw_inequality
+q_signed_le_theta
+charted_q_le_charted_theta
+```
+
+The final field states:
+
+```text
+(Transport.map qToTarget qPoint).coord <=
+  (Transport.map thetaToTarget thetaPoint).coord
+```
+
+The proof rewrites both charted coordinates to `qSigned` and `thetaSigned`,
+then applies the audited raw inequality.
+
+### Lean Decisions
+
+This is still not a new endpoint. It is a stronger audit view of the same
+comparison. Its role is to make the charted real-line readings visible at the
+exact point where q and Theta are compared.
+
+The object depends on both earlier chart-side audits:
+
+* `AuditedQPilotChartSign`;
+* `AuditedThetaChartBound`.
+
+### What This Tests
+
+The source example constructs the charted comparison boundary and extracts the
+charted q-to-Theta inequality. The source example build passes.
+
+### Design Trap Avoided
+
+The trap would be to keep the final inequality only as `qSigned <= thetaSigned`
+while trusting separate lemmas to remember the charting. This milestone gives
+the charted inequality its own audited type.
+
+### Remaining Gap
+
+The charted q and Theta points are still abstract pre-ledger data. Later work
+should connect them to concrete q-pilot and Theta/HDD log-volume constructions.
