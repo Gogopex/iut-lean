@@ -193,6 +193,27 @@ def toSourceObligationProvider
       data.output data.measure data.thetaSigned data.qSigned data.normalization :=
   { ledger := data.toSourceObligationLedger obligations }
 
+def promotedLedger
+    (data : IUTStage1PreLedgerData source target index)
+    (obligations : LedgerPromotionObligations data) :
+    SourceObligationLedger
+      data.output data.measure data.thetaSigned data.qSigned data.normalization :=
+  data.toSourceObligationLedger obligations
+
+def promotedProvider
+    (data : IUTStage1PreLedgerData source target index)
+    (obligations : LedgerPromotionObligations data) :
+    IUTSourceObligationProvider
+      data.output data.measure data.thetaSigned data.qSigned data.normalization :=
+  data.toSourceObligationProvider obligations
+
+theorem promotedProvider_ledger
+    (data : IUTStage1PreLedgerData source target index)
+    (obligations : LedgerPromotionObligations data) :
+    (data.promotedProvider obligations).ledger =
+      data.promotedLedger obligations :=
+  rfl
+
 theorem toSourceObligationLedger_audit
     (data : IUTStage1PreLedgerData source target index)
     (obligations : LedgerPromotionObligations data) :

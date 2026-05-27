@@ -112,6 +112,42 @@ def unitThetaToyPromotedProvider
   (unitThetaToyPreLedgerData measure hnormalized hh hbound hholds).toSourceObligationProvider
     (unitThetaToyPromotionObligations measure hnormalized hh hbound hholds)
 
+theorem unitThetaToy_preLedger_promotedProvider_eq_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyPreLedgerData
+      measure hnormalized hh hbound hholds).promotedProvider
+        (unitThetaToyPromotionObligations measure hnormalized hh hbound hholds) =
+      unitThetaToyPromotedProvider measure hnormalized hh hbound hholds :=
+  rfl
+
+theorem unitThetaToy_preLedger_promotedProvider_ledger_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    ((unitThetaToyPreLedgerData
+      measure hnormalized hh hbound hholds).promotedProvider
+        (unitThetaToyPromotionObligations
+          measure hnormalized hh hbound hholds)).ledger =
+      (unitThetaToyPreLedgerData
+        measure hnormalized hh hbound hholds).promotedLedger
+          (unitThetaToyPromotionObligations
+            measure hnormalized hh hbound hholds) :=
+  (unitThetaToyPreLedgerData
+    measure hnormalized hh hbound hholds).promotedProvider_ledger
+      (unitThetaToyPromotionObligations measure hnormalized hh hbound hholds)
+
 theorem unitThetaToy_promotedProvider_publicAudit_q_le_theta_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

@@ -7063,3 +7063,74 @@ explicit promoted provider.
 The next milestone should add named accessors for the promoted provider and
 ledger produced by a pre-ledger package, if that makes subsequent source
 placeholder modules easier to state without repeating promotion expressions.
+
+## Milestone 83: Named Promoted Pre-Ledger Accessors
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Data.lean`
+* `Iut/Stage1/IUTStage1DataExample.lean`
+
+### Source Check
+
+Milestones 77-82 deliberately kept promotion from pre-ledger data to a full
+source-obligation ledger explicit. That remains essential: source-specific IUT
+data should not be treated as a completed Corollary 3.12 proof until the
+promotion obligations have been supplied.
+
+At the same time, future modules need readable names for the promoted objects
+once those obligations are present. This milestone adds those names without
+changing the promotion boundary.
+
+### Purpose
+
+This milestone introduces named accessors for the two objects produced from
+pre-ledger data plus explicit promotion obligations:
+
+```text
+promotedLedger
+promotedProvider
+```
+
+They are definitional wrappers around the existing controlled constructors:
+
+```text
+toSourceObligationLedger
+toSourceObligationProvider
+```
+
+### Lean Declarations
+
+In `IUTStage1Data.lean`:
+
+```text
+IUTStage1PreLedgerData.promotedLedger
+IUTStage1PreLedgerData.promotedProvider
+IUTStage1PreLedgerData.promotedProvider_ledger
+```
+
+In `IUTStage1DataExample.lean`:
+
+```text
+unitThetaToy_preLedger_promotedProvider_eq_example
+unitThetaToy_preLedger_promotedProvider_ledger_example
+```
+
+### What This Tests
+
+The toy examples verify that the new names do not create a second promotion
+path. They are definitionally the same promoted provider/ledger already used by
+the examples.
+
+### Design Trap Avoided
+
+The trap would be to introduce a "convenient" source-specific provider that
+silently manufactures the missing source obligations. These accessors still
+require `LedgerPromotionObligations`; they only make the resulting promoted
+objects easier to name and audit.
+
+### Next Step
+
+The next milestone should start a first non-toy source placeholder module that
+packages named IUT Stage 1 pre-ledger labels and states, without proof, the
+specific promotion obligations that future source mathematics must discharge.
