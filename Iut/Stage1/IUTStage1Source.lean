@@ -2195,6 +2195,45 @@ theorem stageRecoversCorollary312
       (package.promotedProvider obligations).ledger.corollary312 :=
   sourceAudit.stage_recovers_corollary312
 
+/-- Compact summary of the audited route from source payload inputs to endpoint data. -/
+structure PayloadRouteSummary
+    (sourceAudit : Audit package obligations) : Prop where
+  payload_inputs_eq_package :
+    sourceAudit.comparisonPayloadInputs =
+      package.comparisonPayloadInputs
+  payload_data_eq_comparison_data :
+    package.comparisonDataFromPayloadInputs obligations =
+      sourceAudit.comparisonData
+  comparison_data_eq_package :
+    sourceAudit.comparisonData = package.comparisonData obligations
+  stage1Comparison_eq_provider :
+    sourceAudit.comparisonData.stage1Comparison =
+      (package.promotedProvider obligations).stage1Comparison
+  corollary312_eq_provider :
+    sourceAudit.comparisonData.corollary312 =
+      (package.promotedProvider obligations).corollary312
+  comparison_data_recovers :
+    corollary312_from_stage1_comparison
+        sourceAudit.comparisonData.stage1Comparison =
+      corollary312_of_signed_le
+        sourceAudit.comparisonData.qSigned_le_thetaSigned
+
+theorem payloadRouteSummary
+    (sourceAudit : Audit package obligations) :
+    PayloadRouteSummary sourceAudit :=
+  { payload_inputs_eq_package :=
+      sourceAudit.comparisonPayloadInputsEqPackage,
+    payload_data_eq_comparison_data :=
+      sourceAudit.comparisonDataFromPayloadInputsEqComparisonData,
+    comparison_data_eq_package :=
+      sourceAudit.comparisonDataEqPackage,
+    stage1Comparison_eq_provider :=
+      sourceAudit.comparisonDataStage1Comparison,
+    corollary312_eq_provider :=
+      sourceAudit.comparisonDataCorollary312,
+    comparison_data_recovers :=
+      sourceAudit.comparisonData.publicAudit_stage1Comparison_recovers }
+
 theorem publicAuditEq
     (sourceAudit : Audit package obligations) :
     (⟨sourceAudit.qSignedLeThetaSigned,

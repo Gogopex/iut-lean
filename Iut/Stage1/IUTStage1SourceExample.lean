@@ -2589,6 +2589,44 @@ theorem unitThetaToy_source_audit_payloadStage_eq_comparisonStage_example
       measure hnormalized hh hbound hholds
   sourceAudit.comparisonDataFromPayloadInputsStage1ComparisonEq
 
+theorem unitThetaToy_source_audit_payloadRouteSummary_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1SourcePackage.Audit.PayloadRouteSummary
+      (unitThetaToy_source_audit_example
+        measure hnormalized hh hbound hholds) :=
+  (unitThetaToy_source_audit_example
+    measure hnormalized hh hbound hholds).payloadRouteSummary
+
+theorem unitThetaToy_source_audit_payloadRouteSummary_stage_eq_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let obligations :=
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds
+    (unitThetaToy_source_audit_example
+      measure hnormalized hh hbound hholds).comparisonData.stage1Comparison =
+      (package.promotedProvider obligations).stage1Comparison :=
+  let summary :=
+    (unitThetaToy_source_audit_example
+      measure hnormalized hh hbound hholds).payloadRouteSummary
+  summary.stage1Comparison_eq_provider
+
 theorem unitThetaToy_source_audit_corollary_projection_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

@@ -10882,3 +10882,69 @@ route and promoted-ledger route meet at the same comparison data object.
 The next milestone should add a compact source audit summary for the complete
 payload route: source payload inputs, payload-to-data equality, final
 comparison data, and public endpoint recovery.
+
+## Milestone 137: Source Audit Payload Route Summary
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The formalization report frames the final Stage 1 comparison as the
+`3.11.5 => 3.12` endpoint, while Scholze-Stix focus on whether the source-side
+pilot-object comparison legitimately reaches the final real inequality. The
+local scaffold now has individual bridge theorems for this route. This
+milestone packages those theorem-level facts into one source-audit summary.
+
+### Purpose
+
+`IUTStage1SourcePackage.Audit.PayloadRouteSummary` records the complete audited
+path from source payload inputs to endpoint data:
+
+* payload inputs agree with the package payload inputs;
+* payload-built comparison data equals the source audit's final comparison data;
+* final comparison data agrees with the package comparison data;
+* the final comparison data has the same `Stage1Comparison` and Corollary 3.12
+  proof as the promoted provider;
+* the comparison data recovers its own signed inequality endpoint.
+
+This does not add new mathematical assumptions. It is a compact public view of
+the route already proved by earlier milestones.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.Audit.PayloadRouteSummary
+IUTStage1SourcePackage.Audit.payloadRouteSummary
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_audit_payloadRouteSummary_example
+unitThetaToy_source_audit_payloadRouteSummary_stage_eq_example
+```
+
+### What This Tests
+
+The toy examples verify that the source audit can produce the compact payload
+route summary and that downstream code can recover a concrete summary field,
+namely equality of the final `Stage1Comparison` with the promoted provider's
+`Stage1Comparison`.
+
+### Design Trap Avoided
+
+The trap would be to leave the source-to-endpoint route scattered across many
+projection names. That is hard to audit and increases the chance that later code
+uses only the final endpoint while bypassing the source-side route. The summary
+keeps the full path visible as a single theorem-level package.
+
+### Next Step
+
+The next milestone should connect this payload route summary to
+`ComparisonDataEndpoint`, so the compact audit route is available at the same
+public endpoint boundary as the comparison-data endpoint.
