@@ -4901,3 +4901,72 @@ abstraction.
 The next milestone should audit the charted common container accessor
 `thetaChartTrivial`, showing it is exactly the chart's recorded trivial
 Theta-side transport.
+
+## Milestone 54: Theta Chart Triviality Projection
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+Scholze-Stix's critique emphasizes that several ordered one-dimensional real
+vector spaces occur and that the identifications among them must be explicit.
+Our `RealComparisonChartData` records the q-side transport into the target
+real line and also records the Theta-side transport, even though the Theta side
+already lives on the target side:
+
+```text
+theta_trivial : Transport.TrivialMonodromy thetaToTarget
+```
+
+This mirrors the project policy of making real-line identifications explicit
+rather than implicit.
+
+### Purpose
+
+This milestone exposes that the ledger's `thetaChartTrivial` accessor is
+exactly the charted container's triviality theorem, and therefore exactly the
+chart field:
+
+```text
+ledger.thetaChartTrivial = ledger.chartedContainer.thetaTrivial
+ledger.thetaChartTrivial = ledger.chartedContainer.chart.theta_trivial
+```
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.thetaChartTrivial_eq_chartedContainer
+SourceObligationLedger.thetaChartTrivial_eq_chartField
+```
+
+Both proofs are `rfl`.
+
+### What This Tests
+
+The Theta-side chart triviality is now traceable through:
+
+```text
+RealComparisonChartData.theta_trivial
+ChartedCommonContainerData.thetaTrivial
+SourceObligationLedger.thetaChartTrivial
+```
+
+This keeps the target-side chart convention explicit.
+
+### Design Trap Avoided
+
+The trap would be to treat the Theta side as automatically identical with the
+target real line and only record the q-side transport. The ledger now exposes
+the explicit triviality proof, so even the "obvious" real-line identification is
+auditable.
+
+### Next Step
+
+The next milestone should audit the common-container bridge/accessor layer:
+`theta_commonBound` should be shown to come from applying the charted common
+container to the structured certificate in source-specific ledgers, starting
+with the toy ledger.

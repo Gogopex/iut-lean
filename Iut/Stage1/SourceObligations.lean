@@ -375,6 +375,17 @@ theorem thetaChartTrivial (ledger :
       ledger.chartedContainer.chart.thetaToTarget :=
   ledger.chartedContainer.thetaTrivial
 
+theorem thetaChartTrivial_eq_chartedContainer (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.thetaChartTrivial = ledger.chartedContainer.thetaTrivial :=
+  rfl
+
+theorem thetaChartTrivial_eq_chartField (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.thetaChartTrivial =
+      ledger.chartedContainer.chart.theta_trivial :=
+  rfl
+
 theorem qSigned_eq_chartedQ (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     (Transport.map ledger.chartedContainer.chart.qToTarget
