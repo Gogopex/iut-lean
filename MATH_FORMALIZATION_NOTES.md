@@ -8221,3 +8221,78 @@ log-volume construction. Later work should decide whether this middle term
 needs its own charted data structure, or whether the correct next refinement is
 to replace the abstract membership-to-volume inequality with a more concrete
 upper-ray/log-volume lemma.
+
+## Math Milestone 85: Charted Boundary Cites the Pre-Ledger Chain
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+After adding the pre-ledger charted comparison chain, the higher Stage 1 source
+boundary should not rederive the charted q-to-Theta inequality in isolation.
+It should point back to the local chain where the chosen output and target
+volume middle term appear.
+
+### Lean/API Check
+
+The record:
+
+```text
+IUTStage1SourcePackage.AuditedChartedComparisonBoundary
+```
+
+now stores:
+
+```text
+preledger_charted_chain :
+  package.preLedger.ChartedComparisonChain
+```
+
+and exposes it as:
+
+```text
+preLedgerChartedChain
+```
+
+The final charted inequality is now filled from:
+
+```text
+package.preLedger.chartedComparisonChain.chartedQ_le_chartedTheta
+```
+
+rather than by rewriting the raw signed inequality directly.
+
+### Lean Decisions
+
+The boundary still stores the raw inequality and the q/Theta chart audits. The
+new field does not replace those; it records provenance. The final boundary
+therefore simultaneously exposes:
+
+```text
+raw qSigned <= thetaSigned
+charted q <= charted Theta
+charted q <= targetSigned <= charted Theta
+```
+
+all for the same package and structured-SHE bundle.
+
+### What This Tests
+
+The source example extracts the pre-ledger charted chain from the audited
+charted comparison boundary. The focused Stage 1 source example build passes.
+
+### Design Trap Avoided
+
+The trap would be to maintain a charted final inequality whose proof no longer
+mentions the selected output or measured target-volume middle term. This
+milestone keeps the charted boundary attached to that local chain.
+
+### Remaining Gap
+
+The pre-ledger chain still uses an abstract `q_le_target` membership-to-volume
+inequality. The next useful mathematical refinement is to inspect the toy
+upper-ray proof and decide which general lemma should eventually replace that
+abstract field.

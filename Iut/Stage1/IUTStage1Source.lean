@@ -2516,6 +2516,8 @@ structure AuditedChartedComparisonBoundary
     AuditedQPilotChartSign package bundle sideConditions
   theta_chart_bound :
     AuditedThetaChartBound package bundle sideConditions
+  preledger_charted_chain :
+    package.preLedger.ChartedComparisonChain
   raw_inequality :
     IUTStage1Theorem311AuditedRawInequality package bundle
   q_signed_le_theta :
@@ -2538,11 +2540,11 @@ theorem ofChartAudits
     AuditedChartedComparisonBoundary package bundle sideConditions :=
   { q_pilot_chart_sign := qAudit,
     theta_chart_bound := thetaAudit,
+    preledger_charted_chain := package.preLedger.chartedComparisonChain,
     raw_inequality := bundle.auditedRawInequality,
     q_signed_le_theta := bundle.auditedRawInequality.qSigned_le_thetaSigned,
-    charted_q_le_charted_theta := by
-      rw [qAudit.qCharted, thetaAudit.thetaCharted]
-      exact bundle.auditedRawInequality.qSigned_le_thetaSigned }
+    charted_q_le_charted_theta :=
+      package.preLedger.chartedComparisonChain.chartedQ_le_chartedTheta }
 
 theorem ofStructuredInputsWithSHE
     (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
@@ -2563,6 +2565,12 @@ theorem thetaChartBound
       AuditedChartedComparisonBoundary package bundle sideConditions) :
     AuditedThetaChartBound package bundle sideConditions :=
   boundary.theta_chart_bound
+
+theorem preLedgerChartedChain
+    (boundary :
+      AuditedChartedComparisonBoundary package bundle sideConditions) :
+    package.preLedger.ChartedComparisonChain :=
+  boundary.preledger_charted_chain
 
 theorem qSigned_le_thetaSigned
     (boundary :
