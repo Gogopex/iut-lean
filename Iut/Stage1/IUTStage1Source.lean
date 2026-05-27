@@ -360,6 +360,57 @@ theorem toSideConditions_ofSideConditions
     (ofSideConditions sideConditions).toSideConditions = sideConditions :=
   Subsingleton.elim _ _
 
+/--
+Audit record tying side-condition hypotheses to their source-facing labels.
+
+This record still carries no proof beyond the hypotheses themselves; it records
+which labeled q-pilot log-volume and normalization data the hypotheses concern.
+-/
+structure Audit
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) : Prop where
+  qPilotLogVolume_matches_labels :
+    package.qPilotLogVolume = package.labels.qPilotLogVolume
+  sourceNormalization_matches_labels :
+    package.sourceNormalizationLabel = package.labels.sourceNormalization
+  q_pilot_log_volume_positive : 0 < -package.preLedger.qSigned
+  source_normalized : package.preLedger.normalization
+
+theorem audit
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    Audit hypotheses :=
+  { qPilotLogVolume_matches_labels :=
+      package.qPilotLogVolume_matches_labels,
+    sourceNormalization_matches_labels :=
+      package.sourceNormalization_matches_labels,
+    q_pilot_log_volume_positive := hypotheses.qPilotLogVolumePositive,
+    source_normalized := hypotheses.sourceNormalized }
+
+namespace Audit
+
+variable {hypotheses : IUTStage1SourceSideConditionHypotheses package}
+
+theorem qPilotLogVolumeMatchesLabels
+    (audit : Audit hypotheses) :
+    package.qPilotLogVolume = package.labels.qPilotLogVolume :=
+  audit.qPilotLogVolume_matches_labels
+
+theorem sourceNormalizationMatchesLabels
+    (audit : Audit hypotheses) :
+    package.sourceNormalizationLabel = package.labels.sourceNormalization :=
+  audit.sourceNormalization_matches_labels
+
+theorem qPilotLogVolumePositive
+    (audit : Audit hypotheses) :
+    0 < -package.preLedger.qSigned :=
+  audit.q_pilot_log_volume_positive
+
+theorem sourceNormalized
+    (audit : Audit hypotheses) :
+    package.preLedger.normalization :=
+  audit.source_normalized
+
+end Audit
+
 end IUTStage1SourceSideConditionHypotheses
 
 namespace IUTStage1SourceObligations

@@ -9234,3 +9234,64 @@ source-facing names without assigning mathematical consequences to those names.
 The next milestone should connect side-condition hypotheses to these labels in a
 small audit record, so source modules can state which labeled q-pilot log-volume
 and normalization data their hypotheses concern.
+
+## Milestone 115: Labeled Side-Condition Hypothesis Audit
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Milestone 114 introduced inert source labels for the q-pilot log-volume sign
+datum and source normalization datum. This milestone connects those labels to
+the side-condition hypotheses that state positivity and normalization.
+
+The audit still carries no new mathematical consequence. It only records that
+the hypotheses concern the labeled source objects.
+
+### Purpose
+
+This milestone adds a compact audit record for source side-condition
+hypotheses.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourceSideConditionHypotheses.Audit
+IUTStage1SourceSideConditionHypotheses.audit
+IUTStage1SourceSideConditionHypotheses.Audit.qPilotLogVolumeMatchesLabels
+IUTStage1SourceSideConditionHypotheses.Audit.sourceNormalizationMatchesLabels
+IUTStage1SourceSideConditionHypotheses.Audit.qPilotLogVolumePositive
+IUTStage1SourceSideConditionHypotheses.Audit.sourceNormalized
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_side_condition_hypotheses_audit_example
+unitThetaToy_source_side_condition_hypotheses_audit_q_label_example
+unitThetaToy_source_side_condition_hypotheses_audit_normalization_label_example
+unitThetaToy_source_side_condition_hypotheses_audit_q_positive_example
+unitThetaToy_source_side_condition_hypotheses_audit_normalization_example
+```
+
+### What This Tests
+
+The toy examples verify that the side-condition hypothesis audit exposes both
+label matches and the underlying q-positivity/normalization hypotheses.
+
+### Design Trap Avoided
+
+The trap would be to add source labels but never tie them to the hypotheses they
+are meant to name. This audit keeps the association explicit without upgrading
+labels into proof-producing objects.
+
+### Next Step
+
+The next milestone should thread this side-condition hypothesis audit into the
+package-level hypothesis route, so consumers can recover it next to the public
+audit data.
