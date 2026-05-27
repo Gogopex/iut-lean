@@ -11,6 +11,7 @@ import Mathlib.NumberTheory.NumberField.Completion.FinitePlace
 import Mathlib.NumberTheory.NumberField.InfinitePlace.Basic
 import Mathlib.Data.ZMod.Basic
 import Mathlib.Data.Set.Basic
+import Mathlib.Topology.Algebra.Group.Basic
 import Mathlib.Tactic
 
 /-!
@@ -1062,47 +1063,88 @@ def zmodBadLocalQuotientZData (l : PrimeGeFive) :
   canonicalSignLabelZ := zmodCanonicalSignLabelQuotient l
   canonicalSignLabelZ_eq := rfl
 
+/-- The topological flavor expected of an abstract fundamental group object. -/
+inductive FundamentalGroupTopologyKind where
+  | profinite
+  | tempered
+  | abstract
+  deriving DecidableEq, Repr
+
 /--
 An abstract fundamental group object.
 
-This keeps the local subgroup chain typed as group-like data while postponing
-the choice between profinite and tempered group structures.
+This keeps the local subgroup chain typed as topological group data while
+postponing the choice between profinite and tempered group structures.
 -/
 structure AbstractFundamentalGroup where
   carrier : Type u
   group : Group carrier
-  topologyKind : String
+  topology : TopologicalSpace carrier
+  isTopologicalGroup : @IsTopologicalGroup carrier topology group
+  topologyKind : FundamentalGroupTopologyKind
 
 namespace AbstractFundamentalGroup
 
 instance (G : AbstractFundamentalGroup) : Group G.carrier :=
   G.group
 
+instance (G : AbstractFundamentalGroup) : TopologicalSpace G.carrier :=
+  G.topology
+
+instance (G : AbstractFundamentalGroup) : IsTopologicalGroup G.carrier :=
+  G.isTopologicalGroup
+
 end AbstractFundamentalGroup
 
 /--
 An abstract open embedding of fundamental group objects.
 
-The map is currently a group homomorphism plus injectivity and openness
-obligations. Later milestones can replace the `isOpenImage` proposition with a
-mathlib topological-group statement.
+The map is a group homomorphism whose underlying function is a mathlib open
+embedding. Later milestones can replace this abstract interface with concrete
+profinite or tempered group categories.
 -/
 structure OpenEmbeddingData (source target : AbstractFundamentalGroup) where
   hom : MonoidHom source.carrier target.carrier
-  injective : Function.Injective hom
-  isOpenImage : Prop
-  isOpenImage_holds : isOpenImage
+  isOpenEmbedding : Topology.IsOpenEmbedding hom
 
 namespace OpenEmbeddingData
 
 variable {source target : AbstractFundamentalGroup}
 variable (embedding : OpenEmbeddingData source target)
 
+def isOpenImage : Prop :=
+  IsOpen (Set.range embedding.hom)
+
 theorem openImage : embedding.isOpenImage :=
-  embedding.isOpenImage_holds
+  embedding.isOpenEmbedding.isOpen_range
 
 theorem injective_holds : Function.Injective embedding.hom :=
-  embedding.injective
+  embedding.isOpenEmbedding.injective
+
+theorem continuous_hom : Continuous embedding.hom :=
+  embedding.isOpenEmbedding.continuous
+
+theorem isOpenEmbedding_holds : Topology.IsOpenEmbedding embedding.hom :=
+  embedding.isOpenEmbedding
+
+theorem isOpenMap_holds : IsOpenMap embedding.hom :=
+  embedding.isOpenEmbedding.isOpenMap
+
+def imageSubgroup : Subgroup target.carrier :=
+  embedding.hom.range
+
+theorem imageSubgroup_open :
+    IsOpen ((embedding.imageSubgroup : Subgroup target.carrier) : Set target.carrier) := by
+  simpa [imageSubgroup, isOpenImage] using embedding.openImage
+
+def comp {middle : AbstractFundamentalGroup}
+    (second : OpenEmbeddingData middle target)
+    (first : OpenEmbeddingData source middle) :
+    OpenEmbeddingData source target where
+  hom := second.hom.comp first.hom
+  isOpenEmbedding := by
+    simpa [Function.comp_def] using
+      second.isOpenEmbedding.comp first.isOpenEmbedding
 
 end OpenEmbeddingData
 
@@ -1124,15 +1166,23 @@ namespace BadLocalOpenSubgroupData
 
 variable (openData : BadLocalOpenSubgroupData)
 
+def piXbar_to_piCv_openEmbedding : OpenEmbeddingData openData.piXbar openData.piCv :=
+  openData.piCbar_to_piCv.comp openData.piXbar_to_piCbar
+
 def piXbar_to_piCv : MonoidHom openData.piXbar.carrier openData.piCv.carrier :=
-  openData.piCbar_to_piCv.hom.comp openData.piXbar_to_piCbar.hom
+  openData.piXbar_to_piCv_openEmbedding.hom
+
+theorem piXbar_to_piCv_open :
+    openData.piXbar_to_piCv_openEmbedding.isOpenImage :=
+  openData.piXbar_to_piCv_openEmbedding.openImage
+
+theorem piXbar_to_piCv_isOpenEmbedding :
+    Topology.IsOpenEmbedding openData.piXbar_to_piCv :=
+  openData.piXbar_to_piCv_openEmbedding.isOpenEmbedding_holds
 
 theorem piXbar_to_piCv_injective :
-    Function.Injective openData.piXbar_to_piCv := by
-  intro x y hxy
-  apply openData.piXbar_to_piCbar.injective_holds
-  apply openData.piCbar_to_piCv.injective_holds
-  exact hxy
+    Function.Injective openData.piXbar_to_piCv :=
+  openData.piXbar_to_piCv_openEmbedding.injective_holds
 
 theorem piXbarOpenInPiCbar :
     openData.piXbar_to_piCbar.isOpenImage :=
@@ -1183,6 +1233,14 @@ theorem piXbarOpenInPiCbar :
 theorem piCbarOpenInPiCv :
     thetaRootData.openSubgroups.piCbar_to_piCv.isOpenImage :=
   thetaRootData.openSubgroups.piCbarOpenInPiCv
+
+theorem piXbarOpenInPiCv :
+    thetaRootData.openSubgroups.piXbar_to_piCv_openEmbedding.isOpenImage :=
+  thetaRootData.openSubgroups.piXbar_to_piCv_open
+
+theorem piXbarToPiCvIsOpenEmbedding :
+    Topology.IsOpenEmbedding thetaRootData.openSubgroups.piXbar_to_piCv :=
+  thetaRootData.openSubgroups.piXbar_to_piCv_isOpenEmbedding
 
 theorem piXbarToPiCvInjective :
     Function.Injective thetaRootData.openSubgroups.piXbar_to_piCv :=
@@ -1250,6 +1308,14 @@ theorem piXbarOpenInPiCbar :
 theorem piCbarOpenInPiCv :
     typeData.openSubgroups.piCbar_to_piCv.isOpenImage :=
   typeData.thetaRootData.piCbarOpenInPiCv
+
+theorem piXbarOpenInPiCv :
+    typeData.openSubgroups.piXbar_to_piCv_openEmbedding.isOpenImage :=
+  typeData.thetaRootData.piXbarOpenInPiCv
+
+theorem piXbarToPiCvIsOpenEmbedding :
+    Topology.IsOpenEmbedding typeData.openSubgroups.piXbar_to_piCv :=
+  typeData.thetaRootData.piXbarToPiCvIsOpenEmbedding
 
 theorem piXbarToPiCvInjective :
     Function.Injective typeData.openSubgroups.piXbar_to_piCv :=
@@ -1503,6 +1569,16 @@ theorem badLocalPiCbarOpenInPiCv
     (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
     (localData.badLocalOpenSubgroups v hv).piCbar_to_piCv.isOpenImage :=
   (localData.badLocalCType v hv).piCbarOpenInPiCv
+
+theorem badLocalPiXbarOpenInPiCv
+    (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
+    (localData.badLocalOpenSubgroups v hv).piXbar_to_piCv_openEmbedding.isOpenImage :=
+  (localData.badLocalCType v hv).piXbarOpenInPiCv
+
+theorem badLocalPiXbarToPiCvIsOpenEmbedding
+    (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
+    Topology.IsOpenEmbedding (localData.badLocalOpenSubgroups v hv).piXbar_to_piCv :=
+  (localData.badLocalCType v hv).piXbarToPiCvIsOpenEmbedding
 
 theorem badLocalPiXbarToPiCvInjective
     (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
@@ -1922,6 +1998,16 @@ theorem badLocalPiCbarOpenInPiCv
     (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
     (theta.badLocalOpenSubgroups v hv).piCbar_to_piCv.isOpenImage :=
   ThetaBadLocalData.badLocalPiCbarOpenInPiCv theta.badLocalData v hv
+
+theorem badLocalPiXbarOpenInPiCv
+    (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    (theta.badLocalOpenSubgroups v hv).piXbar_to_piCv_openEmbedding.isOpenImage :=
+  ThetaBadLocalData.badLocalPiXbarOpenInPiCv theta.badLocalData v hv
+
+theorem badLocalPiXbarToPiCvIsOpenEmbedding
+    (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    Topology.IsOpenEmbedding (theta.badLocalOpenSubgroups v hv).piXbar_to_piCv :=
+  ThetaBadLocalData.badLocalPiXbarToPiCvIsOpenEmbedding theta.badLocalData v hv
 
 theorem badLocalPiXbarToPiCvInjective
     (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :

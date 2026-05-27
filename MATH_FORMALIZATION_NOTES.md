@@ -4109,3 +4109,125 @@ the minimal group-theoretic obligations visible to Lean.
 Later milestones should replace this placeholder with real topology:
 `TopologicalSpace`, continuity, open image, and eventually whichever profinite
 or tempered group category best matches the IUT source material.
+
+## Math Milestone 42: Topological Open Embeddings
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Definition 3.1(e), describes the relevant `Pi(-)` objects as profinite
+groups and says that, at bad places, the theta-root local models determine open
+subgroups
+
+```text
+Pi_Xbar_v <= Pi_Cbar_v <= Pi_C_v
+```
+
+Remark 3.1.2 says that the subgroup `Pi_XK <= Pi_CK` may be constructed
+group-theoretically from the topological group `Pi_CK`, then uses this in the
+`Theta` approach to anabelian reconstruction. IUT II, around the review of
+mono-theta-theoretic cyclotomic rigidity, also treats the relevant `Pi_X(MTheta)`,
+`Pi_Y(MTheta)`, and `Pi_C(MTheta)` as topological groups and open subgroups.
+
+Scholze-Stix's critique focuses on the later Corollary 3.12 comparison of pilot
+objects, realified monoids, and Hodge theaters. This milestone is deliberately
+earlier: it only records that the local theta-root subgroup chain is a chain of
+topological group embeddings. It does not identify Hodge theaters or compare
+log-volumes.
+
+### Lean/API Check
+
+The placeholder string field on `AbstractFundamentalGroup` has been replaced by
+actual mathlib topology:
+
+```text
+topology : TopologicalSpace carrier
+isTopologicalGroup : IsTopologicalGroup carrier
+topologyKind : FundamentalGroupTopologyKind
+```
+
+The topology kind is now a small datatype with cases:
+
+```text
+profinite
+tempered
+abstract
+```
+
+This keeps track of the intended source interpretation without pretending that
+we already have full profinite or tempered fundamental group categories.
+
+`OpenEmbeddingData` now stores a monoid homomorphism together with
+
+```text
+Topology.IsOpenEmbedding hom
+```
+
+instead of a custom openness proposition. From this one Lean derives
+continuity, injectivity, open image, and an open image subgroup.
+
+### Lean Decisions
+
+The important change is that openness is no longer only a named proposition. It
+is connected to mathlib's topological map API. This gives us standard theorems
+such as continuity and closure under composition.
+
+The composite
+
+```text
+Pi_Xbar_v -> Pi_C_v
+```
+
+is now itself represented as an `OpenEmbeddingData`, not merely as a monoid
+homomorphism with a derived injectivity proof. This matches the subgroup-chain
+reading of Definition 3.1(e): composing two open subgroup inclusions should
+again be an open embedding.
+
+### Lean Declarations
+
+```text
+FundamentalGroupTopologyKind
+AbstractFundamentalGroup.topology
+AbstractFundamentalGroup.isTopologicalGroup
+OpenEmbeddingData.isOpenEmbedding
+OpenEmbeddingData.continuous_hom
+OpenEmbeddingData.isOpenMap_holds
+OpenEmbeddingData.imageSubgroup
+OpenEmbeddingData.imageSubgroup_open
+OpenEmbeddingData.comp
+BadLocalOpenSubgroupData.piXbar_to_piCv_openEmbedding
+BadLocalOpenSubgroupData.piXbar_to_piCv_open
+BadLocalOpenSubgroupData.piXbar_to_piCv_isOpenEmbedding
+BadLocalThetaRootData.piXbarOpenInPiCv
+BadLocalThetaRootData.piXbarToPiCvIsOpenEmbedding
+InitialThetaData.badLocalPiXbarOpenInPiCv
+InitialThetaData.badLocalPiXbarToPiCvIsOpenEmbedding
+```
+
+### What This Tests
+
+The example file now checks:
+
+* the first and second bad-local subgroup arrows are open images;
+* the composite `Pi_Xbar_v -> Pi_C_v` has open image;
+* the composite is a mathlib `Topology.IsOpenEmbedding`;
+* the composite remains injective.
+
+### Design Trap Avoided
+
+The trap would be to keep a parallel homemade topology vocabulary. By using
+mathlib's `TopologicalSpace`, `IsTopologicalGroup`, and `Topology.IsOpenEmbedding`
+now, later refinements can connect to existing topological-group results instead
+of translating from custom propositions.
+
+### Remaining Gap
+
+This still does not construct actual profinite or tempered fundamental groups.
+`profinite` and `tempered` are tags for the intended interpretation. A later
+milestone should replace the `abstract` objects at concrete source points with
+mathlib-compatible profinite groups, and then add the tempered-fundamental-group
+interface needed for the bad-place conjugation operations discussed in IUT II.

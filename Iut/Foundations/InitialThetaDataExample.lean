@@ -573,6 +573,14 @@ example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
   theta.badLocalPiCbarOpenInPiCv v hv
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    (theta.badLocalOpenSubgroups v hv).piXbar_to_piCv_openEmbedding.isOpenImage :=
+  theta.badLocalPiXbarOpenInPiCv v hv
+
+example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    Topology.IsOpenEmbedding (theta.badLocalOpenSubgroups v hv).piXbar_to_piCv :=
+  theta.badLocalPiXbarToPiCvIsOpenEmbedding v hv
+
+example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
     Function.Injective (theta.badLocalOpenSubgroups v hv).piXbar_to_piCv :=
   theta.badLocalPiXbarToPiCvInjective v hv
 
