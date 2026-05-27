@@ -108,6 +108,55 @@ def unitThetaToyComparisonPayloadInputs
   (unitThetaToyPreLedgerData
     measure hnormalized hh hbound hholds).comparisonPayloadInputs
 
+theorem unitThetaToy_comparisonPayloadInputs_thetaChartTrivial_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    Transport.TrivialMonodromy
+      ((unitThetaToyPreLedgerData
+        measure hnormalized hh hbound hholds).chartedContainer.chart.thetaToTarget) :=
+  (unitThetaToyComparisonPayloadInputs
+    measure hnormalized hh hbound hholds).thetaChartTrivial
+
+theorem unitThetaToy_comparisonPayloadInputs_qCharted_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (Transport.map
+      (unitThetaToyPreLedgerData
+        measure hnormalized hh hbound hholds).chartedContainer.chart.qToTarget
+      (unitThetaToyPreLedgerData
+        measure hnormalized hh hbound hholds).qValue.qPoint).coord =
+      (Transport.map unitQToTheta (qAssignment h)).coord :=
+  (unitThetaToyComparisonPayloadInputs
+    measure hnormalized hh hbound hholds).qCharted
+
+theorem unitThetaToy_comparisonPayloadInputs_chosenHolds_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyPreLedgerData
+      measure hnormalized hh hbound hholds).chosenOutput.comparison.Holds
+      (unitThetaToyPreLedgerData
+        measure hnormalized hh hbound hholds).qValue.qPoint :=
+  (unitThetaToyComparisonPayloadInputs
+    measure hnormalized hh hbound hholds).chosenHolds
+
 theorem unitThetaToy_comparisonPayloadInputs_q_le_theta_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

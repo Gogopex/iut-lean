@@ -10532,3 +10532,91 @@ payload.
 The next milestone should add an audit namespace for `ComparisonPayloadInputs`,
 parallel to the endpoint projection namespace, so later modules can recover
 each source-side input without depending on the internal record field names.
+
+## Milestone 132: Comparison Payload Input Projections
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Data.lean`
+* `Iut/Stage1/IUTStage1DataExample.lean`
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+This remains source-side bookkeeping for the `3.11.5 => 3.12` comparison
+boundary. The formalization report separates this final comparison from the
+earlier construction, while the Scholze-Stix critique warns against hiding
+pilot-object identifications or comparison choices. Making the source-side
+payload inputs projectable keeps the pre-ledger route inspectable.
+
+### Purpose
+
+Milestone 131 introduced `ComparisonPayloadInputs`. This milestone adds public
+projection names for its fields, and source-package wrappers for the same facts.
+
+The projections expose:
+
+* theta chart triviality;
+* q-side charting;
+* Theta-side charting;
+* the selected comparison object holding the q point;
+* the q-to-target-volume inequality;
+* the target-volume-to-Theta inequality;
+* the resulting q-to-Theta inequality.
+
+### Lean Declarations
+
+In `IUTStage1Data.lean`:
+
+```text
+IUTStage1PreLedgerData.ComparisonPayloadInputs.thetaChartTrivial
+IUTStage1PreLedgerData.ComparisonPayloadInputs.qCharted
+IUTStage1PreLedgerData.ComparisonPayloadInputs.thetaCharted
+IUTStage1PreLedgerData.ComparisonPayloadInputs.chosenHolds
+```
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.comparisonPayloadInputs_thetaChartTrivial
+IUTStage1SourcePackage.comparisonPayloadInputs_qCharted
+IUTStage1SourcePackage.comparisonPayloadInputs_thetaCharted
+IUTStage1SourcePackage.comparisonPayloadInputs_chosenHolds
+IUTStage1SourcePackage.comparisonPayloadInputs_qSigned_le_targetSigned
+IUTStage1SourcePackage.comparisonPayloadInputs_targetSigned_le_thetaSigned
+```
+
+In the toy examples:
+
+```text
+unitThetaToy_comparisonPayloadInputs_thetaChartTrivial_example
+unitThetaToy_comparisonPayloadInputs_qCharted_example
+unitThetaToy_comparisonPayloadInputs_chosenHolds_example
+unitThetaToy_source_comparisonPayloadInputs_qCharted_example
+unitThetaToy_source_comparisonPayloadInputs_target_le_theta_example
+```
+
+### What This Tests
+
+The toy examples verify that downstream modules can recover the charting,
+chosen-output, and target-bound facts through named projections rather than by
+accessing the internal structure fields directly.
+
+### Design Trap Avoided
+
+The trap would be to make the source-side input record visible but practically
+opaque. If reviewers have to remember exact field names or destruct the record
+manually, the formalization becomes harder to audit. The projection theorems
+make the intended public API explicit.
+
+This also keeps the final signed payload separate from the source-side route:
+these projections expose how the q-to-Theta comparison is sourced, but they do
+not add q-positivity or collapse the result into the final
+`Corollary312ComparisonData`.
+
+### Next Step
+
+The next milestone should relate `ComparisonPayloadInputs` to the older
+`IUTStage1PreLedgerData.Audit`, showing explicitly that the pre-ledger audit
+contains the same chart/membership comparison facts.

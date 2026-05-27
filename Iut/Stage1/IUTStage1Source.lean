@@ -894,6 +894,44 @@ theorem comparisonPayloadInputs_qSigned_le_thetaSigned
     package.preLedger.qSigned <= package.preLedger.thetaSigned :=
   package.comparisonPayloadInputs.qSignedLeThetaSigned
 
+theorem comparisonPayloadInputs_thetaChartTrivial
+    (package : IUTStage1SourcePackage source target index) :
+    Transport.TrivialMonodromy
+      package.preLedger.chartedContainer.chart.thetaToTarget :=
+  package.comparisonPayloadInputs.thetaChartTrivial
+
+theorem comparisonPayloadInputs_qCharted
+    (package : IUTStage1SourcePackage source target index) :
+    (Transport.map package.preLedger.chartedContainer.chart.qToTarget
+      package.preLedger.qValue.qPoint).coord =
+      package.preLedger.qSigned :=
+  package.comparisonPayloadInputs.qCharted
+
+theorem comparisonPayloadInputs_thetaCharted
+    (package : IUTStage1SourcePackage source target index) :
+    (Transport.map package.preLedger.chartedContainer.chart.thetaToTarget
+      package.preLedger.thetaBound.thetaPoint).coord =
+      package.preLedger.thetaSigned :=
+  package.comparisonPayloadInputs.thetaCharted
+
+theorem comparisonPayloadInputs_chosenHolds
+    (package : IUTStage1SourcePackage source target index) :
+    package.preLedger.chosenOutput.comparison.Holds
+      package.preLedger.qValue.qPoint :=
+  package.comparisonPayloadInputs.chosenHolds
+
+theorem comparisonPayloadInputs_qSigned_le_targetSigned
+    (package : IUTStage1SourcePackage source target index) :
+    package.preLedger.qSigned <=
+      package.preLedger.targetVolume.targetSigned :=
+  package.comparisonPayloadInputs.qSignedLeTargetSigned
+
+theorem comparisonPayloadInputs_targetSigned_le_thetaSigned
+    (package : IUTStage1SourcePackage source target index) :
+    package.preLedger.targetVolume.targetSigned <=
+      package.preLedger.thetaSigned :=
+  package.comparisonPayloadInputs.targetSignedLeThetaSigned
+
 def comparisonDataFromPayloadInputs
     (package : IUTStage1SourcePackage source target index)
     (obligations : IUTStage1SourceObligations package) :

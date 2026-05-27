@@ -157,6 +157,28 @@ namespace ComparisonPayloadInputs
 
 variable {data : IUTStage1PreLedgerData source target index}
 
+theorem thetaChartTrivial
+    (inputs : data.ComparisonPayloadInputs) :
+    Transport.TrivialMonodromy data.chartedContainer.chart.thetaToTarget :=
+  inputs.theta_chart_trivial
+
+theorem qCharted
+    (inputs : data.ComparisonPayloadInputs) :
+    (Transport.map data.chartedContainer.chart.qToTarget
+      data.qValue.qPoint).coord = data.qSigned :=
+  inputs.q_charted
+
+theorem thetaCharted
+    (inputs : data.ComparisonPayloadInputs) :
+    (Transport.map data.chartedContainer.chart.thetaToTarget
+      data.thetaBound.thetaPoint).coord = data.thetaSigned :=
+  inputs.theta_charted
+
+theorem chosenHolds
+    (inputs : data.ComparisonPayloadInputs) :
+    data.chosenOutput.comparison.Holds data.qValue.qPoint :=
+  inputs.chosen_holds
+
 theorem qSignedLeTargetSigned
     (inputs : data.ComparisonPayloadInputs) :
     data.qSigned <= data.targetVolume.targetSigned :=
