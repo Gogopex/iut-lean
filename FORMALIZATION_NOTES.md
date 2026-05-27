@@ -1844,3 +1844,87 @@ The next milestone should connect the structured bridge to the signed
 Corollary-3.12 schema directly, adding a theorem parallel to
 `corollary312_from_bridge` that consumes a `StructuredCommonTargetBoundBridge`
 and a `StructuredCertificate`.
+
+## Milestone 18: Structured Corollary Schema
+
+Lean files:
+
+* `Iut/Stage1/CorollarySchema.lean`
+* `Iut/Stage1/ToyCorollarySchema.lean`
+
+### Source Check
+
+This milestone uses the same source passages as Milestones 15 and 17. IUT III,
+Corollary 3.12, Step (xi), presents the final comparison as a signed real
+inequality involving `-|log(q)|` and `-|log(Theta)|`. IUT III, Remark 3.11.1,
+and Mochizuki's formalization progress report locate the nontrivial earlier
+work in the IPL/SHE/APT and hull+det stages. Scholze-Stix's critique stresses
+that the passage from those qualitative identifications to a real inequality is
+exactly where hidden identifications must be avoided.
+
+### Purpose
+
+Milestone 17 introduced a bridge that consumes a structured IPL/SHE/APT
+certificate. This milestone connects that bridge directly to the signed
+Corollary-3.12 schema.
+
+The new theorem is parallel to `corollary312_from_bridge`, but takes:
+
+```text
+bridge      : output.StructuredCommonTargetBoundBridge measure thetaSigned
+certificate : QualitativeData.StructuredCertificate output.family
+```
+
+instead of the generic bridge plus `output.Certified`.
+
+### Lean Declarations
+
+In `CorollarySchema.lean`:
+
+```text
+corollary312_from_structured_bridge
+stage1Comparison_from_structured_bridge
+```
+
+In `ToyCorollarySchema.lean`:
+
+```text
+unitThetaToyStructuredCorollary312
+unitThetaToyStructuredStage1Comparison
+```
+
+The proof shape is unchanged:
+
+```text
+qSigned <= targetVolume(choice)
+targetVolume(choice) <= thetaSigned
+-----------------------------------
+qSigned <= thetaSigned
+```
+
+The only difference is that the second inequality now comes from the structured
+bridge applied to a structured qualitative certificate.
+
+### What This Tests
+
+The formal end-to-end path now records the qualitative data at the final schema
+boundary:
+
+1. structured IPL/SHE/APT certificate;
+2. structured bridge to common-target bound;
+3. chosen-output membership gives q-side signed comparison;
+4. signed Corollary-3.12 inequality follows.
+
+No theorem turns structured qualitative data alone into the final inequality.
+
+### Design Trap Avoided
+
+The trap would be to keep the structured certificate visible only in intermediate
+toy lemmas and then erase it at the Corollary schema. This milestone makes the
+structured data part of the final theorem's interface.
+
+### Next Step
+
+The next milestone should add a small "source obligation ledger" in Lean: named
+records for which future IUT-specific theorem must provide the structured
+bridge, the q-side signed comparison, and the normalization of the measure.

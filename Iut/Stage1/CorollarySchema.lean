@@ -70,6 +70,21 @@ theorem corollary312_from_bridge
   exact corollary312_of_signed_le
     (le_trans hq_le_choice (bridge.choice_targetVolume_le certified choice))
 
+theorem corollary312_from_structured_bridge
+    {source target : Copy} {index : Type u}
+    {output : AlgorithmicOutput source target index}
+    {measure : RegionMeasure target} {thetaSigned qSigned : Real}
+    (bridge : output.StructuredCommonTargetBoundBridge measure thetaSigned)
+    (certificate : QualitativeData.StructuredCertificate output.family)
+    (choice : index)
+    (hq_le_choice :
+      qSigned <= RegionMeasure.targetVolume measure (output.comparison choice)) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta thetaSigned)
+      (signedPilotLogVolume PilotSide.q qSigned) := by
+  exact corollary312_of_signed_le
+    (le_trans hq_le_choice (bridge.choice_targetVolume_le certificate choice))
+
 def stage1Comparison_from_bridge
     {source target : Copy} {index : Type u}
     {output : AlgorithmicOutput source target index}
@@ -82,6 +97,20 @@ def stage1Comparison_from_bridge
     Stage1Comparison :=
   stage1Comparison_of_signed_le hq_positive
     (le_trans hq_le_choice (bridge.choice_targetVolume_le certified choice))
+
+def stage1Comparison_from_structured_bridge
+    {source target : Copy} {index : Type u}
+    {output : AlgorithmicOutput source target index}
+    {measure : RegionMeasure target} {thetaSigned qSigned : Real}
+    (bridge : output.StructuredCommonTargetBoundBridge measure thetaSigned)
+    (certificate : QualitativeData.StructuredCertificate output.family)
+    (choice : index)
+    (hq_positive : 0 < -qSigned)
+    (hq_le_choice :
+      qSigned <= RegionMeasure.targetVolume measure (output.comparison choice)) :
+    Stage1Comparison :=
+  stage1Comparison_of_signed_le hq_positive
+    (le_trans hq_le_choice (bridge.choice_targetVolume_le certificate choice))
 
 end Stage1
 end Iut

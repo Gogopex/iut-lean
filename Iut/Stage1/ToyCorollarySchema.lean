@@ -61,6 +61,24 @@ theorem unitThetaToyCorollary312
     choice
     (unitThetaToy_qSigned_le_choiceTargetVolume measure hnormalized h epsilon choice hholds)
 
+theorem unitThetaToyStructuredCorollary312
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (h : Real) {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta (-(2 * h) + epsilonBound))
+      (signedPilotLogVolume PilotSide.q
+        (Transport.map unitQToTheta (qAssignment h)).coord) :=
+  corollary312_from_structured_bridge
+    (thetaToyStructuredCommonTargetBoundBridge measure hnormalized unitQToTheta h hbound)
+    (thetaToyStructuredCertificate unitQToTheta h epsilon)
+    choice
+    (unitThetaToy_qSigned_le_choiceTargetVolume measure hnormalized h epsilon choice hholds)
+
 def unitThetaToyStage1Comparison
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -74,6 +92,25 @@ def unitThetaToyStage1Comparison
   stage1Comparison_from_bridge
     (thetaToyCommonTargetBoundBridge measure hnormalized unitQToTheta h hbound)
     (thetaToyAlgorithmOutput_certified unitQToTheta h epsilon)
+    choice
+    (by
+      unfold qAssignment unitQToTheta Transport.map point PositiveScale.one
+      linarith)
+    (unitThetaToy_qSigned_le_choiceTargetVolume measure hnormalized h epsilon choice hholds)
+
+def unitThetaToyStructuredStage1Comparison
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    Stage1Comparison :=
+  stage1Comparison_from_structured_bridge
+    (thetaToyStructuredCommonTargetBoundBridge measure hnormalized unitQToTheta h hbound)
+    (thetaToyStructuredCertificate unitQToTheta h epsilon)
     choice
     (by
       unfold qAssignment unitQToTheta Transport.map point PositiveScale.one
