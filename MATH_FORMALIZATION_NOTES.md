@@ -873,3 +873,99 @@ exactly which extra side conditions are needed to turn the raw real inequality
 into the existing signed comparison payload. That step should mention
 q-positivity and normalization explicitly and should remain separate from the
 SHE/HDD/membership derivation.
+
+## Math Milestone 9: Audited Signed Payload Boundary
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The previous milestone produced only the raw real inequality
+`qSigned <= thetaSigned`. The existing Stage 1 schema represents the signed
+Corollary-3.12-style data by `Corollary312ComparisonData`, which additionally
+stores q-positivity. Separately, the source route tracks normalization as a
+promotion side condition.
+
+This milestone marks the boundary where those side conditions are attached. It
+does not alter the audited SHE/HDD/membership derivation of the raw inequality.
+
+### Purpose
+
+This milestone adds:
+
+```text
+IUTStage1Theorem311AuditedSignedPayloadBoundary
+```
+
+The boundary packages:
+
+* the audited raw inequality from Milestone 8;
+* q-pilot positivity from `IUTStage1SourceSideConditions`;
+* source normalization from `IUTStage1SourceSideConditions`;
+* the raw inequality again as the field used by the signed comparison payload;
+* the history-separation guard.
+
+It also exposes:
+
+```text
+comparisonData : Corollary312ComparisonData
+```
+
+This construction uses q-positivity and the raw inequality. Normalization is
+kept as an explicit boundary proof even though `Corollary312ComparisonData`
+does not currently consume it.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1Theorem311AuditedSignedPayloadBoundary
+IUTStage1Theorem311AuditedSignedPayloadBoundary.ofRawInequality
+IUTStage1Theorem311AuditedSignedPayloadBoundary.ofStructuredInputsWithSideConditions
+IUTStage1Theorem311AuditedSignedPayloadBoundary.rawInequality
+IUTStage1Theorem311AuditedSignedPayloadBoundary.qPilotPositive
+IUTStage1Theorem311AuditedSignedPayloadBoundary.sourceNormalization
+IUTStage1Theorem311AuditedSignedPayloadBoundary.qSigned_le_thetaSigned
+IUTStage1Theorem311AuditedSignedPayloadBoundary.comparisonData
+IUTStage1Theorem311AuditedSignedPayloadBoundary.comparisonData_qSigned
+IUTStage1Theorem311AuditedSignedPayloadBoundary.comparisonData_thetaSigned
+IUTStage1Theorem311AuditedSignedPayloadBoundary.comparisonData_qSigned_le_thetaSigned
+IUTStage1Theorem311AuditedSignedPayloadBoundary.comparisonData_corollary312
+IUTStage1Theorem311AuditedSignedPayloadBoundary.domainHistory_ne_codomainHistory
+IUTStage1Theorem311StructuredInputsWithSHE.auditedSignedPayloadBoundary
+IUTStage1Theorem311StructuredInputsWithSHE.auditedComparisonData
+IUTStage1Theorem311StructuredInputsWithSHE.auditedComparisonData_qSigned_le_thetaSigned
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_audited_signed_payload_boundary_example
+unitThetaToy_source_theorem311_audited_comparison_data_example
+unitThetaToy_source_theorem311_audited_comparison_data_q_le_theta_example
+unitThetaToy_source_theorem311_audited_payload_normalization_example
+```
+
+### What This Tests
+
+The toy model verifies that the audited route can construct
+`Corollary312ComparisonData` only after explicit side conditions are supplied.
+It also checks that the comparison data stores the raw inequality and that
+source normalization remains separately visible.
+
+### Design Trap Avoided
+
+The trap would be to let q-positivity or normalization appear as implicit
+consequences of SHE, HDD, or membership. We did not do that. They enter only
+through `IUTStage1SourceSideConditions`, at the named signed-payload boundary.
+
+### Next Step
+
+The next milestone should compare this audited signed payload with the older
+public-audit route already present in `IUTStage1Source.lean`. The goal is not a
+new endpoint, but a theorem saying that the newly audited payload agrees with
+the existing comparison-data packaging when supplied the same side conditions.

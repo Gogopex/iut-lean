@@ -1153,6 +1153,79 @@ theorem unitThetaToy_source_side_conditions_normalization_example
   (unitThetaToy_source_side_conditions_example
     measure hnormalized hh hbound hholds).sourceNormalization
 
+theorem unitThetaToy_source_theorem311_audited_signed_payload_boundary_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let bundle :=
+      unitThetaToy_source_theorem311_structured_inputs_with_she_example
+        measure hnormalized hh hbound hholds
+    let sideConditions :=
+      unitThetaToy_source_side_conditions_example
+        measure hnormalized hh hbound hholds
+    IUTStage1Theorem311AuditedSignedPayloadBoundary
+      package bundle sideConditions :=
+  IUTStage1Theorem311AuditedSignedPayloadBoundary.ofStructuredInputsWithSideConditions
+    (unitThetaToy_source_theorem311_structured_inputs_with_she_example
+      measure hnormalized hh hbound hholds)
+    (unitThetaToy_source_side_conditions_example
+      measure hnormalized hh hbound hholds)
+
+def unitThetaToy_source_theorem311_audited_comparison_data_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    Corollary312ComparisonData :=
+  (unitThetaToy_source_theorem311_structured_inputs_with_she_example
+    measure hnormalized hh hbound hholds).auditedComparisonData
+      (unitThetaToy_source_side_conditions_example
+        measure hnormalized hh hbound hholds)
+
+theorem unitThetaToy_source_theorem311_audited_comparison_data_q_le_theta_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToy_source_theorem311_audited_comparison_data_example
+      measure hnormalized hh hbound hholds).qSigned <=
+      (unitThetaToy_source_theorem311_audited_comparison_data_example
+        measure hnormalized hh hbound hholds).thetaSigned :=
+  (unitThetaToy_source_theorem311_structured_inputs_with_she_example
+    measure hnormalized hh hbound hholds).auditedComparisonData_qSigned_le_thetaSigned
+      (unitThetaToy_source_side_conditions_example
+        measure hnormalized hh hbound hholds)
+
+theorem unitThetaToy_source_theorem311_audited_payload_normalization_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds).preLedger.normalization :=
+  (unitThetaToy_source_theorem311_audited_signed_payload_boundary_example
+    measure hnormalized hh hbound hholds).sourceNormalization
+
 theorem unitThetaToy_source_side_condition_hypotheses_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

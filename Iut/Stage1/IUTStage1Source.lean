@@ -1137,6 +1137,160 @@ theorem sourceNormalization
 end IUTStage1SourceSideConditions
 
 /--
+Audited boundary between the raw real inequality and the signed comparison
+payload used for Corollary 3.12-style statements.
+
+The raw inequality is still sourced from the audited SHE/HDD/membership route.
+The side conditions are supplied explicitly here, so q-positivity and source
+normalization are not hidden inside the inequality composition.
+-/
+structure IUTStage1Theorem311AuditedSignedPayloadBoundary
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) : Prop where
+  raw_inequality :
+    IUTStage1Theorem311AuditedRawInequality package bundle
+  q_pilot_positive : 0 < -package.preLedger.qSigned
+  source_normalization : package.preLedger.normalization
+  q_signed_le_theta :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned
+  histories_not_identified :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side
+
+namespace IUTStage1Theorem311AuditedSignedPayloadBoundary
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+variable {sideConditions : IUTStage1SourceSideConditions package}
+
+theorem ofRawInequality
+    (raw : IUTStage1Theorem311AuditedRawInequality package bundle)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    IUTStage1Theorem311AuditedSignedPayloadBoundary
+      package bundle sideConditions :=
+  { raw_inequality := raw,
+    q_pilot_positive := sideConditions.qPilotPositive,
+    source_normalization := sideConditions.sourceNormalization,
+    q_signed_le_theta := raw.qSigned_le_thetaSigned,
+    histories_not_identified := raw.domainHistory_ne_codomainHistory }
+
+theorem ofStructuredInputsWithSideConditions
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    IUTStage1Theorem311AuditedSignedPayloadBoundary
+      package bundle sideConditions :=
+  ofRawInequality bundle.auditedRawInequality sideConditions
+
+theorem rawInequality
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    IUTStage1Theorem311AuditedRawInequality package bundle :=
+  boundary.raw_inequality
+
+theorem qPilotPositive
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    0 < -package.preLedger.qSigned :=
+  boundary.q_pilot_positive
+
+theorem sourceNormalization
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    package.preLedger.normalization :=
+  boundary.source_normalization
+
+theorem qSigned_le_thetaSigned
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  boundary.q_signed_le_theta
+
+def comparisonData
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    Corollary312ComparisonData :=
+  { thetaSigned := package.preLedger.thetaSigned,
+    qSigned := package.preLedger.qSigned,
+    q_positive := boundary.qPilotPositive,
+    qSigned_le_thetaSigned := boundary.qSigned_le_thetaSigned }
+
+theorem comparisonData_qSigned
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    boundary.comparisonData.qSigned = package.preLedger.qSigned :=
+  rfl
+
+theorem comparisonData_thetaSigned
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    boundary.comparisonData.thetaSigned = package.preLedger.thetaSigned :=
+  rfl
+
+theorem comparisonData_qSigned_le_thetaSigned
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    boundary.comparisonData.qSigned <= boundary.comparisonData.thetaSigned :=
+  boundary.comparisonData.qSigned_le_thetaSigned
+
+theorem comparisonData_corollary312
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    Corollary312Inequality
+      boundary.comparisonData.thetaPilot boundary.comparisonData.qPilot :=
+  boundary.comparisonData.corollary312
+
+theorem domainHistory_ne_codomainHistory
+    (boundary :
+      IUTStage1Theorem311AuditedSignedPayloadBoundary
+        package bundle sideConditions) :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side :=
+  boundary.histories_not_identified
+
+end IUTStage1Theorem311AuditedSignedPayloadBoundary
+
+namespace IUTStage1Theorem311StructuredInputsWithSHE
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+theorem auditedSignedPayloadBoundary
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    IUTStage1Theorem311AuditedSignedPayloadBoundary
+      package bundle sideConditions :=
+  IUTStage1Theorem311AuditedSignedPayloadBoundary.ofStructuredInputsWithSideConditions
+    bundle sideConditions
+
+def auditedComparisonData
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    Corollary312ComparisonData :=
+  (bundle.auditedSignedPayloadBoundary sideConditions).comparisonData
+
+theorem auditedComparisonData_qSigned_le_thetaSigned
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    (bundle.auditedComparisonData sideConditions).qSigned <=
+      (bundle.auditedComparisonData sideConditions).thetaSigned :=
+  (bundle.auditedSignedPayloadBoundary
+    sideConditions).comparisonData_qSigned_le_thetaSigned
+
+end IUTStage1Theorem311StructuredInputsWithSHE
+
+/--
 Source-facing hypotheses for the side conditions used in Stage 1 promotion.
 
 This record gives source-oriented names to the q-pilot sign and normalization
