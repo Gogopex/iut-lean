@@ -142,6 +142,23 @@ theorem unitThetaToyIndeterminacyQuotient_profile_example :
       theorem311IndeterminacyProfile :=
   IUTStage1IndeterminacyQuotient.discrete_profile index
 
+def unitThetaToyIndeterminacyGenerators :
+    IUTStage1IndeterminacyGenerators index :=
+  { ind1_step := fun _ _ => False,
+    ind2_step := fun _ _ => False,
+    ind3_step := fun _ _ => False }
+
+def unitThetaToyGeneratedIndeterminacyQuotient :
+    IUTStage1IndeterminacyQuotient index :=
+  IUTStage1IndeterminacyQuotient.generated
+    (unitThetaToyIndeterminacyGenerators (index := index))
+
+theorem unitThetaToyGeneratedIndeterminacyQuotient_profile_example :
+    unitThetaToyGeneratedIndeterminacyQuotient (index := index).profile =
+      theorem311IndeterminacyProfile :=
+  IUTStage1IndeterminacyQuotient.generated_profile
+    (unitThetaToyIndeterminacyGenerators (index := index))
+
 def unitThetaToyMultiradialThetaImages
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -215,6 +232,69 @@ theorem unitThetaToy_multiradialThetaImages_output_matches_package_example
         measure hnormalized hh hbound hholds).multiradialOutput :=
   (unitThetaToyMultiradialThetaImages
     measure hnormalized hh hbound hholds).multiradialOutputMatchesPackage
+
+def unitThetaToyGeneratedMultiradialThetaImages
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1MultiradialThetaImages
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  IUTStage1MultiradialThetaImages.ofPackageWithGeneratedQuotient
+    (unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds)
+    (unitThetaToyIndeterminacyGenerators (index := index))
+    (by
+      intro choice₁ choice₂ hstep
+      cases hstep)
+    (by
+      intro choice₁ choice₂ hstep
+      cases hstep)
+    (by
+      intro choice₁ choice₂ hstep
+      cases hstep)
+
+theorem unitThetaToy_generatedMultiradialThetaImages_union_eq_targetUnion_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyGeneratedMultiradialThetaImages
+      measure hnormalized hh hbound hholds).union =
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds).preLedger.output.comparisons.targetUnion :=
+  (unitThetaToyGeneratedMultiradialThetaImages
+    measure hnormalized hh hbound hholds).union_eq_targetUnion
+
+theorem unitThetaToy_generatedMultiradialThetaImages_region_eq_of_generated_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h))
+    {choice₁ choice₂ : index}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (unitThetaToyIndeterminacyGenerators (index := index))
+        choice₁ choice₂) :
+    (unitThetaToyGeneratedMultiradialThetaImages
+      measure hnormalized hh hbound hholds).possibleImages.images.region choice₁ =
+      (unitThetaToyGeneratedMultiradialThetaImages
+        measure hnormalized hh hbound hholds).possibleImages.images.region choice₂ :=
+  (unitThetaToyGeneratedMultiradialThetaImages
+    measure hnormalized hh hbound hholds).region_eq_of_related hrel
 
 theorem unitThetaToy_source_hullDet_targetUnion_subset_hull_example
     (measure : RegionMeasure thetaLine)
