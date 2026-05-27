@@ -6696,3 +6696,84 @@ The next milestone should add a toy regression example for this promotion path:
 package the existing toy ledger ingredients as `IUTStage1PreLedgerData`, supply
 the promotion obligations, and verify that the promoted provider reaches the
 same public endpoint.
+
+## Milestone 78: Toy Pre-Ledger Promotion Examples
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1DataExample.lean`
+* `Iut/Basic.lean`
+
+### Source Check
+
+The controlled promotion path from Milestone 77 should be exercised before it
+is used for future non-toy work. The toy model already has enough data to test
+the full path without asserting any new IUT mathematics.
+
+This regression example packages the toy source data as pre-ledger data, supplies
+the explicit promotion obligations, promotes to a provider, and checks the
+public Stage 1 endpoint.
+
+### Purpose
+
+This milestone introduces:
+
+```text
+unitThetaToyPreLedgerData
+unitThetaToyPromotionObligations
+unitThetaToyPromotedProvider
+```
+
+and verifies through the promoted provider:
+
+```text
+qSigned <= thetaSigned
+Corollary312Inequality
+Stage1Comparison recovers ledger.corollary312
+```
+
+### Lean Declarations
+
+In `IUTStage1DataExample.lean`:
+
+```text
+unitThetaToyStage1Input
+unitThetaToyMultiradialOutput
+unitThetaToyLogVolumeComparison
+unitThetaToyPreLedgerData
+unitThetaToyPromotionObligations
+unitThetaToyPromotedProvider
+unitThetaToy_promotedProvider_publicAudit_q_le_theta_example
+unitThetaToy_promotedProvider_publicAudit_corollary_example
+unitThetaToy_promotedProvider_recovers_corollary_example
+```
+
+The root module imports the example.
+
+### What This Tests
+
+The example exercises the entire chain:
+
+```text
+toy source ingredients
+  -> IUTStage1PreLedgerData
+  -> LedgerPromotionObligations
+  -> SourceObligationLedger
+  -> IUTSourceObligationProvider
+  -> public audit endpoint
+```
+
+The q-positivity proof remains a separate promotion obligation, exactly as in
+the non-toy interface.
+
+### Design Trap Avoided
+
+The trap would be to test only direct toy ledgers and never test the new
+pre-ledger promotion boundary. This milestone verifies that the boundary is
+usable and that the explicit obligations are sufficient.
+
+### Next Step
+
+The next milestone should add a short public regression theorem over the
+pre-ledger promotion path itself, analogous to the provider public audit theorem,
+so future source-specific pre-ledger data can target one compact endpoint.

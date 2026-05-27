@@ -1,0 +1,162 @@
+/-
+Copyright (c) 2026 IUT Lean formalization contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: IUT Lean formalization contributors
+-/
+import Iut.Stage1.IUTStage1Data
+import Iut.Stage1.ToySourceObligations
+
+/-!
+Regression examples for promoting pre-ledger data to the public Stage 1 API.
+
+The toy model supplies sample data. The examples exercise the controlled
+promotion path from `IUTStage1PreLedgerData` to `SourceObligationLedger` and
+then to `IUTSourceObligationProvider`.
+-/
+
+namespace Iut
+namespace Stage1
+namespace ToyModel
+
+open RealLineCopy
+
+variable {index : Type u}
+
+def unitThetaToyStage1Input : Stage1InputId :=
+  { label := "toy-stage1-input" }
+
+def unitThetaToyMultiradialOutput : MultiradialOutputId :=
+  { label := "toy-theta-upper-ray-output" }
+
+def unitThetaToyLogVolumeComparison : LogVolumeComparisonId :=
+  { label := "toy-log-volume-comparison" }
+
+def unitThetaToyPreLedgerData
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (_hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1PreLedgerData qLine thetaLine index :=
+  { input := unitThetaToyStage1Input,
+    multiradialOutput := unitThetaToyMultiradialOutput,
+    logVolumeComparison := unitThetaToyLogVolumeComparison,
+    output := thetaToyAlgorithmOutput unitQToTheta h epsilon,
+    measure := measure,
+    thetaSigned := -(2 * h) + epsilonBound,
+    qSigned := (Transport.map unitQToTheta (qAssignment h)).coord,
+    normalization := RegionMeasure.NormalizesUpperRays measure,
+    certificate := thetaToyStructuredCertificate unitQToTheta h epsilon,
+    chartedContainer :=
+      thetaToyChartedCommonContainerData measure hnormalized unitQToTheta h hbound,
+    qValue := { qPoint := qAssignment h, qSigned_eq := rfl },
+    thetaBound :=
+      { thetaPoint := point thetaLine (-(2 * h) + epsilonBound),
+        thetaSigned_eq := by
+          simp [thetaToyChartedCommonContainerData,
+            thetaToyRealComparisonChartData] },
+    chosenOutput :=
+      { choice := choice,
+        comparison := (thetaToyAlgorithmOutput unitQToTheta h epsilon).comparison choice,
+        comparison_eq := rfl },
+    targetVolume :=
+      { targetSigned :=
+          RegionMeasure.targetVolume measure
+            ((thetaToyAlgorithmOutput unitQToTheta h epsilon).comparison choice),
+        targetSigned_eq := rfl },
+    membership :=
+      { holds := by
+          simpa [AlgorithmicOutput.Holds, TransportedRegionFamily.Holds]
+            using hholds,
+        q_le_target :=
+          unitThetaToy_qSigned_le_choiceTargetVolume
+            measure hnormalized h epsilon choice hholds } }
+
+def unitThetaToyPromotionObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyPreLedgerData
+      measure hnormalized hh hbound hholds).LedgerPromotionObligations :=
+  { certified := thetaToyAlgorithmOutput_certified unitQToTheta h epsilon,
+    she_matches_certificate := rfl,
+    q_positive := by
+      change 0 < - (Transport.map unitQToTheta (qAssignment h)).coord
+      unfold qAssignment unitQToTheta Transport.map point PositiveScale.one
+      linarith,
+    normalization_proof := hnormalized }
+
+def unitThetaToyPromotedProvider
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTSourceObligationProvider
+      (thetaToyAlgorithmOutput unitQToTheta h epsilon)
+      measure
+      (-(2 * h) + epsilonBound)
+      (Transport.map unitQToTheta (qAssignment h)).coord
+      (RegionMeasure.NormalizesUpperRays measure) :=
+  (unitThetaToyPreLedgerData measure hnormalized hh hbound hholds).toSourceObligationProvider
+    (unitThetaToyPromotionObligations measure hnormalized hh hbound hholds)
+
+theorem unitThetaToy_promotedProvider_publicAudit_q_le_theta_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (Transport.map unitQToTheta (qAssignment h)).coord <=
+      -(2 * h) + epsilonBound :=
+  (unitThetaToyPromotedProvider measure hnormalized hh hbound hholds).publicAudit.1
+
+theorem unitThetaToy_promotedProvider_publicAudit_corollary_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta (-(2 * h) + epsilonBound))
+      (signedPilotLogVolume PilotSide.q
+        (Transport.map unitQToTheta (qAssignment h)).coord) :=
+  (unitThetaToyPromotedProvider measure hnormalized hh hbound hholds).publicAudit.2.1
+
+theorem unitThetaToy_promotedProvider_recovers_corollary_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    corollary312_from_stage1_comparison
+      (unitThetaToyPromotedProvider
+        measure hnormalized hh hbound hholds).stage1Comparison =
+      (unitThetaToyPromotedProvider
+        measure hnormalized hh hbound hholds).ledger.corollary312 :=
+  (unitThetaToyPromotedProvider
+    measure hnormalized hh hbound hholds).stage1Comparison_recovers_corollary312
+
+end ToyModel
+end Stage1
+end Iut
