@@ -337,6 +337,17 @@ theorem sheMatchesCertificate (ledger :
       ledger.certificate.she :=
   ledger.she_matches_certificate
 
+theorem sheMatchesCertificate_eq_field (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.sheMatchesCertificate = ledger.she_matches_certificate :=
+  rfl
+
+theorem certificateShe_eq_commonContainerSheDatum (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.certificate.she =
+      ledger.chartedContainer.commonContainer.hddShe.sheArrow.datum :=
+  ledger.she_matches_certificate.symm
+
 theorem commonContextMatchesCertificate (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     ledger.chartedContainer.commonContainer.context =

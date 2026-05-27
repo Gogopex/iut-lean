@@ -4744,3 +4744,75 @@ coordinate. These rewrite theorems keep the sign convention visible.
 The next milestone should audit the remaining certificate/common-container
 alignment fields, starting with the SHE datum equality
 `she_matches_certificate`.
+
+## Milestone 52: SHE Certificate Alignment Projections
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+Mochizuki's April 2026 formalization report describes the final comparison as
+occurring in a common container for the `Theta`-pilot and `q`-pilot data, with
+`q` corresponding to the SHE side. The report also singles out the relationship
+between input data and multiradial output data as part of the final Stage 1
+interface.
+
+At our abstraction level, the ledger records that the SHE datum inside the
+common container is the same SHE datum carried by the structured certificate:
+
+```text
+chartedContainer.commonContainer.hddShe.sheArrow.datum = certificate.she
+```
+
+### Purpose
+
+This milestone exposes the SHE/certificate alignment field:
+
+```text
+ledger.sheMatchesCertificate = ledger.she_matches_certificate
+
+ledger.certificate.she
+  = ledger.chartedContainer.commonContainer.hddShe.sheArrow.datum
+```
+
+The second theorem is the reverse orientation for rewriting from the certificate
+back to the common-container datum.
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.sheMatchesCertificate_eq_field
+SourceObligationLedger.certificateShe_eq_commonContainerSheDatum
+```
+
+The field-origin theorem is `rfl`; the reverse theorem is the symmetric form of
+the stored `she_matches_certificate` proof.
+
+### What This Tests
+
+The common container's SHE side is now visibly tied to the structured
+certificate in both directions:
+
+```text
+common-container SHE datum -> certificate SHE datum
+certificate SHE datum -> common-container SHE datum
+```
+
+This begins the audit of the qualitative/certificate layer beneath the numeric
+comparison chain.
+
+### Design Trap Avoided
+
+The trap would be to audit only the final real inequalities while allowing the
+common container and certificate to drift apart. These projections keep the
+source of the SHE data explicit.
+
+### Next Step
+
+The next milestone should expose the common-context equality as a named
+composition of the common container's `she_context_matches` field and
+`she_matches_certificate`.
