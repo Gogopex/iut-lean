@@ -5118,3 +5118,69 @@ themselves transparent.
 
 The next milestone should continue one level down and expose toy projections
 for the charted container's `commonContainer` and `chart` subfields.
+
+## Milestone 57: Toy Charted-Container Subfield Projections
+
+Lean file:
+
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+The final comparison is organized around a common container and explicit
+real-line chart. Mochizuki's April 2026 report describes the common container
+aspect of the `q`- and `Theta`-pilot comparison, while Scholze-Stix's critique
+emphasizes that the real-line identifications must be spelled out. The toy
+charted common container has exactly these two pieces:
+
+```text
+commonContainer := thetaToyCommonContainerData ...
+chart := thetaToyRealComparisonChartData ...
+```
+
+### Purpose
+
+This milestone exposes the two subfields of the toy charted common container:
+
+```text
+ledger.chartedContainer.commonContainer
+  = thetaToyCommonContainerData measure hnormalized unitQToTheta h hbound
+
+ledger.chartedContainer.chart
+  = thetaToyRealComparisonChartData measure unitQToTheta h epsilon
+```
+
+### Lean Declarations
+
+In `ToySourceObligations.lean`:
+
+```text
+unitThetaToy_commonContainer_from_sourceObligations
+unitThetaToy_realComparisonChart_from_sourceObligations
+```
+
+Both proofs are `rfl`.
+
+### What This Tests
+
+The toy source ledger now exposes the origin of:
+
+```text
+common container data
+real comparison chart data
+```
+
+These are the two structural inputs underneath the toy charted common
+container.
+
+### Design Trap Avoided
+
+The trap would be to name the charted common container but leave its internal
+common-container and chart components opaque. These projections make both
+components available to later audit the context, SHE, and real-line transport
+subfields separately.
+
+### Next Step
+
+The next milestone should expose the toy real-comparison chart's q-transport
+and Theta trivial transport fields, matching the general real-line audit hooks.

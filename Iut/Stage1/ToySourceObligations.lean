@@ -127,6 +127,34 @@ theorem unitThetaToy_chartedContainer_from_sourceObligations
         measure hnormalized unitQToTheta h hbound :=
   rfl
 
+theorem unitThetaToy_commonContainer_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).chartedContainer.commonContainer =
+      thetaToyCommonContainerData measure hnormalized unitQToTheta h hbound :=
+  rfl
+
+theorem unitThetaToy_realComparisonChart_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).chartedContainer.chart =
+      thetaToyRealComparisonChartData measure unitQToTheta h epsilon :=
+  rfl
+
 theorem unitThetaToy_membership_q_le_target_from_sourceObligations
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
