@@ -8797,3 +8797,73 @@ make explicit which Stage 1 source objects are being routed into the audit.
 
 The next milestone should start replacing toy-only side-condition proofs with a
 source-facing side-condition hypothesis record closer to the IUT III notation.
+
+## Milestone 108: Source Side-Condition Hypotheses
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The q-pilot sign condition and source normalization assumption are not Theorem
+3.11 algorithmic content. They are side hypotheses needed before the source
+package can be promoted to the public Stage 1 endpoint.
+
+This milestone gives those assumptions a source-facing hypothesis record, while
+keeping the existing `IUTStage1SourceSideConditions` record as the constructor
+input used by source obligations.
+
+### Purpose
+
+This milestone introduces a named hypothesis layer for:
+
+```text
+q-pilot log-volume positivity
+source normalization
+```
+
+and provides a conversion to the existing side-condition record.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourceSideConditionHypotheses
+IUTStage1SourceSideConditionHypotheses.qPilotLogVolumePositive
+IUTStage1SourceSideConditionHypotheses.sourceNormalized
+IUTStage1SourceSideConditionHypotheses.toSideConditions
+IUTStage1SourceSideConditionHypotheses.ofSideConditions
+IUTStage1SourceSideConditionHypotheses.toSideConditions_ofSideConditions
+IUTStage1SourceObligationGap.sideConditionHypotheses
+IUTStage1SourceObligationGap.Audit.sideConditionHypotheses
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_side_condition_hypotheses_example
+unitThetaToy_source_side_condition_hypotheses_qPilot_example
+unitThetaToy_source_side_condition_hypotheses_normalization_example
+unitThetaToy_source_side_condition_hypotheses_to_side_conditions_example
+```
+
+### What This Tests
+
+The toy examples verify that source-facing hypotheses can be projected and then
+converted back into the side-condition record used by the source-obligation
+constructor.
+
+### Design Trap Avoided
+
+The trap would be to keep relying on toy-specific proofs as if they were the
+eventual source API. This milestone introduces a named target that future
+IUT-specific modules can prove without changing the public audit route.
+
+### Next Step
+
+The next milestone should allow source obligations to be built directly from
+Theorem 3.11 subclaims and side-condition hypotheses by composing through
+`toSideConditions`.

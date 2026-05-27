@@ -285,6 +285,52 @@ theorem sourceNormalization
 
 end IUTStage1SourceSideConditions
 
+/--
+Source-facing hypotheses for the side conditions used in Stage 1 promotion.
+
+This record gives source-oriented names to the q-pilot sign and normalization
+assumptions before converting them to `IUTStage1SourceSideConditions`.
+-/
+structure IUTStage1SourceSideConditionHypotheses
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index) : Prop where
+  q_pilot_log_volume_positive : 0 < -package.preLedger.qSigned
+  source_normalized : package.preLedger.normalization
+
+namespace IUTStage1SourceSideConditionHypotheses
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+
+theorem qPilotLogVolumePositive
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    0 < -package.preLedger.qSigned :=
+  hypotheses.q_pilot_log_volume_positive
+
+theorem sourceNormalized
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    package.preLedger.normalization :=
+  hypotheses.source_normalized
+
+def toSideConditions
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    IUTStage1SourceSideConditions package :=
+  { q_pilot_positive := hypotheses.qPilotLogVolumePositive,
+    source_normalization := hypotheses.sourceNormalized }
+
+def ofSideConditions
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    IUTStage1SourceSideConditionHypotheses package :=
+  { q_pilot_log_volume_positive := sideConditions.qPilotPositive,
+    source_normalized := sideConditions.sourceNormalization }
+
+theorem toSideConditions_ofSideConditions
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    (ofSideConditions sideConditions).toSideConditions = sideConditions :=
+  Subsingleton.elim _ _
+
+end IUTStage1SourceSideConditionHypotheses
+
 namespace IUTStage1SourceObligations
 
 variable {source target : Copy} {index : Type u}
@@ -366,6 +412,11 @@ def sideConditions
     IUTStage1SourceSideConditions package :=
   { q_pilot_positive := gap.qPilotPositive,
     source_normalization := gap.sourceNormalization }
+
+def sideConditionHypotheses
+    (gap : IUTStage1SourceObligationGap package) :
+    IUTStage1SourceSideConditionHypotheses package :=
+  IUTStage1SourceSideConditionHypotheses.ofSideConditions gap.sideConditions
 
 def toSourceObligations
     (gap : IUTStage1SourceObligationGap package) :
@@ -453,6 +504,12 @@ def sideConditions
     IUTStage1SourceSideConditions package :=
   { q_pilot_positive := gapAudit.qPilotPositive,
     source_normalization := gapAudit.sourceNormalization }
+
+def sideConditionHypotheses
+    (gapAudit : Audit gap) :
+    IUTStage1SourceSideConditionHypotheses package :=
+  IUTStage1SourceSideConditionHypotheses.ofSideConditions
+    gapAudit.sideConditions
 
 def toSourceObligations
     (gapAudit : Audit gap) :

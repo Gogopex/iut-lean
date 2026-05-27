@@ -416,6 +416,66 @@ theorem unitThetaToy_source_side_conditions_normalization_example
   (unitThetaToy_source_side_conditions_example
     measure hnormalized hh hbound hholds).sourceNormalization
 
+theorem unitThetaToy_source_side_condition_hypotheses_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    IUTStage1SourceSideConditionHypotheses
+      (unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds) :=
+  (unitThetaToyIUTStage1SourceObligationGap
+    measure hnormalized hh hbound hholds).sideConditionHypotheses
+
+theorem unitThetaToy_source_side_condition_hypotheses_qPilot_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    0 < - (unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds).preLedger.qSigned :=
+  (unitThetaToy_source_side_condition_hypotheses_example
+    measure hnormalized hh hbound hholds).qPilotLogVolumePositive
+
+theorem unitThetaToy_source_side_condition_hypotheses_normalization_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds).preLedger.normalization :=
+  (unitThetaToy_source_side_condition_hypotheses_example
+    measure hnormalized hh hbound hholds).sourceNormalized
+
+theorem unitThetaToy_source_side_condition_hypotheses_to_side_conditions_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToy_source_side_condition_hypotheses_example
+      measure hnormalized hh hbound hholds).toSideConditions =
+      unitThetaToy_source_side_conditions_example
+        measure hnormalized hh hbound hholds :=
+  IUTStage1SourceSideConditionHypotheses.toSideConditions_ofSideConditions
+    (unitThetaToy_source_side_conditions_example
+      measure hnormalized hh hbound hholds)
+
 theorem unitThetaToy_source_obligations_from_parts_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
