@@ -559,10 +559,79 @@ structure QuotientSignUnitCompatibility
   signUnit_smul_eq_neg :
     ∀ x, unitAction.smul signUnit x = signAction.neg x
 
+/-- A lightweight additive torsor interface. -/
+structure AdditiveTorsorData (G X : Type u) [AddGroup G] where
+  vadd : G -> X -> X
+  zero_vadd : ∀ x, vadd 0 x = x
+  add_vadd : ∀ g h x, vadd (g + h) x = vadd g (vadd h x)
+  exists_unique_vadd_eq : ∀ x y, ∃! g, vadd g x = y
+
 /-- The pointed quotient with carrier `ZMod l`, used as the current `F_l` model. -/
 abbrev zmodPointedQuotient (l : PrimeGeFive) : PointedEtaleQuotient where
   carrier := ZMod l.value
   zero := 0
+
+/-- The concrete additive `F_l`-torsor model on `ZMod l` labels. -/
+def zmodLabelAdditiveTorsorData (l : PrimeGeFive) :
+    AdditiveTorsorData (ZMod l.value) (ZMod l.value) where
+  vadd := fun t x => t + x
+  zero_vadd := by
+    intro x
+    simp
+  add_vadd := by
+    intro g h x
+    simp [add_assoc]
+  exists_unique_vadd_eq := by
+    intro x y
+    refine ⟨y - x, ?_, ?_⟩
+    · simp
+    · intro t ht
+      calc
+        t = t + x - x := by simp
+        _ = y - x := by rw [ht]
+
+/-- Translation in the concrete `ZMod l` label torsor. -/
+def zmodLabelTranslate (l : PrimeGeFive)
+    (t x : ZMod l.value) : ZMod l.value :=
+  (zmodLabelAdditiveTorsorData l).vadd t x
+
+theorem zmodLabelTranslate_eq_add
+    (l : PrimeGeFive) (t x : ZMod l.value) :
+    zmodLabelTranslate l t x = t + x :=
+  rfl
+
+theorem zmodLabelTranslate_zero
+    (l : PrimeGeFive) (x : ZMod l.value) :
+    zmodLabelTranslate l 0 x = x :=
+  (zmodLabelAdditiveTorsorData l).zero_vadd x
+
+theorem zmodLabelTranslate_add
+    (l : PrimeGeFive) (g h x : ZMod l.value) :
+    zmodLabelTranslate l (g + h) x =
+      zmodLabelTranslate l g (zmodLabelTranslate l h x) :=
+  (zmodLabelAdditiveTorsorData l).add_vadd g h x
+
+theorem zmodLabelTranslate_existsUnique
+    (l : PrimeGeFive) (x y : ZMod l.value) :
+    ∃! t : ZMod l.value, zmodLabelTranslate l t x = y :=
+  (zmodLabelAdditiveTorsorData l).exists_unique_vadd_eq x y
+
+/-- Coordinate of a `ZMod l` label relative to the zero/canonical base label. -/
+def zmodLabelCoordinateFromZero
+    (l : PrimeGeFive) (x : ZMod l.value) : ZMod l.value :=
+  x
+
+theorem zmodLabelCoordinateFromZero_spec
+    (l : PrimeGeFive) (x : ZMod l.value) :
+    zmodLabelTranslate l (zmodLabelCoordinateFromZero l x) 0 = x := by
+  simp [zmodLabelTranslate, zmodLabelCoordinateFromZero, zmodLabelAdditiveTorsorData]
+
+theorem zmodLabelCoordinateFromZero_unique
+    (l : PrimeGeFive) (x t : ZMod l.value)
+    (ht : zmodLabelTranslate l t 0 = x) :
+    t = zmodLabelCoordinateFromZero l x := by
+  simpa [zmodLabelTranslate, zmodLabelCoordinateFromZero, zmodLabelAdditiveTorsorData]
+    using ht
 
 /-- The action of `(ZMod l)^x` on the pointed quotient `ZMod l` by multiplication. -/
 def zmodUnitActionData (l : PrimeGeFive) :

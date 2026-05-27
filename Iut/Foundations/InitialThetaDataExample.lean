@@ -29,6 +29,28 @@ example : Nat.Prime primeFive.value :=
 example : 5 ≤ primeFive.value :=
   primeFive.ge_five
 
+example (x : ZMod primeFive.value) :
+    zmodLabelTranslate primeFive 0 x = x :=
+  zmodLabelTranslate_zero primeFive x
+
+example (g h x : ZMod primeFive.value) :
+    zmodLabelTranslate primeFive (g + h) x =
+      zmodLabelTranslate primeFive g (zmodLabelTranslate primeFive h x) :=
+  zmodLabelTranslate_add primeFive g h x
+
+example (x y : ZMod primeFive.value) :
+    ∃! t : ZMod primeFive.value, zmodLabelTranslate primeFive t x = y :=
+  zmodLabelTranslate_existsUnique primeFive x y
+
+example (x : ZMod primeFive.value) :
+    zmodLabelTranslate primeFive (zmodLabelCoordinateFromZero primeFive x) 0 = x :=
+  zmodLabelCoordinateFromZero_spec primeFive x
+
+example (x t : ZMod primeFive.value)
+    (ht : zmodLabelTranslate primeFive t 0 = x) :
+    t = zmodLabelCoordinateFromZero primeFive x :=
+  zmodLabelCoordinateFromZero_unique primeFive x t ht
+
 section AbstractConstructor
 
 universe u

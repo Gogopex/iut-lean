@@ -2877,3 +2877,106 @@ We now have the `F_l^×`-style action on sign-label quotients, but not the
 additive `F_l`-torsor structure of `LabCusp`. The next step should add the
 concrete simply transitive translation model on `ZMod l` labels, then relate its
 nonzero/sign quotient to the current multiplicative-unit action.
+
+## Math Milestone 29: Additive `F_l` Label Torsor
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Definition 4.1(ii), states that for each `v`, `LabCusp(D_v)` admits a
+natural `F_l`-torsor structure. Proposition 4.2 then says that the canonical
+element and this `F_l`-torsor structure determine a natural bijection
+`LabCusp(D) -> F_l`.
+
+The earlier milestones modeled the multiplicative `F_l^×` action on the
+quotient side. This milestone adds the additive torsor side in the simplest
+concrete finite model.
+
+### Lean/API Check
+
+The only algebraic fact needed is simple transitivity of translation on
+`ZMod l`:
+
+```text
+for all x y, there exists a unique t such that t + x = y
+```
+
+Lean proves this with the witness `y - x`.
+
+### Lean Decisions
+
+The new lightweight interface is:
+
+```text
+AdditiveTorsorData G X
+```
+
+It records:
+
+* an additive action `vadd`;
+* the zero-translation law;
+* the addition/translation law;
+* unique existence of a translation carrying any point to any other point.
+
+The concrete label torsor is:
+
+```text
+zmodLabelAdditiveTorsorData l
+```
+
+with translation:
+
+```text
+zmodLabelTranslate l t x = t + x
+```
+
+The coordinate relative to the zero/canonical base label is:
+
+```text
+zmodLabelCoordinateFromZero l x = x
+```
+
+with a specification and uniqueness theorem.
+
+### Lean Declarations
+
+```text
+AdditiveTorsorData
+zmodLabelAdditiveTorsorData
+zmodLabelTranslate
+zmodLabelTranslate_eq_add
+zmodLabelTranslate_zero
+zmodLabelTranslate_add
+zmodLabelTranslate_existsUnique
+zmodLabelCoordinateFromZero
+zmodLabelCoordinateFromZero_spec
+zmodLabelCoordinateFromZero_unique
+```
+
+### What This Tests
+
+The example file now checks:
+
+* zero translation fixes labels;
+* successive translations compose by addition;
+* a unique translation carries any label to any other label;
+* the coordinate from the zero base label is characterized by its translation
+  property.
+
+### Design Trap Avoided
+
+The trap would be to say "`LabCusp` is an `F_l`-torsor" while only formalizing
+the multiplicative unit action. This milestone separates the additive torsor
+structure from the multiplicative action and verifies the torsor condition
+directly in the `ZMod l` model.
+
+### Remaining Gap
+
+The current torsor is a concrete finite-label model, not a reconstruction of
+actual cusp labels from orbicurves. The next step should connect the additive
+torsor coordinates with the sign-label quotient and the distinguished
+canonical-generator class.
