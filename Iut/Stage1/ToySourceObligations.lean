@@ -199,6 +199,47 @@ theorem unitThetaToy_theta_trivial_from_sourceObligations
         rfl) :=
   rfl
 
+theorem unitThetaToy_qPoint_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).qValue.qPoint =
+      qAssignment h :=
+  rfl
+
+theorem unitThetaToy_qSigned_eq_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).qValue.qSigned_eq = rfl :=
+  rfl
+
+theorem unitThetaToy_thetaPoint_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).thetaBound.thetaPoint =
+      point thetaLine (-(2 * h) + epsilonBound) :=
+  rfl
+
 theorem unitThetaToy_membership_q_le_target_from_sourceObligations
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

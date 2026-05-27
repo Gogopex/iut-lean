@@ -5252,3 +5252,78 @@ identifications explicit.
 
 The next milestone should expose the toy q-value and Theta-bound fields as
 coming from the named toy q assignment and Theta endpoint.
+
+## Milestone 59: Toy Q-Value and Theta-Endpoint Projections
+
+Lean file:
+
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III's Step `(xi-d)` works with signed q- and Theta-side log-volume objects
+after transport into a common ordered real setting. Scholze-Stix's criticism
+puts pressure on exactly this point: the real-line identifications and the
+origin of the compared numbers must be explicit enough that no hidden
+identification can do mathematical work.
+
+Our general source-obligation layer records this with `ChartedQValueData` and
+`ChartedThetaBoundData`: each signed comparison datum keeps its source point or
+endpoint alongside the signed real number and the proof relating the two.
+
+### Purpose
+
+This milestone exposes the corresponding toy fields through the source ledger:
+
+```text
+ledger.qValue.qPoint = qAssignment h
+ledger.qValue.qSigned_eq = rfl
+ledger.thetaBound.thetaPoint = point thetaLine (-(2 * h) + epsilonBound)
+```
+
+The toy q-point is therefore the named q assignment used by the toy bridge, and
+the toy Theta endpoint is the upper endpoint determined by the effective
+epsilon bound.
+
+### Lean Declarations
+
+In `ToySourceObligations.lean`:
+
+```text
+unitThetaToy_qPoint_from_sourceObligations
+unitThetaToy_qSigned_eq_from_sourceObligations
+unitThetaToy_thetaPoint_from_sourceObligations
+```
+
+All three proofs are definitional.
+
+### What This Tests
+
+The toy ledger now exposes the source objects underneath the signed numerical
+comparison:
+
+```text
+q coordinate source: qAssignment h
+Theta endpoint source: point thetaLine (-(2 * h) + epsilonBound)
+```
+
+This keeps the signed real numbers attached to their named source data before
+later milestones audit the selected output and target-volume fields.
+
+### Design Trap Avoided
+
+The trap would be to let signed q- and Theta-side numbers become free real
+numbers detached from their source points. That would make the toy comparison
+look cleaner while losing the audit trail that matters for the IUT/Scholze-Stix
+disagreement.
+
+We do not restate the toy Theta signed-proof field here. Its readable proof
+term depends on unfolding the full charted container, and the general projection
+`SourceObligationLedger.thetaSigned_eq_chartedTheta_eq_field` already exposes
+that field's origin without duplicating a brittle toy-specific proof term.
+
+### Next Step
+
+The next milestone should expose the toy chosen-output and target-volume
+fields, showing that the selected output choice/comparison and target signed
+value are the named toy choice and measured target volume.
