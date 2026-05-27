@@ -7786,3 +7786,72 @@ now records both the named source objects and the endpoint facts.
 The next milestone should add a source-facing theorem stating that the compact
 audit's public endpoint fields agree with `IUTStage1SourcePackage.publicAudit`,
 so the audit cannot drift from the public endpoint theorem.
+
+## Milestone 93: Source Audit Public Endpoint Compatibility
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The source audit checklist now records the public endpoint components. Since
+the public endpoint itself is already named by
+`IUTStage1SourcePackage.publicAudit`, the audit should be tied back to that
+theorem instead of becoming a parallel endpoint.
+
+This is a proof-maintenance step around the Stage 1 boundary. It does not add a
+new mathematical route to Corollary 3.12.
+
+### Purpose
+
+This milestone adds a theorem saying that the endpoint triple assembled from a
+source audit is propositionally equal to the package's public audit theorem:
+
+```text
+audit endpoint fields = IUTStage1SourcePackage.publicAudit
+```
+
+The equality is proof-irrelevance over the same proposition, but the explicit
+statement is useful for API discipline.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.Audit.publicAuditEq
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_audit_publicAudit_eq_example
+```
+
+### What This Tests
+
+The toy example verifies that the audit fields for:
+
+```text
+qSigned <= thetaSigned
+Corollary312Inequality
+Stage1Comparison recovery to qSigned_le_thetaSigned
+```
+
+assemble into exactly the same endpoint proposition as the source package's
+public audit theorem.
+
+### Design Trap Avoided
+
+The trap would be to let the audit record evolve independently from the public
+endpoint theorem. This compatibility theorem keeps the audit visibly a view over
+the public endpoint, not an alternative proof boundary.
+
+### Next Step
+
+The next milestone should introduce a named source-stage endpoint theorem that
+combines `IUTStage1SourcePackage.audit` and `Audit.publicAuditEq`, so downstream
+modules have one theorem for "source obligations imply the audited public
+endpoint".
