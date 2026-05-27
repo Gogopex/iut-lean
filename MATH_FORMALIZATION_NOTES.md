@@ -5211,3 +5211,110 @@ explicit invariant subfield interface Lean can check.
 The base field and embedding are still supplied as structured data. Later
 milestones should construct them from the formalized `C_K`/`X_K` covering and
 relate the fixed subfield of the deck action to the embedded base field.
+
+## Math Milestone 52: Fixed Field Equals the Embedded Base Field
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Remark 3.1.2, describes the reconstructed function field of `X_K` with
+its natural
+
+```text
+Gal(X_K/C_K) ~= Pi_CK / Pi_XK
+```
+
+action. In ordinary Galois-cover language, the base `C_K` function field is the
+fixed field of the deck/Galois action on the `X_K` function field. Milestone 51
+proved one direction: the action fixes the embedded base field. This milestone
+adds the converse interface: any element fixed by all deck transformations comes
+from the embedded base field.
+
+This remains an IUT I reconstruction-layer statement. It is not a Hodge-theater
+comparison and not a Corollary 3.12 log-volume assertion.
+
+### Lean/API Check
+
+`ReconstructedFunctionFieldData` now includes:
+
+```text
+fixedElementsFromBase :
+  forall x, (forall g, g • x = x) ->
+    exists b, baseToFunctionField b = x
+```
+
+The generic reconstructed field package exposes:
+
+```text
+fixedElementFromBase
+deck_fixed_iff_in_base
+```
+
+The theta function-field package exposes:
+
+```text
+ThetaApproachFunctionFieldData.deck_fixed_iff_in_base
+ThetaApproachFunctionFieldData.piCK_fixed_iff_in_base
+```
+
+The Galois quotient interface exposes:
+
+```text
+ThetaApproachGaloisQuotientData.gal_fixed_iff_in_base
+```
+
+The cover and initial-theta layers expose corresponding projections:
+
+```text
+thetaApproachDeck_fixed_iff_in_base
+thetaApproachPiCK_fixed_iff_in_base
+thetaApproachGal_fixed_iff_in_base
+```
+
+### Lean Decisions
+
+We keep the fixed-field converse as supplied structure on
+`ReconstructedFunctionFieldData`. This is deliberately conservative: Lean does
+not yet construct the finite etale cover or prove a theorem of Galois theory
+from a concrete extension. But once the statement is supplied, Lean derives the
+corresponding `Pi_CK` and Galois versions from already-formalized quotient
+surjectivity and the Galois/quotient equivalence.
+
+The `Pi_CK` theorem uses surjectivity of
+
+```text
+Pi_CK -> Pi_CK / Pi_XK
+```
+
+and the Galois theorem uses surjectivity of
+
+```text
+Gal(X_K/C_K) -> Pi_CK / Pi_XK
+```
+
+given by the multiplicative equivalence.
+
+### What This Tests
+
+The example file now checks:
+
+* fixed-by-deck elements are exactly elements in the embedded base field;
+* fixed-by-`Pi_CK` elements are exactly elements in the embedded base field;
+* fixed-by-Galois elements are exactly elements in the embedded base field.
+
+### Design Trap Avoided
+
+The trap would be to stop at "the base field is fixed" and still allow extra
+fixed elements. That would be too weak for the phrase `Gal(X_K/C_K)`. This
+milestone explicitly rules out extra fixed elements at the interface level.
+
+### Remaining Gap
+
+The fixed-field theorem is still an axiom-like field of the reconstructed data.
+Later milestones should derive it from a concrete finite Galois extension or
+finite etale cover formalization, then relate that construction to the
+fundamental-group quotient.
