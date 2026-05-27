@@ -547,6 +547,27 @@ theorem localTensorPacket_totalLogVolume_eq_sum_example
       Finset.univ.sum fun i => (state.capsuleFamily.capsule i).logVolume :=
   state.capsule_totalLogVolume_eq_sum
 
+def localTensorDirectSummandPacket_to_packetState_example
+    {kind : IUTStage1PlaceKind}
+    (state : IUTStage1LocalTensorDirectSummandPacketState kind) :
+    IUTStage1LocalTensorPacketLogVolumeState kind :=
+  state.toLocalTensorPacketLogVolumeState
+
+theorem localTensorDirectSummandPacket_directSummandCount_eq_example
+    {kind : IUTStage1PlaceKind}
+    (state : IUTStage1LocalTensorDirectSummandPacketState kind) :
+    state.packetState.tensorState.directSummandCount =
+      state.packetState.capsuleFamily.capsuleCount :=
+  state.directSummandCount_eq_capsuleCount
+
+theorem localTensorDirectSummandPacket_logVolume_eq_example
+    {kind : IUTStage1PlaceKind}
+    (state : IUTStage1LocalTensorDirectSummandPacketState kind)
+    (i : Fin state.packetState.capsuleFamily.capsuleCount) :
+    (state.summandFamily.summand i).capsule.logVolume =
+      (state.packetState.capsuleFamily.capsule i).logVolume :=
+  state.summandCapsuleLogVolume_eq i
+
 def tensorPacketTheorem311_forgetPacket_example
     {coric : Type u} {kind : IUTStage1PlaceKind}
     (choice : IUTStage1TensorPacketTheorem311Choice coric kind) :
@@ -625,6 +646,20 @@ theorem tensorPacketTheorem311_actionStep_preserves_directSummandCount_example
       choice₂.local_tensor_state.tensorState.directSummandCount :=
   IUTStage1TensorPacketTheorem311Choice.actionStep_preserves_directSummandCount
     hstep
+
+def directSummandPacketTheorem311_forgetDirectSummands_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    (choice : IUTStage1DirectSummandPacketTheorem311Choice coric kind) :
+    IUTStage1TensorPacketTheorem311Choice coric kind :=
+  choice.forgetDirectSummands
+
+theorem directSummandPacketTheorem311_logVolume_eq_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    (choice : IUTStage1DirectSummandPacketTheorem311Choice coric kind)
+    (i : Fin choice.local_tensor_state.packetState.capsuleFamily.capsuleCount) :
+    (choice.local_tensor_state.summandFamily.summand i).capsule.logVolume =
+      (choice.local_tensor_state.packetState.capsuleFamily.capsule i).logVolume :=
+  choice.localTensor_summandCapsuleLogVolume_eq i
 
 theorem upperSemi_logVolumeCompatibility_upperBound_example
     (data : IUTStage1LogVolumeCompatibilityData) :

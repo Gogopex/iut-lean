@@ -1236,6 +1236,16 @@ structure IUTStage1LocalTensorPacketLogVolumeState
     capsuleFamily.localObject = localObject
 
 /--
+Local tensor-packet state that also carries the direct summand family
+responsible for the packet's capsule action surface.
+-/
+structure IUTStage1LocalTensorDirectSummandPacketState
+    (kind : IUTStage1PlaceKind) where
+  packetState : IUTStage1LocalTensorPacketLogVolumeState kind
+  summandFamily :
+    IUTStage1TensorDirectSummandFamily packetState.capsuleFamily
+
+/--
 Upper semi-compatibility state used by the Theorem 3.11 `(Ind3)` model.
 
 The booleans record whether the local comparison is modeled by the two source
@@ -1403,6 +1413,47 @@ theorem capsule_normalizedLogVolume_eq
   state.capsuleFamily.normalized_eq
 
 end IUTStage1LocalTensorPacketLogVolumeState
+
+namespace IUTStage1LocalTensorDirectSummandPacketState
+
+variable {kind : IUTStage1PlaceKind}
+
+def toLocalTensorPacketLogVolumeState
+    (state : IUTStage1LocalTensorDirectSummandPacketState kind) :
+    IUTStage1LocalTensorPacketLogVolumeState kind :=
+  state.packetState
+
+def toLocalTensorState
+    (state : IUTStage1LocalTensorDirectSummandPacketState kind) :
+    IUTStage1LocalTensorState :=
+  state.packetState.tensorState
+
+theorem directSummandCount_eq_capsuleCount
+    (state : IUTStage1LocalTensorDirectSummandPacketState kind) :
+    state.packetState.tensorState.directSummandCount =
+      state.packetState.capsuleFamily.capsuleCount :=
+  state.packetState.directSummandCount_eq_capsuleCount
+
+theorem directSummandCount_pos
+    (state : IUTStage1LocalTensorDirectSummandPacketState kind) :
+    0 < state.packetState.tensorState.directSummandCount :=
+  state.packetState.directSummandCount_pos
+
+theorem summandCapsule_eq
+    (state : IUTStage1LocalTensorDirectSummandPacketState kind)
+    (i : Fin state.packetState.capsuleFamily.capsuleCount) :
+    (state.summandFamily.summand i).capsule =
+      state.packetState.capsuleFamily.capsule i :=
+  state.summandFamily.summandCapsule_eq i
+
+theorem summandCapsuleLogVolume_eq
+    (state : IUTStage1LocalTensorDirectSummandPacketState kind)
+    (i : Fin state.packetState.capsuleFamily.capsuleCount) :
+    (state.summandFamily.summand i).capsule.logVolume =
+      (state.packetState.capsuleFamily.capsule i).logVolume :=
+  state.summandFamily.summandCapsuleLogVolume_eq i
+
+end IUTStage1LocalTensorDirectSummandPacketState
 
 namespace IUTStage1UpperSemiCompatibilityState
 
@@ -1977,6 +2028,53 @@ theorem actionStep_preserves_directSummandCount
     (actionStep_toPacketSymmetryStep hstep)
 
 end IUTStage1TensorPacketTheorem311Choice
+
+/--
+Theorem 3.11 choice whose local tensor coordinate carries both typed capsule
+log-volume data and the direct summand family that induces capsule actions.
+-/
+abbrev IUTStage1DirectSummandPacketTheorem311Choice
+    (coric : Type u) (kind : IUTStage1PlaceKind) :=
+  IUTStage1Theorem311Choice
+    coric
+    IUTStage1ProcessionState
+    (IUTStage1LocalTensorDirectSummandPacketState kind)
+    IUTStage1UpperSemiCompatibilityState
+
+namespace IUTStage1DirectSummandPacketTheorem311Choice
+
+variable {coric : Type u} {kind : IUTStage1PlaceKind}
+
+def forgetDirectSummands
+    (choice : IUTStage1DirectSummandPacketTheorem311Choice coric kind) :
+    IUTStage1TensorPacketTheorem311Choice coric kind :=
+  { column := choice.column,
+    row := choice.row,
+    coric := choice.coric,
+    procession_state := choice.procession_state,
+    local_tensor_state :=
+      choice.local_tensor_state.toLocalTensorPacketLogVolumeState,
+    upper_semi_state := choice.upper_semi_state }
+
+def forgetPacket
+    (choice : IUTStage1DirectSummandPacketTheorem311Choice coric kind) :
+    IUTStage1StructuredTheorem311Choice coric :=
+  choice.forgetDirectSummands.forgetPacket
+
+theorem localTensor_directSummandCount_eq_capsuleCount
+    (choice : IUTStage1DirectSummandPacketTheorem311Choice coric kind) :
+    choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      choice.local_tensor_state.packetState.capsuleFamily.capsuleCount :=
+  choice.local_tensor_state.directSummandCount_eq_capsuleCount
+
+theorem localTensor_summandCapsuleLogVolume_eq
+    (choice : IUTStage1DirectSummandPacketTheorem311Choice coric kind)
+    (i : Fin choice.local_tensor_state.packetState.capsuleFamily.capsuleCount) :
+    (choice.local_tensor_state.summandFamily.summand i).capsule.logVolume =
+      (choice.local_tensor_state.packetState.capsuleFamily.capsule i).logVolume :=
+  choice.local_tensor_state.summandCapsuleLogVolume_eq i
+
+end IUTStage1DirectSummandPacketTheorem311Choice
 
 /--
 Multiradial possible images of the Theta-pilot, recorded together with the

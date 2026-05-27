@@ -1138,3 +1138,59 @@ This helps the Corollary 3.12 investigation because it prevents the local
 tensor coordinate and the log-volume/capsule coordinate from drifting apart.
 The next step should introduce a packet-aware `(Ind2)` step relation and prove
 exactly which packet/log-volume fields it preserves.
+
+## Periodic Review: Packet and Direct Summand `(Ind2)` Path
+
+Date: 2026-05-28
+
+This checkpoint reviews the local tensor-factor refinement added after the
+first packet/capsule link.
+
+### Current Lean Chain
+
+The current `(Ind2)` path now has:
+
+```text
+IUTStage1TypedCapsuleFamilyLogVolumeAction
+IUTStage1TensorDirectSummandObject
+IUTStage1TensorDirectSummandFamily
+IUTStage1TensorDirectSummandFamilyAction
+IUTStage1LocalTensorDirectSummandPacketState
+IUTStage1DirectSummandPacketTheorem311Choice
+```
+
+The important direction is:
+
+```text
+direct summand action -> capsule action -> finite-sum log-volume preservation
+```
+
+### Source Alignment
+
+This follows the wording of IUT III, Theorem 3.11 `(Ind2)` more closely than the
+earlier packet record. `(Ind2)` concerns actions on direct summands of local
+tensor products. The Lean code now has a typed direct-summand family and a
+direct-summand action that induces a capsule action.
+
+The source distinction between nonarchimedean `Ism` copies and archimedean
+order-two automorphisms is currently recorded only as
+`IUTStage1TensorSummandSymmetryKind`. This is intentional: the actual
+automorphism groups are not yet constructed.
+
+### Risks Found
+
+The current direct-summand family is indexed by the capsule family's finite
+index type. This is clean and avoids casts, but it is a modeling decision. When
+we later formalize the actual local tensor product, we must check whether the
+source gives a canonical shared index or only a cardinality equality.
+
+The action preserves per-capsule log-volume values by assumption. This is not
+yet a theorem from `Ism` or order-two automorphism invariance.
+
+### Global 3.12 Check
+
+This remains on track for the Corollary 3.12 dispute because it avoids treating
+local tensor symmetries as harmless labels. Downstream log-volume preservation
+now has a visible dependency chain through finite indexed data. The next major
+risk is the transition from this abstract action surface to actual
+Hodge-theater/local tensor objects.

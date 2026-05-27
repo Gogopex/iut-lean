@@ -412,3 +412,81 @@ tensorDirectSummandAction_totalLogVolume_example
 The next step should thread `IUTStage1TensorDirectSummandFamily` into the local
 tensor packet state, so a packet choice can carry not only a capsule family but
 also the direct-summand family whose action induces the capsule action.
+
+## 5. Direct Summands Threaded into Packet Choices
+
+### Goal
+
+We connected the direct summand family to the local tensor packet state and to a
+Theorem 3.11 choice type.
+
+### Lean/API Check
+
+The new packet state is:
+
+```text
+IUTStage1LocalTensorDirectSummandPacketState
+```
+
+It carries:
+
+```text
+packetState :
+  IUTStage1LocalTensorPacketLogVolumeState kind
+summandFamily :
+  IUTStage1TensorDirectSummandFamily packetState.capsuleFamily
+```
+
+This dependent field is important: the summand family is attached to the exact
+capsule family already present in the packet state, not to an arbitrary
+externally equal family.
+
+The new Theorem 3.11 choice abbreviation is:
+
+```text
+IUTStage1DirectSummandPacketTheorem311Choice
+```
+
+It has forgetful maps:
+
+```text
+forgetDirectSummands :
+  IUTStage1DirectSummandPacketTheorem311Choice coric kind ->
+  IUTStage1TensorPacketTheorem311Choice coric kind
+
+forgetPacket :
+  IUTStage1DirectSummandPacketTheorem311Choice coric kind ->
+  IUTStage1StructuredTheorem311Choice coric
+```
+
+### Mathematical Point
+
+The local tensor coordinate can now expose three layers:
+
+```text
+plain local tensor state
+packet/capsule/log-volume state
+direct summand family over that packet
+```
+
+This mirrors the Theorem 3.11 `(Ind2)` source pressure more closely: local
+tensor symmetries act on direct summand representatives, and the capsule
+log-volume layer is downstream of that action.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+localTensorDirectSummandPacket_to_packetState_example
+localTensorDirectSummandPacket_directSummandCount_eq_example
+localTensorDirectSummandPacket_logVolume_eq_example
+directSummandPacketTheorem311_forgetDirectSummands_example
+directSummandPacketTheorem311_logVolume_eq_example
+```
+
+### Remaining Gap
+
+The next step should define an `(Ind2)` action step directly on
+`IUTStage1DirectSummandPacketTheorem311Choice`, then derive the existing
+packet-action step by applying `toCapsuleAction` to the direct summand action.
