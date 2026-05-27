@@ -5327,3 +5327,88 @@ that field's origin without duplicating a brittle toy-specific proof term.
 The next milestone should expose the toy chosen-output and target-volume
 fields, showing that the selected output choice/comparison and target signed
 value are the named toy choice and measured target volume.
+
+## Milestone 60: Toy Chosen-Output and Target-Volume Projections
+
+Lean file:
+
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III, Step `(xi-d)`, describes the multiradial construction algorithm as
+yielding a collection of possibilities of output data and then applying
+log-volume to regions associated to these possible outputs. This separates two
+things that should remain separate in the formalization: the selected possible
+output and the real number obtained by measuring its target-side region.
+
+Scholze-Stix's discussion of Corollary 3.12 again stresses that meaningful
+comparison requires consistent identifications of the real-line copies. In our
+ledger, the selected output is therefore named before its target volume is
+measured in the common chart.
+
+### Purpose
+
+This milestone exposes the toy selected-output and target-volume fields:
+
+```text
+ledger.chosenOutput.choice = choice
+ledger.chosenOutput.comparison =
+  (thetaToyAlgorithmOutput unitQToTheta h epsilon).comparison choice
+ledger.chosenOutput.comparison =
+  thetaIndeterminacyComparison unitQToTheta h (epsilon choice)
+ledger.chosenOutput.comparison_eq = rfl
+ledger.targetVolume.targetSigned =
+  RegionMeasure.targetVolume measure
+    ((thetaToyAlgorithmOutput unitQToTheta h epsilon).comparison choice)
+ledger.targetVolume.targetSigned =
+  RegionMeasure.targetVolume measure
+    (thetaIndeterminacyComparison unitQToTheta h (epsilon choice))
+ledger.targetVolume.targetSigned_eq = rfl
+```
+
+The additional `thetaIndeterminacyComparison` projections prevent the toy audit
+from stopping at the generic algorithmic-output wrapper.
+
+### Lean Declarations
+
+In `ToySourceObligations.lean`:
+
+```text
+unitThetaToy_chosenChoice_from_sourceObligations
+unitThetaToy_chosenComparison_from_sourceObligations
+unitThetaToy_chosenThetaComparison_from_sourceObligations
+unitThetaToy_chosenComparison_eq_from_sourceObligations
+unitThetaToy_targetSigned_from_sourceObligations
+unitThetaToy_targetSigned_thetaComparison_from_sourceObligations
+unitThetaToy_targetSigned_eq_from_sourceObligations
+```
+
+All proofs are definitional.
+
+### What This Tests
+
+The toy ledger now records that the middle term in the comparison chain is not a
+free real number. It is obtained by:
+
+```text
+choice
+  -> thetaIndeterminacyComparison unitQToTheta h (epsilon choice)
+  -> RegionMeasure.targetVolume measure ...
+```
+
+This mirrors the general `ChosenOutputData` and `ChartedTargetVolumeData`
+boundary in `AlgorithmicBridge.lean`.
+
+### Design Trap Avoided
+
+The trap would be to conflate the selected possible output with the measured
+target volume, or to let the measured target volume float without remembering
+which possible output it came from. This is exactly the kind of bookkeeping that
+must stay explicit when comparing q-side and Theta-side quantities.
+
+### Next Step
+
+The next milestone should expose the toy membership fields in terms of the
+selected Theta indeterminacy comparison, not only through the already available
+generic output comparison.
