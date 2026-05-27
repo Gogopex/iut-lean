@@ -11005,3 +11005,66 @@ that produced it.
 The next milestone should expose the same endpoint-level payload route summary
 through the structured-hypothesis route, so the highest-level structured source
 path carries the complete source-to-endpoint audit.
+
+## Milestone 139: Structured Route Payload Summary at the Endpoint
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The structured-hypothesis route is our current highest-level local abstraction
+for the Theorem 3.11 input package plus source side conditions. IUT III,
+Corollary 3.12, Step `(xi)` treats the multiradial construction of Theorem 3.11
+as producing output data that is then fed into the final comparison. Scholze and
+Stix focus on whether this passage hides identifications when one reaches the
+real-valued comparison. Therefore the structured route should not merely produce
+the final public endpoint; it should also expose the same payload-route audit
+summary that the lower source audit and comparison endpoint expose.
+
+### Purpose
+
+Milestone 138 made `ComparisonDataEndpoint` recover a compact source-audit
+payload route summary. This milestone lifts that visibility to
+`StructuredHypothesisRouteAudit`, so the route that starts from structured
+Theorem 3.11 inputs can carry the complete source-to-endpoint audit package.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.StructuredHypothesisRouteAudit.payloadRouteSummary
+IUTStage1SourcePackage.StructuredHypothesisRouteAudit.comparisonDataEndpointPayloadRouteSummary
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_structured_route_payloadRouteSummary_example
+unitThetaToy_source_structured_route_endpoint_payloadRouteSummary_example
+```
+
+### What This Tests
+
+The toy route examples verify that the structured-hypothesis audit can recover
+the compact payload summary from its source audit, and that the corresponding
+structured comparison-data endpoint has the same public audit as
+`publicAuditOfStructuredHypotheses`.
+
+### Design Trap Avoided
+
+The trap would be to let the structured route become a clean-looking wrapper
+that forgets the route from source-side payload inputs to final comparison data.
+That would make later code easier to write but harder to audit. The new theorem
+keeps the endpoint equality and payload route summary visible at the same
+structured boundary.
+
+### Next Step
+
+The next milestone should expose individual fields of the structured route
+payload summary, especially the equalities from structured route source audit to
+comparison data, so downstream proof scripts can cite named facts without
+unfolding the compact summary.

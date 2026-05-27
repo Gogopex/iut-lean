@@ -2274,6 +2274,40 @@ theorem payloadRouteSummaryAndPublicAudit
 
 end ComparisonDataEndpoint
 
+namespace StructuredHypothesisRouteAudit
+
+variable {package : IUTStage1SourcePackage source target index}
+variable {inputs : IUTStage1Theorem311StructuredInputs package}
+variable {hypotheses : IUTStage1SourceSideConditionHypotheses package}
+
+theorem payloadRouteSummary
+    (routeAudit : StructuredHypothesisRouteAudit package inputs hypotheses) :
+    Audit.PayloadRouteSummary routeAudit.sourceAudit :=
+  routeAudit.sourceAudit.payloadRouteSummary
+
+theorem comparisonDataEndpointPayloadRouteSummary
+    (routeAudit : StructuredHypothesisRouteAudit package inputs hypotheses) :
+    ∃ sourceAudit :
+        Audit package
+          (package.obligationsFromStructuredHypotheses inputs hypotheses),
+      Audit.PayloadRouteSummary sourceAudit ∧
+        (package.auditedComparisonDataEndpointOfStructuredHypotheses
+          inputs hypotheses).publicAudit =
+          package.publicAuditOfStructuredHypotheses inputs hypotheses := by
+  let endpoint :=
+    package.auditedComparisonDataEndpointOfStructuredHypotheses
+      inputs hypotheses
+  have hpublic :
+      endpoint.publicAudit =
+        package.publicAudit
+          (package.obligationsFromStructuredHypotheses inputs hypotheses) :=
+    endpoint.publicAudit_eq_package_publicAudit
+  exact ⟨routeAudit.sourceAudit, routeAudit.payloadRouteSummary, by
+    simpa [IUTStage1SourcePackage.publicAuditOfStructuredHypotheses] using
+      hpublic⟩
+
+end StructuredHypothesisRouteAudit
+
 end IUTStage1SourcePackage
 
 end Stage1
