@@ -15755,3 +15755,85 @@ The union is still a family of toy upper-ray target regions. The next
 mathematical replacement is a non-toy family of possible Theta-pilot images,
 together with a holomorphic-hull datum and a determinant/log-volume bound for
 that datum.
+
+## Stage 1 Math Milestone 105: Union Containment in Hull+Det Audits
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/ToyBridge.lean`
+
+### Source Check
+
+The previous milestone made common hulls constructible from containment of the
+union of possible images. For the Corollary 3.12 dispute, this fact must remain
+visible at the hull+det audit boundary. Otherwise the formalization could still
+hide the union-of-possible-images step inside the bridge internals.
+
+### Lean/API Check
+
+The measured hull+det audit:
+
+```text
+AlgorithmicOutput.HullDetHullBridgeData.HullAudit
+```
+
+now stores and exposes:
+
+```text
+target_union_subset_common_hull
+HullAudit.targetUnion_subset_commonHull
+```
+
+The split hull/determinant audit:
+
+```text
+AlgorithmicOutput.StructuredHullDetBridgeData.StepAudit
+```
+
+now stores and exposes:
+
+```text
+target_union_subset_hull
+StepAudit.targetUnion_subset_hull
+```
+
+The toy bridge now exposes:
+
+```text
+thetaToyHullDetHull_targetUnion_subset_commonHull
+```
+
+### Lean Decisions
+
+The new audit fields are derived from:
+
+```text
+CommonHull.union_subset_hull
+```
+
+not restated by hand. This keeps the proof path canonical:
+
+```text
+union containment -> common hull -> measured hull bound -> target-volume bound
+```
+
+### What This Tests
+
+Lean verifies that the hull+det hull audit carries the containment of the
+entire target union in the measured common hull. The focused build for
+`Iut.Foundations.AlgorithmicBridge` and `Iut.Stage1.ToyBridge` passes.
+
+### Design Trap Avoided
+
+The trap would be to expose only the final choice-wise target-volume bound at
+the hull+det boundary. The audit now exposes the stronger geometric statement:
+the union of all possible target regions lies inside the hull being measured.
+
+### Remaining Gap
+
+The source-facing pre-ledger still stores the older common-target bridge
+downstream, so the hull-specific audit is available through the hull bridge
+data but not yet part of every final charted source package. A future milestone
+should decide whether to store the split hull+det data in the Stage 1
+pre-ledger, or keep it as a separately audited source obligation.

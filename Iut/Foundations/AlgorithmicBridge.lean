@@ -357,6 +357,9 @@ structure HullAudit
   common_hull_contains_each :
     output.comparisons.CommonTarget
       (data.applyHull certificate).commonHull.hull
+  target_union_subset_common_hull :
+    Region.Subset output.comparisons.targetUnion
+      (data.applyHull certificate).commonHull.hull
   common_hull_volume_bound :
     RegionMeasure.HasVolumeAtMost measure
       (data.applyHull certificate).commonHull.hull bound
@@ -379,6 +382,8 @@ theorem hullAudit
   { apply_eq_hull_to_common := rfl,
     common_hull_contains_each :=
       (data.applyHull certificate).commonHull.contains_each,
+    target_union_subset_common_hull :=
+      (data.applyHull certificate).commonHull.union_subset_hull,
     common_hull_volume_bound := (data.applyHull certificate).volume_bound,
     choice_target_volume_le := data.choice_targetVolume_le certificate,
     holds_common_hull := (data.applyHull certificate).holds_commonHull_of_choice,
@@ -402,6 +407,12 @@ theorem commonHullContainsEach
     output.comparisons.CommonTarget
       (data.applyHull certificate).commonHull.hull :=
   audit.common_hull_contains_each
+
+theorem targetUnion_subset_commonHull
+    (audit : data.HullAudit certificate) :
+    Region.Subset output.comparisons.targetUnion
+      (data.applyHull certificate).commonHull.hull :=
+  audit.target_union_subset_common_hull
 
 theorem commonHullVolumeBound
     (audit : data.HullAudit certificate) :
@@ -499,6 +510,9 @@ structure StepAudit
     (certificate : QualitativeData.StructuredCertificate output.family) : Prop where
   hull_contains_each :
     output.comparisons.CommonTarget (data.applyHull certificate).hull
+  target_union_subset_hull :
+    Region.Subset output.comparisons.targetUnion
+      (data.applyHull certificate).hull
   determinant_volume_bound :
     RegionMeasure.HasVolumeAtMost measure
       (data.applyHull certificate).hull bound
@@ -517,6 +531,7 @@ theorem stepAudit
     (certificate : QualitativeData.StructuredCertificate output.family) :
     data.StepAudit certificate :=
   { hull_contains_each := data.hullBridge.contains_each certificate,
+    target_union_subset_hull := (data.applyHull certificate).union_subset_hull,
     determinant_volume_bound := data.determinant_volume_bound certificate,
     hull_bound_common_hull_eq := rfl,
     hull_det_hull_audit := data.toHullDetHullBridgeData.hullAudit certificate,
@@ -535,6 +550,12 @@ theorem hullContainsEach
     (audit : data.StepAudit certificate) :
     output.comparisons.CommonTarget (data.applyHull certificate).hull :=
   audit.hull_contains_each
+
+theorem targetUnion_subset_hull
+    (audit : data.StepAudit certificate) :
+    Region.Subset output.comparisons.targetUnion
+      (data.applyHull certificate).hull :=
+  audit.target_union_subset_hull
 
 theorem determinantVolumeBound
     (audit : data.StepAudit certificate) :

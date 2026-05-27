@@ -298,6 +298,20 @@ theorem thetaToyHullDetHull_commonHull_volume_bound
       (-(2 * h) + epsilonBound) :=
   (thetaToyHullDetHullAudit measure hnormalized f h hbound).commonHullVolumeBound
 
+theorem thetaToyHullDetHull_targetUnion_subset_commonHull
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    Region.Subset
+      (thetaToyAlgorithmOutput f h epsilon).comparisons.targetUnion
+      ((thetaToyHullDetHullBridgeData
+        measure hnormalized f h hbound).applyHull
+          (thetaToyStructuredCertificate f h epsilon)).commonHull.hull :=
+  (thetaToyHullDetHullAudit
+    measure hnormalized f h hbound).targetUnion_subset_commonHull
+
 theorem thetaToyHullDetHull_choice_targetVolume_le_bound
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
