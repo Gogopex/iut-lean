@@ -17608,3 +17608,81 @@ The focused build for `Iut.Stage1.IUTStage1SourceExample` passes.
 
 The next refinement should introduce an indexed finite capsule family and prove
 that the recorded `totalLogVolume` is the sum of the capsule log-volumes.
+
+## 126. Capsule-Family Log-Volume Sums
+
+### Goal
+
+We refined procession-normalized log-volume so that the total log-volume is no
+longer an arbitrary real. It is now tied to a finite sum over an indexed family
+of capsule log-volumes.
+
+### Source Check
+
+IUT III Proposition 3.9 says that procession-normalized log-volumes arise by
+taking averages over the capsules under consideration. Milestone 125 recorded
+the average equation. This milestone records the finite sum that supplies the
+total being averaged.
+
+### Lean/API Check
+
+The source layer now defines:
+
+```text
+IUTStage1CapsuleFamilyLogVolume
+```
+
+with fields:
+
+```text
+localObject
+capsuleCount
+positive_capsule_count
+capsuleLogVolume : Fin capsuleCount -> Real
+totalLogVolume
+total_eq_sum
+normalizedLogVolume
+normalized_eq_average
+```
+
+The key new equation is:
+
+```text
+totalLogVolume = Finset.univ.sum capsuleLogVolume
+```
+
+and the record converts back to:
+
+```text
+IUTStage1ProcessionNormalizedLogVolume
+```
+
+without losing the total-as-sum theorem.
+
+### Lean Decisions
+
+The capsule family is represented by `Fin capsuleCount -> Real`. This is the
+smallest useful finite indexed form: it gives Lean a real finite sum while
+leaving the actual capsule objects for the next refinement.
+
+The positivity proof `0 < capsuleCount` is retained because the normalized
+average divides by the capsule count.
+
+### Toy Check
+
+The source example now checks:
+
+```text
+upperSemi_capsuleFamilyLogVolume_total_eq_sum_example
+upperSemi_capsuleFamilyLogVolume_normalized_eq_example
+upperSemi_capsuleFamily_to_processionNormalized_example
+upperSemi_capsuleFamily_to_procession_total_eq_example
+```
+
+The focused build for `Iut.Stage1.IUTStage1SourceExample` passes.
+
+### Remaining Gap
+
+The indexed capsules are still represented only by their log-volume values. The
+next refinement should introduce typed capsule identifiers/objects and make
+`capsuleLogVolume` a projection from those capsule objects.

@@ -766,6 +766,24 @@ structure IUTStage1ProcessionNormalizedLogVolume
   normalized_eq_average :
     normalizedLogVolume = totalLogVolume / (capsuleCount : Real)
 
+/--
+Procession-normalized log-volume with an explicit finite capsule family.
+
+The total log-volume is now tied to the finite sum over capsules rather than
+being an independent real.
+-/
+structure IUTStage1CapsuleFamilyLogVolume
+    (kind : IUTStage1PlaceKind) where
+  localObject : IUTStage1FiniteLocalLogVolumeObject kind
+  capsuleCount : Nat
+  positive_capsule_count : 0 < capsuleCount
+  capsuleLogVolume : Fin capsuleCount -> Real
+  totalLogVolume : Real
+  total_eq_sum : totalLogVolume = Finset.univ.sum capsuleLogVolume
+  normalizedLogVolume : Real
+  normalized_eq_average :
+    normalizedLogVolume = totalLogVolume / (capsuleCount : Real)
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}
@@ -803,6 +821,44 @@ def toFiniteLocalLogVolumeObject
   data.localObject
 
 end IUTStage1ProcessionNormalizedLogVolume
+
+namespace IUTStage1CapsuleFamilyLogVolume
+
+variable {kind : IUTStage1PlaceKind}
+
+theorem total_eq
+    (data : IUTStage1CapsuleFamilyLogVolume kind) :
+    data.totalLogVolume = Finset.univ.sum data.capsuleLogVolume :=
+  data.total_eq_sum
+
+theorem normalized_eq
+    (data : IUTStage1CapsuleFamilyLogVolume kind) :
+    data.normalizedLogVolume =
+      data.totalLogVolume / (data.capsuleCount : Real) :=
+  data.normalized_eq_average
+
+theorem capsuleCount_pos
+    (data : IUTStage1CapsuleFamilyLogVolume kind) :
+    0 < data.capsuleCount :=
+  data.positive_capsule_count
+
+def toProcessionNormalizedLogVolume
+    (data : IUTStage1CapsuleFamilyLogVolume kind) :
+    IUTStage1ProcessionNormalizedLogVolume kind :=
+  { localObject := data.localObject,
+    capsuleCount := data.capsuleCount,
+    positive_capsule_count := data.positive_capsule_count,
+    totalLogVolume := data.totalLogVolume,
+    normalizedLogVolume := data.normalizedLogVolume,
+    normalized_eq_average := data.normalized_eq_average }
+
+theorem toProcession_total_eq
+    (data : IUTStage1CapsuleFamilyLogVolume kind) :
+    data.toProcessionNormalizedLogVolume.totalLogVolume =
+      Finset.univ.sum data.capsuleLogVolume :=
+  data.total_eq
+
+end IUTStage1CapsuleFamilyLogVolume
 
 /-- Local nonarchimedean inclusion datum from the upper-semi-compatibility step. -/
 structure IUTStage1NonarchimedeanInclusionData where

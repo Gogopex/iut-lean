@@ -394,6 +394,32 @@ def upperSemi_processionNormalized_to_finite_example
     IUTStage1FiniteLocalLogVolumeObject kind :=
   data.toFiniteLocalLogVolumeObject
 
+theorem upperSemi_capsuleFamilyLogVolume_total_eq_sum_example
+    {kind : IUTStage1PlaceKind}
+    (data : IUTStage1CapsuleFamilyLogVolume kind) :
+    data.totalLogVolume = Finset.univ.sum data.capsuleLogVolume :=
+  data.total_eq
+
+theorem upperSemi_capsuleFamilyLogVolume_normalized_eq_example
+    {kind : IUTStage1PlaceKind}
+    (data : IUTStage1CapsuleFamilyLogVolume kind) :
+    data.normalizedLogVolume =
+      data.totalLogVolume / (data.capsuleCount : Real) :=
+  data.normalized_eq
+
+def upperSemi_capsuleFamily_to_processionNormalized_example
+    {kind : IUTStage1PlaceKind}
+    (data : IUTStage1CapsuleFamilyLogVolume kind) :
+    IUTStage1ProcessionNormalizedLogVolume kind :=
+  data.toProcessionNormalizedLogVolume
+
+theorem upperSemi_capsuleFamily_to_procession_total_eq_example
+    {kind : IUTStage1PlaceKind}
+    (data : IUTStage1CapsuleFamilyLogVolume kind) :
+    data.toProcessionNormalizedLogVolume.totalLogVolume =
+      Finset.univ.sum data.capsuleLogVolume :=
+  data.toProcession_total_eq
+
 theorem upperSemi_logVolumeCompatibility_upperBound_example
     (data : IUTStage1LogVolumeCompatibilityData) :
     data.sourceLogVolume <= data.targetLogVolume :=
