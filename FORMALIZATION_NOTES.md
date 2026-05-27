@@ -3846,3 +3846,79 @@ The next milestone should expose the signed pilot-volume fields of
 `stage1Comparison`, namely that the exported `theta` and `q` values are exactly
 `signedPilotLogVolume PilotSide.theta thetaSigned` and
 `signedPilotLogVolume PilotSide.q qSigned`.
+
+## Milestone 40: Stage 1 Signed Pilot-Volume Projections
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+IUT III, Corollary 3.12, Step `(xi-d)` writes the final comparison in terms of
+signed log-volume expressions such as `-|log(Theta)|` and `-|log(q)|`, while
+our `PilotLogVolume` record stores a positive magnitude in its `value` field.
+`CorollarySchema.lean` therefore uses `signedPilotLogVolume` to keep the sign
+conversion explicit:
+
+```text
+signedPilotLogVolume side signedValue has value -signedValue
+```
+
+This is a small bookkeeping point, but it is directly connected to the broader
+audit requirement emphasized by Scholze-Stix: every real-number identification
+and sign convention used in the final inequality should be visible.
+
+### Purpose
+
+Milestone 39 exposed the proof fields of `stage1Comparison`. This milestone
+exposes the data fields:
+
+```text
+ledger.stage1Comparison.theta
+  = signedPilotLogVolume PilotSide.theta thetaSigned
+
+ledger.stage1Comparison.q
+  = signedPilotLogVolume PilotSide.q qSigned
+
+ledger.stage1Comparison.theta.value = -thetaSigned
+ledger.stage1Comparison.q.value = -qSigned
+```
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.stage1Comparison_theta_eq_signed
+SourceObligationLedger.stage1Comparison_q_eq_signed
+SourceObligationLedger.stage1Comparison_theta_value_eq_neg
+SourceObligationLedger.stage1Comparison_q_value_eq_neg
+```
+
+All four proofs are `rfl`, so the exported record's pilot-volume fields are
+definitionally the signed values advertised by the Stage 1 schema.
+
+### What This Tests
+
+The final exported object now exposes both sides of the sign convention:
+
+```text
+thetaSigned -> theta.value = -thetaSigned
+qSigned     -> q.value     = -qSigned
+```
+
+This makes the final `Corollary312Inequality` package easier to audit without
+unfolding the constructor manually.
+
+### Design Trap Avoided
+
+The trap would be to hide the sign flip inside the final comparison package and
+then reason only about positive magnitudes. The source ledger now has explicit
+projection lemmas for the signed-to-positive conversion.
+
+### Next Step
+
+The next milestone should expose the remaining side-label fields of
+`stage1Comparison`, confirming definitionally that the exported `theta` side is
+`PilotSide.theta` and the exported `q` side is `PilotSide.q`.
