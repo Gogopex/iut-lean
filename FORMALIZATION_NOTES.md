@@ -11261,3 +11261,71 @@ avoid that: they are thin specializations of the ordinary endpoint projections.
 The next milestone should add a compact structured endpoint audit summary that
 packages these existential endpoint projections with the equality to
 `publicAuditOfStructuredHypotheses`.
+
+## Milestone 143: Compact Structured Endpoint Audit Summary
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The formalization is still operating at the local Stage 1 boundary around IUT
+III, Theorem 3.11, and Corollary 3.12, Step `(xi)`. The relevant issue for this
+milestone is auditability rather than new mathematics: the endpoint should carry
+one coherent source-audit witness from structured Theorem 3.11 input data to
+the public Corollary-3.12-shaped comparison. This is aligned with the
+Scholze-Stix diagnostic requirement that endpoint comparisons not hide the
+route by which source-side objects became comparable.
+
+### Purpose
+
+Milestone 142 exposed structured endpoint facts as existential projections.
+This milestone packages the same information into one compact summary with a
+single source audit witness. That avoids the ambiguity of several existential
+facts that might, syntactically, be witnessed by different source audits.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.StructuredEndpointAuditSummary
+IUTStage1SourcePackage.structuredEndpointAuditSummary
+IUTStage1SourcePackage.StructuredEndpointAuditSummary.sourceAudit
+IUTStage1SourcePackage.StructuredEndpointAuditSummary.payloadRouteSummary
+IUTStage1SourcePackage.StructuredEndpointAuditSummary.endpointPublicAuditEq
+IUTStage1SourcePackage.StructuredEndpointAuditSummary.payloadDataEqComparisonData
+IUTStage1SourcePackage.StructuredEndpointAuditSummary.comparisonDataEqPackage
+IUTStage1SourcePackage.StructuredEndpointAuditSummary.comparisonDataRecovers
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_structured_endpoint_audit_summary_example
+unitThetaToy_source_structured_endpoint_summary_publicAudit_eq_example
+unitThetaToy_source_structured_endpoint_summary_payloadData_eq_example
+unitThetaToy_source_structured_endpoint_summary_recovers_example
+```
+
+### What This Tests
+
+The toy examples verify construction of the compact summary and its main
+projections: public-audit equality, payload-built comparison data equality, and
+recovery of the final Corollary-3.12-shaped statement from the summary's
+`Stage1Comparison`.
+
+### Design Trap Avoided
+
+The trap would be to accumulate many endpoint-level existential facts without
+recording that they come from a single route. The compact summary makes the
+single-witness discipline explicit while still allowing downstream code to use
+the more flexible existential projections when appropriate.
+
+### Next Step
+
+The next milestone should compare the compact structured endpoint summary with
+the structured route audit directly, proving that its source audit and payload
+summary are exactly the ones obtained from `structuredHypothesisRouteAudit`.

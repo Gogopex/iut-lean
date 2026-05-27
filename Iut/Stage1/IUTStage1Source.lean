@@ -2482,6 +2482,96 @@ theorem structuredEndpointComparisonDataRecoversExists
   (package.auditedComparisonDataEndpointOfStructuredHypotheses
     inputs hypotheses).comparisonDataRecoversExists
 
+/--
+Compact audit summary for the structured comparison-data endpoint.
+
+The summary keeps one source audit witness while also recording that the
+structured endpoint has the same public audit as the structured-hypothesis
+route.
+-/
+structure StructuredEndpointAuditSummary
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    Prop where
+  source_audit :
+    Audit package
+      (package.obligationsFromStructuredHypotheses inputs hypotheses)
+  payload_route_summary :
+    Audit.PayloadRouteSummary source_audit
+  endpoint_public_audit_eq :
+    (package.auditedComparisonDataEndpointOfStructuredHypotheses
+      inputs hypotheses).publicAudit =
+      package.publicAuditOfStructuredHypotheses inputs hypotheses
+
+theorem structuredEndpointAuditSummary
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    StructuredEndpointAuditSummary package inputs hypotheses :=
+  let routeAudit := package.structuredHypothesisRouteAudit inputs hypotheses
+  { source_audit := routeAudit.sourceAudit,
+    payload_route_summary := routeAudit.payloadRouteSummary,
+    endpoint_public_audit_eq := by
+      let endpoint :=
+        package.auditedComparisonDataEndpointOfStructuredHypotheses
+          inputs hypotheses
+      have hpublic :
+          endpoint.publicAudit =
+            package.publicAudit
+              (package.obligationsFromStructuredHypotheses inputs hypotheses) :=
+        endpoint.publicAudit_eq_package_publicAudit
+      simpa [IUTStage1SourcePackage.publicAuditOfStructuredHypotheses] using
+        hpublic }
+
+namespace StructuredEndpointAuditSummary
+
+variable {package : IUTStage1SourcePackage source target index}
+variable {inputs : IUTStage1Theorem311StructuredInputs package}
+variable {hypotheses : IUTStage1SourceSideConditionHypotheses package}
+
+theorem sourceAudit
+    (summary : StructuredEndpointAuditSummary package inputs hypotheses) :
+    Audit package
+      (package.obligationsFromStructuredHypotheses inputs hypotheses) :=
+  summary.source_audit
+
+theorem payloadRouteSummary
+    (summary : StructuredEndpointAuditSummary package inputs hypotheses) :
+    Audit.PayloadRouteSummary summary.sourceAudit :=
+  summary.payload_route_summary
+
+theorem endpointPublicAuditEq
+    (summary : StructuredEndpointAuditSummary package inputs hypotheses) :
+    (package.auditedComparisonDataEndpointOfStructuredHypotheses
+      inputs hypotheses).publicAudit =
+      package.publicAuditOfStructuredHypotheses inputs hypotheses :=
+  summary.endpoint_public_audit_eq
+
+theorem payloadDataEqComparisonData
+    (summary : StructuredEndpointAuditSummary package inputs hypotheses) :
+    package.comparisonDataFromPayloadInputs
+        (package.obligationsFromStructuredHypotheses inputs hypotheses) =
+      summary.sourceAudit.comparisonData :=
+  summary.payloadRouteSummary.payload_data_eq_comparison_data
+
+theorem comparisonDataEqPackage
+    (summary : StructuredEndpointAuditSummary package inputs hypotheses) :
+    summary.sourceAudit.comparisonData =
+      package.comparisonData
+        (package.obligationsFromStructuredHypotheses inputs hypotheses) :=
+  summary.payloadRouteSummary.comparison_data_eq_package
+
+theorem comparisonDataRecovers
+    (summary : StructuredEndpointAuditSummary package inputs hypotheses) :
+    corollary312_from_stage1_comparison
+        summary.sourceAudit.comparisonData.stage1Comparison =
+      corollary312_of_signed_le
+        summary.sourceAudit.comparisonData.qSigned_le_thetaSigned :=
+  summary.payloadRouteSummary.comparison_data_recovers
+
+end StructuredEndpointAuditSummary
+
 end IUTStage1SourcePackage
 
 end Stage1

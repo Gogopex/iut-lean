@@ -3716,6 +3716,144 @@ theorem unitThetaToy_source_structured_endpoint_comparisonData_recovers_exists_e
   package.structuredEndpointComparisonDataRecoversExists
     inputs hypotheses
 
+theorem unitThetaToy_source_structured_endpoint_audit_summary_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let inputs :=
+      unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds
+    let hypotheses :=
+      unitThetaToy_source_side_condition_hypotheses_example
+        measure hnormalized hh hbound hholds
+    IUTStage1SourcePackage.StructuredEndpointAuditSummary
+      package inputs hypotheses :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  let inputs :=
+    unitThetaToy_source_theorem311_structured_inputs_example
+      measure hnormalized hh hbound hholds
+  let hypotheses :=
+    unitThetaToy_source_side_condition_hypotheses_example
+      measure hnormalized hh hbound hholds
+  package.structuredEndpointAuditSummary inputs hypotheses
+
+theorem unitThetaToy_source_structured_endpoint_summary_publicAudit_eq_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let inputs :=
+      unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds
+    let hypotheses :=
+      unitThetaToy_source_side_condition_hypotheses_example
+        measure hnormalized hh hbound hholds
+    (package.auditedComparisonDataEndpointOfStructuredHypotheses
+      inputs hypotheses).publicAudit =
+      package.publicAuditOfStructuredHypotheses inputs hypotheses :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  let inputs :=
+    unitThetaToy_source_theorem311_structured_inputs_example
+      measure hnormalized hh hbound hholds
+  let hypotheses :=
+    unitThetaToy_source_side_condition_hypotheses_example
+      measure hnormalized hh hbound hholds
+  let summary :=
+    package.structuredEndpointAuditSummary inputs hypotheses
+  summary.endpointPublicAuditEq
+
+theorem unitThetaToy_source_structured_endpoint_summary_payloadData_eq_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let inputs :=
+      unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds
+    let hypotheses :=
+      unitThetaToy_source_side_condition_hypotheses_example
+        measure hnormalized hh hbound hholds
+    let summary :=
+      package.structuredEndpointAuditSummary inputs hypotheses
+    package.comparisonDataFromPayloadInputs
+        (package.obligationsFromStructuredHypotheses inputs hypotheses) =
+      summary.sourceAudit.comparisonData :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  let inputs :=
+    unitThetaToy_source_theorem311_structured_inputs_example
+      measure hnormalized hh hbound hholds
+  let hypotheses :=
+    unitThetaToy_source_side_condition_hypotheses_example
+      measure hnormalized hh hbound hholds
+  let summary :=
+    package.structuredEndpointAuditSummary inputs hypotheses
+  summary.payloadDataEqComparisonData
+
+theorem unitThetaToy_source_structured_endpoint_summary_recovers_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let inputs :=
+      unitThetaToy_source_theorem311_structured_inputs_example
+        measure hnormalized hh hbound hholds
+    let hypotheses :=
+      unitThetaToy_source_side_condition_hypotheses_example
+        measure hnormalized hh hbound hholds
+    let summary :=
+      package.structuredEndpointAuditSummary inputs hypotheses
+    corollary312_from_stage1_comparison
+        summary.sourceAudit.comparisonData.stage1Comparison =
+      corollary312_of_signed_le
+        summary.sourceAudit.comparisonData.qSigned_le_thetaSigned :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  let inputs :=
+    unitThetaToy_source_theorem311_structured_inputs_example
+      measure hnormalized hh hbound hholds
+  let hypotheses :=
+    unitThetaToy_source_side_condition_hypotheses_example
+      measure hnormalized hh hbound hholds
+  let summary :=
+    package.structuredEndpointAuditSummary inputs hypotheses
+  summary.comparisonDataRecovers
+
 theorem unitThetaToy_source_structured_route_auditedPublicEndpoint_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
