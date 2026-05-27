@@ -26,7 +26,8 @@ variable {index : Type u}
 /-- A family of toy Theta indeterminacy comparisons indexed by possible epsilons. -/
 def thetaIndeterminacyFamily (f : Transport qLine thetaLine) (h : Real)
     (epsilon : index -> Real) : RegionComparisonFamily qLine thetaLine index :=
-  { comparison := fun choice => thetaIndeterminacyComparison f h (epsilon choice) }
+  RegionComparisonFamily.upperRayFamily
+    (fun _ => f) (fun choice => -(2 * h) + epsilon choice)
 
 /-- The common upper-ray target determined by a single epsilon cap. -/
 def thetaIndeterminacyCommonTarget (h epsilonBound : Real) : Region thetaLine :=
@@ -38,9 +39,10 @@ theorem thetaIndeterminacyFamily_commonTarget
     (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
     (thetaIndeterminacyFamily f h epsilon).CommonTarget
       (thetaIndeterminacyCommonTarget h epsilonBound) := by
+  unfold thetaIndeterminacyFamily thetaIndeterminacyCommonTarget
+  apply RegionComparisonFamily.upperRayFamily_commonTarget
   intro choice
-  exact (thetaIndeterminacy_target_subset_iff_epsilon_le f h
-    (epsilon choice) epsilonBound).mpr (hbound choice)
+  linarith [hbound choice]
 
 def thetaIndeterminacyCommonTargetBound
     (measure : RegionMeasure thetaLine)
@@ -50,11 +52,13 @@ def thetaIndeterminacyCommonTargetBound
     (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
     RegionComparisonFamily.CommonTargetBound measure
       (thetaIndeterminacyFamily f h epsilon) (-(2 * h) + epsilonBound) :=
-  { common := thetaIndeterminacyCommonTarget h epsilonBound,
-    contains_each := thetaIndeterminacyFamily_commonTarget f h hbound,
-    volume_bound := by
-      unfold RegionMeasure.HasVolumeAtMost thetaIndeterminacyCommonTarget
-      rw [RegionMeasure.upperRay_volume_eq_of_normalized measure hnormalized] }
+  by
+    unfold thetaIndeterminacyFamily
+    exact RegionComparisonFamily.upperRayFamily_commonTargetBound
+      measure hnormalized (fun _ => f) (fun choice => -(2 * h) + epsilon choice)
+      (commonBound := -(2 * h) + epsilonBound) (by
+        intro choice
+        linarith [hbound choice])
 
 theorem thetaIndeterminacyFamily_allTargetsAtMost
     (measure : RegionMeasure thetaLine)

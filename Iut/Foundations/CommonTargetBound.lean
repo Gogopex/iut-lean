@@ -34,6 +34,20 @@ def AllTargetsAtMost (measure : RegionMeasure target)
   ∀ choice : index,
     RegionMeasure.targetVolume measure (family.comparison choice) <= bound
 
+/-- A comparison family whose target regions are coordinate upper rays. -/
+def upperRayFamily
+    (transport : index -> Transport source target) (bound : index -> Real) :
+    RegionComparisonFamily source target index :=
+  { comparison := fun choice => RegionComparison.upperRay (transport choice) (bound choice) }
+
+theorem upperRayFamily_commonTarget
+    (transport : index -> Transport source target) (bound : index -> Real)
+    {commonBound : Real} (hbound : ∀ choice : index, bound choice <= commonBound) :
+    (upperRayFamily transport bound).CommonTarget
+      (Region.upperRay target commonBound) := by
+  intro choice
+  exact Region.upperRay_subset_upperRay (hbound choice)
+
 /--
 A common target region for a comparison family, together with an upper bound for
 the measured volume of that common target.
@@ -43,6 +57,19 @@ structure CommonTargetBound (measure : RegionMeasure target)
   common : Region target
   contains_each : family.CommonTarget common
   volume_bound : RegionMeasure.HasVolumeAtMost measure common bound
+
+def upperRayFamily_commonTargetBound
+    (measure : RegionMeasure target)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (transport : index -> Transport source target) (bound : index -> Real)
+    {commonBound : Real}
+    (hbound : ∀ choice : index, bound choice <= commonBound) :
+    CommonTargetBound measure (upperRayFamily transport bound) commonBound :=
+  { common := Region.upperRay target commonBound,
+    contains_each := upperRayFamily_commonTarget transport bound hbound,
+    volume_bound := by
+      unfold RegionMeasure.HasVolumeAtMost
+      rw [RegionMeasure.upperRay_volume_eq_of_normalized measure hnormalized] }
 
 /--
 A common target hull for a comparison family, together with an upper bound for
@@ -68,6 +95,15 @@ theorem choice_targetVolume_le (data : CommonTargetBound measure family bound)
 theorem allTargetsAtMost (data : CommonTargetBound measure family bound) :
     AllTargetsAtMost measure family bound :=
   data.choice_targetVolume_le
+
+theorem upperRayFamily_allTargetsAtMost
+    (measure : RegionMeasure target)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (transport : index -> Transport source target) (bound : index -> Real)
+    {commonBound : Real}
+    (hbound : ∀ choice : index, bound choice <= commonBound) :
+    AllTargetsAtMost measure (upperRayFamily transport bound) commonBound :=
+  (upperRayFamily_commonTargetBound measure hnormalized transport bound hbound).allTargetsAtMost
 
 theorem choice_region_atMost (data : CommonTargetBound measure family bound)
     (choice : index) :

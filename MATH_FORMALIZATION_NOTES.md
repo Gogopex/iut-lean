@@ -9183,3 +9183,71 @@ The common target is still produced by the supplied bridge. The next step is
 to decide whether the bridge should expose a common-hull object, or whether
 we should first refine the toy upper-ray common target into a reusable
 construction pattern.
+
+## Math Milestone 98: Reusable Upper-Ray Common-Target Construction
+
+Lean files:
+
+* `Iut/Foundations/CommonTargetBound.lean`
+* `Iut/Stage1/ToyFamilyBounds.lean`
+
+### Source Check
+
+The toy Theta family used an upper-ray common target: each chosen target is an
+upper ray with a choice-dependent bound, and a single cap bounds all choices.
+This pattern is not specific to the toy names. It is a reusable common-target
+construction for any upper-ray comparison family.
+
+### Lean/API Check
+
+The foundation layer now defines:
+
+```text
+RegionComparisonFamily.upperRayFamily
+RegionComparisonFamily.upperRayFamily_commonTarget
+RegionComparisonFamily.upperRayFamily_commonTargetBound
+RegionComparisonFamily.upperRayFamily_allTargetsAtMost
+```
+
+The common-target bound theorem assumes:
+
+```text
+∀ choice, bound choice <= commonBound
+```
+
+and upper-ray normalization of the measure.
+
+The toy Theta family:
+
+```text
+thetaIndeterminacyFamily
+```
+
+is now defined using `upperRayFamily`, and its common-target bound is derived
+from `upperRayFamily_commonTargetBound`.
+
+### Lean Decisions
+
+This is the first step toward replacing toy-specific bridge internals with
+small reusable mathematical construction patterns. It is still an upper-ray
+model, not IUT's full log-volume geometry, but it removes unnecessary
+toy-specific proof code.
+
+### What This Tests
+
+The focused build for `Iut.Stage1.ToyFamilyBounds` and the Stage 1 source
+example passes. The downstream toy bridge and source audit route continue to
+compile after the refactor. The full project build also passes.
+
+### Design Trap Avoided
+
+The trap would be to keep every common-target construction hard-coded in the
+toy layer. This milestone moves the generic upper-ray common-target argument
+to the foundation layer, where future non-toy approximations can reuse or
+replace it.
+
+### Remaining Gap
+
+The construction is still upper-ray specific. The next deeper refinement is to
+introduce a common-hull or hull-operation witness that is general enough to
+approximate the hull+det bridge without assuming all targets are upper rays.
