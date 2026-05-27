@@ -1889,3 +1889,78 @@ generator-wise image invariance for the audited `(Ind1)/(Ind2)/(Ind3)` steps.
 That will make it easier to inspect exactly which generator is responsible for
 which part of the possible-image invariance, and it will help us later isolate
 the specific `(Ind2)`/direct-summand issue relevant to Corollary 3.12.
+
+## 25. Generator-Wise Audited Image Invariance
+
+### Goal
+
+We exposed the audited image-invariance theorem one generator at a time for
+`(Ind1)`, `(Ind2)`, and `(Ind3)`.
+
+### Lean/API Check
+
+At the audited choice level:
+
+```text
+IUTStage1PlaceAuditedDirectSummandPacketChoice.ind1_image_invariant_of_coric
+IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_image_invariant_of_coric
+IUTStage1PlaceAuditedDirectSummandPacketChoice.ind3_image_invariant_of_coric
+```
+
+At the audited multiradial image-package level:
+
+```text
+IUTStage1PlaceAuditedMultiradialImages.region_eq_of_ind1_step
+IUTStage1PlaceAuditedMultiradialImages.region_eq_of_ind2_step
+IUTStage1PlaceAuditedMultiradialImages.region_eq_of_ind3_step
+```
+
+At the source-package wrapper level:
+
+```text
+IUTStage1PlaceAuditedMultiradialThetaImages.region_eq_of_ind1_step
+IUTStage1PlaceAuditedMultiradialThetaImages.region_eq_of_ind2_step
+IUTStage1PlaceAuditedMultiradialThetaImages.region_eq_of_ind3_step
+```
+
+### Mathematical Point
+
+The previous theorem proved possible-image invariance for the generated
+equivalence relation.  That is logically useful, but it hides the individual
+source mechanisms.  The new lemmas expose the three generators separately:
+procession automorphism, local direct-summand action, and upper
+semi-compatibility.
+
+This matters for the 3.11/3.12 dispute because the fragile point is not
+"some generated relation preserves the image"; it is whether the local
+direct-summand `(Ind2)` mechanism can be transported through the multiradial
+construction without collapsing the history that is meant to be forgotten only
+in the controlled Hodge-theater sense.  The theorem
+`region_eq_of_ind2_step` is therefore a named audit point.
+
+### Trap Avoided
+
+The generator-wise lemmas do not prove any new automatic multiradiality.  They
+consume either an explicit coric-dependence hypothesis or an already-built
+audited multiradial package.  Thus the `(Ind2)` theorem is visible without
+pretending that the hard arithmetic construction of the `(Ind2)` action has
+already been supplied.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+placeAuditedMultiradialImages_ind1_region_eq_example
+placeAuditedMultiradialImages_ind2_region_eq_example
+placeAuditedMultiradialImages_ind3_region_eq_example
+placeAuditedMultiradialThetaImages_ind2_region_eq_example
+```
+
+### Remaining Gap
+
+The next mathematical step should refine the audited `(Ind2)` action itself:
+instead of treating it as a single direct-summand action with preservation
+fields, separate its nonarchimedean `Ism` and archimedean order-two sources at
+the place-audited level and prove that both feed the same audited
+multiradial-image invariance theorem.

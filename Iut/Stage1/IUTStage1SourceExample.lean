@@ -1212,6 +1212,48 @@ theorem placeAuditedMultiradialImages_region_eq_example
       data.possibleImages.region audited₂ :=
   data.region_eq_of_related hrel
 
+theorem placeAuditedMultiradialImages_ind1_region_eq_example
+    {target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    (data :
+      IUTStage1PlaceAuditedMultiradialImages
+        (target := target) coric kind)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    data.possibleImages.region audited₁ =
+      data.possibleImages.region audited₂ :=
+  data.region_eq_of_ind1_step hstep
+
+theorem placeAuditedMultiradialImages_ind2_region_eq_example
+    {target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    (data :
+      IUTStage1PlaceAuditedMultiradialImages
+        (target := target) coric kind)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    data.possibleImages.region audited₁ =
+      data.possibleImages.region audited₂ :=
+  data.region_eq_of_ind2_step hstep
+
+theorem placeAuditedMultiradialImages_ind3_region_eq_example
+    {target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    (data :
+      IUTStage1PlaceAuditedMultiradialImages
+        (target := target) coric kind)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.UpperSemiCompatibilityStep
+        audited₁ audited₂) :
+    data.possibleImages.region audited₁ =
+      data.possibleImages.region audited₂ :=
+  data.region_eq_of_ind3_step hstep
+
 theorem placeAuditedMultiradialImages_profile_example
     {target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     (data :
@@ -1248,6 +1290,21 @@ theorem placeAuditedMultiradialThetaImages_region_eq_example
     data.possibleImages.images.region audited₁ =
       data.possibleImages.images.region audited₂ :=
   data.region_eq_of_related hrel
+
+theorem placeAuditedMultiradialThetaImages_ind2_region_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    (data : IUTStage1PlaceAuditedMultiradialThetaImages package)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    data.possibleImages.images.region audited₁ =
+      data.possibleImages.images.region audited₂ :=
+  data.region_eq_of_ind2_step hstep
 
 theorem placeAuditedMultiradialThetaImages_union_eq_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}

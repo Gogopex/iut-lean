@@ -3104,6 +3104,51 @@ theorem image_invariant_of_coric
   intro audited₁ audited₂ hrel
   exact hcoric audited₁ audited₂ (generated_preserves_coric hrel)
 
+theorem ind1_image_invariant_of_coric
+    {target : Copy}
+    (images :
+      RegionFamily target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind))
+    (hcoric :
+      ∀ audited₁ audited₂,
+        audited₁.choice.coric = audited₂.choice.coric ->
+          images.region audited₁ = images.region audited₂)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : ProcessionAutomorphismStep audited₁ audited₂) :
+    images.region audited₁ = images.region audited₂ :=
+  hcoric audited₁ audited₂ hstep.choice_step.coric_eq
+
+theorem ind2_image_invariant_of_coric
+    {target : Copy}
+    (images :
+      RegionFamily target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind))
+    (hcoric :
+      ∀ audited₁ audited₂,
+        audited₁.choice.coric = audited₂.choice.coric ->
+          images.region audited₁ = images.region audited₂)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : LocalTensorDirectSummandActionStep audited₁ audited₂) :
+    images.region audited₁ = images.region audited₂ :=
+  hcoric audited₁ audited₂ hstep.choice_step.coric_eq
+
+theorem ind3_image_invariant_of_coric
+    {target : Copy}
+    (images :
+      RegionFamily target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind))
+    (hcoric :
+      ∀ audited₁ audited₂,
+        audited₁.choice.coric = audited₂.choice.coric ->
+          images.region audited₁ = images.region audited₂)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : UpperSemiCompatibilityStep audited₁ audited₂) :
+    images.region audited₁ = images.region audited₂ :=
+  hcoric audited₁ audited₂ hstep.choice_step.coric_eq
+
 end IUTStage1PlaceAuditedDirectSummandPacketChoice
 
 /--
@@ -3163,6 +3208,48 @@ theorem region_eq_of_related
     (hrel : data.quotient.relation audited₁ audited₂) :
     data.possibleImages.region audited₁ = data.possibleImages.region audited₂ :=
   data.image_invariant hrel
+
+theorem region_eq_of_ind1_step
+    (data :
+      IUTStage1PlaceAuditedMultiradialImages
+        (target := target) coric kind)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    data.possibleImages.region audited₁ = data.possibleImages.region audited₂ :=
+  data.region_eq_of_related (by
+    rw [data.quotient_eq_generated]
+    exact IUTStage1GeneratedIndeterminacyRelation.ind1 hstep)
+
+theorem region_eq_of_ind2_step
+    (data :
+      IUTStage1PlaceAuditedMultiradialImages
+        (target := target) coric kind)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    data.possibleImages.region audited₁ = data.possibleImages.region audited₂ :=
+  data.region_eq_of_related (by
+    rw [data.quotient_eq_generated]
+    exact IUTStage1GeneratedIndeterminacyRelation.ind2 hstep)
+
+theorem region_eq_of_ind3_step
+    (data :
+      IUTStage1PlaceAuditedMultiradialImages
+        (target := target) coric kind)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.UpperSemiCompatibilityStep
+        audited₁ audited₂) :
+    data.possibleImages.region audited₁ = data.possibleImages.region audited₂ :=
+  data.region_eq_of_related (by
+    rw [data.quotient_eq_generated]
+    exact IUTStage1GeneratedIndeterminacyRelation.ind3 hstep)
 
 theorem quotient_profile
     (data :
@@ -3234,6 +3321,42 @@ theorem region_eq_of_related
       data.possibleImages.images.region audited₂ := by
   rw [← data.audited_possibleImages_eq]
   exact data.auditedImages.region_eq_of_related hrel
+
+theorem region_eq_of_ind1_step
+    (data : IUTStage1PlaceAuditedMultiradialThetaImages package)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    data.possibleImages.images.region audited₁ =
+      data.possibleImages.images.region audited₂ := by
+  rw [← data.audited_possibleImages_eq]
+  exact data.auditedImages.region_eq_of_ind1_step hstep
+
+theorem region_eq_of_ind2_step
+    (data : IUTStage1PlaceAuditedMultiradialThetaImages package)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    data.possibleImages.images.region audited₁ =
+      data.possibleImages.images.region audited₂ := by
+  rw [← data.audited_possibleImages_eq]
+  exact data.auditedImages.region_eq_of_ind2_step hstep
+
+theorem region_eq_of_ind3_step
+    (data : IUTStage1PlaceAuditedMultiradialThetaImages package)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.UpperSemiCompatibilityStep
+        audited₁ audited₂) :
+    data.possibleImages.images.region audited₁ =
+      data.possibleImages.images.region audited₂ := by
+  rw [← data.audited_possibleImages_eq]
+  exact data.auditedImages.region_eq_of_ind3_step hstep
 
 theorem quotient_profile
     (data : IUTStage1PlaceAuditedMultiradialThetaImages package) :
