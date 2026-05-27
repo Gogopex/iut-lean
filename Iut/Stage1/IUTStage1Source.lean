@@ -1980,6 +1980,128 @@ theorem auditedPublicAudit
     AuditedPublicAudit package bundle sideConditions :=
   AuditedPublicAudit.ofStructuredInputsWithSHE bundle sideConditions
 
+/--
+Compact checkpoint summary for the audited structured-SHE route.
+
+The summary is proof-only: it does not create a new endpoint or hide any
+construction. It records that the major audited checkpoints are simultaneously
+available for the same package, structured-SHE bundle, and side conditions.
+-/
+structure AuditedStructuredSHERouteSummary
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) : Prop where
+  has_structured_she :
+    QualitativeData.HasStructuredSHE package.preLedger.output.family
+  common_container_compatibility :
+    IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+      package bundle.structuredSHE
+  hdd_she_bound : IUTStage1Theorem311AuditedHDDSHEBound package bundle
+  target_volume_middle :
+    IUTStage1Theorem311AuditedTargetVolumeMiddle package bundle
+  membership_middle :
+    IUTStage1Theorem311AuditedMembershipMiddle package bundle
+  raw_inequality :
+    IUTStage1Theorem311AuditedRawInequality package bundle
+  signed_payload_boundary :
+    IUTStage1Theorem311AuditedSignedPayloadBoundary
+      package bundle sideConditions
+  public_audit : AuditedPublicAudit package bundle sideConditions
+  comparison_data_eq_payload_inputs :
+    bundle.auditedComparisonData sideConditions =
+      package.comparisonDataFromPayloadInputs
+        (package.auditedComparisonSourceObligations bundle sideConditions)
+  q_signed_le_theta :
+    (bundle.auditedComparisonData sideConditions).qSigned <=
+      (bundle.auditedComparisonData sideConditions).thetaSigned
+  source_normalization : package.preLedger.normalization
+  histories_not_identified :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side
+
+namespace AuditedStructuredSHERouteSummary
+
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+variable {sideConditions : IUTStage1SourceSideConditions package}
+
+theorem ofStructuredInputsWithSHE
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedStructuredSHERouteSummary package bundle sideConditions :=
+  { has_structured_she := bundle.hasStructuredSHE_from_context,
+    common_container_compatibility := bundle.commonContainerCompatibility,
+    hdd_she_bound := bundle.auditedHDDSHEBound,
+    target_volume_middle := bundle.auditedTargetVolumeMiddle,
+    membership_middle := bundle.auditedMembershipMiddle,
+    raw_inequality := bundle.auditedRawInequality,
+    signed_payload_boundary :=
+      bundle.auditedSignedPayloadBoundary sideConditions,
+    public_audit := package.auditedPublicAudit bundle sideConditions,
+    comparison_data_eq_payload_inputs :=
+      package.auditedComparisonData_eq_payloadInputs bundle sideConditions,
+    q_signed_le_theta :=
+      (package.auditedPublicAudit bundle sideConditions).qSigned_le_thetaSigned,
+    source_normalization := sideConditions.sourceNormalization,
+    histories_not_identified := bundle.domainHistory_ne_codomainHistory }
+
+theorem publicAudit
+    (summary :
+      AuditedStructuredSHERouteSummary package bundle sideConditions) :
+    AuditedPublicAudit package bundle sideConditions :=
+  summary.public_audit
+
+theorem signedPayloadBoundary
+    (summary :
+      AuditedStructuredSHERouteSummary package bundle sideConditions) :
+    IUTStage1Theorem311AuditedSignedPayloadBoundary
+      package bundle sideConditions :=
+  summary.signed_payload_boundary
+
+theorem rawInequality
+    (summary :
+      AuditedStructuredSHERouteSummary package bundle sideConditions) :
+    IUTStage1Theorem311AuditedRawInequality package bundle :=
+  summary.raw_inequality
+
+theorem comparisonDataEqPayloadInputs
+    (summary :
+      AuditedStructuredSHERouteSummary package bundle sideConditions) :
+    bundle.auditedComparisonData sideConditions =
+      package.comparisonDataFromPayloadInputs
+        (package.auditedComparisonSourceObligations bundle sideConditions) :=
+  summary.comparison_data_eq_payload_inputs
+
+theorem qSigned_le_thetaSigned
+    (summary :
+      AuditedStructuredSHERouteSummary package bundle sideConditions) :
+    (bundle.auditedComparisonData sideConditions).qSigned <=
+      (bundle.auditedComparisonData sideConditions).thetaSigned :=
+  summary.q_signed_le_theta
+
+theorem sourceNormalization
+    (summary :
+      AuditedStructuredSHERouteSummary package bundle sideConditions) :
+    package.preLedger.normalization :=
+  summary.source_normalization
+
+theorem domainHistory_ne_codomainHistory
+    (summary :
+      AuditedStructuredSHERouteSummary package bundle sideConditions) :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side :=
+  summary.histories_not_identified
+
+end AuditedStructuredSHERouteSummary
+
+theorem auditedStructuredSHERouteSummary
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    AuditedStructuredSHERouteSummary package bundle sideConditions :=
+  AuditedStructuredSHERouteSummary.ofStructuredInputsWithSHE
+    bundle sideConditions
+
 theorem comparisonData_thetaSigned
     (package : IUTStage1SourcePackage source target index)
     (obligations : IUTStage1SourceObligations package) :

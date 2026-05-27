@@ -1123,3 +1123,93 @@ while keeping the full audited route checklist available for review.
 The next milestone should add a compact route summary for the audited
 structured-SHE path, similar in spirit to earlier endpoint summaries, so a human
 reader can inspect the major checkpoints without expanding every proof field.
+
+## Math Milestone 12: Audited Structured-SHE Route Summary
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The formal path from structured SHE to the public-audit tuple is now deliberately
+long. That length is useful for auditability, but a human reader also needs a
+compact checkpoint view that lists the major stages of the route without hiding
+which route is being used.
+
+This milestone mirrors earlier endpoint-summary patterns in the file while
+remaining attached to the newer structured-SHE audit path.
+
+### Purpose
+
+This milestone adds:
+
+```text
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary
+```
+
+The summary records:
+
+* structured SHE availability;
+* SHE/common-container compatibility;
+* the audited `HDD o SHE` bound;
+* the target-volume middle term;
+* the q-membership middle term;
+* the raw real inequality;
+* the signed-payload boundary;
+* the audited public-audit wrapper;
+* equality with the older payload-input route;
+* the q-to-Theta inequality in comparison data;
+* source normalization;
+* history separation.
+
+It also exposes projection theorems for the public audit, signed-payload
+boundary, raw inequality, payload-route equality, q-to-Theta inequality,
+normalization, and history separation.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary.ofStructuredInputsWithSHE
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary.publicAudit
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary.signedPayloadBoundary
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary.rawInequality
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary.comparisonDataEqPayloadInputs
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary.qSigned_le_thetaSigned
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary.sourceNormalization
+IUTStage1SourcePackage.AuditedStructuredSHERouteSummary.domainHistory_ne_codomainHistory
+IUTStage1SourcePackage.auditedStructuredSHERouteSummary
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_theorem311_audited_route_summary_example
+unitThetaToy_source_theorem311_audited_route_summary_raw_example
+unitThetaToy_source_theorem311_audited_route_summary_public_example
+unitThetaToy_source_theorem311_audited_route_summary_q_le_theta_example
+```
+
+### What This Tests
+
+The toy examples verify that the compact route summary can be built and that it
+recovers the raw inequality, the audited public-audit wrapper, and the
+q-to-Theta inequality in the audited comparison data.
+
+### Design Trap Avoided
+
+The trap would be to introduce a summary that obscures the route by replacing
+the checkpoint records. We did not do that. The summary contains the checkpoint
+records as fields, so it is a review aid rather than a shortcut around the
+audit path.
+
+### Next Step
+
+The next milestone should start separating this audited route into a smaller
+module if the source file becomes unwieldy, or else add source-facing naming for
+which checkpoint corresponds to the debated Theorem 3.11 to Corollary 3.12
+transition.
