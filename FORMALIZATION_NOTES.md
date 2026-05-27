@@ -11473,3 +11473,108 @@ The subgroup orbit is now formal, but the full `LabCusp±` structure is not.
 The next mathematical step should introduce a small typed model of pointed
 `F_l`-label data with a zero element, a nonzero/sign quotient, and the projection
 from `±`-labels to ordinary cusp labels.
+
+## Math Milestone 27: Nonzero Labels Modulo Sign
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+The relevant source passage is the `LabCusp±` discussion in IUT I, Definition
+6.1(iii). It says that `LabCusp±` has a zero element and a `±`-canonical
+element well-defined up to multiplication by `±1`, and gives a natural
+bijection of the form:
+
+```text
+LabCusp± \ {zero} / {±1} -> LabCusp
+```
+
+This is the same sign ambiguity that appears earlier in Definition 3.1(f) for
+the bad local canonical generator, and it is compatible with the `F_l^×` action
+language from Definition 4.1(ii).
+
+### Lean/API Check
+
+Lean's `Setoid` and `Quotient` are the right primitive tools for this stage:
+they let us state that two nonzero labels represent the same ordinary label
+class exactly when they differ by the sign action. No choice of representative
+is required.
+
+### Lean Decisions
+
+The new nonzero carrier is:
+
+```text
+PointedEtaleQuotient.NonzeroCarrier Q
+```
+
+For any `QuotientSignAction`, we define:
+
+```text
+NonzeroSignRel
+nonzeroSignSetoid
+SignLabelQuotient
+toSignLabelQuotient
+```
+
+The relation is:
+
+```text
+x ~ y  iff  x = y or x = sign(y)
+```
+
+Lean proves reflexivity, symmetry, and transitivity using the sign involution.
+The quotient projection then proves:
+
+```text
+toSignLabelQuotient (negNonzero x) =
+toSignLabelQuotient x
+```
+
+For the concrete finite model, the canonical class is:
+
+```text
+zmodCanonicalSignLabelQuotient l
+```
+
+represented by the nonzero label `1 : ZMod l.value`.
+
+### Lean Declarations
+
+```text
+PointedEtaleQuotient.NonzeroCarrier
+QuotientSignAction.neg_ne_zero
+QuotientSignAction.negNonzero
+QuotientSignAction.NonzeroSignRel
+QuotientSignAction.nonzeroSignSetoid
+QuotientSignAction.SignLabelQuotient
+QuotientSignAction.toSignLabelQuotient
+QuotientSignAction.toSignLabelQuotient_eq_of_rel
+QuotientSignAction.toSignLabelQuotient_neg_eq
+zmodOneNonzeroLabel
+zmodCanonicalSignLabelQuotient
+zmodCanonicalSignLabelQuotient_neg_one_eq
+```
+
+### What This Tests
+
+The example file now checks:
+
+* the abstract quotient projection identifies a nonzero label with its negative;
+* the concrete `ZMod 5` canonical sign-label quotient exists;
+* the `ZMod 5` class of `1` is equal to the class of `-1`.
+
+### Design Trap Avoided
+
+The trap would be to model "modulo `±1`" by choosing either `+1` or `-1` as a
+canonical representative. The source says the object is well-defined only up to
+that ambiguity. The Lean quotient preserves the ambiguity instead of erasing it.
+
+### Remaining Gap
+
+This still does not construct the full `F_l`-torsor or `F_l^×`-action on actual
+cusp labels. It gives the quotient-theoretic target needed for that construction:
+nonzero `±` labels can now be projected to sign classes without choosing a sign.

@@ -113,6 +113,12 @@ example (Q : PointedEtaleQuotient)
     signAction.InSignOrbit (signAction.neg generator) generator :=
   signAction.neg_generator_mem_signOrbit generator
 
+example (Q : PointedEtaleQuotient)
+    (signAction : QuotientSignAction Q) (x : Q.NonzeroCarrier) :
+    signAction.toSignLabelQuotient (signAction.negNonzero x) =
+      signAction.toSignLabelQuotient x :=
+  signAction.toSignLabelQuotient_neg_eq x
+
 /-- A constructor smoke test for compatibility between sign and unit actions. -/
 def abstractQuotientSignUnitCompatibility
     (Q : PointedEtaleQuotient)
@@ -196,6 +202,16 @@ example (x generator : ZMod primeFive.value) :
         (zmodUnitActionData primeFive).smul a generator = x) ↔
       (zmodSignAction primeFive).InSignOrbit x generator :=
   zmodSignUnitSubgroup_orbit_iff_signOrbit primeFive x generator
+
+example :
+    (zmodSignAction primeFive).SignLabelQuotient :=
+  zmodCanonicalSignLabelQuotient primeFive
+
+example :
+    (zmodSignAction primeFive).toSignLabelQuotient
+        ((zmodSignAction primeFive).negNonzero (zmodOneNonzeroLabel primeFive)) =
+      zmodCanonicalSignLabelQuotient primeFive :=
+  zmodCanonicalSignLabelQuotient_neg_one_eq primeFive
 
 example :
     (zmodCanonicalGeneratorUpToSignElement primeFive).canonicalGeneratorUpToSign :=
