@@ -3294,6 +3294,50 @@ theorem publicAudit_stage1Comparison_recovers_qSigned_le_thetaSigned
         (package.promotedProvider obligations).ledger.qSigned_le_thetaSigned :=
   (package.publicAudit obligations).2.2
 
+def comparisonDataOfHullDetObligations
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    Corollary312ComparisonData :=
+  package.comparisonData obligations.toSourceObligations
+
+theorem comparisonDataOfHullDetObligations_eq
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    package.comparisonDataOfHullDetObligations obligations =
+      package.comparisonData obligations.toSourceObligations :=
+  rfl
+
+theorem comparisonDataOfHullDetObligations_corollary312
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  (package.comparisonDataOfHullDetObligations obligations).corollary312
+
+theorem publicAuditOfHullDetObligations
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned ∧
+      Corollary312Inequality
+        (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+        (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) ∧
+      (corollary312_from_stage1_comparison
+          (package.promotedProvider
+            obligations.toSourceObligations).stage1Comparison =
+        corollary312_of_signed_le
+          (package.promotedProvider
+            obligations.toSourceObligations).ledger.qSigned_le_thetaSigned) :=
+  package.publicAudit obligations.toSourceObligations
+
+theorem publicAuditOfHullDetObligations_corollary312
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceHullDetObligations package) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  (package.publicAuditOfHullDetObligations obligations).2.1
+
 def obligationsFromParts
     (package : IUTStage1SourcePackage source target index)
     (subclaims : IUTStage1Theorem311Subclaims package)

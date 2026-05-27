@@ -16112,3 +16112,71 @@ The public endpoint constructors still consume the older obligations. A future
 milestone can either add parallel endpoint constructors for
 `IUTStage1SourceHullDetObligations` or gradually make the hull+det evidence a
 required component of the main source-obligation route.
+
+## Stage 1 Math Milestone 109: Endpoint Projection from Hull+Det Obligations
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The strengthened source obligations now require split hull+det evidence, but
+the public comparison endpoint still runs through the older obligation record.
+This milestone adds explicit endpoint-facing projections from the strengthened
+obligations.
+
+This matters because future non-toy work should be able to use the stricter
+route without manually forgetting the hull evidence every time it wants the
+Corollary 3.12-shaped comparison.
+
+### Lean/API Check
+
+The source package namespace now defines:
+
+```text
+comparisonDataOfHullDetObligations
+comparisonDataOfHullDetObligations_eq
+comparisonDataOfHullDetObligations_corollary312
+publicAuditOfHullDetObligations
+publicAuditOfHullDetObligations_corollary312
+```
+
+The toy source example checks:
+
+```text
+unitThetaToy_source_hullDetObligations_publicAudit_corollary_example
+unitThetaToy_source_hullDetObligations_comparisonData_corollary_example
+```
+
+### Lean Decisions
+
+The new endpoint functions project through:
+
+```text
+IUTStage1SourceHullDetObligations.toSourceObligations
+```
+
+The hull+det evidence is not used to re-prove the final real inequality. It is
+carried as required provenance while the existing endpoint machinery remains
+the verified route from q/target/Theta bounds to the public comparison.
+
+### What This Tests
+
+Lean verifies that the toy strengthened obligations can produce the same
+Corollary 3.12-shaped public audit and comparison data as the older obligations.
+The focused build for `Iut.Stage1.IUTStage1SourceExample` passes.
+
+### Design Trap Avoided
+
+The trap would be to create stronger obligations that are awkward to use, so
+future work silently returns to the weaker route. This milestone makes the
+stronger route endpoint-compatible.
+
+### Remaining Gap
+
+The endpoint still does not inspect the hull evidence directly. A later audit
+object should package both facts together: the public comparison and the
+source-facing proof that the Theta-side bound came from a measured hull of the
+union of possible images.
