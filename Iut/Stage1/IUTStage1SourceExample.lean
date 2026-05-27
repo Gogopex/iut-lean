@@ -2912,6 +2912,64 @@ theorem unitThetaToy_source_endpoint_payloadRouteSummary_publicAudit_example
     package.auditedComparisonDataEndpoint obligations
   endpoint.payloadRouteSummaryAndPublicAudit
 
+theorem unitThetaToy_source_endpoint_payloadData_eq_comparisonData_exists_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let obligations :=
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds
+    ∃ sourceAudit : IUTStage1SourcePackage.Audit package obligations,
+      package.comparisonDataFromPayloadInputs obligations =
+        sourceAudit.comparisonData :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  let obligations :=
+    unitThetaToyIUTStage1SourceObligations
+      measure hnormalized hh hbound hholds
+  let endpoint :=
+    package.auditedComparisonDataEndpoint obligations
+  endpoint.payloadDataEqComparisonDataExists
+
+theorem unitThetaToy_source_endpoint_comparisonData_recovers_exists_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let obligations :=
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds
+    ∃ sourceAudit : IUTStage1SourcePackage.Audit package obligations,
+      corollary312_from_stage1_comparison
+          sourceAudit.comparisonData.stage1Comparison =
+        corollary312_of_signed_le
+          sourceAudit.comparisonData.qSigned_le_thetaSigned :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  let obligations :=
+    unitThetaToyIUTStage1SourceObligations
+      measure hnormalized hh hbound hholds
+  let endpoint :=
+    package.auditedComparisonDataEndpoint obligations
+  endpoint.comparisonDataRecoversExists
+
 theorem unitThetaToy_source_comparisonPayloadInputs_q_le_theta_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

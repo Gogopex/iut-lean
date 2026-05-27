@@ -2272,6 +2272,56 @@ theorem payloadRouteSummaryAndPublicAudit
   rcases endpoint.payloadRouteSummaryExists with ⟨sourceAudit, summary⟩
   exact ⟨sourceAudit, summary, endpoint.publicAudit_eq_package_publicAudit⟩
 
+theorem payloadInputsEqPackageExists
+    (endpoint : package.ComparisonDataEndpoint obligations) :
+    ∃ sourceAudit : Audit package obligations,
+      sourceAudit.comparisonPayloadInputs =
+        package.comparisonPayloadInputs := by
+  rcases endpoint.payloadRouteSummaryExists with ⟨sourceAudit, summary⟩
+  exact ⟨sourceAudit, summary.payload_inputs_eq_package⟩
+
+theorem payloadDataEqComparisonDataExists
+    (endpoint : package.ComparisonDataEndpoint obligations) :
+    ∃ sourceAudit : Audit package obligations,
+      package.comparisonDataFromPayloadInputs obligations =
+        sourceAudit.comparisonData := by
+  rcases endpoint.payloadRouteSummaryExists with ⟨sourceAudit, summary⟩
+  exact ⟨sourceAudit, summary.payload_data_eq_comparison_data⟩
+
+theorem comparisonDataEqPackageExists
+    (endpoint : package.ComparisonDataEndpoint obligations) :
+    ∃ sourceAudit : Audit package obligations,
+      sourceAudit.comparisonData =
+        package.comparisonData obligations := by
+  rcases endpoint.payloadRouteSummaryExists with ⟨sourceAudit, summary⟩
+  exact ⟨sourceAudit, summary.comparison_data_eq_package⟩
+
+theorem stage1ComparisonEqProviderExists
+    (endpoint : package.ComparisonDataEndpoint obligations) :
+    ∃ sourceAudit : Audit package obligations,
+      sourceAudit.comparisonData.stage1Comparison =
+        (package.promotedProvider obligations).stage1Comparison := by
+  rcases endpoint.payloadRouteSummaryExists with ⟨sourceAudit, summary⟩
+  exact ⟨sourceAudit, summary.stage1Comparison_eq_provider⟩
+
+theorem corollary312EqProviderExists
+    (endpoint : package.ComparisonDataEndpoint obligations) :
+    ∃ sourceAudit : Audit package obligations,
+      sourceAudit.comparisonData.corollary312 =
+        (package.promotedProvider obligations).corollary312 := by
+  rcases endpoint.payloadRouteSummaryExists with ⟨sourceAudit, summary⟩
+  exact ⟨sourceAudit, summary.corollary312_eq_provider⟩
+
+theorem comparisonDataRecoversExists
+    (endpoint : package.ComparisonDataEndpoint obligations) :
+    ∃ sourceAudit : Audit package obligations,
+      corollary312_from_stage1_comparison
+          sourceAudit.comparisonData.stage1Comparison =
+        corollary312_of_signed_le
+          sourceAudit.comparisonData.qSigned_le_thetaSigned := by
+  rcases endpoint.payloadRouteSummaryExists with ⟨sourceAudit, summary⟩
+  exact ⟨sourceAudit, summary.comparison_data_recovers⟩
+
 end ComparisonDataEndpoint
 
 namespace StructuredHypothesisRouteAudit

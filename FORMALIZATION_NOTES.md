@@ -11133,3 +11133,68 @@ preserving the compact summary as the canonical package.
 The next milestone should add the analogous named projection layer at the
 comparison endpoint itself, so endpoint-level consumers can cite the payload
 route fields directly.
+
+## Milestone 141: Endpoint Payload Projection Theorems
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The comparison-data endpoint is the public boundary for the current Stage 1
+formalization of the `3.11.5 => 3.12` comparison. IUT III, Corollary 3.12,
+Step `(xi)`, is where the source-side Theorem 3.11 output is used to reach the
+real-valued comparison. Since Scholze-Stix's objection concerns hidden
+identifications at that boundary, endpoint-level users should be able to cite
+the route facts without unfolding either the endpoint existential or the compact
+payload summary.
+
+### Purpose
+
+Milestone 140 added named payload projections for the structured route audit.
+This milestone adds the corresponding endpoint-level projections. Because
+`ComparisonDataEndpoint` stores its source audit witness existentially, each
+projection returns an existential witness together with the requested route
+field.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.ComparisonDataEndpoint.payloadInputsEqPackageExists
+IUTStage1SourcePackage.ComparisonDataEndpoint.payloadDataEqComparisonDataExists
+IUTStage1SourcePackage.ComparisonDataEndpoint.comparisonDataEqPackageExists
+IUTStage1SourcePackage.ComparisonDataEndpoint.stage1ComparisonEqProviderExists
+IUTStage1SourcePackage.ComparisonDataEndpoint.corollary312EqProviderExists
+IUTStage1SourcePackage.ComparisonDataEndpoint.comparisonDataRecoversExists
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_endpoint_payloadData_eq_comparisonData_exists_example
+unitThetaToy_source_endpoint_comparisonData_recovers_exists_example
+```
+
+### What This Tests
+
+The toy examples verify that a public comparison-data endpoint can recover a
+source audit witnessing equality between payload-built comparison data and the
+audit comparison data, and can recover the final Corollary-3.12-shaped
+`Stage1Comparison` statement.
+
+### Design Trap Avoided
+
+The trap would be to use the endpoint only as a black-box proof of the final
+comparison. These existential projection theorems keep the endpoint honest:
+the final comparison remains connected to the audited payload route, even when
+the caller starts from the public endpoint.
+
+### Next Step
+
+The next milestone should connect the structured route and endpoint projection
+layers by proving that the structured endpoint exposes the same existential
+payload facts as the ordinary comparison endpoint.
