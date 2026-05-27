@@ -132,6 +132,55 @@ theorem hull_subset_hull (operator : HullOperator line) {small large : Region li
 
 end HullOperator
 
+/-- A family of possible regions, indexed by some type of choices. -/
+structure RegionFamily (line : Copy) (index : Type u) where
+  region : index -> Region line
+
+namespace RegionFamily
+
+variable {line : Copy} {index : Type u}
+
+/-- A region contains every member of a family of possible regions. -/
+def ContainedIn (family : RegionFamily line index) (common : Region line) : Prop :=
+  ∀ choice : index, Region.Subset (family.region choice) common
+
+/-- Membership in any chosen possible region implies membership in a common container. -/
+theorem contains_common_of_contains_choice {family : RegionFamily line index}
+    {common : Region line} (hcommon : family.ContainedIn common)
+    {choice : index} {x : Point line} (hx : (family.region choice).Contains x) :
+    common.Contains x :=
+  hcommon choice x hx
+
+/--
+An abstract common hull for a family of possible regions.
+
+This is the family analogue of the extensive part of `HullOperator`: every
+possible region is contained in the common hull.
+-/
+structure CommonHull (family : RegionFamily line index) where
+  hull : Region line
+  contains_each : family.ContainedIn hull
+
+namespace CommonHull
+
+variable {family : RegionFamily line index}
+
+theorem contains_of_choice (commonHull : CommonHull family)
+    {choice : index} {x : Point line} (hx : (family.region choice).Contains x) :
+    commonHull.hull.Contains x :=
+  commonHull.contains_each choice x hx
+
+/-- Any larger region than a common hull also contains every possible region. -/
+def enlarge (commonHull : CommonHull family) {larger : Region line}
+    (hsubset : Region.Subset commonHull.hull larger) : CommonHull family :=
+  { hull := larger,
+    contains_each := fun choice =>
+      Region.subset_trans (commonHull.contains_each choice) hsubset }
+
+end CommonHull
+
+end RegionFamily
+
 /-- A named transport together with a target-side region. -/
 structure RegionComparison (source target : Copy) where
   transport : Transport source target
@@ -193,6 +242,51 @@ theorem holds_hullTarget (operator : HullOperator target)
     (Transport.map comparison.transport sourcePoint) hholds
 
 end RegionComparison
+
+/--
+A family of region comparisons sharing a source and target.
+
+This represents a collection of possible comparison outputs produced by an
+algorithm, before choosing a specific possibility.
+-/
+structure RegionComparisonFamily (source target : Copy) (index : Type u) where
+  comparison : index -> RegionComparison source target
+
+namespace RegionComparisonFamily
+
+variable {source target : Copy} {index : Type u}
+
+/-- The target-region family underlying a family of comparisons. -/
+def targetRegions (family : RegionComparisonFamily source target index) :
+    RegionFamily target index :=
+  { region := fun choice => (family.comparison choice).targetRegion }
+
+/-- A common target region for all comparisons in the family. -/
+def CommonTarget (family : RegionComparisonFamily source target index)
+    (common : Region target) : Prop :=
+  (family.targetRegions).ContainedIn common
+
+/-- Membership for a chosen comparison survives passage to a common target region. -/
+theorem holds_commonTarget_of_choice {family : RegionComparisonFamily source target index}
+    {common : Region target} (hcommon : family.CommonTarget common)
+    {choice : index} {sourcePoint : Point source}
+    (hholds : (family.comparison choice).Holds sourcePoint) :
+    (RegionComparison.enlargeTarget (family.comparison choice) common).Holds sourcePoint :=
+  RegionComparison.holds_of_target_subset (hcommon choice) hholds
+
+/-- A common hull for the target regions of a comparison family. -/
+abbrev CommonTargetHull (family : RegionComparisonFamily source target index) :=
+  RegionFamily.CommonHull family.targetRegions
+
+theorem holds_commonTargetHull_of_choice {family : RegionComparisonFamily source target index}
+    (commonHull : family.CommonTargetHull)
+    {choice : index} {sourcePoint : Point source}
+    (hholds : (family.comparison choice).Holds sourcePoint) :
+    (RegionComparison.enlargeTarget (family.comparison choice) commonHull.hull).Holds
+      sourcePoint :=
+  RegionComparison.holds_of_target_subset (commonHull.contains_each choice) hholds
+
+end RegionComparisonFamily
 
 end RealLineCopy
 end Iut
