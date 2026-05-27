@@ -113,6 +113,22 @@ theorem unitThetaToy_membership_q_le_target_from_sourceObligations
         measure hnormalized h epsilon choice hholds :=
   rfl
 
+theorem unitThetaToy_membership_holds_from_sourceObligations
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    (unitThetaToySourceObligationLedger
+      measure hnormalized hh hbound hholds).membership.holds =
+      (by
+        simpa [AlgorithmicOutput.Holds, TransportedRegionFamily.Holds]
+          using hholds) :=
+  rfl
+
 end ToyModel
 end Stage1
 end Iut

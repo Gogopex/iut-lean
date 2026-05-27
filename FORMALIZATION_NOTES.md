@@ -3373,3 +3373,83 @@ then store it directly in the membership witness.
 The next milestone should add an analogous projection for the membership
 predicate itself, exposing that the ledger's `membership.holds` is exactly the
 chosen-output form of the original `hholds` assumption.
+
+## Milestone 34: Toy Membership Predicate Projection
+
+Lean file:
+
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III, Corollary 3.12, Step `(xi-d)` uses the relationship between q-pilot
+data and the selected output possibility before passing to measured real
+volumes. In the toy model, this relationship is the original `hholds`
+assumption:
+
+```text
+(thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice (qAssignment h)
+```
+
+After Milestone 32, the source ledger stores this relation as
+`membership.holds` for the selected comparison and charted q-point.
+
+### Purpose
+
+Milestone 33 exposed the packaged inequality proof. This milestone exposes the
+packaged membership proof:
+
+```text
+unitThetaToy_membership_holds_from_sourceObligations
+```
+
+The theorem states that the ledger's `membership.holds` is definitionally the
+proof obtained from `hholds` after unfolding:
+
+```text
+AlgorithmicOutput.Holds
+TransportedRegionFamily.Holds
+```
+
+### Lean Declaration
+
+In `ToySourceObligations.lean`:
+
+```text
+unitThetaToy_membership_holds_from_sourceObligations
+```
+
+The proof is again `rfl`, confirming that the source ledger stores the original
+membership assumption in chosen-output form without adding hidden proof
+machinery.
+
+### What This Tests
+
+The toy endpoint still builds, and Lean confirms that both parts of the
+membership witness are transparent:
+
+```text
+membership.holds
+membership.q_le_target
+```
+
+come directly from the old toy membership assumption and membership-to-volume
+theorem.
+
+### Design Trap Avoided
+
+The trap would be to structure the ledger so heavily that the original
+membership assumption becomes hard to locate. This milestone keeps the origin
+of the membership proof explicit for human readers and future source modules.
+
+### Next Step
+
+The next milestone should add a source-ledger theorem packaging the complete
+three-term final chain as named data:
+
+```text
+qSigned <= targetVolume.targetSigned <= thetaSigned
+```
+
+so the final Corollary-3.12 inequality can be audited through a single
+intermediate comparison object.
