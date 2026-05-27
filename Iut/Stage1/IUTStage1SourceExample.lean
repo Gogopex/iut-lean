@@ -2856,6 +2856,62 @@ theorem unitThetaToy_source_auditedComparisonDataEndpoint_example
     (unitThetaToyIUTStage1SourceObligations
       measure hnormalized hh hbound hholds)
 
+theorem unitThetaToy_source_endpoint_payloadRouteSummary_exists_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let obligations :=
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds
+    ∃ sourceAudit : IUTStage1SourcePackage.Audit package obligations,
+      IUTStage1SourcePackage.Audit.PayloadRouteSummary sourceAudit :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  let endpoint :=
+    package.auditedComparisonDataEndpoint
+      (unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds)
+  endpoint.payloadRouteSummaryExists
+
+theorem unitThetaToy_source_endpoint_payloadRouteSummary_publicAudit_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let obligations :=
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds
+    let endpoint :=
+      package.auditedComparisonDataEndpoint obligations
+    ∃ sourceAudit : IUTStage1SourcePackage.Audit package obligations,
+      IUTStage1SourcePackage.Audit.PayloadRouteSummary sourceAudit ∧
+        endpoint.publicAudit = package.publicAudit obligations :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  let obligations :=
+    unitThetaToyIUTStage1SourceObligations
+      measure hnormalized hh hbound hholds
+  let endpoint :=
+    package.auditedComparisonDataEndpoint obligations
+  endpoint.payloadRouteSummaryAndPublicAudit
+
 theorem unitThetaToy_source_comparisonPayloadInputs_q_le_theta_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

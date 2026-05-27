@@ -10948,3 +10948,60 @@ keeps the full path visible as a single theorem-level package.
 The next milestone should connect this payload route summary to
 `ComparisonDataEndpoint`, so the compact audit route is available at the same
 public endpoint boundary as the comparison-data endpoint.
+
+## Milestone 138: Payload Route Summary at the Comparison Endpoint
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The comparison-data endpoint is the public boundary for the local
+Corollary-3.12-shaped comparison. Since the source audit route now has a compact
+payload summary, the endpoint should expose that summary as well. This keeps the
+endpoint aligned with the source-side route from chart/membership data to final
+comparison data, which is precisely the kind of route that matters in the
+Scholze-Stix/Mochizuki disagreement.
+
+### Purpose
+
+Milestone 137 added `IUTStage1SourcePackage.Audit.PayloadRouteSummary`. This
+milestone connects it to `ComparisonDataEndpoint`, so consumers of the endpoint
+can recover a source audit witness together with the full payload route summary.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.ComparisonDataEndpoint.payloadRouteSummaryExists
+IUTStage1SourcePackage.ComparisonDataEndpoint.payloadRouteSummaryAndPublicAudit
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_endpoint_payloadRouteSummary_exists_example
+unitThetaToy_source_endpoint_payloadRouteSummary_publicAudit_example
+```
+
+### What This Tests
+
+The toy endpoint examples verify that the public comparison-data endpoint can
+recover the compact source audit payload route summary, and can do so while
+also preserving the equality to the package public audit.
+
+### Design Trap Avoided
+
+The trap would be to make `ComparisonDataEndpoint` expose only the final signed
+payload while the source-side route summary remains available only through a
+separate audit theorem. This bridge keeps the public endpoint tied to the route
+that produced it.
+
+### Next Step
+
+The next milestone should expose the same endpoint-level payload route summary
+through the structured-hypothesis route, so the highest-level structured source
+path carries the complete source-to-endpoint audit.

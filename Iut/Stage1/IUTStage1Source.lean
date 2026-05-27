@@ -2252,6 +2252,28 @@ theorem publicAuditEq
 
 end Audit
 
+namespace ComparisonDataEndpoint
+
+variable {package : IUTStage1SourcePackage source target index}
+variable {obligations : IUTStage1SourceObligations package}
+
+theorem payloadRouteSummaryExists
+    (endpoint : package.ComparisonDataEndpoint obligations) :
+    ∃ sourceAudit : Audit package obligations,
+      Audit.PayloadRouteSummary sourceAudit := by
+  rcases endpoint with ⟨sourceAudit, _data, _hdata, _hle, _hcorollary, _hrecovers⟩
+  exact ⟨sourceAudit, sourceAudit.payloadRouteSummary⟩
+
+theorem payloadRouteSummaryAndPublicAudit
+    (endpoint : package.ComparisonDataEndpoint obligations) :
+    ∃ sourceAudit : Audit package obligations,
+      Audit.PayloadRouteSummary sourceAudit ∧
+        endpoint.publicAudit = package.publicAudit obligations := by
+  rcases endpoint.payloadRouteSummaryExists with ⟨sourceAudit, summary⟩
+  exact ⟨sourceAudit, summary, endpoint.publicAudit_eq_package_publicAudit⟩
+
+end ComparisonDataEndpoint
+
 end IUTStage1SourcePackage
 
 end Stage1
