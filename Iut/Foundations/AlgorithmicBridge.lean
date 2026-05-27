@@ -130,6 +130,10 @@ composite.
 structure DescentOperationId where
   label : String
 
+/-- Inert identifier for the SHE arrow used to restrict HDD input data. -/
+structure SHEArrowId where
+  label : String
+
 /--
 A named hull+det operation together with the structured bridge it supplies.
 
@@ -210,6 +214,59 @@ theorem allTargetsAtMost
   data.hullDetBridge.allTargetsAtMost certificate
 
 end HDDCompositeData
+
+/--
+Named SHE-arrow data for the final restricted composite.
+
+The datum records which structured SHE witness is used to view the q-pilot data
+in the common holomorphic context.
+-/
+structure SHEArrowData
+    (output : AlgorithmicOutput source target index) where
+  arrow : SHEArrowId
+  datum : QualitativeData.SHEDatum output.family
+
+/--
+The fourth-triangle composite `(HDD) o (SHE)`.
+
+This is still inert bookkeeping: the SHE arrow and HDD composite are supplied
+explicitly, and no mathematical implication is derived from their names.
+-/
+structure HDDSHECompositeData
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target) (bound : Real) where
+  sheArrow : SHEArrowData output
+  hdd : output.HDDCompositeData measure bound
+
+namespace HDDSHECompositeData
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+
+def structuredBridge (data : HDDSHECompositeData output measure bound) :
+    output.StructuredCommonTargetBoundBridge measure bound :=
+  data.hdd.structuredBridge
+
+def apply (data : HDDSHECompositeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    output.CommonTargetBound measure bound :=
+  data.hdd.apply certificate
+
+theorem choice_targetVolume_le
+    (data : HDDSHECompositeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family)
+    (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  data.hdd.choice_targetVolume_le certificate choice
+
+theorem allTargetsAtMost
+    (data : HDDSHECompositeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  data.hdd.allTargetsAtMost certificate
+
+end HDDSHECompositeData
 
 end AlgorithmicOutput
 

@@ -2384,3 +2384,112 @@ The next milestone should expose the fourth triangle by adding an inert
 `SHEArrowId` or `SHEBridgeData` and a record for the restricted composite
 `HDD o SHE`, then make the source ledger depend on that final composite rather
 than directly on HDD.
+
+## Milestone 24: HDD After SHE Composite
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/ToyBridge.lean`
+* `Iut/Stage1/SourceObligations.lean`
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+Mochizuki's April 2026 formalization report describes the fourth triangle as
+the composite `(HDD) o (SHE)`. In that triangle, the input data `BPS+etHT` for
+`HDD` is obtained by applying the SHE arrow, i.e. simultaneous holomorphic
+expressibility, to the q-pilot data constructed from the etale Hodge theater.
+The report then says the skeletal Lean work concerns this final triangle: a
+simultaneous comparison in a single ring structure/common container between the
+Theta-pilot, corresponding to HDD, and the q-pilot, corresponding to SHE.
+
+IUT III, Corollary 3.12, Step `(xi-d)` gives the matching mathematical shape:
+the output data after holomorphic hull formation is linked to the q-pilot by
+IPL and expressed relative to localized arithmetic vector bundles over rings
+arising from the arithmetic holomorphic structure in the `1`-column by SHE.
+Only after this expression, determinant formation, and normalized log-volume
+application are the q- and Theta-side real objects comparable.
+
+Scholze-Stix again supply the diagnostic constraint for this milestone: because
+the final conclusion compares real numbers, all identifications and comparison
+contexts must be explicit. The SHE datum used by the final composite therefore
+must not drift away from the SHE datum in the structured certificate.
+
+### Purpose
+
+Milestone 23 made HDD visible as descent followed by hull+det. This milestone
+adds the fourth-triangle wrapper:
+
+```text
+SHEArrowId
+SHEArrowData
+HDDSHECompositeData
+```
+
+`SHEArrowData` stores the inert arrow identifier together with the structured
+SHE datum. `HDDSHECompositeData` stores the SHE arrow data and the HDD
+composite. The source ledger now depends on this final composite.
+
+### Lean Declarations
+
+In `AlgorithmicBridge.lean`:
+
+```text
+SHEArrowId.label
+SHEArrowData.arrow
+SHEArrowData.datum
+HDDSHECompositeData.sheArrow
+HDDSHECompositeData.hdd
+HDDSHECompositeData.structuredBridge
+HDDSHECompositeData.apply
+HDDSHECompositeData.choice_targetVolume_le
+HDDSHECompositeData.allTargetsAtMost
+```
+
+In `ToyBridge.lean`:
+
+```text
+thetaToySHEArrow
+thetaToySHEArrowData
+thetaToyHDDSHECompositeData
+thetaToyHDDSHE_choice_targetVolume_le_bound
+thetaToyHDDSHE_allTargetsAtMost
+```
+
+In `SourceObligations.lean`, the ledger field
+
+```text
+hdd : output.HDDCompositeData measure thetaSigned
+```
+
+was replaced by:
+
+```text
+hddShe : output.HDDSHECompositeData measure thetaSigned
+she_matches_certificate : hddShe.sheArrow.datum = certificate.she
+```
+
+The final inequality now accesses the structured bridge through
+`ledger.hddShe.structuredBridge`.
+
+### What This Tests
+
+The toy source-obligation endpoint still proves the signed Stage 1 inequality
+after the final ledger is strengthened from HDD data to HDD-after-SHE data.
+The new `she_matches_certificate` field also tests that the SHE datum used to
+restrict HDD is the same SHE datum carried by the structured certificate.
+
+### Design Trap Avoided
+
+The trap would be to add an `(HDD) o (SHE)` label while leaving the actual SHE
+datum implicit or inconsistent with the certificate used by the bridge. This
+would reintroduce a hidden comparison context at precisely the point where the
+source dispute demands explicit bookkeeping.
+
+### Next Step
+
+The next milestone should make the "single ring structure/common container"
+language explicit by adding an inert common-container record that ties together
+the SHE common holomorphic context, the HDD-after-SHE composite, and the
+target-side measure used for the final real comparison.

@@ -28,10 +28,11 @@ that the normalization/comparability obligation has been discharged.
 structure SourceObligationLedger
     {source target : Copy} {index : Type u}
     (output : AlgorithmicOutput source target index)
-  (measure : RegionMeasure target) (thetaSigned qSigned : Real)
+    (measure : RegionMeasure target) (thetaSigned qSigned : Real)
     (normalization : Prop) where
   certificate : QualitativeData.StructuredCertificate output.family
-  hdd : output.HDDCompositeData measure thetaSigned
+  hddShe : output.HDDSHECompositeData measure thetaSigned
+  she_matches_certificate : hddShe.sheArrow.datum = certificate.she
   choice : index
   q_le_choice :
     qSigned <= RegionMeasure.targetVolume measure (output.comparison choice)
@@ -52,15 +53,20 @@ theorem corollary312 (ledger :
       (signedPilotLogVolume PilotSide.theta thetaSigned)
       (signedPilotLogVolume PilotSide.q qSigned) :=
   corollary312_from_structured_bridge
-    ledger.hdd.structuredBridge ledger.certificate ledger.choice
+    ledger.hddShe.structuredBridge ledger.certificate ledger.choice
     ledger.q_le_choice
 
 def stage1Comparison (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     Stage1Comparison :=
   stage1Comparison_from_structured_bridge
-    ledger.hdd.structuredBridge ledger.certificate ledger.choice
+    ledger.hddShe.structuredBridge ledger.certificate ledger.choice
     ledger.q_positive ledger.q_le_choice
+
+theorem sheMatchesCertificate (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.hddShe.sheArrow.datum = ledger.certificate.she :=
+  ledger.she_matches_certificate
 
 theorem hasNormalization (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
