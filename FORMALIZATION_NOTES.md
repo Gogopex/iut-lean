@@ -10751,3 +10751,78 @@ The next milestone should relate `comparisonDataFromPayloadInputs` to the
 promoted ledger's `comparisonData`, showing explicitly where the payload built
 from source-side inputs meets the payload exported by the promoted source
 ledger.
+
+## Milestone 135: Payload Inputs Meet Promoted Ledger Data
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+Mochizuki's formalization report isolates the final `3.11.5 => 3.12` step as
+the place where the comparison data becomes the Corollary 3.12 endpoint. The
+same report describes this as the comparison of the q-pilot data and
+Theta-pilot data in a common-container setting.
+
+Scholze-Stix's critique focuses on whether the passage from the source-side
+pilot-object discussion to the final real inequality is legitimate. In our
+local scaffold, that passage now has two adjacent objects: the comparison data
+built directly from source-side payload inputs, and the comparison data exported
+by the promoted source ledger. This milestone proves that these are the same
+payload.
+
+### Purpose
+
+The source route now has three layers:
+
+* `ComparisonPayloadInputs`: chart, selected-output, membership, and
+  target-bound facts;
+* `comparisonDataFromPayloadInputs`: the signed payload built from those inputs
+  plus q-positivity;
+* `comparisonData`: the signed payload exported by the promoted ledger/provider.
+
+This milestone relates the second and third layers. That gives future work an
+explicit point where source-side audit facts meet the public promoted-ledger
+endpoint.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.comparisonDataFromPayloadInputs_eq_comparisonData
+IUTStage1SourcePackage.comparisonDataFromPayloadInputs_stage1Comparison_eq
+IUTStage1SourcePackage.comparisonDataFromPayloadInputs_corollary312_eq
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_comparisonDataFromPayloadInputs_eq_comparisonData_example
+unitThetaToy_source_comparisonDataFromPayloadInputs_stage_eq_example
+```
+
+### What This Tests
+
+The toy examples verify that the source-side payload construction and promoted
+ledger payload agree, both as comparison data and after packaging into
+`Stage1Comparison`.
+
+### Design Trap Avoided
+
+The trap would be to let the source-side payload and the promoted-ledger payload
+drift into two independent presentations of the endpoint. The equality bridge
+ensures that future code cannot silently use a different final signed payload
+when moving from source inputs to the promoted ledger.
+
+This is still not a proof of IUT. It is a formal interface check: once the
+source obligations are supplied, the payload computed from the audited
+source-side comparison route is the payload exported at the public endpoint.
+
+### Next Step
+
+The next milestone should expose this equality through
+`IUTStage1SourcePackage.Audit`, so source audits can recover not only the
+payload inputs and final comparison data, but also the bridge between them.

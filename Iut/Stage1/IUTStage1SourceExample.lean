@@ -2845,6 +2845,54 @@ theorem unitThetaToy_source_comparisonDataFromPayloadInputs_corollary_example
     (unitThetaToyIUTStage1SourceObligations
       measure hnormalized hh hbound hholds)
 
+theorem unitThetaToy_source_comparisonDataFromPayloadInputs_eq_comparisonData_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let obligations :=
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds
+    package.comparisonDataFromPayloadInputs obligations =
+      package.comparisonData obligations :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  package.comparisonDataFromPayloadInputs_eq_comparisonData
+    (unitThetaToyIUTStage1SourceObligations
+      measure hnormalized hh hbound hholds)
+
+theorem unitThetaToy_source_comparisonDataFromPayloadInputs_stage_eq_example
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    {h : Real} (hh : 0 < h)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    {choice : index}
+    (hholds : (thetaToyAlgorithmOutput unitQToTheta h epsilon).Holds choice
+      (qAssignment h)) :
+    let package :=
+      unitThetaToyIUTStage1SourcePackage
+        measure hnormalized hh hbound hholds
+    let obligations :=
+      unitThetaToyIUTStage1SourceObligations
+        measure hnormalized hh hbound hholds
+    (package.comparisonDataFromPayloadInputs obligations).stage1Comparison =
+      (package.comparisonData obligations).stage1Comparison :=
+  let package :=
+    unitThetaToyIUTStage1SourcePackage
+      measure hnormalized hh hbound hholds
+  package.comparisonDataFromPayloadInputs_stage1Comparison_eq
+    (unitThetaToyIUTStage1SourceObligations
+      measure hnormalized hh hbound hholds)
+
 theorem unitThetaToy_source_comparisonDataEndpoint_q_le_theta_example
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

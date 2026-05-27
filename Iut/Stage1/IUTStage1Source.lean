@@ -967,6 +967,29 @@ def comparisonData
     Corollary312ComparisonData :=
   (package.promotedProvider obligations).comparisonData
 
+theorem comparisonDataFromPayloadInputs_eq_comparisonData
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceObligations package) :
+    package.comparisonDataFromPayloadInputs obligations =
+      package.comparisonData obligations := by
+  simp [comparisonDataFromPayloadInputs, comparisonData,
+    IUTSourceObligationProvider.comparisonData, SourceObligationLedger.comparisonData,
+    IUTStage1PreLedgerData.ComparisonPayloadInputs.comparisonData]
+
+theorem comparisonDataFromPayloadInputs_stage1Comparison_eq
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceObligations package) :
+    (package.comparisonDataFromPayloadInputs obligations).stage1Comparison =
+      (package.comparisonData obligations).stage1Comparison := by
+  rw [package.comparisonDataFromPayloadInputs_eq_comparisonData obligations]
+
+theorem comparisonDataFromPayloadInputs_corollary312_eq
+    (package : IUTStage1SourcePackage source target index)
+    (obligations : IUTStage1SourceObligations package) :
+    (package.comparisonDataFromPayloadInputs obligations).corollary312 =
+      (package.comparisonData obligations).corollary312 :=
+  Subsingleton.elim _ _
+
 theorem comparisonData_thetaSigned
     (package : IUTStage1SourcePackage source target index)
     (obligations : IUTStage1SourceObligations package) :
