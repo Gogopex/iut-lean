@@ -4816,3 +4816,88 @@ source of the SHE data explicit.
 The next milestone should expose the common-context equality as a named
 composition of the common container's `she_context_matches` field and
 `she_matches_certificate`.
+
+## Milestone 53: Common-Context Alignment Projection
+
+Lean file:
+
+* `Iut/Stage1/SourceObligations.lean`
+
+### Source Check
+
+The April 2026 formalization report describes the final comparison as taking
+place in a common container for the `Theta`- and `q`-pilot data. It also
+identifies the relationship between input data and multiradial output data as
+part of the Stage 1 comparison interface. The common container must therefore
+remain tied to the SHE datum recorded in the structured certificate.
+
+Our `CommonContainerData` stores:
+
+```text
+hddShe.sheArrow.datum.sharedContext = context
+```
+
+and the source ledger stores:
+
+```text
+hddShe.sheArrow.datum = certificate.she
+```
+
+The common-context theorem composes these two facts.
+
+### Purpose
+
+This milestone exposes the proof shape of the context alignment:
+
+```text
+ledger.commonContextMatchesCertificate
+  =
+by
+  rw [<- ledger.chartedContainer.commonContainer.she_context_matches]
+  rw [ledger.she_matches_certificate]
+```
+
+and adds the reverse orientation:
+
+```text
+ledger.certificate.she.sharedContext
+  = ledger.chartedContainer.commonContainer.context
+```
+
+### Lean Declarations
+
+In `SourceObligations.lean`:
+
+```text
+SourceObligationLedger.commonContextMatchesCertificate_eq_sheAlignment
+SourceObligationLedger.certificateContext_eq_commonContext
+```
+
+The first proof is `rfl`, verifying that the public theorem is definitionally
+the advertised two-step rewrite. The second proof is the symmetric form of the
+public context-alignment theorem.
+
+### What This Tests
+
+The qualitative layer now exposes:
+
+```text
+container SHE datum = certificate SHE datum
+container context = certificate SHE sharedContext
+```
+
+with the second equality explicitly built from the first plus the container's
+stored context equality.
+
+### Design Trap Avoided
+
+The trap would be to treat the common container's context as independent of the
+certificate's SHE context. This milestone keeps the common-context alignment
+auditable before any source-specific IUT construction replaces the current
+abstraction.
+
+### Next Step
+
+The next milestone should audit the charted common container accessor
+`thetaChartTrivial`, showing it is exactly the chart's recorded trivial
+Theta-side transport.

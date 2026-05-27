@@ -355,6 +355,20 @@ theorem commonContextMatchesCertificate (ledger :
   rw [← ledger.chartedContainer.commonContainer.she_context_matches]
   rw [ledger.she_matches_certificate]
 
+theorem commonContextMatchesCertificate_eq_sheAlignment (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.commonContextMatchesCertificate =
+      (by
+        rw [← ledger.chartedContainer.commonContainer.she_context_matches]
+        rw [ledger.she_matches_certificate]) :=
+  rfl
+
+theorem certificateContext_eq_commonContext (ledger :
+    SourceObligationLedger output measure thetaSigned qSigned normalization) :
+    ledger.certificate.she.sharedContext =
+      ledger.chartedContainer.commonContainer.context :=
+  ledger.commonContextMatchesCertificate.symm
+
 theorem thetaChartTrivial (ledger :
     SourceObligationLedger output measure thetaSigned qSigned normalization) :
     Transport.TrivialMonodromy
