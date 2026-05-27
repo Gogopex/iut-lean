@@ -12307,3 +12307,102 @@ The modeled cusp still depends on the supplied `LocalLabCuspModel`. The next
 mathematical step is to relate this local label model more tightly to the
 orbicurve type witnesses for `(1, Z/lZ)^pm`, rather than treating the model as
 free extra data.
+
+## Math Milestone 36: `LabCusp` Models Sourced from Bad Local Type Data
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Definition 3.1(e), assumes that at `v in Vbad` the local orbicurve `C_v`
+has type `(1,Z/lZ)^pm`, referring to [EtTh], Definition 2.5(i). Definition
+3.1(f) then says that `epsilon_v` arises from the canonical generator, up to
+sign, of the quotient `Z` appearing in that same type definition. Definition
+4.1(ii) later constructs `LabCusp(D_v)` from the local object and its quotient
+data.
+
+This is not yet a formalization of the [EtTh] reconstruction algorithm. The
+source-aligned refinement is narrower: the local `LabCusp` model is now packaged
+with the bad local type witness, and the cusp layer must use that model.
+
+The Scholze-Stix guardrail remains unchanged: this step is local initial-theta
+data, not a cross-Hodge-theater comparison and not a Corollary 3.12 endpoint.
+It therefore must not identify distinct Hodge-theater histories or claim any
+log-volume inequality.
+
+### Lean/API Check
+
+Before this milestone, the bad local type witness lived in `ThetaBadLocalData`,
+while the local label model lived independently in `ThetaCuspLocalData`. That
+allowed a bad local cusp to cite a model that was not visibly sourced from the
+`(1,Z/lZ)^pm` witness.
+
+The new structure
+
+```text
+BadLocalOrbicurveTypeData
+```
+
+packages:
+
+```text
+typeData : OrbicurveTypeData l C OrbicurveTypeKind.oneZModLPM
+labCuspModel : LocalLabCuspModel l
+labCuspModel_constructedFromType : Prop
+```
+
+The final proposition is an explicit placeholder for the future EtTh
+reconstruction proof.
+
+### Lean Decisions
+
+`ThetaBadLocalData.badLocalCType` now returns `BadLocalOrbicurveTypeData`.
+The old `ThetaCuspLocalData.badLocalLabCuspModel` field was removed. All
+bad-local cusp compatibility statements now refer to:
+
+```text
+badLocalData.badLocalLabCuspModel v hv
+```
+
+This makes the data flow one-way:
+
+```text
+bad local type witness -> local LabCusp model -> modeled bad local cusp
+```
+
+### Lean Declarations
+
+```text
+BadLocalOrbicurveTypeData
+BadLocalOrbicurveTypeData.holds
+BadLocalOrbicurveTypeData.labCuspModelSource
+ThetaBadLocalData.badLocalLabCuspModel
+ThetaBadLocalData.badLocalLabCuspModelSource
+InitialThetaData.badLocalLabCuspModelSource
+```
+
+### What This Tests
+
+The example file now checks:
+
+* the bad local type witness still proves the `(1,Z/lZ)^pm` type condition;
+* the bad local `LabCusp` model has a recorded source obligation from that type
+  witness;
+* the previously exposed modeled bad cusp still builds and has the same
+  underlying local cusp.
+
+### Design Trap Avoided
+
+The trap would be to keep adding compatibility equalities between independent
+records. This milestone moves the label model to the bad local type package, so
+the cusp layer cannot choose a separate model by accident.
+
+### Remaining Gap
+
+`labCuspModel_constructedFromType` is still a named obligation, not a theorem
+derived from a formalized EtTh Definition 2.5(i). A later milestone should
+expand the type witness so the quotient `Z`, its sign ambiguity, and the
+canonical generator are reconstructed rather than supplied.

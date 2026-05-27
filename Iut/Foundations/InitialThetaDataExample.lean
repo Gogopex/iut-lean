@@ -434,7 +434,7 @@ def abstractThetaBadLocalData
       (v : NumberField.FinitePlace K) -> v ∈ valuations.selected -> Prop)
     (badLocalCType :
       (v : NumberField.FinitePlace K) -> (hv : v ∈ valuations.bad) ->
-        OrbicurveTypeData primeFive (localC v hv.1) OrbicurveTypeKind.oneZModLPM)
+        BadLocalOrbicurveTypeData primeFive (localC v hv.1))
     (thetaRootLocalXType :
       (v : NumberField.FinitePlace K) -> (hv : v ∈ valuations.bad) ->
         OrbicurveTypeData primeFive (localX v hv.1) OrbicurveTypeKind.oneZModLTheta)
@@ -478,15 +478,12 @@ def abstractThetaCuspLocalData
     (badLocalCanonicalGenerator :
       (v : NumberField.FinitePlace K) -> v ∈ valuations.bad ->
         CanonicalGeneratorUpToSignElement)
-    (badLocalLabCuspModel :
-      (v : NumberField.FinitePlace K) -> v ∈ valuations.bad ->
-        LocalLabCuspModel primeFive)
     (hBadQuotient :
       ∀ v hv, (localCusp v hv.1).quotientOrigin =
-        (badLocalLabCuspModel v hv).canonicalNonzeroQuotientElement)
+        (badLocalData.badLocalLabCuspModel v hv).canonicalNonzeroQuotientElement)
     (hBadCanonical :
       ∀ v hv, badLocalCanonicalGenerator v hv =
-        (badLocalLabCuspModel v hv).canonicalGeneratorUpToSignElement)
+        (badLocalData.badLocalLabCuspModel v hv).canonicalGeneratorUpToSignElement)
     (hDetermined : ∀ v hv, localCusp_determinedByGlobal v hv) :
     ThetaCuspLocalData primeFive Fmod F K curveModuli coverData valuations
       badLocalData epsilon where
@@ -494,7 +491,6 @@ def abstractThetaCuspLocalData
   localCusp_determinedByGlobal := localCusp_determinedByGlobal
   localCusp_determinedByGlobal_holds := hDetermined
   badLocalCanonicalGenerator := badLocalCanonicalGenerator
-  badLocalLabCuspModel := badLocalLabCuspModel
   badLocalCusp_quotientOrigin_eq_model := hBadQuotient
   badLocalCanonicalGenerator_eq_model := hBadCanonical
 
@@ -552,8 +548,12 @@ example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.selected) :
   theta.decompositionGroupOuterSurjection v hv
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
-    (theta.badLocalData.badLocalCType v hv).hasType :=
+    (theta.badLocalData.badLocalCType v hv).typeData.hasType :=
   theta.badLocalType v hv
+
+example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    (theta.badLocalData.badLocalCType v hv).labCuspModel_constructedFromType :=
+  theta.badLocalLabCuspModelSource v hv
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
     (theta.badLocalData.thetaRootLocalXType v hv).hasType :=
@@ -608,8 +608,10 @@ example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
     (theta.badLocalModeledCusp v hv).labelClassData.labelClass =
-      (theta.badLocalLabCuspModel v hv).signAction.toSignLabelQuotient
-        (theta.badLocalLabCuspModel v hv).canonicalNonzeroLabel :=
+      QuotientSignAction.toSignLabelQuotient
+        ((theta.badLocalModeledCusp v hv).labelClassData.model.signAction)
+        (LocalLabCuspModel.canonicalNonzeroLabel
+          ((theta.badLocalModeledCusp v hv).labelClassData.model)) :=
   theta.badLocalModeledCusp_labelClass_eq_model_quotient v hv
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
