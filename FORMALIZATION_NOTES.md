@@ -13681,3 +13681,117 @@ The quotient is still abstractly attached to reconstructed function-field data.
 Later milestones should connect this to a more concrete covering/deck
 transformation formalization and eventually to the Frobenioid/prime-strip data
 used later in IUT.
+
+## Math Milestone 49: Explicit Galois Quotient Interface
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Remark 3.1.2, says that the `Theta`-approach reconstructs the function
+field of `X_K` together with its natural
+
+```text
+Gal(X_K/C_K) ~= Pi_CK / Pi_XK
+```
+
+action. Milestones 43-48 formalized the quotient side. This milestone adds an
+explicit Lean interface for a proposed Galois/deck group and a multiplicative
+equivalence from that group to the quotient.
+
+This remains an IUT I reconstruction-layer statement. It does not identify
+pilot objects across Hodge theaters and does not assert any Corollary 3.12
+log-volume comparison.
+
+### Lean/API Check
+
+The new record is:
+
+```text
+ThetaApproachGaloisQuotientData
+```
+
+It stores:
+
+```text
+galXKCK : Type
+galXKCKGroup : Group galXKCK
+galXKCKEquivDeckQuotient :
+  galXKCK ~= ThetaApproachQuotientData.deckQuotient thetaApproach
+```
+
+The record yields:
+
+```text
+toDeckHom
+fromDeckHom
+piCKToGalHom
+piCKToGalHom_surjective
+piCKToGalHom_ker
+piXK_toGal_eq_one
+galFunctionFieldAction
+gal_smul_eq_deck_smul
+piCK_smul_eq_gal_smul
+```
+
+The cover and initial-theta layers expose:
+
+```text
+ThetaOrbicurveCoverData.thetaApproachGalPiCKHom
+ThetaOrbicurveCoverData.thetaApproachGalPiCKHomSurjective
+ThetaOrbicurveCoverData.thetaApproachGalPiCKHomKer
+ThetaOrbicurveCoverData.thetaApproachPiXK_toGal_eq_one
+InitialThetaData.thetaApproachGalPiCKHom
+InitialThetaData.thetaApproachGalPiCKHomSurjective
+InitialThetaData.thetaApproachGalPiCKHomKer
+InitialThetaData.thetaApproachPiXK_toGal_eq_one
+```
+
+### Lean Decisions
+
+We did not replace the earlier proposition
+`galXKCK_identifiedWithQuotient`. Instead, we added a separate structured
+interface that can be supplied when an actual candidate deck/Galois group is
+available. This avoids breaking the existing reconstruction skeleton while
+making future uses prove facts through a real group equivalence.
+
+The induced map
+
+```text
+Pi_CK -> Gal(X_K/C_K)
+```
+
+is defined by composing the quotient hom `Pi_CK -> Pi_CK / Pi_XK` with the
+inverse of the Galois/quotient equivalence. Lean proves that this map is
+surjective and has kernel exactly the image of `Pi_XK`.
+
+The Galois action on the reconstructed function field is transported from the
+quotient/deck action by `MulSemiringAction.compHom`.
+
+### What This Tests
+
+The example file now checks:
+
+* the projected `Pi_CK -> Gal(X_K/C_K)` hom is surjective;
+* its kernel is the embedded `Pi_XK`;
+* every `Pi_XK` element maps to `1` in the Galois group;
+* the Galois action agrees with the existing deck-quotient action;
+* the `Pi_CK` action agrees with the action pulled back through the Galois
+  quotient map.
+
+### Design Trap Avoided
+
+The trap would be to keep saying "Galois group equals quotient" only as an
+opaque proposition. That would not let Lean verify maps, kernels, or transported
+actions. The new interface still allows an abstract Galois group, but any use of
+it must pass through a concrete `MulEquiv`.
+
+### Remaining Gap
+
+The Galois/deck group is still supplied abstractly. Later milestones should
+construct it from finite etale covering data or field automorphism data, then
+connect the local/decomposition-group reconstruction data to this global
+quotient interface.

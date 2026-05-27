@@ -746,6 +746,42 @@ example :
       theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.imageSubgroup :=
   theta.thetaApproachQuotientHomKer
 
+variable (galData :
+  ThetaApproachGaloisQuotientData theta.coverData.thetaApproachQuotient)
+
+example :
+    Function.Surjective
+      (InitialThetaData.thetaApproachGalPiCKHom theta galData) :=
+  theta.thetaApproachGalPiCKHomSurjective galData
+
+example :
+    (InitialThetaData.thetaApproachGalPiCKHom theta galData).ker =
+      theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.imageSubgroup :=
+  theta.thetaApproachGalPiCKHomKer galData
+
+example (g : theta.coverData.thetaApproachQuotient.piXK.carrier) :
+    InitialThetaData.thetaApproachGalPiCKHom theta galData
+        (theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g) = 1 :=
+  theta.thetaApproachPiXK_toGal_eq_one galData g
+
+example
+    (γ : galData.galXKCK)
+    (x : ThetaApproachFunctionFieldData.functionField
+      theta.coverData.thetaApproachFunctionField) :
+    γ • x =
+      ThetaApproachGaloisQuotientData.toDeckHom galData γ • x :=
+  ThetaApproachGaloisQuotientData.gal_smul_eq_deck_smul galData
+    theta.coverData.thetaApproachFunctionField γ x
+
+example
+    (g : theta.coverData.thetaApproachQuotient.piCK.carrier)
+    (x : ThetaApproachFunctionFieldData.functionField
+      theta.coverData.thetaApproachFunctionField) :
+    g • x =
+      InitialThetaData.thetaApproachGalPiCKHom theta galData g • x :=
+  ThetaApproachGaloisQuotientData.piCK_smul_eq_gal_smul galData
+    theta.coverData.thetaApproachFunctionField g x
+
 example :
     theta.coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
   theta.thetaApproachGalQuotientIdentification

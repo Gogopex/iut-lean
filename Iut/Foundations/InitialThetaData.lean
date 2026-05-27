@@ -1535,6 +1535,105 @@ theorem reconstructionViaThetaApproach :
 end ThetaApproachQuotientData
 
 /--
+An explicit group-theoretic interface for the source phrase
+`Gal(X_K/C_K) ~= Pi_CK / Pi_XK`.
+
+The actual Galois/deck group is still supplied abstractly. The important point
+at this layer is that any proposed Galois group is related to the reconstructed
+quotient by a genuine multiplicative equivalence, not just by a named
+proposition.
+-/
+structure ThetaApproachGaloisQuotientData
+    (thetaApproach : ThetaApproachQuotientData) where
+  galXKCK : Type u
+  galXKCKGroup : Group galXKCK
+  galXKCKEquivDeckQuotient :
+    galXKCK ≃* ThetaApproachQuotientData.deckQuotient thetaApproach
+
+namespace ThetaApproachGaloisQuotientData
+
+variable {thetaApproach : ThetaApproachQuotientData}
+variable (galData : ThetaApproachGaloisQuotientData thetaApproach)
+
+instance : Group galData.galXKCK :=
+  galData.galXKCKGroup
+
+def toDeckHom :
+    galData.galXKCK →*
+      ThetaApproachQuotientData.deckQuotient thetaApproach :=
+  galData.galXKCKEquivDeckQuotient.toMonoidHom
+
+def fromDeckHom :
+    ThetaApproachQuotientData.deckQuotient thetaApproach →*
+      galData.galXKCK :=
+  galData.galXKCKEquivDeckQuotient.symm.toMonoidHom
+
+theorem toDeckHom_surjective :
+    Function.Surjective (ThetaApproachGaloisQuotientData.toDeckHom galData) :=
+  galData.galXKCKEquivDeckQuotient.surjective
+
+theorem fromDeckHom_surjective :
+    Function.Surjective (ThetaApproachGaloisQuotientData.fromDeckHom galData) :=
+  galData.galXKCKEquivDeckQuotient.symm.surjective
+
+def piCKToGalHom :
+    thetaApproach.piCK.carrier →* galData.galXKCK :=
+  (ThetaApproachGaloisQuotientData.fromDeckHom galData).comp
+    (ThetaApproachQuotientData.quotientHom thetaApproach)
+
+theorem piCKToGalHom_surjective :
+    Function.Surjective (ThetaApproachGaloisQuotientData.piCKToGalHom galData) := by
+  intro γ
+  rcases ThetaApproachQuotientData.quotientHom_surjective thetaApproach
+      (ThetaApproachGaloisQuotientData.toDeckHom galData γ) with ⟨g, hg⟩
+  refine ⟨g, ?_⟩
+  apply galData.galXKCKEquivDeckQuotient.injective
+  simp [ThetaApproachGaloisQuotientData.piCKToGalHom,
+    ThetaApproachGaloisQuotientData.toDeckHom,
+    ThetaApproachGaloisQuotientData.fromDeckHom, hg]
+
+theorem piCKToGalHom_ker :
+    (ThetaApproachGaloisQuotientData.piCKToGalHom galData).ker =
+      thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup := by
+  ext g
+  have hquot :
+      g ∈ (ThetaApproachQuotientData.quotientHom thetaApproach).ker ↔
+        g ∈ thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup := by
+    simpa using
+      congrArg (fun H : Subgroup thetaApproach.piCK.carrier => g ∈ H)
+        (ThetaApproachQuotientData.quotientHom_ker thetaApproach)
+  change
+    galData.galXKCKEquivDeckQuotient.symm
+        (ThetaApproachQuotientData.quotientHom thetaApproach g) = 1 ↔
+      g ∈ thetaApproach.piXK_to_piCK.openEmbedding.imageSubgroup
+  rw [← hquot]
+  constructor
+  · intro h
+    change ThetaApproachQuotientData.quotientHom thetaApproach g = 1
+    have hdeck := congrArg galData.galXKCKEquivDeckQuotient h
+    simpa using hdeck
+  · intro h
+    change
+      galData.galXKCKEquivDeckQuotient.symm
+          (ThetaApproachQuotientData.quotientHom thetaApproach g) = 1
+    simpa [h]
+
+theorem piXK_toGal_eq_one (g : thetaApproach.piXK.carrier) :
+    ThetaApproachGaloisQuotientData.piCKToGalHom galData
+        (thetaApproach.piXK_to_piCK.openEmbedding.hom g) = 1 := by
+  have hker :=
+    congrArg
+      (fun H : Subgroup thetaApproach.piCK.carrier =>
+        thetaApproach.piXK_to_piCK.openEmbedding.hom g ∈ H)
+      (ThetaApproachGaloisQuotientData.piCKToGalHom_ker galData)
+  change
+    ThetaApproachGaloisQuotientData.piCKToGalHom galData
+        (thetaApproach.piXK_to_piCK.openEmbedding.hom g) = 1
+  exact hker.mpr ⟨g, rfl⟩
+
+end ThetaApproachGaloisQuotientData
+
+/--
 A reconstructed function field equipped with a deck-group action.
 
 The action is recorded as a `MulSemiringAction`, so each deck-group element
@@ -1702,6 +1801,40 @@ theorem piXK_smul_trivial
 
 end ThetaApproachFunctionFieldData
 
+namespace ThetaApproachGaloisQuotientData
+
+variable {thetaApproach : ThetaApproachQuotientData}
+variable (galData : ThetaApproachGaloisQuotientData thetaApproach)
+variable (functionFieldData : ThetaApproachFunctionFieldData thetaApproach)
+
+instance galFunctionFieldAction :
+    MulSemiringAction galData.galXKCK functionFieldData.functionField :=
+  MulSemiringAction.compHom
+    (M := ThetaApproachQuotientData.deckQuotient thetaApproach)
+    (N := galData.galXKCK)
+    (R := functionFieldData.functionField)
+    (ThetaApproachGaloisQuotientData.toDeckHom galData)
+
+theorem gal_smul_eq_deck_smul
+    (γ : galData.galXKCK) (x : functionFieldData.functionField) :
+    γ • x = ThetaApproachGaloisQuotientData.toDeckHom galData γ • x :=
+  rfl
+
+theorem piCK_smul_eq_gal_smul
+    (g : thetaApproach.piCK.carrier) (x : functionFieldData.functionField) :
+    g • x =
+      ThetaApproachGaloisQuotientData.piCKToGalHom galData g • x := by
+  rw [functionFieldData.piCK_smul_eq_deck_smul]
+  change
+    ThetaApproachQuotientData.quotientHom thetaApproach g • x =
+      ThetaApproachGaloisQuotientData.toDeckHom galData
+          (ThetaApproachGaloisQuotientData.fromDeckHom galData
+            (ThetaApproachQuotientData.quotientHom thetaApproach g)) • x
+  simp [ThetaApproachGaloisQuotientData.toDeckHom,
+    ThetaApproachGaloisQuotientData.fromDeckHom]
+
+end ThetaApproachGaloisQuotientData
+
 /--
 The `C_K`/`X_K` covering data from IUT I, Definition 3.1(d).
 
@@ -1787,6 +1920,34 @@ theorem thetaApproachQuotientHomKer :
     (ThetaApproachQuotientData.quotientHom coverData.thetaApproachQuotient).ker =
       coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.imageSubgroup :=
   coverData.thetaApproachQuotient.quotientHom_ker
+
+def thetaApproachGalPiCKHom
+    (galData :
+      ThetaApproachGaloisQuotientData coverData.thetaApproachQuotient) :
+    coverData.thetaApproachQuotient.piCK.carrier →* galData.galXKCK :=
+  ThetaApproachGaloisQuotientData.piCKToGalHom galData
+
+theorem thetaApproachGalPiCKHomSurjective
+    (galData :
+      ThetaApproachGaloisQuotientData coverData.thetaApproachQuotient) :
+    Function.Surjective
+      (ThetaOrbicurveCoverData.thetaApproachGalPiCKHom coverData galData) :=
+  ThetaApproachGaloisQuotientData.piCKToGalHom_surjective galData
+
+theorem thetaApproachGalPiCKHomKer
+    (galData :
+      ThetaApproachGaloisQuotientData coverData.thetaApproachQuotient) :
+    (ThetaOrbicurveCoverData.thetaApproachGalPiCKHom coverData galData).ker =
+      coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.imageSubgroup :=
+  ThetaApproachGaloisQuotientData.piCKToGalHom_ker galData
+
+theorem thetaApproachPiXK_toGal_eq_one
+    (galData :
+      ThetaApproachGaloisQuotientData coverData.thetaApproachQuotient)
+    (g : coverData.thetaApproachQuotient.piXK.carrier) :
+    ThetaOrbicurveCoverData.thetaApproachGalPiCKHom coverData galData
+        (coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g) = 1 :=
+  ThetaApproachGaloisQuotientData.piXK_toGal_eq_one galData g
 
 theorem thetaApproachGalQuotientIdentification :
     coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
@@ -2546,6 +2707,34 @@ theorem thetaApproachQuotientHomKer :
     (ThetaApproachQuotientData.quotientHom theta.coverData.thetaApproachQuotient).ker =
       theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.imageSubgroup :=
   theta.coverData.thetaApproachQuotientHomKer
+
+def thetaApproachGalPiCKHom
+    (galData :
+      ThetaApproachGaloisQuotientData theta.coverData.thetaApproachQuotient) :
+    theta.coverData.thetaApproachQuotient.piCK.carrier →* galData.galXKCK :=
+  theta.coverData.thetaApproachGalPiCKHom galData
+
+theorem thetaApproachGalPiCKHomSurjective
+    (galData :
+      ThetaApproachGaloisQuotientData theta.coverData.thetaApproachQuotient) :
+    Function.Surjective
+      (InitialThetaData.thetaApproachGalPiCKHom theta galData) :=
+  theta.coverData.thetaApproachGalPiCKHomSurjective galData
+
+theorem thetaApproachGalPiCKHomKer
+    (galData :
+      ThetaApproachGaloisQuotientData theta.coverData.thetaApproachQuotient) :
+    (InitialThetaData.thetaApproachGalPiCKHom theta galData).ker =
+      theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.imageSubgroup :=
+  theta.coverData.thetaApproachGalPiCKHomKer galData
+
+theorem thetaApproachPiXK_toGal_eq_one
+    (galData :
+      ThetaApproachGaloisQuotientData theta.coverData.thetaApproachQuotient)
+    (g : theta.coverData.thetaApproachQuotient.piXK.carrier) :
+    InitialThetaData.thetaApproachGalPiCKHom theta galData
+        (theta.coverData.thetaApproachQuotient.piXK_to_piCK.openEmbedding.hom g) = 1 :=
+  theta.coverData.thetaApproachPiXK_toGal_eq_one galData g
 
 theorem thetaApproachGalQuotientIdentification :
     theta.coverData.thetaApproachQuotient.galXKCK_identifiedWithQuotient :=
