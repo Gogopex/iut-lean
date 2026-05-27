@@ -1257,6 +1257,12 @@ namespace CuspLabelClassData
 
 variable {l : PrimeGeFive} (labelData : CuspLabelClassData l)
 
+/-- The canonical label-class data supplied by a local `LabCusp` model. -/
+def canonical (model : LocalLabCuspModel l) : CuspLabelClassData l where
+  model := model
+  labelClass := model.canonicalSignLabel
+  labelClass_eq_canonical := rfl
+
 theorem labelClass_eq_model_quotient :
     labelData.labelClass =
       labelData.model.signAction.toSignLabelQuotient
@@ -1268,10 +1274,8 @@ end CuspLabelClassData
 
 /-- The canonical structured cusp-label class in the concrete `ZMod l` model. -/
 def zmodCanonicalCuspLabelClassData (l : PrimeGeFive) :
-    CuspLabelClassData l where
-  model := zmodLocalLabCuspModel l
-  labelClass := (zmodLocalLabCuspModel l).canonicalSignLabel
-  labelClass_eq_canonical := rfl
+    CuspLabelClassData l :=
+  CuspLabelClassData.canonical (zmodLocalLabCuspModel l)
 
 /-- A cusp together with structured label-class data explaining its origin. -/
 structure ModeledCuspData {F : Type u} [Field F]
@@ -1397,6 +1401,33 @@ theorem badLocalCuspEqModelCusp
         (badLocalData.localC v hv.1) (cuspLocalData.badLocalCusp v hv).label := by
   apply CuspData.eq_of_quotientOrigin_eq
   exact cuspLocalData.badLocalCuspQuotientOriginEqModel v hv
+
+def badLocalCuspLabelClassData
+    (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
+    CuspLabelClassData l :=
+  CuspLabelClassData.canonical (cuspLocalData.badLocalLabCuspModel v hv)
+
+def badLocalModeledCusp
+    (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
+    ModeledCuspData (badLocalData.localC v hv.1) l where
+  labelText := (cuspLocalData.badLocalCusp v hv).label
+  labelClassData := cuspLocalData.badLocalCuspLabelClassData v hv
+  cusp := cuspLocalData.badLocalCusp v hv
+  cusp_eq_model := cuspLocalData.badLocalCuspEqModelCusp v hv
+
+theorem badLocalModeledCusp_cusp
+    (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
+    (cuspLocalData.badLocalModeledCusp v hv).cusp =
+      cuspLocalData.badLocalCusp v hv :=
+  rfl
+
+theorem badLocalModeledCusp_labelClass_eq_model_quotient
+    (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
+    (cuspLocalData.badLocalModeledCusp v hv).labelClassData.labelClass =
+      (cuspLocalData.badLocalLabCuspModel v hv).signAction.toSignLabelQuotient
+        (cuspLocalData.badLocalLabCuspModel v hv).canonicalNonzeroLabel :=
+  CuspLabelClassData.labelClass_eq_model_quotient
+    ((cuspLocalData.badLocalModeledCusp v hv).labelClassData)
 
 theorem badLocalCanonicalGeneratorEqModel
     (v : NumberField.FinitePlace K) (hv : v ∈ valuations.bad) :
@@ -1611,6 +1642,28 @@ theorem badLocalCusp_eq_modelCusp
       (theta.badLocalLabCuspModel v hv).toCuspData
         (theta.badLocalData.localC v hv.1) (theta.badLocalCusp v hv).label :=
   theta.cuspLocalData.badLocalCuspEqModelCusp v hv
+
+def badLocalCuspLabelClassData
+    (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    CuspLabelClassData theta.l :=
+  theta.cuspLocalData.badLocalCuspLabelClassData v hv
+
+def badLocalModeledCusp
+    (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    ModeledCuspData (theta.badLocalData.localC v hv.1) theta.l :=
+  theta.cuspLocalData.badLocalModeledCusp v hv
+
+theorem badLocalModeledCusp_cusp
+    (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    (theta.badLocalModeledCusp v hv).cusp = theta.badLocalCusp v hv :=
+  theta.cuspLocalData.badLocalModeledCusp_cusp v hv
+
+theorem badLocalModeledCusp_labelClass_eq_model_quotient
+    (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    (theta.badLocalModeledCusp v hv).labelClassData.labelClass =
+      (theta.badLocalLabCuspModel v hv).signAction.toSignLabelQuotient
+        (theta.badLocalLabCuspModel v hv).canonicalNonzeroLabel :=
+  theta.cuspLocalData.badLocalModeledCusp_labelClass_eq_model_quotient v hv
 
 theorem badLocalCanonicalGenerator_eq_model
     (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :

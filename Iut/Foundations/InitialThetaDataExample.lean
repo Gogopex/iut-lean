@@ -599,6 +599,20 @@ example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
   theta.badLocalCusp_eq_modelCusp v hv
 
 example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    ModeledCuspData (theta.badLocalData.localC v hv.1) theta.l :=
+  theta.badLocalModeledCusp v hv
+
+example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    (theta.badLocalModeledCusp v hv).cusp = theta.badLocalCusp v hv :=
+  theta.badLocalModeledCusp_cusp v hv
+
+example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
+    (theta.badLocalModeledCusp v hv).labelClassData.labelClass =
+      (theta.badLocalLabCuspModel v hv).signAction.toSignLabelQuotient
+        (theta.badLocalLabCuspModel v hv).canonicalNonzeroLabel :=
+  theta.badLocalModeledCusp_labelClass_eq_model_quotient v hv
+
+example (v : NumberField.FinitePlace K) (hv : v ∈ theta.valuations.bad) :
     theta.cuspLocalData.badLocalCanonicalGenerator v hv =
       (theta.badLocalLabCuspModel v hv).canonicalGeneratorUpToSignElement :=
   theta.badLocalCanonicalGenerator_eq_model v hv

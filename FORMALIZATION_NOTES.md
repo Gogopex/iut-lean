@@ -12219,3 +12219,91 @@ local `LabCusp` model.
 separate refinement layer. The next step should replace or supplement the
 bad-local `CuspData` field with this modeled version, so every bad local cusp
 points directly to its structured label class.
+
+## Math Milestone 35: Bad Local Cusps as Modeled Cusps
+
+Lean files:
+
+* `Iut/Foundations/InitialThetaData.lean`
+* `Iut/Foundations/InitialThetaDataExample.lean`
+
+### Source Check
+
+IUT I, Definition 3.1(f), says that at bad places the local cusp `epsilon_v`
+comes from the canonical generator, up to sign, of the local quotient. IUT I,
+Definition 4.1(ii), identifies the corresponding `LabCusp` label class as part
+of the local cusp-label package. The previous milestone built a general
+`ModeledCuspData`; this milestone exposes that structure at every bad place.
+
+### Lean/API Check
+
+`ThetaCuspLocalData` already stores:
+
+```text
+badLocalLabCuspModel
+badLocalCusp_quotientOrigin_eq_model
+```
+
+Those two fields are sufficient to derive a modeled cusp without adding
+duplicated constructor fields. Lean can build the modeled cusp from the existing
+bad local cusp, its local `LabCusp` model, and the proof that the cusp equals
+the model-built cusp.
+
+### Lean Decisions
+
+The new helper
+
+```text
+CuspLabelClassData.canonical
+```
+
+builds structured label-class data from any local `LabCusp` model.
+
+The new projection
+
+```text
+ThetaCuspLocalData.badLocalModeledCusp
+```
+
+turns a bad-place local cusp into a `ModeledCuspData`. The full initial-theta
+API mirrors this with:
+
+```text
+InitialThetaData.badLocalModeledCusp
+```
+
+### Lean Declarations
+
+```text
+CuspLabelClassData.canonical
+ThetaCuspLocalData.badLocalCuspLabelClassData
+ThetaCuspLocalData.badLocalModeledCusp
+ThetaCuspLocalData.badLocalModeledCusp_cusp
+ThetaCuspLocalData.badLocalModeledCusp_labelClass_eq_model_quotient
+InitialThetaData.badLocalCuspLabelClassData
+InitialThetaData.badLocalModeledCusp
+InitialThetaData.badLocalModeledCusp_cusp
+InitialThetaData.badLocalModeledCusp_labelClass_eq_model_quotient
+```
+
+### What This Tests
+
+The example file now checks:
+
+* every bad local cusp can be viewed as `ModeledCuspData`;
+* the modeled cusp's underlying `cusp` is exactly `theta.badLocalCusp`;
+* its label class is the quotient of the local model's canonical nonzero label.
+
+### Design Trap Avoided
+
+The trap would be to add a second, independent bad-local modeled-cusp field and
+then maintain consistency by hand. Instead, the modeled cusp is derived from the
+existing bad local cusp and compatibility proof, so Lean keeps the two views in
+lockstep.
+
+### Remaining Gap
+
+The modeled cusp still depends on the supplied `LocalLabCuspModel`. The next
+mathematical step is to relate this local label model more tightly to the
+orbicurve type witnesses for `(1, Z/lZ)^pm`, rather than treating the model as
+free extra data.
