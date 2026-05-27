@@ -9981,3 +9981,70 @@ underlying subclaims.
 
 The next milestone should expose the structured combined route as an audited
 public endpoint, still reusing the existing source-package endpoint machinery.
+
+## Milestone 126: Structured Audited Public Endpoints
+
+Lean files:
+
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The current Stage 1 skeleton treats the public endpoint as a projection from
+assembled source obligations through the existing public-audit machinery. This
+milestone adds structured-input wrappers for that endpoint.
+
+This is intentionally not a new proof of the debated Theorem 3.11 to Corollary
+3.12 passage. It packages the same audit witness and the same equality to the
+public audit, but along the structured routes introduced in the previous
+milestones.
+
+### Purpose
+
+This milestone makes the structured routes usable at the same endpoint layer as
+the older gap, parts, and hypotheses routes.
+
+### Lean Declarations
+
+In `IUTStage1Source.lean`:
+
+```text
+IUTStage1SourcePackage.StructuredHypothesisRouteAudit.auditedPublicEndpoint
+IUTStage1SourcePackage.auditedPublicEndpointOfStructuredInputs
+IUTStage1SourcePackage.auditedPublicEndpointOfStructuredHypotheses
+IUTStage1SourcePackage.auditedPublicEndpointOfStructuredInputs_eq_parts
+IUTStage1SourcePackage.auditedPublicEndpointOfStructuredHypotheses_eq_parts
+IUTStage1SourcePackage.auditedPublicEndpointOfStructuredHypotheses_eq_hypotheses
+```
+
+In `IUTStage1SourceExample.lean`:
+
+```text
+unitThetaToy_source_structured_inputs_auditedPublicEndpoint_example
+unitThetaToy_source_structured_hypotheses_auditedPublicEndpoint_example
+unitThetaToy_source_structured_route_auditedPublicEndpoint_example
+unitThetaToy_source_structured_inputs_auditedPublicEndpoint_eq_parts_example
+unitThetaToy_source_structured_hypotheses_auditedPublicEndpoint_eq_parts_example
+unitThetaToy_source_structured_hypotheses_auditedPublicEndpoint_eq_hypotheses_example
+```
+
+### What This Tests
+
+The toy examples verify that structured inputs and structured hypotheses can be
+fed to the audited endpoint layer, and that the resulting endpoint objects agree
+with the existing parts and hypotheses endpoint routes.
+
+### Design Trap Avoided
+
+The trap would be to let an "audited endpoint" sound like a new mathematical
+endpoint theorem. It is not. The endpoint is an existential package of a source
+audit witness plus an equality to the public audit. The structured versions
+reuse the same source-package machinery and are definitionally tied to the
+older routes.
+
+### Next Step
+
+The next milestone should start replacing the toy-only q/theta comparison
+payload with a more explicit abstract interface for the Corollary 3.12
+comparison data, so the debated endpoint can be isolated from the toy model.

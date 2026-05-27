@@ -1427,6 +1427,29 @@ theorem qSignedLeThetaSigned
     package.preLedger.qSigned <= package.preLedger.thetaSigned :=
   audit.sourceAudit.qSigned_le_thetaSigned
 
+theorem auditedPublicEndpoint
+    (routeAudit : StructuredHypothesisRouteAudit package inputs hypotheses) :
+    ∃ sourceAudit :
+        Audit package
+          (package.obligationsFromStructuredHypotheses inputs hypotheses),
+      (⟨sourceAudit.qSigned_le_thetaSigned,
+          sourceAudit.corollary312,
+          sourceAudit.stage_recovers_qSigned_le_thetaSigned⟩ :
+        package.preLedger.qSigned <= package.preLedger.thetaSigned ∧
+          Corollary312Inequality
+            (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+            (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) ∧
+          (corollary312_from_stage1_comparison
+              (package.promotedProvider
+                (package.obligationsFromStructuredHypotheses
+                  inputs hypotheses)).stage1Comparison =
+            corollary312_of_signed_le
+              (package.promotedProvider
+                (package.obligationsFromStructuredHypotheses
+                  inputs hypotheses)).ledger.qSigned_le_thetaSigned)) =
+        package.publicAuditOfStructuredHypotheses inputs hypotheses :=
+  ⟨routeAudit.sourceAudit, Subsingleton.elim _ _⟩
+
 end StructuredHypothesisRouteAudit
 
 theorem hypothesisRouteAudit_sideConditionAudit_eq
@@ -1597,6 +1620,88 @@ theorem auditedPublicEndpointOfHypotheses_eq_parts
     package.auditedPublicEndpointOfHypotheses subclaims hypotheses =
       package.auditedPublicEndpointOfParts
         subclaims hypotheses.toSideConditions :=
+  Subsingleton.elim _ _
+
+theorem auditedPublicEndpointOfStructuredInputs
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    ∃ sourceAudit :
+        Audit package
+          (package.obligationsFromStructuredInputs inputs sideConditions),
+      (⟨sourceAudit.qSigned_le_thetaSigned,
+          sourceAudit.corollary312,
+          sourceAudit.stage_recovers_qSigned_le_thetaSigned⟩ :
+        package.preLedger.qSigned <= package.preLedger.thetaSigned ∧
+          Corollary312Inequality
+            (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+            (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) ∧
+          (corollary312_from_stage1_comparison
+              (package.promotedProvider
+                (package.obligationsFromStructuredInputs
+                  inputs sideConditions)).stage1Comparison =
+            corollary312_of_signed_le
+              (package.promotedProvider
+                (package.obligationsFromStructuredInputs
+                  inputs sideConditions)).ledger.qSigned_le_thetaSigned)) =
+        package.publicAuditOfStructuredInputs inputs sideConditions :=
+  package.auditedPublicEndpoint
+    (package.obligationsFromStructuredInputs inputs sideConditions)
+
+theorem auditedPublicEndpointOfStructuredHypotheses
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    ∃ sourceAudit :
+        Audit package
+          (package.obligationsFromStructuredHypotheses inputs hypotheses),
+      (⟨sourceAudit.qSigned_le_thetaSigned,
+          sourceAudit.corollary312,
+          sourceAudit.stage_recovers_qSigned_le_thetaSigned⟩ :
+        package.preLedger.qSigned <= package.preLedger.thetaSigned ∧
+          Corollary312Inequality
+            (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+            (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) ∧
+          (corollary312_from_stage1_comparison
+              (package.promotedProvider
+                (package.obligationsFromStructuredHypotheses
+                  inputs hypotheses)).stage1Comparison =
+            corollary312_of_signed_le
+              (package.promotedProvider
+                (package.obligationsFromStructuredHypotheses
+                  inputs hypotheses)).ledger.qSigned_le_thetaSigned)) =
+        package.publicAuditOfStructuredHypotheses inputs hypotheses :=
+  package.auditedPublicEndpoint
+    (package.obligationsFromStructuredHypotheses inputs hypotheses)
+
+theorem auditedPublicEndpointOfStructuredInputs_eq_parts
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (sideConditions : IUTStage1SourceSideConditions package) :
+    package.auditedPublicEndpointOfStructuredInputs
+        inputs sideConditions =
+      package.auditedPublicEndpointOfParts
+        inputs.theorem311Subclaims sideConditions :=
+  Subsingleton.elim _ _
+
+theorem auditedPublicEndpointOfStructuredHypotheses_eq_parts
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    package.auditedPublicEndpointOfStructuredHypotheses
+        inputs hypotheses =
+      package.auditedPublicEndpointOfStructuredInputs
+        inputs hypotheses.toSideConditions :=
+  Subsingleton.elim _ _
+
+theorem auditedPublicEndpointOfStructuredHypotheses_eq_hypotheses
+    (package : IUTStage1SourcePackage source target index)
+    (inputs : IUTStage1Theorem311StructuredInputs package)
+    (hypotheses : IUTStage1SourceSideConditionHypotheses package) :
+    package.auditedPublicEndpointOfStructuredHypotheses
+        inputs hypotheses =
+      package.auditedPublicEndpointOfHypotheses
+        inputs.theorem311Subclaims hypotheses :=
   Subsingleton.elim _ _
 
 namespace Audit
