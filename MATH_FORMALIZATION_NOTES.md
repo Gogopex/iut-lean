@@ -8960,3 +8960,78 @@ path while keeping the remaining abstraction explicit.
 The hull+det bridge itself is still supplied as data. The next refinement
 should expose the hull+det bridge audit separately and then decide which
 mathematical content belongs there first.
+
+## Math Milestone 95: Hull+Det Bridge Audit Exposed
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/IUTStage1Source.lean`
+* `Iut/Stage1/IUTStage1SourceExample.lean`
+
+### Source Check
+
+The HDD-after-SHE decomposition now reaches the hull+det bridge, but the
+hull+det bridge itself was still just the endpoint of a decomposition equality.
+This milestone gives the hull+det bridge its own bound audit and threads it
+back through HDD and the final charted boundary.
+
+### Lean/API Check
+
+The generic bridge layer now defines:
+
+```text
+AlgorithmicOutput.HullDetBridgeData.BoundAudit
+AlgorithmicOutput.HDDCompositeData.DecompositionAudit
+```
+
+The hull+det bound audit stores:
+
+```text
+apply_eq_bridge_apply
+choice_target_volume_le
+all_targets_at_most
+```
+
+The HDD decomposition audit stores:
+
+```text
+apply_eq_hull_det
+hull_det_bound_audit
+choice_target_volume_le
+all_targets_at_most
+```
+
+The HDD-after-SHE decomposition audit now carries the HDD decomposition, and
+the final charted boundary exposes:
+
+```text
+hddDecompositionAudit
+hullDetBoundAudit
+```
+
+### Lean Decisions
+
+This continues to avoid pretending that hull+det has been formalized. The
+current hull+det bridge is still supplied data. The gain is that the remaining
+abstraction is now named exactly as the hull+det bridge audit, rather than
+being hidden inside a common-container bound.
+
+### What This Tests
+
+The toy source examples extract both the HDD decomposition audit and the
+hull+det bound audit from the audited charted comparison boundary. The focused
+Stage 1 source example build and the full project build both pass.
+
+### Design Trap Avoided
+
+The trap would be to stop at `(HDD) o (SHE)` and leave the hull+det step
+implicit. This milestone makes the decomposition through HDD and hull+det part
+of the formal audit surface.
+
+### Remaining Gap
+
+The hull+det bridge audit still records supplied target-volume bounds. The
+next mathematical target is to identify a first nontrivial construction inside
+that bridge: likely a named common target or hull operation before determinant
+or log-volume estimates are attempted.

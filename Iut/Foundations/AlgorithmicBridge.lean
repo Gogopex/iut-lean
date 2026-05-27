@@ -179,6 +179,51 @@ theorem allTargetsAtMost
     RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
   data.bridge.allTargetsAtMost certificate
 
+/-- Audit view of the named hull+det bridge application. -/
+structure BoundAudit
+    (data : HullDetBridgeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) : Prop where
+  apply_eq_bridge_apply :
+    data.apply certificate = data.bridge.apply certificate
+  choice_target_volume_le :
+    ∀ choice : index,
+      RegionMeasure.targetVolume measure (output.comparison choice) <= bound
+  all_targets_at_most :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound
+
+theorem boundAudit
+    (data : HullDetBridgeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    data.BoundAudit certificate :=
+  { apply_eq_bridge_apply := rfl,
+    choice_target_volume_le := data.choice_targetVolume_le certificate,
+    all_targets_at_most := data.allTargetsAtMost certificate }
+
+namespace BoundAudit
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+variable {data : HullDetBridgeData output measure bound}
+variable {certificate : QualitativeData.StructuredCertificate output.family}
+
+theorem apply_eq_bridgeApply
+    (audit : data.BoundAudit certificate) :
+    data.apply certificate = data.bridge.apply certificate :=
+  audit.apply_eq_bridge_apply
+
+theorem choiceTargetVolume_le
+    (audit : data.BoundAudit certificate) (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  audit.choice_target_volume_le choice
+
+theorem allTargetsAtMost
+    (audit : data.BoundAudit certificate) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  audit.all_targets_at_most
+
+end BoundAudit
+
 end HullDetBridgeData
 
 /--
@@ -220,6 +265,59 @@ theorem allTargetsAtMost
     (certificate : QualitativeData.StructuredCertificate output.family) :
     RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
   data.hullDetBridge.allTargetsAtMost certificate
+
+/-- Audit view of HDD as descent followed by the named hull+det bridge. -/
+structure DecompositionAudit
+    (data : HDDCompositeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) : Prop where
+  apply_eq_hull_det :
+    data.apply certificate = data.hullDetBridge.apply certificate
+  hull_det_bound_audit :
+    data.hullDetBridge.BoundAudit certificate
+  choice_target_volume_le :
+    ∀ choice : index,
+      RegionMeasure.targetVolume measure (output.comparison choice) <= bound
+  all_targets_at_most :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound
+
+theorem decompositionAudit
+    (data : HDDCompositeData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    data.DecompositionAudit certificate :=
+  { apply_eq_hull_det := rfl,
+    hull_det_bound_audit := data.hullDetBridge.boundAudit certificate,
+    choice_target_volume_le := data.choice_targetVolume_le certificate,
+    all_targets_at_most := data.allTargetsAtMost certificate }
+
+namespace DecompositionAudit
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+variable {data : HDDCompositeData output measure bound}
+variable {certificate : QualitativeData.StructuredCertificate output.family}
+
+theorem apply_eq_hullDet
+    (audit : data.DecompositionAudit certificate) :
+    data.apply certificate = data.hullDetBridge.apply certificate :=
+  audit.apply_eq_hull_det
+
+theorem hullDetBoundAudit
+    (audit : data.DecompositionAudit certificate) :
+    data.hullDetBridge.BoundAudit certificate :=
+  audit.hull_det_bound_audit
+
+theorem choiceTargetVolume_le
+    (audit : data.DecompositionAudit certificate) (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  audit.choice_target_volume_le choice
+
+theorem allTargetsAtMost
+    (audit : data.DecompositionAudit certificate) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  audit.all_targets_at_most
+
+end DecompositionAudit
 
 end HDDCompositeData
 
@@ -285,6 +383,8 @@ structure DecompositionAudit
     data.structuredBridge = data.hdd.hullDetBridge.bridge
   apply_eq_hull_det :
     data.apply certificate = data.hdd.hullDetBridge.apply certificate
+  hdd_decomposition :
+    data.hdd.DecompositionAudit certificate
   choice_target_volume_le :
     ∀ choice : index,
       RegionMeasure.targetVolume measure (output.comparison choice) <= bound
@@ -297,6 +397,7 @@ theorem decompositionAudit
     data.DecompositionAudit certificate :=
   { structured_bridge_eq_hull_det := rfl,
     apply_eq_hull_det := rfl,
+    hdd_decomposition := data.hdd.decompositionAudit certificate,
     choice_target_volume_le := data.choice_targetVolume_le certificate,
     all_targets_at_most := data.allTargetsAtMost certificate }
 
@@ -317,6 +418,11 @@ theorem apply_eq_hullDet
     (audit : data.DecompositionAudit certificate) :
     data.apply certificate = data.hdd.hullDetBridge.apply certificate :=
   audit.apply_eq_hull_det
+
+theorem hddDecomposition
+    (audit : data.DecompositionAudit certificate) :
+    data.hdd.DecompositionAudit certificate :=
+  audit.hdd_decomposition
 
 theorem choiceTargetVolume_le
     (audit : data.DecompositionAudit certificate) (choice : index) :
