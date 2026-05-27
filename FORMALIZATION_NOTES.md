@@ -17686,3 +17686,71 @@ The focused build for `Iut.Stage1.IUTStage1SourceExample` passes.
 The indexed capsules are still represented only by their log-volume values. The
 next refinement should introduce typed capsule identifiers/objects and make
 `capsuleLogVolume` a projection from those capsule objects.
+
+## 127. Typed Capsule Log-Volume Objects
+
+### Goal
+
+We refined capsule-family log-volume once more so that the finite sum ranges
+over typed capsule objects, not just raw real values.
+
+### Lean/API Check
+
+The source layer now defines:
+
+```text
+IUTStage1CapsuleLogVolumeObject
+IUTStage1TypedCapsuleFamilyLogVolume
+```
+
+A capsule object carries:
+
+```text
+capsuleLabel
+localObject
+logVolume
+log_volume_eq
+```
+
+The typed family carries:
+
+```text
+capsule : Fin capsuleCount -> IUTStage1CapsuleLogVolumeObject kind
+capsule_local_object_eq
+total_eq_sum
+normalized_eq_average
+```
+
+The sum is now:
+
+```text
+totalLogVolume = Finset.univ.sum fun i => (capsule i).logVolume
+```
+
+and the record converts to the previous value-only capsule family.
+
+### Source Check
+
+This continues the Proposition 3.9 formalization path. We still do not
+construct the analytic capsule objects of the paper, but the Lean API now has a
+place for typed capsule records, their local objects, and their log-volume
+projections.
+
+### Toy Check
+
+The source example now checks:
+
+```text
+upperSemi_capsuleLogVolumeObject_eq_example
+upperSemi_typedCapsuleFamily_localObject_eq_example
+upperSemi_typedCapsuleFamily_total_eq_sum_example
+upperSemi_typedCapsuleFamily_to_capsuleFamily_example
+```
+
+The focused build for `Iut.Stage1.IUTStage1SourceExample` passes.
+
+### Remaining Gap
+
+The capsule object is still a record with labels and a log-volume equality. The
+next refinement should connect these capsule objects to local tensor packets or
+log-shell objects from the Theorem 3.11 state records.
