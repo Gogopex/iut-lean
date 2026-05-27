@@ -149,8 +149,8 @@ Current modules:
   comparison families, modeling the post-hull upper-bound interface.
 * `Iut.Foundations.TransportedRegionFamily`: comparison-family presentation with
   explicit choice-dependent transports and target regions.
-* `Iut.Foundations.QualitativeData`: structured inert IPL/SHE/APT data records
-  and typed qualitative identifiers for algorithmic output bookkeeping.
+* `Iut.Foundations.QualitativeData`: structured inert IPL/SHE/APT data records,
+  typed identifiers, and relation records for qualitative bookkeeping.
 * `Iut.Foundations.AlgorithmicOutput`: opaque IPL/SHE/APT qualitative-property
   interface for transported algorithmic outputs.
 * `Iut.Foundations.AlgorithmicBridge`: explicit bridge schemas from certified

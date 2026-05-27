@@ -31,23 +31,43 @@ def thetaToyCodomainTheater : QualitativeData.HodgeTheaterId :=
   { side := QualitativeData.HodgeTheaterSide.codomain,
     label := "q-codomain" }
 
+def thetaToyInputPrimeStrip (datumLabel : String) : QualitativeData.PrimeStripId :=
+  { label := datumLabel }
+
+def thetaToyOutputPrimeStrip : QualitativeData.PrimeStripId :=
+  { label := "theta-upper-ray-output" }
+
+def thetaToyPrimeStripLink (datumLabel : String) : QualitativeData.PrimeStripLink :=
+  { source := thetaToyInputPrimeStrip datumLabel,
+    target := thetaToyOutputPrimeStrip,
+    linkLabel := "toy-prime-strip-link" }
+
+def thetaToyDomainStructure : QualitativeData.HolomorphicStructure :=
+  { theater := thetaToyDomainTheater,
+    structureLabel := "theta-holomorphic-structure" }
+
+def thetaToyCodomainStructure : QualitativeData.HolomorphicStructure :=
+  { theater := thetaToyCodomainTheater,
+    structureLabel := "q-holomorphic-structure" }
+
+def thetaToySharedHolomorphicContext :
+    QualitativeData.SharedHolomorphicContext :=
+  { domainStructure := thetaToyDomainStructure,
+    codomainStructure := thetaToyCodomainStructure,
+    commonLanguage := { label := "toy-common-real-line" } }
+
 def thetaToyIPLD (datumLabel : String) (epsilon : index -> Real)
     (f : Transport qLine thetaLine) (h : Real) :
     QualitativeData.IPLDatum (thetaAPTOutput f h epsilon) :=
-  { inputPrimeStrip := { label := datumLabel },
-    outputPrimeStrip := { label := "theta-upper-ray-output" },
-    choicePrimeStrip := fun _ => { label := "epsilon-choice" } }
+  { inputPrimeStrip := thetaToyInputPrimeStrip datumLabel,
+    outputPrimeStrip := thetaToyOutputPrimeStrip,
+    choicePrimeStrip := fun _ => { label := "epsilon-choice" },
+    link := thetaToyPrimeStripLink datumLabel }
 
 def thetaToySHED (f : Transport qLine thetaLine) (h : Real)
     (epsilon : index -> Real) :
     QualitativeData.SHEDatum (thetaAPTOutput f h epsilon) :=
-  { domainStructure :=
-      { theater := thetaToyDomainTheater,
-        structureLabel := "theta-holomorphic-structure" },
-    codomainStructure :=
-      { theater := thetaToyCodomainTheater,
-        structureLabel := "q-holomorphic-structure" },
-    commonLanguage := { label := "toy-common-real-line" } }
+  { sharedContext := thetaToySharedHolomorphicContext }
 
 def thetaToyAPTD (f : Transport qLine thetaLine) (h : Real)
     (epsilon : index -> Real) :

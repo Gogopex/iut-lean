@@ -44,22 +44,33 @@ structure CommonLanguageId where
 structure TransportMechanismId where
   label : String
 
+/-- Inert relation record for an IPL-style link between prime strips. -/
+structure PrimeStripLink where
+  source : PrimeStripId
+  target : PrimeStripId
+  linkLabel : String
+
 /-- Inert record for input-prime-strip-link style data. -/
 structure IPLDatum (family : TransportedRegionFamily source target index) where
   inputPrimeStrip : PrimeStripId
   outputPrimeStrip : PrimeStripId
   choicePrimeStrip : index -> PrimeStripId
+  link : PrimeStripLink
 
 /-- A named arithmetic holomorphic structure in the toy bookkeeping layer. -/
 structure HolomorphicStructure where
   theater : HodgeTheaterId
   structureLabel : String
 
-/-- Inert record for simultaneous-holomorphic-expressibility style data. -/
-structure SHEDatum (family : TransportedRegionFamily source target index) where
+/-- Inert relation record for simultaneous expression in a common context. -/
+structure SharedHolomorphicContext where
   domainStructure : HolomorphicStructure
   codomainStructure : HolomorphicStructure
   commonLanguage : CommonLanguageId
+
+/-- Inert record for simultaneous-holomorphic-expressibility style data. -/
+structure SHEDatum (family : TransportedRegionFamily source target index) where
+  sharedContext : SharedHolomorphicContext
 
 /-- Inert record for algorithmic-parallel-transport style data. -/
 structure APTDatum (family : TransportedRegionFamily source target index) where

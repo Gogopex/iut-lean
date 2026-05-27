@@ -2085,3 +2085,85 @@ typed labels.
 The next milestone should add explicit relation records between these
 identifiers, such as an inert `PrimeStripLink` and a `SharedHolomorphicContext`,
 then thread those through `IPLDatum` and `SHEDatum`.
+
+## Milestone 21: Qualitative Relation Records
+
+Lean files:
+
+* `Iut/Foundations/QualitativeData.lean`
+* `Iut/Stage1/ToyQualitativeOutput.lean`
+
+### Source Check
+
+This milestone continues the formalization of IUT III, Remark 3.11.1. The IPL
+discussion is not merely about two named prime strips; it refers to links via
+full poly-isomorphisms of prime strips. The SHE discussion is not merely about
+two Hodge-theater labels; it refers to simultaneous expression relative to both
+arithmetic holomorphic structures. We still do not formalize those
+isomorphisms or structures, but we now give the relation itself a named
+bookkeeping object.
+
+This is also consistent with the Scholze-Stix warning: a proof should not hide
+which identifications or shared contexts are being used when a real comparison
+is extracted.
+
+### Purpose
+
+Milestone 20 introduced typed identifiers. This milestone adds typed inert
+relation records:
+
+```text
+PrimeStripLink
+SharedHolomorphicContext
+```
+
+and threads them through:
+
+```text
+IPLDatum.link
+SHEDatum.sharedContext
+```
+
+These records still do not carry actual isomorphisms, functors, containment
+maps, or comparisons.
+
+### Lean Declarations
+
+In `QualitativeData.lean`:
+
+```text
+PrimeStripLink
+SharedHolomorphicContext
+```
+
+`PrimeStripLink` stores source and target prime-strip identifiers plus a label.
+`SharedHolomorphicContext` stores domain and codomain holomorphic structures
+plus a common-language identifier.
+
+In `ToyQualitativeOutput.lean`, the toy structured certificate now uses:
+
+```text
+thetaToyPrimeStripLink
+thetaToySharedHolomorphicContext
+```
+
+inside the existing IPL and SHE witnesses.
+
+### What This Tests
+
+The complete toy Stage 1 path still builds after adding these relation records.
+That confirms the identifiers and relations are still inert bookkeeping:
+target-volume estimates and signed inequalities continue to require the bridge,
+q-side comparison, and normalization ledger.
+
+### Design Trap Avoided
+
+The trap would be to encode `PrimeStripLink` as an actual isomorphism. That
+would overstate the current formalization. We only name the relation that a
+future source-specific module must refine.
+
+### Next Step
+
+The next milestone should introduce similarly inert identifiers for the
+hull+det stage: a `HullDetOperationId` and a record linking it to the structured
+bridge obligation.
