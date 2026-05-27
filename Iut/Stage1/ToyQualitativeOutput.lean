@@ -23,24 +23,36 @@ open RealLineCopy
 
 variable {index : Type u}
 
+def thetaToyDomainTheater : QualitativeData.HodgeTheaterId :=
+  { side := QualitativeData.HodgeTheaterSide.domain,
+    label := "theta-domain" }
+
+def thetaToyCodomainTheater : QualitativeData.HodgeTheaterId :=
+  { side := QualitativeData.HodgeTheaterSide.codomain,
+    label := "q-codomain" }
+
 def thetaToyIPLD (datumLabel : String) (epsilon : index -> Real)
     (f : Transport qLine thetaLine) (h : Real) :
     QualitativeData.IPLDatum (thetaAPTOutput f h epsilon) :=
-  { inputLabel := datumLabel,
-    outputLabel := "theta-upper-ray-output",
-    choiceLabel := fun _ => "epsilon-choice" }
+  { inputPrimeStrip := { label := datumLabel },
+    outputPrimeStrip := { label := "theta-upper-ray-output" },
+    choicePrimeStrip := fun _ => { label := "epsilon-choice" } }
 
 def thetaToySHED (f : Transport qLine thetaLine) (h : Real)
     (epsilon : index -> Real) :
     QualitativeData.SHEDatum (thetaAPTOutput f h epsilon) :=
-  { domainStructure := { label := "theta-domain" },
-    codomainStructure := { label := "q-codomain" },
-    commonLanguage := "toy-common-real-line" }
+  { domainStructure :=
+      { theater := thetaToyDomainTheater,
+        structureLabel := "theta-holomorphic-structure" },
+    codomainStructure :=
+      { theater := thetaToyCodomainTheater,
+        structureLabel := "q-holomorphic-structure" },
+    commonLanguage := { label := "toy-common-real-line" } }
 
 def thetaToyAPTD (f : Transport qLine thetaLine) (h : Real)
     (epsilon : index -> Real) :
     QualitativeData.APTDatum (thetaAPTOutput f h epsilon) :=
-  { mechanismLabel := "toy-explicit-transport",
+  { mechanism := { label := "toy-explicit-transport" },
     outputFamily := thetaAPTOutput f h epsilon,
     output_eq_family := rfl }
 

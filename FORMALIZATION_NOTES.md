@@ -2003,3 +2003,85 @@ assigned to precise source lemmas.
 The next milestone should begin replacing toy labels in `QualitativeData` with
 slightly richer abstract identifiers for prime strips, Hodge-theater sides, and
 holomorphic structures, still without giving them mathematical consequences.
+
+## Milestone 20: Qualitative Identifiers
+
+Lean files:
+
+* `Iut/Foundations/QualitativeData.lean`
+* `Iut/Stage1/ToyQualitativeOutput.lean`
+
+### Source Check
+
+This milestone follows IUT III, Remark 3.11.1, where IPL is described in terms
+of input and intermediate `F x mu` prime-strips, SHE is described in terms of
+domain and codomain arithmetic holomorphic structures associated to
+Theta-Hodge theaters, and APT is described as a construction mechanism rather
+than a set-theoretic map. Step (xi) of Corollary 3.12 then uses this qualitative
+data while temporarily forgetting hidden theta-function internals.
+
+Scholze-Stix's critique motivates the same bookkeeping discipline: if several
+copies of ordered real vector spaces and pilot objects are involved, labels must
+not be hidden in prose.
+
+### Purpose
+
+The previous qualitative records still used raw strings for prime-strip and
+structure labels. This milestone replaces those raw fields by typed inert
+identifiers:
+
+```text
+PrimeStripId
+HodgeTheaterSide
+HodgeTheaterId
+CommonLanguageId
+TransportMechanismId
+```
+
+These identifiers are still just bookkeeping data. They do not produce
+isomorphisms, containments, common targets, or volume estimates.
+
+### Lean Declarations
+
+In `QualitativeData.lean`:
+
+```text
+PrimeStripId
+HodgeTheaterSide
+HodgeTheaterId
+CommonLanguageId
+TransportMechanismId
+```
+
+The existing records now use these identifiers:
+
+```text
+IPLDatum.inputPrimeStrip
+IPLDatum.outputPrimeStrip
+IPLDatum.choicePrimeStrip
+HolomorphicStructure.theater
+HolomorphicStructure.structureLabel
+SHEDatum.commonLanguage
+APTDatum.mechanism
+```
+
+In `ToyQualitativeOutput.lean`, the toy IPL/SHE/APT witnesses now populate the
+typed identifiers instead of raw string fields.
+
+### What This Tests
+
+The existing bridge, ledger, and Corollary schema continue to work after making
+the qualitative labels more structured. This confirms again that qualitative
+bookkeeping remains separate from the proof-producing bridge layer.
+
+### Design Trap Avoided
+
+The trap would be to model a prime-strip identifier as an actual isomorphism or
+to make a Hodge-theater identifier carry hidden comparison maps. These are only
+typed labels.
+
+### Next Step
+
+The next milestone should add explicit relation records between these
+identifiers, such as an inert `PrimeStripLink` and a `SharedHolomorphicContext`,
+then thread those through `IPLDatum` and `SHEDatum`.

@@ -20,25 +20,50 @@ namespace QualitativeData
 
 variable {source target : Copy} {index : Type u}
 
+/-- Inert identifier for a prime strip or prime-strip-like bookkeeping object. -/
+structure PrimeStripId where
+  label : String
+
+/-- Which side of a Hodge-theater comparison an identifier belongs to. -/
+inductive HodgeTheaterSide where
+  | domain
+  | codomain
+  | intermediate
+deriving DecidableEq, Repr
+
+/-- Inert identifier for a Hodge theater in the qualitative bookkeeping layer. -/
+structure HodgeTheaterId where
+  side : HodgeTheaterSide
+  label : String
+
+/-- Inert identifier for a language/common-expression context. -/
+structure CommonLanguageId where
+  label : String
+
+/-- Inert identifier for an APT-style construction mechanism. -/
+structure TransportMechanismId where
+  label : String
+
 /-- Inert record for input-prime-strip-link style data. -/
 structure IPLDatum (family : TransportedRegionFamily source target index) where
-  inputLabel : String
-  outputLabel : String
-  choiceLabel : index -> String
+  inputPrimeStrip : PrimeStripId
+  outputPrimeStrip : PrimeStripId
+  choicePrimeStrip : index -> PrimeStripId
 
 /-- A named arithmetic holomorphic structure in the toy bookkeeping layer. -/
 structure HolomorphicStructure where
-  label : String
+  theater : HodgeTheaterId
+  structureLabel : String
 
 /-- Inert record for simultaneous-holomorphic-expressibility style data. -/
 structure SHEDatum (family : TransportedRegionFamily source target index) where
   domainStructure : HolomorphicStructure
   codomainStructure : HolomorphicStructure
-  commonLanguage : String
+  commonLanguage : CommonLanguageId
 
 /-- Inert record for algorithmic-parallel-transport style data. -/
 structure APTDatum (family : TransportedRegionFamily source target index) where
-  mechanismLabel : String
+  mechanism : TransportMechanismId
   outputFamily : TransportedRegionFamily source target index
   output_eq_family : outputFamily = family
 

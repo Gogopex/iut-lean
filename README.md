@@ -150,7 +150,7 @@ Current modules:
 * `Iut.Foundations.TransportedRegionFamily`: comparison-family presentation with
   explicit choice-dependent transports and target regions.
 * `Iut.Foundations.QualitativeData`: structured inert IPL/SHE/APT data records
-  for algorithmic output bookkeeping.
+  and typed qualitative identifiers for algorithmic output bookkeeping.
 * `Iut.Foundations.AlgorithmicOutput`: opaque IPL/SHE/APT qualitative-property
   interface for transported algorithmic outputs.
 * `Iut.Foundations.AlgorithmicBridge`: explicit bridge schemas from certified
