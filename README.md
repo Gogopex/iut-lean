@@ -155,8 +155,8 @@ Current modules:
   interface for transported algorithmic outputs.
 * `Iut.Foundations.AlgorithmicBridge`: explicit bridge schemas from certified
   or structured qualitative output to measured common-target-bound data,
-  including named hull+det, HDD, HDD-after-SHE, and common-container bridge
-  slots.
+  including named hull+det, HDD, HDD-after-SHE, common-container, and
+  real-comparison-chart bridge slots.
 * `Iut.Stage1.PilotComparison`: first neutral interface for the Corollary 3.12
   target shape.
 * `Iut.Stage1.ToyModel`: Lean tests for Mochizuki's real-valued toy model from
@@ -171,13 +171,14 @@ Current modules:
   inert IPL/SHE/APT certificates plus separate common-target bound data.
 * `Iut.Stage1.ToyBridge`: toy bridge from qualitative certification to
   common-target bounds via the epsilon-cap construction, with an inert named
-  descent, hull+det, HDD, SHE-restricted composite, and common container.
+  descent, hull+det, HDD, SHE-restricted composite, common container, and real
+  comparison chart.
 * `Iut.Stage1.CorollarySchema`: signed-real schema for producing the
   Corollary-3.12-shaped pilot inequality from bridge output.
 * `Iut.Stage1.ToyCorollarySchema`: toy specialization deriving the signed
   inequality from membership in a chosen upper-ray output.
 * `Iut.Stage1.SourceObligations`: source-obligation ledger for the structured
-  Stage 1 final comparison, now requiring a named common-container bridge.
+  Stage 1 final comparison, now requiring a charted common-container bridge.
 * `Iut.Stage1.ToySourceObligations`: toy completion of that ledger using
   upper-ray normalization and epsilon-cap bounds.
 

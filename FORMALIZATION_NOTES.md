@@ -2614,3 +2614,125 @@ The next milestone should make the real-line comparison discipline sharper by
 recording an inert `RealComparisonChart` for the common container, so the final
 q- and Theta-side signed reals are explicitly associated with the same target
 real-line copy and measure context.
+
+## Milestone 26: Real Comparison Chart
+
+Lean files:
+
+* `Iut/Foundations/AlgorithmicBridge.lean`
+* `Iut/Stage1/ToyBridge.lean`
+* `Iut/Stage1/SourceObligations.lean`
+* `Iut/Stage1/ToySourceObligations.lean`
+
+### Source Check
+
+IUT III, Corollary 3.12, Step `(xi-d)` says that, after determinant formation
+and normalized log-volume are applied, the Theta-side output and q-pilot region
+give comparable real objects: an upper ray `R <= -|log(Theta)|` and an element
+`-|log(q)|` of `R`.
+
+Mochizuki's April 2026 report describes the same Stage 1 endpoint as a
+simultaneous comparison relative to a single ring structure/common container,
+and its elementary model says that passing to heights/log-volumes turns the
+power map into multiplication on real numbers.
+
+Scholze-Stix emphasize the formal danger: because several ordered
+one-dimensional real vector spaces occur, any meaningful inequality requires
+consistent identifications of all real-line copies. This milestone adds an
+explicit real-comparison chart to record those identifications instead of
+letting the final signed inequality use unlabelled `Real` values alone.
+
+### Purpose
+
+Milestone 25 introduced the common container. This milestone adds a real-line
+chart for reading q- and Theta-side quantities in the target real-line copy:
+
+```text
+RealComparisonChartId
+RealComparisonChartData
+ChartedCommonContainerData
+```
+
+`RealComparisonChartData` records:
+
+```text
+qToTarget : Transport source target
+thetaToTarget : Transport target target
+theta_trivial : Transport.TrivialMonodromy thetaToTarget
+```
+
+Thus the q-side real copy must be transported into the target copy explicitly,
+and the Theta-side target copy is not silently identified with itself unless the
+trivial chart transport is supplied.
+
+### Lean Declarations
+
+In `AlgorithmicBridge.lean`:
+
+```text
+RealComparisonChartId.label
+RealComparisonChartData.chart
+RealComparisonChartData.qToTarget
+RealComparisonChartData.thetaToTarget
+RealComparisonChartData.theta_trivial
+ChartedCommonContainerData.commonContainer
+ChartedCommonContainerData.chart
+ChartedCommonContainerData.structuredBridge
+ChartedCommonContainerData.apply
+ChartedCommonContainerData.choice_targetVolume_le
+ChartedCommonContainerData.allTargetsAtMost
+ChartedCommonContainerData.thetaTrivial
+```
+
+In `ToyBridge.lean`:
+
+```text
+thetaToyRealComparisonChart
+thetaToyRealComparisonChartData
+thetaToyChartedCommonContainerData
+thetaToyChartedCommonContainer_choice_targetVolume_le_bound
+thetaToyChartedCommonContainer_allTargetsAtMost
+thetaToyChartedCommonContainer_theta_trivial
+```
+
+In `SourceObligations.lean`, the ledger field
+
+```text
+commonContainer : output.CommonContainerData measure thetaSigned
+```
+
+was replaced by:
+
+```text
+chartedContainer : output.ChartedCommonContainerData measure thetaSigned
+```
+
+and the ledger now proves:
+
+```text
+thetaChartTrivial
+```
+
+which exposes the triviality of the Theta-side chart loop.
+
+### What This Tests
+
+The toy source-obligation endpoint still proves the signed Stage 1 inequality
+after the final ledger is strengthened from common-container data to charted
+common-container data. The toy chart uses the existing q-to-Theta transport
+`f : Transport qLine thetaLine` and the identity transport on `thetaLine`,
+whose trivial monodromy is checked in Lean.
+
+### Design Trap Avoided
+
+The trap would be to add common-container bookkeeping while still allowing
+q-side and Theta-side real numbers to enter the final inequality without an
+explicit chart. This milestone keeps the real-copy identifications visible at
+the final source-obligation boundary.
+
+### Next Step
+
+The next milestone should connect `q_le_choice` to the chart more tightly by
+introducing a charted q-value record: the q-side point, its transport into the
+target real-line copy, and the proof that the transported coordinate is the
+`qSigned` value used in the final source ledger.

@@ -138,6 +138,10 @@ structure SHEArrowId where
 structure CommonContainerId where
   label : String
 
+/-- Inert identifier for a chart of real-line copies used in the final comparison. -/
+structure RealComparisonChartId where
+  label : String
+
 /--
 A named hull+det operation together with the structured bridge it supplies.
 
@@ -315,6 +319,66 @@ theorem allTargetsAtMost
   data.hddShe.allTargetsAtMost certificate
 
 end CommonContainerData
+
+/--
+A named chart of the real-line copies used by the final comparison.
+
+The q-side real line is transported into the target-side real line, while the
+Theta-side line is already the target. The Theta transport is recorded anyway so
+that its triviality is an explicit hypothesis rather than an implicit convention.
+-/
+structure RealComparisonChartData
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target) where
+  chart : RealComparisonChartId
+  qToTarget : Transport source target
+  thetaToTarget : Transport target target
+  theta_trivial : Transport.TrivialMonodromy thetaToTarget
+
+/--
+A common container together with the real-line comparison chart used to read its
+final q- and Theta-side real numbers in the target copy.
+-/
+structure ChartedCommonContainerData
+    (output : AlgorithmicOutput source target index)
+    (measure : RegionMeasure target) (bound : Real) where
+  commonContainer : output.CommonContainerData measure bound
+  chart : output.RealComparisonChartData measure
+
+namespace ChartedCommonContainerData
+
+variable {measure : RegionMeasure target}
+variable {output : AlgorithmicOutput source target index}
+variable {bound : Real}
+
+def structuredBridge (data : ChartedCommonContainerData output measure bound) :
+    output.StructuredCommonTargetBoundBridge measure bound :=
+  data.commonContainer.structuredBridge
+
+def apply (data : ChartedCommonContainerData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    output.CommonTargetBound measure bound :=
+  data.commonContainer.apply certificate
+
+theorem choice_targetVolume_le
+    (data : ChartedCommonContainerData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family)
+    (choice : index) :
+    RegionMeasure.targetVolume measure (output.comparison choice) <= bound :=
+  data.commonContainer.choice_targetVolume_le certificate choice
+
+theorem allTargetsAtMost
+    (data : ChartedCommonContainerData output measure bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  data.commonContainer.allTargetsAtMost certificate
+
+theorem thetaTrivial
+    (data : ChartedCommonContainerData output measure bound) :
+    Transport.TrivialMonodromy data.chart.thetaToTarget :=
+  data.chart.theta_trivial
+
+end ChartedCommonContainerData
 
 end AlgorithmicOutput
 

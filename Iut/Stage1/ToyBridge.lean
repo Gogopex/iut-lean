@@ -55,6 +55,9 @@ def thetaToySHEArrow : AlgorithmicOutput.SHEArrowId :=
 def thetaToyCommonContainer : AlgorithmicOutput.CommonContainerId :=
   { label := "toy-common-upper-ray-container" }
 
+def thetaToyRealComparisonChart : AlgorithmicOutput.RealComparisonChartId :=
+  { label := "toy-real-comparison-chart" }
+
 def thetaToySHEArrowData
     (f : Transport qLine thetaLine) (h : Real) (epsilon : index -> Real) :
     (thetaToyAlgorithmOutput f h epsilon).SHEArrowData :=
@@ -108,6 +111,29 @@ def thetaToyCommonContainerData
     context := thetaToySharedHolomorphicContext,
     hddShe := thetaToyHDDSHECompositeData measure hnormalized f h hbound,
     she_context_matches := rfl }
+
+def thetaToyRealComparisonChartData
+    (measure : RegionMeasure thetaLine)
+    (f : Transport qLine thetaLine) (h : Real) (epsilon : index -> Real) :
+    (thetaToyAlgorithmOutput f h epsilon).RealComparisonChartData measure :=
+  { chart := thetaToyRealComparisonChart,
+    qToTarget := f,
+    thetaToTarget := Transport.id thetaLine,
+    theta_trivial := by
+      rw [Transport.trivialMonodromy_iff_scale_eq_one]
+      rfl }
+
+def thetaToyChartedCommonContainerData
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    (thetaToyAlgorithmOutput f h epsilon).ChartedCommonContainerData
+      measure (-(2 * h) + epsilonBound) :=
+  { commonContainer :=
+      thetaToyCommonContainerData measure hnormalized f h hbound,
+    chart := thetaToyRealComparisonChartData measure f h epsilon }
 
 def thetaToyCertifiedBridgeBound
     (measure : RegionMeasure thetaLine)
@@ -198,6 +224,19 @@ theorem thetaToyCommonContainer_choice_targetVolume_le_bound
   (thetaToyCommonContainerData measure hnormalized f h hbound).choice_targetVolume_le
     (thetaToyStructuredCertificate f h epsilon) choice
 
+theorem thetaToyChartedCommonContainer_choice_targetVolume_le_bound
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound)
+    (choice : index) :
+    RegionMeasure.targetVolume measure
+        ((thetaToyAlgorithmOutput f h epsilon).comparison choice) <=
+      -(2 * h) + epsilonBound :=
+  (thetaToyChartedCommonContainerData measure hnormalized f h hbound).choice_targetVolume_le
+    (thetaToyStructuredCertificate f h epsilon) choice
+
 theorem thetaToyBridge_allTargetsAtMost
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
@@ -263,6 +302,28 @@ theorem thetaToyCommonContainer_allTargetsAtMost
       (thetaToyAlgorithmOutput f h epsilon).comparisons (-(2 * h) + epsilonBound) :=
   (thetaToyCommonContainerData measure hnormalized f h hbound).allTargetsAtMost
     (thetaToyStructuredCertificate f h epsilon)
+
+theorem thetaToyChartedCommonContainer_allTargetsAtMost
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    RegionComparisonFamily.AllTargetsAtMost measure
+      (thetaToyAlgorithmOutput f h epsilon).comparisons (-(2 * h) + epsilonBound) :=
+  (thetaToyChartedCommonContainerData measure hnormalized f h hbound).allTargetsAtMost
+    (thetaToyStructuredCertificate f h epsilon)
+
+theorem thetaToyChartedCommonContainer_theta_trivial
+    (measure : RegionMeasure thetaLine)
+    (hnormalized : RegionMeasure.NormalizesUpperRays measure)
+    (f : Transport qLine thetaLine) (h : Real)
+    {epsilon : index -> Real} {epsilonBound : Real}
+    (hbound : ∀ choice : index, epsilon choice <= epsilonBound) :
+    Transport.TrivialMonodromy
+      (thetaToyChartedCommonContainerData
+        measure hnormalized f h hbound).chart.thetaToTarget :=
+  (thetaToyChartedCommonContainerData measure hnormalized f h hbound).thetaTrivial
 
 theorem thetaToyBridge_hasAPT
     (measure : RegionMeasure thetaLine)
