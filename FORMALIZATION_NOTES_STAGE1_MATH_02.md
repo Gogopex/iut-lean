@@ -1696,3 +1696,62 @@ placeAuditedDirectSummandPacketChoice_ind2_preserves_totalLogVolume_example
 The next step should build a generated indeterminacy relation for the
 place-audited choice type and prove that the audit is preserved under generated
 relations.
+
+## 22. Generated Relation for Place-Audited Choices
+
+### Goal
+
+We built the generated `(Ind1)/(Ind2)/(Ind3)` relation for place-audited
+refined choices.
+
+### Lean/API Check
+
+The audited choice namespace now defines:
+
+```text
+indeterminacySourceData
+```
+
+with generators:
+
+```text
+ProcessionAutomorphismStep
+LocalTensorDirectSummandActionStep
+UpperSemiCompatibilityStep
+```
+
+Lean proves:
+
+```text
+generated_preserves_placeFamilyCompatibility
+generated_preserves_coric
+generated_preserves_upperSemiLogVolumeCompatible
+```
+
+### Mathematical Point
+
+The compatibility audit is now stable under the generated closure, provided
+each generator step supplies audit preservation.  This is the audited analogue
+of the earlier refined generated relation.
+
+### Trap Avoided
+
+The generated preservation theorem is conditional on audited generator steps.
+It does not say that every unaudited refined step preserves the place-family
+audit automatically.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+placeAuditedDirectSummandPacketChoice_generated_preserves_audit_example
+placeAuditedDirectSummandPacketChoice_generated_preserves_coric_example
+placeAuditedDirectSummandPacketChoice_generated_logVolumeCompatible_example
+```
+
+### Remaining Gap
+
+The next refinement should connect place-audited generated relations to
+multiradial image invariance, either by projecting to the underlying refined
+choice relation or by defining audited image packages directly.

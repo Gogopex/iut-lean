@@ -1126,6 +1126,46 @@ theorem placeAuditedDirectSummandPacketChoice_ind2_preserves_totalLogVolume_exam
   IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_preserves_capsuleTotalLogVolume
     hstep
 
+theorem placeAuditedDirectSummandPacketChoice_generated_preserves_audit_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice.indeterminacySourceData
+          (coric := coric) (kind := kind)).generators
+        audited₁ audited₂) :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.generated_preserves_placeFamilyCompatibility
+    hrel
+
+theorem placeAuditedDirectSummandPacketChoice_generated_preserves_coric_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice.indeterminacySourceData
+          (coric := coric) (kind := kind)).generators
+        audited₁ audited₂) :
+    audited₁.choice.coric = audited₂.choice.coric :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.generated_preserves_coric
+    hrel
+
+theorem placeAuditedDirectSummandPacketChoice_generated_logVolumeCompatible_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice.indeterminacySourceData
+          (coric := coric) (kind := kind)).generators
+        audited₁ audited₂) :
+    audited₂.choice.upper_semi_state.logVolumeCompatible :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.generated_preserves_upperSemiLogVolumeCompatible
+    hrel
+
 def refinedThetaImagesDependOnlyOnCoric_to_multiradial_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

@@ -3024,6 +3024,68 @@ theorem ind2_preserves_capsuleTotalLogVolume
   IUTStage1DirectSummandPacketTheorem311Choice.ind2_preserves_capsuleTotalLogVolume
     hstep.choice_step
 
+def indeterminacySourceData :
+    IUTStage1Theorem311IndeterminacySourceData
+      (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :=
+  { procession_automorphism_step := ProcessionAutomorphismStep,
+    local_tensor_symmetry_step := LocalTensorDirectSummandActionStep,
+    upper_semi_compatibility_step := UpperSemiCompatibilityStep }
+
+theorem generated_preserves_placeFamilyCompatibility
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (indeterminacySourceData (coric := coric) (kind := kind)).generators
+        audited₁ audited₂) :
+    audited₁.placeFamilyCompatibility =
+      audited₂.placeFamilyCompatibility := by
+  induction hrel with
+  | refl audited =>
+      rfl
+  | ind1 hstep =>
+      exact ind1_preserves_placeFamilyCompatibility hstep
+  | ind2 hstep =>
+      exact ind2_preserves_placeFamilyCompatibility hstep
+  | ind3 hstep =>
+      exact ind3_preserves_placeFamilyCompatibility hstep
+  | symm _ ih =>
+      exact ih.symm
+  | trans _ _ ih₁₂ ih₂₃ =>
+      exact ih₁₂.trans ih₂₃
+
+theorem generated_preserves_coric
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (indeterminacySourceData (coric := coric) (kind := kind)).generators
+        audited₁ audited₂) :
+    audited₁.choice.coric = audited₂.choice.coric := by
+  induction hrel with
+  | refl audited =>
+      rfl
+  | ind1 hstep =>
+      exact hstep.choice_step.coric_eq
+  | ind2 hstep =>
+      exact hstep.choice_step.coric_eq
+  | ind3 hstep =>
+      exact hstep.choice_step.coric_eq
+  | symm _ ih =>
+      exact ih.symm
+  | trans _ _ ih₁₂ ih₂₃ =>
+      exact ih₁₂.trans ih₂₃
+
+theorem generated_preserves_upperSemiLogVolumeCompatible
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (_hrel :
+      IUTStage1GeneratedIndeterminacyRelation
+        (indeterminacySourceData (coric := coric) (kind := kind)).generators
+        audited₁ audited₂) :
+    audited₂.choice.upper_semi_state.logVolumeCompatible :=
+  audited₂.upperSemi_logVolumeCompatible
+
 end IUTStage1PlaceAuditedDirectSummandPacketChoice
 
 /--
