@@ -2623,6 +2623,17 @@ def toLocalObjectContainerEstimateOfIdentifiedLogVolume
   IUTStage1LocalObjectContainerLogVolumeEstimate.transportLocalLogVolume
     (data.toLocalObjectContainerEstimateOfCapsuleEstimates estimate) hlog
 
+theorem identifiedLogVolumeEstimate_localObject
+    (data : IUTStage1DirectPacketNormalizationData state)
+    {targetSigned localLogVolume : Real}
+    (estimate :
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        targetSigned state.capsuleFamily)
+    (hlog : localLogVolume = state.localObject.finiteLogVolume) :
+    (data.toLocalObjectContainerEstimateOfIdentifiedLogVolume
+      estimate hlog).localObject = state.localObject :=
+  rfl
+
 end IUTStage1DirectPacketNormalizationData
 
 namespace IUTStage1LocalTensorDirectSummandPacketState
@@ -10934,6 +10945,39 @@ structure FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
         audited.choice.local_tensor_state.packetState.capsuleFamily
 
 /--
+Direct local packet route where cusp/zero local object estimates are derived
+from capsule estimates, direct packet normalization, and explicit
+log-volume-to-local-object identifications.
+-/
+structure FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  theta_source : audit.FLZModCuspLabelThetaSourceAudit l
+  ind12_equality_part : audit.Ind12EqualityPart
+  ind3_upper_part : audit.Ind3UpperInequalityPart
+  theta_images_eq_endpoint :
+    theta_source.theta_images = endpoint.theta_hull_endpoint.possible_images
+  targetCapsuleEstimates :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        package.preLedger.targetVolume.targetSigned
+        audited.choice.local_tensor_state.packetState.capsuleFamily
+  directNormalization :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1DirectPacketNormalizationData
+        audited.choice.local_tensor_state.packetState
+  cuspClassLogVolume_eq_localObjectFinite :
+    ∀ (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+      (label : (zmodSignAction l).SignLabelQuotient),
+      (theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+          label =
+        audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume
+  zeroLogVolume_eq_localObjectFinite :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      (theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+        audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume
+
+/--
 Full-route input for the `(Ind2)`-transported packet-normalization and
 transported capsule-estimate route.
 -/
@@ -12607,6 +12651,101 @@ theorem qSigned_le_thetaSigned
   summary.classified_route.qSigned_le_thetaSigned audited
 
 end FLZModCuspLabelThetaFullClassifiedRouteSummary
+
+namespace FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def cuspClassObjectEstimate
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    IUTStage1LocalObjectContainerLogVolumeEstimate kind
+      package.preLedger.targetVolume.targetSigned
+      ((part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label) :=
+  IUTStage1DirectPacketNormalizationData.toLocalObjectContainerEstimateOfIdentifiedLogVolume
+    (part.directNormalization audited)
+    (part.targetCapsuleEstimates audited)
+    (part.cuspClassLogVolume_eq_localObjectFinite audited label)
+
+def zeroObjectEstimate
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1LocalObjectContainerLogVolumeEstimate kind
+      package.preLedger.targetVolume.targetSigned
+      (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume :=
+  IUTStage1DirectPacketNormalizationData.toLocalObjectContainerEstimateOfIdentifiedLogVolume
+    (part.directNormalization audited)
+    (part.targetCapsuleEstimates audited)
+    (part.zeroLogVolume_eq_localObjectFinite audited)
+
+def toDirectLocalPacketNormalizedAudit
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit l :=
+  { theta_source := part.theta_source,
+    ind12_equality_part := part.ind12_equality_part,
+    ind3_upper_part := part.ind3_upper_part,
+    theta_images_eq_endpoint := part.theta_images_eq_endpoint,
+    cuspClassObjectEstimate := part.cuspClassObjectEstimate,
+    cuspClassObject_eq_packetLocalObject := by
+      intro audited label
+      exact
+        IUTStage1DirectPacketNormalizationData.identifiedLogVolumeEstimate_localObject
+          (part.directNormalization audited)
+          (part.targetCapsuleEstimates audited)
+          (part.cuspClassLogVolume_eq_localObjectFinite audited label),
+    cuspClassDirectNormalization := by
+      intro audited _label
+      exact part.directNormalization audited,
+    zeroObjectEstimate := part.zeroObjectEstimate,
+    zeroObject_eq_packetLocalObject := by
+      intro audited
+      exact
+        IUTStage1DirectPacketNormalizationData.identifiedLogVolumeEstimate_localObject
+          (part.directNormalization audited)
+          (part.targetCapsuleEstimates audited)
+          (part.zeroLogVolume_eq_localObjectFinite audited),
+    zeroDirectNormalization := part.directNormalization }
+
+def toDirectLocalPacketDirectCapsuleRouteAudit
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit l :=
+  { direct_packet := part.toDirectLocalPacketNormalizedAudit,
+    targetCapsuleEstimates := part.targetCapsuleEstimates }
+
+def toFullClassifiedRouteSummary
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l :=
+  let directPacket := part.toDirectLocalPacketNormalizedAudit
+  let packetSummary := directPacket.toClassifiedPacketNormalizedAudit
+  let direct : audit.FLZModCuspLabelThetaDirectCapsuleCuspClassAudit l :=
+    { packet_normalized := packetSummary.packet_normalized,
+      targetCapsuleEstimates := part.targetCapsuleEstimates }
+  FLZModCuspLabelThetaFullClassifiedRouteSummary.ofDirectCapsule
+    packetSummary direct rfl
+
+theorem packetIdentificationSource_eq_direct
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    part.toFullClassifiedRouteSummary.packetIdentificationSource =
+      IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization :=
+  rfl
+
+theorem cuspBoundSource_eq_directCapsule
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    part.toFullClassifiedRouteSummary.cuspBoundSource =
+      IUTStage1CuspClassBoundSource.directCapsuleEstimates :=
+  rfl
+
+end FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
 
 namespace FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
 

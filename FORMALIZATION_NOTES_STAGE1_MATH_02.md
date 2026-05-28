@@ -6827,3 +6827,85 @@ directPacketNormalizationData_capsule_estimates_to_identified_log_example
 The next step is to expose the cusp/zero-to-local-object finite-log-volume
 identifications at the high-level direct local packet audit, so these estimates
 can be constructed rather than supplied manually.
+
+## 87. Direct Identified Local Packet Route
+
+### Goal
+
+We reduced the direct local packet route so that cusp/zero local object
+estimates are constructed from smaller data.
+
+### Lean Move
+
+We added:
+
+```text
+FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
+```
+
+It carries:
+
+```text
+target capsule-family container estimates
+direct packet normalization data
+cusp-class log-volume = packet local object finiteLogVolume
+zero log-volume = packet local object finiteLogVolume
+```
+
+From this Lean constructs:
+
+```text
+cuspClassObjectEstimate
+zeroObjectEstimate
+toDirectLocalPacketNormalizedAudit
+toDirectLocalPacketDirectCapsuleRouteAudit
+toFullClassifiedRouteSummary
+```
+
+The resulting full route has:
+
+```text
+packetIdentificationSource = directPacketNormalization
+cuspBoundSource = directCapsuleEstimates
+```
+
+### Mathematical Point
+
+This removes one layer of manual input from the direct route.  Previously the
+high-level direct packet audit required local object container estimates for all
+cusp-class and zero log-volumes.  Now those estimates are derived from:
+
+```text
+capsule-entry bounds
+direct finite-sum packet normalization
+explicit equality between the cusp/zero log-volume and the packet local object
+```
+
+This is exactly the kind of reduction we want near Corollary 3.12: the equality
+that identifies a log-volume real with the packet local object is still a named
+input, while the resulting bound is checked by Lean.
+
+### Trap Avoided
+
+The new route does not assert that cusp/zero log-volumes automatically equal
+the packet local object value.  Those equalities are explicit fields.  Thus the
+Scholze-Stix real-line-identification concern remains visible at the point where
+it is used.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_direct_identified_packet_to_direct_example
+placeAudited_logVolume_fl_zmod_direct_identified_packet_full_route_example
+placeAudited_logVolume_fl_zmod_direct_identified_packet_source_example
+```
+
+### Remaining Gap
+
+The direct identified route still assumes the cusp/zero-to-local-object
+finite-log-volume equalities.  The next mathematical task is to trace those
+equalities back to the source definitions of the cusp-compatible label average,
+or to classify them as separate real-line identifications if no source-close
+construction is available.

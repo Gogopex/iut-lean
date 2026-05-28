@@ -5134,6 +5134,48 @@ theorem placeAudited_logVolume_fl_zmod_direct_local_packet_full_route_source_exa
       IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization :=
   part.packetIdentificationSource_eq_direct
 
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+def placeAudited_logVolume_fl_zmod_direct_identified_packet_to_direct_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit l :=
+  part.toDirectLocalPacketNormalizedAudit
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+def placeAudited_logVolume_fl_zmod_direct_identified_packet_full_route_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l :=
+  part.toFullClassifiedRouteSummary
+
+theorem placeAudited_logVolume_fl_zmod_direct_identified_packet_source_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    part.toFullClassifiedRouteSummary.packetIdentificationSource =
+      IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization :=
+  part.packetIdentificationSource_eq_direct
+
 theorem placeAudited_logVolume_fl_zmod_ind2_local_packet_full_route_source_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
