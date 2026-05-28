@@ -5740,3 +5740,87 @@ placeAudited_logVolume_fl_zmod_classified_route_target_source_example
 The next step should use this summary as the checkpoint for a broader review of
 the current local-to-global chain against IUT III/IV and the Scholze-Stix
 critique before adding more layers.
+
+## 73. Periodic Review of the Local-to-Global Chain
+
+### Scope
+
+We reviewed the current Lean route after introducing the classified route
+summary.
+
+### Source Check
+
+IUT III, in the discussion around Corollary 3.12, describes the Theta-pilot
+log-volume as the log-volume of the holomorphic hull of the union of possible
+Theta-pilot images, with the possible images subject to `(Ind1)`, `(Ind2)`,
+`(Ind3)`.  It then says that this holomorphic-hull computation gives an upper
+bound for the q-pilot log-volume.
+
+Mochizuki's recent formalization note describes a reorganization in which the
+`hull+det` component is moved into a prior `3.11.5`-style stage, leaving the
+final `3.11.5 => 3.12` portion focused on simultaneous comparison.
+
+Scholze-Stix's critique of the Corollary 3.12 step emphasizes that the various
+copies of ordered real lines and the averaged `j = 1,...,l` concrete Theta-pilot
+degrees must be identified consistently.
+
+### Current Lean Alignment
+
+The current route is:
+
+```text
+capsule-entry container estimates
+  -> capsule-family normalized bound
+  -> packet-normalized cusp/zero log-volume bound
+  -> cusp/sign-label bound
+  -> ZMod labelwise bound
+  -> F_l average bound
+  -> Theta-source average bound
+  -> thetaPilotHullContainer target-average bound
+  -> qSigned <= thetaSigned
+```
+
+The current classification summary records:
+
+```text
+cusp_bound_source
+target_average_source
+```
+
+with equality links back to the proof route.
+
+### Assessment
+
+The implementation remains on target.  We are not proving the full analytic
+IUT estimates yet, but we are replacing formerly opaque real inequalities with
+smaller typed obligations:
+
+```text
+capsule-entry estimates
+packet-normalized equalities
+cusp/sign-label compatibility
+finite F_l averaging
+Theta-pilot hull/container classification
+```
+
+This is a useful formalization direction because it puts the disputed real-line
+and averaging identifications directly into Lean data.
+
+### Watch Points
+
+The strongest assumptions currently introduced are:
+
+```text
+cusp/zero log-volume = packet normalized capsule-family log-volume
+targetSigned <= each capsule entry log-volume
+sourceAudited target choices for transported `(Ind2)` bounds
+```
+
+These are not final IUT theorems.  They are typed placeholders for future
+analytic/container proofs.  The notes and names now make that status explicit.
+
+### Next Step
+
+Continue by reducing these assumptions further when possible, but avoid adding
+new abstractions unless they discharge or localize one of the watch-point
+assumptions above.
