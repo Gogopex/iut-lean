@@ -3386,3 +3386,97 @@ weight side of the dispute: the next serious gap is no longer "preserve weights"
 in the abstract, but "produce or justify a coordinate equivalence preserving the
 specific `j.val^2` profile while also preserving the full-label log-volume
 branch."
+
+## 151. Reduced Structured-SHE Obligations via Coordinate Squares
+
+### Lean Move
+
+We added a reduced structured-SHE obligation record:
+
+```text
+IUTStage1StructuredSHECoordinateSquareWeightObligations
+```
+
+This record still asks for the data needed to enter the square-weighted
+full-label transport corridor:
+
+```text
+coordinate equivalence
+source and target square profiles
+source and target full-label log-volume branches
+full-label log-volume preservation
+```
+
+But instead of asking separately for:
+
+```text
+pointwise square-weight preservation
+total square-weight preservation
+```
+
+it asks for the sharper coordinate condition:
+
+```text
+CoordinateSquarePreserving coordinateEquiv
+```
+
+Lean then derives:
+
+```text
+squareWeight_preserved
+weightTotal_preserved
+toStructuredSHESquareWeightTransportObligations
+toStructuredSHESquareWeightTransportObligations_average_eq
+toStructuredSHESquareWeightTransportObligations_bridge_eq
+```
+
+The example file checks the conversion from reduced obligations to the existing
+full structured-SHE square-weight obligations, together with the derived
+pointwise-weight and total-weight preservation facts.
+
+### Mathematical Reason
+
+This is not a new assumption layer.  It is a simplification of the existing
+obligation boundary.  The previous full obligation record was mathematically
+correct but slightly redundant: once the square-weight profile is defined by
+`j.val^2`, pointwise square-weight preservation and total-weight preservation
+are consequences of coordinate-square preservation.
+
+Thus the formalization now separates the square-weight side of the Corollary
+3.12 dispute into:
+
+```text
+coordinate-square preservation: still open;
+full-label log-volume preservation: still open;
+transported weighted-average equality: derived once both are supplied.
+```
+
+### Source Check
+
+This reflects the way the source material treats the weighted calculation.  IUT
+II identifies the weighted diagonal using the vector of `j^2` weights and
+connects it to weighted-volume computation.  IUT III then applies the final
+comparison to averages over `j in F_l` in the Corollary 3.12 proof corridor.
+
+Scholze-Stix's objection is not that finite weighted sums cannot be transported
+when all preservation data are supplied.  The objection is that the comparison
+route may not legitimately supply the nontrivial `j`/`j^2` data after the
+simplification to a common real-line setting.  This reduced obligation record
+matches that pressure point: the square-weight branch now asks for exactly the
+coordinate-square preservation data that would have to survive.
+
+### Relevance to the 3.12 Dispute
+
+After this milestone, the formal endpoint for the square-weight side is sharper:
+
+```text
+CoordinateSquarePreserving coordinateEquiv
++ fullLabelLogVolume preservation
+=> structured-SHE square-weight transport audit
+=> transported weighted-average equality
+```
+
+So a future IUT-positive construction must produce a coordinate equivalence with
+this preservation property from the Hodge-theater/SHE route.  A Scholze-Stix
+style negative formalization can try to show that the currently formalized
+common-container/local-object data do not determine such an equivalence.

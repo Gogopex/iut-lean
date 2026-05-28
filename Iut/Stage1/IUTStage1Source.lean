@@ -8892,6 +8892,102 @@ theorem toStructuredSHESquareWeightTransportAudit_descent_eq
 end IUTStage1StructuredSHESquareWeightTransportObligations
 
 /--
+Reduced structured-SHE square-weight obligations.
+
+Instead of asking separately for pointwise square-weight preservation and
+total-weight preservation, this record asks for the coordinate equivalence to
+preserve the canonical real square profile.  The two weight-preservation fields
+of `IUTStage1StructuredSHESquareWeightTransportObligations` are then derived by
+the `IUTStage1ZModSquareWeightProfile` lemmas.
+-/
+structure IUTStage1StructuredSHECoordinateSquareWeightObligations
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (l : PrimeGeFive) where
+  coordinateEquiv : ZMod l.value ≃ ZMod l.value
+  sourceProfile : IUTStage1ZModSquareWeightProfile l
+  targetProfile : IUTStage1ZModSquareWeightProfile l
+  sourceLogVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+  targetLogVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+  coordinateSquare_preserved :
+    IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+      (l := l) coordinateEquiv
+  fullLabelLogVolume_preserved :
+    ∀ j : ZMod l.value,
+      targetLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)) =
+        sourceLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)
+
+namespace IUTStage1StructuredSHECoordinateSquareWeightObligations
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+variable {l : PrimeGeFive}
+
+theorem squareWeight_preserved
+    (obligations :
+      IUTStage1StructuredSHECoordinateSquareWeightObligations package bundle l) :
+    ∀ j : ZMod l.value,
+      obligations.targetProfile.weight (obligations.coordinateEquiv j) =
+        obligations.sourceProfile.weight j :=
+  IUTStage1ZModSquareWeightProfile.squareWeight_preserved_of_coordinateSquarePreserving
+    obligations.sourceProfile obligations.targetProfile
+    obligations.coordinateSquare_preserved
+
+theorem weightTotal_preserved
+    (obligations :
+      IUTStage1StructuredSHECoordinateSquareWeightObligations package bundle l) :
+    obligations.targetProfile.weightTotal =
+      obligations.sourceProfile.weightTotal :=
+  IUTStage1ZModSquareWeightProfile.weightTotal_preserved_of_coordinateSquarePreserving
+    obligations.sourceProfile obligations.targetProfile
+    obligations.coordinateSquare_preserved
+
+def toStructuredSHESquareWeightTransportObligations
+    (obligations :
+      IUTStage1StructuredSHECoordinateSquareWeightObligations package bundle l) :
+    IUTStage1StructuredSHESquareWeightTransportObligations package bundle l :=
+  { coordinateEquiv := obligations.coordinateEquiv,
+    sourceProfile := obligations.sourceProfile,
+    targetProfile := obligations.targetProfile,
+    sourceLogVolume := obligations.sourceLogVolume,
+    targetLogVolume := obligations.targetLogVolume,
+    fullLabelLogVolume_preserved :=
+      obligations.fullLabelLogVolume_preserved,
+    squareWeight_preserved := obligations.squareWeight_preserved,
+    weightTotal_preserved := obligations.weightTotal_preserved }
+
+theorem toStructuredSHESquareWeightTransportObligations_average_eq
+    (obligations :
+      IUTStage1StructuredSHECoordinateSquareWeightObligations package bundle l) :
+    let transportObligations :=
+      obligations.toStructuredSHESquareWeightTransportObligations
+    let audit := transportObligations.toStructuredSHESquareWeightTransportAudit
+    audit.preservationAudit.targetTransportedAverage =
+      audit.preservationAudit.sourceAverage := by
+  let full := obligations.toStructuredSHESquareWeightTransportObligations
+  change
+    full.toStructuredSHESquareWeightTransportAudit.preservationAudit.targetTransportedAverage =
+      full.toStructuredSHESquareWeightTransportAudit.preservationAudit.sourceAverage
+  exact full.toStructuredSHESquareWeightTransportAudit_average_eq
+
+theorem toStructuredSHESquareWeightTransportObligations_bridge_eq
+    (obligations :
+      IUTStage1StructuredSHECoordinateSquareWeightObligations package bundle l) :
+    let transportObligations :=
+      obligations.toStructuredSHESquareWeightTransportObligations
+    transportObligations.toPreservationAudit.bridge =
+      bundle.hodgeTheaterDescentBridgeData := by
+  let full := obligations.toStructuredSHESquareWeightTransportObligations
+  change full.toPreservationAudit.bridge = bundle.hodgeTheaterDescentBridgeData
+  exact full.toPreservationAudit_bridge_eq_structuredSHE
+
+end IUTStage1StructuredSHECoordinateSquareWeightObligations
+
+/--
 Audited entry from the strengthened SHE route into the existing `HDD o SHE`
 boundedness API.
 

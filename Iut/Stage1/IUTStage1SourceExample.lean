@@ -1059,6 +1059,52 @@ theorem structuredSHESquareWeightTransportObligations_average_example
       audit.preservationAudit.sourceAverage :=
   obligations.toStructuredSHESquareWeightTransportAudit_average_eq
 
+def structuredSHECoordinateSquareWeightObligations_to_full_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHECoordinateSquareWeightObligations package bundle l) :
+    IUTStage1StructuredSHESquareWeightTransportObligations package bundle l :=
+  obligations.toStructuredSHESquareWeightTransportObligations
+
+theorem structuredSHECoordinateSquareWeightObligations_weight_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHECoordinateSquareWeightObligations package bundle l)
+    (j : ZMod l.value) :
+    obligations.targetProfile.weight (obligations.coordinateEquiv j) =
+      obligations.sourceProfile.weight j :=
+  obligations.squareWeight_preserved j
+
+theorem structuredSHECoordinateSquareWeightObligations_total_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHECoordinateSquareWeightObligations package bundle l) :
+    obligations.targetProfile.weightTotal =
+      obligations.sourceProfile.weightTotal :=
+  obligations.weightTotal_preserved
+
+theorem structuredSHECoordinateSquareWeightObligations_average_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHECoordinateSquareWeightObligations package bundle l) :
+    let full := obligations.toStructuredSHESquareWeightTransportObligations
+    let audit := full.toStructuredSHESquareWeightTransportAudit
+    audit.preservationAudit.targetTransportedAverage =
+      audit.preservationAudit.sourceAverage :=
+  obligations.toStructuredSHESquareWeightTransportObligations_average_eq
+
 def flLabelModel_zmod_example
     (l : PrimeGeFive) :
     IUTStage1FLLabelModel (ZMod l.value) :=
