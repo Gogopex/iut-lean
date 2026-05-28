@@ -1036,3 +1036,130 @@ next hard obligation: construct the three matching identifications between
 zero/cusp log-volumes, theta average, and the audited upper-semi source/target
 values from Hodge-theater descent and the multiradial algorithm, rather than
 supplying them as fields.
+
+## 205. Hodge Descent Derives The Source Side Of The Ind3 Bridge
+
+### Lean Move
+
+We refined the previous `(Ind3)` bridge by adding source-side derivations from
+the Hodge-descent packet transport route.
+
+In
+
+```text
+FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
+```
+
+we added:
+
+```text
+cuspClassLogVolume_eq_packetLocalObjectFinite
+zeroLogVolume_eq_packetLocalObjectFinite
+targetSigned_le_cuspClassLogVolume
+targetSigned_le_zeroLogVolume
+toThetaCuspClassContainerAudit
+```
+
+In
+
+```text
+FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
+```
+
+we added:
+
+```text
+toThetaCuspClassContainerAudit
+cuspClassLogVolume_eq_packetLocalObjectFinite
+zeroLogVolume_eq_packetLocalObjectFinite
+Ind3SourceTargetAlignment
+toInd3SourceZeroCuspTargetThetaAudit
+```
+
+The new `Ind3SourceTargetAlignment` no longer asks for separate zero and
+cusp-class identifications with the upper-semi source value.  Hodge descent
+derives both zero and cusp-class log-volumes as the finite log-volume of the
+packet local object.  The remaining alignment data is:
+
+```text
+packetLocalObjectFinite = upper-semi source log-volume
+thetaSourceAverage = upper-semi target log-volume
+```
+
+The example file checks that this Hodge-descent-sourced route still reaches the
+final q/Theta inequality:
+
+```text
+placeAudited_logVolume_fl_zmod_hodge_ind3_source_route_example
+```
+
+### Mathematical Reason
+
+The previous milestone used `(Ind3)` correctly as the only inequality, but it
+still accepted the zero/cusp-to-upper-semi-source equalities directly.  This
+milestone replaces those direct fields by Hodge-descent packet transport:
+
+```text
+zero/cusp local object
+  -- Hodge descent / packet transport -->
+packet local object
+  -- remaining real alignment -->
+upper-semi source real value
+```
+
+This keeps the proof closer to the fourth-triangle picture: the zero-column/SHE
+source data and cusp-class Hodge-Arakelov data are routed through the packet
+descent target before entering the upper-semi inequality.
+
+The endpoint proof shape is now:
+
+```text
+zero/cusp log-volume
+  = finite log-volume of packet local object      (Hodge descent)
+  = upper-semi source log-volume                  (alignment)
+  <= upper-semi target log-volume                 (Ind3)
+  = theta source average                          (alignment)
+```
+
+Only the third line is an inequality.  The other lines remain named
+identifications.
+
+### Source Check
+
+This move follows the same local source readings as Section 204, but it uses
+more of Mochizuki's own formalization-oriented decomposition: the recent
+formalization note describes the final `3.11.5 => 3.12` piece as concentrating
+on simultaneous q/Theta comparison after earlier APT/IPL/SHE work has supplied
+the transport data.  Here, SHE/Hodge descent is not decorative infrastructure:
+it is the reason zero/cusp representatives may be routed to the packet object
+before applying `(Ind3)`.
+
+Against the Scholze-Stix criticism, this remains conservative.  The code does
+not identify real-line copies globally or silently.  The Hodge-descent packet
+transport provides local-object equalities; the real-valued alignment with the
+upper-semi source/target values is still an explicit `Ind3SourceTargetAlignment`
+obligation.
+
+### Relevance to the 3.12 Dispute
+
+The active route has moved from:
+
+```text
+assume zero/cusp = upper-semi source
+assume theta average = upper-semi target
+use Ind3
+```
+
+to:
+
+```text
+derive zero/cusp = packet local object via Hodge descent
+assume packet local object = upper-semi source
+assume theta average = upper-semi target
+use Ind3
+```
+
+The next hard mathematical task is now sharper: derive `Ind3SourceTargetAlignment`
+from the actual multiradial algorithm / upper-semi compatibility construction,
+or prove that such a derivation requires an additional nontrivial identification
+of real-line copies.

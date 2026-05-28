@@ -19606,6 +19606,63 @@ theorem zeroLogVolume_eq_canonicalCuspClassLogVolume
   part.zeroLogVolume_eq_cuspClassLogVolume
     audited (zmodCanonicalSignLabelQuotient l)
 
+theorem cuspClassLogVolume_eq_packetLocalObjectFinite
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label =
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume := by
+  calc
+    (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label =
+        (part.cuspClassLocalObject audited label).finiteLogVolume :=
+      part.cuspClassLogVolume_eq_localObjectFinite audited label
+    _ = audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume := by
+      rw [part.cuspClassLocalObject_eq_packetLocalObject audited label]
+
+theorem zeroLogVolume_eq_packetLocalObjectFinite
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume := by
+  calc
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+        (part.zeroLocalObject audited).finiteLogVolume :=
+      part.zeroLogVolume_eq_localObjectFinite audited
+    _ = audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume := by
+      rw [part.zeroLocalObject_eq_packetLocalObject audited]
+
+theorem targetSigned_le_cuspClassLogVolume
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label := by
+  rw [part.cuspClassLogVolume_eq_packetLocalObjectFinite audited label]
+  exact (part.packetLocalObjectEstimate audited).targetSigned_le_localLogVolume
+
+theorem targetSigned_le_zeroLogVolume
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume := by
+  rw [part.zeroLogVolume_eq_packetLocalObjectFinite audited]
+  exact (part.packetLocalObjectEstimate audited).targetSigned_le_localLogVolume
+
+def toThetaCuspClassContainerAudit
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l) :
+    audit.FLZModCuspLabelThetaCuspClassContainerAudit l :=
+  { theta_source := part.theta_source,
+    ind12_equality_part := part.ind12_equality_part,
+    ind3_upper_part := part.ind3_upper_part,
+    theta_images_eq_endpoint := part.theta_images_eq_endpoint,
+    targetSigned_le_cuspClassLogVolume :=
+      part.targetSigned_le_cuspClassLogVolume,
+    targetSigned_le_zeroLogVolume :=
+      part.targetSigned_le_zeroLogVolume }
+
 end FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
 
 namespace FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
@@ -21540,6 +21597,98 @@ theorem zeroLocalObject_eq_cuspClassLocalObject
       part.insulated_route.cuspClassLocalObject audited label :=
   let packetBridge := part.toInsulatedCuspZeroPacketBridgeAudit
   packetBridge.zeroLocalObject_eq_cuspClassLocalObject audited label
+
+def toThetaCuspClassContainerAudit
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
+    audit.FLZModCuspLabelThetaCuspClassContainerAudit l :=
+  part.toInsulatedCuspZeroPacketBridgeAudit
+    |>.toCuspZeroLocalLabelObjectConstructionAudit
+    |>.toThetaCuspClassContainerAudit
+
+theorem cuspClassLogVolume_eq_packetLocalObjectFinite
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.insulated_route.theta_source.compatible_average.cuspLogVolume
+        audited).cuspClassLogVolume label =
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume :=
+  let cuspZero :=
+    part.toInsulatedCuspZeroPacketBridgeAudit
+      |>.toCuspZeroLocalLabelObjectConstructionAudit
+  cuspZero.cuspClassLogVolume_eq_packetLocalObjectFinite audited label
+
+theorem zeroLogVolume_eq_packetLocalObjectFinite
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.insulated_route.theta_source.compatible_average.cuspLogVolume
+        audited).zeroLogVolume =
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume :=
+  let cuspZero :=
+    part.toInsulatedCuspZeroPacketBridgeAudit
+      |>.toCuspZeroLocalLabelObjectConstructionAudit
+  cuspZero.zeroLogVolume_eq_packetLocalObjectFinite audited
+
+/--
+Alignment of the Hodge-descent packet local object with the two real values of
+the audited `(Ind3)` upper-semi datum.
+
+The zero/cusp-to-packet equalities are derived from Hodge descent; this record
+keeps only the remaining real-line/log-volume alignment needed to use the
+upper-semi inequality.
+-/
+structure Ind3SourceTargetAlignment
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) where
+  packetLocalObjectFinite_eq_ind3Source :
+    audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume
+  thetaSourceAverage_eq_ind3Target :
+    part.insulated_route.theta_source.thetaSourceAverage audited =
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume
+
+open FLZModCuspLabelThetaCuspClassContainerAudit in
+def toInd3SourceZeroCuspTargetThetaAudit
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport_audit :
+      IUTStage1StructuredSHESquareWeightTransportAudit package part.bundle l)
+    (source_profile_eq :
+      profile = transport_audit.preservationAudit.sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        transport_audit.preservationAudit.sourceLogVolume)
+    (target_log_volume_eq_theta :
+      transport_audit.preservationAudit.targetLogVolume =
+        part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited)
+    (alignment : Ind3SourceTargetAlignment part audited) :
+    ThreeElevenFiveStructuredSHEInd3SourceZeroCuspTargetThetaAudit
+      part.toThetaCuspClassContainerAudit part.bundle profile audited :=
+  { transport_audit := transport_audit,
+    source_profile_eq := source_profile_eq,
+    source_log_volume_eq := source_log_volume_eq,
+    target_log_volume_eq_theta := target_log_volume_eq_theta,
+    zeroLogVolume_eq_ind3Source := by
+      calc
+        (part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+            audited).zeroLogVolume =
+            audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume :=
+          part.zeroLogVolume_eq_packetLocalObjectFinite audited
+        _ = audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume :=
+          alignment.packetLocalObjectFinite_eq_ind3Source,
+    cuspClassLogVolume_eq_ind3Source := by
+      intro label
+      calc
+        (part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+            audited).cuspClassLogVolume label =
+            audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume :=
+          part.cuspClassLogVolume_eq_packetLocalObjectFinite audited label
+        _ = audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume :=
+          alignment.packetLocalObjectFinite_eq_ind3Source,
+    thetaSourceAverage_eq_ind3Target :=
+      alignment.thetaSourceAverage_eq_ind3Target }
 
 theorem bridgeSource_eq_hodgeTheaterDescentPacketTransport
     (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
