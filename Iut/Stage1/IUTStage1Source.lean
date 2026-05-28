@@ -718,6 +718,28 @@ deriving DecidableEq, Repr
 structure IUTStage1PlaceId (kind : IUTStage1PlaceKind) where
   label : String
 
+/-- Typed identifier for a base place `vQ` of a fixed kind. -/
+structure IUTStage1BasePlaceId (kind : IUTStage1PlaceKind) where
+  label : String
+
+/-- The typed fiber of places lying above a base place `vQ`. -/
+structure IUTStage1PlaceFiber (kind : IUTStage1PlaceKind) where
+  basePlace : IUTStage1BasePlaceId kind
+  places : List (IUTStage1PlaceId kind)
+
+namespace IUTStage1PlaceFiber
+
+variable {kind : IUTStage1PlaceKind}
+
+def cardinality (fiber : IUTStage1PlaceFiber kind) : Nat :=
+  fiber.places.length
+
+theorem cardinality_eq_length (fiber : IUTStage1PlaceFiber kind) :
+    fiber.cardinality = fiber.places.length :=
+  rfl
+
+end IUTStage1PlaceFiber
+
 /-- Typed identifier for a local object over a place of a fixed kind. -/
 structure IUTStage1LocalObjectId (kind : IUTStage1PlaceKind) where
   place : IUTStage1PlaceId kind
@@ -1356,6 +1378,52 @@ def archimedeanPlaces
     IUTStage1ArchimedeanOrderTwoActionEntry.place
 
 end IUTStage1Ind2PlaceFamilyActionData
+
+/--
+Audit identifying the nonarchimedean `(Ind2)` action places with an explicit
+fiber of places above a base place.
+-/
+structure IUTStage1NonarchimedeanInd2PlaceFiberAudit
+    (data : IUTStage1Ind2PlaceFamilyActionData) where
+  fiber : IUTStage1PlaceFiber IUTStage1PlaceKind.nonarchimedean
+  places_eq : data.nonarchimedeanPlaces = fiber.places
+
+/--
+Audit identifying the archimedean `(Ind2)` action places with an explicit fiber
+of places above a base place.
+-/
+structure IUTStage1ArchimedeanInd2PlaceFiberAudit
+    (data : IUTStage1Ind2PlaceFamilyActionData) where
+  fiber : IUTStage1PlaceFiber IUTStage1PlaceKind.archimedean
+  places_eq : data.archimedeanPlaces = fiber.places
+
+namespace IUTStage1NonarchimedeanInd2PlaceFiberAudit
+
+variable {data : IUTStage1Ind2PlaceFamilyActionData}
+
+theorem actionCount_eq_fiberCardinality
+    (audit : IUTStage1NonarchimedeanInd2PlaceFiberAudit data) :
+    data.nonarchimedeanCount = audit.fiber.cardinality := by
+  rw [IUTStage1Ind2PlaceFamilyActionData.nonarchimedeanCount]
+  unfold IUTStage1PlaceFiber.cardinality
+  rw [← audit.places_eq]
+  simp [IUTStage1Ind2PlaceFamilyActionData.nonarchimedeanPlaces]
+
+end IUTStage1NonarchimedeanInd2PlaceFiberAudit
+
+namespace IUTStage1ArchimedeanInd2PlaceFiberAudit
+
+variable {data : IUTStage1Ind2PlaceFamilyActionData}
+
+theorem actionCount_eq_fiberCardinality
+    (audit : IUTStage1ArchimedeanInd2PlaceFiberAudit data) :
+    data.archimedeanCount = audit.fiber.cardinality := by
+  rw [IUTStage1Ind2PlaceFamilyActionData.archimedeanCount]
+  unfold IUTStage1PlaceFiber.cardinality
+  rw [← audit.places_eq]
+  simp [IUTStage1Ind2PlaceFamilyActionData.archimedeanPlaces]
+
+end IUTStage1ArchimedeanInd2PlaceFiberAudit
 
 /-- Local nonarchimedean inclusion datum from the upper-semi-compatibility step. -/
 structure IUTStage1NonarchimedeanInclusionData where
@@ -3018,6 +3086,32 @@ theorem archimedean_directSummandCount_eq
   rw [audit.direct_summand_count_eq_actionCount]
   exact
     audited.placeFamilyCompatibility.ind2Actions.actionCountForKind_archimedean
+
+theorem nonarchimedean_directSummandCount_eq_fiberCardinality
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (countAudit : DirectSummandPlaceCountAudit audited)
+    (fiberAudit :
+      IUTStage1NonarchimedeanInd2PlaceFiberAudit
+        audited.placeFamilyCompatibility.ind2Actions) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      fiberAudit.fiber.cardinality :=
+  (countAudit.nonarchimedean_directSummandCount_eq).trans
+    fiberAudit.actionCount_eq_fiberCardinality
+
+theorem archimedean_directSummandCount_eq_fiberCardinality
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (countAudit : DirectSummandPlaceCountAudit audited)
+    (fiberAudit :
+      IUTStage1ArchimedeanInd2PlaceFiberAudit
+        audited.placeFamilyCompatibility.ind2Actions) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      fiberAudit.fiber.cardinality :=
+  (countAudit.archimedean_directSummandCount_eq).trans
+    fiberAudit.actionCount_eq_fiberCardinality
 
 end DirectSummandPlaceCountAudit
 

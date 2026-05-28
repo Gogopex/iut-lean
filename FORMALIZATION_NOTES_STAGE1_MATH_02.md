@@ -2280,3 +2280,83 @@ The next step should introduce an explicit typed place-fiber object for the
 places above `vQ`, then compare the audited action-entry lists to that fiber.
 Only then will this count audit stop depending on the action-entry list as a
 proxy for the place fiber.
+
+## 30. Typed Place Fibers over `vQ`
+
+### Goal
+
+We introduced an explicit typed place-fiber object for the places above a base
+place `vQ`, and connected it to the audited `(Ind2)` action lists.
+
+### Lean/API Check
+
+The new typed place objects are:
+
+```text
+IUTStage1BasePlaceId
+IUTStage1PlaceFiber
+IUTStage1PlaceFiber.cardinality
+```
+
+The new audits are:
+
+```text
+IUTStage1NonarchimedeanInd2PlaceFiberAudit
+IUTStage1ArchimedeanInd2PlaceFiberAudit
+```
+
+They prove:
+
+```text
+IUTStage1NonarchimedeanInd2PlaceFiberAudit.actionCount_eq_fiberCardinality
+IUTStage1ArchimedeanInd2PlaceFiberAudit.actionCount_eq_fiberCardinality
+```
+
+Together with `DirectSummandPlaceCountAudit`, Lean derives:
+
+```text
+nonarchimedean_directSummandCount_eq_fiberCardinality
+archimedean_directSummandCount_eq_fiberCardinality
+```
+
+### Mathematical Point
+
+This is a closer formal counterpart to the Theorem 3.11 statement that the
+direct-summand collection has cardinality equal to the set of places above
+`vQ`.  We now have a typed object for that fiber and separate audits identifying
+the nonarchimedean and archimedean `(Ind2)` action-place lists with the fiber's
+place list.
+
+The resulting proof path is:
+
+```text
+directSummandCount
+= action-entry count of the relevant kind
+= cardinality of the audited place fiber over vQ
+```
+
+### Trap Avoided
+
+The place fiber is still an abstract list of typed place identifiers.  We have
+not yet constructed it from a genuine morphism of arithmetic curves or from a
+global set of valuations.  This is intentionally recorded as an audit object,
+not hidden as definitional equality.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+placeFiber_cardinality_example
+placeFiber_cardinality_eq_length_example
+nonarchimedeanPlaceFiberAudit_count_example
+archimedeanPlaceFiberAudit_count_example
+directSummandPlaceCountAudit_nonarchimedean_fiber_count_example
+directSummandPlaceCountAudit_archimedean_fiber_count_example
+```
+
+### Remaining Gap
+
+The next refinement should connect entry-based `(Ind2)` action steps to a
+chosen place fiber, so that a local action entry is not only in the action list
+and upper-semi list, but also in the explicit fiber over `vQ`.
