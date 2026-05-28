@@ -2231,6 +2231,22 @@ structure IUTStage1ClassifiedLocalTensorPacketNormalizedCompatibility
   identification_source : IUTStage1PacketNormalizedIdentificationSource
 
 /--
+Direct packet-normalization data expressed as a finite capsule-sum average.
+
+This is more concrete than a bare equality with the `normalizedLogVolume` field:
+it identifies the local object's finite log-volume with the average of the
+packet's capsule log-volumes.
+-/
+structure IUTStage1DirectPacketNormalizationData
+    {kind : IUTStage1PlaceKind}
+    (state : IUTStage1LocalTensorPacketLogVolumeState kind) where
+  localObject_finiteLogVolume_eq_capsuleSumAverage :
+    state.localObject.finiteLogVolume =
+      (Finset.univ.sum fun i =>
+          (state.capsuleFamily.capsule i).logVolume) /
+        (state.capsuleFamily.capsuleCount : Real)
+
+/--
 Upper semi-compatibility state used by the Theorem 3.11 `(Ind3)` model.
 
 The booleans record whether the local comparison is modeled by the two source
@@ -2515,6 +2531,47 @@ theorem normalizedLogVolume_eq_capsuleAverage
   classified.compatibility.normalizedLogVolume_eq_capsuleAverage
 
 end IUTStage1ClassifiedLocalTensorPacketNormalizedCompatibility
+
+namespace IUTStage1DirectPacketNormalizationData
+
+variable {kind : IUTStage1PlaceKind}
+variable {state : IUTStage1LocalTensorPacketLogVolumeState kind}
+
+theorem localObject_finiteLogVolume_eq_capsuleAverage
+    (data : IUTStage1DirectPacketNormalizationData state) :
+    state.localObject.finiteLogVolume =
+      state.capsuleFamily.totalLogVolume /
+        (state.capsuleFamily.capsuleCount : Real) := by
+  calc
+    state.localObject.finiteLogVolume =
+        (Finset.univ.sum fun i =>
+            (state.capsuleFamily.capsule i).logVolume) /
+          (state.capsuleFamily.capsuleCount : Real) :=
+      data.localObject_finiteLogVolume_eq_capsuleSumAverage
+    _ =
+        state.capsuleFamily.totalLogVolume /
+          (state.capsuleFamily.capsuleCount : Real) := by
+      rw [state.capsule_totalLogVolume_eq_sum]
+
+def toPacketNormalizedCompatibility
+    (data : IUTStage1DirectPacketNormalizationData state) :
+    IUTStage1LocalTensorPacketNormalizedCompatibility state :=
+  { normalizedLogVolume_eq_localObject := by
+      calc
+        state.capsuleFamily.normalizedLogVolume =
+            state.capsuleFamily.totalLogVolume /
+              (state.capsuleFamily.capsuleCount : Real) :=
+          state.capsule_normalizedLogVolume_eq
+        _ = state.localObject.finiteLogVolume :=
+          data.localObject_finiteLogVolume_eq_capsuleAverage.symm }
+
+def toClassifiedPacketNormalizedCompatibility
+    (data : IUTStage1DirectPacketNormalizationData state) :
+    IUTStage1ClassifiedLocalTensorPacketNormalizedCompatibility state :=
+  IUTStage1ClassifiedLocalTensorPacketNormalizedCompatibility.ofDirectPacketNormalization
+    data.toPacketNormalizedCompatibility
+
+end IUTStage1DirectPacketNormalizationData
 
 namespace IUTStage1LocalTensorDirectSummandPacketState
 

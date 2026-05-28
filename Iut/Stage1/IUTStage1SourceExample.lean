@@ -437,6 +437,29 @@ theorem classifiedLocalTensorPacketNormalizedCompatibility_source_example
         IUTStage1PacketNormalizedIdentificationSource.separateRealLineIdentification :=
   rfl
 
+def directPacketNormalizationData_to_compatibility_example
+    {kind : IUTStage1PlaceKind}
+    {state : IUTStage1LocalTensorPacketLogVolumeState kind}
+    (data : IUTStage1DirectPacketNormalizationData state) :
+    IUTStage1LocalTensorPacketNormalizedCompatibility state :=
+  data.toPacketNormalizedCompatibility
+
+theorem directPacketNormalizationData_capsule_average_example
+    {kind : IUTStage1PlaceKind}
+    {state : IUTStage1LocalTensorPacketLogVolumeState kind}
+    (data : IUTStage1DirectPacketNormalizationData state) :
+    state.localObject.finiteLogVolume =
+      state.capsuleFamily.totalLogVolume /
+        (state.capsuleFamily.capsuleCount : Real) :=
+  data.localObject_finiteLogVolume_eq_capsuleAverage
+
+def directPacketNormalizationData_to_classified_compatibility_example
+    {kind : IUTStage1PlaceKind}
+    {state : IUTStage1LocalTensorPacketLogVolumeState kind}
+    (data : IUTStage1DirectPacketNormalizationData state) :
+    IUTStage1ClassifiedLocalTensorPacketNormalizedCompatibility state :=
+  data.toClassifiedPacketNormalizedCompatibility
+
 theorem localContainerLogVolumeEstimate_target_le_local_example
     {targetSigned localLogVolume : Real}
     (estimate :

@@ -6450,3 +6450,85 @@ The transported local packet audit still assumes source classified
 packet-normalized compatibilities.  The next mathematical pressure point is to
 construct direct source compatibilities from a more concrete model of the
 packet/capsule normalization itself.
+
+## 82. Direct Packet Normalization as a Capsule-Sum Formula
+
+### Goal
+
+We refined direct packet-normalized compatibility into a finite capsule-sum
+normalization statement.
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1DirectPacketNormalizationData
+```
+
+For a local tensor packet state it records:
+
+```text
+localObject.finiteLogVolume =
+  (sum over capsules of capsule.logVolume) / capsuleCount
+```
+
+Lean then derives:
+
+```text
+localObject.finiteLogVolume =
+  capsuleFamily.totalLogVolume / capsuleCount
+
+capsuleFamily.normalizedLogVolume =
+  localObject.finiteLogVolume
+```
+
+and packages this as:
+
+```text
+toPacketNormalizedCompatibility
+toClassifiedPacketNormalizedCompatibility
+```
+
+where the classified source is:
+
+```text
+directPacketNormalization
+```
+
+### Mathematical Point
+
+This is closer to the concrete packet/capsule normalization than the previous
+compatibility object.  The direct source is now not merely an equality between
+two named real fields; it must identify the finite local object with the average
+of the actual capsule log-volume entries.
+
+This matters near Corollary 3.12 because the disputed step is sensitive to
+which averages are being identified.  The Lean object now records the finite
+sum over the packet's capsule family before producing the real-line
+compatibility used by the downstream route.
+
+### Trap Avoided
+
+We did not redefine every packet state to make its local object finite
+log-volume equal to the capsule average by default.  Direct normalization is a
+separate certificate, so packets without this certificate cannot be used as
+directly normalized packets.
+
+### Toy Check
+
+The examples now check:
+
+```text
+directPacketNormalizationData_to_compatibility_example
+directPacketNormalizationData_capsule_average_example
+directPacketNormalizationData_to_classified_compatibility_example
+```
+
+### Remaining Gap
+
+The finite-sum formula is still a certificate, not a theorem from Mochizuki's
+underlying packet construction.  The next useful refinement is to build
+high-level direct local packet audits from this direct normalization data, just
+as the transported audit now builds target compatibility from source
+compatibility and an audited `(Ind2)` step.
