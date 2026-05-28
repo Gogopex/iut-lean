@@ -3315,6 +3315,127 @@ theorem logQTwo_le_heightSide
 end IUTStage1IUTIVCorollary22C2InequalityChainShadow
 
 /--
+The denominator `1 - (2/5) * epsilon_E` appearing in the last absorption step
+of the proof of IUT IV, Corollary 2.2(ii).
+-/
+noncomputable def iutIVCorollary22EpsilonDenominator (epsilonE : Real) : Real :=
+  1 - (2 / 5 : Real) * epsilonE
+
+/-- The coefficient of the tripodal log-degree sum before the final absorption. -/
+noncomputable def iutIVCorollary22EpsilonMainCoefficient (epsilonE : Real) :
+    Real :=
+  (iutIVCorollary22EpsilonDenominator epsilonE)⁻¹ *
+    (1 + (1 / 5 : Real) * epsilonE)
+
+/-- The coefficient of the constant term before the final absorption. -/
+noncomputable def iutIVCorollary22EpsilonConstantTerm
+    (epsilonE cK : Real) : Real :=
+  (iutIVCorollary22EpsilonDenominator epsilonE)⁻¹ *
+    ((1 / 2 : Real) * cK)
+
+/--
+IUT IV, Corollary 2.2(ii), final `epsilon_E` absorption.
+
+The source uses `0 < epsilon_E <= 1` to pass from the intermediate inequality
+with denominator `(1 - (2/5)epsilon_E)` to the displayed C2 bound.
+-/
+structure IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow where
+  h : Real
+  logDegreeSum : Real
+  cK : Real
+  epsilonE : Real
+  epsilonE_pos : 0 < epsilonE
+  epsilonE_le_one : epsilonE <= 1
+  logDegreeSum_nonneg : 0 <= logDegreeSum
+  cK_nonneg : 0 <= cK
+  preliminary_bound :
+    (1 / 6 : Real) * h <=
+      iutIVCorollary22EpsilonMainCoefficient epsilonE * logDegreeSum +
+        iutIVCorollary22EpsilonConstantTerm epsilonE cK
+
+namespace IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow
+
+theorem denominator_pos
+    (data : IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow) :
+    0 < iutIVCorollary22EpsilonDenominator data.epsilonE := by
+  rw [iutIVCorollary22EpsilonDenominator]
+  nlinarith [data.epsilonE_pos, data.epsilonE_le_one]
+
+theorem denominator_ge_half
+    (data : IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow) :
+    (1 / 2 : Real) <=
+      iutIVCorollary22EpsilonDenominator data.epsilonE := by
+  rw [iutIVCorollary22EpsilonDenominator]
+  nlinarith [data.epsilonE_le_one]
+
+theorem mainCoefficient_le_one_add_epsilon
+    (data : IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow) :
+    iutIVCorollary22EpsilonMainCoefficient data.epsilonE <=
+      1 + data.epsilonE := by
+  have hden := data.denominator_pos
+  rw [iutIVCorollary22EpsilonMainCoefficient]
+  have hdiv :
+      (iutIVCorollary22EpsilonDenominator data.epsilonE)⁻¹ *
+          (1 + (1 / 5 : Real) * data.epsilonE) =
+        (1 + (1 / 5 : Real) * data.epsilonE) /
+          iutIVCorollary22EpsilonDenominator data.epsilonE := by
+    rw [div_eq_mul_inv]
+    ring
+  rw [hdiv, div_le_iff₀ hden]
+  rw [iutIVCorollary22EpsilonDenominator]
+  have hprod : 0 <= data.epsilonE * (1 - data.epsilonE) :=
+    mul_nonneg data.epsilonE_pos.le (sub_nonneg.mpr data.epsilonE_le_one)
+  nlinarith
+
+theorem constantTerm_le_cK
+    (data : IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow) :
+    iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK <= data.cK := by
+  have hden := data.denominator_pos
+  have hhalf := data.denominator_ge_half
+  have hinv_le_two :
+      (iutIVCorollary22EpsilonDenominator data.epsilonE)⁻¹ <=
+        (2 : Real) := by
+    rw [inv_le_comm₀ hden (by norm_num : (0 : Real) < 2)]
+    nlinarith
+  have hcoeff :
+      (iutIVCorollary22EpsilonDenominator data.epsilonE)⁻¹ *
+          (1 / 2 : Real) <= 1 := by
+    nlinarith
+  rw [iutIVCorollary22EpsilonConstantTerm]
+  calc
+    (iutIVCorollary22EpsilonDenominator data.epsilonE)⁻¹ *
+        ((1 / 2 : Real) * data.cK)
+        =
+      ((iutIVCorollary22EpsilonDenominator data.epsilonE)⁻¹ *
+        (1 / 2 : Real)) * data.cK := by
+          ring
+    _ <= 1 * data.cK :=
+      mul_le_mul_of_nonneg_right hcoeff data.cK_nonneg
+    _ = data.cK := by ring
+
+theorem final_bound
+    (data : IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow) :
+    (1 / 6 : Real) * data.h <=
+      (1 + data.epsilonE) * data.logDegreeSum + data.cK := by
+  have hmain := data.mainCoefficient_le_one_add_epsilon
+  have hmain_mul :
+      iutIVCorollary22EpsilonMainCoefficient data.epsilonE *
+          data.logDegreeSum <=
+        (1 + data.epsilonE) * data.logDegreeSum :=
+    mul_le_mul_of_nonneg_right hmain data.logDegreeSum_nonneg
+  have hconst := data.constantTerm_le_cK
+  calc
+    (1 / 6 : Real) * data.h <=
+      iutIVCorollary22EpsilonMainCoefficient data.epsilonE *
+          data.logDegreeSum +
+        iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK :=
+          data.preliminary_bound
+    _ <= (1 + data.epsilonE) * data.logDegreeSum + data.cK :=
+          add_le_add hmain_mul hconst
+
+end IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow
+
+/--
 IUT IV, Corollary 2.2(ii), comparison of curve functions with tripodal field
 terms.
 

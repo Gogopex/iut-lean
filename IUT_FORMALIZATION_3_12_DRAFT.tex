@@ -229,6 +229,14 @@ The code currently covers:
 \item the IUT IV, Corollary 2.2(ii) condition (C2) inequality chain:
   \(\frac16\log(q)\le\frac16\log(q_2)\le\frac16\log(q_\forall)\le
    (1+\epsilon_E)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)+C_K\);
+\item the IUT IV, Corollary 2.2(ii) final \(\epsilon_E\)-absorption:
+  from \(0<\epsilon_E\le1\), Lean proves
+  \[
+    \frac{1+\epsilon_E/5}{1-2\epsilon_E/5}\le1+\epsilon_E,
+    \qquad
+    (1-2\epsilon_E/5)^{-1}C_K/2\le C_K,
+  \]
+  and hence the displayed C2 bound from the preceding denominator expression;
 \item the IUT IV, Corollary 2.2(ii) comparison
   \(\log\operatorname{diff}_X(x_E)=\log(d_{F_{\mathrm{tpd}}})\) and
   \(\log(f_{F_{\mathrm{tpd}}})\le\log\operatorname{cond}_D(x_E)\le
@@ -290,10 +298,12 @@ log-degree terms.  The Theorem A flag records the bounded-discrepancy
 height/log-different/log-conductor inequality.  The Corollary 2.2 flag records
 composition of the displayed bounded-discrepancy chain.  The transfer flag
 records movement of pointwise bounds across bounded-discrepancy equivalence.
-The Corollary 2.2(C2) flag records the displayed three-step logarithmic
-inequality chain.  The Corollary 2.2(C1) flag records the displayed prime-scale
-window and its elementary consequences.  The log-different/log-conductor flag
-records the bridge from tripodal field terms to curve functions.
+The Corollary 2.2(C1) flag records the displayed prime-scale window and its
+elementary consequences.  The Corollary 2.2(C2) flag records the displayed
+three-step logarithmic inequality chain.  The \(\epsilon_E\)-absorption flag
+records the final denominator removal in the proof of C2.  The
+log-different/log-conductor flag records the bridge from tripodal field terms to
+curve functions.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -383,6 +393,9 @@ derives nonnegativity of \(\log(q_\forall)\), positivity of
 \((\log(q_\forall))^{1/2}\), and \(1\le10\delta\).
 For Corollary 2.2(ii), Lean proves the final \(\frac16\log(q)\) bound from the
 displayed \(\log(q)\), \(\log(q_2)\), and \(\log(q_\forall)\) chain.
+Lean also proves the final \(\epsilon_E\)-absorption step used just before C2:
+the intermediate expression with denominator \(1-2\epsilon_E/5\) is bounded by
+\((1+\epsilon_E)\) times the log-degree sum plus \(C_K\).
 It also proves the two sum inequalities relating the tripodal different and
 conductor terms to \(\log\operatorname{diff}_X+\log\operatorname{cond}_D\).
 
