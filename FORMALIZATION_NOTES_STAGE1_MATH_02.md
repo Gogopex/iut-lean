@@ -2413,3 +2413,67 @@ placeAuditedArchimedeanEntry_place_mem_fiber_example
 We still need a common package that carries an audited choice, its direct
 summand count audit, and its place-fiber audit together.  That package should
 be the next target for source-facing Theorem 3.11 `(Ind2)` obligations.
+
+## 32. Source-Facing `(Ind2)` Fiber Packages
+
+### Goal
+
+We packaged the count audit and place-fiber audit for an audited choice into
+single nonarchimedean and archimedean `(Ind2)` fiber objects.
+
+### Lean/API Check
+
+The audited choice namespace now defines:
+
+```text
+NonarchimedeanInd2FiberPackage
+ArchimedeanInd2FiberPackage
+```
+
+Each package exposes:
+
+```text
+directSummandCount_eq_fiberCardinality
+capsuleCount_eq_fiberCardinality
+entry_place_mem_fiber
+```
+
+### Mathematical Point
+
+This gives the local `(Ind2)` side a single source-facing object that records:
+
+```text
+direct-summand count audit
+place-fiber audit over vQ
+membership of local action entries in that fiber
+```
+
+This is useful because Theorem 3.11 uses all of these facts together: the
+action is local and place-indexed, the action is on direct summands, and the
+direct-summand collection has the cardinality of the place fiber.
+
+### Trap Avoided
+
+The package is still an audit object.  It does not construct the fiber from
+global valuation theory and does not construct `Ism` or order-two actions.
+It only prevents later code from forgetting that the count and fiber evidence
+must travel with the audited local `(Ind2)` choice.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+nonarchimedeanInd2FiberPackage_directSummandCount_example
+nonarchimedeanInd2FiberPackage_capsuleCount_example
+archimedeanInd2FiberPackage_directSummandCount_example
+archimedeanInd2FiberPackage_capsuleCount_example
+nonarchimedeanInd2FiberPackage_entry_place_mem_fiber_example
+archimedeanInd2FiberPackage_entry_place_mem_fiber_example
+```
+
+### Remaining Gap
+
+The next step should thread these packages into entry-based image invariance,
+so that a local `(Ind2)` entry can carry fiber membership and still land in the
+audited multiradial possible-image equality.

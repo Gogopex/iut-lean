@@ -1235,6 +1235,54 @@ theorem directSummandPlaceCountAudit_archimedean_fiber_count_example
   countAudit.archimedean_directSummandCount_eq_fiberCardinality
     fiberAudit
 
+theorem nonarchimedeanInd2FiberPackage_directSummandCount_example
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (package :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.NonarchimedeanInd2FiberPackage
+        audited) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      package.fiberAudit.fiber.cardinality :=
+  package.directSummandCount_eq_fiberCardinality
+
+theorem nonarchimedeanInd2FiberPackage_capsuleCount_example
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (package :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.NonarchimedeanInd2FiberPackage
+        audited) :
+    audited.choice.local_tensor_state.packetState.capsuleFamily.capsuleCount =
+      package.fiberAudit.fiber.cardinality :=
+  package.capsuleCount_eq_fiberCardinality
+
+theorem archimedeanInd2FiberPackage_directSummandCount_example
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (package :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ArchimedeanInd2FiberPackage
+        audited) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      package.fiberAudit.fiber.cardinality :=
+  package.directSummandCount_eq_fiberCardinality
+
+theorem archimedeanInd2FiberPackage_capsuleCount_example
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (package :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ArchimedeanInd2FiberPackage
+        audited) :
+    audited.choice.local_tensor_state.packetState.capsuleFamily.capsuleCount =
+      package.fiberAudit.fiber.cardinality :=
+  package.capsuleCount_eq_fiberCardinality
+
 def placeAuditedNonarchimedeanIsm_to_ind2_example
     {coric : Type u}
     {audited₁ audited₂ :
@@ -1316,6 +1364,20 @@ theorem placeAuditedNonarchimedeanEntry_place_mem_fiber_example
   IUTStage1PlaceAuditedDirectSummandPacketChoice.nonarchimedeanEntry_place_mem_fiber
     hstep fiberAudit
 
+theorem nonarchimedeanInd2FiberPackage_entry_place_mem_fiber_example
+    {coric : Type u}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (package :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.NonarchimedeanInd2FiberPackage
+        audited₁)
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.NonarchimedeanIsmActionEntryStep
+        audited₁ audited₂) :
+    hstep.action_entry.place ∈ package.fiberAudit.fiber.places :=
+  package.entry_place_mem_fiber hstep
+
 theorem placeAuditedNonarchimedeanEntry_preserves_totalLogVolume_example
     {coric : Type u}
     {audited₁ audited₂ :
@@ -1383,6 +1445,20 @@ theorem placeAuditedArchimedeanEntry_place_mem_fiber_example
     hstep.action_entry.place ∈ fiberAudit.fiber.places :=
   IUTStage1PlaceAuditedDirectSummandPacketChoice.archimedeanEntry_place_mem_fiber
     hstep fiberAudit
+
+theorem archimedeanInd2FiberPackage_entry_place_mem_fiber_example
+    {coric : Type u}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (package :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ArchimedeanInd2FiberPackage
+        audited₁)
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ArchimedeanOrderTwoActionEntryStep
+        audited₁ audited₂) :
+    hstep.action_entry.place ∈ package.fiberAudit.fiber.places :=
+  package.entry_place_mem_fiber hstep
 
 theorem placeAuditedArchimedeanEntry_preserves_totalLogVolume_example
     {coric : Type u}

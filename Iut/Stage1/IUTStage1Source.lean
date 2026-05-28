@@ -3115,6 +3115,76 @@ theorem archimedean_directSummandCount_eq_fiberCardinality
 
 end DirectSummandPlaceCountAudit
 
+/--
+Source-facing nonarchimedean `(Ind2)` fiber package for an audited choice.
+-/
+structure NonarchimedeanInd2FiberPackage
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean) where
+  countAudit : DirectSummandPlaceCountAudit audited
+  fiberAudit :
+    IUTStage1NonarchimedeanInd2PlaceFiberAudit
+      audited.placeFamilyCompatibility.ind2Actions
+
+/--
+Source-facing archimedean `(Ind2)` fiber package for an audited choice.
+-/
+structure ArchimedeanInd2FiberPackage
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean) where
+  countAudit : DirectSummandPlaceCountAudit audited
+  fiberAudit :
+    IUTStage1ArchimedeanInd2PlaceFiberAudit
+      audited.placeFamilyCompatibility.ind2Actions
+
+namespace NonarchimedeanInd2FiberPackage
+
+variable
+  {audited :
+    IUTStage1PlaceAuditedDirectSummandPacketChoice
+      coric IUTStage1PlaceKind.nonarchimedean}
+
+theorem directSummandCount_eq_fiberCardinality
+    (package : NonarchimedeanInd2FiberPackage audited) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      package.fiberAudit.fiber.cardinality :=
+  package.countAudit.nonarchimedean_directSummandCount_eq_fiberCardinality
+    package.fiberAudit
+
+theorem capsuleCount_eq_fiberCardinality
+    (package : NonarchimedeanInd2FiberPackage audited) :
+    audited.choice.local_tensor_state.packetState.capsuleFamily.capsuleCount =
+      package.fiberAudit.fiber.cardinality := by
+  rw [← audited.choice.local_tensor_state.packetState.direct_summand_count_eq_capsuleCount]
+  exact package.directSummandCount_eq_fiberCardinality
+
+end NonarchimedeanInd2FiberPackage
+
+namespace ArchimedeanInd2FiberPackage
+
+variable
+  {audited :
+    IUTStage1PlaceAuditedDirectSummandPacketChoice
+      coric IUTStage1PlaceKind.archimedean}
+
+theorem directSummandCount_eq_fiberCardinality
+    (package : ArchimedeanInd2FiberPackage audited) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      package.fiberAudit.fiber.cardinality :=
+  package.countAudit.archimedean_directSummandCount_eq_fiberCardinality
+    package.fiberAudit
+
+theorem capsuleCount_eq_fiberCardinality
+    (package : ArchimedeanInd2FiberPackage audited) :
+    audited.choice.local_tensor_state.packetState.capsuleFamily.capsuleCount =
+      package.fiberAudit.fiber.cardinality := by
+  rw [← audited.choice.local_tensor_state.packetState.direct_summand_count_eq_capsuleCount]
+  exact package.directSummandCount_eq_fiberCardinality
+
+end ArchimedeanInd2FiberPackage
+
 /-- Audited `(Ind1)` step preserving the place-family compatibility audit. -/
 structure ProcessionAutomorphismStep
     (audited₁ audited₂ :
@@ -3421,6 +3491,32 @@ theorem archimedeanEntry_place_mem_fiber
     hstep.action_entry.place ∈ fiberAudit.fiber.places := by
   rw [← fiberAudit.places_eq]
   exact archimedeanEntry_place_mem_ind2Actions hstep
+
+namespace NonarchimedeanInd2FiberPackage
+
+theorem entry_place_mem_fiber
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (package : NonarchimedeanInd2FiberPackage audited₁)
+    (hstep : NonarchimedeanIsmActionEntryStep audited₁ audited₂) :
+    hstep.action_entry.place ∈ package.fiberAudit.fiber.places :=
+  nonarchimedeanEntry_place_mem_fiber hstep package.fiberAudit
+
+end NonarchimedeanInd2FiberPackage
+
+namespace ArchimedeanInd2FiberPackage
+
+theorem entry_place_mem_fiber
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (package : ArchimedeanInd2FiberPackage audited₁)
+    (hstep : ArchimedeanOrderTwoActionEntryStep audited₁ audited₂) :
+    hstep.action_entry.place ∈ package.fiberAudit.fiber.places :=
+  archimedeanEntry_place_mem_fiber hstep package.fiberAudit
+
+end ArchimedeanInd2FiberPackage
 
 theorem nonarchimedeanEntry_preserves_capsuleTotalLogVolume
     {audited₁ audited₂ :
