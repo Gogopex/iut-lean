@@ -2044,3 +2044,64 @@ the place-family action entries themselves.  At present the source step says
 that an action exists on the relevant summand family; it does not yet point to
 the corresponding audited action entry in the nonarchimedean or archimedean
 place list.
+
+## 27. Self-Audit: Theorem 3.11 `(Ind2)` Alignment
+
+### Source Check
+
+I reread the local Theorem 3.11 passage in IUT III around the definition of
+`(Ind1)` and `(Ind2)`, and the Corollary 3.12 proof passage where the
+multiradial representation is regarded as subject to `(Ind1)`, `(Ind2)`, and
+`(Ind3)`.
+
+The relevant source pressure is:
+
+```text
+Ind1: automorphisms of the procession of D-prime-strips
+Ind2, nonarchimedean: independent copies of Ism
+Ind2, archimedean: order-two automorphisms
+Ind2 acts on direct summands of the tensor product defining the local IQ object
+direct-summand count is tied to the places above the base place
+Corollary 3.12 uses possible images and holomorphic hulls subject to Ind1/2/3
+```
+
+### Lean Alignment
+
+The current audited layer now matches this much of the source shape:
+
+```text
+ProcessionAutomorphismStep
+LocalTensorDirectSummandActionStep
+NonarchimedeanIsmInd2Step
+ArchimedeanOrderTwoInd2Step
+UpperSemiCompatibilityStep
+IUTStage1PlaceAuditedMultiradialImages
+IUTStage1PlaceAuditedMultiradialThetaImages
+```
+
+The direct-summand/capsule count equality is already typed in the local tensor
+packet layer, and the place-family audit carries separate nonarchimedean and
+archimedean place lists aligned with the upper-semi state.
+
+### Main Remaining Mismatch
+
+The nonarchimedean and archimedean audited `(Ind2)` source steps still contain
+existential action fields inherited from the unaudited layer.  They do not yet
+identify a concrete action entry in:
+
+```text
+IUTStage1Ind2PlaceFamilyActionData.nonarchimedeanActions
+IUTStage1Ind2PlaceFamilyActionData.archimedeanActions
+```
+
+Thus the formalization currently says "there exists the right kind of local
+action and the audit is preserved", but it does not yet say "this action is one
+of the place-indexed actions carried by the audit".
+
+### Next Step
+
+Introduce audited local action-entry steps that point to an entry in the
+place-family action data, then derive the existing audited
+`NonarchimedeanIsmInd2Step` and `ArchimedeanOrderTwoInd2Step` from those
+entry-based steps.  This should make the "direct summands over places above
+`vQ`" requirement more concrete.
