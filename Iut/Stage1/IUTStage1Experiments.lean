@@ -632,6 +632,8 @@ structure ProcessionContainerExperimentReport where
   finalContainerMatchesAbsLabelExponents : Bool
   valuationFiberDirectSumAvailable : Bool
   fiberTensorPacketNormalizationAvailable : Bool
+  lgpSplittingMonoidActionAvailable : Bool
+  lgpSplittingMonoidAddsGaussianGenerators : Bool
 deriving Repr
 
 /--
@@ -649,7 +651,9 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     processionTotalIndeterminacyFactorial := true,
     finalContainerMatchesAbsLabelExponents := true,
     valuationFiberDirectSumAvailable := true,
-    fiberTensorPacketNormalizationAvailable := true }
+    fiberTensorPacketNormalizationAvailable := true,
+    lgpSplittingMonoidActionAvailable := true,
+    lgpSplittingMonoidAddsGaussianGenerators := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -760,6 +764,48 @@ theorem processionFiberTensorPacket_reindex_preserves_normalized
     (packet.reindex perm).normalizedLogVolume =
       packet.normalizedLogVolume :=
   packet.reindex_normalizedLogVolume_eq perm
+
+theorem lgpSplittingMonoid_generator_core_zero
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    action.generatorLogVolume
+        (IUTStage1ProcessionContainer.core
+          (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) = 0 :=
+  action.generatorLogVolume_core
+
+theorem lgpSplittingMonoid_generator_eq_procession_square
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l)
+    (label :
+      IUTStage1ProcessionContainer
+        (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+    action.generatorLogVolume label =
+      ((label.val : Real) ^ 2) * action.evaluation.environmentDegree :=
+  action.generatorLogVolume_eq_procession_square label
+
+theorem lgpSplittingMonoid_actedTensorPacket_eq_original_plus_generators
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    action.actedTensorPacketLogVolume =
+      action.packet.tensorPacketLogVolume +
+        Finset.univ.sum action.generatorLogVolume :=
+  action.actedTensorPacketLogVolume_eq_original_plus_generators
+
+theorem lgpSplittingMonoid_normalizedActed_eq_original_plus_generators_over_card
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    action.normalizedActedLogVolume =
+      (action.packet.tensorPacketLogVolume +
+        Finset.univ.sum action.generatorLogVolume) /
+          (Fintype.card
+            (IUTStage1ProcessionContainer
+              (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+                Real) :=
+  action.normalizedActedLogVolume_eq_original_plus_generators_over_card
 
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
@@ -991,6 +1037,8 @@ structure Corollary312DisputeFirstPassReport where
   absLabelProcessionExponentBridgeAvailable : Bool
   valuationFiberDirectSumAvailable : Bool
   processionFiberTensorPacketAvailable : Bool
+  lgpSplittingMonoidActionAvailable : Bool
+  lgpSplittingMonoidAddsGaussianGenerators : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1022,6 +1070,8 @@ def corollary312DisputeFirstPassReport :
     absLabelProcessionExponentBridgeAvailable := true,
     valuationFiberDirectSumAvailable := true,
     processionFiberTensorPacketAvailable := true,
+    lgpSplittingMonoidActionAvailable := true,
+    lgpSplittingMonoidAddsGaussianGenerators := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1097,6 +1147,16 @@ theorem corollary312Report_valuationFiberDirectSumAvailable :
 
 theorem corollary312Report_processionFiberTensorPacketAvailable :
     corollary312DisputeFirstPassReport.processionFiberTensorPacketAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_lgpSplittingMonoidActionAvailable :
+    corollary312DisputeFirstPassReport.lgpSplittingMonoidActionAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_lgpSplittingMonoidAddsGaussianGenerators :
+    corollary312DisputeFirstPassReport.lgpSplittingMonoidAddsGaussianGenerators =
       true :=
   rfl
 

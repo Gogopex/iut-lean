@@ -129,6 +129,10 @@ The code currently covers:
   \(0\le j\le(\ell-1)/2\), and the corresponding theta-degree profile;
 \item the degree-level Gaussian evaluation
   \(q\mapsto(q^{j^2})_{j\in |F_\ell|}\), including identity at \(j=1\);
+\item a log-volume shadow of the IUT III splitting-monoid action: the generator
+  attached to a procession label contributes \(j^2\deg(q)\), contributes \(0\) at
+  the core label, and adds its finite generator sum to the tensor-packet
+  log-volume;
 \item the finite procession containers
   \(S^\pm_{j+1}=\{0,\ldots,j\}\), their nested inclusions, core-label stability,
   stage cardinality \(j+1\), and total procession ambiguity \((\ell^\pm)!\)
@@ -167,7 +171,7 @@ Here the route flags are ordered real-line, nonarchimedean entry, and factored
 SHE availability.  The obstruction flags are raw-cancellation failure,
 label-independent \(j^2\) failure, and sign-quotient representative descent
 failure.  The Gaussian/procession flags include the finite-fiber direct-sum
-packet layer used as the current log-shell shadow.
+packet layer and the finite splitting-monoid action shadow.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -215,8 +219,9 @@ The present code does not yet formalize:
 \item actual Hodge theaters, Frobenioids, prime strips, log-shells, or
   \(\Theta\)-links;
 \item the Hodge--Arakelov theta evaluation and Gaussian monoids of IUT II;
-\item the construction of the actual IUT II theta values, Gaussian monoids, and
-  Frobenioids behind the present degree-level Gaussian evaluation;
+\item the construction of the actual IUT II theta values, Gaussian monoids,
+  splitting monoids, and Frobenioids behind the present degree/log-volume
+  shadows;
 \item the actual construction of log-shells and tensor packets attached to
   mono-analytic prime-strips in IUT III, Theorem 3.11;
 \item the genuine holomorphic hull and determinant operations of Step (xi);
@@ -233,7 +238,7 @@ papers:
 \[
 \begin{array}{c}
 \text{theta values }q^{j^2}\\
-\leadsto\ \text{Gaussian monoids}\\
+\leadsto\ \text{Gaussian and splitting monoids}\\
 \leadsto\ \text{square/full-label preservation}\\
 \leadsto\ \text{hull/log-volume route}.
 \end{array}
