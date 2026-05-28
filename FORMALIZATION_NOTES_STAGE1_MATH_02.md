@@ -7243,3 +7243,85 @@ The route still assumes the equality between each `ZMod l` averaged normalized
 log-volume and the packet normalized capsule average.  The next source-facing
 task is to derive or classify this labelwise packet bridge from the local
 packet/capsule construction and the `(Ind1)/(Ind2)` label-averaged audit.
+
+## 92. Classifying the ZMod-to-Packet-Normalized Bridge
+
+### Goal
+
+We classified the source of the bridge from the `ZMod l` averaged normalized
+log-volume family to packet-normalized capsule-family values.
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1ZModPacketNormalizedBridgeSource
+```
+
+with cases:
+
+```text
+directLabelPacketNormalization
+ind12TransportedLabelPacketNormalization
+separateAveragingIdentification
+```
+
+We also added:
+
+```text
+FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit
+```
+
+It packages:
+
+```text
+FLZModCuspLabelThetaZModPacketNormalizedRouteAudit
+bridge_source
+```
+
+and preserves the full route summary, packet-identification source, and
+cusp-bound source exposed by the underlying route.
+
+### Mathematical Point
+
+The remaining bridge:
+
+```text
+ZMod averaged normalized log-volume(j) =
+  packet normalized capsule average
+```
+
+is now a named and classified interface.  This is distinct from both:
+
+```text
+cusp/zero = packet normalized
+packet normalized = local object finiteLogVolume
+```
+
+The classification tells us whether the bridge is intended to come from a
+direct label/packet normalization construction, from `(Ind1)/(Ind2)` transport
+of such a construction, or from a separate averaging identification.
+
+### Trap Avoided
+
+We did not report the final route as direct packet normalization while leaving
+the label-to-packet bridge untracked.  The bridge source is now visible as its
+own piece of provenance.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_classified_zmod_packet_direct_example
+placeAudited_logVolume_fl_zmod_classified_zmod_packet_separate_example
+placeAudited_logVolume_fl_zmod_classified_zmod_packet_source_example
+```
+
+### Remaining Gap
+
+The classification still does not prove the bridge.  The next step is to reduce
+the direct case to an explicit equality between each label value and the packet
+capsule-family normalized value, or to build an `(Ind1)/(Ind2)` transport layer
+for this bridge.

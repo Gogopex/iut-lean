@@ -2265,6 +2265,14 @@ inductive IUTStage1LocalObjectLogVolumeIdentificationSource where
   | separateRealLineIdentification
 deriving DecidableEq
 
+/-- Source classification for the bridge from the `ZMod l` averaged normalized
+log-volume family to packet-normalized capsule-family values. -/
+inductive IUTStage1ZModPacketNormalizedBridgeSource where
+  | directLabelPacketNormalization
+  | ind12TransportedLabelPacketNormalization
+  | separateAveragingIdentification
+deriving DecidableEq
+
 /--
 Local packet-normalized compatibility together with a source classification.
 -/
@@ -11101,6 +11109,17 @@ structure FLZModCuspLabelThetaZModPacketNormalizedRouteAudit
         audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume
 
 /--
+`ZMod l` packet-normalized route with an explicit source classification for
+the bridge from averaged labels to packet-normalized capsule-family values.
+-/
+structure FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  zmod_packet_route :
+    audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l
+  bridge_source : IUTStage1ZModPacketNormalizedBridgeSource
+
+/--
 Full-route input for the `(Ind2)`-transported packet-normalization and
 transported capsule-estimate route.
 -/
@@ -13095,6 +13114,56 @@ theorem cuspBoundSource_eq_directCapsule
   rfl
 
 end FLZModCuspLabelThetaZModPacketNormalizedRouteAudit
+
+namespace FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def ofDirectLabelPacketNormalization
+    (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit l :=
+  { zmod_packet_route := part,
+    bridge_source :=
+      IUTStage1ZModPacketNormalizedBridgeSource.directLabelPacketNormalization }
+
+def ofInd12TransportedLabelPacketNormalization
+    (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit l :=
+  { zmod_packet_route := part,
+    bridge_source :=
+      IUTStage1ZModPacketNormalizedBridgeSource.ind12TransportedLabelPacketNormalization }
+
+def ofSeparateAveragingIdentification
+    (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit l :=
+  { zmod_packet_route := part,
+    bridge_source :=
+      IUTStage1ZModPacketNormalizedBridgeSource.separateAveragingIdentification }
+
+def toZModPacketNormalizedRouteAudit
+    (part : audit.FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l :=
+  part.zmod_packet_route
+
+def toFullClassifiedRouteSummary
+    (part : audit.FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l :=
+  part.zmod_packet_route.toFullClassifiedRouteSummary
+
+theorem packetIdentificationSource_eq_direct
+    (part : audit.FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit l) :
+    part.toFullClassifiedRouteSummary.packetIdentificationSource =
+      IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization :=
+  part.zmod_packet_route.packetIdentificationSource_eq_direct
+
+theorem cuspBoundSource_eq_directCapsule
+    (part : audit.FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit l) :
+    part.toFullClassifiedRouteSummary.cuspBoundSource =
+      IUTStage1CuspClassBoundSource.directCapsuleEstimates :=
+  part.zmod_packet_route.cuspBoundSource_eq_directCapsule
+
+end FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit
 
 namespace FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
 
