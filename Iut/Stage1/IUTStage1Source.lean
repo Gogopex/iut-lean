@@ -5622,6 +5622,59 @@ theorem reindex_normalizedLogVolume_eq
 
 end IUTStage1ProcessionTensorPacketLogVolume
 
+/--
+IUT III Step (x) procession-normalized indeterminacy corridor.
+
+At the averaged log-volume level, `(Ind1)` and `(Ind2)` preserve the value, while
+`(Ind3)` supplies an upper bound.  This record keeps precisely that source
+shape for label-averaged procession log-volumes.
+-/
+structure IUTStage1ProcessionNormalizedIndeterminacyCorridor
+    (label : Type u) [Fintype label] where
+  beforeIndeterminacy :
+    IUTStage1LabelAveragedProcessionLogVolume label
+  afterInd1 :
+    IUTStage1LabelAveragedProcessionLogVolume label
+  afterInd2 :
+    IUTStage1LabelAveragedProcessionLogVolume label
+  ind3UpperBound : Real
+  ind1_pointwise_eq :
+    ∀ j : label,
+      beforeIndeterminacy.normalizedLogVolume j =
+        afterInd1.normalizedLogVolume j
+  ind2_pointwise_eq :
+    ∀ j : label,
+      afterInd1.normalizedLogVolume j =
+        afterInd2.normalizedLogVolume j
+  ind3_upper :
+    afterInd2.averageLogVolume <= ind3UpperBound
+
+namespace IUTStage1ProcessionNormalizedIndeterminacyCorridor
+
+variable {label : Type u} [Fintype label]
+
+theorem ind1_preserves_average
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.beforeIndeterminacy.averageLogVolume =
+      data.afterInd1.averageLogVolume :=
+  IUTStage1LabelAveragedProcessionLogVolume.average_eq_of_pointwise
+    data.ind1_pointwise_eq
+
+theorem ind2_preserves_average
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.afterInd1.averageLogVolume =
+      data.afterInd2.averageLogVolume :=
+  IUTStage1LabelAveragedProcessionLogVolume.average_eq_of_pointwise
+    data.ind2_pointwise_eq
+
+theorem before_average_le_ind3UpperBound
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.beforeIndeterminacy.averageLogVolume <= data.ind3UpperBound := by
+  rw [data.ind1_preserves_average, data.ind2_preserves_average]
+  exact data.ind3_upper
+
+end IUTStage1ProcessionNormalizedIndeterminacyCorridor
+
 namespace IUTStage1WeightedLabelAveragedProcessionLogVolume
 
 variable {label : Type u} [Fintype label]

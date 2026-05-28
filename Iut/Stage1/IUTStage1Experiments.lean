@@ -628,6 +628,7 @@ structure ProcessionContainerExperimentReport where
   stageIndeterminacyBoundedByFullContainer : Bool
   tensorPacketLogVolumeNormalizationAvailable : Bool
   tensorPacketPermutationInvariant : Bool
+  processionNormalizedIndeterminacyCorridorAvailable : Bool
   processionTotalIndeterminacyFactorial : Bool
   finalContainerMatchesAbsLabelExponents : Bool
   valuationFiberDirectSumAvailable : Bool
@@ -702,6 +703,7 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     stageIndeterminacyBoundedByFullContainer := true,
     tensorPacketLogVolumeNormalizationAvailable := true,
     tensorPacketPermutationInvariant := true,
+    processionNormalizedIndeterminacyCorridorAvailable := true,
     processionTotalIndeterminacyFactorial := true,
     finalContainerMatchesAbsLabelExponents := true,
     valuationFiberDirectSumAvailable := true,
@@ -847,6 +849,12 @@ theorem processionTensorPacket_reindex_preserves_normalized
     (packet.reindex perm).normalizedLogVolume =
       packet.normalizedLogVolume :=
   packet.reindex_normalizedLogVolume_eq perm
+
+theorem processionNormalizedIndeterminacyCorridor_before_le_ind3Upper
+    {label : Type u} [Fintype label]
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.beforeIndeterminacy.averageLogVolume <= data.ind3UpperBound :=
+  data.before_average_le_ind3UpperBound
 
 theorem valuationFiberLogShellDirectSum_eq_sum
     {kind : IUTStage1PlaceKind}
@@ -1738,6 +1746,7 @@ structure Corollary312DisputeFirstPassReport where
   processionContainerSkeletonAvailable : Bool
   processionTensorPacketLogVolumeAvailable : Bool
   processionTensorPacketPermutationInvariant : Bool
+  processionNormalizedIndeterminacyCorridorAvailable : Bool
   processionIndeterminacyFactorialAvailable : Bool
   absLabelProcessionExponentBridgeAvailable : Bool
   valuationFiberDirectSumAvailable : Bool
@@ -1825,6 +1834,7 @@ def corollary312DisputeFirstPassReport :
     processionContainerSkeletonAvailable := true,
     processionTensorPacketLogVolumeAvailable := true,
     processionTensorPacketPermutationInvariant := true,
+    processionNormalizedIndeterminacyCorridorAvailable := true,
     processionIndeterminacyFactorialAvailable := true,
     absLabelProcessionExponentBridgeAvailable := true,
     valuationFiberDirectSumAvailable := true,
@@ -1940,6 +1950,11 @@ theorem corollary312Report_processionTensorPacketLogVolumeAvailable :
 
 theorem corollary312Report_processionTensorPacketPermutationInvariant :
     corollary312DisputeFirstPassReport.processionTensorPacketPermutationInvariant =
+      true :=
+  rfl
+
+theorem corollary312Report_processionNormalizedIndeterminacyCorridorAvailable :
+    corollary312DisputeFirstPassReport.processionNormalizedIndeterminacyCorridorAvailable =
       true :=
   rfl
 
