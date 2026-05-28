@@ -7148,3 +7148,98 @@ The next useful implementation target is the first remaining assumption:
 classify or derive the cusp/zero-to-packet-normalized equalities from the
 cusp-compatible label average and packet/capsule side, rather than treating them
 as unstructured fields.
+
+## 91. Cusp/Zero to Packet-Normalized Equalities from ZMod Labels
+
+### Goal
+
+We derived cusp/zero-to-packet-normalized equalities from the `ZMod l` averaged
+label family.
+
+### Lean Move
+
+At the cusp-label compatibility layer we added:
+
+```text
+zmod_toSignLabelQuotient_eq_fromCoordinate
+IUTStage1ZModCuspLabelLogVolumeCompatibility
+  .cuspClass_eq_of_normalizedLogVolume_eq
+  .zeroLogVolume_eq_of_normalizedLogVolume_eq
+```
+
+The key theorem says: if every `ZMod l` normalized log-volume is equal to a
+constant `c`, then every cusp sign-label class log-volume and the zero
+log-volume are also equal to `c`.
+
+We then added:
+
+```text
+FLZModCuspLabelThetaZModPacketNormalizedRouteAudit
+```
+
+It carries:
+
+```text
+target capsule estimates
+direct packet normalization data
+ZMod averaged normalized log-volume = packet normalized capsule average
+```
+
+Lean derives:
+
+```text
+cusp-class log-volume = packet normalized capsule average
+zero log-volume = packet normalized capsule average
+```
+
+and then constructs:
+
+```text
+toDirectPacketNormalizedLocalObjectRouteAudit
+toFullClassifiedRouteSummary
+```
+
+### Mathematical Point
+
+The important step is quotient induction over the sign-label quotient.  The
+formalization does not prove the cusp-class equality only for displayed
+nonzero representatives.  It proves it for every sign-label class by using the
+definition of the quotient by the `{±1}` sign relation.
+
+This reduces the previous assumption:
+
+```text
+cusp/zero log-volume = packet normalized capsule average
+```
+
+to the more source-facing statement:
+
+```text
+ZMod l averaged normalized log-volume at every label =
+  packet normalized capsule average
+```
+
+together with the already formalized cusp-label compatibility.
+
+### Trap Avoided
+
+We did not assume that all sign-label classes have representatives in an
+informal way.  Lean uses the actual quotient type and proves the result by
+quotient induction.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_zmod_packet_normalized_to_local_object_example
+placeAudited_logVolume_fl_zmod_zmod_packet_normalized_cusp_eq_example
+placeAudited_logVolume_fl_zmod_zmod_packet_normalized_full_route_example
+```
+
+### Remaining Gap
+
+The route still assumes the equality between each `ZMod l` averaged normalized
+log-volume and the packet normalized capsule average.  The next source-facing
+task is to derive or classify this labelwise packet bridge from the local
+packet/capsule construction and the `(Ind1)/(Ind2)` label-averaged audit.
