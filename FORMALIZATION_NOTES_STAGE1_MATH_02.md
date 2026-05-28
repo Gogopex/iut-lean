@@ -3353,3 +3353,88 @@ The next step should connect this unit/sign bridge to
 label and canonical sign-label class.  After that, the averaged label side will
 have a clearer path from finite `F_l` labels to the structured cusp-label data
 used in the source papers.
+
+## 45. Canonical Cusp-Label Class Bridge
+
+### Goal
+
+We connected the Stage 1 `F_l` unit/sign label bridge to the foundations
+`LocalLabCuspModel` and `CuspLabelClassData`.
+
+### Lean/API Check
+
+The new bridge is:
+
+```text
+IUTStage1FLZModCuspLabelClassModel l
+```
+
+It packages:
+
+```text
+unit_sign_model : IUTStage1FLZModUnitSignLabelModel l
+local_lab_cusp_model : LocalLabCuspModel l
+local_lab_cusp_model_eq_zmod :
+  local_lab_cusp_model = zmodLocalLabCuspModel l
+cusp_label_class_data : CuspLabelClassData l
+cusp_label_class_data_eq_zmod :
+  cusp_label_class_data = zmodCanonicalCuspLabelClassData l
+```
+
+Lean checks the canonical constructor:
+
+```text
+IUTStage1FLZModCuspLabelClassModel.zmod
+```
+
+and exposes:
+
+```text
+localLabCuspModel_eq_zmod
+cuspLabelClassData_eq_zmod
+canonicalLabelTranslate
+canonicalSignLabelEq
+labelClass_eq_model_quotient
+zmod_canonicalSignLabel_eq
+zmod_cuspLabelClass_eq_canonical
+```
+
+### Mathematical Point
+
+This is the first Stage 1 object that ties the finite `F_l` label model to the
+structured local cusp-label data in the foundations layer.  It records that the
+canonical nonzero label is obtained by additive translation from the base label,
+and that the canonical sign-label class is the sign quotient of this nonzero
+label.
+
+This matters for the later Theorem 3.11 to Corollary 3.12 route because the
+label averages should eventually be attached to structured label/cusp data, not
+just to a finite index set.
+
+### Trap Avoided
+
+The bridge is canonical and `ZMod`-based.  It does not yet assert that every
+transported finite label carrier has a transported local cusp model, nor that
+the log-volume average has already been indexed by these cusp-label classes.
+Those are separate compatibility steps.
+
+### Toy Check
+
+The examples now check:
+
+```text
+flZModCuspLabelClassModel_zmod_example
+flZModCuspLabelClassModel_local_eq_zmod_example
+flZModCuspLabelClassModel_canonical_translate_example
+flZModCuspLabelClassModel_canonical_sign_label_example
+flZModCuspLabelClassModel_label_class_example
+```
+
+### Remaining Gap
+
+The next useful refinement is to connect the label-averaged log-volume audit to
+this canonical cusp-label bridge.  Concretely, we should introduce a wrapper
+where the label set is `ZMod l.value`, the averaged audit is indexed by those
+labels, and the same `l` carries the cusp-label class model.  That will make the
+average over `j ∈ F_l` and the local cusp-label structure live in the same
+formal package.

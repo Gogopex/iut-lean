@@ -489,6 +489,42 @@ theorem flZModUnitSignLabelModel_orbit_iff_signOrbit_example
       (zmodSignAction l).InSignOrbit x generator :=
   model.signUnitSubgroup_orbit_iff_signOrbit' x generator
 
+def flZModCuspLabelClassModel_zmod_example
+    (l : PrimeGeFive) :
+    IUTStage1FLZModCuspLabelClassModel l :=
+  IUTStage1FLZModCuspLabelClassModel.zmod l
+
+theorem flZModCuspLabelClassModel_local_eq_zmod_example
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.local_lab_cusp_model = zmodLocalLabCuspModel l :=
+  model.localLabCuspModel_eq_zmod
+
+theorem flZModCuspLabelClassModel_canonical_translate_example
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.local_lab_cusp_model.canonicalNonzeroLabel.1 =
+      model.local_lab_cusp_model.additiveTorsor.vadd
+        model.local_lab_cusp_model.canonicalCoordinate
+        model.local_lab_cusp_model.labelQuotient.zero :=
+  model.canonicalLabelTranslate
+
+theorem flZModCuspLabelClassModel_canonical_sign_label_example
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.local_lab_cusp_model.canonicalSignLabel =
+      model.local_lab_cusp_model.signAction.toSignLabelQuotient
+        model.local_lab_cusp_model.canonicalNonzeroLabel :=
+  model.canonicalSignLabelEq
+
+theorem flZModCuspLabelClassModel_label_class_example
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.cusp_label_class_data.labelClass =
+      model.cusp_label_class_data.model.signAction.toSignLabelQuotient
+        model.cusp_label_class_data.model.canonicalNonzeroLabel :=
+  model.labelClass_eq_model_quotient
+
 theorem upperSemi_capsuleFamilyLogVolume_total_eq_sum_example
     {kind : IUTStage1PlaceKind}
     (data : IUTStage1CapsuleFamilyLogVolume kind) :

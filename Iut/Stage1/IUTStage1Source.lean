@@ -1085,6 +1085,84 @@ theorem zmod_signUnitSubgroup_orbit_iff_signOrbit
 
 end IUTStage1FLZModUnitSignLabelModel
 
+/--
+The canonical `F_l` label/cusp bridge at the `ZMod l` model.
+
+This packages the Stage 1 unit/sign label bridge with the foundations
+`LocalLabCuspModel` and its canonical `CuspLabelClassData`.
+-/
+structure IUTStage1FLZModCuspLabelClassModel
+    (l : PrimeGeFive) where
+  unit_sign_model : IUTStage1FLZModUnitSignLabelModel l
+  local_lab_cusp_model : LocalLabCuspModel l
+  local_lab_cusp_model_eq_zmod :
+    local_lab_cusp_model = zmodLocalLabCuspModel l
+  cusp_label_class_data : CuspLabelClassData l
+  cusp_label_class_data_eq_zmod :
+    cusp_label_class_data = zmodCanonicalCuspLabelClassData l
+
+namespace IUTStage1FLZModCuspLabelClassModel
+
+/-- The canonical `ZMod l` cusp-label bridge supplied by the foundations layer. -/
+def zmod (l : PrimeGeFive) :
+    IUTStage1FLZModCuspLabelClassModel l :=
+  { unit_sign_model := IUTStage1FLZModUnitSignLabelModel.zmod l,
+    local_lab_cusp_model := zmodLocalLabCuspModel l,
+    local_lab_cusp_model_eq_zmod := rfl,
+    cusp_label_class_data := zmodCanonicalCuspLabelClassData l,
+    cusp_label_class_data_eq_zmod := rfl }
+
+theorem localLabCuspModel_eq_zmod
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.local_lab_cusp_model = zmodLocalLabCuspModel l :=
+  model.local_lab_cusp_model_eq_zmod
+
+theorem cuspLabelClassData_eq_zmod
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.cusp_label_class_data = zmodCanonicalCuspLabelClassData l :=
+  model.cusp_label_class_data_eq_zmod
+
+theorem canonicalLabelTranslate
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.local_lab_cusp_model.canonicalNonzeroLabel.1 =
+      model.local_lab_cusp_model.additiveTorsor.vadd
+        model.local_lab_cusp_model.canonicalCoordinate
+        model.local_lab_cusp_model.labelQuotient.zero :=
+  model.local_lab_cusp_model.canonicalLabelTranslate
+
+theorem canonicalSignLabelEq
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.local_lab_cusp_model.canonicalSignLabel =
+      model.local_lab_cusp_model.signAction.toSignLabelQuotient
+        model.local_lab_cusp_model.canonicalNonzeroLabel :=
+  model.local_lab_cusp_model.canonicalSignLabelEq
+
+theorem labelClass_eq_model_quotient
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.cusp_label_class_data.labelClass =
+      model.cusp_label_class_data.model.signAction.toSignLabelQuotient
+        model.cusp_label_class_data.model.canonicalNonzeroLabel :=
+  model.cusp_label_class_data.labelClass_eq_model_quotient
+
+theorem zmod_canonicalSignLabel_eq
+    (l : PrimeGeFive) :
+    (zmod l).local_lab_cusp_model.canonicalSignLabel =
+      zmodCanonicalSignLabelQuotient l :=
+  rfl
+
+theorem zmod_cuspLabelClass_eq_canonical
+    (l : PrimeGeFive) :
+    (zmod l).cusp_label_class_data.labelClass =
+      (zmod l).cusp_label_class_data.model.canonicalSignLabel :=
+  (zmod l).cusp_label_class_data.labelClass_eq_canonical
+
+end IUTStage1FLZModCuspLabelClassModel
+
 namespace IUTStage1LabelAveragedProcessionLogVolume
 
 variable {label : Type u} [Fintype label]
