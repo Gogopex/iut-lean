@@ -16207,6 +16207,9 @@ structure ThreeElevenFiveWeightedThetaAudit
   theta_pilot_eq_package : theta_pilot = package.thetaPilot
   q_pilot : PilotObjectId
   q_pilot_eq_package : q_pilot = package.qPilot
+  real_comparison_chart : AlgorithmicOutput.RealComparisonChartId
+  real_comparison_chart_eq_package :
+    real_comparison_chart = package.preLedger.chartedContainer.chart.chart
   weightedAverage_le_thetaAverage :
     (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
       profile audited).weightedAverageLogVolume <=
@@ -16339,6 +16342,16 @@ theorem ThreeElevenFiveWeightedThetaAudit.qPilotMatchesPackage
       ThreeElevenFiveWeightedThetaAudit part profile audited) :
     sourceAudit.q_pilot = package.qPilot :=
   sourceAudit.q_pilot_eq_package
+
+theorem ThreeElevenFiveWeightedThetaAudit.realComparisonChartMatchesPackage
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.real_comparison_chart =
+      package.preLedger.chartedContainer.chart.chart :=
+  sourceAudit.real_comparison_chart_eq_package
 
 theorem qSigned_le_thetaSigned_of_weightedThetaComparisonData
     (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
@@ -16720,6 +16733,9 @@ structure ThreeElevenFiveWeightedThetaAudit
   theta_pilot_eq_package : theta_pilot = package.thetaPilot
   q_pilot : PilotObjectId
   q_pilot_eq_package : q_pilot = package.qPilot
+  real_comparison_chart : AlgorithmicOutput.RealComparisonChartId
+  real_comparison_chart_eq_package :
+    real_comparison_chart = package.preLedger.chartedContainer.chart.chart
   weightedAverage_le_thetaAverage :
     (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
       profile audited).weightedAverageLogVolume <=
@@ -16852,6 +16868,16 @@ theorem ThreeElevenFiveWeightedThetaAudit.qPilotMatchesPackage
       ThreeElevenFiveWeightedThetaAudit part profile audited) :
     sourceAudit.q_pilot = package.qPilot :=
   sourceAudit.q_pilot_eq_package
+
+theorem ThreeElevenFiveWeightedThetaAudit.realComparisonChartMatchesPackage
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.real_comparison_chart =
+      package.preLedger.chartedContainer.chart.chart :=
+  sourceAudit.real_comparison_chart_eq_package
 
 def toLabelwiseWeightedThetaComparisonData
     {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}

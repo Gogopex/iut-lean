@@ -18539,3 +18539,46 @@ This narrows the remaining assumption surface.  A future derivation of
 `ThreeElevenFiveWeightedThetaAudit` must supply not only the weighted-to-Theta
 inequality, but also evidence that it belongs to the named final simultaneous
 comparison of the package's q- and Theta-pilots.
+
+## 144. The 3.11.5 Audit Names The Real-Comparison Chart
+
+### Lean Move
+
+We added:
+
+```text
+real_comparison_chart
+real_comparison_chart_eq_package
+realComparisonChartMatchesPackage
+```
+
+to `ThreeElevenFiveWeightedThetaAudit` for both the labelwise and cusp-class
+routes.
+
+### Mathematical Reason
+
+The weighted-to-Theta comparison is a comparison of real log-volume values.  The
+formal data should therefore remember the chart of real-line copies used by the
+source package:
+
+```text
+package.preLedger.chartedContainer.chart.chart
+```
+
+This does not yet derive the hard inequality, but it prevents the audit from
+being detached from the charted real-comparison boundary.
+
+### Source Check
+
+Scholze-Stix explicitly focus on whether all real-number copies in the
+Corollary 3.12 step are identified consistently.  Mochizuki's decomposition
+keeps the final comparison as a specific source-facing step.  Naming the chart
+inside the 3.11.5 audit keeps that real-line-copy issue visible at the exact
+remaining assumption.
+
+### Relevance to the 3.12 Dispute
+
+The hard audit now has four visible pieces of provenance: final checkpoint,
+simultaneous-comparison checkpoint, q/Theta pilots, and the package's real
+comparison chart.  Future source-level proofs must match all four before Lean
+will accept them as this 3.11.5-to-3.12 comparison.
