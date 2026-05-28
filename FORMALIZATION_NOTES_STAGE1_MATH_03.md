@@ -5059,3 +5059,72 @@ with:
 
 as though both were determined by the same full-label object.  The second
 quantity requires extra coordinate/representative data or a separate argument.
+
+## 170. Full-Label Weighted Summands: Balanced Works, Representative Does Not
+
+### Lean Move
+
+We combined the full-label weight result with the full-label log-volume map:
+
+```text
+IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+constant_fullLabelLogVolume
+constant_fullLabelLogVolume_fromCoordinate
+balancedFullLabelWeightedSummand
+balancedFullLabelWeightedSummand_fromCoordinate
+not_exists_representativeSquareUnitSummandOnFullLabel
+```
+
+The balanced summand is genuinely full-label based:
+
+```text
+balancedFullLabelWeightedSummand compat (fromCoordinate j)
+  = balancedSquareWeight j * compat.normalizedLogVolume j.
+```
+
+For the representative profile, Lean proves a unit-log-volume obstruction:
+
+```text
+not exists S : FullLabel -> Real,
+  S(fromCoordinate j)
+    = (j.val)^2 * constantOne.fullLabelLogVolume (fromCoordinate j)
+  for every j.
+```
+
+Since the constant-one full-label log-volume is always `1`, such a summand
+function would immediately recover a forbidden full-label function for
+`j.val^2`.
+
+### Mathematical Reason
+
+Milestone 169 showed that the representative square is not determined by a full
+cusp label.  This milestone shows that multiplying by full-label log-volume data
+does not repair that defect, even in the simplest nonzero log-volume situation.
+
+The balanced profile can be paired with any compatible log-volume family because
+both factors are full-label functions after applying `fromCoordinate`.  The
+literal representative summand:
+
+```text
+(j.val)^2 * fullLabelLogVolume(fromCoordinate j)
+```
+
+still contains representative-dependent information in the first factor.
+
+### Source Check
+
+This is closer to the shape of IUT III Corollary 3.12, where the disputed
+comparison is not merely about labels or weights separately, but about
+log-volume averages built from weighted contributions.  Scholze-Stix's criticism
+also concerns the resulting real-valued comparison after the relevant
+identifications.  Lean now records that the issue persists at the weighted
+summand level.
+
+### Relevance to the 3.12 Dispute
+
+This milestone blocks another possible shortcut: one cannot argue that
+full-label log-volume compatibility makes the representative-weighted summand a
+full-label object.  The log-volume part descends; the representative square part
+does not.  A future formal proof must therefore expose the extra data or theorem
+that authorizes the representative square factor in the `3.11.5 => 3.12`
+comparison.

@@ -996,6 +996,48 @@ theorem zmodSquareWeightProfile_representative_not_full_label_example
           ((j.val : Real) ^ 2) :=
   not_exists_representativeSquareWeightOnFullLabel
 
+def zmodCuspLabelLogVolumeCompatibility_constant_example
+    {l : PrimeGeFive} (c : Real) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility l :=
+  IUTStage1ZModCuspLabelLogVolumeCompatibility.constant (l := l) c
+
+theorem zmodCuspLabelLogVolumeCompatibility_constant_full_label_example
+    {l : PrimeGeFive} (c : Real)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    (zmodCuspLabelLogVolumeCompatibility_constant_example (l := l) c).fullLabelLogVolume
+        label = c :=
+  IUTStage1ZModCuspLabelLogVolumeCompatibility.constant_fullLabelLogVolume c label
+
+noncomputable def zmodSquareWeightProfile_balanced_full_label_summand_example
+    {l : PrimeGeFive}
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (label : IUTStage1ZModCuspFullLabel l) : Real :=
+  IUTStage1ZModSquareWeightProfile.balancedFullLabelWeightedSummand
+    (l := l) compat label
+
+open IUTStage1ZModSquareWeightProfile in
+theorem zmodSquareWeightProfile_balanced_full_label_summand_from_coord_example
+    {l : PrimeGeFive}
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (j : ZMod l.value) :
+    zmodSquareWeightProfile_balanced_full_label_summand_example compat
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+      IUTStage1ZModSquareWeightProfile.balancedSquareWeight (l := l) j *
+        compat.normalizedLogVolume j :=
+  balancedFullLabelWeightedSummand_fromCoordinate compat j
+
+open IUTStage1ZModSquareWeightProfile in
+theorem zmodSquareWeightProfile_representative_unit_summand_not_full_label_example
+    {l : PrimeGeFive} :
+    ¬ ∃ summandOnFullLabel : IUTStage1ZModCuspFullLabel l -> Real,
+      ∀ j : ZMod l.value,
+        summandOnFullLabel (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+          ((j.val : Real) ^ 2) *
+            (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+              (l := l) (1 : Real)).fullLabelLogVolume
+                (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  not_exists_representativeSquareUnitSummandOnFullLabel
+
 theorem zmodSquareWeightProfile_squareWeight_preserved_of_coord_example
     {l : PrimeGeFive}
     (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)

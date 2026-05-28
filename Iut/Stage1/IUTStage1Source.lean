@@ -1480,6 +1480,16 @@ namespace IUTStage1ZModCuspLabelLogVolumeCompatibility
 
 variable {l : PrimeGeFive}
 
+def constant (c : Real) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility l :=
+  { normalizedLogVolume := fun _ => c,
+    cuspClassLogVolume := fun _ => c,
+    zeroLogVolume := c,
+    nonzero_eq_cuspClass := by
+      intro j hj
+      rfl,
+    zero_eq := rfl }
+
 theorem nonzero_eq
     (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
     (j : ZMod l.value) (hj : j ≠ 0) :
@@ -1519,6 +1529,17 @@ theorem fullLabelLogVolume_nonzero
     compat.fullLabelLogVolume (IUTStage1ZModCuspFullLabel.nonzero label) =
       compat.cuspClassLogVolume label :=
   rfl
+
+theorem constant_fullLabelLogVolume
+    (c : Real) (label : IUTStage1ZModCuspFullLabel l) :
+    (constant (l := l) c).fullLabelLogVolume label = c := by
+  cases label <;> rfl
+
+theorem constant_fullLabelLogVolume_fromCoordinate
+    (c : Real) (j : ZMod l.value) :
+    (constant (l := l) c).fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) = c := by
+  rw [constant_fullLabelLogVolume]
 
 theorem normalizedLogVolume_eq_fullLabelLogVolume_fromCoordinate
     (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
@@ -2082,6 +2103,23 @@ theorem balancedSquareWeightOnFullLabel_fromCoordinate
   · rw [IUTStage1ZModCuspFullLabel.fromCoordinate_nonzero l j hj]
     exact balancedSquareWeightOnSignQuotient_fromCoordinate j hj
 
+noncomputable def balancedFullLabelWeightedSummand
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (label : IUTStage1ZModCuspFullLabel l) : Real :=
+  balancedSquareWeightOnFullLabel (l := l) label *
+    compat.fullLabelLogVolume label
+
+theorem balancedFullLabelWeightedSummand_fromCoordinate
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (j : ZMod l.value) :
+    balancedFullLabelWeightedSummand
+        (l := l) compat
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+      balancedSquareWeight (l := l) j * compat.normalizedLogVolume j := by
+  unfold balancedFullLabelWeightedSummand
+  rw [balancedSquareWeightOnFullLabel_fromCoordinate]
+  rw [compat.normalizedLogVolume_eq_fullLabelLogVolume_fromCoordinate]
+
 theorem balancedSquareWeight_eq_square_val_of_val_le_half
     (j : ZMod l.value) (hhalf : j.val ≤ l.value / 2) :
     balancedSquareWeight (l := l) j = ((j.val : Real) ^ 2) := by
@@ -2220,6 +2258,23 @@ theorem not_exists_representativeSquareWeightOnFullLabel :
           ((j.val : Real) ^ 2)
         rw [← IUTStage1ZModCuspFullLabel.fromCoordinate_nonzero l j hj]
         exact hweight j⟩
+
+theorem not_exists_representativeSquareUnitSummandOnFullLabel :
+    ¬ ∃ summandOnFullLabel : IUTStage1ZModCuspFullLabel l -> Real,
+      ∀ j : ZMod l.value,
+        summandOnFullLabel (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+          ((j.val : Real) ^ 2) *
+            (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+              (l := l) (1 : Real)).fullLabelLogVolume
+                (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  rintro ⟨summandOnFullLabel, hsummand⟩
+  exact not_exists_representativeSquareWeightOnFullLabel
+    ⟨summandOnFullLabel, by
+      intro j
+      have h := hsummand j
+      rw [IUTStage1ZModCuspLabelLogVolumeCompatibility.constant_fullLabelLogVolume_fromCoordinate
+        (l := l) (1 : Real) j] at h
+      simpa using h⟩
 
 theorem squareWeight_preserved_of_coordinateSquarePreserving
     (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
