@@ -9693,6 +9693,30 @@ structure FLZModCuspLabelThetaContainerBoundAudit
       package.preLedger.targetVolume.targetSigned <=
         theta_source.thetaSourceAverage audited
 
+/--
+Theta-pilot hull/container source for the target-to-average comparison.
+
+This is the constructive branch of `IUTStage1TargetAverageBoundSource` closest
+to the IUT III/IV description: the Theta-source images are identified with the
+endpoint's possible Theta-pilot images, hence their union is the endpoint union
+bounded by the holomorphic-hull/determinant container.  The final
+target-to-average inequality is still recorded explicitly, because it is the
+mathematical comparison under dispute rather than a consequence of `(Ind3)`
+alone.
+-/
+structure FLZModCuspLabelThetaPilotHullContainerAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  theta_source : audit.FLZModCuspLabelThetaSourceAudit l
+  ind12_equality_part : audit.Ind12EqualityPart
+  ind3_upper_part : audit.Ind3UpperInequalityPart
+  theta_images_eq_endpoint :
+    theta_source.theta_images = endpoint.theta_hull_endpoint.possible_images
+  targetSigned_le_thetaAverage_from_hull_container :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      package.preLedger.targetVolume.targetSigned <=
+        theta_source.thetaSourceAverage audited
+
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord =
@@ -10301,6 +10325,83 @@ theorem targetSigned_le_thetaSigned_via_average
     (part.theta_source.thetaSourceAverage_le_thetaSigned audited)
 
 end FLZModCuspLabelTargetAverageReductionAudit
+
+namespace FLZModCuspLabelThetaPilotHullContainerAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+theorem thetaSourceUnion_subset_hull
+    (part : audit.FLZModCuspLabelThetaPilotHullContainerAudit l) :
+    Region.Subset part.theta_source.theta_images.union
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull := by
+  rw [part.theta_images_eq_endpoint]
+  exact endpoint.theta_hull_endpoint.possibleImagesUnion_subset_hull
+
+theorem thetaSourceUnion_eq_targetUnion
+    (part : audit.FLZModCuspLabelThetaPilotHullContainerAudit l) :
+    part.theta_source.theta_images.union =
+      package.preLedger.output.comparisons.targetUnion := by
+  rw [part.theta_images_eq_endpoint]
+  exact endpoint.theta_hull_endpoint.possibleImagesUnion_eq_targetUnion
+
+theorem thetaSourceChoiceRegion_eq_targetRegion
+    (part : audit.FLZModCuspLabelThetaPilotHullContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.theta_source.theta_images.images.region audited =
+      (package.preLedger.output.comparison audited).targetRegion :=
+  part.theta_source.theta_images.choice_region_eq_targetRegion audited
+
+theorem determinantVolumeBound
+    (part : audit.FLZModCuspLabelThetaPilotHullContainerAudit l) :
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+      package.preLedger.thetaSigned :=
+  part.ind3_upper_part.determinantVolumeBound
+
+theorem targetSigned_le_thetaAverage
+    (part : audit.FLZModCuspLabelThetaPilotHullContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited :=
+  part.targetSigned_le_thetaAverage_from_hull_container audited
+
+def toThetaContainerBoundAudit
+    (part : audit.FLZModCuspLabelThetaPilotHullContainerAudit l) :
+    audit.FLZModCuspLabelThetaContainerBoundAudit l :=
+  { theta_source := part.theta_source,
+    ind12_equality_part := part.ind12_equality_part,
+    ind3_upper_part := part.ind3_upper_part,
+    bound_source := IUTStage1TargetAverageBoundSource.thetaPilotHullContainer,
+    bound_source_not_ind3_only := (by intro h; cases h),
+    targetSigned_le_thetaAverage :=
+      part.targetSigned_le_thetaAverage_from_hull_container }
+
+theorem boundSource_eq_thetaPilotHullContainer
+    (part : audit.FLZModCuspLabelThetaPilotHullContainerAudit l) :
+    part.toThetaContainerBoundAudit.bound_source =
+      IUTStage1TargetAverageBoundSource.thetaPilotHullContainer :=
+  rfl
+
+theorem qSigned_le_thetaSourceAverage
+    (part : audit.FLZModCuspLabelThetaPilotHullContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= part.theta_source.thetaSourceAverage audited :=
+  le_trans
+    part.ind12_equality_part.qSigned_le_targetSigned
+    (part.targetSigned_le_thetaAverage audited)
+
+theorem qSigned_le_thetaSigned_via_hull_container
+    (part : audit.FLZModCuspLabelThetaPilotHullContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  le_trans
+    (part.qSigned_le_thetaSourceAverage audited)
+    (part.theta_source.thetaSourceAverage_le_thetaSigned audited)
+
+end FLZModCuspLabelThetaPilotHullContainerAudit
 
 namespace FLZModCuspLabelThetaContainerBoundAudit
 

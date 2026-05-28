@@ -4044,3 +4044,122 @@ paths now named by the classification: a theta-pilot hull/container theorem, or
 a separate comparison lemma.  The more faithful first target is the
 theta-pilot hull/container route, since that matches the IUT III/IV descriptions
 of upper bounds for the holomorphic hull of possible Theta-pilot images.
+
+## 53. Theta-Pilot Hull/Container Source for the Target-to-Average Bound
+
+### Goal
+
+We implemented the constructive branch of the classification from Section 52:
+the target-to-average comparison may now be recorded as coming from the
+Theta-pilot hull/container computation, not from `(Ind3)` alone.
+
+### Source Check
+
+IUT III describes the relevant Theta-pilot log-volume in terms of the
+holomorphic hull of the union of possible images of the Theta-pilot object,
+subject to `(Ind1)`, `(Ind2)`, `(Ind3)` (local notes: IUT III lines around
+839--945).  This is exactly the source shape already present in our endpoint:
+possible Theta-pilot images, their union, containment in the hull, and the
+determinant/log-volume bound.
+
+The newer formalization paper separates the route into a final
+`3.11.5 => 3.12` comparison after moving the `hull+det` component earlier
+(local notes: formalization paper lines around 477--492).  This supports our
+current split: the hull/container facts are tracked explicitly, while the
+simultaneous comparison remains visible as a separate bound.
+
+Scholze-Stix's Section 2.2 remains the guardrail: identifying abstract
+Theta-pilot data with real-valued degrees and averages is precisely where an
+unjustified collapse can enter.  For that reason the new Lean object does not
+pretend that the average comparison follows automatically from the hull
+containment.
+
+### Lean Move
+
+We added:
+
+```text
+FLZModCuspLabelThetaPilotHullContainerAudit
+```
+
+It carries:
+
+```text
+theta_source
+ind12_equality_part
+ind3_upper_part
+theta_images_eq_endpoint
+targetSigned_le_thetaAverage_from_hull_container
+```
+
+Lean now proves from this audit:
+
+```text
+thetaSourceUnion_subset_hull
+thetaSourceUnion_eq_targetUnion
+thetaSourceChoiceRegion_eq_targetRegion
+determinantVolumeBound
+targetSigned_le_thetaAverage
+toThetaContainerBoundAudit
+boundSource_eq_thetaPilotHullContainer
+qSigned_le_thetaSourceAverage
+qSigned_le_thetaSigned_via_hull_container
+```
+
+The conversion
+
+```text
+toThetaContainerBoundAudit
+```
+
+sets
+
+```text
+bound_source := thetaPilotHullContainer
+```
+
+and proves that the source is not `ind3UpperSemiOnly`.
+
+### Mathematical Point
+
+The formal route is now:
+
+```text
+Theta-source images = endpoint possible Theta-pilot images
+  -> union is contained in the hull/container
+  -> determinant/log-volume bound remains attached
+  -> targetSigned <= thetaSourceAverage is supplied as the hull/container
+     comparison
+  -> qSigned <= thetaSourceAverage by the `(Ind1)/(Ind2)` equality part
+  -> qSigned <= thetaSigned by the Theta-source upper bound
+```
+
+This is still not a full proof of the numerical local bound.  It is a faithful
+typed location for that bound: a later theorem must derive
+`targetSigned_le_thetaAverage_from_hull_container` from the actual analytic
+container and averaging estimates.
+
+### Trap Avoided
+
+The audit explicitly stores equality between `theta_source.theta_images` and
+the endpoint's possible images.  Without this, one could accidentally compare a
+label average attached to one image family with a hull bound attached to a
+different image family.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_hull_container_to_classified_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_hull_container_source_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_hull_container_union_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_hull_container_q_le_theta_example
+```
+
+### Remaining Gap
+
+The next mathematical step is to refine
+`targetSigned_le_thetaAverage_from_hull_container`.  It should become a theorem
+whose hypotheses name the actual local container estimate and the finite
+`F_l`-average estimate, instead of remaining a field of the audit.
