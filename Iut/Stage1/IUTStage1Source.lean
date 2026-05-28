@@ -2009,6 +2009,46 @@ theorem coordinateModularSquarePreserving_neg :
   change (-j) ^ 2 = j ^ 2
   simp [pow_two]
 
+/--
+Rigidity of the current real representative-square profile.
+
+Since `ZMod.val` takes nonnegative representatives, equality of real squares
+forces equality of representatives.
+-/
+theorem coordinateSquarePreserving_val_eq
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hcoord : CoordinateSquarePreserving (l := l) coordinateEquiv) :
+    ∀ j : ZMod l.value, (coordinateEquiv j).val = j.val := by
+  intro j
+  have hsq := hcoord j
+  have heq_or := sq_eq_sq_iff_eq_or_eq_neg.mp hsq
+  rcases heq_or with heq | hneg
+  · exact_mod_cast heq
+  · have hleft_nonneg : (0 : Real) <= ((coordinateEquiv j).val : Real) := by
+      exact_mod_cast Nat.zero_le _
+    have hright_nonneg : (0 : Real) <= ((j.val) : Real) := by
+      exact_mod_cast Nat.zero_le _
+    have hleft_zero : (((coordinateEquiv j).val : Real)) = 0 := by
+      nlinarith
+    have hright_zero : (((j.val) : Real)) = 0 := by
+      nlinarith
+    exact_mod_cast hleft_zero.trans hright_zero.symm
+
+theorem coordinateSquarePreserving_apply_eq
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hcoord : CoordinateSquarePreserving (l := l) coordinateEquiv) :
+    ∀ j : ZMod l.value, coordinateEquiv j = j := by
+  intro j
+  exact ZMod.val_injective l.value
+    (coordinateSquarePreserving_val_eq hcoord j)
+
+theorem coordinateSquarePreserving_eq_refl
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hcoord : CoordinateSquarePreserving (l := l) coordinateEquiv) :
+    coordinateEquiv = Equiv.refl (ZMod l.value) := by
+  ext j
+  exact coordinateSquarePreserving_apply_eq hcoord j
+
 theorem squareWeight_preserved_of_coordinateSquarePreserving
     (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
     {coordinateEquiv : ZMod l.value ≃ ZMod l.value}

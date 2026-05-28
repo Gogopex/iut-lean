@@ -4090,3 +4090,91 @@ by sign/modular-square preservation
 Any later construction that claims to supply the Corollary 3.12 weighted
 transport must pass the stronger `CoordinateSquarePreserving` interface, not
 just the sign-quotient or modular-square interfaces.
+
+## 159. Rigidity of the Real Representative-Square Profile
+
+### Lean Move
+
+We proved three rigidity lemmas for the current square-weight profile:
+
+```text
+IUTStage1ZModSquareWeightProfile.coordinateSquarePreserving_val_eq
+IUTStage1ZModSquareWeightProfile.coordinateSquarePreserving_apply_eq
+IUTStage1ZModSquareWeightProfile.coordinateSquarePreserving_eq_refl
+```
+
+The first says that if a coordinate equivalence preserves the real square
+profile:
+
+```text
+((coordinateEquiv j).val : Real)^2 = (j.val : Real)^2
+```
+
+then it preserves the representatives:
+
+```text
+(coordinateEquiv j).val = j.val
+```
+
+The second and third turn this into pointwise identity of the coordinate
+equivalence, and then equality with `Equiv.refl`.
+
+The proof uses only elementary ordered-ring reasoning: `ZMod.val` gives
+nonnegative representatives, so equality of real squares implies equality of
+the representatives.  Then `ZMod.val_injective` identifies the `ZMod` elements.
+
+### Mathematical Reason
+
+This makes explicit a consequence of the modeling choice introduced when we
+represented the `j^2` weight as:
+
+```text
+(j.val : Real)^2
+```
+
+That choice is rigid.  A transport map that preserves this profile cannot merely
+preserve the sign class or the finite-field square class; it must be the identity
+on the chosen representatives.
+
+This is a useful audit fact, not a final mathematical verdict.  It says that if
+the intended IUT `j^2` datum is supposed to be invariant under nontrivial
+sign/modular transport, then the formalization must eventually refine the model
+of the square-weight profile or supply additional Hodge-theoretic data explaining
+how representative choices are transported.
+
+### Source Check
+
+IUT III Corollary 3.12 describes the relevant log-volume as an average over
+`j in F_l`, while the April 2026 formalization report isolates the final
+`3.11.5 => 3.12` problem as the simultaneous comparison stage.  Scholze-Stix
+Section 2.2 focuses on the same location from the opposite direction: coherent
+real-line identifications appear to leave no room for the nontrivial `j^2`
+scaling.
+
+This Lean milestone contributes a precise local version of that pressure:
+
+```text
+with representative-valued real weights,
+real square preservation is identity-rigid.
+```
+
+### Relevance to the 3.12 Dispute
+
+The current formalization now has two adjacent facts:
+
+```text
+negation preserves sign and modular square data
+negation does not preserve the representative real square profile
+```
+
+and a general rigidity theorem:
+
+```text
+preserving the representative real square profile forces identity
+```
+
+This is exactly the sort of boundary we need before encoding deeper
+Hodge-theoretic mechanisms.  The next source-facing task is not to hide this
+rigidity, but to determine whether the original papers intend a different square
+profile, a different transport interface, or an additional construction that
+justifies the representative-level preservation required by our current audit.

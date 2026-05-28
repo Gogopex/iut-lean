@@ -1455,6 +1455,38 @@ theorem zmodSquareWeightProfile_modular_square_neg_example
       (l := l) (Equiv.neg (ZMod l.value)) :=
   IUTStage1ZModSquareWeightProfile.coordinateModularSquarePreserving_neg
 
+theorem zmodSquareWeightProfile_coordinate_square_val_rigid_example
+    {l : PrimeGeFive}
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hcoord :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (j : ZMod l.value) :
+    (coordinateEquiv j).val = j.val :=
+  IUTStage1ZModSquareWeightProfile.coordinateSquarePreserving_val_eq
+    hcoord j
+
+theorem zmodSquareWeightProfile_coordinate_square_apply_rigid_example
+    {l : PrimeGeFive}
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hcoord :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (j : ZMod l.value) :
+    coordinateEquiv j = j :=
+  IUTStage1ZModSquareWeightProfile.coordinateSquarePreserving_apply_eq
+    hcoord j
+
+theorem zmodSquareWeightProfile_coordinate_square_refl_rigid_example
+    {l : PrimeGeFive}
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hcoord :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv) :
+    coordinateEquiv = Equiv.refl (ZMod l.value) :=
+  IUTStage1ZModSquareWeightProfile.coordinateSquarePreserving_eq_refl
+    hcoord
+
 def squareAuditPrimeFiveExample : PrimeGeFive where
   value := 5
   prime := by norm_num
