@@ -21856,6 +21856,60 @@ structure IUTStage1Ind3LocalExperimentReport where
   orientation : IUTStage1Ind3LocalOrientation
   canFeedPacketToThetaRoute : Bool
 
+/-- Real-line/log-volume alignment data needed after local `(Ind3)` orientation. -/
+inductive IUTStage1Ind3AlignmentMissingDatum where
+  | packetLocalObjectFinite_eq_ind3Source
+  | thetaAverage_eq_ind3Target
+deriving DecidableEq, Repr, Fintype
+
+namespace IUTStage1Ind3AlignmentMissingDatum
+
+def all : Finset IUTStage1Ind3AlignmentMissingDatum :=
+  Finset.univ
+
+theorem packetLocalObjectFinite_eq_ind3Source_mem_all :
+    packetLocalObjectFinite_eq_ind3Source ∈ all := by
+  simp [all]
+
+theorem thetaAverage_eq_ind3Target_mem_all :
+    thetaAverage_eq_ind3Target ∈ all := by
+  simp [all]
+
+end IUTStage1Ind3AlignmentMissingDatum
+
+/--
+Experiment report for the real-valued alignment layer.
+
+If `canBuildSourceTargetAlignment` is false, the current data may still contain
+Hodge descent and local upper-semi orientation, but it cannot yet produce the
+`Ind3SourceTargetAlignment` consumed by the final route.
+-/
+structure IUTStage1Ind3AlignmentExperimentReport where
+  missing : Finset IUTStage1Ind3AlignmentMissingDatum
+  canBuildSourceTargetAlignment : Bool
+
+namespace IUTStage1Ind3AlignmentExperimentReport
+
+def missingRealAlignment : IUTStage1Ind3AlignmentExperimentReport :=
+  { missing := IUTStage1Ind3AlignmentMissingDatum.all,
+    canBuildSourceTargetAlignment := false }
+
+theorem missingRealAlignment_cannotBuild :
+    missingRealAlignment.canBuildSourceTargetAlignment = false :=
+  rfl
+
+theorem missingRealAlignment_packetSource_missing :
+    IUTStage1Ind3AlignmentMissingDatum.packetLocalObjectFinite_eq_ind3Source ∈
+      missingRealAlignment.missing :=
+  IUTStage1Ind3AlignmentMissingDatum.packetLocalObjectFinite_eq_ind3Source_mem_all
+
+theorem missingRealAlignment_thetaTarget_missing :
+    IUTStage1Ind3AlignmentMissingDatum.thetaAverage_eq_ind3Target ∈
+      missingRealAlignment.missing :=
+  IUTStage1Ind3AlignmentMissingDatum.thetaAverage_eq_ind3Target_mem_all
+
+end IUTStage1Ind3AlignmentExperimentReport
+
 namespace NonarchimedeanInd3EntryAlignment
 
 variable
@@ -21883,6 +21937,19 @@ theorem experimentReport_orientation
       NonarchimedeanInd3EntryAlignment audited entry thetaAverage) :
     alignment.experimentReport.orientation =
       IUTStage1Ind3LocalOrientation.packet_le_theta :=
+  rfl
+
+def alignmentExperimentReport
+    (_alignment :
+      NonarchimedeanInd3EntryAlignment audited entry thetaAverage) :
+    IUTStage1Ind3AlignmentExperimentReport :=
+  { missing := ∅,
+    canBuildSourceTargetAlignment := true }
+
+theorem alignmentExperimentReport_canBuild
+    (alignment :
+      NonarchimedeanInd3EntryAlignment audited entry thetaAverage) :
+    alignment.alignmentExperimentReport.canBuildSourceTargetAlignment = true :=
   rfl
 
 end NonarchimedeanInd3EntryAlignment

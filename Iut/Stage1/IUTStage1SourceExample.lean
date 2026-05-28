@@ -10932,6 +10932,41 @@ theorem placeAudited_nonarch_ind3_experiment_can_feed_example
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
   FLZModCuspLabelThetaHodgeDescentPacketTransportAudit in
+theorem placeAudited_nonarch_ind3_alignment_experiment_can_build_example
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    {thetaAverage : Real}
+    (alignment : NonarchimedeanInd3EntryAlignment
+      audited entry thetaAverage) :
+    alignment.alignmentExperimentReport.canBuildSourceTargetAlignment = true :=
+  alignment.alignmentExperimentReport_canBuild
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaHodgeDescentPacketTransportAudit in
+theorem placeAudited_ind3_missing_alignment_experiment_blocks_example :
+    (IUTStage1Ind3AlignmentExperimentReport.missingRealAlignment).canBuildSourceTargetAlignment =
+      false :=
+  IUTStage1Ind3AlignmentExperimentReport.missingRealAlignment_cannotBuild
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaHodgeDescentPacketTransportAudit in
+theorem placeAudited_ind3_missing_alignment_packet_source_gap_example :
+    IUTStage1Ind3AlignmentMissingDatum.packetLocalObjectFinite_eq_ind3Source ∈
+      IUTStage1Ind3AlignmentExperimentReport.missingRealAlignment.missing :=
+  IUTStage1Ind3AlignmentExperimentReport.missingRealAlignment_packetSource_missing
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaHodgeDescentPacketTransportAudit in
+theorem placeAudited_ind3_missing_alignment_theta_target_gap_example :
+    IUTStage1Ind3AlignmentMissingDatum.thetaAverage_eq_ind3Target ∈
+      IUTStage1Ind3AlignmentExperimentReport.missingRealAlignment.missing :=
+  IUTStage1Ind3AlignmentExperimentReport.missingRealAlignment_thetaTarget_missing
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaHodgeDescentPacketTransportAudit in
 theorem placeAudited_arch_ind3_entry_theta_le_packet_example
     {coric : Type u}
     {audited :

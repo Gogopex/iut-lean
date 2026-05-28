@@ -1483,3 +1483,87 @@ The next useful experiment is a missing-alignment pass: remove the
 source/target real-line alignment fields while keeping Hodge descent and local
 entry data, and report exactly which final q/Theta proof obligation remains
 unfilled.
+
+## 210. Missing Real-Alignment Experiment
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1Ind3AlignmentMissingDatum
+IUTStage1Ind3AlignmentExperimentReport
+```
+
+with missing data:
+
+```text
+packetLocalObjectFinite_eq_ind3Source
+thetaAverage_eq_ind3Target
+```
+
+There are now two experiment reports:
+
+```text
+IUTStage1Ind3AlignmentExperimentReport.missingRealAlignment
+NonarchimedeanInd3EntryAlignment.alignmentExperimentReport
+```
+
+The example file checks:
+
+```text
+placeAudited_nonarch_ind3_alignment_experiment_can_build_example
+placeAudited_ind3_missing_alignment_experiment_blocks_example
+placeAudited_ind3_missing_alignment_packet_source_gap_example
+placeAudited_ind3_missing_alignment_theta_target_gap_example
+```
+
+### Mathematical Reason
+
+The orientation experiment says whether a local `(Ind3)` entry has the right
+inequality direction.  This new experiment asks a different question: even with
+the right direction, do we have the real/log-volume identifications that allow
+the local entry to be used as the audited upper-semi source/target pair?
+
+Without these fields, Hodge descent still proves:
+
+```text
+zero/cusp log-volume = packet local object finite log-volume
+```
+
+and a nonarchimedean local entry may still prove:
+
+```text
+entry source <= entry target
+```
+
+but Lean refuses to jump from these to the final route unless it is also told:
+
+```text
+packet local object finite log-volume = audited Ind3 source
+theta average = audited Ind3 target
+```
+
+### Source Check
+
+This is the formal counterpart of the real-line-identification issue in the
+Scholze-Stix critique.  The experiment does not claim that the alignments are
+impossible; it records that they are separate mathematical input and cannot be
+silently inferred from Hodge descent plus local orientation alone.
+
+### Experiment Status
+
+We now have three first-pass experiment outcomes:
+
+```text
+nonarchimedean local orientation:
+  can feed packet <= theta
+
+archimedean local orientation:
+  reverse orientation, cannot feed the current route
+
+missing real alignment:
+  blocks construction of Ind3SourceTargetAlignment
+```
+
+This gives us a concrete starting dashboard for the disputed 3.12 passage.
