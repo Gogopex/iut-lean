@@ -20917,6 +20917,66 @@ def toZModPacketNormalizedRouteAudit
     zmodNormalizedLogVolume_eq_packetNormalized :=
       part.zmodNormalizedLogVolume_eq_packetNormalized }
 
+theorem cuspClassLogVolume_eq_packetNormalized
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  part.toZModPacketNormalizedRouteAudit.cuspClassLogVolume_eq_packetNormalized
+    audited label
+
+theorem zeroLogVolume_eq_packetNormalized
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  part.toZModPacketNormalizedRouteAudit.zeroLogVolume_eq_packetNormalized audited
+
+theorem cuspClassLogVolume_eq_thetaSourceAverage
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label =
+      part.theta_source.thetaSourceAverage audited := by
+  calc
+    (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+      part.cuspClassLogVolume_eq_packetNormalized audited label
+    _ = part.theta_source.thetaSourceAverage audited :=
+      (part.thetaSourceAverage_eq_packetNormalized audited).symm
+
+theorem zeroLogVolume_eq_thetaSourceAverage
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+      part.theta_source.thetaSourceAverage audited := by
+  calc
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+      part.zeroLogVolume_eq_packetNormalized audited
+    _ = part.theta_source.thetaSourceAverage audited :=
+      (part.thetaSourceAverage_eq_packetNormalized audited).symm
+
+theorem source_cuspClassLogVolume_le_thetaAverage
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label <=
+      part.theta_source.thetaSourceAverage audited :=
+  le_of_eq (part.cuspClassLogVolume_eq_thetaSourceAverage audited label)
+
+theorem source_zeroLogVolume_le_thetaAverage
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume <=
+      part.theta_source.thetaSourceAverage audited :=
+  le_of_eq (part.zeroLogVolume_eq_thetaSourceAverage audited)
+
 open FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit in
 def toClassifiedZModPacketNormalizedRouteAudit
     (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l) :

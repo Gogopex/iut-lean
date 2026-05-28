@@ -616,3 +616,78 @@ transport target log-volume equals the Theta-side cusp object
 The hard mathematical load has moved to proving the Theta-side zero/cusp upper
 estimates and the justified structured-SHE target/source log-volume equality
 from the actual Hodge-theater construction.
+
+## 200. Constant `ZMod` Packet Data Supplies Source Zero/Cusp Bounds
+
+### Lean Move
+
+In the namespace for
+
+```text
+FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit
+```
+
+we added:
+
+```text
+cuspClassLogVolume_eq_packetNormalized
+zeroLogVolume_eq_packetNormalized
+cuspClassLogVolume_eq_thetaSourceAverage
+zeroLogVolume_eq_thetaSourceAverage
+source_cuspClassLogVolume_le_thetaAverage
+source_zeroLogVolume_le_thetaAverage
+```
+
+The example file now exposes the equality and inequality forms for both the
+zero component and the nonzero cusp-class components.
+
+### Mathematical Reason
+
+The source-zero/cusp route from the previous milestone asks for:
+
+```text
+source zeroLogVolume <= thetaSourceAverage
+source cuspClassLogVolume label <= thetaSourceAverage
+```
+
+The constant `ZMod` packet-normalized route already says that every coordinate
+of the averaged label family is the packet-normalized capsule value, and that
+the Theta-source average is the same packet-normalized value.  Lean now also
+pushes this fact through the zero/nonzero cusp-label compatibility object:
+
+```text
+zeroLogVolume = packetNormalized = thetaSourceAverage
+cuspClassLogVolume label = packetNormalized = thetaSourceAverage
+```
+
+The required upper estimates follow by `le_of_eq`.
+
+### Source Check
+
+This is still the degenerate constant-label branch, not a claim that the full
+IUT source machinery has proved the nonconstant local estimates.  Its role is
+to verify that the formal chain from a packet-normalized label-family equality
+through zero/cusp decomposition into the source-zero/cusp target route is
+mathematically coherent.
+
+Relative to the Scholze-Stix concern, this remains an explicit equality route:
+Lean does not treat source and target histories as interchangeable.  The
+constant packet data supplies only the source-side zero/cusp estimates; the
+structured-SHE equality needed to read them as target-side estimates is still a
+separate field of the later 3.11.5 route.
+
+### Relevance to the 3.12 Dispute
+
+The current branch now has an audited source of the local estimates in the
+simplest possible packet-normalized case:
+
+```text
+constant ZMod packet-normalized label family
+  -> source zero/cusp values equal thetaSourceAverage
+  -> source zero/cusp upper estimates
+  -> source-zero/cusp target route
+```
+
+The remaining nontrivial work is to replace this constant-label source by the
+actual Hodge-theater/SHE and hull/log-volume estimates that Mochizuki intends
+for Corollary 3.12.
