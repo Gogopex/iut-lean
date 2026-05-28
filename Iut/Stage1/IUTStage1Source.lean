@@ -860,6 +860,34 @@ theorem labelIndeterminacyCount_le_full
   rw [labelIndeterminacyCount_eq]
   omega
 
+def wholeSetIndeterminacyCount (full : Nat) : Nat :=
+  (full + 1) ^ (full + 1)
+
+def processionTotalIndeterminacyCount (full : Nat) : Nat :=
+  (Finset.range (full + 1)).prod labelIndeterminacyCount
+
+theorem processionTotalIndeterminacyCount_eq_factorial (full : Nat) :
+    processionTotalIndeterminacyCount full =
+      Nat.factorial (full + 1) := by
+  unfold processionTotalIndeterminacyCount
+  induction full with
+  | zero =>
+      simp [labelIndeterminacyCount]
+  | succ full ih =>
+      rw [Finset.prod_range_succ]
+      rw [ih]
+      rw [labelIndeterminacyCount_eq]
+      simp [Nat.factorial_succ, Nat.mul_comm, Nat.mul_assoc,
+        Nat.add_comm, Nat.add_left_comm]
+
+theorem processionTotalIndeterminacyCount_le_wholeSetIndeterminacyCount
+    (full : Nat) :
+    processionTotalIndeterminacyCount full ≤
+      wholeSetIndeterminacyCount full := by
+  rw [processionTotalIndeterminacyCount_eq_factorial,
+    wholeSetIndeterminacyCount]
+  exact Nat.factorial_le_pow (full + 1)
+
 end IUTStage1ProcessionContainer
 
 /--

@@ -628,6 +628,7 @@ structure ProcessionContainerExperimentReport where
   stageIndeterminacyBoundedByFullContainer : Bool
   tensorPacketLogVolumeNormalizationAvailable : Bool
   tensorPacketPermutationInvariant : Bool
+  processionTotalIndeterminacyFactorial : Bool
 deriving Repr
 
 /--
@@ -641,7 +642,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     coreLabelStableUnderInclusion := true,
     stageIndeterminacyBoundedByFullContainer := true,
     tensorPacketLogVolumeNormalizationAvailable := true,
-    tensorPacketPermutationInvariant := true }
+    tensorPacketPermutationInvariant := true,
+    processionTotalIndeterminacyFactorial := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -661,6 +663,18 @@ theorem processionContainer_labelIndeterminacy_le_full
     {j full : Nat} (h : j ≤ full) :
     IUTStage1ProcessionContainer.labelIndeterminacyCount j ≤ full + 1 :=
   IUTStage1ProcessionContainer.labelIndeterminacyCount_le_full h
+
+theorem processionTotalIndeterminacy_eq_factorial (full : Nat) :
+    IUTStage1ProcessionContainer.processionTotalIndeterminacyCount full =
+      Nat.factorial (full + 1) :=
+  IUTStage1ProcessionContainer.processionTotalIndeterminacyCount_eq_factorial
+    full
+
+theorem processionTotalIndeterminacy_le_wholeSet (full : Nat) :
+    IUTStage1ProcessionContainer.processionTotalIndeterminacyCount full ≤
+      IUTStage1ProcessionContainer.wholeSetIndeterminacyCount full :=
+  IUTStage1ProcessionContainer.processionTotalIndeterminacyCount_le_wholeSetIndeterminacyCount
+    full
 
 theorem processionTensorPacket_normalized_eq_card_average
     {kind : IUTStage1PlaceKind} {j : Nat}
@@ -922,6 +936,7 @@ structure Corollary312DisputeFirstPassReport where
   processionContainerSkeletonAvailable : Bool
   processionTensorPacketLogVolumeAvailable : Bool
   processionTensorPacketPermutationInvariant : Bool
+  processionIndeterminacyFactorialAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -949,6 +964,7 @@ def corollary312DisputeFirstPassReport :
     processionContainerSkeletonAvailable := true,
     processionTensorPacketLogVolumeAvailable := true,
     processionTensorPacketPermutationInvariant := true,
+    processionIndeterminacyFactorialAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1004,6 +1020,11 @@ theorem corollary312Report_processionTensorPacketLogVolumeAvailable :
 
 theorem corollary312Report_processionTensorPacketPermutationInvariant :
     corollary312DisputeFirstPassReport.processionTensorPacketPermutationInvariant =
+      true :=
+  rfl
+
+theorem corollary312Report_processionIndeterminacyFactorialAvailable :
+    corollary312DisputeFirstPassReport.processionIndeterminacyFactorialAvailable =
       true :=
   rfl
 
