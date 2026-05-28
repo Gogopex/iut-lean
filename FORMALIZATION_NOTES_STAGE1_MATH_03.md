@@ -5419,3 +5419,72 @@ We have now tied the local obstruction theorem to the main audit path.  A future
 formalization of the Corollary 3.12 passage cannot silently pass through the
 structured-SHE interface unless it supplies, or proves from more primitive IUT
 data, the coordinate-square preservation needed for representative summands.
+
+## 176. Representative-Square Preservation Forces Coordinate Identity
+
+### Lean Move
+
+We exposed the rigidity consequence of the factored SHE square/full-label
+obligation:
+
+```text
+IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+  .coordinateEquiv_apply_eq
+IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+  .coordinateEquiv_eq_refl
+IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+  .coordinateIdentity_and_histories_not_identified
+```
+
+Lean now proves that the coordinate equivalence carried by such an obligation is
+pointwise the identity and hence equal to `Equiv.refl (ZMod l.value)`.
+
+At the same time, the structured SHE bundle still carries the independent
+history-separation theorem:
+
+```text
+domain Hodge-theater side != codomain Hodge-theater side.
+```
+
+### Mathematical Reason
+
+In the current representative model, the real square profile is:
+
+```text
+j |-> (j.val : Real)^2.
+```
+
+Since `ZMod.val` uses nonnegative representatives, equality of these real
+squares forces equality of representatives, hence equality of the `ZMod`
+coordinates.  Therefore a literal representative-square-preserving coordinate
+transport cannot be a nontrivial permutation in this model.
+
+This is an important distinction.  Coordinate identity is not the same as
+identifying the Hodge-theater histories.  The SHE bridge can still record that
+the domain and codomain histories are not identified, but the particular
+`j.val^2` branch no longer carries a nontrivial coordinate movement.
+
+### Source Check
+
+Scholze-Stix's §2.2 critique says that after identifying the relevant real
+lines consistently, inserting the `j^2` factors creates the critical problem;
+omitting them loses the desired inequality.  Mochizuki's discussion around IUT
+III Theorem 3.11 and Corollary 3.12 insists that the multiradial/Hodge-theater
+machinery keeps the relevant histories and indeterminacies separate while
+computing log-volumes.
+
+This milestone isolates that tension in our Stage 1 model: if the branch is
+formalized as literal representative-square preservation, then the coordinate
+transport itself is rigid.  Any genuinely nontrivial IUT explanation must
+therefore enter through the Hodge-theater/history/indeterminacy side, the
+holomorphic hull/log-volume side, or a better-sourced replacement for the
+literal representative-square branch.
+
+### Relevance to the 3.12 Dispute
+
+This gives us a concrete warning before attempting deeper Mochizuki
+definitions.  A Lean proof of the Corollary 3.12 route that assumes
+representative-square preservation has already assumed a coordinate-identity
+fact.  That may be acceptable only if the proof explicitly argues that the
+nontrivial IUT content lives elsewhere and does not require a nontrivial
+coordinate transport at this layer.

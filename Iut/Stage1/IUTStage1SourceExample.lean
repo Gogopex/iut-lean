@@ -1420,6 +1420,39 @@ theorem structuredSHEFactoredSquareFullLabelObligations_rep_summand_iff_example
         (l := l) obligations.coordinateEquiv :=
   obligations.representativeSummand_constant_one_preserved_iff_coordinateSquare
 
+theorem structuredSHEFactoredSquareFullLabelObligations_coord_apply_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations package bundle l)
+    (j : ZMod l.value) :
+    obligations.coordinateEquiv j = j :=
+  obligations.coordinateEquiv_apply_eq j
+
+theorem structuredSHEFactoredSquareFullLabelObligations_coord_refl_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations package bundle l) :
+    obligations.coordinateEquiv = Equiv.refl (ZMod l.value) :=
+  obligations.coordinateEquiv_eq_refl
+
+theorem structuredSHEFactoredSquareFullLabelObligations_identity_histories_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations package bundle l) :
+    obligations.coordinateEquiv = Equiv.refl (ZMod l.value) ∧
+      bundle.structuredSHE.context.domainStructure.theater.side ≠
+        bundle.structuredSHE.context.codomainStructure.theater.side :=
+  obligations.coordinateIdentity_and_histories_not_identified
+
 def structuredSHEFactoredPreservationBoundary_of_bundle_example
     {source target : Copy} {index : Type u}
     {package : IUTStage1SourcePackage source target index}

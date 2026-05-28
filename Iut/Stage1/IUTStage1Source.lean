@@ -9965,6 +9965,30 @@ theorem representativeSummand_constant_one_preserved_iff_coordinateSquare
   representativeSummand_constant_one_preserved_iff_coordinateSquarePreserving
     obligations.coordinateEquiv
 
+theorem coordinateEquiv_apply_eq
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+        package bundle l) :
+    ∀ j : ZMod l.value, obligations.coordinateEquiv j = j :=
+  coordinateSquarePreserving_apply_eq obligations.coordinateSquare_preserved
+
+theorem coordinateEquiv_eq_refl
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+        package bundle l) :
+    obligations.coordinateEquiv = Equiv.refl (ZMod l.value) :=
+  coordinateSquarePreserving_eq_refl obligations.coordinateSquare_preserved
+
+theorem coordinateIdentity_and_histories_not_identified
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+        package bundle l) :
+    obligations.coordinateEquiv = Equiv.refl (ZMod l.value) ∧
+      bundle.structuredSHE.context.domainStructure.theater.side ≠
+        bundle.structuredSHE.context.codomainStructure.theater.side :=
+  ⟨obligations.coordinateEquiv_eq_refl,
+    bundle.domainHistory_ne_codomainHistory⟩
+
 end IUTStage1StructuredSHEFactoredSquareFullLabelObligations
 
 /--
