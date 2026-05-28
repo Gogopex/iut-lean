@@ -3620,3 +3620,83 @@ We still need to connect this cusp-compatible label average to the actual
 theta-value side of the source construction.  At present the compatibility is a
 typed audit object; a later theorem must explain how the normalized log-volume
 family is produced from the theta/cusp data used in Theorem 3.11.
+
+## 48. Theta-Source Bound for Cusp-Compatible Averages
+
+### Goal
+
+We connected the cusp-compatible `ZMod l` label average to the existing
+Theta-pilot source side of the Stage 1 package.
+
+### Lean/API Check
+
+The new endpoint-level audit is:
+
+```text
+FLZModCuspLabelThetaSourceAudit
+```
+
+It carries:
+
+```text
+compatible_average :
+  FLZModCuspLabelCompatibleAveragedInd12Audit l
+theta_images : IUTStage1ThetaPilotPossibleImages package
+thetaSourceAverage :
+  audited choice -> Real
+thetaSourceAverage_eq_average
+thetaSourceAverage_le_thetaSigned
+```
+
+Lean exposes:
+
+```text
+thetaPilotMatchesPackage
+indeterminaciesMatchPackage
+thetaSourceAverage_eq
+averageLogVolume_le_thetaSigned
+nonzeroAverageLabel_eq_cuspClass
+ind1AverageLogVolumeEq
+ind2AverageLogVolumeEq
+```
+
+### Mathematical Point
+
+This is the first checked link from the cusp-compatible label average to the
+Theta side of the source package.  It says that for each audited choice, the
+label average is the corresponding Theta-source average and is bounded above by
+the charted Theta signed log-volume:
+
+```text
+averageLogVolume <= package.preLedger.thetaSigned
+```
+
+The audit also carries `IUTStage1ThetaPilotPossibleImages package`, so the
+Theta-pilot and indeterminacy labels remain tied to the source package.
+
+### Trap Avoided
+
+This is not a derivation from the analytic theta construction.  The equality
+between the abstract average and the Theta-source average is an explicit audit
+field, as is the upper bound by `thetaSigned`.  This keeps the current Lean
+state honest: we have formalized the shape of the handoff, not yet the source
+proof that supplies it.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_theta_source_matches_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_theta_source_average_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_theta_source_bound_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_theta_source_ind1_example
+```
+
+### Remaining Gap
+
+The next hard step is to relate this Theta-source bounded average to the q-side
+pilot/log-volume data and the final signed comparison.  We must keep the
+Theta-source upper bound, q-side lower/target bound, and `(Ind3)` upper
+semi-compatibility separate so that Corollary 3.12 is not obtained by an
+unjustified real-line identification.

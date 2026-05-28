@@ -3615,6 +3615,71 @@ theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_cusp_compat_i
       (part.zmod_cusp_audit.averaged_audit.averagedLogVolume audited₂).averageLogVolume :=
   part.ind2AverageLogVolumeEq hstep
 
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_theta_source_matches_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaSourceAudit l) :
+    part.theta_images.thetaPilot = package.thetaPilot :=
+  part.thetaPilotMatchesPackage
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_theta_source_average_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaSourceAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.thetaSourceAverage audited =
+      (part.compatible_average.zmod_cusp_audit.averaged_audit.averagedLogVolume
+        audited).averageLogVolume :=
+  part.thetaSourceAverage_eq audited
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_theta_source_bound_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaSourceAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.compatible_average.zmod_cusp_audit.averaged_audit.averagedLogVolume
+        audited).averageLogVolume <= package.preLedger.thetaSigned :=
+  part.averageLogVolume_le_thetaSigned audited
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_theta_source_ind1_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaSourceAudit l)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    (part.compatible_average.zmod_cusp_audit.averaged_audit.averagedLogVolume
+        audited₁).averageLogVolume =
+      (part.compatible_average.zmod_cusp_audit.averaged_audit.averagedLogVolume
+        audited₂).averageLogVolume :=
+  part.ind1AverageLogVolumeEq hstep
+
 theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind3_target_le_theta_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
