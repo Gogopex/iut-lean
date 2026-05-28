@@ -6372,3 +6372,81 @@ We can now transport a source packet-normalization certificate.  We still need
 to construct such source certificates from a more concrete local packet/capsule
 definition, and then use transported certificates inside the classified local
 packet audit automatically.
+
+## 81. Ind2-Transported Local Packet Audit
+
+### Goal
+
+We packaged the transported packet-normalized compatibility theorem into the
+local packet audit used by the high-level route.
+
+### Lean Move
+
+We added:
+
+```text
+FLZModCuspLabelThetaInd2TransportedLocalPacketNormalizedAudit
+```
+
+For each target audited packet it carries:
+
+```text
+sourceAudited target
+audited Ind2 step from source to target
+target cusp/zero local object estimates
+source cusp/zero classified packet-normalized compatibilities
+```
+
+It constructs:
+
+```text
+targetCuspClassCompatibility
+targetZeroCompatibility
+toClassifiedLocalPacketNormalizedAudit
+toClassifiedPacketNormalizedAudit
+```
+
+The target compatibility source is definitionally:
+
+```text
+ind2TransportedPacketNormalization
+```
+
+### Mathematical Point
+
+This is the packet-normalized analogue of the transported capsule-bound route.
+Instead of assuming that the target cusp/zero log-volumes are packet-normalized
+by a target-side real-line identification, the audit derives the target
+packet-normalized compatibility from:
+
+```text
+source classified packet-normalized compatibility
+audited Ind2 local tensor/direct-summand step
+```
+
+The local object estimates for the target cusp/zero values remain target-side
+data.  The new reduction concerns the compatibility certificate equating the
+target packet's normalized capsule average with its finite local object.
+
+### Trap Avoided
+
+The transported audit does not say that a source cusp-class value is the target
+cusp-class value.  It only transports the packet-local normalization
+compatibility through the audited `(Ind2)` step.  The target local object
+estimate is still supplied for the target log-volume real.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_ind2_local_packet_to_global_example
+placeAudited_logVolume_fl_zmod_ind2_local_packet_source_example
+```
+
+### Remaining Gap
+
+The transported local packet audit still assumes source classified
+packet-normalized compatibilities.  The next mathematical pressure point is to
+construct direct source compatibilities from a more concrete model of the
+packet/capsule normalization itself.
