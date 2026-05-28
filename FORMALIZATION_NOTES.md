@@ -18465,3 +18465,40 @@ We now have a named Lean slot for the exact claim that must eventually be
 proved from the source-level IUT construction.  At this stage it remains an
 explicit audit input, but it is no longer just an arbitrary real inequality with
 no provenance.
+
+## 142. Routes Built From 3.11.5 Retain Their Source Tag
+
+### Lean Move
+
+We added:
+
+```text
+weightedThetaComparisonRouteOfThreeElevenFive_source
+```
+
+for both weighted-theta route namespaces.
+
+### Mathematical Reason
+
+After converting a `ThreeElevenFiveWeightedThetaAudit` into the general route
+certificate, Lean can still recover that the comparison source is:
+
+```text
+threeElevenFiveToCorollary312
+```
+
+This is a small provenance theorem, but it is important because later route
+certificates may be constructed from other source labels.
+
+### Source Check
+
+The recent formalization note treats "3.11.5 => 3.12" as the last comparison
+piece after the predecessor stages have carried the hull+det and APT/IPL data.
+This theorem ensures that a route built from that slot remains visibly attached
+to that source-facing claim.
+
+### Relevance to the 3.12 Dispute
+
+The hard comparison can no longer disappear into an unlabeled certificate.  A
+reviewer can inspect a final route and recover whether it came from the
+3.11.5-to-3.12 slot or from another future source-specific audit.

@@ -16372,6 +16372,17 @@ def weightedThetaComparisonRouteOfThreeElevenFive
   part.weightedThetaComparisonRoute profile audited
     sourceAudit.toWeightedThetaComparisonData
 
+theorem weightedThetaComparisonRouteOfThreeElevenFive_source
+    (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    (part.weightedThetaComparisonRouteOfThreeElevenFive
+        profile audited sourceAudit).comparison_data.comparison_source =
+      IUTStage1WeightedThetaComparisonSource.threeElevenFiveToCorollary312 :=
+  rfl
+
 def weightedThetaComparisonRouteLevel
     {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
     {profile : IUTStage1ZModSquareWeightProfile l}
@@ -16836,6 +16847,17 @@ def weightedThetaComparisonRouteOfThreeElevenFive
     WeightedThetaComparisonRoute part profile audited :=
   part.weightedThetaComparisonRoute profile audited
     sourceAudit.toWeightedThetaComparisonData
+
+theorem weightedThetaComparisonRouteOfThreeElevenFive_source
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    (part.weightedThetaComparisonRouteOfThreeElevenFive
+        profile audited sourceAudit).comparison_data.comparison_source =
+      IUTStage1WeightedThetaComparisonSource.threeElevenFiveToCorollary312 :=
+  rfl
 
 def weightedThetaComparisonRouteLevel
     {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
