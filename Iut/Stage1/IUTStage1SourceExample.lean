@@ -431,6 +431,31 @@ theorem flLabelModel_card_eq_primeValue_example
     Fintype.card label = model.prime.value :=
   model.card_eq_primeValue
 
+def flLabelTorsorModel_zmod_example
+    (l : PrimeGeFive) :
+    IUTStage1FLLabelTorsorModel (ZMod l.value) :=
+  IUTStage1FLLabelTorsorModel.zmod l
+
+theorem flLabelTorsorModel_zero_vadd_example
+    {label : Type}
+    (model : IUTStage1FLLabelTorsorModel label) (j : label) :
+    model.torsor.vadd 0 j = j :=
+  model.zero_vadd j
+
+theorem flLabelTorsorModel_add_vadd_example
+    {label : Type}
+    (model : IUTStage1FLLabelTorsorModel label)
+    (g h : ZMod model.label_model.prime.value) (j : label) :
+    model.torsor.vadd (g + h) j =
+      model.torsor.vadd g (model.torsor.vadd h j) :=
+  model.add_vadd g h j
+
+theorem flLabelTorsorModel_zmod_translate_example
+    (l : PrimeGeFive) (t j : ZMod l.value) :
+    (IUTStage1FLLabelTorsorModel.zmod l).torsor.vadd t j =
+      zmodLabelTranslate l t j :=
+  IUTStage1FLLabelTorsorModel.zmod_vadd_eq_translate l t j
+
 theorem upperSemi_capsuleFamilyLogVolume_total_eq_sum_example
     {kind : IUTStage1PlaceKind}
     (data : IUTStage1CapsuleFamilyLogVolume kind) :
@@ -3300,6 +3325,60 @@ theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_label_ind2_average
     {audit : endpoint.LogVolumeChartAudit}
     {label : Type u} [Fintype label]
     (part : audit.FLLabelAveragedInd12Audit label)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    (part.averaged_audit.averagedLogVolume audited₁).averageLogVolume =
+      (part.averaged_audit.averagedLogVolume audited₂).averageLogVolume :=
+  part.ind2AverageLogVolumeEq hstep
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_torsor_label_vadd_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {label : Type} [Fintype label]
+    (part : audit.FLLabelTorsorAveragedInd12Audit label)
+    (t : ZMod part.torsor_model.label_model.prime.value) (j : label) :
+    part.torsor_model.torsor.vadd t j =
+      part.torsor_model.label_model.fromZMod
+        (t + part.torsor_model.label_model.toZMod j) :=
+  part.labelTorsorVadd_eq_zmod t j
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_torsor_label_ind1_average_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {label : Type} [Fintype label]
+    (part : audit.FLLabelTorsorAveragedInd12Audit label)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    (part.averaged_audit.averagedLogVolume audited₁).averageLogVolume =
+      (part.averaged_audit.averagedLogVolume audited₂).averageLogVolume :=
+  part.ind1AverageLogVolumeEq hstep
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_torsor_label_ind2_average_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {label : Type} [Fintype label]
+    (part : audit.FLLabelTorsorAveragedInd12Audit label)
     {audited₁ audited₂ :
       IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
     (hstep :

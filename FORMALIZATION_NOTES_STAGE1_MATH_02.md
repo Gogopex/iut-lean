@@ -3158,3 +3158,115 @@ translation lemmas from `InitialThetaData` to state that the `F_l` label model i
 not merely equivalent to `ZMod l.value`, but carries the intended additive
 torsor action.  That is the next step toward making the label average compatible
 with the theta/cusp label structures rather than just the finite carrier.
+
+## 43. Additive `F_l` Label Torsor Bridge
+
+### Goal
+
+We strengthened the `F_l` label bridge from a finite carrier identification to
+an additive torsor model.
+
+### Lean/API Check
+
+The new source object is:
+
+```text
+IUTStage1FLLabelTorsorModel label
+```
+
+It carries:
+
+```text
+label_model : IUTStage1FLLabelModel label
+torsor : AdditiveTorsorData (ZMod label_model.prime.value) label
+torsor_vadd_eq_zmod :
+  torsor.vadd t j =
+    label_model.fromZMod (t + label_model.toZMod j)
+```
+
+Lean checks the canonical foundations model:
+
+```text
+IUTStage1FLLabelTorsorModel.zmod
+```
+
+using:
+
+```text
+zmodLabelAdditiveTorsorData
+zmodLabelTranslate
+```
+
+and exposes the torsor laws:
+
+```text
+zero_vadd
+add_vadd
+exists_unique_vadd_eq
+vadd_eq_zmod
+zmod_vadd_eq_translate
+```
+
+The log-volume endpoint now also has:
+
+```text
+FLLabelTorsorAveragedInd12Audit
+```
+
+which packages the torsor-refined label model with the already checked
+label-averaged `(Ind1)/(Ind2)` audit.
+
+### Mathematical Point
+
+The previous milestone only said that the labels in the average are equivalent
+to `ZMod l.value`.  This milestone adds the additive translation structure on
+those labels.  That is closer to the label/cusp structures in the source
+papers, where the `F_l` labels are not just a finite set but carry translation
+behavior used in synchronizing label data.
+
+The transported action is intentionally explicit:
+
+```text
+t • j = fromZMod (t + toZMod j)
+```
+
+Thus every use of the additive label action must pass through the chosen
+`F_l` model, rather than silently identifying all copies of `ZMod l`.
+
+### Trap Avoided
+
+This does not identify Hodge theaters, log-volume real lines, or theta data.  It
+only states the additive label action on a chosen label carrier.  The averaged
+log-volume invariance under `(Ind1)/(Ind2)` is still supplied by the existing
+label-wise equality audit; the torsor structure is additional label geometry,
+not a shortcut to Corollary 3.12.
+
+### Lean Note
+
+The torsor bridge is restricted to `label : Type` because the foundations
+`AdditiveTorsorData` currently takes the acting group and carrier in the same
+universe, and `ZMod l.value` is a small type.  The endpoint wrappers were made
+label-universe-polymorphic so the earlier averaged audit can still be used with
+small `ZMod` labels.
+
+### Toy Check
+
+The examples now check:
+
+```text
+flLabelTorsorModel_zmod_example
+flLabelTorsorModel_zero_vadd_example
+flLabelTorsorModel_add_vadd_example
+flLabelTorsorModel_zmod_translate_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_torsor_label_vadd_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_torsor_label_ind1_average_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_torsor_label_ind2_average_example
+```
+
+### Remaining Gap
+
+The next label refinement should connect this additive torsor model to the
+existing unit action, sign quotient, and local cusp-label data in
+`InitialThetaData`.  That is the next needed step before the label side can
+claim to reflect the richer theta/cusp labeling apparatus used around the
+Theorem 3.11 to Corollary 3.12 transition.

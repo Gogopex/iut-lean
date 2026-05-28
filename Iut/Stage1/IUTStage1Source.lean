@@ -941,6 +941,69 @@ theorem toZMod_fromZMod
 
 end IUTStage1FLLabelModel
 
+/--
+`F_l` label model together with the additive torsor action transported from
+the concrete `ZMod l` model.
+
+The universe is kept at `Type` because `AdditiveTorsorData` in the foundations
+layer currently takes both the acting group and carrier in the same universe,
+and `ZMod l.value` is a small type.
+-/
+structure IUTStage1FLLabelTorsorModel
+    (label : Type) where
+  label_model : IUTStage1FLLabelModel label
+  torsor : AdditiveTorsorData (ZMod label_model.prime.value) label
+  torsor_vadd_eq_zmod :
+    ∀ (t : ZMod label_model.prime.value) (j : label),
+      torsor.vadd t j =
+        label_model.fromZMod (t + label_model.toZMod j)
+
+namespace IUTStage1FLLabelTorsorModel
+
+variable {label : Type}
+
+/-- The canonical additive `F_l` torsor model on `ZMod l`. -/
+def zmod (l : PrimeGeFive) :
+    IUTStage1FLLabelTorsorModel (ZMod l.value) :=
+  { label_model := IUTStage1FLLabelModel.zmod l,
+    torsor := zmodLabelAdditiveTorsorData l,
+    torsor_vadd_eq_zmod := by
+      intro t j
+      rfl }
+
+theorem vadd_eq_zmod
+    (model : IUTStage1FLLabelTorsorModel label)
+    (t : ZMod model.label_model.prime.value) (j : label) :
+    model.torsor.vadd t j =
+      model.label_model.fromZMod (t + model.label_model.toZMod j) :=
+  model.torsor_vadd_eq_zmod t j
+
+theorem zero_vadd
+    (model : IUTStage1FLLabelTorsorModel label) (j : label) :
+    model.torsor.vadd 0 j = j :=
+  model.torsor.zero_vadd j
+
+theorem add_vadd
+    (model : IUTStage1FLLabelTorsorModel label)
+    (g h : ZMod model.label_model.prime.value) (j : label) :
+    model.torsor.vadd (g + h) j =
+      model.torsor.vadd g (model.torsor.vadd h j) :=
+  model.torsor.add_vadd g h j
+
+theorem exists_unique_vadd_eq
+    (model : IUTStage1FLLabelTorsorModel label)
+    (j₁ j₂ : label) :
+    ∃! t : ZMod model.label_model.prime.value,
+      model.torsor.vadd t j₁ = j₂ :=
+  model.torsor.exists_unique_vadd_eq j₁ j₂
+
+theorem zmod_vadd_eq_translate
+    (l : PrimeGeFive) (t j : ZMod l.value) :
+    (zmod l).torsor.vadd t j = zmodLabelTranslate l t j :=
+  rfl
+
+end IUTStage1FLLabelTorsorModel
+
 namespace IUTStage1LabelAveragedProcessionLogVolume
 
 variable {label : Type u} [Fintype label]
@@ -9240,7 +9303,7 @@ label-wise invariance descends to the averaged procession log-volume.
 -/
 structure LabelAveragedInd12Audit
     (audit : endpoint.LogVolumeChartAudit)
-    (label : Type u) [Fintype label] where
+    (label : Type v) [Fintype label] where
   normalized_audit : audit.ProcessionNormalizedInd12Audit
   averagedLogVolume :
     IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind ->
@@ -9270,8 +9333,20 @@ label set is the current `ZMod l` model of the `F_l` labels.
 -/
 structure FLLabelAveragedInd12Audit
     (audit : endpoint.LogVolumeChartAudit)
-    (label : Type u) [Fintype label] where
+    (label : Type v) [Fintype label] where
   label_model : IUTStage1FLLabelModel label
+  averaged_audit : audit.LabelAveragedInd12Audit label
+
+/--
+Additive-torsor-refined `F_l`-labelled averaged audit.
+
+This strengthens `FLLabelAveragedInd12Audit` by recording the transported
+additive `F_l` action on the label carrier.
+-/
+structure FLLabelTorsorAveragedInd12Audit
+    (audit : endpoint.LogVolumeChartAudit)
+    (label : Type) [Fintype label] where
+  torsor_model : IUTStage1FLLabelTorsorModel label
   averaged_audit : audit.LabelAveragedInd12Audit label
 
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
@@ -9384,7 +9459,7 @@ end ProcessionNormalizedInd12Audit
 namespace LabelAveragedInd12Audit
 
 variable {audit : endpoint.LogVolumeChartAudit}
-variable {label : Type u} [Fintype label]
+variable {label : Type v} [Fintype label]
 
 theorem ind1AverageLogVolumeEq
     (part : audit.LabelAveragedInd12Audit label)
@@ -9420,7 +9495,7 @@ end LabelAveragedInd12Audit
 namespace FLLabelAveragedInd12Audit
 
 variable {audit : endpoint.LogVolumeChartAudit}
-variable {label : Type u} [Fintype label]
+variable {label : Type v} [Fintype label]
 
 theorem labelCard_eq_primeValue
     (part : audit.FLLabelAveragedInd12Audit label) :
@@ -9455,6 +9530,59 @@ theorem ind2AverageLogVolumeEq
   part.averaged_audit.ind2AverageLogVolumeEq hstep
 
 end FLLabelAveragedInd12Audit
+
+namespace FLLabelTorsorAveragedInd12Audit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {label : Type} [Fintype label]
+
+def toFLLabelAveragedInd12Audit
+    (part : audit.FLLabelTorsorAveragedInd12Audit label) :
+    audit.FLLabelAveragedInd12Audit label :=
+  { label_model := part.torsor_model.label_model,
+    averaged_audit := part.averaged_audit }
+
+theorem labelCard_eq_primeValue
+    (part : audit.FLLabelTorsorAveragedInd12Audit label) :
+    Fintype.card label = part.torsor_model.label_model.prime.value :=
+  part.toFLLabelAveragedInd12Audit.labelCard_eq_primeValue
+
+theorem labelTorsorVadd_eq_zmod
+    (part : audit.FLLabelTorsorAveragedInd12Audit label)
+    (t : ZMod part.torsor_model.label_model.prime.value) (j : label) :
+    part.torsor_model.torsor.vadd t j =
+      part.torsor_model.label_model.fromZMod
+        (t + part.torsor_model.label_model.toZMod j) :=
+  part.torsor_model.vadd_eq_zmod t j
+
+theorem localNormalizedAudit
+    (part : audit.FLLabelTorsorAveragedInd12Audit label) :
+    audit.ProcessionNormalizedInd12Audit :=
+  part.averaged_audit.localNormalizedAudit
+
+theorem ind1AverageLogVolumeEq
+    (part : audit.FLLabelTorsorAveragedInd12Audit label)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    (part.averaged_audit.averagedLogVolume audited₁).averageLogVolume =
+      (part.averaged_audit.averagedLogVolume audited₂).averageLogVolume :=
+  part.averaged_audit.ind1AverageLogVolumeEq hstep
+
+theorem ind2AverageLogVolumeEq
+    (part : audit.FLLabelTorsorAveragedInd12Audit label)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    (part.averaged_audit.averagedLogVolume audited₁).averageLogVolume =
+      (part.averaged_audit.averagedLogVolume audited₂).averageLogVolume :=
+  part.averaged_audit.ind2AverageLogVolumeEq hstep
+
+end FLLabelTorsorAveragedInd12Audit
 
 end LogVolumeChartAudit
 
