@@ -640,6 +640,7 @@ structure ProcessionContainerExperimentReport where
   monoAnalyticTensorPacketForgettingAvailable : Bool
   determinantTensorPowerNormalizationAvailable : Bool
   hullDetUpperRayComparisonAvailable : Bool
+  qPilotTwoComputationComparisonAvailable : Bool
 deriving Repr
 
 /--
@@ -665,7 +666,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     kummerFTensorPacketToDTransferAvailable := true,
     monoAnalyticTensorPacketForgettingAvailable := true,
     determinantTensorPowerNormalizationAvailable := true,
-    hullDetUpperRayComparisonAvailable := true }
+    hullDetUpperRayComparisonAvailable := true,
+    qPilotTwoComputationComparisonAvailable := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -909,6 +911,21 @@ theorem hullDetUpperRay_qPilot_le_determinant
     data.qPilotLogVolume <= data.determinant.determinantLogVolume :=
   data.qPilotLogVolume_le_determinant
 
+theorem qPilotTwoComputation_input_eq_output
+    (data : IUTStage1QPilotTwoComputationLogVolume) :
+    data.inputPrimeStripLogVolume = data.outputHullLogVolume :=
+  data.input_eq_output
+
+theorem qPilotTwoComputation_input_le_theta
+    (data : IUTStage1QPilotTwoComputationLogVolume) :
+    data.inputPrimeStripLogVolume <= data.upperRayData.thetaHullLogVolume :=
+  data.input_le_thetaHullLogVolume
+
+theorem qPilotTwoComputation_output_le_theta
+    (data : IUTStage1QPilotTwoComputationLogVolume) :
+    data.outputHullLogVolume <= data.upperRayData.thetaHullLogVolume :=
+  data.output_le_thetaHullLogVolume
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
@@ -1147,6 +1164,7 @@ structure Corollary312DisputeFirstPassReport where
   monoAnalyticTensorPacketForgettingAvailable : Bool
   determinantTensorPowerNormalizationAvailable : Bool
   hullDetUpperRayComparisonAvailable : Bool
+  qPilotTwoComputationComparisonAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1186,6 +1204,7 @@ def corollary312DisputeFirstPassReport :
     monoAnalyticTensorPacketForgettingAvailable := true,
     determinantTensorPowerNormalizationAvailable := true,
     hullDetUpperRayComparisonAvailable := true,
+    qPilotTwoComputationComparisonAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1301,6 +1320,11 @@ theorem corollary312Report_determinantTensorPowerNormalizationAvailable :
 
 theorem corollary312Report_hullDetUpperRayComparisonAvailable :
     corollary312DisputeFirstPassReport.hullDetUpperRayComparisonAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_qPilotTwoComputationComparisonAvailable :
+    corollary312DisputeFirstPassReport.qPilotTwoComputationComparisonAvailable =
       true :=
   rfl
 

@@ -1598,6 +1598,51 @@ theorem qPilotLogVolume_le_determinant
 
 end IUTStage1HullDetPilotUpperRayLogVolume
 
+/--
+Step (xi-g) tautological two-computation view of the q-pilot log-volume.
+
+After Step (xi-f), the same q-pilot log-volume is read from the input
+prime-strip side and from the hull/log-volume output side.  The equality is
+recorded explicitly so that this passage is not represented as an untracked
+identification of histories or real-line copies.
+-/
+structure IUTStage1QPilotTwoComputationLogVolume where
+  upperRayData : IUTStage1HullDetPilotUpperRayLogVolume
+  inputPrimeStripLogVolume : Real
+  outputHullLogVolume : Real
+  input_eq_q :
+    inputPrimeStripLogVolume = upperRayData.qPilotLogVolume
+  output_eq_q :
+    outputHullLogVolume = upperRayData.qPilotLogVolume
+
+namespace IUTStage1QPilotTwoComputationLogVolume
+
+theorem input_eq_output
+    (data : IUTStage1QPilotTwoComputationLogVolume) :
+    data.inputPrimeStripLogVolume = data.outputHullLogVolume :=
+  data.input_eq_q.trans data.output_eq_q.symm
+
+theorem input_le_thetaHullLogVolume
+    (data : IUTStage1QPilotTwoComputationLogVolume) :
+    data.inputPrimeStripLogVolume <= data.upperRayData.thetaHullLogVolume := by
+  rw [data.input_eq_q]
+  exact data.upperRayData.qPilotLogVolume_le_thetaHullLogVolume
+
+theorem output_le_thetaHullLogVolume
+    (data : IUTStage1QPilotTwoComputationLogVolume) :
+    data.outputHullLogVolume <= data.upperRayData.thetaHullLogVolume := by
+  rw [data.output_eq_q]
+  exact data.upperRayData.qPilotLogVolume_le_thetaHullLogVolume
+
+theorem input_le_determinant
+    (data : IUTStage1QPilotTwoComputationLogVolume) :
+    data.inputPrimeStripLogVolume <=
+      data.upperRayData.determinant.determinantLogVolume := by
+  rw [data.input_eq_q]
+  exact data.upperRayData.qPilotLogVolume_le_determinant
+
+end IUTStage1QPilotTwoComputationLogVolume
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}
