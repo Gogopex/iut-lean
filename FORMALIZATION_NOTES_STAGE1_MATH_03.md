@@ -1321,3 +1321,53 @@ log-volume-to-local-object equalities.  The next step should investigate whether
 those equalities can be derived from packet-normalized equalities plus direct
 normalization, or whether they need a separate Hodge-theater/local-object
 construction.
+
+## 125. Direct Packet-Normalized Route Produces the Insulated Bridge
+
+### Lean Move
+
+I added:
+
+```text
+FLZModCuspLabelThetaDirectPacketNormalizedLocalObjectRouteAudit
+  .toInsulatedCuspZeroPacketBridgeAudit
+FLZModCuspLabelThetaDirectPacketNormalizedLocalObjectRouteAudit
+  .toClassifiedInsulatedCuspZeroPacketBridgeAudit
+FLZModCuspLabelThetaDirectPacketNormalizedLocalObjectRouteAudit
+  .insulatedPacketBridgeSource_eq_direct
+```
+
+### Mathematical Reason
+
+This lowers the bridge source one step.  Instead of assuming directly that
+cusp/zero log-volumes are the packet local-object finite log-volume, this route
+starts from:
+
+```text
+cusp/zero log-volumes = packet-normalized capsule-family log-volume
+direct packet normalization identifies packet-normalized value with local object
+```
+
+Lean composes those facts to produce the same insulated-to-packet bridge.
+
+### Trap Avoided
+
+The zero/nonzero collapse is still not free.  It now comes from packet-normalized
+identifications plus direct normalization.  This is closer to the actual
+Corollary 3.12 pressure point: where are the packet-normalized real values
+allowed to be compared with finite local objects?
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_direct_packet_normalized_to_insulated_bridge_example
+placeAudited_logVolume_fl_zmod_direct_packet_normalized_insulated_bridge_source_example
+```
+
+### Remaining Gap
+
+The next step should push one level further back to the `ZMod` packet-normalized
+route, where the equalities are stated labelwise over `ZMod l.value` before
+being converted into cusp-class and zero log-volume equalities.
