@@ -2168,3 +2168,68 @@ placeAudited_logVolume_fl_zmod_source_marked_packet_descent_example
 The source-marked objects are still abstract.  Next we should connect the
 Hodge-Arakelov cusp-class source objects to the existing `ZMod l` sign-label
 model and the local lab/cusp data already formalized in `InitialThetaData`.
+
+## 138. ZMod Label Provenance for Hodge-Arakelov Cusp Sources
+
+### Lean Move
+
+I added:
+
+```text
+IUTStage1ZModCuspClassHodgeArakelovLocalObjectData
+IUTStage1ZModSourceMarkedHodgeDescentCuspZeroLocalObjectOperationData
+FLZModCuspLabelThetaZModSourceMarkedHodgeDescentPacketTransportAudit
+```
+
+The cusp-class source object now carries:
+
+```text
+source Hodge-Arakelov local object data
+canonical ZMod cusp-label model
+coordinate : ZMod l.value
+coordinate_ne_zero : coordinate ≠ 0
+label = zmodSignLabelFromCoordinate l coordinate coordinate_ne_zero
+```
+
+The packet transport audit with `ZMod` source data derives the previous
+source-marked audit.
+
+### Mathematical Reason
+
+IUT III repeatedly emphasizes the distinct `F_l` labels and the
+Hodge-Arakelov-theoretic evaluation attached to those labels.  Our previous
+source-marked layer named the cusp-class role, but did not yet require an
+explicit nonzero `F_l`/`ZMod l` coordinate for the cusp-class label.
+
+The new layer forces that coordinate to be present.  Since the cusp-class label
+lives in the sign quotient of nonzero labels, the nonzero proof is also part of
+the data.
+
+### Trap Avoided
+
+This prevents a cusp-class source object from being an anonymous sign-label
+class disconnected from the `ZMod l` model.  A future proof must now state which
+nonzero label coordinate represents the cusp-class source, modulo sign.
+
+That is relevant to the Scholze-Stix pressure point: if the label data is
+discarded too early, the comparison can collapse into a constant or identity
+route.  This layer keeps the label coordinate visible all the way into the
+Hodge-descent transport obligation.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_zmod_source_marked_to_source_marked_example
+placeAudited_logVolume_fl_zmod_zmod_source_marked_label_coordinate_example
+placeAudited_logVolume_fl_zmod_zmod_source_marked_coordinate_ne_zero_example
+placeAudited_logVolume_fl_zmod_zmod_source_marked_zero_to_cusp_example
+```
+
+### Remaining Gap
+
+The `ZMod` coordinate is now explicit, but it is still supplied as data for each
+sign-label class.  The next step should expose canonical and sign-invariant
+special cases: in particular, the canonical class represented by `1`, and the
+fact that `-j` represents the same sign-label source as `j`.
