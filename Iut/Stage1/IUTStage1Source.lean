@@ -1248,6 +1248,133 @@ theorem reindex_normalizedLogVolume_eq
 
 end IUTStage1ProcessionFiberTensorPacketLogVolume
 
+/--
+Finite product, over base valuations `v_Q`, of procession tensor-packet
+log-volumes.
+
+IUT III forms products over `v_Q ∈ V_Q` of the tensor-packet portions at `v_Q`.
+At the current finite log-volume level, product log-volume is represented as a
+sum of the log-volumes of the base-valuation packet factors.
+-/
+structure IUTStage1BaseValuationTensorPacketProductLogVolume
+    (kind : IUTStage1PlaceKind) (j : Nat) where
+  baseCount : Nat
+  basePlace : Fin baseCount -> IUTStage1BasePlaceId kind
+  packet :
+    Fin baseCount -> IUTStage1ProcessionFiberTensorPacketLogVolume kind j
+  packet_basePlace_eq :
+    ∀ (base : Fin baseCount) (label : IUTStage1ProcessionContainer j),
+      ((packet base).directSum label).fiber.basePlace = basePlace base
+  productLogVolume : Real
+  product_eq_sum :
+    productLogVolume =
+      Finset.univ.sum fun base : Fin baseCount =>
+        (packet base).tensorPacketLogVolume
+
+namespace IUTStage1BaseValuationTensorPacketProductLogVolume
+
+variable {kind : IUTStage1PlaceKind} {j : Nat}
+
+theorem packet_directSum_basePlace_eq
+    (product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j)
+    (base : Fin product.baseCount)
+    (label : IUTStage1ProcessionContainer j) :
+    ((product.packet base).directSum label).fiber.basePlace =
+      product.basePlace base :=
+  product.packet_basePlace_eq base label
+
+theorem productLogVolume_eq_nested_sum
+    (product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j) :
+    product.productLogVolume =
+      Finset.univ.sum fun base : Fin product.baseCount =>
+        Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+          ((product.packet base).directSum label).directSumLogVolume := by
+  calc
+    product.productLogVolume =
+        Finset.univ.sum fun base : Fin product.baseCount =>
+          (product.packet base).tensorPacketLogVolume :=
+      product.product_eq_sum
+    _ =
+        Finset.univ.sum fun base : Fin product.baseCount =>
+          Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+            ((product.packet base).directSum label).directSumLogVolume := by
+      apply Finset.sum_congr rfl
+      intro base _hbase
+      exact (product.packet base).tensor_packet_eq_sum
+
+end IUTStage1BaseValuationTensorPacketProductLogVolume
+
+/--
+Log-volume shadow of the action of the labeled copies `(F_mod^×)_j`.
+
+The paper describes copies of the multiplicative monoid of nonzero elements of
+`F_mod`, labeled by `j`, acting on the product over `v_Q` of tensor-packet
+portions.  The present record stores only the finite log-volume effect: for each
+base valuation and each procession label, the action adds the log-volume of the
+corresponding labeled `F_mod^×` copy.
+-/
+structure IUTStage1FmodUnitCopyTensorPacketProductAction
+    (kind : IUTStage1PlaceKind) (j : Nat) where
+  product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j
+  unitCopyLogVolume : IUTStage1ProcessionContainer j -> Real
+  actedFactorLogVolume :
+    Fin product.baseCount -> IUTStage1ProcessionContainer j -> Real
+  acted_factor_eq :
+    ∀ (base : Fin product.baseCount) (label : IUTStage1ProcessionContainer j),
+      actedFactorLogVolume base label =
+        ((product.packet base).directSum label).directSumLogVolume +
+          unitCopyLogVolume label
+  actedProductLogVolume : Real
+  acted_product_eq_sum :
+    actedProductLogVolume =
+      Finset.univ.sum fun base : Fin product.baseCount =>
+        Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+          actedFactorLogVolume base label
+
+namespace IUTStage1FmodUnitCopyTensorPacketProductAction
+
+variable {kind : IUTStage1PlaceKind} {j : Nat}
+
+theorem actedProductLogVolume_eq_original_plus_unitCopies
+    (action : IUTStage1FmodUnitCopyTensorPacketProductAction kind j) :
+    action.actedProductLogVolume =
+      action.product.productLogVolume +
+        Finset.univ.sum fun _base : Fin action.product.baseCount =>
+          Finset.univ.sum action.unitCopyLogVolume := by
+  calc
+    action.actedProductLogVolume =
+        Finset.univ.sum fun base : Fin action.product.baseCount =>
+          Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+            action.actedFactorLogVolume base label :=
+      action.acted_product_eq_sum
+    _ =
+        Finset.univ.sum fun base : Fin action.product.baseCount =>
+          Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+            ((action.product.packet base).directSum label).directSumLogVolume +
+              action.unitCopyLogVolume label := by
+      apply Finset.sum_congr rfl
+      intro base _hbase
+      apply Finset.sum_congr rfl
+      intro label _hlabel
+      exact action.acted_factor_eq base label
+    _ =
+        (Finset.univ.sum fun base : Fin action.product.baseCount =>
+          Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+            ((action.product.packet base).directSum label).directSumLogVolume) +
+        Finset.univ.sum fun _base : Fin action.product.baseCount =>
+          Finset.univ.sum action.unitCopyLogVolume := by
+      rw [← Finset.sum_add_distrib]
+      apply Finset.sum_congr rfl
+      intro base _hbase
+      rw [Finset.sum_add_distrib]
+    _ =
+        action.product.productLogVolume +
+        Finset.univ.sum fun _base : Fin action.product.baseCount =>
+          Finset.univ.sum action.unitCopyLogVolume := by
+      rw [action.product.productLogVolume_eq_nested_sum]
+
+end IUTStage1FmodUnitCopyTensorPacketProductAction
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}

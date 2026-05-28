@@ -634,6 +634,8 @@ structure ProcessionContainerExperimentReport where
   fiberTensorPacketNormalizationAvailable : Bool
   lgpSplittingMonoidActionAvailable : Bool
   lgpSplittingMonoidAddsGaussianGenerators : Bool
+  baseValuationPacketProductAvailable : Bool
+  fmodUnitCopyProductActionAvailable : Bool
 deriving Repr
 
 /--
@@ -653,7 +655,9 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     valuationFiberDirectSumAvailable := true,
     fiberTensorPacketNormalizationAvailable := true,
     lgpSplittingMonoidActionAvailable := true,
-    lgpSplittingMonoidAddsGaussianGenerators := true }
+    lgpSplittingMonoidAddsGaussianGenerators := true,
+    baseValuationPacketProductAvailable := true,
+    fmodUnitCopyProductActionAvailable := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -806,6 +810,33 @@ theorem lgpSplittingMonoid_normalizedActed_eq_original_plus_generators_over_card
               (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
                 Real) :=
   action.normalizedActedLogVolume_eq_original_plus_generators_over_card
+
+theorem baseValuationTensorPacketProduct_eq_nested_sum
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    (product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j) :
+    product.productLogVolume =
+      Finset.univ.sum fun base : Fin product.baseCount =>
+        Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+          ((product.packet base).directSum label).directSumLogVolume :=
+  product.productLogVolume_eq_nested_sum
+
+theorem baseValuationTensorPacketProduct_directSum_basePlace_eq
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    (product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j)
+    (base : Fin product.baseCount)
+    (label : IUTStage1ProcessionContainer j) :
+    ((product.packet base).directSum label).fiber.basePlace =
+      product.basePlace base :=
+  product.packet_directSum_basePlace_eq base label
+
+theorem fmodUnitCopyProductAction_eq_original_plus_unitCopies
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    (action : IUTStage1FmodUnitCopyTensorPacketProductAction kind j) :
+    action.actedProductLogVolume =
+      action.product.productLogVolume +
+        Finset.univ.sum fun _base : Fin action.product.baseCount =>
+          Finset.univ.sum action.unitCopyLogVolume :=
+  action.actedProductLogVolume_eq_original_plus_unitCopies
 
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
@@ -1039,6 +1070,8 @@ structure Corollary312DisputeFirstPassReport where
   processionFiberTensorPacketAvailable : Bool
   lgpSplittingMonoidActionAvailable : Bool
   lgpSplittingMonoidAddsGaussianGenerators : Bool
+  baseValuationPacketProductAvailable : Bool
+  fmodUnitCopyProductActionAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1072,6 +1105,8 @@ def corollary312DisputeFirstPassReport :
     processionFiberTensorPacketAvailable := true,
     lgpSplittingMonoidActionAvailable := true,
     lgpSplittingMonoidAddsGaussianGenerators := true,
+    baseValuationPacketProductAvailable := true,
+    fmodUnitCopyProductActionAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1157,6 +1192,16 @@ theorem corollary312Report_lgpSplittingMonoidActionAvailable :
 
 theorem corollary312Report_lgpSplittingMonoidAddsGaussianGenerators :
     corollary312DisputeFirstPassReport.lgpSplittingMonoidAddsGaussianGenerators =
+      true :=
+  rfl
+
+theorem corollary312Report_baseValuationPacketProductAvailable :
+    corollary312DisputeFirstPassReport.baseValuationPacketProductAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_fmodUnitCopyProductActionAvailable :
+    corollary312DisputeFirstPassReport.fmodUnitCopyProductActionAvailable =
       true :=
   rfl
 

@@ -143,6 +143,10 @@ The code currently covers:
   each factor a finite-fiber direct sum over places above \(v_\mathbb{Q}\), total
   log-volume given by the finite sum over the container, normalized denominator
   \(j+1\), and invariance under container permutations;
+\item the product over base valuations \(v_\mathbb{Q}\) of such tensor packets,
+  with each direct-sum factor audited against its base place, and a log-volume
+  shadow of the labeled \((F_{\mathrm{mod}}^\times)_j\)-action adding one unit
+  contribution for each base-valuation factor;
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -171,7 +175,8 @@ Here the route flags are ordered real-line, nonarchimedean entry, and factored
 SHE availability.  The obstruction flags are raw-cancellation failure,
 label-independent \(j^2\) failure, and sign-quotient representative descent
 failure.  The Gaussian/procession flags include the finite-fiber direct-sum
-packet layer and the finite splitting-monoid action shadow.
+packet layer, finite splitting-monoid action shadow, and finite
+\((F_{\mathrm{mod}}^\times)_j\)-action shadow over base-valuation products.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -220,8 +225,8 @@ The present code does not yet formalize:
   \(\Theta\)-links;
 \item the Hodge--Arakelov theta evaluation and Gaussian monoids of IUT II;
 \item the construction of the actual IUT II theta values, Gaussian monoids,
-  splitting monoids, and Frobenioids behind the present degree/log-volume
-  shadows;
+  splitting monoids, \(F_{\mathrm{mod}}^\times\)-actions, and Frobenioids behind
+  the present degree/log-volume shadows;
 \item the actual construction of log-shells and tensor packets attached to
   mono-analytic prime-strips in IUT III, Theorem 3.11;
 \item the genuine holomorphic hull and determinant operations of Step (xi);
