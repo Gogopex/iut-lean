@@ -5344,9 +5344,27 @@ def placeAudited_logVolume_fl_zmod_hodge_descent_bridge_from_she_example
     {l : PrimeGeFive}
     (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
     (part :
-      audit.FLZModCuspLabelThetaClassifiedInsulatedCuspZeroPacketBridgeAudit l) :
+      audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l) :
     audit.FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit l :=
   ofStructuredInputsWithSHE bundle part
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit in
+theorem placeAudited_logVolume_fl_zmod_hodge_descent_bridge_from_she_source_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (part :
+      audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l) :
+    (ofStructuredInputsWithSHE bundle part).classified_bridge.bridge_source =
+      IUTStage1ZModPacketLocalObjectBridgeSource.hodgeTheaterDescentPacketTransport :=
+  ofStructuredInputsWithSHE_bridgeSource_eq_hodgeTheaterDescent bundle part
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
   FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit in
@@ -5361,7 +5379,7 @@ theorem placeAudited_logVolume_fl_zmod_hodge_descent_bridge_from_she_history_exa
     {l : PrimeGeFive}
     (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
     (part :
-      audit.FLZModCuspLabelThetaClassifiedInsulatedCuspZeroPacketBridgeAudit l) :
+      audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l) :
     let hodgePart := ofStructuredInputsWithSHE bundle part
     hodgePart.hodge_descent_data.domainTheater.side ≠
       hodgePart.hodge_descent_data.codomainTheater.side :=

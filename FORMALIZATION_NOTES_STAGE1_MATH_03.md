@@ -1677,7 +1677,7 @@ FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit
 ```
 
 which builds the Hodge-descent wrapper from structured SHE inputs plus the still
-explicit classified insulated packet bridge.
+explicit insulated packet bridge.
 
 ### Mathematical Reason
 
@@ -1703,7 +1703,7 @@ history discipline has to be visible in the formal object.
 
 ### Trap Avoided
 
-This still does not derive the packet bridge from Hodge theory.  The classified
+This still does not derive the packet bridge from Hodge theory.  The insulated
 packet bridge remains an input.  The improvement is that a bridge may now be
 called Hodge-descent-sourced only when its Hodge metadata comes from structured
 SHE inputs, rather than from arbitrary labels.
@@ -1721,12 +1721,82 @@ unitThetaToy_source_theorem311_hodge_descent_bridge_data_example
 unitThetaToy_source_theorem311_hodge_descent_bridge_data_descent_example
 unitThetaToy_source_theorem311_hodge_descent_bridge_data_history_example
 placeAudited_logVolume_fl_zmod_hodge_descent_bridge_from_she_example
+placeAudited_logVolume_fl_zmod_hodge_descent_bridge_from_she_source_example
 placeAudited_logVolume_fl_zmod_hodge_descent_bridge_from_she_history_example
 ```
 
 ### Remaining Gap
 
 The next mathematical gap is the hard one: specify which structured SHE/HDD
-facts actually justify the classified packet bridge equalities.  At present the
+facts actually justify the packet bridge equalities.  At present the
 formalization records the correct source of the Hodge-descent data, but it does
 not yet construct the packet-local-object identifications from that source.
+
+## 132. Low-Level Source for Hodge-Descent Packet Transport
+
+### Lean Move
+
+I extended:
+
+```text
+IUTStage1ZModPacketLocalObjectBridgeSource
+```
+
+with:
+
+```text
+hodgeTheaterDescentPacketTransport
+```
+
+and strengthened:
+
+```text
+FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit
+```
+
+so that its classified packet bridge must have this low-level source.
+
+The structured-SHE constructor now takes an unclassified insulated packet bridge
+and classifies it internally as `hodgeTheaterDescentPacketTransport`.
+
+### Mathematical Reason
+
+The previous state still had a subtle drift risk: the high-level comparison
+source could say "Hodge-theater descent", while the low-level packet bridge
+could still be tagged as a direct local label/object construction, a constant
+family, or a separate identification.
+
+That is too permissive for the Corollary 3.12 dispute.  If the point of the
+route is that a Hodge-theater/descent construction preserves a distinction that
+a naive real-line identification would erase, then the local packet bridge must
+carry a Hodge-descent source at the low level too.
+
+### Trap Avoided
+
+We no longer allow the following silent mismatch:
+
+```text
+high-level source = hodgeTheaterDescentIndeterminacy
+low-level source  = directLocalLabelObjectConstruction
+```
+
+through the canonical constructor.  Manual construction of a Hodge wrapper also
+requires a proof that the classified bridge source is the Hodge-descent packet
+transport source.
+
+### Toy Check
+
+The examples now check that a bridge constructed from structured SHE has:
+
+```text
+classified_bridge.bridge_source =
+  IUTStage1ZModPacketLocalObjectBridgeSource.hodgeTheaterDescentPacketTransport
+```
+
+### Remaining Gap
+
+The source tag is now honest, but still not mathematically sufficient.  The
+next target is to make the Hodge-descent packet transport expose the actual
+zero/cusp-class-to-packet-local-object identifications as named consequences of
+structured SHE/HDD data, rather than merely as the fields of an insulated packet
+bridge.

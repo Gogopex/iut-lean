@@ -2367,6 +2367,7 @@ packet local object's finite log-volume. -/
 inductive IUTStage1ZModPacketLocalObjectBridgeSource where
   | directLocalLabelObjectConstruction
   | ind12TransportedLocalLabelObjectConstruction
+  | hodgeTheaterDescentPacketTransport
   | separateLocalObjectIdentification
 deriving DecidableEq
 
@@ -11209,6 +11210,9 @@ structure FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit
   hodge_descent_data : IUTStage1HodgeTheaterDescentBridgeData
   classified_bridge :
     audit.FLZModCuspLabelThetaClassifiedInsulatedCuspZeroPacketBridgeAudit l
+  classified_bridge_source_eq_hodge :
+    classified_bridge.bridge_source =
+      IUTStage1ZModPacketLocalObjectBridgeSource.hodgeTheaterDescentPacketTransport
 
 /--
 Packet-normalized source for the cusp-class local object estimates.
@@ -14962,11 +14966,15 @@ variable {l : PrimeGeFive}
 
 def ofStructuredInputsWithSHE
     (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
-    (classified_bridge :
-      audit.FLZModCuspLabelThetaClassifiedInsulatedCuspZeroPacketBridgeAudit l) :
+    (packet_bridge :
+      audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l) :
     audit.FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit l :=
   { hodge_descent_data := bundle.hodgeTheaterDescentBridgeData,
-    classified_bridge := classified_bridge }
+    classified_bridge :=
+      { packet_bridge := packet_bridge,
+        bridge_source :=
+          IUTStage1ZModPacketLocalObjectBridgeSource.hodgeTheaterDescentPacketTransport },
+    classified_bridge_source_eq_hodge := rfl }
 
 open FLZModCuspLabelThetaSourcedInsulatedCuspZeroPacketBridgeAudit in
 def toSourcedInsulatedCuspZeroPacketBridgeAudit
@@ -14989,22 +14997,37 @@ theorem histories_not_identified
       part.hodge_descent_data.codomainTheater.side :=
   part.hodge_descent_data.histories_not_identified
 
+theorem classifiedBridgeSource_eq_hodgeTheaterDescentPacketTransport
+    (part :
+      audit.FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit l) :
+    part.classified_bridge.bridge_source =
+      IUTStage1ZModPacketLocalObjectBridgeSource.hodgeTheaterDescentPacketTransport :=
+  part.classified_bridge_source_eq_hodge
+
 theorem ofStructuredInputsWithSHE_hodgeData_eq
     (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
-    (classified_bridge :
-      audit.FLZModCuspLabelThetaClassifiedInsulatedCuspZeroPacketBridgeAudit l) :
-    (ofStructuredInputsWithSHE bundle classified_bridge).hodge_descent_data =
+    (packet_bridge :
+      audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l) :
+    (ofStructuredInputsWithSHE bundle packet_bridge).hodge_descent_data =
       bundle.hodgeTheaterDescentBridgeData :=
+  rfl
+
+theorem ofStructuredInputsWithSHE_bridgeSource_eq_hodgeTheaterDescent
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (packet_bridge :
+      audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l) :
+    (ofStructuredInputsWithSHE bundle packet_bridge).classified_bridge.bridge_source =
+      IUTStage1ZModPacketLocalObjectBridgeSource.hodgeTheaterDescentPacketTransport :=
   rfl
 
 theorem ofStructuredInputsWithSHE_histories_not_identified
     (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
-    (classified_bridge :
-      audit.FLZModCuspLabelThetaClassifiedInsulatedCuspZeroPacketBridgeAudit l) :
-    let part := ofStructuredInputsWithSHE bundle classified_bridge
+    (packet_bridge :
+      audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l) :
+    let part := ofStructuredInputsWithSHE bundle packet_bridge
     part.hodge_descent_data.domainTheater.side ≠
       part.hodge_descent_data.codomainTheater.side :=
-  (ofStructuredInputsWithSHE bundle classified_bridge).histories_not_identified
+  (ofStructuredInputsWithSHE bundle packet_bridge).histories_not_identified
 
 theorem targetSigned_le_thetaSourceAverage
     (part :
