@@ -5224,3 +5224,68 @@ archimedeanOrderTwoStep_transports_capsule_container_example
 The next step should lift this from direct-summand packet choices to
 `IUTStage1PlaceAuditedDirectSummandPacketChoice`, the type used by the
 place-audited multiradial Theta endpoint.
+
+## 66. Place-Audited `(Ind2)` Transport of Capsule Container Bounds
+
+### Goal
+
+We lifted the direct-summand `(Ind2)` transport theorem to the
+place-audited choice type used by the multiradial Theta endpoint.
+
+### Lean Move
+
+For:
+
+```text
+IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+```
+
+Lean now proves:
+
+```text
+ind2_transports_capsuleContainerBound
+```
+
+The audited nonarchimedean and archimedean instances also inherit the theorem:
+
+```text
+nonarchimedeanIsm_transports_capsuleContainerBound
+archimedeanOrderTwo_transports_capsuleContainerBound
+```
+
+### Mathematical Point
+
+The preservation chain now reaches the same audited choice type that indexes
+the place-audited Theta-pilot image family:
+
+```text
+place-audited source choice
+  -> capsule-entry container estimates
+  -> audited `(Ind2)` direct-summand action step
+  -> place-audited target choice normalized capsule bound
+```
+
+This matters because the final Theta-source average is indexed by
+`IUTStage1PlaceAuditedDirectSummandPacketChoice`.
+
+### Trap Avoided
+
+The place-family compatibility audit is preserved by the audited step, while
+the capsule-bound transport is still delegated to the underlying choice-level
+direct-summand action.  These two responsibilities remain separate.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAuditedInd2Step_transports_capsule_container_example
+placeAuditedNonarchimedeanStep_transports_capsule_container_example
+placeAuditedArchimedeanStep_transports_capsule_container_example
+```
+
+### Remaining Gap
+
+The next step should connect this transported capsule-bound data to the
+`FLZModCuspLabelThetaPacketNormalizedContainerAudit`, so the high-level
+q-to-Theta average route can explicitly use place-audited `(Ind2)` transport.

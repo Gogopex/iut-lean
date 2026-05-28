@@ -4107,6 +4107,20 @@ theorem ind2_preserves_capsuleNormalizedLogVolume
   IUTStage1DirectSummandPacketTheorem311Choice.ind2_preserves_capsuleNormalizedLogVolume
     hstep.choice_step
 
+theorem ind2_transports_capsuleContainerBound
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : LocalTensorDirectSummandActionStep audited₁ audited₂)
+    {targetSigned : Real}
+    (estimate :
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        targetSigned
+        audited₁.choice.local_tensor_state.packetState.capsuleFamily) :
+    targetSigned <=
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  IUTStage1DirectSummandPacketTheorem311Choice.ind2_transports_capsuleContainerBound
+    hstep.choice_step estimate
+
 /--
 Audited nonarchimedean `Ism` instance of the direct-summand `(Ind2)` step.
 -/
@@ -4200,6 +4214,36 @@ theorem archimedeanOrderTwo_preserves_capsuleTotalLogVolume
       audited₂.choice.local_tensor_state.packetState.capsuleFamily.totalLogVolume :=
   ind2_preserves_capsuleTotalLogVolume
     (archimedeanOrderTwo_toDirectSummandActionStep hstep)
+
+theorem nonarchimedeanIsm_transports_capsuleContainerBound
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (hstep : NonarchimedeanIsmInd2Step audited₁ audited₂)
+    {targetSigned : Real}
+    (estimate :
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        targetSigned
+        audited₁.choice.local_tensor_state.packetState.capsuleFamily) :
+    targetSigned <=
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  ind2_transports_capsuleContainerBound
+    (nonarchimedeanIsm_toDirectSummandActionStep hstep) estimate
+
+theorem archimedeanOrderTwo_transports_capsuleContainerBound
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (hstep : ArchimedeanOrderTwoInd2Step audited₁ audited₂)
+    {targetSigned : Real}
+    (estimate :
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        targetSigned
+        audited₁.choice.local_tensor_state.packetState.capsuleFamily) :
+    targetSigned <=
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  ind2_transports_capsuleContainerBound
+    (archimedeanOrderTwo_toDirectSummandActionStep hstep) estimate
 
 /--
 Audited nonarchimedean `Ism` step tied to an entry in the `(Ind2)`
