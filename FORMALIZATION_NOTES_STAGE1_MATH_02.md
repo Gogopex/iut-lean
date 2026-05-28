@@ -3784,3 +3784,80 @@ existing `LogVolumeChartAudit` endpoint and `(Ind3)` upper-inequality part.  In
 particular, we should make clear whether the q-to-average comparison is a new
 source obligation or a theorem derivable from the already audited q/target/Theta
 charted comparison chain.
+
+## 50. Final Comparison Alignment
+
+### Goal
+
+We aligned the q-to-Theta average route with the existing chart audit endpoint
+and the `(Ind3)` upper-inequality part.
+
+### Lean/API Check
+
+The new endpoint-level wrapper is:
+
+```text
+FLZModCuspLabelFinalComparisonAudit
+```
+
+It carries:
+
+```text
+q_theta_comparison : FLZModCuspLabelQThetaComparisonAudit l
+ind3_upper_part : Ind3UpperInequalityPart
+```
+
+Lean exposes:
+
+```text
+qSigned_le_thetaSigned_from_average
+qSigned_le_thetaSigned_from_chart
+corollary312FromAverage
+corollary312FromChart
+ind3TargetSigned_le_thetaSigned
+determinantVolumeBound
+averageLogVolume_le_thetaSigned
+```
+
+### Mathematical Point
+
+There are now two visible routes to the final signed comparison:
+
+```text
+average route:
+qSigned <= thetaSourceAverage = label average <= thetaSigned
+
+chart route:
+LogVolumeChartAudit.qSigned_le_thetaSigned
+```
+
+The wrapper does not identify these proof routes.  It places them next to each
+other so later work can decide whether the q-to-average comparison is an
+independent source obligation or should be derived from the existing
+q/target/Theta charted chain and `(Ind3)` upper semi-compatibility.
+
+### Trap Avoided
+
+We did not reuse the existing `audit.corollary312Endpoint` to justify the new
+average route.  `corollary312FromAverage` is built from
+`qSigned_le_thetaSigned_from_average`, while `corollary312FromChart` is the
+pre-existing endpoint.  This keeps the debated comparison mechanism inspectable.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_final_average_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_final_chart_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_final_cor312_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_final_ind3_example
+```
+
+### Remaining Gap
+
+The next refinement should try to reduce the q-to-average comparison obligation
+against the already available charted q/target/Theta comparison data.  If that
+reduction cannot be made without adding a new hypothesis, that gap is
+mathematically significant and should be recorded as a candidate pressure point
+near the Theorem 3.11 to Corollary 3.12 transition.

@@ -3723,6 +3723,63 @@ theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_q_le_theta_ex
     package.preLedger.qSigned <= package.preLedger.thetaSigned :=
   part.qSigned_le_thetaSigned_via_average audited
 
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_final_average_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.qSigned_le_thetaSigned_from_average audited
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_final_chart_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.qSigned_le_thetaSigned_from_chart
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_final_cor312_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  part.corollary312FromAverage audited
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_final_ind3_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l) :
+    package.preLedger.targetVolume.targetSigned <=
+      package.preLedger.thetaSigned :=
+  part.ind3TargetSigned_le_thetaSigned
+
 theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind3_target_le_theta_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

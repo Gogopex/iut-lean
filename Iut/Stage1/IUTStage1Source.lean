@@ -9628,6 +9628,18 @@ structure FLZModCuspLabelQThetaComparisonAudit
     ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
       qSourceLogVolume <= theta_source.thetaSourceAverage audited
 
+/--
+Final comparison alignment for the cusp-compatible label-average route.
+
+This packages the q-to-Theta-average comparison together with the existing
+`(Ind3)` upper-inequality part of the chart audit.
+-/
+structure FLZModCuspLabelFinalComparisonAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  q_theta_comparison : audit.FLZModCuspLabelQThetaComparisonAudit l
+  ind3_upper_part : audit.Ind3UpperInequalityPart
+
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord =
@@ -10130,6 +10142,66 @@ theorem ind2AverageLogVolumeEq
   part.theta_source.ind2AverageLogVolumeEq hstep
 
 end FLZModCuspLabelQThetaComparisonAudit
+
+namespace FLZModCuspLabelFinalComparisonAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+theorem qSigned_le_thetaSigned_from_average
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.q_theta_comparison.qSigned_le_thetaSigned_via_average audited
+
+theorem qSigned_le_thetaSigned_from_chart
+    (_part : audit.FLZModCuspLabelFinalComparisonAudit l) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  audit.qSigned_le_thetaSigned
+
+theorem corollary312FromAverage
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  corollary312_of_signed_le
+    (part.qSigned_le_thetaSigned_from_average audited)
+
+theorem corollary312FromChart
+    (_part : audit.FLZModCuspLabelFinalComparisonAudit l) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  audit.corollary312Endpoint
+
+theorem ind3TargetSigned_le_thetaSigned
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l) :
+    package.preLedger.targetVolume.targetSigned <=
+      package.preLedger.thetaSigned :=
+  part.ind3_upper_part.targetSigned_le_thetaSigned
+
+theorem determinantVolumeBound
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l) :
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+      package.preLedger.thetaSigned :=
+  part.ind3_upper_part.determinantVolumeBound
+
+def averagedAudit
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l) :
+    audit.LabelAveragedInd12Audit (ZMod l.value) :=
+  part.q_theta_comparison.theta_source.compatible_average.zmod_cusp_audit.averaged_audit
+
+theorem averageLogVolume_le_thetaSigned
+    (part : audit.FLZModCuspLabelFinalComparisonAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    ((part.averagedAudit).averagedLogVolume audited).averageLogVolume <=
+      package.preLedger.thetaSigned :=
+  part.q_theta_comparison.averageLogVolume_le_thetaSigned audited
+
+end FLZModCuspLabelFinalComparisonAudit
 
 end LogVolumeChartAudit
 
