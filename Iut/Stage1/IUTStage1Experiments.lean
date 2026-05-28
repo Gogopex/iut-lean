@@ -627,6 +627,7 @@ structure ProcessionContainerExperimentReport where
   coreLabelStableUnderInclusion : Bool
   stageIndeterminacyBoundedByFullContainer : Bool
   tensorPacketLogVolumeNormalizationAvailable : Bool
+  tensorPacketPermutationInvariant : Bool
 deriving Repr
 
 /--
@@ -639,7 +640,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     nestedInclusionInjective := true,
     coreLabelStableUnderInclusion := true,
     stageIndeterminacyBoundedByFullContainer := true,
-    tensorPacketLogVolumeNormalizationAvailable := true }
+    tensorPacketLogVolumeNormalizationAvailable := true,
+    tensorPacketPermutationInvariant := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -683,6 +685,16 @@ theorem processionTensorPacket_const_le_normalized
         c <= (packet.logShellDirectSum label).finiteLogVolume) :
     c <= packet.normalizedLogVolume :=
   packet.const_le_normalizedLogVolume_of_forall_le hlabel
+
+theorem processionTensorPacket_reindex_preserves_normalized
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    (packet : IUTStage1ProcessionTensorPacketLogVolume kind j)
+    (perm :
+      IUTStage1ProcessionContainer j ≃
+        IUTStage1ProcessionContainer j) :
+    (packet.reindex perm).normalizedLogVolume =
+      packet.normalizedLogVolume :=
+  packet.reindex_normalizedLogVolume_eq perm
 
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
@@ -909,6 +921,7 @@ structure Corollary312DisputeFirstPassReport where
   gaussianDegreeEvaluationTheoremAvailable : Bool
   processionContainerSkeletonAvailable : Bool
   processionTensorPacketLogVolumeAvailable : Bool
+  processionTensorPacketPermutationInvariant : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -935,6 +948,7 @@ def corollary312DisputeFirstPassReport :
     gaussianDegreeEvaluationTheoremAvailable := true,
     processionContainerSkeletonAvailable := true,
     processionTensorPacketLogVolumeAvailable := true,
+    processionTensorPacketPermutationInvariant := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -985,6 +999,11 @@ theorem corollary312Report_processionContainerSkeletonAvailable :
 
 theorem corollary312Report_processionTensorPacketLogVolumeAvailable :
     corollary312DisputeFirstPassReport.processionTensorPacketLogVolumeAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_processionTensorPacketPermutationInvariant :
+    corollary312DisputeFirstPassReport.processionTensorPacketPermutationInvariant =
       true :=
   rfl
 

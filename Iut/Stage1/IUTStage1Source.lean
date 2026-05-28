@@ -1962,6 +1962,56 @@ theorem const_le_normalizedLogVolume_of_forall_le
     IUTStage1LabelAveragedProcessionLogVolume.const_le_average_of_forall_le
       averaged hlabel
 
+def reindex
+    (data : IUTStage1ProcessionTensorPacketLogVolume kind j)
+    (perm :
+      IUTStage1ProcessionContainer j ≃
+        IUTStage1ProcessionContainer j) :
+    IUTStage1ProcessionTensorPacketLogVolume kind j :=
+  { logShellDirectSum := fun label => data.logShellDirectSum (perm label),
+    tensorPacketLogVolume := data.tensorPacketLogVolume,
+    tensor_packet_eq_sum := by
+      have hsum :
+          (Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+            (data.logShellDirectSum (perm label)).finiteLogVolume) =
+            Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+              (data.logShellDirectSum label).finiteLogVolume :=
+        Fintype.sum_equiv perm
+          (fun label : IUTStage1ProcessionContainer j =>
+            (data.logShellDirectSum (perm label)).finiteLogVolume)
+          (fun label : IUTStage1ProcessionContainer j =>
+            (data.logShellDirectSum label).finiteLogVolume)
+          (fun _label => rfl)
+      calc
+        data.tensorPacketLogVolume =
+            Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+              (data.logShellDirectSum label).finiteLogVolume :=
+          data.tensor_packet_eq_sum
+        _ =
+            Finset.univ.sum fun label : IUTStage1ProcessionContainer j =>
+              (data.logShellDirectSum (perm label)).finiteLogVolume :=
+          hsum.symm,
+    normalizedLogVolume := data.normalizedLogVolume,
+    normalized_eq_average := data.normalized_eq_average }
+
+theorem reindex_tensorPacketLogVolume_eq
+    (data : IUTStage1ProcessionTensorPacketLogVolume kind j)
+    (perm :
+      IUTStage1ProcessionContainer j ≃
+        IUTStage1ProcessionContainer j) :
+    (data.reindex perm).tensorPacketLogVolume =
+      data.tensorPacketLogVolume :=
+  rfl
+
+theorem reindex_normalizedLogVolume_eq
+    (data : IUTStage1ProcessionTensorPacketLogVolume kind j)
+    (perm :
+      IUTStage1ProcessionContainer j ≃
+        IUTStage1ProcessionContainer j) :
+    (data.reindex perm).normalizedLogVolume =
+      data.normalizedLogVolume :=
+  rfl
+
 end IUTStage1ProcessionTensorPacketLogVolume
 
 namespace IUTStage1WeightedLabelAveragedProcessionLogVolume
