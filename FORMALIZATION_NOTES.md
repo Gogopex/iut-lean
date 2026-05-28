@@ -18894,3 +18894,78 @@ The next mathematical pressure point is therefore sharper: justify the
 target-side transported-average comparison from the actual Hodge-theater,
 multiradial, IPL, SHE, APT, and hull/determinant data, without collapsing the
 distinct histories into a trivial identification.
+
+## 151. Pointwise Target Bounds Supply The Transported Average
+
+### Lean Move
+
+We added the weighted-average upper-bound lemma:
+
+```text
+IUTStage1WeightedLabelAveragedProcessionLogVolume.weightedAverage_le_const_of_forall_le
+```
+
+and specialized it to the square-weight transport audit:
+
+```text
+IUTStage1ZModSquareWeightedFullLabelTransportAudit.targetTransportedWeightedLogVolume
+IUTStage1ZModSquareWeightedFullLabelTransportAudit.targetTransportedAverage_le_of_forall_targetFullLabel_le
+```
+
+For both labelwise and cusp-class routes we then added:
+
+```text
+ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit
+ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit.toStructuredSHEWeightedThetaAudit
+ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit.weightedAverage_le_thetaAverage
+ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit.toThreeElevenFiveWeightedThetaAudit
+weightedThetaComparisonRouteOfPointwiseTarget
+```
+
+The example file now verifies that the pointwise-target route also produces the
+final q/Theta signed comparison.
+
+### Mathematical Reason
+
+The previous milestone reduced the endpoint problem to:
+
+```text
+transport.targetTransportedAverage <= thetaSourceAverage
+```
+
+This milestone reduces that average-level input further.  It is enough to
+provide pointwise bounds:
+
+```text
+transport.targetLogVolume.fullLabelLogVolume
+  (fromCoordinate (transport.coordinateEquiv j)) <= thetaSourceAverage
+```
+
+for every `j : ZMod l.value`.  Lean proves the average bound from these
+pointwise bounds because the square weights are nonnegative and the total weight
+is positive.
+
+This is a useful mathematical decomposition: the remaining comparison is now
+located at the transported target full-label log-volume branch, not at an
+opaque weighted average.
+
+### Source Check
+
+This matches the way Corollary 3.12 uses `j^2`-weighted label data: the final
+average should be controlled by estimates on the labeled components together
+with the nonnegative square weights.  It also keeps the role of the Hodge/SHE
+transport separate: transport supplies the equality between source and target
+averages; pointwise target estimates supply the upper bound against the
+Theta-source average.
+
+Scholze-Stix's objection remains visible here.  The pointwise estimates are not
+allowed to identify the q- and Theta-side real lines silently; they are stated
+against the transported target full-label values inside the structured-SHE route.
+
+### Relevance to the 3.12 Dispute
+
+The pressure point is now more local.  To complete this branch, we need a
+source-level construction of the pointwise transported target full-label
+inequalities from the actual multiradial/Hodge-theater data.  The Lean chain
+from such pointwise inequalities to the final Corollary-3.12-shaped q/Theta
+comparison is now explicit and verified.

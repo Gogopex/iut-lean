@@ -6715,6 +6715,28 @@ theorem placeAudited_logVolume_fl_zmod_labelwise_structured_she_weighted_theta_e
     bundle profile audited sourceAudit).qSigned_le_thetaSigned
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+open FLZModCuspLabelThetaLabelwiseContainerAudit in
+theorem placeAudited_logVolume_fl_zmod_labelwise_pointwise_target_theta_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (sourceAudit :
+      ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit
+        part bundle profile audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  (part.weightedThetaComparisonRouteOfPointwiseTarget
+    bundle profile audited sourceAudit).qSigned_le_thetaSigned
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
 theorem placeAudited_logVolume_fl_zmod_labelwise_weighted_theta_route_level_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -7475,6 +7497,28 @@ theorem placeAudited_logVolume_fl_zmod_cusp_structured_she_weighted_theta_exampl
           part bundle profile audited) :
     package.preLedger.qSigned <= package.preLedger.thetaSigned :=
   (part.weightedThetaComparisonRouteOfStructuredSHE
+    bundle profile audited sourceAudit).qSigned_le_thetaSigned
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+open FLZModCuspLabelThetaCuspClassContainerAudit in
+theorem placeAudited_logVolume_fl_zmod_cusp_pointwise_target_theta_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (sourceAudit :
+      ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit
+        part bundle profile audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  (part.weightedThetaComparisonRouteOfPointwiseTarget
     bundle profile audited sourceAudit).qSigned_le_thetaSigned
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
