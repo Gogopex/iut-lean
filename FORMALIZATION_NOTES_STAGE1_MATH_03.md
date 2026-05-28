@@ -1800,3 +1800,88 @@ next target is to make the Hodge-descent packet transport expose the actual
 zero/cusp-class-to-packet-local-object identifications as named consequences of
 structured SHE/HDD data, rather than merely as the fields of an insulated packet
 bridge.
+
+## 133. Hodge-Descent Packet Transport Audit
+
+### Lean Move
+
+I added:
+
+```text
+FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
+```
+
+This audit carries:
+
+```text
+structured SHE bundle
+insulated cusp/zero local-object route
+packet-local-object estimate
+packet estimate object equality
+cusp-class local object = packet local object
+zero local object = packet local object
+```
+
+and exposes conversions:
+
+```text
+.toInsulatedCuspZeroPacketBridgeAudit
+.toHodgeDescentInsulatedCuspZeroBridgeAudit
+```
+
+with theorems for:
+
+```text
+history separation
+low-level bridge source = hodgeTheaterDescentPacketTransport
+high-level comparison source = hodgeTheaterDescentIndeterminacy
+zero local object = cusp-class local object
+```
+
+### Mathematical Reason
+
+The packet-local-object identifications are the exact place where the insulated
+route turns into the comparison route.  Before this step, those identifications
+were only the fields of a generic insulated packet bridge.  Now there is a
+separate Hodge-descent transport audit that carries the structured SHE bundle
+next to those identifications.
+
+This better matches the intended pressure point:
+
+```text
+structured SHE/HDD history discipline
+  + packet-local-object transport identifications
+  -> Hodge-descent packet bridge
+  -> zero/nonzero local-object comparison
+```
+
+### Trap Avoided
+
+This still does not prove that Mochizuki's Hodge-theater machinery supplies the
+transport identifications.  The identifications remain assumptions of the
+transport audit.  The gain is that a later proof must now target this audit
+directly; it cannot hide the crucial identifications inside an unlabelled packet
+bridge.
+
+This is also useful against the Scholze-Stix simplification risk: if a future
+route derives this audit by identifying all copies of the real line or all local
+objects by identity, the formal source of the collapse will be visible in the
+constructor used to populate the audit.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_hodge_transport_to_bridge_example
+placeAudited_logVolume_fl_zmod_hodge_transport_bridge_source_example
+placeAudited_logVolume_fl_zmod_hodge_transport_comparison_source_example
+placeAudited_logVolume_fl_zmod_hodge_transport_zero_to_cusp_example
+```
+
+### Remaining Gap
+
+The next mathematical task is to replace the transport audit's equality fields
+with more structured local Hodge-theater data where possible.  In particular,
+we need to identify which source-side objects correspond to the 0-column/SHE
+input and which correspond to the local packet object after descent.

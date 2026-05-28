@@ -11175,6 +11175,39 @@ structure FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
         audited.choice.local_tensor_state.packetState.localObject
 
 /--
+Hodge-descent packet transport audit for the insulated cusp/zero route.
+
+This is the source-facing form of the packet bridge when it is attributed to
+the structured SHE/HDD route: it carries the structured SHE bundle together
+with the packet-local-object identifications that the insulated route
+deliberately omitted.
+-/
+structure FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  bundle : IUTStage1Theorem311StructuredInputsWithSHE package
+  insulated_route :
+    audit.FLZModCuspLabelThetaInsulatedCuspZeroLocalLabelObjectConstructionAudit l
+  packetLocalObjectEstimate :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1LocalObjectContainerLogVolumeEstimate kind
+        package.preLedger.targetVolume.targetSigned
+        audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume
+  packetLocalObjectEstimate_eq_packetLocalObject :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      (packetLocalObjectEstimate audited).localObject =
+        audited.choice.local_tensor_state.packetState.localObject
+  cuspClassLocalObject_eq_packetLocalObject :
+    ∀ (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+      (label : (zmodSignAction l).SignLabelQuotient),
+      insulated_route.cuspClassLocalObject audited label =
+        audited.choice.local_tensor_state.packetState.localObject
+  zeroLocalObject_eq_packetLocalObject :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      insulated_route.zeroLocalObject audited =
+        audited.choice.local_tensor_state.packetState.localObject
+
+/--
 Classified packet bridge from the insulated cusp/zero route to the comparison
 route.
 -/
@@ -15040,6 +15073,86 @@ theorem targetSigned_le_thetaSourceAverage
   sourced.targetSigned_le_thetaSourceAverage audited
 
 end FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit
+
+namespace FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def hodgeTheaterDescentBridgeData
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
+    IUTStage1HodgeTheaterDescentBridgeData :=
+  part.bundle.hodgeTheaterDescentBridgeData
+
+def toInsulatedCuspZeroPacketBridgeAudit
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
+    audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l :=
+  { insulated_route := part.insulated_route,
+    packetLocalObjectEstimate := part.packetLocalObjectEstimate,
+    packetLocalObjectEstimate_eq_packetLocalObject :=
+      part.packetLocalObjectEstimate_eq_packetLocalObject,
+    cuspClassLocalObject_eq_packetLocalObject :=
+      part.cuspClassLocalObject_eq_packetLocalObject,
+    zeroLocalObject_eq_packetLocalObject :=
+      part.zeroLocalObject_eq_packetLocalObject }
+
+open FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit in
+def toHodgeDescentInsulatedCuspZeroBridgeAudit
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
+    audit.FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit l :=
+  ofStructuredInputsWithSHE part.bundle
+    part.toInsulatedCuspZeroPacketBridgeAudit
+
+theorem hodgeTheaterDescentBridgeData_eq_structuredSHE
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
+    part.hodgeTheaterDescentBridgeData =
+      part.bundle.hodgeTheaterDescentBridgeData :=
+  rfl
+
+theorem histories_not_identified
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
+    part.hodgeTheaterDescentBridgeData.domainTheater.side ≠
+      part.hodgeTheaterDescentBridgeData.codomainTheater.side :=
+  part.bundle.hodgeTheaterDescentBridgeData_histories_not_identified
+
+theorem cuspClassLocalObject_eq_packetLocalObject'
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    part.insulated_route.cuspClassLocalObject audited label =
+      audited.choice.local_tensor_state.packetState.localObject :=
+  part.cuspClassLocalObject_eq_packetLocalObject audited label
+
+theorem zeroLocalObject_eq_packetLocalObject'
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.insulated_route.zeroLocalObject audited =
+      audited.choice.local_tensor_state.packetState.localObject :=
+  part.zeroLocalObject_eq_packetLocalObject audited
+
+theorem zeroLocalObject_eq_cuspClassLocalObject
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    part.insulated_route.zeroLocalObject audited =
+      part.insulated_route.cuspClassLocalObject audited label :=
+  let packetBridge := part.toInsulatedCuspZeroPacketBridgeAudit
+  packetBridge.zeroLocalObject_eq_cuspClassLocalObject audited label
+
+theorem bridgeSource_eq_hodgeTheaterDescentPacketTransport
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
+    part.toHodgeDescentInsulatedCuspZeroBridgeAudit.classified_bridge.bridge_source =
+      IUTStage1ZModPacketLocalObjectBridgeSource.hodgeTheaterDescentPacketTransport :=
+  rfl
+
+theorem comparisonSource_eq_hodgeTheaterDescent
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
+    let hodgeBridge := part.toHodgeDescentInsulatedCuspZeroBridgeAudit
+    hodgeBridge.toSourcedInsulatedCuspZeroPacketBridgeAudit.comparison_source =
+      IUTStage1InsulatedCuspZeroBridgeSource.hodgeTheaterDescentIndeterminacy :=
+  rfl
+
+end FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
 
 namespace FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
 
