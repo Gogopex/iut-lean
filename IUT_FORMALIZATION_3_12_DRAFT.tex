@@ -209,6 +209,11 @@ The code currently covers:
   the Corollary 3.12 \(C_\Theta\) handoff, followed by the
   tripodal-to-\(F\) monotonicity, gives the final \(F\)-level
   \(\frac16\log(q)\) inequality;
+\item the IUT IV, Theorem A bounded-discrepancy conclusion:
+  boundedness below of
+  \((1+\epsilon)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)
+   -\operatorname{ht}_{\omega_X(D)}\) implies the corresponding pointwise height
+  inequality on points of bounded degree;
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -262,7 +267,8 @@ Step (iii) flag records the \(\log(s_Q)\) coefficient absorption.
 The Step (viii) flag records the prime-product case split used before the final
 upper bound for \(C_\Theta\), plus the final coarse error absorption.  The final
 display flag records the composed Theorem 1.10 inequality with \(F\)-level
-log-degree terms.
+log-degree terms.  The Theorem A flag records the bounded-discrepancy
+height/log-different/log-conductor inequality.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -340,6 +346,8 @@ Lean also checks the subsequent absorption into the coefficient \(10\) of
 Combining the Corollary 3.12 handoff with the tripodal-to-\(F\) monotonicity,
 Lean proves the final displayed \(F\)-level inequality of Theorem 1.10 at this
 real-valued shadow level.
+For Theorem A, Lean records the exact bounded-discrepancy conclusion and proves
+the equivalent pointwise height bound from the lower-bound hypothesis.
 
 \section{Missing Mathematics}
 
@@ -361,6 +369,8 @@ The present code does not yet formalize:
   log-volume shift model;
 \item the arithmetic-divisor and local log-volume construction behind the IUT IV
   Theorem 1.10 numerical estimates, and the Diophantine applications;
+\item the construction of the normalized height, log-different, and log-conductor
+  functions used in IUT IV, Theorem A;
 \item a proof that the current Hodge/SHE transport obligations follow from
   Mochizuki's full hypotheses.
 \end{itemize}

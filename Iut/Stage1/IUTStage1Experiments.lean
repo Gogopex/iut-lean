@@ -662,6 +662,7 @@ structure ProcessionContainerExperimentReport where
   iutIVPrimeProductCaseSplitBoundAvailable : Bool
   iutIVFinalErrorAbsorptionAvailable : Bool
   iutIVTheorem110FinalDisplayAvailable : Bool
+  iutIVTheoremABoundedDiscrepancyAvailable : Bool
 deriving Repr
 
 /--
@@ -709,7 +710,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     iutIVLogSQStepIIIEstimateAvailable := true,
     iutIVPrimeProductCaseSplitBoundAvailable := true,
     iutIVFinalErrorAbsorptionAvailable := true,
-    iutIVTheorem110FinalDisplayAvailable := true }
+    iutIVTheorem110FinalDisplayAvailable := true,
+    iutIVTheoremABoundedDiscrepancyAvailable := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -1209,6 +1211,21 @@ theorem iutIVTheorem110FinalDisplay_bound
     data.estimate.oneSixthLogQ <= data.finalRightHandSide :=
   data.oneSixthLogQ_le_finalRightHandSide
 
+theorem iutIVTheoremABoundedDiscrepancy_height_bound
+    {Point : Type u}
+    (data : IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point)
+    (x : Point) :
+    data.height x <=
+      (1 + data.epsilon) * (data.logDiff x + data.logCond x) -
+        data.lowerBound :=
+  data.height_le_weighted_logDiff_logCond_minus_lowerBound x
+
+theorem iutIVTheoremABoundedDiscrepancy_hyperbolic
+    {Point : Type u}
+    (data : IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point) :
+    data.hyperbolicCurve :=
+  data.hyperbolicCurve_holds
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
@@ -1469,6 +1486,7 @@ structure Corollary312DisputeFirstPassReport where
   iutIVPrimeProductCaseSplitBoundAvailable : Bool
   iutIVFinalErrorAbsorptionAvailable : Bool
   iutIVTheorem110FinalDisplayAvailable : Bool
+  iutIVTheoremABoundedDiscrepancyAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1530,6 +1548,7 @@ def corollary312DisputeFirstPassReport :
     iutIVPrimeProductCaseSplitBoundAvailable := true,
     iutIVFinalErrorAbsorptionAvailable := true,
     iutIVTheorem110FinalDisplayAvailable := true,
+    iutIVTheoremABoundedDiscrepancyAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1755,6 +1774,11 @@ theorem corollary312Report_iutIVFinalErrorAbsorptionAvailable :
 
 theorem corollary312Report_iutIVTheorem110FinalDisplayAvailable :
     corollary312DisputeFirstPassReport.iutIVTheorem110FinalDisplayAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_iutIVTheoremABoundedDiscrepancyAvailable :
+    corollary312DisputeFirstPassReport.iutIVTheoremABoundedDiscrepancyAvailable =
       true :=
   rfl
 

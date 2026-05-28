@@ -2977,6 +2977,77 @@ theorem oneSixthLogQ_le_finalRightHandSide
 
 end IUTStage1IUTIVTheorem110FinalDisplayShadow
 
+/--
+IUT IV, Theorem A bounded-discrepancy inequality.
+
+Theorem A states, for a hyperbolic curve `U_X = X \ D` and points of extension
+degree at most `d`, that
+`(1 + epsilon) * (logDiff + logCond) - height` is bounded below.  This record
+does not construct the height, different, or conductor functions; it records the
+exact real-valued bounded-discrepancy conclusion that Theorem A asserts.
+-/
+structure IUTStage1IUTIVTheoremABoundedDiscrepancyShadow
+    (Point : Type u) where
+  d : Nat
+  d_pos : 0 < d
+  epsilon : Real
+  epsilon_pos : 0 < epsilon
+  hyperbolicCurve : Prop
+  hyperbolic_curve : hyperbolicCurve
+  height : Point -> Real
+  logDiff : Point -> Real
+  logCond : Point -> Real
+  lowerBound : Real
+  discrepancy_bounded_below :
+    ∀ x : Point,
+      lowerBound <=
+        (1 + epsilon) * (logDiff x + logCond x) - height x
+
+namespace IUTStage1IUTIVTheoremABoundedDiscrepancyShadow
+
+variable {Point : Type u}
+
+def discrepancy
+    (data : IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point)
+    (x : Point) : Real :=
+  (1 + data.epsilon) * (data.logDiff x + data.logCond x) - data.height x
+
+theorem discrepancy_lower_bound
+    (data : IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point)
+    (x : Point) :
+    data.lowerBound <= data.discrepancy x :=
+  data.discrepancy_bounded_below x
+
+theorem one_plus_epsilon_pos
+    (data : IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point) :
+    0 < 1 + data.epsilon := by
+  linarith [data.epsilon_pos]
+
+theorem height_add_lowerBound_le_weighted_logDiff_logCond
+    (data : IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point)
+    (x : Point) :
+    data.height x + data.lowerBound <=
+      (1 + data.epsilon) * (data.logDiff x + data.logCond x) := by
+  have h := data.discrepancy_lower_bound x
+  dsimp [discrepancy] at h
+  linarith
+
+theorem height_le_weighted_logDiff_logCond_minus_lowerBound
+    (data : IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point)
+    (x : Point) :
+    data.height x <=
+      (1 + data.epsilon) * (data.logDiff x + data.logCond x) -
+        data.lowerBound := by
+  have h := data.height_add_lowerBound_le_weighted_logDiff_logCond x
+  linarith
+
+theorem hyperbolicCurve_holds
+    (data : IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point) :
+    data.hyperbolicCurve :=
+  data.hyperbolic_curve
+
+end IUTStage1IUTIVTheoremABoundedDiscrepancyShadow
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}
