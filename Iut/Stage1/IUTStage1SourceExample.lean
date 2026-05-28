@@ -1834,6 +1834,60 @@ theorem squareProfileProbe_averages_differ_primeFive_example :
     squareProfileProbe_balancedAverage_primeFive_example]
   norm_num
 
+theorem squareProfileProbe_representativeTransportedSummand_neg_one_primeFive_example :
+    (((-(1 : ZMod 5)).val : Real) ^ 2) *
+        squareProfileProbeLogVolume (-(1 : ZMod 5)) = 16 := by
+  have hNegVal : ((-(1 : ZMod 5)).val) = 4 := rfl
+  have hProbe : squareProfileProbeLogVolume (-(1 : ZMod 5)) = 1 := by
+    rfl
+  rw [hProbe]
+  have hNegReal : (((-(1 : ZMod 5)).val : Real)) = 4 := by
+    exact_mod_cast hNegVal
+  calc
+    (((-(1 : ZMod 5)).val : Real) ^ 2) * 1 =
+        ((4 : Real) ^ 2) * 1 := by
+      rw [hNegReal]
+    _ = 16 := by
+      norm_num
+
+theorem squareProfileProbe_representativeSourceSummand_one_primeFive_example :
+    (((1 : ZMod 5).val : Real) ^ 2) *
+        squareProfileProbeLogVolume (1 : ZMod 5) = 1 := by
+  have hOneVal : ((1 : ZMod 5).val) = 1 := rfl
+  have hProbe : squareProfileProbeLogVolume (1 : ZMod 5) = 1 := by
+    rfl
+  rw [hProbe]
+  have hOneReal : (((1 : ZMod 5).val : Real)) = 1 := by
+    exact_mod_cast hOneVal
+  calc
+    (((1 : ZMod 5).val : Real) ^ 2) * 1 =
+        ((1 : Real) ^ 2) * 1 := by
+      rw [hOneReal]
+    _ = 1 := by
+      norm_num
+
+theorem squareProfileProbe_representativeSummand_neg_transport_fails_primeFive_example :
+    (((-(1 : ZMod 5)).val : Real) ^ 2) *
+        squareProfileProbeLogVolume (-(1 : ZMod 5)) ≠
+      (((1 : ZMod 5).val : Real) ^ 2) *
+        squareProfileProbeLogVolume (1 : ZMod 5) := by
+  rw [squareProfileProbe_representativeTransportedSummand_neg_one_primeFive_example,
+    squareProfileProbe_representativeSourceSummand_one_primeFive_example]
+  norm_num
+
+theorem squareProfileProbe_balancedSummand_neg_transport_primeFive_example :
+    IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+        (l := squareAuditPrimeFiveExample) (-(1 : ZMod 5)) *
+        squareProfileProbeLogVolume (-(1 : ZMod 5)) =
+      IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+        (l := squareAuditPrimeFiveExample) (1 : ZMod 5) *
+        squareProfileProbeLogVolume (1 : ZMod 5) := by
+  have hWeight :=
+    IUTStage1ZModSquareWeightProfile.balancedSquareWeight_neg_eq
+      (l := squareAuditPrimeFiveExample) (1 : ZMod 5)
+  have hLogVolume := squareProfileProbeLogVolume_neg (1 : ZMod 5)
+  exact congrArg₂ HMul.hMul hWeight hLogVolume
+
 theorem zmodCuspLabelLogVolumeCompatibility_full_label_value_refl_example
     {l : PrimeGeFive}
     (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :

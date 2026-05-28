@@ -4765,3 +4765,73 @@ can give different real values.
 Therefore, a formal proof of the `3.11.5 => 3.12` step must commit to a precise
 weighted-average construction.  It is not enough to say that the labels are
 handled up to sign or that the denominator is adjusted by averaging.
+
+## 166. Pointwise Summand Transport Is Stronger Than Reindexing
+
+### Lean Move
+
+We added a pointwise transport test for the same sign-invariant `ZMod 5` probe:
+
+```text
+squareProfileProbe_representativeTransportedSummand_neg_one_primeFive_example
+squareProfileProbe_representativeSourceSummand_one_primeFive_example
+squareProfileProbe_representativeSummand_neg_transport_fails_primeFive_example
+squareProfileProbe_balancedSummand_neg_transport_primeFive_example
+```
+
+Lean checks that the representative square summand at the transported label is:
+
+```text
+((-1).val)^2 * probe(-1) = 4^2 * 1 = 16
+```
+
+whereas the source representative summand is:
+
+```text
+(1.val)^2 * probe(1) = 1^2 * 1 = 1.
+```
+
+Thus negation does not preserve the representative pointwise weighted summand.
+For the balanced profile, Lean proves the corresponding pointwise equality
+directly from:
+
+```text
+balancedSquareWeight_neg_eq
+squareProfileProbeLogVolume_neg
+```
+
+### Mathematical Reason
+
+This separates two notions that are easy to conflate:
+
+```text
+global reindexing invariance of a finite sum
+pointwise preservation of the weighted summand under a specified transport
+```
+
+The first can hold merely because a permutation reorders the labels.  The second
+is stronger: the transported coordinate must carry the same weight and
+log-volume contribution as the source coordinate.
+
+Our representative `j.val^2` profile fails this stronger pointwise test under
+the sign transport `j -> -j`.  The balanced profile passes it.
+
+### Source Check
+
+This is relevant to the route from IUT III Theorem 3.11 to Corollary 3.12
+because the comparison is not just a bare sum over an anonymous finite set.  It
+is meant to pass through specified `F_l` labels, transported full labels, and
+procession-normalized log-volume data.  Scholze-Stix's criticism of the
+`j^2`-weighted comparison concerns precisely the stability of the real-valued
+comparison under the proposed identifications, not just whether a finite set can
+be permuted.
+
+### Relevance to the 3.12 Dispute
+
+This milestone prevents a false shortcut in either direction.  A proof that the
+global representative sum is invariant by reindexing would not by itself supply
+the pointwise compatibility required by the representative audit route.  A
+balanced, sign-compatible profile can satisfy the pointwise transport test, but
+then it is a different profile from the literal representative `j.val^2` profile
+and must be justified against the source text before it can be used in a
+formalized `3.11.5 => 3.12` argument.
