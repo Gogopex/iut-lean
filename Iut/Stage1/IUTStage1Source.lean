@@ -1583,6 +1583,60 @@ theorem zeroLogVolume_eq_of_normalizedLogVolume_eq
     _ = c :=
       hnormalized 0
 
+/--
+Coordinate-level preservation of the zero/nonzero full-label branch.
+
+This condition is about the label map only: after applying the coordinate
+equivalence, the associated full label is the same zero/nonzero/sign-class label.
+-/
+def FullLabelMapPreserving
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value) : Prop :=
+  ∀ j : ZMod l.value,
+    IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j) =
+      IUTStage1ZModCuspFullLabel.fromCoordinate l j
+
+theorem fullLabelMapPreserving_refl :
+    FullLabelMapPreserving (l := l) (Equiv.refl (ZMod l.value)) := by
+  intro j
+  rfl
+
+/--
+Labelwise preservation of the full-label log-volume branch.
+
+This is separate from coordinate preservation: it says that once a full label has
+been matched, the target and source log-volume functions assign the same real
+value to it.
+-/
+def FullLabelLogVolumeValuePreserving
+    (sourceLogVolume targetLogVolume :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l) : Prop :=
+  ∀ label : IUTStage1ZModCuspFullLabel l,
+    targetLogVolume.fullLabelLogVolume label =
+      sourceLogVolume.fullLabelLogVolume label
+
+theorem transportedFullLabelLogVolume_preserved_of_fullLabelMap
+    (sourceLogVolume targetLogVolume :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hmap : FullLabelMapPreserving (l := l) coordinateEquiv)
+    (hvalue :
+      FullLabelLogVolumeValuePreserving
+        sourceLogVolume targetLogVolume) :
+    ∀ j : ZMod l.value,
+      targetLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)) =
+        sourceLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  intro j
+  rw [hmap j]
+  exact hvalue (IUTStage1ZModCuspFullLabel.fromCoordinate l j)
+
+theorem fullLabelLogVolumeValuePreserving_refl
+    (logVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :
+    FullLabelLogVolumeValuePreserving logVolume logVolume := by
+  intro label
+  rfl
+
 end IUTStage1ZModCuspLabelLogVolumeCompatibility
 
 namespace IUTStage1LabelAveragedProcessionLogVolume

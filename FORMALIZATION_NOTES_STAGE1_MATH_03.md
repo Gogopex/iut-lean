@@ -3480,3 +3480,91 @@ So a future IUT-positive construction must produce a coordinate equivalence with
 this preservation property from the Hodge-theater/SHE route.  A Scholze-Stix
 style negative formalization can try to show that the currently formalized
 common-container/local-object data do not determine such an equivalence.
+
+## 152. Full-Label Log-Volume Preservation Factored
+
+### Lean Move
+
+We added a factored API for the remaining full-label log-volume branch:
+
+```text
+IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelLogVolumeValuePreserving
+```
+
+The first condition is coordinate-level:
+
+```text
+fromCoordinate l (coordinateEquiv j) = fromCoordinate l j
+```
+
+for all `j : ZMod l.value`.  It says that the coordinate equivalence preserves
+the zero/nonzero/sign-class full-label branch.
+
+The second condition is value-level:
+
+```text
+target.fullLabelLogVolume label = source.fullLabelLogVolume label
+```
+
+for every full label.
+
+Lean then proves:
+
+```text
+transportedFullLabelLogVolume_preserved_of_fullLabelMap
+```
+
+which supplies the full-label preservation field used by the square-weighted
+transport audit.
+
+### Mathematical Reason
+
+The previous reduced square-weight milestone isolated the weight side of the
+problem.  This milestone begins the same process for the log-volume side.  The
+full-label preservation field is not treated as an opaque equality anymore: it
+can be obtained from two more primitive assertions, one about how the coordinate
+equivalence acts on the full-label map, and one about equality of the
+log-volume values once the labels have been matched.
+
+This matters because the full labels encode the zero branch separately from the
+nonzero cusp sign-label branch.  A comparison that preserves a real number but
+forgets whether it came from the zero or nonzero branch is not enough for the
+current square-weighted full-label audit.
+
+### Source Check
+
+IUT II separates the role of the `F_l` symmetry from the `F_l^±`/sign-label
+quotient behavior in the weighted-volume discussion.  IUT III's Corollary 3.12
+route uses averages over `j in F_l`, while the surrounding discussion stresses
+that the relevant log-volume quantities are tied to the Hodge-theater/log-link
+structure rather than to arbitrary common real values.
+
+This is also aligned with the Scholze-Stix pressure point.  Their criticism
+targets whether the simplified common comparison object can retain the
+nontrivial `j`-indexed information needed for the final estimate.  This
+milestone says that full-label preservation has two independent ingredients:
+preserving the label branch and preserving the real log-volume attached to the
+matched branch.
+
+### Relevance to the 3.12 Dispute
+
+The square-weighted transport corridor is now factored as:
+
+```text
+coordinate-square preservation
+  gives j^2-weight preservation
+
+full-label-map preservation
++ full-label-value preservation
+  gives full-label log-volume preservation
+
+both branches together
+  give transported weighted-average equality
+```
+
+This still does not prove Corollary 3.12.  It gives a sharper target for the
+next step: combine the coordinate-square and full-label-map/value branches into
+a single fully factored structured-SHE obligation record, then compare that
+record against the data actually supplied by local-object Hodge descent and the
+SHE common-container route.

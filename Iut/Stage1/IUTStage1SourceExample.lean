@@ -1264,6 +1264,38 @@ theorem zmodCuspLabelLogVolumeCompatibility_full_label_nonzero_example
       compat.cuspClassLogVolume (zmodSignLabelFromCoordinate l j hj) :=
   compat.fullLabelLogVolume_fromCoordinate_nonzero j hj
 
+theorem zmodCuspLabelLogVolumeCompatibility_full_label_map_refl_example
+    {l : PrimeGeFive} :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+      (l := l) (Equiv.refl (ZMod l.value)) :=
+  IUTStage1ZModCuspLabelLogVolumeCompatibility.fullLabelMapPreserving_refl
+
+theorem zmodCuspLabelLogVolumeCompatibility_full_label_value_refl_example
+    {l : PrimeGeFive}
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelLogVolumeValuePreserving
+      compat compat :=
+  compat.fullLabelLogVolumeValuePreserving_refl
+
+theorem zmodCuspLabelLogVolumeCompatibility_transport_full_label_example
+    {l : PrimeGeFive}
+    (sourceLogVolume targetLogVolume :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hmap :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (hvalue :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelLogVolumeValuePreserving
+        sourceLogVolume targetLogVolume)
+    (j : ZMod l.value) :
+    targetLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)) =
+      sourceLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  sourceLogVolume.transportedFullLabelLogVolume_preserved_of_fullLabelMap
+    targetLogVolume hmap hvalue j
+
 theorem upperSemi_capsuleFamilyLogVolume_total_eq_sum_example
     {kind : IUTStage1PlaceKind}
     (data : IUTStage1CapsuleFamilyLogVolume kind) :
