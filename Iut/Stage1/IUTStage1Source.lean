@@ -2220,6 +2220,14 @@ inductive IUTStage1PacketNormalizedIdentificationSource where
   | separateRealLineIdentification
 deriving DecidableEq
 
+/-- Source classification for identifying cusp/zero log-volumes with the
+packet local object's finite log-volume. -/
+inductive IUTStage1LocalObjectLogVolumeIdentificationSource where
+  | directLocalObjectConstruction
+  | packetNormalizationAndLocalObjectCompatibility
+  | separateRealLineIdentification
+deriving DecidableEq
+
 /--
 Local packet-normalized compatibility together with a source classification.
 -/
@@ -10978,6 +10986,23 @@ structure FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
         audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume
 
 /--
+Direct identified local packet route with source classifications for the
+cusp/zero-to-local-object log-volume identifications.
+-/
+structure FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  identified_route :
+    audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l
+  cuspClass_identification_source :
+    ∀ (_audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+      (_label : (zmodSignAction l).SignLabelQuotient),
+      IUTStage1LocalObjectLogVolumeIdentificationSource
+  zero_identification_source :
+    ∀ _audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1LocalObjectLogVolumeIdentificationSource
+
+/--
 Full-route input for the `(Ind2)`-transported packet-normalization and
 transported capsule-estimate route.
 -/
@@ -12746,6 +12771,75 @@ theorem cuspBoundSource_eq_directCapsule
   rfl
 
 end FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
+
+namespace FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def ofSeparateRealLineIdentification
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit l :=
+  { identified_route := part,
+    cuspClass_identification_source := by
+      intro _audited _label
+      exact IUTStage1LocalObjectLogVolumeIdentificationSource.separateRealLineIdentification,
+    zero_identification_source := by
+      intro _audited
+      exact IUTStage1LocalObjectLogVolumeIdentificationSource.separateRealLineIdentification }
+
+def ofDirectLocalObjectConstruction
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit l :=
+  { identified_route := part,
+    cuspClass_identification_source := by
+      intro _audited _label
+      exact IUTStage1LocalObjectLogVolumeIdentificationSource.directLocalObjectConstruction,
+    zero_identification_source := by
+      intro _audited
+      exact IUTStage1LocalObjectLogVolumeIdentificationSource.directLocalObjectConstruction }
+
+def ofPacketNormalizationAndLocalObjectCompatibility
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit l :=
+  { identified_route := part,
+    cuspClass_identification_source := by
+      intro _audited _label
+      exact .packetNormalizationAndLocalObjectCompatibility,
+    zero_identification_source := by
+      intro _audited
+      exact .packetNormalizationAndLocalObjectCompatibility }
+
+def toDirectIdentifiedLocalPacketRouteAudit
+    (part :
+      audit.FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l :=
+  part.identified_route
+
+def toFullClassifiedRouteSummary
+    (part :
+      audit.FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l :=
+  part.identified_route.toFullClassifiedRouteSummary
+
+theorem packetIdentificationSource_eq_direct
+    (part :
+      audit.FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit l) :
+    part.toFullClassifiedRouteSummary.packetIdentificationSource =
+      IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization :=
+  part.identified_route.packetIdentificationSource_eq_direct
+
+theorem cuspBoundSource_eq_directCapsule
+    (part :
+      audit.FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit l) :
+    part.toFullClassifiedRouteSummary.cuspBoundSource =
+      IUTStage1CuspClassBoundSource.directCapsuleEstimates :=
+  part.identified_route.cuspBoundSource_eq_directCapsule
+
+end FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit
 
 namespace FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
 

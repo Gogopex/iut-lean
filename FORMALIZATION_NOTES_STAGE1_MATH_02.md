@@ -6909,3 +6909,89 @@ finite-log-volume equalities.  The next mathematical task is to trace those
 equalities back to the source definitions of the cusp-compatible label average,
 or to classify them as separate real-line identifications if no source-close
 construction is available.
+
+## 88. Classifying Local Object Log-Volume Identifications
+
+### Goal
+
+We classified the source of the cusp/zero-to-local-object log-volume
+identifications used by the direct identified route.
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1LocalObjectLogVolumeIdentificationSource
+```
+
+with cases:
+
+```text
+directLocalObjectConstruction
+packetNormalizationAndLocalObjectCompatibility
+separateRealLineIdentification
+```
+
+We also added:
+
+```text
+FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit
+```
+
+It packages:
+
+```text
+direct identified local packet route
+cusp-class identification source for each audited packet and label
+zero-label identification source for each audited packet
+```
+
+and still exposes the same full route summary, packet source, and cusp-bound
+source as the underlying direct identified route.
+
+### Mathematical Point
+
+The new classification distinguishes two equalities that were easy to conflate:
+
+```text
+cusp/zero log-volume = packet normalized capsule average
+packet normalized capsule average = packet local object finiteLogVolume
+```
+
+The direct identified route uses the composed target:
+
+```text
+cusp/zero log-volume = packet local object finiteLogVolume
+```
+
+Lean now records where that equality is meant to come from.  This is directly
+relevant to the Scholze-Stix pressure point: if the equality is only a separate
+real-line identification, it must be visible as such.
+
+### Trap Avoided
+
+We did not reuse `IUTStage1PacketNormalizedIdentificationSource` for this
+local-object equality.  Packet normalization and cusp/zero-to-local-object
+identification are related but distinct proof obligations.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_classified_direct_identified_separate_example
+placeAudited_logVolume_fl_zmod_classified_direct_identified_packet_example
+placeAudited_logVolume_fl_zmod_classified_direct_identified_source_example
+```
+
+### Remaining Gap
+
+The classified route still carries the equality proofs themselves.  The next
+source-facing refinement should derive the packet-normalization/local-object
+case from an explicit pair of equalities:
+
+```text
+cusp/zero log-volume = packet normalized capsule average
+packet normalized capsule average = local object finiteLogVolume
+```
