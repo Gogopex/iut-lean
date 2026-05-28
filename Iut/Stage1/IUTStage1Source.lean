@@ -789,6 +789,21 @@ structure IUTStage1ProcessionNormalizedLogVolume
     normalizedLogVolume = totalLogVolume / (capsuleCount : Real)
 
 /--
+Procession-normalized log-volume averaged over a finite label set.
+
+This is the Stage 1 abstraction of the average over `j ∈ F_l` that appears in
+the Corollary 3.12 discussion.  The concrete `F_l`/`ZMod l` label model is not
+chosen here; the only required structure is a finite label type.
+-/
+structure IUTStage1LabelAveragedProcessionLogVolume
+    (label : Type u) [Fintype label] where
+  normalizedLogVolume : label -> Real
+  averageLogVolume : Real
+  average_eq :
+    averageLogVolume =
+      (Finset.univ.sum normalizedLogVolume) / (Fintype.card label : Real)
+
+/--
 Procession-normalized log-volume with an explicit finite capsule family.
 
 The total log-volume is now tied to the finite sum over capsules rather than
@@ -866,6 +881,41 @@ def toFiniteLocalLogVolumeObject
   data.localObject
 
 end IUTStage1ProcessionNormalizedLogVolume
+
+namespace IUTStage1LabelAveragedProcessionLogVolume
+
+variable {label : Type u} [Fintype label]
+
+theorem average_eq_formula
+    (data : IUTStage1LabelAveragedProcessionLogVolume label) :
+    data.averageLogVolume =
+      (Finset.univ.sum data.normalizedLogVolume) /
+        (Fintype.card label : Real) :=
+  data.average_eq
+
+theorem average_eq_of_pointwise
+    {data₁ data₂ : IUTStage1LabelAveragedProcessionLogVolume label}
+    (hpointwise :
+      ∀ j : label,
+        data₁.normalizedLogVolume j =
+          data₂.normalizedLogVolume j) :
+    data₁.averageLogVolume = data₂.averageLogVolume := by
+  calc
+    data₁.averageLogVolume =
+        (Finset.univ.sum data₁.normalizedLogVolume) /
+          (Fintype.card label : Real) :=
+      data₁.average_eq
+    _ =
+        (Finset.univ.sum data₂.normalizedLogVolume) /
+          (Fintype.card label : Real) := by
+      congr 1
+      exact Finset.sum_congr rfl (by
+        intro j _hj
+        exact hpointwise j)
+    _ = data₂.averageLogVolume :=
+      data₂.average_eq.symm
+
+end IUTStage1LabelAveragedProcessionLogVolume
 
 namespace IUTStage1CapsuleFamilyLogVolume
 

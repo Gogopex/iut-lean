@@ -2918,3 +2918,76 @@ placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_ind2_normalized_example
 The normalized log-volume is still the local capsule-family value.  A later
 refinement should aggregate these local normalized values into the full
 procession-normalized average over `j ∈ F_l` used in Corollary 3.12.
+
+## 40. Label-Averaged Procession Log-Volumes
+
+### Goal
+
+We introduced an abstract finite-label average for procession-normalized
+log-volumes, corresponding to the average over `j ∈ F_l` in Corollary 3.12.
+
+### Lean/API Check
+
+The new structure is:
+
+```text
+IUTStage1LabelAveragedProcessionLogVolume
+```
+
+It is indexed by an arbitrary finite label type:
+
+```text
+label : Type u
+[Fintype label]
+```
+
+and carries:
+
+```text
+normalizedLogVolume : label -> Real
+averageLogVolume : Real
+average_eq :
+  averageLogVolume =
+    (Finset.univ.sum normalizedLogVolume) / (Fintype.card label : Real)
+```
+
+Lean also proves:
+
+```text
+average_eq_formula
+average_eq_of_pointwise
+```
+
+The second theorem says that pointwise equality of the normalized log-volume
+function implies equality of the averaged procession log-volume.
+
+### Mathematical Point
+
+This is the first Stage 1 object that models the source phrase "where the
+average is taken over `j ∈ F_l`" without yet choosing the concrete `ZMod l`
+label model from the foundations layer.  It gives us a target for lifting the
+local `(Ind1)/(Ind2)` normalized-log-volume invariance to the averaged
+Corollary 3.12 quantity.
+
+### Trap Avoided
+
+We did not hard-wire `ZMod l` into the Stage 1 source layer.  The foundations
+module already contains concrete `ZMod l` label/torsor data, but the current
+Stage 1 route only needs finiteness of the label set.  This keeps the API
+generic until a later milestone explicitly connects it to `F_l`.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+labelAveragedProcessionLogVolume_average_example
+labelAveragedProcessionLogVolume_average_eq_example
+labelAveragedProcessionLogVolume_average_eq_of_pointwise_example
+```
+
+### Remaining Gap
+
+The next step should combine `ProcessionNormalizedInd12Audit` with
+`IUTStage1LabelAveragedProcessionLogVolume`, proving averaged invariance under
+`(Ind1)` and `(Ind2)` from pointwise label-wise invariance.

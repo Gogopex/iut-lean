@@ -395,6 +395,31 @@ def upperSemi_processionNormalized_to_finite_example
     IUTStage1FiniteLocalLogVolumeObject kind :=
   data.toFiniteLocalLogVolumeObject
 
+def labelAveragedProcessionLogVolume_average_example
+    {label : Type u} [Fintype label]
+    (data : IUTStage1LabelAveragedProcessionLogVolume label) :
+    Real :=
+  data.averageLogVolume
+
+theorem labelAveragedProcessionLogVolume_average_eq_example
+    {label : Type u} [Fintype label]
+    (data : IUTStage1LabelAveragedProcessionLogVolume label) :
+    data.averageLogVolume =
+      (Finset.univ.sum data.normalizedLogVolume) /
+        (Fintype.card label : Real) :=
+  data.average_eq_formula
+
+theorem labelAveragedProcessionLogVolume_average_eq_of_pointwise_example
+    {label : Type u} [Fintype label]
+    {data₁ data₂ : IUTStage1LabelAveragedProcessionLogVolume label}
+    (hpointwise :
+      ∀ j : label,
+        data₁.normalizedLogVolume j =
+          data₂.normalizedLogVolume j) :
+    data₁.averageLogVolume = data₂.averageLogVolume :=
+  IUTStage1LabelAveragedProcessionLogVolume.average_eq_of_pointwise
+    hpointwise
+
 theorem upperSemi_capsuleFamilyLogVolume_total_eq_sum_example
     {kind : IUTStage1PlaceKind}
     (data : IUTStage1CapsuleFamilyLogVolume kind) :
