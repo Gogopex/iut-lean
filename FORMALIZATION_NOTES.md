@@ -18502,3 +18502,40 @@ to that source-facing claim.
 The hard comparison can no longer disappear into an unlabeled certificate.  A
 reviewer can inspect a final route and recover whether it came from the
 3.11.5-to-3.12 slot or from another future source-specific audit.
+
+## 143. The 3.11.5 Audit Now Names Its Checkpoints And Pilots
+
+### Lean Move
+
+We strengthened `ThreeElevenFiveWeightedThetaAudit` by adding:
+
+```text
+final_comparison_checkpoint = theorem3115ToCorollary312Checkpoint
+simultaneous_comparison_checkpoint = simultaneousComparisonCheckpoint
+theta_pilot = package.thetaPilot
+q_pilot = package.qPilot
+```
+
+and exposed theorem accessors for both the labelwise and cusp-class routes.
+
+### Mathematical Reason
+
+The remaining hard inequality is no longer just a real comparison plus a source
+tag.  It is now tied to the named final `3.11.5 => 3.12` checkpoint, to the
+simultaneous common-container checkpoint, and to the two pilot objects that are
+being compared.
+
+### Source Check
+
+Mochizuki's recent formalization note describes the last stage as the final
+comparison of q- and Theta-pilot data after the earlier APT/IPL/hull+det work.
+Scholze-Stix's critique focuses on whether this simultaneous comparison can be
+made without inconsistent real-line identifications.  The strengthened audit
+records those source-facing roles before the numerical inequality is used.
+
+### Relevance to the 3.12 Dispute
+
+This narrows the remaining assumption surface.  A future derivation of
+`ThreeElevenFiveWeightedThetaAudit` must supply not only the weighted-to-Theta
+inequality, but also evidence that it belongs to the named final simultaneous
+comparison of the package's q- and Theta-pilots.

@@ -16197,6 +16197,16 @@ structure ThreeElevenFiveWeightedThetaAudit
     (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
     (profile : IUTStage1ZModSquareWeightProfile l)
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) where
+  final_comparison_checkpoint : TransitionCheckpointId
+  final_comparison_checkpoint_eq :
+    final_comparison_checkpoint = theorem3115ToCorollary312Checkpoint
+  simultaneous_comparison_checkpoint : TransitionCheckpointId
+  simultaneous_comparison_checkpoint_eq :
+    simultaneous_comparison_checkpoint = simultaneousComparisonCheckpoint
+  theta_pilot : PilotObjectId
+  theta_pilot_eq_package : theta_pilot = package.thetaPilot
+  q_pilot : PilotObjectId
+  q_pilot_eq_package : q_pilot = package.qPilot
   weightedAverage_le_thetaAverage :
     (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
       profile audited).weightedAverageLogVolume <=
@@ -16291,6 +16301,44 @@ theorem ThreeElevenFiveWeightedThetaAudit.source_eq
     sourceAudit.toWeightedThetaComparisonData.comparison_source =
       IUTStage1WeightedThetaComparisonSource.threeElevenFiveToCorollary312 :=
   rfl
+
+theorem ThreeElevenFiveWeightedThetaAudit.finalCheckpoint_eq
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.final_comparison_checkpoint =
+      theorem3115ToCorollary312Checkpoint :=
+  sourceAudit.final_comparison_checkpoint_eq
+
+theorem ThreeElevenFiveWeightedThetaAudit.simultaneousCheckpoint_eq
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.simultaneous_comparison_checkpoint =
+      simultaneousComparisonCheckpoint :=
+  sourceAudit.simultaneous_comparison_checkpoint_eq
+
+theorem ThreeElevenFiveWeightedThetaAudit.thetaPilotMatchesPackage
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.theta_pilot = package.thetaPilot :=
+  sourceAudit.theta_pilot_eq_package
+
+theorem ThreeElevenFiveWeightedThetaAudit.qPilotMatchesPackage
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.q_pilot = package.qPilot :=
+  sourceAudit.q_pilot_eq_package
 
 theorem qSigned_le_thetaSigned_of_weightedThetaComparisonData
     (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
@@ -16662,6 +16710,16 @@ structure ThreeElevenFiveWeightedThetaAudit
     (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
     (profile : IUTStage1ZModSquareWeightProfile l)
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) where
+  final_comparison_checkpoint : TransitionCheckpointId
+  final_comparison_checkpoint_eq :
+    final_comparison_checkpoint = theorem3115ToCorollary312Checkpoint
+  simultaneous_comparison_checkpoint : TransitionCheckpointId
+  simultaneous_comparison_checkpoint_eq :
+    simultaneous_comparison_checkpoint = simultaneousComparisonCheckpoint
+  theta_pilot : PilotObjectId
+  theta_pilot_eq_package : theta_pilot = package.thetaPilot
+  q_pilot : PilotObjectId
+  q_pilot_eq_package : q_pilot = package.qPilot
   weightedAverage_le_thetaAverage :
     (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
       profile audited).weightedAverageLogVolume <=
@@ -16756,6 +16814,44 @@ theorem ThreeElevenFiveWeightedThetaAudit.source_eq
     sourceAudit.toWeightedThetaComparisonData.comparison_source =
       IUTStage1WeightedThetaComparisonSource.threeElevenFiveToCorollary312 :=
   rfl
+
+theorem ThreeElevenFiveWeightedThetaAudit.finalCheckpoint_eq
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.final_comparison_checkpoint =
+      theorem3115ToCorollary312Checkpoint :=
+  sourceAudit.final_comparison_checkpoint_eq
+
+theorem ThreeElevenFiveWeightedThetaAudit.simultaneousCheckpoint_eq
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.simultaneous_comparison_checkpoint =
+      simultaneousComparisonCheckpoint :=
+  sourceAudit.simultaneous_comparison_checkpoint_eq
+
+theorem ThreeElevenFiveWeightedThetaAudit.thetaPilotMatchesPackage
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.theta_pilot = package.thetaPilot :=
+  sourceAudit.theta_pilot_eq_package
+
+theorem ThreeElevenFiveWeightedThetaAudit.qPilotMatchesPackage
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveWeightedThetaAudit part profile audited) :
+    sourceAudit.q_pilot = package.qPilot :=
+  sourceAudit.q_pilot_eq_package
 
 def toLabelwiseWeightedThetaComparisonData
     {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
