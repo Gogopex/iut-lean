@@ -1,0 +1,393 @@
+# Formalization Notes: Stage 1 Math, Part 04
+
+This file continues the stage-1 mathematical implementation notes after
+`FORMALIZATION_NOTES_STAGE1_MATH_03.md`.  The root `FORMALIZATION_NOTES.md`
+should remain the older infrastructure/base notebook; current Corollary 3.12
+math updates continue here.
+
+## 190. The 3.11.5 Audit Exposes Allowed Chart Readings
+
+### Lean Move
+
+We added the chart-discipline accessors:
+
+```text
+qToTargetAllowedAtChart
+thetaToTargetAllowedAtChart
+thetaChartTrivial
+```
+
+for `ThreeElevenFiveWeightedThetaAudit` in both route namespaces.
+
+### Mathematical Reason
+
+Once the audit names the package's real-comparison chart, it should also expose
+the permitted readings attached to that chart.  The q-side reading is the
+order-preserving transport into the target real-line copy, while the Theta-side
+reading is allowed together with explicit trivial monodromy.
+
+### Source Check
+
+This addresses the real-line-copy part of the Corollary 3.12 dispute at the
+current abstraction level.  It does not assert that the weighted-theta
+comparison has been proved, but it records that any use of the 3.11.5 audit is
+using the package's named chart discipline rather than an unnamed identification
+of real numbers.
+
+### Relevance to the 3.12 Dispute
+
+The formal boundary now exposes the exact chart permissions available when the
+hard comparison is supplied.  Later work can require these accessors when
+deriving the weighted-to-Theta inequality from Hodge-theater data.
+
+## 191. The 3.11.5 Audit Names The Two Real Endpoints
+
+### Lean Move
+
+We added:
+
+```text
+ThreeElevenFiveWeightedThetaEndpointAudit
+ThreeElevenFiveWeightedThetaAudit.endpointAudit
+ThreeElevenFiveWeightedThetaEndpointAudit.recovers_weightedAverage_le_thetaAverage
+```
+
+for both the labelwise and cusp-class routes.
+
+### Mathematical Reason
+
+The remaining hard comparison has two precise real endpoints:
+
+```text
+squareWeightedAverage.weightedAverageLogVolume
+thetaSourceAverage
+```
+
+The endpoint audit names these reals and records that the inequality in the
+3.11.5 audit is exactly the inequality between them.  The constructor is marked
+`noncomputable` because it materializes the square-weighted average value.
+
+### Source Check
+
+This matches the Scholze-Stix demand that the real quantities being compared be
+spelled out, rather than hidden behind notation.  It also keeps Mochizuki's
+final comparison slot precise: the source-level proof must target these two
+real log-volume endpoints.
+
+### Relevance to the 3.12 Dispute
+
+Future work can replace the current explicit inequality by a proof that
+constructs this endpoint audit from source-level Hodge-theater data.  Until
+then, Lean records exactly which endpoint inequality remains assumed.
+
+## 192. 3.11.5 Comparison Data Uses The Endpoint Audit
+
+### Lean Move
+
+We added:
+
+```text
+ThreeElevenFiveWeightedThetaAudit.comparisonData_uses_endpointAudit
+```
+
+for both the labelwise and cusp-class routes.
+
+### Mathematical Reason
+
+The comparison data emitted by a `ThreeElevenFiveWeightedThetaAudit` now has a
+named proof that its weighted-to-Theta inequality is exactly the inequality
+recovered from the endpoint audit.
+
+### Source Check
+
+This keeps the formal chain honest about the real quantities under comparison.
+The source-tagged comparison data cannot be read as introducing a second,
+independent proof of the disputed inequality; it is tied back to the endpoint
+audit naming the square-weighted average and the Theta-source average.
+
+### Relevance to the 3.12 Dispute
+
+When future source-level work replaces the explicit audit input, the replacement
+target is now even more precise: produce endpoint data, recover the endpoint
+inequality, and feed that exact proof into the 3.11.5 comparison data.
+
+## 193. 3.11.5 Routes Use The Endpoint Audit
+
+### Lean Move
+
+We added:
+
+```text
+weightedThetaComparisonRouteOfThreeElevenFive_uses_endpointAudit
+```
+
+for both the labelwise and cusp-class route certificates.
+
+### Mathematical Reason
+
+The full route certificate built from the `3.11.5 => 3.12` audit now exposes
+that its hard field
+
+```text
+weightedAverage_le_thetaAverage
+```
+
+is exactly the inequality recovered from the endpoint audit.
+
+### Source Check
+
+This keeps the source-facing final comparison from being duplicated or obscured
+after the route certificate is built.  The route does not introduce a new
+comparison; it carries forward the same endpoint audit.
+
+### Relevance to the 3.12 Dispute
+
+Downstream users of the route can recover the precise endpoint proof that drives
+the final q/Theta inequality.  This makes the remaining dispute point visible
+even at the full-route API boundary.
+
+## 194. Endpoint Audits Carry 3.11.5 Provenance
+
+### Lean Move
+
+We strengthened:
+
+```text
+ThreeElevenFiveWeightedThetaEndpointAudit
+```
+
+for both the labelwise and cusp-class routes.  The endpoint audit now records:
+
+```text
+final_comparison_checkpoint
+simultaneous_comparison_checkpoint
+real_comparison_chart
+```
+
+with accessor theorems:
+
+```text
+ThreeElevenFiveWeightedThetaEndpointAudit.finalCheckpoint_eq
+ThreeElevenFiveWeightedThetaEndpointAudit.simultaneousCheckpoint_eq
+ThreeElevenFiveWeightedThetaEndpointAudit.realComparisonChartMatchesPackage
+```
+
+The example file exposes the same fact via endpoint-provenance examples.
+
+### Mathematical Reason
+
+The previous endpoint audit named the two real numbers and their inequality, but
+the checkpoint and chart provenance lived one layer above it in the
+`ThreeElevenFiveWeightedThetaAudit`.  That was too easy to misuse: a later
+consumer could carry the endpoint inequality without also carrying the fact that
+it belongs to the final `3.11.5 => 3.12` simultaneous comparison chart.
+
+The endpoint audit is now a self-contained certificate for the disputed real
+comparison endpoint.  It still does not derive the hard inequality; it says that
+any proof of the hard inequality must be attached to the exact final checkpoint
+and real comparison chart used by the package.
+
+### Source Check
+
+Mochizuki's April 2026 formalization report describes the final portion of the
+Theorem 3.11 to Corollary 3.12 route as the `3.11.5 => 3.12` comparison of the
+q- and Theta-pilot objects in a common container after moving the `hull+det`
+work into the `3.11.5` side.  The new fields mirror that organization: the
+endpoint comparison is not a free-floating real inequality but part of this
+named final simultaneous-comparison stage.
+
+Scholze-Stix's discussion of Corollary 3.12 asks that the relevant copies of the
+real line and their identifications be spelled out.  Recording the chart at the
+endpoint-audit level is a direct response to that requirement: the real
+endpoints and the chart in which they are compared travel together.
+
+### Relevance to the 3.12 Dispute
+
+The current unresolved mathematical load remains exactly the same endpoint
+inequality:
+
+```text
+squareWeightedAveragedLogVolume.weightedAverageLogVolume <= thetaSourceAverage
+```
+
+but the formalization now prevents that inequality from being detached from its
+claimed 3.11.5 provenance.  This is useful before moving deeper into the
+Hodge-theater side: when we eventually replace the explicit audit assumption by
+source-level construction, Lean will require us to produce not merely an
+inequality, but an inequality at the named final checkpoint and chart.
+
+## 195. Structured-SHE Transport Supplies The Weighted Endpoint
+
+### Lean Move
+
+We added the transport-to-endpoint bridge:
+
+```text
+FLZModCuspLabelCompatibleAveragedInd12Audit.squareWeightedAverage_eq_transportSourceAverage
+```
+
+and, for both labelwise and cusp-class routes:
+
+```text
+ThreeElevenFiveStructuredSHEWeightedThetaAudit
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.transportBridge_eq_structuredSHE
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.histories_not_identified
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.squareWeightedAverage_eq_transportSource
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.weightedAverage_le_thetaAverage
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.toThreeElevenFiveWeightedThetaAudit
+weightedThetaComparisonRouteOfStructuredSHE
+weightedThetaComparisonRouteOfStructuredSHE_source
+weightedThetaComparisonRouteOfStructuredSHE_uses_transport
+```
+
+The example file now has public structured-SHE examples showing that this route
+recovers a final q/Theta signed comparison.
+
+### Mathematical Reason
+
+Before this milestone, the `ThreeElevenFiveWeightedThetaAudit` took the disputed
+endpoint inequality directly:
+
+```text
+squareWeightedAveragedLogVolume.weightedAverageLogVolume <= thetaSourceAverage
+```
+
+The new structured-SHE audit does not take that inequality directly.  Instead it
+requires:
+
+```text
+IUTStage1StructuredSHESquareWeightTransportAudit
+profile = transport.sourceProfile
+cuspLogVolume = transport.sourceLogVolume
+transport.targetTransportedAverage <= thetaSourceAverage
+```
+
+Lean then uses the existing Hodge/SHE square-weight transport theorem
+
+```text
+transport.targetTransportedAverage = transport.sourceAverage
+```
+
+together with the new equality identifying the formal square-weighted average
+with the transport source average.  Thus the endpoint inequality is now derived
+from a source-side transport certificate plus one remaining target-side
+comparison.  This is a real reduction of the bare audit input: the square-weight
+preservation branch must pass through the structured-SHE/Hodge-descent bridge.
+
+### Source Check
+
+Mochizuki's April 2026 formalization report describes the final
+`3.11.5 => 3.12` step as the simultaneous comparison of q- and Theta-pilot
+objects in a common container, after the `hull+det` work has been moved into
+the preceding `3.11.5` side.  The new Lean structure follows that split: the
+endpoint route still belongs to the final comparison, but the equality that
+makes the square-weighted source average available is now explicitly routed
+through structured SHE square-weight transport.
+
+This also tracks IUT III, Corollary 3.12, Step `(xi)`, where the final real
+comparison is supposed to come after multiradial construction, indeterminacies,
+holomorphic hulls, determinant formation, and simultaneous consideration of the
+q- and Theta-side pilot data.
+
+Scholze-Stix's criticism focuses on whether the needed real comparisons survive
+consistent identifications of the relevant real-line copies.  The new structure
+keeps the Hodge-theater histories nonidentified:
+
+```text
+histories_not_identified
+```
+
+and it requires explicit source-profile and source-log-volume equalities before
+the transported average may be read as the square-weighted average in the final
+endpoint.
+
+### Relevance to the 3.12 Dispute
+
+The remaining unresolved input has moved.  We no longer need to assume the
+final square-weighted endpoint inequality as an isolated fact in this route; we
+can derive it from:
+
+```text
+structured-SHE square-weight transport
+transport.targetTransportedAverage <= thetaSourceAverage
+```
+
+The next mathematical pressure point is therefore sharper: justify the
+target-side transported-average comparison from the actual Hodge-theater,
+multiradial, IPL, SHE, APT, and hull/determinant data, without collapsing the
+distinct histories into a trivial identification.
+
+## 196. Pointwise Target Bounds Supply The Transported Average
+
+### Lean Move
+
+We added the weighted-average upper-bound lemma:
+
+```text
+IUTStage1WeightedLabelAveragedProcessionLogVolume.weightedAverage_le_const_of_forall_le
+```
+
+and specialized it to the square-weight transport audit:
+
+```text
+IUTStage1ZModSquareWeightedFullLabelTransportAudit.targetTransportedWeightedLogVolume
+IUTStage1ZModSquareWeightedFullLabelTransportAudit.targetTransportedAverage_le_of_forall_targetFullLabel_le
+```
+
+For both labelwise and cusp-class routes we then added:
+
+```text
+ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit
+ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit.toStructuredSHEWeightedThetaAudit
+ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit.weightedAverage_le_thetaAverage
+ThreeElevenFiveStructuredSHEPointwiseTargetThetaAudit.toThreeElevenFiveWeightedThetaAudit
+weightedThetaComparisonRouteOfPointwiseTarget
+```
+
+The example file now verifies that the pointwise-target route also produces the
+final q/Theta signed comparison.
+
+### Mathematical Reason
+
+The previous milestone reduced the endpoint problem to:
+
+```text
+transport.targetTransportedAverage <= thetaSourceAverage
+```
+
+This milestone reduces that average-level input further.  It is enough to
+provide pointwise bounds:
+
+```text
+transport.targetLogVolume.fullLabelLogVolume
+  (fromCoordinate (transport.coordinateEquiv j)) <= thetaSourceAverage
+```
+
+for every `j : ZMod l.value`.  Lean proves the average bound from these
+pointwise bounds because the square weights are nonnegative and the total weight
+is positive.
+
+This is a useful mathematical decomposition: the remaining comparison is now
+located at the transported target full-label log-volume branch, not at an
+opaque weighted average.
+
+### Source Check
+
+This matches the way Corollary 3.12 uses `j^2`-weighted label data: the final
+average should be controlled by estimates on the labeled components together
+with the nonnegative square weights.  It also keeps the role of the Hodge/SHE
+transport separate: transport supplies the equality between source and target
+averages; pointwise target estimates supply the upper bound against the
+Theta-source average.
+
+Scholze-Stix's objection remains visible here.  The pointwise estimates are not
+allowed to identify the q- and Theta-side real lines silently; they are stated
+against the transported target full-label values inside the structured-SHE route.
+
+### Relevance to the 3.12 Dispute
+
+The pressure point is now more local.  To complete this branch, we need a
+source-level construction of the pointwise transported target full-label
+inequalities from the actual multiradial/Hodge-theater data.  The Lean chain
+from such pointwise inequalities to the final Corollary-3.12-shaped q/Theta
+comparison is now explicit and verified.
