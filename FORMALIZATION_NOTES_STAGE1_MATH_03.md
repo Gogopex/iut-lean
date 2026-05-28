@@ -477,3 +477,69 @@ placeAudited_logVolume_fl_zmod_constant_packet_object_target_bound_example
 The constant object equality is still an input.  The next useful step is to add
 a source classification for this local label/object bridge, separating direct
 local label construction from transported or separate identifications.
+
+## 111. Classifying the ZMod-to-Local-Object Bridge
+
+### Goal
+
+We made the source of the constant `ZMod` packet-local-object bridge explicit.
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1ZModPacketLocalObjectBridgeSource
+```
+
+with cases:
+
+```text
+directLocalLabelObjectConstruction
+ind12TransportedLocalLabelObjectConstruction
+separateLocalObjectIdentification
+```
+
+and wrapped the constant route in:
+
+```text
+FLZModCuspLabelThetaClassifiedConstantZModPacketLocalObjectEstimateAudit
+```
+
+The wrapper exposes constructors for the three source cases and preserves the
+target-average theorem:
+
+```text
+targetSigned_le_thetaSourceAverage
+```
+
+### Mathematical Point
+
+The pointwise/constant label-to-local-object bridge is now source-tagged.  This
+is the current lowest explicit equality in the direct local-object route, so it
+should not remain anonymous.
+
+### Trap Avoided
+
+We did not let a separate local-object identification masquerade as a direct
+local label construction.  The route can now record this distinction in Lean,
+which is important for later comparison with both Mochizuki's use of labeled
+Hodge-theater data and Scholze-Stix's insistence on explicit real-line
+identifications.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_classified_constant_packet_object_direct_example
+placeAudited_logVolume_fl_zmod_classified_constant_packet_object_separate_example
+placeAudited_logVolume_fl_zmod_classified_constant_packet_object_bound_example
+```
+
+### Remaining Gap
+
+Classification is not construction.  The next mathematical reduction is to
+define a direct local label/object construction interface that produces the
+constant `ZMod` packet-local-object family, rather than merely classifying an
+assumed equality.
