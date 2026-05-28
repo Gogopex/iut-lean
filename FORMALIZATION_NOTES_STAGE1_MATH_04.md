@@ -1567,3 +1567,77 @@ missing real alignment:
 ```
 
 This gives us a concrete starting dashboard for the disputed 3.12 passage.
+
+## 211. Dedicated Experiment Module
+
+### Lean Move
+
+We added:
+
+```text
+Iut/Stage1/IUTStage1Experiments.lean
+```
+
+and imported it from:
+
+```text
+Iut/Basic.lean
+```
+
+The module exposes the first repeatable diagnostic passes:
+
+```text
+Experiments.ind3MissingRealAlignmentReport
+Experiments.ind3MissingRealAlignment_blocks
+Experiments.ind3MissingRealAlignment_packetSourceGap
+Experiments.ind3MissingRealAlignment_thetaTargetGap
+Experiments.nonarchimedeanInd3LocalReport
+Experiments.nonarchimedeanInd3Local_canFeed
+Experiments.archimedeanInd3LocalReport
+Experiments.archimedeanInd3Local_cannotFeed
+Experiments.ind3LocalOrientations_differ
+```
+
+### Mathematical Reason
+
+The experiment module is intentionally proof-theoretic rather than numerical.
+The disputed 3.12 passage turns on whether certain real/log-volume
+identifications can be supplied coherently.  A useful first experiment is
+therefore to ask Lean which proof corridor can be assembled from a given set of
+formal data.
+
+The first reports say:
+
+```text
+missing real alignment:
+  cannot build the final Ind3 source/target alignment
+
+nonarchimedean local entry:
+  has the packet <= theta orientation needed by the current route
+
+archimedean local entry:
+  has theta <= packet orientation and cannot feed the current route directly
+```
+
+### Source Check
+
+This experiment layer is based on the same IUT III passage around Remark
+3.12.3 and Step (x): `(Ind3)` supplies the inequality, but the local mechanisms
+and real-valued identifications must remain explicit.  It also directly mirrors
+the Scholze-Stix diagnostic strategy of spelling out the real-line
+identifications before concluding a numerical inequality.
+
+### Relevance to the 3.12 Dispute
+
+We now have the first runnable Lean experiment surface for Corollary 3.12.  It
+does not settle the dispute, but it gives us a concrete way to run variants:
+
+```text
+provide nonarchimedean local alignment -> route can proceed
+provide only archimedean local alignment -> orientation blocks this route
+remove real alignment -> missing source/target fields are reported
+```
+
+The next experiment should connect these reports to the final q/Theta route
+summary, so a single Lean object records both the proof result and the exact
+remaining missing data.
