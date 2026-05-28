@@ -425,6 +425,7 @@ structure Ind3J2ScaleExperimentReport where
   twoScale : Real
   scalesDiffer : Bool
   labelIndependentScaleCanMatchAll : Bool
+  nonzeroQPilotDegreeRejectsLabelIndependentThetaScale : Bool
 
 /--
 For every `l >= 5`, the representative square scales at `j = 1` and `j = 2`
@@ -439,7 +440,8 @@ def ind3J2ScaleExperimentReport (l : PrimeGeFive) :
       IUTStage1ZModSquareWeightProfile.representativeSquareScale
         (l := l) (2 : ZMod l.value),
     scalesDiffer := true,
-    labelIndependentScaleCanMatchAll := false }
+    labelIndependentScaleCanMatchAll := false,
+    nonzeroQPilotDegreeRejectsLabelIndependentThetaScale := true }
 
 theorem ind3J2ScaleExperimentReport_oneScale
     (l : PrimeGeFive) :
@@ -461,6 +463,12 @@ theorem ind3J2ScaleExperimentReport_noLabelIndependentScale
     (ind3J2ScaleExperimentReport l).labelIndependentScaleCanMatchAll = false :=
   rfl
 
+theorem ind3J2ScaleExperimentReport_noThetaPilotDegreeScale
+    (l : PrimeGeFive) :
+    (ind3J2ScaleExperimentReport
+      l).nonzeroQPilotDegreeRejectsLabelIndependentThetaScale = true :=
+  rfl
+
 theorem no_labelIndependent_transport_scale_absorbs_j2
     (l : PrimeGeFive) (scale : Real) :
     ¬ ∀ j : ZMod l.value,
@@ -469,6 +477,23 @@ theorem no_labelIndependent_transport_scale_absorbs_j2
           (l := l) j :=
   IUTStage1ZModSquareWeightProfile.no_label_independent_scale_matches_all_representative_squares
     (l := l) scale
+
+/--
+Concrete pilot-degree collapse test for the representative relation
+`Theta_j ~ q^{j^2}`.
+
+If the q-pilot degree is nonzero, no single label-independent scale can make all
+representative theta-pilot degrees equal to that scale times the q-pilot degree.
+-/
+theorem no_labelIndependent_thetaPilot_degree_scale
+    {l : PrimeGeFive}
+    (profile :
+      IUTStage1ZModSquareWeightProfile.RepresentativeThetaPilotDegreeProfile l)
+    (q_ne_zero : profile.qPilotDegree ≠ 0)
+    (scale : Real) :
+    ¬ ∀ j : ZMod l.value,
+      profile.thetaPilotDegree j = scale * profile.qPilotDegree :=
+  profile.no_labelIndependent_scale_matches_theta_degrees q_ne_zero scale
 
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where

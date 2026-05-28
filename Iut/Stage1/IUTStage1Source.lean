@@ -2098,6 +2098,69 @@ theorem no_label_independent_scale_matches_all_representative_squares
   exact no_single_scale_matches_one_two (l := l) scale
     ⟨h (1 : ZMod l.value), h (2 : ZMod l.value)⟩
 
+/--
+Representative pilot-degree model for the concrete relation `Theta_j ~ q^{j^2}`.
+
+The field `qPilotDegree` is the real log/degree value attached to the q-pilot,
+and `thetaPilotDegree j` is the corresponding representative theta-pilot value at
+the label `j`.  This is still the current finite-label model, not the full
+Hodge-Arakelov construction of theta values.
+-/
+structure RepresentativeThetaPilotDegreeProfile
+    (l : PrimeGeFive) where
+  qPilotDegree : Real
+  thetaPilotDegree : ZMod l.value -> Real
+  thetaPilotDegree_eq_square_scale :
+    ∀ j : ZMod l.value,
+      thetaPilotDegree j =
+        representativeSquareScale (l := l) j * qPilotDegree
+
+namespace RepresentativeThetaPilotDegreeProfile
+
+variable {l : PrimeGeFive}
+
+theorem thetaPilotDegree_one
+    (profile : RepresentativeThetaPilotDegreeProfile l) :
+    profile.thetaPilotDegree (1 : ZMod l.value) = profile.qPilotDegree := by
+  rw [profile.thetaPilotDegree_eq_square_scale,
+    representativeSquareScale_one]
+  ring
+
+theorem thetaPilotDegree_two
+    (profile : RepresentativeThetaPilotDegreeProfile l) :
+    profile.thetaPilotDegree (2 : ZMod l.value) =
+      4 * profile.qPilotDegree := by
+  rw [profile.thetaPilotDegree_eq_square_scale,
+    representativeSquareScale_two]
+
+theorem no_labelIndependent_scale_matches_theta_degrees
+    (profile : RepresentativeThetaPilotDegreeProfile l)
+    (q_ne_zero : profile.qPilotDegree ≠ 0)
+    (scale : Real) :
+    ¬ ∀ j : ZMod l.value,
+      profile.thetaPilotDegree j = scale * profile.qPilotDegree := by
+  intro hscale
+  have hone :
+      (1 : Real) * profile.qPilotDegree =
+        scale * profile.qPilotDegree := by
+    simpa [profile.thetaPilotDegree_eq_square_scale,
+      representativeSquareScale_one] using hscale (1 : ZMod l.value)
+  have htwo :
+      (4 : Real) * profile.qPilotDegree =
+        scale * profile.qPilotDegree := by
+    simpa [profile.thetaPilotDegree_eq_square_scale,
+      representativeSquareScale_two] using hscale (2 : ZMod l.value)
+  have hone_four :
+      (1 : Real) * profile.qPilotDegree =
+        (4 : Real) * profile.qPilotDegree :=
+    hone.trans htwo.symm
+  have hbad : (1 : Real) = 4 := by
+    apply mul_right_cancel₀ q_ne_zero
+    simpa using hone_four
+  norm_num at hbad
+
+end RepresentativeThetaPilotDegreeProfile
+
 theorem toWeighted_const_le_weightedAverage_of_forall_le
     (profile : IUTStage1ZModSquareWeightProfile l)
     (data : IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value))

@@ -2419,3 +2419,77 @@ IUT_FORMALIZATION_3_12_DRAFT.pdf
 The draft states the current result as conditional, records the exact missing
 mathematics, and includes simple diagrams for the `3.11 -> 3.11.5 -> 3.12`
 decomposition and the current Lean route.
+
+## 222. Representative q-to-Theta Pilot Degree Scaling
+
+### Lean Move
+
+In:
+
+```text
+Iut/Stage1/IUTStage1Source.lean
+Iut/Stage1/IUTStage1Experiments.lean
+```
+
+we added:
+
+```text
+IUTStage1ZModSquareWeightProfile.RepresentativeThetaPilotDegreeProfile
+RepresentativeThetaPilotDegreeProfile.thetaPilotDegree_one
+RepresentativeThetaPilotDegreeProfile.thetaPilotDegree_two
+RepresentativeThetaPilotDegreeProfile.no_labelIndependent_scale_matches_theta_degrees
+no_labelIndependent_thetaPilot_degree_scale
+```
+
+and extended:
+
+```text
+Ind3J2ScaleExperimentReport.nonzeroQPilotDegreeRejectsLabelIndependentThetaScale
+```
+
+### Mathematical Reason
+
+The previous `j^2` obstruction was stated only for a square-scale function:
+
+```text
+j |-> j.val^2
+```
+
+The new profile attaches this scale to a q-pilot degree:
+
+```text
+thetaPilotDegree j = representativeSquareScale j * qPilotDegree
+```
+
+Lean proves:
+
+```text
+thetaPilotDegree 1 = qPilotDegree
+thetaPilotDegree 2 = 4 * qPilotDegree
+```
+
+and, if `qPilotDegree != 0`, no single label-independent scale can make all
+theta-pilot degrees equal to `scale * qPilotDegree`.
+
+### Source Check
+
+IUT II's Hodge-Arakelov evaluation discussion identifies the concrete theta
+values at torsion labels as carrying `q^{j^2}` behavior.  Scholze-Stix isolate
+the corresponding `j^2` degree scaling as part of their real-line identification
+objection.  This milestone does not yet formalize theta functions or
+Hodge-Arakelov evaluation, but it moves the obstruction from an abstract
+square-weight profile to an explicit q/theta pilot-degree relation.
+
+### Current Reading
+
+The finite-label model now checks the narrow collapse claim in the form closest
+to the critique:
+
+```text
+nonzero q-pilot degree
++ theta_j degree = j^2 * q-pilot degree
+-> no label-independent scalar accounts for all theta_j degrees
+```
+
+This is still representative-label mathematics, not the full `|F_l|` quotient or
+the actual IUT theta-value construction.
