@@ -2986,6 +2986,52 @@ theorem placeAuditedMultiradialThetaHullEndpoint_region_eq_related_example
       endpoint.audited_images.possibleImages.images.region audited₂ :=
   endpoint.region_eq_of_related hrel
 
+theorem placeAuditedMultiradialThetaHullEndpoint_nonarchimedeanEntry_example
+    {source target : Copy} {coric : Type u}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (fiberPackage :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.NonarchimedeanInd2FiberPackage
+        audited₁)
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.NonarchimedeanIsmActionEntryStep
+        audited₁ audited₂) :
+    endpoint.audited_images.possibleImages.images.region audited₁ =
+        endpoint.audited_images.possibleImages.images.region audited₂ ∧
+      hstep.action_entry.place ∈ fiberPackage.fiberAudit.fiber.places :=
+  endpoint.nonarchimedeanEntry_region_eq_and_fiber_mem
+    fiberPackage hstep
+
+theorem placeAuditedMultiradialThetaHullEndpoint_archimedeanEntry_example
+    {source target : Copy} {coric : Type u}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.archimedean)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (fiberPackage :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ArchimedeanInd2FiberPackage
+        audited₁)
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ArchimedeanOrderTwoActionEntryStep
+        audited₁ audited₂) :
+    endpoint.audited_images.possibleImages.images.region audited₁ =
+        endpoint.audited_images.possibleImages.images.region audited₂ ∧
+      hstep.action_entry.place ∈ fiberPackage.fiberAudit.fiber.places :=
+  endpoint.archimedeanEntry_region_eq_and_fiber_mem
+    fiberPackage hstep
+
 def unitThetaToyIUTStage1SourceObligationGap
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)

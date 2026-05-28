@@ -8905,6 +8905,52 @@ theorem region_eq_of_related
       endpoint.audited_images.possibleImages.images.region audited₂ :=
   endpoint.audited_images.region_eq_of_related hrel
 
+theorem nonarchimedeanEntry_region_eq_and_fiber_mem
+    {coric : Type u}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (fiberPackage :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.NonarchimedeanInd2FiberPackage
+        audited₁)
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.NonarchimedeanIsmActionEntryStep
+        audited₁ audited₂) :
+    endpoint.audited_images.possibleImages.images.region audited₁ =
+        endpoint.audited_images.possibleImages.images.region audited₂ ∧
+      hstep.action_entry.place ∈ fiberPackage.fiberAudit.fiber.places :=
+  endpoint.audited_images.region_eq_and_fiber_mem_of_nonarchimedeanEntry_step
+    fiberPackage hstep
+
+theorem archimedeanEntry_region_eq_and_fiber_mem
+    {coric : Type u}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.archimedean)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (fiberPackage :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ArchimedeanInd2FiberPackage
+        audited₁)
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ArchimedeanOrderTwoActionEntryStep
+        audited₁ audited₂) :
+    endpoint.audited_images.possibleImages.images.region audited₁ =
+        endpoint.audited_images.possibleImages.images.region audited₂ ∧
+      hstep.action_entry.place ∈ fiberPackage.fiberAudit.fiber.places :=
+  endpoint.audited_images.region_eq_and_fiber_mem_of_archimedeanEntry_step
+    fiberPackage hstep
+
 theorem multiradialOutputMatchesPackage
     (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations) :
     endpoint.audited_images.multiradialOutput =

@@ -2600,3 +2600,52 @@ placeAuditedMultiradialThetaHullEndpoint_region_eq_related_example
 The next refinement should combine the fiber-aware entry image theorem with
 this hull endpoint, so a single local `(Ind2)` entry carries both its fiber
 membership and its audited image equality at the hull boundary.
+
+## 35. Fiber-Aware Entry Invariance at the Hull Boundary
+
+### Goal
+
+We exposed the fiber-aware entry image theorem directly on the place-audited
+multiradial hull endpoint.
+
+### Lean/API Check
+
+The endpoint now proves:
+
+```text
+nonarchimedeanEntry_region_eq_and_fiber_mem
+archimedeanEntry_region_eq_and_fiber_mem
+```
+
+These are endpoint-level versions of the image-package theorems.  They return
+both the audited region equality and the action-entry place's membership in the
+explicit fiber over `vQ`.
+
+### Mathematical Point
+
+This keeps the local `(Ind2)` bookkeeping visible exactly where the hull and
+determinant/log-volume data enter the Corollary 3.12 route.  A later proof that
+uses the hull endpoint can no longer cite only the final inequality while
+silently dropping the local place-fiber information.
+
+### Trap Avoided
+
+The theorem does not derive any new hull containment or determinant bound from
+the `(Ind2)` entry.  It simply keeps the already-proved entry invariance and
+fiber membership attached to the audited hull endpoint.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+placeAuditedMultiradialThetaHullEndpoint_nonarchimedeanEntry_example
+placeAuditedMultiradialThetaHullEndpoint_archimedeanEntry_example
+```
+
+### Remaining Gap
+
+The next global audit should re-read the Corollary 3.12 proof steps around the
+holomorphic hull and procession-normalized log-volume to decide whether the
+next formal object should be a hull-volume audit, a procession-normalization
+audit, or a log-Kummer compatibility audit.
