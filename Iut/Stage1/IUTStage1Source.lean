@@ -2783,6 +2783,53 @@ theorem gaussianDegree_neg_fromCoordinate_eq
 
 end GaussianMonoidDegreeEvaluation
 
+def absLabelProcessionTop (l : PrimeGeFive) : Nat :=
+  l.value / 2
+
+def absLabelFromProcession
+    (l : PrimeGeFive)
+    (label : IUTStage1ProcessionContainer (absLabelProcessionTop l)) :
+    IUTStage1ZModCuspFullLabel l :=
+  IUTStage1ZModCuspFullLabel.fromCoordinate l
+    (label.val : ZMod l.value)
+
+theorem absLabelProcession_value_le_half
+    (label : IUTStage1ProcessionContainer (absLabelProcessionTop l)) :
+    label.val ≤ l.value / 2 := by
+  have h := label.isLt
+  unfold absLabelProcessionTop at h
+  omega
+
+theorem absLabelFromProcession_core :
+    absLabelFromProcession l
+        (IUTStage1ProcessionContainer.core
+          (absLabelProcessionTop l)) =
+      IUTStage1ZModCuspFullLabel.zero := by
+  simp [absLabelFromProcession, IUTStage1ProcessionContainer.core,
+    IUTStage1ZModCuspFullLabel.fromCoordinate_zero]
+
+theorem thetaExponentOnAbsLabel_fromProcession
+    (label : IUTStage1ProcessionContainer (absLabelProcessionTop l)) :
+    thetaExponentOnAbsLabel
+        (l := l) (absLabelFromProcession l label) =
+      ((label.val : Real) ^ 2) := by
+  unfold absLabelFromProcession
+  have hle : label.val ≤ l.value / 2 :=
+    absLabelProcession_value_le_half (l := l) label
+  have hlt : label.val < l.value := by
+    have hge : 5 ≤ l.value := l.ge_five
+    omega
+  have hval :
+      ((label.val : ZMod l.value).val) = label.val :=
+    ZMod.val_natCast_of_lt hlt
+  have hhalf :
+      ((label.val : ZMod l.value).val) ≤ l.value / 2 := by
+    rw [hval]
+    exact hle
+  rw [thetaExponentOnAbsLabel_fromCoordinate_of_val_le_half
+    (l := l) (label.val : ZMod l.value) hhalf]
+  rw [hval]
+
 noncomputable def balancedFullLabelWeightedSummand
     (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
     (label : IUTStage1ZModCuspFullLabel l) : Real :=

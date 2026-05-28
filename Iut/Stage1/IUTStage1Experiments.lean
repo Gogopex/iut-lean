@@ -629,6 +629,7 @@ structure ProcessionContainerExperimentReport where
   tensorPacketLogVolumeNormalizationAvailable : Bool
   tensorPacketPermutationInvariant : Bool
   processionTotalIndeterminacyFactorial : Bool
+  finalContainerMatchesAbsLabelExponents : Bool
 deriving Repr
 
 /--
@@ -643,7 +644,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     stageIndeterminacyBoundedByFullContainer := true,
     tensorPacketLogVolumeNormalizationAvailable := true,
     tensorPacketPermutationInvariant := true,
-    processionTotalIndeterminacyFactorial := true }
+    processionTotalIndeterminacyFactorial := true,
+    finalContainerMatchesAbsLabelExponents := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -675,6 +677,26 @@ theorem processionTotalIndeterminacy_le_wholeSet (full : Nat) :
       IUTStage1ProcessionContainer.wholeSetIndeterminacyCount full :=
   IUTStage1ProcessionContainer.processionTotalIndeterminacyCount_le_wholeSetIndeterminacyCount
     full
+
+theorem absLabelProcession_core_maps_to_zero
+    (l : PrimeGeFive) :
+    IUTStage1ZModSquareWeightProfile.absLabelFromProcession l
+        (IUTStage1ProcessionContainer.core
+          (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) =
+      IUTStage1ZModCuspFullLabel.zero :=
+  IUTStage1ZModSquareWeightProfile.absLabelFromProcession_core
+
+theorem absLabelProcession_thetaExponent_eq_square
+    (l : PrimeGeFive)
+    (label :
+      IUTStage1ProcessionContainer
+        (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+    IUTStage1ZModSquareWeightProfile.thetaExponentOnAbsLabel
+        (l := l)
+        (IUTStage1ZModSquareWeightProfile.absLabelFromProcession l label) =
+      ((label.val : Real) ^ 2) :=
+  IUTStage1ZModSquareWeightProfile.thetaExponentOnAbsLabel_fromProcession
+    (l := l) label
 
 theorem processionTensorPacket_normalized_eq_card_average
     {kind : IUTStage1PlaceKind} {j : Nat}
@@ -937,6 +959,7 @@ structure Corollary312DisputeFirstPassReport where
   processionTensorPacketLogVolumeAvailable : Bool
   processionTensorPacketPermutationInvariant : Bool
   processionIndeterminacyFactorialAvailable : Bool
+  absLabelProcessionExponentBridgeAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -965,6 +988,7 @@ def corollary312DisputeFirstPassReport :
     processionTensorPacketLogVolumeAvailable := true,
     processionTensorPacketPermutationInvariant := true,
     processionIndeterminacyFactorialAvailable := true,
+    absLabelProcessionExponentBridgeAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1025,6 +1049,11 @@ theorem corollary312Report_processionTensorPacketPermutationInvariant :
 
 theorem corollary312Report_processionIndeterminacyFactorialAvailable :
     corollary312DisputeFirstPassReport.processionIndeterminacyFactorialAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_absLabelProcessionExponentBridgeAvailable :
+    corollary312DisputeFirstPassReport.absLabelProcessionExponentBridgeAvailable =
       true :=
   rfl
 
