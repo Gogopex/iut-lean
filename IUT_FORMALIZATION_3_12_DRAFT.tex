@@ -229,6 +229,11 @@ The code currently covers:
 \item the IUT IV, Corollary 2.2(ii) condition (C2) inequality chain:
   \(\frac16\log(q)\le\frac16\log(q_2)\le\frac16\log(q_\forall)\le
    (1+\epsilon_E)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)+C_K\);
+\item the IUT IV, Corollary 2.2(ii) definition of \(\epsilon_E\):
+  \(\epsilon_E=(60\delta)^2h^{-1/2}\log(2\delta h)\), represented with
+  \(h^{1/2}\) and \(\log(2\delta h)\) as explicit real parameters; Lean proves
+  positivity and \(\epsilon_E\ge5\delta h^{-1/2}\) from
+  \(\delta\ge2\), \(h^{1/2}>0\), and \(\log(2\delta h)\ge1\);
 \item the IUT IV, Corollary 2.2(ii) final \(\epsilon_E\)-absorption:
   from \(0<\epsilon_E\le1\), Lean proves
   \[
@@ -300,8 +305,9 @@ composition of the displayed bounded-discrepancy chain.  The transfer flag
 records movement of pointwise bounds across bounded-discrepancy equivalence.
 The Corollary 2.2(C1) flag records the displayed prime-scale window and its
 elementary consequences.  The Corollary 2.2(C2) flag records the displayed
-three-step logarithmic inequality chain.  The \(\epsilon_E\)-absorption flag
-records the final denominator removal in the proof of C2.  The
+three-step logarithmic inequality chain.  The \(\epsilon_E\)-definition flag
+records the source formula and lower estimate for \(\epsilon_E\).  The
+\(\epsilon_E\)-absorption flag records the final denominator removal in C2.  The
 log-different/log-conductor flag records the bridge from tripodal field terms to
 curve functions.
 The theorem-level route is:
@@ -393,6 +399,8 @@ derives nonnegativity of \(\log(q_\forall)\), positivity of
 \((\log(q_\forall))^{1/2}\), and \(1\le10\delta\).
 For Corollary 2.2(ii), Lean proves the final \(\frac16\log(q)\) bound from the
 displayed \(\log(q)\), \(\log(q_2)\), and \(\log(q_\forall)\) chain.
+Lean records the proof's definition of \(\epsilon_E\) and verifies the stated
+lower estimate \(\epsilon_E\ge5\delta h^{-1/2}\).
 Lean also proves the final \(\epsilon_E\)-absorption step used just before C2:
 the intermediate expression with denominator \(1-2\epsilon_E/5\) is bounded by
 \((1+\epsilon_E)\) times the log-degree sum plus \(C_K\).

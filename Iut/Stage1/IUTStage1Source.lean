@@ -3315,6 +3315,90 @@ theorem logQTwo_le_heightSide
 end IUTStage1IUTIVCorollary22C2InequalityChainShadow
 
 /--
+The `epsilon_E` expression introduced in the proof of IUT IV, Corollary 2.2(ii):
+`(60 * delta)^2 * h^(-1/2) * log(2 * delta * h)`.
+
+The square-root of `h = log(q_all)` and the logarithmic factor are explicit
+parameters at this stage.
+-/
+noncomputable def iutIVCorollary22EpsilonDefinitionRHS
+    (delta sqrtH logTwoDeltaH : Real) : Real :=
+  (60 * delta) ^ 2 * sqrtH⁻¹ * logTwoDeltaH
+
+/--
+IUT IV, Corollary 2.2(ii), definition and elementary lower estimate for
+`epsilon_E`.
+
+The source records
+`epsilon_E := (60 delta)^2 h^(-1/2) log(2 delta h) (>= 5 delta h^(-1/2))`,
+using `delta >= 2` and `log(2 delta h) >= 1`.
+-/
+structure IUTStage1IUTIVCorollary22EpsilonDefinitionShadow where
+  delta : Real
+  sqrtH : Real
+  logTwoDeltaH : Real
+  epsilonE : Real
+  delta_ge_two : 2 <= delta
+  sqrtH_pos : 0 < sqrtH
+  logTwoDeltaH_ge_one : 1 <= logTwoDeltaH
+  epsilonE_eq :
+    epsilonE =
+      iutIVCorollary22EpsilonDefinitionRHS delta sqrtH logTwoDeltaH
+
+namespace IUTStage1IUTIVCorollary22EpsilonDefinitionShadow
+
+theorem delta_pos
+    (data : IUTStage1IUTIVCorollary22EpsilonDefinitionShadow) :
+    0 < data.delta := by
+  linarith [data.delta_ge_two]
+
+theorem epsilonE_pos
+    (data : IUTStage1IUTIVCorollary22EpsilonDefinitionShadow) :
+    0 < data.epsilonE := by
+  rw [data.epsilonE_eq, iutIVCorollary22EpsilonDefinitionRHS]
+  have hsixty_delta : 0 < 60 * data.delta := by
+    nlinarith [data.delta_pos]
+  have hsquare : 0 < (60 * data.delta) ^ 2 :=
+    sq_pos_of_pos hsixty_delta
+  have hinv : 0 < data.sqrtH⁻¹ := inv_pos.mpr data.sqrtH_pos
+  have hlog : 0 < data.logTwoDeltaH := by
+    linarith [data.logTwoDeltaH_ge_one]
+  exact mul_pos (mul_pos hsquare hinv) hlog
+
+theorem five_delta_inv_sqrtH_le_epsilonE
+    (data : IUTStage1IUTIVCorollary22EpsilonDefinitionShadow) :
+    5 * data.delta * data.sqrtH⁻¹ <= data.epsilonE := by
+  rw [data.epsilonE_eq, iutIVCorollary22EpsilonDefinitionRHS]
+  have hsquare_nonneg : 0 <= (60 * data.delta) ^ 2 := sq_nonneg _
+  have hlogmul :
+      (60 * data.delta) ^ 2 <=
+        (60 * data.delta) ^ 2 * data.logTwoDeltaH := by
+    simpa using
+      mul_le_mul_of_nonneg_left data.logTwoDeltaH_ge_one hsquare_nonneg
+  have hmain : 5 * data.delta <=
+      (60 * data.delta) ^ 2 * data.logTwoDeltaH := by
+    have hdelta_pos := data.delta_pos
+    nlinarith [data.delta_ge_two, hlogmul]
+  have hinv_nonneg : 0 <= data.sqrtH⁻¹ := inv_nonneg.mpr data.sqrtH_pos.le
+  have hmul :=
+    mul_le_mul_of_nonneg_right hmain hinv_nonneg
+  calc
+    5 * data.delta * data.sqrtH⁻¹ =
+        (5 * data.delta) * data.sqrtH⁻¹ := by ring
+    _ <= ((60 * data.delta) ^ 2 * data.logTwoDeltaH) * data.sqrtH⁻¹ :=
+        hmul
+    _ = (60 * data.delta) ^ 2 * data.sqrtH⁻¹ * data.logTwoDeltaH := by
+        ring
+
+theorem five_delta_inv_sqrtH_le_one_of_epsilonE_le_one
+    (data : IUTStage1IUTIVCorollary22EpsilonDefinitionShadow)
+    (heps : data.epsilonE <= 1) :
+    5 * data.delta * data.sqrtH⁻¹ <= 1 :=
+  le_trans data.five_delta_inv_sqrtH_le_epsilonE heps
+
+end IUTStage1IUTIVCorollary22EpsilonDefinitionShadow
+
+/--
 The denominator `1 - (2/5) * epsilon_E` appearing in the last absorption step
 of the proof of IUT IV, Corollary 2.2(ii).
 -/
