@@ -12189,6 +12189,22 @@ theorem zeroObject_eq_packetLocalObject'
       audited.choice.local_tensor_state.packetState.localObject :=
   part.zeroObject_eq_packetLocalObject audited
 
+theorem localLabCuspModel_eq_zmod
+    (part : audit.FLZModCuspLabelThetaPacketLocalObjectContainerAudit l) :
+    (part.theta_source.compatible_average.zmod_cusp_audit.cusp_label_model).local_lab_cusp_model =
+      zmodLocalLabCuspModel l :=
+  let model :=
+    part.theta_source.compatible_average.zmod_cusp_audit.cusp_label_model
+  model.localLabCuspModel_eq_zmod
+
+theorem cuspLabelClassData_eq_zmod
+    (part : audit.FLZModCuspLabelThetaPacketLocalObjectContainerAudit l) :
+    (part.theta_source.compatible_average.zmod_cusp_audit.cusp_label_model).cusp_label_class_data =
+      zmodCanonicalCuspLabelClassData l :=
+  let model :=
+    part.theta_source.compatible_average.zmod_cusp_audit.cusp_label_model
+  model.cuspLabelClassData_eq_zmod
+
 def toThetaLocalObjectContainerAudit
     (part : audit.FLZModCuspLabelThetaPacketLocalObjectContainerAudit l) :
     audit.FLZModCuspLabelThetaLocalObjectContainerAudit l :=

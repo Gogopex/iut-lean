@@ -4597,6 +4597,34 @@ theorem placeAudited_logVolume_fl_zmod_packet_local_object_eq_example
       audited.choice.local_tensor_state.packetState.localObject :=
   part.cuspClassObject_eq_packetLocalObject' audited label
 
+theorem placeAudited_logVolume_fl_zmod_packet_local_object_cusp_model_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaPacketLocalObjectContainerAudit l) :
+    (part.theta_source.compatible_average.zmod_cusp_audit.cusp_label_model).local_lab_cusp_model =
+      zmodLocalLabCuspModel l :=
+  part.localLabCuspModel_eq_zmod
+
+theorem placeAudited_logVolume_fl_zmod_packet_local_object_cusp_data_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaPacketLocalObjectContainerAudit l) :
+    (part.theta_source.compatible_average.zmod_cusp_audit.cusp_label_model).cusp_label_class_data =
+      zmodCanonicalCuspLabelClassData l :=
+  part.cuspLabelClassData_eq_zmod
+
 def placeAudited_logVolume_fl_zmod_packet_local_object_to_local_object_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
