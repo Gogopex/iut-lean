@@ -205,6 +205,10 @@ The code currently covers:
 \item the IUT IV, Theorem 1.10 Step (viii) final absorption of
   \(2\log(\ell)+74\) and the prime-product term into
   \(10(e^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}})\);
+\item the IUT IV, Theorem 1.10 final display:
+  the Corollary 3.12 \(C_\Theta\) handoff, followed by the
+  tripodal-to-\(F\) monotonicity, gives the final \(F\)-level
+  \(\frac16\log(q)\) inequality;
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -256,7 +260,9 @@ small-prime flag records the additive error bound \(21\).  The \(\mathrm{GL}_2\)
 flag records the finite cardinality constants feeding that bound.  The
 Step (iii) flag records the \(\log(s_Q)\) coefficient absorption.
 The Step (viii) flag records the prime-product case split used before the final
-upper bound for \(C_\Theta\), plus the final coarse error absorption.
+upper bound for \(C_\Theta\), plus the final coarse error absorption.  The final
+display flag records the composed Theorem 1.10 inequality with \(F\)-level
+log-degree terms.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -331,6 +337,9 @@ For Step (viii), Lean checks that the two Proposition 1.6 cases imply the
 uniform prime-product bound used in the final \(C_\Theta\) estimate.
 Lean also checks the subsequent absorption into the coefficient \(10\) of
 \(e^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}}\).
+Combining the Corollary 3.12 handoff with the tripodal-to-\(F\) monotonicity,
+Lean proves the final displayed \(F\)-level inequality of Theorem 1.10 at this
+real-valued shadow level.
 
 \section{Missing Mathematics}
 

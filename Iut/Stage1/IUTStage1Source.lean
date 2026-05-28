@@ -2927,6 +2927,56 @@ theorem oneSixthLogQ_le_theorem110RightHandSide
 
 end IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow
 
+/--
+IUT IV, Theorem 1.10 final displayed bound after the tripodal-to-`F` passage.
+
+This record composes two already-formalized pieces of the theorem: the
+Corollary 3.12 handoff giving the `F_tpd` right-hand side, and the monotonicity
+`log(d_Ftpd) <= log(d_F)`, `log(f_Ftpd) <= log(f_F)` that yields the final
+right-hand side in the statement of Theorem 1.10.
+-/
+structure IUTStage1IUTIVTheorem110FinalDisplayShadow where
+  estimate : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow
+  logDifferentF : Real
+  logConductorF : Real
+  different_le : estimate.logDifferentFtpd <= logDifferentF
+  conductor_le : estimate.logConductorFtpd <= logConductorF
+
+namespace IUTStage1IUTIVTheorem110FinalDisplayShadow
+
+noncomputable def finalRightHandSide
+    (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) : Real :=
+  iutIVThetaPilotTheorem110RightHandSide data.estimate.l data.estimate.dmod
+    data.logDifferentF data.logConductorF data.estimate.eStarMod
+    data.estimate.etaPrm
+
+def baseChange
+    (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) :
+    IUTStage1IUTIVTripodalBaseChangeLogDegreeShadow :=
+  { l := data.estimate.l
+    dmod := data.estimate.dmod
+    logDifferentFtpd := data.estimate.logDifferentFtpd
+    logConductorFtpd := data.estimate.logConductorFtpd
+    logDifferentF := data.logDifferentF
+    logConductorF := data.logConductorF
+    eStarMod := data.estimate.eStarMod
+    etaPrm := data.estimate.etaPrm
+    different_le := data.different_le
+    conductor_le := data.conductor_le }
+
+theorem finalRightHandSide_eq_baseChange
+    (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) :
+    data.finalRightHandSide = data.baseChange.fTheorem110RightHandSide :=
+  rfl
+
+theorem oneSixthLogQ_le_finalRightHandSide
+    (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) :
+    data.estimate.oneSixthLogQ <= data.finalRightHandSide := by
+  exact le_trans data.estimate.oneSixthLogQ_le_theorem110RightHandSide
+    data.baseChange.ftpdTheorem110RightHandSide_le_fTheorem110RightHandSide
+
+end IUTStage1IUTIVTheorem110FinalDisplayShadow
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}

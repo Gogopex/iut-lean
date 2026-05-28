@@ -661,6 +661,7 @@ structure ProcessionContainerExperimentReport where
   iutIVLogSQStepIIIEstimateAvailable : Bool
   iutIVPrimeProductCaseSplitBoundAvailable : Bool
   iutIVFinalErrorAbsorptionAvailable : Bool
+  iutIVTheorem110FinalDisplayAvailable : Bool
 deriving Repr
 
 /--
@@ -707,7 +708,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     iutIVGLTwoCardinalityConstantsAvailable := true,
     iutIVLogSQStepIIIEstimateAvailable := true,
     iutIVPrimeProductCaseSplitBoundAvailable := true,
-    iutIVFinalErrorAbsorptionAvailable := true }
+    iutIVFinalErrorAbsorptionAvailable := true,
+    iutIVTheorem110FinalDisplayAvailable := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -1202,6 +1204,11 @@ theorem iutIVFinalErrorAbsorption_le_ten
       10 * data.eEta :=
   data.finalError_le_ten
 
+theorem iutIVTheorem110FinalDisplay_bound
+    (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) :
+    data.estimate.oneSixthLogQ <= data.finalRightHandSide :=
+  data.oneSixthLogQ_le_finalRightHandSide
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
@@ -1461,6 +1468,7 @@ structure Corollary312DisputeFirstPassReport where
   iutIVLogSQStepIIIEstimateAvailable : Bool
   iutIVPrimeProductCaseSplitBoundAvailable : Bool
   iutIVFinalErrorAbsorptionAvailable : Bool
+  iutIVTheorem110FinalDisplayAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1521,6 +1529,7 @@ def corollary312DisputeFirstPassReport :
     iutIVLogSQStepIIIEstimateAvailable := true,
     iutIVPrimeProductCaseSplitBoundAvailable := true,
     iutIVFinalErrorAbsorptionAvailable := true,
+    iutIVTheorem110FinalDisplayAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1741,6 +1750,11 @@ theorem corollary312Report_iutIVPrimeProductCaseSplitBoundAvailable :
 
 theorem corollary312Report_iutIVFinalErrorAbsorptionAvailable :
     corollary312DisputeFirstPassReport.iutIVFinalErrorAbsorptionAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_iutIVTheorem110FinalDisplayAvailable :
+    corollary312DisputeFirstPassReport.iutIVTheorem110FinalDisplayAvailable =
       true :=
   rfl
 
