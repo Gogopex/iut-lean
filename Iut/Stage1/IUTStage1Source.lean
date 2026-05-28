@@ -21089,6 +21089,76 @@ def weightedThetaComparisonRouteOfConstantZModFactoredSourceZeroCuspTarget
       bundle profile audited obligations source_profile_eq source_log_volume_eq
       target_log_volume_eq_theta)
 
+structure FactoredSourceZeroCuspTargetAudit
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) where
+  obligations :
+    IUTStage1StructuredSHEFactoredSquareFullLabelObligations package bundle l
+  source_profile_eq : profile = obligations.sourceProfile
+  source_log_volume_eq :
+    part.theta_source.compatible_average.cuspLogVolume audited =
+      obligations.sourceLogVolume
+  target_log_volume_eq_theta :
+    obligations.targetLogVolume =
+      part.theta_source.compatible_average.cuspLogVolume audited
+
+namespace FactoredSourceZeroCuspTargetAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+open FLZModCuspLabelThetaCuspClassContainerAudit in
+def toSourceZeroCuspTargetThetaAudit
+    {part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (routeAudit :
+      FactoredSourceZeroCuspTargetAudit part bundle profile audited) :
+    ThreeElevenFiveStructuredSHESourceZeroCuspTargetThetaAudit
+      part.toThetaCuspClassContainerAudit bundle profile audited :=
+  part.toSourceZeroCuspTargetThetaAuditOfFactoredObligations
+    bundle profile audited routeAudit.obligations routeAudit.source_profile_eq
+    routeAudit.source_log_volume_eq routeAudit.target_log_volume_eq_theta
+
+def weightedThetaComparisonRoute
+    {part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (routeAudit :
+      FactoredSourceZeroCuspTargetAudit part bundle profile audited) :
+    FLZModCuspLabelThetaCuspClassContainerAudit.WeightedThetaComparisonRoute
+      part.toThetaCuspClassContainerAudit profile audited :=
+  part.weightedThetaComparisonRouteOfConstantZModFactoredSourceZeroCuspTarget
+    bundle profile audited routeAudit.obligations routeAudit.source_profile_eq
+    routeAudit.source_log_volume_eq routeAudit.target_log_volume_eq_theta
+
+theorem qSigned_le_thetaSigned
+    {part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (routeAudit :
+      FactoredSourceZeroCuspTargetAudit part bundle profile audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  routeAudit.weightedThetaComparisonRoute.qSigned_le_thetaSigned
+
+theorem transportBridge_eq_structuredSHE
+    {part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (routeAudit :
+      FactoredSourceZeroCuspTargetAudit part bundle profile audited) :
+    (routeAudit.obligations.toStructuredSHESquareWeightTransportAudit.preservationAudit).bridge =
+      bundle.hodgeTheaterDescentBridgeData :=
+  routeAudit.obligations.bridge_eq_structuredSHE
+
+end FactoredSourceZeroCuspTargetAudit
+
 open FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit in
 def toClassifiedZModPacketNormalizedRouteAudit
     (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l) :

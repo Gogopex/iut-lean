@@ -844,3 +844,75 @@ constant ZMod packet-normalized label family
 The next mathematical pressure point is to replace the constant packet data and
 explicit matching equalities by source-level constructions from the actual
 Hodge-theater/SHE apparatus.
+
+## 203. Factored Constant Branch Matching Is A Single Audit
+
+### Lean Move
+
+In
+
+```text
+FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit
+```
+
+we added the route-level certificate:
+
+```text
+FactoredSourceZeroCuspTargetAudit
+```
+
+with accessors:
+
+```text
+FactoredSourceZeroCuspTargetAudit.toSourceZeroCuspTargetThetaAudit
+FactoredSourceZeroCuspTargetAudit.weightedThetaComparisonRoute
+FactoredSourceZeroCuspTargetAudit.qSigned_le_thetaSigned
+FactoredSourceZeroCuspTargetAudit.transportBridge_eq_structuredSHE
+```
+
+The example file now checks that this single audit proves the final q/Theta
+comparison and exposes the structured-SHE bridge equality.
+
+### Mathematical Reason
+
+The previous milestone still passed the three matching equalities as loose
+arguments:
+
+```text
+profile = obligations.sourceProfile
+constantRoute.cuspLogVolume audited = obligations.sourceLogVolume
+obligations.targetLogVolume = constantRoute.cuspLogVolume audited
+```
+
+These are not incidental implementation details.  They are exactly the
+identifications that say the factored structured-SHE obligations are being
+applied to the same profile and log-volume objects as the constant packet
+route.  This milestone packages them into one certificate, next to the factored
+SHE obligations themselves.
+
+### Source Check
+
+This follows the same discipline used throughout the Corollary 3.12 corridor:
+identifications of real/log-volume data are not performed silently.  A later
+construction may replace this audit by data derived from Hodge-theater/SHE
+machinery, but it must still prove the same matching fields.
+
+This directly reflects the Scholze-Stix pressure point.  The branch does not
+allow the source and target histories to be identified by notation; the
+structured-SHE bridge equality is an accessor theorem of the audit, and the
+source/target log-volume matches are named fields.
+
+### Relevance to the 3.12 Dispute
+
+The current constant branch now has a cleaner certificate boundary:
+
+```text
+constant packet data
+factored SHE square/full-label obligations
+profile/source/target log-volume matching fields
+  -> final 3.11.5-to-3.12 q/Theta comparison
+```
+
+The next step is mathematical rather than organizational: replace one of the
+constant-packet or explicit matching fields by a construction from the
+nonconstant local Hodge-theater route.
