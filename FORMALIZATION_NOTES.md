@@ -18335,3 +18335,37 @@ than derived from Hodge-theater data.  At present the answer is explicit:
 `weightedAverage_le_thetaAverage` is supplied by `WeightedThetaComparisonData`;
 the other fields are derived from already formalized local/container,
 q-to-target, and Theta-source upper-bound data.
+
+## 139. Route Certificates Retain The Hull-Log-Volume Classification
+
+### Lean Move
+
+We added:
+
+```text
+weightedThetaComparisonRouteLevel
+weightedThetaComparisonRouteLevel_eq_hullLogVolume
+weightedThetaComparisonRouteLevel_ne_pointwiseRepresentative
+weightedThetaComparisonRouteLevel_ne_aggregateRepresentative
+```
+
+for the labelwise and cusp-class weighted-theta route certificates.
+
+### Mathematical Reason
+
+Packaging the route as a certificate must not blur the classification of the
+critical comparison.  The certificate inherits its level from the supplied
+weighted-theta datum, so it remains a `hullLogVolume` comparison.
+
+### Source Check
+
+This follows the same source separation used in the prior milestones.  The route
+certificate is a final real log-volume corridor; it is not evidence that the
+pointwise square representative survived transport, nor that aggregate
+reindexing alone solved the comparison.
+
+### Relevance to the 3.12 Dispute
+
+This closes a possible API loophole: a downstream theorem cannot use the route
+certificate and then classify it as pointwise or aggregate square preservation.
+Lean records that the certificate remains at the disputed hull/log-volume level.

@@ -16270,6 +16270,43 @@ def weightedThetaComparisonRoute
       part.qSigned_le_thetaSigned_of_weightedThetaComparisonData
         profile audited comparison }
 
+def weightedThetaComparisonRouteLevel
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    IUTStage1SquareComparisonLevel :=
+  weightedThetaComparisonDataLevel route.comparison_data
+
+theorem weightedThetaComparisonRouteLevel_eq_hullLogVolume
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    weightedThetaComparisonRouteLevel route =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  weightedThetaComparisonDataLevel_eq_hullLogVolume route.comparison_data
+
+theorem weightedThetaComparisonRouteLevel_ne_pointwiseRepresentative
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    weightedThetaComparisonRouteLevel route ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative := by
+  rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
+  exact IUTStage1SquareComparisonLevel.hull_ne_pointwise
+
+theorem weightedThetaComparisonRouteLevel_ne_aggregateRepresentative
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    weightedThetaComparisonRouteLevel route ≠
+      IUTStage1SquareComparisonLevel.aggregateRepresentative := by
+  rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
+  exact IUTStage1SquareComparisonLevel.hull_ne_aggregate
+
 theorem targetSigned_le_thetaAverage
     (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
@@ -16617,6 +16654,43 @@ def weightedThetaComparisonRoute
     qSigned_le_thetaSigned :=
       part.qSigned_le_thetaSigned_of_weightedThetaComparisonData
         profile audited comparison }
+
+def weightedThetaComparisonRouteLevel
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    IUTStage1SquareComparisonLevel :=
+  weightedThetaComparisonDataLevel route.comparison_data
+
+theorem weightedThetaComparisonRouteLevel_eq_hullLogVolume
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    weightedThetaComparisonRouteLevel route =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  weightedThetaComparisonDataLevel_eq_hullLogVolume route.comparison_data
+
+theorem weightedThetaComparisonRouteLevel_ne_pointwiseRepresentative
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    weightedThetaComparisonRouteLevel route ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative := by
+  rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
+  exact IUTStage1SquareComparisonLevel.hull_ne_pointwise
+
+theorem weightedThetaComparisonRouteLevel_ne_aggregateRepresentative
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    weightedThetaComparisonRouteLevel route ≠
+      IUTStage1SquareComparisonLevel.aggregateRepresentative := by
+  rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
+  exact IUTStage1SquareComparisonLevel.hull_ne_aggregate
 
 theorem targetSigned_le_thetaAverage
     (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
