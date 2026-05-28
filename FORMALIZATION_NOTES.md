@@ -18032,3 +18032,62 @@ the final theta signed bound
 The weighted-to-theta gap belongs to the real comparison layer.  It cannot be
 used as a replacement for the pointwise SHE transport gap, and the aggregate
 average alone cannot fill it.
+
+## 133. Weighted-Theta Comparison Data Supplies The Gap
+
+### Lean Move
+
+We added supplied-data records for the named weighted-theta gap:
+
+```text
+FLZModCuspLabelThetaLabelwiseContainerAudit.WeightedThetaComparisonData
+FLZModCuspLabelThetaCuspClassContainerAudit.WeightedThetaComparisonData
+```
+
+Each record contains exactly one field:
+
+```text
+weightedAverage_le_thetaAverage :
+  squareWeightedAverage <= thetaSourceAverage
+```
+
+and each audit namespace now has:
+
+```text
+qSigned_le_thetaSigned_of_weightedThetaComparisonData
+```
+
+### Mathematical Reason
+
+The previous milestones named the comparison as missing.  This milestone gives
+the positive input shape that fills it.  Once this one real comparison is
+supplied, Lean composes it with the already verified inequalities
+
+```text
+qSigned <= squareWeightedAverage
+thetaSourceAverage <= thetaSigned
+```
+
+to obtain the final signed inequality.
+
+### Source Check
+
+This matches the IUT III Corollary 3.12 proof corridor as we are auditing it:
+the final step is a real log-volume comparison after averaged data have been
+formed.  It also matches the Scholze-Stix diagnostic: the comparison must be
+supplied explicitly, rather than being smuggled in by identifying weighted and
+Theta-source averages.
+
+### Relevance to the 3.12 Dispute
+
+The formal API now has both sides of the boundary:
+
+```text
+missingWeightedThetaComparisonData
+WeightedThetaComparisonData
+```
+
+Downstream formalization work can therefore distinguish a route that merely
+knows the gap from a route that has actually supplied the weighted-to-Theta
+comparison.  This is still separate from the pointwise representative-square
+SHE transport question.
