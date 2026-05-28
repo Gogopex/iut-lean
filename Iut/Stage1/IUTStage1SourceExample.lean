@@ -5984,6 +5984,34 @@ theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_container_not
       IUTStage1TargetAverageBoundSource.ind3UpperSemiOnly :=
   part.boundSource_not_ind3Only
 
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_container_level_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaContainerBoundAudit l) :
+    part.comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  part.comparisonLevel_eq_hullLogVolume
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_container_level_ne_avg_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaContainerBoundAudit l) :
+    part.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.aggregateRepresentative :=
+  part.comparisonLevel_ne_aggregateRepresentative
+
 def placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_container_to_reduction_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -8458,6 +8486,20 @@ theorem placeAudited_logVolume_fl_zmod_classified_route_target_source_example
       IUTStage1TargetAverageBoundSource.thetaPilotHullContainer :=
   summary.targetAverageSource_eq_thetaPilotHullContainer
 
+theorem placeAudited_logVolume_fl_zmod_classified_route_level_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (summary : audit.FLZModCuspLabelThetaClassifiedRouteSummary l) :
+    summary.comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  summary.comparisonLevel_eq_hullLogVolume
+
 def placeAudited_logVolume_fl_zmod_full_classified_summary_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -9057,6 +9099,20 @@ theorem placeAudited_logVolume_fl_zmod_full_classified_target_source_example
     summary.targetAverageSource =
       IUTStage1TargetAverageBoundSource.thetaPilotHullContainer :=
   summary.targetAverageSource_eq_thetaPilotHullContainer
+
+theorem placeAudited_logVolume_fl_zmod_full_classified_level_ne_pointwise_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (summary : audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l) :
+    summary.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative :=
+  summary.comparisonLevel_ne_pointwiseRepresentative
 
 theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind3_target_le_theta_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}

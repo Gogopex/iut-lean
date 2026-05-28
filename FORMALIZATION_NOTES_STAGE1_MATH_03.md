@@ -5887,3 +5887,62 @@ obligation.  A later proof of Corollary 3.12 must either supply a bridge from
 aggregate evidence to the intended conclusion, or state that the intended
 conclusion lives at the aggregate/log-volume level rather than at the
 pointwise representative level.
+
+## 185. Target-To-Average Bounds Are Hull/Log-Volume Evidence
+
+### Lean Move
+
+We tagged the target-to-Theta-average bound route:
+
+```text
+FLZModCuspLabelThetaContainerBoundAudit.comparisonLevel
+  = IUTStage1SquareComparisonLevel.hullLogVolume
+
+FLZModCuspLabelThetaClassifiedRouteSummary.comparisonLevel
+  = IUTStage1SquareComparisonLevel.hullLogVolume
+
+FLZModCuspLabelThetaFullClassifiedRouteSummary.comparisonLevel
+  = IUTStage1SquareComparisonLevel.hullLogVolume
+```
+
+Lean also records that this level is neither pointwise representative evidence
+nor aggregate representative evidence.
+
+### Mathematical Reason
+
+This route proves a real inequality of the form
+
+```text
+targetSigned <= thetaSourceAverage
+```
+
+and then combines it with the existing `qSigned <= targetSigned` comparison and
+the `Ind3` upper bound to reach the signed pilot comparison.  Its mathematical
+role is therefore a hull/log-volume bound, not a statement about how an
+individual `j.val^2` factor is transported and not the finite reindexing of a
+square-weighted average.
+
+### Source Check
+
+IUT III's proof of Corollary 3.12 passes through holomorphic hulls and
+log-volume computations before obtaining the displayed pilot-object inequality.
+The local source text also emphasizes that `(Ind3)` is converted into an
+upper-bound condition only after applying the relevant log-volume machinery.
+Scholze-Stix's discussion likewise treats the final step as a real-number
+comparison, while separately questioning whether the preceding multiradial
+identifications justify the needed comparison.
+
+### Relevance to the 3.12 Dispute
+
+We now have three distinct Lean levels for the corridor:
+
+```text
+pointwiseRepresentative: structured SHE square/full-label obligations
+aggregateRepresentative: square-weighted averaged log-volume route
+hullLogVolume: target-to-Theta-average real inequality route
+```
+
+This prevents a proof from using the final hull/log-volume inequality as if it
+had supplied the missing pointwise representative-square transport.  It also
+prevents the aggregate square-weight average from being conflated with the
+global real inequality after holomorphic-hull/log-volume comparison.

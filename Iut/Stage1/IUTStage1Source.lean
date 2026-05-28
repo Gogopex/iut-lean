@@ -921,6 +921,14 @@ theorem hull_ne_pointwise :
     hullLogVolume ≠ pointwiseRepresentative := by
   decide
 
+theorem hull_ne_aggregate :
+    hullLogVolume ≠ aggregateRepresentative := by
+  decide
+
+theorem hull_ne_balanced :
+    hullLogVolume ≠ balancedSignCompatible := by
+  decide
+
 theorem pointwise_ne_aggregate :
     pointwiseRepresentative ≠ aggregateRepresentative := by
   decide
@@ -17830,6 +17838,29 @@ theorem targetAverageSource_eq_thetaPilotHullContainer
   exact
     summary.classified_cusp.targetAverageBoundSource_eq_thetaPilotHullContainer
 
+def comparisonLevel
+    (_summary : audit.FLZModCuspLabelThetaClassifiedRouteSummary l) :
+    IUTStage1SquareComparisonLevel :=
+  IUTStage1SquareComparisonLevel.hullLogVolume
+
+theorem comparisonLevel_eq_hullLogVolume
+    (summary : audit.FLZModCuspLabelThetaClassifiedRouteSummary l) :
+    summary.comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  rfl
+
+theorem comparisonLevel_ne_pointwiseRepresentative
+    (summary : audit.FLZModCuspLabelThetaClassifiedRouteSummary l) :
+    summary.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative :=
+  IUTStage1SquareComparisonLevel.hull_ne_pointwise
+
+theorem comparisonLevel_ne_aggregateRepresentative
+    (summary : audit.FLZModCuspLabelThetaClassifiedRouteSummary l) :
+    summary.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.aggregateRepresentative :=
+  IUTStage1SquareComparisonLevel.hull_ne_aggregate
+
 theorem qSigned_le_thetaSigned
     (summary : audit.FLZModCuspLabelThetaClassifiedRouteSummary l)
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
@@ -17909,11 +17940,34 @@ def targetAverageSource
     IUTStage1TargetAverageBoundSource :=
   summary.classified_route.target_average_source
 
+def comparisonLevel
+    (summary : audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l) :
+    IUTStage1SquareComparisonLevel :=
+  summary.classified_route.comparisonLevel
+
 theorem targetAverageSource_eq_thetaPilotHullContainer
     (summary : audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l) :
     summary.targetAverageSource =
       IUTStage1TargetAverageBoundSource.thetaPilotHullContainer :=
   summary.classified_route.targetAverageSource_eq_thetaPilotHullContainer
+
+theorem comparisonLevel_eq_hullLogVolume
+    (summary : audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l) :
+    summary.comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  summary.classified_route.comparisonLevel_eq_hullLogVolume
+
+theorem comparisonLevel_ne_pointwiseRepresentative
+    (summary : audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l) :
+    summary.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative :=
+  summary.classified_route.comparisonLevel_ne_pointwiseRepresentative
+
+theorem comparisonLevel_ne_aggregateRepresentative
+    (summary : audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l) :
+    summary.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.aggregateRepresentative :=
+  summary.classified_route.comparisonLevel_ne_aggregateRepresentative
 
 theorem qSigned_le_thetaSigned
     (summary : audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l)
@@ -19570,6 +19624,29 @@ namespace FLZModCuspLabelThetaContainerBoundAudit
 
 variable {audit : endpoint.LogVolumeChartAudit}
 variable {l : PrimeGeFive}
+
+def comparisonLevel
+    (_part : audit.FLZModCuspLabelThetaContainerBoundAudit l) :
+    IUTStage1SquareComparisonLevel :=
+  IUTStage1SquareComparisonLevel.hullLogVolume
+
+theorem comparisonLevel_eq_hullLogVolume
+    (part : audit.FLZModCuspLabelThetaContainerBoundAudit l) :
+    part.comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  rfl
+
+theorem comparisonLevel_ne_pointwiseRepresentative
+    (part : audit.FLZModCuspLabelThetaContainerBoundAudit l) :
+    part.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative :=
+  IUTStage1SquareComparisonLevel.hull_ne_pointwise
+
+theorem comparisonLevel_ne_aggregateRepresentative
+    (part : audit.FLZModCuspLabelThetaContainerBoundAudit l) :
+    part.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.aggregateRepresentative :=
+  IUTStage1SquareComparisonLevel.hull_ne_aggregate
 
 theorem boundSource_not_ind3Only
     (part : audit.FLZModCuspLabelThetaContainerBoundAudit l) :
