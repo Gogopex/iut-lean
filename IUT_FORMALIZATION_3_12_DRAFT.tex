@@ -158,6 +158,9 @@ The code currently covers:
 \item the Remark 3.12.1(ii) generalized-link numerical bound
   \(C_\Theta\ge-\lambda\) for \(\lambda\in\mathbb{Q}_{>0}\), with strict
   strengthening over the \(\lambda=1\) bound when \(\lambda<1\);
+\item the Remark 3.12.2 distinct-label implication
+  \(q\text{-itw}\Rightarrow q\text{-itw}\wedge\Theta\text{-itw}/\mathrm{indets}\),
+  with q-native and \(\Theta\)-native labels proved distinct;
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -191,6 +194,8 @@ upper-ray, \(q\)-pilot two-computation, tensor-power warning, and global
 Frobenioid-calibration shadows, plus positive-rational unit rigidity.
 The generalized-link flag records the rational parameter inequality
 \(C_\Theta\ge-\lambda\).
+The distinct-label flag records the logical intertwining display in
+Remark 3.12.2 and rejects collapse of the q-native and \(\Theta\)-native labels.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -231,6 +236,8 @@ numerical warning: nonzero local Frobenioid shifts change log-volume, whereas
 global calibration restores the unshifted value.  The positive rational unit
 rigidity fact in Remark 3.12.1(iii) is formalized directly over \(\mathbb{Q}\).
 For generalized links, Lean records that \(\lambda<1\) makes \(-\lambda>-1\).
+Lean also checks that the Remark 3.12.2 simultaneous-intertwining step depends
+on distinct labels rather than an unlabeled identification.
 
 \section{Missing Mathematics}
 

@@ -1882,6 +1882,78 @@ theorem standard_case_bound
 
 end IUTStage1GeneralizedThetaLGPLambdaBound
 
+/-- Labels for the two arithmetic holomorphic intertwinings in Remark 3.12.2. -/
+inductive IUTStage1IntertwiningLabel where
+  | qNative
+  | thetaNative
+deriving DecidableEq, Repr
+
+/--
+Remark 3.12.2 distinct-label intertwining transport.
+
+The source text summarizes the Corollary 3.12 proof by the logical display
+`q-itw => q-itw ∧ Theta-itw/indets => Theta-itw/indets`, while holding a
+single weakened abstract `F^{×μ}`-prime-strip fixed.  This record keeps exactly
+that logical content and the label separation between the q-native and
+`Theta`-native arithmetic holomorphic structures.
+-/
+structure IUTStage1DistinctLabelIntertwiningTransport where
+  abstractFtimesMuPrimeStrip : QualitativeData.PrimeStripId
+  qHolomorphicStructure : QualitativeData.HolomorphicStructure
+  thetaHolomorphicStructure : QualitativeData.HolomorphicStructure
+  indeterminacyProfile : IndeterminacyProfileId
+  qLabel : IUTStage1IntertwiningLabel
+  thetaLabel : IUTStage1IntertwiningLabel
+  q_label_eq_native : qLabel = IUTStage1IntertwiningLabel.qNative
+  theta_label_eq_native :
+    thetaLabel = IUTStage1IntertwiningLabel.thetaNative
+  weakenedPrimeStripCannotDistinguishPilots : Prop
+  weakened_primeStrip_cannot_distinguish_pilots :
+    weakenedPrimeStripCannotDistinguishPilots
+  qIntertwining : Prop
+  thetaIntertwiningUpToIndeterminacy : Prop
+  theta_from_q :
+    qIntertwining -> thetaIntertwiningUpToIndeterminacy
+
+namespace IUTStage1DistinctLabelIntertwiningTransport
+
+theorem labels_distinct
+    (data : IUTStage1DistinctLabelIntertwiningTransport) :
+    data.qLabel ≠ data.thetaLabel := by
+  intro h
+  rw [data.q_label_eq_native, data.theta_label_eq_native] at h
+  cases h
+
+theorem weakenedPrimeStripCondition
+    (data : IUTStage1DistinctLabelIntertwiningTransport) :
+    data.weakenedPrimeStripCannotDistinguishPilots :=
+  data.weakened_primeStrip_cannot_distinguish_pilots
+
+theorem simultaneous_intertwining_of_q
+    (data : IUTStage1DistinctLabelIntertwiningTransport)
+    (hq : data.qIntertwining) :
+    data.qIntertwining ∧ data.thetaIntertwiningUpToIndeterminacy :=
+  ⟨hq, data.theta_from_q hq⟩
+
+theorem theta_intertwining_of_q
+    (data : IUTStage1DistinctLabelIntertwiningTransport)
+    (hq : data.qIntertwining) :
+    data.thetaIntertwiningUpToIndeterminacy :=
+  (data.simultaneous_intertwining_of_q hq).2
+
+theorem q_intertwining_not_invalidated
+    (data : IUTStage1DistinctLabelIntertwiningTransport)
+    (hq : data.qIntertwining) :
+    (data.simultaneous_intertwining_of_q hq).1 = hq :=
+  rfl
+
+theorem unlabeled_collapse_rejected
+    (data : IUTStage1DistinctLabelIntertwiningTransport) :
+    ¬ data.qLabel = data.thetaLabel :=
+  data.labels_distinct
+
+end IUTStage1DistinctLabelIntertwiningTransport
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}

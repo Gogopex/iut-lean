@@ -645,6 +645,7 @@ structure ProcessionContainerExperimentReport where
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
   generalizedThetaLGPLambdaBoundAvailable : Bool
+  distinctLabelIntertwiningTransportAvailable : Bool
 deriving Repr
 
 /--
@@ -675,7 +676,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     thetaPilotTensorPowerWarningAvailable := true,
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
-    generalizedThetaLGPLambdaBoundAvailable := true }
+    generalizedThetaLGPLambdaBoundAvailable := true,
+    distinctLabelIntertwiningTransportAvailable := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -990,6 +992,22 @@ theorem generalizedThetaLGPLambda_sharper_boundary
     (-1 : Real) < -((data.lambda : Real)) :=
   data.sharper_boundary_of_lambda_lt_one hlambda
 
+theorem distinctLabelIntertwining_labels_distinct
+    (data : IUTStage1DistinctLabelIntertwiningTransport) :
+    data.qLabel ≠ data.thetaLabel :=
+  data.labels_distinct
+
+theorem distinctLabelIntertwining_simultaneous_of_q
+    (data : IUTStage1DistinctLabelIntertwiningTransport)
+    (hq : data.qIntertwining) :
+    data.qIntertwining ∧ data.thetaIntertwiningUpToIndeterminacy :=
+  data.simultaneous_intertwining_of_q hq
+
+theorem distinctLabelIntertwining_unlabeled_collapse_rejected
+    (data : IUTStage1DistinctLabelIntertwiningTransport) :
+    ¬ data.qLabel = data.thetaLabel :=
+  data.unlabeled_collapse_rejected
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
@@ -1233,6 +1251,7 @@ structure Corollary312DisputeFirstPassReport where
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
   generalizedThetaLGPLambdaBoundAvailable : Bool
+  distinctLabelIntertwiningTransportAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1277,6 +1296,7 @@ def corollary312DisputeFirstPassReport :
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
     generalizedThetaLGPLambdaBoundAvailable := true,
+    distinctLabelIntertwiningTransportAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1417,6 +1437,11 @@ theorem corollary312Report_positiveRationalUnitRigidityAvailable :
 
 theorem corollary312Report_generalizedThetaLGPLambdaBoundAvailable :
     corollary312DisputeFirstPassReport.generalizedThetaLGPLambdaBoundAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_distinctLabelIntertwiningTransportAvailable :
+    corollary312DisputeFirstPassReport.distinctLabelIntertwiningTransportAvailable =
       true :=
   rfl
 
