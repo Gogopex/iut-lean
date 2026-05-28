@@ -10665,6 +10665,49 @@ theorem placeAudited_logVolume_fl_zmod_constant_zmod_zero_le_theta_average_examp
       part.theta_source.thetaSourceAverage audited :=
   part.source_zeroLogVolume_le_thetaAverage audited
 
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+def placeAudited_logVolume_fl_zmod_constant_zmod_to_cusp_container_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaCuspClassContainerAudit l :=
+  part.toThetaCuspClassContainerAudit
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+theorem placeAudited_logVolume_fl_zmod_constant_zmod_source_cusp_route_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport_audit :
+      IUTStage1StructuredSHESquareWeightTransportAudit package bundle l)
+    (source_profile_eq :
+      profile = transport_audit.preservationAudit.sourceProfile)
+    (source_log_volume_eq :
+      part.theta_source.compatible_average.cuspLogVolume audited =
+        transport_audit.preservationAudit.sourceLogVolume)
+    (target_log_volume_eq_theta :
+      transport_audit.preservationAudit.targetLogVolume =
+        part.theta_source.compatible_average.cuspLogVolume audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  (part.weightedThetaComparisonRouteOfConstantZModSourceZeroCuspTarget
+    bundle profile audited transport_audit source_profile_eq
+    source_log_volume_eq target_log_volume_eq_theta).qSigned_le_thetaSigned
+
 theorem placeAudited_logVolume_fl_zmod_constant_zmod_target_bound_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

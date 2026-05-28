@@ -20977,6 +20977,71 @@ theorem source_zeroLogVolume_le_thetaAverage
       part.theta_source.thetaSourceAverage audited :=
   le_of_eq (part.zeroLogVolume_eq_thetaSourceAverage audited)
 
+def toThetaCuspClassContainerAudit
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaCuspClassContainerAudit l :=
+  { theta_source := part.theta_source,
+    ind12_equality_part := part.ind12_equality_part,
+    ind3_upper_part := part.ind3_upper_part,
+    theta_images_eq_endpoint := part.theta_images_eq_endpoint,
+    targetSigned_le_cuspClassLogVolume := by
+      intro audited label
+      rw [part.cuspClassLogVolume_eq_packetNormalized audited label]
+      exact (part.targetCapsuleEstimates audited).targetSigned_le_normalizedLogVolume,
+    targetSigned_le_zeroLogVolume := by
+      intro audited
+      rw [part.zeroLogVolume_eq_packetNormalized audited]
+      exact (part.targetCapsuleEstimates audited).targetSigned_le_normalizedLogVolume }
+
+open FLZModCuspLabelThetaCuspClassContainerAudit in
+def toSourceZeroCuspTargetThetaAudit
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport_audit :
+      IUTStage1StructuredSHESquareWeightTransportAudit package bundle l)
+    (source_profile_eq :
+      profile = transport_audit.preservationAudit.sourceProfile)
+    (source_log_volume_eq :
+      part.theta_source.compatible_average.cuspLogVolume audited =
+        transport_audit.preservationAudit.sourceLogVolume)
+    (target_log_volume_eq_theta :
+      transport_audit.preservationAudit.targetLogVolume =
+        part.theta_source.compatible_average.cuspLogVolume audited) :
+    ThreeElevenFiveStructuredSHESourceZeroCuspTargetThetaAudit
+      part.toThetaCuspClassContainerAudit bundle profile audited :=
+  { transport_audit := transport_audit,
+    source_profile_eq := source_profile_eq,
+    source_log_volume_eq := source_log_volume_eq,
+    target_log_volume_eq_theta := target_log_volume_eq_theta,
+    source_zeroLogVolume_le_thetaAverage :=
+      part.source_zeroLogVolume_le_thetaAverage audited,
+    source_cuspClassLogVolume_le_thetaAverage :=
+      part.source_cuspClassLogVolume_le_thetaAverage audited }
+
+def weightedThetaComparisonRouteOfConstantZModSourceZeroCuspTarget
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport_audit :
+      IUTStage1StructuredSHESquareWeightTransportAudit package bundle l)
+    (source_profile_eq :
+      profile = transport_audit.preservationAudit.sourceProfile)
+    (source_log_volume_eq :
+      part.theta_source.compatible_average.cuspLogVolume audited =
+        transport_audit.preservationAudit.sourceLogVolume)
+    (target_log_volume_eq_theta :
+      transport_audit.preservationAudit.targetLogVolume =
+        part.theta_source.compatible_average.cuspLogVolume audited) :
+    FLZModCuspLabelThetaCuspClassContainerAudit.WeightedThetaComparisonRoute
+      part.toThetaCuspClassContainerAudit profile audited :=
+  part.toThetaCuspClassContainerAudit.weightedThetaComparisonRouteOfSourceZeroCuspTarget
+    bundle profile audited
+    (part.toSourceZeroCuspTargetThetaAudit bundle profile audited transport_audit
+      source_profile_eq source_log_volume_eq target_log_volume_eq_theta)
+
 open FLZModCuspLabelThetaClassifiedZModPacketNormalizedRouteAudit in
 def toClassifiedZModPacketNormalizedRouteAudit
     (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l) :

@@ -691,3 +691,79 @@ constant ZMod packet-normalized label family
 The remaining nontrivial work is to replace this constant-label source by the
 actual Hodge-theater/SHE and hull/log-volume estimates that Mochizuki intends
 for Corollary 3.12.
+
+## 201. Constant `ZMod` Packet Data Enters The Source-Zero/Cusp Route
+
+### Lean Move
+
+Still in
+
+```text
+FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit
+```
+
+we added:
+
+```text
+toThetaCuspClassContainerAudit
+toSourceZeroCuspTargetThetaAudit
+weightedThetaComparisonRouteOfConstantZModSourceZeroCuspTarget
+```
+
+The example file now exposes a conversion from the constant packet route to the
+cusp-class container, and a public final q/Theta comparison route using
+constant packet data plus the explicit structured-SHE transport fields.
+
+### Mathematical Reason
+
+The preceding milestone proved that constant `ZMod` packet-normalized data
+supplies the source-side zero/cusp estimates:
+
+```text
+source zeroLogVolume <= thetaSourceAverage
+source cuspClassLogVolume label <= thetaSourceAverage
+```
+
+This milestone feeds those estimates into the audited 3.11.5 corridor.  The
+constant packet route first becomes a cusp-class container, because its capsule
+estimate bounds the packet-normalized value and the zero/cusp log-volumes are
+equal to that value.  Then, given the structured-SHE square-weight transport
+audit and the explicit source/target log-volume equalities, Lean constructs:
+
+```text
+ThreeElevenFiveStructuredSHESourceZeroCuspTargetThetaAudit
+```
+
+and uses the existing source-zero/cusp target route to obtain the final
+`qSigned <= thetaSigned` comparison.
+
+### Source Check
+
+This is the first branch where a concrete local data source, not just an
+abstract source-zero/cusp audit, reaches the final 3.11.5-shaped q/Theta route.
+It is still the constant packet-normalized branch, so it should be read as a
+formal sanity corridor rather than as the full Mochizuki construction.
+
+The structured-SHE part remains explicit: the route still asks separately for
+the transport audit, the source profile equality, the source log-volume
+equality, and the target log-volume equality.  This keeps the Scholze-Stix
+identification concern visible instead of hiding it in the constant packet
+calculation.
+
+### Relevance to the 3.12 Dispute
+
+The branch now has a complete checked path:
+
+```text
+constant ZMod packet-normalized label family
+  -> cusp-class container bounds
+  -> source zero/cusp upper estimates
+  -> explicit structured-SHE transport equalities
+  -> source-zero/cusp target route
+  -> final 3.11.5-to-3.12 q/Theta comparison
+```
+
+The next nontrivial work is to replace the constant packet-normalized source by
+the actual nonconstant local Hodge-theater estimates and then examine whether
+the required structured-SHE equalities can be justified without collapsing the
+histories.
