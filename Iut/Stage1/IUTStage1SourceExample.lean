@@ -5510,6 +5510,71 @@ theorem placeAudited_logVolume_fl_zmod_structured_hodge_transport_zero_to_cusp_e
   part.zeroLocalObject_eq_cuspClassLocalObject audited label
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+def placeAudited_logVolume_fl_zmod_operated_hodge_transport_to_structured_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaOperatedHodgeDescentPacketTransportAudit l) :
+    audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l :=
+  part.toStructuredHodgeDescentPacketTransportAudit
+
+theorem placeAudited_logVolume_fl_zmod_operated_hodge_transport_zero_descent_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaOperatedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.localObjectOperation audited).zeroOperation.descent =
+      part.bundle.hodgeTheaterDescentBridgeData.descent :=
+  part.zeroOperation_descent_eq_hodgeData audited
+
+theorem placeAudited_logVolume_fl_zmod_operated_hodge_transport_cusp_descent_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaOperatedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    ((part.localObjectOperation audited).cuspClassOperation label).descent =
+      part.bundle.hodgeTheaterDescentBridgeData.descent :=
+  part.cuspClassOperation_descent_eq_hodgeData audited label
+
+theorem placeAudited_logVolume_fl_zmod_operated_hodge_transport_source_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaOperatedHodgeDescentPacketTransportAudit l) :
+    let structured := part.toStructuredHodgeDescentPacketTransportAudit
+    let transport := structured.toHodgeDescentPacketTransportAudit
+    transport.toHodgeDescentInsulatedCuspZeroBridgeAudit.classified_bridge.bridge_source =
+      IUTStage1ZModPacketLocalObjectBridgeSource.hodgeTheaterDescentPacketTransport :=
+  part.bridgeSource_eq_hodgeTheaterDescentPacketTransport
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
 def placeAudited_logVolume_fl_zmod_hodge_descent_bridge_to_sourced_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

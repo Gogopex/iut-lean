@@ -1956,3 +1956,77 @@ The next target is to connect the local transport datum to existing
 source-side local objects more concretely: which object is the 0-column/SHE
 input object, which object is the descended packet object, and what local
 operation transports one to the other.
+
+## 135. Local Descent-Operation Records for Hodge Transport
+
+### Lean Move
+
+I added:
+
+```text
+IUTStage1HodgeDescentLocalObjectOperationData
+IUTStage1HodgeDescentCuspZeroLocalObjectOperationData
+FLZModCuspLabelThetaOperatedHodgeDescentPacketTransportAudit
+```
+
+The single-operation record names:
+
+```text
+source local object
+packet-side target local object
+descent operation identifier
+descent = hodgeData.descent
+fourth-triangle checkpoint
+history-separation guard
+source object transports to packet object
+```
+
+The cusp/zero operation family contains one zero operation and one operation
+for every nonzero cusp sign-label class.  It derives the previous local
+transport datum.
+
+### Mathematical Reason
+
+This connects the local transport equations to the descent operation already
+stored in `IUTStage1HodgeTheaterDescentBridgeData`.  The formal object now says
+more than "these objects are equal": it says the equality is being supplied by
+a local operation whose descent identifier is the same descent identifier used
+in the structured SHE/HDD bridge data.
+
+This is closer to the intended final target in the IUT formalization note: the
+0-column/SHE input is moved through the descent/HDD/SHE route before entering
+the Corollary 3.12 comparison.
+
+### Trap Avoided
+
+The descent operation is not allowed to be an unrelated label.  The Lean field
+
+```text
+descent_eq_hodgeData : descent = hodgeData.descent
+```
+
+forces the local operation to use the same descent recorded in the Hodge bridge
+data extracted from structured SHE inputs.
+
+This still does not build the analytic/arithmetic Hodge-theater operation.  It
+only gives that future construction a sharper target: produce these local
+operation records for zero and nonzero cusp-class objects.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_operated_hodge_transport_to_structured_example
+placeAudited_logVolume_fl_zmod_operated_hodge_transport_zero_descent_example
+placeAudited_logVolume_fl_zmod_operated_hodge_transport_cusp_descent_example
+placeAudited_logVolume_fl_zmod_operated_hodge_transport_source_example
+```
+
+### Remaining Gap
+
+The next step is to distinguish the source object roles more explicitly: the
+zero object should be marked as coming from the 0-column/SHE side, while
+nonzero cusp-class objects should be marked as the local Hodge-Arakelov
+evaluation/cusp-class side.  That distinction matters because collapsing those
+roles too early would recreate the simplified Scholze-Stix route.
