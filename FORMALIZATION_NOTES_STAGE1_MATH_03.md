@@ -262,3 +262,81 @@ The shared packet estimate still requires explicit cusp/zero log-volume
 equalities.  The next construction should connect those equalities to the
 canonical nonzero sign-label quotient and the separate zero label, rather than
 treating them as unstructured real-line equalities.
+
+## 108. Shared Packet Estimates from ZMod Label Equality
+
+### Goal
+
+We derived the shared packet-local-object audit from a `ZMod l` label-family
+equality to the packet local object's finite log-volume.
+
+### Lean Move
+
+We added:
+
+```text
+FLZModCuspLabelThetaSharedZModPacketLocalObjectEstimateAudit
+```
+
+It supplies:
+
+```text
+packetLocalObjectEstimate audited
+averaged ZMod label(j) = packet local-object finite log-volume
+```
+
+Lean then proves:
+
+```text
+cuspLogVolume_normalized_eq_packetLocalObjectFinite
+cuspClassLogVolume_eq_packetLocalObjectFinite
+zeroLogVolume_eq_packetLocalObjectFinite
+toSharedPacketLocalObjectEstimateAudit
+toClassifiedPacketLocalObjectContainerAudit
+estimateSource_eq_direct
+```
+
+The cusp-class theorem uses:
+
+```text
+IUTStage1ZModCuspLabelLogVolumeCompatibility
+  .cuspClass_eq_of_normalizedLogVolume_eq
+```
+
+and the zero theorem uses:
+
+```text
+IUTStage1ZModCuspLabelLogVolumeCompatibility
+  .zeroLogVolume_eq_of_normalizedLogVolume_eq
+```
+
+### Mathematical Point
+
+This connects the shared packet estimate to the actual `ZMod` label family.
+Instead of supplying separate cusp-class and zero real-line equalities, we prove
+them from a single pointwise statement over `j : ZMod l.value`, then project
+through the existing sign-label quotient compatibility.
+
+### Trap Avoided
+
+The zero label is still handled separately.  Nonzero labels pass through the
+sign-label quotient theorem; zero passes through the zero-log-volume theorem.
+Thus the construction does not pretend that zero is a nonzero cusp sign-label
+class.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_shared_zmod_packet_object_cusp_eq_example
+placeAudited_logVolume_fl_zmod_shared_zmod_packet_object_to_shared_example
+placeAudited_logVolume_fl_zmod_shared_zmod_packet_object_source_example
+```
+
+### Remaining Gap
+
+The pointwise `ZMod` equality to the packet local-object finite log-volume is
+still supplied as an input.  A later construction should either derive this from
+the local definition of the label log-volume family or explicitly classify it as
+a separate local label/object identification.
