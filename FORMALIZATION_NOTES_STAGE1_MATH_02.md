@@ -2848,3 +2848,73 @@ placeAuditedMultiradialThetaHullEndpoint_logVolume_ind3_target_le_theta_example
 The split is still fed by existing source obligations.  A later refinement
 should connect `Ind12EqualityPart` to explicit `(Ind1)/(Ind2)` invariance of
 procession-normalized log-volumes, not only to chart equalities.
+
+## 39. Procession-Normalized `(Ind1)/(Ind2)` Log-Volume Audit
+
+### Goal
+
+We connected the `(Ind1)/(Ind2)` equality part of the hull log audit to
+explicit invariance of procession-normalized local log-volumes.
+
+### Lean/API Check
+
+At the direct-summand packet choice level, Lean now proves:
+
+```text
+IUTStage1DirectSummandPacketTheorem311Choice.ind2_preserves_capsuleNormalizedLogVolume
+```
+
+At the place-audited choice level, Lean now proves:
+
+```text
+ind1_preserves_capsuleNormalizedLogVolume
+ind2_preserves_capsuleNormalizedLogVolume
+```
+
+Inside `LogVolumeChartAudit`, the new subaudit is:
+
+```text
+ProcessionNormalizedInd12Audit
+processionNormalizedInd12Audit
+```
+
+It contains the existing `Ind12EqualityPart` together with explicit normalized
+log-volume invariance under audited `(Ind1)` and `(Ind2)` steps.
+
+### Mathematical Point
+
+This is a closer formal counterpart to the Step (x) assertion that
+procession-normalized mono-analytic log-volumes are invariant with respect to
+`(Ind1)` and `(Ind2)`.  In the current abstraction, the relevant
+procession-normalized value is represented by the packet capsule family's
+`normalizedLogVolume`.
+
+For `(Ind1)`, invariance follows because the audited procession-automorphism
+step preserves the local tensor state.  For `(Ind2)`, invariance follows from
+the direct-summand action inducing a capsule-family action that preserves the
+normalized log-volume.
+
+### Trap Avoided
+
+The audit does not claim anything about `(Ind3)`.  The upper-inequality part
+remains separate in `Ind3UpperInequalityPart`.  This keeps the source
+distinction between equality/invariance under `(Ind1)/(Ind2)` and the
+one-sided `(Ind3)` effect visible in Lean.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+placeAuditedDirectSummandPacketChoice_ind1_preserves_normalizedLogVolume_example
+placeAuditedDirectSummandPacketChoice_ind2_preserves_normalizedLogVolume_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_normalized_audit_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_ind1_normalized_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_ind2_normalized_example
+```
+
+### Remaining Gap
+
+The normalized log-volume is still the local capsule-family value.  A later
+refinement should aggregate these local normalized values into the full
+procession-normalized average over `j ∈ F_l` used in Corollary 3.12.

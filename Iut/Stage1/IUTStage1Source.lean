@@ -2465,6 +2465,15 @@ theorem ind2_preserves_capsuleTotalLogVolume
   IUTStage1TensorPacketTheorem311Choice.actionStep_preserves_capsuleTotalLogVolume
     (toTensorPacketActionStep hstep)
 
+theorem ind2_preserves_capsuleNormalizedLogVolume
+    {choice₁ choice₂ :
+      IUTStage1DirectSummandPacketTheorem311Choice coric kind}
+    (hstep : LocalTensorDirectSummandActionStep choice₁ choice₂) :
+    choice₁.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+      choice₂.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  IUTStage1TensorPacketTheorem311Choice.actionStep_preserves_capsuleNormalizedLogVolume
+    (toTensorPacketActionStep hstep)
+
 /-- Nonarchimedean `Ism` instance of the direct-summand `(Ind2)` step. -/
 structure NonarchimedeanIsmInd2Step
     (choice₁ choice₂ :
@@ -3252,6 +3261,23 @@ theorem ind2_preserves_capsuleTotalLogVolume
     audited₁.choice.local_tensor_state.packetState.capsuleFamily.totalLogVolume =
       audited₂.choice.local_tensor_state.packetState.capsuleFamily.totalLogVolume :=
   IUTStage1DirectSummandPacketTheorem311Choice.ind2_preserves_capsuleTotalLogVolume
+    hstep.choice_step
+
+theorem ind1_preserves_capsuleNormalizedLogVolume
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : ProcessionAutomorphismStep audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume := by
+  rw [hstep.choice_step.local_tensor_eq]
+
+theorem ind2_preserves_capsuleNormalizedLogVolume
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep : LocalTensorDirectSummandActionStep audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  IUTStage1DirectSummandPacketTheorem311Choice.ind2_preserves_capsuleNormalizedLogVolume
     hstep.choice_step
 
 /--
@@ -9059,6 +9085,43 @@ def ind3UpperInequalityPart
   { target_signed_le_theta := audit.target_signed_le_theta,
     determinant_volume_bound := audit.determinant_volume_bound }
 
+/--
+Audit connecting the `(Ind1)/(Ind2)` equality part to explicit invariance of
+procession-normalized local log-volumes.
+-/
+structure ProcessionNormalizedInd12Audit
+    (audit : endpoint.LogVolumeChartAudit) : Prop where
+  ind12_equality_part : audit.Ind12EqualityPart
+  ind1_normalizedLogVolume_eq :
+    ∀ {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind},
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂ ->
+        audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+          audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume
+  ind2_normalizedLogVolume_eq :
+    ∀ {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind},
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂ ->
+        audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+          audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume
+
+def processionNormalizedInd12Audit
+    (audit : endpoint.LogVolumeChartAudit) :
+    audit.ProcessionNormalizedInd12Audit :=
+  { ind12_equality_part := audit.ind12EqualityPart,
+    ind1_normalizedLogVolume_eq := by
+      intro audited₁ audited₂ hstep
+      exact
+        IUTStage1PlaceAuditedDirectSummandPacketChoice.ind1_preserves_capsuleNormalizedLogVolume
+          hstep,
+    ind2_normalizedLogVolume_eq := by
+      intro audited₁ audited₂ hstep
+      exact
+        IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_preserves_capsuleNormalizedLogVolume
+          hstep }
+
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord =
@@ -9132,6 +9195,39 @@ theorem determinantVolumeBound
   part.determinant_volume_bound
 
 end Ind3UpperInequalityPart
+
+namespace ProcessionNormalizedInd12Audit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+
+theorem ind12EqualityPart
+    (part : audit.ProcessionNormalizedInd12Audit) :
+    audit.Ind12EqualityPart :=
+  part.ind12_equality_part
+
+theorem ind1NormalizedLogVolumeEq
+    (part : audit.ProcessionNormalizedInd12Audit)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  part.ind1_normalizedLogVolume_eq hstep
+
+theorem ind2NormalizedLogVolumeEq
+    (part : audit.ProcessionNormalizedInd12Audit)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  part.ind2_normalizedLogVolume_eq hstep
+
+end ProcessionNormalizedInd12Audit
 
 end LogVolumeChartAudit
 

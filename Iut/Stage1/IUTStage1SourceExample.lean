@@ -1168,6 +1168,30 @@ theorem placeAuditedDirectSummandPacketChoice_ind2_preserves_totalLogVolume_exam
   IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_preserves_capsuleTotalLogVolume
     hstep
 
+theorem placeAuditedDirectSummandPacketChoice_ind1_preserves_normalizedLogVolume_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.ind1_preserves_capsuleNormalizedLogVolume
+    hstep
+
+theorem placeAuditedDirectSummandPacketChoice_ind2_preserves_normalizedLogVolume_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_preserves_capsuleNormalizedLogVolume
+    hstep
+
 theorem directSummandPlaceCountAudit_capsuleCount_eq_actionCount_example
     {coric : Type u} {kind : IUTStage1PlaceKind}
     {audited :
@@ -3101,6 +3125,17 @@ def placeAuditedMultiradialThetaHullEndpoint_logVolume_ind3_part_example
     audit.Ind3UpperInequalityPart :=
   audit.ind3UpperInequalityPart
 
+def placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_normalized_audit_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    (audit : endpoint.LogVolumeChartAudit) :
+    audit.ProcessionNormalizedInd12Audit :=
+  audit.processionNormalizedInd12Audit
+
 theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_q_le_target_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -3112,6 +3147,42 @@ theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_q_le_target_exa
     (part : audit.Ind12EqualityPart) :
     package.preLedger.qSigned <= package.preLedger.targetVolume.targetSigned :=
   part.qSigned_le_targetSigned
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_ind1_normalized_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    (part : audit.ProcessionNormalizedInd12Audit)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  part.ind1NormalizedLogVolumeEq hstep
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_ind2_normalized_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    (part : audit.ProcessionNormalizedInd12Audit)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    audited₁.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume =
+      audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  part.ind2NormalizedLogVolumeEq hstep
 
 theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind3_target_le_theta_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
