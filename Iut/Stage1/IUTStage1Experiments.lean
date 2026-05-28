@@ -683,6 +683,7 @@ structure ProcessionContainerExperimentReport where
   iutIVCorollary22ToTheoremABoundAvailable : Bool
   iutIVFiniteExceptionLowerBoundAvailable : Bool
   iutIVCorollary22FiniteExceptionTheoremAAvailable : Bool
+  iutIVCorollary23DiophantineInequalityAvailable : Bool
 deriving Repr
 
 /--
@@ -751,7 +752,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     iutIVCorollary22FinalHToC2Available := true,
     iutIVCorollary22ToTheoremABoundAvailable := true,
     iutIVFiniteExceptionLowerBoundAvailable := true,
-    iutIVCorollary22FiniteExceptionTheoremAAvailable := true }
+    iutIVCorollary22FiniteExceptionTheoremAAvailable := true,
+    iutIVCorollary23DiophantineInequalityAvailable := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -1464,6 +1466,13 @@ theorem iutIVCorollary22FiniteExceptionTheoremA_global
     data.globalLowerBound <= data.discrepancy x :=
   data.discrepancy_bounded_below x
 
+theorem iutIVCorollary23DiophantineInequality_lower_bound
+    {Point : Type u}
+    (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point)
+    (x : Point) :
+    data.lowerBound <= data.discrepancy x :=
+  data.discrepancy_bounded_below x
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
@@ -1745,6 +1754,7 @@ structure Corollary312DisputeFirstPassReport where
   iutIVCorollary22ToTheoremABoundAvailable : Bool
   iutIVFiniteExceptionLowerBoundAvailable : Bool
   iutIVCorollary22FiniteExceptionTheoremAAvailable : Bool
+  iutIVCorollary23DiophantineInequalityAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1827,6 +1837,7 @@ def corollary312DisputeFirstPassReport :
     iutIVCorollary22ToTheoremABoundAvailable := true,
     iutIVFiniteExceptionLowerBoundAvailable := true,
     iutIVCorollary22FiniteExceptionTheoremAAvailable := true,
+    iutIVCorollary23DiophantineInequalityAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -2157,6 +2168,11 @@ theorem corollary312Report_iutIVFiniteExceptionLowerBoundAvailable :
 
 theorem corollary312Report_iutIVCorollary22FiniteExceptionTheoremAAvailable :
     corollary312DisputeFirstPassReport.iutIVCorollary22FiniteExceptionTheoremAAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_iutIVCorollary23DiophantineInequalityAvailable :
+    corollary312DisputeFirstPassReport.iutIVCorollary23DiophantineInequalityAvailable =
       true :=
   rfl
 

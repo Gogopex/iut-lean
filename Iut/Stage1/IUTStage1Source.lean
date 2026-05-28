@@ -4467,6 +4467,78 @@ theorem discrepancy_bounded_below
 
 end IUTStage1IUTIVCorollary22FiniteExceptionTheoremAShadow
 
+/--
+IUT IV, Corollary 2.3 Diophantine inequality shadow.
+
+The source proof reduces the general hyperbolic curve statement to the
+projective-line/three-point compact-subset statement by invoking [GenEll],
+Theorem 2.1.  This record does not formalize GenEll; it keeps the exact
+real-valued consequence of that reduction as an explicit transfer hypothesis.
+-/
+structure IUTStage1IUTIVCorollary23DiophantineInequalityShadow
+    (Point : Type u) where
+  d : Nat
+  d_pos : 0 < d
+  epsilon : Real
+  epsilon_pos : 0 < epsilon
+  hyperbolicCurve : Prop
+  hyperbolic_curve : hyperbolicCurve
+  height : Point -> Real
+  logDiff : Point -> Real
+  logCond : Point -> Real
+  compactSubsetTheoremA : Prop
+  compact_subset_theoremA : compactSubsetTheoremA
+  genEll_transfer :
+    compactSubsetTheoremA ->
+      ∃ lowerBound : Real,
+        ∀ x : Point,
+          lowerBound <=
+            (1 + epsilon) * (logDiff x + logCond x) - height x
+
+namespace IUTStage1IUTIVCorollary23DiophantineInequalityShadow
+
+variable {Point : Type u}
+
+def discrepancy
+    (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point)
+    (x : Point) : Real :=
+  (1 + data.epsilon) * (data.logDiff x + data.logCond x) - data.height x
+
+theorem exists_lowerBound
+    (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point) :
+    ∃ lowerBound : Real, ∀ x : Point, lowerBound <= data.discrepancy x := by
+  rcases data.genEll_transfer data.compact_subset_theoremA with
+    ⟨lowerBound, hbound⟩
+  exact ⟨lowerBound, hbound⟩
+
+noncomputable def lowerBound
+    (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point) :
+    Real :=
+  Classical.choose data.exists_lowerBound
+
+theorem discrepancy_bounded_below
+    (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point)
+    (x : Point) :
+    data.lowerBound <= data.discrepancy x :=
+  Classical.choose_spec data.exists_lowerBound x
+
+noncomputable def toTheoremABoundedDiscrepancyShadow
+    (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point) :
+    IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point :=
+  { d := data.d
+    d_pos := data.d_pos
+    epsilon := data.epsilon
+    epsilon_pos := data.epsilon_pos
+    hyperbolicCurve := data.hyperbolicCurve
+    hyperbolic_curve := data.hyperbolic_curve
+    height := data.height
+    logDiff := data.logDiff
+    logCond := data.logCond
+    lowerBound := data.lowerBound
+    discrepancy_bounded_below := data.discrepancy_bounded_below }
+
+end IUTStage1IUTIVCorollary23DiophantineInequalityShadow
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}
