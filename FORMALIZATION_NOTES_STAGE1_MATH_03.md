@@ -5755,3 +5755,42 @@ Mochizuki route should be modeled with a sign-compatible balanced square
 profile, that decision must be justified against the paper text and the
 Corollary 3.12 target.  It cannot be treated as a harmless reformulation of the
 representative `j^2` comparison.
+
+## 182. Structured SHE Rejects Balanced Negation as Representative Data
+
+### Lean Move
+
+We connected the balanced/representative distinction to the structured SHE
+factored obligation layer:
+
+```text
+IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+  .coordinateEquiv_ne_balancedNegSelf
+```
+
+Lean now proves that the coordinate equivalence in a representative-square SHE
+obligation cannot be the coordinate equivalence of
+`IUTStage1BalancedSquareFullLabelTransport.negSelf`.
+
+### Mathematical Reason
+
+The balanced negation transport is legitimate for the balanced profile.  But a
+factored SHE square/full-label obligation requires representative
+`CoordinateSquarePreserving`, and that condition already rules out negation.
+Therefore balanced preservation cannot be passed upward as representative
+square preservation.
+
+### Source Check
+
+This matches the source distinction we are tracking: IUT III's sign-label and
+`F_l^+/-` compatibility language may justify balanced/sign-compatible data, but
+Scholze-Stix's objection concerns the real representative `j^2` factors in the
+Corollary 3.12 comparison.  The structured layer must reject a silent swap
+between these two readings.
+
+### Relevance to the 3.12 Dispute
+
+Future high-level proof routes cannot satisfy the representative-square SHE
+interface by presenting the balanced negation transport.  If balanced data are
+the intended IUT invariant, a separate bridge theorem must explain why this is
+the correct Corollary 3.12 target.

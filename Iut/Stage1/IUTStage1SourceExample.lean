@@ -1552,6 +1552,18 @@ theorem structuredSHEFactoredSquareFullLabelObligations_coord_ne_modular_neg_exa
       (IUTStage1FullLabelModularSquareOnlyTransport.neg l).coordinateEquiv :=
   obligations.coordinateEquiv_ne_modularSquareOnlyNeg
 
+theorem structuredSHEFactoredSquareFullLabelObligations_coord_ne_balanced_neg_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations package bundle l)
+    (logVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :
+    obligations.coordinateEquiv ≠
+      (IUTStage1BalancedSquareFullLabelTransport.negSelf logVolume).coordinateEquiv :=
+  obligations.coordinateEquiv_ne_balancedNegSelf logVolume
+
 def structuredSHEFactoredPreservationBoundary_of_bundle_example
     {source target : Copy} {index : Type u}
     {package : IUTStage1SourcePackage source target index}

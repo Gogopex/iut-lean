@@ -10175,6 +10175,16 @@ theorem coordinateEquiv_ne_modularSquareOnlyNeg
   simpa [IUTStage1FullLabelModularSquareOnlyTransport.neg] using
     obligations.coordinateEquiv_ne_neg
 
+theorem coordinateEquiv_ne_balancedNegSelf
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+        package bundle l)
+    (logVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :
+    obligations.coordinateEquiv ≠
+      (IUTStage1BalancedSquareFullLabelTransport.negSelf logVolume).coordinateEquiv := by
+  simpa [IUTStage1BalancedSquareFullLabelTransport.negSelf] using
+    obligations.coordinateEquiv_ne_neg
+
 end IUTStage1StructuredSHEFactoredSquareFullLabelObligations
 
 /--
