@@ -5388,6 +5388,36 @@ theorem placeAudited_logVolume_fl_zmod_constant_zmod_packet_eq_example
       audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
   part.zmodNormalizedLogVolume_eq_packetNormalized audited j
 
+theorem placeAudited_logVolume_fl_zmod_constant_zmod_average_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.theta_source.thetaSourceAverage audited =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  part.thetaSourceAverage_eq_packetNormalized audited
+
+theorem placeAudited_logVolume_fl_zmod_constant_zmod_target_bound_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited :=
+  part.targetSigned_le_thetaSourceAverage audited
+
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
 def placeAudited_logVolume_fl_zmod_constant_zmod_packet_full_route_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}

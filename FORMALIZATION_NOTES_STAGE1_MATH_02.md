@@ -7399,3 +7399,81 @@ The object equality with the constant packet-normalized label family is still
 an assumption.  The next refinement should either construct this equality from
 a concrete local label/capsule definition or classify it as a separate
 averaging identification when it cannot be source-derived.
+
+## 94. Theta Average from Constant ZMod Packet Family
+
+### Goal
+
+We connected the constant `ZMod` label-family bridge directly to the
+Theta-source average bound.
+
+### Lean Move
+
+For:
+
+```text
+FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit
+```
+
+we added:
+
+```text
+thetaSourceAverage_eq_packetNormalized
+targetSigned_le_thetaSourceAverage
+```
+
+The first theorem says that if the audited `ZMod l` averaged log-volume object
+is literally the constant packet-normalized family, then the
+`thetaSourceAverage` is the packet capsule-family normalized log-volume.
+
+The second theorem composes this equality with the previously audited target
+capsule estimate:
+
+```text
+targetSigned <= packet normalized log-volume
+```
+
+to obtain:
+
+```text
+targetSigned <= thetaSourceAverage
+```
+
+### Mathematical Point
+
+This is a small but important closure step.  Section 93 projected the constant
+family equality labelwise.  Here we also project it at the averaged-value level.
+The formal route now exposes both:
+
+```text
+each ZMod label value = packet normalized value
+Theta-source average = packet normalized value
+```
+
+and the target bound comes from the capsule estimate, not from an untracked
+average comparison.
+
+### Trap Avoided
+
+We did not infer the target bound from a generic "average should behave well"
+principle.  The proof uses the explicit equality between the Theta-source
+average and the packet-normalized capsule value, then applies the audited
+capsule estimate.  This keeps the averaging bridge visible at the exact point
+where the Corollary 3.12-style target inequality is derived.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_constant_zmod_average_eq_example
+placeAudited_logVolume_fl_zmod_constant_zmod_target_bound_example
+```
+
+### Remaining Gap
+
+The constant label-family equality is still assumed.  The next mathematical
+task is to stop treating it as primitive in the direct route: either construct
+it from the local `ZMod`/cusp label definitions and packet normalization data,
+or split the route into explicit direct and separately supplied averaging
+identification cases.

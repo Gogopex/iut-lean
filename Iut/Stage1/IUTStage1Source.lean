@@ -13227,6 +13227,37 @@ theorem zmodNormalizedLogVolume_eq_packetNormalized
       data.normalizedLogVolume j) (part.averagedLogVolume_eq_packetConstant audited)
   simpa [IUTStage1LabelAveragedProcessionLogVolume.constant] using h
 
+theorem thetaSourceAverage_eq_packetNormalized
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.theta_source.thetaSourceAverage audited =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume := by
+  calc
+    part.theta_source.thetaSourceAverage audited =
+        (part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit.averagedLogVolume
+          audited).averageLogVolume :=
+      part.theta_source.thetaSourceAverage_eq_average audited
+    _ =
+        (IUTStage1LabelAveragedProcessionLogVolume.constant
+          (label := ZMod l.value)
+          audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume
+        ).averageLogVolume := by
+      rw [part.averagedLogVolume_eq_packetConstant audited]
+    _ = audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+      rfl
+
+theorem targetSigned_le_thetaSourceAverage
+    (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited := by
+  have hpacket :
+      package.preLedger.targetVolume.targetSigned <=
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+    (part.targetCapsuleEstimates audited).targetSigned_le_normalizedLogVolume
+  rw [part.thetaSourceAverage_eq_packetNormalized audited]
+  exact hpacket
+
 def toZModPacketNormalizedRouteAudit
     (part : audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l) :
     audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l :=
