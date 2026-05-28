@@ -571,6 +571,118 @@ theorem ind3SquareWeightLevelExperimentReport_aggregateNotPointwise :
     ind3SquareWeightLevelExperimentReport.aggregateLevelIsNotPointwise = true :=
   rfl
 
+/-- Experiment report for the comparison level consumed by the final q/Theta route. -/
+structure Ind3FinalRouteLevelExperimentReport where
+  finalRouteIsHullLogVolume : Bool
+  finalRouteRejectsPointwise : Bool
+  finalRouteRejectsAggregate : Bool
+  finalRouteRejectsBalanced : Bool
+  missingComparisonDatumIsHullLevel : Bool
+deriving Repr
+
+/--
+The current final weighted-theta route is a hull/log-volume comparison, not a
+representative pointwise, aggregate-only, or balanced sign-compatible comparison.
+-/
+def ind3FinalRouteLevelExperimentReport :
+    Ind3FinalRouteLevelExperimentReport :=
+  { finalRouteIsHullLogVolume := true,
+    finalRouteRejectsPointwise := true,
+    finalRouteRejectsAggregate := true,
+    finalRouteRejectsBalanced := true,
+    missingComparisonDatumIsHullLevel := true }
+
+theorem finalWeightedThetaRoute_levelIsHull
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route :
+      FLZModCuspLabelThetaCuspClassContainerAudit.WeightedThetaComparisonRoute
+        part profile audited) :
+    FLZModCuspLabelThetaCuspClassContainerAudit.weightedThetaComparisonRouteLevel
+        route =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  weightedThetaComparisonRouteLevel_eq_hullLogVolume route
+
+theorem finalWeightedThetaRoute_rejectsBalanced
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route :
+      FLZModCuspLabelThetaCuspClassContainerAudit.WeightedThetaComparisonRoute
+        part profile audited) :
+    FLZModCuspLabelThetaCuspClassContainerAudit.weightedThetaComparisonRouteLevel
+        route ≠
+      IUTStage1SquareComparisonLevel.balancedSignCompatible :=
+  weightedThetaComparisonRouteLevel_ne_balancedSignCompatible route
+
+theorem finalWeightedThetaRoute_rejectsPointwise
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route :
+      FLZModCuspLabelThetaCuspClassContainerAudit.WeightedThetaComparisonRoute
+        part profile audited) :
+    FLZModCuspLabelThetaCuspClassContainerAudit.weightedThetaComparisonRouteLevel
+        route ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative :=
+  weightedThetaComparisonRouteLevel_ne_pointwiseRepresentative route
+
+theorem finalWeightedThetaRoute_rejectsAggregate
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route :
+      FLZModCuspLabelThetaCuspClassContainerAudit.WeightedThetaComparisonRoute
+        part profile audited) :
+    FLZModCuspLabelThetaCuspClassContainerAudit.weightedThetaComparisonRouteLevel
+        route ≠
+      IUTStage1SquareComparisonLevel.aggregateRepresentative :=
+  weightedThetaComparisonRouteLevel_ne_aggregateRepresentative route
+
+theorem missingWeightedThetaComparisonDatum_rejectsBalanced :
+    (IUTStage1WeightedThetaComparisonMissingDatum.weightedAverage_le_thetaAverage
+        |>.comparisonLevel) ≠
+      IUTStage1SquareComparisonLevel.balancedSignCompatible :=
+  IUTStage1WeightedThetaComparisonMissingDatum.comparisonLevel_ne_balancedSignCompatible
+    IUTStage1WeightedThetaComparisonMissingDatum.weightedAverage_le_thetaAverage
+
+theorem ind3FinalRouteLevelExperimentReport_rejectsBalanced :
+    ind3FinalRouteLevelExperimentReport.finalRouteRejectsBalanced = true :=
+  rfl
+
 end Experiments
 end Stage1
 end Iut

@@ -4198,6 +4198,12 @@ theorem comparisonLevel_ne_aggregateRepresentative
       IUTStage1SquareComparisonLevel.aggregateRepresentative :=
   IUTStage1SquareComparisonLevel.hull_ne_aggregate
 
+theorem comparisonLevel_ne_balancedSignCompatible
+    (datum : IUTStage1WeightedThetaComparisonMissingDatum) :
+    datum.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.balancedSignCompatible :=
+  IUTStage1SquareComparisonLevel.hull_ne_balanced
+
 theorem weightedAverage_le_thetaAverage_mem_all :
     weightedAverage_le_thetaAverage ∈ all := by
   simp [all]
@@ -4241,6 +4247,12 @@ theorem comparisonLevel_ne_aggregateRepresentative
     source.comparisonLevel ≠
       IUTStage1SquareComparisonLevel.aggregateRepresentative :=
   IUTStage1SquareComparisonLevel.hull_ne_aggregate
+
+theorem comparisonLevel_ne_balancedSignCompatible
+    (source : IUTStage1WeightedThetaComparisonSource) :
+    source.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.balancedSignCompatible :=
+  IUTStage1SquareComparisonLevel.hull_ne_balanced
 
 end IUTStage1WeightedThetaComparisonSource
 
@@ -17312,6 +17324,16 @@ theorem weightedThetaComparisonRouteLevel_ne_aggregateRepresentative
   rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
   exact IUTStage1SquareComparisonLevel.hull_ne_aggregate
 
+theorem weightedThetaComparisonRouteLevel_ne_balancedSignCompatible
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    weightedThetaComparisonRouteLevel route ≠
+      IUTStage1SquareComparisonLevel.balancedSignCompatible := by
+  rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
+  exact IUTStage1SquareComparisonLevel.hull_ne_balanced
+
 theorem weightedThetaComparisonRouteSource_level_eq_hullLogVolume
     {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
     {profile : IUTStage1ZModSquareWeightProfile l}
@@ -18595,6 +18617,16 @@ theorem weightedThetaComparisonRouteLevel_ne_aggregateRepresentative
       IUTStage1SquareComparisonLevel.aggregateRepresentative := by
   rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
   exact IUTStage1SquareComparisonLevel.hull_ne_aggregate
+
+theorem weightedThetaComparisonRouteLevel_ne_balancedSignCompatible
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    weightedThetaComparisonRouteLevel route ≠
+      IUTStage1SquareComparisonLevel.balancedSignCompatible := by
+  rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
+  exact IUTStage1SquareComparisonLevel.hull_ne_balanced
 
 theorem weightedThetaComparisonRouteSource_level_eq_hullLogVolume
     {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}

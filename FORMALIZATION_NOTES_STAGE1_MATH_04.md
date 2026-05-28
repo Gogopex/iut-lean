@@ -2042,3 +2042,89 @@ aggregate/hull branch:
 This gives us a sharper next target: any proposed formal route through
 Mochizuki's Hodge-theater/SHE machinery must say exactly which comparison level
 is being used when it reaches the final q/Theta inequality.
+
+## 217. Final Weighted-Theta Route Rejects Balanced-Level Drift
+
+### Lean Move
+
+In
+
+```text
+Iut/Stage1/IUTStage1Source.lean
+Iut/Stage1/IUTStage1Experiments.lean
+```
+
+we added:
+
+```text
+IUTStage1WeightedThetaComparisonMissingDatum.comparisonLevel_ne_balancedSignCompatible
+IUTStage1WeightedThetaComparisonSource.comparisonLevel_ne_balancedSignCompatible
+weightedThetaComparisonRouteLevel_ne_balancedSignCompatible
+Ind3FinalRouteLevelExperimentReport
+finalWeightedThetaRoute_levelIsHull
+finalWeightedThetaRoute_rejectsBalanced
+finalWeightedThetaRoute_rejectsPointwise
+finalWeightedThetaRoute_rejectsAggregate
+missingWeightedThetaComparisonDatum_rejectsBalanced
+```
+
+This extends the previous pointwise/aggregate separation by making the balanced
+sign-compatible level explicitly unavailable as the final weighted-theta route
+level.
+
+### Mathematical Reason
+
+The final q/Theta comparison is recorded as a hull/log-volume comparison:
+
+```text
+weighted theta route level = hullLogVolume
+```
+
+Lean now checks that this level is not:
+
+```text
+pointwiseRepresentative
+aggregateRepresentative
+balancedSignCompatible
+```
+
+This is a small but important guardrail.  The balanced sign-compatible branch
+can preserve sign-symmetric data, but the previous milestone showed that it does
+not preserve representative `j.val^2` summands.  The final route should
+therefore not accept balanced-level evidence as if it were the hull/log-volume
+comparison needed for Corollary 3.12.
+
+### Source Check
+
+Mochizuki's formalization note describes the final `3.11.5 => 3.12` portion as
+the simultaneous q/Theta pilot comparison after earlier APT and hull+det work.
+The Lean route now reflects this: it consumes a hull/log-volume comparison
+source, not a pointwise representative square transport or a balanced
+sign-compatible transport.
+
+Scholze-Stix's critique presses exactly on this kind of level change: if a
+scalar or sign-compatible identification is used in one part of the diagram, it
+cannot be silently read as a consistent final real-number comparison.  The new
+guard forces any future formal route to state the promotion from balanced or
+representative data to hull/log-volume data explicitly.
+
+### Experiment Result
+
+The active 3.12 experiment dashboard now separates four levels:
+
+```text
+representative pointwise:
+  rigid; coordinate equivalence is identity
+
+balanced sign-compatible:
+  allows negation but is not representative pointwise
+
+aggregate average:
+  not pointwise and not the final hull comparison
+
+final weighted-theta route:
+  hull/log-volume level only
+```
+
+The next mathematical step should inspect the existing Hodge/SHE endpoint audit
+and make the promotion into this hull/log-volume level more source-specific.
