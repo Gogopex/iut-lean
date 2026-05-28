@@ -1279,13 +1279,14 @@ theorem iutIVCorollary22C1_logQAll_nonneg
 
 theorem iutIVCorollary22C1_scale_window_nonempty
     (data : IUTStage1IUTIVCorollary22C1PrimeScaleWindowShadow) :
-    data.sqrtLogQAll <= 10 * data.delta * data.sqrtLogQAll :=
-  data.sqrtLogQAll_le_ten_delta_sqrtLogQAll
+    data.sqrtLogQAll <=
+      10 * data.delta * data.sqrtLogQAll * data.logTwoDeltaLogQAll :=
+  data.sqrtLogQAll_le_upperWindow
 
-theorem iutIVCorollary22C1_one_le_ten_delta
+theorem iutIVCorollary22C1_one_le_ten_delta_logFactor
     (data : IUTStage1IUTIVCorollary22C1PrimeScaleWindowShadow) :
-    (1 : Real) <= 10 * data.delta :=
-  data.one_le_ten_delta
+    (1 : Real) <= 10 * data.delta * data.logTwoDeltaLogQAll :=
+  data.one_le_ten_delta_logFactor
 
 theorem iutIVCorollary22C2_logQ_bound
     (data : IUTStage1IUTIVCorollary22C2InequalityChainShadow) :

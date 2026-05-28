@@ -223,9 +223,10 @@ The code currently covers:
   across an \(\approx\) relation with the expected additive constant shift;
 \item the IUT IV, Corollary 2.2(ii) condition (C1) prime-scale window:
   \((\log(q_\forall))^{1/2}\le\ell\le
-   10\delta(\log(q_\forall))^{1/2}\).  Lean keeps the square-root term explicit,
-  proves \(\log(q_\forall)\ge0\), and derives \(1\le10\delta\) from the nonempty
-  window;
+   10\delta(\log(q_\forall))^{1/2}\log(2\delta\log(q_\forall))\).  Lean keeps
+  the square-root and logarithmic factor explicit, proves
+  \(\log(q_\forall)\ge0\), and derives
+  \(1\le10\delta\log(2\delta\log(q_\forall))\) from the nonempty window;
 \item the IUT IV, Corollary 2.2(ii) condition (C2) inequality chain:
   \(\frac16\log(q)\le\frac16\log(q_2)\le\frac16\log(q_\forall)\le
    (1+\epsilon_E)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)+C_K\);
@@ -403,7 +404,8 @@ Lean also proves that upper and lower pointwise bounds transfer across such a
 bounded-discrepancy equivalence with the appropriate constant shift.
 For Corollary 2.2(ii)(C1), Lean records the displayed window for \(\ell\) and
 derives nonnegativity of \(\log(q_\forall)\), positivity of
-\((\log(q_\forall))^{1/2}\), and \(1\le10\delta\).
+\((\log(q_\forall))^{1/2}\), and
+\(1\le10\delta\log(2\delta\log(q_\forall))\).
 For Corollary 2.2(ii), Lean proves the final \(\frac16\log(q)\) bound from the
 displayed \(\log(q)\), \(\log(q_2)\), and \(\log(q_\forall)\) chain.
 Lean records the proof's definition of \(\epsilon_E\) and verifies the stated
