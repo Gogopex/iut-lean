@@ -862,6 +862,68 @@ theorem labelAveragedProcessionLogVolume_const_le_average_example
   IUTStage1LabelAveragedProcessionLogVolume.const_le_average_of_forall_le
     data hpointwise
 
+def weightedLabelAveragedProcessionLogVolume_average_example
+    {label : Type u} [Fintype label]
+    (data : IUTStage1WeightedLabelAveragedProcessionLogVolume label) :
+    Real :=
+  data.weightedAverageLogVolume
+
+theorem weightedLabelAveragedProcessionLogVolume_average_eq_example
+    {label : Type u} [Fintype label]
+    (data : IUTStage1WeightedLabelAveragedProcessionLogVolume label) :
+    data.weightedAverageLogVolume =
+      (Finset.univ.sum fun j => data.weight j * data.normalizedLogVolume j) /
+        data.weightTotal :=
+  data.weightedAverage_eq_formula
+
+theorem weightedLabelAveragedProcessionLogVolume_const_le_average_example
+    {label : Type u} [Fintype label]
+    (data : IUTStage1WeightedLabelAveragedProcessionLogVolume label)
+    {c : Real}
+    (hweight_nonnegative : ∀ j : label, 0 <= data.weight j)
+    (hpointwise : ∀ j : label, c <= data.normalizedLogVolume j) :
+    c <= data.weightedAverageLogVolume :=
+  IUTStage1WeightedLabelAveragedProcessionLogVolume.const_le_weightedAverage_of_forall_le
+      data hweight_nonnegative hpointwise
+
+theorem labelAveragedProcessionLogVolume_toWeighted_normalized_example
+    {label : Type u} [Fintype label]
+    (data : IUTStage1LabelAveragedProcessionLogVolume label)
+    (weight : label -> Real)
+    (weightTotal : Real)
+    (positive_weightTotal : 0 < weightTotal)
+    (weightTotal_eq_sum : weightTotal = Finset.univ.sum weight)
+    (j : label) :
+    (data.toWeighted weight weightTotal positive_weightTotal
+      weightTotal_eq_sum).normalizedLogVolume j =
+      data.normalizedLogVolume j :=
+  data.toWeighted_normalizedLogVolume_eq
+    weight weightTotal positive_weightTotal weightTotal_eq_sum j
+
+theorem zmodSquareWeightProfile_weight_eq_square_val_example
+    {l : PrimeGeFive}
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (j : ZMod l.value) :
+    profile.weight j = ((j.val : Real) ^ 2) :=
+  profile.profile_weight_eq_square_val j
+
+theorem zmodSquareWeightProfile_toWeighted_weight_eq_square_val_example
+    {l : PrimeGeFive}
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (data : IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value))
+    (j : ZMod l.value) :
+    (profile.toWeighted data).weight j = ((j.val : Real) ^ 2) :=
+  profile.toWeighted_weight_eq_square_val data j
+
+theorem zmodSquareWeightProfile_toWeighted_const_le_average_example
+    {l : PrimeGeFive}
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (data : IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value))
+    {c : Real}
+    (hpointwise : ∀ j : ZMod l.value, c <= data.normalizedLogVolume j) :
+    c <= (profile.toWeighted data).weightedAverageLogVolume :=
+  profile.toWeighted_const_le_weightedAverage_of_forall_le data hpointwise
+
 def flLabelModel_zmod_example
     (l : PrimeGeFive) :
     IUTStage1FLLabelModel (ZMod l.value) :=

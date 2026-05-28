@@ -2533,3 +2533,138 @@ separate weighted-log-volume structure for the Gaussian-monoid-style `j²`
 weights, so that the Scholze-Stix "missing `j²`" objection can be represented as
 a precise Lean comparison between the unweighted `F_l` average and the weighted
 Gaussian-monoid average.
+
+## 143. Square-Weighted Label Averages
+
+### Lean Move
+
+I introduced a second finite-average structure:
+
+```text
+IUTStage1WeightedLabelAveragedProcessionLogVolume
+```
+
+It records:
+
+```text
+normalizedLogVolume : label -> Real
+weight              : label -> Real
+weightTotal         : Real
+0 < weightTotal
+weightTotal = sum weight
+weightedAverageLogVolume =
+  (sum (weight j * normalizedLogVolume j)) / weightTotal
+```
+
+This is deliberately separate from:
+
+```text
+IUTStage1LabelAveragedProcessionLogVolume
+```
+
+which remains the uniform finite average over the label set.
+
+The generic weighted lemmas are:
+
+```text
+IUTStage1WeightedLabelAveragedProcessionLogVolume.weightedAverage_eq_formula
+IUTStage1WeightedLabelAveragedProcessionLogVolume.weightedAverage_eq_of_pointwise
+IUTStage1WeightedLabelAveragedProcessionLogVolume.const_le_weightedAverage_of_forall_le
+```
+
+I also added:
+
+```text
+IUTStage1LabelAveragedProcessionLogVolume.toWeighted
+```
+
+This converts a uniform-average data record into a weighted-average record using
+the same normalized summands and an explicitly supplied weight profile.  It does
+not assert that the uniform and weighted averages are equal.
+
+For the concrete `F_l = ZMod l.value` model, I added:
+
+```text
+IUTStage1ZModSquareWeightProfile
+```
+
+with fields proving:
+
+```text
+weight j = ((j.val : Real) ^ 2)
+0 <= weight j
+0 < weightTotal
+weightTotal = sum weight
+```
+
+The constructor:
+
+```text
+IUTStage1ZModSquareWeightProfile.fromSquareWeights
+```
+
+uses the square formula and nonnegativity directly, while keeping strict
+positivity of the total as an explicit input.  This is intentional: a later
+milestone should prove positivity from a named nonzero coordinate or from the
+Gaussian-monoid source construction, rather than hide it in arithmetic
+automation.
+
+The example file now checks that a square-weight profile can be attached to a
+uniform `ZMod l` average and that the resulting weighted record really has
+weight `j^2` at coordinate `j`.
+
+### Mathematical Reason
+
+IUT III, in the Corollary 3.12 discussion, uses a procession-normalized average
+over `j ∈ F_l`.  That is the uniform average already represented by
+`IUTStage1LabelAveragedProcessionLogVolume`.
+
+Scholze-Stix's criticism focuses on the claim that the relevant Theta-side
+quantities carry `j^2` scaling, and that this scaling disappears once all real
+line identifications are made consistently.  The Lean code therefore needs two
+different objects:
+
+```text
+uniform F_l average
+weighted square-profile average
+```
+
+and it must not smuggle equality between them into a definition.  This milestone
+creates exactly that separation.
+
+### Relevance to the 3.12 Dispute
+
+We can now state future obligations in a sharper form:
+
+```text
+Given the same coordinate-indexed normalized log-volume values,
+compare the uniform F_l average with the j^2-weighted average.
+```
+
+If the Mochizuki route requires the square weights to survive Hodge-theater
+transport, then a later theorem must produce compatible square-weight data after
+transport.  If the Scholze-Stix simplification is formalized, it should amount
+to showing that the available identifications force a collapse in which this
+extra weighted structure cannot be recovered from the common real-line data.
+
+This milestone still does not decide that question.  It merely prevents the
+formalization from confusing:
+
+```text
+average over labels
+```
+
+with:
+
+```text
+average over labels using the j^2 Gaussian-monoid weight profile.
+```
+
+### Remaining Gap
+
+The square-weight profile is attached to `ZMod l` coordinates via `j.val`.
+The next mathematical refinement should connect this weighted layer to the
+full-label zero/nonzero split from the previous milestone and then ask whether
+Hodge-theater transport preserves, erases, or reconstructs this square-weight
+profile.  That is much closer to the actual Corollary 3.12 pressure point than
+the previous infrastructure work.

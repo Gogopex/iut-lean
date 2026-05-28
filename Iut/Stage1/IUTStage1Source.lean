@@ -853,6 +853,45 @@ structure IUTStage1LabelAveragedProcessionLogVolume
       (Finset.univ.sum normalizedLogVolume) / (Fintype.card label : Real)
 
 /--
+Procession-normalized log-volume averaged over a finite label set with explicit
+weights.
+
+This is separate from `IUTStage1LabelAveragedProcessionLogVolume`: the latter is
+the uniform average over `F_l`, while this record is the Stage 1 place where
+Gaussian-monoid-style weights such as the `j^2` profile can be recorded and
+compared.
+-/
+structure IUTStage1WeightedLabelAveragedProcessionLogVolume
+    (label : Type u) [Fintype label] where
+  normalizedLogVolume : label -> Real
+  weight : label -> Real
+  weightTotal : Real
+  positive_weightTotal : 0 < weightTotal
+  weightTotal_eq_sum : weightTotal = Finset.univ.sum weight
+  weightedAverageLogVolume : Real
+  weighted_average_eq :
+    weightedAverageLogVolume =
+      (Finset.univ.sum fun j => weight j * normalizedLogVolume j) /
+        weightTotal
+
+/--
+Concrete square-weight profile on the current `F_l = ZMod l.value` model.
+
+The formula records the finite-field coordinate representative `j.val` and
+squares it as a real number. Positivity of the total weight is kept as explicit
+evidence because later milestones should audit exactly which nonzero coordinate
+or Gaussian-monoid argument supplies it.
+-/
+structure IUTStage1ZModSquareWeightProfile
+    (l : PrimeGeFive) where
+  weight : ZMod l.value -> Real
+  weight_eq_square_val : ∀ j : ZMod l.value, weight j = ((j.val : Real) ^ 2)
+  weight_nonnegative : ∀ j : ZMod l.value, 0 <= weight j
+  weightTotal : Real
+  positive_weightTotal : 0 < weightTotal
+  weightTotal_eq_sum : weightTotal = Finset.univ.sum weight
+
+/--
 Evidence that a finite label type is being used as the Stage 1 model of the
 `F_l` labels.
 
@@ -1634,6 +1673,180 @@ theorem const_le_average_of_forall_le
   simpa [mul_comm] using hsum
 
 end IUTStage1LabelAveragedProcessionLogVolume
+
+namespace IUTStage1WeightedLabelAveragedProcessionLogVolume
+
+variable {label : Type u} [Fintype label]
+
+theorem weightTotal_eq
+    (data : IUTStage1WeightedLabelAveragedProcessionLogVolume label) :
+    data.weightTotal = Finset.univ.sum data.weight :=
+  data.weightTotal_eq_sum
+
+theorem weightedAverage_eq_formula
+    (data : IUTStage1WeightedLabelAveragedProcessionLogVolume label) :
+    data.weightedAverageLogVolume =
+      (Finset.univ.sum fun j => data.weight j * data.normalizedLogVolume j) /
+        data.weightTotal :=
+  data.weighted_average_eq
+
+theorem weightedAverage_eq_of_pointwise
+    {data₁ data₂ : IUTStage1WeightedLabelAveragedProcessionLogVolume label}
+    (hweight : ∀ j : label, data₁.weight j = data₂.weight j)
+    (hnormalized :
+      ∀ j : label,
+        data₁.normalizedLogVolume j =
+          data₂.normalizedLogVolume j)
+    (htotal : data₁.weightTotal = data₂.weightTotal) :
+    data₁.weightedAverageLogVolume =
+      data₂.weightedAverageLogVolume := by
+  calc
+    data₁.weightedAverageLogVolume =
+        (Finset.univ.sum fun j =>
+            data₁.weight j * data₁.normalizedLogVolume j) /
+          data₁.weightTotal :=
+      data₁.weighted_average_eq
+    _ =
+        (Finset.univ.sum fun j =>
+            data₂.weight j * data₂.normalizedLogVolume j) /
+          data₂.weightTotal := by
+      rw [htotal]
+      congr 1
+      exact Finset.sum_congr rfl (by
+        intro j _hj
+        rw [hweight j, hnormalized j])
+    _ = data₂.weightedAverageLogVolume :=
+      data₂.weighted_average_eq.symm
+
+theorem const_le_weightedAverage_of_forall_le
+    (data : IUTStage1WeightedLabelAveragedProcessionLogVolume label)
+    {c : Real}
+    (hweight_nonnegative : ∀ j : label, 0 <= data.weight j)
+    (hpointwise : ∀ j : label, c <= data.normalizedLogVolume j) :
+    c <= data.weightedAverageLogVolume := by
+  rw [data.weighted_average_eq]
+  rw [le_div_iff₀ data.positive_weightTotal]
+  have hsum :
+      Finset.univ.sum (fun j : label => data.weight j * c) <=
+        Finset.univ.sum
+          (fun j : label => data.weight j * data.normalizedLogVolume j) := by
+    exact Finset.sum_le_sum (by
+      intro j _hj
+      exact mul_le_mul_of_nonneg_left (hpointwise j) (hweight_nonnegative j))
+  have hleft :
+      c * data.weightTotal =
+        Finset.univ.sum (fun j : label => data.weight j * c) := by
+    rw [data.weightTotal_eq_sum, mul_comm c, Finset.sum_mul]
+  calc
+    c * data.weightTotal =
+        Finset.univ.sum (fun j : label => data.weight j * c) :=
+      hleft
+    _ <=
+        Finset.univ.sum
+          (fun j : label => data.weight j * data.normalizedLogVolume j) :=
+      hsum
+
+end IUTStage1WeightedLabelAveragedProcessionLogVolume
+
+namespace IUTStage1LabelAveragedProcessionLogVolume
+
+variable {label : Type u} [Fintype label]
+
+noncomputable def toWeighted
+    (data : IUTStage1LabelAveragedProcessionLogVolume label)
+    (weight : label -> Real)
+    (weightTotal : Real)
+    (positive_weightTotal : 0 < weightTotal)
+    (weightTotal_eq_sum : weightTotal = Finset.univ.sum weight) :
+    IUTStage1WeightedLabelAveragedProcessionLogVolume label :=
+  { normalizedLogVolume := data.normalizedLogVolume,
+    weight := weight,
+    weightTotal := weightTotal,
+    positive_weightTotal := positive_weightTotal,
+    weightTotal_eq_sum := weightTotal_eq_sum,
+    weightedAverageLogVolume :=
+      (Finset.univ.sum fun j => weight j * data.normalizedLogVolume j) /
+        weightTotal,
+    weighted_average_eq := rfl }
+
+theorem toWeighted_normalizedLogVolume_eq
+    (data : IUTStage1LabelAveragedProcessionLogVolume label)
+    (weight : label -> Real)
+    (weightTotal : Real)
+    (positive_weightTotal : 0 < weightTotal)
+    (weightTotal_eq_sum : weightTotal = Finset.univ.sum weight)
+    (j : label) :
+    (data.toWeighted weight weightTotal positive_weightTotal
+      weightTotal_eq_sum).normalizedLogVolume j =
+      data.normalizedLogVolume j :=
+  rfl
+
+end IUTStage1LabelAveragedProcessionLogVolume
+
+namespace IUTStage1ZModSquareWeightProfile
+
+variable {l : PrimeGeFive}
+
+def fromSquareWeights
+    (l : PrimeGeFive)
+    (positive_squareWeightTotal :
+      0 < Finset.univ.sum (fun j : ZMod l.value => ((j.val : Real) ^ 2))) :
+    IUTStage1ZModSquareWeightProfile l :=
+  { weight := fun j => ((j.val : Real) ^ 2),
+    weight_eq_square_val := by
+      intro j
+      rfl,
+    weight_nonnegative := by
+      intro j
+      exact sq_nonneg (j.val : Real),
+    weightTotal :=
+      Finset.univ.sum (fun j : ZMod l.value => ((j.val : Real) ^ 2)),
+    positive_weightTotal := positive_squareWeightTotal,
+    weightTotal_eq_sum := rfl }
+
+theorem weightTotal_eq
+    (profile : IUTStage1ZModSquareWeightProfile l) :
+    profile.weightTotal = Finset.univ.sum profile.weight :=
+  profile.weightTotal_eq_sum
+
+theorem profile_weight_eq_square_val
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (j : ZMod l.value) :
+    profile.weight j = ((j.val : Real) ^ 2) :=
+  profile.weight_eq_square_val j
+
+theorem profile_weight_nonnegative
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (j : ZMod l.value) :
+    0 <= profile.weight j :=
+  profile.weight_nonnegative j
+
+noncomputable def toWeighted
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (data : IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value)) :
+    IUTStage1WeightedLabelAveragedProcessionLogVolume (ZMod l.value) :=
+  data.toWeighted profile.weight profile.weightTotal
+    profile.positive_weightTotal profile.weightTotal_eq_sum
+
+theorem toWeighted_weight_eq_square_val
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (data : IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value))
+    (j : ZMod l.value) :
+    (profile.toWeighted data).weight j = ((j.val : Real) ^ 2) :=
+  profile.weight_eq_square_val j
+
+theorem toWeighted_const_le_weightedAverage_of_forall_le
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (data : IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value))
+    {c : Real}
+    (hpointwise : ∀ j : ZMod l.value, c <= data.normalizedLogVolume j) :
+    c <= (profile.toWeighted data).weightedAverageLogVolume :=
+  IUTStage1WeightedLabelAveragedProcessionLogVolume.const_le_weightedAverage_of_forall_le
+      (profile.toWeighted data)
+      (by intro j; exact profile.weight_nonnegative j)
+      hpointwise
+
+end IUTStage1ZModSquareWeightProfile
 
 namespace IUTStage1CapsuleFamilyLogVolume
 
