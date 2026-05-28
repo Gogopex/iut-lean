@@ -3861,3 +3861,80 @@ against the already available charted q/target/Theta comparison data.  If that
 reduction cannot be made without adding a new hypothesis, that gap is
 mathematically significant and should be recorded as a candidate pressure point
 near the Theorem 3.11 to Corollary 3.12 transition.
+
+## 51. Reducing q-to-Average to Target-to-Average
+
+### Goal
+
+We reduced the q-to-Theta-average comparison obligation to a target-to-average
+bound plus the existing charted q-to-target inequality.
+
+### Lean/API Check
+
+The new endpoint-level audit is:
+
+```text
+FLZModCuspLabelTargetAverageReductionAudit
+```
+
+It carries:
+
+```text
+theta_source : FLZModCuspLabelThetaSourceAudit l
+ind12_equality_part : Ind12EqualityPart
+targetSigned_le_thetaAverage :
+  targetSigned <= thetaSourceAverage audited
+```
+
+Lean proves:
+
+```text
+qSigned_le_targetSigned
+qSigned_le_thetaSourceAverage
+toQThetaComparisonAudit
+toQThetaComparisonAudit_qSigned_le_thetaSigned
+targetSigned_le_thetaSigned_via_average
+```
+
+### Mathematical Point
+
+The q-to-average comparison is no longer a completely opaque field.  It can be
+constructed from:
+
+```text
+qSigned <= targetSigned
+targetSigned <= thetaSourceAverage
+```
+
+The first inequality is already part of the `(Ind1)/(Ind2)` equality/charting
+side.  The remaining additional obligation is now isolated as:
+
+```text
+targetSigned <= thetaSourceAverage
+```
+
+### Trap Avoided
+
+We did not assume that the existing `targetSigned <= thetaSigned` bound implies
+`targetSigned <= thetaSourceAverage`.  That would be backwards unless the
+Theta-source average is known to dominate the target.  The Lean object records
+that domination as its own field.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_target_reduction_q_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_target_reduction_average_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_target_reduction_to_q_example
+```
+
+### Remaining Gap
+
+This is now a clear mathematical pressure point: can
+`targetSigned <= thetaSourceAverage` be derived from Mochizuki's source
+construction, or is it an extra comparison assumption?  The next milestone
+should inspect the surrounding source definitions and decide whether this bound
+belongs to `(Ind3)` upper semi-compatibility, to the theta-value construction,
+or to a separate comparison lemma.

@@ -9640,6 +9640,23 @@ structure FLZModCuspLabelFinalComparisonAudit
   q_theta_comparison : audit.FLZModCuspLabelQThetaComparisonAudit l
   ind3_upper_part : audit.Ind3UpperInequalityPart
 
+/--
+Reduction of the q-to-average comparison to a target-to-average bound.
+
+The existing `(Ind1)/(Ind2)` equality part supplies `qSigned <= targetSigned`.
+Thus a bound `targetSigned <= thetaSourceAverage` is sufficient to build the
+q-to-Theta-average comparison audit.
+-/
+structure FLZModCuspLabelTargetAverageReductionAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  theta_source : audit.FLZModCuspLabelThetaSourceAudit l
+  ind12_equality_part : audit.Ind12EqualityPart
+  targetSigned_le_thetaAverage :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      package.preLedger.targetVolume.targetSigned <=
+        theta_source.thetaSourceAverage audited
+
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord =
@@ -10202,6 +10219,52 @@ theorem averageLogVolume_le_thetaSigned
   part.q_theta_comparison.averageLogVolume_le_thetaSigned audited
 
 end FLZModCuspLabelFinalComparisonAudit
+
+namespace FLZModCuspLabelTargetAverageReductionAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+theorem qSigned_le_targetSigned
+    (part : audit.FLZModCuspLabelTargetAverageReductionAudit l) :
+    package.preLedger.qSigned <= package.preLedger.targetVolume.targetSigned :=
+  part.ind12_equality_part.qSigned_le_targetSigned
+
+theorem qSigned_le_thetaSourceAverage
+    (part : audit.FLZModCuspLabelTargetAverageReductionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= part.theta_source.thetaSourceAverage audited :=
+  le_trans
+    part.qSigned_le_targetSigned
+    (part.targetSigned_le_thetaAverage audited)
+
+def toQThetaComparisonAudit
+    (part : audit.FLZModCuspLabelTargetAverageReductionAudit l) :
+    audit.FLZModCuspLabelQThetaComparisonAudit l :=
+  { theta_source := part.theta_source,
+    qPilotLogVolume := package.qPilotLogVolume,
+    qPilotLogVolume_eq_package := rfl,
+    qSourceLogVolume := package.preLedger.qSigned,
+    qSourceLogVolume_eq_qSigned := rfl,
+    qSourceLogVolume_le_thetaAverage := by
+      intro audited
+      exact part.qSigned_le_thetaSourceAverage audited }
+
+theorem toQThetaComparisonAudit_qSigned_le_thetaSigned
+    (part : audit.FLZModCuspLabelTargetAverageReductionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.toQThetaComparisonAudit.qSigned_le_thetaSigned_via_average audited
+
+theorem targetSigned_le_thetaSigned_via_average
+    (part : audit.FLZModCuspLabelTargetAverageReductionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <= package.preLedger.thetaSigned :=
+  le_trans
+    (part.targetSigned_le_thetaAverage audited)
+    (part.theta_source.thetaSourceAverage_le_thetaSigned audited)
+
+end FLZModCuspLabelTargetAverageReductionAudit
 
 end LogVolumeChartAudit
 
