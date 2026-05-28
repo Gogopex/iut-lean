@@ -628,6 +628,7 @@ structure ProcessionContainerExperimentReport where
   stageIndeterminacyBoundedByFullContainer : Bool
   tensorPacketLogVolumeNormalizationAvailable : Bool
   tensorPacketPermutationInvariant : Bool
+  zmodPrimeAverageDenominatorAvailable : Bool
   processionNormalizedIndeterminacyCorridorAvailable : Bool
   processionTotalIndeterminacyFactorial : Bool
   finalContainerMatchesAbsLabelExponents : Bool
@@ -703,6 +704,7 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     stageIndeterminacyBoundedByFullContainer := true,
     tensorPacketLogVolumeNormalizationAvailable := true,
     tensorPacketPermutationInvariant := true,
+    zmodPrimeAverageDenominatorAvailable := true,
     processionNormalizedIndeterminacyCorridorAvailable := true,
     processionTotalIndeterminacyFactorial := true,
     finalContainerMatchesAbsLabelExponents := true,
@@ -849,6 +851,14 @@ theorem processionTensorPacket_reindex_preserves_normalized
     (packet.reindex perm).normalizedLogVolume =
       packet.normalizedLogVolume :=
   packet.reindex_normalizedLogVolume_eq perm
+
+theorem zmodPrimeAverageDenominator_eq_primeValue
+    (l : PrimeGeFive)
+    (data : IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value)) :
+    data.averageLogVolume =
+      (Finset.univ.sum data.normalizedLogVolume) / (l.value : Real) :=
+  IUTStage1LabelAveragedProcessionLogVolume.average_eq_zmod_prime_formula
+    l data
 
 theorem processionNormalizedIndeterminacyCorridor_before_le_ind3Upper
     {label : Type u} [Fintype label]
@@ -1746,6 +1756,7 @@ structure Corollary312DisputeFirstPassReport where
   processionContainerSkeletonAvailable : Bool
   processionTensorPacketLogVolumeAvailable : Bool
   processionTensorPacketPermutationInvariant : Bool
+  zmodPrimeAverageDenominatorAvailable : Bool
   processionNormalizedIndeterminacyCorridorAvailable : Bool
   processionIndeterminacyFactorialAvailable : Bool
   absLabelProcessionExponentBridgeAvailable : Bool
@@ -1834,6 +1845,7 @@ def corollary312DisputeFirstPassReport :
     processionContainerSkeletonAvailable := true,
     processionTensorPacketLogVolumeAvailable := true,
     processionTensorPacketPermutationInvariant := true,
+    zmodPrimeAverageDenominatorAvailable := true,
     processionNormalizedIndeterminacyCorridorAvailable := true,
     processionIndeterminacyFactorialAvailable := true,
     absLabelProcessionExponentBridgeAvailable := true,
@@ -1950,6 +1962,11 @@ theorem corollary312Report_processionTensorPacketLogVolumeAvailable :
 
 theorem corollary312Report_processionTensorPacketPermutationInvariant :
     corollary312DisputeFirstPassReport.processionTensorPacketPermutationInvariant =
+      true :=
+  rfl
+
+theorem corollary312Report_zmodPrimeAverageDenominatorAvailable :
+    corollary312DisputeFirstPassReport.zmodPrimeAverageDenominatorAvailable =
       true :=
   rfl
 

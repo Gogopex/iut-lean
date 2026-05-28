@@ -5490,6 +5490,13 @@ theorem average_eq_formula
         (Fintype.card label : Real) :=
   data.average_eq
 
+theorem average_eq_zmod_prime_formula
+    (l : PrimeGeFive)
+    (data : IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value)) :
+    data.averageLogVolume =
+      (Finset.univ.sum data.normalizedLogVolume) / (l.value : Real) := by
+  rw [data.average_eq, ZMod.card]
+
 theorem average_eq_of_pointwise
     {data₁ data₂ : IUTStage1LabelAveragedProcessionLogVolume label}
     (hpointwise :
