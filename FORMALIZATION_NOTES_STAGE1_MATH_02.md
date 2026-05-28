@@ -7325,3 +7325,77 @@ The classification still does not prove the bridge.  The next step is to reduce
 the direct case to an explicit equality between each label value and the packet
 capsule-family normalized value, or to build an `(Ind1)/(Ind2)` transport layer
 for this bridge.
+
+## 93. Constant ZMod Label Family as Direct Packet Bridge
+
+### Goal
+
+We reduced the direct `ZMod`-to-packet-normalized bridge to an equality of
+label-averaged log-volume objects.
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1LabelAveragedProcessionLogVolume.constant
+```
+
+for a finite nonempty label type.  It is the label-averaged log-volume object
+whose normalized value is constantly `c` and whose average is also `c`.
+
+We then added:
+
+```text
+FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit
+```
+
+It carries:
+
+```text
+target capsule estimates
+direct packet normalization data
+averaged ZMod log-volume object =
+  constant packet-normalized label object
+```
+
+Lean derives:
+
+```text
+ZMod averaged normalized log-volume(j) =
+  packet normalized capsule average
+```
+
+and then reuses the route from Section 91.
+
+### Mathematical Point
+
+The bridge is now one step more concrete.  Instead of asking for a separate
+pointwise equality at every label, the direct route can state that the whole
+`ZMod l` averaged label family is the constant packet-normalized family.  The
+pointwise equality used downstream is obtained by projecting the normalized
+log-volume function from this object equality.
+
+### Trap Avoided
+
+The constant family is explicit.  We do not silently replace a nonconstant label
+family by its average.  This is important because the Scholze-Stix critique is
+sensitive to averaging and identification: equality of averages is not equality
+of labelwise values.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_constant_zmod_packet_to_zmod_example
+placeAudited_logVolume_fl_zmod_constant_zmod_packet_eq_example
+placeAudited_logVolume_fl_zmod_constant_zmod_packet_full_route_example
+```
+
+### Remaining Gap
+
+The object equality with the constant packet-normalized label family is still
+an assumption.  The next refinement should either construct this equality from
+a concrete local label/capsule definition or classify it as a separate
+averaging identification when it cannot be source-derived.
