@@ -7777,3 +7777,67 @@ This is a more local and more concrete target than the earlier average-level
 assumptions.  The next step is to see how much of this can be constructed from
 the existing local-object container estimates and from the canonical
 `ZMod`/cusp-label model, rather than supplied as a real-line identification.
+
+## 99. Direct Identified Route Gives the Theta-Average Target Bound
+
+### Goal
+
+We exposed the full consequence of the direct identified local-packet route as
+named Lean declarations.
+
+### Lean Move
+
+We reopened:
+
+```text
+FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
+```
+
+and added:
+
+```text
+toZModPacketNormalizedRouteAudit
+toConstantZModPacketNormalizedRouteAudit
+thetaSourceAverage_eq_packetNormalized
+targetSigned_le_thetaSourceAverage
+```
+
+These declarations compose the reductions from Sections 95-98:
+
+```text
+cusp/zero = local object
+direct packet normalization
+  -> cusp/zero = packet normalized
+  -> pointwise ZMod label = packet normalized
+  -> averaged label object = constant packet object
+  -> Theta-source average = packet normalized
+  -> targetSigned <= Theta-source average
+```
+
+### Mathematical Point
+
+This gives us a compact audit endpoint for the current formal route.  A human
+reader no longer has to inspect all intermediate conversions to see what local
+data is sufficient for the Corollary 3.12-style target-to-Theta-average bound.
+
+### Trap Avoided
+
+The endpoint theorem is a composition of named source steps.  It does not hide
+the controversial comparison inside an anonymous proof term.  The local-object
+identification remains a visible assumption of the route, so this theorem should
+not be read as a proof of the disputed step by itself.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_identified_to_constant_zmod_example
+placeAudited_logVolume_fl_zmod_identified_target_bound_example
+```
+
+### Remaining Gap
+
+The next serious mathematical task is still the same: construct or classify the
+cusp/zero-to-local-object identifications.  The current endpoint tells us exactly
+where such a construction would feed into the global target-average inequality.

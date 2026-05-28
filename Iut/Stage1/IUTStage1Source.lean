@@ -13427,6 +13427,43 @@ theorem cuspBoundSource_eq_directCapsule
 
 end FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit
 
+namespace FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def toZModPacketNormalizedRouteAudit
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l :=
+  part.toDirectPacketNormalizedLocalObjectRouteAudit.toZModPacketNormalizedRouteAudit
+
+def toConstantZModPacketNormalizedRouteAudit
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l :=
+  part.toZModPacketNormalizedRouteAudit.toConstantZModPacketNormalizedRouteAudit
+
+theorem thetaSourceAverage_eq_packetNormalized
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.theta_source.thetaSourceAverage audited =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  let constantRoute := part.toConstantZModPacketNormalizedRouteAudit
+  constantRoute.thetaSourceAverage_eq_packetNormalized audited
+
+theorem targetSigned_le_thetaSourceAverage
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited :=
+  let constantRoute := part.toConstantZModPacketNormalizedRouteAudit
+  constantRoute.targetSigned_le_thetaSourceAverage audited
+
+end FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
+
 namespace FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
 
 variable {audit : endpoint.LogVolumeChartAudit}
