@@ -4022,6 +4022,46 @@ theorem weightedAverage_le_thetaAverage_mem_all :
 end IUTStage1WeightedThetaComparisonMissingDatum
 
 /--
+Source label for the supplied weighted-theta real comparison.
+
+This is not a proof by itself.  It records which source-facing part of the
+IUT III 3.11-to-3.12 corridor is being used to justify the real inequality
+between the square-weighted average and the Theta-source average.
+-/
+inductive IUTStage1WeightedThetaComparisonSource where
+  | threeElevenFiveToCorollary312
+  | inputPrimeStripLink
+  | separateAnalyticComparison
+deriving DecidableEq, Repr
+
+namespace IUTStage1WeightedThetaComparisonSource
+
+def comparisonLevel
+    (_source : IUTStage1WeightedThetaComparisonSource) :
+    IUTStage1SquareComparisonLevel :=
+  IUTStage1SquareComparisonLevel.hullLogVolume
+
+theorem comparisonLevel_eq_hullLogVolume
+    (source : IUTStage1WeightedThetaComparisonSource) :
+    source.comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  rfl
+
+theorem comparisonLevel_ne_pointwiseRepresentative
+    (source : IUTStage1WeightedThetaComparisonSource) :
+    source.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative :=
+  IUTStage1SquareComparisonLevel.hull_ne_pointwise
+
+theorem comparisonLevel_ne_aggregateRepresentative
+    (source : IUTStage1WeightedThetaComparisonSource) :
+    source.comparisonLevel ≠
+      IUTStage1SquareComparisonLevel.aggregateRepresentative :=
+  IUTStage1SquareComparisonLevel.hull_ne_aggregate
+
+end IUTStage1WeightedThetaComparisonSource
+
+/--
 Primitive preservation data required by the fully factored structured-SHE
 square/full-label obligation record, but not supplied by local-object Hodge
 descent alone.
@@ -16147,6 +16187,7 @@ structure WeightedThetaComparisonData
     (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
     (profile : IUTStage1ZModSquareWeightProfile l)
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) where
+  comparison_source : IUTStage1WeightedThetaComparisonSource
   weightedAverage_le_thetaAverage :
     (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
       profile audited).weightedAverageLogVolume <=
@@ -16199,6 +16240,26 @@ theorem weightedThetaComparisonDataLevel_eq_hullLogVolume
     weightedThetaComparisonDataLevel comparison =
       IUTStage1SquareComparisonLevel.hullLogVolume :=
   rfl
+
+def weightedThetaComparisonDataSource
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (comparison :
+      WeightedThetaComparisonData part profile audited) :
+    IUTStage1WeightedThetaComparisonSource :=
+  comparison.comparison_source
+
+theorem weightedThetaComparisonDataSource_level_eq_hullLogVolume
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (comparison :
+      WeightedThetaComparisonData part profile audited) :
+    (weightedThetaComparisonDataSource comparison).comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  IUTStage1WeightedThetaComparisonSource.comparisonLevel_eq_hullLogVolume
+    comparison.comparison_source
 
 theorem qSigned_le_thetaSigned_of_weightedThetaComparisonData
     (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
@@ -16278,6 +16339,14 @@ def weightedThetaComparisonRouteLevel
     IUTStage1SquareComparisonLevel :=
   weightedThetaComparisonDataLevel route.comparison_data
 
+def weightedThetaComparisonRouteSource
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    IUTStage1WeightedThetaComparisonSource :=
+  weightedThetaComparisonDataSource route.comparison_data
+
 theorem weightedThetaComparisonRouteLevel_eq_hullLogVolume
     {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
     {profile : IUTStage1ZModSquareWeightProfile l}
@@ -16306,6 +16375,15 @@ theorem weightedThetaComparisonRouteLevel_ne_aggregateRepresentative
       IUTStage1SquareComparisonLevel.aggregateRepresentative := by
   rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
   exact IUTStage1SquareComparisonLevel.hull_ne_aggregate
+
+theorem weightedThetaComparisonRouteSource_level_eq_hullLogVolume
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    (weightedThetaComparisonRouteSource route).comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  weightedThetaComparisonDataSource_level_eq_hullLogVolume route.comparison_data
 
 theorem targetSigned_le_thetaAverage
     (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
@@ -16522,6 +16600,7 @@ structure WeightedThetaComparisonData
     (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
     (profile : IUTStage1ZModSquareWeightProfile l)
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) where
+  comparison_source : IUTStage1WeightedThetaComparisonSource
   weightedAverage_le_thetaAverage :
     (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
       profile audited).weightedAverageLogVolume <=
@@ -16575,6 +16654,26 @@ theorem weightedThetaComparisonDataLevel_eq_hullLogVolume
       IUTStage1SquareComparisonLevel.hullLogVolume :=
   rfl
 
+def weightedThetaComparisonDataSource
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (comparison :
+      WeightedThetaComparisonData part profile audited) :
+    IUTStage1WeightedThetaComparisonSource :=
+  comparison.comparison_source
+
+theorem weightedThetaComparisonDataSource_level_eq_hullLogVolume
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (comparison :
+      WeightedThetaComparisonData part profile audited) :
+    (weightedThetaComparisonDataSource comparison).comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  IUTStage1WeightedThetaComparisonSource.comparisonLevel_eq_hullLogVolume
+    comparison.comparison_source
+
 def toLabelwiseWeightedThetaComparisonData
     {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
     {profile : IUTStage1ZModSquareWeightProfile l}
@@ -16583,7 +16682,8 @@ def toLabelwiseWeightedThetaComparisonData
       WeightedThetaComparisonData part profile audited) :
     FLZModCuspLabelThetaLabelwiseContainerAudit.WeightedThetaComparisonData
       part.toThetaLabelwiseContainerAudit profile audited :=
-  { weightedAverage_le_thetaAverage := comparison.weightedAverage_le_thetaAverage }
+  { comparison_source := comparison.comparison_source,
+    weightedAverage_le_thetaAverage := comparison.weightedAverage_le_thetaAverage }
 
 theorem qSigned_le_thetaSigned_of_weightedThetaComparisonData
     (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
@@ -16663,6 +16763,14 @@ def weightedThetaComparisonRouteLevel
     IUTStage1SquareComparisonLevel :=
   weightedThetaComparisonDataLevel route.comparison_data
 
+def weightedThetaComparisonRouteSource
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    IUTStage1WeightedThetaComparisonSource :=
+  weightedThetaComparisonDataSource route.comparison_data
+
 theorem weightedThetaComparisonRouteLevel_eq_hullLogVolume
     {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
     {profile : IUTStage1ZModSquareWeightProfile l}
@@ -16691,6 +16799,15 @@ theorem weightedThetaComparisonRouteLevel_ne_aggregateRepresentative
       IUTStage1SquareComparisonLevel.aggregateRepresentative := by
   rw [weightedThetaComparisonRouteLevel_eq_hullLogVolume route]
   exact IUTStage1SquareComparisonLevel.hull_ne_aggregate
+
+theorem weightedThetaComparisonRouteSource_level_eq_hullLogVolume
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route : WeightedThetaComparisonRoute part profile audited) :
+    (weightedThetaComparisonRouteSource route).comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  weightedThetaComparisonDataSource_level_eq_hullLogVolume route.comparison_data
 
 theorem targetSigned_le_thetaAverage
     (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)

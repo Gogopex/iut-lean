@@ -18369,3 +18369,55 @@ reindexing alone solved the comparison.
 This closes a possible API loophole: a downstream theorem cannot use the route
 certificate and then classify it as pointwise or aggregate square preservation.
 Lean records that the certificate remains at the disputed hull/log-volume level.
+
+## 140. Supplied Weighted-Theta Data Now Carries A Source Label
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1WeightedThetaComparisonSource
+WeightedThetaComparisonData.comparison_source
+weightedThetaComparisonDataSource
+weightedThetaComparisonRouteSource
+```
+
+The source label currently has three constructors:
+
+```text
+threeElevenFiveToCorollary312
+inputPrimeStripLink
+separateAnalyticComparison
+```
+
+Every such source is classified at `hullLogVolume`.
+
+### Mathematical Reason
+
+The inequality
+
+```text
+squareWeightedAverage <= thetaSourceAverage
+```
+
+is not merely a numerical hypothesis.  The formalization must remember which
+part of the IUT argument is intended to justify it.  Adding a source field makes
+that dependency explicit without pretending that we have already derived it
+from full Hodge-theater machinery.
+
+### Source Check
+
+Mochizuki's recent formalization note separates the final "3.11.5 => 3.12"
+comparison from the earlier APT/IPL/SHE work and says that the final part
+focuses on the simultaneous comparison of q- and Theta-pilots.  Scholze-Stix
+focus their objection on whether the real-number identifications and averaged
+`j^2` factors are consistent.  The new source label records exactly which
+source-facing explanation a supplied comparison is claiming.
+
+### Relevance to the 3.12 Dispute
+
+This prevents an anonymous real inequality from entering the proof.  Downstream
+work must supply both the inequality and its claimed source.  Later milestones
+can refine these constructors into actual source-level Lean data and reject
+source labels that do not provide the required real comparison.

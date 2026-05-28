@@ -6382,6 +6382,27 @@ theorem placeAudited_logVolume_fl_zmod_labelwise_weighted_theta_route_level_exam
     (part.weightedThetaComparisonRoute profile audited comparison)
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+theorem placeAudited_logVolume_fl_zmod_labelwise_weighted_theta_route_source_level_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (comparison :
+      FLZModCuspLabelThetaLabelwiseContainerAudit.WeightedThetaComparisonData
+        part profile audited) :
+    (FLZModCuspLabelThetaLabelwiseContainerAudit.weightedThetaComparisonRouteSource
+        (part.weightedThetaComparisonRoute profile audited comparison)).comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  IUTStage1WeightedThetaComparisonSource.comparisonLevel_eq_hullLogVolume _
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
 theorem placeAudited_logVolume_fl_zmod_labelwise_weighted_theta_route_not_pointwise_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -6767,6 +6788,27 @@ theorem placeAudited_logVolume_fl_zmod_cusp_weighted_theta_route_level_example
       IUTStage1SquareComparisonLevel.hullLogVolume :=
   FLZModCuspLabelThetaCuspClassContainerAudit.weightedThetaComparisonRouteLevel_eq_hullLogVolume
     (part.weightedThetaComparisonRoute profile audited comparison)
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+theorem placeAudited_logVolume_fl_zmod_cusp_weighted_theta_route_source_level_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (comparison :
+      FLZModCuspLabelThetaCuspClassContainerAudit.WeightedThetaComparisonData
+        part profile audited) :
+    (FLZModCuspLabelThetaCuspClassContainerAudit.weightedThetaComparisonRouteSource
+        (part.weightedThetaComparisonRoute profile audited comparison)).comparisonLevel =
+      IUTStage1SquareComparisonLevel.hullLogVolume :=
+  IUTStage1WeightedThetaComparisonSource.comparisonLevel_eq_hullLogVolume _
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
 theorem placeAudited_logVolume_fl_zmod_cusp_weighted_theta_route_not_pointwise_example
