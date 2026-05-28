@@ -544,6 +544,76 @@ define a direct local label/object construction interface that produces the
 constant `ZMod` packet-local-object family, rather than merely classifying an
 assumed equality.
 
+## 113. Direct Local Label/Object Construction
+
+### Goal
+
+We replaced the constant `ZMod` packet-local-object family assumption by a more
+local construction interface.
+
+### Lean Move
+
+We added:
+
+```text
+FLZModCuspLabelThetaDirectLocalLabelObjectConstructionAudit
+```
+
+It supplies, for each audited packet and each `j : ZMod l.value`:
+
+```text
+labelLocalObject audited j
+labelLocalObject audited j = packet local object
+label normalized log-volume(j) = finite log-volume(labelLocalObject audited j)
+```
+
+Lean derives:
+
+```text
+zmodNormalizedLogVolume_eq_packetLocalObjectFinite
+toSharedZModPacketLocalObjectEstimateAudit
+toConstantZModPacketLocalObjectEstimateAudit
+toClassifiedConstantZModPacketLocalObjectEstimateAudit
+bridgeSource_eq_direct
+targetSigned_le_thetaSourceAverage
+```
+
+### Mathematical Point
+
+This is a lower and more local input than a constant family equality.  The
+constant label-family route now follows because each label has an explicitly
+provided local object and that object is proved to be the packet local object.
+
+### Trap Avoided
+
+We did not allow the `ZMod` family to become constant by averaging.  Constancy
+is derived label by label from local object identifications:
+
+```text
+label(j) -> labelLocalObject(j) = packet local object
+```
+
+This keeps the labelwise data present at exactly the point where it could
+otherwise be lost.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_direct_label_object_zmod_eq_example
+placeAudited_logVolume_fl_zmod_direct_label_object_to_constant_example
+placeAudited_logVolume_fl_zmod_direct_label_object_source_example
+placeAudited_logVolume_fl_zmod_direct_label_object_target_bound_example
+```
+
+### Remaining Gap
+
+The direct local label/object interface still supplies the label-local objects
+as data.  The next deeper construction should connect those objects to the
+canonical `LocalLabCuspModel`/`CuspLabelClassData` foundations, especially the
+nonzero sign-label quotient and the separate zero label.
+
 ## 112. Source Audit: Labels, Averages, and Real-Line Identifications
 
 ### Check Performed
