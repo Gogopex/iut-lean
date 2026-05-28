@@ -5289,3 +5289,79 @@ placeAuditedArchimedeanStep_transports_capsule_container_example
 The next step should connect this transported capsule-bound data to the
 `FLZModCuspLabelThetaPacketNormalizedContainerAudit`, so the high-level
 q-to-Theta average route can explicitly use place-audited `(Ind2)` transport.
+
+## 67. Feeding `(Ind2)` Transport into the Packet-Normalized Cusp Audit
+
+### Goal
+
+We connected place-audited `(Ind2)` capsule-bound transport back into the
+high-level packet-normalized cusp/zero log-volume audit.
+
+### Lean Move
+
+Inside:
+
+```text
+FLZModCuspLabelThetaPacketNormalizedContainerAudit
+```
+
+Lean now proves:
+
+```text
+targetSigned_le_cuspClassLogVolume_of_ind2_capsuleEstimates
+targetSigned_le_zeroLogVolume_of_ind2_capsuleEstimates
+```
+
+Given:
+
+```text
+source capsule-family container estimates
+an audited LocalTensorDirectSummandActionStep from source to target
+```
+
+Lean derives the target cusp-class or zero-label bound by:
+
+```text
+1. transporting the source capsule estimates across the audited `(Ind2)` step
+2. rewriting the target cusp/zero log-volume to the target packet-normalized
+   capsule-family log-volume
+```
+
+### Mathematical Point
+
+This links the low-level local estimate transport to the high-level average
+route:
+
+```text
+source capsule estimates
+  -> audited `(Ind2)` transport
+  -> target packet normalized bound
+  -> target cusp/zero log-volume bound
+  -> labelwise/F_l average route
+```
+
+The formalization now has a visible path showing how an estimate attached to
+one place-audited representative can survive a local tensor/direct-summand
+indeterminacy before entering the cusp-label average.
+
+### Trap Avoided
+
+The theorem does not assert that cusp-log values are invariant under `(Ind2)`.
+It proves the target bound by transporting capsule estimates to the target
+packet and then using the target packet-normalized equality.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_packet_normalized_ind2_cusp_bound_example
+placeAudited_logVolume_fl_zmod_packet_normalized_ind2_zero_bound_example
+```
+
+### Remaining Gap
+
+The next refinement should package this as an optional source of the
+`FLZModCuspLabelThetaCuspClassContainerAudit` fields, so downstream code can
+use either direct target estimates or estimates transported along audited
+`(Ind2)` steps.

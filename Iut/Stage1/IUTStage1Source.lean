@@ -11404,6 +11404,44 @@ theorem zeroLogVolume_eq_capsuleSumAverage
         (audited.choice.local_tensor_state.packetState.capsuleFamily.capsuleCount : Real) :=
   (part.zeroPacketEstimate audited).localLogVolume_eq_capsuleSumAverage
 
+theorem targetSigned_le_cuspClassLogVolume_of_ind2_capsuleEstimates
+    (part : audit.FLZModCuspLabelThetaPacketNormalizedContainerAudit l)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂)
+    (estimate :
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        package.preLedger.targetVolume.targetSigned
+        audited₁.choice.local_tensor_state.packetState.capsuleFamily)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited₂).cuspClassLogVolume
+        label := by
+  rw [part.cuspClassLogVolume_eq_packetNormalized audited₂ label]
+  exact
+    IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_transports_capsuleContainerBound
+      hstep estimate
+
+theorem targetSigned_le_zeroLogVolume_of_ind2_capsuleEstimates
+    (part : audit.FLZModCuspLabelThetaPacketNormalizedContainerAudit l)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂)
+    (estimate :
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        package.preLedger.targetVolume.targetSigned
+        audited₁.choice.local_tensor_state.packetState.capsuleFamily) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited₂).zeroLogVolume := by
+  rw [part.zeroLogVolume_eq_packetNormalized audited₂]
+  exact
+    IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_transports_capsuleContainerBound
+      hstep estimate
+
 def toThetaPacketLocalObjectContainerAudit
     (part : audit.FLZModCuspLabelThetaPacketNormalizedContainerAudit l) :
     audit.FLZModCuspLabelThetaPacketLocalObjectContainerAudit l :=
