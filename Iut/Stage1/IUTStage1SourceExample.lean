@@ -5736,6 +5736,45 @@ theorem placeAudited_logVolume_fl_zmod_zmod_source_marked_label_coordinate_examp
         ((part.localObjectOperation audited).cuspClassSource label).coordinate_ne_zero :=
   part.cuspClassLabel_eq_zmodCoordinate audited label
 
+theorem placeAudited_logVolume_fl_zmod_zmod_source_marked_label_neg_coordinate_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaZModSourceMarkedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    label =
+      zmodSignLabelFromCoordinate l
+        (-((part.localObjectOperation audited).cuspClassSource label).coordinate)
+        (zmod_neg_ne_zero_of_ne_zero l
+          ((part.localObjectOperation audited).cuspClassSource label).coordinate_ne_zero) :=
+  part.cuspClassLabel_eq_negCoordinate audited label
+
+theorem placeAudited_logVolume_fl_zmod_zmod_source_marked_label_canonical_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaZModSourceMarkedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient)
+    (hcoord :
+      ((part.localObjectOperation audited).cuspClassSource label).coordinate =
+        (1 : ZMod l.value)) :
+    label = zmodCanonicalSignLabelQuotient l :=
+  part.cuspClassLabel_eq_canonical_of_coordinate_eq_one audited label hcoord
+
 theorem placeAudited_logVolume_fl_zmod_zmod_source_marked_coordinate_ne_zero_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

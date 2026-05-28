@@ -3023,6 +3023,42 @@ theorem label_eq_zmodCoordinate
     label = zmodSignLabelFromCoordinate l data.coordinate data.coordinate_ne_zero :=
   data.label_eq_coordinate
 
+theorem label_eq_negCoordinate
+    (data :
+      IUTStage1ZModCuspClassHodgeArakelovLocalObjectData
+        l hodgeData label object) :
+    label =
+      zmodSignLabelFromCoordinate l (-data.coordinate)
+        (zmod_neg_ne_zero_of_ne_zero l data.coordinate_ne_zero) := by
+  calc
+    label = zmodSignLabelFromCoordinate l data.coordinate data.coordinate_ne_zero :=
+      data.label_eq_zmodCoordinate
+    _ = zmodSignLabelFromCoordinate l (-data.coordinate)
+          (zmod_neg_ne_zero_of_ne_zero l data.coordinate_ne_zero) :=
+      (zmodSignLabelFromCoordinate_neg_eq l data.coordinate data.coordinate_ne_zero).symm
+
+theorem label_eq_canonical_of_coordinate_eq_one
+    (data :
+      IUTStage1ZModCuspClassHodgeArakelovLocalObjectData
+        l hodgeData label object)
+    (hcoord : data.coordinate = (1 : ZMod l.value)) :
+    label = zmodCanonicalSignLabelQuotient l := by
+  have hnonzero_one : (1 : ZMod l.value) ≠ 0 := by
+    simpa [hcoord] using data.coordinate_ne_zero
+  have hnonzero_one_eq :
+      hnonzero_one = (zmodOneNonzeroLabel l).2 := by
+    apply Subsingleton.elim
+  calc
+    label = zmodSignLabelFromCoordinate l data.coordinate data.coordinate_ne_zero :=
+      data.label_eq_zmodCoordinate
+    _ = zmodSignLabelFromCoordinate l (1 : ZMod l.value) hnonzero_one := by
+      simp [hcoord]
+    _ = zmodSignLabelFromCoordinate l (1 : ZMod l.value)
+          (zmodOneNonzeroLabel l).2 := by
+      rw [hnonzero_one_eq]
+    _ = zmodCanonicalSignLabelQuotient l :=
+      zmodSignLabelFromCoordinate_one_eq_canonical l
+
 theorem coordinate_ne_zero'
     (data :
       IUTStage1ZModCuspClassHodgeArakelovLocalObjectData
@@ -3083,6 +3119,28 @@ theorem cuspClassLabel_eq_zmodCoordinate
         (data.cuspClassSource label).coordinate
         (data.cuspClassSource label).coordinate_ne_zero :=
   (data.cuspClassSource label).label_eq_zmodCoordinate
+
+theorem cuspClassLabel_eq_negCoordinate
+    (data :
+      IUTStage1ZModSourceMarkedHodgeDescentCuspZeroLocalObjectOperationData
+        l hodgeData zeroObject cuspClassObject packetObject)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    label =
+      zmodSignLabelFromCoordinate l
+        (-(data.cuspClassSource label).coordinate)
+        (zmod_neg_ne_zero_of_ne_zero l
+          (data.cuspClassSource label).coordinate_ne_zero) :=
+  (data.cuspClassSource label).label_eq_negCoordinate
+
+theorem cuspClassLabel_eq_canonical_of_coordinate_eq_one
+    (data :
+      IUTStage1ZModSourceMarkedHodgeDescentCuspZeroLocalObjectOperationData
+        l hodgeData zeroObject cuspClassObject packetObject)
+    (label : (zmodSignAction l).SignLabelQuotient)
+    (hcoord :
+      (data.cuspClassSource label).coordinate = (1 : ZMod l.value)) :
+    label = zmodCanonicalSignLabelQuotient l :=
+  (data.cuspClassSource label).label_eq_canonical_of_coordinate_eq_one hcoord
 
 theorem cuspClassCoordinate_ne_zero
     (data :
@@ -16345,6 +16403,30 @@ theorem cuspClassLabel_eq_zmodCoordinate
         ((part.localObjectOperation audited).cuspClassSource label).coordinate
         ((part.localObjectOperation audited).cuspClassSource label).coordinate_ne_zero :=
   (part.localObjectOperation audited).cuspClassLabel_eq_zmodCoordinate label
+
+theorem cuspClassLabel_eq_negCoordinate
+    (part :
+      audit.FLZModCuspLabelThetaZModSourceMarkedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    label =
+      zmodSignLabelFromCoordinate l
+        (-((part.localObjectOperation audited).cuspClassSource label).coordinate)
+        (zmod_neg_ne_zero_of_ne_zero l
+          ((part.localObjectOperation audited).cuspClassSource label).coordinate_ne_zero) :=
+  (part.localObjectOperation audited).cuspClassLabel_eq_negCoordinate label
+
+theorem cuspClassLabel_eq_canonical_of_coordinate_eq_one
+    (part :
+      audit.FLZModCuspLabelThetaZModSourceMarkedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient)
+    (hcoord :
+      ((part.localObjectOperation audited).cuspClassSource label).coordinate =
+        (1 : ZMod l.value)) :
+    label = zmodCanonicalSignLabelQuotient l :=
+  (part.localObjectOperation audited).cuspClassLabel_eq_canonical_of_coordinate_eq_one
+    label hcoord
 
 theorem cuspClassCoordinate_ne_zero
     (part :

@@ -2233,3 +2233,48 @@ The `ZMod` coordinate is now explicit, but it is still supplied as data for each
 sign-label class.  The next step should expose canonical and sign-invariant
 special cases: in particular, the canonical class represented by `1`, and the
 fact that `-j` represents the same sign-label source as `j`.
+
+## 139. Sign-Normalized ZMod Cusp Source Labels
+
+### Lean Move
+
+I added sign-normalization lemmas for the `ZMod` cusp source layer:
+
+```text
+IUTStage1ZModCuspClassHodgeArakelovLocalObjectData.label_eq_negCoordinate
+IUTStage1ZModCuspClassHodgeArakelovLocalObjectData.label_eq_canonical_of_coordinate_eq_one
+IUTStage1ZModSourceMarkedHodgeDescentCuspZeroLocalObjectOperationData.cuspClassLabel_eq_negCoordinate
+IUTStage1ZModSourceMarkedHodgeDescentCuspZeroLocalObjectOperationData.cuspClassLabel_eq_canonical_of_coordinate_eq_one
+FLZModCuspLabelThetaZModSourceMarkedHodgeDescentPacketTransportAudit.cuspClassLabel_eq_negCoordinate
+FLZModCuspLabelThetaZModSourceMarkedHodgeDescentPacketTransportAudit.cuspClassLabel_eq_canonical_of_coordinate_eq_one
+```
+
+and corresponding example endpoints:
+
+```text
+placeAudited_logVolume_fl_zmod_zmod_source_marked_label_neg_coordinate_example
+placeAudited_logVolume_fl_zmod_zmod_source_marked_label_canonical_example
+```
+
+### Mathematical Reason
+
+The nonzero cusp-label classes are not raw `ZMod l` coordinates.  They are
+coordinates modulo the sign action.  This is why a label represented by `j` must
+also be represented by `-j`, and why the coordinate `1` recovers the canonical
+sign-label quotient.
+
+This is a small but important correction in the formal interface: it makes the
+source-marked Hodge-Arakelov cusp data remember the concrete `F_l` coordinate
+while still respecting the quotient relation that the papers use for
+cusp-label classes.
+
+### Relevance to the 3.12 Dispute
+
+The disputed step is sensitive to when label/cusp structure is preserved and
+when it is collapsed into an undifferentiated comparison.  These lemmas do not
+prove Corollary 3.12.  They make one local invariant explicit: quotienting by
+sign is allowed, but losing the nonzero `ZMod` source data entirely is not part
+of this route.
+
+This gives the later Hodge-theater/descent bridge a precise local object to
+transport, instead of only an anonymous endpoint equality.
