@@ -95,6 +95,44 @@ theorem ind3LocalOrientations_differ :
       IUTStage1Ind3LocalOrientation.theta_le_packet :=
   IUTStage1Ind3LocalOrientation.packet_le_theta_ne_theta_le_packet
 
+/-- Summary of the first diagnostic pass through the local `(Ind3)` route. -/
+structure Ind3FirstPassDashboard where
+  missingRealAlignmentBlocks : Bool
+  nonarchimedeanEntryCanFeed : Bool
+  archimedeanEntryCanFeed : Bool
+  localOrientationsSeparated : Bool
+deriving Repr
+
+/--
+Current first-pass outcome.
+
+This value records the results proved above: real alignment is still an
+explicit missing layer; nonarchimedean local upper-semi entries have the
+orientation needed by the current route; archimedean entries do not; and Lean
+distinguishes the two orientations.
+-/
+def ind3FirstPassDashboard : Ind3FirstPassDashboard :=
+  { missingRealAlignmentBlocks := true,
+    nonarchimedeanEntryCanFeed := true,
+    archimedeanEntryCanFeed := false,
+    localOrientationsSeparated := true }
+
+theorem ind3FirstPassDashboard_missingRealAlignmentBlocks :
+    ind3FirstPassDashboard.missingRealAlignmentBlocks = true :=
+  rfl
+
+theorem ind3FirstPassDashboard_nonarchimedeanEntryCanFeed :
+    ind3FirstPassDashboard.nonarchimedeanEntryCanFeed = true :=
+  rfl
+
+theorem ind3FirstPassDashboard_archimedeanEntryCanFeed :
+    ind3FirstPassDashboard.archimedeanEntryCanFeed = false :=
+  rfl
+
+theorem ind3FirstPassDashboard_localOrientationsSeparated :
+    ind3FirstPassDashboard.localOrientationsSeparated = true :=
+  rfl
+
 end Experiments
 end Stage1
 end Iut

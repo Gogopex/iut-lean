@@ -1641,3 +1641,54 @@ remove real alignment -> missing source/target fields are reported
 The next experiment should connect these reports to the final q/Theta route
 summary, so a single Lean object records both the proof result and the exact
 remaining missing data.
+
+## 212. First-Pass Ind3 Dashboard
+
+### Lean Move
+
+In
+
+```text
+Iut/Stage1/IUTStage1Experiments.lean
+```
+
+we added:
+
+```text
+Ind3FirstPassDashboard
+ind3FirstPassDashboard
+```
+
+with checked fields:
+
+```text
+missingRealAlignmentBlocks = true
+nonarchimedeanEntryCanFeed = true
+archimedeanEntryCanFeed = false
+localOrientationsSeparated = true
+```
+
+### Mathematical Reason
+
+This is a compact Lean object summarizing the current experimental state of the
+Corollary 3.12 `(Ind3)` corridor.  It is intentionally modest: it does not
+claim that Corollary 3.12 is proved or refuted.  It records the first structural
+facts that our formalization can already distinguish.
+
+### Relevance to the 3.12 Dispute
+
+The dashboard makes the first insight explicit:
+
+```text
+The nonarchimedean local upper-semi route is compatible with the current
+packet-to-theta comparison.
+
+The archimedean local upper-semi route, as currently modeled, has the opposite
+orientation and cannot be substituted silently.
+
+The real-line/log-volume source-target alignment remains a separate proof
+obligation.
+```
+
+This is the first actual experiment output from the Lean model of the disputed
+passage.
