@@ -4282,3 +4282,119 @@ But these are different Lean objects.  A future proof of the `3.11.5 => 3.12`
 transport step must say which one is being transported and why that matches the
 paper's `j^2` expression.  That is exactly the kind of precision the
 formalization is meant to enforce.
+
+## 161. Balanced Square/Full-Label Summand Transport
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1BalancedSquareFullLabelTransport
+```
+
+This is a compact transport record for the balanced profile branch.  It carries:
+
+```text
+coordinateEquiv
+sourceLogVolume
+targetLogVolume
+coordinateBalancedSquare_preserved
+fullLabelMap_preserved
+fullLabelValue_preserved
+```
+
+From these fields Lean proves:
+
+```text
+balancedSquareWeight_preserved
+fullLabelLogVolume_preserved
+balancedSummand_preserved
+```
+
+The final theorem states that the balanced weighted full-label summand is
+preserved:
+
+```text
+balancedSquareWeight (coordinateEquiv j)
+  * targetFullLabelLogVolume (coordinateEquiv j)
+=
+balancedSquareWeight j
+  * sourceFullLabelLogVolume j
+```
+
+We also added:
+
+```text
+IUTStage1BalancedSquareFullLabelTransport.negSelf
+```
+
+which constructs this balanced transport for negation when source and target
+log-volume branches are the same.
+
+### Mathematical Reason
+
+This is the positive counterpart to the representative-profile rigidity result.
+For the representative profile:
+
+```text
+(j.val : Real)^2
+```
+
+negation fails and full preservation forces identity.  For the balanced profile:
+
+```text
+(j.valMinAbs.natAbs : Real)^2
+```
+
+negation is valid, and the full-label sign quotient is also valid under
+negation.  Therefore the balanced weighted summand really is transported under
+the sign-compatible route.
+
+The point is not to claim that Corollary 3.12 uses the balanced profile.  The
+point is to make the two options formally incomparable:
+
+```text
+representative summand transport
+balanced summand transport
+```
+
+They are different Lean records with different hypotheses.
+
+### Source Check
+
+The distinction matches the tension visible in the source material.  IUT II
+emphasizes the `F_l^±` symmetry and its compatibility with zero/nonzero
+symmetrization and the log-link, while also assigning a distinct role to the
+full `F_l` symmetry in the Gaussian-monoid structure.  IUT III Corollary 3.12
+and Remark 3.12.4 keep averages over `j in F_l` central to the final log-volume
+estimate.  Scholze-Stix Section 2.2 focuses on whether the `j^2` scaling can
+survive real-line comparisons.
+
+The new balanced summand theorem shows exactly what a sign-compatible square
+route can prove.  It does not prove that this is the route intended in the IUT
+papers.
+
+### Relevance to the 3.12 Dispute
+
+We now have two formal corridors:
+
+```text
+representative corridor:
+  matches the current j.val^2 audit profile,
+  but is identity-rigid
+
+balanced corridor:
+  compatible with sign quotient and negation,
+  but uses valMinAbs.natAbs^2 instead of j.val^2
+```
+
+This is useful because future source-facing work must either:
+
+```text
+show that Corollary 3.12 really requires the representative corridor,
+show that the balanced corridor is the intended interpretation,
+or add the missing Hodge-theoretic mechanism that reconciles the two.
+```
+
+The formalization is now precise enough to keep these choices separate.

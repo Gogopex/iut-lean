@@ -3621,6 +3621,87 @@ theorem fullLabelValuePreservation_missing
 end IUTStage1FullLabelModularSquareOnlyTransport
 
 /--
+Balanced-square/full-label transport data.
+
+This is an alternate sign-compatible branch: it uses the balanced square profile
+`valMinAbs.natAbs ^ 2`, not the representative-valued Corollary 3.12 audit
+profile `j.val ^ 2`.
+-/
+structure IUTStage1BalancedSquareFullLabelTransport
+    (l : PrimeGeFive) where
+  coordinateEquiv : ZMod l.value ≃ ZMod l.value
+  sourceLogVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+  targetLogVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+  coordinateBalancedSquare_preserved :
+    IUTStage1ZModSquareWeightProfile.CoordinateBalancedSquarePreserving
+      (l := l) coordinateEquiv
+  fullLabelMap_preserved :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+      (l := l) coordinateEquiv
+  fullLabelValue_preserved :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelLogVolumeValuePreserving
+      sourceLogVolume targetLogVolume
+
+namespace IUTStage1BalancedSquareFullLabelTransport
+
+variable {l : PrimeGeFive}
+
+def negSelf
+    (logVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :
+    IUTStage1BalancedSquareFullLabelTransport l :=
+  { coordinateEquiv := Equiv.neg (ZMod l.value),
+    sourceLogVolume := logVolume,
+    targetLogVolume := logVolume,
+    coordinateBalancedSquare_preserved :=
+      IUTStage1ZModSquareWeightProfile.coordinateBalancedSquarePreserving_neg,
+    fullLabelMap_preserved :=
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.fullLabelMapPreserving_neg,
+    fullLabelValue_preserved :=
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.fullLabelLogVolumeValuePreserving_refl
+        logVolume }
+
+theorem balancedSquareWeight_preserved
+    (transport : IUTStage1BalancedSquareFullLabelTransport l) :
+    ∀ j : ZMod l.value,
+      IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+          (l := l) (transport.coordinateEquiv j) =
+        IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+          (l := l) j :=
+  transport.coordinateBalancedSquare_preserved
+
+theorem fullLabelLogVolume_preserved
+    (transport : IUTStage1BalancedSquareFullLabelTransport l) :
+    ∀ j : ZMod l.value,
+      transport.targetLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (transport.coordinateEquiv j)) =
+        transport.sourceLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  by
+    intro j
+    rw [transport.fullLabelMap_preserved j]
+    exact transport.fullLabelValue_preserved
+      (IUTStage1ZModCuspFullLabel.fromCoordinate l j)
+
+theorem balancedSummand_preserved
+    (transport : IUTStage1BalancedSquareFullLabelTransport l) :
+    ∀ j : ZMod l.value,
+      IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+          (l := l) (transport.coordinateEquiv j) *
+        transport.targetLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (transport.coordinateEquiv j)) =
+      IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+          (l := l) j *
+        transport.sourceLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  intro j
+  rw [transport.balancedSquareWeight_preserved j,
+    transport.fullLabelLogVolume_preserved j]
+
+end IUTStage1BalancedSquareFullLabelTransport
+
+/--
 Boundary object showing what the local-object Hodge-descent packet layer supplies
 before square-weight preservation data are added.
 

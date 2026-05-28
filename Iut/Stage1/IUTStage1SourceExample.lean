@@ -1479,6 +1479,46 @@ theorem zmodSquareWeightProfile_balanced_square_preserving_neg_example
       (l := l) (Equiv.neg (ZMod l.value)) :=
   IUTStage1ZModSquareWeightProfile.coordinateBalancedSquarePreserving_neg
 
+def balancedSquareFullLabelTransport_neg_self_example
+    {l : PrimeGeFive}
+    (logVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :
+    IUTStage1BalancedSquareFullLabelTransport l :=
+  IUTStage1BalancedSquareFullLabelTransport.negSelf logVolume
+
+theorem balancedSquareFullLabelTransport_weight_example
+    {l : PrimeGeFive}
+    (transport : IUTStage1BalancedSquareFullLabelTransport l)
+    (j : ZMod l.value) :
+    IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+        (l := l) (transport.coordinateEquiv j) =
+      IUTStage1ZModSquareWeightProfile.balancedSquareWeight (l := l) j :=
+  transport.balancedSquareWeight_preserved j
+
+theorem balancedSquareFullLabelTransport_full_label_example
+    {l : PrimeGeFive}
+    (transport : IUTStage1BalancedSquareFullLabelTransport l)
+    (j : ZMod l.value) :
+    transport.targetLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          (transport.coordinateEquiv j)) =
+      transport.sourceLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  transport.fullLabelLogVolume_preserved j
+
+theorem balancedSquareFullLabelTransport_summand_example
+    {l : PrimeGeFive}
+    (transport : IUTStage1BalancedSquareFullLabelTransport l)
+    (j : ZMod l.value) :
+    IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+        (l := l) (transport.coordinateEquiv j) *
+      transport.targetLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          (transport.coordinateEquiv j)) =
+    IUTStage1ZModSquareWeightProfile.balancedSquareWeight (l := l) j *
+      transport.sourceLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  transport.balancedSummand_preserved j
+
 theorem zmodSquareWeightProfile_coordinate_square_val_rigid_example
     {l : PrimeGeFive}
     {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
