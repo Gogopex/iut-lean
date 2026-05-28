@@ -16076,6 +16076,24 @@ theorem targetSigned_le_zeroLogVolume'
       (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume :=
   part.targetSigned_le_zeroLogVolume audited
 
+theorem targetSigned_le_fullLabelLogVolume_fromCoordinate
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (j : ZMod l.value) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited).fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  by_cases hj : j = 0
+  · subst j
+    rw [(part.theta_source.compatible_average.cuspLogVolume
+      audited).fullLabelLogVolume_fromCoordinate_zero]
+    exact part.targetSigned_le_zeroLogVolume audited
+  · rw [(part.theta_source.compatible_average.cuspLogVolume
+      audited).fullLabelLogVolume_fromCoordinate_nonzero j hj]
+    exact
+      part.targetSigned_le_cuspClassLogVolume audited
+        (zmodSignLabelFromCoordinate l j hj)
+
 theorem targetSigned_le_normalizedLogVolume
     (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)

@@ -6245,6 +6245,23 @@ theorem placeAudited_logVolume_fl_zmod_cusp_container_labelwise_example
         audited).normalizedLogVolume j :=
   part.targetSigned_le_normalizedLogVolume audited j
 
+theorem placeAudited_logVolume_fl_zmod_cusp_container_full_label_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (j : ZMod l.value) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited).fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  part.targetSigned_le_fullLabelLogVolume_fromCoordinate audited j
+
 def placeAudited_logVolume_fl_zmod_cusp_container_to_labelwise_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

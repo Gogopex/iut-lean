@@ -6093,3 +6093,57 @@ If yes, Lean transports them to both the uniform and square-weighted averages.
 If no, the weighted-average theorem cannot substitute for the missing local
 comparison.  This keeps the disputed SHE/Hodge-theater identification question
 upstream of the real averaging calculation.
+
+## 189. Cusp Bounds Give Pointwise Full-Label Bounds
+
+### Lean Move
+
+We exposed the full-label form of the cusp-class container estimate:
+
+```text
+FLZModCuspLabelThetaCuspClassContainerAudit
+  .targetSigned_le_fullLabelLogVolume_fromCoordinate
+```
+
+For every `j : ZMod l.value`, it proves
+
+```text
+targetSigned <= fullLabelLogVolume(fromCoordinate j)
+```
+
+by splitting into the zero coordinate and the nonzero cusp-class coordinate.
+
+### Mathematical Reason
+
+The full-label interface is the common boundary between the zero/cusp local
+container estimates and the square-weighted average formula.  The zero case
+uses the zero-log-volume branch.  The nonzero case uses the sign-label quotient
+attached to `j`.
+
+This theorem makes explicit that the weighted-average lower-bound theorem is
+not consuming a vague cusp estimate.  It consumes a coordinate-indexed
+full-label lower bound.
+
+### Source Check
+
+IUT III's notation distinguishes zero and nonzero/cusp-label contributions,
+while the Corollary 3.12 comparison is expressed in terms of log-volume data
+indexed over `F_l`.  Scholze-Stix's discussion of the critical step also tracks
+the coordinate-indexed quantities.  This theorem states exactly how our local
+zero/nonzero split is reassembled into the coordinate-indexed full-label
+interface.
+
+### Relevance to the 3.12 Dispute
+
+The current Lean corridor now has a clear positive chain:
+
+```text
+zero/cusp local bounds
+  -> fullLabel(fromCoordinate j) bounds
+  -> square-weighted average bound
+```
+
+The disputed part is therefore not hidden in the real averaging calculation.
+It is pushed back to the source of the local zero/cusp bounds and to the
+separate question of pointwise representative-square transport across the
+structured SHE/Hodge-theater boundary.
