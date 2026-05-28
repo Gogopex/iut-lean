@@ -5488,3 +5488,54 @@ representative-square preservation has already assumed a coordinate-identity
 fact.  That may be acceptable only if the proof explicitly argues that the
 nontrivial IUT content lives elsewhere and does not require a nontrivial
 coordinate transport at this layer.
+
+## 177. Negation Cannot Be the Representative-Square SHE Coordinate
+
+### Lean Move
+
+We added the structured-SHE obstruction:
+
+```text
+IUTStage1StructuredSHEFactoredSquareFullLabelObligations.coordinateEquiv_ne_neg
+IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+  .coordinateEquiv_ne_modularSquareOnlyNeg
+```
+
+The first theorem says that the coordinate equivalence in a representative
+square/full-label SHE obligation cannot be the negation equivalence on
+`ZMod l.value`.  The second theorem states the same obstruction against the
+previously defined modular-square-only negation transport.
+
+### Mathematical Reason
+
+The negation map satisfies:
+
+```text
+(-j)^2 = j^2  in ZMod l.value
+```
+
+but it does not preserve the selected real representative square:
+
+```text
+((-j).val : Real)^2 = (j.val : Real)^2.
+```
+
+Since the factored SHE obligation contains `CoordinateSquarePreserving`, Lean
+rejects negation as a possible coordinate equivalence for that obligation.
+
+### Source Check
+
+This is the formal version of the local distinction already visible in the
+Scholze-Stix critique: finite-field/sign-compatible identifications do not
+automatically justify inserting the real `j^2` scaling in the comparison of
+real log-volumes.  IUT III's discussion of the `F_l` labels and the
+Hodge-Arakelov evaluation motivates tracking sign/label indeterminacy, but our
+current representative-square branch needs more than sign compatibility.
+
+### Relevance to the 3.12 Dispute
+
+The obstruction is now stated exactly at the level where a future SHE route
+would try to discharge the factored square/full-label obligations.  A proof that
+uses the modular-square-only negation route must either switch to the balanced
+sign-compatible profile or supply additional mathematical content explaining why
+the literal representative-square comparison is not the correct formal target.

@@ -1453,6 +1453,27 @@ theorem structuredSHEFactoredSquareFullLabelObligations_identity_histories_examp
         bundle.structuredSHE.context.codomainStructure.theater.side :=
   obligations.coordinateIdentity_and_histories_not_identified
 
+theorem structuredSHEFactoredSquareFullLabelObligations_coord_ne_neg_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations package bundle l) :
+    obligations.coordinateEquiv ≠ Equiv.neg (ZMod l.value) :=
+  obligations.coordinateEquiv_ne_neg
+
+theorem structuredSHEFactoredSquareFullLabelObligations_coord_ne_modular_neg_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations package bundle l) :
+    obligations.coordinateEquiv ≠
+      (IUTStage1FullLabelModularSquareOnlyTransport.neg l).coordinateEquiv :=
+  obligations.coordinateEquiv_ne_modularSquareOnlyNeg
+
 def structuredSHEFactoredPreservationBoundary_of_bundle_example
     {source target : Copy} {index : Type u}
     {package : IUTStage1SourcePackage source target index}

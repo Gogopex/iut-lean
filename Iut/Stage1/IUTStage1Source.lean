@@ -9989,6 +9989,25 @@ theorem coordinateIdentity_and_histories_not_identified
   ⟨obligations.coordinateEquiv_eq_refl,
     bundle.domainHistory_ne_codomainHistory⟩
 
+theorem coordinateEquiv_ne_neg
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+        package bundle l) :
+    obligations.coordinateEquiv ≠ Equiv.neg (ZMod l.value) := by
+  intro hneg
+  have hcoord := obligations.coordinateSquare_preserved
+  rw [hneg] at hcoord
+  exact not_coordinateSquarePreserving_neg hcoord
+
+theorem coordinateEquiv_ne_modularSquareOnlyNeg
+    (obligations :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+        package bundle l) :
+    obligations.coordinateEquiv ≠
+      (IUTStage1FullLabelModularSquareOnlyTransport.neg l).coordinateEquiv := by
+  simpa [IUTStage1FullLabelModularSquareOnlyTransport.neg] using
+    obligations.coordinateEquiv_ne_neg
+
 end IUTStage1StructuredSHEFactoredSquareFullLabelObligations
 
 /--
