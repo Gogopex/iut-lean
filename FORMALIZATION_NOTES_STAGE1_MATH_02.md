@@ -4260,3 +4260,96 @@ placeAudited_logVolume_fl_zmod_labelwise_container_q_le_theta_example
 The next step is to replace the raw labelwise inequality field by more
 structured source data: a local container estimate for each `j : F_l`, tied to
 the cusp/sign label model and to the chosen place-audited packet.
+
+## 55. Cusp-Class Bounds Imply Labelwise Bounds
+
+### Goal
+
+We refined the labelwise container estimate so that it is expressed through the
+cusp/sign-label model rather than as an arbitrary function on `ZMod l.value`.
+
+### Source Check
+
+The Corollary 3.12 discussion averages over `j ∈ F_l`, but the local
+Theta-side data is organized through cusp labels and their sign/unit
+identifications.  This is also one of the places where the Scholze-Stix critique
+warns against silently changing the interpretation of the real-valued objects.
+Therefore we should not treat the raw `ZMod l` label family as independent of
+the cusp-label model.
+
+### Lean Move
+
+We added:
+
+```text
+FLZModCuspLabelThetaCuspClassContainerAudit
+```
+
+It assumes:
+
+```text
+targetSigned <= cuspClassLogVolume(sign label)
+targetSigned <= zeroLogVolume
+```
+
+for each audited place-packet.  Lean then proves:
+
+```text
+targetSigned_le_normalizedLogVolume
+toThetaLabelwiseContainerAudit
+targetSigned_le_averageLogVolume
+toThetaPilotHullContainerAudit
+qSigned_le_thetaSigned_via_cusp_container
+```
+
+The proof splits on whether `j : ZMod l.value` is zero.
+
+For `j ≠ 0`, it uses the compatibility theorem:
+
+```text
+nonzeroAverageLabel_eq_cuspClass
+```
+
+For `j = 0`, it uses:
+
+```text
+zeroAverageLabel_eq_zeroLogVolume
+```
+
+### Mathematical Point
+
+The route is now:
+
+```text
+cusp-class and zero-label local bounds
+  -> normalized bound for every ZMod l label
+  -> finite F_l average bound
+  -> Theta-source average bound
+  -> qSigned <= thetaSigned
+```
+
+This is closer to the structure of the IUT local estimates: the future analytic
+proof should supply bounds for the cusp/sign-label classes and the zero label,
+not for an anonymous list of real numbers.
+
+### Trap Avoided
+
+The zero label is not forced into the nonzero cusp sign-label quotient.  Lean
+requires a separate zero bound, which matches the way the compatibility object
+was designed.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_cusp_container_labelwise_example
+placeAudited_logVolume_fl_zmod_cusp_container_to_labelwise_example
+placeAudited_logVolume_fl_zmod_cusp_container_q_le_theta_example
+```
+
+### Remaining Gap
+
+The next refinement should unpack the source of the cusp-class bounds
+themselves: a local container estimate attached to the audited place packet and
+the corresponding cusp sign-label class.

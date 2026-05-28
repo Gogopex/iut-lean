@@ -9760,6 +9760,32 @@ structure FLZModCuspLabelThetaLabelwiseContainerAudit
         (theta_source.compatible_average.zmod_cusp_audit.averaged_audit.averagedLogVolume
           audited).normalizedLogVolume j
 
+/--
+Cusp-class local-container estimate for the Theta-pilot hull/container route.
+
+This is one step closer to the local IUT data than the raw `ZMod l` labelwise
+audit: nonzero labels are bounded via their cusp sign-label classes, while the
+zero label is bounded by the separately recorded zero log-volume.
+-/
+structure FLZModCuspLabelThetaCuspClassContainerAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  theta_source : audit.FLZModCuspLabelThetaSourceAudit l
+  ind12_equality_part : audit.Ind12EqualityPart
+  ind3_upper_part : audit.Ind3UpperInequalityPart
+  theta_images_eq_endpoint :
+    theta_source.theta_images = endpoint.theta_hull_endpoint.possible_images
+  targetSigned_le_cuspClassLogVolume :
+    ∀ (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+      (label : (zmodSignAction l).SignLabelQuotient),
+      package.preLedger.targetVolume.targetSigned <=
+        (theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+          label
+  targetSigned_le_zeroLogVolume :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      package.preLedger.targetVolume.targetSigned <=
+        (theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume
+
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord =
@@ -10510,6 +10536,77 @@ theorem qSigned_le_thetaSigned_via_labelwise_container
     audited
 
 end FLZModCuspLabelThetaLabelwiseContainerAudit
+
+namespace FLZModCuspLabelThetaCuspClassContainerAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+theorem targetSigned_le_cuspClassLogVolume'
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label :=
+  part.targetSigned_le_cuspClassLogVolume audited label
+
+theorem targetSigned_le_zeroLogVolume'
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume :=
+  part.targetSigned_le_zeroLogVolume audited
+
+theorem targetSigned_le_normalizedLogVolume
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (j : ZMod l.value) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit.averagedLogVolume
+        audited).normalizedLogVolume j := by
+  by_cases hj : j = 0
+  · subst j
+    rw [part.theta_source.compatible_average.zeroAverageLabel_eq_zeroLogVolume
+      audited]
+    exact part.targetSigned_le_zeroLogVolume audited
+  · rw [part.theta_source.compatible_average.nonzeroAverageLabel_eq_cuspClass
+      audited j hj]
+    exact
+      part.targetSigned_le_cuspClassLogVolume audited
+        (zmodSignLabelFromCoordinate l j hj)
+
+def toThetaLabelwiseContainerAudit
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l) :
+    audit.FLZModCuspLabelThetaLabelwiseContainerAudit l :=
+  { theta_source := part.theta_source,
+    ind12_equality_part := part.ind12_equality_part,
+    ind3_upper_part := part.ind3_upper_part,
+    theta_images_eq_endpoint := part.theta_images_eq_endpoint,
+    targetSigned_le_normalizedLogVolume :=
+      part.targetSigned_le_normalizedLogVolume }
+
+theorem targetSigned_le_averageLogVolume
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit.averagedLogVolume
+        audited).averageLogVolume :=
+  part.toThetaLabelwiseContainerAudit.targetSigned_le_averageLogVolume audited
+
+def toThetaPilotHullContainerAudit
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l) :
+    audit.FLZModCuspLabelThetaPilotHullContainerAudit l :=
+  part.toThetaLabelwiseContainerAudit.toThetaPilotHullContainerAudit
+
+theorem qSigned_le_thetaSigned_via_cusp_container
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.toThetaLabelwiseContainerAudit.qSigned_le_thetaSigned_via_labelwise_container
+    audited
+
+end FLZModCuspLabelThetaCuspClassContainerAudit
 
 namespace FLZModCuspLabelThetaContainerBoundAudit
 
