@@ -1823,6 +1823,52 @@ theorem qInputLogVolume_le_cTheta_absLogQ
 end IUTStage1QPilotTwoComputationCThetaEndpoint
 
 /--
+Opening sign reduction in the proof of IUT III, Corollary 3.12.
+
+The source proof observes that, since `|log(q)| > 0`, if
+`-|log(Theta)| >= 0`, then the desired comparison
+`-|log(q)| <= -|log(Theta)|` is immediate.  Thus the nontrivial case may assume
+`-|log(Theta)| < 0`.
+-/
+structure IUTStage1Corollary312ThetaSignReduction where
+  qSigned : Real
+  thetaSigned : Real
+  q_pilot_positive : 0 < -qSigned
+
+namespace IUTStage1Corollary312ThetaSignReduction
+
+theorem qSigned_neg
+    (data : IUTStage1Corollary312ThetaSignReduction) :
+    data.qSigned < 0 := by
+  linarith [data.q_pilot_positive]
+
+theorem qSigned_le_thetaSigned_of_theta_nonneg
+    (data : IUTStage1Corollary312ThetaSignReduction)
+    (hTheta : 0 <= data.thetaSigned) :
+    data.qSigned <= data.thetaSigned := by
+  linarith [data.qSigned_neg, hTheta]
+
+def comparisonDataOfThetaNonnegative
+    (data : IUTStage1Corollary312ThetaSignReduction)
+    (hTheta : 0 <= data.thetaSigned) :
+    Corollary312ComparisonData :=
+  { thetaSigned := data.thetaSigned,
+    qSigned := data.qSigned,
+    q_positive := data.q_pilot_positive,
+    qSigned_le_thetaSigned :=
+      data.qSigned_le_thetaSigned_of_theta_nonneg hTheta }
+
+theorem corollary312_of_theta_nonnegative
+    (data : IUTStage1Corollary312ThetaSignReduction)
+    (hTheta : 0 <= data.thetaSigned) :
+    Corollary312Inequality
+      (data.comparisonDataOfThetaNonnegative hTheta).thetaPilot
+      (data.comparisonDataOfThetaNonnegative hTheta).qPilot :=
+  (data.comparisonDataOfThetaNonnegative hTheta).corollary312
+
+end IUTStage1Corollary312ThetaSignReduction
+
+/--
 Step (xi-h) tensor-power warning for the `Theta`-pilot log-volume.
 
 The source text recalls that the EtTh argument used in Step (xi) has no evident

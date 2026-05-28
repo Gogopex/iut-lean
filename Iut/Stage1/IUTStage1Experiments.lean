@@ -647,6 +647,7 @@ structure ProcessionContainerExperimentReport where
   corollary312CThetaLowerBoundAlgebraAvailable : Bool
   corollary312SignedCThetaBridgeAvailable : Bool
   qPilotTwoComputationCThetaEndpointAvailable : Bool
+  corollary312ThetaSignReductionAvailable : Bool
   thetaPilotTensorPowerWarningAvailable : Bool
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
@@ -723,6 +724,7 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     corollary312CThetaLowerBoundAlgebraAvailable := true,
     corollary312SignedCThetaBridgeAvailable := true,
     qPilotTwoComputationCThetaEndpointAvailable := true,
+    corollary312ThetaSignReductionAvailable := true,
     thetaPilotTensorPowerWarningAvailable := true,
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
@@ -1068,6 +1070,12 @@ theorem qPilotTwoComputationCThetaEndpoint_lower_bound
     (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
     (-1 : Real) <= data.cTheta :=
   data.cTheta_ge_neg_one
+
+theorem corollary312ThetaSignReduction_trivial_case
+    (data : IUTStage1Corollary312ThetaSignReduction)
+    (hTheta : 0 <= data.thetaSigned) :
+    data.qSigned <= data.thetaSigned :=
+  data.qSigned_le_thetaSigned_of_theta_nonneg hTheta
 
 theorem thetaPilotTensorPowerLogVolume_eq_mul
     (data : IUTStage1ThetaPilotTensorPowerLogVolume) :
@@ -1775,6 +1783,7 @@ structure Corollary312DisputeFirstPassReport where
   corollary312CThetaLowerBoundAlgebraAvailable : Bool
   corollary312SignedCThetaBridgeAvailable : Bool
   qPilotTwoComputationCThetaEndpointAvailable : Bool
+  corollary312ThetaSignReductionAvailable : Bool
   thetaPilotTensorPowerWarningAvailable : Bool
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
@@ -1864,6 +1873,7 @@ def corollary312DisputeFirstPassReport :
     corollary312CThetaLowerBoundAlgebraAvailable := true,
     corollary312SignedCThetaBridgeAvailable := true,
     qPilotTwoComputationCThetaEndpointAvailable := true,
+    corollary312ThetaSignReductionAvailable := true,
     thetaPilotTensorPowerWarningAvailable := true,
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
@@ -2057,6 +2067,11 @@ theorem corollary312Report_signedCThetaBridgeAvailable :
 
 theorem corollary312Report_qPilotTwoComputationCThetaEndpointAvailable :
     corollary312DisputeFirstPassReport.qPilotTwoComputationCThetaEndpointAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_thetaSignReductionAvailable :
+    corollary312DisputeFirstPassReport.corollary312ThetaSignReductionAvailable =
       true :=
   rfl
 
