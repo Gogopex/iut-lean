@@ -2030,3 +2030,71 @@ zero object should be marked as coming from the 0-column/SHE side, while
 nonzero cusp-class objects should be marked as the local Hodge-Arakelov
 evaluation/cusp-class side.  That distinction matters because collapsing those
 roles too early would recreate the simplified Scholze-Stix route.
+
+## 136. Role-Marked Hodge-Descent Local Operations
+
+### Lean Move
+
+I added:
+
+```text
+IUTStage1HodgeDescentLocalObjectRole
+IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit
+```
+
+The roles are:
+
+```text
+zeroColumnSHEInput
+cuspClassHodgeArakelovEvaluation
+packetDescentTarget
+```
+
+The role-marked packet transport audit derives the operated transport audit,
+but it additionally checks that:
+
+```text
+zero operation source role = zeroColumnSHEInput
+cusp-class operation source role = cuspClassHodgeArakelovEvaluation
+all operation target roles = packetDescentTarget
+```
+
+### Mathematical Reason
+
+This records a distinction that matters directly for the Corollary 3.12
+dispute.  The zero-column/SHE input object and the nonzero cusp-class
+Hodge-Arakelov evaluation objects may later transport to the same packet-side
+target object, but the formalization now remembers that they entered the
+transport route with different roles.
+
+That prevents the local Hodge-descent interface from saying merely "two things
+are equal".  It says which side of the intended construction each thing belongs
+to before the transport is applied.
+
+### Trap Avoided
+
+A simplified route can still be formalized separately, but it cannot populate
+this role-marked route without naming the zero-column/SHE role, the cusp-class
+evaluation role, and the packet descent target role.  This is the anti-collapse
+discipline we need before attempting the genuinely hard Hodge-theater
+construction.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_role_marked_hodge_transport_to_operated_example
+placeAudited_logVolume_fl_zmod_role_marked_zero_source_role_example
+placeAudited_logVolume_fl_zmod_role_marked_cusp_source_role_example
+placeAudited_logVolume_fl_zmod_role_marked_zero_target_role_example
+```
+
+### Remaining Gap
+
+The roles are still bookkeeping.  The next mathematical target is to attach the
+zero-column/SHE role and cusp-class evaluation role to more source-specific
+objects from the original IUT III construction, especially the 0-column and the
+Hodge-Arakelov label/cusp data.

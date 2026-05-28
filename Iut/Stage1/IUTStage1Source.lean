@@ -2450,6 +2450,57 @@ structure IUTStage1HodgeDescentCuspZeroLocalObjectOperationData
       IUTStage1HodgeDescentLocalObjectOperationData
         hodgeData (cuspClassObject label) packetObject
 
+/--
+Source/target roles for local objects in the Hodge-descent packet transport.
+-/
+inductive IUTStage1HodgeDescentLocalObjectRole where
+  | zeroColumnSHEInput
+  | cuspClassHodgeArakelovEvaluation
+  | packetDescentTarget
+deriving DecidableEq, Repr
+
+/--
+Local descent operation with the source and target object roles made explicit.
+-/
+structure IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+    {kind : IUTStage1PlaceKind}
+    (hodgeData : IUTStage1HodgeTheaterDescentBridgeData)
+    (sourceObject packetObject : IUTStage1FiniteLocalLogVolumeObject kind) where
+  operation :
+    IUTStage1HodgeDescentLocalObjectOperationData
+      hodgeData sourceObject packetObject
+  sourceRole : IUTStage1HodgeDescentLocalObjectRole
+  targetRole : IUTStage1HodgeDescentLocalObjectRole
+  target_role_eq_packet :
+    targetRole = IUTStage1HodgeDescentLocalObjectRole.packetDescentTarget
+
+/--
+Role-marked zero/cusp local descent-operation family.
+-/
+structure IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+    {kind : IUTStage1PlaceKind}
+    (l : PrimeGeFive)
+    (hodgeData : IUTStage1HodgeTheaterDescentBridgeData)
+    (zeroObject : IUTStage1FiniteLocalLogVolumeObject kind)
+    (cuspClassObject :
+      (zmodSignAction l).SignLabelQuotient ->
+        IUTStage1FiniteLocalLogVolumeObject kind)
+    (packetObject : IUTStage1FiniteLocalLogVolumeObject kind) where
+  zeroOperation :
+    IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+      hodgeData zeroObject packetObject
+  zero_source_role :
+    zeroOperation.sourceRole =
+      IUTStage1HodgeDescentLocalObjectRole.zeroColumnSHEInput
+  cuspClassOperation :
+    ∀ label : (zmodSignAction l).SignLabelQuotient,
+      IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+        hodgeData (cuspClassObject label) packetObject
+  cuspClass_source_role :
+    ∀ label : (zmodSignAction l).SignLabelQuotient,
+      (cuspClassOperation label).sourceRole =
+        IUTStage1HodgeDescentLocalObjectRole.cuspClassHodgeArakelovEvaluation
+
 namespace IUTStage1HodgeDescentLocalObjectTransportData
 
 variable {kind : IUTStage1PlaceKind}
@@ -2590,6 +2641,118 @@ theorem cuspClassOperation_descent_eq_hodgeData
   (data.cuspClassOperation label).descent_eq
 
 end IUTStage1HodgeDescentCuspZeroLocalObjectOperationData
+
+namespace IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+
+variable {kind : IUTStage1PlaceKind}
+variable {hodgeData : IUTStage1HodgeTheaterDescentBridgeData}
+variable {sourceObject packetObject : IUTStage1FiniteLocalLogVolumeObject kind}
+
+def toLocalObjectOperationData
+    (data :
+      IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+        hodgeData sourceObject packetObject) :
+    IUTStage1HodgeDescentLocalObjectOperationData
+      hodgeData sourceObject packetObject :=
+  data.operation
+
+theorem source_transports_to_packet
+    (data :
+      IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+        hodgeData sourceObject packetObject) :
+    sourceObject = packetObject :=
+  data.operation.source_transports_to_packet'
+
+theorem targetRole_eq_packet
+    (data :
+      IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+        hodgeData sourceObject packetObject) :
+    data.targetRole =
+      IUTStage1HodgeDescentLocalObjectRole.packetDescentTarget :=
+  data.target_role_eq_packet
+
+theorem descent_eq_hodgeData
+    (data :
+      IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+        hodgeData sourceObject packetObject) :
+    data.operation.descent = hodgeData.descent :=
+  data.operation.descent_eq
+
+end IUTStage1RoleMarkedHodgeDescentLocalObjectOperationData
+
+namespace IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+
+variable {kind : IUTStage1PlaceKind}
+variable {l : PrimeGeFive}
+variable {hodgeData : IUTStage1HodgeTheaterDescentBridgeData}
+variable {zeroObject : IUTStage1FiniteLocalLogVolumeObject kind}
+variable
+  {cuspClassObject :
+    (zmodSignAction l).SignLabelQuotient ->
+      IUTStage1FiniteLocalLogVolumeObject kind}
+variable {packetObject : IUTStage1FiniteLocalLogVolumeObject kind}
+
+def toCuspZeroLocalObjectOperationData
+    (data :
+      IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    IUTStage1HodgeDescentCuspZeroLocalObjectOperationData
+      l hodgeData zeroObject cuspClassObject packetObject :=
+  { zeroOperation := data.zeroOperation.toLocalObjectOperationData,
+    cuspClassOperation := fun label =>
+      (data.cuspClassOperation label).toLocalObjectOperationData }
+
+def toLocalObjectTransportData
+    (data :
+      IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    IUTStage1HodgeDescentLocalObjectTransportData
+      l hodgeData zeroObject cuspClassObject packetObject :=
+  data.toCuspZeroLocalObjectOperationData.toLocalObjectTransportData
+
+theorem zeroSourceRole_eq
+    (data :
+      IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    data.zeroOperation.sourceRole =
+      IUTStage1HodgeDescentLocalObjectRole.zeroColumnSHEInput :=
+  data.zero_source_role
+
+theorem cuspClassSourceRole_eq
+    (data :
+      IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+        l hodgeData zeroObject cuspClassObject packetObject)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (data.cuspClassOperation label).sourceRole =
+      IUTStage1HodgeDescentLocalObjectRole.cuspClassHodgeArakelovEvaluation :=
+  data.cuspClass_source_role label
+
+theorem zeroTargetRole_eq_packet
+    (data :
+      IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    data.zeroOperation.targetRole =
+      IUTStage1HodgeDescentLocalObjectRole.packetDescentTarget :=
+  data.zeroOperation.targetRole_eq_packet
+
+theorem cuspClassTargetRole_eq_packet
+    (data :
+      IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+        l hodgeData zeroObject cuspClassObject packetObject)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (data.cuspClassOperation label).targetRole =
+      IUTStage1HodgeDescentLocalObjectRole.packetDescentTarget :=
+  (data.cuspClassOperation label).targetRole_eq_packet
+
+theorem zero_eq_cuspClass
+    (data :
+      IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
+        l hodgeData zeroObject cuspClassObject packetObject)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    zeroObject = cuspClassObject label :=
+  data.toCuspZeroLocalObjectOperationData.zero_eq_cuspClass label
+
+end IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData
 
 /--
 Local packet-normalized compatibility together with a source classification.
@@ -11470,6 +11633,33 @@ structure FLZModCuspLabelThetaOperatedHodgeDescentPacketTransportAudit
         audited.choice.local_tensor_state.packetState.localObject
 
 /--
+Hodge-descent packet transport audit with explicit source/target local-object
+roles.
+-/
+structure FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  bundle : IUTStage1Theorem311StructuredInputsWithSHE package
+  insulated_route :
+    audit.FLZModCuspLabelThetaInsulatedCuspZeroLocalLabelObjectConstructionAudit l
+  packetLocalObjectEstimate :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1LocalObjectContainerLogVolumeEstimate kind
+        package.preLedger.targetVolume.targetSigned
+        audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume
+  packetLocalObjectEstimate_eq_packetLocalObject :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      (packetLocalObjectEstimate audited).localObject =
+        audited.choice.local_tensor_state.packetState.localObject
+  localObjectOperation :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1RoleMarkedHodgeDescentCuspZeroLocalObjectOperationData l
+        bundle.hodgeTheaterDescentBridgeData
+        (insulated_route.zeroLocalObject audited)
+        (insulated_route.cuspClassLocalObject audited)
+        audited.choice.local_tensor_state.packetState.localObject
+
+/--
 Classified packet bridge from the insulated cusp/zero route to the comparison
 route.
 -/
@@ -15563,6 +15753,75 @@ theorem bridgeSource_eq_hodgeTheaterDescentPacketTransport
   structured.bridgeSource_eq_hodgeTheaterDescentPacketTransport
 
 end FLZModCuspLabelThetaOperatedHodgeDescentPacketTransportAudit
+
+namespace FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def toOperatedHodgeDescentPacketTransportAudit
+    (part :
+      audit.FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit l) :
+    audit.FLZModCuspLabelThetaOperatedHodgeDescentPacketTransportAudit l :=
+  { bundle := part.bundle,
+    insulated_route := part.insulated_route,
+    packetLocalObjectEstimate := part.packetLocalObjectEstimate,
+    packetLocalObjectEstimate_eq_packetLocalObject :=
+      part.packetLocalObjectEstimate_eq_packetLocalObject,
+    localObjectOperation := fun audited =>
+      (part.localObjectOperation audited).toCuspZeroLocalObjectOperationData }
+
+def toStructuredHodgeDescentPacketTransportAudit
+    (part :
+      audit.FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit l) :
+    audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l :=
+  let operated := part.toOperatedHodgeDescentPacketTransportAudit
+  operated.toStructuredHodgeDescentPacketTransportAudit
+
+theorem zeroSourceRole_eq
+    (part :
+      audit.FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.localObjectOperation audited).zeroOperation.sourceRole =
+      IUTStage1HodgeDescentLocalObjectRole.zeroColumnSHEInput :=
+  (part.localObjectOperation audited).zeroSourceRole_eq
+
+theorem cuspClassSourceRole_eq
+    (part :
+      audit.FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    ((part.localObjectOperation audited).cuspClassOperation label).sourceRole =
+      IUTStage1HodgeDescentLocalObjectRole.cuspClassHodgeArakelovEvaluation :=
+  (part.localObjectOperation audited).cuspClassSourceRole_eq label
+
+theorem zeroTargetRole_eq_packet
+    (part :
+      audit.FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.localObjectOperation audited).zeroOperation.targetRole =
+      IUTStage1HodgeDescentLocalObjectRole.packetDescentTarget :=
+  (part.localObjectOperation audited).zeroTargetRole_eq_packet
+
+theorem cuspClassTargetRole_eq_packet
+    (part :
+      audit.FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    ((part.localObjectOperation audited).cuspClassOperation label).targetRole =
+      IUTStage1HodgeDescentLocalObjectRole.packetDescentTarget :=
+  (part.localObjectOperation audited).cuspClassTargetRole_eq_packet label
+
+theorem zeroLocalObject_eq_cuspClassLocalObject
+    (part :
+      audit.FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    part.insulated_route.zeroLocalObject audited =
+      part.insulated_route.cuspClassLocalObject audited label :=
+  (part.localObjectOperation audited).zero_eq_cuspClass label
+
+end FLZModCuspLabelThetaRoleMarkedHodgeDescentPacketTransportAudit
 
 namespace FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
 
