@@ -11066,6 +11066,37 @@ structure FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
         (zeroLocalObject audited).finiteLogVolume
 
 /--
+Bridge from the insulated cusp/zero local-object route to the comparison route.
+
+The bridge supplies exactly the packet-local-object identifications missing from
+the insulated route.  These fields are the source of any subsequent equality
+between the zero object and nonzero cusp-class objects.
+-/
+structure FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  insulated_route :
+    audit.FLZModCuspLabelThetaInsulatedCuspZeroLocalLabelObjectConstructionAudit l
+  packetLocalObjectEstimate :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1LocalObjectContainerLogVolumeEstimate kind
+        package.preLedger.targetVolume.targetSigned
+        audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume
+  packetLocalObjectEstimate_eq_packetLocalObject :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      (packetLocalObjectEstimate audited).localObject =
+        audited.choice.local_tensor_state.packetState.localObject
+  cuspClassLocalObject_eq_packetLocalObject :
+    ∀ (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+      (label : (zmodSignAction l).SignLabelQuotient),
+      insulated_route.cuspClassLocalObject audited label =
+        audited.choice.local_tensor_state.packetState.localObject
+  zeroLocalObject_eq_packetLocalObject :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      insulated_route.zeroLocalObject audited =
+        audited.choice.local_tensor_state.packetState.localObject
+
+/--
 Packet-normalized source for the cusp-class local object estimates.
 
 This refinement requires each cusp-class or zero-label log-volume real to be
@@ -13311,6 +13342,62 @@ theorem zeroLogVolume_eq_canonicalCuspClassLogVolume
     audited (zmodCanonicalSignLabelQuotient l)
 
 end FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
+
+namespace FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def toCuspZeroLocalLabelObjectConstructionAudit
+    (part : audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l) :
+    audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l :=
+  { theta_source := part.insulated_route.theta_source,
+    ind12_equality_part := part.insulated_route.ind12_equality_part,
+    ind3_upper_part := part.insulated_route.ind3_upper_part,
+    theta_images_eq_endpoint := part.insulated_route.theta_images_eq_endpoint,
+    packetLocalObjectEstimate := part.packetLocalObjectEstimate,
+    packetLocalObjectEstimate_eq_packetLocalObject :=
+      part.packetLocalObjectEstimate_eq_packetLocalObject,
+    cuspClassLocalObject := part.insulated_route.cuspClassLocalObject,
+    cuspClassLocalObject_eq_packetLocalObject :=
+      part.cuspClassLocalObject_eq_packetLocalObject,
+    cuspClassLogVolume_eq_localObjectFinite :=
+      part.insulated_route.cuspClassLogVolume_eq_localObjectFinite,
+    zeroLocalObject := part.insulated_route.zeroLocalObject,
+    zeroLocalObject_eq_packetLocalObject :=
+      part.zeroLocalObject_eq_packetLocalObject,
+    zeroLogVolume_eq_localObjectFinite :=
+      part.insulated_route.zeroLogVolume_eq_localObjectFinite }
+
+theorem zeroLocalObject_eq_cuspClassLocalObject
+    (part : audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    part.insulated_route.zeroLocalObject audited =
+      part.insulated_route.cuspClassLocalObject audited label :=
+  let comparisonRoute := part.toCuspZeroLocalLabelObjectConstructionAudit
+  comparisonRoute.zeroLocalObject_eq_cuspClassLocalObject audited label
+
+theorem zeroLogVolume_eq_cuspClassLogVolume
+    (part : audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.insulated_route.theta_source.compatible_average.cuspLogVolume
+        audited).zeroLogVolume =
+      (part.insulated_route.theta_source.compatible_average.cuspLogVolume
+        audited).cuspClassLogVolume label :=
+  let comparisonRoute := part.toCuspZeroLocalLabelObjectConstructionAudit
+  comparisonRoute.zeroLogVolume_eq_cuspClassLogVolume audited label
+
+theorem targetSigned_le_thetaSourceAverage
+    (part : audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.insulated_route.theta_source.thetaSourceAverage audited :=
+  let comparisonRoute := part.toCuspZeroLocalLabelObjectConstructionAudit
+  comparisonRoute.targetSigned_le_thetaSourceAverage audited
+
+end FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
 
 namespace FLZModCuspLabelThetaPacketNormalizedContainerAudit
 

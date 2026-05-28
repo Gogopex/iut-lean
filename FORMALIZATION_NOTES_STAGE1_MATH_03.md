@@ -1152,3 +1152,59 @@ The next step is to add a bridge from the insulated route to the comparison
 route.  That bridge should contain precisely the packet-local-object
 identifications that cause the zero/nonzero collapse, making the disputed
 assumption boundary easy to inspect.
+
+## 122. Packet Bridge from Insulated to Comparison Route
+
+### Lean Move
+
+I added:
+
+```text
+FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
+FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
+  .toCuspZeroLocalLabelObjectConstructionAudit
+FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
+  .zeroLocalObject_eq_cuspClassLocalObject
+FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
+  .zeroLogVolume_eq_cuspClassLogVolume
+FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit
+  .targetSigned_le_thetaSourceAverage
+```
+
+### Mathematical Reason
+
+The insulated route has separate zero and nonzero local objects.  The bridge
+adds exactly the missing packet identifications:
+
+```text
+cuspClassLocalObject audited label = packet local object
+zeroLocalObject audited = packet local object
+```
+
+Once those are supplied, Lean can convert the insulated route into the earlier
+comparison route and inherit the zero/nonzero comparison consequences and the
+target-average bound.
+
+### Trap Exposed
+
+The collapse now has a named bridge.  If the Corollary 3.12 route requires this
+bridge, then a later formal proof must justify the packet-local-object
+identifications from the actual IUT construction.  The insulated route alone
+does not justify them.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_insulated_packet_bridge_to_comparison_example
+placeAudited_logVolume_fl_zmod_insulated_packet_bridge_zero_to_cusp_example
+placeAudited_logVolume_fl_zmod_insulated_packet_bridge_target_bound_example
+```
+
+### Remaining Gap
+
+This is still an abstract bridge.  The next step should classify the bridge
+source: direct local construction, `(Ind1)/(Ind2)` transport, or a separate
+local-object comparison lemma.  This mirrors the earlier source classifications
+and keeps the disputed identification auditable.
