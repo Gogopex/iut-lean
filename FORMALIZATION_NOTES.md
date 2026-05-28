@@ -18793,3 +18793,104 @@ claimed 3.11.5 provenance.  This is useful before moving deeper into the
 Hodge-theater side: when we eventually replace the explicit audit assumption by
 source-level construction, Lean will require us to produce not merely an
 inequality, but an inequality at the named final checkpoint and chart.
+
+## 150. Structured-SHE Transport Supplies The Weighted Endpoint
+
+### Lean Move
+
+We added the transport-to-endpoint bridge:
+
+```text
+FLZModCuspLabelCompatibleAveragedInd12Audit.squareWeightedAverage_eq_transportSourceAverage
+```
+
+and, for both labelwise and cusp-class routes:
+
+```text
+ThreeElevenFiveStructuredSHEWeightedThetaAudit
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.transportBridge_eq_structuredSHE
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.histories_not_identified
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.squareWeightedAverage_eq_transportSource
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.weightedAverage_le_thetaAverage
+ThreeElevenFiveStructuredSHEWeightedThetaAudit.toThreeElevenFiveWeightedThetaAudit
+weightedThetaComparisonRouteOfStructuredSHE
+weightedThetaComparisonRouteOfStructuredSHE_source
+weightedThetaComparisonRouteOfStructuredSHE_uses_transport
+```
+
+The example file now has public structured-SHE examples showing that this route
+recovers a final q/Theta signed comparison.
+
+### Mathematical Reason
+
+Before this milestone, the `ThreeElevenFiveWeightedThetaAudit` took the disputed
+endpoint inequality directly:
+
+```text
+squareWeightedAveragedLogVolume.weightedAverageLogVolume <= thetaSourceAverage
+```
+
+The new structured-SHE audit does not take that inequality directly.  Instead it
+requires:
+
+```text
+IUTStage1StructuredSHESquareWeightTransportAudit
+profile = transport.sourceProfile
+cuspLogVolume = transport.sourceLogVolume
+transport.targetTransportedAverage <= thetaSourceAverage
+```
+
+Lean then uses the existing Hodge/SHE square-weight transport theorem
+
+```text
+transport.targetTransportedAverage = transport.sourceAverage
+```
+
+together with the new equality identifying the formal square-weighted average
+with the transport source average.  Thus the endpoint inequality is now derived
+from a source-side transport certificate plus one remaining target-side
+comparison.  This is a real reduction of the bare audit input: the square-weight
+preservation branch must pass through the structured-SHE/Hodge-descent bridge.
+
+### Source Check
+
+Mochizuki's April 2026 formalization report describes the final
+`3.11.5 => 3.12` step as the simultaneous comparison of q- and Theta-pilot
+objects in a common container, after the `hull+det` work has been moved into
+the preceding `3.11.5` side.  The new Lean structure follows that split: the
+endpoint route still belongs to the final comparison, but the equality that
+makes the square-weighted source average available is now explicitly routed
+through structured SHE square-weight transport.
+
+This also tracks IUT III, Corollary 3.12, Step `(xi)`, where the final real
+comparison is supposed to come after multiradial construction, indeterminacies,
+holomorphic hulls, determinant formation, and simultaneous consideration of the
+q- and Theta-side pilot data.
+
+Scholze-Stix's criticism focuses on whether the needed real comparisons survive
+consistent identifications of the relevant real-line copies.  The new structure
+keeps the Hodge-theater histories nonidentified:
+
+```text
+histories_not_identified
+```
+
+and it requires explicit source-profile and source-log-volume equalities before
+the transported average may be read as the square-weighted average in the final
+endpoint.
+
+### Relevance to the 3.12 Dispute
+
+The remaining unresolved input has moved.  We no longer need to assume the
+final square-weighted endpoint inequality as an isolated fact in this route; we
+can derive it from:
+
+```text
+structured-SHE square-weight transport
+transport.targetTransportedAverage <= thetaSourceAverage
+```
+
+The next mathematical pressure point is therefore sharper: justify the
+target-side transported-average comparison from the actual Hodge-theater,
+multiradial, IPL, SHE, APT, and hull/determinant data, without collapsing the
+distinct histories into a trivial identification.
