@@ -18187,3 +18187,56 @@ endpoint.  If later source work justifies the weighted-to-Theta comparison, Lean
 can show exactly what it gives before the final hull/log-volume upper bound is
 used.  This prevents the formal proof from treating the final signed inequality
 as one opaque transitivity step.
+
+## 136. Weighted-Theta Data Also Gives The Target-Average Bound
+
+### Lean Move
+
+We added the target-side analogues:
+
+```text
+targetSigned_le_thetaSourceAverage_via_squareWeightedAverage
+targetSigned_le_thetaSourceAverage_of_weightedThetaComparisonData
+```
+
+for both the labelwise and cusp-class container audit namespaces, together with
+example-facing theorems.
+
+### Mathematical Reason
+
+The q-side inequality is not the first real-valued bound in the route.  The
+local/container estimates first give:
+
+```text
+targetSigned <= squareWeightedAverage
+```
+
+and the supplied weighted-theta comparison then gives:
+
+```text
+squareWeightedAverage <= thetaSourceAverage
+```
+
+so the target endpoint is:
+
+```text
+targetSigned <= thetaSourceAverage
+```
+
+Only after this endpoint is known do the `(Ind1)/(Ind2)` q-to-target comparison
+and the final Theta upper bound enter the full Corollary 3.12 chain.
+
+### Source Check
+
+This keeps the local-container estimate, the weighted averaging operation, and
+the final weighted-to-Theta-source comparison visibly separate.  That is the
+right granularity for the IUT III Corollary 3.12 corridor and for the
+Scholze-Stix objection, where collapsing distinct real-valued comparison stages
+would obscure exactly which mathematical datum is doing the work.
+
+### Relevance to the 3.12 Dispute
+
+The formal API can now ask whether the disputed weighted-theta datum supplies
+the target-average inequality before any q-side transport is used.  This gives
+us a cleaner audit point when later replacing the current explicit comparison
+field by a theorem derived from more source-level IUT objects.

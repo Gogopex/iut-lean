@@ -16100,6 +16100,20 @@ theorem qSigned_le_thetaSourceAverage_via_squareWeightedAverage
     (part.qSigned_le_squareWeightedAverageLogVolume profile audited)
     hweighted_le_thetaAverage
 
+theorem targetSigned_le_thetaSourceAverage_via_squareWeightedAverage
+    (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (hweighted_le_thetaAverage :
+      (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
+        profile audited).weightedAverageLogVolume <=
+          part.theta_source.thetaSourceAverage audited) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited :=
+  le_trans
+    (part.targetSigned_le_squareWeightedAverageLogVolume profile audited)
+    hweighted_le_thetaAverage
+
 def missingWeightedThetaComparisonData
     (_part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
     (_profile : IUTStage1ZModSquareWeightProfile l)
@@ -16161,6 +16175,17 @@ theorem qSigned_le_thetaSourceAverage_of_weightedThetaComparisonData
       WeightedThetaComparisonData part profile audited) :
     package.preLedger.qSigned <= part.theta_source.thetaSourceAverage audited :=
   part.qSigned_le_thetaSourceAverage_via_squareWeightedAverage
+    profile audited comparison.weightedAverage_le_thetaAverage
+
+theorem targetSigned_le_thetaSourceAverage_of_weightedThetaComparisonData
+    (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (comparison :
+      WeightedThetaComparisonData part profile audited) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited :=
+  part.targetSigned_le_thetaSourceAverage_via_squareWeightedAverage
     profile audited comparison.weightedAverage_le_thetaAverage
 
 theorem targetSigned_le_thetaAverage
@@ -16334,6 +16359,19 @@ theorem qSigned_le_thetaSourceAverage_via_squareWeightedAverage
   part.toThetaLabelwiseContainerAudit.qSigned_le_thetaSourceAverage_via_squareWeightedAverage
     profile audited hweighted_le_thetaAverage
 
+theorem targetSigned_le_thetaSourceAverage_via_squareWeightedAverage
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (hweighted_le_thetaAverage :
+      (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
+        profile audited).weightedAverageLogVolume <=
+          part.theta_source.thetaSourceAverage audited) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited :=
+  part.toThetaLabelwiseContainerAudit.targetSigned_le_thetaSourceAverage_via_squareWeightedAverage
+    profile audited hweighted_le_thetaAverage
+
 def missingWeightedThetaComparisonData
     (_part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
     (_profile : IUTStage1ZModSquareWeightProfile l)
@@ -16405,6 +16443,17 @@ theorem qSigned_le_thetaSourceAverage_of_weightedThetaComparisonData
       WeightedThetaComparisonData part profile audited) :
     package.preLedger.qSigned <= part.theta_source.thetaSourceAverage audited :=
   part.qSigned_le_thetaSourceAverage_via_squareWeightedAverage
+    profile audited comparison.weightedAverage_le_thetaAverage
+
+theorem targetSigned_le_thetaSourceAverage_of_weightedThetaComparisonData
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (comparison :
+      WeightedThetaComparisonData part profile audited) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited :=
+  part.targetSigned_le_thetaSourceAverage_via_squareWeightedAverage
     profile audited comparison.weightedAverage_le_thetaAverage
 
 theorem targetSigned_le_thetaAverage
