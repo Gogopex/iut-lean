@@ -224,6 +224,10 @@ The code currently covers:
 \item the IUT IV, Corollary 2.2(ii) condition (C2) inequality chain:
   \(\frac16\log(q)\le\frac16\log(q_2)\le\frac16\log(q_\forall)\le
    (1+\epsilon_E)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)+C_K\);
+\item the IUT IV, Corollary 2.2(ii) comparison
+  \(\log\operatorname{diff}_X(x_E)=\log(d_{F_{\mathrm{tpd}}})\) and
+  \(\log(f_{F_{\mathrm{tpd}}})\le\log\operatorname{cond}_D(x_E)\le
+   \log(f_{F_{\mathrm{tpd}}})+\log(2\ell)\);
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -282,7 +286,8 @@ height/log-different/log-conductor inequality.  The Corollary 2.2 flag records
 composition of the displayed bounded-discrepancy chain.  The transfer flag
 records movement of pointwise bounds across bounded-discrepancy equivalence.
 The Corollary 2.2(C2) flag records the displayed three-step logarithmic
-inequality chain.
+inequality chain.  The log-different/log-conductor flag records the bridge from
+tripodal field terms to curve functions.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -369,6 +374,8 @@ Lean also proves that upper and lower pointwise bounds transfer across such a
 bounded-discrepancy equivalence with the appropriate constant shift.
 For Corollary 2.2(ii), Lean proves the final \(\frac16\log(q)\) bound from the
 displayed \(\log(q)\), \(\log(q_2)\), and \(\log(q_\forall)\) chain.
+It also proves the two sum inequalities relating the tripodal different and
+conductor terms to \(\log\operatorname{diff}_X+\log\operatorname{cond}_D\).
 
 \section{Missing Mathematics}
 

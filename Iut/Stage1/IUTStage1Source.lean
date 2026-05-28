@@ -3245,6 +3245,53 @@ theorem logQTwo_le_heightSide
 
 end IUTStage1IUTIVCorollary22C2InequalityChainShadow
 
+/--
+IUT IV, Corollary 2.2(ii), comparison of curve functions with tripodal field
+terms.
+
+The source records the tautological equality
+`log-diff_X(x_E) = log(d_Ftpd)` and the inequalities
+`log(f_Ftpd) <= log-cond_D(x_E) <= log(f_Ftpd) + log(2l)`.
+-/
+structure IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow where
+  logDiffX : Real
+  logCondD : Real
+  logDifferentFtpd : Real
+  logConductorFtpd : Real
+  logTwoL : Real
+  logDiff_eq_logDifferentFtpd :
+    logDiffX = logDifferentFtpd
+  logConductorFtpd_le_logCondD :
+    logConductorFtpd <= logCondD
+  logCondD_le_logConductorFtpd_add_logTwoL :
+    logCondD <= logConductorFtpd + logTwoL
+
+namespace IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow
+
+def curveLogSum
+    (data : IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow) : Real :=
+  data.logDiffX + data.logCondD
+
+def ftpdLogSum
+    (data : IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow) : Real :=
+  data.logDifferentFtpd + data.logConductorFtpd
+
+theorem ftpdLogSum_le_curveLogSum
+    (data : IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow) :
+    data.ftpdLogSum <= data.curveLogSum := by
+  dsimp [ftpdLogSum, curveLogSum]
+  rw [data.logDiff_eq_logDifferentFtpd]
+  linarith [data.logConductorFtpd_le_logCondD]
+
+theorem curveLogSum_le_ftpdLogSum_add_logTwoL
+    (data : IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow) :
+    data.curveLogSum <= data.ftpdLogSum + data.logTwoL := by
+  dsimp [ftpdLogSum, curveLogSum]
+  rw [data.logDiff_eq_logDifferentFtpd]
+  linarith [data.logCondD_le_logConductorFtpd_add_logTwoL]
+
+end IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}

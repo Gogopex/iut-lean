@@ -666,6 +666,7 @@ structure ProcessionContainerExperimentReport where
   iutIVCorollary22BoundedDiscrepancyChainAvailable : Bool
   iutIVBoundedDiscrepancyTransferAvailable : Bool
   iutIVCorollary22C2InequalityChainAvailable : Bool
+  iutIVCorollary22LogDiffCondComparisonAvailable : Bool
 deriving Repr
 
 /--
@@ -717,7 +718,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     iutIVTheoremABoundedDiscrepancyAvailable := true,
     iutIVCorollary22BoundedDiscrepancyChainAvailable := true,
     iutIVBoundedDiscrepancyTransferAvailable := true,
-    iutIVCorollary22C2InequalityChainAvailable := true }
+    iutIVCorollary22C2InequalityChainAvailable := true,
+    iutIVCorollary22LogDiffCondComparisonAvailable := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -1272,6 +1274,16 @@ theorem iutIVCorollary22C2_logQTwo_bound
     (1 / 6 : Real) * data.logQTwo <= data.heightSide :=
   data.logQTwo_le_heightSide
 
+theorem iutIVCorollary22LogDiffCond_ftpd_le_curve
+    (data : IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow) :
+    data.ftpdLogSum <= data.curveLogSum :=
+  data.ftpdLogSum_le_curveLogSum
+
+theorem iutIVCorollary22LogDiffCond_curve_le_ftpd_add_logTwoL
+    (data : IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow) :
+    data.curveLogSum <= data.ftpdLogSum + data.logTwoL :=
+  data.curveLogSum_le_ftpdLogSum_add_logTwoL
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
@@ -1536,6 +1548,7 @@ structure Corollary312DisputeFirstPassReport where
   iutIVCorollary22BoundedDiscrepancyChainAvailable : Bool
   iutIVBoundedDiscrepancyTransferAvailable : Bool
   iutIVCorollary22C2InequalityChainAvailable : Bool
+  iutIVCorollary22LogDiffCondComparisonAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1601,6 +1614,7 @@ def corollary312DisputeFirstPassReport :
     iutIVCorollary22BoundedDiscrepancyChainAvailable := true,
     iutIVBoundedDiscrepancyTransferAvailable := true,
     iutIVCorollary22C2InequalityChainAvailable := true,
+    iutIVCorollary22LogDiffCondComparisonAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1846,6 +1860,11 @@ theorem corollary312Report_iutIVBoundedDiscrepancyTransferAvailable :
 
 theorem corollary312Report_iutIVCorollary22C2InequalityChainAvailable :
     corollary312DisputeFirstPassReport.iutIVCorollary22C2InequalityChainAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_iutIVCorollary22LogDiffCondComparisonAvailable :
+    corollary312DisputeFirstPassReport.iutIVCorollary22LogDiffCondComparisonAvailable =
       true :=
   rfl
 
