@@ -1907,6 +1907,119 @@ theorem toWeighted_weightedAverage_eq_square_fullLabelLogVolume_sum
 
 end IUTStage1ZModSquareWeightProfile
 
+/--
+Audit that square-weighted full-label summands survive a Hodge-theater/descent
+bridge along an explicit coordinate equivalence.
+
+This record does not construct the bridge.  It states exactly what a future
+Hodge-theater/log-link argument must supply before one may compare transported
+`j^2`-weighted summands: preservation of the full-label log-volume branch,
+preservation of the square weight, and preservation of the total weight.
+-/
+structure IUTStage1ZModSquareWeightedFullLabelTransportAudit
+    (l : PrimeGeFive) where
+  bridge : IUTStage1HodgeTheaterDescentBridgeData
+  coordinateEquiv : ZMod l.value ≃ ZMod l.value
+  sourceProfile : IUTStage1ZModSquareWeightProfile l
+  targetProfile : IUTStage1ZModSquareWeightProfile l
+  sourceLogVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+  targetLogVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+  fullLabelLogVolume_preserved :
+    ∀ j : ZMod l.value,
+      targetLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)) =
+        sourceLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)
+  squareWeight_preserved :
+    ∀ j : ZMod l.value,
+      targetProfile.weight (coordinateEquiv j) =
+        sourceProfile.weight j
+  weightTotal_preserved :
+    targetProfile.weightTotal = sourceProfile.weightTotal
+
+namespace IUTStage1ZModSquareWeightedFullLabelTransportAudit
+
+variable {l : PrimeGeFive}
+
+def sourceNumerator
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    Real :=
+  Finset.univ.sum fun j : ZMod l.value =>
+    audit.sourceProfile.weight j *
+      audit.sourceLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j)
+
+def targetTransportedNumerator
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    Real :=
+  Finset.univ.sum fun j : ZMod l.value =>
+    audit.targetProfile.weight (audit.coordinateEquiv j) *
+      audit.targetLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          (audit.coordinateEquiv j))
+
+noncomputable def sourceAverage
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    Real :=
+  audit.sourceNumerator / audit.sourceProfile.weightTotal
+
+noncomputable def targetTransportedAverage
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    Real :=
+  audit.targetTransportedNumerator / audit.targetProfile.weightTotal
+
+theorem histories_not_identified
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    audit.bridge.domainTheater.side ≠ audit.bridge.codomainTheater.side :=
+  audit.bridge.histories_not_identified
+
+theorem transportedFullLabelLogVolume_preserved
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l)
+    (j : ZMod l.value) :
+    audit.targetLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          (audit.coordinateEquiv j)) =
+      audit.sourceLogVolume.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  audit.fullLabelLogVolume_preserved j
+
+theorem transportedSquareWeight_preserved
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l)
+    (j : ZMod l.value) :
+    audit.targetProfile.weight (audit.coordinateEquiv j) =
+      audit.sourceProfile.weight j :=
+  audit.squareWeight_preserved j
+
+theorem targetTransportedSummand_eq_sourceSummand
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l)
+    (j : ZMod l.value) :
+    audit.targetProfile.weight (audit.coordinateEquiv j) *
+      audit.targetLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (audit.coordinateEquiv j)) =
+      audit.sourceProfile.weight j *
+        audit.sourceLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  rw [audit.transportedSquareWeight_preserved j,
+    audit.transportedFullLabelLogVolume_preserved j]
+
+theorem targetTransportedNumerator_eq_sourceNumerator
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    audit.targetTransportedNumerator = audit.sourceNumerator := by
+  unfold targetTransportedNumerator sourceNumerator
+  exact Finset.sum_congr rfl (by
+    intro j _hj
+    exact audit.targetTransportedSummand_eq_sourceSummand j)
+
+theorem targetTransportedAverage_eq_sourceAverage
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    audit.targetTransportedAverage = audit.sourceAverage := by
+  unfold targetTransportedAverage sourceAverage
+  rw [audit.targetTransportedNumerator_eq_sourceNumerator,
+    audit.weightTotal_preserved]
+
+end IUTStage1ZModSquareWeightedFullLabelTransportAudit
+
 namespace IUTStage1CapsuleFamilyLogVolume
 
 variable {kind : IUTStage1PlaceKind}

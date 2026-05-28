@@ -2785,3 +2785,115 @@ full-label compatibility.  The next milestone should introduce an explicit
 "square-weight provenance under transport" audit: either a preservation record,
 or a deliberately weaker record showing exactly which data are unavailable after
 Hodge-theater erasure.
+
+## 145. Square-Weighted Full-Label Transport Preservation Audit
+
+### Lean Move
+
+I added an explicit preservation audit:
+
+```text
+IUTStage1ZModSquareWeightedFullLabelTransportAudit
+```
+
+It contains:
+
+```text
+bridge              : IUTStage1HodgeTheaterDescentBridgeData
+coordinateEquiv     : ZMod l.value ≃ ZMod l.value
+sourceProfile       : IUTStage1ZModSquareWeightProfile l
+targetProfile       : IUTStage1ZModSquareWeightProfile l
+sourceLogVolume     : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+targetLogVolume     : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+```
+
+and three preservation obligations:
+
+```text
+target full-label log-volume at coordinateEquiv j
+  = source full-label log-volume at j
+
+target square weight at coordinateEquiv j
+  = source square weight at j
+
+target weight total
+  = source weight total
+```
+
+From these fields Lean proves:
+
+```text
+targetTransportedSummand_eq_sourceSummand
+targetTransportedNumerator_eq_sourceNumerator
+targetTransportedAverage_eq_sourceAverage
+histories_not_identified
+```
+
+The example file checks the transported summand, numerator, average, and
+history-separation projections.
+
+### Mathematical Reason
+
+The previous milestone wrote down the local formula
+
+```text
+sum_j (j^2 * fullLabelLogVolume(j)) / squareWeightTotal
+```
+
+but did not say what it would mean for this formula to survive a Hodge-theater
+or log-link transition.  This milestone gives a precise preservation boundary:
+to transport the square-weighted full-label expression, one must supply an
+equivalence of coordinates and prove that both pieces of data are preserved
+along it:
+
+```text
+full-label log-volume branch
+square-weight branch
+```
+
+The bridge field keeps the Hodge-theater/descent context attached to this
+preservation claim, including the already established guard that the histories
+are not identified.
+
+### Source Check
+
+This matches the project reading of the disputed Corollary 3.12 passage:
+
+* IUT III treats the final comparison as a simultaneous comparison at the
+  `3.11.5 => 3.12` boundary, with averages over `j ∈ F_l`.
+* IUT II and IUT III discuss weighted log-volume/measure calculations in which
+  weights are part of the computation rather than decorative metadata.
+* Scholze-Stix's critique presses precisely on whether the `j^2` information
+  can remain meaningful after the relevant real-line identifications.
+
+The Lean move is intentionally neutral.  It does not assert that the audit can
+be supplied from Mochizuki's construction, and it does not assert that
+Scholze-Stix's collapse is correct.  It says what preservation would have to
+mean as a typechecked statement.
+
+### Relevance to the 3.12 Dispute
+
+This is the first formal object in the project that can express:
+
+```text
+the j^2-weighted full-label expression survived transport
+```
+
+as an auditable Lean hypothesis.  That is useful because the next stage can now
+branch cleanly:
+
+* Try to construct this preservation audit from the Hodge-theater/descent data.
+* Try to formalize an erasure/collapse result showing that the available common
+  real-line object is insufficient to reconstruct this audit.
+
+Either route must now interact with the same typed object.  This reduces the
+risk of arguing past the dispute by proving a theorem about uniform averages
+while intending a theorem about square-weighted Gaussian-monoid averages.
+
+### Remaining Gap
+
+The preservation audit currently assumes the coordinate equivalence and the
+three preservation fields.  The next mathematical work is to relate this audit
+to the existing structured-SHE/common-container route: which data in that route
+could supply the coordinate equivalence, and which data could supply or refute
+the two preservation equalities?

@@ -924,6 +924,37 @@ theorem zmodSquareWeightProfile_toWeighted_const_le_average_example
     c <= (profile.toWeighted data).weightedAverageLogVolume :=
   profile.toWeighted_const_le_weightedAverage_of_forall_le data hpointwise
 
+theorem zmodSquareWeightedFullLabelTransportAudit_summand_example
+    {l : PrimeGeFive}
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l)
+    (j : ZMod l.value) :
+    audit.targetProfile.weight (audit.coordinateEquiv j) *
+        audit.targetLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (audit.coordinateEquiv j)) =
+      audit.sourceProfile.weight j *
+        audit.sourceLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  audit.targetTransportedSummand_eq_sourceSummand j
+
+theorem zmodSquareWeightedFullLabelTransportAudit_numerator_example
+    {l : PrimeGeFive}
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    audit.targetTransportedNumerator = audit.sourceNumerator :=
+  audit.targetTransportedNumerator_eq_sourceNumerator
+
+theorem zmodSquareWeightedFullLabelTransportAudit_average_example
+    {l : PrimeGeFive}
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    audit.targetTransportedAverage = audit.sourceAverage :=
+  audit.targetTransportedAverage_eq_sourceAverage
+
+theorem zmodSquareWeightedFullLabelTransportAudit_histories_example
+    {l : PrimeGeFive}
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l) :
+    audit.bridge.domainTheater.side ≠ audit.bridge.codomainTheater.side :=
+  audit.histories_not_identified
+
 def flLabelModel_zmod_example
     (l : PrimeGeFive) :
     IUTStage1FLLabelModel (ZMod l.value) :=
