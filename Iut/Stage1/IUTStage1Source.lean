@@ -6120,6 +6120,22 @@ theorem weightedAverage_le_const_of_forall_le
     _ = c * data.weightTotal :=
       hright
 
+theorem weightedAverage_eq_const_of_forall_eq
+    (data : IUTStage1WeightedLabelAveragedProcessionLogVolume label)
+    {c : Real}
+    (hweight_nonnegative : ∀ j : label, 0 <= data.weight j)
+    (hpointwise : ∀ j : label, data.normalizedLogVolume j = c) :
+    data.weightedAverageLogVolume = c :=
+  le_antisymm
+    (data.weightedAverage_le_const_of_forall_le hweight_nonnegative
+      (by
+        intro j
+        rw [hpointwise j]))
+    (data.const_le_weightedAverage_of_forall_le hweight_nonnegative
+      (by
+        intro j
+        rw [hpointwise j]))
+
 end IUTStage1WeightedLabelAveragedProcessionLogVolume
 
 namespace IUTStage1LabelAveragedProcessionLogVolume
@@ -6304,6 +6320,22 @@ theorem canonicalSquareWeights_weight_one :
 theorem canonicalSquareWeights_weightTotal_pos :
     0 < (canonicalSquareWeights l).weightTotal :=
   (canonicalSquareWeights l).positive_weightTotal
+
+theorem canonicalSquareWeights_toWeighted_constant_average
+    (c : Real) :
+    ((canonicalSquareWeights l).toWeighted
+      (IUTStage1LabelAveragedProcessionLogVolume.constant
+        (label := ZMod l.value) c)).weightedAverageLogVolume = c :=
+  IUTStage1WeightedLabelAveragedProcessionLogVolume.weightedAverage_eq_const_of_forall_eq
+    ((canonicalSquareWeights l).toWeighted
+      (IUTStage1LabelAveragedProcessionLogVolume.constant
+        (label := ZMod l.value) c))
+    (by
+      intro j
+      exact (canonicalSquareWeights l).profile_weight_nonnegative j)
+    (by
+      intro _j
+      rfl)
 
 theorem representativeSquareScale_two :
     representativeSquareScale (l := l) (2 : ZMod l.value) = 4 := by

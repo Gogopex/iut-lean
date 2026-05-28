@@ -432,6 +432,7 @@ structure Ind3J2ScaleExperimentReport where
   absLabelThetaPilotDegreeProfileAvailable : Bool
   gaussianDegreeEvaluationIdentityAtOne : Bool
   canonicalSquareWeightProfileAvailable : Bool
+  canonicalSquareWeightConstantAverageAvailable : Bool
 
 /--
 For every `l >= 5`, the representative square scales at `j = 1` and `j = 2`
@@ -454,7 +455,8 @@ def ind3J2ScaleExperimentReport (l : PrimeGeFive) :
     absLabelThetaExponentMatchesHalfRangeJ2 := true,
     absLabelThetaPilotDegreeProfileAvailable := true,
     gaussianDegreeEvaluationIdentityAtOne := true,
-    canonicalSquareWeightProfileAvailable := true }
+    canonicalSquareWeightProfileAvailable := true,
+    canonicalSquareWeightConstantAverageAvailable := true }
 
 theorem ind3J2ScaleExperimentReport_oneScale
     (l : PrimeGeFive) :
@@ -516,6 +518,12 @@ theorem ind3J2ScaleExperimentReport_canonicalSquareWeightProfile
     (l : PrimeGeFive) :
     (ind3J2ScaleExperimentReport
       l).canonicalSquareWeightProfileAvailable = true :=
+  rfl
+
+theorem ind3J2ScaleExperimentReport_canonicalSquareWeightConstantAverage
+    (l : PrimeGeFive) :
+    (ind3J2ScaleExperimentReport
+      l).canonicalSquareWeightConstantAverageAvailable = true :=
   rfl
 
 theorem no_labelIndependent_transport_scale_absorbs_j2
@@ -624,6 +632,14 @@ theorem canonicalSquareWeightProfile_weight_one
     (IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l).weight
         (1 : ZMod l.value) = 1 :=
   IUTStage1ZModSquareWeightProfile.canonicalSquareWeights_weight_one
+
+theorem canonicalSquareWeightProfile_constant_average
+    (l : PrimeGeFive) (c : Real) :
+    ((IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l).toWeighted
+      (IUTStage1LabelAveragedProcessionLogVolume.constant
+        (label := ZMod l.value) c)).weightedAverageLogVolume = c :=
+  IUTStage1ZModSquareWeightProfile.canonicalSquareWeights_toWeighted_constant_average
+    (l := l) c
 
 /--
 On half-range representatives, the degree-level Gaussian evaluation is exactly
@@ -1828,6 +1844,7 @@ structure Corollary312DisputeFirstPassReport where
   absLabelThetaDegreeHalfRangeModelAvailable : Bool
   gaussianDegreeEvaluationTheoremAvailable : Bool
   canonicalSquareWeightProfileAvailable : Bool
+  canonicalSquareWeightConstantAverageAvailable : Bool
   processionContainerSkeletonAvailable : Bool
   processionTensorPacketLogVolumeAvailable : Bool
   processionTensorPacketPermutationInvariant : Bool
@@ -1923,6 +1940,7 @@ def corollary312DisputeFirstPassReport :
     absLabelThetaDegreeHalfRangeModelAvailable := true,
     gaussianDegreeEvaluationTheoremAvailable := true,
     canonicalSquareWeightProfileAvailable := true,
+    canonicalSquareWeightConstantAverageAvailable := true,
     processionContainerSkeletonAvailable := true,
     processionTensorPacketLogVolumeAvailable := true,
     processionTensorPacketPermutationInvariant := true,
@@ -2038,6 +2056,11 @@ theorem corollary312Report_gaussianDegreeEvaluationTheoremAvailable :
 
 theorem corollary312Report_canonicalSquareWeightProfileAvailable :
     corollary312DisputeFirstPassReport.canonicalSquareWeightProfileAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_canonicalSquareWeightConstantAverageAvailable :
+    corollary312DisputeFirstPassReport.canonicalSquareWeightConstantAverageAvailable =
       true :=
   rfl
 
