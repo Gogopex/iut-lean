@@ -6607,3 +6607,90 @@ The finite-sum normalization certificate should eventually be obtained from a
 formal local packet/capsule construction.  The next practical step is to connect
 the direct and `(Ind2)`-transported local packet audits to the existing full
 route-summary constructors, reducing manual packet-audit assembly.
+
+## 84. Full Routes from Local Packet Normalization Audits
+
+### Goal
+
+We connected the direct and `(Ind2)`-transported local packet-normalization
+audits to the full classified route summaries.
+
+### Lean Move
+
+We added two route-input structures:
+
+```text
+FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
+FLZModCuspLabelThetaInd2LocalPacketTransportedCapsuleRouteAudit
+```
+
+The direct route combines:
+
+```text
+direct local packet normalization audit
+direct target capsule estimates
+```
+
+The transported route combines:
+
+```text
+Ind2-transported local packet normalization audit
+source capsule estimates
+```
+
+Each route constructs:
+
+```text
+toFullClassifiedRouteSummary
+```
+
+and exposes source checks:
+
+```text
+packetIdentificationSource = directPacketNormalization
+cuspBoundSource = directCapsuleEstimates
+
+packetIdentificationSource = ind2TransportedPacketNormalization
+cuspBoundSource = ind2TransportedCapsuleEstimates
+```
+
+### Mathematical Point
+
+The full route summary can now be assembled from the two actual mathematical
+inputs we have isolated:
+
+```text
+packet-normalized compatibility source
+cusp/zero capsule-bound source
+```
+
+For the direct route, both are target-side.  For the transported route, both use
+an audited `(Ind2)` step from a source packet to the target packet.  This keeps
+the packet-normalization source and the cusp-bound source aligned in the final
+summary.
+
+### Trap Avoided
+
+The new route-input structures avoid manually combining a packet-normalized
+audit with an unrelated cusp-bound audit.  The packet-normalized audit used by
+the cusp route is projected from the same local packet-normalization audit used
+by the full route summary.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_direct_local_packet_full_route_example
+placeAudited_logVolume_fl_zmod_ind2_local_packet_full_route_example
+placeAudited_logVolume_fl_zmod_direct_local_packet_full_route_source_example
+placeAudited_logVolume_fl_zmod_ind2_local_packet_full_route_source_example
+```
+
+### Remaining Gap
+
+These full route inputs still assume local object estimates and direct
+finite-sum packet normalization data.  The next mathematical step is to reduce
+one of those assumptions from more concrete capsule/local-object data, or to
+audit exactly where the local object estimates are supposed to enter from
+Mochizuki's source definitions.

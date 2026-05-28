@@ -10866,6 +10866,37 @@ structure FLZModCuspLabelThetaDirectCapsuleCuspClassAudit
         package.preLedger.targetVolume.targetSigned
         audited.choice.local_tensor_state.packetState.capsuleFamily
 
+/--
+Full-route input for the direct packet-normalization/direct capsule-estimate
+route.
+-/
+structure FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  direct_packet :
+    audit.FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit l
+  targetCapsuleEstimates :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        package.preLedger.targetVolume.targetSigned
+        audited.choice.local_tensor_state.packetState.capsuleFamily
+
+/--
+Full-route input for the `(Ind2)`-transported packet-normalization and
+transported capsule-estimate route.
+-/
+structure FLZModCuspLabelThetaInd2LocalPacketTransportedCapsuleRouteAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  ind2_packet :
+    audit.FLZModCuspLabelThetaInd2TransportedLocalPacketNormalizedAudit l
+  sourceCapsuleEstimates :
+    ∀ targetAudited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        package.preLedger.targetVolume.targetSigned
+        (ind2_packet.sourceAudited
+          targetAudited).choice.local_tensor_state.packetState.capsuleFamily
+
 /-- Source classification for cusp-class/zero-label bounds. -/
 inductive IUTStage1CuspClassBoundSource where
   | directCapsuleEstimates
@@ -12524,6 +12555,84 @@ theorem qSigned_le_thetaSigned
   summary.classified_route.qSigned_le_thetaSigned audited
 
 end FLZModCuspLabelThetaFullClassifiedRouteSummary
+
+namespace FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def toDirectCapsuleCuspClassAudit
+    (part :
+      audit.FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit l) :
+    audit.FLZModCuspLabelThetaDirectCapsuleCuspClassAudit l :=
+  { packet_normalized :=
+      part.direct_packet.toClassifiedPacketNormalizedAudit.packet_normalized,
+    targetCapsuleEstimates := part.targetCapsuleEstimates }
+
+def toFullClassifiedRouteSummary
+    (part :
+      audit.FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit l) :
+    audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l :=
+  let packetSummary := part.direct_packet.toClassifiedPacketNormalizedAudit
+  let direct := part.toDirectCapsuleCuspClassAudit
+  FLZModCuspLabelThetaFullClassifiedRouteSummary.ofDirectCapsule
+    packetSummary direct rfl
+
+theorem packetIdentificationSource_eq_direct
+    (part :
+      audit.FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit l) :
+    part.toFullClassifiedRouteSummary.packetIdentificationSource =
+      IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization :=
+  rfl
+
+theorem cuspBoundSource_eq_directCapsule
+    (part :
+      audit.FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit l) :
+    part.toFullClassifiedRouteSummary.cuspBoundSource =
+      IUTStage1CuspClassBoundSource.directCapsuleEstimates :=
+  rfl
+
+end FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
+
+namespace FLZModCuspLabelThetaInd2LocalPacketTransportedCapsuleRouteAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def toInd2TransportedCuspClassAudit
+    (part :
+      audit.FLZModCuspLabelThetaInd2LocalPacketTransportedCapsuleRouteAudit l) :
+    audit.FLZModCuspLabelThetaInd2TransportedCuspClassAudit l :=
+  { packet_normalized :=
+      part.ind2_packet.toClassifiedPacketNormalizedAudit.packet_normalized,
+    sourceAudited := part.ind2_packet.sourceAudited,
+    ind2_step := part.ind2_packet.ind2_step,
+    sourceCapsuleEstimates := part.sourceCapsuleEstimates }
+
+def toFullClassifiedRouteSummary
+    (part :
+      audit.FLZModCuspLabelThetaInd2LocalPacketTransportedCapsuleRouteAudit l) :
+    audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l :=
+  let packetSummary := part.ind2_packet.toClassifiedPacketNormalizedAudit
+  let transported := part.toInd2TransportedCuspClassAudit
+  FLZModCuspLabelThetaFullClassifiedRouteSummary.ofInd2Transport
+    packetSummary transported rfl
+
+theorem packetIdentificationSource_eq_ind2Transported
+    (part :
+      audit.FLZModCuspLabelThetaInd2LocalPacketTransportedCapsuleRouteAudit l) :
+    part.toFullClassifiedRouteSummary.packetIdentificationSource =
+      IUTStage1PacketNormalizedIdentificationSource.ind2TransportedPacketNormalization :=
+  rfl
+
+theorem cuspBoundSource_eq_ind2Transported
+    (part :
+      audit.FLZModCuspLabelThetaInd2LocalPacketTransportedCapsuleRouteAudit l) :
+    part.toFullClassifiedRouteSummary.cuspBoundSource =
+      IUTStage1CuspClassBoundSource.ind2TransportedCapsuleEstimates :=
+  rfl
+
+end FLZModCuspLabelThetaInd2LocalPacketTransportedCapsuleRouteAudit
 
 namespace FLZModCuspLabelThetaContainerBoundAudit
 
