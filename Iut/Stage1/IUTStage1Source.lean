@@ -1385,6 +1385,51 @@ theorem logVolume_eq
 
 end IUTStage1CapsuleLogVolumeObject
 
+/--
+Container estimate for one capsule log-volume entry.
+
+The local object used by the estimate must match the local object carried by
+the capsule entry.
+-/
+structure IUTStage1CapsuleEntryContainerEstimate
+    {kind : IUTStage1PlaceKind}
+    (targetSigned : Real)
+    (capsule : IUTStage1CapsuleLogVolumeObject kind) where
+  objectEstimate :
+    IUTStage1LocalObjectContainerLogVolumeEstimate
+      kind targetSigned capsule.logVolume
+  localObject_eq_capsuleLocalObject :
+    objectEstimate.localObject = capsule.localObject
+
+namespace IUTStage1CapsuleEntryContainerEstimate
+
+variable {kind : IUTStage1PlaceKind}
+variable {targetSigned : Real}
+variable {capsule : IUTStage1CapsuleLogVolumeObject kind}
+
+theorem targetSigned_le_capsuleLogVolume
+    (estimate :
+      IUTStage1CapsuleEntryContainerEstimate targetSigned capsule) :
+    targetSigned <= capsule.logVolume :=
+  estimate.objectEstimate.targetSigned_le_localLogVolume
+
+theorem localObject_eq_capsuleLocalObject'
+    (estimate :
+      IUTStage1CapsuleEntryContainerEstimate targetSigned capsule) :
+    estimate.objectEstimate.localObject = capsule.localObject :=
+  estimate.localObject_eq_capsuleLocalObject
+
+end IUTStage1CapsuleEntryContainerEstimate
+
+/-- Container estimates for every entry of a typed capsule family. -/
+structure IUTStage1TypedCapsuleFamilyContainerEstimate
+    {kind : IUTStage1PlaceKind}
+    (targetSigned : Real)
+    (data : IUTStage1TypedCapsuleFamilyLogVolume kind) where
+  capsuleEntryEstimate :
+    ∀ i : Fin data.capsuleCount,
+      IUTStage1CapsuleEntryContainerEstimate targetSigned (data.capsule i)
+
 namespace IUTStage1TypedCapsuleFamilyLogVolume
 
 variable {kind : IUTStage1PlaceKind}
@@ -1462,6 +1507,28 @@ theorem const_le_normalizedLogVolume_of_capsule_le
       averaged hcapsule
 
 end IUTStage1TypedCapsuleFamilyLogVolume
+
+namespace IUTStage1TypedCapsuleFamilyContainerEstimate
+
+variable {kind : IUTStage1PlaceKind}
+variable {targetSigned : Real}
+variable {data : IUTStage1TypedCapsuleFamilyLogVolume kind}
+
+theorem targetSigned_le_capsuleLogVolume
+    (estimate :
+      IUTStage1TypedCapsuleFamilyContainerEstimate targetSigned data)
+    (i : Fin data.capsuleCount) :
+    targetSigned <= (data.capsule i).logVolume :=
+  (estimate.capsuleEntryEstimate i).targetSigned_le_capsuleLogVolume
+
+theorem targetSigned_le_normalizedLogVolume
+    (estimate :
+      IUTStage1TypedCapsuleFamilyContainerEstimate targetSigned data) :
+    targetSigned <= data.normalizedLogVolume :=
+  data.const_le_normalizedLogVolume_of_capsule_le
+    estimate.targetSigned_le_capsuleLogVolume
+
+end IUTStage1TypedCapsuleFamilyContainerEstimate
 
 /--
 An action on the indexed capsules of a typed capsule family that preserves each
@@ -2389,6 +2456,17 @@ theorem targetSigned_le_localLogVolume_of_capsule_le
   exact
     packetState.packetState.capsuleFamily.const_le_normalizedLogVolume_of_capsule_le
       hcapsule
+
+theorem targetSigned_le_localLogVolume_of_capsule_estimates
+    (estimate :
+      IUTStage1PacketNormalizedContainerEstimate
+        packetState targetSigned localLogVolume)
+    (capsuleEstimates :
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        targetSigned packetState.packetState.capsuleFamily) :
+    targetSigned <= localLogVolume :=
+  estimate.targetSigned_le_localLogVolume_of_capsule_le
+    capsuleEstimates.targetSigned_le_capsuleLogVolume
 
 end IUTStage1PacketNormalizedContainerEstimate
 

@@ -4896,3 +4896,85 @@ packetNormalizedContainerEstimate_capsule_bound_example
 The capsule-entry bound itself is still a hypothesis.  The next step should
 make that hypothesis come from a capsule-entry container estimate, parallel to
 the local-object and packet-normalized container estimates above.
+
+## 62. Capsule-Entry Container Estimates
+
+### Goal
+
+We replaced the raw per-capsule lower-bound hypothesis by explicit
+capsule-entry container estimates.
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1CapsuleEntryContainerEstimate
+```
+
+It records a local-object container estimate for one capsule log-volume and an
+equality identifying the estimate's local object with the capsule's local
+object.
+
+Lean proves:
+
+```text
+targetSigned_le_capsuleLogVolume
+localObject_eq_capsuleLocalObject'
+```
+
+We also added:
+
+```text
+IUTStage1TypedCapsuleFamilyContainerEstimate
+```
+
+which supplies such a capsule-entry estimate for every capsule in a typed
+capsule family.  Lean derives:
+
+```text
+targetSigned_le_capsuleLogVolume
+targetSigned_le_normalizedLogVolume
+```
+
+Finally, `IUTStage1PacketNormalizedContainerEstimate` now has:
+
+```text
+targetSigned_le_localLogVolume_of_capsule_estimates
+```
+
+### Mathematical Point
+
+The local start of the route can now be:
+
+```text
+container estimate for each capsule entry
+  -> targetSigned <= each capsule log-volume
+  -> targetSigned <= normalized capsule-family average
+  -> packet/cusp/label/F_l average route
+```
+
+This is closer to a formal version of the finite local estimate, since the
+individual capsule entries are no longer bounded by an anonymous hypothesis.
+
+### Trap Avoided
+
+Each capsule-entry estimate carries the local-object match for that capsule.
+This prevents using a container estimate attached to a different capsule-local
+object.
+
+### Toy Check
+
+The examples now check:
+
+```text
+capsuleEntryContainerEstimate_target_le_capsule_example
+typedCapsuleFamilyContainerEstimate_target_le_normalized_example
+packetNormalizedContainerEstimate_capsule_estimates_example
+```
+
+### Remaining Gap
+
+The next refinement should decide how these capsule-entry estimates interact
+with `(Ind2)` direct-summand actions, i.e. whether capsule-entry container
+estimates are preserved under the local tensor direct-summand action.
