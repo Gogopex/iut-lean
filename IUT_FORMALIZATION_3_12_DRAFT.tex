@@ -202,6 +202,9 @@ The code currently covers:
   the two cases \(e^*_{\mathrm{mod}}\ell\ge\eta_{\mathrm{prm}}\) and
   \(e^*_{\mathrm{mod}}\ell<\eta_{\mathrm{prm}}\) imply the uniform
   \(4/3(e^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}})\) bound;
+\item the IUT IV, Theorem 1.10 Step (viii) final absorption of
+  \(2\log(\ell)+74\) and the prime-product term into
+  \(10(e^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}})\);
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -253,7 +256,7 @@ small-prime flag records the additive error bound \(21\).  The \(\mathrm{GL}_2\)
 flag records the finite cardinality constants feeding that bound.  The
 Step (iii) flag records the \(\log(s_Q)\) coefficient absorption.
 The Step (viii) flag records the prime-product case split used before the final
-upper bound for \(C_\Theta\).
+upper bound for \(C_\Theta\), plus the final coarse error absorption.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -326,6 +329,8 @@ source hypotheses \(d_{\mathrm{mod}}\ge1\), \(\ell\ge5\), \(2\log(\ell)\le\ell\)
 and nonnegativity of the tripodal log-degree sum.
 For Step (viii), Lean checks that the two Proposition 1.6 cases imply the
 uniform prime-product bound used in the final \(C_\Theta\) estimate.
+Lean also checks the subsequent absorption into the coefficient \(10\) of
+\(e^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}}\).
 
 \section{Missing Mathematics}
 

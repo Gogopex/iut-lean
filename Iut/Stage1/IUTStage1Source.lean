@@ -2731,6 +2731,38 @@ theorem primeProductLogTerm_le_uniform
 end IUTStage1IUTIVPrimeProductCaseSplitBoundShadow
 
 /--
+IUT IV, Theorem 1.10, Step (viii), final coarse error absorption.
+
+After bounding the prime-product term by `4/3*(e*_mod*l+eta_prm)`, the source
+uses a separate lower estimate for `e*_mod*l+eta_prm` to absorb the remaining
+`2*log(l)+74` term and replace the accumulated constants by
+`10*(e*_mod*l+eta_prm)`.
+-/
+structure IUTStage1IUTIVFinalErrorAbsorptionShadow where
+  primeProductLogTerm : Real
+  eEta : Real
+  logL : Real
+  eEta_nonneg : 0 <= eEta
+  primeProduct_bound :
+    primeProductLogTerm <= (4 / 3 : Real) * eEta
+  log_error_bound :
+    2 * logL + 74 <= (4 / 9 : Real) * eEta
+
+namespace IUTStage1IUTIVFinalErrorAbsorptionShadow
+
+theorem finalError_le_ten
+    (data : IUTStage1IUTIVFinalErrorAbsorptionShadow) :
+    2 * data.logL + 74 + (20 / 3 : Real) * data.primeProductLogTerm <=
+      10 * data.eEta := by
+  have hprimeScaled :
+      (20 / 3 : Real) * data.primeProductLogTerm <=
+        (20 / 3 : Real) * ((4 / 3 : Real) * data.eEta) := by
+    exact mul_le_mul_of_nonneg_left data.primeProduct_bound (by norm_num)
+  nlinarith [data.log_error_bound, hprimeScaled, data.eEta_nonneg]
+
+end IUTStage1IUTIVFinalErrorAbsorptionShadow
+
+/--
 IUT IV, Theorem 1.10 and Step (ii): replacing the tripodal intermediate field
 by the larger field in the final displayed estimate.
 
