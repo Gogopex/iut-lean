@@ -2530,6 +2530,60 @@ theorem iutIVThetaPilot_average_sum_sq
   nlinarith
 
 /--
+IUT IV, Theorem 1.10, Step (ii), small-prime ramification error.
+
+The paper bounds the contribution from the primes dividing `2 * 3 * 5` by
+`log(2^11 * 3^3 * 5^2) <= 21`, using the elementary logarithmic estimates in
+(E6).  This record keeps only the real-valued upper-bound calculation.
+-/
+structure IUTStage1IUTIVSmallPrimeRamificationErrorBoundShadow where
+  logTwo : Real
+  logThree : Real
+  logFive : Real
+  logTwo_le_one : logTwo <= 1
+  logThree_le_two : logThree <= 2
+  logFive_le_two : logFive <= 2
+
+namespace IUTStage1IUTIVSmallPrimeRamificationErrorBoundShadow
+
+def smallPrimeError
+    (data : IUTStage1IUTIVSmallPrimeRamificationErrorBoundShadow) : Real :=
+  11 * data.logTwo + 3 * data.logThree + 2 * data.logFive
+
+theorem smallPrimeError_le_twentyOne
+    (data : IUTStage1IUTIVSmallPrimeRamificationErrorBoundShadow) :
+    data.smallPrimeError <= 21 := by
+  rw [smallPrimeError]
+  nlinarith [data.logTwo_le_one, data.logThree_le_two, data.logFive_le_two]
+
+end IUTStage1IUTIVSmallPrimeRamificationErrorBoundShadow
+
+/--
+IUT IV, Theorem 1.10, Step (ii), additive log-degree error bound.
+
+This packages the formal shape of the displayed estimate
+`log(d_F)+log(f_F) <= log(d_Ftpd)+log(f_Ftpd)+21` once the finite small-prime
+error has been bounded by `21`.
+-/
+structure IUTStage1IUTIVTameRamificationLogDegreeErrorShadow where
+  ftpdLogDegreeSum : Real
+  fLogDegreeSum : Real
+  smallPrimeError :
+    IUTStage1IUTIVSmallPrimeRamificationErrorBoundShadow
+  f_le_ftpd_add_smallPrimeError :
+    fLogDegreeSum <= ftpdLogDegreeSum + smallPrimeError.smallPrimeError
+
+namespace IUTStage1IUTIVTameRamificationLogDegreeErrorShadow
+
+theorem fLogDegreeSum_le_ftpd_add_twentyOne
+    (data : IUTStage1IUTIVTameRamificationLogDegreeErrorShadow) :
+    data.fLogDegreeSum <= data.ftpdLogDegreeSum + 21 := by
+  exact le_trans data.f_le_ftpd_add_smallPrimeError
+    (add_le_add le_rfl data.smallPrimeError.smallPrimeError_le_twentyOne)
+
+end IUTStage1IUTIVTameRamificationLogDegreeErrorShadow
+
+/--
 IUT IV, Theorem 1.10 and Step (ii): replacing the tripodal intermediate field
 by the larger field in the final displayed estimate.
 

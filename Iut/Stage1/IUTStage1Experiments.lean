@@ -656,6 +656,7 @@ structure ProcessionContainerExperimentReport where
   iutIVElementaryCoefficientEstimatesAvailable : Bool
   iutIVTripodalBaseChangeLogDegreeAvailable : Bool
   iutIVElementarySumIdentitiesAvailable : Bool
+  iutIVSmallPrimeRamificationErrorBoundAvailable : Bool
 deriving Repr
 
 /--
@@ -697,7 +698,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     iutIVThetaPilotLogVolumeEstimateAvailable := true,
     iutIVElementaryCoefficientEstimatesAvailable := true,
     iutIVTripodalBaseChangeLogDegreeAvailable := true,
-    iutIVElementarySumIdentitiesAvailable := true }
+    iutIVElementarySumIdentitiesAvailable := true,
+    iutIVSmallPrimeRamificationErrorBoundAvailable := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -1149,6 +1151,16 @@ theorem iutIVElementarySumIdentity_E2
       (1 / 6 : Real) * (2 * (n : Real) + 1) * ((n : Real) + 1) :=
   iutIVThetaPilot_average_sum_sq n hn
 
+theorem iutIVSmallPrimeRamificationError_le_twentyOne
+    (data : IUTStage1IUTIVSmallPrimeRamificationErrorBoundShadow) :
+    data.smallPrimeError <= 21 :=
+  data.smallPrimeError_le_twentyOne
+
+theorem iutIVTameRamificationLogDegreeError_le_twentyOne
+    (data : IUTStage1IUTIVTameRamificationLogDegreeErrorShadow) :
+    data.fLogDegreeSum <= data.ftpdLogDegreeSum + 21 :=
+  data.fLogDegreeSum_le_ftpd_add_twentyOne
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
@@ -1403,6 +1415,7 @@ structure Corollary312DisputeFirstPassReport where
   iutIVElementaryCoefficientEstimatesAvailable : Bool
   iutIVTripodalBaseChangeLogDegreeAvailable : Bool
   iutIVElementarySumIdentitiesAvailable : Bool
+  iutIVSmallPrimeRamificationErrorBoundAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1458,6 +1471,7 @@ def corollary312DisputeFirstPassReport :
     iutIVElementaryCoefficientEstimatesAvailable := true,
     iutIVTripodalBaseChangeLogDegreeAvailable := true,
     iutIVElementarySumIdentitiesAvailable := true,
+    iutIVSmallPrimeRamificationErrorBoundAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1653,6 +1667,11 @@ theorem corollary312Report_iutIVTripodalBaseChangeLogDegreeAvailable :
 
 theorem corollary312Report_iutIVElementarySumIdentitiesAvailable :
     corollary312DisputeFirstPassReport.iutIVElementarySumIdentitiesAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_iutIVSmallPrimeRamificationErrorBoundAvailable :
+    corollary312DisputeFirstPassReport.iutIVSmallPrimeRamificationErrorBoundAvailable =
       true :=
   rfl
 

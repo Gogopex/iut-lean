@@ -189,6 +189,9 @@ The code currently covers:
 \item the IUT IV, Theorem 1.10 Step (i) identities:
   \(n^{-1}\sum_{m=1}^n m=(n+1)/2\) and
   \(n^{-1}\sum_{m=1}^n m^2=(2n+1)(n+1)/6\);
+\item the IUT IV, Theorem 1.10 Step (ii) small-prime error:
+  \(\log(2^{11}3^35^2)\le21\), represented by the corresponding linear
+  logarithmic bound;
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -235,7 +238,8 @@ The Frobenius-derivative flag records the degree inequality from inclusion.
 The IUT IV flag records the downstream Theorem 1.10 use of the Corollary 3.12
 lower bound on \(C_\Theta\), including the final coefficient estimates and the
 tripodal-to-\(F\) log-degree monotonicity.  The Step (i) flag records the two
-elementary sum identities used in the leading-term computation.
+elementary sum identities used in the leading-term computation.  The Step (ii)
+small-prime flag records the additive error bound \(21\).
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -299,6 +303,8 @@ It also proves the final monotonic replacement of the tripodal log-degree sum by
 the larger \(F\)-level log-degree sum, conditional on the two component
 monotonicity inequalities cited from Proposition 1.3(i).
 Lean also proves the Step (i) sum and square-sum identities over \(\mathbb{R}\).
+For Step (ii), Lean proves the small-prime additive error bound from the
+displayed logarithmic inequalities.
 
 \section{Missing Mathematics}
 
