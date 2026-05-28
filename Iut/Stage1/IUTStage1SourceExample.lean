@@ -6238,6 +6238,22 @@ theorem placeAudited_logVolume_fl_zmod_labelwise_container_q_theta_via_square_av
   part.qSigned_le_thetaSigned_via_squareWeightedAverage
     profile audited hweighted_le_thetaAverage
 
+theorem placeAudited_logVolume_fl_zmod_labelwise_weighted_theta_gap_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1WeightedThetaComparisonMissingDatum.weightedAverage_le_thetaAverage ∈
+      part.missingWeightedThetaComparisonData profile audited :=
+  part.weightedAverage_le_thetaAverage_missing profile audited
+
 def placeAudited_logVolume_fl_zmod_labelwise_container_to_hull_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -6412,6 +6428,22 @@ theorem placeAudited_logVolume_fl_zmod_cusp_container_q_theta_via_square_avg_exa
     package.preLedger.qSigned <= package.preLedger.thetaSigned :=
   part.qSigned_le_thetaSigned_via_squareWeightedAverage
     profile audited hweighted_le_thetaAverage
+
+theorem placeAudited_logVolume_fl_zmod_cusp_weighted_theta_gap_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1WeightedThetaComparisonMissingDatum.weightedAverage_le_thetaAverage ∈
+      part.missingWeightedThetaComparisonData profile audited :=
+  part.weightedAverage_le_thetaAverage_missing profile audited
 
 theorem placeAudited_logVolume_fl_zmod_local_container_cusp_bound_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}

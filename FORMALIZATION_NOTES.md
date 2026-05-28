@@ -17929,3 +17929,57 @@ zero/cusp local estimates
 The unresolved part remains upstream: proving that the required full-label
 comparison is actually supplied by the structured Hodge-theater/SHE machinery,
 without replacing it by a weaker aggregate or hull/log-volume statement.
+
+## 131. Weighted-To-Theta Comparison Is A Named Missing Datum
+
+### Lean Move
+
+We introduced:
+
+```text
+IUTStage1WeightedThetaComparisonMissingDatum
+  .weightedAverage_le_thetaAverage
+```
+
+and attached it to the labelwise and cusp-class container routes via:
+
+```text
+missingWeightedThetaComparisonData
+weightedAverage_le_thetaAverage_missing
+```
+
+### Mathematical Reason
+
+The previous milestone showed that the square-weighted route proves the final
+signed inequality only after one real comparison is supplied:
+
+```text
+squareWeightedAverage <= thetaSourceAverage
+```
+
+This milestone names that comparison as missing data.  It is not the same as
+the pointwise representative-square transport missing data, and it is not the
+same as the local zero/cusp lower-bound data.  It is a final real comparison
+between a square-weighted average and the Theta-source average.
+
+### Source Check
+
+IUT III's Corollary 3.12 corridor moves between averaged log-volumes and final
+pilot-object log-volume inequalities.  Scholze-Stix object that such movement
+cannot be treated as automatic after simplification; one must account for the
+actual comparison being used.  The Lean API now records exactly this
+weighted-to-Theta comparison as a named obligation.
+
+### Relevance to the 3.12 Dispute
+
+Downstream code can no longer merely say that the weighted-average route has
+local bounds and therefore reaches the final theta inequality.  It must either
+provide the named comparison
+
+```text
+weightedAverage_le_thetaAverage
+```
+
+or remain at the weighted-average bound.  This keeps the final real comparison
+visible and separate from both aggregate square evidence and pointwise SHE
+transport evidence.

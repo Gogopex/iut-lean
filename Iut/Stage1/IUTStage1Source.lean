@@ -3975,6 +3975,30 @@ theorem weightTotalPreservation_mem_all :
 end IUTStage1SquareWeightTransportMissingDatum
 
 /--
+Real comparison datum still needed when the square-weighted average route is
+used to feed the final Theta-source bound.
+
+This is deliberately separate from the pointwise square/full-label transport
+missing data: even after local bounds give `qSigned <= squareWeightedAverage`,
+one still needs an explicit real inequality comparing that weighted average to
+the Theta-source average.
+-/
+inductive IUTStage1WeightedThetaComparisonMissingDatum where
+  | weightedAverage_le_thetaAverage
+deriving DecidableEq, Repr, Fintype
+
+namespace IUTStage1WeightedThetaComparisonMissingDatum
+
+def all : Finset IUTStage1WeightedThetaComparisonMissingDatum :=
+  Finset.univ
+
+theorem weightedAverage_le_thetaAverage_mem_all :
+    weightedAverage_le_thetaAverage ∈ all := by
+  simp [all]
+
+end IUTStage1WeightedThetaComparisonMissingDatum
+
+/--
 Primitive preservation data required by the fully factored structured-SHE
 square/full-label obligation record, but not supplied by local-object Hodge
 descent alone.
@@ -16040,6 +16064,21 @@ theorem qSigned_le_thetaSigned_via_squareWeightedAverage
     (le_trans hweighted_le_thetaAverage
       (part.theta_source.thetaSourceAverage_le_thetaSigned audited))
 
+def missingWeightedThetaComparisonData
+    (_part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
+    (_profile : IUTStage1ZModSquareWeightProfile l)
+    (_audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    Finset IUTStage1WeightedThetaComparisonMissingDatum :=
+  IUTStage1WeightedThetaComparisonMissingDatum.all
+
+theorem weightedAverage_le_thetaAverage_missing
+    (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1WeightedThetaComparisonMissingDatum.weightedAverage_le_thetaAverage ∈
+      part.missingWeightedThetaComparisonData profile audited :=
+  IUTStage1WeightedThetaComparisonMissingDatum.weightedAverage_le_thetaAverage_mem_all
+
 theorem targetSigned_le_thetaAverage
     (part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l)
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
@@ -16198,6 +16237,21 @@ theorem qSigned_le_thetaSigned_via_squareWeightedAverage
     package.preLedger.qSigned <= package.preLedger.thetaSigned :=
   part.toThetaLabelwiseContainerAudit.qSigned_le_thetaSigned_via_squareWeightedAverage
     profile audited hweighted_le_thetaAverage
+
+def missingWeightedThetaComparisonData
+    (_part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (_profile : IUTStage1ZModSquareWeightProfile l)
+    (_audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    Finset IUTStage1WeightedThetaComparisonMissingDatum :=
+  IUTStage1WeightedThetaComparisonMissingDatum.all
+
+theorem weightedAverage_le_thetaAverage_missing
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1WeightedThetaComparisonMissingDatum.weightedAverage_le_thetaAverage ∈
+      part.missingWeightedThetaComparisonData profile audited :=
+  IUTStage1WeightedThetaComparisonMissingDatum.weightedAverage_le_thetaAverage_mem_all
 
 theorem targetSigned_le_thetaAverage
     (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
