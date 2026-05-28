@@ -3686,6 +3686,66 @@ noncomputable def iutIVCorollary22EpsilonConstantTerm
     ((1 / 2 : Real) * cK)
 
 /--
+IUT IV, Corollary 2.2(ii), moving the `epsilon_E` multiple of `(1/6)h`
+to the left-hand side.
+
+This is the algebraic step immediately before the final absorption estimates.
+-/
+structure IUTStage1IUTIVCorollary22EpsilonMoveLeftShadow where
+  h : Real
+  logDegreeSum : Real
+  cK : Real
+  epsilonE : Real
+  denominator_pos :
+    0 < iutIVCorollary22EpsilonDenominator epsilonE
+  preliminary_bound :
+    (1 / 6 : Real) * h <=
+      (1 + (1 / 5 : Real) * epsilonE) * logDegreeSum +
+        (1 / 6 : Real) * h * ((2 / 5 : Real) * epsilonE) +
+          (1 / 2 : Real) * cK
+
+namespace IUTStage1IUTIVCorollary22EpsilonMoveLeftShadow
+
+theorem moved_left_bound
+    (data : IUTStage1IUTIVCorollary22EpsilonMoveLeftShadow) :
+    (1 / 6 : Real) * data.h <=
+      iutIVCorollary22EpsilonMainCoefficient data.epsilonE *
+          data.logDegreeSum +
+        iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK := by
+  let lhs : Real := (1 / 6 : Real) * data.h
+  let mainTerm : Real :=
+    (1 + (1 / 5 : Real) * data.epsilonE) * data.logDegreeSum
+  let constTerm : Real := (1 / 2 : Real) * data.cK
+  have hpre :
+      lhs <= mainTerm + lhs * ((2 / 5 : Real) * data.epsilonE) + constTerm := by
+    dsimp [lhs, mainTerm, constTerm]
+    exact data.preliminary_bound
+  have hleft :
+      iutIVCorollary22EpsilonDenominator data.epsilonE * lhs <=
+        mainTerm + constTerm := by
+    rw [iutIVCorollary22EpsilonDenominator]
+    linarith
+  have hdiv :
+      lhs <= (mainTerm + constTerm) /
+        iutIVCorollary22EpsilonDenominator data.epsilonE := by
+    rw [le_div_iff₀ data.denominator_pos]
+    simpa [mul_comm] using hleft
+  calc
+    (1 / 6 : Real) * data.h = lhs := rfl
+    _ <= (mainTerm + constTerm) /
+        iutIVCorollary22EpsilonDenominator data.epsilonE := hdiv
+    _ =
+      iutIVCorollary22EpsilonMainCoefficient data.epsilonE *
+          data.logDegreeSum +
+        iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK := by
+        dsimp [mainTerm, constTerm, iutIVCorollary22EpsilonMainCoefficient,
+          iutIVCorollary22EpsilonConstantTerm]
+        rw [div_eq_mul_inv]
+        ring
+
+end IUTStage1IUTIVCorollary22EpsilonMoveLeftShadow
+
+/--
 IUT IV, Corollary 2.2(ii), final `epsilon_E` absorption.
 
 The source uses `0 < epsilon_E <= 1` to pass from the intermediate inequality
