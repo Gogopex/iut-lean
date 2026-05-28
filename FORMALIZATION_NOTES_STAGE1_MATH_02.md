@@ -7477,3 +7477,83 @@ task is to stop treating it as primitive in the direct route: either construct
 it from the local `ZMod`/cusp label definitions and packet normalization data,
 or split the route into explicit direct and separately supplied averaging
 identification cases.
+
+## 95. Constant Family Derived from Pointwise ZMod Packet Equality
+
+### Goal
+
+We removed one unnecessary primitive assumption from the constant-family route.
+
+### Lean Move
+
+At the label-average level we added:
+
+```text
+IUTStage1LabelAveragedProcessionLogVolume.eq_constant_of_forall_eq
+```
+
+It proves that a finite label-averaged log-volume object is equal to the
+constant object `constant c` if every normalized label value is equal to `c`.
+
+Using this lemma, we added:
+
+```text
+FLZModCuspLabelThetaZModPacketNormalizedRouteAudit
+  .toConstantZModPacketNormalizedRouteAudit
+```
+
+Thus the route:
+
+```text
+forall j : ZMod l, label(j) = packet normalized value
+```
+
+now constructs the stronger object-level route:
+
+```text
+label-averaged object =
+  constant packet-normalized label-averaged object
+```
+
+### Mathematical Point
+
+This is closer to the actual cusp-label route.  The pointwise `ZMod` equality
+is the statement naturally obtained from a label/cusp compatibility argument:
+first prove the value attached to each label, then derive the averaged object
+identity.  We no longer need to postulate the whole object identity separately
+when the pointwise bridge is available.
+
+### Trap Avoided
+
+We did not replace pointwise equality by equality of averages.  The proof goes
+in the stronger direction:
+
+```text
+pointwise equality for every label
+  -> object equality with the constant family
+  -> average equality
+```
+
+This keeps the label information visible and avoids collapsing the finite label
+family to a single real before the label/cusp bridge has been checked.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_pointwise_to_constant_zmod_example
+placeAudited_logVolume_fl_zmod_pointwise_to_constant_average_bound_example
+```
+
+### Remaining Gap
+
+The pointwise bridge itself is still an interface:
+
+```text
+label(j) = packet normalized value
+```
+
+The next step is to derive this pointwise bridge from explicit cusp-class and
+zero-label packet-normalized equalities, because those are closer to the
+nonzero sign-label quotient and zero-label split in the current formal model.

@@ -1380,6 +1380,24 @@ theorem average_eq_of_pointwise
     _ = data₂.averageLogVolume :=
       data₂.average_eq.symm
 
+theorem eq_constant_of_forall_eq
+    [Nonempty label]
+    (data : IUTStage1LabelAveragedProcessionLogVolume label)
+    {c : Real}
+    (hpointwise : ∀ j : label, data.normalizedLogVolume j = c) :
+    data = constant c := by
+  have haverage :
+      data.averageLogVolume = (constant (label := label) c).averageLogVolume :=
+    average_eq_of_pointwise hpointwise
+  cases data with
+  | mk normalized average average_eq =>
+      simp only [constant] at hpointwise haverage ⊢
+      have hnormalized : normalized = fun _ => c :=
+        funext hpointwise
+      subst normalized
+      subst average
+      rfl
+
 theorem const_le_average_of_forall_le
     [Nonempty label]
     (data : IUTStage1LabelAveragedProcessionLogVolume label)
@@ -13157,6 +13175,24 @@ theorem cuspBoundSource_eq_directCapsule
     part.toFullClassifiedRouteSummary.cuspBoundSource =
       IUTStage1CuspClassBoundSource.directCapsuleEstimates :=
   rfl
+
+def toConstantZModPacketNormalizedRouteAudit
+    (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l :=
+  { theta_source := part.theta_source,
+    ind12_equality_part := part.ind12_equality_part,
+    ind3_upper_part := part.ind3_upper_part,
+    theta_images_eq_endpoint := part.theta_images_eq_endpoint,
+    targetCapsuleEstimates := part.targetCapsuleEstimates,
+    directNormalization := part.directNormalization,
+    averagedLogVolume_eq_packetConstant := by
+      intro audited
+      let averagedAudit :=
+        part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit
+      exact
+        IUTStage1LabelAveragedProcessionLogVolume.eq_constant_of_forall_eq
+          (averagedAudit.averagedLogVolume audited)
+          (part.zmodNormalizedLogVolume_eq_packetNormalized audited) }
 
 end FLZModCuspLabelThetaZModPacketNormalizedRouteAudit
 

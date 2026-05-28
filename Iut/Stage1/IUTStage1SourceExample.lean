@@ -5358,6 +5358,35 @@ theorem placeAudited_logVolume_fl_zmod_classified_zmod_packet_source_example
   part.packetIdentificationSource_eq_direct
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+def placeAudited_logVolume_fl_zmod_pointwise_to_constant_zmod_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l :=
+  part.toConstantZModPacketNormalizedRouteAudit
+
+theorem placeAudited_logVolume_fl_zmod_pointwise_to_constant_average_bound_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited :=
+  part.toConstantZModPacketNormalizedRouteAudit.targetSigned_le_thetaSourceAverage audited
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
 def placeAudited_logVolume_fl_zmod_constant_zmod_packet_to_zmod_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
