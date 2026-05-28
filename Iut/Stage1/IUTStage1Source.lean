@@ -2394,6 +2394,106 @@ theorem balancedSquareWeightOnFullLabel_fromCoordinate
   · rw [IUTStage1ZModCuspFullLabel.fromCoordinate_nonzero l j hj]
     exact balancedSquareWeightOnSignQuotient_fromCoordinate j hj
 
+/--
+The `|F_l| = {0} ∪ F_l^×/{±1}` theta-value exponent used by the current finite
+model.
+
+IUT II writes the theta values as `q^{j^2}`, with `j` the unique representative
+in `{0, ..., (l - 1) / 2}` determined by a label of `|F_l|`.  In the `ZMod`
+model this is the square of the minimal absolute representative.
+-/
+noncomputable def thetaExponentOnAbsLabel :
+    IUTStage1ZModCuspFullLabel l -> Real :=
+  balancedSquareWeightOnFullLabel (l := l)
+
+theorem thetaExponentOnAbsLabel_zero :
+    thetaExponentOnAbsLabel
+        (l := l) (IUTStage1ZModCuspFullLabel.zero) = 0 :=
+  rfl
+
+theorem thetaExponentOnAbsLabel_fromCoordinate
+    (j : ZMod l.value) :
+    thetaExponentOnAbsLabel
+        (l := l) (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+      balancedSquareWeight (l := l) j :=
+  balancedSquareWeightOnFullLabel_fromCoordinate j
+
+theorem thetaExponentOnAbsLabel_fromCoordinate_of_val_le_half
+    (j : ZMod l.value) (hhalf : j.val ≤ l.value / 2) :
+    thetaExponentOnAbsLabel
+        (l := l) (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+      ((j.val : Real) ^ 2) := by
+  rw [thetaExponentOnAbsLabel_fromCoordinate]
+  unfold balancedSquareWeight
+  rw [ZMod.valMinAbs_natAbs_eq_min]
+  have hcomp : j.val ≤ l.value - j.val := by
+    omega
+  rw [Nat.min_eq_left hcomp]
+
+theorem thetaExponentOnAbsLabel_fromCoordinate_neg_eq
+    (j : ZMod l.value) (hj : j ≠ 0) :
+    thetaExponentOnAbsLabel
+        (l := l) (IUTStage1ZModCuspFullLabel.fromCoordinate l (-j)) =
+      thetaExponentOnAbsLabel
+        (l := l) (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  rw [IUTStage1ZModCuspFullLabel.fromCoordinate_neg l j hj]
+
+/--
+Full `|F_l|` pilot-degree model for theta values of the form `q^{j^2}`.
+
+This is still a finite-label degree model, not the Hodge-Arakelov construction of
+theta values.  Its role is to make the paper's absolute-label convention explicit:
+the exponent is defined on `|F_l|`, not on arbitrary raw representatives.
+-/
+structure AbsThetaPilotDegreeProfile
+    (l : PrimeGeFive) where
+  qPilotDegree : Real
+  thetaPilotDegree : IUTStage1ZModCuspFullLabel l -> Real
+  thetaPilotDegree_eq_abs_exponent :
+    ∀ label : IUTStage1ZModCuspFullLabel l,
+      thetaPilotDegree label =
+        thetaExponentOnAbsLabel (l := l) label * qPilotDegree
+
+namespace AbsThetaPilotDegreeProfile
+
+variable {l : PrimeGeFive}
+
+theorem thetaPilotDegree_zero
+    (profile : AbsThetaPilotDegreeProfile l) :
+    profile.thetaPilotDegree IUTStage1ZModCuspFullLabel.zero = 0 := by
+  rw [profile.thetaPilotDegree_eq_abs_exponent,
+    thetaExponentOnAbsLabel_zero]
+  ring
+
+theorem thetaPilotDegree_fromCoordinate
+    (profile : AbsThetaPilotDegreeProfile l)
+    (j : ZMod l.value) :
+    profile.thetaPilotDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+      balancedSquareWeight (l := l) j * profile.qPilotDegree := by
+  rw [profile.thetaPilotDegree_eq_abs_exponent,
+    thetaExponentOnAbsLabel_fromCoordinate]
+
+theorem thetaPilotDegree_fromCoordinate_of_val_le_half
+    (profile : AbsThetaPilotDegreeProfile l)
+    (j : ZMod l.value) (hhalf : j.val ≤ l.value / 2) :
+    profile.thetaPilotDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+      ((j.val : Real) ^ 2) * profile.qPilotDegree := by
+  rw [profile.thetaPilotDegree_eq_abs_exponent,
+    thetaExponentOnAbsLabel_fromCoordinate_of_val_le_half j hhalf]
+
+theorem thetaPilotDegree_neg_fromCoordinate_eq
+    (profile : AbsThetaPilotDegreeProfile l)
+    (j : ZMod l.value) (hj : j ≠ 0) :
+    profile.thetaPilotDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (-j)) =
+      profile.thetaPilotDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  rw [IUTStage1ZModCuspFullLabel.fromCoordinate_neg l j hj]
+
+end AbsThetaPilotDegreeProfile
+
 noncomputable def balancedFullLabelWeightedSummand
     (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
     (label : IUTStage1ZModCuspFullLabel l) : Real :=

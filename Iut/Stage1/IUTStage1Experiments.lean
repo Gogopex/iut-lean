@@ -428,6 +428,8 @@ structure Ind3J2ScaleExperimentReport where
   nonzeroQPilotDegreeRejectsLabelIndependentThetaScale : Bool
   representativeJ2SignQuotientDescentRejected : Bool
   balancedThetaPilotDegreeDescendsToSignQuotient : Bool
+  absLabelThetaExponentMatchesHalfRangeJ2 : Bool
+  absLabelThetaPilotDegreeProfileAvailable : Bool
 
 /--
 For every `l >= 5`, the representative square scales at `j = 1` and `j = 2`
@@ -446,7 +448,9 @@ def ind3J2ScaleExperimentReport (l : PrimeGeFive) :
     labelIndependentScaleCanMatchAll := false,
     nonzeroQPilotDegreeRejectsLabelIndependentThetaScale := true,
     representativeJ2SignQuotientDescentRejected := true,
-    balancedThetaPilotDegreeDescendsToSignQuotient := true }
+    balancedThetaPilotDegreeDescendsToSignQuotient := true,
+    absLabelThetaExponentMatchesHalfRangeJ2 := true,
+    absLabelThetaPilotDegreeProfileAvailable := true }
 
 theorem ind3J2ScaleExperimentReport_oneScale
     (l : PrimeGeFive) :
@@ -484,6 +488,18 @@ theorem ind3J2ScaleExperimentReport_balancedDescends
     (l : PrimeGeFive) :
     (ind3J2ScaleExperimentReport
       l).balancedThetaPilotDegreeDescendsToSignQuotient = true :=
+  rfl
+
+theorem ind3J2ScaleExperimentReport_absLabelExponent
+    (l : PrimeGeFive) :
+    (ind3J2ScaleExperimentReport
+      l).absLabelThetaExponentMatchesHalfRangeJ2 = true :=
+  rfl
+
+theorem ind3J2ScaleExperimentReport_absLabelProfile
+    (l : PrimeGeFive) :
+    (ind3J2ScaleExperimentReport
+      l).absLabelThetaPilotDegreeProfileAvailable = true :=
   rfl
 
 theorem no_labelIndependent_transport_scale_absorbs_j2
@@ -541,6 +557,33 @@ theorem balanced_signQuotient_thetaPilot_degree_fromCoordinate
       IUTStage1ZModSquareWeightProfile.balancedSquareWeight
         (l := l) j * profile.qPilotDegree :=
   profile.thetaPilotDegree_fromCoordinate j hj
+
+/--
+On the canonical half-range representatives of `|F_l|`, the full-label exponent
+is the displayed `j^2` exponent from the IUT theta-value formula.
+-/
+theorem absLabel_thetaExponent_matches_halfRange_j2
+    {l : PrimeGeFive}
+    (j : ZMod l.value) (hhalf : j.val ≤ l.value / 2) :
+    IUTStage1ZModSquareWeightProfile.thetaExponentOnAbsLabel
+        (l := l) (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+      ((j.val : Real) ^ 2) :=
+  IUTStage1ZModSquareWeightProfile.thetaExponentOnAbsLabel_fromCoordinate_of_val_le_half
+    (l := l) j hhalf
+
+/--
+The full `|F_l|` theta-pilot degree profile gives the displayed
+`deg(Theta_j)=j^2 deg(q)` formula on half-range representatives.
+-/
+theorem absLabel_thetaPilot_degree_matches_halfRange_j2
+    {l : PrimeGeFive}
+    (profile :
+      IUTStage1ZModSquareWeightProfile.AbsThetaPilotDegreeProfile l)
+    (j : ZMod l.value) (hhalf : j.val ≤ l.value / 2) :
+    profile.thetaPilotDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+      ((j.val : Real) ^ 2) * profile.qPilotDegree :=
+  profile.thetaPilotDegree_fromCoordinate_of_val_le_half j hhalf
 
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
@@ -763,6 +806,7 @@ structure Corollary312DisputeFirstPassReport where
   mismatchCounterexampleBlocksRawCancellation : Bool
   labelIndependentJ2CollapseRejectedInZModModel : Bool
   representativeJ2SignQuotientDescentRejectedInZModModel : Bool
+  absLabelThetaDegreeHalfRangeModelAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -785,6 +829,7 @@ def corollary312DisputeFirstPassReport :
     mismatchCounterexampleBlocksRawCancellation := true,
     labelIndependentJ2CollapseRejectedInZModModel := true,
     representativeJ2SignQuotientDescentRejectedInZModModel := true,
+    absLabelThetaDegreeHalfRangeModelAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -815,6 +860,11 @@ theorem corollary312Report_labelIndependentJ2CollapseRejectedInZModModel :
 
 theorem corollary312Report_representativeJ2SignQuotientDescentRejected :
     corollary312DisputeFirstPassReport.representativeJ2SignQuotientDescentRejectedInZModModel =
+      true :=
+  rfl
+
+theorem corollary312Report_absLabelThetaDegreeHalfRangeModelAvailable :
+    corollary312DisputeFirstPassReport.absLabelThetaDegreeHalfRangeModelAvailable =
       true :=
   rfl
 
