@@ -2098,3 +2098,73 @@ The roles are still bookkeeping.  The next mathematical target is to attach the
 zero-column/SHE role and cusp-class evaluation role to more source-specific
 objects from the original IUT III construction, especially the 0-column and the
 Hodge-Arakelov label/cusp data.
+
+## 137. Source-Marked Hodge-Descent Local Objects
+
+### Lean Move
+
+I added:
+
+```text
+IUTStage1ZeroColumnSHELocalObjectData
+IUTStage1CuspClassHodgeArakelovLocalObjectData
+IUTStage1PacketDescentTargetLocalObjectData
+IUTStage1SourceMarkedHodgeDescentCuspZeroLocalObjectOperationData
+FLZModCuspLabelThetaSourceMarkedHodgeDescentPacketTransportAudit
+```
+
+The source-marked operation family records:
+
+```text
+zero source object: 0-column/SHE local object data
+cusp-class source object: Hodge-Arakelov local object data for each sign class
+packet target object: descent target local object data
+zero/cusp operations: local Hodge-descent operations into the packet target
+```
+
+It derives the role-marked operation family, so the source-specific layer feeds
+the previous role discipline rather than bypassing it.
+
+### Mathematical Reason
+
+This is the first layer that explicitly names the source-side mathematical
+roles from the papers:
+
+```text
+0-column / SHE input
+Hodge-Arakelov label/cusp evaluation
+packet-side descent target
+```
+
+IUT III emphasizes the distinct labels in `F_l` and their Hodge-Arakelov
+evaluation context, while Mochizuki's formalization note emphasizes the
+0-column and the descent/HDD/SHE route.  The new structures keep those two
+sources separate until a local descent operation transports them to the packet
+target.
+
+### Trap Avoided
+
+Previously, the role-marked layer remembered that zero and cusp-class objects
+had different roles, but not what source data justified those roles.  Now a
+formal proof must supply source objects for the 0-column/SHE side and for each
+Hodge-Arakelov cusp-class side.
+
+This still does not prove that these objects exist in the full IUT
+construction.  It identifies a sharper local obligation for the next pass.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_source_marked_hodge_transport_to_role_marked_example
+placeAudited_logVolume_fl_zmod_source_marked_zero_checkpoint_example
+placeAudited_logVolume_fl_zmod_source_marked_cusp_checkpoint_example
+placeAudited_logVolume_fl_zmod_source_marked_packet_descent_example
+```
+
+### Remaining Gap
+
+The source-marked objects are still abstract.  Next we should connect the
+Hodge-Arakelov cusp-class source objects to the existing `ZMod l` sign-label
+model and the local lab/cusp data already formalized in `InitialThetaData`.
