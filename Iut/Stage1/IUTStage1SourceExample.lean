@@ -6108,6 +6108,54 @@ theorem placeAudited_logVolume_fl_zmod_structured_hodge_square_weight_weight_gap
       (part.localObjectSquareWeightBoundary audited).missingSquareWeightData :=
   part.localObjectSquareWeightBoundary_squareWeightPreservation_missing audited
 
+theorem placeAudited_logVolume_fl_zmod_structured_hodge_factored_coord_gap_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.coordinateSquarePreservation ∈
+      (part.localObjectSquareWeightBoundary audited).missingFactoredSquareFullLabelData :=
+  part.localObjectSquareWeightBoundary_coordinateSquarePreservation_missing audited
+
+theorem placeAudited_logVolume_fl_zmod_structured_hodge_factored_map_gap_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelMapPreservation ∈
+      (part.localObjectSquareWeightBoundary audited).missingFactoredSquareFullLabelData :=
+  part.localObjectSquareWeightBoundary_fullLabelMapPreservation_missing audited
+
+theorem placeAudited_logVolume_fl_zmod_structured_hodge_factored_value_gap_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelValuePreservation ∈
+      (part.localObjectSquareWeightBoundary audited).missingFactoredSquareFullLabelData :=
+  part.localObjectSquareWeightBoundary_fullLabelValuePreservation_missing audited
+
 theorem placeAudited_logVolume_fl_zmod_structured_hodge_transport_source_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

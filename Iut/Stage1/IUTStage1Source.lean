@@ -3371,6 +3371,36 @@ theorem weightTotalPreservation_mem_all :
 end IUTStage1SquareWeightTransportMissingDatum
 
 /--
+Primitive preservation data required by the fully factored structured-SHE
+square/full-label obligation record, but not supplied by local-object Hodge
+descent alone.
+-/
+inductive IUTStage1FactoredSquareFullLabelMissingDatum where
+  | coordinateSquarePreservation
+  | fullLabelMapPreservation
+  | fullLabelValuePreservation
+deriving DecidableEq, Repr, Fintype
+
+namespace IUTStage1FactoredSquareFullLabelMissingDatum
+
+def all : Finset IUTStage1FactoredSquareFullLabelMissingDatum :=
+  Finset.univ
+
+theorem coordinateSquarePreservation_mem_all :
+    coordinateSquarePreservation ∈ all := by
+  simp [all]
+
+theorem fullLabelMapPreservation_mem_all :
+    fullLabelMapPreservation ∈ all := by
+  simp [all]
+
+theorem fullLabelValuePreservation_mem_all :
+    fullLabelValuePreservation ∈ all := by
+  simp [all]
+
+end IUTStage1FactoredSquareFullLabelMissingDatum
+
+/--
 Boundary object showing what the local-object Hodge-descent packet layer supplies
 before square-weight preservation data are added.
 
@@ -3410,6 +3440,13 @@ def missingSquareWeightData
         l hodgeData zeroObject cuspClassObject packetObject) :
     Finset IUTStage1SquareWeightTransportMissingDatum :=
   IUTStage1SquareWeightTransportMissingDatum.all
+
+def missingFactoredSquareFullLabelData
+    (_boundary :
+      IUTStage1LocalObjectHodgeDescentSquareWeightBoundary
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    Finset IUTStage1FactoredSquareFullLabelMissingDatum :=
+  IUTStage1FactoredSquareFullLabelMissingDatum.all
 
 theorem zero_transports_to_packet
     (boundary :
@@ -3464,6 +3501,30 @@ theorem weightTotalPreservation_missing
     IUTStage1SquareWeightTransportMissingDatum.weightTotalPreservation ∈
       boundary.missingSquareWeightData :=
   IUTStage1SquareWeightTransportMissingDatum.weightTotalPreservation_mem_all
+
+theorem coordinateSquarePreservation_missing
+    (boundary :
+      IUTStage1LocalObjectHodgeDescentSquareWeightBoundary
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.coordinateSquarePreservation ∈
+      boundary.missingFactoredSquareFullLabelData :=
+  IUTStage1FactoredSquareFullLabelMissingDatum.coordinateSquarePreservation_mem_all
+
+theorem fullLabelMapPreservation_missing
+    (boundary :
+      IUTStage1LocalObjectHodgeDescentSquareWeightBoundary
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelMapPreservation ∈
+      boundary.missingFactoredSquareFullLabelData :=
+  IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelMapPreservation_mem_all
+
+theorem fullLabelValuePreservation_missing
+    (boundary :
+      IUTStage1LocalObjectHodgeDescentSquareWeightBoundary
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelValuePreservation ∈
+      boundary.missingFactoredSquareFullLabelData :=
+  IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelValuePreservation_mem_all
 
 end IUTStage1LocalObjectHodgeDescentSquareWeightBoundary
 
@@ -17650,6 +17711,30 @@ theorem localObjectSquareWeightBoundary_fullLabelPreservation_missing
     IUTStage1SquareWeightTransportMissingDatum.fullLabelLogVolumePreservation ∈
       (part.localObjectSquareWeightBoundary audited).missingSquareWeightData :=
   (part.localObjectSquareWeightBoundary audited).fullLabelLogVolumePreservation_missing
+
+theorem localObjectSquareWeightBoundary_coordinateSquarePreservation_missing
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.coordinateSquarePreservation ∈
+      (part.localObjectSquareWeightBoundary audited).missingFactoredSquareFullLabelData :=
+  (part.localObjectSquareWeightBoundary audited).coordinateSquarePreservation_missing
+
+theorem localObjectSquareWeightBoundary_fullLabelMapPreservation_missing
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelMapPreservation ∈
+      (part.localObjectSquareWeightBoundary audited).missingFactoredSquareFullLabelData :=
+  (part.localObjectSquareWeightBoundary audited).fullLabelMapPreservation_missing
+
+theorem localObjectSquareWeightBoundary_fullLabelValuePreservation_missing
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelValuePreservation ∈
+      (part.localObjectSquareWeightBoundary audited).missingFactoredSquareFullLabelData :=
+  (part.localObjectSquareWeightBoundary audited).fullLabelValuePreservation_missing
 
 theorem zeroLocalObject_eq_packetLocalObject
     (part :

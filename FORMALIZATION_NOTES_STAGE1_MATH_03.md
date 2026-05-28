@@ -3658,3 +3658,93 @@ Lean interface.  The next review should compare this interface against the
 currently formalized Hodge-descent/local-object/common-container data and mark
 exactly which of the three primitive fields are supplied, missing, or
 unjustified.
+
+## 154. Local-Object Hodge Descent vs. Factored Preservation Fields
+
+### Lean Move
+
+We added a primitive missing-data checklist:
+
+```text
+IUTStage1FactoredSquareFullLabelMissingDatum
+```
+
+with three entries:
+
+```text
+coordinateSquarePreservation
+fullLabelMapPreservation
+fullLabelValuePreservation
+```
+
+The existing local-object Hodge descent boundary now exposes:
+
+```text
+missingFactoredSquareFullLabelData
+coordinateSquarePreservation_missing
+fullLabelMapPreservation_missing
+fullLabelValuePreservation_missing
+```
+
+The structured Hodge-descent packet audit projects these same gaps through
+`localObjectSquareWeightBoundary`, and the example file checks the three
+primitive missing-field lemmas on a place-audited log-volume route.
+
+### Mathematical Reason
+
+This is a comparison milestone.  The previous milestone defined the factored
+input record sufficient to derive transported square-weighted full-label average
+equality.  This milestone asks whether the local-object Hodge descent packet
+data supplies the primitive fields of that record.
+
+The answer in the current Lean interface is no.  Local-object Hodge descent
+supplies:
+
+```text
+zero local object = packet local object
+cusp-class local object = packet local object
+history separation
+```
+
+It does not supply:
+
+```text
+coordinate-square preservation of the j^2 profile
+full-label-map preservation
+full-label-value preservation
+```
+
+This is deliberately modest.  It does not claim that Mochizuki's full theory
+cannot supply these fields elsewhere.  It only prevents the formalization from
+silently extracting them from the local-object descent packet layer.
+
+### Source Check
+
+This matches the source tension around Corollary 3.12.  IUT III's final
+comparison uses log-volume averages over `j in F_l`, and IUT II's weighted
+volume discussion keeps the `j^2` weighting as structured data.  Scholze-Stix's
+objection targets the possibility that, after simplifying to common comparison
+data, the nontrivial label/weight information is no longer present.
+
+The current Lean boundary reflects that issue exactly: packet-level
+local-object equality is not enough to reconstruct either the `j^2` coordinate
+profile or the full-label log-volume branch.
+
+### Relevance to the 3.12 Dispute
+
+The formal picture is now:
+
+```text
+local-object Hodge descent
+  gives packet equalities
+
+factored 3.12 square/full-label transport
+  needs three primitive preservation fields
+
+current Lean comparison
+  marks all three primitive fields as missing from local-object descent alone
+```
+
+The next mathematical task is therefore sharper: inspect the stronger
+Hodge-theater/SHE/common-container machinery and ask whether it supplies these
+fields, or whether further source-specific assumptions must be introduced.
