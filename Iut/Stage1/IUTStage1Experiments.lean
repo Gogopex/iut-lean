@@ -673,6 +673,7 @@ structure ProcessionContainerExperimentReport where
   iutIVCorollary22HBoundBeforeEpsilonAvailable : Bool
   iutIVCorollary22C2InequalityChainAvailable : Bool
   iutIVCorollary22EpsilonDefinitionAvailable : Bool
+  iutIVCorollary22EpsilonErrorConversionAvailable : Bool
   iutIVCorollary22EpsilonMoveLeftAvailable : Bool
   iutIVCorollary22EpsilonAbsorptionAvailable : Bool
   iutIVCorollary22LogDiffCondComparisonAvailable : Bool
@@ -736,6 +737,7 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     iutIVCorollary22HBoundBeforeEpsilonAvailable := true,
     iutIVCorollary22C2InequalityChainAvailable := true,
     iutIVCorollary22EpsilonDefinitionAvailable := true,
+    iutIVCorollary22EpsilonErrorConversionAvailable := true,
     iutIVCorollary22EpsilonMoveLeftAvailable := true,
     iutIVCorollary22EpsilonAbsorptionAvailable := true,
     iutIVCorollary22LogDiffCondComparisonAvailable := true,
@@ -1355,6 +1357,12 @@ theorem iutIVCorollary22EpsilonDefinition_lower_bound
     5 * data.delta * data.sqrtH⁻¹ <= data.epsilonE :=
   data.five_delta_inv_sqrtH_le_epsilonE
 
+theorem iutIVCorollary22EpsilonErrorConversion_bound
+    (data : IUTStage1IUTIVCorollary22EpsilonErrorConversionShadow) :
+    (15 * data.delta) ^ 2 * data.sqrtH * data.logTwoDeltaH <=
+      (1 / 6 : Real) * data.h * ((2 / 5 : Real) * data.epsilonE) :=
+  data.fifteen_delta_sq_error_le_epsilon_term
+
 theorem iutIVCorollary22EpsilonMoveLeft_bound
     (data : IUTStage1IUTIVCorollary22EpsilonMoveLeftShadow) :
     (1 / 6 : Real) * data.h <=
@@ -1678,6 +1686,7 @@ structure Corollary312DisputeFirstPassReport where
   iutIVCorollary22HBoundBeforeEpsilonAvailable : Bool
   iutIVCorollary22C2InequalityChainAvailable : Bool
   iutIVCorollary22EpsilonDefinitionAvailable : Bool
+  iutIVCorollary22EpsilonErrorConversionAvailable : Bool
   iutIVCorollary22EpsilonMoveLeftAvailable : Bool
   iutIVCorollary22EpsilonAbsorptionAvailable : Bool
   iutIVCorollary22LogDiffCondComparisonAvailable : Bool
@@ -1754,6 +1763,7 @@ def corollary312DisputeFirstPassReport :
     iutIVCorollary22HBoundBeforeEpsilonAvailable := true,
     iutIVCorollary22C2InequalityChainAvailable := true,
     iutIVCorollary22EpsilonDefinitionAvailable := true,
+    iutIVCorollary22EpsilonErrorConversionAvailable := true,
     iutIVCorollary22EpsilonMoveLeftAvailable := true,
     iutIVCorollary22EpsilonAbsorptionAvailable := true,
     iutIVCorollary22LogDiffCondComparisonAvailable := true,
@@ -2038,6 +2048,11 @@ theorem corollary312Report_iutIVCorollary22C2InequalityChainAvailable :
 
 theorem corollary312Report_iutIVCorollary22EpsilonDefinitionAvailable :
     corollary312DisputeFirstPassReport.iutIVCorollary22EpsilonDefinitionAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_iutIVCorollary22EpsilonErrorConversionAvailable :
+    corollary312DisputeFirstPassReport.iutIVCorollary22EpsilonErrorConversionAvailable =
       true :=
   rfl
 

@@ -3776,6 +3776,58 @@ theorem five_delta_inv_sqrtH_le_one_of_epsilonE_le_one
 end IUTStage1IUTIVCorollary22EpsilonDefinitionShadow
 
 /--
+IUT IV, Corollary 2.2(ii), conversion of the pre-`epsilon_E` error term.
+
+The proof rewrites the term `(15 * delta)^2 * h^(1/2) * log(2 * delta * h)` as
+bounded by `(1/6) * h * (2/5 * epsilon_E)` after substituting the definition of
+`epsilon_E`.
+-/
+structure IUTStage1IUTIVCorollary22EpsilonErrorConversionShadow where
+  h : Real
+  delta : Real
+  sqrtH : Real
+  logTwoDeltaH : Real
+  epsilonE : Real
+  sqrtH_pos : 0 < sqrtH
+  delta_sq_log_nonneg : 0 <= delta ^ 2 * logTwoDeltaH
+  h_eq_sqrtH_sq : h = sqrtH ^ 2
+  epsilonE_eq :
+    epsilonE =
+      iutIVCorollary22EpsilonDefinitionRHS delta sqrtH logTwoDeltaH
+
+namespace IUTStage1IUTIVCorollary22EpsilonErrorConversionShadow
+
+theorem fifteen_delta_sq_error_le_epsilon_term
+    (data : IUTStage1IUTIVCorollary22EpsilonErrorConversionShadow) :
+    (15 * data.delta) ^ 2 * data.sqrtH * data.logTwoDeltaH <=
+      (1 / 6 : Real) * data.h * ((2 / 5 : Real) * data.epsilonE) := by
+  have hleft_nonneg :
+      0 <= data.delta ^ 2 * data.sqrtH * data.logTwoDeltaH := by
+    have h := mul_nonneg data.delta_sq_log_nonneg data.sqrtH_pos.le
+    simpa [mul_assoc, mul_comm, mul_left_comm] using h
+  rw [data.h_eq_sqrtH_sq, data.epsilonE_eq,
+    iutIVCorollary22EpsilonDefinitionRHS]
+  have hsqrt_ne : data.sqrtH ≠ 0 := ne_of_gt data.sqrtH_pos
+  have hcancel :
+      data.sqrtH ^ 2 * ((data.sqrtH)⁻¹) = data.sqrtH := by
+    field_simp [hsqrt_ne]
+  calc
+    (15 * data.delta) ^ 2 * data.sqrtH * data.logTwoDeltaH
+        =
+      225 * (data.delta ^ 2 * data.sqrtH * data.logTwoDeltaH) := by ring
+    _ <=
+      240 * (data.delta ^ 2 * data.sqrtH * data.logTwoDeltaH) := by
+        exact mul_le_mul_of_nonneg_right (by norm_num) hleft_nonneg
+    _ =
+      (1 / 6 : Real) * data.sqrtH ^ 2 *
+        ((2 / 5 : Real) *
+          ((60 * data.delta) ^ 2 * data.sqrtH⁻¹ * data.logTwoDeltaH)) := by
+        field_simp [hsqrt_ne]
+        ring
+
+end IUTStage1IUTIVCorollary22EpsilonErrorConversionShadow
+
+/--
 The denominator `1 - (2/5) * epsilon_E` appearing in the last absorption step
 of the proof of IUT IV, Corollary 2.2(ii).
 -/
