@@ -1964,3 +1964,83 @@ instead of treating it as a single direct-summand action with preservation
 fields, separate its nonarchimedean `Ism` and archimedean order-two sources at
 the place-audited level and prove that both feed the same audited
 multiradial-image invariance theorem.
+
+## 26. Audited Nonarchimedean and Archimedean `(Ind2)` Sources
+
+### Goal
+
+We split the audited `(Ind2)` action into the two source mechanisms named in
+IUT III, Theorem 3.11: the nonarchimedean `Ism` action and the archimedean
+order-two action.
+
+### Lean/API Check
+
+The audited choice namespace now defines:
+
+```text
+NonarchimedeanIsmInd2Step
+ArchimedeanOrderTwoInd2Step
+nonarchimedeanIsm_toDirectSummandActionStep
+archimedeanOrderTwo_toDirectSummandActionStep
+nonarchimedeanIsm_preserves_placeFamilyCompatibility
+archimedeanOrderTwo_preserves_placeFamilyCompatibility
+nonarchimedeanIsm_preserves_capsuleTotalLogVolume
+archimedeanOrderTwo_preserves_capsuleTotalLogVolume
+nonarchimedeanIsm_image_invariant_of_coric
+archimedeanOrderTwo_image_invariant_of_coric
+```
+
+The audited multiradial image package exposes:
+
+```text
+region_eq_of_nonarchimedeanIsm_step
+region_eq_of_archimedeanOrderTwo_step
+```
+
+and the same two accessors exist on the audited source-package theta-image
+wrapper.
+
+### Mathematical Point
+
+This is the first audited version of the local `(Ind2)` split.  Earlier, the
+nonarchimedean and archimedean mechanisms existed for direct-summand packet
+choices, but the place-family audit layer saw only a single broad
+`LocalTensorDirectSummandActionStep`.  We now keep the two cases separate after
+adding the audit.
+
+This is important because Theorem 3.11 distinguishes independent copies of
+`Ism` at nonarchimedean places from order-two automorphisms at archimedean
+places, both acting on direct summands.  The formalization now has named Lean
+endpoints where each case reaches multiradial image invariance without losing
+the place-family compatibility certificate.
+
+### Trap Avoided
+
+The split does not assert that nonarchimedean and archimedean actions are the
+same phenomenon.  Each has its own audited source step and is merely converted
+to the common direct-summand `(Ind2)` step when we need the already-proved
+image-invariance theorem.  This keeps the common proof path visible without
+collapsing the two local cases.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+placeAuditedNonarchimedeanIsm_to_ind2_example
+placeAuditedArchimedeanOrderTwo_to_ind2_example
+placeAuditedNonarchimedeanIsm_preserves_totalLogVolume_example
+placeAuditedArchimedeanOrderTwo_preserves_totalLogVolume_example
+placeAuditedMultiradialImages_nonarchimedeanIsm_region_eq_example
+placeAuditedMultiradialImages_archimedeanOrderTwo_region_eq_example
+placeAuditedMultiradialThetaImages_nonarchimedeanIsm_region_eq_example
+placeAuditedMultiradialThetaImages_archimedeanOrderTwo_region_eq_example
+```
+
+### Remaining Gap
+
+The next refinement should connect these audited local `(Ind2)` source steps to
+the place-family action entries themselves.  At present the source step says
+that an action exists on the relevant summand family; it does not yet point to
+the corresponding audited action entry in the nonarchimedean or archimedean
+place list.
