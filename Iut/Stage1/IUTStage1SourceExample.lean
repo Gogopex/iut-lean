@@ -5126,6 +5126,40 @@ theorem placeAudited_logVolume_fl_zmod_cusp_zero_label_object_neg_one_object_eq_
       part.cuspClassLocalObject audited (zmodCanonicalSignLabelQuotient l) :=
   part.cuspClassLocalObject_neg_one_eq_canonical audited
 
+theorem placeAudited_logVolume_fl_zmod_cusp_zero_zero_to_cusp_object_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    part.zeroLocalObject audited =
+      part.cuspClassLocalObject audited label :=
+  part.zeroLocalObject_eq_cuspClassLocalObject audited label
+
+theorem placeAudited_logVolume_fl_zmod_cusp_zero_zero_to_canonical_log_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+      (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        (zmodCanonicalSignLabelQuotient l) :=
+  part.zeroLogVolume_eq_canonicalCuspClassLogVolume audited
+
 theorem placeAudited_logVolume_fl_zmod_cusp_zero_label_object_target_bound_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

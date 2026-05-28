@@ -1026,3 +1026,72 @@ next boundary is the stronger IUT concern about relating zero-labeled and
 nonzero-labeled data via permitted symmetries without collapsing them.  That
 will likely require an explicit "zero-to-nonzero comparison source" rather than
 an equality of labels.
+
+## 120. Conditional Zero-to-Nonzero Collapse Through Packet Local Object
+
+### Lean Move
+
+I added:
+
+```text
+FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
+  .zeroLocalObject_eq_cuspClassLocalObject
+FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
+  .zeroLocalObject_eq_canonicalCuspClassLocalObject
+FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
+  .zeroLogVolume_eq_cuspClassLogVolume
+FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
+  .zeroLogVolume_eq_canonicalCuspClassLogVolume
+```
+
+### Mathematical Reason
+
+This is deliberately a conditional theorem.  In the current route, both the
+zero branch and every nonzero cusp-class branch are assumed to be identified
+with the audited packet local object:
+
+```text
+zeroLocalObject audited = packet local object
+cuspClassLocalObject audited label = packet local object
+```
+
+Lean therefore proves that the zero local object and each cusp-class local
+object are equal.  The corresponding log-volumes are equal for the same reason.
+
+### Trap Exposed
+
+This is exactly the kind of collapse that must not be hidden.  The theorem does
+not identify the zero label with a nonzero sign-label class.  It identifies the
+local objects only after the route has assumed that both branches are the same
+packet local object.
+
+Thus, if a future attempt to model Corollary 3.12 needs zero/nonzero data to
+remain insulated longer, this theorem marks the precise assumption that causes
+the collapse:
+
+```text
+zeroLocalObject_eq_packetLocalObject
+cuspClassLocalObject_eq_packetLocalObject
+```
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_cusp_zero_zero_to_cusp_object_eq_example
+placeAudited_logVolume_fl_zmod_cusp_zero_zero_to_canonical_log_eq_example
+```
+
+### Remaining Gap
+
+The next step should not add more consequences of this collapse.  It should
+split the route into two variants:
+
+```text
+comparison route: zero/nonzero branches may be compared through a packet object
+insulated route: zero/nonzero branches remain separate until an explicit bridge
+```
+
+That split will let us test whether Corollary 3.12 needs the comparison route
+and where the required bridge is supposed to come from.

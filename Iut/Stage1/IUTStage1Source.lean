@@ -13106,6 +13106,54 @@ theorem cuspClassLocalObject_neg_one_eq_canonical
     l (1 : ZMod l.value) (zmodOneNonzeroLabel l).2]
   rw [zmodSignLabelFromCoordinate_one_eq_canonical]
 
+theorem zeroLocalObject_eq_cuspClassLocalObject
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    part.zeroLocalObject audited =
+      part.cuspClassLocalObject audited label := by
+  calc
+    part.zeroLocalObject audited =
+        audited.choice.local_tensor_state.packetState.localObject :=
+      part.zeroLocalObject_eq_packetLocalObject audited
+    _ = part.cuspClassLocalObject audited label :=
+      (part.cuspClassLocalObject_eq_packetLocalObject audited label).symm
+
+theorem zeroLocalObject_eq_canonicalCuspClassLocalObject
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.zeroLocalObject audited =
+      part.cuspClassLocalObject audited (zmodCanonicalSignLabelQuotient l) :=
+  part.zeroLocalObject_eq_cuspClassLocalObject
+    audited (zmodCanonicalSignLabelQuotient l)
+
+theorem zeroLogVolume_eq_cuspClassLogVolume
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+      (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label := by
+  calc
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+        (part.zeroLocalObject audited).finiteLogVolume :=
+      part.zeroLogVolume_eq_localObjectFinite audited
+    _ = (part.cuspClassLocalObject audited label).finiteLogVolume := by
+      rw [part.zeroLocalObject_eq_cuspClassLocalObject audited label]
+    _ =
+        (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+          label :=
+      (part.cuspClassLogVolume_eq_localObjectFinite audited label).symm
+
+theorem zeroLogVolume_eq_canonicalCuspClassLogVolume
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+      (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        (zmodCanonicalSignLabelQuotient l) :=
+  part.zeroLogVolume_eq_cuspClassLogVolume
+    audited (zmodCanonicalSignLabelQuotient l)
+
 end FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
 
 namespace FLZModCuspLabelThetaPacketNormalizedContainerAudit
