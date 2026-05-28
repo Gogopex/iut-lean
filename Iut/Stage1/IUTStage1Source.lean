@@ -9172,6 +9172,37 @@ def processionNormalizedInd12Audit
         IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_preserves_capsuleNormalizedLogVolume
           hstep }
 
+/--
+Label-averaged version of the `(Ind1)/(Ind2)` log-volume audit.
+
+The label-wise log-volume family is source data: later work should instantiate
+the label type by the concrete `F_l` model.  This audit proves that pointwise
+label-wise invariance descends to the averaged procession log-volume.
+-/
+structure LabelAveragedInd12Audit
+    (audit : endpoint.LogVolumeChartAudit)
+    (label : Type u) [Fintype label] where
+  normalized_audit : audit.ProcessionNormalizedInd12Audit
+  averagedLogVolume :
+    IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind ->
+      IUTStage1LabelAveragedProcessionLogVolume label
+  ind1_labelwise_eq :
+    ∀ {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind},
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂ ->
+        ∀ j : label,
+          (averagedLogVolume audited₁).normalizedLogVolume j =
+            (averagedLogVolume audited₂).normalizedLogVolume j
+  ind2_labelwise_eq :
+    ∀ {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind},
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂ ->
+        ∀ j : label,
+          (averagedLogVolume audited₁).normalizedLogVolume j =
+            (averagedLogVolume audited₂).normalizedLogVolume j
+
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord =
@@ -9278,6 +9309,42 @@ theorem ind2NormalizedLogVolumeEq
   part.ind2_normalizedLogVolume_eq hstep
 
 end ProcessionNormalizedInd12Audit
+
+namespace LabelAveragedInd12Audit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {label : Type u} [Fintype label]
+
+theorem ind1AverageLogVolumeEq
+    (part : audit.LabelAveragedInd12Audit label)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    (part.averagedLogVolume audited₁).averageLogVolume =
+      (part.averagedLogVolume audited₂).averageLogVolume :=
+  IUTStage1LabelAveragedProcessionLogVolume.average_eq_of_pointwise
+    (part.ind1_labelwise_eq hstep)
+
+theorem ind2AverageLogVolumeEq
+    (part : audit.LabelAveragedInd12Audit label)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    (part.averagedLogVolume audited₁).averageLogVolume =
+      (part.averagedLogVolume audited₂).averageLogVolume :=
+  IUTStage1LabelAveragedProcessionLogVolume.average_eq_of_pointwise
+    (part.ind2_labelwise_eq hstep)
+
+theorem localNormalizedAudit
+    (part : audit.LabelAveragedInd12Audit label) :
+    audit.ProcessionNormalizedInd12Audit :=
+  part.normalized_audit
+
+end LabelAveragedInd12Audit
 
 end LogVolumeChartAudit
 

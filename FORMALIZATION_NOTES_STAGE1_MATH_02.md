@@ -2991,3 +2991,67 @@ labelAveragedProcessionLogVolume_average_eq_of_pointwise_example
 The next step should combine `ProcessionNormalizedInd12Audit` with
 `IUTStage1LabelAveragedProcessionLogVolume`, proving averaged invariance under
 `(Ind1)` and `(Ind2)` from pointwise label-wise invariance.
+
+## 41. Label-Averaged `(Ind1)/(Ind2)` Invariance
+
+### Goal
+
+We connected the local `(Ind1)/(Ind2)` log-volume audit to label-averaged
+procession log-volumes.
+
+### Lean/API Check
+
+Inside `LogVolumeChartAudit`, the new source-facing audit is:
+
+```text
+LabelAveragedInd12Audit
+```
+
+It carries:
+
+```text
+normalized_audit : ProcessionNormalizedInd12Audit
+averagedLogVolume :
+  audited choice -> IUTStage1LabelAveragedProcessionLogVolume label
+ind1_labelwise_eq
+ind2_labelwise_eq
+```
+
+Lean proves:
+
+```text
+ind1AverageLogVolumeEq
+ind2AverageLogVolumeEq
+localNormalizedAudit
+```
+
+### Mathematical Point
+
+This bridges the local normalized-log-volume equality to the average over a
+finite label set.  The proof is exactly the finite-sum argument: if the
+label-wise normalized values agree for every label, then their averages agree.
+
+This mirrors the Corollary 3.12 use of procession-normalized averages over
+`j ∈ F_l`, while still leaving the concrete `F_l` model as a later refinement.
+
+### Trap Avoided
+
+The audit requires explicit label-wise equality hypotheses.  It does not infer
+averaged invariance merely from a single unindexed local equality, since the
+Corollary 3.12 average ranges over label-indexed theta values.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+placeAuditedMultiradialThetaHullEndpoint_logVolume_label_ind1_average_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_label_ind2_average_example
+```
+
+### Remaining Gap
+
+The next refinement should instantiate the abstract finite label type with the
+existing `ZMod l`/`F_l` label model in the foundations layer, or introduce a
+bridge object that records when a finite label type represents that `F_l` label
+set.

@@ -3209,6 +3209,44 @@ theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind12_ind2_normalized
       audited₂.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
   part.ind2NormalizedLogVolumeEq hstep
 
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_label_ind1_average_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {label : Type u} [Fintype label]
+    (part : audit.LabelAveragedInd12Audit label)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    (part.averagedLogVolume audited₁).averageLogVolume =
+      (part.averagedLogVolume audited₂).averageLogVolume :=
+  part.ind1AverageLogVolumeEq hstep
+
+theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_label_ind2_average_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {label : Type u} [Fintype label]
+    (part : audit.LabelAveragedInd12Audit label)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    (part.averagedLogVolume audited₁).averageLogVolume =
+      (part.averagedLogVolume audited₂).averageLogVolume :=
+  part.ind2AverageLogVolumeEq hstep
+
 theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind3_target_le_theta_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
