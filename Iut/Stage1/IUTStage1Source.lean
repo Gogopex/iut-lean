@@ -807,6 +807,21 @@ structure IUTStage1LocalContainerLogVolumeEstimate
   targetSigned_le_containerLogVolume : targetSigned <= containerLogVolume
 
 /--
+Local container estimate tied to a finite local log-volume object.
+
+This refines the real-valued estimate by recording which local object supplies
+the local log-volume being bounded.
+-/
+structure IUTStage1LocalObjectContainerLogVolumeEstimate
+    (kind : IUTStage1PlaceKind)
+    (targetSigned localLogVolume : Real) where
+  localObject : IUTStage1FiniteLocalLogVolumeObject kind
+  localLogVolume_eq_object : localLogVolume = localObject.finiteLogVolume
+  object_container_estimate :
+    IUTStage1LocalContainerLogVolumeEstimate
+      targetSigned localObject.finiteLogVolume
+
+/--
 Procession-normalized log-volume averaged over a finite label set.
 
 This is the Stage 1 abstraction of the average over `j ∈ F_l` that appears in
@@ -926,6 +941,34 @@ theorem targetSigned_le_localLogVolume
   exact estimate.targetSigned_le_containerLogVolume
 
 end IUTStage1LocalContainerLogVolumeEstimate
+
+namespace IUTStage1LocalObjectContainerLogVolumeEstimate
+
+variable {kind : IUTStage1PlaceKind}
+variable {targetSigned localLogVolume : Real}
+
+def toLocalContainerEstimate
+    (estimate :
+      IUTStage1LocalObjectContainerLogVolumeEstimate
+        kind targetSigned localLogVolume) :
+    IUTStage1LocalContainerLogVolumeEstimate
+      targetSigned localLogVolume :=
+  { containerLogVolume :=
+      estimate.object_container_estimate.containerLogVolume,
+    localLogVolume_eq_container :=
+      estimate.localLogVolume_eq_object.trans
+        estimate.object_container_estimate.localLogVolume_eq_container,
+    targetSigned_le_containerLogVolume :=
+      estimate.object_container_estimate.targetSigned_le_containerLogVolume }
+
+theorem targetSigned_le_localLogVolume
+    (estimate :
+      IUTStage1LocalObjectContainerLogVolumeEstimate
+        kind targetSigned localLogVolume) :
+    targetSigned <= localLogVolume :=
+  estimate.toLocalContainerEstimate.targetSigned_le_localLogVolume
+
+end IUTStage1LocalObjectContainerLogVolumeEstimate
 
 namespace IUTStage1FLLabelModel
 
@@ -9840,6 +9883,34 @@ structure FLZModCuspLabelThetaLocalContainerAudit
         package.preLedger.targetVolume.targetSigned
         (theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume
 
+/--
+Local-object source for the cusp-class local container estimates.
+
+Each cusp-class and zero-label estimate is now tied to a finite local
+log-volume object before being converted to the real-valued local container
+audit.
+-/
+structure FLZModCuspLabelThetaLocalObjectContainerAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  theta_source : audit.FLZModCuspLabelThetaSourceAudit l
+  ind12_equality_part : audit.Ind12EqualityPart
+  ind3_upper_part : audit.Ind3UpperInequalityPart
+  theta_images_eq_endpoint :
+    theta_source.theta_images = endpoint.theta_hull_endpoint.possible_images
+  cuspClassObjectEstimate :
+    ∀ (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+      (label : (zmodSignAction l).SignLabelQuotient),
+      IUTStage1LocalObjectContainerLogVolumeEstimate kind
+        package.preLedger.targetVolume.targetSigned
+        ((theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+          label)
+  zeroObjectEstimate :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1LocalObjectContainerLogVolumeEstimate kind
+        package.preLedger.targetVolume.targetSigned
+        (theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume
+
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord =
@@ -10718,6 +10789,56 @@ theorem qSigned_le_thetaSigned_via_local_container
     audited
 
 end FLZModCuspLabelThetaLocalContainerAudit
+
+namespace FLZModCuspLabelThetaLocalObjectContainerAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+theorem targetSigned_le_cuspClassLogVolume
+    (part : audit.FLZModCuspLabelThetaLocalObjectContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label :=
+  (part.cuspClassObjectEstimate audited label).targetSigned_le_localLogVolume
+
+theorem targetSigned_le_zeroLogVolume
+    (part : audit.FLZModCuspLabelThetaLocalObjectContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume :=
+  (part.zeroObjectEstimate audited).targetSigned_le_localLogVolume
+
+def toThetaLocalContainerAudit
+    (part : audit.FLZModCuspLabelThetaLocalObjectContainerAudit l) :
+    audit.FLZModCuspLabelThetaLocalContainerAudit l :=
+  { theta_source := part.theta_source,
+    ind12_equality_part := part.ind12_equality_part,
+    ind3_upper_part := part.ind3_upper_part,
+    theta_images_eq_endpoint := part.theta_images_eq_endpoint,
+    cuspClassEstimate := by
+      intro audited label
+      exact
+        (part.cuspClassObjectEstimate audited label).toLocalContainerEstimate,
+    zeroEstimate := by
+      intro audited
+      exact (part.zeroObjectEstimate audited).toLocalContainerEstimate }
+
+def toThetaPilotHullContainerAudit
+    (part : audit.FLZModCuspLabelThetaLocalObjectContainerAudit l) :
+    audit.FLZModCuspLabelThetaPilotHullContainerAudit l :=
+  part.toThetaLocalContainerAudit.toThetaPilotHullContainerAudit
+
+theorem qSigned_le_thetaSigned_via_local_object_container
+    (part : audit.FLZModCuspLabelThetaLocalObjectContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.toThetaLocalContainerAudit.qSigned_le_thetaSigned_via_local_container
+    audited
+
+end FLZModCuspLabelThetaLocalObjectContainerAudit
 
 namespace FLZModCuspLabelThetaContainerBoundAudit
 

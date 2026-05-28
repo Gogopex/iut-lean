@@ -4463,3 +4463,98 @@ The next step should make the local container estimate less real-opaque by
 attaching it to the local log-volume object/capsule data already present in the
 place-audited packet.  That will connect the estimate to the actual
 procession-normalized local object rather than only to its real value.
+
+## 57. Local Objects Behind the Container Estimates
+
+### Goal
+
+We refined the local container estimate so that it names a finite local
+log-volume object before producing a real-valued bound.
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1LocalObjectContainerLogVolumeEstimate
+```
+
+It records:
+
+```text
+localObject : IUTStage1FiniteLocalLogVolumeObject kind
+localLogVolume = localObject.finiteLogVolume
+localObject.finiteLogVolume has a local container estimate
+```
+
+Lean derives:
+
+```text
+toLocalContainerEstimate
+targetSigned_le_localLogVolume
+```
+
+We then added:
+
+```text
+FLZModCuspLabelThetaLocalObjectContainerAudit
+```
+
+It supplies local-object estimates for each cusp sign-label class and for the
+zero label.  Lean converts it to:
+
+```text
+FLZModCuspLabelThetaLocalContainerAudit
+```
+
+and therefore recovers the full route to:
+
+```text
+qSigned_le_thetaSigned_via_local_object_container
+```
+
+### Mathematical Point
+
+The chain now begins with a named local object:
+
+```text
+finite local log-volume object
+  -> container log-volume estimate
+  -> cusp-class/zero-label real bound
+  -> labelwise bound
+  -> F_l-average bound
+  -> qSigned <= thetaSigned
+```
+
+This is still not the final analytic construction, but it prevents the local
+estimate from being just a free real inequality.  The real number being bounded
+must first be identified with the finite log-volume of a local object.
+
+### Trap Avoided
+
+The equality
+
+```text
+localLogVolume = localObject.finiteLogVolume
+```
+
+is explicit.  Without it, a proof could use a valid container estimate for one
+local object while applying the result to a different log-volume real.
+
+### Toy Check
+
+The examples now check:
+
+```text
+localObjectContainerLogVolumeEstimate_target_le_local_example
+placeAudited_logVolume_fl_zmod_local_object_container_cusp_bound_example
+placeAudited_logVolume_fl_zmod_local_object_container_to_local_example
+placeAudited_logVolume_fl_zmod_local_object_container_q_le_theta_example
+```
+
+### Remaining Gap
+
+The next refinement should connect these finite local log-volume objects to the
+capsule-family/procession-normalized local data carried by the place-audited
+packet, so that the local object estimates are not supplied independently of
+the packet being averaged.
