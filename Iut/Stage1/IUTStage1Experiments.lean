@@ -667,6 +667,7 @@ structure ProcessionContainerExperimentReport where
   iutIVBoundedDiscrepancyTransferAvailable : Bool
   iutIVCorollary22C1PrimeScaleWindowAvailable : Bool
   iutIVCorollary22C1Theorem110CoefficientAvailable : Bool
+  iutIVCorollary22C1ErrorTermAvailable : Bool
   iutIVCorollary22C2InequalityChainAvailable : Bool
   iutIVCorollary22EpsilonDefinitionAvailable : Bool
   iutIVCorollary22EpsilonAbsorptionAvailable : Bool
@@ -725,6 +726,7 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     iutIVBoundedDiscrepancyTransferAvailable := true,
     iutIVCorollary22C1PrimeScaleWindowAvailable := true,
     iutIVCorollary22C1Theorem110CoefficientAvailable := true,
+    iutIVCorollary22C1ErrorTermAvailable := true,
     iutIVCorollary22C2InequalityChainAvailable := true,
     iutIVCorollary22EpsilonDefinitionAvailable := true,
     iutIVCorollary22EpsilonAbsorptionAvailable := true,
@@ -1296,6 +1298,13 @@ theorem iutIVCorollary22C1Theorem110_coefficient_bound
       data.delta / data.sqrtH :=
   data.coefficient_le_delta_inv_sqrtH
 
+theorem iutIVCorollary22C1_errorTerm_bound
+    (data : IUTStage1IUTIVCorollary22C1ErrorTermShadow) :
+    20 * (data.dStarMod * (data.l.value : Real) + data.etaPrm) <=
+      200 * data.delta ^ 2 * data.sqrtH * data.logTwoDeltaH +
+        20 * data.etaPrm :=
+  data.theorem110_errorTerm_le_corollary22_errorTerm
+
 theorem iutIVCorollary22C2_logQ_bound
     (data : IUTStage1IUTIVCorollary22C2InequalityChainShadow) :
     (1 / 6 : Real) * data.logQ <= data.heightSide :=
@@ -1625,6 +1634,7 @@ structure Corollary312DisputeFirstPassReport where
   iutIVBoundedDiscrepancyTransferAvailable : Bool
   iutIVCorollary22C1PrimeScaleWindowAvailable : Bool
   iutIVCorollary22C1Theorem110CoefficientAvailable : Bool
+  iutIVCorollary22C1ErrorTermAvailable : Bool
   iutIVCorollary22C2InequalityChainAvailable : Bool
   iutIVCorollary22EpsilonDefinitionAvailable : Bool
   iutIVCorollary22EpsilonAbsorptionAvailable : Bool
@@ -1696,6 +1706,7 @@ def corollary312DisputeFirstPassReport :
     iutIVBoundedDiscrepancyTransferAvailable := true,
     iutIVCorollary22C1PrimeScaleWindowAvailable := true,
     iutIVCorollary22C1Theorem110CoefficientAvailable := true,
+    iutIVCorollary22C1ErrorTermAvailable := true,
     iutIVCorollary22C2InequalityChainAvailable := true,
     iutIVCorollary22EpsilonDefinitionAvailable := true,
     iutIVCorollary22EpsilonAbsorptionAvailable := true,
@@ -1951,6 +1962,11 @@ theorem corollary312Report_iutIVCorollary22C1PrimeScaleWindowAvailable :
 
 theorem corollary312Report_iutIVCorollary22C1Theorem110CoefficientAvailable :
     corollary312DisputeFirstPassReport.iutIVCorollary22C1Theorem110CoefficientAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_iutIVCorollary22C1ErrorTermAvailable :
+    corollary312DisputeFirstPassReport.iutIVCorollary22C1ErrorTermAvailable =
       true :=
   rfl
 

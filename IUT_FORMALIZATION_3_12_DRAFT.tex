@@ -230,6 +230,11 @@ The code currently covers:
 \item the IUT IV, Corollary 2.2(ii) use of (C1) in Theorem 1.10:
   \(\sqrt h\le\ell\) and \(80d_{\mathrm{mod}}\le\delta\) imply
   \(80d_{\mathrm{mod}}/\ell\le\delta h^{-1/2}\);
+\item the IUT IV, Corollary 2.2(ii) error-term use of (C1):
+  \(d^*_{\mathrm{mod}}\le\delta\) and
+  \(\ell\le10\delta h^{1/2}\log(2\delta h)\) imply
+  \(20(d^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}})
+   \le200\delta^2h^{1/2}\log(2\delta h)+20\eta_{\mathrm{prm}}\);
 \item the IUT IV, Corollary 2.2(ii) condition (C2) inequality chain:
   \(\frac16\log(q)\le\frac16\log(q_2)\le\frac16\log(q_\forall)\le
    (1+\epsilon_E)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)+C_K\);
@@ -317,7 +322,9 @@ The Corollary 2.2(C1) flag records the displayed prime-scale window and its
 elementary consequences.  The Corollary 2.2(C2) flag records the displayed
 three-step logarithmic inequality chain.  The C1 coefficient flag records the
 replacement of \(80d_{\mathrm{mod}}/\ell\) by \(\delta h^{-1/2}\) in the
-Theorem 1.10-to-C2 proof.  The \(\epsilon_E\)-definition flag
+Theorem 1.10-to-C2 proof.  The C1 error-term flag records the corresponding
+replacement of \(20d^*_{\mathrm{mod}}\ell\) by
+\(200\delta^2h^{1/2}\log(2\delta h)\).  The \(\epsilon_E\)-definition flag
 records the source formula and lower estimate for \(\epsilon_E\).  The
 \(\epsilon_E\)-absorption flag records the final denominator removal in C2.  The
 log-different/log-conductor flag records the bridge from tripodal field terms to
@@ -414,6 +421,8 @@ derives nonnegativity of \(\log(q_\forall)\), positivity of
 Lean also verifies the C1 coefficient replacement
 \(80d_{\mathrm{mod}}/\ell\le\delta h^{-1/2}\) used immediately after applying
 Theorem 1.10.
+Lean also verifies the C1 upper-window replacement for the Theorem 1.10 error
+term \(20(d^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}})\).
 For Corollary 2.2(ii), Lean proves the final \(\frac16\log(q)\) bound from the
 displayed \(\log(q)\), \(\log(q_2)\), and \(\log(q_\forall)\) chain.
 Lean records the proof's definition of \(\epsilon_E\) and verifies the stated

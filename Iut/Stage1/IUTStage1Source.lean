@@ -3330,6 +3330,69 @@ theorem one_add_coefficient_le_one_add_delta_inv_sqrtH
 end IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow
 
 /--
+IUT IV, Corollary 2.2(ii), use of the upper part of (C1) in the Theorem 1.10
+error term.
+
+The proof combines `d^*_mod <= delta` with
+`l <= 10 * delta * h^(1/2) * log(2 * delta * h)`.
+-/
+structure IUTStage1IUTIVCorollary22C1ErrorTermShadow where
+  l : PrimeGeFive
+  dStarMod : Real
+  delta : Real
+  sqrtH : Real
+  logTwoDeltaH : Real
+  etaPrm : Real
+  dStarMod_nonneg : 0 <= dStarMod
+  delta_nonneg : 0 <= delta
+  sqrtH_nonneg : 0 <= sqrtH
+  logTwoDeltaH_nonneg : 0 <= logTwoDeltaH
+  dStarMod_le_delta : dStarMod <= delta
+  l_upper_bound :
+    (l.value : Real) <= 10 * delta * sqrtH * logTwoDeltaH
+
+namespace IUTStage1IUTIVCorollary22C1ErrorTermShadow
+
+theorem l_real_nonneg
+    (data : IUTStage1IUTIVCorollary22C1ErrorTermShadow) :
+    0 <= (data.l.value : Real) := by
+  exact_mod_cast Nat.zero_le data.l.value
+
+theorem dStarMod_mul_l_le_delta_window
+    (data : IUTStage1IUTIVCorollary22C1ErrorTermShadow) :
+    data.dStarMod * (data.l.value : Real) <=
+      data.delta * (10 * data.delta * data.sqrtH * data.logTwoDeltaH) :=
+  mul_le_mul data.dStarMod_le_delta data.l_upper_bound data.l_real_nonneg
+    data.delta_nonneg
+
+theorem theorem110_errorTerm_le_corollary22_errorTerm
+    (data : IUTStage1IUTIVCorollary22C1ErrorTermShadow) :
+    20 * (data.dStarMod * (data.l.value : Real) + data.etaPrm) <=
+      200 * data.delta ^ 2 * data.sqrtH * data.logTwoDeltaH +
+        20 * data.etaPrm := by
+  have hprod := data.dStarMod_mul_l_le_delta_window
+  have hscaled :
+      20 * (data.dStarMod * (data.l.value : Real)) <=
+        20 * (data.delta * (10 * data.delta * data.sqrtH *
+          data.logTwoDeltaH)) := by
+    exact mul_le_mul_of_nonneg_left hprod (by norm_num)
+  calc
+    20 * (data.dStarMod * (data.l.value : Real) + data.etaPrm)
+        =
+      20 * (data.dStarMod * (data.l.value : Real)) + 20 * data.etaPrm := by
+        ring
+    _ <=
+      20 * (data.delta * (10 * data.delta * data.sqrtH *
+        data.logTwoDeltaH)) + 20 * data.etaPrm := by
+        exact add_le_add hscaled le_rfl
+    _ =
+      200 * data.delta ^ 2 * data.sqrtH * data.logTwoDeltaH +
+        20 * data.etaPrm := by
+        ring
+
+end IUTStage1IUTIVCorollary22C1ErrorTermShadow
+
+/--
 IUT IV, Corollary 2.2(ii), condition (C2).
 
 The source records the chain
