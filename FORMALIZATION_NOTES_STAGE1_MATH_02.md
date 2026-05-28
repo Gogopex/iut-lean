@@ -6995,3 +6995,78 @@ case from an explicit pair of equalities:
 cusp/zero log-volume = packet normalized capsule average
 packet normalized capsule average = local object finiteLogVolume
 ```
+
+## 89. Deriving Local Object Equalities from Packet-Normalized Equalities
+
+### Goal
+
+We derived the cusp/zero-to-local-object finite-log-volume equalities from two
+smaller equalities.
+
+### Lean Move
+
+We added:
+
+```text
+FLZModCuspLabelThetaDirectPacketNormalizedLocalObjectRouteAudit
+```
+
+It carries:
+
+```text
+target capsule-family container estimates
+direct packet normalization data
+cusp-class log-volume = packet normalized capsule average
+zero log-volume = packet normalized capsule average
+```
+
+Lean then proves:
+
+```text
+cusp-class log-volume = packet local object finiteLogVolume
+zero log-volume = packet local object finiteLogVolume
+```
+
+and constructs:
+
+```text
+toDirectIdentifiedLocalPacketRouteAudit
+toClassifiedDirectIdentifiedLocalPacketRouteAudit
+toFullClassifiedRouteSummary
+```
+
+### Mathematical Point
+
+The proof composes exactly the two equalities that should be separately
+auditable:
+
+```text
+cusp/zero log-volume = packet normalized capsule average
+packet normalized capsule average = packet local object finiteLogVolume
+```
+
+The second equality comes from direct finite-sum packet normalization.  Thus the
+combined local-object equality is no longer a primitive field in this route.
+
+### Trap Avoided
+
+We did not identify cusp/zero values with the packet local object merely from
+direct packet normalization.  The route still requires the first equality,
+namely the explicit cusp/zero-to-packet-normalized comparison.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_packet_normalized_local_object_to_identified_example
+placeAudited_logVolume_fl_zmod_packet_normalized_local_object_eq_example
+placeAudited_logVolume_fl_zmod_packet_normalized_local_object_full_route_example
+```
+
+### Remaining Gap
+
+The route still assumes the cusp/zero-to-packet-normalized equalities.  The next
+source-facing work is to trace those equalities back to the cusp-compatible
+label average and the packet/capsule construction, or keep them explicitly
+classified as separate real-line identifications.
