@@ -2120,6 +2120,43 @@ theorem balancedFullLabelWeightedSummand_fromCoordinate
   rw [balancedSquareWeightOnFullLabel_fromCoordinate]
   rw [compat.normalizedLogVolume_eq_fullLabelLogVolume_fromCoordinate]
 
+theorem fullLabelSummand_preserved_of_fullLabelMap
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hmap :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (sourceSummand targetSummand : IUTStage1ZModCuspFullLabel l -> Real)
+    (hvalue :
+      ∀ label : IUTStage1ZModCuspFullLabel l,
+        targetSummand label = sourceSummand label) :
+    ∀ j : ZMod l.value,
+      targetSummand
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)) =
+        sourceSummand (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  intro j
+  rw [hmap j]
+  exact hvalue (IUTStage1ZModCuspFullLabel.fromCoordinate l j)
+
+theorem balancedFullLabelWeightedSummand_preserved_of_fullLabelMap
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hmap :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (sourceLogVolume targetLogVolume :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (hvalue :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelLogVolumeValuePreserving
+        sourceLogVolume targetLogVolume) :
+    ∀ j : ZMod l.value,
+      balancedFullLabelWeightedSummand (l := l) targetLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)) =
+        balancedFullLabelWeightedSummand (l := l) sourceLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  intro j
+  unfold balancedFullLabelWeightedSummand
+  rw [hmap j]
+  rw [hvalue (IUTStage1ZModCuspFullLabel.fromCoordinate l j)]
+
 theorem balancedSquareWeight_eq_square_val_of_val_le_half
     (j : ZMod l.value) (hhalf : j.val ≤ l.value / 2) :
     balancedSquareWeight (l := l) j = ((j.val : Real) ^ 2) := by
@@ -3889,6 +3926,22 @@ theorem balancedSummand_preserved
   intro j
   rw [transport.balancedSquareWeight_preserved j,
     transport.fullLabelLogVolume_preserved j]
+
+theorem balancedFullLabelWeightedSummand_preserved
+    (transport : IUTStage1BalancedSquareFullLabelTransport l) :
+    ∀ j : ZMod l.value,
+      IUTStage1ZModSquareWeightProfile.balancedFullLabelWeightedSummand
+          (l := l) transport.targetLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (transport.coordinateEquiv j)) =
+        IUTStage1ZModSquareWeightProfile.balancedFullLabelWeightedSummand
+          (l := l) transport.sourceLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  IUTStage1ZModSquareWeightProfile.balancedFullLabelWeightedSummand_preserved_of_fullLabelMap
+      transport.fullLabelMap_preserved
+      transport.sourceLogVolume
+      transport.targetLogVolume
+      transport.fullLabelValue_preserved
 
 def balancedWeightTotal
     (_transport : IUTStage1BalancedSquareFullLabelTransport l) :

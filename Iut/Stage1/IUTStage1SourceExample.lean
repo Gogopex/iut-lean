@@ -1027,6 +1027,46 @@ theorem zmodSquareWeightProfile_balanced_full_label_summand_from_coord_example
   balancedFullLabelWeightedSummand_fromCoordinate compat j
 
 open IUTStage1ZModSquareWeightProfile in
+theorem zmodSquareWeightProfile_full_label_summand_transport_example
+    {l : PrimeGeFive}
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hmap :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (sourceSummand targetSummand : IUTStage1ZModCuspFullLabel l -> Real)
+    (hvalue :
+      ∀ label : IUTStage1ZModCuspFullLabel l,
+        targetSummand label = sourceSummand label)
+    (j : ZMod l.value) :
+    targetSummand
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)) =
+      sourceSummand (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  fullLabelSummand_preserved_of_fullLabelMap
+    hmap sourceSummand targetSummand hvalue j
+
+open IUTStage1ZModSquareWeightProfile in
+theorem zmodSquareWeightProfile_balanced_full_label_summand_transport_example
+    {l : PrimeGeFive}
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hmap :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (sourceLogVolume targetLogVolume :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (hvalue :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelLogVolumeValuePreserving
+        sourceLogVolume targetLogVolume)
+    (j : ZMod l.value) :
+    IUTStage1ZModSquareWeightProfile.balancedFullLabelWeightedSummand
+        (l := l) targetLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)) =
+      IUTStage1ZModSquareWeightProfile.balancedFullLabelWeightedSummand
+        (l := l) sourceLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  balancedFullLabelWeightedSummand_preserved_of_fullLabelMap
+    hmap sourceLogVolume targetLogVolume hvalue j
+
+open IUTStage1ZModSquareWeightProfile in
 theorem zmodSquareWeightProfile_representative_unit_summand_not_full_label_example
     {l : PrimeGeFive} :
     ¬ ∃ summandOnFullLabel : IUTStage1ZModCuspFullLabel l -> Real,
@@ -1633,6 +1673,19 @@ theorem balancedSquareFullLabelTransport_summand_example
       transport.sourceLogVolume.fullLabelLogVolume
         (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
   transport.balancedSummand_preserved j
+
+theorem balancedSquareFullLabelTransport_full_label_summand_example
+    {l : PrimeGeFive}
+    (transport : IUTStage1BalancedSquareFullLabelTransport l)
+    (j : ZMod l.value) :
+    IUTStage1ZModSquareWeightProfile.balancedFullLabelWeightedSummand
+        (l := l) transport.targetLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          (transport.coordinateEquiv j)) =
+      IUTStage1ZModSquareWeightProfile.balancedFullLabelWeightedSummand
+        (l := l) transport.sourceLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  transport.balancedFullLabelWeightedSummand_preserved j
 
 theorem balancedSquareFullLabelTransport_weight_total_example
     {l : PrimeGeFive}

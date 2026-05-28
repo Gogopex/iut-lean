@@ -5128,3 +5128,62 @@ full-label object.  The log-volume part descends; the representative square part
 does not.  A future formal proof must therefore expose the extra data or theorem
 that authorizes the representative square factor in the `3.11.5 => 3.12`
 comparison.
+
+## 171. Full-Label Transport Preserves Full-Label Summands
+
+### Lean Move
+
+We added a general transport principle for summands that are genuinely functions
+of the full cusp label:
+
+```text
+fullLabelSummand_preserved_of_fullLabelMap
+balancedFullLabelWeightedSummand_preserved_of_fullLabelMap
+IUTStage1BalancedSquareFullLabelTransport.balancedFullLabelWeightedSummand_preserved
+```
+
+The generic theorem says:
+
+```text
+if fromCoordinate (T j) = fromCoordinate j
+and targetSummand(label) = sourceSummand(label),
+then targetSummand(fromCoordinate (T j))
+   = sourceSummand(fromCoordinate j).
+```
+
+The balanced weighted summand is an instance of this principle because it is a
+full-label function:
+
+```text
+balancedSquareWeightOnFullLabel(label)
+  * fullLabelLogVolume(label).
+```
+
+### Mathematical Reason
+
+This isolates the exact power of full-label transport.  It can transport any
+quantity that has already descended to the full-label level.  No coordinate
+representative is inspected in the proof.
+
+For the balanced branch, this is enough: the weight and log-volume factors are
+both full-label functions.  For the representative branch, the earlier
+milestones show that `j.val^2` is not a full-label function, so this transport
+principle cannot be applied to the representative-weighted summand.
+
+### Source Check
+
+IUT III's route from Theorem 3.11 to Corollary 3.12 is formulated in terms of
+transported label/log-volume data across Hodge-theater comparisons.  This Lean
+milestone records exactly what such transport gives at the formal level: it
+preserves full-label observables.  Scholze-Stix's objection concerns whether the
+real-valued `j^2` comparison is one of those observables after the proposed
+identifications.
+
+### Relevance to the 3.12 Dispute
+
+The result is deliberately two-sided.  It supports the Mochizuki-style idea that
+erased-history/full-label data can transport real-valued summands, but only
+after the summand is actually shown to be full-label based.  Our representative
+`j.val^2` branch has not passed that test; the balanced branch has.  This keeps
+the formalization honest about where the disputed additional argument must
+enter.
