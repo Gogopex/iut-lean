@@ -235,6 +235,10 @@ The code currently covers:
   \(\ell\le10\delta h^{1/2}\log(2\delta h)\) imply
   \(20(d^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}})
    \le200\delta^2h^{1/2}\log(2\delta h)+20\eta_{\mathrm{prm}}\);
+\item the IUT IV, Theorem 1.10 to Corollary 2.2(ii) first-bound composition:
+  these two C1 replacements convert the Theorem 1.10 right-hand side into
+  \((1+\delta h^{-1/2})S+
+    200\delta^2h^{1/2}\log(2\delta h)+20\eta_{\mathrm{prm}}\);
 \item the IUT IV, Corollary 2.2(ii) condition (C2) inequality chain:
   \(\frac16\log(q)\le\frac16\log(q_2)\le\frac16\log(q_\forall)\le
    (1+\epsilon_E)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)+C_K\);
@@ -324,7 +328,8 @@ three-step logarithmic inequality chain.  The C1 coefficient flag records the
 replacement of \(80d_{\mathrm{mod}}/\ell\) by \(\delta h^{-1/2}\) in the
 Theorem 1.10-to-C2 proof.  The C1 error-term flag records the corresponding
 replacement of \(20d^*_{\mathrm{mod}}\ell\) by
-\(200\delta^2h^{1/2}\log(2\delta h)\).  The \(\epsilon_E\)-definition flag
+\(200\delta^2h^{1/2}\log(2\delta h)\).  The first-bound flag records the
+composition of those replacements with Theorem 1.10.  The \(\epsilon_E\)-definition flag
 records the source formula and lower estimate for \(\epsilon_E\).  The
 \(\epsilon_E\)-absorption flag records the final denominator removal in C2.  The
 log-different/log-conductor flag records the bridge from tripodal field terms to
@@ -423,6 +428,8 @@ Lean also verifies the C1 coefficient replacement
 Theorem 1.10.
 Lean also verifies the C1 upper-window replacement for the Theorem 1.10 error
 term \(20(d^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}})\).
+Combining these, Lean proves the first displayed post-Theorem-1.10 bound in the
+proof of Corollary 2.2(ii).
 For Corollary 2.2(ii), Lean proves the final \(\frac16\log(q)\) bound from the
 displayed \(\log(q)\), \(\log(q_2)\), and \(\log(q_\forall)\) chain.
 Lean records the proof's definition of \(\epsilon_E\) and verifies the stated

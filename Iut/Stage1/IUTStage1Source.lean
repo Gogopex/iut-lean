@@ -3393,6 +3393,97 @@ theorem theorem110_errorTerm_le_corollary22_errorTerm
 end IUTStage1IUTIVCorollary22C1ErrorTermShadow
 
 /--
+IUT IV, Corollary 2.2(ii), first inequality after applying Theorem 1.10.
+
+This composes the Theorem 1.10 bound with the two C1-based replacements:
+`80*d_mod/l <= delta*h^(-1/2)` and
+`20*(d^*_mod*l + eta_prm) <=
+  200*delta^2*h^(1/2)*log(2*delta*h) + 20*eta_prm`.
+-/
+structure IUTStage1IUTIVCorollary22Theorem110ToC2FirstBoundShadow where
+  l : PrimeGeFive
+  dmod : Nat
+  dStarMod : Real
+  delta : Real
+  sqrtH : Real
+  logTwoDeltaH : Real
+  etaPrm : Real
+  logQ : Real
+  logDegreeSum : Real
+  sqrtH_pos : 0 < sqrtH
+  sqrtH_le_l : sqrtH <= (l.value : Real)
+  eighty_dmod_le_delta : 80 * (dmod : Real) <= delta
+  dStarMod_nonneg : 0 <= dStarMod
+  delta_nonneg : 0 <= delta
+  logTwoDeltaH_nonneg : 0 <= logTwoDeltaH
+  dStarMod_le_delta : dStarMod <= delta
+  l_upper_bound :
+    (l.value : Real) <= 10 * delta * sqrtH * logTwoDeltaH
+  logDegreeSum_nonneg : 0 <= logDegreeSum
+  theorem110_bound :
+    (1 / 6 : Real) * logQ <=
+      (1 + 80 * (dmod : Real) / (l.value : Real)) * logDegreeSum +
+        20 * (dStarMod * (l.value : Real) + etaPrm)
+
+namespace IUTStage1IUTIVCorollary22Theorem110ToC2FirstBoundShadow
+
+def coefficientShadow
+    (data : IUTStage1IUTIVCorollary22Theorem110ToC2FirstBoundShadow) :
+    IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow :=
+  { l := data.l
+    dmod := data.dmod
+    delta := data.delta
+    sqrtH := data.sqrtH
+    sqrtH_pos := data.sqrtH_pos
+    sqrtH_le_l := data.sqrtH_le_l
+    eighty_dmod_le_delta := data.eighty_dmod_le_delta }
+
+def errorTermShadow
+    (data : IUTStage1IUTIVCorollary22Theorem110ToC2FirstBoundShadow) :
+    IUTStage1IUTIVCorollary22C1ErrorTermShadow :=
+  { l := data.l
+    dStarMod := data.dStarMod
+    delta := data.delta
+    sqrtH := data.sqrtH
+    logTwoDeltaH := data.logTwoDeltaH
+    etaPrm := data.etaPrm
+    dStarMod_nonneg := data.dStarMod_nonneg
+    delta_nonneg := data.delta_nonneg
+    sqrtH_nonneg := data.sqrtH_pos.le
+    logTwoDeltaH_nonneg := data.logTwoDeltaH_nonneg
+    dStarMod_le_delta := data.dStarMod_le_delta
+    l_upper_bound := data.l_upper_bound }
+
+theorem oneSixthLogQ_le_corollary22FirstRightHandSide
+    (data : IUTStage1IUTIVCorollary22Theorem110ToC2FirstBoundShadow) :
+    (1 / 6 : Real) * data.logQ <=
+      (1 + data.delta / data.sqrtH) * data.logDegreeSum +
+        (200 * data.delta ^ 2 * data.sqrtH * data.logTwoDeltaH +
+          20 * data.etaPrm) := by
+  have hcoeff :=
+    data.coefficientShadow.one_add_coefficient_le_one_add_delta_inv_sqrtH
+  have hcoeff_mul :
+      (1 + 80 * (data.dmod : Real) / (data.l.value : Real)) *
+          data.logDegreeSum <=
+        (1 + data.delta / data.sqrtH) * data.logDegreeSum :=
+    mul_le_mul_of_nonneg_right hcoeff data.logDegreeSum_nonneg
+  have herr :=
+    data.errorTermShadow.theorem110_errorTerm_le_corollary22_errorTerm
+  calc
+    (1 / 6 : Real) * data.logQ <=
+      (1 + 80 * (data.dmod : Real) / (data.l.value : Real)) *
+          data.logDegreeSum +
+        20 * (data.dStarMod * (data.l.value : Real) + data.etaPrm) :=
+          data.theorem110_bound
+    _ <=
+      (1 + data.delta / data.sqrtH) * data.logDegreeSum +
+        (200 * data.delta ^ 2 * data.sqrtH * data.logTwoDeltaH +
+          20 * data.etaPrm) :=
+          add_le_add hcoeff_mul herr
+
+end IUTStage1IUTIVCorollary22Theorem110ToC2FirstBoundShadow
+
+/--
 IUT IV, Corollary 2.2(ii), condition (C2).
 
 The source records the chain
