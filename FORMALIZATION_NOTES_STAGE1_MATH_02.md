@@ -3700,3 +3700,87 @@ pilot/log-volume data and the final signed comparison.  We must keep the
 Theta-source upper bound, q-side lower/target bound, and `(Ind3)` upper
 semi-compatibility separate so that Corollary 3.12 is not obtained by an
 unjustified real-line identification.
+
+## 49. q-Side Comparison to Theta-Source Average
+
+### Goal
+
+We added a q-side comparison audit for the cusp-compatible Theta-source label
+average.
+
+### Lean/API Check
+
+The new endpoint-level audit is:
+
+```text
+FLZModCuspLabelQThetaComparisonAudit
+```
+
+It carries:
+
+```text
+theta_source : FLZModCuspLabelThetaSourceAudit l
+qPilotLogVolume : QPilotLogVolumeId
+qPilotLogVolume_eq_package
+qSourceLogVolume : Real
+qSourceLogVolume_eq_qSigned
+qSourceLogVolume_le_thetaAverage
+```
+
+Lean exposes:
+
+```text
+qPilotLogVolumeMatchesPackage
+qSourceLogVolume_eq
+qSigned_le_thetaSourceAverage
+qSigned_le_averageLogVolume
+qSigned_le_thetaSigned_via_average
+averageLogVolume_le_thetaSigned
+ind1AverageLogVolumeEq
+ind2AverageLogVolumeEq
+```
+
+### Mathematical Point
+
+The formal comparison chain now has an explicit audited route:
+
+```text
+qSigned = qSourceLogVolume
+qSourceLogVolume <= thetaSourceAverage
+thetaSourceAverage = label average
+label average <= thetaSigned
+```
+
+so Lean can derive:
+
+```text
+qSigned <= thetaSigned
+```
+
+for an audited choice.
+
+### Trap Avoided
+
+This does not identify the q-side and Theta-side constructions by fiat.  The
+q-side source real, its equality with `qSigned`, and its comparison to the
+Theta-source average are all explicit fields.  This keeps the Scholze-Stix
+concern in view: real-line comparisons must be visible and justified, not
+silently imported through notation.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_q_matches_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_q_le_average_example
+placeAuditedMultiradialThetaHullEndpoint_logVolume_fl_zmod_q_le_theta_example
+```
+
+### Remaining Gap
+
+The next refinement should align this q-to-Theta average comparison with the
+existing `LogVolumeChartAudit` endpoint and `(Ind3)` upper-inequality part.  In
+particular, we should make clear whether the q-to-average comparison is a new
+source obligation or a theorem derivable from the already audited q/target/Theta
+charted comparison chain.

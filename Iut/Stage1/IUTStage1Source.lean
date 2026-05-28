@@ -9609,6 +9609,25 @@ structure FLZModCuspLabelThetaSourceAudit
     ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
       thetaSourceAverage audited <= package.preLedger.thetaSigned
 
+/--
+q-side comparison audit for a Theta-source label average.
+
+This records the q-pilot log-volume source real and the comparison from the
+q-side to the Theta-source average before composing with the final Theta bound.
+-/
+structure FLZModCuspLabelQThetaComparisonAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  theta_source : audit.FLZModCuspLabelThetaSourceAudit l
+  qPilotLogVolume : QPilotLogVolumeId
+  qPilotLogVolume_eq_package : qPilotLogVolume = package.qPilotLogVolume
+  qSourceLogVolume : Real
+  qSourceLogVolume_eq_qSigned :
+    qSourceLogVolume = package.preLedger.qSigned
+  qSourceLogVolume_le_thetaAverage :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      qSourceLogVolume <= theta_source.thetaSourceAverage audited
+
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord =
@@ -10036,6 +10055,81 @@ theorem ind2AverageLogVolumeEq
   part.compatible_average.ind2AverageLogVolumeEq hstep
 
 end FLZModCuspLabelThetaSourceAudit
+
+namespace FLZModCuspLabelQThetaComparisonAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+theorem qPilotLogVolumeMatchesPackage
+    (part : audit.FLZModCuspLabelQThetaComparisonAudit l) :
+    part.qPilotLogVolume = package.qPilotLogVolume :=
+  part.qPilotLogVolume_eq_package
+
+theorem qSourceLogVolume_eq
+    (part : audit.FLZModCuspLabelQThetaComparisonAudit l) :
+    part.qSourceLogVolume = package.preLedger.qSigned :=
+  part.qSourceLogVolume_eq_qSigned
+
+theorem qSigned_le_thetaSourceAverage
+    (part : audit.FLZModCuspLabelQThetaComparisonAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= part.theta_source.thetaSourceAverage audited := by
+  rw [← part.qSourceLogVolume_eq]
+  exact part.qSourceLogVolume_le_thetaAverage audited
+
+theorem qSigned_le_averageLogVolume
+    (part : audit.FLZModCuspLabelQThetaComparisonAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <=
+      ((part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit).averagedLogVolume
+        audited).averageLogVolume := by
+  rw [← part.theta_source.thetaSourceAverage_eq audited]
+  exact part.qSigned_le_thetaSourceAverage audited
+
+theorem qSigned_le_thetaSigned_via_average
+    (part : audit.FLZModCuspLabelQThetaComparisonAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  le_trans
+    (part.qSigned_le_thetaSourceAverage audited)
+    (part.theta_source.thetaSourceAverage_le_thetaSigned audited)
+
+theorem averageLogVolume_le_thetaSigned
+    (part : audit.FLZModCuspLabelQThetaComparisonAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    ((part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit).averagedLogVolume
+        audited).averageLogVolume <=
+      package.preLedger.thetaSigned :=
+  part.theta_source.averageLogVolume_le_thetaSigned audited
+
+theorem ind1AverageLogVolumeEq
+    (part : audit.FLZModCuspLabelQThetaComparisonAudit l)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.ProcessionAutomorphismStep
+        audited₁ audited₂) :
+    ((part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit).averagedLogVolume
+        audited₁).averageLogVolume =
+      ((part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit).averagedLogVolume
+        audited₂).averageLogVolume :=
+  part.theta_source.ind1AverageLogVolumeEq hstep
+
+theorem ind2AverageLogVolumeEq
+    (part : audit.FLZModCuspLabelQThetaComparisonAudit l)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hstep :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.LocalTensorDirectSummandActionStep
+        audited₁ audited₂) :
+    ((part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit).averagedLogVolume
+        audited₁).averageLogVolume =
+      ((part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit).averagedLogVolume
+        audited₂).averageLogVolume :=
+  part.theta_source.ind2AverageLogVolumeEq hstep
+
+end FLZModCuspLabelQThetaComparisonAudit
 
 end LogVolumeChartAudit
 
