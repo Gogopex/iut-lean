@@ -25,12 +25,13 @@
 This note records the present state of a Lean formalization of a narrow part of
 Mochizuki's inter-universal Teichmuller theory: the passage from IUT III,
 Theorem 3.11 to Corollary 3.12, with attention to the Scholze--Stix objection.
-The current Lean code proves conditional route theorems and obstruction lemmas.
-It does not prove Corollary 3.12 and does not refute it.  The main formal result
-so far is that a nonarchimedean \((\mathrm{Ind3})\) entry, together with explicit
-Hodge/SHE square-weight transport data, feeds a hull/log-volume
-\(q\)-to-\(\Theta\) comparison, while several simplified collapse mechanisms are
-rejected by Lean.
+The current Lean code proves conditional route theorems, obstruction lemmas, and
+the final ordered-real algebra in Step (xi-f).  It does not prove Corollary 3.12
+and does not refute it.  The main formal result so far is that a supplied
+hull/log-volume \(q\)-to-\(\Theta\) comparison gives \(C_\Theta\ge-1\), and that a
+nonarchimedean \((\mathrm{Ind3})\) entry together with explicit Hodge/SHE
+square-weight transport data feeds such a comparison, while several simplified
+collapse mechanisms are rejected by Lean.
 \end{abstract}
 
 \section{Scope}
@@ -63,6 +64,12 @@ log-volume in an upper ray controlled by the \(\Theta\)-pilot log-volume:
   \quad\Rightarrow\quad
   -|\log(q)| \le -|\log(\Theta)|.
 \]
+If \(C_\Theta\) is any real number satisfying
+\[
+  -|\log(\Theta)|\le C_\Theta|\log(q)|,\qquad |\log(q)|>0,
+\]
+then Step (xi-f) concludes \(C_\Theta\ge-1\).  This last inference is now a
+Lean theorem.
 Mochizuki's 2026 note isolates the final comparison as:
 \[
 \begin{array}{ccccc}
@@ -149,6 +156,9 @@ The code currently covers:
   Hodge-theater histories;
 \item the Step (xi-d)--(xi-g) shadow: determinant normalization, upper-ray
   membership, and equality of the two \(q\)-pilot log-volume computations;
+\item the Step (xi-f) final algebra:
+  from \(-|\log(q)|\le-|\log(\Theta)|\), \(|\log(q)|>0\), and
+  \(-|\log(\Theta)|\le C_\Theta|\log(q)|\), Lean proves \(C_\Theta\ge-1\);
 \item the Step (xi-h) warning: for \(N\ge2\) and \(\Theta<0\), the tensor-power
   boundary satisfies \(N\Theta<\Theta\);
 \item the Step (xii) shadow: local Frobenioid \(p_v^N\)-ambiguity changes
@@ -337,7 +347,8 @@ label-independent \(j^2\) failure, and sign-quotient representative descent
 failure.  The Gaussian/procession flags include finite tensor-packet, monoid
 action, base-valuation product, coric-transfer, determinant-normalization,
 upper-ray, \(q\)-pilot two-computation, tensor-power warning, and global
-Frobenioid-calibration shadows, plus positive-rational unit rigidity.
+Frobenioid-calibration shadows, plus the direct Step (xi-f) \(C_\Theta\ge-1\)
+algebra and positive-rational unit rigidity.
 The generalized-link flag records the rational parameter inequality
 \(C_\Theta\ge-\lambda\).
 The distinct-label flag records the logical intertwining display in
@@ -418,9 +429,12 @@ The route remains conditional on the displayed hypotheses.
 
 No formal statement currently proves IUT III, Corollary 3.12 from Mochizuki's
 published hypotheses.  The strongest positive result is conditional: if the
-nonarchimedean \((\mathrm{Ind3})\) entry, ordered real-line alignment, and
-Hodge/SHE square-weight transport audit are supplied, then Lean checks the final
-signed \(q\)-to-\(\Theta\) inequality.
+hull/log-volume upper-ray comparison supplies
+\(-|\log(q)|\le-|\log(\Theta)|\), then Lean checks the formal Step (xi-f)
+conclusion \(C_\Theta\ge-1\).  If the nonarchimedean \((\mathrm{Ind3})\) entry,
+ordered real-line alignment, and Hodge/SHE square-weight transport audit are
+supplied, Lean checks the final signed \(q\)-to-\(\Theta\) inequality feeding
+that algebra.
 
 The strongest negative result is also limited: in the current \(\F_\ell\)-label
 model, Lean rejects a single label-independent scale accounting for all

@@ -641,6 +641,7 @@ structure ProcessionContainerExperimentReport where
   determinantTensorPowerNormalizationAvailable : Bool
   hullDetUpperRayComparisonAvailable : Bool
   qPilotTwoComputationComparisonAvailable : Bool
+  corollary312CThetaLowerBoundAlgebraAvailable : Bool
   thetaPilotTensorPowerWarningAvailable : Bool
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
@@ -711,6 +712,7 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     determinantTensorPowerNormalizationAvailable := true,
     hullDetUpperRayComparisonAvailable := true,
     qPilotTwoComputationComparisonAvailable := true,
+    corollary312CThetaLowerBoundAlgebraAvailable := true,
     thetaPilotTensorPowerWarningAvailable := true,
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
@@ -1011,6 +1013,16 @@ theorem qPilotTwoComputation_output_le_theta
     (data : IUTStage1QPilotTwoComputationLogVolume) :
     data.outputHullLogVolume <= data.upperRayData.thetaHullLogVolume :=
   data.output_le_thetaHullLogVolume
+
+theorem corollary312CTheta_qPilotLogVolume_le_cTheta_absLogQ
+    (data : IUTStage1Corollary312CThetaLowerBoundShadow) :
+    data.qPilotLogVolume <= data.cTheta * data.absLogQ :=
+  data.qPilotLogVolume_le_cTheta_absLogQ
+
+theorem corollary312CTheta_lower_bound
+    (data : IUTStage1Corollary312CThetaLowerBoundShadow) :
+    (-1 : Real) <= data.cTheta :=
+  data.cTheta_ge_neg_one
 
 theorem thetaPilotTensorPowerLogVolume_eq_mul
     (data : IUTStage1ThetaPilotTensorPowerLogVolume) :
@@ -1712,6 +1724,7 @@ structure Corollary312DisputeFirstPassReport where
   determinantTensorPowerNormalizationAvailable : Bool
   hullDetUpperRayComparisonAvailable : Bool
   qPilotTwoComputationComparisonAvailable : Bool
+  corollary312CThetaLowerBoundAlgebraAvailable : Bool
   thetaPilotTensorPowerWarningAvailable : Bool
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
@@ -1795,6 +1808,7 @@ def corollary312DisputeFirstPassReport :
     determinantTensorPowerNormalizationAvailable := true,
     hullDetUpperRayComparisonAvailable := true,
     qPilotTwoComputationComparisonAvailable := true,
+    corollary312CThetaLowerBoundAlgebraAvailable := true,
     thetaPilotTensorPowerWarningAvailable := true,
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
@@ -1958,6 +1972,11 @@ theorem corollary312Report_hullDetUpperRayComparisonAvailable :
 
 theorem corollary312Report_qPilotTwoComputationComparisonAvailable :
     corollary312DisputeFirstPassReport.qPilotTwoComputationComparisonAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_cThetaLowerBoundAlgebraAvailable :
+    corollary312DisputeFirstPassReport.corollary312CThetaLowerBoundAlgebraAvailable =
       true :=
   rfl
 

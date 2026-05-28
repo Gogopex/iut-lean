@@ -1645,6 +1645,52 @@ theorem input_le_determinant
 end IUTStage1QPilotTwoComputationLogVolume
 
 /--
+IUT III, Corollary 3.12 Step (xi-f) final `C_Theta` algebra.
+
+The source text obtains `-|log(q)| <= -|log(Theta)|` from membership of the
+q-pilot log-volume in the upper ray of possible output pilot log-volumes.  It
+then says that `C_Theta >= -1` follows formally for any `C_Theta` satisfying
+`-|log(Theta)| <= C_Theta * |log(q)|`.  This record isolates only that final
+ordered-real calculation.
+-/
+structure IUTStage1Corollary312CThetaLowerBoundShadow where
+  absLogQ : Real
+  absLogQ_pos : 0 < absLogQ
+  qPilotLogVolume : Real
+  thetaPilotLogVolume : Real
+  cTheta : Real
+  qPilotLogVolume_eq_neg_absLogQ :
+    qPilotLogVolume = -absLogQ
+  qPilotLogVolume_le_thetaPilotLogVolume :
+    qPilotLogVolume <= thetaPilotLogVolume
+  thetaPilotLogVolume_le_cTheta_absLogQ :
+    thetaPilotLogVolume <= cTheta * absLogQ
+
+namespace IUTStage1Corollary312CThetaLowerBoundShadow
+
+theorem qPilotLogVolume_le_cTheta_absLogQ
+    (data : IUTStage1Corollary312CThetaLowerBoundShadow) :
+    data.qPilotLogVolume <= data.cTheta * data.absLogQ :=
+  le_trans data.qPilotLogVolume_le_thetaPilotLogVolume
+    data.thetaPilotLogVolume_le_cTheta_absLogQ
+
+theorem neg_absLogQ_le_cTheta_absLogQ
+    (data : IUTStage1Corollary312CThetaLowerBoundShadow) :
+    -data.absLogQ <= data.cTheta * data.absLogQ := by
+  rw [← data.qPilotLogVolume_eq_neg_absLogQ]
+  exact data.qPilotLogVolume_le_cTheta_absLogQ
+
+theorem cTheta_ge_neg_one
+    (data : IUTStage1Corollary312CThetaLowerBoundShadow) :
+    (-1 : Real) <= data.cTheta := by
+  have hmul :
+      (-1 : Real) * data.absLogQ <= data.cTheta * data.absLogQ := by
+    simpa using data.neg_absLogQ_le_cTheta_absLogQ
+  exact le_of_mul_le_mul_right hmul data.absLogQ_pos
+
+end IUTStage1Corollary312CThetaLowerBoundShadow
+
+/--
 Step (xi-h) tensor-power warning for the `Theta`-pilot log-volume.
 
 The source text recalls that the EtTh argument used in Step (xi) has no evident
