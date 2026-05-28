@@ -12888,6 +12888,54 @@ def zeroObjectEstimate
     (part.targetCapsuleEstimates audited)
     (part.zeroLogVolume_eq_localObjectFinite audited)
 
+theorem cuspClassLogVolume_eq_packetNormalized
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume := by
+  calc
+    (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label =
+        audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume :=
+      part.cuspClassLogVolume_eq_localObjectFinite audited label
+    _ = audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+      let compat :=
+        (part.directNormalization audited).toPacketNormalizedCompatibility
+      compat.normalizedLogVolume_eq_localObject.symm
+
+theorem zeroLogVolume_eq_packetNormalized
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume := by
+  calc
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume =
+        audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume :=
+      part.zeroLogVolume_eq_localObjectFinite audited
+    _ = audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+      let compat :=
+        (part.directNormalization audited).toPacketNormalizedCompatibility
+      compat.normalizedLogVolume_eq_localObject.symm
+
+def toDirectPacketNormalizedLocalObjectRouteAudit
+    (part :
+      audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaDirectPacketNormalizedLocalObjectRouteAudit l :=
+  { theta_source := part.theta_source,
+    ind12_equality_part := part.ind12_equality_part,
+    ind3_upper_part := part.ind3_upper_part,
+    theta_images_eq_endpoint := part.theta_images_eq_endpoint,
+    targetCapsuleEstimates := part.targetCapsuleEstimates,
+    directNormalization := part.directNormalization,
+    cuspClassLogVolume_eq_packetNormalized :=
+      part.cuspClassLogVolume_eq_packetNormalized,
+    zeroLogVolume_eq_packetNormalized :=
+      part.zeroLogVolume_eq_packetNormalized }
+
 def toDirectLocalPacketNormalizedAudit
     (part :
       audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :

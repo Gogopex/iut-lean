@@ -5206,6 +5206,37 @@ def placeAudited_logVolume_fl_zmod_classified_direct_identified_packet_example
     audit.FLZModCuspLabelThetaClassifiedDirectIdentifiedLocalPacketRouteAudit l :=
   ofPacketNormalizationAndLocalObjectCompatibility part
 
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+def placeAudited_logVolume_fl_zmod_identified_to_packet_normalized_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l) :
+    audit.FLZModCuspLabelThetaDirectPacketNormalizedLocalObjectRouteAudit l :=
+  part.toDirectPacketNormalizedLocalObjectRouteAudit
+
+theorem placeAudited_logVolume_fl_zmod_identified_packet_cusp_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  part.cuspClassLogVolume_eq_packetNormalized audited label
+
 theorem placeAudited_logVolume_fl_zmod_classified_direct_identified_source_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

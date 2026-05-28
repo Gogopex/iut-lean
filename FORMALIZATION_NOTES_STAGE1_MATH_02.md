@@ -7702,3 +7702,78 @@ Continue reducing those cusp/zero packet-normalized equalities.  The immediate
 candidate is a route from local-object/capsule normalization data plus explicit
 cusp/zero-to-local-object log-volume identifications, because that is already
 represented by the direct identified local packet route.
+
+## 98. Cusp/Zero Packet Equality from Local-Object Identification
+
+### Goal
+
+We reduced the cusp-class and zero packet-normalized equalities to local-object
+identification plus direct packet normalization.
+
+### Lean Move
+
+Inside:
+
+```text
+FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
+```
+
+we added:
+
+```text
+cuspClassLogVolume_eq_packetNormalized
+zeroLogVolume_eq_packetNormalized
+toDirectPacketNormalizedLocalObjectRouteAudit
+```
+
+The proof composes:
+
+```text
+cusp/zero log-volume
+  = finite local-object log-volume
+  = packet capsule-family normalized log-volume
+```
+
+The second equality is the reverse of the direct packet-normalization
+compatibility:
+
+```text
+packet normalized log-volume = finite local-object log-volume
+```
+
+### Mathematical Point
+
+This moves the main assumption one level lower.  Instead of assuming the
+cusp-class and zero values are packet-normalized directly, it is enough to show
+that they are the finite local-object log-volume attached to the packet.  The
+packet normalization data then supplies the passage from local object to capsule
+average.
+
+### Trap Avoided
+
+The proof does not identify an arbitrary real-valued cusp log-volume with the
+packet average.  It requires an explicit local-object identification, then uses
+the audited direct packet normalization.  This keeps the "which copy of the real
+line?" question visible at the local-object boundary.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_identified_to_packet_normalized_example
+placeAudited_logVolume_fl_zmod_identified_packet_cusp_eq_example
+```
+
+### Remaining Gap
+
+The remaining pressure point is now:
+
+```text
+cusp/zero log-volume = finite local-object log-volume
+```
+
+This is a more local and more concrete target than the earlier average-level
+assumptions.  The next step is to see how much of this can be constructed from
+the existing local-object container estimates and from the canonical
+`ZMod`/cusp-label model, rather than supplied as a real-line identification.
