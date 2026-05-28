@@ -18657,3 +18657,34 @@ real log-volume endpoints.
 Future work can replace the current explicit inequality by a proof that
 constructs this endpoint audit from source-level Hodge-theater data.  Until
 then, Lean records exactly which endpoint inequality remains assumed.
+
+## 147. 3.11.5 Comparison Data Uses The Endpoint Audit
+
+### Lean Move
+
+We added:
+
+```text
+ThreeElevenFiveWeightedThetaAudit.comparisonData_uses_endpointAudit
+```
+
+for both the labelwise and cusp-class routes.
+
+### Mathematical Reason
+
+The comparison data emitted by a `ThreeElevenFiveWeightedThetaAudit` now has a
+named proof that its weighted-to-Theta inequality is exactly the inequality
+recovered from the endpoint audit.
+
+### Source Check
+
+This keeps the formal chain honest about the real quantities under comparison.
+The source-tagged comparison data cannot be read as introducing a second,
+independent proof of the disputed inequality; it is tied back to the endpoint
+audit naming the square-weighted average and the Theta-source average.
+
+### Relevance to the 3.12 Dispute
+
+When future source-level work replaces the explicit audit input, the replacement
+target is now even more precise: produce endpoint data, recover the endpoint
+inequality, and feed that exact proof into the 3.11.5 comparison data.

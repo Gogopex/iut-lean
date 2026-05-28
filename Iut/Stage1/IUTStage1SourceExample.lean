@@ -6560,6 +6560,26 @@ theorem placeAudited_logVolume_fl_zmod_labelwise_3115_endpoint_recovers_example
   sourceAudit.endpointAudit.recovers_weightedAverage_le_thetaAverage
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+theorem placeAudited_logVolume_fl_zmod_labelwise_3115_data_uses_endpoint_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      FLZModCuspLabelThetaLabelwiseContainerAudit.ThreeElevenFiveWeightedThetaAudit
+        part profile audited) :
+    sourceAudit.toWeightedThetaComparisonData.weightedAverage_le_thetaAverage =
+      sourceAudit.endpointAudit.recovers_weightedAverage_le_thetaAverage :=
+  sourceAudit.comparisonData_uses_endpointAudit
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
 theorem placeAudited_logVolume_fl_zmod_labelwise_3115_weighted_theta_q_theta_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -7208,6 +7228,26 @@ theorem placeAudited_logVolume_fl_zmod_cusp_3115_endpoint_recovers_example
         profile audited).weightedAverageLogVolume <=
       part.theta_source.thetaSourceAverage audited :=
   sourceAudit.endpointAudit.recovers_weightedAverage_le_thetaAverage
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+theorem placeAudited_logVolume_fl_zmod_cusp_3115_data_uses_endpoint_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      FLZModCuspLabelThetaCuspClassContainerAudit.ThreeElevenFiveWeightedThetaAudit
+        part profile audited) :
+    sourceAudit.toWeightedThetaComparisonData.weightedAverage_le_thetaAverage =
+      sourceAudit.endpointAudit.recovers_weightedAverage_le_thetaAverage :=
+  sourceAudit.comparisonData_uses_endpointAudit
 
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
 theorem placeAudited_logVolume_fl_zmod_cusp_3115_weighted_theta_q_theta_example
