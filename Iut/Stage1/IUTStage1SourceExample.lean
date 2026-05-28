@@ -4666,6 +4666,21 @@ def placeAudited_logVolume_fl_zmod_packet_local_object_to_direct_route_example
   part.toDirectLocalPacketDirectCapsuleRouteAudit
     directNormalization targetCapsuleEstimates
 
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaClassifiedPacketLocalObjectContainerAudit in
+def placeAudited_logVolume_fl_zmod_classified_packet_local_object_direct_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaPacketLocalObjectContainerAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedPacketLocalObjectContainerAudit l :=
+  ofDirectLocalCuspConstruction part
+
 theorem placeAudited_logVolume_fl_zmod_packet_local_object_target_bound_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -4688,6 +4703,31 @@ theorem placeAudited_logVolume_fl_zmod_packet_local_object_target_bound_example
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
     package.preLedger.targetVolume.targetSigned <=
       part.theta_source.thetaSourceAverage audited :=
+  part.targetSigned_le_thetaSourceAverage_of_directPacket
+    directNormalization targetCapsuleEstimates audited
+
+theorem placeAudited_logVolume_fl_zmod_classified_packet_local_object_target_bound_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaClassifiedPacketLocalObjectContainerAudit l)
+    (directNormalization :
+      ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+        IUTStage1DirectPacketNormalizationData
+          audited.choice.local_tensor_state.packetState)
+    (targetCapsuleEstimates :
+      ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+        IUTStage1TypedCapsuleFamilyContainerEstimate
+          package.preLedger.targetVolume.targetSigned
+          audited.choice.local_tensor_state.packetState.capsuleFamily)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.packet_local_object.theta_source.thetaSourceAverage audited :=
   part.targetSigned_le_thetaSourceAverage_of_directPacket
     directNormalization targetCapsuleEstimates audited
 
