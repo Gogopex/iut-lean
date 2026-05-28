@@ -916,3 +916,123 @@ profile/source/target log-volume matching fields
 The next step is mathematical rather than organizational: replace one of the
 constant-packet or explicit matching fields by a construction from the
 nonconstant local Hodge-theater route.
+
+## 204. Ind3 Supplies The Source Zero/Cusp Upper Bounds
+
+### Lean Move
+
+In
+
+```text
+FLZModCuspLabelThetaCuspClassContainerAudit
+```
+
+we added
+
+```text
+ThreeElevenFiveStructuredSHEInd3SourceZeroCuspTargetThetaAudit
+```
+
+This audit is a source-zero/cusp route whose upper bounds are no longer supplied
+by the constant packet equality branch.  Instead, it names three identifications:
+
+```text
+zeroLogVolume = audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume
+cuspClassLogVolume label = audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume
+thetaSourceAverage = audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume
+```
+
+Lean then derives:
+
+```text
+source_zeroLogVolume_le_thetaAverage
+source_cuspClassLogVolume_le_thetaAverage
+weightedAverage_le_thetaAverage
+weightedThetaComparisonRouteOfInd3SourceZeroCuspTarget
+```
+
+The crucial inequality used in the proof is exactly:
+
+```text
+audited.upperSemi_logVolumeUpperBound
+```
+
+This is the audited form of the `(Ind3)` upper semi-compatibility inequality.
+
+The example file now verifies two things:
+
+```text
+placeAudited_logVolume_fl_zmod_ind3_source_zero_bound_example
+placeAudited_logVolume_fl_zmod_ind3_source_cusp_route_example
+```
+
+The first checks the local zero bound.  The second checks that the same `(Ind3)`
+source route reaches the final q/Theta inequality.
+
+### Mathematical Reason
+
+This is the first replacement of the constant-packet shortcut by a genuine
+Theorem 3.11 / Corollary 3.12 mechanism.  IUT III, Remark 3.12.3 explicitly
+identifies upper semi-compatibility `(Ind3)` as the source of the inequality in
+Corollary 3.12, with a pointer back to Step (x) of the proof.  The Lean object
+therefore does not assert a free bound on zero/cusp log-volumes.  It requires
+the zero and cusp-class representatives to be identified with the source real
+value of the audited upper-semi datum, and it requires the theta source average
+to be identified with the target real value of that same datum.
+
+Formally, the proof shape is:
+
+```text
+source zero/cusp log-volume
+  = upper-semi source log-volume
+  <= upper-semi target log-volume
+  = theta source average
+```
+
+This is intentionally one-sided.  We do not introduce an equality between the
+source and target log-volume values; the only order step is the upper-semi
+inequality already attached to the audited choice.
+
+### Source Check
+
+Local paper passages checked before this move:
+
+```text
+docs/INTER-UNIVERSAL TEICHM ULLER THEORY III: ... .md
+```
+
+around the Corollary 3.12 remarks says that the upper semi-compatibility
+indeterminacy `(Ind3)` underlies the inequality of Corollary 3.12 and compares
+this to an inequality rather than an isomorphism in the p-adic Teichmuller
+analogy.
+
+```text
+docs/scholze- Why abc is still a conjecture.md
+```
+
+around Section 2.2 says that the disputed step requires explicit and consistent
+identifications of copies of ordered one-dimensional real vector spaces, and
+that the issue is whether the theta-side square factors can be carried through
+those identifications without producing monodromy or an empty inequality.
+
+The Lean move responds to both points: `(Ind3)` is used as the actual source of
+the inequality, while the real/log-volume identifications remain named fields.
+No identification of source and target real-line copies is hidden in notation.
+
+### Relevance to the 3.12 Dispute
+
+The active 3.12 corridor now has two mathematically distinct branches:
+
+```text
+constant packet branch:
+  packet normalization equalities give source zero/cusp <= theta average
+
+Ind3 branch:
+  audited upper semi-compatibility gives source zero/cusp <= theta average
+```
+
+The second branch is closer to the paper's stated mechanism.  It isolates the
+next hard obligation: construct the three matching identifications between
+zero/cusp log-volumes, theta average, and the audited upper-semi source/target
+values from Hodge-theater descent and the multiradial algorithm, rather than
+supplying them as fields.

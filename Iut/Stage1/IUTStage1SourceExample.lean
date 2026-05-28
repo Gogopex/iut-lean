@@ -10778,6 +10778,50 @@ theorem placeAudited_logVolume_fl_zmod_constant_zmod_factored_source_cusp_bridge
       bundle.hodgeTheaterDescentBridgeData :=
   routeAudit.transportBridge_eq_structuredSHE
 
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaCuspClassContainerAudit in
+theorem placeAudited_logVolume_fl_zmod_ind3_source_zero_bound_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveStructuredSHEInd3SourceZeroCuspTargetThetaAudit
+        part bundle profile audited) :
+    (part.theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume <=
+      part.theta_source.thetaSourceAverage audited :=
+  sourceAudit.source_zeroLogVolume_le_thetaAverage
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaCuspClassContainerAudit in
+theorem placeAudited_logVolume_fl_zmod_ind3_source_cusp_route_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveStructuredSHEInd3SourceZeroCuspTargetThetaAudit
+        part bundle profile audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  (part.weightedThetaComparisonRouteOfInd3SourceZeroCuspTarget
+    bundle profile audited sourceAudit).qSigned_le_thetaSigned
+
 theorem placeAudited_logVolume_fl_zmod_constant_zmod_target_bound_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
