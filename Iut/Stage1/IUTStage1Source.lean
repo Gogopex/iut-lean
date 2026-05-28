@@ -3048,6 +3048,124 @@ theorem hyperbolicCurve_holds
 
 end IUTStage1IUTIVTheoremABoundedDiscrepancyShadow
 
+/--
+Real-valued equality up to bounded discrepancy.
+
+This is the function-level relation used in IUT IV and GenEll when writing
+`f ≈ g`: the difference `f - g` is bounded above and below by constants on the
+specified point set.
+-/
+structure IUTStage1BoundedDiscrepancyEquivalent
+    (Point : Type u) (f g : Point -> Real) where
+  lower : Real
+  upper : Real
+  lower_bound : ∀ x : Point, lower <= f x - g x
+  upper_bound : ∀ x : Point, f x - g x <= upper
+
+namespace IUTStage1BoundedDiscrepancyEquivalent
+
+variable {Point : Type u} {f g h : Point -> Real}
+
+def refl (f : Point -> Real) :
+    IUTStage1BoundedDiscrepancyEquivalent Point f f :=
+  { lower := 0
+    upper := 0
+    lower_bound := by intro x; simp
+    upper_bound := by intro x; simp }
+
+def symm
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g) :
+    IUTStage1BoundedDiscrepancyEquivalent Point g f :=
+  { lower := -data.upper
+    upper := -data.lower
+    lower_bound := by
+      intro x
+      have hupper := data.upper_bound x
+      linarith
+    upper_bound := by
+      intro x
+      have hlower := data.lower_bound x
+      linarith }
+
+def trans
+    (fg : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    (gh : IUTStage1BoundedDiscrepancyEquivalent Point g h) :
+    IUTStage1BoundedDiscrepancyEquivalent Point f h :=
+  { lower := fg.lower + gh.lower
+    upper := fg.upper + gh.upper
+    lower_bound := by
+      intro x
+      have hfg := fg.lower_bound x
+      have hgh := gh.lower_bound x
+      linarith
+    upper_bound := by
+      intro x
+      have hfg := fg.upper_bound x
+      have hgh := gh.upper_bound x
+      linarith }
+
+def scale
+    (c : Real) (hc : 0 <= c)
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g) :
+    IUTStage1BoundedDiscrepancyEquivalent Point
+      (fun x => c * f x) (fun x => c * g x) :=
+  { lower := c * data.lower
+    upper := c * data.upper
+    lower_bound := by
+      intro x
+      have h := mul_le_mul_of_nonneg_left (data.lower_bound x) hc
+      linarith
+    upper_bound := by
+      intro x
+      have h := mul_le_mul_of_nonneg_left (data.upper_bound x) hc
+      linarith }
+
+end IUTStage1BoundedDiscrepancyEquivalent
+
+/--
+IUT IV, Corollary 2.2(i), bounded-discrepancy chain.
+
+The source records
+`(1/6)log(q_2) ≈ (1/6)log(q_all) ≈ (1/6)ht_infty ≈ ht_{omega_X(D)}`.
+This record keeps the three adjacent bounded-discrepancy equivalences and proves
+the composite relation.
+-/
+structure IUTStage1IUTIVCorollary22BoundedDiscrepancyChainShadow
+    (Point : Type u) where
+  logQTwo : Point -> Real
+  logQAll : Point -> Real
+  heightInfinity : Point -> Real
+  canonicalHeight : Point -> Real
+  logQTwo_to_logQAll :
+    IUTStage1BoundedDiscrepancyEquivalent Point
+      (fun x => (1 / 6 : Real) * logQTwo x)
+      (fun x => (1 / 6 : Real) * logQAll x)
+  logQAll_to_heightInfinity :
+    IUTStage1BoundedDiscrepancyEquivalent Point
+      (fun x => (1 / 6 : Real) * logQAll x)
+      (fun x => (1 / 6 : Real) * heightInfinity x)
+  heightInfinity_to_canonicalHeight :
+    IUTStage1BoundedDiscrepancyEquivalent Point
+      (fun x => (1 / 6 : Real) * heightInfinity x)
+      canonicalHeight
+
+namespace IUTStage1IUTIVCorollary22BoundedDiscrepancyChainShadow
+
+variable {Point : Type u}
+
+noncomputable def logQTwo_to_canonicalHeight
+    (data :
+      IUTStage1IUTIVCorollary22BoundedDiscrepancyChainShadow Point) :
+    IUTStage1BoundedDiscrepancyEquivalent Point
+      (fun x => (1 / 6 : Real) * data.logQTwo x)
+      data.canonicalHeight :=
+  IUTStage1BoundedDiscrepancyEquivalent.trans
+    (IUTStage1BoundedDiscrepancyEquivalent.trans
+      data.logQTwo_to_logQAll data.logQAll_to_heightInfinity)
+    data.heightInfinity_to_canonicalHeight
+
+end IUTStage1IUTIVCorollary22BoundedDiscrepancyChainShadow
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}

@@ -214,6 +214,11 @@ The code currently covers:
   \((1+\epsilon)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)
    -\operatorname{ht}_{\omega_X(D)}\) implies the corresponding pointwise height
   inequality on points of bounded degree;
+\item the IUT IV, Corollary 2.2(i) bounded-discrepancy chain:
+  \(\frac16\log(q_2)\approx\frac16\log(q_\forall)
+   \approx\frac16\operatorname{ht}_\infty
+   \approx\operatorname{ht}_{\omega_X(D)}\) composes to a direct bounded
+  discrepancy relation;
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -268,7 +273,8 @@ The Step (viii) flag records the prime-product case split used before the final
 upper bound for \(C_\Theta\), plus the final coarse error absorption.  The final
 display flag records the composed Theorem 1.10 inequality with \(F\)-level
 log-degree terms.  The Theorem A flag records the bounded-discrepancy
-height/log-different/log-conductor inequality.
+height/log-different/log-conductor inequality.  The Corollary 2.2 flag records
+composition of the displayed bounded-discrepancy chain.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -348,6 +354,9 @@ Lean proves the final displayed \(F\)-level inequality of Theorem 1.10 at this
 real-valued shadow level.
 For Theorem A, Lean records the exact bounded-discrepancy conclusion and proves
 the equivalent pointwise height bound from the lower-bound hypothesis.
+For Corollary 2.2(i), Lean defines equality up to bounded discrepancy, proves
+reflexivity, symmetry, transitivity, nonnegative scaling, and composes the
+displayed chain from \(\log(q_2)\) to \(\operatorname{ht}_{\omega_X(D)}\).
 
 \section{Missing Mathematics}
 
@@ -371,6 +380,8 @@ The present code does not yet formalize:
   Theorem 1.10 numerical estimates, and the Diophantine applications;
 \item the construction of the normalized height, log-different, and log-conductor
   functions used in IUT IV, Theorem A;
+\item the construction of the bounded-discrepancy equivalences asserted in
+  IUT IV, Corollary 2.2(i);
 \item a proof that the current Hodge/SHE transport obligations follow from
   Mochizuki's full hypotheses.
 \end{itemize}
