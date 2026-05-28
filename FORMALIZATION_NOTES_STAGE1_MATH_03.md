@@ -910,3 +910,119 @@ placeAudited_logVolume_fl_zmod_cusp_zero_label_object_neg_one_eq_example
 The route now knows that opposite nonzero coordinates share a cusp-class local
 object.  The next useful refinement is to expose this at the level of local
 objects themselves, not only at the level of their finite log-volumes.
+
+## 118. Self-Audit: Stage 1 Boundary and Zero/Nonzero Labels
+
+### Check Performed
+
+I reread the current Lean route against the local copies of:
+
+```text
+ON THE FORMALIZATION OF IUT.md, §2 and §4
+IUT I, Remark 6.12.5
+IUT II discussion around distinct theta labels and conjugate synchronization
+```
+
+The formalization note explicitly identifies the first stage as:
+
+```text
+[IUTchIII] Theorem 3.11 => Corollary 3.12
+```
+
+and describes the current Lean effort as skeletal Stage 1.  This matches the
+current project boundary: we are not trying to prove all of IUT at once, but to
+formalize the route from label/procession data to the Corollary 3.12-shaped
+log-volume comparison.
+
+### Alignment
+
+IUT I, Remark 6.12.5 stresses that the relevant `F_l`/`F_l^±` symmetry relates
+zero-labeled and nonzero-labeled prime-strips, while also warning that one must
+not confuse the zero-labeled prime-strip with nonzero-labeled prime-strips.
+This supports the current design:
+
+```text
+zero label             -> separate zeroLogVolume / zeroLocalObject branch
+nonzero sign classes   -> SignLabelQuotient / cuspClassLocalObject branch
+```
+
+The code is intentionally proving bridges between these branches only through
+explicit compatibility fields or theorems.  It is not identifying zero with a
+nonzero sign class.
+
+IUT II's discussion of distinct labels and conjugate synchronization also
+supports keeping label distinctions visible at the point where Kummer/log-volume
+data are compared.  The current Lean route keeps the sign quotient explicit
+before passing to finite local-object log-volumes.
+
+### Current Risk
+
+The current local-object route is still conditional: it assumes the cusp-class
+and zero local-object identifications, then verifies their consequences.  The
+next implementation should continue lowering those assumptions toward data that
+is closer to the Hodge-theater/local-cusp construction.
+
+### Next Target
+
+Expose sign-orbit equivalence at the local-object level itself:
+
+```text
+cuspClassLocalObject audited (label of j)
+=
+cuspClassLocalObject audited (label of -j)
+```
+
+This should be proved through the quotient equality rather than by any
+zero/nonzero shortcut.
+
+## 119. Sign-Orbit Equality of Cusp-Class Local Objects
+
+### Lean Move
+
+I added:
+
+```text
+FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
+  .cuspClassLocalObject_negCoordinate_eq
+FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
+  .cuspClassLocalObject_neg_one_eq_canonical
+```
+
+These prove equality of the actual finite local objects indexed by opposite
+nonzero coordinates, not just equality of their finite log-volumes.
+
+### Mathematical Reason
+
+The previous theorem lifted sign-pair invariance to log-volumes.  This one uses
+the quotient identity:
+
+```text
+zmodSignLabelFromCoordinate_neg_eq
+```
+
+directly in the index of `cuspClassLocalObject`.  Thus the local object indexed
+by the sign class of `-j` is definitionally transported to the local object
+indexed by the sign class of `j`.
+
+### Trap Avoided
+
+The theorem is only stated for `j != 0`.  The zero local object remains outside
+the sign-label quotient, and the canonical `-1` theorem explicitly uses the
+proof that `1 != 0`.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_cusp_zero_label_object_neg_object_eq_example
+placeAudited_logVolume_fl_zmod_cusp_zero_label_object_neg_one_object_eq_example
+```
+
+### Remaining Gap
+
+We now have the sign quotient under control for the local-object index.  The
+next boundary is the stronger IUT concern about relating zero-labeled and
+nonzero-labeled data via permitted symmetries without collapsing them.  That
+will likely require an explicit "zero-to-nonzero comparison source" rather than
+an equality of labels.

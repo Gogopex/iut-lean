@@ -5088,6 +5088,44 @@ theorem placeAudited_logVolume_fl_zmod_cusp_zero_label_object_neg_one_eq_example
         (zmodCanonicalSignLabelQuotient l)).finiteLogVolume :=
   part.neg_one_normalizedLogVolume_eq_canonicalCuspClassLocalObjectFinite audited
 
+theorem placeAudited_logVolume_fl_zmod_cusp_zero_label_object_neg_object_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (j : ZMod l.value) (hj : j ≠ 0) :
+    part.cuspClassLocalObject audited
+        (zmodSignLabelFromCoordinate l (-j)
+          (zmod_neg_ne_zero_of_ne_zero l hj)) =
+      part.cuspClassLocalObject audited
+        (zmodSignLabelFromCoordinate l j hj) :=
+  part.cuspClassLocalObject_negCoordinate_eq audited j hj
+
+theorem placeAudited_logVolume_fl_zmod_cusp_zero_label_object_neg_one_object_eq_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part :
+      audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.cuspClassLocalObject audited
+        (zmodSignLabelFromCoordinate l (-(1 : ZMod l.value))
+          (zmod_neg_ne_zero_of_ne_zero l (zmodOneNonzeroLabel l).2)) =
+      part.cuspClassLocalObject audited (zmodCanonicalSignLabelQuotient l) :=
+  part.cuspClassLocalObject_neg_one_eq_canonical audited
+
 theorem placeAudited_logVolume_fl_zmod_cusp_zero_label_object_target_bound_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

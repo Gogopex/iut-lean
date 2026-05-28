@@ -13084,6 +13084,28 @@ theorem neg_one_normalizedLogVolume_eq_canonicalCuspClassLocalObjectFinite
           (zmodCanonicalSignLabelQuotient l)).finiteLogVolume := by
       rw [zmodSignLabelFromCoordinate_one_eq_canonical]
 
+theorem cuspClassLocalObject_negCoordinate_eq
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (j : ZMod l.value) (hj : j ≠ 0) :
+    part.cuspClassLocalObject audited
+        (zmodSignLabelFromCoordinate l (-j)
+          (zmod_neg_ne_zero_of_ne_zero l hj)) =
+      part.cuspClassLocalObject audited
+        (zmodSignLabelFromCoordinate l j hj) := by
+  rw [zmodSignLabelFromCoordinate_neg_eq]
+
+theorem cuspClassLocalObject_neg_one_eq_canonical
+    (part : audit.FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.cuspClassLocalObject audited
+        (zmodSignLabelFromCoordinate l (-(1 : ZMod l.value))
+          (zmod_neg_ne_zero_of_ne_zero l (zmodOneNonzeroLabel l).2)) =
+      part.cuspClassLocalObject audited (zmodCanonicalSignLabelQuotient l) := by
+  rw [zmodSignLabelFromCoordinate_neg_eq
+    l (1 : ZMod l.value) (zmodOneNonzeroLabel l).2]
+  rw [zmodSignLabelFromCoordinate_one_eq_canonical]
+
 end FLZModCuspLabelThetaCuspZeroLocalLabelObjectConstructionAudit
 
 namespace FLZModCuspLabelThetaPacketNormalizedContainerAudit
