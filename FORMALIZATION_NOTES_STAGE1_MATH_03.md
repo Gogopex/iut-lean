@@ -3748,3 +3748,98 @@ current Lean comparison
 The next mathematical task is therefore sharper: inspect the stronger
 Hodge-theater/SHE/common-container machinery and ask whether it supplies these
 fields, or whether further source-specific assumptions must be introduced.
+
+## 155. SHE/Common-Container Boundary for Factored Preservation
+
+### Lean Move
+
+We added a higher-level boundary record:
+
+```text
+IUTStage1StructuredSHEFactoredPreservationBoundary
+```
+
+It wraps the existing structured-SHE common-container compatibility:
+
+```text
+IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+```
+
+and exposes the facts this layer really supplies:
+
+```text
+commonContainerContextMatches
+simultaneousValid
+domainHistory_ne_codomainHistory
+```
+
+It also records that the three primitive preservation fields needed by the
+factored square/full-label transport interface are still missing from this
+compatibility layer:
+
+```text
+coordinateSquarePreservation_missing
+fullLabelMapPreservation_missing
+fullLabelValuePreservation_missing
+```
+
+The example file now checks construction of this boundary from a structured-SHE
+bundle and verifies both sides of the interface: available simultaneous
+common-container data, and missing `j^2`/full-label primitive preservation
+data.
+
+### Mathematical Reason
+
+The previous milestone compared local-object Hodge descent with the factored
+transport interface.  This milestone moves one level higher, to the
+structured-SHE/common-container route.
+
+The common-container layer is stronger than local-object packet descent.  It
+does supply the simultaneous comparison context and keeps the domain/codomain
+histories separated.  But the current Lean data still does not include:
+
+```text
+coordinate-square preservation
+full-label-map preservation
+full-label-value preservation
+```
+
+This distinction matters.  "Simultaneous common-container comparison" is not
+identical to "the `j^2`-weighted full-label expression has been transported".
+The latter requires the three primitive fields isolated in Milestone 153.
+
+### Source Check
+
+The April 2026 formalization report describes the final `3.11.5 => 3.12` stage
+as concentrating on the crucial simultaneous comparison aspect after moving the
+`hull+det` work earlier.  Our structured-SHE/common-container compatibility
+matches that simultaneous-comparison bookkeeping.
+
+IUT III's Corollary 3.12 corridor still uses averages over `j in F_l`, and IUT
+II's weighted-volume discussion treats the `j^2` profile as structured data.
+Scholze-Stix's criticism asks whether the common comparison can retain that
+nontrivial label/weight information.  This Lean boundary says: the current
+common-container compatibility gives the simultaneous setting, but it does not
+by itself give the primitive preservation fields needed for the weighted
+full-label transport.
+
+### Relevance to the 3.12 Dispute
+
+The hierarchy is now explicit:
+
+```text
+local-object Hodge descent
+  gives packet equalities
+
+structured-SHE/common-container compatibility
+  gives simultaneous comparison context
+
+factored square/full-label transport
+  still needs coordinate-square, full-label-map, and full-label-value preservation
+```
+
+This is a useful impartial checkpoint.  It does not refute IUT, because the full
+source theory may intend to supply these fields by additional Hodge-theoretic
+or log-link arguments.  It also does not prove Corollary 3.12, because the
+fields are not yet constructed.  It identifies exactly what the next source
+audit must look for.

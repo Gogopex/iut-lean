@@ -1163,6 +1163,62 @@ theorem structuredSHEFactoredSquareFullLabelObligations_bridge_example
       bundle.hodgeTheaterDescentBridgeData :=
   obligations.bridge_eq_structuredSHE
 
+def structuredSHEFactoredPreservationBoundary_of_bundle_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    IUTStage1StructuredSHEFactoredPreservationBoundary package bundle :=
+  IUTStage1StructuredSHEFactoredPreservationBoundary.ofBundle bundle
+
+theorem structuredSHEFactoredPreservationBoundary_simultaneous_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    bundle.structuredSHE.context.simultaneous_valid :=
+  boundary.simultaneousValid
+
+theorem structuredSHEFactoredPreservationBoundary_context_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    package.preLedger.chartedContainer.commonContainer.context =
+      bundle.structuredSHE.context.sharedContext :=
+  boundary.commonContainerContextMatches
+
+theorem structuredSHEFactoredPreservationBoundary_coord_gap_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.coordinateSquarePreservation ∈
+      boundary.missingFactoredSquareFullLabelData :=
+  boundary.coordinateSquarePreservation_missing
+
+theorem structuredSHEFactoredPreservationBoundary_map_gap_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelMapPreservation ∈
+      boundary.missingFactoredSquareFullLabelData :=
+  boundary.fullLabelMapPreservation_missing
+
+theorem structuredSHEFactoredPreservationBoundary_value_gap_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelValuePreservation ∈
+      boundary.missingFactoredSquareFullLabelData :=
+  boundary.fullLabelValuePreservation_missing
+
 def flLabelModel_zmod_example
     (l : PrimeGeFive) :
     IUTStage1FLLabelModel (ZMod l.value) :=

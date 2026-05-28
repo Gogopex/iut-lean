@@ -9212,6 +9212,82 @@ theorem bridge_eq_structuredSHE
 end IUTStage1StructuredSHEFactoredSquareFullLabelObligations
 
 /--
+Boundary comparing the strengthened SHE/common-container route with the factored
+square/full-label preservation interface.
+
+The compatibility data records the simultaneous common-container bookkeeping,
+but the primitive `j^2` and full-label preservation fields remain separate
+obligations.
+-/
+structure IUTStage1StructuredSHEFactoredPreservationBoundary
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) where
+  commonContainerCompatibility :
+    IUTStage1Theorem311StructuredSHECommonContainerCompatibility
+      package bundle.structuredSHE
+
+namespace IUTStage1StructuredSHEFactoredPreservationBoundary
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+
+def ofBundle
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package) :
+    IUTStage1StructuredSHEFactoredPreservationBoundary package bundle :=
+  { commonContainerCompatibility := bundle.commonContainerCompatibility }
+
+def missingFactoredSquareFullLabelData
+    (_boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    Finset IUTStage1FactoredSquareFullLabelMissingDatum :=
+  IUTStage1FactoredSquareFullLabelMissingDatum.all
+
+theorem commonContainerContextMatches
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    package.preLedger.chartedContainer.commonContainer.context =
+      bundle.structuredSHE.context.sharedContext :=
+  boundary.commonContainerCompatibility.commonContainerContextMatches
+
+theorem simultaneousValid
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    bundle.structuredSHE.context.simultaneous_valid :=
+  boundary.commonContainerCompatibility.simultaneousValid
+
+theorem domainHistory_ne_codomainHistory
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    bundle.structuredSHE.context.domainStructure.theater.side ≠
+      bundle.structuredSHE.context.codomainStructure.theater.side :=
+  boundary.commonContainerCompatibility.domainHistory_ne_codomainHistory
+
+theorem coordinateSquarePreservation_missing
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.coordinateSquarePreservation ∈
+      boundary.missingFactoredSquareFullLabelData :=
+  IUTStage1FactoredSquareFullLabelMissingDatum.coordinateSquarePreservation_mem_all
+
+theorem fullLabelMapPreservation_missing
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelMapPreservation ∈
+      boundary.missingFactoredSquareFullLabelData :=
+  IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelMapPreservation_mem_all
+
+theorem fullLabelValuePreservation_missing
+    (boundary :
+      IUTStage1StructuredSHEFactoredPreservationBoundary package bundle) :
+    IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelValuePreservation ∈
+      boundary.missingFactoredSquareFullLabelData :=
+  IUTStage1FactoredSquareFullLabelMissingDatum.fullLabelValuePreservation_mem_all
+
+end IUTStage1StructuredSHEFactoredPreservationBoundary
+
+/--
 Audited entry from the strengthened SHE route into the existing `HDD o SHE`
 boundedness API.
 
