@@ -463,3 +463,88 @@ The actual dispute still sits upstream: whether Mochizuki's Hodge-theater/SHE
 machinery legitimately supplies the needed target-side control without the
 Scholze-Stix collapse.  This milestone gives Lean another audited route through
 the corridor, while keeping that source-level question explicit.
+
+## 198. Zero/Cusp Target Bounds Supply Pointwise Target Bounds
+
+### Lean Move
+
+At the `IUTStage1ZModCuspLabelLogVolumeCompatibility` level we added:
+
+```text
+fullLabelLogVolume_le_of_zero_and_cuspClass_le
+fullLabelLogVolume_fromCoordinate_le_of_zero_and_cuspClass_le
+```
+
+These lemmas say that an upper bound on the zero log-volume and an upper bound
+on every nonzero cusp-class log-volume imply the same upper bound for every
+full-label coordinate.
+
+For both the labelwise and cusp-class 3.11.5 routes we then added:
+
+```text
+ThreeElevenFiveStructuredSHEZeroCuspTargetThetaAudit
+ThreeElevenFiveStructuredSHEZeroCuspTargetThetaAudit.toPointwiseTargetThetaAudit
+ThreeElevenFiveStructuredSHEZeroCuspTargetThetaAudit.weightedAverage_le_thetaAverage
+ThreeElevenFiveStructuredSHEZeroCuspTargetThetaAudit.toThreeElevenFiveWeightedThetaAudit
+weightedThetaComparisonRouteOfZeroCuspTarget
+weightedThetaComparisonRouteOfZeroCuspTarget_uses_zeroCuspTarget
+```
+
+The example file verifies the corresponding public q/Theta comparison examples.
+
+### Mathematical Reason
+
+The pointwise target route needs:
+
+```text
+targetLogVolume.fullLabelLogVolume(fromCoordinate (coordinateEquiv j))
+  <= thetaSourceAverage
+```
+
+The target log-volume object is not primitive coordinate data.  It is a
+zero/nonzero cusp-label object:
+
+```text
+zeroLogVolume
+cuspClassLogVolume label
+```
+
+This milestone makes that decomposition usable on the target-upper side.  To
+produce the pointwise target bound, it is enough to prove:
+
+```text
+targetLogVolume.zeroLogVolume <= thetaSourceAverage
+targetLogVolume.cuspClassLogVolume label <= thetaSourceAverage
+```
+
+for every nonzero cusp class.  Lean then performs the zero/nonzero split via
+`fromCoordinate` and feeds the result into the existing pointwise-target route.
+
+### Source Check
+
+This follows the same zero/nonzero label split already used on the local
+container side of the formalization.  It is also closer to the notation of IUT
+III's local cusp-label estimates than the previous monolithic pointwise
+coordinate hypothesis, because the nonzero labels are handled through the sign
+quotient rather than by pretending the target data is a flat coordinate family.
+
+For the Scholze-Stix issue, the important point is that these are target-side
+upper estimates inside the structured-SHE route.  The proof does not identify
+the source and target real lines; it only decomposes the target log-volume
+object after the structured transport audit has named it.
+
+### Relevance to the 3.12 Dispute
+
+The remaining source-level task is now more faithful to the local geometry:
+
+```text
+zero target estimate
+nonzero cusp-class target estimates
+  -> pointwise transported target bounds
+  -> transported weighted-average bound
+  -> final 3.11.5-to-3.12 q/Theta comparison
+```
+
+This is still not a proof of Corollary 3.12.  It exposes the precise local
+upper estimates that would have to come from the Hodge-theater/SHE and
+hull/log-volume machinery without collapsing the histories.
