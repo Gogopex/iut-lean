@@ -8557,6 +8557,103 @@ theorem structuredSHE_histories_not_identified
 end IUTStage1StructuredSHESquareWeightTransportAudit
 
 /--
+Explicit open obligations for constructing the structured-SHE square-weight
+transport audit.
+
+The structured-SHE bundle supplies the Hodge-theater/descent bridge.  The fields
+below are exactly the additional square-weight/full-label data still needed to
+turn that bridge into a preservation audit.
+-/
+structure IUTStage1StructuredSHESquareWeightTransportObligations
+    {source target : Copy} {index : Type u}
+    (package : IUTStage1SourcePackage source target index)
+    (bundle : IUTStage1Theorem311StructuredInputsWithSHE package)
+    (l : PrimeGeFive) where
+  coordinateEquiv : ZMod l.value ≃ ZMod l.value
+  sourceProfile : IUTStage1ZModSquareWeightProfile l
+  targetProfile : IUTStage1ZModSquareWeightProfile l
+  sourceLogVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+  targetLogVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l
+  fullLabelLogVolume_preserved :
+    ∀ j : ZMod l.value,
+      targetLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)) =
+        sourceLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)
+  squareWeight_preserved :
+    ∀ j : ZMod l.value,
+      targetProfile.weight (coordinateEquiv j) =
+        sourceProfile.weight j
+  weightTotal_preserved :
+    targetProfile.weightTotal = sourceProfile.weightTotal
+
+namespace IUTStage1StructuredSHESquareWeightTransportObligations
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+variable {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+variable {l : PrimeGeFive}
+
+def suppliedBridge
+    (_obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    IUTStage1HodgeTheaterDescentBridgeData :=
+  bundle.hodgeTheaterDescentBridgeData
+
+theorem suppliedBridge_histories_not_identified
+    (obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    obligations.suppliedBridge.domainTheater.side ≠
+      obligations.suppliedBridge.codomainTheater.side :=
+  bundle.hodgeTheaterDescentBridgeData_histories_not_identified
+
+def toPreservationAudit
+    (obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    IUTStage1ZModSquareWeightedFullLabelTransportAudit l :=
+  { bridge := obligations.suppliedBridge,
+    coordinateEquiv := obligations.coordinateEquiv,
+    sourceProfile := obligations.sourceProfile,
+    targetProfile := obligations.targetProfile,
+    sourceLogVolume := obligations.sourceLogVolume,
+    targetLogVolume := obligations.targetLogVolume,
+    fullLabelLogVolume_preserved := obligations.fullLabelLogVolume_preserved,
+    squareWeight_preserved := obligations.squareWeight_preserved,
+    weightTotal_preserved := obligations.weightTotal_preserved }
+
+def toStructuredSHESquareWeightTransportAudit
+    (obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    IUTStage1StructuredSHESquareWeightTransportAudit package bundle l :=
+  { preservation_audit := obligations.toPreservationAudit,
+    bridge_eq_structured_she := rfl }
+
+theorem toPreservationAudit_bridge_eq_structuredSHE
+    (obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    obligations.toPreservationAudit.bridge =
+      bundle.hodgeTheaterDescentBridgeData :=
+  rfl
+
+theorem toStructuredSHESquareWeightTransportAudit_average_eq
+    (obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    let audit := obligations.toStructuredSHESquareWeightTransportAudit
+    audit.preservationAudit.targetTransportedAverage =
+      audit.preservationAudit.sourceAverage :=
+  (obligations.toStructuredSHESquareWeightTransportAudit).targetTransportedAverage_eq_sourceAverage
+
+theorem toStructuredSHESquareWeightTransportAudit_descent_eq
+    (obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    let audit := obligations.toStructuredSHESquareWeightTransportAudit
+    audit.preservationAudit.bridge.descent =
+      package.preLedger.chartedContainer.commonContainer.hddShe.hdd.descent :=
+  (obligations.toStructuredSHESquareWeightTransportAudit).bridge_descent_eq
+
+end IUTStage1StructuredSHESquareWeightTransportObligations
+
+/--
 Audited entry from the strengthened SHE route into the existing `HDD o SHE`
 boundedness API.
 

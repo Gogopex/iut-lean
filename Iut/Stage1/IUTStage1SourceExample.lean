@@ -984,6 +984,39 @@ theorem structuredSHESquareWeightTransportAudit_descent_example
       package.preLedger.chartedContainer.commonContainer.hddShe.hdd.descent :=
   audit.bridge_descent_eq
 
+def structuredSHESquareWeightTransportObligations_to_audit_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    IUTStage1StructuredSHESquareWeightTransportAudit package bundle l :=
+  obligations.toStructuredSHESquareWeightTransportAudit
+
+theorem structuredSHESquareWeightTransportObligations_bridge_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    obligations.toPreservationAudit.bridge =
+      bundle.hodgeTheaterDescentBridgeData :=
+  obligations.toPreservationAudit_bridge_eq_structuredSHE
+
+theorem structuredSHESquareWeightTransportObligations_average_example
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (obligations :
+      IUTStage1StructuredSHESquareWeightTransportObligations package bundle l) :
+    let audit := obligations.toStructuredSHESquareWeightTransportAudit
+    audit.preservationAudit.targetTransportedAverage =
+      audit.preservationAudit.sourceAverage :=
+  obligations.toStructuredSHESquareWeightTransportAudit_average_eq
+
 def flLabelModel_zmod_example
     (l : PrimeGeFive) :
     IUTStage1FLLabelModel (ZMod l.value) :=

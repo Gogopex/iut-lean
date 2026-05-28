@@ -3067,3 +3067,118 @@ The wrapper still assumes the preservation audit.  The next milestone should
 separate the available structured-SHE data from the missing square-weight data:
 what is already supplied by `bundle.hodgeTheaterDescentBridgeData`, and what
 extra equalities are still needed to construct the wrapper?
+
+## 148. Structured-SHE Square-Weight Transport Obligations
+
+### Lean Move
+
+I added an explicit construction-obligation record:
+
+```text
+IUTStage1StructuredSHESquareWeightTransportObligations
+```
+
+It is parameterized by the same `package`, structured-SHE `bundle`, and prime
+`l` as the wrapper from Milestone 147.  The important design choice is that this
+record does not ask for a Hodge-theater bridge.  The bridge is supplied by:
+
+```text
+bundle.hodgeTheaterDescentBridgeData
+```
+
+The remaining fields are exactly the square-weight/full-label preservation data:
+
+```text
+coordinateEquiv
+sourceProfile
+targetProfile
+sourceLogVolume
+targetLogVolume
+fullLabelLogVolume_preserved
+squareWeight_preserved
+weightTotal_preserved
+```
+
+From these obligations Lean constructs:
+
+```text
+toPreservationAudit :
+  IUTStage1ZModSquareWeightedFullLabelTransportAudit l
+
+toStructuredSHESquareWeightTransportAudit :
+  IUTStage1StructuredSHESquareWeightTransportAudit package bundle l
+```
+
+and proves:
+
+```text
+toPreservationAudit.bridge = bundle.hodgeTheaterDescentBridgeData
+target transported average = source average
+transport bridge descent = the HDD descent in the package
+```
+
+The example module now checks these conversions.
+
+### Mathematical Reason
+
+Milestone 147 bound a preservation audit to the structured-SHE route.  This
+milestone turns that into a checklist of what remains to be proved.
+
+The structured-SHE bundle already supplies:
+
+```text
+domain Hodge theater
+codomain Hodge theater
+HDD descent operation
+zero-column checkpoint
+indeterminacy profile
+history non-identification
+```
+
+The square-weight controversy is not in those inert route labels alone.  It is
+in whether the route supplies the extra preservation data:
+
+```text
+coordinate equivalence
+full-label log-volume preservation
+j^2 square-weight preservation
+weight-total preservation
+```
+
+This record makes that division explicit in Lean.
+
+### Source Check
+
+This follows the April 2026 formalization report's decomposition of the
+Theorem 3.11 to Corollary 3.12 route: the final `3.11.5 => 3.12` portion is
+supposed to isolate the simultaneous comparison.  Our code now isolates the
+additional square-weight preservation obligations that such a simultaneous
+comparison would need if it is to preserve the `j^2` data.
+
+It also reflects the Scholze-Stix pressure point: merely having a common
+comparison route or common real-line reading is not the same as having a
+transported square-weight/full-label expression.
+
+### Relevance to the 3.12 Dispute
+
+The formalization now has three distinct layers:
+
+```text
+1. structured-SHE bridge data supplied by the route;
+2. square-weight/full-label preservation obligations not yet supplied;
+3. wrapper proving transported weighted-average equality once 1 and 2 are both present.
+```
+
+This is a useful place to pause for future mathematical scrutiny.  If one wants
+to defend the IUT route, the next proof obligation is no longer vague: construct
+the fields of `IUTStage1StructuredSHESquareWeightTransportObligations`.  If one
+wants to formalize the Scholze-Stix criticism, the target is also sharper: show
+that the structured-SHE/common real-line data do not determine those fields.
+
+### Remaining Gap
+
+The project still has not constructed the preservation equalities.  The next
+milestone should inspect the existing local-object Hodge-descent packet audits
+and ask whether any of them can supply the coordinate equivalence and the two
+preservation equalities, or whether we need an explicit "erasure" record saying
+that this information is absent after passage to the common container.
