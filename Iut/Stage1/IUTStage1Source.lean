@@ -2387,6 +2387,76 @@ inductive IUTStage1InsulatedCuspZeroBridgeSource where
 deriving DecidableEq
 
 /--
+Per-audited local-object transport data for a Hodge-descent packet bridge.
+
+The record keeps the zero-column checkpoint and history guard next to the local
+object equalities that transport the insulated zero and nonzero cusp-class
+objects to the packet local object.
+-/
+structure IUTStage1HodgeDescentLocalObjectTransportData
+    {kind : IUTStage1PlaceKind}
+    (l : PrimeGeFive)
+    (hodgeData : IUTStage1HodgeTheaterDescentBridgeData)
+    (zeroObject : IUTStage1FiniteLocalLogVolumeObject kind)
+    (cuspClassObject :
+      (zmodSignAction l).SignLabelQuotient ->
+        IUTStage1FiniteLocalLogVolumeObject kind)
+    (packetObject : IUTStage1FiniteLocalLogVolumeObject kind) where
+  checkpoint_eq_fourth_triangle :
+    hodgeData.zeroColumnCheckpoint = fourthTriangleHDDSHECheckpoint
+  histories_not_identified :
+    hodgeData.domainTheater.side ≠ hodgeData.codomainTheater.side
+  zero_transports_to_packet : zeroObject = packetObject
+  cuspClass_transports_to_packet :
+    ∀ label : (zmodSignAction l).SignLabelQuotient,
+      cuspClassObject label = packetObject
+
+namespace IUTStage1HodgeDescentLocalObjectTransportData
+
+variable {kind : IUTStage1PlaceKind}
+variable {l : PrimeGeFive}
+variable {hodgeData : IUTStage1HodgeTheaterDescentBridgeData}
+variable {zeroObject : IUTStage1FiniteLocalLogVolumeObject kind}
+variable
+  {cuspClassObject :
+    (zmodSignAction l).SignLabelQuotient ->
+      IUTStage1FiniteLocalLogVolumeObject kind}
+variable {packetObject : IUTStage1FiniteLocalLogVolumeObject kind}
+
+theorem zero_transports_to_packet'
+    (data :
+      IUTStage1HodgeDescentLocalObjectTransportData
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    zeroObject = packetObject :=
+  data.zero_transports_to_packet
+
+theorem cuspClass_transports_to_packet'
+    (data :
+      IUTStage1HodgeDescentLocalObjectTransportData
+        l hodgeData zeroObject cuspClassObject packetObject)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    cuspClassObject label = packetObject :=
+  data.cuspClass_transports_to_packet label
+
+theorem zero_eq_cuspClass
+    (data :
+      IUTStage1HodgeDescentLocalObjectTransportData
+        l hodgeData zeroObject cuspClassObject packetObject)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    zeroObject = cuspClassObject label :=
+  data.zero_transports_to_packet.trans
+    (data.cuspClass_transports_to_packet label).symm
+
+theorem checkpoint_eq_fourthTriangle
+    (data :
+      IUTStage1HodgeDescentLocalObjectTransportData
+        l hodgeData zeroObject cuspClassObject packetObject) :
+    hodgeData.zeroColumnCheckpoint = fourthTriangleHDDSHECheckpoint :=
+  data.checkpoint_eq_fourth_triangle
+
+end IUTStage1HodgeDescentLocalObjectTransportData
+
+/--
 Local packet-normalized compatibility together with a source classification.
 -/
 structure IUTStage1ClassifiedLocalTensorPacketNormalizedCompatibility
@@ -11208,6 +11278,36 @@ structure FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
         audited.choice.local_tensor_state.packetState.localObject
 
 /--
+Structured Hodge-descent packet transport audit.
+
+This version does not take the zero/cusp-class packet equalities directly.
+Instead it requires one local Hodge-descent transport datum for each audited
+packet choice, from which the packet bridge equalities are derived.
+-/
+structure FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  bundle : IUTStage1Theorem311StructuredInputsWithSHE package
+  insulated_route :
+    audit.FLZModCuspLabelThetaInsulatedCuspZeroLocalLabelObjectConstructionAudit l
+  packetLocalObjectEstimate :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1LocalObjectContainerLogVolumeEstimate kind
+        package.preLedger.targetVolume.targetSigned
+        audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume
+  packetLocalObjectEstimate_eq_packetLocalObject :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      (packetLocalObjectEstimate audited).localObject =
+        audited.choice.local_tensor_state.packetState.localObject
+  localObjectTransport :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1HodgeDescentLocalObjectTransportData l
+        bundle.hodgeTheaterDescentBridgeData
+        (insulated_route.zeroLocalObject audited)
+        (insulated_route.cuspClassLocalObject audited)
+        audited.choice.local_tensor_state.packetState.localObject
+
+/--
 Classified packet bridge from the insulated cusp/zero route to the comparison
 route.
 -/
@@ -15153,6 +15253,91 @@ theorem comparisonSource_eq_hodgeTheaterDescent
   rfl
 
 end FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
+
+namespace FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def toHodgeDescentPacketTransportAudit
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l) :
+    audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l :=
+  { bundle := part.bundle,
+    insulated_route := part.insulated_route,
+    packetLocalObjectEstimate := part.packetLocalObjectEstimate,
+    packetLocalObjectEstimate_eq_packetLocalObject :=
+      part.packetLocalObjectEstimate_eq_packetLocalObject,
+    cuspClassLocalObject_eq_packetLocalObject := by
+      intro audited label
+      exact
+        (part.localObjectTransport audited).cuspClass_transports_to_packet'
+          label,
+    zeroLocalObject_eq_packetLocalObject := by
+      intro audited
+      exact (part.localObjectTransport audited).zero_transports_to_packet' }
+
+def toHodgeDescentInsulatedCuspZeroBridgeAudit
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l) :
+    audit.FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit l :=
+  let transport := part.toHodgeDescentPacketTransportAudit
+  transport.toHodgeDescentInsulatedCuspZeroBridgeAudit
+
+theorem localObjectTransport_checkpoint_eq_fourthTriangle
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.bundle.hodgeTheaterDescentBridgeData.zeroColumnCheckpoint =
+      fourthTriangleHDDSHECheckpoint :=
+  (part.localObjectTransport audited).checkpoint_eq_fourthTriangle
+
+theorem zeroLocalObject_eq_packetLocalObject
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    part.insulated_route.zeroLocalObject audited =
+      audited.choice.local_tensor_state.packetState.localObject :=
+  (part.localObjectTransport audited).zero_transports_to_packet'
+
+theorem cuspClassLocalObject_eq_packetLocalObject
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    part.insulated_route.cuspClassLocalObject audited label =
+      audited.choice.local_tensor_state.packetState.localObject :=
+  (part.localObjectTransport audited).cuspClass_transports_to_packet' label
+
+theorem zeroLocalObject_eq_cuspClassLocalObject
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    part.insulated_route.zeroLocalObject audited =
+      part.insulated_route.cuspClassLocalObject audited label :=
+  (part.localObjectTransport audited).zero_eq_cuspClass label
+
+theorem bridgeSource_eq_hodgeTheaterDescentPacketTransport
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l) :
+    let transport := part.toHodgeDescentPacketTransportAudit
+    transport.toHodgeDescentInsulatedCuspZeroBridgeAudit.classified_bridge.bridge_source =
+      IUTStage1ZModPacketLocalObjectBridgeSource.hodgeTheaterDescentPacketTransport :=
+  let transport := part.toHodgeDescentPacketTransportAudit
+  transport.bridgeSource_eq_hodgeTheaterDescentPacketTransport
+
+theorem comparisonSource_eq_hodgeTheaterDescent
+    (part :
+      audit.FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit l) :
+    let transport := part.toHodgeDescentPacketTransportAudit
+    let hodgeBridge := transport.toHodgeDescentInsulatedCuspZeroBridgeAudit
+    hodgeBridge.toSourcedInsulatedCuspZeroPacketBridgeAudit.comparison_source =
+      IUTStage1InsulatedCuspZeroBridgeSource.hodgeTheaterDescentIndeterminacy :=
+  let transport := part.toHodgeDescentPacketTransportAudit
+  transport.comparisonSource_eq_hodgeTheaterDescent
+
+end FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit
 
 namespace FLZModCuspLabelThetaDirectIdentifiedLocalPacketRouteAudit
 

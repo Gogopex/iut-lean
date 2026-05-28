@@ -1885,3 +1885,74 @@ The next mathematical task is to replace the transport audit's equality fields
 with more structured local Hodge-theater data where possible.  In particular,
 we need to identify which source-side objects correspond to the 0-column/SHE
 input and which correspond to the local packet object after descent.
+
+## 134. Structured Local Hodge-Descent Transport Data
+
+### Lean Move
+
+I added:
+
+```text
+IUTStage1HodgeDescentLocalObjectTransportData
+FLZModCuspLabelThetaStructuredHodgeDescentPacketTransportAudit
+```
+
+The local transport datum records, for one audited packet:
+
+```text
+hodgeData.zeroColumnCheckpoint = fourthTriangleHDDSHECheckpoint
+domain/codomain histories are not identified
+zero object transports to packet object
+each cusp-class object transports to packet object
+```
+
+The structured packet transport audit then stores one such local transport
+datum for every audited packet choice, and derives:
+
+```text
+FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
+FLZModCuspLabelThetaHodgeDescentInsulatedCuspZeroBridgeAudit
+zero local object = cusp-class local object
+```
+
+### Mathematical Reason
+
+This is a small but important move from raw equality fields toward source-shaped
+local data.  The zero/cusp-to-packet identifications are now consequences of
+per-place Hodge-descent local transport data that explicitly mentions the
+fourth-triangle HDD-after-SHE checkpoint and the history-separation guard.
+
+This matches Mochizuki's 2026 formalization note more closely than the previous
+interface: the relevant final stage is organized around the 0-column, the
+descent/HDD/SHE composite, and the indeterminacy profile.  We are not yet
+formalizing the internal Hodge-theater construction, but the local transport
+obligation now has the right shape to be attacked later.
+
+### Trap Avoided
+
+The formalization no longer presents the zero/cusp-to-packet equations as an
+unexplained packet bridge in the structured route.  To use the structured route,
+a proof must provide local transport data at each audited packet.
+
+This still does not settle the dispute.  It only isolates the disputed
+mathematical burden more sharply: either the IUT machinery supplies these local
+transport data without collapsing the histories, or the formalization will get
+stuck exactly here.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_structured_hodge_transport_to_transport_example
+placeAudited_logVolume_fl_zmod_structured_hodge_transport_checkpoint_example
+placeAudited_logVolume_fl_zmod_structured_hodge_transport_source_example
+placeAudited_logVolume_fl_zmod_structured_hodge_transport_zero_to_cusp_example
+```
+
+### Remaining Gap
+
+The next target is to connect the local transport datum to existing
+source-side local objects more concretely: which object is the 0-column/SHE
+input object, which object is the descended packet object, and what local
+operation transports one to the other.
