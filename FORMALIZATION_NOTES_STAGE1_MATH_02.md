@@ -6532,3 +6532,78 @@ underlying packet construction.  The next useful refinement is to build
 high-level direct local packet audits from this direct normalization data, just
 as the transported audit now builds target compatibility from source
 compatibility and an audited `(Ind2)` step.
+
+## 83. Direct Local Packet Audit from Capsule-Sum Normalization
+
+### Goal
+
+We packaged direct finite-sum packet normalization into the high-level local
+packet audit.
+
+### Lean Move
+
+We added:
+
+```text
+FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit
+```
+
+For each audited packet it carries:
+
+```text
+target cusp/zero local object estimates
+direct finite-sum packet normalization data
+```
+
+It constructs:
+
+```text
+targetCuspClassCompatibility
+targetZeroCompatibility
+toClassifiedLocalPacketNormalizedAudit
+toClassifiedPacketNormalizedAudit
+```
+
+and the target compatibility source is definitionally:
+
+```text
+directPacketNormalization
+```
+
+### Mathematical Point
+
+This gives the direct route the same structure as the transported route.  A
+direct packet-normalized audit no longer needs to assume opaque classified local
+compatibilities.  It can be built from the finite capsule-sum formula:
+
+```text
+localObject.finiteLogVolume =
+  average of the packet capsule log-volumes
+```
+
+The downstream packet-normalized container audit then follows through the
+already checked conversion from direct normalization data to classified local
+compatibility.
+
+### Trap Avoided
+
+The direct audit still requires target-side local object estimates for the
+cusp/zero log-volume reals.  The finite-sum normalization only supplies the
+packet-normalized compatibility; it does not by itself prove that a cusp-class
+real is bounded or that it is the correct target real.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_direct_local_packet_to_global_example
+placeAudited_logVolume_fl_zmod_direct_local_packet_source_example
+```
+
+### Remaining Gap
+
+The finite-sum normalization certificate should eventually be obtained from a
+formal local packet/capsule construction.  The next practical step is to connect
+the direct and `(Ind2)`-transported local packet audits to the existing full
+route-summary constructors, reducing manual packet-audit assembly.

@@ -10781,6 +10781,49 @@ structure FLZModCuspLabelThetaInd2TransportedLocalPacketNormalizedAudit
         (sourceAudited targetAudited).choice.local_tensor_state.packetState
 
 /--
+Classified local packet-normalized audit whose compatibility certificates come
+from direct finite capsule-sum packet normalization on the target packet.
+-/
+structure FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  theta_source : audit.FLZModCuspLabelThetaSourceAudit l
+  ind12_equality_part : audit.Ind12EqualityPart
+  ind3_upper_part : audit.Ind3UpperInequalityPart
+  theta_images_eq_endpoint :
+    theta_source.theta_images = endpoint.theta_hull_endpoint.possible_images
+  cuspClassObjectEstimate :
+    ∀ (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+      (label : (zmodSignAction l).SignLabelQuotient),
+      IUTStage1LocalObjectContainerLogVolumeEstimate kind
+        package.preLedger.targetVolume.targetSigned
+        ((theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+          label)
+  cuspClassObject_eq_packetLocalObject :
+    ∀ (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+      (label : (zmodSignAction l).SignLabelQuotient),
+      (cuspClassObjectEstimate audited label).localObject =
+        audited.choice.local_tensor_state.packetState.localObject
+  cuspClassDirectNormalization :
+    ∀ (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+      (_label : (zmodSignAction l).SignLabelQuotient),
+      IUTStage1DirectPacketNormalizationData
+        audited.choice.local_tensor_state.packetState
+  zeroObjectEstimate :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1LocalObjectContainerLogVolumeEstimate kind
+        package.preLedger.targetVolume.targetSigned
+        (theta_source.compatible_average.cuspLogVolume audited).zeroLogVolume
+  zeroObject_eq_packetLocalObject :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      (zeroObjectEstimate audited).localObject =
+        audited.choice.local_tensor_state.packetState.localObject
+  zeroDirectNormalization :
+    ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+      IUTStage1DirectPacketNormalizationData
+        audited.choice.local_tensor_state.packetState
+
+/--
 Transported source for cusp-class container bounds.
 
 For each target audited packet, this audit chooses a source audited packet,
@@ -12085,6 +12128,75 @@ theorem targetZeroCompatibilitySource_eq
   rfl
 
 end FLZModCuspLabelThetaInd2TransportedLocalPacketNormalizedAudit
+
+namespace FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def targetCuspClassCompatibility
+    (part : audit.FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    IUTStage1ClassifiedLocalTensorPacketNormalizedCompatibility
+      audited.choice.local_tensor_state.packetState :=
+  IUTStage1DirectPacketNormalizationData.toClassifiedPacketNormalizedCompatibility
+    (part.cuspClassDirectNormalization audited label)
+
+def targetZeroCompatibility
+    (part : audit.FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    IUTStage1ClassifiedLocalTensorPacketNormalizedCompatibility
+      audited.choice.local_tensor_state.packetState :=
+  IUTStage1DirectPacketNormalizationData.toClassifiedPacketNormalizedCompatibility
+    (part.zeroDirectNormalization audited)
+
+def toClassifiedLocalPacketNormalizedAudit
+    (part : audit.FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedLocalPacketNormalizedAudit l :=
+  { theta_source := part.theta_source,
+    ind12_equality_part := part.ind12_equality_part,
+    ind3_upper_part := part.ind3_upper_part,
+    theta_images_eq_endpoint := part.theta_images_eq_endpoint,
+    identification_source :=
+      IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization,
+    cuspClassObjectEstimate := part.cuspClassObjectEstimate,
+    cuspClassObject_eq_packetLocalObject :=
+      part.cuspClassObject_eq_packetLocalObject,
+    cuspClassCompatibility := part.targetCuspClassCompatibility,
+    cuspClassCompatibility_source_eq := by
+      intro audited label
+      rfl,
+    zeroObjectEstimate := part.zeroObjectEstimate,
+    zeroObject_eq_packetLocalObject :=
+      part.zeroObject_eq_packetLocalObject,
+    zeroCompatibility := part.targetZeroCompatibility,
+    zeroCompatibility_source_eq := by
+      intro audited
+      rfl }
+
+def toClassifiedPacketNormalizedAudit
+    (part : audit.FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedPacketNormalizedAudit l :=
+  let localAudit := part.toClassifiedLocalPacketNormalizedAudit
+  localAudit.toClassifiedPacketNormalizedAudit
+
+theorem targetCuspClassCompatibilitySource_eq
+    (part : audit.FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (part.targetCuspClassCompatibility audited label).identification_source =
+      IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization :=
+  rfl
+
+theorem targetZeroCompatibilitySource_eq
+    (part : audit.FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    (part.targetZeroCompatibility audited).identification_source =
+      IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization :=
+  rfl
+
+end FLZModCuspLabelThetaDirectLocalPacketNormalizedAudit
 
 namespace FLZModCuspLabelThetaClassifiedPacketNormalizedAudit
 
