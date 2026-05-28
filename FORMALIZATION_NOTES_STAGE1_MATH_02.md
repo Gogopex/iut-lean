@@ -4353,3 +4353,113 @@ placeAudited_logVolume_fl_zmod_cusp_container_q_le_theta_example
 The next refinement should unpack the source of the cusp-class bounds
 themselves: a local container estimate attached to the audited place packet and
 the corresponding cusp sign-label class.
+
+## 56. Local Container Estimates for Cusp-Class Bounds
+
+### Goal
+
+We refined the source of the cusp-class bounds by introducing explicit local
+container log-volume estimates.
+
+### Lean Move
+
+We added a small real-valued estimate object:
+
+```text
+IUTStage1LocalContainerLogVolumeEstimate targetSigned localLogVolume
+```
+
+It records:
+
+```text
+containerLogVolume
+localLogVolume = containerLogVolume
+targetSigned <= containerLogVolume
+```
+
+Lean proves:
+
+```text
+targetSigned_le_localLogVolume
+```
+
+We then added:
+
+```text
+FLZModCuspLabelThetaLocalContainerAudit
+```
+
+It supplies such estimates for:
+
+```text
+each audited packet and nonzero cusp sign-label class
+the separately handled zero label
+```
+
+Lean derives:
+
+```text
+targetSigned_le_cuspClassLogVolume
+targetSigned_le_zeroLogVolume
+toThetaCuspClassContainerAudit
+targetSigned_le_normalizedLogVolume
+toThetaPilotHullContainerAudit
+qSigned_le_thetaSigned_via_local_container
+```
+
+### Mathematical Point
+
+The chain is now more structured:
+
+```text
+local container log-volume estimate
+  -> cusp-class or zero-label bound
+  -> ZMod labelwise bound
+  -> finite F_l average bound
+  -> Theta-source average bound
+  -> qSigned <= thetaSigned
+```
+
+This keeps the hard future work in the expected place: proving local analytic
+container estimates for the actual cusp-labelled log-volume objects.
+
+### Periodic Audit
+
+The formalization still targets the disputed boundary rather than drifting into
+general infrastructure.  The current route explicitly separates:
+
+```text
+(Ind1)/(Ind2): qSigned <= targetSigned and invariance/averaging compatibility
+(Ind3): the hull/container upper-bound context
+local container estimates: the source of targetSigned <= thetaSourceAverage
+```
+
+This matches the source-text split: IUT III describes the holomorphic hull of
+possible Theta-pilot images, the formalization note moves `hull+det` into a
+prior `3.11.5`-style stage, and Scholze-Stix identify the real-line/average
+comparison as the dangerous point.  Our Lean code now keeps that dangerous
+point named and localized instead of hiding it inside the endpoint.
+
+### Trap Avoided
+
+The local estimate object proves a bound for a named local log-volume only
+after checking its equality with the container log-volume.  This prevents the
+container bound from being applied to an unrelated real number.
+
+### Toy Check
+
+The examples now check:
+
+```text
+localContainerLogVolumeEstimate_target_le_local_example
+placeAudited_logVolume_fl_zmod_local_container_cusp_bound_example
+placeAudited_logVolume_fl_zmod_local_container_to_cusp_example
+placeAudited_logVolume_fl_zmod_local_container_q_le_theta_example
+```
+
+### Remaining Gap
+
+The next step should make the local container estimate less real-opaque by
+attaching it to the local log-volume object/capsule data already present in the
+place-audited packet.  That will connect the estimate to the actual
+procession-normalized local object rather than only to its real value.

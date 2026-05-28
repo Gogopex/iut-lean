@@ -395,6 +395,13 @@ def upperSemi_processionNormalized_to_finite_example
     IUTStage1FiniteLocalLogVolumeObject kind :=
   data.toFiniteLocalLogVolumeObject
 
+theorem localContainerLogVolumeEstimate_target_le_local_example
+    {targetSigned localLogVolume : Real}
+    (estimate :
+      IUTStage1LocalContainerLogVolumeEstimate targetSigned localLogVolume) :
+    targetSigned <= localLogVolume :=
+  estimate.targetSigned_le_localLogVolume
+
 def labelAveragedProcessionLogVolume_average_example
     {label : Type u} [Fintype label]
     (data : IUTStage1LabelAveragedProcessionLogVolume label) :
@@ -4014,6 +4021,50 @@ theorem placeAudited_logVolume_fl_zmod_cusp_container_q_le_theta_example
     (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
     package.preLedger.qSigned <= package.preLedger.thetaSigned :=
   part.qSigned_le_thetaSigned_via_cusp_container audited
+
+theorem placeAudited_logVolume_fl_zmod_local_container_cusp_bound_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaLocalContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.theta_source.compatible_average.cuspLogVolume audited).cuspClassLogVolume
+        label :=
+  part.targetSigned_le_cuspClassLogVolume audited label
+
+def placeAudited_logVolume_fl_zmod_local_container_to_cusp_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaLocalContainerAudit l) :
+    audit.FLZModCuspLabelThetaCuspClassContainerAudit l :=
+  part.toThetaCuspClassContainerAudit
+
+theorem placeAudited_logVolume_fl_zmod_local_container_q_le_theta_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaLocalContainerAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.qSigned_le_thetaSigned_via_local_container audited
 
 theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind3_target_le_theta_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
