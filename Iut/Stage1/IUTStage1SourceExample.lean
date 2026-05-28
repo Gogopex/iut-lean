@@ -4613,6 +4613,48 @@ theorem placeAudited_logVolume_fl_zmod_direct_capsule_q_le_theta_example
     package.preLedger.qSigned <= package.preLedger.thetaSigned :=
   part.qSigned_le_thetaSigned_via_direct_capsules audited
 
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+def placeAudited_logVolume_fl_zmod_classified_cusp_direct_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaDirectCapsuleCuspClassAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedCuspClassAudit l :=
+  FLZModCuspLabelThetaClassifiedCuspClassAudit.ofDirectCapsule part
+
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit in
+def placeAudited_logVolume_fl_zmod_classified_cusp_ind2_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaInd2TransportedCuspClassAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedCuspClassAudit l :=
+  FLZModCuspLabelThetaClassifiedCuspClassAudit.ofInd2Transport part
+
+theorem placeAudited_logVolume_fl_zmod_classified_cusp_q_le_theta_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaClassifiedCuspClassAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.qSigned_le_thetaSigned_via_classified_cusp audited
+
 theorem placeAuditedMultiradialThetaHullEndpoint_logVolume_ind3_target_le_theta_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

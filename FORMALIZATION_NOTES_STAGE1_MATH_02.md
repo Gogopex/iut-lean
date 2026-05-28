@@ -5512,3 +5512,91 @@ The next step should classify the source of cusp-class bounds, analogous to the
 earlier classification of the target-to-average bound source.  This will make
 explicit whether a cusp bound came from direct capsule estimates, transported
 capsule estimates, or a still-separate analytic comparison lemma.
+
+## 70. Classifying the Source of Cusp-Class Bounds
+
+### Goal
+
+We classified the source of cusp-class and zero-label bounds.
+
+### Lean Move
+
+We added:
+
+```text
+IUTStage1CuspClassBoundSource
+```
+
+with constructors:
+
+```text
+directCapsuleEstimates
+ind2TransportedCapsuleEstimates
+separateAnalyticComparison
+```
+
+We then added:
+
+```text
+FLZModCuspLabelThetaClassifiedCuspClassAudit
+```
+
+It packages a standard:
+
+```text
+FLZModCuspLabelThetaCuspClassContainerAudit
+```
+
+with its bound-source classification.
+
+Lean provides constructors:
+
+```text
+ofDirectCapsule
+ofInd2Transport
+ofSeparateAnalyticComparison
+```
+
+and proves the same downstream bounds:
+
+```text
+targetSigned_le_cuspClassLogVolume
+targetSigned_le_zeroLogVolume
+qSigned_le_thetaSigned_via_classified_cusp
+```
+
+### Mathematical Point
+
+The formal route now records the provenance of the local cusp/zero estimates:
+
+```text
+direct capsule estimates
+transported capsule estimates along audited `(Ind2)` steps
+separate analytic comparison
+```
+
+This mirrors the earlier target-to-average source classification and gives us a
+clear audit trail for local estimates.
+
+### Trap Avoided
+
+Downstream code can no longer consume a cusp-class audit without the option of
+recording how its bounds were obtained.  This is important because direct local
+estimates and transported estimates have different mathematical obligations.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_classified_cusp_direct_example
+placeAudited_logVolume_fl_zmod_classified_cusp_ind2_example
+placeAudited_logVolume_fl_zmod_classified_cusp_q_le_theta_example
+```
+
+### Remaining Gap
+
+The next step should connect the classified cusp-class audit to the
+target-to-average classification, so the final hull/container route records
+both the source of the local cusp bounds and the source of the global
+target-to-average comparison.

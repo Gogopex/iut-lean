@@ -10423,6 +10423,23 @@ structure FLZModCuspLabelThetaDirectCapsuleCuspClassAudit
         package.preLedger.targetVolume.targetSigned
         audited.choice.local_tensor_state.packetState.capsuleFamily
 
+/-- Source classification for cusp-class/zero-label bounds. -/
+inductive IUTStage1CuspClassBoundSource where
+  | directCapsuleEstimates
+  | ind2TransportedCapsuleEstimates
+  | separateAnalyticComparison
+deriving DecidableEq
+
+/--
+Cusp-class container audit with an explicit source classification for the
+cusp/zero bounds.
+-/
+structure FLZModCuspLabelThetaClassifiedCuspClassAudit
+    (audit : endpoint.LogVolumeChartAudit)
+    (l : PrimeGeFive) where
+  cusp_class_audit : audit.FLZModCuspLabelThetaCuspClassContainerAudit l
+  bound_source : IUTStage1CuspClassBoundSource
+
 theorem qCharted (audit : endpoint.LogVolumeChartAudit) :
     (Transport.map package.preLedger.chartedContainer.chart.qToTarget
       package.preLedger.qValue.qPoint).coord =
@@ -11626,6 +11643,54 @@ theorem qSigned_le_thetaSigned_via_direct_capsules
     audited
 
 end FLZModCuspLabelThetaDirectCapsuleCuspClassAudit
+
+namespace FLZModCuspLabelThetaClassifiedCuspClassAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+def ofDirectCapsule
+    (part : audit.FLZModCuspLabelThetaDirectCapsuleCuspClassAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedCuspClassAudit l :=
+  { cusp_class_audit := part.toThetaCuspClassContainerAudit,
+    bound_source := IUTStage1CuspClassBoundSource.directCapsuleEstimates }
+
+def ofInd2Transport
+    (part : audit.FLZModCuspLabelThetaInd2TransportedCuspClassAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedCuspClassAudit l :=
+  { cusp_class_audit := part.toThetaCuspClassContainerAudit,
+    bound_source := IUTStage1CuspClassBoundSource.ind2TransportedCapsuleEstimates }
+
+def ofSeparateAnalyticComparison
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedCuspClassAudit l :=
+  { cusp_class_audit := part,
+    bound_source := IUTStage1CuspClassBoundSource.separateAnalyticComparison }
+
+theorem targetSigned_le_cuspClassLogVolume
+    (part : audit.FLZModCuspLabelThetaClassifiedCuspClassAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.cusp_class_audit.theta_source.compatible_average.cuspLogVolume
+        audited).cuspClassLogVolume label :=
+  part.cusp_class_audit.targetSigned_le_cuspClassLogVolume audited label
+
+theorem targetSigned_le_zeroLogVolume
+    (part : audit.FLZModCuspLabelThetaClassifiedCuspClassAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      (part.cusp_class_audit.theta_source.compatible_average.cuspLogVolume
+        audited).zeroLogVolume :=
+  part.cusp_class_audit.targetSigned_le_zeroLogVolume audited
+
+theorem qSigned_le_thetaSigned_via_classified_cusp
+    (part : audit.FLZModCuspLabelThetaClassifiedCuspClassAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.cusp_class_audit.qSigned_le_thetaSigned_via_cusp_container audited
+
+end FLZModCuspLabelThetaClassifiedCuspClassAudit
 
 namespace FLZModCuspLabelThetaContainerBoundAudit
 
