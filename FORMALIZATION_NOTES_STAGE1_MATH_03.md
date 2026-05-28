@@ -5841,3 +5841,49 @@ formalization needs these levels distinguished explicitly.
 Future proofs can no longer pass around an untyped "square comparison" and
 silently switch its meaning.  The next task is to audit the existing Theorem
 3.11-to-Corollary 3.12 route and assign each step one of these levels.
+
+## 184. Square-Weighted Averages Are Aggregate-Level Evidence
+
+### Lean Move
+
+We tagged the compatible `F_l^+/-` square-weighted averaged log-volume route:
+
+```text
+FLZModCuspLabelCompatibleAveragedInd12Audit
+  .squareWeightedAverageComparisonLevel
+    = IUTStage1SquareComparisonLevel.aggregateRepresentative
+```
+
+Lean also records that this level is not
+`pointwiseRepresentative`.
+
+### Mathematical Reason
+
+The existing square-weighted average formula expands to a finite sum of
+representative summands:
+
+```text
+sum_j j.val^2 * fullLabelLogVolume(fromCoordinate j)
+```
+
+divided by the profile's total weight.  This is genuine representative-square
+data, but only after summing over the finite label set.  The average may be
+stable under procession automorphism and local tensor direct-summand action
+steps without proving that each coordinate preserves `j.val^2` pointwise.
+
+### Source Check
+
+This matches the IUT III pattern in which procession-normalized or averaged
+log-volume expressions appear as aggregate invariants.  It also matches the
+Scholze-Stix pressure point: averaging or reindexing square-weighted terms does
+not by itself justify inserting the individual `j^2` factors into a global
+pointwise comparison.
+
+### Relevance to the 3.12 Dispute
+
+The square-weighted averaged route can now be used as aggregate evidence, but
+Lean will not let it discharge the structured SHE representative-square
+obligation.  A later proof of Corollary 3.12 must either supply a bridge from
+aggregate evidence to the intended conclusion, or state that the intended
+conclusion lives at the aggregate/log-volume level rather than at the
+pointwise representative level.

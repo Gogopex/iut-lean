@@ -15402,6 +15402,23 @@ namespace FLZModCuspLabelCompatibleAveragedInd12Audit
 variable {audit : endpoint.LogVolumeChartAudit}
 variable {l : PrimeGeFive}
 
+def squareWeightedAverageComparisonLevel
+    (_part : audit.FLZModCuspLabelCompatibleAveragedInd12Audit l) :
+    IUTStage1SquareComparisonLevel :=
+  IUTStage1SquareComparisonLevel.aggregateRepresentative
+
+theorem squareWeightedAverageComparisonLevel_eq_aggregate
+    (part : audit.FLZModCuspLabelCompatibleAveragedInd12Audit l) :
+    part.squareWeightedAverageComparisonLevel =
+      IUTStage1SquareComparisonLevel.aggregateRepresentative :=
+  rfl
+
+theorem squareWeightedAverageComparisonLevel_ne_pointwise
+    (part : audit.FLZModCuspLabelCompatibleAveragedInd12Audit l) :
+    part.squareWeightedAverageComparisonLevel ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative :=
+  IUTStage1SquareComparisonLevel.aggregate_ne_pointwise
+
 theorem localNormalizedAudit
     (part : audit.FLZModCuspLabelCompatibleAveragedInd12Audit l) :
     audit.ProcessionNormalizedInd12Audit :=

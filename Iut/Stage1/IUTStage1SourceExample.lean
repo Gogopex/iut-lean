@@ -5616,6 +5616,34 @@ theorem placeAudited_logVolume_fl_zmod_cusp_square_weighted_normalized_example
   part.squareWeighted_normalizedLogVolume_eq_fullLabelLogVolume
     profile audited j
 
+theorem placeAudited_logVolume_fl_zmod_cusp_square_weighted_level_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelCompatibleAveragedInd12Audit l) :
+    part.squareWeightedAverageComparisonLevel =
+      IUTStage1SquareComparisonLevel.aggregateRepresentative :=
+  part.squareWeightedAverageComparisonLevel_eq_aggregate
+
+theorem placeAudited_logVolume_fl_zmod_cusp_square_weighted_level_ne_pointwise_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelCompatibleAveragedInd12Audit l) :
+    part.squareWeightedAverageComparisonLevel ≠
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative :=
+  part.squareWeightedAverageComparisonLevel_ne_pointwise
+
 theorem placeAudited_logVolume_fl_zmod_cusp_square_weighted_summand_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
