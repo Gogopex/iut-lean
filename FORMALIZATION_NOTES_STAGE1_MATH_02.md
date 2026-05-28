@@ -2199,3 +2199,84 @@ transport of the action entry across an equality of direct-summand families.
 The next serious refinement is to make the action-entry family and the choice's
 local summand family share a common typed source, reducing the need for this
 extra witness.
+
+## 29. Direct-Summand Count Audit
+
+### Goal
+
+We added an audited count statement corresponding to the Theorem 3.11 sentence
+that the number of direct summands is the number of places above the base
+place.
+
+### Lean/API Check
+
+The place-family action data now has:
+
+```text
+IUTStage1Ind2PlaceFamilyActionData.actionCountForKind
+actionCountForKind_nonarchimedean
+actionCountForKind_archimedean
+```
+
+The audited choice namespace now has:
+
+```text
+DirectSummandPlaceCountAudit
+```
+
+with theorems:
+
+```text
+capsuleCount_eq_actionCount
+nonarchimedean_directSummandCount_eq
+archimedean_directSummandCount_eq
+```
+
+### Mathematical Point
+
+The source text says that the cardinality of the direct-summand collection is
+the cardinality of the set of places over `vQ`.  We do not yet have the full
+arithmetic set of places over `vQ`; in this Stage 1 abstraction, the closest
+typed substitute is the audited list of local `(Ind2)` action entries of the
+appropriate place kind.
+
+Thus `DirectSummandPlaceCountAudit` records the exact count obligation at the
+current abstraction layer:
+
+```text
+directSummandCount = number of audited action entries of this kind
+```
+
+Since the local tensor packet already records
+`directSummandCount = capsuleCount`, Lean also derives:
+
+```text
+capsuleCount = number of audited action entries of this kind
+```
+
+### Trap Avoided
+
+This does not identify the action-entry list with the actual arithmetic fiber
+`{v | v lies over vQ}`.  It records a count audit against our present typed
+proxy for that fiber.  A later layer must replace or justify this proxy by
+formalizing the actual place map and fiber.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+ind2PlaceFamily_actionCountForKind_example
+ind2PlaceFamily_nonarchimedean_actionCountForKind_example
+ind2PlaceFamily_archimedean_actionCountForKind_example
+directSummandPlaceCountAudit_capsuleCount_eq_actionCount_example
+directSummandPlaceCountAudit_nonarchimedean_count_example
+directSummandPlaceCountAudit_archimedean_count_example
+```
+
+### Remaining Gap
+
+The next step should introduce an explicit typed place-fiber object for the
+places above `vQ`, then compare the audited action-entry lists to that fiber.
+Only then will this count audit stop depending on the action-entry list as a
+proxy for the place fiber.

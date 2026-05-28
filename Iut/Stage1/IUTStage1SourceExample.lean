@@ -604,6 +604,24 @@ theorem ind2PlaceFamily_totalActionCount_eq_example
       data.nonarchimedeanActions.length + data.archimedeanActions.length :=
   data.totalActionCount_eq
 
+def ind2PlaceFamily_actionCountForKind_example
+    (data : IUTStage1Ind2PlaceFamilyActionData)
+    (kind : IUTStage1PlaceKind) :
+    Nat :=
+  data.actionCountForKind kind
+
+theorem ind2PlaceFamily_nonarchimedean_actionCountForKind_example
+    (data : IUTStage1Ind2PlaceFamilyActionData) :
+    data.actionCountForKind IUTStage1PlaceKind.nonarchimedean =
+      data.nonarchimedeanActions.length :=
+  data.actionCountForKind_nonarchimedean
+
+theorem ind2PlaceFamily_archimedean_actionCountForKind_example
+    (data : IUTStage1Ind2PlaceFamilyActionData) :
+    data.actionCountForKind IUTStage1PlaceKind.archimedean =
+      data.archimedeanActions.length :=
+  data.actionCountForKind_archimedean
+
 def ind2PlaceFamily_nonarchimedeanPlaces_example
     (data : IUTStage1Ind2PlaceFamilyActionData) :
     List (IUTStage1PlaceId IUTStage1PlaceKind.nonarchimedean) :=
@@ -1125,6 +1143,41 @@ theorem placeAuditedDirectSummandPacketChoice_ind2_preserves_totalLogVolume_exam
       audited₂.choice.local_tensor_state.packetState.capsuleFamily.totalLogVolume :=
   IUTStage1PlaceAuditedDirectSummandPacketChoice.ind2_preserves_capsuleTotalLogVolume
     hstep
+
+theorem directSummandPlaceCountAudit_capsuleCount_eq_actionCount_example
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (audit :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.DirectSummandPlaceCountAudit
+        audited) :
+    audited.choice.local_tensor_state.packetState.capsuleFamily.capsuleCount =
+      audited.placeFamilyCompatibility.ind2Actions.actionCountForKind kind :=
+  audit.capsuleCount_eq_actionCount
+
+theorem directSummandPlaceCountAudit_nonarchimedean_count_example
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (audit :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.DirectSummandPlaceCountAudit
+        audited) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      audited.placeFamilyCompatibility.ind2Actions.nonarchimedeanActions.length :=
+  audit.nonarchimedean_directSummandCount_eq
+
+theorem directSummandPlaceCountAudit_archimedean_count_example
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (audit :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice.DirectSummandPlaceCountAudit
+        audited) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      audited.placeFamilyCompatibility.ind2Actions.archimedeanActions.length :=
+  audit.archimedean_directSummandCount_eq
 
 def placeAuditedNonarchimedeanIsm_to_ind2_example
     {coric : Type u}

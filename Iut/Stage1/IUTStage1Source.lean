@@ -1325,6 +1325,24 @@ theorem totalActionCount_eq
       data.nonarchimedeanActions.length + data.archimedeanActions.length :=
   rfl
 
+def actionCountForKind
+    (data : IUTStage1Ind2PlaceFamilyActionData) :
+    IUTStage1PlaceKind -> Nat
+  | IUTStage1PlaceKind.nonarchimedean => data.nonarchimedeanCount
+  | IUTStage1PlaceKind.archimedean => data.archimedeanCount
+
+theorem actionCountForKind_nonarchimedean
+    (data : IUTStage1Ind2PlaceFamilyActionData) :
+    data.actionCountForKind IUTStage1PlaceKind.nonarchimedean =
+      data.nonarchimedeanActions.length :=
+  rfl
+
+theorem actionCountForKind_archimedean
+    (data : IUTStage1Ind2PlaceFamilyActionData) :
+    data.actionCountForKind IUTStage1PlaceKind.archimedean =
+      data.archimedeanActions.length :=
+  rfl
+
 def nonarchimedeanPlaces
     (data : IUTStage1Ind2PlaceFamilyActionData) :
     List (IUTStage1PlaceId IUTStage1PlaceKind.nonarchimedean) :=
@@ -2954,6 +2972,54 @@ theorem archimedeanPlaces_eq
         entry.place := by
   rw [← audited.upperSemiState_eq]
   exact audited.placeFamilyCompatibility.archimedeanPlaces_eq
+
+/--
+Audit that the direct-summand count of a place-audited Theorem 3.11 choice
+matches the number of `(Ind2)` action entries of the corresponding place kind.
+-/
+structure DirectSummandPlaceCountAudit
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) where
+  direct_summand_count_eq_actionCount :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      audited.placeFamilyCompatibility.ind2Actions.actionCountForKind kind
+
+namespace DirectSummandPlaceCountAudit
+
+variable
+  {audited :
+    IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+
+theorem capsuleCount_eq_actionCount
+    (audit : DirectSummandPlaceCountAudit audited) :
+    audited.choice.local_tensor_state.packetState.capsuleFamily.capsuleCount =
+      audited.placeFamilyCompatibility.ind2Actions.actionCountForKind kind := by
+  rw [← audited.choice.local_tensor_state.packetState.direct_summand_count_eq_capsuleCount]
+  exact audit.direct_summand_count_eq_actionCount
+
+theorem nonarchimedean_directSummandCount_eq
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    (audit : DirectSummandPlaceCountAudit audited) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      audited.placeFamilyCompatibility.ind2Actions.nonarchimedeanActions.length := by
+  rw [audit.direct_summand_count_eq_actionCount]
+  exact
+    audited.placeFamilyCompatibility.ind2Actions.actionCountForKind_nonarchimedean
+
+theorem archimedean_directSummandCount_eq
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    (audit : DirectSummandPlaceCountAudit audited) :
+    audited.choice.local_tensor_state.packetState.tensorState.directSummandCount =
+      audited.placeFamilyCompatibility.ind2Actions.archimedeanActions.length := by
+  rw [audit.direct_summand_count_eq_actionCount]
+  exact
+    audited.placeFamilyCompatibility.ind2Actions.actionCountForKind_archimedean
+
+end DirectSummandPlaceCountAudit
 
 /-- Audited `(Ind1)` step preserving the place-family compatibility audit. -/
 structure ProcessionAutomorphismStep
