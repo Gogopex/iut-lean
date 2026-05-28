@@ -1550,6 +1550,54 @@ theorem rank_pos
 
 end IUTStage1ArithmeticVectorBundleDeterminantLogVolume
 
+/--
+Step (xi-e)/(xi-f) upper-ray comparison after hull, determinant, and normalized
+log-volume.
+
+The source text writes the possible output pilot log-volumes as
+`R_{≤ -|log(Theta)|}` and then records `-|log(q)|` as an element of this subset.
+The current record keeps the comparable real-line skeleton of that step, with
+`thetaHullLogVolume` supplied by the determinant-normalized hull value.
+-/
+structure IUTStage1HullDetPilotUpperRayLogVolume where
+  determinant :
+    IUTStage1ArithmeticVectorBundleDeterminantLogVolume
+  thetaHullLogVolume : Real
+  theta_eq_normalized_determinant :
+    thetaHullLogVolume = determinant.normalizedLogVolume
+  qPilotLogVolume : Real
+  q_mem_upperRay : qPilotLogVolume <= thetaHullLogVolume
+
+namespace IUTStage1HullDetPilotUpperRayLogVolume
+
+def upperRay
+    (data : IUTStage1HullDetPilotUpperRayLogVolume) : Set Real :=
+  { value | value <= data.thetaHullLogVolume }
+
+theorem qPilot_mem_upperRay
+    (data : IUTStage1HullDetPilotUpperRayLogVolume) :
+    data.qPilotLogVolume ∈ data.upperRay :=
+  data.q_mem_upperRay
+
+theorem qPilotLogVolume_le_thetaHullLogVolume
+    (data : IUTStage1HullDetPilotUpperRayLogVolume) :
+    data.qPilotLogVolume <= data.thetaHullLogVolume :=
+  data.q_mem_upperRay
+
+theorem thetaHullLogVolume_eq_determinant
+    (data : IUTStage1HullDetPilotUpperRayLogVolume) :
+    data.thetaHullLogVolume = data.determinant.determinantLogVolume := by
+  rw [data.theta_eq_normalized_determinant,
+    data.determinant.normalizedLogVolume_eq_determinant]
+
+theorem qPilotLogVolume_le_determinant
+    (data : IUTStage1HullDetPilotUpperRayLogVolume) :
+    data.qPilotLogVolume <= data.determinant.determinantLogVolume := by
+  rw [← data.thetaHullLogVolume_eq_determinant]
+  exact data.qPilotLogVolume_le_thetaHullLogVolume
+
+end IUTStage1HullDetPilotUpperRayLogVolume
+
 namespace IUTStage1FiniteLocalLogVolumeObject
 
 variable {kind : IUTStage1PlaceKind}
