@@ -1691,6 +1691,51 @@ theorem cTheta_ge_neg_one
 end IUTStage1Corollary312CThetaLowerBoundShadow
 
 /--
+Signed Corollary 3.12 comparison data together with the final `C_Theta` bound.
+
+This connects the existing Stage 1 signed comparison payload
+`qSigned <= thetaSigned` to the Step (xi-f) lower bound on `C_Theta`.  The only
+new hypothesis is the source condition on the chosen constant:
+`thetaSigned <= C_Theta * (-qSigned)`, i.e. the displayed
+`-|log(Theta)| <= C_Theta |log(q)|`.
+-/
+structure IUTStage1Corollary312SignedCThetaBound where
+  comparison : Corollary312ComparisonData
+  cTheta : Real
+  thetaSigned_le_cTheta_absLogQ :
+    comparison.thetaSigned <= cTheta * (-comparison.qSigned)
+
+namespace IUTStage1Corollary312SignedCThetaBound
+
+def toCThetaLowerBoundShadow
+    (data : IUTStage1Corollary312SignedCThetaBound) :
+    IUTStage1Corollary312CThetaLowerBoundShadow :=
+  { absLogQ := -data.comparison.qSigned,
+    absLogQ_pos := by
+      simpa using data.comparison.q_positive,
+    qPilotLogVolume := data.comparison.qSigned,
+    thetaPilotLogVolume := data.comparison.thetaSigned,
+    cTheta := data.cTheta,
+    qPilotLogVolume_eq_neg_absLogQ := by
+      ring,
+    qPilotLogVolume_le_thetaPilotLogVolume :=
+      data.comparison.qSigned_le_thetaSigned,
+    thetaPilotLogVolume_le_cTheta_absLogQ :=
+      data.thetaSigned_le_cTheta_absLogQ }
+
+theorem qSigned_le_cTheta_absLogQ
+    (data : IUTStage1Corollary312SignedCThetaBound) :
+    data.comparison.qSigned <= data.cTheta * (-data.comparison.qSigned) :=
+  data.toCThetaLowerBoundShadow.qPilotLogVolume_le_cTheta_absLogQ
+
+theorem cTheta_ge_neg_one
+    (data : IUTStage1Corollary312SignedCThetaBound) :
+    (-1 : Real) <= data.cTheta :=
+  data.toCThetaLowerBoundShadow.cTheta_ge_neg_one
+
+end IUTStage1Corollary312SignedCThetaBound
+
+/--
 Step (xi-h) tensor-power warning for the `Theta`-pilot log-volume.
 
 The source text recalls that the EtTh argument used in Step (xi) has no evident

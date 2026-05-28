@@ -642,6 +642,7 @@ structure ProcessionContainerExperimentReport where
   hullDetUpperRayComparisonAvailable : Bool
   qPilotTwoComputationComparisonAvailable : Bool
   corollary312CThetaLowerBoundAlgebraAvailable : Bool
+  corollary312SignedCThetaBridgeAvailable : Bool
   thetaPilotTensorPowerWarningAvailable : Bool
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
@@ -713,6 +714,7 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     hullDetUpperRayComparisonAvailable := true,
     qPilotTwoComputationComparisonAvailable := true,
     corollary312CThetaLowerBoundAlgebraAvailable := true,
+    corollary312SignedCThetaBridgeAvailable := true,
     thetaPilotTensorPowerWarningAvailable := true,
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
@@ -1021,6 +1023,16 @@ theorem corollary312CTheta_qPilotLogVolume_le_cTheta_absLogQ
 
 theorem corollary312CTheta_lower_bound
     (data : IUTStage1Corollary312CThetaLowerBoundShadow) :
+    (-1 : Real) <= data.cTheta :=
+  data.cTheta_ge_neg_one
+
+theorem corollary312SignedCTheta_qSigned_le_cTheta_absLogQ
+    (data : IUTStage1Corollary312SignedCThetaBound) :
+    data.comparison.qSigned <= data.cTheta * (-data.comparison.qSigned) :=
+  data.qSigned_le_cTheta_absLogQ
+
+theorem corollary312SignedCTheta_lower_bound
+    (data : IUTStage1Corollary312SignedCThetaBound) :
     (-1 : Real) <= data.cTheta :=
   data.cTheta_ge_neg_one
 
@@ -1725,6 +1737,7 @@ structure Corollary312DisputeFirstPassReport where
   hullDetUpperRayComparisonAvailable : Bool
   qPilotTwoComputationComparisonAvailable : Bool
   corollary312CThetaLowerBoundAlgebraAvailable : Bool
+  corollary312SignedCThetaBridgeAvailable : Bool
   thetaPilotTensorPowerWarningAvailable : Bool
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
@@ -1809,6 +1822,7 @@ def corollary312DisputeFirstPassReport :
     hullDetUpperRayComparisonAvailable := true,
     qPilotTwoComputationComparisonAvailable := true,
     corollary312CThetaLowerBoundAlgebraAvailable := true,
+    corollary312SignedCThetaBridgeAvailable := true,
     thetaPilotTensorPowerWarningAvailable := true,
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
@@ -1977,6 +1991,11 @@ theorem corollary312Report_qPilotTwoComputationComparisonAvailable :
 
 theorem corollary312Report_cThetaLowerBoundAlgebraAvailable :
     corollary312DisputeFirstPassReport.corollary312CThetaLowerBoundAlgebraAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_signedCThetaBridgeAvailable :
+    corollary312DisputeFirstPassReport.corollary312SignedCThetaBridgeAvailable =
       true :=
   rfl
 
