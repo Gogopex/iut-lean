@@ -1371,3 +1371,58 @@ placeAudited_logVolume_fl_zmod_direct_packet_normalized_insulated_bridge_source_
 The next step should push one level further back to the `ZMod` packet-normalized
 route, where the equalities are stated labelwise over `ZMod l.value` before
 being converted into cusp-class and zero log-volume equalities.
+
+## 126. ZMod Packet-Normalized Route Produces the Insulated Bridge
+
+### Lean Move
+
+I added:
+
+```text
+FLZModCuspLabelThetaZModPacketNormalizedRouteAudit
+  .toInsulatedCuspZeroPacketBridgeAudit
+FLZModCuspLabelThetaZModPacketNormalizedRouteAudit
+  .toClassifiedInsulatedCuspZeroPacketBridgeAudit
+FLZModCuspLabelThetaZModPacketNormalizedRouteAudit
+  .insulatedPacketBridgeSource_eq_direct
+```
+
+### Mathematical Reason
+
+This pushes the bridge source back to the labelwise `ZMod l.value` route.  From
+a theorem saying every `ZMod` label's normalized log-volume is the packet
+normalized value, Lean first recovers the cusp-class and zero equalities via the
+existing cusp-label compatibility theorem.  Then direct packet normalization
+supplies the local-object bridge.
+
+The route is now:
+
+```text
+ZMod labelwise packet-normalized equality
+  -> cusp/zero packet-normalized equality
+  -> direct packet-normalized local-object route
+  -> insulated packet bridge
+```
+
+### Trap Avoided
+
+The zero/nonzero comparison is still downstream of explicit labelwise equality
+and direct normalization.  The proof does not identify zero as a sign-label
+class; it converts zero through the separate zero theorem of the compatibility
+structure.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_zmod_packet_to_insulated_bridge_example
+placeAudited_logVolume_fl_zmod_zmod_packet_insulated_bridge_source_example
+```
+
+### Remaining Gap
+
+The next step should expose the strongest version: a constant `ZMod` packet
+family gives the same insulated bridge.  That will make clear that a constant
+label family is sufficient to collapse the insulated zero/nonzero route through
+the packet object.

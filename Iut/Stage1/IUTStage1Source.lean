@@ -14581,6 +14581,25 @@ def toFullClassifiedRouteSummary
     audit.FLZModCuspLabelThetaFullClassifiedRouteSummary l :=
   part.toDirectPacketNormalizedLocalObjectRouteAudit.toFullClassifiedRouteSummary
 
+def toInsulatedCuspZeroPacketBridgeAudit
+    (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaInsulatedCuspZeroPacketBridgeAudit l :=
+  let directRoute := part.toDirectPacketNormalizedLocalObjectRouteAudit
+  directRoute.toInsulatedCuspZeroPacketBridgeAudit
+
+def toClassifiedInsulatedCuspZeroPacketBridgeAudit
+    (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l) :
+    audit.FLZModCuspLabelThetaClassifiedInsulatedCuspZeroPacketBridgeAudit l :=
+  let directRoute := part.toDirectPacketNormalizedLocalObjectRouteAudit
+  directRoute.toClassifiedInsulatedCuspZeroPacketBridgeAudit
+
+theorem insulatedPacketBridgeSource_eq_direct
+    (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l) :
+    part.toClassifiedInsulatedCuspZeroPacketBridgeAudit.bridge_source =
+      IUTStage1ZModPacketLocalObjectBridgeSource.directLocalLabelObjectConstruction :=
+  let directRoute := part.toDirectPacketNormalizedLocalObjectRouteAudit
+  directRoute.insulatedPacketBridgeSource_eq_direct
+
 theorem packetIdentificationSource_eq_direct
     (part : audit.FLZModCuspLabelThetaZModPacketNormalizedRouteAudit l) :
     part.toFullClassifiedRouteSummary.packetIdentificationSource =
