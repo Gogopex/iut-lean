@@ -1243,3 +1243,71 @@ The current proof corridor separates three questions that are often conflated:
 
 The first two are now Lean-checked in separate mathematical modules.  The third
 is precisely where the real-line-identification issue remains concentrated.
+
+## 207. Archimedean Upper-Semi Entries Have The Opposite Local Direction
+
+### Lean Move
+
+Next to the nonarchimedean entry alignment we added:
+
+```text
+ArchimedeanInd3EntryAlignment
+```
+
+with:
+
+```text
+thetaAverage_le_packetLocalObjectFinite
+packetLocalObjectFinite_eq_ind3Source
+thetaAverage_eq_ind3Target
+```
+
+The example file checks:
+
+```text
+placeAudited_arch_ind3_entry_theta_le_packet_example
+```
+
+### Mathematical Reason
+
+The archimedean upper-semi datum in the current source model is a surjection
+datum:
+
+```text
+entry.targetLogVolume.finiteLogVolume <= entry.sourceLogVolume.finiteLogVolume
+```
+
+Thus, if we align
+
+```text
+packet local object = entry source
+theta average = entry target
+```
+
+Lean derives:
+
+```text
+theta average <= packet local object finite log-volume
+```
+
+not the nonarchimedean-style inequality
+
+```text
+packet local object finite log-volume <= theta average
+```
+
+### Source Check
+
+This follows the distinction already encoded in the source-facing Theorem 3.11
+model: nonarchimedean upper-semi data is represented by inclusion data, while
+archimedean upper-semi data is represented by surjection data.  We should not
+erase that distinction when assembling the Corollary 3.12 route.
+
+### Relevance to the 3.12 Dispute
+
+This is a useful failure-prevention checkpoint.  One possible formalization
+mistake would be to treat all upper-semi local entries as if they supplied the
+same ordered real inequality.  The Lean code now makes that impossible at this
+layer: the archimedean theorem exposes the reverse orientation, so any later
+global aggregation must explain how the archimedean contribution is used rather
+than silently folding it into the nonarchimedean inclusion argument.

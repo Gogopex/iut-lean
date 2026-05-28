@@ -10873,6 +10873,21 @@ theorem placeAudited_nonarch_ind3_entry_packet_le_theta_example
       thetaAverage :=
   alignment.packetLocalObjectFinite_le_thetaAverage
 
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaHodgeDescentPacketTransportAudit in
+theorem placeAudited_arch_ind3_entry_theta_le_packet_example
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.archimedean}
+    {entry : IUTStage1ArchimedeanSurjectionData}
+    {thetaAverage : Real}
+    (alignment : ArchimedeanInd3EntryAlignment
+      audited entry thetaAverage) :
+    thetaAverage <=
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume :=
+  alignment.thetaAverage_le_packetLocalObjectFinite
+
 theorem placeAudited_logVolume_fl_zmod_constant_zmod_target_bound_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
