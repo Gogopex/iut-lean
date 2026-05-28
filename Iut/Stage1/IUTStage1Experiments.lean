@@ -652,6 +652,7 @@ structure ProcessionContainerExperimentReport where
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
   generalizedThetaLGPLambdaBoundAvailable : Bool
+  generalizedQLambdaCThetaAlgebraAvailable : Bool
   distinctLabelIntertwiningTransportAvailable : Bool
   toyIntertwiningUpperRayBoundAvailable : Bool
   logThetaColumnRoleTableAvailable : Bool
@@ -729,6 +730,7 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
     generalizedThetaLGPLambdaBoundAvailable := true,
+    generalizedQLambdaCThetaAlgebraAvailable := true,
     distinctLabelIntertwiningTransportAvailable := true,
     toyIntertwiningUpperRayBoundAvailable := true,
     logThetaColumnRoleTableAvailable := true,
@@ -1132,6 +1134,17 @@ theorem generalizedThetaLGPLambda_sharper_boundary
     (hlambda : data.lambda < 1) :
     (-1 : Real) < -((data.lambda : Real)) :=
   data.sharper_boundary_of_lambda_lt_one hlambda
+
+theorem generalizedQLambdaCTheta_lower_bound
+    (data : IUTStage1Corollary312QLambdaCThetaBoundShadow) :
+    -((data.lambda : Real)) <= data.cTheta :=
+  data.cTheta_ge_neg_lambda
+
+theorem generalizedQLambdaCTheta_standard_bound
+    (data : IUTStage1Corollary312QLambdaCThetaBoundShadow)
+    (hlambda : data.lambda <= 1) :
+    (-1 : Real) <= data.cTheta :=
+  data.standard_bound_of_lambda_le_one hlambda
 
 theorem distinctLabelIntertwining_labels_distinct
     (data : IUTStage1DistinctLabelIntertwiningTransport) :
@@ -1788,6 +1801,7 @@ structure Corollary312DisputeFirstPassReport where
   globalFrobenioidCalibrationAvailable : Bool
   positiveRationalUnitRigidityAvailable : Bool
   generalizedThetaLGPLambdaBoundAvailable : Bool
+  generalizedQLambdaCThetaAlgebraAvailable : Bool
   distinctLabelIntertwiningTransportAvailable : Bool
   toyIntertwiningUpperRayBoundAvailable : Bool
   logThetaColumnRoleTableAvailable : Bool
@@ -1878,6 +1892,7 @@ def corollary312DisputeFirstPassReport :
     globalFrobenioidCalibrationAvailable := true,
     positiveRationalUnitRigidityAvailable := true,
     generalizedThetaLGPLambdaBoundAvailable := true,
+    generalizedQLambdaCThetaAlgebraAvailable := true,
     distinctLabelIntertwiningTransportAvailable := true,
     toyIntertwiningUpperRayBoundAvailable := true,
     logThetaColumnRoleTableAvailable := true,
@@ -2092,6 +2107,11 @@ theorem corollary312Report_positiveRationalUnitRigidityAvailable :
 
 theorem corollary312Report_generalizedThetaLGPLambdaBoundAvailable :
     corollary312DisputeFirstPassReport.generalizedThetaLGPLambdaBoundAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_generalizedQLambdaCThetaAlgebraAvailable :
+    corollary312DisputeFirstPassReport.generalizedQLambdaCThetaAlgebraAvailable =
       true :=
   rfl
 

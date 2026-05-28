@@ -190,6 +190,10 @@ The code currently covers:
 \item the Remark 3.12.1(ii) generalized-link numerical bound
   \(C_\Theta\ge-\lambda\) for \(\lambda\in\mathbb{Q}_{>0}\), with strict
   strengthening over the \(\lambda=1\) bound when \(\lambda<1\);
+\item the \(q^\lambda\)-pilot endpoint algebra:
+  from a signed comparison for \(-\lambda|\log(q)|\) and the same
+  \(C_\Theta|\log(q)|\) upper bound, Lean derives \(C_\Theta\ge-\lambda\), and
+  hence \(C_\Theta\ge-1\) when \(\lambda\le1\);
 \item the Remark 3.12.2 distinct-label implication
   \(q\text{-itw}\Rightarrow q\text{-itw}\wedge\Theta\text{-itw}/\mathrm{indets}\),
   with q-native and \(\Theta\)-native labels proved distinct;
@@ -374,7 +378,8 @@ shadows, plus the direct Step (xi-g)-to-(xi-f) endpoint bridge giving
 \(C_\Theta\ge-1\) from the two-computation q-pilot record and positive-rational
 unit rigidity.
 The generalized-link flag records the rational parameter inequality
-\(C_\Theta\ge-\lambda\).
+\(C_\Theta\ge-\lambda\), now with the corresponding \(q^\lambda\)-pilot
+real-valued derivation.
 The distinct-label flag records the logical intertwining display in
 Remark 3.12.2 and rejects collapse of the q-native and \(\Theta\)-native labels.
 The toy-model flag records the resulting upper-ray arithmetic \(h\le\epsilon\).

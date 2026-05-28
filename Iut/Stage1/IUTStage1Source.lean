@@ -1784,6 +1784,60 @@ theorem cTheta_ge_neg_one
 end IUTStage1Corollary312SignedCThetaBound
 
 /--
+Generalized `q^lambda` Step (xi-f) algebra.
+
+Remark 3.11.1(ii) and Remark 3.12.1(ii) discuss replacing the q-pilot by a
+`q^lambda`-pilot.  At the real-valued endpoint, a signed q-pilot log-volume
+`-lambda * |log(q)|`, together with the same Theta upper bound by
+`C_Theta * |log(q)|`, yields `C_Theta >= -lambda`.
+-/
+structure IUTStage1Corollary312QLambdaCThetaBoundShadow where
+  lambda : Rat
+  lambda_pos : 0 < lambda
+  absLogQ : Real
+  absLogQ_pos : 0 < absLogQ
+  qLambdaSigned : Real
+  thetaSigned : Real
+  cTheta : Real
+  qLambdaSigned_eq_neg_lambda_absLogQ :
+    qLambdaSigned = -((lambda : Real) * absLogQ)
+  qLambdaSigned_le_thetaSigned :
+    qLambdaSigned <= thetaSigned
+  thetaSigned_le_cTheta_absLogQ :
+    thetaSigned <= cTheta * absLogQ
+
+namespace IUTStage1Corollary312QLambdaCThetaBoundShadow
+
+theorem qLambdaSigned_le_cTheta_absLogQ
+    (data : IUTStage1Corollary312QLambdaCThetaBoundShadow) :
+    data.qLambdaSigned <= data.cTheta * data.absLogQ :=
+  le_trans data.qLambdaSigned_le_thetaSigned
+    data.thetaSigned_le_cTheta_absLogQ
+
+theorem cTheta_ge_neg_lambda
+    (data : IUTStage1Corollary312QLambdaCThetaBoundShadow) :
+    -((data.lambda : Real)) <= data.cTheta := by
+  have hle := data.qLambdaSigned_le_cTheta_absLogQ
+  rw [data.qLambdaSigned_eq_neg_lambda_absLogQ] at hle
+  have hmul :
+      -((data.lambda : Real)) * data.absLogQ <=
+        data.cTheta * data.absLogQ := by
+    simpa [neg_mul] using hle
+  exact le_of_mul_le_mul_right hmul data.absLogQ_pos
+
+theorem standard_bound_of_lambda_le_one
+    (data : IUTStage1Corollary312QLambdaCThetaBoundShadow)
+    (hlambda : data.lambda <= 1) :
+    (-1 : Real) <= data.cTheta := by
+  have hcast : (data.lambda : Real) <= 1 := by
+    exact_mod_cast hlambda
+  have hstandard : (-1 : Real) <= -((data.lambda : Real)) := by
+    linarith
+  exact le_trans hstandard data.cTheta_ge_neg_lambda
+
+end IUTStage1Corollary312QLambdaCThetaBoundShadow
+
+/--
 Step (xi-g) to Step (xi-f) endpoint with a chosen `C_Theta`.
 
 This composes the two q-pilot computations, the signed Corollary 3.12 payload,
