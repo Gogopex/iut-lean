@@ -18688,3 +18688,38 @@ audit naming the square-weighted average and the Theta-source average.
 When future source-level work replaces the explicit audit input, the replacement
 target is now even more precise: produce endpoint data, recover the endpoint
 inequality, and feed that exact proof into the 3.11.5 comparison data.
+
+## 148. 3.11.5 Routes Use The Endpoint Audit
+
+### Lean Move
+
+We added:
+
+```text
+weightedThetaComparisonRouteOfThreeElevenFive_uses_endpointAudit
+```
+
+for both the labelwise and cusp-class route certificates.
+
+### Mathematical Reason
+
+The full route certificate built from the `3.11.5 => 3.12` audit now exposes
+that its hard field
+
+```text
+weightedAverage_le_thetaAverage
+```
+
+is exactly the inequality recovered from the endpoint audit.
+
+### Source Check
+
+This keeps the source-facing final comparison from being duplicated or obscured
+after the route certificate is built.  The route does not introduce a new
+comparison; it carries forward the same endpoint audit.
+
+### Relevance to the 3.12 Dispute
+
+Downstream users of the route can recover the precise endpoint proof that drives
+the final q/Theta inequality.  This makes the remaining dispute point visible
+even at the full-route API boundary.
