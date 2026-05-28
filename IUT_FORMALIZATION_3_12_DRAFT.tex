@@ -219,6 +219,8 @@ The code currently covers:
    \approx\frac16\operatorname{ht}_\infty
    \approx\operatorname{ht}_{\omega_X(D)}\) composes to a direct bounded
   discrepancy relation;
+\item bounded-discrepancy transfer lemmas: pointwise upper and lower bounds move
+  across an \(\approx\) relation with the expected additive constant shift;
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -274,7 +276,8 @@ upper bound for \(C_\Theta\), plus the final coarse error absorption.  The final
 display flag records the composed Theorem 1.10 inequality with \(F\)-level
 log-degree terms.  The Theorem A flag records the bounded-discrepancy
 height/log-different/log-conductor inequality.  The Corollary 2.2 flag records
-composition of the displayed bounded-discrepancy chain.
+composition of the displayed bounded-discrepancy chain.  The transfer flag
+records movement of pointwise bounds across bounded-discrepancy equivalence.
 The theorem-level route is:
 \[
 \begin{array}{ccccc}
@@ -357,6 +360,8 @@ the equivalent pointwise height bound from the lower-bound hypothesis.
 For Corollary 2.2(i), Lean defines equality up to bounded discrepancy, proves
 reflexivity, symmetry, transitivity, nonnegative scaling, and composes the
 displayed chain from \(\log(q_2)\) to \(\operatorname{ht}_{\omega_X(D)}\).
+Lean also proves that upper and lower pointwise bounds transfer across such a
+bounded-discrepancy equivalence with the appropriate constant shift.
 
 \section{Missing Mathematics}
 

@@ -664,6 +664,7 @@ structure ProcessionContainerExperimentReport where
   iutIVTheorem110FinalDisplayAvailable : Bool
   iutIVTheoremABoundedDiscrepancyAvailable : Bool
   iutIVCorollary22BoundedDiscrepancyChainAvailable : Bool
+  iutIVBoundedDiscrepancyTransferAvailable : Bool
 deriving Repr
 
 /--
@@ -713,7 +714,8 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     iutIVFinalErrorAbsorptionAvailable := true,
     iutIVTheorem110FinalDisplayAvailable := true,
     iutIVTheoremABoundedDiscrepancyAvailable := true,
-    iutIVCorollary22BoundedDiscrepancyChainAvailable := true }
+    iutIVCorollary22BoundedDiscrepancyChainAvailable := true,
+    iutIVBoundedDiscrepancyTransferAvailable := true }
 
 theorem processionContainer_card_eq (j : Nat) :
     Fintype.card (IUTStage1ProcessionContainer j) = j + 1 :=
@@ -1244,6 +1246,20 @@ theorem iutIVCorollary22BoundedDiscrepancyChain_lower
       (1 / 6 : Real) * data.logQTwo x - data.canonicalHeight x :=
   data.logQTwo_to_canonicalHeight.lower_bound x
 
+theorem iutIVBoundedDiscrepancy_lowerBound_transfers
+    {Point : Type u} {f g : Point -> Real}
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    {B : Real} (hB : ∀ x : Point, B <= f x) :
+    ∀ x : Point, B - data.upper <= g x :=
+  data.lowerBound_transfers_to_right hB
+
+theorem iutIVBoundedDiscrepancy_upperBound_transfers
+    {Point : Type u} {f g : Point -> Real}
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    {B : Real} (hB : ∀ x : Point, f x <= B) :
+    ∀ x : Point, g x <= B - data.lower :=
+  data.upperBound_transfers_to_right hB
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
@@ -1506,6 +1522,7 @@ structure Corollary312DisputeFirstPassReport where
   iutIVTheorem110FinalDisplayAvailable : Bool
   iutIVTheoremABoundedDiscrepancyAvailable : Bool
   iutIVCorollary22BoundedDiscrepancyChainAvailable : Bool
+  iutIVBoundedDiscrepancyTransferAvailable : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -1569,6 +1586,7 @@ def corollary312DisputeFirstPassReport :
     iutIVTheorem110FinalDisplayAvailable := true,
     iutIVTheoremABoundedDiscrepancyAvailable := true,
     iutIVCorollary22BoundedDiscrepancyChainAvailable := true,
+    iutIVBoundedDiscrepancyTransferAvailable := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -1804,6 +1822,11 @@ theorem corollary312Report_iutIVTheoremABoundedDiscrepancyAvailable :
 
 theorem corollary312Report_iutIVCorollary22BoundedDiscrepancyChainAvailable :
     corollary312DisputeFirstPassReport.iutIVCorollary22BoundedDiscrepancyChainAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_iutIVBoundedDiscrepancyTransferAvailable :
+    corollary312DisputeFirstPassReport.iutIVBoundedDiscrepancyTransferAvailable =
       true :=
   rfl
 

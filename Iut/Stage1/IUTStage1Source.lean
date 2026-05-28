@@ -3120,6 +3120,42 @@ def scale
       have h := mul_le_mul_of_nonneg_left (data.upper_bound x) hc
       linarith }
 
+theorem lowerBound_transfers_to_right
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    {B : Real} (hB : ∀ x : Point, B <= f x) :
+    ∀ x : Point, B - data.upper <= g x := by
+  intro x
+  have hbound := hB x
+  have hupper := data.upper_bound x
+  linarith
+
+theorem lowerBound_transfers_to_left
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    {B : Real} (hB : ∀ x : Point, B <= g x) :
+    ∀ x : Point, B + data.lower <= f x := by
+  intro x
+  have hbound := hB x
+  have hlower := data.lower_bound x
+  linarith
+
+theorem upperBound_transfers_to_right
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    {B : Real} (hB : ∀ x : Point, f x <= B) :
+    ∀ x : Point, g x <= B - data.lower := by
+  intro x
+  have hbound := hB x
+  have hlower := data.lower_bound x
+  linarith
+
+theorem upperBound_transfers_to_left
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    {B : Real} (hB : ∀ x : Point, g x <= B) :
+    ∀ x : Point, f x <= B + data.upper := by
+  intro x
+  have hbound := hB x
+  have hupper := data.upper_bound x
+  linarith
+
 end IUTStage1BoundedDiscrepancyEquivalent
 
 /--
