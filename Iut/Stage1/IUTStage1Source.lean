@@ -13580,6 +13580,32 @@ theorem targetSigned_le_thetaSourceAverage
 
 end FLZModCuspLabelThetaDirectLocalPacketDirectCapsuleRouteAudit
 
+namespace FLZModCuspLabelThetaPacketLocalObjectContainerAudit
+
+variable {audit : endpoint.LogVolumeChartAudit}
+variable {l : PrimeGeFive}
+
+theorem targetSigned_le_thetaSourceAverage_of_directPacket
+    (part : audit.FLZModCuspLabelThetaPacketLocalObjectContainerAudit l)
+    (directNormalization :
+      ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+        IUTStage1DirectPacketNormalizationData
+          audited.choice.local_tensor_state.packetState)
+    (targetCapsuleEstimates :
+      ∀ audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind,
+        IUTStage1TypedCapsuleFamilyContainerEstimate
+          package.preLedger.targetVolume.targetSigned
+          audited.choice.local_tensor_state.packetState.capsuleFamily)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) :
+    package.preLedger.targetVolume.targetSigned <=
+      part.theta_source.thetaSourceAverage audited := by
+  let directRoute :=
+    part.toDirectLocalPacketDirectCapsuleRouteAudit
+      directNormalization targetCapsuleEstimates
+  exact directRoute.targetSigned_le_thetaSourceAverage audited
+
+end FLZModCuspLabelThetaPacketLocalObjectContainerAudit
+
 namespace FLZModCuspLabelThetaInd2LocalPacketTransportedCapsuleRouteAudit
 
 variable {audit : endpoint.LogVolumeChartAudit}

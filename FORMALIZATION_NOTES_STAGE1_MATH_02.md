@@ -7979,3 +7979,65 @@ The lowest-level open problem in the current route is now the construction of
 the packet-local-object estimates themselves from more primitive local/cusp
 data.  This is where the formalization must eventually encode the actual local
 objects behind the `ZMod` cusp-label bridge.
+
+## 102. Packet-Local-Object Estimates Give the Target Bound
+
+### Goal
+
+We exposed the bottom-to-top consequence of the current direct route.
+
+### Lean Move
+
+After the direct local packet route was available, we reopened:
+
+```text
+FLZModCuspLabelThetaPacketLocalObjectContainerAudit
+```
+
+and added:
+
+```text
+targetSigned_le_thetaSourceAverage_of_directPacket
+```
+
+This theorem says that packet-local-object estimates, direct packet
+normalization, and target capsule estimates imply:
+
+```text
+targetSigned <= thetaSourceAverage
+```
+
+### Mathematical Point
+
+This is now the clearest statement of the current formal route.  The theorem's
+inputs are exactly the remaining constructive obligations:
+
+```text
+packet-local-object estimates for cusp classes and zero
+direct packet normalization for each audited packet
+target capsule estimates for each audited packet
+```
+
+Everything above those inputs is derived by named Lean transformations.
+
+### Trap Avoided
+
+The theorem does not claim that packet-local-object estimates exist.  It only
+states what follows if they are supplied.  This is important because these
+estimates are where the eventual formalization must encode the real local IUT
+objects, rather than smuggling them into a high-level average comparison.
+
+### Toy Check
+
+The examples now check:
+
+```text
+placeAudited_logVolume_fl_zmod_packet_local_object_target_bound_example
+```
+
+### Remaining Gap
+
+The next mathematical work should target the construction of the
+packet-local-object estimates from local/cusp data.  The local reference point
+is the `LocalLabCuspModel`/`CuspLabelClassData` foundation layer and the IUT III
+discussion of labels, tensor packets, and log-shells.
