@@ -21646,6 +21646,87 @@ structure Ind3SourceTargetAlignment
     part.insulated_route.theta_source.thetaSourceAverage audited =
       audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume
 
+/--
+Nonarchimedean local upper-semi entry explaining a packet-to-theta real
+comparison.
+
+The local inclusion supplies source/target finite log-volumes.  The remaining
+fields identify the packet local object and a named theta average with those
+local source/target values, and identify the local values with the global
+upper-semi compatibility real values of the audited choice.
+-/
+structure NonarchimedeanInd3EntryAlignment
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    (entry : IUTStage1NonarchimedeanInclusionData)
+    (thetaAverage : Real) where
+  entry_mem :
+    entry ∈ audited.choice.upper_semi_state.nonarchimedeanInclusions
+  packetLocalObject_eq_entrySource :
+    audited.choice.local_tensor_state.packetState.localObject =
+      entry.sourceLogVolume
+  entrySource_eq_ind3Source :
+    entry.sourceLogVolume.finiteLogVolume =
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume
+  thetaAverage_eq_entryTarget :
+    thetaAverage =
+      entry.targetLogVolume.finiteLogVolume
+  entryTarget_eq_ind3Target :
+    entry.targetLogVolume.finiteLogVolume =
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume
+
+namespace NonarchimedeanInd3EntryAlignment
+
+variable
+  {audited :
+    IUTStage1PlaceAuditedDirectSummandPacketChoice
+      coric IUTStage1PlaceKind.nonarchimedean}
+  {entry : IUTStage1NonarchimedeanInclusionData}
+  {thetaAverage : Real}
+
+theorem packetLocalObjectFinite_eq_entrySource
+    (alignment : NonarchimedeanInd3EntryAlignment audited entry thetaAverage) :
+    audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+      entry.sourceLogVolume.finiteLogVolume := by
+  rw [alignment.packetLocalObject_eq_entrySource]
+
+theorem packetLocalObjectFinite_le_thetaAverage
+    (alignment : NonarchimedeanInd3EntryAlignment audited entry thetaAverage) :
+    audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume <=
+      thetaAverage := by
+  calc
+    audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        entry.sourceLogVolume.finiteLogVolume :=
+      alignment.packetLocalObjectFinite_eq_entrySource
+    _ <= entry.targetLogVolume.finiteLogVolume :=
+      entry.logVolume_le
+    _ = thetaAverage :=
+      alignment.thetaAverage_eq_entryTarget.symm
+
+theorem packetLocalObjectFinite_eq_ind3Source
+    (alignment : NonarchimedeanInd3EntryAlignment audited entry thetaAverage) :
+    audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume := by
+  calc
+    audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        entry.sourceLogVolume.finiteLogVolume :=
+      alignment.packetLocalObjectFinite_eq_entrySource
+    _ = audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume :=
+      alignment.entrySource_eq_ind3Source
+
+theorem thetaAverage_eq_ind3Target
+    (alignment : NonarchimedeanInd3EntryAlignment audited entry thetaAverage) :
+    thetaAverage =
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume := by
+  calc
+    thetaAverage = entry.targetLogVolume.finiteLogVolume :=
+      alignment.thetaAverage_eq_entryTarget
+    _ = audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
+      alignment.entryTarget_eq_ind3Target
+
+end NonarchimedeanInd3EntryAlignment
+
 open FLZModCuspLabelThetaCuspClassContainerAudit in
 def toInd3SourceZeroCuspTargetThetaAudit
     (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)

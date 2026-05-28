@@ -10858,6 +10858,21 @@ theorem placeAudited_logVolume_fl_zmod_hodge_ind3_source_route_example
     |>.weightedThetaComparisonRouteOfInd3SourceZeroCuspTarget
       part.bundle profile audited sourceAudit).qSigned_le_thetaSigned
 
+open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
+  FLZModCuspLabelThetaHodgeDescentPacketTransportAudit in
+theorem placeAudited_nonarch_ind3_entry_packet_le_theta_example
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    {thetaAverage : Real}
+    (alignment : NonarchimedeanInd3EntryAlignment
+      audited entry thetaAverage) :
+    audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume <=
+      thetaAverage :=
+  alignment.packetLocalObjectFinite_le_thetaAverage
+
 theorem placeAudited_logVolume_fl_zmod_constant_zmod_target_bound_example
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

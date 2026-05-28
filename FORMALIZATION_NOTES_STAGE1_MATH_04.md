@@ -1163,3 +1163,83 @@ The next hard mathematical task is now sharper: derive `Ind3SourceTargetAlignmen
 from the actual multiradial algorithm / upper-semi compatibility construction,
 or prove that such a derivation requires an additional nontrivial identification
 of real-line copies.
+
+## 206. Nonarchimedean Upper-Semi Entry Gives A Local Packet-To-Theta Bound
+
+### Lean Move
+
+Inside
+
+```text
+FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
+```
+
+we added:
+
+```text
+NonarchimedeanInd3EntryAlignment
+```
+
+with derived facts:
+
+```text
+packetLocalObjectFinite_eq_entrySource
+packetLocalObjectFinite_le_thetaAverage
+packetLocalObjectFinite_eq_ind3Source
+thetaAverage_eq_ind3Target
+```
+
+The example file checks:
+
+```text
+placeAudited_nonarch_ind3_entry_packet_le_theta_example
+```
+
+### Mathematical Reason
+
+This formalizes the nonarchimedean half of upper semi-compatibility more
+directly.  A nonarchimedean upper-semi entry has a source finite log-volume, a
+target finite log-volume, and an inclusion inequality:
+
+```text
+entry.sourceLogVolume.finiteLogVolume <= entry.targetLogVolume.finiteLogVolume
+```
+
+The new alignment says:
+
+```text
+packet local object finite log-volume = entry source finite log-volume
+theta average = entry target finite log-volume
+```
+
+Lean then proves:
+
+```text
+packet local object finite log-volume <= theta average
+```
+
+This is not yet the full Corollary 3.12 route.  It is the local
+nonarchimedean `(Ind3)` inequality that the full route must aggregate and align
+with the Hodge-descent packet object and the theta source average.
+
+### Source Check
+
+This matches the IUT III description of upper semi-compatibility as a local
+one-sided phenomenon.  The formal object is intentionally nonarchimedean: it
+uses the inclusion direction already encoded in
+`IUTStage1NonarchimedeanInclusionData`.  The archimedean surjection data has a
+different local direction and should not be silently merged into this theorem.
+
+### Relevance to the 3.12 Dispute
+
+The current proof corridor separates three questions that are often conflated:
+
+```text
+1. Hodge descent gives zero/cusp = packet local object.
+2. A nonarchimedean upper-semi entry gives packet local object <= theta average.
+3. The global q/Theta comparison requires these local real values to match the
+   audited upper-semi source/target values used by the final route.
+```
+
+The first two are now Lean-checked in separate mathematical modules.  The third
+is precisely where the real-line-identification issue remains concentrated.
