@@ -6772,3 +6772,58 @@ The high-level direct local packet audit still takes target cusp/zero local
 object estimates directly.  A future refinement can use this theorem when the
 cusp/zero log-volume is explicitly identified with the packet local object's
 finite log-volume.
+
+## 86. Local Object Estimates for Identified Log-Volumes
+
+### Goal
+
+We made the capsule-derived local object estimate reusable for an explicitly
+identified log-volume real.
+
+### Lean Move
+
+`IUTStage1DirectPacketNormalizationData` now has:
+
+```text
+toLocalObjectContainerEstimateOfIdentifiedLogVolume
+```
+
+It takes:
+
+```text
+capsule-family container estimates
+localLogVolume = packet local object finiteLogVolume
+```
+
+and returns:
+
+```text
+IUTStage1LocalObjectContainerLogVolumeEstimate kind targetSigned localLogVolume
+```
+
+### Mathematical Point
+
+This is the small bridge needed for future cusp/zero refinements.  If a
+cusp-class or zero log-volume is explicitly identified with the packet local
+object's finite log-volume, then capsule-entry bounds plus direct packet
+normalization give the corresponding local object estimate.
+
+### Trap Avoided
+
+The equality to the packet local object's finite log-volume is still an input.
+Lean does not infer that a cusp/zero log-volume is the local object value merely
+because the packet is directly normalized.
+
+### Toy Check
+
+The examples now check:
+
+```text
+directPacketNormalizationData_capsule_estimates_to_identified_log_example
+```
+
+### Remaining Gap
+
+The next step is to expose the cusp/zero-to-local-object finite-log-volume
+identifications at the high-level direct local packet audit, so these estimates
+can be constructed rather than supplied manually.

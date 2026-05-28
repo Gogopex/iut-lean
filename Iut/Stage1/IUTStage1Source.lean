@@ -2611,6 +2611,18 @@ def toLocalObjectContainerEstimateOfCapsuleEstimates
         targetSigned_le_containerLogVolume :=
           data.targetSigned_le_localObject_of_capsule_estimates estimate } }
 
+def toLocalObjectContainerEstimateOfIdentifiedLogVolume
+    (data : IUTStage1DirectPacketNormalizationData state)
+    {targetSigned localLogVolume : Real}
+    (estimate :
+      IUTStage1TypedCapsuleFamilyContainerEstimate
+        targetSigned state.capsuleFamily)
+    (hlog : localLogVolume = state.localObject.finiteLogVolume) :
+    IUTStage1LocalObjectContainerLogVolumeEstimate
+      kind targetSigned localLogVolume :=
+  IUTStage1LocalObjectContainerLogVolumeEstimate.transportLocalLogVolume
+    (data.toLocalObjectContainerEstimateOfCapsuleEstimates estimate) hlog
+
 end IUTStage1DirectPacketNormalizationData
 
 namespace IUTStage1LocalTensorDirectSummandPacketState
