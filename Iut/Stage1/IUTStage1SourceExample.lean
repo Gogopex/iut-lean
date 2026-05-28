@@ -1455,6 +1455,30 @@ theorem zmodSquareWeightProfile_modular_square_neg_example
       (l := l) (Equiv.neg (ZMod l.value)) :=
   IUTStage1ZModSquareWeightProfile.coordinateModularSquarePreserving_neg
 
+theorem zmodSquareWeightProfile_balanced_square_weight_example
+    {l : PrimeGeFive} (j : ZMod l.value) :
+    IUTStage1ZModSquareWeightProfile.balancedSquareWeight (l := l) j =
+      ((j.valMinAbs.natAbs : Real) ^ 2) :=
+  rfl
+
+theorem zmodSquareWeightProfile_balanced_square_neg_example
+    {l : PrimeGeFive} (j : ZMod l.value) :
+    IUTStage1ZModSquareWeightProfile.balancedSquareWeight (l := l) (-j) =
+      IUTStage1ZModSquareWeightProfile.balancedSquareWeight (l := l) j :=
+  IUTStage1ZModSquareWeightProfile.balancedSquareWeight_neg_eq j
+
+theorem zmodSquareWeightProfile_balanced_square_preserving_refl_example
+    {l : PrimeGeFive} :
+    IUTStage1ZModSquareWeightProfile.CoordinateBalancedSquarePreserving
+      (l := l) (Equiv.refl (ZMod l.value)) :=
+  IUTStage1ZModSquareWeightProfile.coordinateBalancedSquarePreserving_refl
+
+theorem zmodSquareWeightProfile_balanced_square_preserving_neg_example
+    {l : PrimeGeFive} :
+    IUTStage1ZModSquareWeightProfile.CoordinateBalancedSquarePreserving
+      (l := l) (Equiv.neg (ZMod l.value)) :=
+  IUTStage1ZModSquareWeightProfile.coordinateBalancedSquarePreserving_neg
+
 theorem zmodSquareWeightProfile_coordinate_square_val_rigid_example
     {l : PrimeGeFive}
     {coordinateEquiv : ZMod l.value ≃ ZMod l.value}

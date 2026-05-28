@@ -5,6 +5,7 @@ Authors: IUT Lean formalization contributors
 -/
 import Iut.Foundations.InitialThetaData
 import Iut.Stage1.IUTStage1Data
+import Mathlib.Data.ZMod.ValMinAbs
 
 /-!
 First non-toy source-facing package for the Stage 1 IUT scaffold.
@@ -1991,6 +1992,23 @@ def CoordinateModularSquarePreserving
     (coordinateEquiv : ZMod l.value ≃ ZMod l.value) : Prop :=
   ∀ j : ZMod l.value, (coordinateEquiv j) ^ 2 = j ^ 2
 
+/--
+Sign-invariant real square profile built from the minimal absolute
+representative of a `ZMod` class.
+
+This is not the default Corollary 3.12 audit profile.  It is a separate
+candidate profile used to keep track of what can be preserved by sign
+symmetries without preserving the chosen nonnegative representative `j.val`.
+-/
+def balancedSquareWeight (j : ZMod l.value) : Real :=
+  ((j.valMinAbs.natAbs : Real) ^ 2)
+
+def CoordinateBalancedSquarePreserving
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value) : Prop :=
+  ∀ j : ZMod l.value,
+    balancedSquareWeight (l := l) (coordinateEquiv j) =
+      balancedSquareWeight (l := l) j
+
 theorem coordinateSquarePreserving_refl :
     CoordinateSquarePreserving (l := l) (Equiv.refl (ZMod l.value)) := by
   intro j
@@ -2008,6 +2026,24 @@ theorem coordinateModularSquarePreserving_neg :
   intro j
   change (-j) ^ 2 = j ^ 2
   simp [pow_two]
+
+theorem balancedSquareWeight_neg_eq (j : ZMod l.value) :
+    balancedSquareWeight (l := l) (-j) =
+      balancedSquareWeight (l := l) j := by
+  unfold balancedSquareWeight
+  rw [ZMod.natAbs_valMinAbs_neg]
+
+theorem coordinateBalancedSquarePreserving_refl :
+    CoordinateBalancedSquarePreserving
+      (l := l) (Equiv.refl (ZMod l.value)) := by
+  intro j
+  rfl
+
+theorem coordinateBalancedSquarePreserving_neg :
+    CoordinateBalancedSquarePreserving
+      (l := l) (Equiv.neg (ZMod l.value)) := by
+  intro j
+  exact balancedSquareWeight_neg_eq j
 
 /--
 Rigidity of the current real representative-square profile.

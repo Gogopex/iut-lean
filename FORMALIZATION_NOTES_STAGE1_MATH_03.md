@@ -4178,3 +4178,107 @@ Hodge-theoretic mechanisms.  The next source-facing task is not to hide this
 rigidity, but to determine whether the original papers intend a different square
 profile, a different transport interface, or an additional construction that
 justifies the representative-level preservation required by our current audit.
+
+## 160. Balanced Sign-Invariant Square Profile
+
+### Lean Move
+
+We added a separate sign-invariant square profile:
+
+```text
+IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+```
+
+It is defined by the minimal absolute representative supplied by mathlib:
+
+```text
+balancedSquareWeight j = (j.valMinAbs.natAbs : Real)^2
+```
+
+We also added the preservation predicate:
+
+```text
+IUTStage1ZModSquareWeightProfile.CoordinateBalancedSquarePreserving
+```
+
+and proved:
+
+```text
+balancedSquareWeight_neg_eq
+coordinateBalancedSquarePreserving_refl
+coordinateBalancedSquarePreserving_neg
+```
+
+The key input is mathlib's theorem:
+
+```text
+ZMod.natAbs_valMinAbs_neg
+```
+
+which says that `j` and `-j` have the same minimal absolute representative.
+
+### Mathematical Reason
+
+Milestone 159 showed that the current representative-valued profile:
+
+```text
+(j.val : Real)^2
+```
+
+is identity-rigid.  This milestone records a different possible real square
+profile, one that is genuinely compatible with sign symmetry:
+
+```text
+(j.valMinAbs.natAbs : Real)^2
+```
+
+This does not replace the Corollary 3.12 audit profile.  It gives us an explicit
+formal fork:
+
+```text
+representative profile
+  rigid, tied to the chosen nonnegative representative j.val
+
+balanced profile
+  sign-invariant, tied to the minimal absolute representative
+```
+
+If later source analysis indicates that the relevant `j^2` datum should be
+understood only up to sign, we now have a checked Lean object for that.  If the
+source requires the representative-valued profile, the rigidity theorem from
+Milestone 159 remains the correct audit condition.
+
+### Source Check
+
+IUT II separates the `F_l^±` symmetry from the full `F_l` symmetry.  The former
+has a coric/uniradial role and interacts with the zero/nonzero symmetrization;
+the latter separates the zero label from nonzero labels and supports the
+Gaussian-monoid internal structure indexed by `j in F_l`.
+
+IUT III Remark 3.12.4 describes averages over `j in F_l` as part of the
+Corollary 3.12 log-volume estimate and compares this with the `mod p/p^2`
+portion of Witt-vector-like structure.  Scholze-Stix Section 2.2 identifies the
+`j^2` scaling as the obstruction under coherent real-line identifications.
+
+The balanced profile records one possible sign-compatible square model, but it
+does not answer which square model is intended by the source text at the
+Corollary 3.12 boundary.
+
+### Relevance to the 3.12 Dispute
+
+This milestone prevents a false binary.  The formalization no longer has only:
+
+```text
+rigid representative square profile
+```
+
+It also has:
+
+```text
+sign-invariant balanced square profile
+```
+
+But these are different Lean objects.  A future proof of the `3.11.5 => 3.12`
+transport step must say which one is being transported and why that matches the
+paper's `j^2` expression.  That is exactly the kind of precision the
+formalization is meant to enforce.
