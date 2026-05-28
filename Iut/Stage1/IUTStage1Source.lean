@@ -3279,6 +3279,57 @@ theorem one_le_ten_delta_logFactor
 end IUTStage1IUTIVCorollary22C1PrimeScaleWindowShadow
 
 /--
+IUT IV, Corollary 2.2(ii), use of condition (C1) in the Theorem 1.10
+coefficient.
+
+The proof applies the lower part of (C1), together with the source estimate
+`80 * d_mod <= delta`, to replace `80 * d_mod / l` by `delta * h^(-1/2)`.
+-/
+structure IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow where
+  l : PrimeGeFive
+  dmod : Nat
+  delta : Real
+  sqrtH : Real
+  sqrtH_pos : 0 < sqrtH
+  sqrtH_le_l : sqrtH <= (l.value : Real)
+  eighty_dmod_le_delta : 80 * (dmod : Real) <= delta
+
+namespace IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow
+
+theorem l_real_pos
+    (data : IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow) :
+    0 < (data.l.value : Real) := by
+  exact_mod_cast Nat.pos_of_ne_zero data.l.ne_zero
+
+theorem delta_nonneg
+    (data : IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow) :
+    0 <= data.delta := by
+  have hdmod : 0 <= 80 * (data.dmod : Real) := by positivity
+  linarith [data.eighty_dmod_le_delta]
+
+theorem coefficient_le_delta_inv_sqrtH
+    (data : IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow) :
+    80 * (data.dmod : Real) / (data.l.value : Real) <=
+      data.delta / data.sqrtH := by
+  have h_l_pos := data.l_real_pos
+  have hfirst :
+      80 * (data.dmod : Real) / (data.l.value : Real) <=
+        data.delta / (data.l.value : Real) :=
+    div_le_div_of_nonneg_right data.eighty_dmod_le_delta h_l_pos.le
+  have hsecond :
+      data.delta / (data.l.value : Real) <= data.delta / data.sqrtH :=
+    div_le_div_of_nonneg_left data.delta_nonneg data.sqrtH_pos data.sqrtH_le_l
+  exact le_trans hfirst hsecond
+
+theorem one_add_coefficient_le_one_add_delta_inv_sqrtH
+    (data : IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow) :
+    1 + 80 * (data.dmod : Real) / (data.l.value : Real) <=
+      1 + data.delta / data.sqrtH := by
+  linarith [data.coefficient_le_delta_inv_sqrtH]
+
+end IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow
+
+/--
 IUT IV, Corollary 2.2(ii), condition (C2).
 
 The source records the chain
