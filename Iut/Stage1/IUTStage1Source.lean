@@ -2138,6 +2138,58 @@ theorem representativeFullLabelWeightedSummand_constant_one
     (l := l) (1 : Real) j]
   ring
 
+theorem coordinateSquarePreserving_of_representativeSummand_constant_one_preserved
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hsummand :
+      ∀ j : ZMod l.value,
+        representativeFullLabelWeightedSummand
+            (l := l)
+            (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+              (l := l) (1 : Real)) (coordinateEquiv j) =
+          representativeFullLabelWeightedSummand
+            (l := l)
+            (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+              (l := l) (1 : Real)) j) :
+    CoordinateSquarePreserving (l := l) coordinateEquiv := by
+  intro j
+  have h := hsummand j
+  rw [representativeFullLabelWeightedSummand_constant_one,
+    representativeFullLabelWeightedSummand_constant_one] at h
+  exact h
+
+theorem representativeSummand_constant_one_preserved_of_coordinateSquarePreserving
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hcoord : CoordinateSquarePreserving (l := l) coordinateEquiv) :
+    ∀ j : ZMod l.value,
+      representativeFullLabelWeightedSummand
+          (l := l)
+          (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+            (l := l) (1 : Real)) (coordinateEquiv j) =
+        representativeFullLabelWeightedSummand
+          (l := l)
+          (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+            (l := l) (1 : Real)) j := by
+  intro j
+  rw [representativeFullLabelWeightedSummand_constant_one,
+    representativeFullLabelWeightedSummand_constant_one]
+  exact hcoord j
+
+theorem representativeSummand_constant_one_preserved_iff_coordinateSquarePreserving
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value) :
+    (∀ j : ZMod l.value,
+      representativeFullLabelWeightedSummand
+          (l := l)
+          (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+            (l := l) (1 : Real)) (coordinateEquiv j) =
+        representativeFullLabelWeightedSummand
+          (l := l)
+          (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+            (l := l) (1 : Real)) j) ↔
+      CoordinateSquarePreserving (l := l) coordinateEquiv := by
+  constructor
+  · exact coordinateSquarePreserving_of_representativeSummand_constant_one_preserved
+  · exact representativeSummand_constant_one_preserved_of_coordinateSquarePreserving
+
 theorem fullLabelSummand_preserved_of_fullLabelMap
     {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
     (hmap :

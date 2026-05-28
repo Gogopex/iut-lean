@@ -5309,3 +5309,59 @@ than just a standalone theorem.  Any future proof route using only the data in
 representative-weighted summand.  It must be upgraded to the stronger
 coordinate-square/representative-square audit route, or use a sign-compatible
 profile with a separate source justification.
+
+## 174. Representative Summand Preservation Is Exactly Coordinate-Square Preservation
+
+### Lean Move
+
+We promoted the constant-one representative summand obstruction to an exact
+equivalence:
+
+```text
+coordinateSquarePreserving_of_representativeSummand_constant_one_preserved
+representativeSummand_constant_one_preserved_of_coordinateSquarePreserving
+representativeSummand_constant_one_preserved_iff_coordinateSquarePreserving
+```
+
+Lean proves:
+
+```text
+(forall j,
+  representativeFullLabelWeightedSummand constantOne (T j)
+    = representativeFullLabelWeightedSummand constantOne j)
+iff
+CoordinateSquarePreserving T.
+```
+
+### Mathematical Reason
+
+For constant-one log-volume, the representative summand is exactly:
+
+```text
+(j.val)^2.
+```
+
+Thus preserving that summand along a coordinate equivalence is neither weaker
+nor stronger than preserving the real representative square profile.  It is the
+same obligation.
+
+This is useful because it turns a negative example into a precise requirement:
+any proof route that transports representative `j.val^2` summands must provide
+`CoordinateSquarePreserving`, or an equivalent theorem.
+
+### Source Check
+
+The IUT III Corollary 3.12 comparison is a weighted real log-volume comparison.
+Scholze-Stix's objection targets whether the real-valued `j^2` comparison is
+well-defined after the proposed Hodge-theater identifications.  This Lean
+equivalence identifies the formal content of that concern in our Stage 1 model:
+representative-summand transport requires representative-square transport.
+
+### Relevance to the 3.12 Dispute
+
+The missing datum is now exact.  Full-label map preservation, full-label
+log-volume value preservation, and modular-square preservation do not imply the
+representative-summand transport needed for the literal `j.val^2` branch.  The
+necessary condition is precisely coordinate-square preservation, which earlier
+rigidity lemmas show forces identity transport for the current representative
+profile.

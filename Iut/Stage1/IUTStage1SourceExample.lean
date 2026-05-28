@@ -1043,6 +1043,43 @@ theorem zmodSquareWeightProfile_representative_full_label_summand_constant_one_e
   representativeFullLabelWeightedSummand_constant_one j
 
 open IUTStage1ZModSquareWeightProfile in
+theorem zmodSquareWeightProfile_rep_summand_preserved_to_coord_square_example
+    {l : PrimeGeFive}
+    {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
+    (hsummand :
+      ∀ j : ZMod l.value,
+        IUTStage1ZModSquareWeightProfile.representativeFullLabelWeightedSummand
+            (l := l)
+            (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+              (l := l) (1 : Real)) (coordinateEquiv j) =
+          IUTStage1ZModSquareWeightProfile.representativeFullLabelWeightedSummand
+            (l := l)
+            (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+              (l := l) (1 : Real)) j) :
+    IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+      (l := l) coordinateEquiv :=
+  coordinateSquarePreserving_of_representativeSummand_constant_one_preserved
+    hsummand
+
+open IUTStage1ZModSquareWeightProfile in
+theorem zmodSquareWeightProfile_rep_summand_preserved_iff_coord_square_example
+    {l : PrimeGeFive}
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value) :
+    (∀ j : ZMod l.value,
+      IUTStage1ZModSquareWeightProfile.representativeFullLabelWeightedSummand
+          (l := l)
+          (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+            (l := l) (1 : Real)) (coordinateEquiv j) =
+        IUTStage1ZModSquareWeightProfile.representativeFullLabelWeightedSummand
+          (l := l)
+          (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+            (l := l) (1 : Real)) j) ↔
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv :=
+  representativeSummand_constant_one_preserved_iff_coordinateSquarePreserving
+    coordinateEquiv
+
+open IUTStage1ZModSquareWeightProfile in
 theorem zmodSquareWeightProfile_full_label_summand_transport_example
     {l : PrimeGeFive}
     {coordinateEquiv : ZMod l.value ≃ ZMod l.value}
