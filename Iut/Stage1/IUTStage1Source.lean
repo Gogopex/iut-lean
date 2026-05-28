@@ -2322,6 +2322,55 @@ theorem balancedSquareWeightOnSignQuotient_fromCoordinate
     balancedSquareWeight (l := l) j
   rw [zmodNonzeroLabelFromCoordinate_val]
 
+/--
+Sign-quotient pilot-degree model for the sign-compatible square branch.
+
+This is deliberately not the representative `j.val ^ 2` branch.  It records the
+degree relation that actually descends to `F_l / {±1}` in the current finite
+model, using `balancedSquareWeightOnSignQuotient`.
+-/
+structure BalancedThetaPilotDegreeProfile
+    (l : PrimeGeFive) where
+  qPilotDegree : Real
+  thetaPilotDegree : (zmodSignAction l).SignLabelQuotient -> Real
+  thetaPilotDegree_eq_balanced_scale :
+    ∀ label : (zmodSignAction l).SignLabelQuotient,
+      thetaPilotDegree label =
+        balancedSquareWeightOnSignQuotient (l := l) label * qPilotDegree
+
+namespace BalancedThetaPilotDegreeProfile
+
+variable {l : PrimeGeFive}
+
+theorem thetaPilotDegree_fromCoordinate
+    (profile : BalancedThetaPilotDegreeProfile l)
+    (j : ZMod l.value) (hj : j ≠ 0) :
+    profile.thetaPilotDegree (zmodSignLabelFromCoordinate l j hj) =
+      balancedSquareWeight (l := l) j * profile.qPilotDegree := by
+  rw [profile.thetaPilotDegree_eq_balanced_scale,
+    balancedSquareWeightOnSignQuotient_fromCoordinate]
+
+theorem thetaPilotDegree_neg_fromCoordinate_eq
+    (profile : BalancedThetaPilotDegreeProfile l)
+    (j : ZMod l.value) (hj : j ≠ 0) :
+    profile.thetaPilotDegree
+        (zmodSignLabelFromCoordinate l (-j)
+          (zmod_neg_ne_zero_of_ne_zero l hj)) =
+      profile.thetaPilotDegree (zmodSignLabelFromCoordinate l j hj) := by
+  rw [zmodSignLabelFromCoordinate_neg_eq]
+
+theorem thetaPilotDegree_one
+    (profile : BalancedThetaPilotDegreeProfile l) :
+    profile.thetaPilotDegree
+        (zmodSignLabelFromCoordinate l (1 : ZMod l.value)
+          (zmodOneNonzeroLabel l).2) =
+      balancedSquareWeight (l := l) (1 : ZMod l.value) *
+        profile.qPilotDegree :=
+  profile.thetaPilotDegree_fromCoordinate
+    (1 : ZMod l.value) (zmodOneNonzeroLabel l).2
+
+end BalancedThetaPilotDegreeProfile
+
 theorem balancedSquareWeight_zero :
     balancedSquareWeight (l := l) (0 : ZMod l.value) = 0 := by
   unfold balancedSquareWeight
@@ -2631,6 +2680,39 @@ theorem not_exists_representativeSquareWeightOnSignQuotient :
   exact not_coordinateSquarePreserving_neg
     (coordinateSquarePreserving_neg_of_representativeSquareWeightOnSignQuotient
       weightOnQuotient hweight)
+
+/--
+The representative q-to-theta degree rule does not descend to sign-quotient
+labels when the q-pilot degree is nonzero.
+
+The obstruction is exactly the same as for representative square weights:
+dividing a hypothetical quotient-level theta-degree function by the nonzero
+q-pilot degree would produce a quotient-level representative `j.val ^ 2`
+function, contradicting `not_exists_representativeSquareWeightOnSignQuotient`.
+-/
+theorem not_exists_signQuotient_representativeThetaPilotDegree
+    (qPilotDegree : Real) (q_ne_zero : qPilotDegree ≠ 0) :
+    ¬ ∃ thetaOnQuotient :
+        (zmodSignAction l).SignLabelQuotient -> Real,
+      ∀ (j : ZMod l.value) (hj : j ≠ 0),
+        thetaOnQuotient (zmodSignLabelFromCoordinate l j hj) =
+          representativeSquareScale (l := l) j * qPilotDegree := by
+  rintro ⟨thetaOnQuotient, htheta⟩
+  exact not_exists_representativeSquareWeightOnSignQuotient (l := l)
+    ⟨fun label => thetaOnQuotient label / qPilotDegree,
+      by
+        intro j hj
+        calc
+          thetaOnQuotient (zmodSignLabelFromCoordinate l j hj) /
+              qPilotDegree =
+              (representativeSquareScale (l := l) j * qPilotDegree) /
+                qPilotDegree := by
+            rw [htheta j hj]
+          _ = representativeSquareScale (l := l) j := by
+            exact mul_div_cancel_right₀
+              (representativeSquareScale (l := l) j) q_ne_zero
+          _ = ((j.val : Real) ^ 2) :=
+            representativeSquareScale_eq (l := l) j⟩
 
 theorem not_exists_representativeSquareWeightOnFullLabel :
     ¬ ∃ weightOnFullLabel : IUTStage1ZModCuspFullLabel l -> Real,

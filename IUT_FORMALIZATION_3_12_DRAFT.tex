@@ -122,6 +122,10 @@ The code currently covers:
   \(j^2\) scales in this model;
 \item proof that, for nonzero \(\deg(q)\), one label-independent scale cannot
   account for all representative \(\Theta_j\)-degrees;
+\item proof that the raw representative \(j^2\) theta-degree rule does not
+  descend to the sign quotient \(|F_\ell|=F_\ell/\{\pm1\}\) when \(\deg(q)\ne0\);
+\item a separate balanced sign-quotient theta-degree profile which does descend
+  in the current finite model;
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume;
@@ -144,6 +148,7 @@ The current first-pass experiment report evaluates to:
 \texttt{factoredSHEBridgeTheoremAvailable} & = \texttt{true},\\
 \texttt{mismatchCounterexampleBlocksRawCancellation} & = \texttt{true},\\
 \texttt{labelIndependentJ2CollapseRejectedInZModModel} & = \texttt{true},\\
+\texttt{representativeJ2SignQuotientDescentRejectedInZModModel} & = \texttt{true},\\
 \texttt{balancedLevelRejectedAtFinalRouteTheoremAvailable} & = \texttt{true},\\
 \texttt{disputeSettledByCurrentStage} & = \texttt{false}.
 \end{array}
@@ -179,7 +184,10 @@ signed \(q\)-to-\(\Theta\) inequality.
 The strongest negative result is also limited: in the current \(\F_\ell\)-label
 model, Lean rejects a single label-independent scale accounting for all
 representative \(j^2\) factors, and it rejects balanced sign-compatible evidence
-as the final hull/log-volume comparison level.
+as the final hull/log-volume comparison level.  Lean also rejects direct descent
+of raw representative \(j^2\) theta-degree data to \(|F_\ell|\); a balanced
+sign-compatible replacement descends, but is not the final comparison level used
+by the current 3.12 route.
 
 One correctness issue was fixed during this audit.  The experiment report fields
 were renamed so that they describe theorem availability under hypotheses rather
@@ -193,6 +201,8 @@ The present code does not yet formalize:
 \item actual Hodge theaters, Frobenioids, prime strips, log-shells, or
   \(\Theta\)-links;
 \item the Hodge--Arakelov theta evaluation and Gaussian monoids of IUT II;
+\item the replacement of the present balanced sign-quotient control model by the
+  exact IUT theta-value construction over \(|F_\ell|\);
 \item the full multiradial construction of IUT III, Theorem 3.11;
 \item the genuine holomorphic hull and determinant operations of Step (xi);
 \item the exact IUT IV log-volume estimates and Diophantine applications;

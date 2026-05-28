@@ -426,10 +426,13 @@ structure Ind3J2ScaleExperimentReport where
   scalesDiffer : Bool
   labelIndependentScaleCanMatchAll : Bool
   nonzeroQPilotDegreeRejectsLabelIndependentThetaScale : Bool
+  representativeJ2SignQuotientDescentRejected : Bool
+  balancedThetaPilotDegreeDescendsToSignQuotient : Bool
 
 /--
 For every `l >= 5`, the representative square scales at `j = 1` and `j = 2`
-already differ.
+already differ.  At the sign-quotient level, the raw representative `j^2`
+profile does not descend, while the balanced sign-compatible profile does.
 -/
 def ind3J2ScaleExperimentReport (l : PrimeGeFive) :
     Ind3J2ScaleExperimentReport :=
@@ -441,7 +444,9 @@ def ind3J2ScaleExperimentReport (l : PrimeGeFive) :
         (l := l) (2 : ZMod l.value),
     scalesDiffer := true,
     labelIndependentScaleCanMatchAll := false,
-    nonzeroQPilotDegreeRejectsLabelIndependentThetaScale := true }
+    nonzeroQPilotDegreeRejectsLabelIndependentThetaScale := true,
+    representativeJ2SignQuotientDescentRejected := true,
+    balancedThetaPilotDegreeDescendsToSignQuotient := true }
 
 theorem ind3J2ScaleExperimentReport_oneScale
     (l : PrimeGeFive) :
@@ -469,6 +474,18 @@ theorem ind3J2ScaleExperimentReport_noThetaPilotDegreeScale
       l).nonzeroQPilotDegreeRejectsLabelIndependentThetaScale = true :=
   rfl
 
+theorem ind3J2ScaleExperimentReport_noSignQuotientDescent
+    (l : PrimeGeFive) :
+    (ind3J2ScaleExperimentReport
+      l).representativeJ2SignQuotientDescentRejected = true :=
+  rfl
+
+theorem ind3J2ScaleExperimentReport_balancedDescends
+    (l : PrimeGeFive) :
+    (ind3J2ScaleExperimentReport
+      l).balancedThetaPilotDegreeDescendsToSignQuotient = true :=
+  rfl
+
 theorem no_labelIndependent_transport_scale_absorbs_j2
     (l : PrimeGeFive) (scale : Real) :
     ¬ ∀ j : ZMod l.value,
@@ -494,6 +511,36 @@ theorem no_labelIndependent_thetaPilot_degree_scale
     ¬ ∀ j : ZMod l.value,
       profile.thetaPilotDegree j = scale * profile.qPilotDegree :=
   profile.no_labelIndependent_scale_matches_theta_degrees q_ne_zero scale
+
+/--
+Raw representative theta-pilot degrees cannot be pushed down to
+`F_l / {±1}` when the q-pilot degree is nonzero.
+-/
+theorem no_signQuotient_representativeThetaPilot_degree
+    {l : PrimeGeFive}
+    (qPilotDegree : Real) (q_ne_zero : qPilotDegree ≠ 0) :
+    ¬ ∃ thetaOnQuotient :
+        (zmodSignAction l).SignLabelQuotient -> Real,
+      ∀ (j : ZMod l.value) (hj : j ≠ 0),
+        thetaOnQuotient (zmodSignLabelFromCoordinate l j hj) =
+          IUTStage1ZModSquareWeightProfile.representativeSquareScale
+            (l := l) j * qPilotDegree :=
+  IUTStage1ZModSquareWeightProfile.not_exists_signQuotient_representativeThetaPilotDegree
+    (l := l) qPilotDegree q_ne_zero
+
+/--
+The balanced sign-compatible theta-pilot profile has the expected quotient-level
+coordinate equation.
+-/
+theorem balanced_signQuotient_thetaPilot_degree_fromCoordinate
+    {l : PrimeGeFive}
+    (profile :
+      IUTStage1ZModSquareWeightProfile.BalancedThetaPilotDegreeProfile l)
+    (j : ZMod l.value) (hj : j ≠ 0) :
+    profile.thetaPilotDegree (zmodSignLabelFromCoordinate l j hj) =
+      IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+        (l := l) j * profile.qPilotDegree :=
+  profile.thetaPilotDegree_fromCoordinate j hj
 
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
@@ -715,6 +762,7 @@ structure Corollary312DisputeFirstPassReport where
   factoredSHEBridgeTheoremAvailable : Bool
   mismatchCounterexampleBlocksRawCancellation : Bool
   labelIndependentJ2CollapseRejectedInZModModel : Bool
+  representativeJ2SignQuotientDescentRejectedInZModModel : Bool
   balancedLevelRejectedAtFinalRouteTheoremAvailable : Bool
   disputeSettledByCurrentStage : Bool
 deriving Repr
@@ -736,6 +784,7 @@ def corollary312DisputeFirstPassReport :
     factoredSHEBridgeTheoremAvailable := true,
     mismatchCounterexampleBlocksRawCancellation := true,
     labelIndependentJ2CollapseRejectedInZModModel := true,
+    representativeJ2SignQuotientDescentRejectedInZModModel := true,
     balancedLevelRejectedAtFinalRouteTheoremAvailable := true,
     disputeSettledByCurrentStage := false }
 
@@ -761,6 +810,11 @@ theorem corollary312Report_mismatchCounterexampleBlocksRawCancellation :
 
 theorem corollary312Report_labelIndependentJ2CollapseRejectedInZModModel :
     corollary312DisputeFirstPassReport.labelIndependentJ2CollapseRejectedInZModModel =
+      true :=
+  rfl
+
+theorem corollary312Report_representativeJ2SignQuotientDescentRejected :
+    corollary312DisputeFirstPassReport.representativeJ2SignQuotientDescentRejectedInZModModel =
       true :=
   rfl
 

@@ -2493,3 +2493,101 @@ nonzero q-pilot degree
 
 This is still representative-label mathematics, not the full `|F_l|` quotient or
 the actual IUT theta-value construction.
+
+## 223. Sign-Quotient q-to-Theta Pilot Degree Descent
+
+### Lean Move
+
+In:
+
+```text
+Iut/Stage1/IUTStage1Source.lean
+Iut/Stage1/IUTStage1Experiments.lean
+```
+
+we added:
+
+```text
+IUTStage1ZModSquareWeightProfile.BalancedThetaPilotDegreeProfile
+BalancedThetaPilotDegreeProfile.thetaPilotDegree_fromCoordinate
+BalancedThetaPilotDegreeProfile.thetaPilotDegree_neg_fromCoordinate_eq
+not_exists_signQuotient_representativeThetaPilotDegree
+no_signQuotient_representativeThetaPilot_degree
+balanced_signQuotient_thetaPilot_degree_fromCoordinate
+```
+
+and extended the first-pass experiment reports with:
+
+```text
+representativeJ2SignQuotientDescentRejected
+balancedThetaPilotDegreeDescendsToSignQuotient
+representativeJ2SignQuotientDescentRejectedInZModModel
+```
+
+### Mathematical Reason
+
+The previous milestone modeled:
+
+```text
+thetaPilotDegree j = representativeSquareScale j * qPilotDegree
+```
+
+on raw `ZMod l` labels.  The IUT source passages, however, phrase the relevant
+theta labels as elements of:
+
+```text
+|F_l| = F_l / {±1}.
+```
+
+In the current finite model, the raw nonnegative representative square
+
+```text
+j |-> j.val^2
+```
+
+does not descend to the sign quotient, because `j` and `-j` define the same
+sign-quotient label but generally have different nonnegative representatives.
+Lean already had the square-weight obstruction:
+
+```text
+not_exists_representativeSquareWeightOnSignQuotient
+```
+
+The new theorem transfers that obstruction to the q/theta degree relation: if
+`qPilotDegree != 0`, then a quotient-level theta-degree function satisfying
+
+```text
+theta([j]) = representativeSquareScale j * qPilotDegree
+```
+
+would divide by the nonzero q-degree and produce a quotient-level
+representative `j.val^2` function, contradicting the existing no-descent
+theorem.
+
+### Source Check
+
+IUT II describes the theta-value labels through `|F_l|` and the concrete
+`q^{j^2}` behavior.  Scholze-Stix's objection focuses on the resulting `j^2`
+degree scalars.  This milestone records a necessary bookkeeping distinction:
+raw representative `j.val^2` data is not automatically quotient-level
+`|F_l|` data.
+
+The formalization therefore keeps two branches separate:
+
+```text
+representative branch:
+  j in F_l, theta_j degree = j.val^2 * q-degree
+  does not descend to F_l/{±1}
+
+balanced branch:
+  [j] in F_l/{±1}, theta_[j] degree = balancedSquareWeight([j]) * q-degree
+  descends to the sign quotient
+```
+
+### Current Reading
+
+This improves the 3.12 corridor experiment by preventing a silent conflation of
+representative labels with sign-quotient labels.  It is not yet Mochizuki's full
+theta-value construction: the balanced branch is a sign-compatible control model,
+not a proof that the IUT `q^{j^2}` theta values have been reconstructed from
+Hodge-Arakelov theory.
