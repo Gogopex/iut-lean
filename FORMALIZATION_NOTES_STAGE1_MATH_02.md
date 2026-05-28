@@ -2532,3 +2532,71 @@ placeAuditedMultiradialThetaImages_archimedeanEntry_region_fiber_example
 The current equality is still region-valued.  The next major mathematical
 pressure point is to connect these audited possible-image equalities to the
 holomorphic hull and log-volume side used in Corollary 3.12.
+
+## 34. Place-Audited Multiradial Hull Endpoint
+
+### Goal
+
+We connected the place-audited multiradial theta-image package to the existing
+hull+det endpoint for the Corollary 3.12 comparison route.
+
+### Lean/API Check
+
+The source package namespace now defines:
+
+```text
+PlaceAuditedMultiradialThetaHullEndpoint
+auditedPlaceAuditedMultiradialThetaHullEndpoint
+```
+
+The endpoint exposes:
+
+```text
+corollary312Endpoint
+auditedUnion_subset_hull
+auditedUnion_eq_possibleImagesUnion
+determinantVolumeBound
+region_eq_of_related
+multiradialOutputMatchesPackage
+```
+
+### Mathematical Point
+
+The audited `(Ind2)` bookkeeping now reaches the same hull+det boundary as the
+older generic multiradial image package.  This matters because Corollary 3.12 is
+not merely a statement about region equality under indeterminacies; it uses the
+union of possible images, its holomorphic hull, and a determinant/log-volume
+bound.
+
+The new endpoint keeps the place-audited image package attached while proving:
+
+```text
+audited possible-image union = endpoint possible-image union
+audited possible-image union is contained in the hull
+the determinant/log-volume bound is available
+the final signed Corollary 3.12 inequality is available from the obligations
+```
+
+### Trap Avoided
+
+This does not prove the hull+det obligations from the audited `(Ind2)` data.
+It only shows that once the existing hull+det obligations are supplied, the
+audited multiradial images can be carried into that endpoint without being
+forgotten.
+
+### Toy Check
+
+The source examples now check:
+
+```text
+placeAuditedMultiradialThetaHullEndpoint_of_images_example
+placeAuditedMultiradialThetaHullEndpoint_corollary_example
+placeAuditedMultiradialThetaHullEndpoint_union_subset_hull_example
+placeAuditedMultiradialThetaHullEndpoint_region_eq_related_example
+```
+
+### Remaining Gap
+
+The next refinement should combine the fiber-aware entry image theorem with
+this hull endpoint, so a single local `(Ind2)` entry carries both its fiber
+membership and its audited image equality at the hull boundary.

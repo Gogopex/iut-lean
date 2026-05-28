@@ -8814,6 +8814,105 @@ theorem multiradialOutputMatchesPackage
 
 end MultiradialThetaHullEndpoint
 
+/--
+Hull+det endpoint stated for place-audited multiradial Theta-pilot images.
+
+This specializes the hull endpoint to the audited choice type used to track the
+Theorem 3.11 `(Ind2)` place-family and fiber data.
+-/
+structure PlaceAuditedMultiradialThetaHullEndpoint
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind))
+    (obligations : IUTStage1SourceHullDetObligations package) where
+  audited_images : IUTStage1PlaceAuditedMultiradialThetaImages package
+  theta_hull_endpoint : package.ThetaPilotHullEndpoint obligations
+  audited_union_eq_endpoint_union :
+    audited_images.possibleImages.union =
+      theta_hull_endpoint.possible_images.union
+  audited_union_subset_hull :
+    Region.Subset audited_images.possibleImages.union
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+
+def auditedPlaceAuditedMultiradialThetaHullEndpoint
+    {coric : Type u} {kind : IUTStage1PlaceKind}
+    (package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind))
+    (obligations : IUTStage1SourceHullDetObligations package)
+    (images : IUTStage1PlaceAuditedMultiradialThetaImages package) :
+    package.PlaceAuditedMultiradialThetaHullEndpoint obligations :=
+  let endpoint := package.auditedThetaPilotHullEndpoint obligations
+  { audited_images := images,
+    theta_hull_endpoint := endpoint,
+    audited_union_eq_endpoint_union := by
+      calc
+        images.possibleImages.union =
+            package.preLedger.output.comparisons.targetUnion :=
+          images.union_eq_targetUnion
+        _ = endpoint.possible_images.union :=
+          endpoint.possibleImagesUnion_eq_targetUnion.symm,
+    audited_union_subset_hull := by
+      rw [images.union_eq_targetUnion]
+      exact obligations.targetUnion_subset_hull }
+
+namespace PlaceAuditedMultiradialThetaHullEndpoint
+
+variable {coric : Type u} {kind : IUTStage1PlaceKind}
+variable
+  {package :
+    IUTStage1SourcePackage source target
+      (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+variable {obligations : IUTStage1SourceHullDetObligations package}
+
+theorem corollary312Endpoint
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  endpoint.theta_hull_endpoint.corollary312Endpoint
+
+theorem auditedUnion_subset_hull
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations) :
+    Region.Subset endpoint.audited_images.possibleImages.union
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull :=
+  endpoint.audited_union_subset_hull
+
+theorem auditedUnion_eq_possibleImagesUnion
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations) :
+    endpoint.audited_images.possibleImages.union =
+      endpoint.theta_hull_endpoint.possible_images.union :=
+  endpoint.audited_union_eq_endpoint_union
+
+theorem determinantVolumeBound
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations) :
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull
+      package.preLedger.thetaSigned :=
+  endpoint.theta_hull_endpoint.determinantVolumeBound
+
+theorem region_eq_of_related
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hrel : endpoint.audited_images.auditedImages.quotient.relation
+      audited₁ audited₂) :
+    endpoint.audited_images.possibleImages.images.region audited₁ =
+      endpoint.audited_images.possibleImages.images.region audited₂ :=
+  endpoint.audited_images.region_eq_of_related hrel
+
+theorem multiradialOutputMatchesPackage
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations) :
+    endpoint.audited_images.multiradialOutput =
+      package.multiradialOutput :=
+  endpoint.audited_images.multiradial_output_eq
+
+end PlaceAuditedMultiradialThetaHullEndpoint
+
 theorem auditOfParts
     (package : IUTStage1SourcePackage source target index)
     (subclaims : IUTStage1Theorem311Subclaims package)

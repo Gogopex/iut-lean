@@ -2937,6 +2937,55 @@ theorem unitThetaToy_source_multiradialThetaHullEndpoint_region_eq_related_examp
   (unitThetaToy_source_multiradialThetaHullEndpoint_example
     measure hnormalized hh hbound hholds).region_eq_of_related hrel
 
+def placeAuditedMultiradialThetaHullEndpoint_of_images_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    (obligations : IUTStage1SourceHullDetObligations package)
+    (images : IUTStage1PlaceAuditedMultiradialThetaImages package) :
+    package.PlaceAuditedMultiradialThetaHullEndpoint obligations :=
+  package.auditedPlaceAuditedMultiradialThetaHullEndpoint obligations images
+
+theorem placeAuditedMultiradialThetaHullEndpoint_corollary_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations) :
+    Corollary312Inequality
+      (signedPilotLogVolume PilotSide.theta package.preLedger.thetaSigned)
+      (signedPilotLogVolume PilotSide.q package.preLedger.qSigned) :=
+  endpoint.corollary312Endpoint
+
+theorem placeAuditedMultiradialThetaHullEndpoint_union_subset_hull_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations) :
+    Region.Subset endpoint.audited_images.possibleImages.union
+      (obligations.hullDetData.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull :=
+  endpoint.auditedUnion_subset_hull
+
+theorem placeAuditedMultiradialThetaHullEndpoint_region_eq_related_example
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    (endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations)
+    {audited₁ audited₂ :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (hrel : endpoint.audited_images.auditedImages.quotient.relation
+      audited₁ audited₂) :
+    endpoint.audited_images.possibleImages.images.region audited₁ =
+      endpoint.audited_images.possibleImages.images.region audited₂ :=
+  endpoint.region_eq_of_related hrel
+
 def unitThetaToyIUTStage1SourceObligationGap
     (measure : RegionMeasure thetaLine)
     (hnormalized : RegionMeasure.NormalizesUpperRays measure)
