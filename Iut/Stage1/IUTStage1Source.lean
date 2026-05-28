@@ -6337,6 +6337,68 @@ theorem canonicalSquareWeights_toWeighted_constant_average
       intro _j
       rfl)
 
+theorem zmod_val_image_univ :
+    (Finset.univ.image fun j : ZMod l.value => j.val) =
+      Finset.range l.value := by
+  ext k
+  constructor
+  · intro hk
+    rcases Finset.mem_image.mp hk with ⟨j, _hj, rfl⟩
+    exact Finset.mem_range.mpr j.val_lt
+  · intro hk
+    have hklt : k < l.value := Finset.mem_range.mp hk
+    exact Finset.mem_image.mpr
+      ⟨(k : ZMod l.value), Finset.mem_univ _, ZMod.val_natCast_of_lt hklt⟩
+
+theorem sum_representativeSquareScale_eq_range_sum :
+    (Finset.univ.sum fun j : ZMod l.value => ((j.val : Real) ^ 2)) =
+      (Finset.range l.value).sum fun k => ((k : Real) ^ 2) := by
+  have hsum :=
+    Finset.sum_image
+      (s := (Finset.univ : Finset (ZMod l.value)))
+      (g := fun j : ZMod l.value => j.val)
+      (f := fun k : Nat => ((k : Real) ^ 2))
+      (by
+        intro _j _hj _k _hk h
+        exact ZMod.val_injective l.value h)
+  rw [zmod_val_image_univ] at hsum
+  exact hsum.symm
+
+theorem canonicalSquareWeights_weightTotal_mul_six :
+    (canonicalSquareWeights l).weightTotal * 6 =
+      ((l.value - 1 : Nat) : Real) * (l.value : Real) *
+        (2 * ((l.value - 1 : Nat) : Real) + 1) := by
+  rw [(canonicalSquareWeights l).weightTotal_eq_sum]
+  have hsum_weight :
+      Finset.univ.sum (canonicalSquareWeights l).weight =
+        Finset.univ.sum (fun j : ZMod l.value => ((j.val : Real) ^ 2)) := by
+    exact Finset.sum_congr rfl (by
+      intro j _hj
+      exact canonicalSquareWeights_weight_eq_square_val (l := l) j)
+  rw [hsum_weight]
+  rw [sum_representativeSquareScale_eq_range_sum]
+  have hpos : 0 < l.value :=
+    lt_of_lt_of_le (by norm_num) l.ge_five
+  have hsucc : l.value - 1 + 1 = l.value :=
+    Nat.succ_pred_eq_of_pos hpos
+  have hrange :
+      Finset.range l.value = Finset.range (l.value - 1 + 1) := by
+    rw [hsucc]
+  rw [hrange]
+  calc
+    ((Finset.range (l.value - 1 + 1)).sum fun k => ((k : Real) ^ 2)) * 6 =
+        ((l.value - 1 : Nat) : Real) *
+          (((l.value - 1 : Nat) : Real) + 1) *
+            (2 * ((l.value - 1 : Nat) : Real) + 1) :=
+      iutIVThetaPilot_sum_sq_mul_six (l.value - 1)
+    _ =
+        ((l.value - 1 : Nat) : Real) * (l.value : Real) *
+          (2 * ((l.value - 1 : Nat) : Real) + 1) := by
+      have hsucc_real :
+          (((l.value - 1 : Nat) : Real) + 1) = (l.value : Real) := by
+        exact_mod_cast hsucc
+      rw [hsucc_real]
+
 theorem representativeSquareScale_two :
     representativeSquareScale (l := l) (2 : ZMod l.value) = 4 := by
   have hlt : 2 < l.value :=
