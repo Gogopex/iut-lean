@@ -1751,6 +1751,12 @@ theorem quotientMap_ne_collapsed_of_not_mem
   intro hmap
   exact hx (quotientMap_eq_collapsed_iff.mp hmap)
 
+theorem quotientMap_eq_quotientMap_of_mem_iff
+    {x y : E} (hy : y ∈ S) :
+    quotientMap S x = quotientMap S y ↔ x ∈ S := by
+  rw [quotientMap_eq_collapsed_of_mem hy]
+  exact quotientMap_eq_collapsed_iff
+
 theorem quotientMap_image_eq_singleton_collapsed_of_nonempty_subset
     {A : Set E} (hne : A.Nonempty) (hsubset : A ⊆ S) :
     quotientMap S '' A = {collapsed} := by

@@ -6883,6 +6883,25 @@ theorem boundaryCTheta_upperSemiSingletonQuotient_separates_nonzeroLocalShift
       intro hmap
       exact hshift_ne_collapsed (hmap.trans hdet_collapsed)⟩
 
+theorem upperSemiQuotient_localShift_eq_q_iff_mem_of_q_mem
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (collapsedRegion : Set Real)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (hq_mem : data.qPilotLogVolume ∈ collapsedRegion) :
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    IUTStage1UpperSemiSetQuotient.quotientMap
+        collapsedRegion global.localData.shiftedLogVolume =
+      IUTStage1UpperSemiSetQuotient.quotientMap
+        collapsedRegion data.qPilotLogVolume ↔
+      global.localData.shiftedLogVolume ∈ collapsedRegion := by
+  intro global
+  exact
+    IUTStage1UpperSemiSetQuotient.quotientMap_eq_quotientMap_of_mem_iff
+      hq_mem
+
 theorem boundaryCTheta_upperSemiQuotient_collapses_nonzeroLocalShift_of_mem
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (collapsedRegion : Set Real)

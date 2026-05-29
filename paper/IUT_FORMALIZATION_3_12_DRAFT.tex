@@ -703,8 +703,11 @@ The code currently covers:
   if the quotient collapses only the fixed q-reading, a nonzero local shift
   remains distinct from the quotient images of both the q-reading and the
   determinant reading; conversely, if an arbitrary collapsed region contains
-  both the fixed q/determinant boundary and a nonzero local shift, Lean proves
-  that the quotient identifies them while the underlying log-volumes remain
+  the fixed q-boundary, Lean proves the exact audit criterion: quotient equality
+  between a local shifted value and q is equivalent to membership of that
+  shifted value in the collapsed region.  Hence, if the collapsed region also
+  contains a nonzero local shift, Lean proves that the quotient identifies it
+  with the fixed q/determinant boundary while the underlying log-volumes remain
   unequal; this broad-collapse diagnostic is now packaged as a
   boundary-versus-strict theorem together with the determinant boundary.  The
   same diagnostic applies to two shifted local readings with unequal exponents
