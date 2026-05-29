@@ -1100,6 +1100,55 @@ theorem gaussianNegativeTheta_separates_allLabel_from_nonzeroTargetBound
           coordinateEquiv target_environment_nonpositive).mpr
         environment_le_thetaAverage
 
+theorem gaussianNegativeTheta_nonzeroRoute_finalQTheta_and_rejects_allLabel
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (canonical_one_preserved :
+      targetEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        sourceEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)))
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (theta_average_negative :
+      part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+          audited < 0)
+    (target_environment_le_thetaAverage :
+      targetEvaluation.environmentDegree <=
+        part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+          audited) :
+    (¬ ∀ j : ZMod l.value,
+        targetEvaluation.gaussianDegree
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l j) <=
+          part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+            audited) ∧
+      package.preLedger.qSigned <= package.preLedger.thetaSigned := by
+  have hsep :=
+    gaussianNegativeTheta_separates_allLabel_from_nonzeroTargetBound
+      part audited (Equiv.refl (ZMod l.value)) targetEvaluation
+      theta_average_negative target_environment_le_thetaAverage
+  exact
+    ⟨hsep.1,
+      gaussianFactoredSHEIdentityCanonicalOneNonzeroBound_finalQTheta
+        part profile audited sourceProfile targetProfile sourceEvaluation
+        targetEvaluation canonical_one_preserved source_profile_eq
+        source_log_volume_eq hsep.2⟩
+
 theorem gaussianAllLabelTargetBound_iff_thetaAverage_nonnegative
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
