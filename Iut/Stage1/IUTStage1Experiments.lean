@@ -1183,6 +1183,31 @@ theorem qPilotTwoComputationSignedEndpoint_corollary312
       data.comparisonData.thetaPilot data.comparisonData.qPilot :=
   data.corollary312
 
+theorem qPilotTwoComputationSignedEndpoint_absLogQ_pos
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    0 < data.absLogQ :=
+  data.absLogQ_pos
+
+theorem qPilotTwoComputationSignedEndpoint_input_eq_fixed
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    data.twoComputation.inputPrimeStripLogVolume = -data.absLogQ :=
+  data.inputPrimeStripLogVolume_eq_neg_absLogQ
+
+theorem qPilotTwoComputationSignedEndpoint_output_eq_fixed
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    data.twoComputation.outputHullLogVolume = -data.absLogQ :=
+  data.outputHullLogVolume_eq_neg_absLogQ
+
+theorem qPilotTwoComputationSignedEndpoint_fixed_mem_upperRay
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    -data.absLogQ ∈ data.twoComputation.upperRayData.upperRay :=
+  data.fixed_qPilot_mem_upperRay
+
+theorem qPilotTwoComputationSignedEndpoint_fixed_le_theta
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    -data.absLogQ <= data.twoComputation.upperRayData.thetaHullLogVolume :=
+  data.fixed_qPilot_le_thetaHullLogVolume
+
 theorem corollary312CTheta_qPilotLogVolume_le_cTheta_absLogQ
     (data : IUTStage1Corollary312CThetaLowerBoundShadow) :
     data.qPilotLogVolume <= data.cTheta * data.absLogQ :=

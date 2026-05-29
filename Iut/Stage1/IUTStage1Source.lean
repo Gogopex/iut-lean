@@ -1773,6 +1773,45 @@ theorem corollary312
       data.comparisonData.thetaPilot data.comparisonData.qPilot :=
   data.comparisonData.corollary312
 
+def absLogQ
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) : Real :=
+  -data.twoComputation.inputPrimeStripLogVolume
+
+theorem absLogQ_pos
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    0 < data.absLogQ :=
+  data.q_pilot_positive
+
+theorem inputPrimeStripLogVolume_eq_neg_absLogQ
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    data.twoComputation.inputPrimeStripLogVolume = -data.absLogQ := by
+  unfold absLogQ
+  ring
+
+theorem outputHullLogVolume_eq_neg_absLogQ
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    data.twoComputation.outputHullLogVolume = -data.absLogQ := by
+  calc
+    data.twoComputation.outputHullLogVolume =
+        data.twoComputation.upperRayData.qPilotLogVolume :=
+      data.twoComputation.output_eq_q
+    _ = data.twoComputation.inputPrimeStripLogVolume :=
+      data.twoComputation.input_eq_q.symm
+    _ = -data.absLogQ :=
+      data.inputPrimeStripLogVolume_eq_neg_absLogQ
+
+theorem fixed_qPilot_mem_upperRay
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    -data.absLogQ ∈ data.twoComputation.upperRayData.upperRay := by
+  rw [← data.inputPrimeStripLogVolume_eq_neg_absLogQ]
+  exact data.twoComputation.input_le_thetaHullLogVolume
+
+theorem fixed_qPilot_le_thetaHullLogVolume
+    (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
+    -data.absLogQ <=
+      data.twoComputation.upperRayData.thetaHullLogVolume :=
+  data.fixed_qPilot_mem_upperRay
+
 end IUTStage1QPilotTwoComputationSignedEndpoint
 
 /--

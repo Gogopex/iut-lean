@@ -208,6 +208,11 @@ The code currently covers:
   with \(q_{\mathrm{signed}}\) read from the input prime-strip log-volume and
   \(\Theta_{\mathrm{signed}}\) read from the hull/determinant upper-ray
   boundary;
+\item the Step (xi-e)--(xi-f) fixed-value condition:
+  in the signed two-computation endpoint, Lean proves that the input
+  prime-strip reading and the hull-output reading are both the same real value
+  \(-|\log(q)|\), and that this value lies in the upper ray
+  \(\mathbb{R}_{\le-|\log(\Theta)|}\);
 \item the opening sign reduction in the proof of Corollary 3.12:
   from \(0<-q_{\mathrm{signed}}\), Lean proves that
   \(0\le\Theta_{\mathrm{signed}}\) immediately implies
@@ -414,7 +419,8 @@ finite real \(\Theta\)-value, the direct
 Corollary 3.12 statement endpoint with \(\Theta\)-subject/\(q\)-not-subject
 pilot bookkeeping, the
 Step (xi-g)-to-(xi-f) endpoint bridge giving \(C_\Theta\ge-1\) from the
-two-computation q-pilot record, and positive-rational unit rigidity.
+two-computation q-pilot record, the Step (xi-e)--(xi-f) fixed
+\(-|\log(q)|\) membership check, and positive-rational unit rigidity.
 The generalized-link flag records the rational parameter inequality
 \(C_\Theta\ge-\lambda\), now with the corresponding \(q^\lambda\)-pilot
 real-valued derivation.
