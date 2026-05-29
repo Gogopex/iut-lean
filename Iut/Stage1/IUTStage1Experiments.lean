@@ -837,6 +837,16 @@ theorem nonzeroTranslation_not_descend_to_fullLabel
   IUTStage1ZModCuspFullLabel.no_fullLabel_map_descends_nonzero_translation
     l t ht
 
+theorem translation_descends_to_fullLabel_iff_zero
+    (l : PrimeGeFive) (t : ZMod l.value) :
+    (∃ T : IUTStage1ZModCuspFullLabel l -> IUTStage1ZModCuspFullLabel l,
+      ∀ j : ZMod l.value,
+        T (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+          IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (zmodLabelTranslate l t j)) ↔
+      t = 0 :=
+  IUTStage1ZModCuspFullLabel.fullLabel_map_descends_translation_iff l t
+
 theorem properNonemptySubset_not_translationInvariant
     (l : PrimeGeFive) (s : Finset (ZMod l.value))
     (hne : s.Nonempty)

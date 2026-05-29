@@ -5930,6 +5930,32 @@ theorem no_fullLabel_map_descends_translation_one
   exact no_fullLabel_map_descends_nonzero_translation l
     (1 : ZMod l.value) (zmodOneNonzeroLabel l).2
 
+theorem fullLabel_map_descends_zero_translation
+    (l : PrimeGeFive) :
+    ∃ T : IUTStage1ZModCuspFullLabel l -> IUTStage1ZModCuspFullLabel l,
+      ∀ j : ZMod l.value,
+        T (fromCoordinate l j) =
+          fromCoordinate l (zmodLabelTranslate l (0 : ZMod l.value) j) := by
+  refine ⟨id, ?_⟩
+  intro j
+  rw [zmodLabelTranslate_zero]
+  rfl
+
+theorem fullLabel_map_descends_translation_iff
+    (l : PrimeGeFive) (t : ZMod l.value) :
+    (∃ T : IUTStage1ZModCuspFullLabel l -> IUTStage1ZModCuspFullLabel l,
+      ∀ j : ZMod l.value,
+        T (fromCoordinate l j) =
+          fromCoordinate l (zmodLabelTranslate l t j)) ↔
+      t = 0 := by
+  constructor
+  · intro hdesc
+    by_contra ht
+    exact no_fullLabel_map_descends_nonzero_translation l t ht hdesc
+  · intro ht
+    subst t
+    exact fullLabel_map_descends_zero_translation l
+
 /--
 Stage 1 shadow of the weighted-volume relation `F_l ∋ j ≪ 0` from IUT II,
 Remark 4.7.3(iii).
