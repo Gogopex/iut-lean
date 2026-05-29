@@ -9026,6 +9026,24 @@ theorem fullLabelAveragedLogVolume_average_ne_canonicalCoordinate_of_nonzero
     evaluation]
   exact h
 
+theorem fullLabelAveragedLogVolume_average_eq_canonicalCoordinate_iff
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    evaluation.fullLabelAveragedLogVolume.averageLogVolume =
+      evaluation.fullLabelAveragedLogVolume.normalizedLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) ↔
+      evaluation.environmentDegree = 0 := by
+  constructor
+  · intro h
+    by_contra henv
+    exact
+      evaluation.fullLabelAveragedLogVolume_average_ne_canonicalCoordinate_of_nonzero
+        henv h
+  · intro henv
+    rw [evaluation.fullLabelAveragedLogVolume_average_eq_coeff]
+    rw [evaluation.fullLabelAveragedLogVolume_canonicalCoordinate_eq_environment]
+    rw [henv]
+    ring
+
 theorem fullLabelAveragedLogVolume_le_environment_of_nonpositive
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (henv_nonpos : evaluation.environmentDegree <= 0) :
