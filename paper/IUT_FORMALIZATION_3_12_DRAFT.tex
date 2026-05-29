@@ -688,12 +688,15 @@ The code currently covers:
 \item the IUT IV, Corollary 2.2/2.3 finite-exception passage:
   a lower bound on the complement of a finite exceptional set and a lower bound
   on the exceptional set glue to a global lower bound by taking the minimum of
-  the two constants;
+  the two constants; Lean packages both minimum comparisons together with the
+  resulting pointwise global lower bound;
 \item the IUT IV, Corollary 2.3 Diophantine inequality:
   Lean records the GenEll transfer as an explicit hypothesis and derives the
   global bounded-discrepancy lower bound for
   \((1+\epsilon)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)
-   -\operatorname{ht}_{\omega_X(D)}\);
+   -\operatorname{ht}_{\omega_X(D)}\), packaged with \(d>0\),
+  \(\epsilon>0\), the hyperbolic-curve premise, and the compact-subset
+  Theorem A premise;
 \item comparison levels:
   pointwise representative, aggregate representative, balanced sign-compatible,
   and hull/log-volume; Lean proves that the final weighted-theta route is
@@ -1149,9 +1152,12 @@ height and the lower bound for
 -\operatorname{ht}_{\omega_X(D)}\).
 For the Corollary 2.2/2.3 exceptional-set passage, Lean proves that a lower
 bound off a finite exceptional set and a lower bound on the exceptional set imply
-a global lower bound, and specializes this to the Theorem A discrepancy.
+a global lower bound, and specializes this to the Theorem A discrepancy.  The
+endpoint records both minimum comparisons and the resulting pointwise bound.
 For Corollary 2.3, Lean proves the stated bounded-discrepancy conclusion from an
-explicit GenEll transfer hypothesis; GenEll itself is not formalized here.
+explicit GenEll transfer hypothesis; GenEll itself is not formalized here.  The
+endpoint exposes \(d>0\), \(\epsilon>0\), hyperbolicity, and the compact-subset
+Theorem A premise.
 Finally, Lean combines the Corollary 2.2(i) bounded-discrepancy height
 comparison with the C2 bound to construct the Theorem A lower-bound shadow.
 

@@ -5808,6 +5808,15 @@ theorem iutIVFiniteExceptionLowerBound_global
     data.globalLowerBound <= data.function x :=
   data.global_bound x
 
+theorem iutIVFiniteExceptionLowerBound_endpoint
+    {Point : Type u} [DecidableEq Point]
+    (data : IUTStage1FiniteExceptionLowerBoundShadow Point)
+    (x : Point) :
+    data.globalLowerBound <= data.genericLowerBound ∧
+      data.globalLowerBound <= data.exceptionalLowerBound ∧
+      data.globalLowerBound <= data.function x :=
+  data.finite_exception_endpoint x
+
 theorem iutIVCorollary22FiniteExceptionTheoremA_global
     {Point : Type u} [DecidableEq Point]
     (data : IUTStage1IUTIVCorollary22FiniteExceptionTheoremAShadow Point)
@@ -5815,12 +5824,33 @@ theorem iutIVCorollary22FiniteExceptionTheoremA_global
     data.globalLowerBound <= data.discrepancy x :=
   data.discrepancy_bounded_below x
 
+theorem iutIVCorollary22FiniteExceptionTheoremA_endpoint
+    {Point : Type u} [DecidableEq Point]
+    (data : IUTStage1IUTIVCorollary22FiniteExceptionTheoremAShadow Point)
+    (x : Point) :
+    data.globalLowerBound <= data.genericLowerBound ∧
+      data.globalLowerBound <= data.exceptionalLowerBound ∧
+      data.globalLowerBound <= data.discrepancy x :=
+  data.finite_exception_theoremA_endpoint x
+
 theorem iutIVCorollary23DiophantineInequality_lower_bound
     {Point : Type u}
     (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point)
     (x : Point) :
     data.lowerBound <= data.discrepancy x :=
   data.discrepancy_bounded_below x
+
+theorem iutIVCorollary23DiophantineInequality_endpoint
+    {Point : Type u}
+    (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point)
+    (x : Point) :
+    0 < data.d ∧
+      0 < data.epsilon ∧
+      data.hyperbolicCurve ∧
+      data.compactSubsetTheoremA ∧
+      (∃ lowerBound : Real, ∀ y : Point, lowerBound <= data.discrepancy y) ∧
+      data.lowerBound <= data.discrepancy x :=
+  data.diophantine_inequality_endpoint x
 
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where

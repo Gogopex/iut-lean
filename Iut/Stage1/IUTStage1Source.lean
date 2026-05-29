@@ -2804,6 +2804,16 @@ theorem global_bound
   · exact le_trans data.globalLowerBound_le_genericLowerBound
       (data.generic_bound x hx)
 
+theorem finite_exception_endpoint
+    (data : IUTStage1FiniteExceptionLowerBoundShadow Point)
+    (x : Point) :
+    data.globalLowerBound <= data.genericLowerBound ∧
+      data.globalLowerBound <= data.exceptionalLowerBound ∧
+      data.globalLowerBound <= data.function x :=
+  ⟨data.globalLowerBound_le_genericLowerBound,
+    data.globalLowerBound_le_exceptionalLowerBound,
+    data.global_bound x⟩
+
 end IUTStage1FiniteExceptionLowerBoundShadow
 
 /--
@@ -2861,6 +2871,16 @@ theorem discrepancy_bounded_below
     data.globalLowerBound <= data.discrepancy x :=
   data.toFiniteExceptionLowerBound.global_bound x
 
+theorem finite_exception_theoremA_endpoint
+    (data : IUTStage1IUTIVCorollary22FiniteExceptionTheoremAShadow Point)
+    (x : Point) :
+    data.globalLowerBound <= data.genericLowerBound ∧
+      data.globalLowerBound <= data.exceptionalLowerBound ∧
+      data.globalLowerBound <= data.discrepancy x :=
+  ⟨data.toFiniteExceptionLowerBound.globalLowerBound_le_genericLowerBound,
+    data.toFiniteExceptionLowerBound.globalLowerBound_le_exceptionalLowerBound,
+    data.discrepancy_bounded_below x⟩
+
 end IUTStage1IUTIVCorollary22FiniteExceptionTheoremAShadow
 
 /--
@@ -2917,6 +2937,22 @@ theorem discrepancy_bounded_below
     (x : Point) :
     data.lowerBound <= data.discrepancy x :=
   Classical.choose_spec data.exists_lowerBound x
+
+theorem diophantine_inequality_endpoint
+    (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point)
+    (x : Point) :
+    0 < data.d ∧
+      0 < data.epsilon ∧
+      data.hyperbolicCurve ∧
+      data.compactSubsetTheoremA ∧
+      (∃ lowerBound : Real, ∀ y : Point, lowerBound <= data.discrepancy y) ∧
+      data.lowerBound <= data.discrepancy x :=
+  ⟨data.d_pos,
+    data.epsilon_pos,
+    data.hyperbolic_curve,
+    data.compact_subset_theoremA,
+    data.exists_lowerBound,
+    data.discrepancy_bounded_below x⟩
 
 noncomputable def toTheoremABoundedDiscrepancyShadow
     (data : IUTStage1IUTIVCorollary23DiophantineInequalityShadow Point) :
