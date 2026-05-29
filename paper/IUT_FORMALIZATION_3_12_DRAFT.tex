@@ -168,7 +168,8 @@ The code currently covers:
   \(q\mapsto(q^{j^2})_{j\in |F_\ell|}\), including identity at \(j=1\);
   Lean proves that the absolute-label exponents at \(j=1\) and \(j=2\) are
   \(1\) and \(4\), hence the corresponding theta/Gaussian degrees are distinct
-  whenever \(\deg(q)\ne0\);
+  whenever \(\deg(q)\ne0\), and equal exactly in the degenerate case
+  \(\deg(q)=0\);
   Lean now also converts such an evaluation into a cusp/full-label log-volume
   compatibility object and proves the full-label value-preservation branch when
   the source and target environment degrees agree; Lean also proves the IUT II
@@ -833,8 +834,8 @@ average is \((\ell-1)/\ell\) times the nonzero absolute average; consequently
 the \(F_\ell\)-coordinate and full \(|F_\ell|\)-absolute averages differ
 strictly for nonzero environment degree.  Lean also now proves the local
 distinct-label fact emphasized in IUT II: the \(j=1\) and \(j=2\) theta/Gaussian
-components cannot coincide unless the environment degree vanishes.  The remaining
-task is to replace
+components coincide if and only if the environment degree vanishes.  The
+remaining task is to replace
 the current degree-level Gaussian shadow by the actual Hodge--Arakelov
 Gaussian/Frobenioid construction behind this environment comparison.
 

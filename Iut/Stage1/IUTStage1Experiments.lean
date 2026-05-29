@@ -1517,6 +1517,27 @@ theorem gaussianDegree_distinguishes_one_two_of_environment_ne_zero
         (IUTStage1ZModCuspFullLabel.fromCoordinate l (2 : ZMod l.value)) :=
   evaluation.gaussianDegree_one_ne_two_of_environment_ne_zero henv
 
+theorem absThetaPilotDegree_one_two_equal_iff_q_zero
+    {l : PrimeGeFive}
+    (profile : IUTStage1ZModSquareWeightProfile.AbsThetaPilotDegreeProfile l) :
+    profile.thetaPilotDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        profile.thetaPilotDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (2 : ZMod l.value)) ↔
+      profile.qPilotDegree = 0 :=
+  profile.thetaPilotDegree_one_eq_two_iff_q_zero
+
+theorem gaussianDegree_one_two_equal_iff_environment_zero
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (2 : ZMod l.value)) ↔
+      evaluation.environmentDegree = 0 :=
+  evaluation.gaussianDegree_one_eq_two_iff_environment_zero
+
 theorem gaussianUnitAffine_zeroComponent_ne_zero_of_environment_ne_zero
     {l : PrimeGeFive}
     (evaluation :

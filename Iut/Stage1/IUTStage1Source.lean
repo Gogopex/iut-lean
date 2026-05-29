@@ -5910,6 +5910,21 @@ theorem thetaPilotDegree_one_ne_two_of_q_ne_zero
     simpa using h
   norm_num at hone_four
 
+theorem thetaPilotDegree_one_eq_two_iff_q_zero
+    (profile : AbsThetaPilotDegreeProfile l) :
+    profile.thetaPilotDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        profile.thetaPilotDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (2 : ZMod l.value)) ↔
+      profile.qPilotDegree = 0 := by
+  constructor
+  · intro h
+    by_contra hq
+    exact profile.thetaPilotDegree_one_ne_two_of_q_ne_zero hq h
+  · intro hq
+    rw [profile.thetaPilotDegree_one, profile.thetaPilotDegree_two, hq]
+    ring
+
 theorem thetaPilotDegree_neg_fromCoordinate_eq
     (profile : AbsThetaPilotDegreeProfile l)
     (j : ZMod l.value) (hj : j ≠ 0) :
@@ -6078,6 +6093,16 @@ theorem gaussianDegree_one_ne_two_of_environment_ne_zero
         (IUTStage1ZModCuspFullLabel.fromCoordinate l (2 : ZMod l.value)) := by
   exact evaluation.toAbsThetaPilotDegreeProfile
     |>.thetaPilotDegree_one_ne_two_of_q_ne_zero henv
+
+theorem gaussianDegree_one_eq_two_iff_environment_zero
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (2 : ZMod l.value)) ↔
+      evaluation.environmentDegree = 0 := by
+  exact evaluation.toAbsThetaPilotDegreeProfile
+    |>.thetaPilotDegree_one_eq_two_iff_q_zero
 
 theorem gaussianDegree_canonicalSignLabel
     (evaluation : GaussianMonoidDegreeEvaluation l) :
