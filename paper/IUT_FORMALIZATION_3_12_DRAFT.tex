@@ -682,7 +682,9 @@ The code currently covers:
   \(\frac16\log(q_2)\approx\operatorname{ht}_{\omega_X(D)}\), together with the
   C2 bound for \(\frac16\log(q_2)\), gives a lower bound for
   \((1+\epsilon_E)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)
-   -\operatorname{ht}_{\omega_X(D)}\);
+   -\operatorname{ht}_{\omega_X(D)}\); Lean packages the lower
+  bounded-discrepancy constant, the C2 input, the induced height upper bound,
+  and the resulting discrepancy lower bound in one endpoint;
 \item the IUT IV, Corollary 2.2/2.3 finite-exception passage:
   a lower bound on the complement of a finite exceptional set and a lower bound
   on the exceptional set glue to a global lower bound by taking the minimum of
@@ -1138,6 +1140,13 @@ q_\forall\) inequalities and the monotonicity condition \(1+\epsilon_E\ge0\).
 It also proves the two sum inequalities relating the tripodal different and
 conductor terms to \(\log\operatorname{diff}_X+\log\operatorname{cond}_D\),
 packaged with the defining equality and conductor inequalities.
+For the Corollary 2.2 to Theorem A passage, Lean combines the
+bounded-discrepancy lower estimate for
+\(\frac16\log(q_2)-\operatorname{ht}_{\omega_X(D)}\) with the C2 upper bound
+for \(\frac16\log(q_2)\), deriving both the corresponding upper bound for the
+height and the lower bound for
+\((1+\epsilon_E)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)
+-\operatorname{ht}_{\omega_X(D)}\).
 For the Corollary 2.2/2.3 exceptional-set passage, Lean proves that a lower
 bound off a finite exceptional set and a lower bound on the exceptional set imply
 a global lower bound, and specializes this to the Theorem A discrepancy.

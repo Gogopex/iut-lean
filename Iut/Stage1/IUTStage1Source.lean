@@ -2719,6 +2719,23 @@ theorem discrepancy_bounded_below
   dsimp [lowerBound, discrepancy]
   linarith
 
+theorem theoremA_handoff_endpoint
+    (data : IUTStage1IUTIVCorollary22ToTheoremABoundShadow Point)
+    (x : Point) :
+    data.logQTwo_to_canonicalHeight.lower <=
+        (1 / 6 : Real) * data.logQTwo x - data.canonicalHeight x ∧
+      (1 / 6 : Real) * data.logQTwo x <=
+        (1 + data.epsilonE) * (data.logDiff x + data.logCond x) +
+          data.cK ∧
+      data.canonicalHeight x <=
+        (1 + data.epsilonE) * (data.logDiff x + data.logCond x) +
+          data.cK - data.logQTwo_to_canonicalHeight.lower ∧
+      data.lowerBound <= data.discrepancy x :=
+  ⟨data.logQTwo_to_canonicalHeight.lower_bound x,
+    data.c2_logQTwo_bound x,
+    data.canonicalHeight_le_weightedSide_minus_lower x,
+    data.discrepancy_bounded_below x⟩
+
 noncomputable def toTheoremABoundedDiscrepancyShadow
     (data : IUTStage1IUTIVCorollary22ToTheoremABoundShadow Point)
     (d : Nat) (d_pos : 0 < d)

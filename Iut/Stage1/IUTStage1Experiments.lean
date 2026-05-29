@@ -5776,6 +5776,21 @@ theorem iutIVCorollary22ToTheoremA_discrepancy_bounded_below
     data.lowerBound <= data.discrepancy x :=
   data.discrepancy_bounded_below x
 
+theorem iutIVCorollary22ToTheoremA_handoffEndpoint
+    {Point : Type u}
+    (data : IUTStage1IUTIVCorollary22ToTheoremABoundShadow Point)
+    (x : Point) :
+    data.logQTwo_to_canonicalHeight.lower <=
+        (1 / 6 : Real) * data.logQTwo x - data.canonicalHeight x ∧
+      (1 / 6 : Real) * data.logQTwo x <=
+        (1 + data.epsilonE) * (data.logDiff x + data.logCond x) +
+          data.cK ∧
+      data.canonicalHeight x <=
+        (1 + data.epsilonE) * (data.logDiff x + data.logCond x) +
+          data.cK - data.logQTwo_to_canonicalHeight.lower ∧
+      data.lowerBound <= data.discrepancy x :=
+  data.theoremA_handoff_endpoint x
+
 noncomputable def iutIVCorollary22ToTheoremA_shadow
     {Point : Type u}
     (data : IUTStage1IUTIVCorollary22ToTheoremABoundShadow Point)
