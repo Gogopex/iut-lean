@@ -284,6 +284,38 @@ theorem nonarchimedeanEntry_finalQTheta
     |>.weightedThetaComparisonRouteOfInd3SourceZeroCuspTarget
       part.bundle profile audited sourceAudit).qSigned_le_thetaSigned
 
+theorem structuredSHETargetBound_finalQTheta
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport_audit :
+      IUTStage1StructuredSHESquareWeightTransportAudit package part.bundle l)
+    (source_profile_eq :
+      profile = transport_audit.preservationAudit.sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        transport_audit.preservationAudit.sourceLogVolume)
+    (target_fullLabel_le_thetaAverage :
+      ∀ j : ZMod l.value,
+        transport_audit.preservationAudit.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (transport_audit.preservationAudit.coordinateEquiv j)) <=
+          part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+            audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.toThetaCuspClassContainerAudit.qSigned_le_thetaSigned_via_structuredSHEBound
+    profile audited transport_audit source_profile_eq source_log_volume_eq
+    target_fullLabel_le_thetaAverage
+
 /-- Scale-level status for transport-explicit real-line cancellation. -/
 structure Ind3TransportScaleExperimentReport where
   sourceScaleMatched : Bool

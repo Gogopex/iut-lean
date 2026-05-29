@@ -23535,6 +23535,74 @@ theorem qSigned_le_thetaSourceAverage_via_squareWeightedAverage
   part.toThetaLabelwiseContainerAudit.qSigned_le_thetaSourceAverage_via_squareWeightedAverage
     profile audited hweighted_le_thetaAverage
 
+theorem squareWeightedAverage_le_thetaSourceAverage_via_structuredSHEBound
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport :
+      IUTStage1StructuredSHESquareWeightTransportAudit package bundle l)
+    (hprofile : profile = transport.preservationAudit.sourceProfile)
+    (hlog :
+      part.theta_source.compatible_average.cuspLogVolume audited =
+        transport.preservationAudit.sourceLogVolume)
+    (hpointwise :
+      ∀ j : ZMod l.value,
+        transport.preservationAudit.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (transport.preservationAudit.coordinateEquiv j)) <=
+          part.theta_source.thetaSourceAverage audited) :
+    (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
+        profile audited).weightedAverageLogVolume <=
+      part.theta_source.thetaSourceAverage audited :=
+  part.theta_source.compatible_average.squareWeightedAverage_le_of_structuredSHETargetFullLabel_le
+    profile audited transport hprofile hlog hpointwise
+
+theorem qSigned_le_thetaSourceAverage_via_structuredSHEBound
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport :
+      IUTStage1StructuredSHESquareWeightTransportAudit package bundle l)
+    (hprofile : profile = transport.preservationAudit.sourceProfile)
+    (hlog :
+      part.theta_source.compatible_average.cuspLogVolume audited =
+        transport.preservationAudit.sourceLogVolume)
+    (hpointwise :
+      ∀ j : ZMod l.value,
+        transport.preservationAudit.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (transport.preservationAudit.coordinateEquiv j)) <=
+          part.theta_source.thetaSourceAverage audited) :
+    package.preLedger.qSigned <= part.theta_source.thetaSourceAverage audited :=
+  part.qSigned_le_thetaSourceAverage_via_squareWeightedAverage profile audited
+    (part.squareWeightedAverage_le_thetaSourceAverage_via_structuredSHEBound
+      profile audited transport hprofile hlog hpointwise)
+
+theorem qSigned_le_thetaSigned_via_structuredSHEBound
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport :
+      IUTStage1StructuredSHESquareWeightTransportAudit package bundle l)
+    (hprofile : profile = transport.preservationAudit.sourceProfile)
+    (hlog :
+      part.theta_source.compatible_average.cuspLogVolume audited =
+        transport.preservationAudit.sourceLogVolume)
+    (hpointwise :
+      ∀ j : ZMod l.value,
+        transport.preservationAudit.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (transport.preservationAudit.coordinateEquiv j)) <=
+          part.theta_source.thetaSourceAverage audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  le_trans
+    (part.qSigned_le_thetaSourceAverage_via_structuredSHEBound
+      profile audited transport hprofile hlog hpointwise)
+    (part.theta_source.thetaSourceAverage_le_thetaSigned audited)
+
 theorem targetSigned_le_thetaSourceAverage_via_squareWeightedAverage
     (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
     (profile : IUTStage1ZModSquareWeightProfile l)
