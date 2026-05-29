@@ -2529,6 +2529,27 @@ theorem tensorPowerLogVolume_lt_original_of_original_neg
     mul_lt_mul_of_neg_right data.one_lt_tensorPower_real hTheta
   simpa using h
 
+theorem originalBoundary_mem_originalUpperRay
+    (data : IUTStage1ThetaPilotTensorPowerLogVolume) :
+    data.originalThetaPilotLogVolume ∈ data.originalUpperRay := by
+  unfold originalUpperRay
+  exact le_refl data.originalThetaPilotLogVolume
+
+theorem originalBoundary_not_mem_tensorPowerUpperRay_of_original_neg
+    (data : IUTStage1ThetaPilotTensorPowerLogVolume)
+    (hTheta : data.originalThetaPilotLogVolume < 0) :
+    data.originalThetaPilotLogVolume ∉ data.tensorPowerUpperRay := by
+  exact not_le_of_gt
+    (data.tensorPowerLogVolume_lt_original_of_original_neg hTheta)
+
+theorem originalUpperRay_not_subset_tensorPowerUpperRay_of_original_neg
+    (data : IUTStage1ThetaPilotTensorPowerLogVolume)
+    (hTheta : data.originalThetaPilotLogVolume < 0) :
+    ¬ data.originalUpperRay ⊆ data.tensorPowerUpperRay := by
+  intro hsubset
+  exact data.originalBoundary_not_mem_tensorPowerUpperRay_of_original_neg
+    hTheta (hsubset data.originalBoundary_mem_originalUpperRay)
+
 end IUTStage1ThetaPilotTensorPowerLogVolume
 
 /--

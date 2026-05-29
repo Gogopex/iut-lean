@@ -4942,6 +4942,18 @@ theorem thetaPilotTensorPowerLogVolume_sharper_of_neg
     data.tensorPowerLogVolume < data.originalThetaPilotLogVolume :=
   data.tensorPowerLogVolume_lt_original_of_original_neg hTheta
 
+theorem thetaPilotTensorPower_originalBoundary_not_mem_tensorPowerUpperRay
+    (data : IUTStage1ThetaPilotTensorPowerLogVolume)
+    (hTheta : data.originalThetaPilotLogVolume < 0) :
+    data.originalThetaPilotLogVolume ∉ data.tensorPowerUpperRay :=
+  data.originalBoundary_not_mem_tensorPowerUpperRay_of_original_neg hTheta
+
+theorem thetaPilotTensorPower_originalUpperRay_not_subset_tensorPowerUpperRay
+    (data : IUTStage1ThetaPilotTensorPowerLogVolume)
+    (hTheta : data.originalThetaPilotLogVolume < 0) :
+    ¬ data.originalUpperRay ⊆ data.tensorPowerUpperRay :=
+  data.originalUpperRay_not_subset_tensorPowerUpperRay_of_original_neg hTheta
+
 theorem localFrobenioidLogVolume_shifted_ne_unshifted
     (data : IUTStage1LocalFrobenioidLogVolumeAmbiguity)
     (hExponent : data.localExponent ≠ 0)
