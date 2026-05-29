@@ -6400,6 +6400,28 @@ theorem statementEndpoint_thetaRealLogVolume_eq_hull
   (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
     thetaHull_le_cTheta_absLogQ).thetaRealLogVolume_eq_hull
 
+theorem statementEndpoint_thetaRealLogVolume_eq_ind3Upper
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ).thetaRealLogVolume =
+      data.corridor.ind3UpperBound := by
+  rw [data.statementEndpoint_thetaRealLogVolume_eq_hull
+    pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ,
+    data.theta_eq_ind3Upper]
+
+theorem beforeAverage_le_statementEndpoint_ind3Upper
+    (data : IUTStage1StepXToHullUpperRayLogVolume label) :
+    data.corridor.beforeIndeterminacy.averageLogVolume <=
+      data.corridor.ind3UpperBound :=
+  data.corridor.before_average_le_ind3UpperBound
+
 theorem beforeAverage_le_statementEndpoint_thetaRealLogVolume
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
