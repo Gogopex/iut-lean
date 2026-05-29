@@ -3142,6 +3142,17 @@ theorem toZMod_fromZMod
     model.toZMod (model.fromZMod j) = j :=
   model.labelEquiv.right_inv j
 
+theorem labelModel_endpoint
+    [Fintype label]
+    (model : IUTStage1FLLabelModel label)
+    (j : label) (z : ZMod model.prime.value) :
+    Fintype.card label = model.prime.value ∧
+      model.fromZMod (model.toZMod j) = j ∧
+      model.toZMod (model.fromZMod z) = z :=
+  ⟨model.card_eq_primeValue,
+    model.fromZMod_toZMod j,
+    model.toZMod_fromZMod z⟩
+
 end IUTStage1FLLabelModel
 
 /--
@@ -3199,6 +3210,21 @@ theorem exists_unique_vadd_eq
     ∃! t : ZMod model.label_model.prime.value,
       model.torsor.vadd t j₁ = j₂ :=
   model.torsor.exists_unique_vadd_eq j₁ j₂
+
+theorem torsorModel_endpoint
+    (model : IUTStage1FLLabelTorsorModel label)
+    (t g h : ZMod model.label_model.prime.value) (j j₁ j₂ : label) :
+    model.torsor.vadd t j =
+        model.label_model.fromZMod (t + model.label_model.toZMod j) ∧
+      model.torsor.vadd 0 j = j ∧
+      model.torsor.vadd (g + h) j =
+        model.torsor.vadd g (model.torsor.vadd h j) ∧
+      (∃! u : ZMod model.label_model.prime.value,
+        model.torsor.vadd u j₁ = j₂) :=
+  ⟨model.vadd_eq_zmod t j,
+    model.zero_vadd j,
+    model.add_vadd g h j,
+    model.exists_unique_vadd_eq j₁ j₂⟩
 
 theorem zmod_vadd_eq_translate
     (l : PrimeGeFive) (t j : ZMod l.value) :
@@ -3260,6 +3286,17 @@ theorem zmod_proper_nonempty_subset_not_translation_closed
   intro hclosed
   exact hproper
     (zmod_subset_eq_univ_of_nonempty_translation_closed l s hne hclosed)
+
+theorem zmodTranslationClosure_endpoint
+    (l : PrimeGeFive) (s : Finset (ZMod l.value))
+    (hne : s.Nonempty) :
+    (¬ ∀ j : ZMod l.value,
+        j = 1 -> zmodLabelTranslate l (1 : ZMod l.value) j = 1) ∧
+      ((∀ (t j : ZMod l.value), j ∈ s ->
+          zmodLabelTranslate l t j ∈ s) -> s = Finset.univ) :=
+  ⟨singletonOne_not_closed_under_translation_one l,
+    fun hclosed => zmod_subset_eq_univ_of_nonempty_translation_closed
+      l s hne hclosed⟩
 
 end IUTStage1FLLabelTorsorModel
 

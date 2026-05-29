@@ -183,11 +183,15 @@ The code currently covers:
   restriction check at the canonical \(j=1\) sign label:
   the Gaussian component and the corresponding cusp-class log-volume are both
   the original environment degree; Lean also records the accompanying IUT II
+  \(F_\ell\)-label model endpoint: the carrier has cardinality \(\ell\), the
+  maps to and from \(\mathbb{Z}/\ell\mathbb{Z}\) are inverse, and the additive
+  torsor action is transported by coordinate addition.  It also records the
   warning in the finite model: the singleton restriction to \(j=1\) is not
   stable under the additive \(F_\ell\)-torsor action, since translation by \(1\)
   sends \(1\) to \(2\ne1\); more generally, Lean proves that every nonempty
-  translation-stable finite subset of \(F_\ell\) is all of \(F_\ell\), so no
-  nonempty proper subset restriction is compatible with this symmetry; Lean
+  translation-stable finite subset of \(F_\ell\) is all of \(F_\ell\), packaged
+  as a translation-closure endpoint, so no nonempty proper subset restriction is
+  compatible with this symmetry; Lean
   also proves that no nonzero additive translation descends to a well-defined
   map on \(|F_\ell|\), since the equal absolute labels of \(t\) and \(-t\) would
   have to map simultaneously to the nonzero label of \(2t\) and to \(0\);
@@ -1044,6 +1048,8 @@ model, Lean rejects a single label-independent scale accounting for all
 representative \(j^2\) factors, and it rejects balanced sign-compatible evidence
 as the final hull/log-volume comparison level.  Lean also rejects direct descent
 of arbitrary raw representative \(j^2\) theta-degree data to \(|F_\ell|\), while
+the underlying \(F_\ell\)-label model and additive torsor laws are now packaged
+as source-side endpoints.
 accepting the half-range exponent convention stated in IUT II.
 Lean also checks that an \(N\)-th tensor-power boundary is a strict strengthening
 for \(N\ge2\) and negative pilot log-volume.  It also checks the Step (xii)

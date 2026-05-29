@@ -5889,6 +5889,37 @@ theorem localObjectContainerLogVolume_endpoint
       targetSigned <= localLogVolume :=
   estimate.localObjectContainerLogVolume_endpoint
 
+theorem flLabelModel_endpoint
+    {label : Type u} [Fintype label]
+    (model : IUTStage1FLLabelModel label)
+    (j : label) (z : ZMod model.prime.value) :
+    Fintype.card label = model.prime.value ∧
+      model.fromZMod (model.toZMod j) = j ∧
+      model.toZMod (model.fromZMod z) = z :=
+  model.labelModel_endpoint j z
+
+theorem flLabelTorsorModel_endpoint
+    {label : Type}
+    (model : IUTStage1FLLabelTorsorModel label)
+    (t g h : ZMod model.label_model.prime.value) (j j₁ j₂ : label) :
+    model.torsor.vadd t j =
+        model.label_model.fromZMod (t + model.label_model.toZMod j) ∧
+      model.torsor.vadd 0 j = j ∧
+      model.torsor.vadd (g + h) j =
+        model.torsor.vadd g (model.torsor.vadd h j) ∧
+      (∃! u : ZMod model.label_model.prime.value,
+        model.torsor.vadd u j₁ = j₂) :=
+  model.torsorModel_endpoint t g h j j₁ j₂
+
+theorem flZModTranslationClosure_endpoint
+    (l : PrimeGeFive) (s : Finset (ZMod l.value))
+    (hne : s.Nonempty) :
+    (¬ ∀ j : ZMod l.value,
+        j = 1 -> zmodLabelTranslate l (1 : ZMod l.value) j = 1) ∧
+      ((∀ (t j : ZMod l.value), j ∈ s ->
+          zmodLabelTranslate l t j ∈ s) -> s = Finset.univ) :=
+  IUTStage1FLLabelTorsorModel.zmodTranslationClosure_endpoint l s hne
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
