@@ -6064,6 +6064,55 @@ theorem statementEndpoint_not_cTheta_lt_neg_one
   (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
     thetaHull_le_cTheta_absLogQ).not_cTheta_lt_neg_one
 
+theorem ofZModCuspLabelLogVolumeCompatibilities_cThetaLowerBound
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -before.toLabelAveraged.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      thetaHullLogVolume <= cTheta * (-before.toLabelAveraged.averageLogVolume)) :
+    let data :=
+      ofZModCuspLabelLogVolumeCompatibilities before afterInd1 afterInd2
+        ind3UpperBound hind1 hind2 hzero hcusp determinant thetaHullLogVolume
+        theta_eq_ind3Upper theta_eq_normalized_determinant
+    let endpoint :=
+      data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+        thetaHull_le_cTheta_absLogQ
+    before.toLabelAveraged.averageLogVolume <=
+        cTheta * (-before.toLabelAveraged.averageLogVolume) ∧
+      (-1 : Real) <= endpoint.cTheta ∧
+      ¬ endpoint.cTheta < (-1 : Real) := by
+  intro data endpoint
+  exact
+    ⟨data.beforeAverage_le_cTheta_absLogQ
+        pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ,
+      data.statementEndpoint_cTheta_ge_neg_one
+        pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ,
+      data.statementEndpoint_not_cTheta_lt_neg_one
+        pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ⟩
+
 end IUTStage1StepXToHullUpperRayLogVolume
 
 namespace IUTStage1WeightedLabelAveragedProcessionLogVolume

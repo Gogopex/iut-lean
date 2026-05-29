@@ -443,7 +443,10 @@ The code currently covers:
   if the \((\mathrm{Ind3})\) upper bound is nonnegative, then the q-pilot
   average is strictly smaller than it and the endpoint has \(C_\Theta\ge0\);
   Lean also packages this branch as a formal `Corollary312Inequality` value
-  for the comparison data induced by the endpoint sign reduction;
+  for the comparison data induced by the endpoint sign reduction; without the
+  nonnegative-\(\Theta\) assumption, the same \(F_\ell\)-sourced endpoint proves
+  \(q_{\mathrm{avg}}\le C_\Theta|q_{\mathrm{avg}}|\), \(C_\Theta\ge-1\), and
+  rejection of \(C_\Theta<-1\);
   Lean also proves
   that the endpoint \(q\)-pilot log-volume is exactly the pre-indeterminacy
   average and, by Step (x) invariance, also the after-\((\mathrm{Ind1})\)- and
