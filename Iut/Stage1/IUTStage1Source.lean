@@ -7169,6 +7169,36 @@ theorem forall_coordinateFullLabel_nonzero_le_iff_environment_le_bound
       henv_nonpos henv_le
       (zmodSignLabelFromCoordinate l (coordinateEquiv j) hj)
 
+theorem target_nonzeroBound_iff_source_environment_le_of_gaussianDegree_one_eq
+    (sourceEvaluation targetEvaluation : GaussianMonoidDegreeEvaluation l)
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (target_environment_nonpositive :
+      targetEvaluation.environmentDegree <= 0)
+    (canonical_one_preserved :
+      targetEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        sourceEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)))
+    {c : Real} :
+    (∀ j : ZMod l.value,
+        coordinateEquiv j ≠ 0 ->
+          targetEvaluation.gaussianDegree
+              (IUTStage1ZModCuspFullLabel.fromCoordinate l
+                (coordinateEquiv j)) <= c) ↔
+      sourceEvaluation.environmentDegree <= c := by
+  have henv :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree :=
+    sourceEvaluation.environmentDegree_eq_of_gaussianDegree_one_eq
+      targetEvaluation canonical_one_preserved
+  rw [targetEvaluation.forall_coordinateFullLabel_nonzero_le_iff_environment_le_bound
+    coordinateEquiv target_environment_nonpositive]
+  constructor
+  · intro htarget
+    simpa [henv] using htarget
+  · intro hsource
+    simpa [henv] using hsource
+
 end GaussianMonoidDegreeEvaluation
 
 def absLabelProcessionTop (l : PrimeGeFive) : Nat :=
