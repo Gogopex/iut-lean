@@ -630,7 +630,10 @@ The code currently covers:
   \(\Theta\)-branch: the \(N\)-tensor-power upper ray is a strict tightening of
   the finite endpoint's upper ray and excludes the original real \(\Theta\)
   value; Lean now also proves that every value in the tensor-power upper ray is
-  strictly below the original \(\Theta\)-boundary;
+  strictly below the original \(\Theta\)-boundary; consequently, if the fixed
+  q-reading is forced into this tensor-power upper ray while the usual
+  \(C_\Theta\)-bound is assumed, Lean derives the strict branch
+  \(C_\Theta>-1\);
 \item the Step (xii) shadow: local Frobenioid \(p_v^N\)-ambiguity changes
   log-volume by an integer shift, while global calibration fixes exponent \(0\);
   Lean now records the exact criterion: the local shifted and unshifted
