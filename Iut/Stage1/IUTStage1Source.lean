@@ -6055,6 +6055,35 @@ theorem fixedQPilotCTheta_endpoint
       endpoint.cTheta_ge_neg_one_from_fixed_qPilot,
       endpoint.not_cTheta_lt_neg_one_from_fixed_qPilot⟩
 
+theorem xiF_upperRayCTheta_endpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    data.qPilotLogVolume ∈
+        data.toHullDetPilotUpperRayLogVolume.upperRay ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaHullLogVolume <= cTheta * (-data.qPilotLogVolume) ∧
+      data.qPilotLogVolume <= cTheta * (-data.qPilotLogVolume) ∧
+      (-1 : Real) <= cTheta ∧
+      ¬ cTheta < (-1 : Real) := by
+  have hTheta :
+      data.thetaHullLogVolume <= cTheta * (-data.qPilotLogVolume) := by
+    rw [data.q_eq_beforeAverage]
+    exact thetaHull_le_cTheta_absLogQ
+  have hCTheta := data.cTheta_ge_neg_one
+    q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+  exact
+    ⟨data.toUpperRay_q_mem,
+      data.qPilotLogVolume_le_thetaHullLogVolume,
+      hTheta,
+      le_trans data.qPilotLogVolume_le_thetaHullLogVolume hTheta,
+      hCTheta,
+      not_lt_of_ge hCTheta⟩
+
 theorem signedCThetaComparison_endpoint
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (q_pilot_positive :

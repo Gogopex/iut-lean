@@ -5076,6 +5076,25 @@ theorem stepXToHullUpperRay_cTheta_ge_neg_one
   data.cTheta_ge_neg_one
     q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
 
+theorem stepXToHullUpperRay_xiF_upperRayCThetaEndpoint
+    {label : Type u} [Fintype label]
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    data.qPilotLogVolume ∈
+        data.toHullDetPilotUpperRayLogVolume.upperRay ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaHullLogVolume <= cTheta * (-data.qPilotLogVolume) ∧
+      data.qPilotLogVolume <= cTheta * (-data.qPilotLogVolume) ∧
+      (-1 : Real) <= cTheta ∧
+      ¬ cTheta < (-1 : Real) :=
+  data.xiF_upperRayCTheta_endpoint
+    q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+
 theorem stepXToHullUpperRay_statementEndpoint_thetaFinite
     {label : Type u} [Fintype label]
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
