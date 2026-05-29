@@ -8946,6 +8946,72 @@ theorem gaussianDegree_fullLabel_average_eq_coeff
   have h := gaussianDegree_fullLabel_average_mul_six evaluation
   nlinarith
 
+theorem gaussianDegree_absNonzeroLabel_average_eq_coeff
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    (absNonzeroLabelAveragedLogVolume evaluation).averageLogVolume =
+      (((absLabelProcessionTop l : Real) + 1) *
+        (2 * (absLabelProcessionTop l : Real) + 1) / 6) *
+          evaluation.environmentDegree := by
+  have h := gaussianDegree_absNonzeroLabelAverage_mul_six evaluation
+  nlinarith
+
+theorem absNonzeroLabelAverageCoefficient_gt_fullLabelAverageCoefficient :
+    (absLabelProcessionTop l : Real) *
+        (2 * (absLabelProcessionTop l : Real) + 1) / 6 <
+      ((absLabelProcessionTop l : Real) + 1) *
+        (2 * (absLabelProcessionTop l : Real) + 1) / 6 := by
+  have hpos : 0 < 2 * (absLabelProcessionTop l : Real) + 1 := by
+    positivity
+  nlinarith
+
+theorem gaussianDegree_absNonzeroLabel_average_lt_fullLabel_average_of_negative
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_neg : evaluation.environmentDegree < 0) :
+    (absNonzeroLabelAveragedLogVolume evaluation).averageLogVolume <
+      (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) := by
+  rw [gaussianDegree_absNonzeroLabel_average_eq_coeff,
+    gaussianDegree_fullLabel_average_eq_coeff]
+  let fullCoeff : Real :=
+    (absLabelProcessionTop l : Real) *
+      (2 * (absLabelProcessionTop l : Real) + 1) / 6
+  let nonzeroCoeff : Real :=
+    ((absLabelProcessionTop l : Real) + 1) *
+      (2 * (absLabelProcessionTop l : Real) + 1) / 6
+  have hcoeff : fullCoeff < nonzeroCoeff := by
+    simpa [fullCoeff, nonzeroCoeff] using
+      absNonzeroLabelAverageCoefficient_gt_fullLabelAverageCoefficient
+        (l := l)
+  have hmul :
+      nonzeroCoeff * evaluation.environmentDegree <
+        fullCoeff * evaluation.environmentDegree :=
+    mul_lt_mul_of_neg_right hcoeff henv_neg
+  simpa [fullCoeff, nonzeroCoeff] using hmul
+
+theorem gaussianDegree_fullLabel_average_lt_absNonzeroLabel_average_of_positive
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_pos : 0 < evaluation.environmentDegree) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) <
+      (absNonzeroLabelAveragedLogVolume evaluation).averageLogVolume := by
+  rw [gaussianDegree_absNonzeroLabel_average_eq_coeff,
+    gaussianDegree_fullLabel_average_eq_coeff]
+  let fullCoeff : Real :=
+    (absLabelProcessionTop l : Real) *
+      (2 * (absLabelProcessionTop l : Real) + 1) / 6
+  let nonzeroCoeff : Real :=
+    ((absLabelProcessionTop l : Real) + 1) *
+      (2 * (absLabelProcessionTop l : Real) + 1) / 6
+  have hcoeff : fullCoeff < nonzeroCoeff := by
+    simpa [fullCoeff, nonzeroCoeff] using
+      absNonzeroLabelAverageCoefficient_gt_fullLabelAverageCoefficient
+        (l := l)
+  have hmul :
+      fullCoeff * evaluation.environmentDegree <
+        nonzeroCoeff * evaluation.environmentDegree :=
+    mul_lt_mul_of_pos_right hcoeff henv_pos
+  simpa [fullCoeff, nonzeroCoeff] using hmul
+
 theorem gaussianDegree_fullLabel_average_ne_environment_of_nonzero
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (henv : evaluation.environmentDegree ≠ 0) :

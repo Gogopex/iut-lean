@@ -921,6 +921,46 @@ theorem gaussianDegree_absNonzeroIndexAverage_mul_six
   IUTStage1ZModSquareWeightProfile.gaussianDegree_absNonzeroLabelAverage_mul_six
     evaluation
 
+theorem gaussianDegree_absNonzeroIndexAverage_eq_coeff
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    (IUTStage1ZModSquareWeightProfile.absNonzeroLabelAveragedLogVolume
+        evaluation).averageLogVolume =
+      (((IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) + 1) *
+        (2 *
+          (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) +
+            1) / 6) *
+          evaluation.environmentDegree :=
+  open IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction in
+  gaussianDegree_absNonzeroLabel_average_eq_coeff evaluation
+
+theorem gaussianDegree_absNonzeroIndexAverage_lt_fullLabelAverage_of_negative
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (henv_neg : evaluation.environmentDegree < 0) :
+    (IUTStage1ZModSquareWeightProfile.absNonzeroLabelAveragedLogVolume
+        evaluation).averageLogVolume <
+      (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) :=
+  open IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction in
+  gaussianDegree_absNonzeroLabel_average_lt_fullLabel_average_of_negative
+    evaluation henv_neg
+
+theorem gaussianDegree_fullLabelAverage_lt_absNonzeroIndexAverage_of_positive
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (henv_pos : 0 < evaluation.environmentDegree) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) <
+      (IUTStage1ZModSquareWeightProfile.absNonzeroLabelAveragedLogVolume
+        evaluation).averageLogVolume :=
+  open IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction in
+  gaussianDegree_fullLabel_average_lt_absNonzeroLabel_average_of_positive
+    evaluation henv_pos
+
 theorem gaussianDegree_absLabelProcessionAverage_mul_six
     {l : PrimeGeFive}
     (evaluation :
