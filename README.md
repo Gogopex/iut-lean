@@ -148,6 +148,11 @@ endpoint and packages the boundary-vs-strict dichotomy:
 qSigned = thetaSigned ∧ thetaSigned < 0 ∨ (-1 : Real) < C_Theta
 ```
 
+The factored square/full-label SHE preservation package no longer has to be
+primitive in the finite Gaussian case: Gaussian degree evaluations with preserved
+environment degree now construct that package and feed it directly into the
+nonarchimedean `C_Theta` dichotomy.
+
 This is deliberately not marked as settling the dispute. The experiment report
 keeps `disputeSettledByCurrentStage = false`. The remaining issue is whether the
 records consumed by this route are actually constructible from the IUT I-III
@@ -255,13 +260,14 @@ Near-term engineering:
   Frobenioid shifts, and IUT IV ordered-real algebra.
 * Keep theorem names stable while refactoring; rebuild after each mechanical
   move.
-* Add experiment exports for the newest nonarchimedean `C_Theta` endpoint
-  theorems so the report surface tracks the route-level dichotomy directly.
+* Add more experiment exports for any new source-derived route theorem, so the
+  report surface tracks which assumptions have been eliminated.
 
 Near-term mathematics:
 
-* Replace `IUTStage1StructuredSHEFactoredSquareFullLabelObligations` with a
-  construction from the Gaussian/Frobenioid material corresponding to IUT II.
+* Extend the Gaussian-derived factored SHE construction toward actual
+  Gaussian/Frobenioid material corresponding to IUT II, rather than only finite
+  degree-evaluation shadows.
 * Replace `NonarchimedeanInd3EntryAlignment` with the log-Kummer
   upper-semi-compatibility construction of IUT III, Step (x).
 * Replace the current hull/determinant obligation records with formal

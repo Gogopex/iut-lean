@@ -8294,6 +8294,7 @@ structure Corollary312DisputeFirstPassReport where
   orderedRealLineRouteTheoremAvailable : Bool
   nonarchimedeanEntryCanonicalAlignmentTheoremAvailable : Bool
   factoredSHEBridgeTheoremAvailable : Bool
+  gaussianFactoredNonarchimedeanCThetaDichotomyAvailable : Bool
   mismatchCounterexampleBlocksRawCancellation : Bool
   labelIndependentJ2CollapseRejectedInZModModel : Bool
   representativeJ2SignQuotientDescentRejectedInZModModel : Bool
@@ -8398,6 +8399,7 @@ def corollary312DisputeFirstPassReport :
   { orderedRealLineRouteTheoremAvailable := true,
     nonarchimedeanEntryCanonicalAlignmentTheoremAvailable := true,
     factoredSHEBridgeTheoremAvailable := true,
+    gaussianFactoredNonarchimedeanCThetaDichotomyAvailable := true,
     mismatchCounterexampleBlocksRawCancellation := true,
     labelIndependentJ2CollapseRejectedInZModModel := true,
     representativeJ2SignQuotientDescentRejectedInZModModel := true,
@@ -8498,6 +8500,11 @@ theorem corollary312Report_nonarchimedeanEntryCanonicalAlignmentTheoremAvailable
 
 theorem corollary312Report_factoredSHEBridgeTheoremAvailable :
     corollary312DisputeFirstPassReport.factoredSHEBridgeTheoremAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_gaussianFactoredNonarchimedeanCThetaDichotomyAvailable :
+    corollary312DisputeFirstPassReport.gaussianFactoredNonarchimedeanCThetaDichotomyAvailable =
       true :=
   rfl
 
@@ -9061,6 +9068,70 @@ theorem corollary312_firstPass_finalQTheta_from_factoredSHEAndNonarchimedeanEntr
     (by simpa using source_log_volume_eq)
     (by simpa using target_log_volume_eq_theta)
     entryAlignment
+
+/--
+Corollary 3.12 first-pass `C_Theta` dichotomy from Gaussian-derived factored
+SHE data and a nonarchimedean `(Ind3)` entry.
+
+This is the current strongest experiment-surface form of the route: the
+factored square/full-label preservation package is constructed from Gaussian
+degree evaluations before the nonarchimedean endpoint is applied.
+-/
+theorem corollary312_firstPass_cThetaDichotomy_from_gaussianFactoredSHEAndNonarchimedeanEntry
+    {source target : Copy} {coric : Type u}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (coordinate_square_preserved :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (fullLabelMap_preserved :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (environmentDegree_preserved :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree)
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_log_volume_eq_theta :
+      targetEvaluation.toCuspLabelLogVolumeCompatibility =
+        part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited)
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    (entryAlignment :
+      NonarchimedeanInd3EntryAlignment audited entry
+        (part.insulated_route.theta_source.thetaSourceAverage audited))
+    (q_pilot_positive : 0 < -package.preLedger.qSigned)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      package.preLedger.thetaSigned <=
+        cTheta * (-package.preLedger.qSigned)) :
+    (package.preLedger.qSigned = package.preLedger.thetaSigned ∧
+        package.preLedger.thetaSigned < 0) ∨
+      (-1 : Real) < cTheta :=
+  part.boundarySignedEqualityOrStrictCTheta_of_gaussianFactoredNonarchimedeanEntry
+    profile audited coordinateEquiv sourceProfile targetProfile
+    sourceEvaluation targetEvaluation coordinate_square_preserved
+    fullLabelMap_preserved environmentDegree_preserved source_profile_eq
+    source_log_volume_eq target_log_volume_eq_theta entryAlignment
+    q_pilot_positive cTheta thetaSigned_le_cTheta_absLogQ
 
 /--
 Scholze-Stix-style collapse test for the representative `j^2` factors.

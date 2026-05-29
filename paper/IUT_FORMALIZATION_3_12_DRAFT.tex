@@ -309,6 +309,12 @@ The code also proves a Gaussian-to-factored-\SHE{} bridge at the present finite
 degree level.  In particular, equality of the source and target environment
 degrees gives full-label value preservation; nonzero-label target bounds are
 enough because the zero label has square weight zero.
+The newest route uses this bridge before applying the nonarchimedean endpoint:
+Gaussian degree evaluations with preserved environment degree now construct the
+factored square/full-label preservation package consumed by the
+nonarchimedean \(C_\Theta\) dichotomy.  This removes one primitive preservation
+input from that route, but it still assumes the nonarchimedean \((\Ind3)\)
+alignment and the Hodge-descent/SHE source audit.
 
 \subsection{Step (xi-f) algebra}
 
@@ -401,6 +407,9 @@ The project currently proves the following source-facing results in \Lean{}:
   \(C_\Theta>-1\) and the boundary consequence
   \(C_\Theta=-1\Rightarrow q_{\mathrm{signed}}=\Theta_{\mathrm{signed}}<0\).
   It also packages these as one dichotomy at the route level.
+\item Gaussian degree evaluations with preserved environment degree now feed
+  directly into this nonarchimedean \(C_\Theta\) dichotomy, constructing the
+  factored square/full-label \SHE{} package internally.
 \item The Step (xi-f) real algebra proves \(C_\Theta\ge-1\), strictness under
   strict upper-ray membership, and equality constraints in the boundary case.
 \item The final route rejects the balanced sign-compatible comparison level as
@@ -502,8 +511,9 @@ The practical priority order is:
 \item factor the large source module into reviewable finite-label, hull,
   Frobenioid-shift, and \IUT{} IV algebra modules without changing theorem
   statements;
-\item replace the factored \SHE{} full-label preservation record by a construction
-  from the Gaussian/Frobenioid material of \IUT{} II;
+\item extend the Gaussian-derived factored \SHE{} construction toward actual
+  Gaussian/Frobenioid material from \IUT{} II, rather than only finite
+  degree-evaluation shadows;
 \item replace the nonarchimedean \((\Ind3)\) alignment record by the
   log-Kummer upper-semi compatibility construction of \IUT{} III, Step (x);
 \item replace the hull/determinant endpoint records by the actual
