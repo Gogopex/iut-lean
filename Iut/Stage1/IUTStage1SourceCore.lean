@@ -1663,6 +1663,24 @@ theorem logVolume_le_of_subset_hull
     data.logVolume region₁ <= data.logVolume (data.hullRegion region₂) :=
   data.logVolume_mono hsubset
 
+theorem hull_subset_closed_of_subset
+    (data : IUTStage1HolomorphicHullLogVolumeShadow α)
+    {region closedRegion : Set α}
+    (hsubset : region ⊆ closedRegion)
+    (hclosed : data.hull.IsClosed closedRegion) :
+    data.hullRegion region ⊆ closedRegion :=
+  hclosed.closure_le_iff.mpr hsubset
+
+theorem logVolume_hull_le_closed_of_subset
+    (data : IUTStage1HolomorphicHullLogVolumeShadow α)
+    {region closedRegion : Set α}
+    (hsubset : region ⊆ closedRegion)
+    (hclosed : data.hull.IsClosed closedRegion) :
+    data.logVolume (data.hullRegion region) <=
+      data.logVolume closedRegion :=
+  data.logVolume_mono
+    (data.hull_subset_closed_of_subset hsubset hclosed)
+
 end IUTStage1HolomorphicHullLogVolumeShadow
 
 /--
@@ -1933,6 +1951,31 @@ theorem endpoint
         data.toHullDetPilotUpperRayLogVolume.upperRay :=
   ⟨rfl, rfl, data.qPilotLogVolume_le_thetaHullLogVolume,
     data.toUpperRay_qPilot_mem_upperRay⟩
+
+theorem thetaHull_subset_closed_of_possibleImages_subset
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    {closedRegion : Set α}
+    (himages :
+      ∀ i, data.possibleThetaImage i ⊆ closedRegion)
+    (hclosed : data.hullData.hull.IsClosed closedRegion) :
+    data.thetaHull ⊆ closedRegion := by
+  exact
+    data.hullData.hull_subset_closed_of_subset
+      (by
+        intro x hx
+        rcases Set.mem_iUnion.mp hx with ⟨i, hi⟩
+        exact himages i hi)
+      hclosed
+
+theorem thetaHullLogVolume_le_closed_of_possibleImages_subset
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    {closedRegion : Set α}
+    (himages :
+      ∀ i, data.possibleThetaImage i ⊆ closedRegion)
+    (hclosed : data.hullData.hull.IsClosed closedRegion) :
+    data.thetaHullLogVolume <= data.hullData.logVolume closedRegion :=
+  data.hullData.logVolume_mono
+    (data.thetaHull_subset_closed_of_possibleImages_subset himages hclosed)
 
 end IUTStage1ThetaPossibleImagesHullLogVolumeShadow
 
