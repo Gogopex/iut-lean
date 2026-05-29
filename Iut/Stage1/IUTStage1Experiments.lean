@@ -21,6 +21,7 @@ open RealLineCopy
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
 open FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
 open FLZModCuspLabelThetaCuspClassContainerAudit
+open IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction
 
 /-- First pass: no real-line/log-volume alignment has been supplied. -/
 def ind3MissingRealAlignmentReport :
@@ -759,6 +760,26 @@ theorem gaussianDegree_fromAbsLabelProcession
       ((label.val : Real) ^ 2) * evaluation.environmentDegree :=
   IUTStage1ZModSquareWeightProfile.gaussianDegree_fromProcession
     evaluation label
+
+theorem gaussianDegree_absLabelProcessionAverage_mul_six
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    (((Finset.univ.sum fun label :
+      IUTStage1ProcessionContainer
+        (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l) =>
+        evaluation.gaussianDegree
+          (IUTStage1ZModSquareWeightProfile.absLabelFromProcession l label)) /
+        (Fintype.card
+          (IUTStage1ProcessionContainer
+            (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+          Real)) * 6 =
+      (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) *
+        (2 *
+          (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) +
+            1) *
+          evaluation.environmentDegree) :=
+  gaussianDegree_procession_average_mul_six evaluation
 
 /-- Scale-level status for transport-explicit real-line cancellation. -/
 structure Ind3TransportScaleExperimentReport where

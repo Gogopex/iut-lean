@@ -8258,6 +8258,32 @@ theorem gaussianDegree_processionCore
             (absLabelProcessionTop l))) = 0 := by
   rw [absLabelFromProcession_core, evaluation.gaussianDegree_zero]
 
+theorem gaussianDegree_procession_sum_eq_square_sum
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    (Finset.univ.sum fun label :
+      IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+        evaluation.gaussianDegree (absLabelFromProcession l label)) =
+      (Finset.univ.sum fun label :
+        IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+          ((label.val : Real) ^ 2)) *
+        evaluation.environmentDegree := by
+  calc
+    (Finset.univ.sum fun label :
+      IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+        evaluation.gaussianDegree (absLabelFromProcession l label)) =
+        Finset.univ.sum fun label :
+          IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+            ((label.val : Real) ^ 2) * evaluation.environmentDegree := by
+      apply Finset.sum_congr rfl
+      intro label _hlabel
+      exact gaussianDegree_fromProcession evaluation label
+    _ =
+        (Finset.univ.sum fun label :
+          IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+            ((label.val : Real) ^ 2)) *
+          evaluation.environmentDegree := by
+      rw [Finset.sum_mul]
+
 theorem absLabelProcessionTop_ge_two (l : PrimeGeFive) :
     2 ≤ absLabelProcessionTop l := by
   unfold absLabelProcessionTop
@@ -8422,6 +8448,52 @@ theorem processionSquareSum_mul_six :
     simp [hxlt]
   rw [hsum_eq]
   exact iutIVThetaPilot_sum_sq_mul_six (absLabelProcessionTop l)
+
+theorem gaussianDegree_procession_average_mul_six
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    (((Finset.univ.sum fun label :
+      IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+        evaluation.gaussianDegree (absLabelFromProcession l label)) /
+        (Fintype.card
+          (IUTStage1ProcessionContainer (absLabelProcessionTop l)) : Real)) *
+      6 =
+      (absLabelProcessionTop l : Real) *
+        (2 * (absLabelProcessionTop l : Real) + 1) *
+          evaluation.environmentDegree) := by
+  rw [gaussianDegree_procession_sum_eq_square_sum evaluation]
+  have hsum := processionSquareSum_mul_six (l := l)
+  have hcard :
+      (Fintype.card
+        (IUTStage1ProcessionContainer (absLabelProcessionTop l)) : Real) =
+      ((absLabelProcessionTop l : Real) + 1) := by
+    rw [IUTStage1ProcessionContainer.card_eq]
+    norm_num
+  have hden : ((absLabelProcessionTop l : Real) + 1) ≠ 0 := by
+    positivity
+  rw [hcard]
+  calc
+    (((Finset.univ.sum fun label :
+      IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+        ((label.val : Real) ^ 2)) * evaluation.environmentDegree) /
+        ((absLabelProcessionTop l : Real) + 1)) * 6 =
+        ((((Finset.univ.sum fun label :
+          IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+            ((label.val : Real) ^ 2)) * 6) *
+          evaluation.environmentDegree) /
+          ((absLabelProcessionTop l : Real) + 1)) := by
+      ring
+    _ =
+        (((absLabelProcessionTop l : Real) *
+          ((absLabelProcessionTop l : Real) + 1) *
+            (2 * (absLabelProcessionTop l : Real) + 1)) *
+          evaluation.environmentDegree) /
+          ((absLabelProcessionTop l : Real) + 1) := by
+      rw [hsum]
+    _ =
+        (absLabelProcessionTop l : Real) *
+          (2 * (absLabelProcessionTop l : Real) + 1) *
+            evaluation.environmentDegree := by
+      field_simp [hden]
 
 theorem generatorLogVolume_sum_mul_six
     (action : LGPSplittingMonoidTensorPacketAction l) :
