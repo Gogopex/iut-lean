@@ -6652,6 +6652,15 @@ theorem zmodTranslationEquiv_apply
   rw [zmodLabelTranslate_eq_add]
   rfl
 
+theorem zmodTranslation_sum_eq
+    (t : ZMod l.value) (f : ZMod l.value -> Real) :
+    (Finset.univ.sum fun j : ZMod l.value => f (zmodLabelTranslate l t j)) =
+      Finset.univ.sum f :=
+  Fintype.sum_equiv (zmodTranslationEquiv l t)
+    (fun j : ZMod l.value => f (zmodLabelTranslate l t j))
+    (fun j : ZMod l.value => f j)
+    (fun j => by rw [zmodTranslationEquiv_apply])
+
 theorem fullLabelMapPreserving_translation_iff_zero
     (t : ZMod l.value) :
     FullLabelMapPreserving (l := l) (zmodTranslationEquiv l t) ↔
@@ -8694,6 +8703,33 @@ noncomputable def coordinateAveragedLogVolume
           (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) /
         (l.value : Real),
     average_eq := by rw [ZMod.card] }
+
+theorem coordinateGaussian_sum_translation_eq
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (t : ZMod l.value) :
+    (Finset.univ.sum fun j : ZMod l.value =>
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          (zmodLabelTranslate l t j))) =
+      Finset.univ.sum fun j : ZMod l.value =>
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodTranslation_sum_eq
+    (l := l) t
+    (fun j : ZMod l.value =>
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j))
+
+theorem coordinateAveragedLogVolume_average_translation_eq
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (t : ZMod l.value) :
+    ((Finset.univ.sum fun j : ZMod l.value =>
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          (zmodLabelTranslate l t j))) / (l.value : Real)) =
+      evaluation.coordinateAveragedLogVolume.averageLogVolume := by
+  rw [evaluation.coordinateGaussian_sum_translation_eq t]
+  rfl
 
 theorem coordinateGaussian_sum_eq_zero_add_nonzero
     (evaluation : GaussianMonoidDegreeEvaluation l) :

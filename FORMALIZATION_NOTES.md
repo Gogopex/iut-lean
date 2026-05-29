@@ -19175,3 +19175,38 @@ This strengthens the finite-model version of the IUT II, Remarks 4.7.3--4.7.4
 separation: residual multiplicative symmetry is compatible with the
 \(|F_\ell|\) label quotient, but an additive displacement remains detectable
 even after composing with a multiplicative unit.
+
+## Raw coordinate translation invariance
+
+### Lean Move
+
+Added:
+
+```text
+zmodTranslation_sum_eq
+coordinateGaussian_sum_translation_eq
+coordinateAveragedLogVolume_average_translation_eq
+rawCoordinate_sum_translation_eq
+gaussianCoordinateSum_translation_eq
+gaussianCoordinateAverage_translation_eq
+```
+
+### Mathematical Reason
+
+Lean now records the benign fact that translation by \(t\in F_\ell\) preserves
+any raw coordinate sum over all of \(F_\ell\), since translation is a finite
+permutation.  Specializing this to the Gaussian coordinate function shows that
+the all-coordinate Gaussian average is translation-invariant at the raw
+\(F_\ell\)-indexing level.
+
+This is deliberately placed next to the non-descent theorems: raw finite-sum
+invariance does not imply that a nonzero additive translation descends to
+\(|F_\ell|\), nor that it preserves the distinguished zero/nonzero subordinate
+branch.
+
+### Source Check
+
+This matches the bookkeeping tension around IUT II, Remarks 4.7.3--4.7.4:
+ordinary \(F_\ell\)-coordinate permutation invariance is weaker than the
+multiplicative symmetry on absolute labels that is used for the Gaussian
+monoid side.

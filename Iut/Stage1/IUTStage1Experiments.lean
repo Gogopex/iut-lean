@@ -974,6 +974,13 @@ theorem translationEquiv_fullLabelMapPreserving_iff_zero
   IUTStage1ZModCuspLabelLogVolumeCompatibility.fullLabelMapPreserving_translation_iff_zero
     t
 
+theorem rawCoordinate_sum_translation_eq
+    {l : PrimeGeFive} (t : ZMod l.value) (f : ZMod l.value -> Real) :
+    (Finset.univ.sum fun j : ZMod l.value => f (zmodLabelTranslate l t j)) =
+      Finset.univ.sum f :=
+  IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodTranslation_sum_eq
+    (l := l) t f
+
 theorem properNonemptySubset_not_translationInvariant
     (l : PrimeGeFive) (s : Finset (ZMod l.value))
     (hne : s.Nonempty)
@@ -1220,6 +1227,32 @@ theorem gaussianFullLabelAverage_eq_processionAverage
             (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) : Real) :=
   IUTStage1ZModSquareWeightProfile.fullLabel_average_eq_procession_average
     evaluation.gaussianDegree
+
+theorem gaussianCoordinateSum_translation_eq
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (t : ZMod l.value) :
+    (Finset.univ.sum fun j : ZMod l.value =>
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          (zmodLabelTranslate l t j))) =
+      Finset.univ.sum fun j : ZMod l.value =>
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  evaluation.coordinateGaussian_sum_translation_eq t
+
+theorem gaussianCoordinateAverage_translation_eq
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (t : ZMod l.value) :
+    ((Finset.univ.sum fun j : ZMod l.value =>
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          (zmodLabelTranslate l t j))) / (l.value : Real)) =
+      evaluation.coordinateAveragedLogVolume.averageLogVolume :=
+  evaluation.coordinateAveragedLogVolume_average_translation_eq t
 
 theorem gaussianFullLabelAverage_eq_subordinateSum_div
     {l : PrimeGeFive}
