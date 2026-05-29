@@ -6485,6 +6485,41 @@ theorem standardQLambdaCTheta_tensorPowerBoundary_or_strict
           q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).2.2
         (Ne.symm hboundary)
 
+theorem standardQLambdaCTheta_twoComputationTensorPowerBoundary_or_strict
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (tensorPower : Nat)
+    (tensor_power_ge_two : 2 ≤ tensorPower)
+    (theta_neg : data.thetaHullLogVolume < 0) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    (cTheta = (-1 : Real) ∧
+        twoComputation.inputPrimeStripLogVolume ∉
+          (data.toThetaPilotTensorPowerLogVolume
+            tensorPower tensor_power_ge_two).tensorPowerUpperRay ∧
+        twoComputation.outputHullLogVolume ∉
+          (data.toThetaPilotTensorPowerLogVolume
+            tensorPower tensor_power_ge_two).tensorPowerUpperRay) ∨
+      (-1 : Real) < cTheta := by
+  intro twoComputation
+  by_cases hboundary : cTheta = (-1 : Real)
+  · left
+    have hnot :=
+      data.standardQLambdaCTheta_not_twoComputation_mem_tensorPowerUpperRay_of_boundary
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+        tensorPower tensor_power_ge_two theta_neg hboundary
+    exact ⟨hboundary, hnot⟩
+  · right
+    exact
+      lt_of_le_of_ne
+        (data.standardQLambdaCTheta_endpoint
+          q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).2.2
+        (Ne.symm hboundary)
+
 theorem standardQLambdaCTheta_qPilot_eq_thetaHullLogVolume_of_cTheta_eq_neg_one
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (q_pilot_positive :
