@@ -6577,6 +6577,63 @@ theorem boundaryCTheta_localShift_eq_q_or_det_iff_trivial
             htrivial
         exact hcalshift.symm.trans hglobaldet⟩
 
+theorem boundaryCTheta_localShift_orderedAround_q_and_det
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hC : cTheta = (-1 : Real)) :
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    (data.qPilotLogVolume < global.localData.shiftedLogVolume ↔
+        0 < (localExponent : Real) * localPrimeStepLogVolume) ∧
+      (global.localData.shiftedLogVolume < data.qPilotLogVolume ↔
+        (localExponent : Real) * localPrimeStepLogVolume < 0) ∧
+      (data.determinant.determinantLogVolume <
+          global.localData.shiftedLogVolume ↔
+        0 < (localExponent : Real) * localPrimeStepLogVolume) ∧
+      (global.localData.shiftedLogVolume <
+          data.determinant.determinantLogVolume ↔
+        (localExponent : Real) * localPrimeStepLogVolume < 0) := by
+  intro global
+  have hqtheta :
+      data.qPilotLogVolume = data.thetaHullLogVolume :=
+    data.standardQLambdaCTheta_qPilot_eq_thetaHullLogVolume_of_cTheta_eq_neg_one
+      q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hC
+  have hqdet :
+      data.qPilotLogVolume = data.determinant.determinantLogVolume :=
+    data.standardQLambdaCTheta_qPilot_eq_determinantLogVolume_of_cTheta_eq_neg_one
+      q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hC
+  have hglobaltheta :
+      global.calibratedLogVolume = data.thetaHullLogVolume := by
+    simpa [global, toGlobalFrobenioidLogVolumeCalibration] using
+      data.toThetaFiniteLogVolumeEndpoint.thetaRealLogVolume_eq_hull
+  have hglobalq :
+      global.calibratedLogVolume = data.qPilotLogVolume :=
+    hglobaltheta.trans hqtheta.symm
+  have hglobaldet :
+      global.calibratedLogVolume = data.determinant.determinantLogVolume :=
+    hglobalq.trans hqdet
+  exact
+    ⟨by
+      rw [← hglobalq]
+      exact global.calibratedLogVolume_lt_shifted_iff_shiftTerm_pos,
+    by
+      rw [← hglobalq]
+      exact global.shiftedLogVolume_lt_calibrated_iff_shiftTerm_lt_zero,
+    by
+      rw [← hglobaldet]
+      exact global.calibratedLogVolume_lt_shifted_iff_shiftTerm_pos,
+    by
+      rw [← hglobaldet]
+      exact global.shiftedLogVolume_lt_calibrated_iff_shiftTerm_lt_zero⟩
+
 theorem cTheta_ge_neg_one
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (q_pilot_positive :
