@@ -6066,6 +6066,21 @@ theorem zmodCuspLabelLogVolumeCompatibility_endpoint
         compat.cuspClassLogVolume (zmodSignLabelFromCoordinate l j hj) :=
   compat.fullLabelLogVolumeCompatibility_endpoint j hj
 
+theorem zmodCuspLabelLogVolumeCompatibility_fullLabelAverage_endpoint
+    {l : PrimeGeFive}
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    {c : Real}
+    (hzero : compat.zeroLogVolume <= c)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      compat.cuspClassLogVolume label <= c) :
+    compat.toLabelAveraged.averageLogVolume =
+        (Finset.univ.sum fun j : ZMod l.value =>
+          compat.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) /
+          (l.value : Real) ∧
+      compat.toLabelAveraged.averageLogVolume <= c :=
+  compat.toLabelAveraged_fullLabel_average_endpoint hzero hcusp
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool

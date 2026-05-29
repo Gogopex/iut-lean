@@ -4946,6 +4946,62 @@ theorem constant_toLabelAveraged_eq_constant
   exact toLabelAveraged_eq_constant_of_zero_and_cusp_eq
     (constant (l := l) c) rfl (by intro label; rfl)
 
+theorem toLabelAveraged_average_eq_fullLabelCoordinateAverage
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :
+    compat.toLabelAveraged.averageLogVolume =
+      (Finset.univ.sum fun j : ZMod l.value =>
+        compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) /
+        (l.value : Real) := by
+  calc
+    compat.toLabelAveraged.averageLogVolume =
+        (Finset.univ.sum compat.normalizedLogVolume) / (l.value : Real) := by
+      exact IUTStage1LabelAveragedProcessionLogVolume.average_eq_zmod_prime_formula
+        l compat.toLabelAveraged
+    _ =
+        (Finset.univ.sum fun j : ZMod l.value =>
+          compat.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) /
+          (l.value : Real) := by
+      congr 1
+      exact Finset.sum_congr rfl (by
+        intro j _hj
+        exact compat.normalizedLogVolume_eq_fullLabelLogVolume_fromCoordinate j)
+
+theorem toLabelAveraged_average_le_of_zero_and_cuspClass_le
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    {c : Real}
+    (hzero : compat.zeroLogVolume <= c)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      compat.cuspClassLogVolume label <= c) :
+    compat.toLabelAveraged.averageLogVolume <= c := by
+  haveI : Nonempty (ZMod l.value) := ⟨0⟩
+  exact IUTStage1LabelAveragedProcessionLogVolume.average_le_const_of_forall_le
+    compat.toLabelAveraged
+    (by
+      intro j
+      by_cases hj : j = 0
+      · subst j
+        simpa [toLabelAveraged] using compat.zero_eq_zeroLogVolume.trans_le hzero
+      · simpa [toLabelAveraged] using
+          (compat.nonzero_eq j hj).trans_le
+            (hcusp (zmodSignLabelFromCoordinate l j hj)))
+
+theorem toLabelAveraged_fullLabel_average_endpoint
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    {c : Real}
+    (hzero : compat.zeroLogVolume <= c)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      compat.cuspClassLogVolume label <= c) :
+    compat.toLabelAveraged.averageLogVolume =
+        (Finset.univ.sum fun j : ZMod l.value =>
+          compat.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) /
+          (l.value : Real) ∧
+      compat.toLabelAveraged.averageLogVolume <= c :=
+  ⟨compat.toLabelAveraged_average_eq_fullLabelCoordinateAverage,
+    compat.toLabelAveraged_average_le_of_zero_and_cuspClass_le hzero hcusp⟩
+
 end IUTStage1ZModCuspLabelLogVolumeCompatibility
 
 namespace IUTStage1ProcessionTensorPacketLogVolume
