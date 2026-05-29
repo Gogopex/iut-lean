@@ -18938,3 +18938,30 @@ full-label relation rather than through an external index set.
 This stays aligned with IUT II's Gaussian convention \(q^{j^2}\) and Remark
 4.7.3(iii)'s notation \(j\ll0\): the finite Lean statement makes explicit that
 the nonzero subordinate part is exactly where the square exponents contribute.
+
+## Subordinate Gaussian sum equals half-range sum
+
+### Lean Move
+
+Added:
+
+```text
+gaussianDegree_absNonzeroLabel_sum_mul_six
+gaussianDegree_subordinate_sum_eq_absNonzeroLabel_sum
+gaussianDegree_absNonzeroIndexSum_mul_six
+gaussianSubordinateSum_eq_absNonzeroIndexSum
+```
+
+### Mathematical Reason
+
+Lean now identifies the subordinate full-label Gaussian sum with the canonical
+nonzero absolute half-range sum.  Both sides have the same closed-form
+sixfold value, and division by \(6\) is cancellable in \(\mathbb{R}\).  This
+connects the relation \(a\ll0\) directly to the paper's representative indexing
+\(j=1,\ldots,(\ell-1)/2\).
+
+### Source Check
+
+This is a Lean bridge between two source conventions from IUT II: the
+weighted-volume notation \(j\ll0\) in Remark 4.7.3(iii), and the Gaussian
+theta-value convention \(q^{j^2}\) indexed by the canonical half range.

@@ -1161,6 +1161,36 @@ theorem gaussianDegree_absNonzeroIndexAverage_mul_six
   IUTStage1ZModSquareWeightProfile.gaussianDegree_absNonzeroLabelAverage_mul_six
     evaluation
 
+theorem gaussianDegree_absNonzeroIndexSum_mul_six
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    ((Finset.univ.sum fun label :
+      Fin (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l) =>
+      evaluation.gaussianDegree
+        (IUTStage1ZModSquareWeightProfile.absNonzeroLabelFromIndex l label)) * 6 =
+      ((IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) *
+        ((IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) + 1) *
+          (2 * (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) + 1)) *
+        evaluation.environmentDegree) :=
+  IUTStage1ZModSquareWeightProfile.gaussianDegree_absNonzeroLabel_sum_mul_six
+    evaluation
+
+theorem gaussianSubordinateSum_eq_absNonzeroIndexSum
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    (@Finset.filter (IUTStage1ZModCuspFullLabel l)
+      (fun label : IUTStage1ZModCuspFullLabel l =>
+        IUTStage1ZModCuspFullLabel.WeightedVolumeSubordinate
+          label IUTStage1ZModCuspFullLabel.zero)
+      (Classical.decPred _) Finset.univ).sum evaluation.gaussianDegree =
+      Finset.univ.sum fun label :
+        Fin (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l) =>
+          evaluation.gaussianDegree
+            (IUTStage1ZModSquareWeightProfile.absNonzeroLabelFromIndex l label) :=
+  evaluation.gaussianDegree_subordinate_sum_eq_absNonzeroLabel_sum
+
 theorem gaussianDegree_absNonzeroIndexAverage_eq_coeff
     {l : PrimeGeFive}
     (evaluation :

@@ -9538,6 +9538,28 @@ theorem gaussianDegree_absNonzeroLabelAverage_mul_six
             evaluation.environmentDegree := by
       field_simp [hden]
 
+theorem gaussianDegree_absNonzeroLabel_sum_mul_six
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    ((Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+      evaluation.gaussianDegree (absNonzeroLabelFromIndex l label)) * 6 =
+      ((absLabelProcessionTop l : Real) *
+        ((absLabelProcessionTop l : Real) + 1) *
+          (2 * (absLabelProcessionTop l : Real) + 1)) *
+        evaluation.environmentDegree) := by
+  have havg := gaussianDegree_absNonzeroLabelAverage_mul_six evaluation
+  unfold absNonzeroLabelAveragedLogVolume at havg
+  change
+    (((Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+      evaluation.gaussianDegree (absNonzeroLabelFromIndex l label)) /
+        (absLabelProcessionTop l : Real)) * 6 =
+      ((absLabelProcessionTop l : Real) + 1) *
+        (2 * (absLabelProcessionTop l : Real) + 1) *
+          evaluation.environmentDegree) at havg
+  have hden : (absLabelProcessionTop l : Real) ≠ 0 := by
+    exact_mod_cast ne_of_gt (absLabelProcessionTop_pos l)
+  field_simp [hden] at havg
+  nlinarith
+
 /--
 Log-volume shadow of the IUT III splitting-monoid action.
 
@@ -10190,6 +10212,19 @@ theorem gaussianDegree_subordinate_sum_mul_six
         ((absLabelProcessionTop l : Real) + 1) *
           (2 * (absLabelProcessionTop l : Real) + 1)) *
         evaluation.environmentDegree
+  nlinarith
+
+theorem gaussianDegree_subordinate_sum_eq_absNonzeroLabel_sum
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    (@Finset.filter (IUTStage1ZModCuspFullLabel l)
+      (fun label : IUTStage1ZModCuspFullLabel l =>
+        IUTStage1ZModCuspFullLabel.WeightedVolumeSubordinate
+          label IUTStage1ZModCuspFullLabel.zero)
+      (Classical.decPred _) Finset.univ).sum evaluation.gaussianDegree =
+      Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+        evaluation.gaussianDegree (absNonzeroLabelFromIndex l label) := by
+  have hsub := evaluation.gaussianDegree_subordinate_sum_mul_six
+  have habs := gaussianDegree_absNonzeroLabel_sum_mul_six evaluation
   nlinarith
 
 theorem coordinateAveragedLogVolume_average_eq_coeff
