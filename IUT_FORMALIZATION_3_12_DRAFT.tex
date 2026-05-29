@@ -222,7 +222,9 @@ The code currently covers:
   \]
   for the degree-level Gaussian evaluation \(G\), using \(G(0)=0\).  Thus the
   paper's uniform \(1/\ell\) weighted-volume convention is not silently replaced
-  by the auxiliary nonzero-only average;
+  by the auxiliary nonzero-only average; in the negative signed branch Lean also
+  proves the strict inequality
+  \(\operatorname{Avg}_{j\ne0}G(j)<\operatorname{Avg}_{j\in F_\ell}G(j)\);
 \item the IUT II Remark 4.7.3 zero/nonzero weighted-volume relation:
   Lean records a relation in which every nonzero full label is subordinate to
   the zero label, proves that \(0\ll0\) is false, and proves that this relation

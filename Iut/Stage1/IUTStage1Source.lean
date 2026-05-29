@@ -8317,6 +8317,40 @@ theorem nonzeroCarrierAverage_le_of_environment_le_bound
         exact evaluation.gaussianDegree_nonzero_le_of_environment_le_bound
           henv_nonpos henv_le ((zmodSignAction l).toSignLabelQuotient x))
 
+theorem nonzeroCarrierAveragedLogVolume_lt_zero_of_environment_negative
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_neg : evaluation.environmentDegree < 0) :
+    evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume < 0 := by
+  have hle :
+      evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume <=
+        evaluation.environmentDegree :=
+    evaluation.nonzeroCarrierAverage_le_of_environment_le_bound
+      (le_of_lt henv_neg) (le_refl evaluation.environmentDegree)
+  linarith
+
+theorem coordinateAveragedLogVolume_gt_nonzeroCarrierAverage_of_negative
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_neg : evaluation.environmentDegree < 0) :
+    evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume <
+      evaluation.coordinateAveragedLogVolume.averageLogVolume := by
+  rw [evaluation.coordinateAveragedLogVolume_eq_nonzero_mass_rescale]
+  let factor : Real := ((l.value - 1 : Nat) : Real) / (l.value : Real)
+  have hfactor_lt : factor < 1 := by
+    have hl_pos : 0 < (l.value : Real) := by
+      exact_mod_cast (lt_of_lt_of_le (by decide : 0 < 5) l.ge_five)
+    have hlt_nat : l.value - 1 < l.value := by
+      have hge : 5 ≤ l.value := l.ge_five
+      omega
+    have hlt_real : ((l.value - 1 : Nat) : Real) < (l.value : Real) := by
+      exact_mod_cast hlt_nat
+    dsimp [factor]
+    rw [div_lt_one hl_pos]
+    exact hlt_real
+  have havg_neg :=
+    evaluation.nonzeroCarrierAveragedLogVolume_lt_zero_of_environment_negative
+      henv_neg
+  nlinarith
+
 theorem forall_coordinateFullLabel_le_implies_bound_nonnegative
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
