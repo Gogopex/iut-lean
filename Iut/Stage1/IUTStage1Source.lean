@@ -8837,6 +8837,24 @@ theorem gaussianDegree_fullLabel_average_lt_environment_of_negative
     mul_lt_mul_of_neg_right hcoeff henv_neg
   simpa [coeff] using hmul
 
+theorem gaussianDegree_fullLabel_average_gt_environment_of_positive
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_pos : 0 < evaluation.environmentDegree) :
+    evaluation.environmentDegree <
+      (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) := by
+  rw [gaussianDegree_fullLabel_average_eq_coeff]
+  let coeff : Real :=
+    (absLabelProcessionTop l : Real) *
+      (2 * (absLabelProcessionTop l : Real) + 1) / 6
+  have hcoeff : 1 < coeff := by
+    simpa [coeff] using absLabelAverageCoefficient_gt_one (l := l)
+  have hmul :
+      1 * evaluation.environmentDegree <
+        coeff * evaluation.environmentDegree :=
+    mul_lt_mul_of_pos_right hcoeff henv_pos
+  simpa [coeff] using hmul
+
 theorem gaussianDegree_fullLabel_average_le_of_environment_le_bound
     (evaluation : GaussianMonoidDegreeEvaluation l)
     {c : Real}
@@ -9053,6 +9071,16 @@ theorem fullLabelAveragedLogVolume_average_lt_canonicalCoordinate_of_negative
   rw [evaluation.fullLabelAveragedLogVolume_canonicalCoordinate_eq_environment]
   exact gaussianDegree_fullLabel_average_lt_environment_of_negative
     evaluation henv_neg
+
+theorem fullLabelAveragedLogVolume_canonicalCoordinate_lt_average_of_positive
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_pos : 0 < evaluation.environmentDegree) :
+    evaluation.fullLabelAveragedLogVolume.normalizedLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) <
+      evaluation.fullLabelAveragedLogVolume.averageLogVolume := by
+  rw [evaluation.fullLabelAveragedLogVolume_canonicalCoordinate_eq_environment]
+  exact gaussianDegree_fullLabel_average_gt_environment_of_positive
+    evaluation henv_pos
 
 theorem fullLabelAveragedLogVolume_average_eq_canonicalCoordinate_iff
     (evaluation : GaussianMonoidDegreeEvaluation l) :

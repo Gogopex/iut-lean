@@ -963,6 +963,17 @@ theorem gaussianDegree_fullLabelAverage_lt_environment_of_negative
   gaussianDegree_fullLabel_average_lt_environment_of_negative
     evaluation henv_neg
 
+theorem gaussianDegree_fullLabelAverage_gt_environment_of_positive
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (henv_pos : 0 < evaluation.environmentDegree) :
+    evaluation.environmentDegree <
+      (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) :=
+  gaussianDegree_fullLabel_average_gt_environment_of_positive
+    evaluation henv_pos
+
 theorem gaussianDegree_fullLabelAverage_le_of_environment_le_bound
     {l : PrimeGeFive}
     (evaluation :
@@ -1017,6 +1028,17 @@ theorem gaussianFullLabelAveragedLogVolume_average_lt_canonical_of_negative
         (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) :=
   evaluation.fullLabelAveragedLogVolume_average_lt_canonicalCoordinate_of_negative
     henv_neg
+
+theorem gaussianFullLabelAveragedLogVolume_canonical_lt_average_of_positive
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (henv_pos : 0 < evaluation.environmentDegree) :
+    evaluation.fullLabelAveragedLogVolume.normalizedLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) <
+      evaluation.fullLabelAveragedLogVolume.averageLogVolume :=
+  evaluation.fullLabelAveragedLogVolume_canonicalCoordinate_lt_average_of_positive
+    henv_pos
 
 theorem gaussianFullLabelAveragedLogVolume_average_eq_canonical_iff
     {l : PrimeGeFive}
