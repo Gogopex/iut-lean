@@ -1792,6 +1792,32 @@ theorem quotientMap_two_images_collapse_iff
       ⟨(quotientMap_image_eq_singleton_collapsed_iff hneA).mpr hA,
         (quotientMap_image_eq_singleton_collapsed_iff hneB).mpr hB⟩
 
+theorem quotientMap_map_between_subsets_eq_identity
+    {A B : Set E} {f : E -> E}
+    (hsubA : A ⊆ S) (hsubB : B ⊆ S)
+    (hf : ∀ x, x ∈ A -> f x ∈ B)
+    {x : E} (hxA : x ∈ A) :
+    quotientMap S (f x) = quotientMap S x := by
+  exact quotientMap_eq_of_mem (hsubB (hf x hxA)) (hsubA hxA)
+
+theorem quotientMap_image_under_map_between_subsets
+    {A B : Set E} {f : E -> E}
+    (hneA : A.Nonempty)
+    (hsubA : A ⊆ S) (hsubB : B ⊆ S)
+    (hf : ∀ x, x ∈ A -> f x ∈ B) :
+    (fun x => quotientMap S (f x)) '' A = quotientMap S '' A := by
+  rw [quotientMap_image_eq_singleton_collapsed_of_nonempty_subset hneA hsubA]
+  ext q
+  constructor
+  · rintro ⟨x, hxA, rfl⟩
+    simp [quotientMap_eq_collapsed_of_mem (hsubB (hf x hxA))]
+  · intro hq
+    rcases hneA with ⟨x, hxA⟩
+    rw [Set.mem_singleton_iff] at hq
+    subst q
+    exact
+      ⟨x, hxA, quotientMap_eq_collapsed_of_mem (hsubB (hf x hxA))⟩
+
 theorem quotientMap_eq_iff_of_not_mem
     {x y : E} (hx : x ∉ S) (hy : y ∉ S) :
     quotientMap S x = quotientMap S y ↔ x = y := by
