@@ -1233,6 +1233,16 @@ theorem qPilotTwoComputationCThetaEndpoint_lower_bound
     (-1 : Real) <= data.cTheta :=
   data.cTheta_ge_neg_one
 
+theorem qPilotTwoComputationCThetaEndpoint_fixed_lower_bound
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    (-1 : Real) <= data.cTheta :=
+  data.cTheta_ge_neg_one_from_fixed_qPilot
+
+theorem qPilotTwoComputationCThetaEndpoint_fixed_le_cTheta_absLogQ
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    -data.absLogQ <= data.cTheta * data.absLogQ :=
+  data.fixed_qPilotLogVolume_le_cTheta_absLogQ
+
 theorem corollary312ThetaSignReduction_trivial_case
     (data : IUTStage1Corollary312ThetaSignReduction)
     (hTheta : 0 <= data.thetaSigned) :

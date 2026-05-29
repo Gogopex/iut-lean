@@ -2207,6 +2207,51 @@ structure IUTStage1QPilotTwoComputationCThetaEndpoint where
 
 namespace IUTStage1QPilotTwoComputationCThetaEndpoint
 
+def absLogQ
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) : Real :=
+  data.signedEndpoint.absLogQ
+
+theorem absLogQ_pos
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    0 < data.absLogQ :=
+  data.signedEndpoint.absLogQ_pos
+
+theorem thetaHullLogVolume_le_cTheta_fixedAbsLogQ
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    data.signedEndpoint.twoComputation.upperRayData.thetaHullLogVolume <=
+      data.cTheta * data.absLogQ := by
+  simpa [IUTStage1QPilotTwoComputationCThetaEndpoint.absLogQ,
+    IUTStage1QPilotTwoComputationSignedEndpoint.absLogQ, mul_neg] using
+    data.thetaHullLogVolume_le_cTheta_absLogQ
+
+theorem fixed_qPilot_le_thetaHullLogVolume
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    -data.absLogQ <=
+      data.signedEndpoint.twoComputation.upperRayData.thetaHullLogVolume := by
+  simpa [IUTStage1QPilotTwoComputationCThetaEndpoint.absLogQ] using
+    data.signedEndpoint.fixed_qPilot_le_thetaHullLogVolume
+
+theorem fixed_qPilot_le_cTheta_absLogQ
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    -data.absLogQ <= data.cTheta * data.absLogQ :=
+  le_trans data.fixed_qPilot_le_thetaHullLogVolume
+    data.thetaHullLogVolume_le_cTheta_fixedAbsLogQ
+
+def toFixedValueCThetaLowerBoundShadow
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    IUTStage1Corollary312CThetaLowerBoundShadow :=
+  { absLogQ := data.absLogQ,
+    absLogQ_pos := data.absLogQ_pos,
+    qPilotLogVolume := -data.absLogQ,
+    thetaPilotLogVolume :=
+      data.signedEndpoint.twoComputation.upperRayData.thetaHullLogVolume,
+    cTheta := data.cTheta,
+    qPilotLogVolume_eq_neg_absLogQ := rfl,
+    qPilotLogVolume_le_thetaPilotLogVolume :=
+      data.fixed_qPilot_le_thetaHullLogVolume,
+    thetaPilotLogVolume_le_cTheta_absLogQ :=
+      data.thetaHullLogVolume_le_cTheta_fixedAbsLogQ }
+
 def toSignedCThetaBound
     (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
     IUTStage1Corollary312SignedCThetaBound :=
@@ -2221,12 +2266,22 @@ theorem cTheta_ge_neg_one
     (-1 : Real) <= data.cTheta :=
   data.toSignedCThetaBound.cTheta_ge_neg_one
 
+theorem cTheta_ge_neg_one_from_fixed_qPilot
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    (-1 : Real) <= data.cTheta :=
+  data.toFixedValueCThetaLowerBoundShadow.cTheta_ge_neg_one
+
 theorem qInputLogVolume_le_cTheta_absLogQ
     (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
     data.signedEndpoint.twoComputation.inputPrimeStripLogVolume <=
       data.cTheta *
         (-data.signedEndpoint.twoComputation.inputPrimeStripLogVolume) :=
   data.toSignedCThetaBound.qSigned_le_cTheta_absLogQ
+
+theorem fixed_qPilotLogVolume_le_cTheta_absLogQ
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    -data.absLogQ <= data.cTheta * data.absLogQ :=
+  data.toFixedValueCThetaLowerBoundShadow.neg_absLogQ_le_cTheta_absLogQ
 
 end IUTStage1QPilotTwoComputationCThetaEndpoint
 
