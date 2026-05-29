@@ -416,8 +416,8 @@ end Audit
 Optional source-side evidence that the pre-ledger's named hull+det bridge comes
 from split hull and determinant/log-volume data.
 
-This is not required for the older public endpoint, but it is the stronger audit
-shape needed to keep the union-of-possible-images hull visible.
+This is the stronger audit shape needed to keep the union-of-possible-images
+hull visible alongside the public endpoint.
 -/
 structure HullDetSourceData
     (data : IUTStage1PreLedgerData source target index) where

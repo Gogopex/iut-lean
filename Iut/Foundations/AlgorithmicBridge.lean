@@ -185,7 +185,7 @@ end StructuredDeterminantLogVolumeBridge
 A bridge whose source-specific construction first supplies a measured common
 hull for the transported family.
 
-This is the closer interface for a future hull+det construction. The older
+This is the closer interface for a future hull+det construction. The
 common-target bridge is recovered by forgetting the hull through
 `CommonTargetHullBound.toCommonTargetBound`.
 -/

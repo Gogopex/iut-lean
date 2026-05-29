@@ -155,9 +155,12 @@ nonarchimedean `C_Theta` dichotomy. In the identity-coordinate Gaussian route,
 equality at the canonical full label `1` supplies the required environment-degree
 preservation, so that preservation is no longer an independent input there.
 The raw nonarchimedean `(Ind3)` alignment is now also available through a
-source-facing 1-column log-Kummer upper-semi compatibility object, which records
-the q-pilot column and log-Kummer non-interference before converting to the raw
-real equalities used by the route. Its source-side equality can already be
+source-facing nonarchimedean upper-semi object equipped with 1-column q-pilot
+log-Kummer data. The upper-semi inequality is still the Step (x) input; the
+q-pilot column and log-Kummer non-interference are recorded before converting
+to the raw real equalities used by the route. The active route does not use
+equality of possible-image regions across `(Ind3)` as its Step (x) input.
+Its source-side equality can already be
 derived from the finite Kummer-plus-forgetting tensor-packet chain:
 `holomorphicF -> holomorphicD -> monoAnalyticD`, where both steps preserve
 product log-volume. The strongest route also no longer takes the direct
@@ -181,7 +184,8 @@ The latest source reread gives the following interpretation:
   construct these objects; it only has typed shadows and source packages.
 * IUT II supplies Hodge-Arakelov theta evaluation, Gaussian Frobenioids,
   conjugate synchronization, and multiradial/coric behavior. Our code currently
-  formalizes finite-label and Gaussian-degree shadows, not the full theory.
+  formalizes finite-label and Gaussian-degree shadows, including the zero class
+  plus nonzero sign-quotient classes of `|F_l|`, not the full theory.
 * IUT III, Step (x), is represented by an `(Ind1)/(Ind2)` equality corridor plus
   `(Ind3)` upper-semi inequality. Step (xi) is represented by hull/log-volume and
   SHE/Hodge-descent route records. Step (xii) is represented by a local

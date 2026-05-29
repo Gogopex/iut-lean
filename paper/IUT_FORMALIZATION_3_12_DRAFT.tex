@@ -156,6 +156,11 @@ the \(q\)-pilot reading in the upper ray determined by the \(\Theta\)-pilot:
 \[
   -|\log(q)|\in\R_{\le -|\log(\Theta)|}.
 \]
+The active source-facing Corollary 3.12 route does not use equality of
+possible-image regions across an \((\Ind3)\) generator.  Such an equality exists
+only in separate quotient bookkeeping interfaces as an explicit stronger
+hypothesis; the route uses the one-sided upper-semi corridor as its Step (x)
+input.
 The final numerical step is elementary:
 \[
   -|\log(q)|\le -|\log(\Theta)|
@@ -239,12 +244,13 @@ The relevant implementation lives in four Lean modules:
 
 \subsection{Finite label model}
 
-The code defines a finite \(\F_\ell\)-label model, its sign quotient
-\(|F_\ell|=F_\ell/\{\pm 1\}\), and the canonical half-range representatives
+The code defines a finite \(\F_\ell\)-label model, the quotient
+\(|F_\ell|\) consisting of the zero class together with
+\(\F_\ell^\times/\{\pm 1\}\), and the canonical half-range representatives
 \[
   j=0,\ldots,(\ell-1)/2 .
 \]
-It proves:
+It proves, for the descended full-label degree model:
 \[
   \deg(\Theta_j)=j^2\deg(q)
 \]
@@ -253,8 +259,10 @@ quotient.  It also proves that \(j=1\) and \(j=2\) give distinct degrees exactly
 when \(\deg(q)\ne0\).  Thus the \(q^{j^2}\) phenomenon is present in the model;
 it is not hidden inside a scalar identification.
 
-The coordinate average, the nonzero-coordinate average, and the absolute-label
-average are all formalized separately.  \Lean{} proves the exact denominator
+The raw coordinate square-weight profile on \(\mathbb{Z}/\ell\mathbb{Z}\) is kept as a
+diagnostic object and is not identified with the descended \(|F_\ell|\)
+theta exponent.  The coordinate average, the nonzero-coordinate average, and
+the absolute-label average are all formalized separately.  \Lean{} proves the exact denominator
 relations and shows that these averages differ strictly for nonzero
 environment degree.  This prevents silently replacing the paper's
 \(\ell\)-denominator convention by an auxiliary nonzero-only average.
@@ -320,9 +328,10 @@ Gaussian degree at the canonical full label \(1\) implies preservation of the
 environment degree, so the nonarchimedean \(C_\Theta\) dichotomy no longer
 takes environment-degree preservation as an independent hypothesis.
 The raw nonarchimedean entry alignment has also been refactored through a
-source-facing 1-column log-Kummer upper-semi compatibility object.  This records
-the q-pilot column and log-Kummer non-interference before converting to the raw
-real equalities consumed by the current route.
+source-facing nonarchimedean upper-semi object equipped with 1-column q-pilot
+log-Kummer data.  The upper-semi inequality remains the Step (x) input; the
+1-column datum records the q-pilot column and log-Kummer non-interference
+before converting to the raw real equalities consumed by the current route.
 For the source side of this compatibility, the code can now use the existing
 finite tensor-packet chain: Kummer transfer
 \(\mathrm{holomorphicF}\to\mathrm{holomorphicD}\) and mono-analytic forgetting
@@ -442,9 +451,9 @@ The project currently proves the following source-facing results in \Lean{}:
 \item In the identity-coordinate Gaussian route, equality at the canonical full
   label \(1\) supplies the environment-degree preservation needed by the same
   nonarchimedean \(C_\Theta\) dichotomy.
-\item A 1-column log-Kummer upper-semi compatibility object now supplies the raw
-  nonarchimedean \((\Ind3)\) entry alignment used by the canonical Gaussian
-  route.
+\item A nonarchimedean upper-semi object equipped with 1-column q-pilot
+  log-Kummer data now supplies the raw nonarchimedean \((\Ind3)\) entry
+  alignment used by the canonical Gaussian route.
 \item The source-side equality in that compatibility can be derived from
   product-log-volume preservation along the finite Kummer-plus-forgetting
   tensor-packet chain.

@@ -9236,7 +9236,8 @@ theorem corollary312_firstPass_cThetaDichotomy_from_gaussianCanonicalOneSHEAndNo
 
 /--
 Corollary 3.12 first-pass `C_Theta` dichotomy from the identity-coordinate
-Gaussian route and a 1-column log-Kummer upper-semi nonarchimedean entry.
+Gaussian route and a nonarchimedean upper-semi entry equipped with 1-column
+q-pilot log-Kummer data.
 
 This is the strongest current experiment-surface form of the nonarchimedean
 route: the raw `(Ind3)` entry alignment is supplied by a source-facing
@@ -9379,11 +9380,8 @@ theorem corollary312_firstPass_cThetaDichotomy_from_gaussianCanonicalOneKummerFo
 /--
 Corollary 3.12 first-pass `C_Theta` dichotomy from the identity-coordinate
 Gaussian route, Kummer-plus-forgetting source preservation, and a target-side
-Step (x) theta alignment.
-
-Compared with the previous Kummer/forgetting endpoint, this theorem derives the
-theta-to-entry-target equality from the upper-semi target alignment and the
-entry's target calibration.
+Step (x) theta alignment. The theta-to-entry-target equality is derived from
+the upper-semi target alignment and the entry's target calibration.
 -/
 theorem corollary312_firstPass_cThetaDichotomy_from_targetAlignedKummerForgetting
     {source target : Copy} {coric : Type u}

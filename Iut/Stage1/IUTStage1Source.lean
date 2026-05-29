@@ -2720,7 +2720,7 @@ end IUTStage1FiniteExceptionLowerBoundShadow
 /--
 IUT IV, Corollary 2.2 exceptional-set passage toward Corollary 2.3.
 
-This packages the previous finite-exception gluing for the specific
+This packages finite-exception gluing for the specific
 height/different/conductor discrepancy that appears in Theorem A and
 Corollary 2.3.
 -/
@@ -10052,12 +10052,12 @@ theorem no_label_independent_scale_matches_all_representative_squares
     ⟨h (1 : ZMod l.value), h (2 : ZMod l.value)⟩
 
 /--
-Representative pilot-degree model for the concrete relation `Theta_j ~ q^{j^2}`.
+Representative-coordinate pilot-degree model for the relation `Theta_j ~ q^{j^2}`.
 
 The field `qPilotDegree` is the real log/degree value attached to the q-pilot,
-and `thetaPilotDegree j` is the corresponding representative theta-pilot value at
-the label `j`.  This is still the current finite-label model, not the full
-Hodge-Arakelov construction of theta values.
+and `thetaPilotDegree j` is the corresponding raw `ZMod` representative value
+at the label `j`. This does not descend to the source `|F_l|` sign quotient by
+itself; the descended full-label model is `AbsThetaPilotDegreeProfile`.
 -/
 structure RepresentativeThetaPilotDegreeProfile
     (l : PrimeGeFive) where
@@ -18324,9 +18324,9 @@ variable {coric : Type u} {kind : IUTStage1PlaceKind}
 /--
 Forget the typed capsule/log-volume refinement of the local tensor coordinate.
 
-This is deliberately one-way: later refined steps must prove that the extra
+This is deliberately one-way: refined steps must prove that the extra
 packet/log-volume fields are preserved or transformed correctly before they can
-descend to the older structured interface.
+descend to the structured interface.
 -/
 def forgetPacket
     (choice : IUTStage1TensorPacketTheorem311Choice coric kind) :
@@ -20039,7 +20039,7 @@ theorem archimedeanOrderTwo_image_invariant_of_coric
   ind2_image_invariant_of_coric images hcoric
     (archimedeanOrderTwo_toDirectSummandActionStep hstep)
 
-theorem ind3_image_invariant_of_coric
+theorem ind3_image_invariant_of_coric_as_extra_equality
     {target : Copy}
     (images :
       RegionFamily target
@@ -20238,7 +20238,13 @@ theorem region_eq_and_fiber_mem_of_archimedeanEntry_step
   ⟨data.region_eq_of_archimedeanEntry_step hstep,
     fiberPackage.entry_place_mem_fiber hstep⟩
 
-theorem region_eq_of_ind3_step
+/--
+Equality projection for an `(Ind3)` generator when the supplied possible-image
+quotient already carries equality across that generator. This is an extra
+equality interface; the source-facing Corollary 3.12 route uses
+`NonarchimedeanInd3EntryAlignment` for the Step (x) one-sided upper-semi input.
+-/
+theorem region_eq_of_ind3_step_from_equalityQuotient
     (data :
       IUTStage1PlaceAuditedMultiradialImages
         (target := target) coric kind)
@@ -20457,7 +20463,12 @@ theorem region_eq_and_fiber_mem_of_archimedeanEntry_step
   ⟨data.region_eq_of_archimedeanEntry_step hstep,
     fiberPackage.entry_place_mem_fiber hstep⟩
 
-theorem region_eq_of_ind3_step
+/--
+Equality projection for an `(Ind3)` generator when the supplied audited
+possible-image quotient already carries equality across that generator. This is
+not the Step (x) upper-semi input used by the Corollary 3.12 route.
+-/
+theorem region_eq_of_ind3_step_from_equalityQuotient
     (data : IUTStage1PlaceAuditedMultiradialThetaImages package)
     {audited₁ audited₂ :
       IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
@@ -20467,7 +20478,7 @@ theorem region_eq_of_ind3_step
     data.possibleImages.images.region audited₁ =
       data.possibleImages.images.region audited₂ := by
   rw [← data.audited_possibleImages_eq]
-  exact data.auditedImages.region_eq_of_ind3_step hstep
+  exact data.auditedImages.region_eq_of_ind3_step_from_equalityQuotient hstep
 
 theorem quotient_profile
     (data : IUTStage1PlaceAuditedMultiradialThetaImages package) :
@@ -21102,8 +21113,11 @@ Multiradial possible images of the Theta-pilot, recorded together with the
 indeterminacy quotient on choices.
 
 The key field is `image_invariant`: related choices give the same target
-region. This is the first formal place where "quotient by `(Ind1)`, `(Ind2)`,
-`(Ind3)`" becomes a Lean obligation instead of prose.
+region. If the quotient includes `(Ind3)`, this field is a stronger extra
+obligation than the Corollary 3.12 Step (x) log-volume statement: in the source
+text `(Ind3)` becomes an upper-semi inequality after applying log-volume.
+The source-faithful one-sided route is the procession-normalized corridor, not
+this optional equality quotient.
 -/
 structure IUTStage1MultiradialThetaImages
     {source target : Copy} {index : Type u}
@@ -21138,6 +21152,11 @@ def ofPackageWithQuotient
     multiradial_output_eq := rfl,
     image_invariant := hinvariant }
 
+/--
+Generated quotient constructor. The `hInd3` argument is deliberately an
+explicit equality hypothesis on possible-image regions; it is not inferred from
+the paper's Step (x) upper-semi statement.
+-/
 def ofPackageWithGeneratedQuotient
     (package : IUTStage1SourcePackage source target index)
     (steps : IUTStage1IndeterminacyGenerators index)
@@ -21190,6 +21209,11 @@ def ofPackageWithCoordinateQuotient
       intro choice₁ choice₂ hstep
       exact hcoric choice₁ choice₂ hstep.1)
 
+/--
+Theorem 3.11 indeterminacy quotient constructor. The `(Ind3)` equality input is
+an explicit possible-image equality hypothesis, separate from the one-sided
+upper-semi input used in the source-facing Corollary 3.12 route.
+-/
 def ofPackageWithTheorem311Indeterminacies
     (package : IUTStage1SourcePackage source target index)
     (indeterminacyData :
@@ -21252,7 +21276,9 @@ Obligation that Theta-pilot possible images depend only on the coric coordinate
 of a coordinate choice.
 
 This is the source-facing form of the multiradiality requirement needed by the
-generated Ind1/2/3 quotient interface.
+generated quotient interface. When applied to an `(Ind3)` generator it is an
+extra equality hypothesis; the Step (x) Corollary 3.12 route instead uses the
+upper-semi log-volume corridor.
 -/
 structure IUTStage1ThetaImagesDependOnlyOnCoric
     {source target : Copy}
@@ -21432,10 +21458,9 @@ end IUTStage1SourceHullDetData
 /--
 Strengthened source obligations that include split hull+det provenance.
 
-The older `IUTStage1SourceObligations` are still enough to build the public
-comparison endpoint. This record is the stricter route a source-level IUT proof
-should target when it wants the final comparison to remember its
-union-of-possible-images hull.
+`IUTStage1SourceObligations` build the public comparison endpoint. This record
+is the stricter route a source-level IUT proof should target when it wants the
+final comparison to remember its union-of-possible-images hull.
 -/
 structure IUTStage1SourceHullDetObligations
     {source target : Copy} {index : Type u}
@@ -21887,7 +21912,7 @@ end IUTStage1Theorem311StructuredInputs
 Structured Theorem 3.11 inputs equipped with the strengthened SHE context.
 
 This is a conservative extension of `IUTStage1Theorem311StructuredInputs`; it
-does not replace the older route, and it does not produce an endpoint.
+adds strengthened SHE context without producing an endpoint.
 -/
 structure IUTStage1Theorem311StructuredInputsWithSHE
     {source target : Copy} {index : Type u}
@@ -22334,8 +22359,8 @@ This record asks for the two primitive preservation branches separately:
 * coordinate-square preservation for the `j^2` weights;
 * full-label map preservation plus value preservation for the log-volume branch.
 
-The previous structured-SHE square-weight obligation records are derived from
-these fields.
+The structured-SHE square-weight obligation records are derived from these
+fields.
 -/
 structure IUTStage1StructuredSHEFactoredSquareFullLabelObligations
     {source target : Copy} {index : Type u}
@@ -25926,6 +25951,9 @@ Hull+det endpoint stated for place-audited multiradial Theta-pilot images.
 
 This specializes the hull endpoint to the audited choice type used to track the
 Theorem 3.11 `(Ind2)` place-family and fiber data.
+The `audited_images` field is possible-image quotient bookkeeping. The active
+Corollary 3.12 route does not read the Step (x) `(Ind3)` inequality from
+possible-image equality; it reads it from `NonarchimedeanInd3EntryAlignment`.
 -/
 structure PlaceAuditedMultiradialThetaHullEndpoint
     {coric : Type u} {kind : IUTStage1PlaceKind}
@@ -34784,14 +34812,17 @@ structure NonarchimedeanInd3EntryAlignment
       audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume
 
 /--
-Source-facing log-Kummer upper-semi compatibility for a nonarchimedean
-Step (x) entry.
+Source-facing log-Kummer data attached to a nonarchimedean Step (x)
+upper-semi entry.
 
-This is the first replacement layer for the raw `NonarchimedeanInd3EntryAlignment`:
-it records that the entry is being used through the 1-column q-pilot
-log-Kummer/non-interference side of the upper-semi comparison.  The remaining
-real equalities still have to be supplied explicitly; later stages must derive
-them from the actual log-Kummer and Hodge-theater constructions.
+This is the source-facing layer over `NonarchimedeanInd3EntryAlignment`:
+it keeps the Step (x) nonarchimedean upper-semi entry together with the
+1-column q-pilot log-Kummer/non-interference datum used in Step (xi). The
+upper-semi inequality remains the Step (x) input; the 1-column datum records
+the q-pilot side where the source text permits precise log-volume equalities
+after passing to log-volumes. The remaining real equalities still have to be
+supplied explicitly; later stages must derive them from the actual log-Kummer
+and Hodge-theater constructions.
 -/
 structure NonarchimedeanLogKummerUpperSemiCompatibility
     (audited :
