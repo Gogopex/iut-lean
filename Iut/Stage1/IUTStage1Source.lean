@@ -4835,6 +4835,41 @@ theorem beforeAverage_le_statementEndpoint_thetaRealLogVolume
   rw [← data.q_eq_beforeAverage]
   exact data.qPilotLogVolume_le_thetaHullLogVolume
 
+theorem statementEndpoint_thetaRealLogVolume_le_cTheta_absLogQ
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ).thetaRealLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume) := by
+  have h :=
+    (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ).thetaRealLogVolume_le_cTheta_absLogQ
+  simpa [data.statementEndpoint_qPilotLogVolume_eq_beforeAverage
+    pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ] using h
+
+theorem beforeAverage_le_cTheta_absLogQ
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    data.corridor.beforeIndeterminacy.averageLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume) :=
+  le_trans
+    (data.beforeAverage_le_statementEndpoint_thetaRealLogVolume
+      pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ)
+    (data.statementEndpoint_thetaRealLogVolume_le_cTheta_absLogQ
+      pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ)
+
 theorem afterInd1Average_le_statementEndpoint_thetaRealLogVolume
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
