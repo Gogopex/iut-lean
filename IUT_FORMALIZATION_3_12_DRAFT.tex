@@ -487,7 +487,9 @@ The code currently covers:
   \(ZMod\) carrier and proves the same upper bound for this nonzero average;
   because the square-weighted route assigns weight \(0\) to the core label, Lean
   now feeds nonzero-only target bounds through the square/full-label transport
-  audit all the way to \(q_{\mathrm{signed}}\le\Theta_{\mathrm{signed}}\);
+  audit all the way to \(q_{\mathrm{signed}}\le\Theta_{\mathrm{signed}}\); this
+  nonzero Gaussian environment-comparison route is now a source-layer theorem,
+  not only an experiment wrapper;
 \item a bridge from factored square/full-label SHE obligations to the
   Hodge-descent \((\mathrm{Ind3})\) route.
 \end{itemize}
@@ -633,7 +635,9 @@ absolute exponent is at least \(1\), so a nonpositive environment degree below
 the \(\Theta\)-source average bounds every nonzero Gaussian component and hence
 their finite nonzero-label average.  The square-weighted transport route has
 also been strengthened from an all-label pointwise bound to a weighted-summand
-bound, so the zero label requires no target upper bound.
+bound, so the zero label requires no target upper bound.  The experiment theorem
+now delegates to the source-layer q-to-\(\Theta\) theorem for this nonzero
+Gaussian environment-comparison route.
 
 \section{Audit Findings}
 
@@ -656,7 +660,11 @@ the negative branch: the core label contributes \(0\), so a negative upper bound
 is impossible.  On the nonzero-label part, the formal obstruction disappears:
 exponent \(\ge1\) gives the expected bound from the environment comparison.  The
 square-weighted final route now accepts this nonzero-only bound, since the core
-summand has weight \(0\).  The remaining task is to replace the current
+summand has weight \(0\).  This gives a conditional source-level q-to-\(\Theta\)
+route from degree-level Gaussian data, coordinate-square preservation,
+full-label-map preservation, equal source/target environment degree, and
+environment degree bounded above by the \(\Theta\)-source average.  The remaining
+task is to replace the current
 degree-level Gaussian shadow by the actual Hodge--Arakelov Gaussian/Frobenioid
 construction behind this environment comparison.
 

@@ -24153,6 +24153,52 @@ theorem qSigned_le_thetaSigned_via_factoredSHENonzeroBound
     (by simpa using hlog)
     (by simpa using hpointwise)
 
+theorem qSigned_le_thetaSigned_via_gaussianFactoredSHENonzeroEnvironment
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (coordinate_square_preserved :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (fullLabelMap_preserved :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (environmentDegree_preserved :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree)
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.theta_source.compatible_average.cuspLogVolume audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_environment_nonpositive :
+      targetEvaluation.environmentDegree <= 0)
+    (environment_le_thetaAverage :
+      targetEvaluation.environmentDegree <=
+        part.theta_source.thetaSourceAverage audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned := by
+  let factored :=
+    IUTStage1StructuredSHEFactoredSquareFullLabelObligations.fromGaussianDegreeEvaluations
+      (package := package) (bundle := bundle)
+      coordinateEquiv sourceProfile targetProfile
+      sourceEvaluation targetEvaluation coordinate_square_preserved
+      fullLabelMap_preserved environmentDegree_preserved
+  exact part.qSigned_le_thetaSigned_via_factoredSHENonzeroBound
+    profile audited factored source_profile_eq source_log_volume_eq
+    (by
+      intro j hj
+      dsimp [factored,
+        IUTStage1StructuredSHEFactoredSquareFullLabelObligations.fromGaussianDegreeEvaluations]
+      rw [IUTStage1ZModCuspFullLabel.fromCoordinate_nonzero l
+        (coordinateEquiv j) hj]
+      exact targetEvaluation.gaussianDegree_nonzero_le_of_environment_le_bound
+        target_environment_nonpositive environment_le_thetaAverage
+        (zmodSignLabelFromCoordinate l (coordinateEquiv j) hj))
+
 theorem targetSigned_le_thetaSourceAverage_via_squareWeightedAverage
     (part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l)
     (profile : IUTStage1ZModSquareWeightProfile l)

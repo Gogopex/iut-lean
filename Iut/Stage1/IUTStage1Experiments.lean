@@ -579,18 +579,14 @@ theorem gaussianFactoredSHENonzeroTargetBound_finalQTheta_of_environment_le
         part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
           audited) :
     package.preLedger.qSigned <= package.preLedger.thetaSigned :=
-  gaussianFactoredSHENonzeroTargetBound_finalQTheta
-    part profile audited coordinateEquiv sourceProfile targetProfile
+  part.toThetaCuspClassContainerAudit
+    |>.qSigned_le_thetaSigned_via_gaussianFactoredSHENonzeroEnvironment
+      (bundle := part.bundle)
+      profile audited coordinateEquiv sourceProfile targetProfile
     sourceEvaluation targetEvaluation coordinate_square_preserved
     fullLabelMap_preserved environmentDegree_preserved source_profile_eq
-    source_log_volume_eq
-    (by
-      intro j hj
-      rw [IUTStage1ZModCuspFullLabel.fromCoordinate_nonzero l
-        (coordinateEquiv j) hj]
-      exact targetEvaluation.gaussianDegree_nonzero_le_of_environment_le_bound
-        target_environment_nonpositive environment_le_thetaAverage
-        (zmodSignLabelFromCoordinate l (coordinateEquiv j) hj))
+    source_log_volume_eq target_environment_nonpositive
+    environment_le_thetaAverage
 
 theorem gaussianAllLabelTargetBound_implies_thetaAverage_nonnegative
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
