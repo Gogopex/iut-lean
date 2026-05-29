@@ -7171,6 +7171,46 @@ theorem boundaryCTheta_actualUpperRayQuotient_separates_positiveLocalShift
     · exact False.elim ((ne_of_gt hShiftTerm) hzero.1)
     · exact ⟨hpos.2.1, hpos.2.2, ne_of_gt hpos.2.1⟩
 
+theorem boundaryCTheta_actualUpperRayQuotient_eq_q_iff_shiftTerm_nonpos
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hC : cTheta = (-1 : Real)) :
+    let collapsedRegion : Set Real :=
+      data.toHullDetPilotUpperRayLogVolume.upperRay;
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    IUTStage1UpperSemiSetQuotient.quotientMap
+        collapsedRegion global.localData.shiftedLogVolume =
+      IUTStage1UpperSemiSetQuotient.quotientMap
+        collapsedRegion data.qPilotLogVolume ↔
+      (localExponent : Real) * localPrimeStepLogVolume <= 0 := by
+  intro collapsedRegion global
+  have hclass :=
+    data.boundaryCTheta_actualUpperRayQuotient_classifies_localShift_by_shiftTerm
+      localExponent localPrimeStepLogVolume q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ hC
+  constructor
+  · intro hmap
+    rcases hclass with hneg | hrest
+    · exact le_of_lt hneg.1
+    · rcases hrest with hzero | hpos
+      · exact le_of_eq hzero.1
+      · exact False.elim (hpos.2.2 hmap)
+  · intro hnonpos
+    rcases hclass with hneg | hrest
+    · exact hneg.2.2
+    · rcases hrest with hzero | hpos
+      · exact hzero.2.2
+      · exact False.elim ((not_lt_of_ge hnonpos) hpos.1)
+
 theorem boundaryCTheta_upperSemiQuotient_collapses_nonzeroLocalShift_of_mem
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (collapsedRegion : Set Real)
