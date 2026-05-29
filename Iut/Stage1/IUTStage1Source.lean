@@ -6640,6 +6640,44 @@ theorem standardQLambdaCTheta_determinantBoundary_or_strict
           q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).cTheta_ge_neg_one)
         (Ne.symm hC)
 
+theorem standardQLambdaCTheta_determinantTensorBoundary_or_strict
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (tensorPower : Nat)
+    (tensor_power_ge_two : 2 ≤ tensorPower)
+    (theta_neg : data.thetaHullLogVolume < 0) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    (cTheta = (-1 : Real) ∧
+        twoComputation.inputPrimeStripLogVolume =
+          data.determinant.determinantLogVolume ∧
+        twoComputation.outputHullLogVolume =
+          data.determinant.determinantLogVolume ∧
+        twoComputation.inputPrimeStripLogVolume ∉
+          (data.toThetaPilotTensorPowerLogVolume
+            tensorPower tensor_power_ge_two).tensorPowerUpperRay ∧
+        twoComputation.outputHullLogVolume ∉
+          (data.toThetaPilotTensorPowerLogVolume
+            tensorPower tensor_power_ge_two).tensorPowerUpperRay) ∨
+      (-1 : Real) < cTheta := by
+  intro twoComputation
+  rcases data.standardQLambdaCTheta_determinantBoundary_or_strict
+      q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ with
+    hboundary | hstrict
+  · left
+    have hnot :=
+      data.standardQLambdaCTheta_not_twoComputation_mem_tensorPowerUpperRay_of_boundary
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+        tensorPower tensor_power_ge_two theta_neg hboundary.1
+    exact
+      ⟨hboundary.1, hboundary.2.1, hboundary.2.2,
+        hnot.1, hnot.2⟩
+  · exact Or.inr hstrict
+
 theorem boundaryCTheta_globalFrobenioidCalibration_separates_localShift
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (localExponent : Int)
