@@ -7825,6 +7825,32 @@ theorem exists_labelIndependent_scale_matches_theta_degrees_iff_qPilotDegree_eq_
     rw [profile.thetaPilotDegree_eq_zero_of_qPilotDegree_eq_zero hq j,
       hq, mul_zero]
 
+theorem qPilotDegree_ne_zero_of_neg_pos
+    (profile : RepresentativeThetaPilotDegreeProfile l)
+    (hq_pos : 0 < -profile.qPilotDegree) :
+    profile.qPilotDegree ≠ 0 := by
+  intro hq
+  linarith
+
+theorem not_exists_labelIndependent_scale_matches_theta_degrees_of_neg_pos
+    (profile : RepresentativeThetaPilotDegreeProfile l)
+    (hq_pos : 0 < -profile.qPilotDegree) :
+    ¬ ∃ scale : Real, ∀ j : ZMod l.value,
+      profile.thetaPilotDegree j = scale * profile.qPilotDegree := by
+  rw [profile.exists_labelIndependent_scale_matches_theta_degrees_iff_qPilotDegree_eq_zero]
+  exact profile.qPilotDegree_ne_zero_of_neg_pos hq_pos
+
+theorem no_labelIndependent_scale_matches_theta_degrees_of_neg_pos
+    (profile : RepresentativeThetaPilotDegreeProfile l)
+    (hq_pos : 0 < -profile.qPilotDegree)
+    (scale : Real) :
+    ¬ ∀ j : ZMod l.value,
+      profile.thetaPilotDegree j = scale * profile.qPilotDegree := by
+  intro hscale
+  exact
+    profile.not_exists_labelIndependent_scale_matches_theta_degrees_of_neg_pos
+      hq_pos ⟨scale, hscale⟩
+
 end RepresentativeThetaPilotDegreeProfile
 
 theorem toWeighted_const_le_weightedAverage_of_forall_le
