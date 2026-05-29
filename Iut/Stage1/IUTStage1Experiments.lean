@@ -5577,6 +5577,58 @@ theorem finalWeightedThetaRoute_rejectsBalancedNegTransportLevel
   exact finalWeightedThetaRoute_rejectsBalanced route (by
     simpa [IUTStage1BalancedSquareFullLabelTransport.comparisonLevel] using h)
 
+theorem balancedNegDiagnostic_preservedButNotFinalRoute
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaCuspClassContainerAudit l}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (route :
+      FLZModCuspLabelThetaCuspClassContainerAudit.WeightedThetaComparisonRoute
+        part profile audited)
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (logVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :
+    ((∀ j : ZMod l.value,
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            ((IUTStage1BalancedSquareFullLabelTransport.negSelf
+              logVolume).coordinateEquiv j)) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) ∧
+      (∀ j : ZMod l.value,
+        IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+            (l := l)
+            ((IUTStage1BalancedSquareFullLabelTransport.negSelf
+              logVolume).coordinateEquiv j) =
+          IUTStage1ZModSquareWeightProfile.balancedSquareWeight
+            (l := l) j) ∧
+      ¬ ∀ j : ZMod l.value,
+        IUTStage1ZModSquareWeightProfile.representativeFullLabelWeightedSummand
+            (l := l)
+            (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+              (l := l) (1 : Real))
+            ((IUTStage1BalancedSquareFullLabelTransport.negSelf
+              logVolume).coordinateEquiv j) =
+          IUTStage1ZModSquareWeightProfile.representativeFullLabelWeightedSummand
+            (l := l)
+            (IUTStage1ZModCuspLabelLogVolumeCompatibility.constant
+              (l := l) (1 : Real))
+            j) ∧
+      FLZModCuspLabelThetaCuspClassContainerAudit.weightedThetaComparisonRouteLevel
+          route ≠
+        (IUTStage1BalancedSquareFullLabelTransport.negSelf
+          logVolume).comparisonLevel :=
+  ⟨balancedNeg_preservesGaussianAndBalanced_rejectsRepresentative
+      evaluation logVolume,
+    finalWeightedThetaRoute_rejectsBalancedNegTransportLevel route logVolume⟩
+
 theorem finalWeightedThetaRoute_rejectsPointwise
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
