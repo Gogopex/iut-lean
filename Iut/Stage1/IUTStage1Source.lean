@@ -9012,6 +9012,44 @@ theorem gaussianDegree_fullLabel_average_lt_absNonzeroLabel_average_of_positive
     mul_lt_mul_of_pos_right hcoeff henv_pos
   simpa [fullCoeff, nonzeroCoeff] using hmul
 
+theorem gaussianDegree_absNonzeroLabel_average_eq_fullLabel_average_iff
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    (absNonzeroLabelAveragedLogVolume evaluation).averageLogVolume =
+        (Finset.univ.sum evaluation.gaussianDegree) /
+          (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) ↔
+      evaluation.environmentDegree = 0 := by
+  constructor
+  · intro h
+    rw [gaussianDegree_absNonzeroLabel_average_eq_coeff,
+      gaussianDegree_fullLabel_average_eq_coeff] at h
+    let fullCoeff : Real :=
+      (absLabelProcessionTop l : Real) *
+        (2 * (absLabelProcessionTop l : Real) + 1) / 6
+    let nonzeroCoeff : Real :=
+      ((absLabelProcessionTop l : Real) + 1) *
+        (2 * (absLabelProcessionTop l : Real) + 1) / 6
+    have hcoeff_ne : nonzeroCoeff ≠ fullCoeff := by
+      have hcoeff : fullCoeff < nonzeroCoeff := by
+        simpa [fullCoeff, nonzeroCoeff] using
+          absNonzeroLabelAverageCoefficient_gt_fullLabelAverageCoefficient
+            (l := l)
+      exact ne_of_gt hcoeff
+    have hmul :
+        nonzeroCoeff * evaluation.environmentDegree =
+          fullCoeff * evaluation.environmentDegree := by
+      simpa [nonzeroCoeff, fullCoeff] using h
+    have hfactor :
+        (nonzeroCoeff - fullCoeff) * evaluation.environmentDegree = 0 := by
+      nlinarith
+    have hfactor_ne : nonzeroCoeff - fullCoeff ≠ 0 := by
+      intro hzero
+      exact hcoeff_ne (sub_eq_zero.mp hzero)
+    exact mul_eq_zero.mp hfactor |>.resolve_left hfactor_ne
+  · intro henv
+    rw [gaussianDegree_absNonzeroLabel_average_eq_coeff,
+      gaussianDegree_fullLabel_average_eq_coeff, henv]
+    ring
+
 theorem gaussianDegree_fullLabel_average_ne_environment_of_nonzero
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (henv : evaluation.environmentDegree ≠ 0) :
