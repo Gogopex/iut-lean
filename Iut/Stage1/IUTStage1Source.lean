@@ -5331,6 +5331,28 @@ theorem toUpperRay_q_mem
       data.toHullDetPilotUpperRayLogVolume.upperRay :=
   data.toHullDetPilotUpperRayLogVolume.qPilot_mem_upperRay
 
+def toThetaFiniteLogVolumeEndpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label) :
+    IUTStage1Corollary312ThetaFiniteLogVolumeEndpoint :=
+  IUTStage1Corollary312ThetaFiniteLogVolumeEndpoint.ofUpperRayData
+    data.toHullDetPilotUpperRayLogVolume
+
+theorem thetaFiniteLogVolumeEndpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label) :
+    let endpoint := data.toThetaFiniteLogVolumeEndpoint;
+    endpoint.thetaExtended.IsFinite ∧
+      endpoint.thetaExtended ≠
+        IUTStage1ExtendedSignedLogVolume.plusInfinity ∧
+      endpoint.thetaRealLogVolume = data.thetaHullLogVolume ∧
+      endpoint.upperRayData.qPilotLogVolume <=
+        endpoint.thetaRealLogVolume := by
+  intro endpoint
+  exact
+    ⟨endpoint.thetaExtendedFinite,
+      endpoint.thetaExtended_ne_plusInfinity,
+      endpoint.thetaRealLogVolume_eq_hull,
+      endpoint.qPilotLogVolume_le_thetaRealLogVolume⟩
+
 theorem ofZModCuspLabelLogVolumeCompatibilities_q_mem_upperRay
     {l : PrimeGeFive}
     (before afterInd1 afterInd2 :
@@ -5362,6 +5384,43 @@ theorem ofZModCuspLabelLogVolumeCompatibilities_q_mem_upperRay
       data.toHullDetPilotUpperRayLogVolume.upperRay := by
   intro data
   exact data.toUpperRay_q_mem
+
+theorem ofZModCuspLabelLogVolumeCompatibilities_thetaFiniteEndpoint
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume) :
+    let data :=
+      ofZModCuspLabelLogVolumeCompatibilities before afterInd1 afterInd2
+        ind3UpperBound hind1 hind2 hzero hcusp determinant thetaHullLogVolume
+        theta_eq_ind3Upper theta_eq_normalized_determinant;
+    let endpoint := data.toThetaFiniteLogVolumeEndpoint;
+    endpoint.thetaExtended.IsFinite ∧
+      endpoint.thetaExtended ≠
+        IUTStage1ExtendedSignedLogVolume.plusInfinity ∧
+      endpoint.thetaRealLogVolume = thetaHullLogVolume ∧
+      endpoint.upperRayData.qPilotLogVolume <=
+        endpoint.thetaRealLogVolume := by
+  intro data endpoint
+  exact data.thetaFiniteLogVolumeEndpoint
 
 def toQPilotTwoComputationLogVolume
     (data : IUTStage1StepXToHullUpperRayLogVolume label) :

@@ -4072,6 +4072,47 @@ theorem zmodCuspLabelLogVolumeCompatibility_stepXToHull_q_mem
     determinant thetaHullLogVolume theta_eq_ind3Upper
     theta_eq_normalized_determinant
 
+theorem zmodCuspLabelLogVolumeCompatibility_thetaFiniteEndpoint
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume) :
+    let data :=
+      IUTStage1StepXToHullUpperRayLogVolume.ofZModCuspLabelLogVolumeCompatibilities
+        before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+        determinant thetaHullLogVolume theta_eq_ind3Upper
+        theta_eq_normalized_determinant;
+    let endpoint := data.toThetaFiniteLogVolumeEndpoint;
+    endpoint.thetaExtended.IsFinite ∧
+      endpoint.thetaExtended ≠
+        IUTStage1ExtendedSignedLogVolume.plusInfinity ∧
+      endpoint.thetaRealLogVolume = thetaHullLogVolume ∧
+      endpoint.upperRayData.qPilotLogVolume <=
+        endpoint.thetaRealLogVolume := by
+  open IUTStage1StepXToHullUpperRayLogVolume in
+    exact ofZModCuspLabelLogVolumeCompatibilities_thetaFiniteEndpoint
+      before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+      determinant thetaHullLogVolume theta_eq_ind3Upper
+      theta_eq_normalized_determinant
+
 theorem zmodCuspLabelLogVolumeCompatibility_signedEndpointCorollary312
     {l : PrimeGeFive}
     (before afterInd1 afterInd2 :
