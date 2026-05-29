@@ -162,7 +162,9 @@ The code currently covers:
   \(j^2\deg(q)\) contributions over the procession container; for
   \(S_{j+1}=\{0,\ldots,j\}\), Lean expands the total generator contribution to
   \(j(j+1)(2j+1)\deg(q)/6\), and the resulting normalized log-volume change to
-  \(j(2j+1)\deg(q)/6\);
+  \(j(2j+1)\deg(q)/6\); since \(j=\lfloor\ell/2\rfloor\ge2\), a nonnegative
+  environment degree makes the acted normalized tensor-packet log-volume an
+  upper bound for the original one;
 \item the finite procession containers
   \(S^\pm_{j+1}=\{0,\ldots,j\}\), their nested inclusions, core-label stability,
   stage cardinality \(j+1\), and total procession ambiguity \((\ell^\pm)!\)
@@ -472,7 +474,8 @@ SHE availability.  The obstruction flags are raw-cancellation failure,
 label-independent \(j^2\) failure, and sign-quotient representative descent
 failure.  The Gaussian/procession flags include finite tensor-packet, monoid
 action, normalized splitting-generator average, the explicit square-sum formula
-for the generator total and normalized delta, canonical positive square-weight
+for the generator total and normalized delta, the resulting conditional
+monotonicity of the acted tensor packet, canonical positive square-weight
 profile, the constant-average check,
 base-valuation product,
 coric-transfer, determinant-normalization,

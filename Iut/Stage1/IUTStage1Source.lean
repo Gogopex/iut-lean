@@ -7775,6 +7775,21 @@ theorem thetaExponentOnAbsLabel_fromProcession
     (l := l) (label.val : ZMod l.value) hhalf]
   rw [hval]
 
+theorem absLabelProcessionTop_ge_two (l : PrimeGeFive) :
+    2 ≤ absLabelProcessionTop l := by
+  unfold absLabelProcessionTop
+  have hfour : 4 ≤ l.value := by
+    have hfive : 5 ≤ l.value := l.ge_five
+    omega
+  have h : 4 / 2 ≤ l.value / 2 :=
+    Nat.div_le_div_right hfour
+  norm_num at h
+  exact h
+
+theorem absLabelProcessionTop_pos (l : PrimeGeFive) :
+    0 < absLabelProcessionTop l :=
+  lt_of_lt_of_le (by norm_num) (absLabelProcessionTop_ge_two l)
+
 /--
 Log-volume shadow of the IUT III splitting-monoid action.
 
@@ -8036,6 +8051,40 @@ theorem normalizedActedLogVolume_delta_mul_six
         (absLabelProcessionTop l : Real) *
           (2 * (absLabelProcessionTop l : Real) + 1) *
             action.evaluation.environmentDegree := havg
+
+theorem normalizedActedLogVolume_delta_nonnegative_of_environment_nonnegative
+    (action : LGPSplittingMonoidTensorPacketAction l)
+    (henv : 0 <= action.evaluation.environmentDegree) :
+    0 <= action.normalizedActedLogVolume -
+      action.packet.normalizedLogVolume := by
+  have hdelta := action.normalizedActedLogVolume_delta_mul_six
+  have htop : 0 <= (absLabelProcessionTop l : Real) := by
+    exact_mod_cast (absLabelProcessionTop_pos l).le
+  have hfactor :
+      0 <= (absLabelProcessionTop l : Real) *
+        (2 * (absLabelProcessionTop l : Real) + 1) := by
+    exact mul_nonneg htop (by positivity)
+  have hright :
+      0 <= (absLabelProcessionTop l : Real) *
+        (2 * (absLabelProcessionTop l : Real) + 1) *
+          action.evaluation.environmentDegree :=
+    mul_nonneg hfactor henv
+  have hdelta6 :
+      0 <=
+        (action.normalizedActedLogVolume -
+          action.packet.normalizedLogVolume) * 6 := by
+    rw [hdelta]
+    exact hright
+  nlinarith
+
+theorem packet_normalizedLogVolume_le_normalizedActedLogVolume_of_environment_nonnegative
+    (action : LGPSplittingMonoidTensorPacketAction l)
+    (henv : 0 <= action.evaluation.environmentDegree) :
+    action.packet.normalizedLogVolume <= action.normalizedActedLogVolume := by
+  have hdelta :=
+    action.normalizedActedLogVolume_delta_nonnegative_of_environment_nonnegative
+      henv
+  linarith
 
 end LGPSplittingMonoidTensorPacketAction
 

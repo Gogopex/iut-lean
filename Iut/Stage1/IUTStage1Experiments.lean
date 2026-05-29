@@ -1440,6 +1440,16 @@ theorem lgpSplittingMonoid_generator_core_zero
           (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) = 0 :=
   action.generatorLogVolume_core
 
+theorem absLabelProcessionTop_ge_two
+    {l : PrimeGeFive} :
+    2 ≤ IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l :=
+  IUTStage1ZModSquareWeightProfile.absLabelProcessionTop_ge_two l
+
+theorem absLabelProcessionTop_pos
+    {l : PrimeGeFive} :
+    0 < IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l :=
+  IUTStage1ZModSquareWeightProfile.absLabelProcessionTop_pos l
+
 theorem lgpSplittingMonoid_generator_eq_procession_square
     {l : PrimeGeFive}
     (action :
@@ -1570,6 +1580,25 @@ theorem lgpSplittingMonoid_normalizedActed_delta_mul_six
             1) *
           action.evaluation.environmentDegree :=
   action.normalizedActedLogVolume_delta_mul_six
+
+theorem lgpSplittingMonoid_normalizedActed_delta_nonnegative_of_environment_nonnegative
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l)
+    (henv : 0 <= action.evaluation.environmentDegree) :
+    0 <= action.normalizedActedLogVolume -
+      action.packet.normalizedLogVolume :=
+  action.normalizedActedLogVolume_delta_nonnegative_of_environment_nonnegative
+    henv
+
+theorem lgpSplittingMonoid_packet_normalized_le_acted_of_environment_nonnegative
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l)
+    (henv : 0 <= action.evaluation.environmentDegree) :
+    action.packet.normalizedLogVolume <= action.normalizedActedLogVolume :=
+  action.packet_normalizedLogVolume_le_normalizedActedLogVolume_of_environment_nonnegative
+    henv
 
 theorem baseValuationTensorPacketProduct_eq_nested_sum
     {kind : IUTStage1PlaceKind} {j : Nat}
