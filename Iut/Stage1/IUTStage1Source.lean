@@ -3704,6 +3704,20 @@ theorem nonzero_fullLabel_fiber_eq_sign_pair
       (fromCoordinate_eq_iff (l := l) k x.1).mpr hk
     exact hsame.trans hxlabel
 
+theorem fromCoordinate_fullLabel_endpoint
+    (j k : ZMod l.value) :
+    fromCoordinate l (0 : ZMod l.value) = zero ∧
+      fromCoordinate l (1 : ZMod l.value) =
+        nonzero (zmodCanonicalSignLabelQuotient l) ∧
+      (fromCoordinate l j = zero ↔ j = 0) ∧
+      (fromCoordinate l j = fromCoordinate l k ↔ j = k ∨ j = -k) ∧
+      Function.Surjective (fromCoordinate l) :=
+  ⟨fromCoordinate_zero l,
+    fromCoordinate_one l,
+    fromCoordinate_eq_zero_iff j,
+    fromCoordinate_eq_iff j k,
+    fromCoordinate_surjective⟩
+
 theorem fromCoordinate_natAbs_valMinAbs
     (j : ZMod l.value) :
     fromCoordinate l (j.valMinAbs.natAbs : ZMod l.value) =

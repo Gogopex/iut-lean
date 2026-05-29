@@ -5949,6 +5949,22 @@ theorem flZModCuspLabelClassModel_endpoint
           model.cusp_label_class_data.model.canonicalNonzeroLabel :=
   model.cuspLabelClassModel_endpoint
 
+theorem zmodCuspFullLabel_fromCoordinate_endpoint
+    {l : PrimeGeFive}
+    (j k : ZMod l.value) :
+    IUTStage1ZModCuspFullLabel.fromCoordinate l (0 : ZMod l.value) =
+        IUTStage1ZModCuspFullLabel.zero ∧
+      IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value) =
+        IUTStage1ZModCuspFullLabel.nonzero
+          (zmodCanonicalSignLabelQuotient l) ∧
+      (IUTStage1ZModCuspFullLabel.fromCoordinate l j =
+          IUTStage1ZModCuspFullLabel.zero ↔ j = 0) ∧
+      (IUTStage1ZModCuspFullLabel.fromCoordinate l j =
+          IUTStage1ZModCuspFullLabel.fromCoordinate l k ↔
+        j = k ∨ j = -k) ∧
+      Function.Surjective (IUTStage1ZModCuspFullLabel.fromCoordinate l) :=
+  IUTStage1ZModCuspFullLabel.fromCoordinate_fullLabel_endpoint j k
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
