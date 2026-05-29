@@ -6020,6 +6020,23 @@ theorem gaussianDegree_zero
     thetaExponentOnAbsLabel_zero]
   ring
 
+theorem gaussianDegree_eq_zero_of_environment_zero
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv : evaluation.environmentDegree = 0)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    evaluation.gaussianDegree label = 0 := by
+  rw [evaluation.gaussianDegree_eq_eval, henv]
+  ring
+
+theorem gaussianDegree_fromCoordinate_eq_zero_of_environment_zero
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv : evaluation.environmentDegree = 0)
+    (j : ZMod l.value) :
+    evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) = 0 :=
+  evaluation.gaussianDegree_eq_zero_of_environment_zero henv
+    (IUTStage1ZModCuspFullLabel.fromCoordinate l j)
+
 theorem gaussianDegree_nonzero_ne_zero_of_environment_ne_zero
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (label : (zmodSignAction l).SignLabelQuotient)
@@ -6422,6 +6439,22 @@ theorem unitAffine_pointwise_gaussian_preserving_iff_fullLabelMapPreserving
           l a t) := by
   rw [evaluation.unitAffine_pointwise_gaussian_preserving_iff a t henv]
   rw [IUTStage1ZModCuspLabelLogVolumeCompatibility.fullLabelMapPreserving_unitAffine_iff]
+
+theorem unitAffine_pointwise_gaussian_preserving_of_environment_zero
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (a : (ZMod l.value)ˣ) (t : ZMod l.value)
+    (henv : evaluation.environmentDegree = 0) :
+    ∀ j : ZMod l.value,
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (zmodLabelTranslate l t ((zmodUnitActionData l).smul a j))) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  intro j
+  rw [evaluation.gaussianDegree_fromCoordinate_eq_zero_of_environment_zero
+    henv]
+  rw [evaluation.gaussianDegree_fromCoordinate_eq_zero_of_environment_zero
+    henv]
 
 theorem coordinateAveragedLogVolume_average_translation_eq
     (evaluation : GaussianMonoidDegreeEvaluation l)

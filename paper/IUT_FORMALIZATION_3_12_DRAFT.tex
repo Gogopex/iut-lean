@@ -330,7 +330,9 @@ The code currently covers:
   \(j\mapsto a j+t\) preserves all coordinate Gaussian degrees if and only if
   \(t=0\) and \(a\in\{\pm1\}\).  Equivalently, in this finite affine family,
   nondegenerate pointwise Gaussian preservation is exactly preservation of the
-  full absolute-label map.
+  full absolute-label map.  Lean also proves the degenerate complement:
+  if \(\deg(q)=0\), then every Gaussian degree is \(0\), so every affine
+  coordinate operation preserves Gaussian values.
   For the stricter representative \(j^2\) square-weight branch, Lean proves the
   corresponding affine criterion \(t=0\) and \(a=1\).  Thus the sign action is
   legitimate for the balanced/full-label Gaussian branch, but not for the

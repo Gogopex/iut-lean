@@ -1455,6 +1455,21 @@ theorem unitAffine_pointwiseGaussianPreserving_iff_fullLabelMapPreserving
   evaluation.unitAffine_pointwise_gaussian_preserving_iff_fullLabelMapPreserving
     a t henv
 
+theorem unitAffine_pointwiseGaussianPreserving_of_environment_zero
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (a : (ZMod l.value)ˣ) (t : ZMod l.value)
+    (henv : evaluation.environmentDegree = 0) :
+    ∀ j : ZMod l.value,
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (zmodLabelTranslate l t ((zmodUnitActionData l).smul a j))) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  evaluation.unitAffine_pointwise_gaussian_preserving_of_environment_zero
+    a t henv
+
 theorem coordinateSquarePreserving_unitAffine_iff
     {l : PrimeGeFive} (a : (ZMod l.value)ˣ) (t : ZMod l.value) :
     IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
@@ -1514,6 +1529,15 @@ theorem gaussianDegree_fromCoordinate_eq_zero_iff
         (IUTStage1ZModCuspFullLabel.fromCoordinate l j) = 0 ↔
       j = 0 ∨ evaluation.environmentDegree = 0 :=
   evaluation.gaussianDegree_fromCoordinate_eq_zero_iff j
+
+theorem gaussianDegree_eq_zero_of_environment_zero
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (henv : evaluation.environmentDegree = 0)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    evaluation.gaussianDegree label = 0 :=
+  evaluation.gaussianDegree_eq_zero_of_environment_zero henv label
 
 theorem absThetaPilotDegree_distinguishes_one_two_of_q_ne_zero
     {l : PrimeGeFive}
