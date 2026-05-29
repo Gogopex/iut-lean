@@ -2125,6 +2125,29 @@ theorem preliminary_for_move_left
           (1 / 2 : Real) * data.cK :=
           add_le_add (add_le_add hcoeff_mul data.error_conversion_bound) le_rfl
 
+theorem h_bound_to_move_left_endpoint
+    (data : IUTStage1IUTIVCorollary22HBoundToMoveLeftShadow) :
+    0 <= data.logDegreeSum ∧
+      data.delta / data.sqrtH <= (1 / 5 : Real) * data.epsilonE ∧
+      (15 * data.delta) ^ 2 * data.sqrtH * data.logTwoDeltaH <=
+        (1 / 6 : Real) * data.h * ((2 / 5 : Real) * data.epsilonE) ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.delta / data.sqrtH) * data.logDegreeSum +
+          (15 * data.delta) ^ 2 * data.sqrtH * data.logTwoDeltaH +
+            (1 / 2 : Real) * data.cK ∧
+      1 + data.delta / data.sqrtH <=
+        1 + (1 / 5 : Real) * data.epsilonE ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + (1 / 5 : Real) * data.epsilonE) * data.logDegreeSum +
+          (1 / 6 : Real) * data.h * ((2 / 5 : Real) * data.epsilonE) +
+            (1 / 2 : Real) * data.cK :=
+  ⟨data.logDegreeSum_nonneg,
+    data.delta_inv_sqrtH_le_epsilon_over_five,
+    data.error_conversion_bound,
+    data.pre_epsilon_bound,
+    data.coefficient_le_epsilon_coefficient,
+    data.preliminary_for_move_left⟩
+
 end IUTStage1IUTIVCorollary22HBoundToMoveLeftShadow
 
 /--

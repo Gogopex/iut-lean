@@ -644,7 +644,9 @@ The code currently covers:
 \item the IUT IV, Corollary 2.2(ii) bridge to the denominator step:
   the pre-\(\epsilon_E\) \(h\)-bound, the error conversion, and
   \(\delta h^{-1/2}\le\epsilon_E/5\) yield the preliminary inequality used to
-  move the \(\frac25\epsilon_E\frac16h\) term to the left;
+  move the \(\frac25\epsilon_E\frac16h\) term to the left; Lean packages this
+  with log-degree nonnegativity and
+  \(1+\delta h^{-1/2}\le1+\epsilon_E/5\);
 \item the IUT IV, Corollary 2.2(ii) denominator step:
   Lean moves the term
   \((2\epsilon_E/5)\frac16h\) to the left and obtains the denominator
@@ -1111,7 +1113,8 @@ Lean also verifies the source conversion
 \((15\delta)^2h^{1/2}\log(2\delta h)\le\frac16h\cdot\frac25\epsilon_E\),
 with \(h=(h^{1/2})^2\) and the required nonnegativity facts explicit.
 Combining this with \(\delta h^{-1/2}\le\epsilon_E/5\), Lean proves the
-preliminary inequality needed for the move-left step.
+preliminary inequality needed for the move-left step, including the
+nonnegative log-degree premise used to scale the coefficient comparison.
 Lean then verifies the algebraic move-left step that introduces the denominator
 \((1-2\epsilon_E/5)^{-1}\).
 Lean also proves the final \(\epsilon_E\)-absorption step used just before C2:

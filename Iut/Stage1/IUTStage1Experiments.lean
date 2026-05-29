@@ -5617,6 +5617,24 @@ theorem iutIVCorollary22HBoundToMoveLeft_preliminary
           (1 / 2 : Real) * data.cK :=
   data.preliminary_for_move_left
 
+theorem iutIVCorollary22HBoundToMoveLeft_endpoint
+    (data : IUTStage1IUTIVCorollary22HBoundToMoveLeftShadow) :
+    0 <= data.logDegreeSum ∧
+      data.delta / data.sqrtH <= (1 / 5 : Real) * data.epsilonE ∧
+      (15 * data.delta) ^ 2 * data.sqrtH * data.logTwoDeltaH <=
+        (1 / 6 : Real) * data.h * ((2 / 5 : Real) * data.epsilonE) ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.delta / data.sqrtH) * data.logDegreeSum +
+          (15 * data.delta) ^ 2 * data.sqrtH * data.logTwoDeltaH +
+            (1 / 2 : Real) * data.cK ∧
+      1 + data.delta / data.sqrtH <=
+        1 + (1 / 5 : Real) * data.epsilonE ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + (1 / 5 : Real) * data.epsilonE) * data.logDegreeSum +
+          (1 / 6 : Real) * data.h * ((2 / 5 : Real) * data.epsilonE) +
+            (1 / 2 : Real) * data.cK :=
+  data.h_bound_to_move_left_endpoint
+
 theorem iutIVCorollary22EpsilonMoveLeft_bound
     (data : IUTStage1IUTIVCorollary22EpsilonMoveLeftShadow) :
     (1 / 6 : Real) * data.h <=
