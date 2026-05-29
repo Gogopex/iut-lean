@@ -584,7 +584,8 @@ The code currently covers:
    \approx\operatorname{ht}_{\omega_X(D)}\) composes to a direct bounded
   discrepancy relation;
 \item bounded-discrepancy transfer lemmas: pointwise upper and lower bounds move
-  across an \(\approx\) relation with the expected additive constant shift;
+  across an \(\approx\) relation with the expected additive constant shift; Lean
+  also packages simultaneous two-sided bound transfer;
 \item the IUT IV, Corollary 2.2(ii) condition (C1) prime-scale window:
   \((\log(q_\forall))^{1/2}\le\ell\le
    10\delta(\log(q_\forall))^{1/2}\log(2\delta\log(q_\forall))\).  Lean keeps
@@ -1066,7 +1067,8 @@ For Corollary 2.2(i), Lean defines equality up to bounded discrepancy, proves
 reflexivity, symmetry, transitivity, nonnegative scaling, and composes the
 displayed chain from \(\log(q_2)\) to \(\operatorname{ht}_{\omega_X(D)}\).
 Lean also proves that upper and lower pointwise bounds transfer across such a
-bounded-discrepancy equivalence with the appropriate constant shift.
+bounded-discrepancy equivalence with the appropriate constant shift, including a
+combined two-sided transfer theorem.
 For Corollary 2.2(ii)(C1), Lean records the displayed window for \(\ell\) and
 derives nonnegativity of \(\log(q_\forall)\), positivity of
 \((\log(q_\forall))^{1/2}\), and

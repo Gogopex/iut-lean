@@ -1201,6 +1201,26 @@ theorem upperBound_transfers_to_left
   have hupper := data.upper_bound x
   linarith
 
+theorem twoSidedBound_transfers_to_right
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    {L U : Real} (hB : ∀ x : Point, L <= f x ∧ f x <= U) :
+    ∀ x : Point, (L - data.upper <= g x) ∧
+      (g x <= U - data.lower) := by
+  intro x
+  exact
+    ⟨data.lowerBound_transfers_to_right (fun y => (hB y).1) x,
+      data.upperBound_transfers_to_right (fun y => (hB y).2) x⟩
+
+theorem twoSidedBound_transfers_to_left
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    {L U : Real} (hB : ∀ x : Point, L <= g x ∧ g x <= U) :
+    ∀ x : Point, (L + data.lower <= f x) ∧
+      (f x <= U + data.upper) := by
+  intro x
+  exact
+    ⟨data.lowerBound_transfers_to_left (fun y => (hB y).1) x,
+      data.upperBound_transfers_to_left (fun y => (hB y).2) x⟩
+
 end IUTStage1BoundedDiscrepancyEquivalent
 
 /--

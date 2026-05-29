@@ -5401,6 +5401,14 @@ theorem iutIVBoundedDiscrepancy_upperBound_transfers
     ∀ x : Point, g x <= B - data.lower :=
   data.upperBound_transfers_to_right hB
 
+theorem iutIVBoundedDiscrepancy_twoSidedBound_transfers
+    {Point : Type u} {f g : Point -> Real}
+    (data : IUTStage1BoundedDiscrepancyEquivalent Point f g)
+    {L U : Real} (hB : ∀ x : Point, L <= f x ∧ f x <= U) :
+    ∀ x : Point, (L - data.upper <= g x) ∧
+      (g x <= U - data.lower) :=
+  data.twoSidedBound_transfers_to_right hB
+
 theorem iutIVCorollary22C1_logQAll_nonneg
     (data : IUTStage1IUTIVCorollary22C1PrimeScaleWindowShadow) :
     0 <= data.logQAll :=
