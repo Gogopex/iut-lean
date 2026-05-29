@@ -7014,6 +7014,41 @@ theorem boundaryCTheta_localShift_eq_q_or_det_iff_exponent_zero_of_step_nonzero
       · intro hExponent
         exact hcollapse.2.mpr (Or.inl hExponent)⟩
 
+theorem boundaryCTheta_localShift_eq_twoComputation_iff_exponent_zero_of_step_nonzero
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hC : cTheta = (-1 : Real))
+    (hStep : localPrimeStepLogVolume ≠ 0) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    (global.localData.shiftedLogVolume =
+        twoComputation.inputPrimeStripLogVolume ↔
+        localExponent = 0) ∧
+      (global.localData.shiftedLogVolume =
+        twoComputation.outputHullLogVolume ↔
+        localExponent = 0) := by
+  intro twoComputation global
+  have hcriterion :=
+    data.boundaryCTheta_localShift_eq_q_or_det_iff_exponent_zero_of_step_nonzero
+      localExponent localPrimeStepLogVolume q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ hC hStep
+  exact
+    ⟨by
+      rw [twoComputation.input_eq_q]
+      exact hcriterion.1,
+    by
+      rw [twoComputation.output_eq_q]
+      exact hcriterion.1⟩
+
 theorem boundaryCTheta_localShift_collapses_for_step_zero
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (localExponent : Int)
