@@ -7210,6 +7210,59 @@ theorem determinantBoundary_upperSemiQuotientCollapsesNonzeroLocalShift_or_stric
         hcollapse.2.2.2⟩
   · exact Or.inr hstrict
 
+theorem determinantBoundary_actualUpperRayQuotientClassifiesLocalShift_or_strict
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    let collapsedRegion : Set Real :=
+      data.toHullDetPilotUpperRayLogVolume.upperRay;
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    (cTheta = (-1 : Real) ∧
+        twoComputation.inputPrimeStripLogVolume =
+          data.determinant.determinantLogVolume ∧
+        twoComputation.outputHullLogVolume =
+          data.determinant.determinantLogVolume ∧
+        (((localExponent : Real) * localPrimeStepLogVolume < 0 ∧
+            global.localData.shiftedLogVolume < data.qPilotLogVolume ∧
+            IUTStage1UpperSemiSetQuotient.quotientMap
+                collapsedRegion global.localData.shiftedLogVolume =
+              IUTStage1UpperSemiSetQuotient.quotientMap
+                collapsedRegion data.qPilotLogVolume) ∨
+          ((localExponent : Real) * localPrimeStepLogVolume = 0 ∧
+            global.localData.shiftedLogVolume = data.qPilotLogVolume ∧
+            IUTStage1UpperSemiSetQuotient.quotientMap
+                collapsedRegion global.localData.shiftedLogVolume =
+              IUTStage1UpperSemiSetQuotient.quotientMap
+                collapsedRegion data.qPilotLogVolume) ∨
+          (0 < (localExponent : Real) * localPrimeStepLogVolume ∧
+            data.qPilotLogVolume < global.localData.shiftedLogVolume ∧
+            IUTStage1UpperSemiSetQuotient.quotientMap
+                collapsedRegion global.localData.shiftedLogVolume ≠
+              IUTStage1UpperSemiSetQuotient.quotientMap
+                collapsedRegion data.qPilotLogVolume))) ∨
+      (-1 : Real) < cTheta := by
+  intro twoComputation collapsedRegion global
+  rcases data.standardQLambdaCTheta_determinantBoundary_or_strict
+      q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ with
+    hboundary | hstrict
+  · left
+    have hclass :=
+      data.boundaryCTheta_actualUpperRayQuotient_classifies_localShift_by_shiftTerm
+        localExponent localPrimeStepLogVolume q_pilot_positive cTheta
+        thetaHull_le_cTheta_absLogQ hboundary.1
+    exact
+      ⟨hboundary.1, hboundary.2.1, hboundary.2.2, hclass⟩
+  · exact Or.inr hstrict
+
 theorem determinantTensorBoundary_separatesLocalShift_or_strict
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (localExponent : Int)
