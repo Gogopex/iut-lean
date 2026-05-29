@@ -2471,6 +2471,37 @@ theorem final_h_bound
       (1 + data.epsilonE) * data.logDegreeSum + data.cK :=
   data.absorption.final_bound
 
+theorem final_h_bound_endpoint
+    (data : IUTStage1IUTIVCorollary22FinalHBoundShadow) :
+    0 < data.sqrtH ∧
+      0 <= data.delta ^ 2 * data.logTwoDeltaH ∧
+      data.h = data.sqrtH ^ 2 ∧
+      data.epsilonE =
+        iutIVCorollary22EpsilonDefinitionRHS
+          data.delta data.sqrtH data.logTwoDeltaH ∧
+      0 <= data.logDegreeSum ∧
+      data.delta / data.sqrtH <= (1 / 5 : Real) * data.epsilonE ∧
+      0 < data.epsilonE ∧
+      data.epsilonE <= 1 ∧
+      0 <= data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.delta / data.sqrtH) * data.logDegreeSum +
+          (15 * data.delta) ^ 2 * data.sqrtH * data.logTwoDeltaH +
+            (1 / 2 : Real) * data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.epsilonE) * data.logDegreeSum + data.cK :=
+  ⟨data.sqrtH_pos,
+    data.delta_sq_log_nonneg,
+    data.h_eq_sqrtH_sq,
+    data.epsilonE_eq,
+    data.logDegreeSum_nonneg,
+    data.delta_inv_sqrtH_le_epsilon_over_five,
+    data.epsilonE_pos,
+    data.epsilonE_le_one,
+    data.cK_nonneg,
+    data.pre_epsilon_bound,
+    data.final_h_bound⟩
+
 end IUTStage1IUTIVCorollary22FinalHBoundShadow
 
 /--
@@ -2587,6 +2618,33 @@ def toC2InequalityChain
     logQ_le_logQTwo := data.logQ_le_logQTwo
     logQTwo_le_logQAll := data.logQTwo_le_logQAll
     logQAll_le_heightSide := data.logQAll_le_curveSide }
+
+theorem final_h_to_c2_endpoint
+    (data : IUTStage1IUTIVCorollary22FinalHToC2Shadow) :
+    data.h = data.logQAll ∧
+      0 < data.epsilonE ∧
+      0 <= 1 + data.epsilonE ∧
+      data.logDegreeSum <= data.logDiffX + data.logCondD ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.epsilonE) * data.logDegreeSum + data.cK ∧
+      (1 / 6 : Real) * data.logQ <=
+        (1 / 6 : Real) * data.logQTwo ∧
+      (1 / 6 : Real) * data.logQTwo <=
+        (1 / 6 : Real) * data.logQAll ∧
+      (1 / 6 : Real) * data.logQAll <=
+        (1 + data.epsilonE) * (data.logDiffX + data.logCondD) + data.cK ∧
+      (1 / 6 : Real) * data.logQ <= data.toC2InequalityChain.heightSide ∧
+      (1 / 6 : Real) * data.logQTwo <= data.toC2InequalityChain.heightSide :=
+  ⟨data.h_eq_logQAll,
+    data.epsilonE_pos,
+    data.one_plus_epsilonE_nonneg,
+    data.logDegreeSum_le_curveSum,
+    data.final_h_bound,
+    data.logQ_le_logQTwo,
+    data.logQTwo_le_logQAll,
+    data.logQAll_le_curveSide,
+    data.toC2InequalityChain.logQ_le_heightSide,
+    data.toC2InequalityChain.logQTwo_le_heightSide⟩
 
 end IUTStage1IUTIVCorollary22FinalHToC2Shadow
 

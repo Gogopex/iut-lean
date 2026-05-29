@@ -664,10 +664,14 @@ The code currently covers:
 \item the IUT IV, Corollary 2.2(ii) final \(h\)-bound:
   Lean composes the pre-\(\epsilon_E\) bound, error conversion, move-left step,
   and absorption to prove
-  \(\frac16h\le(1+\epsilon_E)S+C_K\);
+  \(\frac16h\le(1+\epsilon_E)S+C_K\), with the square-root identity,
+  \(\epsilon_E\) definition, coefficient comparison, \(0<\epsilon_E\le1\),
+  and nonnegativity hypotheses exposed in one endpoint;
 \item the IUT IV, Corollary 2.2(ii) final C2 bridge:
   using \(S\le\log\operatorname{diff}_X(x_E)+\log\operatorname{cond}_D(x_E)\),
-  Lean derives the displayed C2 inequality chain;
+  Lean derives the displayed C2 inequality chain, including the
+  \(q\to q_2\to q_\forall\) inequalities and monotonicity under
+  \(1+\epsilon_E\ge0\);
 \item the IUT IV, Corollary 2.2(ii) comparison
   \(\log\operatorname{diff}_X(x_E)=\log(d_{F_{\mathrm{tpd}}})\) and
   \(\log(f_{F_{\mathrm{tpd}}})\le\log\operatorname{cond}_D(x_E)\le
@@ -1125,9 +1129,11 @@ the intermediate expression with denominator \(1-2\epsilon_E/5\) is bounded by
 \((1+\epsilon_E)\) times the log-degree sum plus \(C_K\), with denominator
 \(\ge1/2\) and nonnegativity of \(S\) and \(C_K\) explicit.
 Lean now composes these steps into the final displayed \(h=\log(q_\forall)\)
-bound.
+bound, with all square-root, \(\epsilon_E\), coefficient, and nonnegativity
+premises exposed in one endpoint.
 Lean also derives the displayed C2 chain from this \(h\)-bound and the
-tripodal-to-curve log-degree comparison.
+tripodal-to-curve log-degree comparison, recording the \(q\to q_2\to
+q_\forall\) inequalities and the monotonicity condition \(1+\epsilon_E\ge0\).
 It also proves the two sum inequalities relating the tripodal different and
 conductor terms to \(\log\operatorname{diff}_X+\log\operatorname{cond}_D\).
 For the Corollary 2.2/2.3 exceptional-set passage, Lean proves that a lower

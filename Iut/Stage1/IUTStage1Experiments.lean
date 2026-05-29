@@ -5700,6 +5700,27 @@ theorem iutIVCorollary22FinalHBound_bound
       (1 + data.epsilonE) * data.logDegreeSum + data.cK :=
   data.final_h_bound
 
+theorem iutIVCorollary22FinalHBound_endpoint
+    (data : IUTStage1IUTIVCorollary22FinalHBoundShadow) :
+    0 < data.sqrtH ∧
+      0 <= data.delta ^ 2 * data.logTwoDeltaH ∧
+      data.h = data.sqrtH ^ 2 ∧
+      data.epsilonE =
+        iutIVCorollary22EpsilonDefinitionRHS
+          data.delta data.sqrtH data.logTwoDeltaH ∧
+      0 <= data.logDegreeSum ∧
+      data.delta / data.sqrtH <= (1 / 5 : Real) * data.epsilonE ∧
+      0 < data.epsilonE ∧
+      data.epsilonE <= 1 ∧
+      0 <= data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.delta / data.sqrtH) * data.logDegreeSum +
+          (15 * data.delta) ^ 2 * data.sqrtH * data.logTwoDeltaH +
+            (1 / 2 : Real) * data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.epsilonE) * data.logDegreeSum + data.cK :=
+  data.final_h_bound_endpoint
+
 theorem iutIVCorollary22LogDiffCond_ftpd_le_curve
     (data : IUTStage1IUTIVCorollary22LogDiffCondComparisonShadow) :
     data.ftpdLogSum <= data.curveLogSum :=
@@ -5720,6 +5741,24 @@ def iutIVCorollary22FinalHToC2_chain
     (data : IUTStage1IUTIVCorollary22FinalHToC2Shadow) :
     IUTStage1IUTIVCorollary22C2InequalityChainShadow :=
   data.toC2InequalityChain
+
+theorem iutIVCorollary22FinalHToC2_endpoint
+    (data : IUTStage1IUTIVCorollary22FinalHToC2Shadow) :
+    data.h = data.logQAll ∧
+      0 < data.epsilonE ∧
+      0 <= 1 + data.epsilonE ∧
+      data.logDegreeSum <= data.logDiffX + data.logCondD ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.epsilonE) * data.logDegreeSum + data.cK ∧
+      (1 / 6 : Real) * data.logQ <=
+        (1 / 6 : Real) * data.logQTwo ∧
+      (1 / 6 : Real) * data.logQTwo <=
+        (1 / 6 : Real) * data.logQAll ∧
+      (1 / 6 : Real) * data.logQAll <=
+        (1 + data.epsilonE) * (data.logDiffX + data.logCondD) + data.cK ∧
+      (1 / 6 : Real) * data.logQ <= data.toC2InequalityChain.heightSide ∧
+      (1 / 6 : Real) * data.logQTwo <= data.toC2InequalityChain.heightSide :=
+  data.final_h_to_c2_endpoint
 
 theorem iutIVCorollary22ToTheoremA_discrepancy_bounded_below
     {Point : Type u}
