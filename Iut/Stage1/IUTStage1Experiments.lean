@@ -4993,6 +4993,11 @@ theorem positiveRationalUnitRigidity_eq_one
   IUTStage1PositiveRationalUnitRigidity.eq_one_of_pos_of_integerUnit
     hpos hunit
 
+theorem positiveRationalUnitRigidity_positive_iff_eq_one
+    {q : Rat} (hunit : IUTStage1PositiveRationalUnitRigidity.IsIntegerUnit q) :
+    0 < q ↔ q = 1 :=
+  IUTStage1PositiveRationalUnitRigidity.positive_integerUnit_iff_eq_one hunit
+
 theorem generalizedThetaLGPLambda_standard_bound
     (data : IUTStage1GeneralizedThetaLGPLambdaBound)
     (hlambda : data.lambda <= 1) :
