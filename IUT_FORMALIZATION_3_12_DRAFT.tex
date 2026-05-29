@@ -137,6 +137,9 @@ The code currently covers:
   \(0\le j\le(\ell-1)/2\), and the corresponding theta-degree profile;
 \item the degree-level Gaussian evaluation
   \(q\mapsto(q^{j^2})_{j\in |F_\ell|}\), including identity at \(j=1\);
+  Lean now also converts such an evaluation into a cusp/full-label log-volume
+  compatibility object and proves the full-label value-preservation branch when
+  the source and target environment degrees agree;
 \item a canonical representative square-weight profile on \(F_\ell\):
   Lean proves the total \(j^2\)-mass is positive from the \(j=1\) contribution
   and therefore constructs the profile without an external positivity premise;
@@ -466,6 +469,13 @@ The code currently covers:
   \(q_{\mathrm{signed}}\le\Theta_{\mathrm{signed}}\); the same final comparison
   is now available directly from the primitive factored square/full-label SHE
   obligations, without requiring a prebuilt transport-audit argument;
+\item a Gaussian-to-factored-SHE bridge:
+  source and target degree-level Gaussian evaluations with equal environment
+  degree supply the full-label value-preservation branch of the factored
+  square/full-label SHE obligations; with separate coordinate-square and
+  full-label-map preservation, the experiment route reaches
+  \(q_{\mathrm{signed}}\le\Theta_{\mathrm{signed}}\) directly from Gaussian
+  target bounds;
 \item a bridge from factored square/full-label SHE obligations to the
   Hodge-descent \((\mathrm{Ind3})\) route.
 \end{itemize}
@@ -600,7 +610,9 @@ The square/full-label audit now also transports target pointwise upper bounds
 back to the source square-weighted average, including through the structured-SHE
 route wrapper, and the experiment layer exposes the resulting final
 q-to-\(\Theta\) comparison theorem.  The same experiment-level theorem is now
-exposed for primitive factored square/full-label SHE obligations.
+exposed for primitive factored square/full-label SHE obligations and for
+degree-level Gaussian evaluations after the explicit preservation branches are
+supplied.
 
 \section{Audit Findings}
 
@@ -613,7 +625,9 @@ ordered real-line alignment, and Hodge/SHE square-weight transport audit are
 supplied, Lean checks the final signed \(q\)-to-\(\Theta\) inequality feeding
 that algebra.  If the corresponding primitive factored square/full-label SHE
 obligations are supplied instead, Lean first constructs the transport audit and
-checks the same final inequality.
+checks the same final inequality.  If the input is a pair of degree-level
+Gaussian evaluations with equal environment degree, Lean constructs the
+full-label log-volume compatibility branch before invoking the factored route.
 
 The strongest negative result is also limited: in the current \(\F_\ell\)-label
 model, Lean rejects a single label-independent scale accounting for all

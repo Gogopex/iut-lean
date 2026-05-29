@@ -7692,6 +7692,55 @@ def toAbsThetaPilotDegreeProfile
     thetaPilotDegree := evaluation.gaussianDegree,
     thetaPilotDegree_eq_abs_exponent := evaluation.gaussianDegree_eq_eval }
 
+noncomputable def toCuspLabelLogVolumeCompatibility
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility l :=
+  { normalizedLogVolume := fun j =>
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j),
+    cuspClassLogVolume := fun label =>
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.nonzero label),
+    zeroLogVolume :=
+      evaluation.gaussianDegree IUTStage1ZModCuspFullLabel.zero,
+    nonzero_eq_cuspClass := by
+      intro j hj
+      rw [IUTStage1ZModCuspFullLabel.fromCoordinate_nonzero l j hj],
+    zero_eq := by
+      rw [IUTStage1ZModCuspFullLabel.fromCoordinate_zero] }
+
+theorem toCuspLabelLogVolumeCompatibility_fullLabelLogVolume
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    evaluation.toCuspLabelLogVolumeCompatibility.fullLabelLogVolume label =
+      evaluation.gaussianDegree label := by
+  cases label <;> rfl
+
+theorem gaussianDegree_eq_of_environmentDegree_eq
+    (sourceEvaluation targetEvaluation : GaussianMonoidDegreeEvaluation l)
+    (henv :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    targetEvaluation.gaussianDegree label =
+      sourceEvaluation.gaussianDegree label := by
+  rw [targetEvaluation.gaussianDegree_eq_eval,
+    sourceEvaluation.gaussianDegree_eq_eval, henv]
+
+theorem fullLabelLogVolumeValuePreserving_of_environmentDegree_eq
+    (sourceEvaluation targetEvaluation : GaussianMonoidDegreeEvaluation l)
+    (henv :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelLogVolumeValuePreserving
+      sourceEvaluation.toCuspLabelLogVolumeCompatibility
+      targetEvaluation.toCuspLabelLogVolumeCompatibility := by
+  intro label
+  rw [targetEvaluation.toCuspLabelLogVolumeCompatibility_fullLabelLogVolume,
+    sourceEvaluation.toCuspLabelLogVolumeCompatibility_fullLabelLogVolume]
+  exact sourceEvaluation.gaussianDegree_eq_of_environmentDegree_eq
+    targetEvaluation henv label
+
 theorem gaussianDegree_zero
     (evaluation : GaussianMonoidDegreeEvaluation l) :
     evaluation.gaussianDegree IUTStage1ZModCuspFullLabel.zero = 0 := by
@@ -16344,6 +16393,56 @@ theorem fullLabelLogVolume_preserved
   rw [obligations.fullLabelMap_preserved j]
   exact obligations.fullLabelValue_preserved
     (IUTStage1ZModCuspFullLabel.fromCoordinate l j)
+
+noncomputable def fromGaussianDegreeEvaluations
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation : GaussianMonoidDegreeEvaluation l)
+    (hcoord :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (hmap :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (henv :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree) :
+    IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+      package bundle l :=
+  { coordinateEquiv := coordinateEquiv,
+    sourceProfile := sourceProfile,
+    targetProfile := targetProfile,
+    sourceLogVolume :=
+      sourceEvaluation.toCuspLabelLogVolumeCompatibility,
+    targetLogVolume :=
+      targetEvaluation.toCuspLabelLogVolumeCompatibility,
+    coordinateSquare_preserved := hcoord,
+    fullLabelMap_preserved := hmap,
+    fullLabelValue_preserved :=
+      sourceEvaluation.fullLabelLogVolumeValuePreserving_of_environmentDegree_eq
+        targetEvaluation henv }
+
+theorem fromGaussianDegreeEvaluations_targetLogVolume_fullLabel
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation : GaussianMonoidDegreeEvaluation l)
+    (hcoord :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (hmap :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (henv :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    (fromGaussianDegreeEvaluations
+        (package := package) (bundle := bundle)
+        coordinateEquiv sourceProfile targetProfile
+        sourceEvaluation targetEvaluation hcoord hmap henv).targetLogVolume.fullLabelLogVolume
+        label =
+      targetEvaluation.gaussianDegree label :=
+  targetEvaluation.toCuspLabelLogVolumeCompatibility_fullLabelLogVolume label
 
 def toCoordinateSquareWeightObligations
     (obligations :

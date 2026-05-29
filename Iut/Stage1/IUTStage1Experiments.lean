@@ -348,6 +348,62 @@ theorem factoredSHETargetBound_finalQTheta
     profile audited factored source_profile_eq source_log_volume_eq
     target_fullLabel_le_thetaAverage
 
+theorem gaussianFactoredSHETargetBound_finalQTheta
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (coordinate_square_preserved :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (fullLabelMap_preserved :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (environmentDegree_preserved :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree)
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_gaussian_le_thetaAverage :
+      ∀ j : ZMod l.value,
+        targetEvaluation.gaussianDegree
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (coordinateEquiv j)) <=
+          part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+            audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned := by
+  let factored :=
+    IUTStage1StructuredSHEFactoredSquareFullLabelObligations.fromGaussianDegreeEvaluations
+      (package := package) (bundle := part.bundle)
+      coordinateEquiv sourceProfile targetProfile
+      sourceEvaluation targetEvaluation coordinate_square_preserved
+      fullLabelMap_preserved environmentDegree_preserved
+  exact factoredSHETargetBound_finalQTheta
+    part profile audited factored source_profile_eq source_log_volume_eq
+    (by
+      intro j
+      dsimp [factored,
+        IUTStage1StructuredSHEFactoredSquareFullLabelObligations.fromGaussianDegreeEvaluations]
+      have hfull :=
+        targetEvaluation.toCuspLabelLogVolumeCompatibility_fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j))
+      rw [hfull]
+      exact target_gaussian_le_thetaAverage j)
+
 /-- Scale-level status for transport-explicit real-line cancellation. -/
 structure Ind3TransportScaleExperimentReport where
   sourceScaleMatched : Bool
