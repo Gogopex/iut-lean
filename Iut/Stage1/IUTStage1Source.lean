@@ -5465,6 +5465,34 @@ theorem fixedQPilotCTheta_endpoint
       endpoint.cTheta_ge_neg_one_from_fixed_qPilot,
       endpoint.not_cTheta_lt_neg_one_from_fixed_qPilot⟩
 
+theorem signedCThetaComparison_endpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    let endpoint :=
+      data.toQPilotTwoComputationCThetaEndpoint
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ;
+    endpoint.toSignedCThetaBound.comparison.qSigned =
+        data.corridor.beforeIndeterminacy.averageLogVolume ∧
+      endpoint.toSignedCThetaBound.comparison.thetaSigned =
+        data.thetaHullLogVolume ∧
+      endpoint.toSignedCThetaBound.comparison.qSigned <=
+        endpoint.toSignedCThetaBound.comparison.thetaSigned ∧
+      endpoint.toSignedCThetaBound.comparison.qSigned <=
+        endpoint.toSignedCThetaBound.cTheta *
+          (-endpoint.toSignedCThetaBound.comparison.qSigned) ∧
+      (-1 : Real) <= endpoint.toSignedCThetaBound.cTheta := by
+  intro endpoint
+  exact
+    ⟨rfl, rfl,
+      endpoint.toSignedCThetaBound.comparison.qSigned_le_thetaSigned,
+      endpoint.toSignedCThetaBound.qSigned_le_cTheta_absLogQ,
+      endpoint.toSignedCThetaBound.cTheta_ge_neg_one⟩
+
 def toStatementEndpoint
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
@@ -6173,6 +6201,55 @@ theorem ofZModCuspLabelLogVolumeCompatibilities_fixedQPilotCThetaEndpoint
       ¬ (cTheta < (-1 : Real)) := by
   intro data endpoint
   exact data.fixedQPilotCTheta_endpoint
+    q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+
+theorem ofZModCuspLabelLogVolumeCompatibilities_signedCThetaComparison
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume)
+    (q_pilot_positive :
+      0 < -before.toLabelAveraged.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      thetaHullLogVolume <= cTheta * (-before.toLabelAveraged.averageLogVolume)) :
+    let data :=
+      ofZModCuspLabelLogVolumeCompatibilities before afterInd1 afterInd2
+        ind3UpperBound hind1 hind2 hzero hcusp determinant thetaHullLogVolume
+        theta_eq_ind3Upper theta_eq_normalized_determinant;
+    let endpoint :=
+      data.toQPilotTwoComputationCThetaEndpoint
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ;
+    endpoint.toSignedCThetaBound.comparison.qSigned =
+        before.toLabelAveraged.averageLogVolume ∧
+      endpoint.toSignedCThetaBound.comparison.thetaSigned =
+        thetaHullLogVolume ∧
+      endpoint.toSignedCThetaBound.comparison.qSigned <=
+        endpoint.toSignedCThetaBound.comparison.thetaSigned ∧
+      endpoint.toSignedCThetaBound.comparison.qSigned <=
+        endpoint.toSignedCThetaBound.cTheta *
+          (-endpoint.toSignedCThetaBound.comparison.qSigned) ∧
+      (-1 : Real) <= endpoint.toSignedCThetaBound.cTheta := by
+  intro data endpoint
+  exact data.signedCThetaComparison_endpoint
     q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
 
 end IUTStage1StepXToHullUpperRayLogVolume

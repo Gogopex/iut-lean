@@ -4317,6 +4317,59 @@ theorem zmodCuspLabelLogVolumeCompatibility_fixedQPilotCThetaEndpoint
       theta_eq_normalized_determinant q_pilot_positive cTheta
       thetaHull_le_cTheta_absLogQ
 
+theorem zmodCuspLabelLogVolumeCompatibility_signedCThetaComparison
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume)
+    (q_pilot_positive :
+      0 < -before.toLabelAveraged.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      thetaHullLogVolume <= cTheta * (-before.toLabelAveraged.averageLogVolume)) :
+    let data :=
+      IUTStage1StepXToHullUpperRayLogVolume.ofZModCuspLabelLogVolumeCompatibilities
+        before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+        determinant thetaHullLogVolume theta_eq_ind3Upper
+        theta_eq_normalized_determinant;
+    let endpoint :=
+      data.toQPilotTwoComputationCThetaEndpoint
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ;
+    endpoint.toSignedCThetaBound.comparison.qSigned =
+        before.toLabelAveraged.averageLogVolume ∧
+      endpoint.toSignedCThetaBound.comparison.thetaSigned =
+        thetaHullLogVolume ∧
+      endpoint.toSignedCThetaBound.comparison.qSigned <=
+        endpoint.toSignedCThetaBound.comparison.thetaSigned ∧
+      endpoint.toSignedCThetaBound.comparison.qSigned <=
+        endpoint.toSignedCThetaBound.cTheta *
+          (-endpoint.toSignedCThetaBound.comparison.qSigned) ∧
+      (-1 : Real) <= endpoint.toSignedCThetaBound.cTheta := by
+  open IUTStage1StepXToHullUpperRayLogVolume in
+    exact ofZModCuspLabelLogVolumeCompatibilities_signedCThetaComparison
+      before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+      determinant thetaHullLogVolume theta_eq_ind3Upper
+      theta_eq_normalized_determinant q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ
+
 theorem stepXToHullUpperRay_q_mem
     {label : Type u} [Fintype label]
     (data : IUTStage1StepXToHullUpperRayLogVolume label) :
