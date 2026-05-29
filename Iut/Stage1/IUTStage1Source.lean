@@ -8780,6 +8780,19 @@ theorem targetTransportedAverage_le_of_forall_targetFullLabel_le
       audit.targetTransportedWeightedLogVolume_weight_nonnegative
       hpointwise
 
+theorem sourceAverage_le_of_forall_targetFullLabel_le
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l)
+    {c : Real}
+    (hpointwise :
+      ∀ j : ZMod l.value,
+        audit.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (audit.coordinateEquiv j)) <= c) :
+    audit.sourceAverage <= c := by
+  rw [← audit.targetTransportedAverage_eq_sourceAverage]
+  exact audit.targetTransportedAverage_le_of_forall_targetFullLabel_le
+    hpointwise
+
 end IUTStage1ZModSquareWeightedFullLabelTransportAudit
 
 namespace IUTStage1CapsuleFamilyLogVolume

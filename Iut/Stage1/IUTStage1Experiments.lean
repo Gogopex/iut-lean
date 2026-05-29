@@ -2377,6 +2377,18 @@ theorem representativeSquareWeightAudit_rejectsNegation
     audit.coordinateEquiv ≠ Equiv.neg (ZMod l.value) :=
   audit.coordinateEquiv_ne_neg
 
+theorem representativeSquareWeightAudit_sourceAverage_le_of_target_bound
+    {l : PrimeGeFive}
+    (audit : IUTStage1ZModSquareWeightedFullLabelTransportAudit l)
+    {c : Real}
+    (hpointwise :
+      ∀ j : ZMod l.value,
+        audit.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (audit.coordinateEquiv j)) <= c) :
+    audit.sourceAverage <= c :=
+  audit.sourceAverage_le_of_forall_targetFullLabel_le hpointwise
+
 theorem balancedNeg_preservesBalancedWeights
     {l : PrimeGeFive}
     (logVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :
