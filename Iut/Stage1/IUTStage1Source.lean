@@ -6322,6 +6322,41 @@ theorem twoComputation_input_le_theta
       data.toQPilotTwoComputationLogVolume.upperRayData.thetaHullLogVolume :=
   data.toQPilotTwoComputationLogVolume.input_le_thetaHullLogVolume
 
+def toQPilotTwoComputationSignedEndpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume) :
+    IUTStage1QPilotTwoComputationSignedEndpoint :=
+  { twoComputation := data.toQPilotTwoComputationLogVolume,
+    q_pilot_positive := q_pilot_positive }
+
+def toQPilotTwoComputationCThetaEndpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    IUTStage1QPilotTwoComputationCThetaEndpoint :=
+  { signedEndpoint :=
+      data.toQPilotTwoComputationSignedEndpoint q_pilot_positive,
+    cTheta := cTheta,
+    thetaHullLogVolume_le_cTheta_absLogQ :=
+      thetaHull_le_cTheta_absLogQ }
+
+theorem cTheta_ge_neg_one
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    (-1 : Real) <= cTheta :=
+  (data.toQPilotTwoComputationCThetaEndpoint
+    q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).cTheta_ge_neg_one
+
 end IUTStage1StepXToHullUpperRayLogVolume
 
 namespace IUTStage1WeightedLabelAveragedProcessionLogVolume

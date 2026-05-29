@@ -963,6 +963,19 @@ theorem stepXToHullUpperRay_twoComputation_input_le_theta
       data.toQPilotTwoComputationLogVolume.upperRayData.thetaHullLogVolume :=
   data.twoComputation_input_le_theta
 
+theorem stepXToHullUpperRay_cTheta_ge_neg_one
+    {label : Type u} [Fintype label]
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    (-1 : Real) <= cTheta :=
+  data.cTheta_ge_neg_one
+    q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+
 theorem valuationFiberLogShellDirectSum_eq_sum
     {kind : IUTStage1PlaceKind}
     (directSum : IUTStage1ValuationFiberLogShellDirectSum kind) :
