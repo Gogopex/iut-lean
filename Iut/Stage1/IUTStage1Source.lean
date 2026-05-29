@@ -6456,6 +6456,37 @@ theorem unitAffine_pointwise_gaussian_preserving_of_environment_zero
   rw [evaluation.gaussianDegree_fromCoordinate_eq_zero_of_environment_zero
     henv]
 
+theorem unitAffine_pointwise_gaussian_preserving_iff_environment_zero_or_fullLabelMapPreserving
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (a : (ZMod l.value)ˣ) (t : ZMod l.value) :
+    (∀ j : ZMod l.value,
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (zmodLabelTranslate l t ((zmodUnitActionData l).smul a j))) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) ↔
+      evaluation.environmentDegree = 0 ∨
+        IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+          (l := l)
+          (IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodUnitAffineEquiv
+            l a t) := by
+  by_cases henv : evaluation.environmentDegree = 0
+  · constructor
+    · intro _hpres
+      exact Or.inl henv
+    · intro _h
+      exact evaluation.unitAffine_pointwise_gaussian_preserving_of_environment_zero
+        a t henv
+  · rw [evaluation.unitAffine_pointwise_gaussian_preserving_iff_fullLabelMapPreserving
+      a t henv]
+    constructor
+    · intro hmap
+      exact Or.inr hmap
+    · intro h
+      rcases h with hzero | hmap
+      · exact False.elim (henv hzero)
+      · exact hmap
+
 theorem coordinateAveragedLogVolume_average_translation_eq
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (t : ZMod l.value) :
