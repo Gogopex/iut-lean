@@ -6268,6 +6268,25 @@ theorem logThetaColumn_upperTableSimilarities
           column.hasLogKummerNonInterference = true :=
   column.upper_table_similarities
 
+theorem remark3122iv_zero_one_column_similarities_endpoint :
+    IUTStage1LogThetaVerticalColumn.zeroThetaPilot.requiresFrobeniusLikeRole =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.zeroThetaPilot.requiresEtaleLikeRole =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.requiresFrobeniusLikeRole =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.requiresEtaleLikeRole =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.zeroThetaPilot.hasLogVolumeCompatibility =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogVolumeCompatibility =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.zeroThetaPilot.hasLogKummerNonInterference =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogKummerNonInterference =
+        true :=
+  IUTStage1LogThetaVerticalColumn.remark3122iv_zero_one_column_similarities_endpoint
+
 theorem logThetaColumn_qPilot_lacksMultiradiality :
     IUTStage1LogThetaVerticalColumn.oneQPilot.hasPilotMultiradiality =
       false :=

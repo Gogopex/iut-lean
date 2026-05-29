@@ -622,7 +622,9 @@ The code currently covers:
 \item the Fig. 3.9 column table: Lean packages the upper-row similarities
   shared by the 0-column and 1-column, namely the essential
   \(\bullet_0\) and \(\circ\) roles, log-volume compatibility, and
-  log-Kummer non-interference; it also packages the lower-row differences:
+  log-Kummer non-interference; the simultaneous Remark 3.12.2(iv) endpoint
+  now records these facts for both columns, including q-pilot
+  non-interference; it also packages the lower-row differences:
   \(\Theta\)-pilot multiradiality holds, q-pilot multiradiality does not, and
   the log-shell treatments differ;
 \item the Remark 3.12.2(v) absorption distinction: zero-column unit
@@ -915,7 +917,8 @@ The toy-model flag records the resulting \((\mathrm{ftoy})\) upper-ray endpoint
 and arithmetic bound \(h\le\epsilon\).
 The column-table flag records the Fig. 3.9 theta/q similarity-difference split:
 upper similarities are common to both columns, while multiradiality and
-log-shell treatment distinguish the 0-column from the 1-column.
+log-shell treatment distinguish the 0-column from the 1-column; the upper
+similarities are now exposed as a simultaneous zero/one-column theorem.
 The absorption flag records the zero-column upper-bound versus one-column
 equality distinction, tied to the two Fig. 3.9 log-shell treatments.
 The metric flag records the Gauss--Bonnet sign calculation used as analogy for
@@ -1168,6 +1171,9 @@ In the accompanying toy model, Lean proves the final upper bound exactly from
 the upper-ray membership hypothesis.
 Lean also records that the q-pilot column lacks the theta-side multiradiality
 used in Theorem 3.11(iii)(c).
+For Remark 3.12.2(iv), Lean records that the essential \(\bullet_0\) and
+\(\circ\) roles, log-volume compatibility, and log-Kummer non-interference hold
+on both the 0-column and the 1-column.
 For Remark 3.12.2(iii), Lean packages the log-link juggling as the source of
 the upper-semi \((\mathrm{Ind3})\) endpoint: the averaged value is fixed through
 \((\mathrm{Ind1})\) and \((\mathrm{Ind2})\), then bounded from above.

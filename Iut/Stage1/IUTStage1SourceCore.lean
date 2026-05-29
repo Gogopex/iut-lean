@@ -3043,6 +3043,39 @@ theorem upper_table_similarities
     column.logVolumeCompatibility_eq_true,
     column.logKummerNonInterference_eq_true⟩
 
+/--
+Remark 3.12.2(iv) / Fig. 3.9 upper-table endpoint.
+
+The essential Frobenius-like and etale-like roles, log-link log-volume
+compatibility, and log-Kummer non-interference are shared by both the
+0-column/theta-pilot side and the 1-column/q-pilot side.
+-/
+theorem remark3122iv_zero_one_column_similarities_endpoint :
+    IUTStage1LogThetaVerticalColumn.zeroThetaPilot.requiresFrobeniusLikeRole =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.zeroThetaPilot.requiresEtaleLikeRole =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.requiresFrobeniusLikeRole =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.requiresEtaleLikeRole =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.zeroThetaPilot.hasLogVolumeCompatibility =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogVolumeCompatibility =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.zeroThetaPilot.hasLogKummerNonInterference =
+        true ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogKummerNonInterference =
+        true :=
+  ⟨IUTStage1LogThetaVerticalColumn.zeroThetaPilot.requiresFrobeniusLikeRole_eq_true,
+    IUTStage1LogThetaVerticalColumn.zeroThetaPilot.requiresEtaleLikeRole_eq_true,
+    IUTStage1LogThetaVerticalColumn.oneQPilot.requiresFrobeniusLikeRole_eq_true,
+    IUTStage1LogThetaVerticalColumn.oneQPilot.requiresEtaleLikeRole_eq_true,
+    IUTStage1LogThetaVerticalColumn.zeroThetaPilot.logVolumeCompatibility_eq_true,
+    IUTStage1LogThetaVerticalColumn.oneQPilot.logVolumeCompatibility_eq_true,
+    IUTStage1LogThetaVerticalColumn.zeroThetaPilot.logKummerNonInterference_eq_true,
+    IUTStage1LogThetaVerticalColumn.oneQPilot.logKummerNonInterference_eq_true⟩
+
 theorem thetaPilot_hasMultiradiality :
     IUTStage1LogThetaVerticalColumn.zeroThetaPilot.hasPilotMultiradiality =
       true :=
