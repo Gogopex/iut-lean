@@ -7802,6 +7802,29 @@ theorem no_labelIndependent_scale_matches_theta_degrees
     simpa using hone_four
   norm_num at hbad
 
+theorem thetaPilotDegree_eq_zero_of_qPilotDegree_eq_zero
+    (profile : RepresentativeThetaPilotDegreeProfile l)
+    (hq : profile.qPilotDegree = 0)
+    (j : ZMod l.value) :
+    profile.thetaPilotDegree j = 0 := by
+  rw [profile.thetaPilotDegree_eq_square_scale, hq, mul_zero]
+
+theorem exists_labelIndependent_scale_matches_theta_degrees_iff_qPilotDegree_eq_zero
+    (profile : RepresentativeThetaPilotDegreeProfile l) :
+    (∃ scale : Real, ∀ j : ZMod l.value,
+      profile.thetaPilotDegree j = scale * profile.qPilotDegree) ↔
+      profile.qPilotDegree = 0 := by
+  constructor
+  · rintro ⟨scale, hscale⟩
+    by_contra hq
+    exact profile.no_labelIndependent_scale_matches_theta_degrees
+      hq scale hscale
+  · intro hq
+    refine ⟨0, ?_⟩
+    intro j
+    rw [profile.thetaPilotDegree_eq_zero_of_qPilotDegree_eq_zero hq j,
+      hq, mul_zero]
+
 end RepresentativeThetaPilotDegreeProfile
 
 theorem toWeighted_const_le_weightedAverage_of_forall_le

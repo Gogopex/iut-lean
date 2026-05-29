@@ -3624,6 +3624,15 @@ theorem no_labelIndependent_thetaPilot_degree_scale
       profile.thetaPilotDegree j = scale * profile.qPilotDegree :=
   profile.no_labelIndependent_scale_matches_theta_degrees q_ne_zero scale
 
+theorem exists_labelIndependent_thetaPilot_degree_scale_iff_q_zero
+    {l : PrimeGeFive}
+    (profile :
+      IUTStage1ZModSquareWeightProfile.RepresentativeThetaPilotDegreeProfile l) :
+    (∃ scale : Real, ∀ j : ZMod l.value,
+      profile.thetaPilotDegree j = scale * profile.qPilotDegree) ↔
+      profile.qPilotDegree = 0 :=
+  profile.exists_labelIndependent_scale_matches_theta_degrees_iff_qPilotDegree_eq_zero
+
 /--
 Raw representative theta-pilot degrees cannot be pushed down to
 `F_l / {±1}` when the q-pilot degree is nonzero.
