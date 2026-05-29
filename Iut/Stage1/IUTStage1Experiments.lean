@@ -4396,6 +4396,51 @@ theorem zmodCuspLabelLogVolumeCompatibility_signedEndpointDistinctIntertwining
         |>.thetaFinite_signedEndpoint_agree_with_distinctIntertwining
           q_pilot_positive transport hq
 
+theorem zmodCuspLabelLogVolumeCompatibility_remark3122UpperRayBound
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume)
+    (h epsilon : Real)
+    (h_pos : 0 < h)
+    (epsilon_pos : 0 < epsilon)
+    (q_eq_neg_h :
+      before.toLabelAveraged.averageLogVolume = -h)
+    (theta_eq_neg_two_h_add_epsilon :
+      thetaHullLogVolume = -2 * h + epsilon) :
+    let data :=
+      IUTStage1StepXToHullUpperRayLogVolume.ofZModCuspLabelLogVolumeCompatibilities
+        before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+        determinant thetaHullLogVolume theta_eq_ind3Upper
+        theta_eq_normalized_determinant;
+    let toy :=
+      data.toRemark3122IntertwiningUpperRayBound h epsilon h_pos
+        epsilon_pos q_eq_neg_h theta_eq_neg_two_h_add_epsilon;
+    toy.qAssignment ∈ toy.thetaUpperRay ∧
+      (-h : Real) <= -2 * h + epsilon ∧
+      h <= epsilon := by
+  intro data toy
+  exact data.remark3122UpperRayBound_fromThetaFinite
+    h epsilon h_pos epsilon_pos q_eq_neg_h theta_eq_neg_two_h_add_epsilon
+
 theorem zmodCuspLabelLogVolumeCompatibility_statementEndpoint
     {l : PrimeGeFive}
     (before afterInd1 afterInd2 :

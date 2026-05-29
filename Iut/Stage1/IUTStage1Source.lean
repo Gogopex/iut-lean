@@ -5709,6 +5709,49 @@ theorem thetaFinite_signedEndpoint_agree_with_distinctIntertwining
       transport.weakenedPrimeStripCondition,
       hq, transport.theta_from_q hq⟩
 
+def toRemark3122IntertwiningUpperRayBound
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (h epsilon : Real)
+    (h_pos : 0 < h)
+    (epsilon_pos : 0 < epsilon)
+    (q_eq_neg_h : data.qPilotLogVolume = -h)
+    (theta_eq_neg_two_h_add_epsilon :
+      data.thetaHullLogVolume = -2 * h + epsilon) :
+    IUTStage1Remark3122IntertwiningUpperRayBound :=
+  { h := h,
+    epsilon := epsilon,
+    h_pos := h_pos,
+    epsilon_pos := epsilon_pos,
+    qAssignment :=
+      data.toThetaFiniteLogVolumeEndpoint.upperRayData.qPilotLogVolume,
+    thetaUpperRayBound :=
+      data.toThetaFiniteLogVolumeEndpoint.thetaRealLogVolume,
+    q_assignment_eq_neg_h := by
+      simpa [toThetaFiniteLogVolumeEndpoint] using q_eq_neg_h,
+    theta_upperRay_bound_eq := by
+      rw [data.toThetaFiniteLogVolumeEndpoint.thetaRealLogVolume_eq_hull]
+      simpa [toThetaFiniteLogVolumeEndpoint] using
+        theta_eq_neg_two_h_add_epsilon,
+    q_assignment_mem_theta_upperRay :=
+      data.toThetaFiniteLogVolumeEndpoint.qPilotLogVolume_le_thetaRealLogVolume }
+
+theorem remark3122UpperRayBound_fromThetaFinite
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (h epsilon : Real)
+    (h_pos : 0 < h)
+    (epsilon_pos : 0 < epsilon)
+    (q_eq_neg_h : data.qPilotLogVolume = -h)
+    (theta_eq_neg_two_h_add_epsilon :
+      data.thetaHullLogVolume = -2 * h + epsilon) :
+    let toy :=
+      data.toRemark3122IntertwiningUpperRayBound h epsilon h_pos
+        epsilon_pos q_eq_neg_h theta_eq_neg_two_h_add_epsilon;
+    toy.qAssignment ∈ toy.thetaUpperRay ∧
+      (-h : Real) <= -2 * h + epsilon ∧
+      h <= epsilon := by
+  intro toy
+  exact toy.ftoy_upper_ray_endpoint
+
 theorem ofZModCuspLabelLogVolumeCompatibilities_signedEndpointCorollary312
     {l : PrimeGeFive}
     (before afterInd1 afterInd2 :
