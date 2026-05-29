@@ -8761,6 +8761,45 @@ theorem gaussianDegree_fullLabel_average_mul_six
   rw [fullLabel_average_eq_procession_average]
   exact gaussianDegree_procession_average_mul_six evaluation
 
+theorem absLabelAverageCoefficient_gt_one :
+    (1 : Real) <
+      (absLabelProcessionTop l : Real) *
+        (2 * (absLabelProcessionTop l : Real) + 1) / 6 := by
+  have htop : (2 : Real) <= (absLabelProcessionTop l : Real) := by
+    exact_mod_cast absLabelProcessionTop_ge_two l
+  nlinarith
+
+theorem gaussianDegree_fullLabel_average_eq_coeff
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) =
+      ((absLabelProcessionTop l : Real) *
+        (2 * (absLabelProcessionTop l : Real) + 1) / 6) *
+          evaluation.environmentDegree := by
+  have h := gaussianDegree_fullLabel_average_mul_six evaluation
+  nlinarith
+
+theorem gaussianDegree_fullLabel_average_ne_environment_of_nonzero
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv : evaluation.environmentDegree ≠ 0) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) ≠
+      evaluation.environmentDegree := by
+  rw [gaussianDegree_fullLabel_average_eq_coeff]
+  intro h
+  let coeff : Real :=
+    (absLabelProcessionTop l : Real) *
+      (2 * (absLabelProcessionTop l : Real) + 1) / 6
+  have hmul :
+      coeff * evaluation.environmentDegree =
+        1 * evaluation.environmentDegree := by
+    simpa [coeff] using h
+  have hcoeff : coeff = 1 :=
+    mul_right_cancel₀ henv hmul
+  have hgt := absLabelAverageCoefficient_gt_one (l := l)
+  dsimp [coeff] at hcoeff
+  linarith
+
 theorem generatorLogVolume_sum_mul_six
     (action : LGPSplittingMonoidTensorPacketAction l) :
     (Finset.univ.sum action.generatorLogVolume) * 6 =

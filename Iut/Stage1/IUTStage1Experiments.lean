@@ -918,6 +918,29 @@ theorem gaussianDegree_fullLabelAverage_mul_six
           evaluation.environmentDegree) :=
   gaussianDegree_fullLabel_average_mul_six evaluation
 
+theorem gaussianDegree_fullLabelAverage_eq_coeff
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) =
+      ((IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) *
+        (2 *
+          (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) +
+            1) / 6) *
+          evaluation.environmentDegree :=
+  gaussianDegree_fullLabel_average_eq_coeff evaluation
+
+theorem gaussianDegree_fullLabelAverage_ne_singletonIdentity
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (henv : evaluation.environmentDegree ≠ 0) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) ≠
+      evaluation.environmentDegree :=
+  gaussianDegree_fullLabel_average_ne_environment_of_nonzero evaluation henv
+
 /-- Scale-level status for transport-explicit real-line cancellation. -/
 structure Ind3TransportScaleExperimentReport where
   sourceScaleMatched : Bool
