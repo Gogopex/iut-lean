@@ -1818,6 +1818,15 @@ theorem finiteValueOrZero_finite (value : Real) :
     finiteValueOrZero (finite value) = value :=
   rfl
 
+theorem finiteValue_eq_finiteValueOrZero
+    (value : IUTStage1ExtendedSignedLogVolume) (h : value.IsFinite) :
+    finiteValue value h = finiteValueOrZero value := by
+  cases value with
+  | finite realValue =>
+      rfl
+  | plusInfinity =>
+      exact False.elim h
+
 theorem finite_ne_plusInfinity (value : Real) :
     finite value ≠ plusInfinity := by
   intro h
@@ -1870,12 +1879,31 @@ theorem thetaFiniteValue_eq_hull
   rw [data.thetaExtended_eq_finiteHull]
   rfl
 
+def thetaRealLogVolume
+    (data : IUTStage1Corollary312ThetaFiniteLogVolumeEndpoint) : Real :=
+  IUTStage1ExtendedSignedLogVolume.finiteValue
+    data.thetaExtended data.thetaExtendedFinite
+
+theorem thetaRealLogVolume_eq_hull
+    (data : IUTStage1Corollary312ThetaFiniteLogVolumeEndpoint) :
+    data.thetaRealLogVolume =
+      data.upperRayData.thetaHullLogVolume := by
+  unfold thetaRealLogVolume
+  rw [IUTStage1ExtendedSignedLogVolume.finiteValue_eq_finiteValueOrZero,
+    data.thetaFiniteValue_eq_hull]
+
 theorem qPilotLogVolume_le_thetaFiniteValue
     (data : IUTStage1Corollary312ThetaFiniteLogVolumeEndpoint) :
     data.upperRayData.qPilotLogVolume <=
       IUTStage1ExtendedSignedLogVolume.finiteValueOrZero
         data.thetaExtended := by
   rw [data.thetaFiniteValue_eq_hull]
+  exact data.upperRayData.qPilotLogVolume_le_thetaHullLogVolume
+
+theorem qPilotLogVolume_le_thetaRealLogVolume
+    (data : IUTStage1Corollary312ThetaFiniteLogVolumeEndpoint) :
+    data.upperRayData.qPilotLogVolume <= data.thetaRealLogVolume := by
+  rw [data.thetaRealLogVolume_eq_hull]
   exact data.upperRayData.qPilotLogVolume_le_thetaHullLogVolume
 
 end IUTStage1Corollary312ThetaFiniteLogVolumeEndpoint
@@ -1992,6 +2020,31 @@ theorem qPilotLogVolume_le_thetaFiniteValue
       IUTStage1ExtendedSignedLogVolume.finiteValueOrZero
         data.finiteEndpoint.thetaExtended :=
   data.finiteEndpoint.qPilotLogVolume_le_thetaFiniteValue
+
+def thetaRealLogVolume
+    (data : IUTStage1Corollary312StatementEndpoint) : Real :=
+  data.finiteEndpoint.thetaRealLogVolume
+
+theorem thetaRealLogVolume_eq_hull
+    (data : IUTStage1Corollary312StatementEndpoint) :
+    data.thetaRealLogVolume =
+      data.finiteEndpoint.upperRayData.thetaHullLogVolume :=
+  data.finiteEndpoint.thetaRealLogVolume_eq_hull
+
+theorem qPilotLogVolume_le_thetaRealLogVolume
+    (data : IUTStage1Corollary312StatementEndpoint) :
+    data.finiteEndpoint.upperRayData.qPilotLogVolume <=
+      data.thetaRealLogVolume :=
+  data.finiteEndpoint.qPilotLogVolume_le_thetaRealLogVolume
+
+theorem thetaRealLogVolume_le_cTheta_absLogQ
+    (data : IUTStage1Corollary312StatementEndpoint) :
+    data.thetaRealLogVolume <=
+      data.cTheta * (-data.finiteEndpoint.upperRayData.qPilotLogVolume) := by
+  rw [IUTStage1Corollary312StatementEndpoint.thetaRealLogVolume,
+    data.finiteEndpoint.thetaRealLogVolume_eq_hull,
+    ← data.finiteEndpoint.thetaFiniteValue_eq_hull]
+  exact data.thetaFiniteValue_le_cTheta_absLogQ
 
 theorem cTheta_ge_neg_one
     (data : IUTStage1Corollary312StatementEndpoint) :

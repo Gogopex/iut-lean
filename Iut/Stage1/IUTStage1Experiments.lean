@@ -1133,6 +1133,16 @@ theorem thetaFiniteEndpoint_q_le_finiteTheta
         data.thetaExtended :=
   data.qPilotLogVolume_le_thetaFiniteValue
 
+theorem thetaFiniteEndpoint_realTheta_eq_hull
+    (data : IUTStage1Corollary312ThetaFiniteLogVolumeEndpoint) :
+    data.thetaRealLogVolume = data.upperRayData.thetaHullLogVolume :=
+  data.thetaRealLogVolume_eq_hull
+
+theorem thetaFiniteEndpoint_q_le_realTheta
+    (data : IUTStage1Corollary312ThetaFiniteLogVolumeEndpoint) :
+    data.upperRayData.qPilotLogVolume <= data.thetaRealLogVolume :=
+  data.qPilotLogVolume_le_thetaRealLogVolume
+
 theorem pilotIndeterminacyBoundary_statuses_distinct
     (data : IUTStage1Corollary312PilotIndeterminacyBoundary) :
     data.thetaStatus ≠ data.qStatus :=
@@ -1154,6 +1164,18 @@ theorem corollary312StatementEndpoint_theta_ne_plusInfinity
     data.finiteEndpoint.thetaExtended ≠
       IUTStage1ExtendedSignedLogVolume.plusInfinity :=
   data.thetaExtended_ne_plusInfinity
+
+theorem corollary312StatementEndpoint_q_le_realTheta
+    (data : IUTStage1Corollary312StatementEndpoint) :
+    data.finiteEndpoint.upperRayData.qPilotLogVolume <=
+      data.thetaRealLogVolume :=
+  data.qPilotLogVolume_le_thetaRealLogVolume
+
+theorem corollary312StatementEndpoint_realTheta_le_cTheta_absLogQ
+    (data : IUTStage1Corollary312StatementEndpoint) :
+    data.thetaRealLogVolume <=
+      data.cTheta * (-data.finiteEndpoint.upperRayData.qPilotLogVolume) :=
+  data.thetaRealLogVolume_le_cTheta_absLogQ
 
 theorem qPilotTwoComputationSignedEndpoint_corollary312
     (data : IUTStage1QPilotTwoComputationSignedEndpoint) :
