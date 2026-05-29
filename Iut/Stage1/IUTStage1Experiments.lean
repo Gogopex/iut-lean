@@ -951,6 +951,20 @@ theorem processionNormalizedIndeterminacyCorridor_before_le_ind3Upper
     data.beforeIndeterminacy.averageLogVolume <= data.ind3UpperBound :=
   data.before_average_le_ind3UpperBound
 
+theorem processionNormalizedIndeterminacyCorridor_afterInd1_eq_before
+    {label : Type u} [Fintype label]
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.afterInd1.averageLogVolume =
+      data.beforeIndeterminacy.averageLogVolume :=
+  data.afterInd1_average_eq_before
+
+theorem processionNormalizedIndeterminacyCorridor_afterInd2_eq_before
+    {label : Type u} [Fintype label]
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.afterInd2.averageLogVolume =
+      data.beforeIndeterminacy.averageLogVolume :=
+  data.afterInd2_average_eq_before
+
 theorem stepXToHullUpperRay_q_le_theta
     {label : Type u} [Fintype label]
     (data : IUTStage1StepXToHullUpperRayLogVolume label) :
@@ -1013,6 +1027,38 @@ theorem stepXToHullUpperRay_statementEndpoint_q_le_thetaReal
       (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
         thetaHull_le_cTheta_absLogQ).thetaRealLogVolume :=
   data.beforeAverage_le_statementEndpoint_thetaRealLogVolume
+    pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+
+theorem stepXToHullUpperRay_statementEndpoint_afterInd1_le_thetaReal
+    {label : Type u} [Fintype label]
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    data.corridor.afterInd1.averageLogVolume <=
+      (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+        thetaHull_le_cTheta_absLogQ).thetaRealLogVolume :=
+  data.afterInd1Average_le_statementEndpoint_thetaRealLogVolume
+    pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+
+theorem stepXToHullUpperRay_statementEndpoint_afterInd2_le_thetaReal
+    {label : Type u} [Fintype label]
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    data.corridor.afterInd2.averageLogVolume <=
+      (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+        thetaHull_le_cTheta_absLogQ).thetaRealLogVolume :=
+  data.afterInd2Average_le_statementEndpoint_thetaRealLogVolume
     pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
 
 theorem stepXToHullUpperRay_statementEndpoint_theta_eq_ind3Upper
