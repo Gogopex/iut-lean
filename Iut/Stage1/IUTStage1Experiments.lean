@@ -22,6 +22,7 @@ open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeCh
 open FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
 open FLZModCuspLabelThetaCuspClassContainerAudit
 open IUTStage1ZModCuspFullLabel
+open IUTStage1ProcessionNormalizedIndeterminacyCorridor
 open IUTStage1ZModSquareWeightProfile
 open IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation
 open IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction
@@ -3965,6 +3966,34 @@ theorem processionNormalizedIndeterminacyCorridor_afterInd2_eq_before
     data.afterInd2.averageLogVolume =
       data.beforeIndeterminacy.averageLogVolume :=
   data.afterInd2_average_eq_before
+
+theorem zmodCuspLabelLogVolumeCompatibility_corridor_endpoint
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound) :
+    let corridor :=
+      ofZModCuspLabelLogVolumeCompatibilities before afterInd1 afterInd2
+        ind3UpperBound hind1 hind2 hzero hcusp
+    corridor.beforeIndeterminacy.averageLogVolume <= ind3UpperBound ∧
+      corridor.afterInd1.averageLogVolume =
+        corridor.beforeIndeterminacy.averageLogVolume ∧
+      corridor.afterInd2.averageLogVolume =
+        corridor.beforeIndeterminacy.averageLogVolume ∧
+      corridor.afterInd2.averageLogVolume <= ind3UpperBound :=
+  ofZModCuspLabelLogVolumeCompatibilities_endpoint
+    before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
 
 theorem stepXToHullUpperRay_q_le_theta
     {label : Type u} [Fintype label]

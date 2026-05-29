@@ -5149,6 +5149,65 @@ theorem afterInd2_average_le_ind3UpperBound
     data.afterInd2.averageLogVolume <= data.ind3UpperBound :=
   data.ind3_upper
 
+noncomputable def ofZModCuspLabelLogVolumeCompatibilities
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound) :
+    IUTStage1ProcessionNormalizedIndeterminacyCorridor (ZMod l.value) :=
+  { beforeIndeterminacy := before.toLabelAveraged,
+    afterInd1 := afterInd1.toLabelAveraged,
+    afterInd2 := afterInd2.toLabelAveraged,
+    ind3UpperBound := ind3UpperBound,
+    ind1_pointwise_eq := hind1,
+    ind2_pointwise_eq := hind2,
+    ind3_upper :=
+      afterInd2.toLabelAveraged_average_le_of_zero_and_cuspClass_le
+        hzero hcusp }
+
+theorem ofZModCuspLabelLogVolumeCompatibilities_endpoint
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound) :
+    let corridor :=
+      ofZModCuspLabelLogVolumeCompatibilities before afterInd1 afterInd2
+        ind3UpperBound hind1 hind2 hzero hcusp
+    corridor.beforeIndeterminacy.averageLogVolume <= ind3UpperBound ∧
+      corridor.afterInd1.averageLogVolume =
+        corridor.beforeIndeterminacy.averageLogVolume ∧
+      corridor.afterInd2.averageLogVolume =
+        corridor.beforeIndeterminacy.averageLogVolume ∧
+      corridor.afterInd2.averageLogVolume <= ind3UpperBound := by
+  intro corridor
+  exact
+    ⟨corridor.before_average_le_ind3UpperBound,
+      corridor.afterInd1_average_eq_before,
+      corridor.afterInd2_average_eq_before,
+      corridor.afterInd2_average_le_ind3UpperBound⟩
+
 end IUTStage1ProcessionNormalizedIndeterminacyCorridor
 
 /--
