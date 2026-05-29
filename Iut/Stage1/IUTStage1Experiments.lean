@@ -819,6 +819,16 @@ theorem fullLabelFromCoordinate_eq_iff_sign
       j = k ∨ j = -k :=
   IUTStage1ZModCuspFullLabel.fromCoordinate_eq_iff j k
 
+theorem nonzeroFullLabel_fiber_eq_signPair
+    {l : PrimeGeFive}
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    ∃ (j : ZMod l.value) (_hj : j ≠ 0),
+      ∀ k : ZMod l.value,
+        IUTStage1ZModCuspFullLabel.fromCoordinate l k =
+            IUTStage1ZModCuspFullLabel.nonzero label ↔
+          k = j ∨ k = -j :=
+  IUTStage1ZModCuspFullLabel.nonzero_fullLabel_fiber_eq_sign_pair label
+
 theorem singletonOneRestriction_not_translationInvariant
     (l : PrimeGeFive) :
     ¬ ∀ j : ZMod l.value,

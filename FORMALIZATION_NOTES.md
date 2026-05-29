@@ -18753,6 +18753,8 @@ Added:
 ```text
 fromCoordinate_eq_iff
 fullLabelFromCoordinate_eq_iff_sign
+nonzero_fullLabel_fiber_eq_sign_pair
+nonzeroFullLabel_fiber_eq_signPair
 ```
 
 ### Mathematical Reason
@@ -18760,7 +18762,9 @@ fullLabelFromCoordinate_eq_iff_sign
 The finite full-label map \(F_\ell\to |F_\ell|\) has exactly the expected
 fibers: two coordinates determine the same full absolute label if and only if
 they are equal or negatives of one another.  This includes the zero label
-correctly, since \(j=0\) is its own negative.
+correctly, since \(j=0\) is its own negative.  Lean also packages the nonzero
+case in the form used by the quotient convention: every nonzero full-label fiber
+is represented by some \(j\ne0\) and consists exactly of \(j\) and \(-j\).
 
 ### Source Check
 

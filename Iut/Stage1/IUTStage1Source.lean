@@ -5904,6 +5904,29 @@ theorem nonzero_fromCoordinate_surjective
   rw [← zmod_toSignLabelQuotient_eq_fromCoordinate x]
   rfl
 
+theorem nonzero_fullLabel_fiber_eq_sign_pair
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    ∃ (j : ZMod l.value) (_hj : j ≠ 0),
+      ∀ k : ZMod l.value,
+        fromCoordinate l k = nonzero label ↔ k = j ∨ k = -j := by
+  refine Quotient.inductionOn label ?_
+  intro x
+  refine ⟨x.1, x.2, ?_⟩
+  intro k
+  have hxlabel :
+      fromCoordinate l x.1 = nonzero ((zmodSignAction l).toSignLabelQuotient x) := by
+    rw [fromCoordinate_nonzero l x.1 x.2]
+    rw [← zmod_toSignLabelQuotient_eq_fromCoordinate x]
+  constructor
+  · intro hk
+    have hsame : fromCoordinate l k = fromCoordinate l x.1 :=
+      hk.trans hxlabel.symm
+    exact (fromCoordinate_eq_iff (l := l) k x.1).mp hsame
+  · intro hk
+    have hsame : fromCoordinate l k = fromCoordinate l x.1 :=
+      (fromCoordinate_eq_iff (l := l) k x.1).mpr hk
+    exact hsame.trans hxlabel
+
 theorem fromCoordinate_natAbs_valMinAbs
     (j : ZMod l.value) :
     fromCoordinate l (j.valMinAbs.natAbs : ZMod l.value) =
