@@ -323,10 +323,10 @@ The code currently covers:
   At the purely labelwise level, Lean proves the exact pointwise preservation
   criterion: \(j\mapsto a j+t\) preserves the full absolute label of every
   coordinate if and only if \(t=0\) and \(a\in\{\pm1\}\).
-  At the Gaussian-value level, the sign subgroup with \(t=0\) preserves
-  coordinate Gaussian degrees pointwise; conversely, when the environment
-  degree is nonzero, any affine pointwise Gaussian preservation already forces
-  \(t=0\).
+  At the Gaussian-value level, Lean proves the exact nondegenerate pointwise
+  criterion: if the environment degree is nonzero, then
+  \(j\mapsto a j+t\) preserves all coordinate Gaussian degrees if and only if
+  \(t=0\) and \(a\in\{\pm1\}\).
   Lean also converts the
   zero/nonzero cusp-label compatibility object to a uniform \(F_\ell\) average
   and proves that a diagonal constant log-volume distribution averages to that

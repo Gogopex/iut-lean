@@ -8515,6 +8515,56 @@ theorem balancedSquareWeight_eq_zero_iff
     subst j
     exact balancedSquareWeight_zero
 
+theorem one_valMinAbs_natAbs (l : PrimeGeFive) :
+    ((1 : ZMod l.value).valMinAbs.natAbs) = 1 := by
+  have hhalf : (1 : Nat) ≤ l.value / 2 := by
+    have hge : 5 ≤ l.value := l.ge_five
+    omega
+  have h := ZMod.valMinAbs_natCast_of_le_half (n := l.value) (a := 1) hhalf
+  norm_num at h
+  exact congrArg Int.natAbs h
+
+theorem balancedSquareWeight_eq_one_iff_sign
+    (j : ZMod l.value) :
+    balancedSquareWeight (l := l) j = 1 ↔
+      j = 1 ∨ j = -(1 : ZMod l.value) := by
+  constructor
+  · intro h
+    unfold balancedSquareWeight at h
+    have hsquares :
+        ((j.valMinAbs.natAbs : Real) ^ 2) = ((1 : Real) ^ 2) := by
+      simpa using h
+    have heq_or := sq_eq_sq_iff_eq_or_eq_neg.mp hsquares
+    have hnat : j.valMinAbs.natAbs = 1 := by
+      rcases heq_or with heq | hneg
+      · exact_mod_cast heq
+      · have hnonneg :
+            (0 : Real) <= (j.valMinAbs.natAbs : Real) := by
+          exact_mod_cast Nat.zero_le _
+        linarith
+    have habs :
+        j.valMinAbs.natAbs =
+          (1 : ZMod l.value).valMinAbs.natAbs := by
+      rw [hnat, one_valMinAbs_natAbs l]
+    exact
+      (ZMod.natAbs_valMinAbs_eq_natAbs_valMinAbs
+        (a := j) (b := (1 : ZMod l.value))).mp habs
+  · intro h
+    rcases h with rfl | hneg
+    · rw [show balancedSquareWeight (l := l) (1 : ZMod l.value) =
+          ((1 : Real) ^ 2) by
+          unfold balancedSquareWeight
+          rw [one_valMinAbs_natAbs l]
+          norm_num]
+      norm_num
+    · rw [hneg, balancedSquareWeight_neg_eq]
+      rw [show balancedSquareWeight (l := l) (1 : ZMod l.value) =
+          ((1 : Real) ^ 2) by
+          unfold balancedSquareWeight
+          rw [one_valMinAbs_natAbs l]
+          norm_num]
+      norm_num
+
 noncomputable def balancedSquareWeightOnFullLabel :
     IUTStage1ZModCuspFullLabel l -> Real
   | IUTStage1ZModCuspFullLabel.zero => 0
@@ -9054,6 +9104,72 @@ theorem no_nonzero_translation_unitAffine_pointwise_gaussian_preserving
   exact ht
     (evaluation.zero_translation_of_unitAffine_pointwise_gaussian_preserving
       a henv hpres)
+
+theorem signSubgroup_of_unitAffine_pointwise_gaussian_preserving
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (a : (ZMod l.value)ˣ) {t : ZMod l.value}
+    (henv : evaluation.environmentDegree ≠ 0)
+    (hpres : ∀ j : ZMod l.value,
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (zmodLabelTranslate l t ((zmodUnitActionData l).smul a j))) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) :
+    a ∈ zmodSignUnitSubgroup l := by
+  have ht :=
+    evaluation.zero_translation_of_unitAffine_pointwise_gaussian_preserving
+      a henv hpres
+  have h1 := hpres (1 : ZMod l.value)
+  subst t
+  rw [zmodLabelTranslate_zero] at h1
+  rw [evaluation.gaussianDegree_eq_eval, evaluation.gaussianDegree_one] at h1
+  rw [thetaExponentOnAbsLabel_fromCoordinate] at h1
+  have hweight :
+      balancedSquareWeight (l := l)
+          ((zmodUnitActionData l).smul a (1 : ZMod l.value)) = 1 := by
+    have hmul :
+        balancedSquareWeight (l := l)
+            ((zmodUnitActionData l).smul a (1 : ZMod l.value)) *
+            evaluation.environmentDegree =
+          1 * evaluation.environmentDegree := by
+      simpa using h1
+    exact mul_right_cancel₀ henv hmul
+  have ha_coord : (a : ZMod l.value) = 1 ∨ (a : ZMod l.value) = -1 := by
+    simpa [zmodUnitActionData] using
+      (balancedSquareWeight_eq_one_iff_sign (l := l)
+        ((zmodUnitActionData l).smul a (1 : ZMod l.value))).mp hweight
+  rw [mem_zmodSignUnitSubgroup_iff]
+  rcases ha_coord with ha1 | haneg
+  · left
+    ext
+    simpa using ha1
+  · right
+    ext
+    simpa using haneg
+
+theorem unitAffine_pointwise_gaussian_preserving_iff
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (a : (ZMod l.value)ˣ) (t : ZMod l.value)
+    (henv : evaluation.environmentDegree ≠ 0) :
+    (∀ j : ZMod l.value,
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (zmodLabelTranslate l t ((zmodUnitActionData l).smul a j))) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) ↔
+      t = 0 ∧ a ∈ zmodSignUnitSubgroup l := by
+  constructor
+  · intro hpres
+    exact
+      ⟨evaluation.zero_translation_of_unitAffine_pointwise_gaussian_preserving
+          a henv hpres,
+        evaluation.signSubgroup_of_unitAffine_pointwise_gaussian_preserving
+          a henv hpres⟩
+  · rintro ⟨ht, ha⟩ j
+    subst t
+    rw [zmodLabelTranslate_zero]
+    exact evaluation.gaussianDegree_unitSmul_fromCoordinate_eq_of_signSubgroup
+      ha j
 
 theorem coordinateAveragedLogVolume_average_translation_eq
     (evaluation : GaussianMonoidDegreeEvaluation l)

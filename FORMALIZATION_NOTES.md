@@ -19431,3 +19431,39 @@ strictly weaker than pointwise Gaussian compatibility.
 This is another finite-model version of the IUT II distinction between
 permutation symmetry and componentwise compatibility.  It keeps the Gaussian
 \(q^{j^2}\) branch from being silently identified after an additive offset.
+
+## Exact affine pointwise Gaussian preservation
+
+### Lean Move
+
+Added:
+
+```text
+one_valMinAbs_natAbs
+balancedSquareWeight_eq_one_iff_sign
+signSubgroup_of_unitAffine_pointwise_gaussian_preserving
+unitAffine_pointwise_gaussian_preserving_iff
+signSubgroup_of_unitAffine_pointwiseGaussianPreserving
+unitAffine_pointwiseGaussianPreserving_iff
+```
+
+### Mathematical Reason
+
+Lean now upgrades the previous zero-translation obstruction to an exact
+classification.  In the nondegenerate case
+\(\mathrm{environmentDegree}\ne0\), an affine operation \(j\mapsto a j+t\)
+preserves every coordinate Gaussian degree pointwise if and only if \(t=0\)
+and \(a\in\{\pm1\}\).
+
+The forward proof reads coordinate \(0\) to force \(t=0\).  It then reads
+coordinate \(1\): after cancellation of the nonzero environment degree, the
+balanced square weight of \(a\cdot 1\) is \(1\), and the finite balanced-square
+lemma identifies this condition with \(a=\pm1\).  The reverse direction is the
+already formalized sign-subgroup invariance of the Gaussian degree.
+
+### Source Check
+
+This sharpens the finite Gaussian shadow of IUT II's \(q^{j^2}\) convention
+used in Remarks 4.7.3--4.7.4.  It confirms that raw affine reindexing of
+coordinate averages is weaker than pointwise compatibility with the Gaussian
+components.
