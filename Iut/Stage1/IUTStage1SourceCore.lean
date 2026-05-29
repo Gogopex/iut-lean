@@ -1842,6 +1842,101 @@ theorem upperRayEqualityRequiresReverseBounds
 end IUTStage1HullDetPilotUpperRayLogVolume
 
 /--
+Step (xi) possible-image hull shadow.
+
+Theorem B and the proof of Corollary 3.12 define the theta-pilot log-volume as
+the log-volume of the holomorphic hull of the union of possible theta images,
+subject to `(Ind1)`, `(Ind2)`, `(Ind3)`.  This record keeps the exact
+order/log-volume skeleton needed for the later real inequality.
+-/
+structure IUTStage1ThetaPossibleImagesHullLogVolumeShadow
+    (α : Type u) (ι : Type v) where
+  hullData : IUTStage1HolomorphicHullLogVolumeShadow α
+  possibleThetaImage : ι -> Set α
+  qPilotRegion : Set α
+  determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume
+  q_subset_theta_hull :
+    qPilotRegion ⊆ hullData.hullRegion (⋃ i, possibleThetaImage i)
+  theta_hull_eq_normalized_determinant :
+    hullData.logVolume (hullData.hullRegion (⋃ i, possibleThetaImage i)) =
+      determinant.normalizedLogVolume
+
+namespace IUTStage1ThetaPossibleImagesHullLogVolumeShadow
+
+variable {α : Type u} {ι : Type v}
+
+def thetaImageUnion
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    Set α :=
+  ⋃ i, data.possibleThetaImage i
+
+def thetaHull
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    Set α :=
+  data.hullData.hullRegion data.thetaImageUnion
+
+def thetaHullLogVolume
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    Real :=
+  data.hullData.logVolume data.thetaHull
+
+def qPilotLogVolume
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    Real :=
+  data.hullData.logVolume data.qPilotRegion
+
+theorem qPilotLogVolume_le_thetaHullLogVolume
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    data.qPilotLogVolume <= data.thetaHullLogVolume :=
+  data.hullData.logVolume_le_of_subset_hull data.q_subset_theta_hull
+
+theorem thetaHullLogVolume_eq_normalized_determinant
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    data.thetaHullLogVolume = data.determinant.normalizedLogVolume := by
+  simpa [thetaHullLogVolume, thetaHull, thetaImageUnion] using
+    data.theta_hull_eq_normalized_determinant
+
+def toHullDetPilotUpperRayLogVolume
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    IUTStage1HullDetPilotUpperRayLogVolume :=
+  IUTStage1HullDetPilotUpperRayLogVolume.ofHolomorphicHull
+    data.hullData data.qPilotRegion data.thetaImageUnion
+    data.q_subset_theta_hull data.determinant
+    data.thetaHullLogVolume_eq_normalized_determinant
+
+theorem toUpperRay_qPilotLogVolume_eq
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume =
+      data.qPilotLogVolume :=
+  rfl
+
+theorem toUpperRay_thetaHullLogVolume_eq
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    data.toHullDetPilotUpperRayLogVolume.thetaHullLogVolume =
+      data.thetaHullLogVolume :=
+  rfl
+
+theorem toUpperRay_qPilot_mem_upperRay
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume ∈
+      data.toHullDetPilotUpperRayLogVolume.upperRay :=
+  data.toHullDetPilotUpperRayLogVolume.qPilot_mem_upperRay
+
+theorem endpoint
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume =
+        data.qPilotLogVolume ∧
+      data.toHullDetPilotUpperRayLogVolume.thetaHullLogVolume =
+        data.thetaHullLogVolume ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume ∈
+        data.toHullDetPilotUpperRayLogVolume.upperRay :=
+  ⟨rfl, rfl, data.qPilotLogVolume_le_thetaHullLogVolume,
+    data.toUpperRay_qPilot_mem_upperRay⟩
+
+end IUTStage1ThetaPossibleImagesHullLogVolumeShadow
+
+/--
 Step (xi-g) tautological two-computation view of the q-pilot log-volume.
 
 After Step (xi-f), the same q-pilot log-volume is read from the input

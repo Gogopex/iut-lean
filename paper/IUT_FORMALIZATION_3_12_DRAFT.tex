@@ -542,7 +542,10 @@ The code currently covers:
   the fixed-hull, extensivity, monotonicity, idempotence, and log-volume
   monotonicity properties P1--P3 used in Step (xi); from a q-region contained
   in the theta hull, Lean constructs the existing hull/determinant upper-ray
-  endpoint \(q_{\mathrm{pilot}}\le\Theta_{\mathrm{hull}}\);
+  endpoint \(q_{\mathrm{pilot}}\le\Theta_{\mathrm{hull}}\); Lean now also
+  packages the Step (xi) union of possible theta images and derives the same
+  upper-ray endpoint from containment of the q-pilot region in the holomorphic
+  hull of that union;
 \item the Step (xi-d)--(xi-g) shadow: determinant normalization, upper-ray
   membership, and equality of the two \(q\)-pilot log-volume computations; the
   determinant normalization is invariant under changing the positive
