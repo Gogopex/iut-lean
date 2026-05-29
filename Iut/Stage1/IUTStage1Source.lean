@@ -6988,6 +6988,49 @@ theorem not_beforeAverage_lt_statementEndpoint_thetaRealLogVolume_of_cTheta_eq_n
     pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hC]
   exact lt_irrefl _
 
+theorem thetaHullLogVolume_neg_of_cTheta_eq_neg_one
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hC : cTheta = (-1 : Real)) :
+    data.thetaHullLogVolume < 0 := by
+  rw [← data.beforeAverage_eq_thetaHullLogVolume_of_cTheta_eq_neg_one
+    pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hC]
+  linarith [q_pilot_positive]
+
+theorem not_thetaHullLogVolume_nonnegative_of_cTheta_eq_neg_one
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hC : cTheta = (-1 : Real)) :
+    ¬ 0 <= data.thetaHullLogVolume :=
+  not_le_of_gt
+    (data.thetaHullLogVolume_neg_of_cTheta_eq_neg_one
+      pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hC)
+
+theorem statementEndpoint_cTheta_eq_neg_one_or_gt_neg_one
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    cTheta = (-1 : Real) ∨ (-1 : Real) < cTheta :=
+  (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+    thetaHull_le_cTheta_absLogQ).cTheta_eq_neg_one_or_gt_neg_one
+
 theorem statementEndpoint_not_cTheta_lt_neg_one
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)

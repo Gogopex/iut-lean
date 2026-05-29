@@ -2083,6 +2083,13 @@ theorem qPilotLogVolume_eq_thetaPilotLogVolume_of_cTheta_eq_neg_one
   rw [data.qPilotLogVolume_eq_neg_absLogQ,
     data.thetaPilotLogVolume_eq_neg_absLogQ_of_cTheta_eq_neg_one hC]
 
+theorem cTheta_eq_neg_one_or_gt_neg_one
+    (data : IUTStage1Corollary312CThetaLowerBoundShadow) :
+    data.cTheta = (-1 : Real) ∨ (-1 : Real) < data.cTheta := by
+  by_cases hC : data.cTheta = (-1 : Real)
+  · exact Or.inl hC
+  · exact Or.inr (lt_of_le_of_ne data.cTheta_ge_neg_one (Ne.symm hC))
+
 theorem neg_absLogQ_lt_cTheta_absLogQ_of_qPilot_lt_theta
     (data : IUTStage1Corollary312CThetaLowerBoundShadow)
     (hstrict :
@@ -2275,6 +2282,24 @@ theorem qPilotLogVolume_eq_thetaRealLogVolume_of_cTheta_eq_neg_one
   rw [htheta] at h
   exact h
 
+theorem thetaRealLogVolume_neg_of_cTheta_eq_neg_one
+    (data : IUTStage1Corollary312StatementEndpoint)
+    (hC : data.cTheta = (-1 : Real)) :
+    data.thetaRealLogVolume < 0 := by
+  rw [← data.qPilotLogVolume_eq_thetaRealLogVolume_of_cTheta_eq_neg_one hC]
+  exact data.qPilotLogVolume_neg
+
+theorem not_thetaRealLogVolume_nonnegative_of_cTheta_eq_neg_one
+    (data : IUTStage1Corollary312StatementEndpoint)
+    (hC : data.cTheta = (-1 : Real)) :
+    ¬ 0 <= data.thetaRealLogVolume :=
+  not_le_of_gt (data.thetaRealLogVolume_neg_of_cTheta_eq_neg_one hC)
+
+theorem cTheta_eq_neg_one_or_gt_neg_one
+    (data : IUTStage1Corollary312StatementEndpoint) :
+    data.cTheta = (-1 : Real) ∨ (-1 : Real) < data.cTheta :=
+  data.toCThetaLowerBoundShadow.cTheta_eq_neg_one_or_gt_neg_one
+
 theorem not_cTheta_lt_neg_one
     (data : IUTStage1Corollary312StatementEndpoint) :
     ¬ data.cTheta < (-1 : Real) :=
@@ -2338,6 +2363,18 @@ theorem qSigned_eq_thetaSigned_of_cTheta_eq_neg_one
     data.comparison.qSigned = data.comparison.thetaSigned :=
   data.toCThetaLowerBoundShadow
     |>.qPilotLogVolume_eq_thetaPilotLogVolume_of_cTheta_eq_neg_one hC
+
+theorem thetaSigned_neg_of_cTheta_eq_neg_one
+    (data : IUTStage1Corollary312SignedCThetaBound)
+    (hC : data.cTheta = (-1 : Real)) :
+    data.comparison.thetaSigned < 0 := by
+  rw [← data.qSigned_eq_thetaSigned_of_cTheta_eq_neg_one hC]
+  linarith [data.comparison.q_positive]
+
+theorem cTheta_eq_neg_one_or_gt_neg_one
+    (data : IUTStage1Corollary312SignedCThetaBound) :
+    data.cTheta = (-1 : Real) ∨ (-1 : Real) < data.cTheta :=
+  data.toCThetaLowerBoundShadow.cTheta_eq_neg_one_or_gt_neg_one
 
 end IUTStage1Corollary312SignedCThetaBound
 
@@ -2525,6 +2562,18 @@ theorem qInputLogVolume_eq_thetaHullLogVolume_of_cTheta_eq_neg_one
   rw [data.signedEndpoint.inputPrimeStripLogVolume_eq_neg_absLogQ]
   simpa [IUTStage1QPilotTwoComputationCThetaEndpoint.absLogQ] using
     data.fixed_qPilot_eq_thetaHullLogVolume_of_cTheta_eq_neg_one hC
+
+theorem thetaHullLogVolume_neg_of_cTheta_eq_neg_one
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint)
+    (hC : data.cTheta = (-1 : Real)) :
+    data.signedEndpoint.twoComputation.upperRayData.thetaHullLogVolume < 0 := by
+  rw [← data.qInputLogVolume_eq_thetaHullLogVolume_of_cTheta_eq_neg_one hC]
+  linarith [data.signedEndpoint.q_pilot_positive]
+
+theorem cTheta_eq_neg_one_or_gt_neg_one
+    (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :
+    data.cTheta = (-1 : Real) ∨ (-1 : Real) < data.cTheta :=
+  data.toFixedValueCThetaLowerBoundShadow.cTheta_eq_neg_one_or_gt_neg_one
 
 theorem not_cTheta_lt_neg_one_from_fixed_qPilot
     (data : IUTStage1QPilotTwoComputationCThetaEndpoint) :

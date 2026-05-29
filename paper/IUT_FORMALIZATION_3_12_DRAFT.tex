@@ -77,7 +77,7 @@ then Step (xi-f) concludes \(C_\Theta\ge-1\).  This last inference is now a
 Lean theorem.  Lean also proves the strict variant: if the q-pilot lies strictly
 inside the \(\Theta\)-upper ray, then \(C_\Theta>-1\); conversely, the boundary
 case \(C_\Theta=-1\) forces equality of the q-pilot and \(\Theta\)-boundary
-log-volumes.
+log-volumes and places the \(\Theta\)-boundary on the negative branch.
 Mochizuki's 2026 note isolates the final comparison as:
 \[
 \begin{array}{ccccc}
@@ -563,7 +563,9 @@ The code currently covers:
   from the strict inequality
   \(-|\log(q)|<-|\log(\Theta)|\), Lean proves \(C_\Theta>-1\); if
   \(C_\Theta=-1\), Lean proves
-  \(-|\log(q)|=-|\log(\Theta)|\);
+  \(-|\log(q)|=-|\log(\Theta)|\) and \(-|\log(\Theta)|<0\); hence the endpoint
+  splits into the boundary branch \(C_\Theta=-1\) or the strict branch
+  \(C_\Theta>-1\);
 \item the signed-payload bridge:
   the existing Stage 1 comparison record \(q_{\mathrm{signed}}\le
   \Theta_{\mathrm{signed}}\), together with
@@ -1122,7 +1124,8 @@ hull/log-volume upper-ray comparison supplies
 \(-|\log(q)|\le-|\log(\Theta)|\), then Lean checks the formal Step (xi-f)
 conclusion \(C_\Theta\ge-1\); if the upper-ray membership is strict, Lean checks
 the sharper \(C_\Theta>-1\), while the boundary value \(C_\Theta=-1\) collapses
-the q-pilot and \(\Theta\)-boundary log-volumes to equality.  If the
+the q-pilot and \(\Theta\)-boundary log-volumes to equality and forces the
+\(\Theta\)-boundary to be negative.  If the
 nonarchimedean \((\mathrm{Ind3})\) entry,
 ordered real-line alignment, and Hodge/SHE square-weight transport audit are
 supplied, Lean checks the final signed \(q\)-to-\(\Theta\) inequality feeding
