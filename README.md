@@ -157,7 +157,10 @@ preservation, so that preservation is no longer an independent input there.
 The raw nonarchimedean `(Ind3)` alignment is now also available through a
 source-facing 1-column log-Kummer upper-semi compatibility object, which records
 the q-pilot column and log-Kummer non-interference before converting to the raw
-real equalities used by the route.
+real equalities used by the route. Its source-side equality can already be
+derived from the finite Kummer-plus-forgetting tensor-packet chain:
+`holomorphicF -> holomorphicD -> monoAnalyticD`, where both steps preserve
+product log-volume.
 
 This is deliberately not marked as settling the dispute. The experiment report
 keeps `disputeSettledByCurrentStage = false`. The remaining issue is whether the
@@ -274,9 +277,9 @@ Near-term mathematics:
 * Extend the Gaussian-derived factored SHE construction beyond finite
   degree-evaluation and canonical-label shadows toward actual Gaussian/Frobenioid
   material corresponding to IUT II.
-* Derive the remaining real equalities in the 1-column log-Kummer upper-semi
-  compatibility object from the actual log-Kummer construction of IUT III,
-  Step (x).
+* Derive the remaining target-side theta equality in the 1-column log-Kummer
+  upper-semi compatibility object from the actual log-Kummer construction of
+  IUT III, Step (x).
 * Replace the current hull/determinant obligation records with formal
   holomorphic-hull and determinant operations from IUT III, Remark 3.9.5 and
   Step (xi).

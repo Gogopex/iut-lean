@@ -8297,6 +8297,7 @@ structure Corollary312DisputeFirstPassReport where
   gaussianFactoredNonarchimedeanCThetaDichotomyAvailable : Bool
   gaussianCanonicalOneNonarchimedeanCThetaDichotomyAvailable : Bool
   logKummerUpperSemiGaussianCThetaDichotomyAvailable : Bool
+  kummerForgettingGaussianCThetaDichotomyAvailable : Bool
   mismatchCounterexampleBlocksRawCancellation : Bool
   labelIndependentJ2CollapseRejectedInZModModel : Bool
   representativeJ2SignQuotientDescentRejectedInZModModel : Bool
@@ -8404,6 +8405,7 @@ def corollary312DisputeFirstPassReport :
     gaussianFactoredNonarchimedeanCThetaDichotomyAvailable := true,
     gaussianCanonicalOneNonarchimedeanCThetaDichotomyAvailable := true,
     logKummerUpperSemiGaussianCThetaDichotomyAvailable := true,
+    kummerForgettingGaussianCThetaDichotomyAvailable := true,
     mismatchCounterexampleBlocksRawCancellation := true,
     labelIndependentJ2CollapseRejectedInZModModel := true,
     representativeJ2SignQuotientDescentRejectedInZModModel := true,
@@ -8519,6 +8521,11 @@ theorem corollary312Report_gaussianCanonicalOneNonarchimedeanCThetaDichotomyAvai
 
 theorem corollary312Report_logKummerUpperSemiGaussianCThetaDichotomyAvailable :
     corollary312DisputeFirstPassReport.logKummerUpperSemiGaussianCThetaDichotomyAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_kummerForgettingGaussianCThetaDichotomyAvailable :
+    corollary312DisputeFirstPassReport.kummerForgettingGaussianCThetaDichotomyAvailable =
       true :=
   rfl
 
@@ -9263,6 +9270,90 @@ theorem corollary312_firstPass_cThetaDichotomy_from_gaussianCanonicalOneLogKumme
     targetEvaluation canonical_one_preserved source_profile_eq
     source_log_volume_eq target_log_volume_eq_theta logKummerUpperSemi
     q_pilot_positive cTheta thetaSigned_le_cTheta_absLogQ
+
+/--
+Corollary 3.12 first-pass `C_Theta` dichotomy from the identity-coordinate
+Gaussian route and a Kummer-plus-forgetting source-side upper-semi chain.
+
+The source-side real equality in the log-Kummer upper-semi object is derived
+from product-log-volume preservation along
+`holomorphicF -> holomorphicD -> monoAnalyticD`.
+-/
+theorem corollary312_firstPass_cThetaDichotomy_from_gaussianCanonicalOneKummerForgettingEntry
+    {source target : Copy} {coric : Type u}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (canonical_one_preserved :
+      targetEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        sourceEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)))
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_log_volume_eq_theta :
+      targetEvaluation.toCuspLabelLogVolumeCompatibility =
+        part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealizedTensorPacketProductLogVolume
+        IUTStage1PlaceKind.nonarchimedean j}
+    (kummer :
+      IUTStage1KummerFTensorPacketToDTensorPacketTransfer
+        holomorphicF holomorphicD)
+    (forgetting :
+      IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+        holomorphicD monoAnalyticD)
+    (entry : IUTStage1NonarchimedeanInclusionData)
+    (entry_mem :
+      entry ∈ audited.choice.upper_semi_state.nonarchimedeanInclusions)
+    (packetLocalObject_eq_entrySource :
+      audited.choice.local_tensor_state.packetState.localObject =
+        entry.sourceLogVolume)
+    (entrySource_eq_monoAnalyticProduct :
+      entry.sourceLogVolume.finiteLogVolume =
+        monoAnalyticD.product.productLogVolume)
+    (ind3Source_eq_holomorphicFProduct :
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume =
+        holomorphicF.product.productLogVolume)
+    (thetaAverage_eq_entryTarget :
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        entry.targetLogVolume.finiteLogVolume)
+    (entryTarget_eq_ind3Target :
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume)
+    (q_pilot_positive : 0 < -package.preLedger.qSigned)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      package.preLedger.thetaSigned <=
+        cTheta * (-package.preLedger.qSigned)) :
+    (package.preLedger.qSigned = package.preLedger.thetaSigned ∧
+        package.preLedger.thetaSigned < 0) ∨
+      (-1 : Real) < cTheta :=
+  part.boundarySignedEqualityOrStrictCTheta_of_gaussianIdentityCanonicalOneKummerForgettingEntry
+    profile audited sourceProfile targetProfile sourceEvaluation targetEvaluation
+    canonical_one_preserved source_profile_eq source_log_volume_eq
+    target_log_volume_eq_theta kummer forgetting entry entry_mem
+    packetLocalObject_eq_entrySource entrySource_eq_monoAnalyticProduct
+    ind3Source_eq_holomorphicFProduct thetaAverage_eq_entryTarget
+    entryTarget_eq_ind3Target q_pilot_positive cTheta thetaSigned_le_cTheta_absLogQ
 
 /--
 Scholze-Stix-style collapse test for the representative `j^2` factors.

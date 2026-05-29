@@ -323,6 +323,12 @@ The raw nonarchimedean entry alignment has also been refactored through a
 source-facing 1-column log-Kummer upper-semi compatibility object.  This records
 the q-pilot column and log-Kummer non-interference before converting to the raw
 real equalities consumed by the current route.
+For the source side of this compatibility, the code can now use the existing
+finite tensor-packet chain: Kummer transfer
+\(\mathrm{holomorphicF}\to\mathrm{holomorphicD}\) and mono-analytic forgetting
+\(\mathrm{holomorphicD}\to D^\vdash\) preserve product log-volume.  Thus the
+source-side upper-semi equality may be derived from this chain rather than
+postulated as a bare equality.
 
 \subsection{Step (xi-f) algebra}
 
@@ -424,6 +430,9 @@ The project currently proves the following source-facing results in \Lean{}:
 \item A 1-column log-Kummer upper-semi compatibility object now supplies the raw
   nonarchimedean \((\Ind3)\) entry alignment used by the canonical Gaussian
   route.
+\item The source-side equality in that compatibility can be derived from
+  product-log-volume preservation along the finite Kummer-plus-forgetting
+  tensor-packet chain.
 \item The Step (xi-f) real algebra proves \(C_\Theta\ge-1\), strictness under
   strict upper-ray membership, and equality constraints in the boundary case.
 \item The final route rejects the balanced sign-compatible comparison level as
@@ -528,9 +537,9 @@ The practical priority order is:
 \item extend the Gaussian-derived factored \SHE{} construction beyond the
   finite degree-evaluation and canonical-label shadows toward actual
   Gaussian/Frobenioid material from \IUT{} II;
-\item derive the remaining real equalities in the 1-column log-Kummer
-  upper-semi compatibility object from the actual log-Kummer construction of
-  \IUT{} III, Step (x);
+\item derive the remaining target-side theta equality in the 1-column
+  log-Kummer upper-semi compatibility object from the actual log-Kummer
+  construction of \IUT{} III, Step (x);
 \item replace the hull/determinant endpoint records by the actual
   holomorphic-hull and determinant operations from Remark 3.9.5 and
   Step (xi);
