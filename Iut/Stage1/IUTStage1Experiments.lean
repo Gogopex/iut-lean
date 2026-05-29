@@ -787,6 +787,25 @@ theorem constantCuspLabelLogVolume_toLabelAveraged_eq_constant
   IUTStage1ZModCuspLabelLogVolumeCompatibility.constant_toLabelAveraged_eq_constant
     c
 
+theorem fullLabelFromCoordinate_surjective
+    {l : PrimeGeFive} :
+    Function.Surjective (IUTStage1ZModCuspFullLabel.fromCoordinate l) :=
+  IUTStage1ZModCuspFullLabel.fromCoordinate_surjective
+
+theorem fullLabelFromCoordinate_eq_zero_iff
+    {l : PrimeGeFive} (j : ZMod l.value) :
+    IUTStage1ZModCuspFullLabel.fromCoordinate l j =
+      IUTStage1ZModCuspFullLabel.zero ↔ j = 0 :=
+  IUTStage1ZModCuspFullLabel.fromCoordinate_eq_zero_iff j
+
+theorem nonzeroFullLabelFromCoordinate_surjective
+    {l : PrimeGeFive}
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    ∃ (j : ZMod l.value) (_hj : j ≠ 0),
+      IUTStage1ZModCuspFullLabel.fromCoordinate l j =
+        IUTStage1ZModCuspFullLabel.nonzero label :=
+  IUTStage1ZModCuspFullLabel.nonzero_fromCoordinate_surjective label
+
 theorem absLabelProcessionTop_eq_halfMinusOne
     (l : PrimeGeFive) :
     IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l =

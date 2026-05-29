@@ -5795,6 +5795,49 @@ theorem fromCoordinate_neg
   rw [fromCoordinate_nonzero l j hj]
   rw [zmodSignLabelFromCoordinate_neg_eq]
 
+theorem fromCoordinate_eq_zero_iff
+    (j : ZMod l.value) :
+    fromCoordinate l j = IUTStage1ZModCuspFullLabel.zero ↔ j = 0 := by
+  constructor
+  · intro h
+    by_cases hj : j = 0
+    · exact hj
+    · rw [fromCoordinate_nonzero l j hj] at h
+      contradiction
+  · intro h
+    subst j
+    rw [fromCoordinate_zero]
+
+theorem fromCoordinate_ne_zero_iff
+    (j : ZMod l.value) :
+    fromCoordinate l j ≠ IUTStage1ZModCuspFullLabel.zero ↔ j ≠ 0 := by
+  rw [ne_eq, ne_eq, fromCoordinate_eq_zero_iff]
+
+theorem fromCoordinate_surjective :
+    Function.Surjective (fromCoordinate l) := by
+  intro label
+  cases label with
+  | zero =>
+      exact ⟨0, fromCoordinate_zero l⟩
+  | nonzero label =>
+      refine Quotient.inductionOn label ?_
+      intro x
+      refine ⟨x.1, ?_⟩
+      rw [fromCoordinate_nonzero l x.1 x.2]
+      rw [← zmod_toSignLabelQuotient_eq_fromCoordinate x]
+      rfl
+
+theorem nonzero_fromCoordinate_surjective
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    ∃ (j : ZMod l.value) (_hj : j ≠ 0),
+      fromCoordinate l j = nonzero label := by
+  refine Quotient.inductionOn label ?_
+  intro x
+  refine ⟨x.1, x.2, ?_⟩
+  rw [fromCoordinate_nonzero l x.1 x.2]
+  rw [← zmod_toSignLabelQuotient_eq_fromCoordinate x]
+  rfl
+
 /--
 Stage 1 shadow of the weighted-volume relation `F_l ∋ j ≪ 0` from IUT II,
 Remark 4.7.3(iii).
