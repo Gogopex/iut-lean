@@ -6084,6 +6084,44 @@ theorem xiF_upperRayCTheta_endpoint
       hCTheta,
       not_lt_of_ge hCTheta⟩
 
+theorem xiF_upperRayCTheta_distinctIntertwining_endpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (transport : IUTStage1DistinctLabelIntertwiningTransport)
+    (hq : transport.qIntertwining) :
+    let endpoint :=
+      data.toQPilotTwoComputationCThetaEndpoint
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ;
+    data.qPilotLogVolume ∈
+        data.toHullDetPilotUpperRayLogVolume.upperRay ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaHullLogVolume <= endpoint.cTheta * (-data.qPilotLogVolume) ∧
+      data.qPilotLogVolume <= endpoint.cTheta * (-data.qPilotLogVolume) ∧
+      (-1 : Real) <= endpoint.cTheta ∧
+      Corollary312Inequality
+        endpoint.toSignedCThetaBound.comparison.thetaPilot
+        endpoint.toSignedCThetaBound.comparison.qPilot ∧
+      transport.qLabel ≠ transport.thetaLabel ∧
+      transport.weakenedPrimeStripCannotDistinguishPilots ∧
+      transport.qIntertwining ∧
+      transport.thetaIntertwiningUpToIndeterminacy := by
+  intro endpoint
+  have hxi :=
+    data.xiF_upperRayCTheta_endpoint
+      q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+  exact
+    ⟨hxi.1, hxi.2.1, hxi.2.2.1, hxi.2.2.2.1,
+      hxi.2.2.2.2.1,
+      endpoint.toSignedCThetaBound.comparison.corollary312,
+      transport.labels_distinct,
+      transport.weakenedPrimeStripCondition,
+      hq, transport.theta_from_q hq⟩
+
 theorem signedCThetaComparison_endpoint
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (q_pilot_positive :

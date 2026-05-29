@@ -442,7 +442,10 @@ The code currently covers:
   hence \(q_{\mathrm{avg}}\le C_\Theta|q_{\mathrm{avg}}|\), before invoking the
   final ordered-real algebra; the Step (xi-f) endpoint now packages q-pilot
   upper-ray membership, both ordered inequalities, \(C_\Theta\ge-1\), and the
-  rejection of \(C_\Theta<-1\) directly at the route level;
+  rejection of \(C_\Theta<-1\) directly at the route level; Lean now also
+  combines this Step (xi-f) package with the Remark 3.12.2 distinct-label
+  intertwining discipline, so the inequality endpoint is available while the
+  q-native and \(\Theta\)-native labels remain unequal;
 \item the Step (x)-sourced statement endpoint:
   after adjoining the statement-level
   \(\Theta\)-subject/\(q\)-not-subject boundary, the same data constructs the
@@ -594,7 +597,8 @@ The code currently covers:
   \(F_\ell\)-sourced finite/signed endpoint, Lean combines the signed
   q-to-\(\Theta\) comparison with this distinct-label discipline, so the
   comparison is available while the q-native and \(\Theta\)-native labels remain
-  provably unequal;
+  provably unequal; the same discipline is now attached to the Step (xi-f)
+  \(C_\Theta\)-endpoint itself;
 \item the Remark 3.12.2 toy calculation: forgotten concrete assignments
   \(-h\) and \(-2h\) are incompatible for \(h>0\), while
   \(-h\in\R_{\le-2h+\epsilon}\) implies \(h\le\epsilon\); Lean now packages
@@ -894,7 +898,8 @@ The generalized-link flag records the rational parameter inequality
 real-valued derivation.
 The distinct-label flag records the logical intertwining display in
 Remark 3.12.2, keeps the weakened abstract prime-strip condition fixed, and
-rejects collapse of the q-native and \(\Theta\)-native labels.
+rejects collapse of the q-native and \(\Theta\)-native labels; the final
+Step (xi-f) inequality package is now checked under this same label separation.
 The toy-model flag records the resulting \((\mathrm{ftoy})\) upper-ray endpoint
 and arithmetic bound \(h\le\epsilon\).
 The column-table flag records the Fig. 3.9 theta/q similarity-difference split:
