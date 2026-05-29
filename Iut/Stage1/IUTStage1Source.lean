@@ -8800,6 +8800,37 @@ theorem gaussianDegree_fullLabel_average_ne_environment_of_nonzero
   dsimp [coeff] at hcoeff
   linarith
 
+theorem gaussianDegree_fullLabel_average_le_environment_of_nonpositive
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_nonpos : evaluation.environmentDegree <= 0) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) <=
+      evaluation.environmentDegree := by
+  rw [gaussianDegree_fullLabel_average_eq_coeff]
+  let coeff : Real :=
+    (absLabelProcessionTop l : Real) *
+      (2 * (absLabelProcessionTop l : Real) + 1) / 6
+  have hcoeff : 1 <= coeff := by
+    exact le_of_lt (by
+      simpa [coeff] using absLabelAverageCoefficient_gt_one (l := l))
+  have hmul :
+      coeff * evaluation.environmentDegree <=
+        1 * evaluation.environmentDegree :=
+    mul_le_mul_of_nonpos_right hcoeff henv_nonpos
+  simpa [coeff] using hmul
+
+theorem gaussianDegree_fullLabel_average_le_of_environment_le_bound
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    {c : Real}
+    (henv_nonpos : evaluation.environmentDegree <= 0)
+    (henv_le : evaluation.environmentDegree <= c) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) <= c :=
+  le_trans
+    (gaussianDegree_fullLabel_average_le_environment_of_nonpositive
+      evaluation henv_nonpos)
+    henv_le
+
 theorem generatorLogVolume_sum_mul_six
     (action : LGPSplittingMonoidTensorPacketAction l) :
     (Finset.univ.sum action.generatorLogVolume) * 6 =

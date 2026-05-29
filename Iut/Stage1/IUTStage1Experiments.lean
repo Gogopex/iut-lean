@@ -941,6 +941,29 @@ theorem gaussianDegree_fullLabelAverage_ne_singletonIdentity
       evaluation.environmentDegree :=
   gaussianDegree_fullLabel_average_ne_environment_of_nonzero evaluation henv
 
+theorem gaussianDegree_fullLabelAverage_le_environment_of_nonpositive
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (henv_nonpos : evaluation.environmentDegree <= 0) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) <=
+      evaluation.environmentDegree :=
+  gaussianDegree_fullLabel_average_le_environment_of_nonpositive
+    evaluation henv_nonpos
+
+theorem gaussianDegree_fullLabelAverage_le_of_environment_le_bound
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    {c : Real}
+    (henv_nonpos : evaluation.environmentDegree <= 0)
+    (henv_le : evaluation.environmentDegree <= c) :
+    (Finset.univ.sum evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) <= c :=
+  gaussianDegree_fullLabel_average_le_of_environment_le_bound
+    evaluation henv_nonpos henv_le
+
 /-- Scale-level status for transport-explicit real-line cancellation. -/
 structure Ind3TransportScaleExperimentReport where
   sourceScaleMatched : Bool

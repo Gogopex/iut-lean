@@ -151,7 +151,9 @@ The code currently covers:
   \(6\,\operatorname{Avg}(G)=j_{\max}(2j_{\max}+1)\deg(q)\); by reindexing,
   the same identity holds for the average over \(|F_\ell|\).  Since
   \(j_{\max}\ge2\), Lean proves that this full average is not the singleton
-  \(j=1\) identity value when \(\deg(q)\ne0\);
+  \(j=1\) identity value when \(\deg(q)\ne0\); in the nonpositive environment
+  branch, the full \(|F_\ell|\)-average is bounded above by \(\deg(q)\), and
+  hence by any bound above \(\deg(q)\);
 \item the degree-level Gaussian evaluation
   \(q\mapsto(q^{j^2})_{j\in |F_\ell|}\), including identity at \(j=1\);
   Lean now also converts such an evaluation into a cusp/full-label log-volume
