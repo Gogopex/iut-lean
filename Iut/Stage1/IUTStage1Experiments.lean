@@ -1496,6 +1496,27 @@ theorem gaussianDegree_fromCoordinate_eq_zero_iff
       j = 0 ∨ evaluation.environmentDegree = 0 :=
   evaluation.gaussianDegree_fromCoordinate_eq_zero_iff j
 
+theorem absThetaPilotDegree_distinguishes_one_two_of_q_ne_zero
+    {l : PrimeGeFive}
+    (profile : IUTStage1ZModSquareWeightProfile.AbsThetaPilotDegreeProfile l)
+    (hq : profile.qPilotDegree ≠ 0) :
+    profile.thetaPilotDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) ≠
+      profile.thetaPilotDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (2 : ZMod l.value)) :=
+  profile.thetaPilotDegree_one_ne_two_of_q_ne_zero hq
+
+theorem gaussianDegree_distinguishes_one_two_of_environment_ne_zero
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (henv : evaluation.environmentDegree ≠ 0) :
+    evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) ≠
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (2 : ZMod l.value)) :=
+  evaluation.gaussianDegree_one_ne_two_of_environment_ne_zero henv
+
 theorem gaussianUnitAffine_zeroComponent_ne_zero_of_environment_ne_zero
     {l : PrimeGeFive}
     (evaluation :
@@ -4338,6 +4359,7 @@ structure Corollary312DisputeFirstPassReport where
   labelIndependentJ2CollapseRejectedInZModModel : Bool
   representativeJ2SignQuotientDescentRejectedInZModModel : Bool
   absLabelThetaDegreeHalfRangeModelAvailable : Bool
+  absThetaDegreeDistinguishesOneTwoAvailable : Bool
   gaussianDegreeEvaluationTheoremAvailable : Bool
   canonicalSquareWeightProfileAvailable : Bool
   canonicalSquareWeightConstantAverageAvailable : Bool
@@ -4441,6 +4463,7 @@ def corollary312DisputeFirstPassReport :
     labelIndependentJ2CollapseRejectedInZModModel := true,
     representativeJ2SignQuotientDescentRejectedInZModModel := true,
     absLabelThetaDegreeHalfRangeModelAvailable := true,
+    absThetaDegreeDistinguishesOneTwoAvailable := true,
     gaussianDegreeEvaluationTheoremAvailable := true,
     canonicalSquareWeightProfileAvailable := true,
     canonicalSquareWeightConstantAverageAvailable := true,
@@ -4556,6 +4579,11 @@ theorem corollary312Report_representativeJ2SignQuotientDescentRejected :
 
 theorem corollary312Report_absLabelThetaDegreeHalfRangeModelAvailable :
     corollary312DisputeFirstPassReport.absLabelThetaDegreeHalfRangeModelAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_absThetaDegreeDistinguishesOneTwoAvailable :
+    corollary312DisputeFirstPassReport.absThetaDegreeDistinguishesOneTwoAvailable =
       true :=
   rfl
 
