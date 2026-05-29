@@ -710,6 +710,10 @@ structure ProcessionContainerExperimentReport where
   determinantTensorPowerNormalizationAvailable : Bool
   hullDetUpperRayComparisonAvailable : Bool
   qPilotTwoComputationComparisonAvailable : Bool
+  stepXToHullUpperRayHandoffAvailable : Bool
+  stepXToQPilotTwoComputationHandoffAvailable : Bool
+  stepXSourcedStatementEndpointAvailable : Bool
+  stepXSourcedStatementInequalityAvailable : Bool
   thetaExtendedFiniteEndpointAvailable : Bool
   corollary312PilotIndeterminacyBoundaryAvailable : Bool
   corollary312StatementEndpointAvailable : Bool
@@ -791,6 +795,10 @@ def processionContainerExperimentReport : ProcessionContainerExperimentReport :=
     determinantTensorPowerNormalizationAvailable := true,
     hullDetUpperRayComparisonAvailable := true,
     qPilotTwoComputationComparisonAvailable := true,
+    stepXToHullUpperRayHandoffAvailable := true,
+    stepXToQPilotTwoComputationHandoffAvailable := true,
+    stepXSourcedStatementEndpointAvailable := true,
+    stepXSourcedStatementInequalityAvailable := true,
     thetaExtendedFiniteEndpointAvailable := true,
     corollary312PilotIndeterminacyBoundaryAvailable := true,
     corollary312StatementEndpointAvailable := true,
@@ -2074,6 +2082,10 @@ structure Corollary312DisputeFirstPassReport where
   determinantTensorPowerNormalizationAvailable : Bool
   hullDetUpperRayComparisonAvailable : Bool
   qPilotTwoComputationComparisonAvailable : Bool
+  stepXToHullUpperRayHandoffAvailable : Bool
+  stepXToQPilotTwoComputationHandoffAvailable : Bool
+  stepXSourcedStatementEndpointAvailable : Bool
+  stepXSourcedStatementInequalityAvailable : Bool
   thetaExtendedFiniteEndpointAvailable : Bool
   corollary312PilotIndeterminacyBoundaryAvailable : Bool
   corollary312StatementEndpointAvailable : Bool
@@ -2172,6 +2184,10 @@ def corollary312DisputeFirstPassReport :
     determinantTensorPowerNormalizationAvailable := true,
     hullDetUpperRayComparisonAvailable := true,
     qPilotTwoComputationComparisonAvailable := true,
+    stepXToHullUpperRayHandoffAvailable := true,
+    stepXToQPilotTwoComputationHandoffAvailable := true,
+    stepXSourcedStatementEndpointAvailable := true,
+    stepXSourcedStatementInequalityAvailable := true,
     thetaExtendedFiniteEndpointAvailable := true,
     corollary312PilotIndeterminacyBoundaryAvailable := true,
     corollary312StatementEndpointAvailable := true,
@@ -2374,6 +2390,26 @@ theorem corollary312Report_hullDetUpperRayComparisonAvailable :
 
 theorem corollary312Report_qPilotTwoComputationComparisonAvailable :
     corollary312DisputeFirstPassReport.qPilotTwoComputationComparisonAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_stepXToHullUpperRayHandoffAvailable :
+    corollary312DisputeFirstPassReport.stepXToHullUpperRayHandoffAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_stepXToQPilotTwoComputationHandoffAvailable :
+    corollary312DisputeFirstPassReport.stepXToQPilotTwoComputationHandoffAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_stepXSourcedStatementEndpointAvailable :
+    corollary312DisputeFirstPassReport.stepXSourcedStatementEndpointAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_stepXSourcedStatementInequalityAvailable :
+    corollary312DisputeFirstPassReport.stepXSourcedStatementInequalityAvailable =
       true :=
   rfl
 
