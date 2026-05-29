@@ -18855,3 +18855,33 @@ This is the finite-count form of the IUT II zero/nonzero separation in
 Remark 4.7.3(iii): the zero label is coric/unit-like, while the nonzero
 absolute labels form the Gaussian side that is subordinate to zero in
 weighted-volume computations.
+
+## Full-label zero/subordinate sum split
+
+### Lean Move
+
+Added:
+
+```text
+fullLabel_sum_eq_zero_add_subordinate_sum
+fullLabel_average_eq_zero_add_subordinate_sum_div
+fullLabelSum_eq_zero_add_subordinateSum
+fullLabelAverage_eq_zero_add_subordinateSum_div
+```
+
+### Mathematical Reason
+
+For an arbitrary real-valued function on full absolute labels, Lean now splits
+the total full-label sum into the zero/coric contribution and the contribution
+from labels subordinate to zero.  The corresponding average has denominator
+`absLabelProcessionTop l + 1`, i.e. \((\ell+1)/2\), not the nonzero-only
+denominator.  This is the algebraic bookkeeping needed before applying such
+splits to log-volume functions.
+
+### Source Check
+
+This is a direct finite-sum form of IUT II, Remark 4.7.3(iii): zero remains a
+separate coric label, while nonzero Gaussian labels form the subordinate
+weighted-volume part.  The theorem avoids replacing the full \(|F_\ell|\)
+average by a nonzero-only average without explicitly accounting for the zero
+summand.

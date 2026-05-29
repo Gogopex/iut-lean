@@ -8968,6 +8968,48 @@ theorem subordinateFullLabel_card_eq_absLabelProcessionTop :
     IUTStage1ProcessionContainer.card_eq]
   omega
 
+theorem fullLabel_sum_eq_zero_add_subordinate_sum
+    (f : IUTStage1ZModCuspFullLabel l -> Real) :
+    Finset.univ.sum f =
+      f IUTStage1ZModCuspFullLabel.zero +
+        (@Finset.filter (IUTStage1ZModCuspFullLabel l)
+          (fun label : IUTStage1ZModCuspFullLabel l =>
+            IUTStage1ZModCuspFullLabel.WeightedVolumeSubordinate
+              label IUTStage1ZModCuspFullLabel.zero)
+          (Classical.decPred _) Finset.univ).sum f := by
+  classical
+  have hset :
+      (@Finset.filter (IUTStage1ZModCuspFullLabel l)
+        (fun label : IUTStage1ZModCuspFullLabel l =>
+          IUTStage1ZModCuspFullLabel.WeightedVolumeSubordinate
+            label IUTStage1ZModCuspFullLabel.zero)
+        (Classical.decPred _) Finset.univ) =
+          (Finset.univ.erase IUTStage1ZModCuspFullLabel.zero) := by
+    ext label
+    simp [IUTStage1ZModCuspFullLabel.weightedVolumeSubordinate_zero_iff_ne_zero]
+  rw [hset]
+  have hsplit :=
+    Finset.sum_erase_add (s := (Finset.univ : Finset (IUTStage1ZModCuspFullLabel l)))
+      (f := f)
+      (a := IUTStage1ZModCuspFullLabel.zero)
+      (Finset.mem_univ IUTStage1ZModCuspFullLabel.zero)
+  linarith
+
+theorem fullLabel_average_eq_zero_add_subordinate_sum_div
+    (f : IUTStage1ZModCuspFullLabel l -> Real) :
+    (Finset.univ.sum f) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) =
+      (f IUTStage1ZModCuspFullLabel.zero +
+        (@Finset.filter (IUTStage1ZModCuspFullLabel l)
+          (fun label : IUTStage1ZModCuspFullLabel l =>
+            IUTStage1ZModCuspFullLabel.WeightedVolumeSubordinate
+              label IUTStage1ZModCuspFullLabel.zero)
+          (Classical.decPred _) Finset.univ).sum f) /
+        ((absLabelProcessionTop l : Real) + 1) := by
+  rw [fullLabel_sum_eq_zero_add_subordinate_sum]
+  rw [fullLabel_card_eq_procession, IUTStage1ProcessionContainer.card_eq]
+  norm_num
+
 theorem fullLabel_sum_eq_procession_sum
     (f : IUTStage1ZModCuspFullLabel l -> Real) :
     (Finset.univ.sum f) =

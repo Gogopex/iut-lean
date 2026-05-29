@@ -277,7 +277,9 @@ The code currently covers:
   \(j\ll0\iff j\ne0\), so the all-coordinate statement is false precisely
   because it includes \(j=0\).  Lean also proves that the full-label set
   subordinate to zero has cardinality \((\ell-1)/2\), the nonzero absolute
-  half-range.  Lean also converts the
+  half-range, and decomposes any full-label sum, hence any full-label average,
+  into its zero contribution plus the subordinate nonzero contribution with
+  denominator \((\ell+1)/2\).  Lean also converts the
   zero/nonzero cusp-label compatibility object to a uniform \(F_\ell\) average
   and proves that a diagonal constant log-volume distribution averages to that
   same constant;
