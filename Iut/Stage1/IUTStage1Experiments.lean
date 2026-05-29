@@ -848,6 +848,14 @@ theorem zeroFullLabel_fiber_card
       (Classical.decPred _) Finset.univ).card = 1 :=
   IUTStage1ZModCuspFullLabel.zero_fullLabel_fiber_card
 
+theorem unitActionOnFullLabel_fromCoordinate
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ) (j : ZMod l.value) :
+    IUTStage1ZModCuspFullLabel.unitActionOnFullLabel l a
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+      IUTStage1ZModCuspFullLabel.fromCoordinate l
+        ((zmodUnitActionData l).smul a j) :=
+  IUTStage1ZModCuspFullLabel.unitActionOnFullLabel_fromCoordinate l a j
+
 theorem singletonOneRestriction_not_translationInvariant
     (l : PrimeGeFive) :
     ¬ ∀ j : ZMod l.value,
@@ -961,6 +969,17 @@ theorem coordinateWeightedVolumeSubordinate_zero_iff_nonzero
       j ≠ 0 :=
   IUTStage1ZModCuspFullLabel.fromCoordinate_weightedVolumeSubordinate_zero_iff
     l j
+
+theorem unitActionOnFullLabel_preserves_subordinate_zero
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    IUTStage1ZModCuspFullLabel.WeightedVolumeSubordinate
+        (IUTStage1ZModCuspFullLabel.unitActionOnFullLabel l a label)
+        IUTStage1ZModCuspFullLabel.zero ↔
+      IUTStage1ZModCuspFullLabel.WeightedVolumeSubordinate
+        label IUTStage1ZModCuspFullLabel.zero :=
+  IUTStage1ZModCuspFullLabel.unitActionOnFullLabel_preserves_subordinate_zero
+    l a label
 
 theorem constantCuspLabelLogVolume_toLabelAveraged_eq_constant
     {l : PrimeGeFive} (c : Real) :

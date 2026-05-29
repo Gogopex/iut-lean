@@ -18965,3 +18965,37 @@ connects the relation \(a\ll0\) directly to the paper's representative indexing
 This is a Lean bridge between two source conventions from IUT II: the
 weighted-volume notation \(j\ll0\) in Remark 4.7.3(iii), and the Gaussian
 theta-value convention \(q^{j^2}\) indexed by the canonical half range.
+
+## Multiplicative unit action on full labels
+
+### Lean Move
+
+Added:
+
+```text
+unitActionOnFullLabel
+unitActionOnFullLabel_zero
+unitActionOnFullLabel_nonzero
+unitActionOnFullLabel_fromCoordinate
+unitActionOnFullLabel_preserves_subordinate_zero
+```
+
+### Mathematical Reason
+
+The multiplicative unit action of \(F_\ell^\times\) descends to the full
+absolute-label set \(|F_\ell|=\{0\}\cup F_\ell^\times/\{\pm1\}\): it fixes the
+zero label and sends a nonzero sign class to its unit multiple.  Lean proves the
+coordinate compatibility
+\[
+  a\cdot [j]=[a j]
+\]
+for the full-label map and proves that this action preserves the subordinate
+zero/nonzero relation.  This is the positive counterpart to the earlier result
+that nonzero additive translations do not descend to \(|F_\ell|\).
+
+### Source Check
+
+This matches IUT II, Remark 4.7.3(i),(iii): the \(F_\ell\)-symmetry is tied to
+the multiplicative structure and separates the zero label from the nonzero
+Gaussian components, whereas the additive \(F_\ell^\pm\)-symmetry has different
+zero/nonzero behavior.

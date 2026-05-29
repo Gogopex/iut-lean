@@ -5940,6 +5940,50 @@ theorem fromCoordinate_natAbs_valMinAbs
       exact hhalf (by simp)
     rw [fromCoordinate_neg l j hj]
 
+def unitActionOnFullLabel
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ) :
+    IUTStage1ZModCuspFullLabel l -> IUTStage1ZModCuspFullLabel l
+  | zero => zero
+  | nonzero label =>
+      nonzero (zmodUnitActionOnSignLabelQuotient l a label)
+
+theorem unitActionOnFullLabel_zero
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ) :
+    unitActionOnFullLabel l a zero = zero :=
+  rfl
+
+theorem unitActionOnFullLabel_nonzero
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    unitActionOnFullLabel l a (nonzero label) =
+      nonzero (zmodUnitActionOnSignLabelQuotient l a label) :=
+  rfl
+
+theorem unitActionOnFullLabel_fromCoordinate
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ) (j : ZMod l.value) :
+    unitActionOnFullLabel l a (fromCoordinate l j) =
+      fromCoordinate l ((zmodUnitActionData l).smul a j) := by
+  by_cases hj : j = 0
+  · subst j
+    rw [fromCoordinate_zero, unitActionOnFullLabel_zero]
+    simp [zmodUnitActionData, fromCoordinate_zero]
+  · have hsmul :
+        (zmodUnitActionData l).smul a j ≠ 0 :=
+      (zmodUnitActionData l).smul_nonzero a j hj
+    rw [fromCoordinate_nonzero l j hj]
+    rw [unitActionOnFullLabel_nonzero]
+    rw [fromCoordinate_nonzero l ((zmodUnitActionData l).smul a j) hsmul]
+    unfold zmodSignLabelFromCoordinate
+    rw [zmodUnitActionOnSignLabelQuotient_apply]
+    have hx :
+        zmodUnitSmulNonzeroLabel l a (zmodNonzeroLabelFromCoordinate l j hj) =
+          zmodNonzeroLabelFromCoordinate l
+            ((zmodUnitActionData l).smul a j) hsmul := by
+      apply Subtype.ext
+      simp [zmodUnitSmulNonzeroLabel, zmodNonzeroLabelFromCoordinate,
+        zmodLabelTranslate_eq_add]
+    rw [hx]
+
 theorem two_ne_zero (l : PrimeGeFive) :
     (2 : ZMod l.value) ≠ 0 := by
   intro hzero
@@ -6113,6 +6157,15 @@ theorem weightedVolumeSubordinate_zero_iff_ne_zero
     WeightedVolumeSubordinate label IUTStage1ZModCuspFullLabel.zero ↔
       label ≠ IUTStage1ZModCuspFullLabel.zero := by
   cases label <;> simp [WeightedVolumeSubordinate]
+
+theorem unitActionOnFullLabel_preserves_subordinate_zero
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    WeightedVolumeSubordinate
+        (unitActionOnFullLabel l a label)
+        IUTStage1ZModCuspFullLabel.zero ↔
+      WeightedVolumeSubordinate label IUTStage1ZModCuspFullLabel.zero := by
+  cases label <;> simp [unitActionOnFullLabel, WeightedVolumeSubordinate]
 
 theorem fromCoordinate_nonzero_weightedVolumeSubordinate_zero
     (l : PrimeGeFive) (j : ZMod l.value) (hj : j ≠ 0) :
