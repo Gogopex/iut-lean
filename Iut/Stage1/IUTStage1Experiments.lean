@@ -348,6 +348,39 @@ theorem factoredSHETargetBound_finalQTheta
     profile audited factored source_profile_eq source_log_volume_eq
     target_fullLabel_le_thetaAverage
 
+theorem factoredSHENonzeroTargetBound_finalQTheta
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (factored :
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+        package part.bundle l)
+    (source_profile_eq : profile = factored.sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        factored.sourceLogVolume)
+    (target_nonzero_fullLabel_le_thetaAverage :
+      ∀ j : ZMod l.value,
+        factored.coordinateEquiv j ≠ 0 ->
+          factored.targetLogVolume.fullLabelLogVolume
+              (IUTStage1ZModCuspFullLabel.fromCoordinate l
+                (factored.coordinateEquiv j)) <=
+            part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+              audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.toThetaCuspClassContainerAudit.qSigned_le_thetaSigned_via_factoredSHENonzeroBound
+    profile audited factored source_profile_eq source_log_volume_eq
+    target_nonzero_fullLabel_le_thetaAverage
+
 theorem gaussianFactoredSHETargetBound_finalQTheta
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -404,6 +437,63 @@ theorem gaussianFactoredSHETargetBound_finalQTheta
       rw [hfull]
       exact target_gaussian_le_thetaAverage j)
 
+theorem gaussianFactoredSHENonzeroTargetBound_finalQTheta
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (coordinate_square_preserved :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (fullLabelMap_preserved :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (environmentDegree_preserved :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree)
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_nonzero_gaussian_le_thetaAverage :
+      ∀ j : ZMod l.value,
+        coordinateEquiv j ≠ 0 ->
+          targetEvaluation.gaussianDegree
+              (IUTStage1ZModCuspFullLabel.fromCoordinate l
+                (coordinateEquiv j)) <=
+            part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+              audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned := by
+  let factored :=
+    IUTStage1StructuredSHEFactoredSquareFullLabelObligations.fromGaussianDegreeEvaluations
+      (package := package) (bundle := part.bundle)
+      coordinateEquiv sourceProfile targetProfile
+      sourceEvaluation targetEvaluation coordinate_square_preserved
+      fullLabelMap_preserved environmentDegree_preserved
+  exact factoredSHENonzeroTargetBound_finalQTheta
+    part profile audited factored source_profile_eq source_log_volume_eq
+    (by
+      intro j hj
+      dsimp [factored,
+        IUTStage1StructuredSHEFactoredSquareFullLabelObligations.fromGaussianDegreeEvaluations]
+      have hfull :=
+        targetEvaluation.toCuspLabelLogVolumeCompatibility_fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j))
+      rw [hfull]
+      exact target_nonzero_gaussian_le_thetaAverage j hj)
+
 theorem gaussianFactoredSHETargetBound_finalQTheta_of_nonpositive_environment
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
@@ -449,8 +539,58 @@ theorem gaussianFactoredSHETargetBound_finalQTheta_of_nonpositive_environment
     (by
       intro j
       exact targetEvaluation.gaussianDegree_le_of_environment_nonpositive_of_nonnegative_bound
-          target_environment_nonpositive theta_average_nonnegative
+        target_environment_nonpositive theta_average_nonnegative
         (IUTStage1ZModCuspFullLabel.fromCoordinate l (coordinateEquiv j)))
+
+theorem gaussianFactoredSHENonzeroTargetBound_finalQTheta_of_environment_le
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (coordinate_square_preserved :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (fullLabelMap_preserved :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (environmentDegree_preserved :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree)
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_environment_nonpositive :
+      targetEvaluation.environmentDegree <= 0)
+    (environment_le_thetaAverage :
+      targetEvaluation.environmentDegree <=
+        part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+          audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  gaussianFactoredSHENonzeroTargetBound_finalQTheta
+    part profile audited coordinateEquiv sourceProfile targetProfile
+    sourceEvaluation targetEvaluation coordinate_square_preserved
+    fullLabelMap_preserved environmentDegree_preserved source_profile_eq
+    source_log_volume_eq
+    (by
+      intro j hj
+      rw [IUTStage1ZModCuspFullLabel.fromCoordinate_nonzero l
+        (coordinateEquiv j) hj]
+      exact targetEvaluation.gaussianDegree_nonzero_le_of_environment_le_bound
+        target_environment_nonpositive environment_le_thetaAverage
+        (zmodSignLabelFromCoordinate l (coordinateEquiv j) hj))
 
 theorem gaussianAllLabelTargetBound_implies_thetaAverage_nonnegative
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}

@@ -485,6 +485,9 @@ The code currently covers:
   the target environment degree is nonpositive and is itself bounded by that
   average; Lean also forms the corresponding finite average over the nonzero
   \(ZMod\) carrier and proves the same upper bound for this nonzero average;
+  because the square-weighted route assigns weight \(0\) to the core label, Lean
+  now feeds nonzero-only target bounds through the square/full-label transport
+  audit all the way to \(q_{\mathrm{signed}}\le\Theta_{\mathrm{signed}}\);
 \item a bridge from factored square/full-label SHE obligations to the
   Hodge-descent \((\mathrm{Ind3})\) route.
 \end{itemize}
@@ -628,7 +631,9 @@ all-label Gaussian bound cannot hold when the \(\Theta\)-source average is
 negative.  For nonzero labels, Lean proves the complementary bound: the
 absolute exponent is at least \(1\), so a nonpositive environment degree below
 the \(\Theta\)-source average bounds every nonzero Gaussian component and hence
-their finite nonzero-label average.
+their finite nonzero-label average.  The square-weighted transport route has
+also been strengthened from an all-label pointwise bound to a weighted-summand
+bound, so the zero label requires no target upper bound.
 
 \section{Audit Findings}
 
@@ -650,10 +655,10 @@ target value bounded above by that average.  The all-label version cannot be
 the negative branch: the core label contributes \(0\), so a negative upper bound
 is impossible.  On the nonzero-label part, the formal obstruction disappears:
 exponent \(\ge1\) gives the expected bound from the environment comparison.  The
-remaining task is to connect this refined nonzero-label statement, together with
-the separate core/coric bookkeeping, to the hull/log-volume route.  The present
-formalization now has the nonzero average, but the final route still consumes
-the older all-label square/full-label average.
+square-weighted final route now accepts this nonzero-only bound, since the core
+summand has weight \(0\).  The remaining task is to replace the current
+degree-level Gaussian shadow by the actual Hodge--Arakelov Gaussian/Frobenioid
+construction behind this environment comparison.
 
 The strongest negative result is also limited: in the current \(\F_\ell\)-label
 model, Lean rejects a single label-independent scale accounting for all
