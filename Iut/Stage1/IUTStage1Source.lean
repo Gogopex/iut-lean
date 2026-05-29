@@ -8773,6 +8773,236 @@ def absNonzeroLabelFromIndex
   IUTStage1ZModCuspFullLabel.fromCoordinate l
     ((label.val + 1 : Nat) : ZMod l.value)
 
+def signedAbsNonzeroIndexToCoordinate
+    (l : PrimeGeFive)
+    (label : Bool × Fin (absLabelProcessionTop l)) :
+    ZMod l.value :=
+  if label.1 then
+    -((label.2.val + 1 : Nat) : ZMod l.value)
+  else
+    ((label.2.val + 1 : Nat) : ZMod l.value)
+
+theorem absNonzeroIndexNatCast_ne_zero
+    (label : Fin (absLabelProcessionTop l)) :
+    ((label.val + 1 : Nat) : ZMod l.value) ≠ 0 := by
+  intro hzero
+  rw [ZMod.natCast_eq_zero_iff] at hzero
+  have hpos : 0 < label.val + 1 := Nat.succ_pos label.val
+  have hlt : label.val + 1 < l.value := by
+    have htop := label.isLt
+    unfold absLabelProcessionTop at htop
+    have hge : 5 ≤ l.value := l.ge_five
+    omega
+  have hle : l.value ≤ label.val + 1 := Nat.le_of_dvd hpos hzero
+  omega
+
+theorem signedAbsNonzeroIndexToCoordinate_ne_zero
+    (label : Bool × Fin (absLabelProcessionTop l)) :
+    signedAbsNonzeroIndexToCoordinate l label ≠ 0 := by
+  cases label with
+  | mk sign index =>
+      cases sign
+      · exact absNonzeroIndexNatCast_ne_zero (l := l) index
+      · exact zmod_neg_ne_zero_of_ne_zero l
+          (absNonzeroIndexNatCast_ne_zero (l := l) index)
+
+def signedAbsNonzeroIndexToCarrier
+    (l : PrimeGeFive)
+    (label : Bool × Fin (absLabelProcessionTop l)) :
+    (zmodPointedQuotient l).NonzeroCarrier :=
+  { val := signedAbsNonzeroIndexToCoordinate l label,
+    property := signedAbsNonzeroIndexToCoordinate_ne_zero (l := l) label }
+
+theorem signedAbsNonzeroIndexToCoordinate_pos
+    (label : Fin (absLabelProcessionTop l)) :
+    signedAbsNonzeroIndexToCoordinate l (false, label) =
+      ((label.val + 1 : Nat) : ZMod l.value) := by
+  simp [signedAbsNonzeroIndexToCoordinate]
+
+theorem signedAbsNonzeroIndexToCoordinate_neg
+    (label : Fin (absLabelProcessionTop l)) :
+    signedAbsNonzeroIndexToCoordinate l (true, label) =
+      -((label.val + 1 : Nat) : ZMod l.value) := by
+  simp [signedAbsNonzeroIndexToCoordinate]
+
+theorem signedAbsNonzeroIndexToCarrier_pos
+    (label : Fin (absLabelProcessionTop l)) :
+    (signedAbsNonzeroIndexToCarrier l (false, label)).1 =
+      ((label.val + 1 : Nat) : ZMod l.value) :=
+  signedAbsNonzeroIndexToCoordinate_pos (l := l) label
+
+theorem signedAbsNonzeroIndexToCarrier_neg
+    (label : Fin (absLabelProcessionTop l)) :
+    (signedAbsNonzeroIndexToCarrier l (true, label)).1 =
+      -((label.val + 1 : Nat) : ZMod l.value) :=
+  signedAbsNonzeroIndexToCoordinate_neg (l := l) label
+
+theorem absNonzeroIndexNatCast_val
+    (label : Fin (absLabelProcessionTop l)) :
+    (((label.val + 1 : Nat) : ZMod l.value).val) = label.val + 1 := by
+  have hlt : label.val + 1 < l.value := by
+    have htop := label.isLt
+    unfold absLabelProcessionTop at htop
+    have hge : 5 ≤ l.value := l.ge_five
+    omega
+  exact ZMod.val_natCast_of_lt hlt
+
+theorem absNonzeroIndexNatCast_ne_neg
+    (a b : Fin (absLabelProcessionTop l)) :
+    ((a.val + 1 : Nat) : ZMod l.value) ≠
+      -((b.val + 1 : Nat) : ZMod l.value) := by
+  intro h
+  have hsum_zmod :
+      (((a.val + 1) + (b.val + 1) : Nat) : ZMod l.value) = 0 := by
+    have hsum :
+        ((a.val + 1 : Nat) : ZMod l.value) +
+            ((b.val + 1 : Nat) : ZMod l.value) = 0 := by
+      rw [h]
+      ring
+    simpa [Nat.cast_add] using hsum
+  rw [ZMod.natCast_eq_zero_iff] at hsum_zmod
+  have hpos : 0 < (a.val + 1) + (b.val + 1) := by omega
+  have hle :
+      l.value ≤ (a.val + 1) + (b.val + 1) :=
+    Nat.le_of_dvd hpos hsum_zmod
+  have htop := absLabelProcessionTop_eq_half_minus_one l
+  have ha := a.isLt
+  have hb := b.isLt
+  have hge : 5 ≤ l.value := l.ge_five
+  omega
+
+theorem signedAbsNonzeroIndexToCarrier_injective :
+    Function.Injective (signedAbsNonzeroIndexToCarrier l) := by
+  intro a b h
+  cases a with
+  | mk asign aindex =>
+      cases b with
+      | mk bsign bindex =>
+          cases asign <;> cases bsign
+          · have hcoord := congrArg
+              (fun x : (zmodPointedQuotient l).NonzeroCarrier => x.1) h
+            change
+              (signedAbsNonzeroIndexToCarrier l (false, aindex)).1 =
+                (signedAbsNonzeroIndexToCarrier l (false, bindex)).1 at hcoord
+            rw [signedAbsNonzeroIndexToCarrier_pos,
+              signedAbsNonzeroIndexToCarrier_pos] at hcoord
+            have hval := congrArg ZMod.val hcoord
+            rw [absNonzeroIndexNatCast_val,
+              absNonzeroIndexNatCast_val] at hval
+            congr
+            exact Fin.ext (Nat.succ.inj hval)
+          · have hcoord := congrArg (fun x : (zmodPointedQuotient l).NonzeroCarrier => x.1) h
+            change
+              (signedAbsNonzeroIndexToCarrier l (false, aindex)).1 =
+                (signedAbsNonzeroIndexToCarrier l (true, bindex)).1 at hcoord
+            rw [signedAbsNonzeroIndexToCarrier_pos,
+              signedAbsNonzeroIndexToCarrier_neg] at hcoord
+            exact False.elim
+              (absNonzeroIndexNatCast_ne_neg (l := l) aindex bindex hcoord)
+          · have hcoord := congrArg (fun x : (zmodPointedQuotient l).NonzeroCarrier => x.1) h
+            change
+              (signedAbsNonzeroIndexToCarrier l (true, aindex)).1 =
+                (signedAbsNonzeroIndexToCarrier l (false, bindex)).1 at hcoord
+            rw [signedAbsNonzeroIndexToCarrier_neg,
+              signedAbsNonzeroIndexToCarrier_pos] at hcoord
+            exact False.elim
+              (absNonzeroIndexNatCast_ne_neg (l := l) bindex aindex hcoord.symm)
+          · have hcoord := congrArg (fun x : (zmodPointedQuotient l).NonzeroCarrier => x.1) h
+            change
+              (signedAbsNonzeroIndexToCarrier l (true, aindex)).1 =
+                (signedAbsNonzeroIndexToCarrier l (true, bindex)).1 at hcoord
+            have hpos :
+                ((aindex.val + 1 : Nat) : ZMod l.value) =
+                  ((bindex.val + 1 : Nat) : ZMod l.value) := by
+              rw [signedAbsNonzeroIndexToCarrier_neg,
+                signedAbsNonzeroIndexToCarrier_neg] at hcoord
+              exact neg_injective hcoord
+            have hval := congrArg ZMod.val hpos
+            rw [absNonzeroIndexNatCast_val,
+              absNonzeroIndexNatCast_val] at hval
+            congr
+            exact Fin.ext (Nat.succ.inj hval)
+
+theorem signedAbsNonzeroIndexToCarrier_surjective :
+    Function.Surjective (signedAbsNonzeroIndexToCarrier l) := by
+  intro x
+  let m : Nat := x.1.valMinAbs.natAbs
+  have hm_pos : 0 < m := by
+    have hm_ne : m ≠ 0 := by
+      intro hm
+      have hmin : x.1.valMinAbs = 0 := Int.natAbs_eq_zero.mp hm
+      exact x.2 ((ZMod.valMinAbs_eq_zero x.1).mp hmin)
+    exact Nat.pos_of_ne_zero hm_ne
+  have hm_le : m ≤ absLabelProcessionTop l := by
+    dsimp [m]
+    unfold absLabelProcessionTop
+    exact ZMod.natAbs_valMinAbs_le x.1
+  let index : Fin (absLabelProcessionTop l) :=
+    ⟨m - 1, by omega⟩
+  have hindex : index.val + 1 = m := by
+    dsimp [index]
+    omega
+  by_cases hhalf : x.1.val ≤ l.value / 2
+  · refine ⟨(false, index), Subtype.ext ?_⟩
+    rw [signedAbsNonzeroIndexToCarrier_pos, hindex]
+    have hcast := ZMod.natCast_natAbs_valMinAbs (n := l.value) x.1
+    rw [if_pos hhalf] at hcast
+    exact hcast
+  · refine ⟨(true, index), Subtype.ext ?_⟩
+    rw [signedAbsNonzeroIndexToCarrier_neg, hindex]
+    have hcast := ZMod.natCast_natAbs_valMinAbs (n := l.value) x.1
+    rw [if_neg hhalf] at hcast
+    rw [hcast]
+    simp
+
+noncomputable def signedAbsNonzeroIndexEquivCarrier :
+    Bool × Fin (absLabelProcessionTop l) ≃
+      (zmodPointedQuotient l).NonzeroCarrier :=
+  Equiv.ofBijective (signedAbsNonzeroIndexToCarrier l)
+    ⟨signedAbsNonzeroIndexToCarrier_injective,
+      signedAbsNonzeroIndexToCarrier_surjective⟩
+
+theorem signedAbsNonzeroIndexEquivCarrier_apply
+    (label : Bool × Fin (absLabelProcessionTop l)) :
+    signedAbsNonzeroIndexEquivCarrier label =
+      signedAbsNonzeroIndexToCarrier l label :=
+  rfl
+
+theorem fromCoordinate_signedAbsNonzeroIndexToCarrier
+    (label : Bool × Fin (absLabelProcessionTop l)) :
+    IUTStage1ZModCuspFullLabel.fromCoordinate l
+        (signedAbsNonzeroIndexToCarrier l label).1 =
+      absNonzeroLabelFromIndex l label.2 := by
+  cases label with
+  | mk sign index =>
+      cases sign
+      · rfl
+      · rw [signedAbsNonzeroIndexToCarrier_neg]
+        unfold absNonzeroLabelFromIndex
+        exact IUTStage1ZModCuspFullLabel.fromCoordinate_neg l
+          ((index.val + 1 : Nat) : ZMod l.value)
+          (absNonzeroIndexNatCast_ne_zero (l := l) index)
+
+theorem fromCoordinate_nonzeroCarrier
+    (x : (zmodPointedQuotient l).NonzeroCarrier) :
+    IUTStage1ZModCuspFullLabel.fromCoordinate l x.1 =
+      IUTStage1ZModCuspFullLabel.nonzero
+        ((zmodSignAction l).toSignLabelQuotient x) := by
+  rw [IUTStage1ZModCuspFullLabel.fromCoordinate_nonzero l x.1 x.2]
+  rw [← zmod_toSignLabelQuotient_eq_fromCoordinate x]
+
+theorem gaussianDegree_signedAbsNonzeroIndexToCarrier
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (label : Bool × Fin (absLabelProcessionTop l)) :
+    evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.nonzero
+          ((zmodSignAction l).toSignLabelQuotient
+            (signedAbsNonzeroIndexToCarrier l label))) =
+      evaluation.gaussianDegree (absNonzeroLabelFromIndex l label.2) := by
+  rw [← fromCoordinate_nonzeroCarrier
+    (l := l) (signedAbsNonzeroIndexToCarrier l label)]
+  rw [fromCoordinate_signedAbsNonzeroIndexToCarrier]
+
 theorem gaussianDegree_fromAbsNonzeroLabelIndex
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (label : Fin (absLabelProcessionTop l)) :
@@ -8798,6 +9028,44 @@ theorem gaussianDegree_fromAbsNonzeroLabelIndex
     ((label.val + 1 : Nat) : ZMod l.value) hhalf]
   rw [hval]
 
+theorem nonzeroCarrier_gaussianDegree_sum_eq_two_absNonzeroLabel_sum
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    (Finset.univ.sum
+        (fun x : (zmodPointedQuotient l).NonzeroCarrier =>
+          evaluation.gaussianDegree
+            (IUTStage1ZModCuspFullLabel.nonzero
+              ((zmodSignAction l).toSignLabelQuotient x)))) =
+      2 *
+        (Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+          evaluation.gaussianDegree (absNonzeroLabelFromIndex l label)) := by
+  classical
+  let f : (zmodPointedQuotient l).NonzeroCarrier -> Real := fun x =>
+    evaluation.gaussianDegree
+      (IUTStage1ZModCuspFullLabel.nonzero
+        ((zmodSignAction l).toSignLabelQuotient x))
+  have hcarrier :
+      (Finset.univ.sum f) =
+        Finset.univ.sum
+          (fun label : Bool × Fin (absLabelProcessionTop l) =>
+            f (signedAbsNonzeroIndexToCarrier l label)) := by
+    symm
+    exact Fintype.sum_equiv
+      (signedAbsNonzeroIndexEquivCarrier (l := l))
+      (fun label : Bool × Fin (absLabelProcessionTop l) =>
+        f (signedAbsNonzeroIndexToCarrier l label))
+      f
+      (by
+        intro label
+        rw [signedAbsNonzeroIndexEquivCarrier_apply])
+  change
+    (Finset.univ.sum f) =
+      2 *
+        (Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+          evaluation.gaussianDegree (absNonzeroLabelFromIndex l label))
+  rw [hcarrier]
+  rw [← Finset.univ_product_univ, Finset.sum_product]
+  simp [f, gaussianDegree_signedAbsNonzeroIndexToCarrier, two_mul]
+
 noncomputable def absNonzeroLabelAveragedLogVolume
     (evaluation : GaussianMonoidDegreeEvaluation l) :
     IUTStage1LabelAveragedProcessionLogVolume
@@ -8809,6 +9077,38 @@ noncomputable def absNonzeroLabelAveragedLogVolume
         evaluation.gaussianDegree (absNonzeroLabelFromIndex l label)) /
         (absLabelProcessionTop l : Real),
     average_eq := by simp }
+
+theorem zmodNonzeroCarrier_card_eq_two_absLabelProcessionTop :
+    Fintype.card (zmodPointedQuotient l).NonzeroCarrier =
+      2 * absLabelProcessionTop l := by
+  rw [zmodNonzeroCarrier_card_eq]
+  rw [absLabelProcessionTop_eq_half_minus_one]
+  have hodd : Odd l.value := l.prime.odd_of_ne_two l.ne_two
+  rcases hodd with ⟨k, hk⟩
+  rw [hk]
+  omega
+
+theorem nonzeroCarrierAveragedLogVolume_eq_absNonzeroLabelAveragedLogVolume
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume =
+      (absNonzeroLabelAveragedLogVolume evaluation).averageLogVolume := by
+  unfold GaussianMonoidDegreeEvaluation.nonzeroCarrierAveragedLogVolume
+  unfold absNonzeroLabelAveragedLogVolume
+  simp only
+  rw [nonzeroCarrier_gaussianDegree_sum_eq_two_absNonzeroLabel_sum,
+    zmodNonzeroCarrier_card_eq_two_absLabelProcessionTop]
+  have hden : (absLabelProcessionTop l : Real) ≠ 0 := by
+    exact_mod_cast ne_of_gt (absLabelProcessionTop_pos l)
+  norm_num
+  field_simp [hden]
+
+theorem coordinateAveragedLogVolume_eq_absNonzero_mass_rescale
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    evaluation.coordinateAveragedLogVolume.averageLogVolume =
+      ((l.value - 1 : Nat) : Real) / (l.value : Real) *
+        (absNonzeroLabelAveragedLogVolume evaluation).averageLogVolume := by
+  rw [evaluation.coordinateAveragedLogVolume_eq_nonzero_mass_rescale]
+  rw [nonzeroCarrierAveragedLogVolume_eq_absNonzeroLabelAveragedLogVolume]
 
 theorem nonzeroProcessionSquareSum_mul_six :
     ((Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>

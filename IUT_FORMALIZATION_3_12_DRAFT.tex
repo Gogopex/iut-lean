@@ -230,7 +230,10 @@ The code currently covers:
   all-\(F_\ell\) coordinate average itself is zero if and only if
   \(\deg(q)=0\);
   Lean separately formalizes the nonzero half-range
-  \(j=1,\ldots,(\ell-1)/2\) average and proves
+  \(j=1,\ldots,(\ell-1)/2\) average, proves that the signed nonzero carrier
+  \(F_\ell^\times\) is the twofold cover of this half-range by \(j\) and \(-j\),
+  and therefore proves that the signed nonzero average equals the nonzero
+  absolute-label average.  It also proves
   \(6\,\operatorname{Avg}_{j\ne0,\,|F_\ell|}G(j)
    =(j_{\max}+1)(2j_{\max}+1)\deg(q)\); Lean also proves the exact rescaling
   \[
@@ -739,8 +742,10 @@ route from degree-level Gaussian data, coordinate-square preservation,
 full-label-map preservation, equal source/target environment degree, and
 environment degree bounded above by the \(\Theta\)-source average.  The
 zero/nonzero average split is now exact: the nonzero carrier has cardinality
-\(\ell-1\), the zero Gaussian degree is \(0\), and the all-\(F_\ell\) average is
-\((\ell-1)/\ell\) times the nonzero average.  The remaining task is to replace
+\(\ell-1=2j_{\max}\), the signed carrier is a twofold cover of the nonzero
+absolute half-range, the zero Gaussian degree is \(0\), and the all-\(F_\ell\)
+average is \((\ell-1)/\ell\) times the nonzero absolute average.  The remaining
+task is to replace
 the current degree-level Gaussian shadow by the actual Hodge--Arakelov
 Gaussian/Frobenioid construction behind this environment comparison.
 

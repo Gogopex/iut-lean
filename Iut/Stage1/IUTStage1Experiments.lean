@@ -21,6 +21,7 @@ open RealLineCopy
 open IUTStage1SourcePackage.PlaceAuditedMultiradialThetaHullEndpoint.LogVolumeChartAudit
 open FLZModCuspLabelThetaHodgeDescentPacketTransportAudit
 open FLZModCuspLabelThetaCuspClassContainerAudit
+open IUTStage1ZModSquareWeightProfile
 open IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction
 
 /-- First pass: no real-line/log-volume alignment has been supplied. -/
@@ -700,6 +701,13 @@ theorem zmodNonzeroCarrierCard_eq
     Fintype.card (zmodPointedQuotient l).NonzeroCarrier = l.value - 1 :=
   zmodNonzeroCarrier_card_eq l
 
+theorem zmodNonzeroCarrierCard_eq_two_absLabelTop
+    (l : PrimeGeFive) :
+    Fintype.card (zmodPointedQuotient l).NonzeroCarrier =
+      2 * IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l :=
+  IUTStage1ZModSquareWeightProfile.zmodNonzeroCarrier_card_eq_two_absLabelProcessionTop
+    (l := l)
+
 theorem gaussianCoordinateAverage_eq_nonzeroMassRescale
     {l : PrimeGeFive}
     (evaluation :
@@ -708,6 +716,27 @@ theorem gaussianCoordinateAverage_eq_nonzeroMassRescale
       ((l.value - 1 : Nat) : Real) / (l.value : Real) *
         evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume :=
   evaluation.coordinateAveragedLogVolume_eq_nonzero_mass_rescale
+
+theorem gaussianNonzeroCarrierAverage_eq_absNonzeroAverage
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume =
+      (IUTStage1ZModSquareWeightProfile.absNonzeroLabelAveragedLogVolume
+        evaluation).averageLogVolume :=
+  nonzeroCarrierAveragedLogVolume_eq_absNonzeroLabelAveragedLogVolume
+    evaluation
+
+theorem gaussianCoordinateAverage_eq_absNonzeroMassRescale
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    evaluation.coordinateAveragedLogVolume.averageLogVolume =
+      ((l.value - 1 : Nat) : Real) / (l.value : Real) *
+        (IUTStage1ZModSquareWeightProfile.absNonzeroLabelAveragedLogVolume
+          evaluation).averageLogVolume :=
+  IUTStage1ZModSquareWeightProfile.coordinateAveragedLogVolume_eq_absNonzero_mass_rescale
+    evaluation
 
 theorem gaussianCoordinateAverage_strictly_above_nonzeroAverage_of_negative
     {l : PrimeGeFive}

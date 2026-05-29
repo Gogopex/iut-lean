@@ -18624,3 +18624,35 @@ IUT II, Remark 4.7.3(iii), assigns weight \(1/\ell\) to volumes indexed by
 \(j\in F_\ell\) and separates the zero label from the nonzero Gaussian
 components.  The Lean theorem records that replacing this weighted all-label
 average by a nonzero-only average changes the value in a sign-dependent way.
+
+## Signed nonzero carrier versus nonzero absolute labels
+
+### Lean Move
+
+Added:
+
+```text
+signedAbsNonzeroIndexToCoordinate
+signedAbsNonzeroIndexToCarrier
+signedAbsNonzeroIndexEquivCarrier
+nonzeroCarrier_gaussianDegree_sum_eq_two_absNonzeroLabel_sum
+nonzeroCarrierAveragedLogVolume_eq_absNonzeroLabelAveragedLogVolume
+coordinateAveragedLogVolume_eq_absNonzero_mass_rescale
+gaussianNonzeroCarrierAverage_eq_absNonzeroAverage
+gaussianCoordinateAverage_eq_absNonzeroMassRescale
+```
+
+### Mathematical Reason
+
+For odd prime \(\ell\), every nonzero residue is uniquely either
+\(j\) or \(-j\) with \(1\le j\le(\ell-1)/2\).  Lean now proves this as a
+bijection from `Bool × Fin (absLabelProcessionTop l)` to the nonzero carrier.
+Since the Gaussian degree is sign-invariant, the signed nonzero sum is twice the
+nonzero absolute half-range sum, and the averages are equal after dividing by
+\(\ell-1=2j_{\max}\).
+
+### Source Check
+
+This matches the IUT II convention that \(|F_\ell|=\{0\}\cup
+F_\ell^\times/\{\pm1\}\), while preserving the separate \(F_\ell\)-indexed
+weighted-volume average with the zero label included.
