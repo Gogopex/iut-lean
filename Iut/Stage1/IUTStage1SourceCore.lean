@@ -2601,6 +2601,26 @@ theorem shiftedLogVolume_ne_unshifted
     add_left_cancel hsum'
   exact data.shiftTerm_ne_zero hExponent hStep hzero
 
+theorem shiftedLogVolume_eq_unshifted_iff_shiftTerm_eq_zero
+    (data : IUTStage1LocalFrobenioidLogVolumeAmbiguity) :
+    data.shiftedLogVolume = data.unshiftedLogVolume ↔
+      (data.localExponent : Real) * data.localPrimeStepLogVolume = 0 := by
+  constructor
+  · intro h
+    have hsum :
+        data.unshiftedLogVolume +
+            (data.localExponent : Real) * data.localPrimeStepLogVolume =
+          data.unshiftedLogVolume := by
+      simpa [data.shifted_logVolume_eq] using h
+    have hsum' :
+        data.unshiftedLogVolume +
+            (data.localExponent : Real) * data.localPrimeStepLogVolume =
+          data.unshiftedLogVolume + 0 := by
+      simpa using hsum
+    exact add_left_cancel hsum'
+  · intro h
+    rw [data.shifted_logVolume_eq, h, add_zero]
+
 end IUTStage1LocalFrobenioidLogVolumeAmbiguity
 
 /--
@@ -2640,6 +2660,27 @@ theorem calibratedLogVolume_ne_shifted_of_local_nonzero
     exact h
   exact data.localData.shiftedLogVolume_ne_unshifted hExponent hStep
     hunshifted_eq_shifted.symm
+
+theorem calibratedLogVolume_eq_shifted_iff_shiftTerm_eq_zero
+    (data : IUTStage1GlobalFrobenioidLogVolumeCalibration) :
+    data.calibratedLogVolume = data.localData.shiftedLogVolume ↔
+      (data.localData.localExponent : Real) *
+        data.localData.localPrimeStepLogVolume = 0 := by
+  constructor
+  · intro h
+    have hunshifted_eq_shifted :
+        data.localData.unshiftedLogVolume =
+          data.localData.shiftedLogVolume := by
+      rw [← data.calibratedLogVolume_eq_unshifted]
+      exact h
+    exact
+      data.localData.shiftedLogVolume_eq_unshifted_iff_shiftTerm_eq_zero.mp
+        hunshifted_eq_shifted.symm
+  · intro hzero
+    rw [data.calibratedLogVolume_eq_unshifted]
+    exact
+      (data.localData.shiftedLogVolume_eq_unshifted_iff_shiftTerm_eq_zero.mpr
+        hzero).symm
 
 end IUTStage1GlobalFrobenioidLogVolumeCalibration
 

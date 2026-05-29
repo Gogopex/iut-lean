@@ -4961,6 +4961,12 @@ theorem localFrobenioidLogVolume_shifted_ne_unshifted
     data.shiftedLogVolume ≠ data.unshiftedLogVolume :=
   data.shiftedLogVolume_ne_unshifted hExponent hStep
 
+theorem localFrobenioidLogVolume_shifted_eq_unshifted_iff_zero_shift
+    (data : IUTStage1LocalFrobenioidLogVolumeAmbiguity) :
+    data.shiftedLogVolume = data.unshiftedLogVolume ↔
+      (data.localExponent : Real) * data.localPrimeStepLogVolume = 0 :=
+  data.shiftedLogVolume_eq_unshifted_iff_shiftTerm_eq_zero
+
 theorem globalFrobenioidCalibration_eq_unshifted
     (data : IUTStage1GlobalFrobenioidLogVolumeCalibration) :
     data.calibratedLogVolume = data.localData.unshiftedLogVolume :=
@@ -4972,6 +4978,13 @@ theorem globalFrobenioidCalibration_ne_localShifted
     (hStep : data.localData.localPrimeStepLogVolume ≠ 0) :
     data.calibratedLogVolume ≠ data.localData.shiftedLogVolume :=
   data.calibratedLogVolume_ne_shifted_of_local_nonzero hExponent hStep
+
+theorem globalFrobenioidCalibration_eq_localShifted_iff_zero_shift
+    (data : IUTStage1GlobalFrobenioidLogVolumeCalibration) :
+    data.calibratedLogVolume = data.localData.shiftedLogVolume ↔
+      (data.localData.localExponent : Real) *
+        data.localData.localPrimeStepLogVolume = 0 :=
+  data.calibratedLogVolume_eq_shifted_iff_shiftTerm_eq_zero
 
 theorem positiveRationalUnitRigidity_eq_one
     {q : Rat} (hpos : 0 < q)
