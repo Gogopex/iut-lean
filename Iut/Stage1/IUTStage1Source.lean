@@ -21854,6 +21854,35 @@ def ThreeElevenFiveStructuredSHEConstantTargetThetaAudit.toPointwiseTargetThetaA
       exact le_of_eq (sourceAudit.target_normalizedLogVolume_eq_thetaAverage
         (sourceAudit.transport_audit.preservationAudit.coordinateEquiv j)) }
 
+theorem ThreeElevenFiveStructuredSHEConstantTargetThetaAudit.squareWeightedAverage_eq_thetaAverage
+    {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {profile : IUTStage1ZModSquareWeightProfile l}
+    {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+    (sourceAudit :
+      ThreeElevenFiveStructuredSHEConstantTargetThetaAudit
+        part bundle profile audited) :
+    (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
+        profile audited).weightedAverageLogVolume =
+      part.theta_source.thetaSourceAverage audited := by
+  exact
+    part.theta_source.compatible_average.squareWeightedAverage_eq_const_of_fullLabelLogVolume_eq
+      profile audited
+      (by
+        intro j
+        calc
+          (part.theta_source.compatible_average.cuspLogVolume audited).fullLabelLogVolume
+              (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+            (part.theta_source.compatible_average.zmod_cusp_audit.averaged_audit.averagedLogVolume
+                audited).normalizedLogVolume j := by
+              have hlabel :=
+                part.theta_source.compatible_average
+                  |>.averageLabel_eq_fullLabelLogVolume_fromCoordinate
+                    audited j
+              exact hlabel.symm
+          _ = part.theta_source.thetaSourceAverage audited :=
+            sourceAudit.target_normalizedLogVolume_eq_thetaAverage j)
+
 theorem ThreeElevenFiveStructuredSHEConstantTargetThetaAudit.weightedAverage_le_thetaAverage
     {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
     {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
@@ -21865,7 +21894,7 @@ theorem ThreeElevenFiveStructuredSHEConstantTargetThetaAudit.weightedAverage_le_
     (part.theta_source.compatible_average.squareWeightedAveragedLogVolume
         profile audited).weightedAverageLogVolume <=
       part.theta_source.thetaSourceAverage audited :=
-  sourceAudit.toPointwiseTargetThetaAudit.weightedAverage_le_thetaAverage
+  le_of_eq sourceAudit.squareWeightedAverage_eq_thetaAverage
 
 def ThreeElevenFiveStructuredSHEConstantTargetThetaAudit.toThreeElevenFiveWeightedThetaAudit
     {part : audit.FLZModCuspLabelThetaLabelwiseContainerAudit l}
