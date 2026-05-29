@@ -6795,6 +6795,61 @@ theorem determinantTensorBoundary_separatesLocalShift_or_strict
         hsep.2.2.2.1, hsep.2.2.2.2⟩
   · exact Or.inr hstrict
 
+theorem determinantTensorBoundary_separatesLocalShiftFromTwoComputation_or_strict
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (tensorPower : Nat)
+    (tensor_power_ge_two : 2 ≤ tensorPower)
+    (theta_neg : data.thetaHullLogVolume < 0)
+    (hExponent : localExponent ≠ 0)
+    (hStep : localPrimeStepLogVolume ≠ 0) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    (cTheta = (-1 : Real) ∧
+        twoComputation.inputPrimeStripLogVolume =
+          data.determinant.determinantLogVolume ∧
+        twoComputation.outputHullLogVolume =
+          data.determinant.determinantLogVolume ∧
+        twoComputation.inputPrimeStripLogVolume ∉
+          (data.toThetaPilotTensorPowerLogVolume
+            tensorPower tensor_power_ge_two).tensorPowerUpperRay ∧
+        twoComputation.outputHullLogVolume ∉
+          (data.toThetaPilotTensorPowerLogVolume
+            tensorPower tensor_power_ge_two).tensorPowerUpperRay ∧
+        global.localData.shiftedLogVolume ≠
+          twoComputation.inputPrimeStripLogVolume ∧
+        global.localData.shiftedLogVolume ≠
+          twoComputation.outputHullLogVolume) ∨
+      (-1 : Real) < cTheta := by
+  intro twoComputation global
+  rcases data.determinantTensorBoundary_separatesLocalShift_or_strict
+      localExponent localPrimeStepLogVolume q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ tensorPower tensor_power_ge_two theta_neg
+      hExponent hStep with
+    hboundary | hstrict
+  · left
+    exact
+      ⟨hboundary.1, hboundary.2.1, hboundary.2.2.1,
+        hboundary.2.2.2.1, hboundary.2.2.2.2.1,
+        by
+          intro hshift
+          exact hboundary.2.2.2.2.2.2.2.2.2
+            (hshift.trans hboundary.2.1),
+        by
+          intro hshift
+          exact hboundary.2.2.2.2.2.2.2.2.2
+            (hshift.trans hboundary.2.2.1)⟩
+  · exact Or.inr hstrict
+
 theorem boundaryCTheta_localShift_eq_q_or_det_iff_trivial
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (localExponent : Int)
