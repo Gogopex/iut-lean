@@ -7236,6 +7236,35 @@ theorem target_allLabelBound_iff_nonnegative_and_source_environment_le_of_gaussi
     targetEvaluation coordinateEquiv target_environment_nonpositive
     canonical_one_preserved]
 
+theorem target_allLabelBound_iff_source_allLabelBound_of_gaussianDegree_one_eq
+    (sourceEvaluation targetEvaluation : GaussianMonoidDegreeEvaluation l)
+    (targetCoordinateEquiv sourceCoordinateEquiv :
+      ZMod l.value ≃ ZMod l.value)
+    (target_environment_nonpositive :
+      targetEvaluation.environmentDegree <= 0)
+    (source_environment_nonpositive :
+      sourceEvaluation.environmentDegree <= 0)
+    (canonical_one_preserved :
+      targetEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        sourceEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)))
+    {c : Real} :
+    (∀ j : ZMod l.value,
+        targetEvaluation.gaussianDegree
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (targetCoordinateEquiv j)) <= c) ↔
+      ∀ j : ZMod l.value,
+        sourceEvaluation.gaussianDegree
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (sourceCoordinateEquiv j)) <= c := by
+  rw [sourceEvaluation
+    |>.target_allLabelBound_iff_nonnegative_and_source_environment_le_of_gaussianDegree_one_eq
+      targetEvaluation targetCoordinateEquiv target_environment_nonpositive
+      canonical_one_preserved]
+  rw [sourceEvaluation.forall_coordinateFullLabel_le_iff_bound_nonnegative_and_environment_le
+    sourceCoordinateEquiv source_environment_nonpositive]
+
 end GaussianMonoidDegreeEvaluation
 
 def absLabelProcessionTop (l : PrimeGeFive) : Nat :=

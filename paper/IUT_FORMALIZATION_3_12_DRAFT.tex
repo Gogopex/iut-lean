@@ -824,7 +824,9 @@ all-label q-to-\(\Theta\) endpoint now consumes this source-side package
 directly, and it can alternatively derive that package from a source all-label
 Gaussian bound under source nonpositivity.  The source all-label predicate is
 itself equivalent, under source nonpositivity, to the conjunction of
-\(0\le\Theta_{\mathrm{avg}}\) and the source-environment upper bound.  It can also
+\(0\le\Theta_{\mathrm{avg}}\) and the source-environment upper bound.  Hence,
+under canonical \(j=1\) preservation and the two nonpositive branches, the
+source and target all-label Gaussian predicates are equivalent.  It can also
 consume the decomposed zero/nonzero input directly.  For nonzero labels, Lean
 proves the complementary bound: the absolute exponent is at least \(1\), so a
 nonpositive environment degree below the \(\Theta\)-source average bounds every
@@ -877,7 +879,9 @@ with \(0\le\Theta_{\mathrm{avg}}\).  The corresponding final theorem now
 uses these source-side inputs directly rather than asking for the all-label
 target predicate separately; a further variant derives them from a source
 all-label Gaussian bound, and Lean classifies that source all-label predicate
-as exactly \(0\le\Theta_{\mathrm{avg}}\) plus the source-environment bound.
+as exactly \(0\le\Theta_{\mathrm{avg}}\) plus the source-environment bound; the
+target and source all-label predicates are consequently equivalent under the
+same canonical \(j=1\) and nonpositivity hypotheses.
 Lean also proves that, in the nonpositive
 environment branch, the nonzero coordinate target-bound formulation is
 equivalent to this environment bound against the
