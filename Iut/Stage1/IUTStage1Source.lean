@@ -5353,6 +5353,32 @@ theorem thetaFiniteLogVolumeEndpoint
       endpoint.thetaRealLogVolume_eq_hull,
       endpoint.qPilotLogVolume_le_thetaRealLogVolume⟩
 
+theorem thetaFinite_determinantLogVolume_endpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label) :
+    let finite := data.toThetaFiniteLogVolumeEndpoint;
+    finite.thetaRealLogVolume = data.determinant.determinantLogVolume ∧
+      data.qPilotLogVolume <= data.determinant.determinantLogVolume ∧
+      data.qPilotLogVolume <=
+        data.determinant.tensorPowerLogVolume /
+          (data.determinant.positiveTensorPower : Real) ∧
+      data.determinant.tensorPowerLogVolume =
+        (data.determinant.positiveTensorPower : Real) *
+          finite.thetaRealLogVolume := by
+  intro finite
+  exact
+    ⟨by
+      rw [finite.thetaRealLogVolume_eq_hull]
+      simpa [finite, toThetaFiniteLogVolumeEndpoint,
+        toHullDetPilotUpperRayLogVolume] using
+        data.thetaHullLogVolume_eq_determinantLogVolume,
+    data.qPilotLogVolume_le_determinantLogVolume,
+    data.qPilotLogVolume_le_tensorPowerLogVolume_div,
+    by
+      rw [finite.thetaRealLogVolume_eq_hull]
+      simpa [finite, toThetaFiniteLogVolumeEndpoint,
+        toHullDetPilotUpperRayLogVolume] using
+        data.tensorPowerLogVolume_eq_positiveTensorPower_mul_thetaHullLogVolume⟩
+
 def toZeroColumnHullAbsorption
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (originalRegionLogVolume unitShiftedRegionLogVolume : Real)
