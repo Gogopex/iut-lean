@@ -18704,7 +18704,10 @@ Added:
 
 ```text
 two_ne_zero
+two_mul_ne_zero_of_ne_zero
+no_fullLabel_map_descends_nonzero_translation
 no_fullLabel_map_descends_translation_one
+nonzeroTranslation_not_descend_to_fullLabel
 translationOne_not_descend_to_fullLabel
 zmod_subset_eq_univ_of_nonempty_translation_closed
 zmod_proper_nonempty_subset_not_translation_closed
@@ -18717,10 +18720,10 @@ In the concrete \(F_\ell=\mathbb{Z}/\ell\mathbb{Z}\) torsor, a nonempty subset
 closed under all translations must be the whole carrier: from any base point in
 the subset, translating by \(x-\mathrm{base}\) reaches an arbitrary \(x\).  Thus
 no nonempty proper subset restriction can preserve the full additive
-\(F_\ell\)-torsor symmetry.  Lean also proves that translation by \(1\) cannot
-descend to the full absolute label quotient: \(1\) and \(-1\) have the same
-absolute label, but translation by \(1\) sends them to \(2\) and \(0\),
-respectively.
+\(F_\ell\)-torsor symmetry.  Lean also proves that no nonzero translation
+\(j\mapsto t+j\) can descend to the full absolute label quotient: \(t\) and
+\(-t\) have the same absolute label, but translation by \(t\) sends them to
+\(2t\ne0\) and \(0\), respectively.
 
 ### Source Check
 

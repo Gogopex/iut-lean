@@ -5887,33 +5887,48 @@ theorem two_ne_zero (l : PrimeGeFive) :
   have hge : 5 ≤ l.value := l.ge_five
   omega
 
+theorem two_mul_ne_zero_of_ne_zero
+    (l : PrimeGeFive) (t : ZMod l.value) (ht : t ≠ 0) :
+    (2 : ZMod l.value) * t ≠ 0 := by
+  haveI : Fact l.value.Prime := ⟨l.prime⟩
+  exact mul_ne_zero (two_ne_zero l) ht
+
+theorem no_fullLabel_map_descends_nonzero_translation
+    (l : PrimeGeFive) (t : ZMod l.value) (ht : t ≠ 0) :
+    ¬ ∃ T : IUTStage1ZModCuspFullLabel l -> IUTStage1ZModCuspFullLabel l,
+      ∀ j : ZMod l.value,
+        T (fromCoordinate l j) =
+          fromCoordinate l (zmodLabelTranslate l t j) := by
+  rintro ⟨T, hT⟩
+  have hsame :
+      fromCoordinate l (-t) = fromCoordinate l t :=
+    fromCoordinate_neg l t ht
+  have hneg := hT (-t)
+  have hpos := hT t
+  rw [hsame] at hneg
+  have htranslated :
+      fromCoordinate l (zmodLabelTranslate l t (-t)) =
+        fromCoordinate l (zmodLabelTranslate l t t) := by
+    rw [← hneg, hpos]
+  rw [zmodLabelTranslate_eq_add, zmodLabelTranslate_eq_add] at htranslated
+  rw [add_neg_cancel] at htranslated
+  have hdouble : t + t = (2 : ZMod l.value) * t := by ring
+  rw [hdouble] at htranslated
+  rw [fromCoordinate_zero] at htranslated
+  have htwo_zero :
+      (2 : ZMod l.value) * t = 0 := by
+    exact (fromCoordinate_eq_zero_iff
+      (l := l) ((2 : ZMod l.value) * t)).mp htranslated.symm
+  exact two_mul_ne_zero_of_ne_zero l t ht htwo_zero
+
 theorem no_fullLabel_map_descends_translation_one
     (l : PrimeGeFive) :
     ¬ ∃ T : IUTStage1ZModCuspFullLabel l -> IUTStage1ZModCuspFullLabel l,
       ∀ j : ZMod l.value,
         T (fromCoordinate l j) =
           fromCoordinate l (zmodLabelTranslate l (1 : ZMod l.value) j) := by
-  rintro ⟨T, hT⟩
-  have hone_ne : (1 : ZMod l.value) ≠ 0 := (zmodOneNonzeroLabel l).2
-  have hsame :
-      fromCoordinate l (-(1 : ZMod l.value)) =
-        fromCoordinate l (1 : ZMod l.value) :=
-    fromCoordinate_neg l (1 : ZMod l.value) hone_ne
-  have hneg := hT (-(1 : ZMod l.value))
-  have hpos := hT (1 : ZMod l.value)
-  rw [hsame] at hneg
-  have htranslated :
-      fromCoordinate l (zmodLabelTranslate l (1 : ZMod l.value) (-(1 : ZMod l.value))) =
-        fromCoordinate l (zmodLabelTranslate l (1 : ZMod l.value) (1 : ZMod l.value)) := by
-    rw [← hneg, hpos]
-  rw [zmodLabelTranslate_eq_add, zmodLabelTranslate_eq_add] at htranslated
-  norm_num at htranslated
-  rw [fromCoordinate_zero] at htranslated
-  have htwo_zero :
-      (2 : ZMod l.value) = 0 := by
-    exact (fromCoordinate_eq_zero_iff (l := l) (2 : ZMod l.value)).mp
-      htranslated.symm
-  exact two_ne_zero l htwo_zero
+  exact no_fullLabel_map_descends_nonzero_translation l
+    (1 : ZMod l.value) (zmodOneNonzeroLabel l).2
 
 /--
 Stage 1 shadow of the weighted-volume relation `F_l ∋ j ≪ 0` from IUT II,
