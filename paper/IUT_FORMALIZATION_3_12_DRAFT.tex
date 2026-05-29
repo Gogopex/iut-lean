@@ -709,6 +709,9 @@ The code currently covers:
   \(\{x\mid x\le q\}\), Lean proves the sign classification: a negative local
   shift term lies below q and is quotient-identified with q, a zero term equals
   q, and a positive term lies above q and is not quotient-identified with q.
+  The same classification is now proved for the actual hull/determinant upper
+  ray already present in the corridor, using the boundary identification
+  \(q=\Theta_{\mathrm{hull}}\).
   Hence, if the collapsed region also contains a nonzero local shift, Lean
   proves that the quotient identifies it with the fixed q/determinant boundary
   while the underlying log-volumes remain unequal; this broad-collapse
