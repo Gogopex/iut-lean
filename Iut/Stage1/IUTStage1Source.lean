@@ -7243,6 +7243,65 @@ theorem boundaryCTheta_actualUpperRayQuotient_ne_q_iff_shiftTerm_pos
   · intro hpos hmap
     exact (not_le_of_gt hpos) (heq.mp hmap)
 
+theorem boundaryCTheta_actualUpperRayQuotient_eq_q_of_exponent_nonpos_step_pos
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hC : cTheta = (-1 : Real))
+    (hExponent : (localExponent : Real) <= 0)
+    (hStep : 0 < localPrimeStepLogVolume) :
+    let collapsedRegion : Set Real :=
+      data.toHullDetPilotUpperRayLogVolume.upperRay;
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    IUTStage1UpperSemiSetQuotient.quotientMap
+        collapsedRegion global.localData.shiftedLogVolume =
+      IUTStage1UpperSemiSetQuotient.quotientMap
+        collapsedRegion data.qPilotLogVolume := by
+  intro collapsedRegion global
+  have heq :=
+    data.boundaryCTheta_actualUpperRayQuotient_eq_q_iff_shiftTerm_nonpos
+      localExponent localPrimeStepLogVolume q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ hC
+  exact heq.mpr
+    (mul_nonpos_of_nonpos_of_nonneg hExponent (le_of_lt hStep))
+
+theorem boundaryCTheta_actualUpperRayQuotient_ne_q_of_exponent_pos_step_pos
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hC : cTheta = (-1 : Real))
+    (hExponent : 0 < (localExponent : Real))
+    (hStep : 0 < localPrimeStepLogVolume) :
+    let collapsedRegion : Set Real :=
+      data.toHullDetPilotUpperRayLogVolume.upperRay;
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    IUTStage1UpperSemiSetQuotient.quotientMap
+        collapsedRegion global.localData.shiftedLogVolume ≠
+      IUTStage1UpperSemiSetQuotient.quotientMap
+        collapsedRegion data.qPilotLogVolume := by
+  intro collapsedRegion global
+  have hne :=
+    data.boundaryCTheta_actualUpperRayQuotient_ne_q_iff_shiftTerm_pos
+      localExponent localPrimeStepLogVolume q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ hC
+  exact hne.mpr (mul_pos hExponent hStep)
+
 theorem boundaryCTheta_upperSemiQuotient_collapses_nonzeroLocalShift_of_mem
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (collapsedRegion : Set Real)
