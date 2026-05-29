@@ -6388,6 +6388,45 @@ theorem standardQLambdaCTheta_qPilot_eq_determinantLogVolume_of_cTheta_eq_neg_on
     q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hC,
     data.thetaHullLogVolume_eq_determinantLogVolume]
 
+theorem standardQLambdaCTheta_determinantBoundary_or_strict
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    (cTheta = (-1 : Real) ∧
+        twoComputation.inputPrimeStripLogVolume =
+          data.determinant.determinantLogVolume ∧
+        twoComputation.outputHullLogVolume =
+          data.determinant.determinantLogVolume) ∨
+      (-1 : Real) < cTheta := by
+  intro twoComputation
+  by_cases hC : cTheta = (-1 : Real)
+  · left
+    have hq :
+        data.qPilotLogVolume = data.determinant.determinantLogVolume :=
+      data.standardQLambdaCTheta_qPilot_eq_determinantLogVolume_of_cTheta_eq_neg_one
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hC
+    exact
+      ⟨hC,
+        by
+          rw [twoComputation.input_eq_q]
+          simpa [toQPilotTwoComputationLogVolume,
+            toHullDetPilotUpperRayLogVolume] using hq,
+        by
+          rw [twoComputation.output_eq_q]
+          simpa [toQPilotTwoComputationLogVolume,
+            toHullDetPilotUpperRayLogVolume] using hq⟩
+  · right
+    exact
+      lt_of_le_of_ne
+        ((data.toQPilotTwoComputationCThetaEndpoint
+          q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).cTheta_ge_neg_one)
+        (Ne.symm hC)
+
 theorem cTheta_ge_neg_one
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (q_pilot_positive :
