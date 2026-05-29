@@ -6257,6 +6257,17 @@ theorem before_average_le_ind3UpperBound
   rw [data.ind1_preserves_average, data.ind2_preserves_average]
   exact data.ind3_upper
 
+theorem afterInd1_average_le_ind3UpperBound
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.afterInd1.averageLogVolume <= data.ind3UpperBound := by
+  rw [data.ind2_preserves_average]
+  exact data.ind3_upper
+
+theorem afterInd2_average_le_ind3UpperBound
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.afterInd2.averageLogVolume <= data.ind3UpperBound :=
+  data.ind3_upper
+
 end IUTStage1ProcessionNormalizedIndeterminacyCorridor
 
 /--

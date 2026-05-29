@@ -951,6 +951,18 @@ theorem processionNormalizedIndeterminacyCorridor_before_le_ind3Upper
     data.beforeIndeterminacy.averageLogVolume <= data.ind3UpperBound :=
   data.before_average_le_ind3UpperBound
 
+theorem processionNormalizedIndeterminacyCorridor_afterInd1_le_ind3Upper
+    {label : Type u} [Fintype label]
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.afterInd1.averageLogVolume <= data.ind3UpperBound :=
+  data.afterInd1_average_le_ind3UpperBound
+
+theorem processionNormalizedIndeterminacyCorridor_afterInd2_le_ind3Upper
+    {label : Type u} [Fintype label]
+    (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
+    data.afterInd2.averageLogVolume <= data.ind3UpperBound :=
+  data.afterInd2_average_le_ind3UpperBound
+
 theorem processionNormalizedIndeterminacyCorridor_afterInd1_eq_before
     {label : Type u} [Fintype label]
     (data : IUTStage1ProcessionNormalizedIndeterminacyCorridor label) :
