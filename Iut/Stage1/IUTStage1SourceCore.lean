@@ -3018,6 +3018,57 @@ theorem shiftedLogVolume_eq_unshifted_iff_exponent_zero_or_step_zero
   rw [data.shiftedLogVolume_eq_unshifted_iff_shiftTerm_eq_zero,
     data.shiftTerm_eq_zero_iff_exponent_zero_or_step_zero]
 
+theorem shiftedLogVolume_eq_iff_exponent_eq_of_same_base_step
+    (data₁ data₂ : IUTStage1LocalFrobenioidLogVolumeAmbiguity)
+    (hunshift : data₁.unshiftedLogVolume = data₂.unshiftedLogVolume)
+    (hstep :
+      data₁.localPrimeStepLogVolume = data₂.localPrimeStepLogVolume)
+    (hstep_ne_zero : data₁.localPrimeStepLogVolume ≠ 0) :
+    data₁.shiftedLogVolume = data₂.shiftedLogVolume ↔
+      data₁.localExponent = data₂.localExponent := by
+  constructor
+  · intro hshift
+    have hsum :
+        data₁.unshiftedLogVolume +
+            (data₁.localExponent : Real) *
+              data₁.localPrimeStepLogVolume =
+          data₂.unshiftedLogVolume +
+            (data₂.localExponent : Real) *
+              data₂.localPrimeStepLogVolume := by
+      calc
+        data₁.unshiftedLogVolume +
+            (data₁.localExponent : Real) *
+              data₁.localPrimeStepLogVolume =
+            data₁.shiftedLogVolume := data₁.shifted_logVolume_eq.symm
+        _ = data₂.shiftedLogVolume := hshift
+        _ =
+            data₂.unshiftedLogVolume +
+              (data₂.localExponent : Real) *
+                data₂.localPrimeStepLogVolume :=
+          data₂.shifted_logVolume_eq
+    have hsum_same_step :
+        data₁.unshiftedLogVolume +
+            (data₁.localExponent : Real) *
+              data₁.localPrimeStepLogVolume =
+          data₁.unshiftedLogVolume +
+            (data₂.localExponent : Real) *
+              data₁.localPrimeStepLogVolume := by
+      simpa [← hunshift, ← hstep] using hsum
+    have hmuleq :
+        (data₁.localExponent : Real) *
+            data₁.localPrimeStepLogVolume =
+          (data₂.localExponent : Real) *
+            data₁.localPrimeStepLogVolume :=
+      add_left_cancel hsum_same_step
+    have hreal :
+        (data₁.localExponent : Real) =
+          (data₂.localExponent : Real) :=
+      mul_right_cancel₀ hstep_ne_zero hmuleq
+    exact_mod_cast hreal
+  · intro hExponent
+    rw [data₁.shifted_logVolume_eq, data₂.shifted_logVolume_eq,
+      hunshift, hstep, hExponent]
+
 theorem shiftedLogVolume_lt_unshifted_iff_shiftTerm_lt_zero
     (data : IUTStage1LocalFrobenioidLogVolumeAmbiguity) :
     data.shiftedLogVolume < data.unshiftedLogVolume ↔
