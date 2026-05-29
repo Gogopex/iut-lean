@@ -2117,6 +2117,16 @@ theorem thetaRealLogVolume_le_cTheta_absLogQ
     ← data.finiteEndpoint.thetaFiniteValue_eq_hull]
   exact data.thetaFiniteValue_le_cTheta_absLogQ
 
+theorem cTheta_nonnegative_of_thetaRealLogVolume_nonnegative
+    (data : IUTStage1Corollary312StatementEndpoint)
+    (hTheta : 0 <= data.thetaRealLogVolume) :
+    0 <= data.cTheta := by
+  have hmul :
+      0 <= data.cTheta *
+        (-data.finiteEndpoint.upperRayData.qPilotLogVolume) :=
+    le_trans hTheta data.thetaRealLogVolume_le_cTheta_absLogQ
+  nlinarith [hmul, data.q_pilot_positive]
+
 theorem cTheta_ge_neg_one
     (data : IUTStage1Corollary312StatementEndpoint) :
     (-1 : Real) <= data.cTheta :=
@@ -6699,6 +6709,25 @@ theorem beforeAverage_lt_statementEndpoint_thetaRealLogVolume_of_theta_nonneg
     pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ]
   exact data.statementEndpoint_qPilotLogVolume_lt_thetaRealLogVolume_of_theta_nonneg
     pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hTheta
+
+theorem statementEndpoint_cTheta_nonnegative_of_thetaRealLogVolume_nonnegative
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hTheta :
+      0 <= (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+        thetaHull_le_cTheta_absLogQ).thetaRealLogVolume) :
+    0 <=
+      (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+        thetaHull_le_cTheta_absLogQ).cTheta :=
+  (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+    thetaHull_le_cTheta_absLogQ).cTheta_nonnegative_of_thetaRealLogVolume_nonnegative
+      hTheta
 
 theorem beforeAverage_le_statementEndpoint_ind3Upper
     (data : IUTStage1StepXToHullUpperRayLogVolume label) :
