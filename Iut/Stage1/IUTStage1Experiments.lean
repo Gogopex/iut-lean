@@ -5335,6 +5335,13 @@ theorem iutIVTheorem110FinalDisplay_bound
     data.estimate.oneSixthLogQ <= data.finalRightHandSide :=
   data.oneSixthLogQ_le_finalRightHandSide
 
+theorem iutIVTheorem110FinalDisplay_chain
+    (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) :
+    data.estimate.oneSixthLogQ <= data.baseChange.ftpdTheorem110RightHandSide ∧
+      data.baseChange.ftpdTheorem110RightHandSide <= data.finalRightHandSide ∧
+        data.estimate.oneSixthLogQ <= data.finalRightHandSide :=
+  data.final_display_chain
+
 theorem iutIVTheoremABoundedDiscrepancy_height_bound
     {Point : Type u}
     (data : IUTStage1IUTIVTheoremABoundedDiscrepancyShadow Point)

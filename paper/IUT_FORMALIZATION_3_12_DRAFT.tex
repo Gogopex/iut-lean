@@ -570,8 +570,9 @@ The code currently covers:
   \(10(e^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}})\);
 \item the IUT IV, Theorem 1.10 final display:
   the Corollary 3.12 \(C_\Theta\) handoff, followed by the
-  tripodal-to-\(F\) monotonicity, gives the final \(F\)-level
-  \(\frac16\log(q)\) inequality;
+  tripodal-to-\(F\) monotonicity, gives the two displayed inequalities:
+  first the \(F_{\mathrm{tpd}}\)-level \(\frac16\log(q)\) bound, then the
+  final \(F\)-level bound;
 \item the IUT IV, Theorem A bounded-discrepancy conclusion:
   boundedness below of
   \((1+\epsilon)(\log\operatorname{diff}_X+\log\operatorname{cond}_D)
@@ -1055,8 +1056,9 @@ uniform prime-product bound used in the final \(C_\Theta\) estimate.
 Lean also checks the subsequent absorption into the coefficient \(10\) of
 \(e^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}}\).
 Combining the Corollary 3.12 handoff with the tripodal-to-\(F\) monotonicity,
-Lean proves the final displayed \(F\)-level inequality of Theorem 1.10 at this
-real-valued shadow level.
+Lean proves the two-line final display of Theorem 1.10 at this real-valued
+shadow level: the intermediate \(F_{\mathrm{tpd}}\)-level bound and the final
+\(F\)-level bound.
 For Theorem A, Lean records the exact bounded-discrepancy conclusion and proves
 the equivalent pointwise height bound from the lower-bound hypothesis.
 For Corollary 2.2(i), Lean defines equality up to bounded discrepancy, proves

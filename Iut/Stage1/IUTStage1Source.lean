@@ -978,11 +978,30 @@ theorem finalRightHandSide_eq_baseChange
     data.finalRightHandSide = data.baseChange.fTheorem110RightHandSide :=
   rfl
 
+theorem oneSixthLogQ_le_ftpdRightHandSide
+    (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) :
+    data.estimate.oneSixthLogQ <= data.baseChange.ftpdTheorem110RightHandSide :=
+  data.estimate.oneSixthLogQ_le_theorem110RightHandSide
+
+theorem ftpdRightHandSide_le_finalRightHandSide
+    (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) :
+    data.baseChange.ftpdTheorem110RightHandSide <= data.finalRightHandSide :=
+  data.baseChange.ftpdTheorem110RightHandSide_le_fTheorem110RightHandSide
+
 theorem oneSixthLogQ_le_finalRightHandSide
     (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) :
     data.estimate.oneSixthLogQ <= data.finalRightHandSide := by
-  exact le_trans data.estimate.oneSixthLogQ_le_theorem110RightHandSide
-    data.baseChange.ftpdTheorem110RightHandSide_le_fTheorem110RightHandSide
+  exact le_trans data.oneSixthLogQ_le_ftpdRightHandSide
+    data.ftpdRightHandSide_le_finalRightHandSide
+
+theorem final_display_chain
+    (data : IUTStage1IUTIVTheorem110FinalDisplayShadow) :
+    data.estimate.oneSixthLogQ <= data.baseChange.ftpdTheorem110RightHandSide ∧
+      data.baseChange.ftpdTheorem110RightHandSide <= data.finalRightHandSide ∧
+        data.estimate.oneSixthLogQ <= data.finalRightHandSide :=
+  ⟨data.oneSixthLogQ_le_ftpdRightHandSide,
+    data.ftpdRightHandSide_le_finalRightHandSide,
+    data.oneSixthLogQ_le_finalRightHandSide⟩
 
 end IUTStage1IUTIVTheorem110FinalDisplayShadow
 
