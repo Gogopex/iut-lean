@@ -7017,6 +7017,92 @@ theorem boundaryCTheta_localShift_orderedAround_twoComputation
       rw [twoComputation.output_eq_q]
       exact hordered.2.1⟩
 
+theorem boundaryCTheta_localShift_trichotomyAround_twoComputation
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hC : cTheta = (-1 : Real)) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    ((localExponent : Real) * localPrimeStepLogVolume < 0 ∧
+        global.localData.shiftedLogVolume <
+          twoComputation.inputPrimeStripLogVolume ∧
+        global.localData.shiftedLogVolume <
+          twoComputation.outputHullLogVolume) ∨
+      ((localExponent : Real) * localPrimeStepLogVolume = 0 ∧
+        global.localData.shiftedLogVolume =
+          twoComputation.inputPrimeStripLogVolume ∧
+        global.localData.shiftedLogVolume =
+          twoComputation.outputHullLogVolume) ∨
+      (0 < (localExponent : Real) * localPrimeStepLogVolume ∧
+        twoComputation.inputPrimeStripLogVolume <
+          global.localData.shiftedLogVolume ∧
+        twoComputation.outputHullLogVolume <
+          global.localData.shiftedLogVolume) := by
+  intro twoComputation global
+  have hordered :=
+    data.boundaryCTheta_localShift_orderedAround_twoComputation
+      localExponent localPrimeStepLogVolume q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ hC
+  have hqtheta :
+      data.qPilotLogVolume = data.thetaHullLogVolume :=
+    data.standardQLambdaCTheta_qPilot_eq_thetaHullLogVolume_of_cTheta_eq_neg_one
+      q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hC
+  have hglobaltheta :
+      global.calibratedLogVolume = data.thetaHullLogVolume := by
+    simpa [global, toGlobalFrobenioidLogVolumeCalibration] using
+      data.toThetaFiniteLogVolumeEndpoint.thetaRealLogVolume_eq_hull
+  have hglobalq :
+      global.calibratedLogVolume = data.qPilotLogVolume :=
+    hglobaltheta.trans hqtheta.symm
+  have hinputZero :
+      global.localData.shiftedLogVolume =
+          twoComputation.inputPrimeStripLogVolume ↔
+        (localExponent : Real) * localPrimeStepLogVolume = 0 := by
+    rw [twoComputation.input_eq_q]
+    constructor
+    · intro hshift
+      exact
+        global.calibratedLogVolume_eq_shifted_iff_shiftTerm_eq_zero.mp
+          (hglobalq.trans hshift.symm)
+    · intro hzero
+      have hcalshift :
+          global.calibratedLogVolume = global.localData.shiftedLogVolume :=
+        global.calibratedLogVolume_eq_shifted_iff_shiftTerm_eq_zero.mpr hzero
+      exact hcalshift.symm.trans hglobalq
+  have houtputZero :
+      global.localData.shiftedLogVolume =
+          twoComputation.outputHullLogVolume ↔
+        (localExponent : Real) * localPrimeStepLogVolume = 0 := by
+    rw [twoComputation.output_eq_q]
+    constructor
+    · intro hshift
+      exact
+        global.calibratedLogVolume_eq_shifted_iff_shiftTerm_eq_zero.mp
+          (hglobalq.trans hshift.symm)
+    · intro hzero
+      have hcalshift :
+          global.calibratedLogVolume = global.localData.shiftedLogVolume :=
+        global.calibratedLogVolume_eq_shifted_iff_shiftTerm_eq_zero.mpr hzero
+      exact hcalshift.symm.trans hglobalq
+  rcases lt_trichotomy
+      ((localExponent : Real) * localPrimeStepLogVolume) 0 with
+    hneg | hzero | hpos
+  · exact Or.inl
+      ⟨hneg, hordered.2.1.mpr hneg, hordered.2.2.2.mpr hneg⟩
+  · exact Or.inr (Or.inl
+      ⟨hzero, hinputZero.mpr hzero, houtputZero.mpr hzero⟩)
+  · exact Or.inr (Or.inr
+      ⟨hpos, hordered.1.mpr hpos, hordered.2.2.1.mpr hpos⟩)
+
 theorem determinantTensorBoundary_ordersLocalShiftAroundTwoComputation_or_strict
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (localExponent : Int)
@@ -7073,6 +7159,65 @@ theorem determinantTensorBoundary_ordersLocalShiftAroundTwoComputation_or_strict
         hboundary.2.2.2.1, hboundary.2.2.2.2,
         hordered.1, hordered.2.1, hordered.2.2.1,
         hordered.2.2.2⟩
+  · exact Or.inr hstrict
+
+theorem determinantTensorBoundary_trichotomyAroundTwoComputation_or_strict
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (tensorPower : Nat)
+    (tensor_power_ge_two : 2 ≤ tensorPower)
+    (theta_neg : data.thetaHullLogVolume < 0) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    (cTheta = (-1 : Real) ∧
+        twoComputation.inputPrimeStripLogVolume =
+          data.determinant.determinantLogVolume ∧
+        twoComputation.outputHullLogVolume =
+          data.determinant.determinantLogVolume ∧
+        twoComputation.inputPrimeStripLogVolume ∉
+          (data.toThetaPilotTensorPowerLogVolume
+            tensorPower tensor_power_ge_two).tensorPowerUpperRay ∧
+        twoComputation.outputHullLogVolume ∉
+          (data.toThetaPilotTensorPowerLogVolume
+            tensorPower tensor_power_ge_two).tensorPowerUpperRay ∧
+        (((localExponent : Real) * localPrimeStepLogVolume < 0 ∧
+            global.localData.shiftedLogVolume <
+              twoComputation.inputPrimeStripLogVolume ∧
+            global.localData.shiftedLogVolume <
+              twoComputation.outputHullLogVolume) ∨
+          ((localExponent : Real) * localPrimeStepLogVolume = 0 ∧
+            global.localData.shiftedLogVolume =
+              twoComputation.inputPrimeStripLogVolume ∧
+            global.localData.shiftedLogVolume =
+              twoComputation.outputHullLogVolume) ∨
+          (0 < (localExponent : Real) * localPrimeStepLogVolume ∧
+            twoComputation.inputPrimeStripLogVolume <
+              global.localData.shiftedLogVolume ∧
+            twoComputation.outputHullLogVolume <
+              global.localData.shiftedLogVolume))) ∨
+      (-1 : Real) < cTheta := by
+  intro twoComputation global
+  rcases data.standardQLambdaCTheta_determinantTensorBoundary_or_strict
+      q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+      tensorPower tensor_power_ge_two theta_neg with
+    hboundary | hstrict
+  · left
+    have htri :=
+      data.boundaryCTheta_localShift_trichotomyAround_twoComputation
+        localExponent localPrimeStepLogVolume q_pilot_positive cTheta
+        thetaHull_le_cTheta_absLogQ hboundary.1
+    exact
+      ⟨hboundary.1, hboundary.2.1, hboundary.2.2.1,
+        hboundary.2.2.2.1, hboundary.2.2.2.2, htri⟩
   · exact Or.inr hstrict
 
 theorem boundaryCTheta_localShift_eq_q_or_det_iff_exponent_zero_of_step_nonzero

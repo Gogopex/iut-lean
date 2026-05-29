@@ -666,11 +666,17 @@ The code currently covers:
   set to zero, every exponent collapses to the same boundary q/determinant value;
   the same ordered local-shift comparison is now stated against both fixed
   q-readings;
+  Lean now fuses these facts into a trichotomy: at \(C_\Theta=-1\), the sign of
+  the Frobenioid shift term decides whether the local shifted value is below,
+  equal to, or above both fixed q-readings;
   Lean now also packages the determinant boundary, tensor-ray exclusion, and
   nonzero local-shift separation into one boundary-versus-strict branch theorem,
   including separation from both fixed q-readings of the two-computation endpoint;
   a parallel branch theorem packages the determinant/tensor boundary together
   with the ordered local-shift comparison around both fixed q-readings;
+  this has now been sharpened to a determinant/tensor branch theorem carrying
+  the full sign trichotomy for the local shifted value, opposed to the strict
+  branch \(C_\Theta>-1\);
   with nonzero local step, equality with either fixed q-reading is equivalent to
   exponent \(N=0\), while in the zero-step case Lean proves the complementary
   collapse to both fixed q-readings;
