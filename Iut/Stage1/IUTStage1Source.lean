@@ -5683,6 +5683,32 @@ theorem thetaFinite_signedEndpoint_agree
     finite.qPilotLogVolume_le_thetaRealLogVolume,
     signed.corollary312⟩
 
+theorem thetaFinite_signedEndpoint_agree_with_distinctIntertwining
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (transport : IUTStage1DistinctLabelIntertwiningTransport)
+    (hq : transport.qIntertwining) :
+    let finite := data.toThetaFiniteLogVolumeEndpoint;
+    let signed := data.toQPilotTwoComputationSignedEndpoint q_pilot_positive;
+    signed.comparisonData.qSigned = finite.upperRayData.qPilotLogVolume ∧
+      signed.comparisonData.thetaSigned = finite.thetaRealLogVolume ∧
+      Corollary312Inequality
+        signed.comparisonData.thetaPilot
+        signed.comparisonData.qPilot ∧
+      transport.qLabel ≠ transport.thetaLabel ∧
+      transport.weakenedPrimeStripCannotDistinguishPilots ∧
+      transport.qIntertwining ∧
+      transport.thetaIntertwiningUpToIndeterminacy := by
+  intro finite signed
+  have hagree :=
+    data.thetaFinite_signedEndpoint_agree q_pilot_positive
+  exact
+    ⟨hagree.1, hagree.2.1, hagree.2.2.2,
+      transport.labels_distinct,
+      transport.weakenedPrimeStripCondition,
+      hq, transport.theta_from_q hq⟩
+
 theorem ofZModCuspLabelLogVolumeCompatibilities_signedEndpointCorollary312
     {l : PrimeGeFive}
     (before afterInd1 afterInd2 :
