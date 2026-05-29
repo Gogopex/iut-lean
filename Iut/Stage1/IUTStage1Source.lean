@@ -34726,6 +34726,43 @@ structure NonarchimedeanInd3EntryAlignment
     entry.targetLogVolume.finiteLogVolume =
       audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume
 
+/--
+Source-facing log-Kummer upper-semi compatibility for a nonarchimedean
+Step (x) entry.
+
+This is the first replacement layer for the raw `NonarchimedeanInd3EntryAlignment`:
+it records that the entry is being used through the 1-column q-pilot
+log-Kummer/non-interference side of the upper-semi comparison.  The remaining
+real equalities still have to be supplied explicitly; later stages must derive
+them from the actual log-Kummer and Hodge-theater constructions.
+-/
+structure NonarchimedeanLogKummerUpperSemiCompatibility
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    (thetaAverage : Real)
+    (logKummer : LogKummerCorrespondenceId) where
+  column : IUTStage1LogThetaVerticalColumn
+  column_eq_qPilot :
+    column = IUTStage1LogThetaVerticalColumn.oneQPilot
+  logKummerNonInterference :
+    column.hasLogKummerNonInterference = true
+  entry : IUTStage1NonarchimedeanInclusionData
+  entry_mem :
+    entry ∈ audited.choice.upper_semi_state.nonarchimedeanInclusions
+  packetLocalObject_eq_entrySource :
+    audited.choice.local_tensor_state.packetState.localObject =
+      entry.sourceLogVolume
+  entrySource_eq_ind3Source :
+    entry.sourceLogVolume.finiteLogVolume =
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume
+  thetaAverage_eq_entryTarget :
+    thetaAverage =
+      entry.targetLogVolume.finiteLogVolume
+  entryTarget_eq_ind3Target :
+    entry.targetLogVolume.finiteLogVolume =
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume
+
 namespace NonarchimedeanInd3EntryAlignment
 
 variable
@@ -34882,6 +34919,74 @@ theorem canonicalOrderedRealLineAlignment_toRaw
   exact Subsingleton.elim _ _
 
 end NonarchimedeanInd3EntryAlignment
+
+namespace NonarchimedeanLogKummerUpperSemiCompatibility
+
+variable
+  {audited :
+    IUTStage1PlaceAuditedDirectSummandPacketChoice
+      coric IUTStage1PlaceKind.nonarchimedean}
+  {thetaAverage : Real}
+  {logKummer : LogKummerCorrespondenceId}
+
+def ofQPilotEntry
+    (entry : IUTStage1NonarchimedeanInclusionData)
+    (entry_mem :
+      entry ∈ audited.choice.upper_semi_state.nonarchimedeanInclusions)
+    (packetLocalObject_eq_entrySource :
+      audited.choice.local_tensor_state.packetState.localObject =
+        entry.sourceLogVolume)
+    (entrySource_eq_ind3Source :
+      entry.sourceLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume)
+    (thetaAverage_eq_entryTarget :
+      thetaAverage =
+        entry.targetLogVolume.finiteLogVolume)
+    (entryTarget_eq_ind3Target :
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume) :
+    NonarchimedeanLogKummerUpperSemiCompatibility
+      audited thetaAverage logKummer :=
+  { column := IUTStage1LogThetaVerticalColumn.oneQPilot,
+    column_eq_qPilot := rfl,
+    logKummerNonInterference :=
+      IUTStage1LogThetaVerticalColumn.oneQPilot.logKummerNonInterference_eq_true,
+    entry := entry,
+    entry_mem := entry_mem,
+    packetLocalObject_eq_entrySource := packetLocalObject_eq_entrySource,
+    entrySource_eq_ind3Source := entrySource_eq_ind3Source,
+    thetaAverage_eq_entryTarget := thetaAverage_eq_entryTarget,
+    entryTarget_eq_ind3Target := entryTarget_eq_ind3Target }
+
+theorem qPilotLogKummerNonInterference
+    (compat :
+      NonarchimedeanLogKummerUpperSemiCompatibility
+        audited thetaAverage logKummer) :
+    IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogKummerNonInterference =
+      true := by
+  rw [← compat.column_eq_qPilot]
+  exact compat.logKummerNonInterference
+
+def toNonarchimedeanInd3EntryAlignment
+    (compat :
+      NonarchimedeanLogKummerUpperSemiCompatibility
+        audited thetaAverage logKummer) :
+    NonarchimedeanInd3EntryAlignment audited compat.entry thetaAverage :=
+  { entry_mem := compat.entry_mem,
+    packetLocalObject_eq_entrySource := compat.packetLocalObject_eq_entrySource,
+    entrySource_eq_ind3Source := compat.entrySource_eq_ind3Source,
+    thetaAverage_eq_entryTarget := compat.thetaAverage_eq_entryTarget,
+    entryTarget_eq_ind3Target := compat.entryTarget_eq_ind3Target }
+
+theorem packetLocalObjectFinite_le_thetaAverage
+    (compat :
+      NonarchimedeanLogKummerUpperSemiCompatibility
+        audited thetaAverage logKummer) :
+    audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume <=
+      thetaAverage :=
+  compat.toNonarchimedeanInd3EntryAlignment.packetLocalObjectFinite_le_thetaAverage
+
+end NonarchimedeanLogKummerUpperSemiCompatibility
 
 /--
 Archimedean local upper-semi entry with its native surjection direction.
@@ -35766,6 +35871,56 @@ theorem boundarySignedEqualityOrStrictCTheta_of_gaussianIdentityCanonicalOneNona
       targetEvaluation canonical_one_preserved)
     source_profile_eq source_log_volume_eq target_log_volume_eq_theta
     entryAlignment q_pilot_positive cTheta thetaSigned_le_cTheta_absLogQ
+
+theorem boundarySignedEqualityOrStrictCTheta_of_gaussianIdentityCanonicalOneLogKummerUpperSemiEntry
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (canonical_one_preserved :
+      targetEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        sourceEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)))
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_log_volume_eq_theta :
+      targetEvaluation.toCuspLabelLogVolumeCompatibility =
+        part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited)
+    (logKummerUpperSemi :
+      NonarchimedeanLogKummerUpperSemiCompatibility audited
+        (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer)
+    (q_pilot_positive : 0 < -packageN.preLedger.qSigned)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    (packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+        packageN.preLedger.thetaSigned < 0) ∨
+      (-1 : Real) < cTheta :=
+  part.boundarySignedEqualityOrStrictCTheta_of_gaussianIdentityCanonicalOneNonarchimedeanEntry
+    profile audited sourceProfile targetProfile sourceEvaluation targetEvaluation
+    canonical_one_preserved source_profile_eq source_log_volume_eq
+    target_log_volume_eq_theta
+    logKummerUpperSemi.toNonarchimedeanInd3EntryAlignment q_pilot_positive
+    cTheta thetaSigned_le_cTheta_absLogQ
 
 theorem bridgeSource_eq_hodgeTheaterDescentPacketTransport
     (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :

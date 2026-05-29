@@ -319,6 +319,10 @@ There is also an identity-coordinate specialization.  In that case equality of
 Gaussian degree at the canonical full label \(1\) implies preservation of the
 environment degree, so the nonarchimedean \(C_\Theta\) dichotomy no longer
 takes environment-degree preservation as an independent hypothesis.
+The raw nonarchimedean entry alignment has also been refactored through a
+source-facing 1-column log-Kummer upper-semi compatibility object.  This records
+the q-pilot column and log-Kummer non-interference before converting to the raw
+real equalities consumed by the current route.
 
 \subsection{Step (xi-f) algebra}
 
@@ -417,6 +421,9 @@ The project currently proves the following source-facing results in \Lean{}:
 \item In the identity-coordinate Gaussian route, equality at the canonical full
   label \(1\) supplies the environment-degree preservation needed by the same
   nonarchimedean \(C_\Theta\) dichotomy.
+\item A 1-column log-Kummer upper-semi compatibility object now supplies the raw
+  nonarchimedean \((\Ind3)\) entry alignment used by the canonical Gaussian
+  route.
 \item The Step (xi-f) real algebra proves \(C_\Theta\ge-1\), strictness under
   strict upper-ray membership, and equality constraints in the boundary case.
 \item The final route rejects the balanced sign-compatible comparison level as
@@ -521,8 +528,9 @@ The practical priority order is:
 \item extend the Gaussian-derived factored \SHE{} construction beyond the
   finite degree-evaluation and canonical-label shadows toward actual
   Gaussian/Frobenioid material from \IUT{} II;
-\item replace the nonarchimedean \((\Ind3)\) alignment record by the
-  log-Kummer upper-semi compatibility construction of \IUT{} III, Step (x);
+\item derive the remaining real equalities in the 1-column log-Kummer
+  upper-semi compatibility object from the actual log-Kummer construction of
+  \IUT{} III, Step (x);
 \item replace the hull/determinant endpoint records by the actual
   holomorphic-hull and determinant operations from Remark 3.9.5 and
   Step (xi);
