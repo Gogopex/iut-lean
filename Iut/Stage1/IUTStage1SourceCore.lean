@@ -2622,6 +2622,80 @@ theorem cTheta_eq_neg_one_or_gt_neg_one
 
 end IUTStage1Corollary312SignedCThetaBound
 
+namespace IUTStage1ThetaPossibleImagesHullLogVolumeShadow
+
+variable {α : Type u} {ι : Type v}
+
+def toQPilotTwoComputationLogVolume
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
+    IUTStage1QPilotTwoComputationLogVolume :=
+  { upperRayData := data.toHullDetPilotUpperRayLogVolume,
+    inputPrimeStripLogVolume := data.qPilotLogVolume,
+    outputHullLogVolume := data.qPilotLogVolume,
+    input_eq_q := rfl,
+    output_eq_q := rfl }
+
+def toSignedEndpoint
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    (q_pilot_positive : 0 < -data.qPilotLogVolume) :
+    IUTStage1QPilotTwoComputationSignedEndpoint :=
+  { twoComputation := data.toQPilotTwoComputationLogVolume,
+    q_pilot_positive := q_pilot_positive }
+
+def toSignedCThetaBound
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    (q_pilot_positive : 0 < -data.qPilotLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <= cTheta * (-data.qPilotLogVolume)) :
+    IUTStage1Corollary312SignedCThetaBound :=
+  { comparison := (data.toSignedEndpoint q_pilot_positive).comparisonData,
+    cTheta := cTheta,
+    thetaSigned_le_cTheta_absLogQ := by
+      simpa [toSignedEndpoint, toQPilotTwoComputationLogVolume,
+        IUTStage1QPilotTwoComputationSignedEndpoint.comparisonData]
+        using thetaHull_le_cTheta_absLogQ }
+
+theorem cTheta_ge_neg_one
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    (q_pilot_positive : 0 < -data.qPilotLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <= cTheta * (-data.qPilotLogVolume)) :
+    (-1 : Real) <= cTheta :=
+  (data.toSignedCThetaBound q_pilot_positive cTheta
+    thetaHull_le_cTheta_absLogQ).cTheta_ge_neg_one
+
+theorem cTheta_eq_neg_one_or_gt_neg_one
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    (q_pilot_positive : 0 < -data.qPilotLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <= cTheta * (-data.qPilotLogVolume)) :
+    cTheta = (-1 : Real) ∨ (-1 : Real) < cTheta :=
+  (data.toSignedCThetaBound q_pilot_positive cTheta
+    thetaHull_le_cTheta_absLogQ).cTheta_eq_neg_one_or_gt_neg_one
+
+theorem thetaHull_eq_qPilotLogVolume_of_cTheta_eq_neg_one
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    (q_pilot_positive : 0 < -data.qPilotLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <= cTheta * (-data.qPilotLogVolume))
+    (hC : cTheta = (-1 : Real)) :
+    data.thetaHullLogVolume = data.qPilotLogVolume := by
+  have htheta :
+      data.qPilotLogVolume = data.thetaHullLogVolume :=
+    (data.toSignedCThetaBound q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ)
+        |>.toCThetaLowerBoundShadow
+        |>.qPilotLogVolume_eq_thetaPilotLogVolume_of_cTheta_eq_neg_one hC
+  simpa [toSignedCThetaBound, toSignedEndpoint, toQPilotTwoComputationLogVolume,
+    IUTStage1QPilotTwoComputationSignedEndpoint.comparisonData] using
+    htheta.symm
+
+end IUTStage1ThetaPossibleImagesHullLogVolumeShadow
+
 /--
 Generalized `q^lambda` Step (xi-f) algebra.
 
