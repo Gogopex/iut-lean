@@ -19869,6 +19869,56 @@ theorem bridge_eq_structuredSHE
       bundle.hodgeTheaterDescentBridgeData :=
   obligations.toStructuredSHESquareWeightTransportAudit.bridge_eq_structuredSHE
 
+/--
+Gaussian-to-factored-SHE preservation endpoint.
+
+If the source and target Gaussian evaluations have the same environment degree,
+then the constructed factored square/full-label obligations supply the
+full-label value preservation branch, the structured-SHE transported average
+equality, the pointwise representative comparison level, and the retained
+distinction of Hodge-theater histories.
+-/
+theorem fromGaussianDegreeEvaluations_endpoint
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation : GaussianMonoidDegreeEvaluation l)
+    (hcoord :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (hmap :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (henv :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree) :
+    let obligations :=
+      fromGaussianDegreeEvaluations
+        (package := package) (bundle := bundle)
+        coordinateEquiv sourceProfile targetProfile
+        sourceEvaluation targetEvaluation hcoord hmap henv;
+    let transportAudit := obligations.toStructuredSHESquareWeightTransportAudit;
+    obligations.comparisonLevel =
+        IUTStage1SquareComparisonLevel.pointwiseRepresentative ∧
+      (∀ j : ZMod l.value,
+        obligations.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (obligations.coordinateEquiv j)) =
+          obligations.sourceLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) ∧
+      transportAudit.preservationAudit.targetTransportedAverage =
+        transportAudit.preservationAudit.sourceAverage ∧
+      obligations.coordinateEquiv = Equiv.refl (ZMod l.value) ∧
+      bundle.structuredSHE.context.domainStructure.theater.side ≠
+        bundle.structuredSHE.context.codomainStructure.theater.side := by
+  intro obligations transportAudit
+  exact
+    ⟨obligations.comparisonLevel_eq_pointwiseRepresentative,
+      obligations.fullLabelLogVolume_preserved,
+      obligations.transportedAverage_eq,
+      IUTStage1ZModSquareWeightProfile.coordinateSquarePreserving_eq_refl
+        obligations.coordinateSquare_preserved,
+      bundle.domainHistory_ne_codomainHistory⟩
+
 theorem representativeSummand_constant_one_preserved
     (obligations :
       IUTStage1StructuredSHEFactoredSquareFullLabelObligations

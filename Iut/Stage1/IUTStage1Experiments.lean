@@ -442,6 +442,50 @@ theorem gaussianFactoredSHETargetBound_finalQTheta
       rw [hfull]
       exact target_gaussian_le_thetaAverage j)
 
+theorem gaussianDegreeEvaluations_factoredSHEEndpoint
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (coordinate_square_preserved :
+      IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) coordinateEquiv)
+    (fullLabelMap_preserved :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) coordinateEquiv)
+    (environmentDegree_preserved :
+      targetEvaluation.environmentDegree =
+        sourceEvaluation.environmentDegree) :
+    let obligations :=
+      IUTStage1StructuredSHEFactoredSquareFullLabelObligations.fromGaussianDegreeEvaluations
+        (package := package) (bundle := bundle)
+        coordinateEquiv sourceProfile targetProfile
+        sourceEvaluation targetEvaluation coordinate_square_preserved
+        fullLabelMap_preserved environmentDegree_preserved;
+    let transportAudit := obligations.toStructuredSHESquareWeightTransportAudit;
+    obligations.comparisonLevel =
+        IUTStage1SquareComparisonLevel.pointwiseRepresentative ∧
+      (∀ j : ZMod l.value,
+        obligations.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (obligations.coordinateEquiv j)) =
+          obligations.sourceLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) ∧
+      transportAudit.preservationAudit.targetTransportedAverage =
+        transportAudit.preservationAudit.sourceAverage ∧
+      obligations.coordinateEquiv = Equiv.refl (ZMod l.value) ∧
+      bundle.structuredSHE.context.domainStructure.theater.side ≠
+        bundle.structuredSHE.context.codomainStructure.theater.side :=
+  IUTStage1StructuredSHEFactoredSquareFullLabelObligations.fromGaussianDegreeEvaluations_endpoint
+    (package := package) (bundle := bundle)
+    coordinateEquiv sourceProfile targetProfile
+    sourceEvaluation targetEvaluation coordinate_square_preserved
+    fullLabelMap_preserved environmentDegree_preserved
+
 theorem gaussianFactoredSHENonzeroTargetBound_finalQTheta
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

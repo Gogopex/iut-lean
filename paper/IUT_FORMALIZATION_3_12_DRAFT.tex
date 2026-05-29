@@ -852,7 +852,10 @@ The code currently covers:
   source and target degree-level Gaussian evaluations with equal environment
   degree supply the full-label value-preservation branch of the factored
   square/full-label SHE obligations; with separate coordinate-square and
-  full-label-map preservation, the experiment route reaches
+  full-label-map preservation, Lean exposes the resulting pointwise comparison
+  level, transported-average equality, forced identity of the representative
+  square coordinate map, and retained separation of the two Hodge histories;
+  the experiment route then reaches
   \(q_{\mathrm{signed}}\le\Theta_{\mathrm{signed}}\) directly from Gaussian
   target bounds; since the absolute-label exponent is nonnegative, Lean also
   derives those target bounds in the branch where the target environment degree
@@ -1341,22 +1344,22 @@ The present code does not yet formalize:
 
 \section{Next Work}
 
-The continuation point remains the finite \(q^{j^2}\) branch and the
-distinct-label/intertwining corridor.  The next significant formal step is not
-another wrapper.  It is to replace current explicit Hodge/SHE transport
-assumptions by constructions closer to the papers:
+The finite \(q^{j^2}\), splitting-generator, and Gaussian-to-factored-SHE
+packaging endpoints are now in place.  The next significant formal step is to
+replace current explicit Hodge/SHE transport assumptions by constructions
+closer to the papers:
 
 \[
 \begin{array}{c}
 \text{theta values }q^{j^2}\quad\checkmark\ \text{finite square-weight endpoint}\\
 \leadsto\ \text{Gaussian and splitting monoids}\quad\checkmark\
   \text{generator action endpoint}\\
-\leadsto\ \text{square/full-label preservation}\\
+\leadsto\ \text{factored square/full-label preservation}\quad\checkmark\
+  \text{Gaussian endpoint}\\
 \leadsto\ \text{hull/log-volume route}.
 \end{array}
 \]
-The next step is to connect the generator-action endpoint to the
-square/full-label preservation route.
+The next step is to construct the Hodge/SHE preservation hypotheses themselves.
 
 \begingroup
 \small
