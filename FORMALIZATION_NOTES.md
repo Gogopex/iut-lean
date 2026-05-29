@@ -19027,3 +19027,31 @@ This refines the formal version of IUT II, Remarks 4.7.3--4.7.5: the
 multiplicative \(F_\ell\)-symmetry is kept as an action on the absolute-label
 side, while the \(\{\pm1\}\) ambiguity is exactly the one killed by the sign
 quotient.
+
+## Unit action as full-label equivalence
+
+### Lean Move
+
+Added:
+
+```text
+unitActionOnFullLabel_inv_mul
+unitActionOnFullLabel_mul_inv
+unitActionOnFullLabelEquiv
+unitActionOnFullLabelEquiv_apply
+unitActionOnFullLabel_eq_zero_iff
+```
+
+### Mathematical Reason
+
+Each multiplicative unit now gives a permutation of the full absolute-label
+set.  The inverse permutation is induced by the inverse unit.  Lean also proves
+that the zero label is fixed exactly: \(a\cdot x=0\) if and only if \(x=0\).
+Thus the multiplicative action preserves the zero/nonzero separation not just
+as a predicate, but as an equivalence of the full label set.
+
+### Source Check
+
+This strengthens the formal counterpart of IUT II, Remarks 4.7.3--4.7.5:
+the \(F_\ell\)-symmetry on the absolute-label side is modeled as genuine
+permutation symmetry, while the zero label remains distinguished.

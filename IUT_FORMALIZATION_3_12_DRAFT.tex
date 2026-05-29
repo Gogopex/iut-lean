@@ -294,7 +294,9 @@ The code currently covers:
   formula \(j\mapsto a\cdot j\), and proves that it preserves the subordinate
   zero/nonzero relation.  Lean also proves the unit and multiplication laws for
   this action and proves that the sign subgroup \(\{\pm1\}\) acts trivially on
-  full absolute labels.
+  full absolute labels.  Each unit action is packaged as an equivalence of
+  full labels with inverse action by \(a^{-1}\), and Lean proves that the zero
+  label is fixed exactly.
   Lean also converts the
   zero/nonzero cusp-label compatibility object to a uniform \(F_\ell\) average
   and proves that a diagonal constant log-volume distribution averages to that

@@ -6016,6 +6016,47 @@ theorem unitActionOnFullLabel_signSubgroup_trivial
       rw [unitActionOnFullLabel_nonzero]
       rw [zmodSignUnitSubgroup_action_trivial_on_signLabelQuotient l ha label]
 
+theorem unitActionOnFullLabel_inv_mul
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    unitActionOnFullLabel l a⁻¹ (unitActionOnFullLabel l a label) =
+      label := by
+  rw [← unitActionOnFullLabel_mul]
+  rw [inv_mul_cancel]
+  exact unitActionOnFullLabel_one l label
+
+theorem unitActionOnFullLabel_mul_inv
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    unitActionOnFullLabel l a (unitActionOnFullLabel l a⁻¹ label) =
+      label := by
+  rw [← unitActionOnFullLabel_mul]
+  rw [mul_inv_cancel]
+  exact unitActionOnFullLabel_one l label
+
+noncomputable def unitActionOnFullLabelEquiv
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ) :
+    IUTStage1ZModCuspFullLabel l ≃ IUTStage1ZModCuspFullLabel l where
+  toFun := unitActionOnFullLabel l a
+  invFun := unitActionOnFullLabel l a⁻¹
+  left_inv := unitActionOnFullLabel_inv_mul l a
+  right_inv := unitActionOnFullLabel_mul_inv l a
+
+theorem unitActionOnFullLabelEquiv_apply
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    unitActionOnFullLabelEquiv l a label =
+      unitActionOnFullLabel l a label :=
+  rfl
+
+theorem unitActionOnFullLabel_eq_zero_iff
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    unitActionOnFullLabel l a label =
+        IUTStage1ZModCuspFullLabel.zero ↔
+      label = IUTStage1ZModCuspFullLabel.zero := by
+  cases label <;> simp [unitActionOnFullLabel]
+
 theorem two_ne_zero (l : PrimeGeFive) :
     (2 : ZMod l.value) ≠ 0 := by
   intro hzero

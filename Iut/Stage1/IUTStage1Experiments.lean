@@ -877,6 +877,37 @@ theorem unitActionOnFullLabel_signSubgroup_trivial
   IUTStage1ZModCuspFullLabel.unitActionOnFullLabel_signSubgroup_trivial
     l ha label
 
+theorem unitActionOnFullLabel_inv_mul
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    IUTStage1ZModCuspFullLabel.unitActionOnFullLabel l a⁻¹
+        (IUTStage1ZModCuspFullLabel.unitActionOnFullLabel l a label) =
+      label :=
+  IUTStage1ZModCuspFullLabel.unitActionOnFullLabel_inv_mul l a label
+
+theorem unitActionOnFullLabel_mul_inv
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    IUTStage1ZModCuspFullLabel.unitActionOnFullLabel l a
+        (IUTStage1ZModCuspFullLabel.unitActionOnFullLabel l a⁻¹ label) =
+      label :=
+  IUTStage1ZModCuspFullLabel.unitActionOnFullLabel_mul_inv l a label
+
+theorem unitActionOnFullLabelEquiv_apply
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    IUTStage1ZModCuspFullLabel.unitActionOnFullLabelEquiv l a label =
+      IUTStage1ZModCuspFullLabel.unitActionOnFullLabel l a label :=
+  IUTStage1ZModCuspFullLabel.unitActionOnFullLabelEquiv_apply l a label
+
+theorem unitActionOnFullLabel_eq_zero_iff
+    (l : PrimeGeFive) (a : (ZMod l.value)ˣ)
+    (label : IUTStage1ZModCuspFullLabel l) :
+    IUTStage1ZModCuspFullLabel.unitActionOnFullLabel l a label =
+        IUTStage1ZModCuspFullLabel.zero ↔
+      label = IUTStage1ZModCuspFullLabel.zero :=
+  IUTStage1ZModCuspFullLabel.unitActionOnFullLabel_eq_zero_iff l a label
+
 theorem singletonOneRestriction_not_translationInvariant
     (l : PrimeGeFive) :
     ¬ ∀ j : ZMod l.value,
