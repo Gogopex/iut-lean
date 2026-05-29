@@ -156,7 +156,10 @@ The code currently covers:
 \item a log-volume shadow of the IUT III splitting-monoid action: the generator
   attached to a procession label contributes \(j^2\deg(q)\), contributes \(0\) at
   the core label, and adds its finite generator sum to the tensor-packet
-  log-volume;
+  log-volume; Lean also proves the procession-normalized form: the acted
+  tensor-packet average is the original tensor-packet average plus the averaged
+  Gaussian generator contribution, equivalently the average of the
+  \(j^2\deg(q)\) contributions over the procession container;
 \item the finite procession containers
   \(S^\pm_{j+1}=\{0,\ldots,j\}\), their nested inclusions, core-label stability,
   stage cardinality \(j+1\), and total procession ambiguity \((\ell^\pm)!\)
@@ -465,7 +468,8 @@ Here the route flags are ordered real-line, nonarchimedean entry, and factored
 SHE availability.  The obstruction flags are raw-cancellation failure,
 label-independent \(j^2\) failure, and sign-quotient representative descent
 failure.  The Gaussian/procession flags include finite tensor-packet, monoid
-action, canonical positive square-weight profile, the constant-average check,
+action, normalized splitting-generator average, canonical positive square-weight
+profile, the constant-average check,
 base-valuation product,
 coric-transfer, determinant-normalization,
 upper-ray, \(q\)-pilot two-computation, the Step (x) averaged-log-volume

@@ -1473,6 +1473,48 @@ theorem lgpSplittingMonoid_normalizedActed_eq_original_plus_generators_over_card
                 Real) :=
   action.normalizedActedLogVolume_eq_original_plus_generators_over_card
 
+theorem lgpSplittingMonoid_generator_sum_eq_procession_square_sum
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    Finset.univ.sum action.generatorLogVolume =
+      (Finset.univ.sum fun label :
+        IUTStage1ProcessionContainer
+          (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l) =>
+          ((label.val : Real) ^ 2)) *
+        action.evaluation.environmentDegree :=
+  action.generatorLogVolume_sum_eq_procession_square_sum
+
+theorem lgpSplittingMonoid_normalizedActed_eq_packetNormalized_plus_generatorAverage
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    action.normalizedActedLogVolume =
+      action.packet.normalizedLogVolume +
+        (Finset.univ.sum action.generatorLogVolume) /
+          (Fintype.card
+            (IUTStage1ProcessionContainer
+              (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+                Real) :=
+  action.normalizedActedLogVolume_eq_packetNormalized_plus_generatorAverage
+
+theorem lgpSplittingMonoid_normalizedActed_eq_packetNormalized_plus_squareAverage
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    action.normalizedActedLogVolume =
+      action.packet.normalizedLogVolume +
+        ((Finset.univ.sum fun label :
+          IUTStage1ProcessionContainer
+            (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l) =>
+            ((label.val : Real) ^ 2)) *
+          action.evaluation.environmentDegree) /
+          (Fintype.card
+            (IUTStage1ProcessionContainer
+              (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+                Real) :=
+  action.normalizedActedLogVolume_eq_packetNormalized_plus_squareAverage
+
 theorem baseValuationTensorPacketProduct_eq_nested_sum
     {kind : IUTStage1PlaceKind} {j : Nat}
     (product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j) :

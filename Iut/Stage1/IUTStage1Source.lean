@@ -7872,6 +7872,53 @@ theorem normalizedActedLogVolume_eq_original_plus_generators_over_card
   rw [action.normalized_acted_eq_average,
     action.actedTensorPacketLogVolume_eq_original_plus_generators]
 
+theorem generatorLogVolume_sum_eq_procession_square_sum
+    (action : LGPSplittingMonoidTensorPacketAction l) :
+    Finset.univ.sum action.generatorLogVolume =
+      (Finset.univ.sum fun label :
+        IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+          ((label.val : Real) ^ 2)) *
+        action.evaluation.environmentDegree := by
+  calc
+    Finset.univ.sum action.generatorLogVolume =
+        Finset.univ.sum fun label :
+          IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+            ((label.val : Real) ^ 2) *
+              action.evaluation.environmentDegree := by
+      apply Finset.sum_congr rfl
+      intro label _hlabel
+      exact action.generatorLogVolume_eq_procession_square label
+    _ =
+        (Finset.univ.sum fun label :
+          IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+            ((label.val : Real) ^ 2)) *
+          action.evaluation.environmentDegree := by
+      rw [Finset.sum_mul]
+
+theorem normalizedActedLogVolume_eq_packetNormalized_plus_generatorAverage
+    (action : LGPSplittingMonoidTensorPacketAction l) :
+    action.normalizedActedLogVolume =
+      action.packet.normalizedLogVolume +
+        (Finset.univ.sum action.generatorLogVolume) /
+          (Fintype.card
+            (IUTStage1ProcessionContainer (absLabelProcessionTop l)) : Real) := by
+  rw [action.normalizedActedLogVolume_eq_original_plus_generators_over_card,
+    action.packet.normalized_eq_card_average]
+  ring
+
+theorem normalizedActedLogVolume_eq_packetNormalized_plus_squareAverage
+    (action : LGPSplittingMonoidTensorPacketAction l) :
+    action.normalizedActedLogVolume =
+      action.packet.normalizedLogVolume +
+        ((Finset.univ.sum fun label :
+          IUTStage1ProcessionContainer (absLabelProcessionTop l) =>
+            ((label.val : Real) ^ 2)) *
+          action.evaluation.environmentDegree) /
+          (Fintype.card
+            (IUTStage1ProcessionContainer (absLabelProcessionTop l)) : Real) := by
+  rw [action.normalizedActedLogVolume_eq_packetNormalized_plus_generatorAverage,
+    action.generatorLogVolume_sum_eq_procession_square_sum]
+
 end LGPSplittingMonoidTensorPacketAction
 
 noncomputable def balancedFullLabelWeightedSummand
