@@ -171,9 +171,12 @@ Current modules:
 * `Iut.Stage1.IUTStage1Data`: pre-ledger data layer for future IUT-specific
   Stage 1 constructions, with explicit promotion obligations before the public
   endpoint is available.
-* `Iut.Stage1.IUTStage1Source`: first source-facing non-toy package for the
-  Theorem 3.11 to Corollary 3.12 boundary, restating the promotion obligations
-  under IUT Stage 1 names.
+* `Iut.Stage1.IUTStage1SourceCore`: source-facing labels, package records,
+  indeterminacy bookkeeping, finite local log-volume objects, and the initial
+  Remark 3.12.2 corridor.
+* `Iut.Stage1.IUTStage1Source`: continuation of the source-facing package for
+  the Theorem 3.11 to Corollary 3.12 boundary, including the hull, Gaussian,
+  transport, and endpoint route obligations.
 * `Iut.Stage1.IUTStage1Experiments`: finite-model tests and theorem exports for
   the current Corollary 3.12 corridor, including the label, Gaussian,
   affine-action, and pointwise/aggregate separation results.
