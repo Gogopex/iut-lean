@@ -818,6 +818,15 @@ theorem singletonOneRestriction_not_translationInvariant
         j = 1 -> zmodLabelTranslate l (1 : ZMod l.value) j = 1 :=
   IUTStage1FLLabelTorsorModel.singletonOne_not_closed_under_translation_one l
 
+theorem translationOne_not_descend_to_fullLabel
+    (l : PrimeGeFive) :
+    ¬ ∃ T : IUTStage1ZModCuspFullLabel l -> IUTStage1ZModCuspFullLabel l,
+      ∀ j : ZMod l.value,
+        T (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+          IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (zmodLabelTranslate l (1 : ZMod l.value) j) :=
+  IUTStage1ZModCuspFullLabel.no_fullLabel_map_descends_translation_one l
+
 theorem properNonemptySubset_not_translationInvariant
     (l : PrimeGeFive) (s : Finset (ZMod l.value))
     (hne : s.Nonempty)

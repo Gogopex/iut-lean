@@ -172,7 +172,10 @@ The code currently covers:
   stable under the additive \(F_\ell\)-torsor action, since translation by \(1\)
   sends \(1\) to \(2\ne1\); more generally, Lean proves that every nonempty
   translation-stable finite subset of \(F_\ell\) is all of \(F_\ell\), so no
-  nonempty proper subset restriction is compatible with this symmetry;
+  nonempty proper subset restriction is compatible with this symmetry; Lean
+  also proves that translation by \(1\) does not descend to a well-defined map
+  on \(|F_\ell|\), since the equal absolute labels of \(1\) and \(-1\) would
+  have to map simultaneously to the nonzero label of \(2\) and to \(0\);
 \item a canonical representative square-weight profile on \(F_\ell\):
   Lean proves the total \(j^2\)-mass is positive from the \(j=1\) contribution
   and therefore constructs the profile without an external positivity premise;

@@ -5877,6 +5877,44 @@ theorem fromCoordinate_natAbs_valMinAbs
       exact hhalf (by simp)
     rw [fromCoordinate_neg l j hj]
 
+theorem two_ne_zero (l : PrimeGeFive) :
+    (2 : ZMod l.value) ≠ 0 := by
+  intro hzero
+  have hzero' : ((2 : Nat) : ZMod l.value) = 0 := by
+    simpa using hzero
+  rw [ZMod.natCast_eq_zero_iff] at hzero'
+  have hle : l.value ≤ 2 := Nat.le_of_dvd (by norm_num) hzero'
+  have hge : 5 ≤ l.value := l.ge_five
+  omega
+
+theorem no_fullLabel_map_descends_translation_one
+    (l : PrimeGeFive) :
+    ¬ ∃ T : IUTStage1ZModCuspFullLabel l -> IUTStage1ZModCuspFullLabel l,
+      ∀ j : ZMod l.value,
+        T (fromCoordinate l j) =
+          fromCoordinate l (zmodLabelTranslate l (1 : ZMod l.value) j) := by
+  rintro ⟨T, hT⟩
+  have hone_ne : (1 : ZMod l.value) ≠ 0 := (zmodOneNonzeroLabel l).2
+  have hsame :
+      fromCoordinate l (-(1 : ZMod l.value)) =
+        fromCoordinate l (1 : ZMod l.value) :=
+    fromCoordinate_neg l (1 : ZMod l.value) hone_ne
+  have hneg := hT (-(1 : ZMod l.value))
+  have hpos := hT (1 : ZMod l.value)
+  rw [hsame] at hneg
+  have htranslated :
+      fromCoordinate l (zmodLabelTranslate l (1 : ZMod l.value) (-(1 : ZMod l.value))) =
+        fromCoordinate l (zmodLabelTranslate l (1 : ZMod l.value) (1 : ZMod l.value)) := by
+    rw [← hneg, hpos]
+  rw [zmodLabelTranslate_eq_add, zmodLabelTranslate_eq_add] at htranslated
+  norm_num at htranslated
+  rw [fromCoordinate_zero] at htranslated
+  have htwo_zero :
+      (2 : ZMod l.value) = 0 := by
+    exact (fromCoordinate_eq_zero_iff (l := l) (2 : ZMod l.value)).mp
+      htranslated.symm
+  exact two_ne_zero l htwo_zero
+
 /--
 Stage 1 shadow of the weighted-volume relation `F_l ∋ j ≪ 0` from IUT II,
 Remark 4.7.3(iii).
