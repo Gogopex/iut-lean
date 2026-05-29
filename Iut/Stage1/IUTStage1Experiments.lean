@@ -5871,6 +5871,26 @@ theorem lgpSplittingMonoid_normalizedFixed_iff_environmentDegree_zero
       action.evaluation.environmentDegree = 0 :=
   action.normalizedActedLogVolume_eq_packetNormalized_iff_environmentDegree_eq_zero
 
+theorem lgpSplittingMonoid_packetNormalized_lt_acted_of_environmentDegree_pos
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l)
+    (henv : 0 < action.evaluation.environmentDegree) :
+    action.packet.normalizedLogVolume <
+      action.normalizedActedLogVolume :=
+  action.packetNormalized_lt_normalizedActedLogVolume_of_environmentDegree_pos
+    henv
+
+theorem lgpSplittingMonoid_acted_lt_packetNormalized_of_environmentDegree_neg
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l)
+    (henv : action.evaluation.environmentDegree < 0) :
+    action.normalizedActedLogVolume <
+      action.packet.normalizedLogVolume :=
+  action.normalizedActedLogVolume_lt_packetNormalized_of_environmentDegree_neg
+    henv
+
 theorem lgpSplittingMonoid_normalizedActed_delta_mul_six
     {l : PrimeGeFive}
     (action :
@@ -5931,6 +5951,12 @@ theorem lgpSplittingMonoid_qSquaredGeneratorTensorPacketAction_endpoint
       (action.normalizedActedLogVolume =
           action.packet.normalizedLogVolume ↔
         action.evaluation.environmentDegree = 0) ∧
+      (0 < action.evaluation.environmentDegree ->
+        action.packet.normalizedLogVolume <
+          action.normalizedActedLogVolume) ∧
+      (action.evaluation.environmentDegree < 0 ->
+        action.normalizedActedLogVolume <
+          action.packet.normalizedLogVolume) ∧
       (0 <= action.evaluation.environmentDegree ->
         action.packet.normalizedLogVolume <= action.normalizedActedLogVolume) :=
   action.qSquaredGeneratorTensorPacketAction_endpoint

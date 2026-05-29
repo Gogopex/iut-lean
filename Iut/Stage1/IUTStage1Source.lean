@@ -10988,6 +10988,47 @@ theorem normalizedActedLogVolume_eq_packetNormalized_iff_environmentDegree_eq_ze
   ⟨action.environmentDegree_eq_zero_of_normalizedActedLogVolume_eq_packetNormalized,
     action.normalizedActedLogVolume_eq_packetNormalized_of_environmentDegree_eq_zero⟩
 
+theorem packetNormalized_lt_normalizedActedLogVolume_of_environmentDegree_pos
+    (action : LGPSplittingMonoidTensorPacketAction l)
+    (henv : 0 < action.evaluation.environmentDegree) :
+    action.packet.normalizedLogVolume <
+      action.normalizedActedLogVolume := by
+  have hdelta := action.normalizedActedLogVolume_delta_mul_six
+  have hcoeff_pos :
+      0 <
+        (absLabelProcessionTop l : Real) *
+          (2 * (absLabelProcessionTop l : Real) + 1) := by
+    have htop : 0 < (absLabelProcessionTop l : Real) := by
+      exact_mod_cast absLabelProcessionTop_pos l
+    positivity
+  have hdelta_pos :
+      0 <
+        (action.normalizedActedLogVolume -
+          action.packet.normalizedLogVolume) * 6 := by
+    rw [hdelta]
+    positivity
+  nlinarith
+
+theorem normalizedActedLogVolume_lt_packetNormalized_of_environmentDegree_neg
+    (action : LGPSplittingMonoidTensorPacketAction l)
+    (henv : action.evaluation.environmentDegree < 0) :
+    action.normalizedActedLogVolume <
+      action.packet.normalizedLogVolume := by
+  have hdelta := action.normalizedActedLogVolume_delta_mul_six
+  have hcoeff_pos :
+      0 <
+        (absLabelProcessionTop l : Real) *
+          (2 * (absLabelProcessionTop l : Real) + 1) := by
+    have htop : 0 < (absLabelProcessionTop l : Real) := by
+      exact_mod_cast absLabelProcessionTop_pos l
+    positivity
+  have hdelta_neg :
+      (action.normalizedActedLogVolume -
+          action.packet.normalizedLogVolume) * 6 < 0 := by
+    rw [hdelta]
+    exact mul_neg_of_pos_of_neg hcoeff_pos henv
+  nlinarith
+
 /--
 IUT III Fig. I.4 splitting-action endpoint.
 
@@ -11019,6 +11060,12 @@ theorem qSquaredGeneratorTensorPacketAction_endpoint
       (action.normalizedActedLogVolume =
           action.packet.normalizedLogVolume ↔
         action.evaluation.environmentDegree = 0) ∧
+      (0 < action.evaluation.environmentDegree ->
+        action.packet.normalizedLogVolume <
+          action.normalizedActedLogVolume) ∧
+      (action.evaluation.environmentDegree < 0 ->
+        action.normalizedActedLogVolume <
+          action.packet.normalizedLogVolume) ∧
       (0 <= action.evaluation.environmentDegree ->
         action.packet.normalizedLogVolume <= action.normalizedActedLogVolume) :=
   ⟨action.generatorLogVolume_core,
@@ -11027,6 +11074,8 @@ theorem qSquaredGeneratorTensorPacketAction_endpoint
     action.normalizedActedLogVolume_eq_packetNormalized_plus_generatorAverage,
     action.normalizedActedLogVolume_eq_packetNormalized_plus_gaussianFullLabelAverage,
     action.normalizedActedLogVolume_eq_packetNormalized_iff_environmentDegree_eq_zero,
+    action.packetNormalized_lt_normalizedActedLogVolume_of_environmentDegree_pos,
+    action.normalizedActedLogVolume_lt_packetNormalized_of_environmentDegree_neg,
     action.packet_normalizedLogVolume_le_normalizedActedLogVolume_of_environment_nonnegative⟩
 
 end LGPSplittingMonoidTensorPacketAction
