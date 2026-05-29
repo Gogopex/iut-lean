@@ -191,7 +191,9 @@ The code currently covers:
   unit/sign bridge: the distinguished sign unit acts by negation, the
   \(\{\pm1\}\)-unit subgroup orbits are exactly sign orbits, and the canonical
   cusp class is the sign class of coordinate \(1\).  It also records the
-  warning in the finite model: the singleton restriction to \(j=1\) is not
+  zero/nonzero local-object assignment and the coordinate-to-full-label
+  log-volume compatibility endpoint, including invariance under \(j\mapsto -j\),
+  and the warning in the finite model: the singleton restriction to \(j=1\) is not
   stable under the additive \(F_\ell\)-torsor action, since translation by \(1\)
   sends \(1\) to \(2\ne1\); more generally, Lean proves that every nonempty
   translation-stable finite subset of \(F_\ell\) is all of \(F_\ell\), packaged
@@ -386,7 +388,10 @@ The code currently covers:
   Lean also converts the
   zero/nonzero cusp-label compatibility object to a uniform \(F_\ell\) average
   and proves that a diagonal constant log-volume distribution averages to that
-  same constant;
+  same constant; the same compatibility layer now exposes, as a single endpoint,
+  the equality between coordinate-normalized log-volumes and full-label
+  log-volumes, together with the zero branch, nonzero cusp-class branch, and
+  sign-pair invariance;
 \item the IUT III Step (x) averaged-log-volume corridor:
   Lean records that \((\mathrm{Ind1})\) and \((\mathrm{Ind2})\) preserve the
   procession-normalized averaged log-volume, while \((\mathrm{Ind3})\) supplies

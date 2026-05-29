@@ -6022,6 +6022,50 @@ theorem zmodCuspFullLabel_weightedVolumeSubordinate_endpoint
   IUTStage1ZModCuspFullLabel.weightedVolumeSubordinate_endpoint
     l a t j label
 
+theorem zmodCuspFullLabel_localObject_endpoint
+    {l : PrimeGeFive} {kind : IUTStage1PlaceKind}
+    (zeroObject : IUTStage1FiniteLocalLogVolumeObject kind)
+    (cuspClassObject :
+      (zmodSignAction l).SignLabelQuotient ->
+        IUTStage1FiniteLocalLogVolumeObject kind)
+    (j : ZMod l.value) (hj : j ≠ 0) :
+    IUTStage1ZModCuspFullLabel.localObject zeroObject cuspClassObject
+        IUTStage1ZModCuspFullLabel.zero = zeroObject ∧
+      IUTStage1ZModCuspFullLabel.localObject zeroObject cuspClassObject
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (0 : ZMod l.value)) = zeroObject ∧
+      IUTStage1ZModCuspFullLabel.localObject zeroObject cuspClassObject
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+        cuspClassObject (zmodSignLabelFromCoordinate l j hj) ∧
+      IUTStage1ZModCuspFullLabel.localObject zeroObject cuspClassObject
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (-j)) =
+        IUTStage1ZModCuspFullLabel.localObject zeroObject cuspClassObject
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  IUTStage1ZModCuspFullLabel.localObject_endpoint
+    zeroObject cuspClassObject j hj
+
+theorem zmodCuspLabelLogVolumeCompatibility_endpoint
+    {l : PrimeGeFive}
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (j : ZMod l.value) (hj : j ≠ 0) :
+    compat.normalizedLogVolume j =
+        compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) ∧
+      compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (0 : ZMod l.value)) =
+        compat.zeroLogVolume ∧
+      compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) =
+        compat.cuspClassLogVolume (zmodSignLabelFromCoordinate l j hj) ∧
+      compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (-j)) =
+        compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) ∧
+      compat.normalizedLogVolume (-j) =
+        compat.cuspClassLogVolume (zmodSignLabelFromCoordinate l j hj) :=
+  compat.fullLabelLogVolumeCompatibility_endpoint j hj
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool
