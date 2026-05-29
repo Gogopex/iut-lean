@@ -5833,6 +5833,65 @@ theorem statementEndpoint_cTheta_nonnegative_of_thetaRealLogVolume_nonnegative
     thetaHull_le_cTheta_absLogQ).cTheta_nonnegative_of_thetaRealLogVolume_nonnegative
       hTheta
 
+theorem ofZModCuspLabelLogVolumeCompatibilities_thetaNonnegativeBranch
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -before.toLabelAveraged.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      thetaHullLogVolume <= cTheta * (-before.toLabelAveraged.averageLogVolume))
+    (theta_nonnegative : 0 <= ind3UpperBound) :
+    let data :=
+      ofZModCuspLabelLogVolumeCompatibilities before afterInd1 afterInd2
+        ind3UpperBound hind1 hind2 hzero hcusp determinant thetaHullLogVolume
+        theta_eq_ind3Upper theta_eq_normalized_determinant
+    let endpoint :=
+      data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+        thetaHull_le_cTheta_absLogQ
+    before.toLabelAveraged.averageLogVolume < ind3UpperBound ∧
+      0 <= endpoint.cTheta := by
+  intro data endpoint
+  have hThetaEndpoint :
+      0 <= endpoint.thetaRealLogVolume := by
+    rw [data.statementEndpoint_thetaRealLogVolume_eq_ind3Upper
+      pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ]
+    exact theta_nonnegative
+  have hlt :
+      before.toLabelAveraged.averageLogVolume <
+        endpoint.thetaRealLogVolume :=
+    data.beforeAverage_lt_statementEndpoint_thetaRealLogVolume_of_theta_nonneg
+      pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+      hThetaEndpoint
+  rw [data.statementEndpoint_thetaRealLogVolume_eq_ind3Upper
+    pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ] at hlt
+  exact
+    ⟨hlt,
+      data.statementEndpoint_cTheta_nonnegative_of_thetaRealLogVolume_nonnegative
+        pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+        hThetaEndpoint⟩
+
 theorem beforeAverage_le_statementEndpoint_ind3Upper
     (data : IUTStage1StepXToHullUpperRayLogVolume label) :
     data.corridor.beforeIndeterminacy.averageLogVolume <=
