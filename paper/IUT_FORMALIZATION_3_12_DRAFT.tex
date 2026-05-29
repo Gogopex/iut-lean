@@ -243,6 +243,10 @@ and Hodge-descent packet transport now compose directly to this comparison.
 With the \(q\)-pilot positivity condition and the displayed
 \(C_\Theta\)-bound, the same composed route instantiates the signed
 \(C_\Theta\) endpoint and proves \(C_\Theta\ge -1\).
+The instantiated endpoint also exposes the strict and boundary alternatives:
+strict source comparison gives \(C_\Theta>-1\), while \(C_\Theta=-1\) forces
+equality of the signed \(q\)- and \(\Theta\)-readings and makes the
+\(\Theta\)-reading negative.
 The code also proves a Gaussian-to-factored-\SHE{} bridge at the present finite
 degree level.  In particular, equality of the source and target environment
 degrees gives full-label value preservation; nonzero-label target bounds are
@@ -264,7 +268,9 @@ hull/log-volume upper-ray comparison and the displayed \(C_\Theta\)-bound are
 available.
 It is also instantiated by the current nonarchimedean
 \((\Ind3)\)-plus-factored-\SHE{} route, subject to the same positivity and
-displayed-bound hypotheses.
+displayed-bound hypotheses.  Thus the remaining gap is not the final
+ordered-real implication, including its strict and boundary branches, but the
+construction of the source hypotheses consumed by that implication.
 
 \section{Boundary Quotient Experiment}
 
@@ -333,6 +339,9 @@ The project currently proves the following source-facing results in \Lean{}:
   preservation now directly supplies the final weighted-theta route and the
   signed \(C_\Theta\ge-1\) endpoint, once \(q\)-positivity and the displayed
   \(C_\Theta\)-bound are supplied.
+\item The same nonarchimedean route now exposes the strict branch
+  \(C_\Theta>-1\) and the boundary consequence
+  \(C_\Theta=-1\Rightarrow q_{\mathrm{signed}}=\Theta_{\mathrm{signed}}<0\).
 \item The Step (xi-f) real algebra proves \(C_\Theta\ge-1\), strictness under
   strict upper-ray membership, and equality constraints in the boundary case.
 \item The final route rejects the balanced sign-compatible comparison level as
