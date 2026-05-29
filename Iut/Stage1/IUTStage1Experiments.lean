@@ -5920,6 +5920,35 @@ theorem flZModTranslationClosure_endpoint
           zmodLabelTranslate l t j ∈ s) -> s = Finset.univ) :=
   IUTStage1FLLabelTorsorModel.zmodTranslationClosure_endpoint l s hne
 
+theorem flZModUnitSignLabelModel_endpoint
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModUnitSignLabelModel l)
+    (x generator : ZMod l.value) :
+    (zmodUnitActionData l).smul model.signUnitCompatibility.signUnit x =
+        (zmodSignAction l).neg x ∧
+      ((∃ a : (ZMod l.value)ˣ,
+        a ∈ model.signUnitSubgroup ∧
+          (zmodUnitActionData l).smul a generator = x) ↔
+        (zmodSignAction l).InSignOrbit x generator) :=
+  model.unitSignLabelModel_endpoint x generator
+
+theorem flZModCuspLabelClassModel_endpoint
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.local_lab_cusp_model = zmodLocalLabCuspModel l ∧
+      model.cusp_label_class_data = zmodCanonicalCuspLabelClassData l ∧
+      model.local_lab_cusp_model.canonicalNonzeroLabel.1 =
+        model.local_lab_cusp_model.additiveTorsor.vadd
+          model.local_lab_cusp_model.canonicalCoordinate
+          model.local_lab_cusp_model.labelQuotient.zero ∧
+      model.local_lab_cusp_model.canonicalSignLabel =
+        model.local_lab_cusp_model.signAction.toSignLabelQuotient
+          model.local_lab_cusp_model.canonicalNonzeroLabel ∧
+      model.cusp_label_class_data.labelClass =
+        model.cusp_label_class_data.model.signAction.toSignLabelQuotient
+          model.cusp_label_class_data.model.canonicalNonzeroLabel :=
+  model.cuspLabelClassModel_endpoint
+
 /-- Experiment report separating representative, balanced, and aggregate levels. -/
 structure Ind3SquareWeightLevelExperimentReport where
   representativeAuditForcesIdentity : Bool

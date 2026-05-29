@@ -3379,6 +3379,19 @@ theorem zmod_signUnitSubgroup_orbit_iff_signOrbit
       (zmodSignAction l).InSignOrbit x generator :=
   (zmod l).signUnitSubgroup_orbit_iff_signOrbit' x generator
 
+theorem unitSignLabelModel_endpoint
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModUnitSignLabelModel l)
+    (x generator : ZMod l.value) :
+    (zmodUnitActionData l).smul model.signUnitCompatibility.signUnit x =
+        (zmodSignAction l).neg x ∧
+      ((∃ a : (ZMod l.value)ˣ,
+        a ∈ model.signUnitSubgroup ∧
+          (zmodUnitActionData l).smul a generator = x) ↔
+        (zmodSignAction l).InSignOrbit x generator) :=
+  ⟨model.signUnit_smul_eq_neg x,
+    model.signUnitSubgroup_orbit_iff_signOrbit' x generator⟩
+
 end IUTStage1FLZModUnitSignLabelModel
 
 /--
@@ -3488,6 +3501,27 @@ theorem zmod_cuspLabelClass_eq_fromCoordinate_one
     _ = zmodSignLabelFromCoordinate l (1 : ZMod l.value)
           (zmodOneNonzeroLabel l).2 :=
       zmod_canonicalSignLabel_eq_fromCoordinate_one l
+
+theorem cuspLabelClassModel_endpoint
+    {l : PrimeGeFive}
+    (model : IUTStage1FLZModCuspLabelClassModel l) :
+    model.local_lab_cusp_model = zmodLocalLabCuspModel l ∧
+      model.cusp_label_class_data = zmodCanonicalCuspLabelClassData l ∧
+      model.local_lab_cusp_model.canonicalNonzeroLabel.1 =
+        model.local_lab_cusp_model.additiveTorsor.vadd
+          model.local_lab_cusp_model.canonicalCoordinate
+          model.local_lab_cusp_model.labelQuotient.zero ∧
+      model.local_lab_cusp_model.canonicalSignLabel =
+        model.local_lab_cusp_model.signAction.toSignLabelQuotient
+          model.local_lab_cusp_model.canonicalNonzeroLabel ∧
+      model.cusp_label_class_data.labelClass =
+        model.cusp_label_class_data.model.signAction.toSignLabelQuotient
+          model.cusp_label_class_data.model.canonicalNonzeroLabel :=
+  ⟨model.localLabCuspModel_eq_zmod,
+    model.cuspLabelClassData_eq_zmod,
+    model.canonicalLabelTranslate,
+    model.canonicalSignLabelEq,
+    model.labelClass_eq_model_quotient⟩
 
 end IUTStage1FLZModCuspLabelClassModel
 
