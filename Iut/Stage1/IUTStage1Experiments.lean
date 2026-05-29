@@ -3699,13 +3699,13 @@ theorem distinctLabelIntertwining_unlabeled_collapse_rejected
     ¬ data.qLabel = data.thetaLabel :=
   data.unlabeled_collapse_rejected
 
-theorem toyIntertwining_forgottenConcreteAssignmentsIncompatible
-    (data : IUTStage1ToyIntertwiningUpperRayBound) :
+theorem remark3122Intertwining_forgottenConcreteAssignmentsIncompatible
+    (data : IUTStage1Remark3122IntertwiningUpperRayBound) :
     (-data.h : Real) ≠ -2 * data.h :=
   data.forgotten_concrete_assignments_incompatible
 
-theorem toyIntertwining_h_le_epsilon
-    (data : IUTStage1ToyIntertwiningUpperRayBound) :
+theorem remark3122Intertwining_h_le_epsilon
+    (data : IUTStage1Remark3122IntertwiningUpperRayBound) :
     data.h <= data.epsilon :=
   data.h_le_epsilon
 

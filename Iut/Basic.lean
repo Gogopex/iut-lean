@@ -21,14 +21,13 @@ import Iut.Stage1.IUTSourceScaffold
 import Iut.Stage1.IUTStage1Data
 import Iut.Stage1.IUTStage1Source
 import Iut.Stage1.IUTStage1Experiments
-import Iut.Foundations.InitialThetaDataExample
 
 /-!
 Root module for the IUT formalization corridor.
 
 The root import now exposes the current Stage 1 formal corridor rather than the
-early toy/example scaffolding. Historical toy modules remain buildable directly
-while the main project surface tracks the Corollary 3.12 work.
+early toy/example scaffolding. The main project surface tracks the Corollary
+3.12 work.
 -/
 
 namespace Iut

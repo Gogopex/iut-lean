@@ -11,8 +11,8 @@ hypotheses.
 The local `docs/` folder contains Markdown conversions of the four IUT papers,
 Mochizuki's April 2026 formalization progress report, and the Scholze-Stix
 critique. It is intentionally gitignored as a local paper cache. The tracked
-research draft is `IUT_FORMALIZATION_3_12_DRAFT.tex`; `FORMALIZATION_NOTES.md`
-is only a short pointer kept for old references.
+research draft is `paper/IUT_FORMALIZATION_3_12_DRAFT.tex`, with the rendered
+PDF at `paper/IUT_FORMALIZATION_3_12_DRAFT.pdf`.
 
 ## Current Understanding
 
@@ -178,13 +178,12 @@ Current modules:
   the current Corollary 3.12 corridor, including the label, Gaussian,
   affine-action, and pointwise/aggregate separation results.
 
-Historical toy and example modules remain in the tree for direct regression
-builds, but they are no longer imported by the root module.
-
 Useful commands:
 
 ```bash
 lake build
+pdflatex -interaction=nonstopmode -halt-on-error \
+  -output-directory=paper paper/IUT_FORMALIZATION_3_12_DRAFT.tex
 lake exe cache get
 ```
 
