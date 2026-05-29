@@ -11589,6 +11589,38 @@ theorem neg_one_ne_one :
   have hge : 5 ≤ l.value := l.ge_five
   omega
 
+theorem neg_unit_ne_one :
+    (-1 : (ZMod l.value)ˣ) ≠ 1 := by
+  intro h
+  exact neg_one_ne_one (l := l) (by
+    have hcoord :=
+      congrArg (fun a : (ZMod l.value)ˣ => (a : ZMod l.value)) h
+    simpa using hcoord)
+
+theorem negUnitAffine_pointwiseGaussianPreserving_and_not_coordinateSquarePreserving
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    (∀ j : ZMod l.value,
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (zmodLabelTranslate l (0 : ZMod l.value)
+              ((zmodUnitActionData l).smul
+                (-1 : (ZMod l.value)ˣ) j))) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) ∧
+      ¬ CoordinateSquarePreserving
+          (l := l)
+          (IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodUnitAffineEquiv
+            l (-1 : (ZMod l.value)ˣ) (0 : ZMod l.value)) := by
+  constructor
+  · intro j
+    exact evaluation.gaussianDegree_unitAffine_fromCoordinate_eq_of_signSubgroup
+      (neg_one_mem_zmodSignUnitSubgroup l) j
+  · intro hcoord
+    have hstrict :=
+      (coordinateSquarePreserving_unitAffine_iff
+        (l := l) (-1 : (ZMod l.value)ˣ) (0 : ZMod l.value)).mp hcoord
+    exact neg_unit_ne_one (l := l) hstrict.2
+
 theorem not_coordinateSquarePreserving_neg :
     ¬ CoordinateSquarePreserving
       (l := l) (Equiv.neg (ZMod l.value)) := by

@@ -1446,6 +1446,25 @@ theorem coordinateSquarePreserving_unitAffine_iff
   IUTStage1ZModSquareWeightProfile.coordinateSquarePreserving_unitAffine_iff
     a t
 
+theorem negUnitAffine_pointwiseGaussianPreserving_but_not_coordinateSquarePreserving
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    (∀ j : ZMod l.value,
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (zmodLabelTranslate l (0 : ZMod l.value)
+              ((zmodUnitActionData l).smul
+                (-1 : (ZMod l.value)ˣ) j))) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) ∧
+      ¬ IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+          (l := l)
+          (IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodUnitAffineEquiv
+            l (-1 : (ZMod l.value)ˣ) (0 : ZMod l.value)) :=
+  negUnitAffine_pointwiseGaussianPreserving_and_not_coordinateSquarePreserving
+    evaluation
+
 theorem gaussianDegree_nonzero_ne_zero_of_environment_ne_zero
     {l : PrimeGeFive}
     (evaluation :
