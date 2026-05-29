@@ -538,7 +538,10 @@ The code currently covers:
   strictly negative;
 \item the IUT IV, Theorem 1.10 algebraic handoff: an explicit expression for
   \(C_\Theta\), together with \(C_\Theta\ge-1\) and the remaining elementary
-  estimates, implies the displayed \(\frac16\log(q)\) bound;
+  estimates, implies the displayed \(\frac16\log(q)\) bound; Lean now exposes
+  the exact Corollary 3.12 handoff identity
+  \(C_\Theta+1=A-M\), where \(A\) is the arithmetic upper term and \(M\) is the
+  main logarithmic term, so \(C_\Theta\ge-1\) gives \(0\le A-M\);
 \item the final elementary coefficient estimates in IUT IV, Theorem 1.10:
   \((1-12/\ell^2)^{-1}\le2\) and
   \((1-12/\ell^2)^{-1}\frac14(1+36d_{\mathrm{mod}}/\ell)
@@ -789,7 +792,8 @@ the order-preservation of this positive normalization.
 The Frobenius-derivative flag records the degree inequality from inclusion and
 the sharper strict negativity of the degree defect under \(p\ge2\), \(g\ge2\).
 The IUT IV flag records the downstream Theorem 1.10 use of the Corollary 3.12
-lower bound on \(C_\Theta\), including the final coefficient estimates and the
+lower bound on \(C_\Theta\), including the identity \(C_\Theta+1=A-M\), the
+resulting nonnegative gap \(0\le A-M\), the final coefficient estimates, and the
 tripodal-to-\(F\) log-degree monotonicity.  The Step (i) flag records the two
 elementary sum identities used in the leading-term computation.  The Step (ii)
 small-prime flag records the additive error bound \(21\).  The \(\mathrm{GL}_2\)

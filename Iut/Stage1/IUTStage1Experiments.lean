@@ -5234,10 +5234,24 @@ theorem iutIVThetaPilotLogVolumeEstimate_mainTerm_le_upper
     data.mainLogTerm <= data.arithmeticUpperTerm :=
   data.mainLogTerm_le_arithmeticUpperTerm
 
+theorem iutIVThetaPilotLogVolumeEstimate_arithmetic_minus_main_nonneg
+    (data : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow) :
+    0 <= data.arithmeticUpperTerm - data.mainLogTerm :=
+  data.arithmetic_minus_main_nonneg
+
 theorem iutIVThetaPilotLogVolumeEstimate_oneSixthLogQ_bound
     (data : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow) :
     data.oneSixthLogQ <= data.theorem110RightHandSide :=
   data.oneSixthLogQ_le_theorem110RightHandSide
+
+theorem iutIVThetaPilotLogVolumeEstimate_corollary312_handoff_endpoint
+    (data : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow) :
+    0 < data.absoluteLogQ ∧
+      data.cTheta + 1 = data.arithmeticUpperTerm - data.mainLogTerm ∧
+        0 <= data.arithmeticUpperTerm - data.mainLogTerm ∧
+          data.mainLogTerm <= data.arithmeticUpperTerm ∧
+            data.oneSixthLogQ <= data.theorem110RightHandSide :=
+  data.corollary312_handoff_endpoint
 
 theorem iutIVThetaPilotCorrectionFactor_inverse_bound
     (l : PrimeGeFive) :

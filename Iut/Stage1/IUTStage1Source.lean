@@ -887,12 +887,23 @@ theorem cTheta_expression
     data.cTheta = data.arithmeticUpperTerm - data.mainLogTerm - 1 :=
   data.cTheta_eq
 
-theorem mainLogTerm_le_arithmeticUpperTerm
+theorem cTheta_add_one_eq_arithmetic_minus_main
     (data : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow) :
-    data.mainLogTerm <= data.arithmeticUpperTerm := by
+    data.cTheta + 1 = data.arithmeticUpperTerm - data.mainLogTerm := by
+  rw [data.cTheta_expression]
+  ring
+
+theorem arithmetic_minus_main_nonneg
+    (data : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow) :
+    0 <= data.arithmeticUpperTerm - data.mainLogTerm := by
   have h := data.cor312_lower_bound
   rw [data.cTheta_expression] at h
   linarith
+
+theorem mainLogTerm_le_arithmeticUpperTerm
+    (data : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow) :
+    data.mainLogTerm <= data.arithmeticUpperTerm := by
+  linarith [data.arithmetic_minus_main_nonneg]
 
 theorem oneSixthLogQ_eq_main_add_correction
     (data : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow) :
@@ -909,6 +920,19 @@ theorem oneSixthLogQ_le_theorem110RightHandSide
   exact le_trans
     (add_le_add data.mainLogTerm_le_arithmeticUpperTerm le_rfl)
     data.explicit_estimates_to_theorem110_rhs
+
+theorem corollary312_handoff_endpoint
+    (data : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow) :
+    0 < data.absoluteLogQ ∧
+      data.cTheta + 1 = data.arithmeticUpperTerm - data.mainLogTerm ∧
+        0 <= data.arithmeticUpperTerm - data.mainLogTerm ∧
+          data.mainLogTerm <= data.arithmeticUpperTerm ∧
+            data.oneSixthLogQ <= data.theorem110RightHandSide :=
+  ⟨data.absoluteLogQ_pos,
+    data.cTheta_add_one_eq_arithmetic_minus_main,
+    data.arithmetic_minus_main_nonneg,
+    data.mainLogTerm_le_arithmeticUpperTerm,
+    data.oneSixthLogQ_le_theorem110RightHandSide⟩
 
 end IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow
 
