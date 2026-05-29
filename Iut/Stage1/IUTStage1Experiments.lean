@@ -727,6 +727,12 @@ theorem gaussianCuspClassCanonicalSignLabel_eq_environment
       evaluation.environmentDegree :=
   evaluation.cuspClassLogVolume_canonicalSignLabel
 
+theorem singletonOneRestriction_not_translationInvariant
+    (l : PrimeGeFive) :
+    ¬ ∀ j : ZMod l.value,
+        j = 1 -> zmodLabelTranslate l (1 : ZMod l.value) j = 1 :=
+  IUTStage1FLLabelTorsorModel.singletonOne_not_closed_under_translation_one l
+
 theorem absLabelProcessionTop_eq_halfMinusOne
     (l : PrimeGeFive) :
     IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l =

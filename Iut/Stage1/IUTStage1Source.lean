@@ -5499,6 +5499,36 @@ theorem zmod_vadd_eq_translate
     (zmod l).torsor.vadd t j = zmodLabelTranslate l t j :=
   rfl
 
+theorem zmod_two_ne_one (l : PrimeGeFive) :
+    (2 : ZMod l.value) ≠ (1 : ZMod l.value) := by
+  haveI : Fact (1 < l.value) := ⟨by
+    have hge : 5 ≤ l.value := l.ge_five
+    omega⟩
+  intro h
+  have h10 : (1 : ZMod l.value) = 0 := by
+    calc
+      (1 : ZMod l.value) = (2 : ZMod l.value) - 1 := by norm_num
+      _ = (1 : ZMod l.value) - 1 := by rw [h]
+      _ = 0 := by ring
+  exact (one_ne_zero : (1 : ZMod l.value) ≠ 0) h10
+
+theorem zmodLabelTranslate_one_one_eq_two (l : PrimeGeFive) :
+    zmodLabelTranslate l (1 : ZMod l.value) (1 : ZMod l.value) = 2 := by
+  change (1 : ZMod l.value) + 1 = 2
+  norm_num
+
+/--
+The singleton restriction to the coordinate `j = 1` is not stable under the
+additive `F_l`-torsor symmetry in the concrete finite model.
+-/
+theorem singletonOne_not_closed_under_translation_one (l : PrimeGeFive) :
+    ¬ ∀ j : ZMod l.value,
+        j = 1 -> zmodLabelTranslate l (1 : ZMod l.value) j = 1 := by
+  intro hclosed
+  have h := hclosed (1 : ZMod l.value) rfl
+  rw [zmodLabelTranslate_one_one_eq_two] at h
+  exact zmod_two_ne_one l h
+
 end IUTStage1FLLabelTorsorModel
 
 /--
