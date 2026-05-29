@@ -281,12 +281,33 @@ theorem genus_term_nonneg
     exact_mod_cast data.genus_ge_two
   nlinarith
 
+theorem genus_term_pos
+    (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
+    (0 : Real) < (2 : Real) * (data.genus : Real) - 2 := by
+  have hgenus : (2 : Real) <= data.genus := by
+    exact_mod_cast data.genus_ge_two
+  nlinarith
+
 theorem degreeDefect_nonpos
     (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
     data.degreeDefect <= 0 := by
   have hp : (1 : Real) - (data.p : Real) <= 0 := by
     linarith [data.one_le_p_real]
   exact mul_nonpos_of_nonpos_of_nonneg hp data.genus_term_nonneg
+
+theorem degreeDefect_neg
+    (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
+    data.degreeDefect < 0 := by
+  have hp : (1 : Real) - (data.p : Real) < 0 := by
+    have hp2 : (2 : Real) <= data.p := by
+      exact_mod_cast data.p_ge_two
+    linarith
+  exact mul_neg_of_neg_of_pos hp data.genus_term_pos
+
+theorem degreeDefect_ne_zero
+    (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
+    data.degreeDefect ≠ 0 :=
+  ne_of_lt data.degreeDefect_neg
 
 theorem derivativeGivesInclusion_holds
     (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
@@ -297,6 +318,16 @@ theorem derivativeIsomorphismNotAssumed_holds
     (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
     data.derivativeIsomorphismNotAssumed :=
   data.derivative_isomorphism_not_assumed
+
+theorem derivative_degree_endpoint
+    (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
+    data.derivativeGivesInclusion ∧
+      data.derivativeIsomorphismNotAssumed ∧
+        data.degreeDefect <= 0 ∧ data.degreeDefect < 0 :=
+  ⟨data.derivativeGivesInclusion_holds,
+    data.derivativeIsomorphismNotAssumed_holds,
+    data.degreeDefect_nonpos,
+    data.degreeDefect_neg⟩
 
 end IUTStage1FrobeniusDerivativeDegreeInequalityShadow
 

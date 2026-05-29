@@ -533,7 +533,9 @@ The code currently covers:
   divides a gap log-volume by \(\ell\), multiplication by \(\ell\) recovers it,
   and the positive factor \(\ell\) preserves nonpositive bounds exactly;
 \item the Remark 3.12.4(v) p-adic analogue:
-  an inclusion, not isomorphism, gives \((1-p)(2g-2)\le0\);
+  an inclusion, not isomorphism, gives \((1-p)(2g-2)\le0\); under the
+  recorded hypotheses \(p\ge2\) and \(g\ge2\), Lean also proves the defect is
+  strictly negative;
 \item the IUT IV, Theorem 1.10 algebraic handoff: an explicit expression for
   \(C_\Theta\), together with \(C_\Theta\ge-1\) and the remaining elementary
   estimates, implies the displayed \(\frac16\log(q)\) bound;
@@ -784,7 +786,8 @@ the upper semi-compatibility inequality, including the nonpositive inequality
 form following from strict negativity.
 The factor-\(p\) flag records the \(F_\ell\)-label averaging denominator and
 the order-preservation of this positive normalization.
-The Frobenius-derivative flag records the degree inequality from inclusion.
+The Frobenius-derivative flag records the degree inequality from inclusion and
+the sharper strict negativity of the degree defect under \(p\ge2\), \(g\ge2\).
 The IUT IV flag records the downstream Theorem 1.10 use of the Corollary 3.12
 lower bound on \(C_\Theta\), including the final coefficient estimates and the
 tripodal-to-\(F\) log-degree monotonicity.  The Step (i) flag records the two

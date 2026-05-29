@@ -5212,10 +5212,22 @@ theorem frobeniusDerivativeDegreeInequality_nonpos
     data.degreeDefect <= 0 :=
   data.degreeDefect_nonpos
 
+theorem frobeniusDerivativeDegreeInequality_neg
+    (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
+    data.degreeDefect < 0 :=
+  data.degreeDefect_neg
+
 theorem frobeniusDerivativeDegreeInequality_inclusion
     (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
     data.derivativeGivesInclusion :=
   data.derivativeGivesInclusion_holds
+
+theorem frobeniusDerivativeDegreeInequality_endpoint
+    (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
+    data.derivativeGivesInclusion ∧
+      data.derivativeIsomorphismNotAssumed ∧
+        data.degreeDefect <= 0 ∧ data.degreeDefect < 0 :=
+  data.derivative_degree_endpoint
 
 theorem iutIVThetaPilotLogVolumeEstimate_mainTerm_le_upper
     (data : IUTStage1IUTIVThetaPilotLogVolumeEstimateShadow) :
