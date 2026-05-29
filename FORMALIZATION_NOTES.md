@@ -18709,9 +18709,13 @@ no_fullLabel_map_descends_nonzero_translation
 no_fullLabel_map_descends_translation_one
 fullLabel_map_descends_zero_translation
 fullLabel_map_descends_translation_iff
+zmodTranslationEquiv
+zmodTranslationEquiv_apply
+fullLabelMapPreserving_translation_iff_zero
 nonzeroTranslation_not_descend_to_fullLabel
 translationOne_not_descend_to_fullLabel
 translation_descends_to_fullLabel_iff_zero
+translationEquiv_fullLabelMapPreserving_iff_zero
 zmod_subset_eq_univ_of_nonempty_translation_closed
 zmod_proper_nonempty_subset_not_translation_closed
 properNonemptySubset_not_translationInvariant
@@ -18727,7 +18731,10 @@ no nonempty proper subset restriction can preserve the full additive
 \(j\mapsto t+j\) can descend to the full absolute label quotient: \(t\) and
 \(-t\) have the same absolute label, but translation by \(t\) sends them to
 \(2t\ne0\) and \(0\), respectively.  The exact boundary is now an iff:
-translation descends to \(|F_\ell|\) exactly for \(t=0\).
+translation descends to \(|F_\ell|\) exactly for \(t=0\).  The same iff is
+registered at the existing `FullLabelMapPreserving` route condition, so a
+coordinate translation equivalence satisfies that route condition exactly in the
+zero-translation case.
 
 ### Source Check
 

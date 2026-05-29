@@ -6285,6 +6285,44 @@ theorem fullLabelMapPreserving_neg :
     simp [IUTStage1ZModCuspFullLabel.fromCoordinate_zero]
   · exact IUTStage1ZModCuspFullLabel.fromCoordinate_neg l j hj
 
+def zmodTranslationEquiv
+    (l : PrimeGeFive) (t : ZMod l.value) :
+    ZMod l.value ≃ ZMod l.value where
+  toFun := fun j => t + j
+  invFun := fun j => -t + j
+  left_inv := by
+    intro j
+    simp
+  right_inv := by
+    intro j
+    simp
+
+theorem zmodTranslationEquiv_apply
+    (l : PrimeGeFive) (t j : ZMod l.value) :
+    zmodTranslationEquiv l t j = zmodLabelTranslate l t j := by
+  rw [zmodLabelTranslate_eq_add]
+  rfl
+
+theorem fullLabelMapPreserving_translation_iff_zero
+    (t : ZMod l.value) :
+    FullLabelMapPreserving (l := l) (zmodTranslationEquiv l t) ↔
+      t = 0 := by
+  constructor
+  · intro hpres
+    have hzero := hpres 0
+    rw [zmodTranslationEquiv_apply, zmodLabelTranslate_eq_add] at hzero
+    have hzero' :
+        IUTStage1ZModCuspFullLabel.fromCoordinate l t =
+          IUTStage1ZModCuspFullLabel.fromCoordinate l 0 := by
+      simpa using hzero
+    rw [IUTStage1ZModCuspFullLabel.fromCoordinate_zero] at hzero'
+    exact (IUTStage1ZModCuspFullLabel.fromCoordinate_eq_zero_iff
+      (l := l) t).mp hzero'
+  · intro ht
+    subst t
+    intro j
+    rw [zmodTranslationEquiv_apply, zmodLabelTranslate_zero]
+
 /--
 Labelwise preservation of the full-label log-volume branch.
 
