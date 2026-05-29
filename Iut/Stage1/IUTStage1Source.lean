@@ -8428,6 +8428,33 @@ theorem thetaExponentOnAbsLabel_fromProcession
     (l := l) (label.val : ZMod l.value) hhalf]
   rw [hval]
 
+theorem absLabelFromProcession_injective :
+    Function.Injective (absLabelFromProcession l) := by
+  intro a b h
+  have hexp := congrArg (thetaExponentOnAbsLabel (l := l)) h
+  rw [thetaExponentOnAbsLabel_fromProcession,
+    thetaExponentOnAbsLabel_fromProcession] at hexp
+  have ha_nonneg : 0 <= (a.val : Real) := by
+    exact_mod_cast Nat.zero_le a.val
+  have hb_nonneg : 0 <= (b.val : Real) := by
+    exact_mod_cast Nat.zero_le b.val
+  have hval_real : (a.val : Real) = (b.val : Real) := by
+    nlinarith
+  have hval_nat : a.val = b.val := by
+    exact_mod_cast hval_real
+  exact Fin.ext hval_nat
+
+noncomputable def absLabelProcessionEquivFullLabel :
+    IUTStage1ProcessionContainer (absLabelProcessionTop l) ≃
+      IUTStage1ZModCuspFullLabel l :=
+  Equiv.ofBijective (absLabelFromProcession l)
+    ⟨absLabelFromProcession_injective, absLabelFromProcession_surjective⟩
+
+theorem absLabelProcessionEquivFullLabel_apply
+    (label : IUTStage1ProcessionContainer (absLabelProcessionTop l)) :
+    absLabelProcessionEquivFullLabel label = absLabelFromProcession l label :=
+  rfl
+
 theorem gaussianDegree_fromProcession
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (label : IUTStage1ProcessionContainer (absLabelProcessionTop l)) :

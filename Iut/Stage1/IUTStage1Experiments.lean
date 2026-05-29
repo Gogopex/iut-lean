@@ -833,6 +833,22 @@ theorem absLabelFromProcession_surjective
       (IUTStage1ZModSquareWeightProfile.absLabelFromProcession l) :=
   IUTStage1ZModSquareWeightProfile.absLabelFromProcession_surjective
 
+theorem absLabelFromProcession_injective
+    {l : PrimeGeFive} :
+    Function.Injective
+      (IUTStage1ZModSquareWeightProfile.absLabelFromProcession l) :=
+  IUTStage1ZModSquareWeightProfile.absLabelFromProcession_injective
+
+theorem absLabelProcessionEquivFullLabel_apply
+    {l : PrimeGeFive}
+    (label :
+      IUTStage1ProcessionContainer
+        (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+    IUTStage1ZModSquareWeightProfile.absLabelProcessionEquivFullLabel label =
+      IUTStage1ZModSquareWeightProfile.absLabelFromProcession l label :=
+  IUTStage1ZModSquareWeightProfile.absLabelProcessionEquivFullLabel_apply
+    label
+
 theorem gaussianDegree_fromAbsLabelProcession
     {l : PrimeGeFive}
     (evaluation :
