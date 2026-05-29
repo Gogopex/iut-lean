@@ -5650,6 +5650,25 @@ theorem thetaFinite_globalFrobenioidCalibration_orderedShift
     ⟨global.calibratedLogVolume_lt_shifted_iff_shiftTerm_pos,
       global.shiftedLogVolume_lt_calibrated_iff_shiftTerm_lt_zero⟩
 
+theorem thetaFinite_localFrobenioidShift_eq_iff_exponent_eq_of_step_nonzero
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (exponent₁ exponent₂ : Int)
+    (localPrimeStepLogVolume : Real)
+    (hStep : localPrimeStepLogVolume ≠ 0) :
+    let local₁ :=
+      data.toLocalFrobenioidLogVolumeAmbiguity
+        exponent₁ localPrimeStepLogVolume;
+    let local₂ :=
+      data.toLocalFrobenioidLogVolumeAmbiguity
+        exponent₂ localPrimeStepLogVolume;
+    local₁.shiftedLogVolume = local₂.shiftedLogVolume ↔
+      exponent₁ = exponent₂ := by
+  intro local₁ local₂
+  have hlocal :=
+    IUTStage1LocalFrobenioidLogVolumeAmbiguity.shiftedLogVolume_eq_iff_exponent_eq_of_same_base_step
+      local₁ local₂ rfl rfl hStep
+  simpa [local₁, local₂, toLocalFrobenioidLogVolumeAmbiguity] using hlocal
+
 theorem ofZModCuspLabelLogVolumeCompatibilities_q_mem_upperRay
     {l : PrimeGeFive}
     (before afterInd1 afterInd2 :
