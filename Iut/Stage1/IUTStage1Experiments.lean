@@ -812,6 +812,13 @@ theorem gaussianCuspClassCanonicalSignLabel_eq_environment
       evaluation.environmentDegree :=
   evaluation.cuspClassLogVolume_canonicalSignLabel
 
+theorem fullLabelFromCoordinate_eq_iff_sign
+    {l : PrimeGeFive} (j k : ZMod l.value) :
+    IUTStage1ZModCuspFullLabel.fromCoordinate l j =
+        IUTStage1ZModCuspFullLabel.fromCoordinate l k ↔
+      j = k ∨ j = -k :=
+  IUTStage1ZModCuspFullLabel.fromCoordinate_eq_iff j k
+
 theorem singletonOneRestriction_not_translationInvariant
     (l : PrimeGeFive) :
     ¬ ∀ j : ZMod l.value,

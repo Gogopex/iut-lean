@@ -5839,6 +5839,46 @@ theorem fromCoordinate_ne_zero_iff
     fromCoordinate l j ≠ IUTStage1ZModCuspFullLabel.zero ↔ j ≠ 0 := by
   rw [ne_eq, ne_eq, fromCoordinate_eq_zero_iff]
 
+theorem fromCoordinate_eq_iff
+    (j k : ZMod l.value) :
+    fromCoordinate l j = fromCoordinate l k ↔ j = k ∨ j = -k := by
+  constructor
+  · intro h
+    by_cases hj : j = 0
+    · subst j
+      rw [fromCoordinate_zero] at h
+      have hk : k = 0 :=
+        (fromCoordinate_eq_zero_iff (l := l) k).mp h.symm
+      exact Or.inl hk.symm
+    · by_cases hk : k = 0
+      · subst k
+        rw [fromCoordinate_zero] at h
+        have hj_zero : j = 0 :=
+          (fromCoordinate_eq_zero_iff (l := l) j).mp h
+        exact False.elim (hj hj_zero)
+      · have hlabel :
+            zmodSignLabelFromCoordinate l j hj =
+              zmodSignLabelFromCoordinate l k hk := by
+          simpa [fromCoordinate_nonzero l j hj,
+            fromCoordinate_nonzero l k hk] using h
+        unfold zmodSignLabelFromCoordinate at hlabel
+        have hrel := Quotient.exact hlabel
+        change
+          (zmodSignAction l).InSignOrbit
+            (zmodNonzeroLabelFromCoordinate l j hj).1
+            (zmodNonzeroLabelFromCoordinate l k hk).1 at hrel
+        rw [zmodNonzeroLabelFromCoordinate_val,
+          zmodNonzeroLabelFromCoordinate_val] at hrel
+        exact hrel
+  · intro h
+    rcases h with rfl | hneg
+    · rfl
+    · subst j
+      by_cases hk : k = 0
+      · subst k
+        rw [neg_zero]
+      · exact fromCoordinate_neg l k hk
+
 theorem fromCoordinate_surjective :
     Function.Surjective (fromCoordinate l) := by
   intro label

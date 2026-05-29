@@ -18743,3 +18743,28 @@ IUT II, Remark 4.10.1(iii), that restriction to a proper subset may destroy the
 relevant \(F_\ell^\pm\) and \(F_\ell\) symmetries.  It also keeps the additive
 \(F_\ell\)-torsor structure separate from the absolute quotient
 \(|F_\ell|\), as required by the paper's labeling conventions.
+
+## Absolute-label fiber relation
+
+### Lean Move
+
+Added:
+
+```text
+fromCoordinate_eq_iff
+fullLabelFromCoordinate_eq_iff_sign
+```
+
+### Mathematical Reason
+
+The finite full-label map \(F_\ell\to |F_\ell|\) has exactly the expected
+fibers: two coordinates determine the same full absolute label if and only if
+they are equal or negatives of one another.  This includes the zero label
+correctly, since \(j=0\) is its own negative.
+
+### Source Check
+
+This is the formal version of the paper's convention
+\(|F_\ell|=\{0\}\cup F_\ell^\times/\{\pm1\}\).  It is the pointwise fiber
+bookkeeping underlying the half-range procession and signed/nonzero average
+theorems.
