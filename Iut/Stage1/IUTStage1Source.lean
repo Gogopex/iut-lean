@@ -34584,6 +34584,33 @@ structure Ind3SourceTargetAlignment
       audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume
 
 /--
+Target-side part of the Step (x) upper-semi real alignment.
+
+This is the only target-side equality needed to identify the theta-source
+average with the target value of a local nonarchimedean upper-semi entry.
+-/
+structure Ind3ThetaTargetAlignment
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind) where
+  thetaSourceAverage_eq_ind3Target :
+    part.insulated_route.theta_source.thetaSourceAverage audited =
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume
+
+namespace Ind3SourceTargetAlignment
+
+variable
+  {part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l}
+  {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
+
+def toThetaTargetAlignment
+    (alignment : Ind3SourceTargetAlignment part audited) :
+    Ind3ThetaTargetAlignment part audited :=
+  { thetaSourceAverage_eq_ind3Target :=
+      alignment.thetaSourceAverage_eq_ind3Target }
+
+end Ind3SourceTargetAlignment
+
+/--
 Transport-explicit real-line alignment for the two real equalities required by
 `Ind3SourceTargetAlignment`.
 
@@ -34692,6 +34719,12 @@ def toInd3SourceTargetAlignment
   { packetLocalObjectFinite_eq_ind3Source :=
       alignment.packetLocalObjectFinite_eq_ind3Source,
     thetaSourceAverage_eq_ind3Target :=
+      alignment.thetaSourceAverage_eq_ind3Target }
+
+def toInd3ThetaTargetAlignment
+    (alignment : Ind3OrderedRealLineAlignment part audited) :
+    Ind3ThetaTargetAlignment part audited :=
+  { thetaSourceAverage_eq_ind3Target :=
       alignment.thetaSourceAverage_eq_ind3Target }
 
 end Ind3OrderedRealLineAlignment
@@ -35002,6 +35035,49 @@ def ofQPilotKummerForgettingEntry
         _ = audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume :=
           ind3Source_eq_holomorphicFProduct.symm)
     thetaAverage_eq_entryTarget entryTarget_eq_ind3Target
+
+def ofQPilotKummerForgettingTargetAlignedEntry
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealizedTensorPacketProductLogVolume
+        IUTStage1PlaceKind.nonarchimedean j}
+    (kummer :
+      IUTStage1KummerFTensorPacketToDTensorPacketTransfer
+        holomorphicF holomorphicD)
+    (forgetting :
+      IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+        holomorphicD monoAnalyticD)
+    (entry : IUTStage1NonarchimedeanInclusionData)
+    (entry_mem :
+      entry ∈ audited.choice.upper_semi_state.nonarchimedeanInclusions)
+    (packetLocalObject_eq_entrySource :
+      audited.choice.local_tensor_state.packetState.localObject =
+        entry.sourceLogVolume)
+    (entrySource_eq_monoAnalyticProduct :
+      entry.sourceLogVolume.finiteLogVolume =
+        monoAnalyticD.product.productLogVolume)
+    (ind3Source_eq_holomorphicFProduct :
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume =
+        holomorphicF.product.productLogVolume)
+    (thetaAverage_eq_ind3Target :
+      thetaAverage =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume)
+    (entryTarget_eq_ind3Target :
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume) :
+    NonarchimedeanLogKummerUpperSemiCompatibility
+      audited thetaAverage logKummer :=
+  ofQPilotKummerForgettingEntry kummer forgetting entry entry_mem
+    packetLocalObject_eq_entrySource entrySource_eq_monoAnalyticProduct
+    ind3Source_eq_holomorphicFProduct
+    (by
+      calc
+        thetaAverage =
+            audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
+          thetaAverage_eq_ind3Target
+        _ = entry.targetLogVolume.finiteLogVolume :=
+          entryTarget_eq_ind3Target.symm)
+    entryTarget_eq_ind3Target
 
 theorem qPilotLogKummerNonInterference
     (compat :
@@ -36042,6 +36118,87 @@ theorem boundarySignedEqualityOrStrictCTheta_of_gaussianIdentityCanonicalOneKumm
       kummer forgetting entry entry_mem packetLocalObject_eq_entrySource
       entrySource_eq_monoAnalyticProduct ind3Source_eq_holomorphicFProduct
       thetaAverage_eq_entryTarget entryTarget_eq_ind3Target
+  exact
+    part.boundarySignedEqualityOrStrictCTheta_of_gaussianIdentityCanonicalOneLogKummerUpperSemiEntry
+      profile audited sourceProfile targetProfile sourceEvaluation
+      targetEvaluation canonical_one_preserved source_profile_eq
+      source_log_volume_eq target_log_volume_eq_theta logKummerUpperSemi
+      q_pilot_positive cTheta thetaSigned_le_cTheta_absLogQ
+
+theorem boundarySignedEqualityOrStrictCTheta_of_gaussianKummerForgettingTargetAlignedEntry
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (canonical_one_preserved :
+      targetEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        sourceEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)))
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_log_volume_eq_theta :
+      targetEvaluation.toCuspLabelLogVolumeCompatibility =
+        part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealizedTensorPacketProductLogVolume
+        IUTStage1PlaceKind.nonarchimedean j}
+    (kummer :
+      IUTStage1KummerFTensorPacketToDTensorPacketTransfer
+        holomorphicF holomorphicD)
+    (forgetting :
+      IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+        holomorphicD monoAnalyticD)
+    (entry : IUTStage1NonarchimedeanInclusionData)
+    (entry_mem :
+      entry ∈ audited.choice.upper_semi_state.nonarchimedeanInclusions)
+    (packetLocalObject_eq_entrySource :
+      audited.choice.local_tensor_state.packetState.localObject =
+        entry.sourceLogVolume)
+    (entrySource_eq_monoAnalyticProduct :
+      entry.sourceLogVolume.finiteLogVolume =
+        monoAnalyticD.product.productLogVolume)
+    (ind3Source_eq_holomorphicFProduct :
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume =
+        holomorphicF.product.productLogVolume)
+    (thetaTargetAlignment : Ind3ThetaTargetAlignment part audited)
+    (entryTarget_eq_ind3Target :
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume)
+    (q_pilot_positive : 0 < -packageN.preLedger.qSigned)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    (packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+        packageN.preLedger.thetaSigned < 0) ∨
+      (-1 : Real) < cTheta := by
+  let logKummerUpperSemi :
+      NonarchimedeanLogKummerUpperSemiCompatibility audited
+        (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer :=
+    NonarchimedeanLogKummerUpperSemiCompatibility.ofQPilotKummerForgettingTargetAlignedEntry
+      kummer forgetting entry entry_mem packetLocalObject_eq_entrySource
+      entrySource_eq_monoAnalyticProduct ind3Source_eq_holomorphicFProduct
+      thetaTargetAlignment.thetaSourceAverage_eq_ind3Target
+      entryTarget_eq_ind3Target
   exact
     part.boundarySignedEqualityOrStrictCTheta_of_gaussianIdentityCanonicalOneLogKummerUpperSemiEntry
       profile audited sourceProfile targetProfile sourceEvaluation

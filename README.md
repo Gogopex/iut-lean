@@ -160,7 +160,10 @@ the q-pilot column and log-Kummer non-interference before converting to the raw
 real equalities used by the route. Its source-side equality can already be
 derived from the finite Kummer-plus-forgetting tensor-packet chain:
 `holomorphicF -> holomorphicD -> monoAnalyticD`, where both steps preserve
-product log-volume.
+product log-volume. The strongest route also no longer takes the direct
+theta-to-entry-target equality; it derives that equality from a target-side
+Step (x) alignment plus calibration of the local entry target with the
+upper-semi target value.
 
 This is deliberately not marked as settling the dispute. The experiment report
 keeps `disputeSettledByCurrentStage = false`. The remaining issue is whether the
@@ -277,9 +280,9 @@ Near-term mathematics:
 * Extend the Gaussian-derived factored SHE construction beyond finite
   degree-evaluation and canonical-label shadows toward actual Gaussian/Frobenioid
   material corresponding to IUT II.
-* Derive the remaining target-side theta equality in the 1-column log-Kummer
-  upper-semi compatibility object from the actual log-Kummer construction of
-  IUT III, Step (x).
+* Derive the Step (x) theta-target alignment and entry-target calibration from
+  the actual log-Kummer construction of IUT III, Step (x), rather than treating
+  them as named source-facing inputs.
 * Replace the current hull/determinant obligation records with formal
   holomorphic-hull and determinant operations from IUT III, Remark 3.9.5 and
   Step (xi).
