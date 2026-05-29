@@ -5193,6 +5193,20 @@ theorem thetaLabelFactorPNormalization_mul_labelFactor
       data.modPOverP2GapLogVolume :=
   data.normalized_mul_labelFactor
 
+theorem thetaLabelFactorPNormalization_nonpos_iff
+    (data : IUTStage1ThetaLabelFactorPNormalizationShadow) :
+    data.normalizedModPLogVolume <= 0 ↔
+      data.modPOverP2GapLogVolume <= 0 :=
+  data.normalized_nonpos_iff_gap_nonpos
+
+theorem thetaLabelFactorPNormalization_orderEndpoint
+    (data : IUTStage1ThetaLabelFactorPNormalizationShadow) :
+    data.normalizedModPLogVolume * (data.l.value : Real) =
+        data.modPOverP2GapLogVolume ∧
+      (data.normalizedModPLogVolume <= 0 ↔
+        data.modPOverP2GapLogVolume <= 0) :=
+  data.factor_normalization_order_endpoint
+
 theorem frobeniusDerivativeDegreeInequality_nonpos
     (data : IUTStage1FrobeniusDerivativeDegreeInequalityShadow) :
     data.degreeDefect <= 0 :=

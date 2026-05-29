@@ -217,6 +217,28 @@ theorem normalized_eq_factor_average
       data.modPOverP2GapLogVolume / (data.l.value : Real) :=
   data.normalized_eq_div_l
 
+theorem normalized_nonpos_iff_gap_nonpos
+    (data : IUTStage1ThetaLabelFactorPNormalizationShadow) :
+    data.normalizedModPLogVolume <= 0 ↔
+      data.modPOverP2GapLogVolume <= 0 := by
+  constructor
+  · intro hnorm
+    have hmul := data.normalized_mul_labelFactor
+    have hpos := data.labelFactor_pos
+    nlinarith
+  · intro hgap
+    have hmul := data.normalized_mul_labelFactor
+    have hpos := data.labelFactor_pos
+    nlinarith
+
+theorem factor_normalization_order_endpoint
+    (data : IUTStage1ThetaLabelFactorPNormalizationShadow) :
+    data.normalizedModPLogVolume * (data.l.value : Real) =
+        data.modPOverP2GapLogVolume ∧
+      (data.normalizedModPLogVolume <= 0 ↔
+        data.modPOverP2GapLogVolume <= 0) :=
+  ⟨data.normalized_mul_labelFactor, data.normalized_nonpos_iff_gap_nonpos⟩
+
 end IUTStage1ThetaLabelFactorPNormalizationShadow
 
 /--
