@@ -5914,6 +5914,50 @@ theorem qLambdaCTheta_endpoint
       endpoint.standard_bound_of_lambda_le_one,
       endpoint.strict_standard_bound_of_lambda_lt_one⟩
 
+def toStandardQLambdaCThetaBound
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    IUTStage1Corollary312QLambdaCThetaBoundShadow :=
+  data.toQLambdaCThetaBound q_pilot_positive 1 (by norm_num) cTheta
+    (by
+      simpa [data.q_eq_beforeAverage] using
+        data.qPilotLogVolume_le_thetaHullLogVolume)
+    thetaHull_le_cTheta_absLogQ
+
+theorem standardQLambdaCTheta_endpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    (data.toStandardQLambdaCThetaBound
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).qLambdaSigned =
+        data.qPilotLogVolume ∧
+      (data.toStandardQLambdaCThetaBound
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).thetaSigned =
+        data.thetaHullLogVolume ∧
+      (-1 : Real) <=
+        (data.toStandardQLambdaCThetaBound
+          q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).cTheta := by
+  exact
+    ⟨by
+      simp [toStandardQLambdaCThetaBound, toQLambdaCThetaBound,
+        data.q_eq_beforeAverage],
+    rfl,
+    (data.toStandardQLambdaCThetaBound
+      q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ).standard_bound_of_lambda_le_one
+      (by
+        change (1 : Rat) <= 1
+        norm_num)⟩
+
 theorem cTheta_ge_neg_one
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (q_pilot_positive :

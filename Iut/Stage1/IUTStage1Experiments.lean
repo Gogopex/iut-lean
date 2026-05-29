@@ -4858,6 +4858,57 @@ theorem zmodCuspLabelLogVolumeCompatibility_qLambdaCThetaEndpoint
           q_pilot_positive lambda lambda_pos cTheta qLambda_le_thetaHull
           thetaHull_le_cTheta_absLogQ
 
+theorem zmodCuspLabelLogVolumeCompatibility_standardQLambdaCThetaEndpoint
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume)
+    (q_pilot_positive :
+      0 < -before.toLabelAveraged.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      thetaHullLogVolume <= cTheta * (-before.toLabelAveraged.averageLogVolume)) :
+    let data :=
+      IUTStage1StepXToHullUpperRayLogVolume.ofZModCuspLabelLogVolumeCompatibilities
+        before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+        determinant thetaHullLogVolume theta_eq_ind3Upper
+        theta_eq_normalized_determinant;
+    (data.toStandardQLambdaCThetaBound
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).qLambdaSigned =
+        before.toLabelAveraged.averageLogVolume ∧
+      (data.toStandardQLambdaCThetaBound
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).thetaSigned =
+        thetaHullLogVolume ∧
+      (-1 : Real) <=
+        (data.toStandardQLambdaCThetaBound
+          q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).cTheta := by
+  open IUTStage1StepXToHullUpperRayLogVolume in
+    let data :=
+      ofZModCuspLabelLogVolumeCompatibilities before afterInd1 afterInd2
+        ind3UpperBound hind1 hind2 hzero hcusp determinant thetaHullLogVolume
+        theta_eq_ind3Upper theta_eq_normalized_determinant
+    exact
+      data.standardQLambdaCTheta_endpoint
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+
 theorem zmodCuspLabelLogVolumeCompatibility_signedCorollary312
     {l : PrimeGeFive}
     (before afterInd1 afterInd2 :

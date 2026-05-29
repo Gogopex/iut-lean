@@ -577,7 +577,9 @@ The code currently covers:
   \(-1<C_\Theta\) conclusion when \(\lambda<1\); the \(F_\ell\)-sourced
   corridor exposes this as a conditional generalized endpoint, without
   asserting that the ordinary \(\lambda=1\) construction supplies all
-  generalized links;
+  generalized links; Lean now also specializes the endpoint at \(\lambda=1\)
+  and proves that its signed \(q^\lambda\)-boundary is exactly the ordinary
+  q-pilot log-volume;
 \item the Remark 3.12.2 distinct-label implication
   \(q\text{-itw}\Rightarrow q\text{-itw}\wedge\Theta\text{-itw}/\mathrm{indets}\),
   with q-native and \(\Theta\)-native labels proved distinct; Lean now also
@@ -1133,6 +1135,8 @@ numerical warning: nonzero local Frobenioid shifts change log-volume, whereas
 global calibration restores the unshifted value.  The positive rational unit
 rigidity fact in Remark 3.12.1(iii) is formalized directly over \(\mathbb{Q}\).
 For generalized links, Lean records that \(\lambda<1\) makes \(-\lambda>-1\).
+At \(\lambda=1\), the generalized endpoint reduces to the ordinary q-pilot
+boundary.
 Lean also checks that the Remark 3.12.2 simultaneous-intertwining step depends
 on distinct labels rather than an unlabeled identification, while the weakened
 prime-strip condition is retained.
