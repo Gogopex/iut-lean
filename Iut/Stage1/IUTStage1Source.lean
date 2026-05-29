@@ -8589,6 +8589,139 @@ theorem absLabelProcessionTop_pos (l : PrimeGeFive) :
     0 < absLabelProcessionTop l :=
   lt_of_lt_of_le (by norm_num) (absLabelProcessionTop_ge_two l)
 
+def absNonzeroLabelFromIndex
+    (l : PrimeGeFive)
+    (label : Fin (absLabelProcessionTop l)) :
+    IUTStage1ZModCuspFullLabel l :=
+  IUTStage1ZModCuspFullLabel.fromCoordinate l
+    ((label.val + 1 : Nat) : ZMod l.value)
+
+theorem gaussianDegree_fromAbsNonzeroLabelIndex
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (label : Fin (absLabelProcessionTop l)) :
+    evaluation.gaussianDegree (absNonzeroLabelFromIndex l label) =
+      (((label.val + 1 : Nat) : Real) ^ 2) *
+        evaluation.environmentDegree := by
+  unfold absNonzeroLabelFromIndex
+  have hle : label.val + 1 ≤ l.value / 2 := by
+    have hlt := label.isLt
+    unfold absLabelProcessionTop at hlt
+    omega
+  have hlt_value : label.val + 1 < l.value := by
+    have hge : 5 ≤ l.value := l.ge_five
+    omega
+  have hval :
+      (((label.val + 1 : Nat) : ZMod l.value).val) = label.val + 1 :=
+    ZMod.val_natCast_of_lt hlt_value
+  have hhalf :
+      (((label.val + 1 : Nat) : ZMod l.value).val) ≤ l.value / 2 := by
+    rw [hval]
+    exact hle
+  rw [evaluation.gaussianDegree_fromCoordinate_of_val_le_half
+    ((label.val + 1 : Nat) : ZMod l.value) hhalf]
+  rw [hval]
+
+noncomputable def absNonzeroLabelAveragedLogVolume
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    IUTStage1LabelAveragedProcessionLogVolume
+      (Fin (absLabelProcessionTop l)) :=
+  { normalizedLogVolume := fun label =>
+      evaluation.gaussianDegree (absNonzeroLabelFromIndex l label),
+    averageLogVolume :=
+      (Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+        evaluation.gaussianDegree (absNonzeroLabelFromIndex l label)) /
+        (absLabelProcessionTop l : Real),
+    average_eq := by simp }
+
+theorem nonzeroProcessionSquareSum_mul_six :
+    ((Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+      (((label.val + 1 : Nat) : Real) ^ 2)) * 6) =
+      (absLabelProcessionTop l : Real) *
+        ((absLabelProcessionTop l : Real) + 1) *
+          (2 * (absLabelProcessionTop l : Real) + 1) := by
+  let k := absLabelProcessionTop l
+  change
+    ((Finset.univ.sum fun label : Fin k =>
+      (((label.val + 1 : Nat) : Real) ^ 2)) * 6) =
+      (k : Real) * ((k : Real) + 1) * (2 * (k : Real) + 1)
+  rw [Finset.sum_fin_eq_sum_range]
+  have hsum_eq :
+      (Finset.range k).sum
+          (fun x : Nat =>
+            if h : x < k then
+              (((((⟨x, h⟩ : Fin k).val + 1 : Nat) : Real) ^ 2))
+            else 0) =
+        (Finset.range k).sum
+          (fun x : Nat => (((x + 1 : Nat) : Real) ^ 2)) := by
+    apply Finset.sum_congr rfl
+    intro x hx
+    have hxlt : x < k := Finset.mem_range.mp hx
+    simp [hxlt]
+  rw [hsum_eq]
+  have hshift :
+      (Finset.range k).sum
+          (fun x : Nat => (((x + 1 : Nat) : Real) ^ 2)) =
+        (Finset.range (k + 1)).sum
+          (fun x : Nat => ((x : Real) ^ 2)) := by
+    rw [Finset.sum_range_succ']
+    simp
+  rw [hshift]
+  exact iutIVThetaPilot_sum_sq_mul_six k
+
+theorem gaussianDegree_absNonzeroLabelAverage_mul_six
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    ((absNonzeroLabelAveragedLogVolume evaluation).averageLogVolume * 6 =
+      ((absLabelProcessionTop l : Real) + 1) *
+        (2 * (absLabelProcessionTop l : Real) + 1) *
+          evaluation.environmentDegree) := by
+  change
+    (((Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+      evaluation.gaussianDegree (absNonzeroLabelFromIndex l label)) /
+      (absLabelProcessionTop l : Real)) * 6 =
+      ((absLabelProcessionTop l : Real) + 1) *
+        (2 * (absLabelProcessionTop l : Real) + 1) *
+          evaluation.environmentDegree)
+  have hsum := nonzeroProcessionSquareSum_mul_six (l := l)
+  have hden : (absLabelProcessionTop l : Real) ≠ 0 := by
+    exact_mod_cast ne_of_gt (absLabelProcessionTop_pos l)
+  calc
+    ((Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+        evaluation.gaussianDegree (absNonzeroLabelFromIndex l label)) /
+        (absLabelProcessionTop l : Real)) * 6 =
+        ((Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+          (((label.val + 1 : Nat) : Real) ^ 2) *
+            evaluation.environmentDegree) /
+          (absLabelProcessionTop l : Real)) * 6 := by
+      congr 1
+      congr 1
+      exact Finset.sum_congr rfl (by
+        intro label _hlabel
+        exact gaussianDegree_fromAbsNonzeroLabelIndex evaluation label)
+    _ =
+        (((Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+          (((label.val + 1 : Nat) : Real) ^ 2)) *
+          evaluation.environmentDegree) /
+          (absLabelProcessionTop l : Real)) * 6 := by
+      rw [Finset.sum_mul]
+    _ =
+        ((((Finset.univ.sum fun label : Fin (absLabelProcessionTop l) =>
+          (((label.val + 1 : Nat) : Real) ^ 2)) * 6) *
+          evaluation.environmentDegree) /
+          (absLabelProcessionTop l : Real)) := by
+      ring
+    _ =
+        (((absLabelProcessionTop l : Real) *
+          ((absLabelProcessionTop l : Real) + 1) *
+            (2 * (absLabelProcessionTop l : Real) + 1)) *
+          evaluation.environmentDegree) /
+          (absLabelProcessionTop l : Real) := by
+      rw [hsum]
+    _ =
+        ((absLabelProcessionTop l : Real) + 1) *
+          (2 * (absLabelProcessionTop l : Real) + 1) *
+            evaluation.environmentDegree := by
+      field_simp [hden]
+
 /--
 Log-volume shadow of the IUT III splitting-monoid action.
 

@@ -895,6 +895,32 @@ theorem gaussianDegree_fromAbsLabelProcession
   IUTStage1ZModSquareWeightProfile.gaussianDegree_fromProcession
     evaluation label
 
+theorem gaussianDegree_fromAbsNonzeroIndex
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (label : Fin (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+    evaluation.gaussianDegree
+        (IUTStage1ZModSquareWeightProfile.absNonzeroLabelFromIndex l label) =
+      (((label.val + 1 : Nat) : Real) ^ 2) *
+        evaluation.environmentDegree :=
+  IUTStage1ZModSquareWeightProfile.gaussianDegree_fromAbsNonzeroLabelIndex
+    evaluation label
+
+theorem gaussianDegree_absNonzeroIndexAverage_mul_six
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    ((IUTStage1ZModSquareWeightProfile.absNonzeroLabelAveragedLogVolume
+        evaluation).averageLogVolume * 6 =
+      ((IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) + 1) *
+        (2 *
+          (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) +
+            1) *
+          evaluation.environmentDegree) :=
+  IUTStage1ZModSquareWeightProfile.gaussianDegree_absNonzeroLabelAverage_mul_six
+    evaluation
+
 theorem gaussianDegree_absLabelProcessionAverage_mul_six
     {l : PrimeGeFive}
     (evaluation :
