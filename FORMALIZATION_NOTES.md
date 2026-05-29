@@ -18755,6 +18755,8 @@ fromCoordinate_eq_iff
 fullLabelFromCoordinate_eq_iff_sign
 nonzero_fullLabel_fiber_eq_sign_pair
 nonzeroFullLabel_fiber_eq_signPair
+nonzero_fullLabel_fiber_card
+nonzeroFullLabel_fiber_card
 ```
 
 ### Mathematical Reason
@@ -18764,7 +18766,8 @@ fibers: two coordinates determine the same full absolute label if and only if
 they are equal or negatives of one another.  This includes the zero label
 correctly, since \(j=0\) is its own negative.  Lean also packages the nonzero
 case in the form used by the quotient convention: every nonzero full-label fiber
-is represented by some \(j\ne0\) and consists exactly of \(j\) and \(-j\).
+is represented by some \(j\ne0\) and consists exactly of \(j\) and \(-j\), hence
+has cardinality \(2\).
 
 ### Source Check
 

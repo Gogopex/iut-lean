@@ -829,6 +829,16 @@ theorem nonzeroFullLabel_fiber_eq_signPair
           k = j ∨ k = -j :=
   IUTStage1ZModCuspFullLabel.nonzero_fullLabel_fiber_eq_sign_pair label
 
+theorem nonzeroFullLabel_fiber_card
+    {l : PrimeGeFive}
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (@Finset.filter (ZMod l.value)
+      (fun k : ZMod l.value =>
+        IUTStage1ZModCuspFullLabel.fromCoordinate l k =
+          IUTStage1ZModCuspFullLabel.nonzero label)
+      (Classical.decPred _) Finset.univ).card = 2 :=
+  IUTStage1ZModCuspFullLabel.nonzero_fullLabel_fiber_card label
+
 theorem singletonOneRestriction_not_translationInvariant
     (l : PrimeGeFive) :
     ¬ ∀ j : ZMod l.value,

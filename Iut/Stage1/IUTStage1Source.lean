@@ -5956,6 +5956,33 @@ theorem two_mul_ne_zero_of_ne_zero
   haveI : Fact l.value.Prime := ⟨l.prime⟩
   exact mul_ne_zero (two_ne_zero l) ht
 
+theorem nonzero_fullLabel_fiber_card
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    (@Finset.filter (ZMod l.value)
+      (fun k : ZMod l.value => fromCoordinate l k = nonzero label)
+      (Classical.decPred _) Finset.univ).card = 2 := by
+  classical
+  rcases nonzero_fullLabel_fiber_eq_sign_pair (l := l) label with
+    ⟨j, hj, hfiber⟩
+  have hnot_neg : j ≠ -j := by
+    intro h
+    have hsum : j + j = 0 := by
+      have hrewrite : j + j = j + -j := congrArg (fun x => j + x) h
+      rw [hrewrite]
+      simp
+    have htwo : (2 : ZMod l.value) * j = 0 := by
+      rw [show (2 : ZMod l.value) * j = j + j by ring, hsum]
+    exact two_mul_ne_zero_of_ne_zero l j hj htwo
+  have hset :
+      (@Finset.filter (ZMod l.value)
+        (fun k : ZMod l.value => fromCoordinate l k = nonzero label)
+        (Classical.decPred _) Finset.univ) =
+        ({j, -j} : Finset (ZMod l.value)) := by
+    ext k
+    simp [hfiber k]
+  rw [hset]
+  simp [hnot_neg]
+
 theorem no_fullLabel_map_descends_nonzero_translation
     (l : PrimeGeFive) (t : ZMod l.value) (ht : t ≠ 0) :
     ¬ ∃ T : IUTStage1ZModCuspFullLabel l -> IUTStage1ZModCuspFullLabel l,
