@@ -6409,6 +6409,39 @@ theorem statementEndpoint_thetaExtendedFinite
   (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
     thetaHull_le_cTheta_absLogQ).thetaExtendedFinite
 
+theorem statementEndpoint_thetaExtended_ne_plusInfinity
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ).finiteEndpoint.thetaExtended ≠
+      IUTStage1ExtendedSignedLogVolume.plusInfinity :=
+  (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+    thetaHull_le_cTheta_absLogQ).thetaExtended_ne_plusInfinity
+
+theorem statementEndpoint_thetaFiniteValue_eq_ind3Upper
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    IUTStage1ExtendedSignedLogVolume.finiteValueOrZero
+        (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+          thetaHull_le_cTheta_absLogQ).finiteEndpoint.thetaExtended =
+      data.corridor.ind3UpperBound := by
+  rw [(data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ).finiteEndpoint.thetaFiniteValue_eq_hull]
+  change data.thetaHullLogVolume = data.corridor.ind3UpperBound
+  exact data.theta_eq_ind3Upper
+
 theorem statementEndpoint_qPilotNotSubject
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)

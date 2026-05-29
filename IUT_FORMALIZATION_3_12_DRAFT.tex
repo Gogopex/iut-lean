@@ -191,8 +191,8 @@ The code currently covers:
 \item the Step (x)-sourced statement endpoint:
   after adjoining the statement-level
   \(\Theta\)-subject/\(q\)-not-subject boundary, the same data constructs the
-  Corollary 3.12 statement endpoint, with finite \(\Theta\)-branch and
-  \(C_\Theta\ge-1\); Lean proves that this constructed endpoint still records
+  Corollary 3.12 statement endpoint, with finite \(\Theta\)-branch excluding
+  \(+\infty\) and \(C_\Theta\ge-1\); Lean proves that this constructed endpoint still records
   the \(\Theta\)-pilot as subject to \((\mathrm{Ind1}),(\mathrm{Ind2}),
   (\mathrm{Ind3})\) and the \(q\)-pilot as not subject to them, and that these
   two status fields are unequal at the constructed endpoint; Lean also proves
@@ -204,8 +204,8 @@ The code currently covers:
   the displayed inequality
   \(-|\log(q)|\le-|\log(\Theta)|\) at this endpoint, with \(q\) read as the
   pre-indeterminacy average and \(\Theta\) read as the finite real branch;
-  the finite \(\Theta\)-value is identified with the Step (x)
-  \((\mathrm{Ind3})\) upper bound; the same endpoint bound holds after the
+  the finite extended \(\Theta\)-value and the real \(\Theta\)-branch are
+  identified with the Step (x) \((\mathrm{Ind3})\) upper bound; the same endpoint bound holds after the
   \((\mathrm{Ind1})\) and \((\mathrm{Ind2})\) average-preserving
   transformations; the Step (x)-sourced endpoint also directly rejects
   \(C_\Theta<-1\);
@@ -475,7 +475,9 @@ endpoint, proof that the endpoint \(\Theta\)- and \(q\)-statuses are distinct,
 identification of its \(q\)-pilot real with the Step (x)
 pre-, after-\((\mathrm{Ind1})\)-, and after-\((\mathrm{Ind2})\)-averages,
 positivity of \(|\log(q)|\) at that endpoint, and direct
-\(-|\log(q)|\le-|\log(\Theta)|\) and \(C_\Theta\nless-1\) conclusions,
+\(-|\log(q)|\le-|\log(\Theta)|\), finite-\(\Theta\) exclusion of \(+\infty\),
+identification of the finite extended \(\Theta\)-value with the Step (x)
+\((\mathrm{Ind3})\) upper bound, and \(C_\Theta\nless-1\) conclusions,
 the
 Step (xi-g)-to-(xi-f) endpoint bridge giving \(C_\Theta\ge-1\) from the
 two-computation q-pilot record, the Step (xi-e)--(xi-f) fixed
