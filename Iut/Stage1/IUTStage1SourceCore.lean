@@ -2719,6 +2719,23 @@ theorem cTheta_eq_neg_one_or_gt_neg_one
   (data.toSignedCThetaBound q_pilot_positive cTheta
     thetaHull_le_cTheta_absLogQ).cTheta_eq_neg_one_or_gt_neg_one
 
+theorem cTheta_gt_neg_one_of_qPilot_lt_thetaHull
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    (q_pilot_positive : 0 < -data.qPilotLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <= cTheta * (-data.qPilotLogVolume))
+    (hstrict : data.qPilotLogVolume < data.thetaHullLogVolume) :
+    (-1 : Real) < cTheta :=
+  (data.toSignedCThetaBound q_pilot_positive cTheta
+    thetaHull_le_cTheta_absLogQ)
+      |>.cTheta_gt_neg_one_of_qSigned_lt_thetaSigned
+        (by
+          simpa [toSignedCThetaBound, toSignedEndpoint,
+            toQPilotTwoComputationLogVolume,
+            IUTStage1QPilotTwoComputationSignedEndpoint.comparisonData]
+            using hstrict)
+
 theorem thetaHull_eq_qPilotLogVolume_of_cTheta_eq_neg_one
     (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
     (q_pilot_positive : 0 < -data.qPilotLogVolume)
@@ -2736,6 +2753,22 @@ theorem thetaHull_eq_qPilotLogVolume_of_cTheta_eq_neg_one
   simpa [toSignedCThetaBound, toSignedEndpoint, toQPilotTwoComputationLogVolume,
     IUTStage1QPilotTwoComputationSignedEndpoint.comparisonData] using
     htheta.symm
+
+theorem thetaHull_eq_qPilotLogVolume_or_cTheta_gt_neg_one
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    (q_pilot_positive : 0 < -data.qPilotLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <= cTheta * (-data.qPilotLogVolume)) :
+    data.thetaHullLogVolume = data.qPilotLogVolume ∨
+      (-1 : Real) < cTheta := by
+  rcases data.cTheta_eq_neg_one_or_gt_neg_one
+      q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ with
+    hboundary | hstrict
+  · exact Or.inl
+      (data.thetaHull_eq_qPilotLogVolume_of_cTheta_eq_neg_one
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ hboundary)
+  · exact Or.inr hstrict
 
 end IUTStage1ThetaPossibleImagesHullLogVolumeShadow
 
