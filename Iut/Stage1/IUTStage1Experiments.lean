@@ -1512,6 +1512,23 @@ theorem lgpSplittingMonoid_generator_sum_mul_six
         action.evaluation.environmentDegree :=
   action.generatorLogVolume_sum_mul_six
 
+theorem lgpSplittingMonoid_generator_average_mul_six
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    ((Finset.univ.sum action.generatorLogVolume) /
+        (Fintype.card
+          (IUTStage1ProcessionContainer
+            (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+              Real)) *
+      6 =
+      (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) *
+        (2 *
+          (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) +
+            1) *
+          action.evaluation.environmentDegree :=
+  action.generatorLogVolume_average_mul_six
+
 theorem lgpSplittingMonoid_normalizedActed_eq_packetNormalized_plus_generatorAverage
     {l : PrimeGeFive}
     (action :
@@ -1541,6 +1558,18 @@ theorem lgpSplittingMonoid_normalizedActed_eq_packetNormalized_plus_squareAverag
               (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
                 Real) :=
   action.normalizedActedLogVolume_eq_packetNormalized_plus_squareAverage
+
+theorem lgpSplittingMonoid_normalizedActed_delta_mul_six
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    (action.normalizedActedLogVolume - action.packet.normalizedLogVolume) * 6 =
+      (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) *
+        (2 *
+          (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l : Real) +
+            1) *
+          action.evaluation.environmentDegree :=
+  action.normalizedActedLogVolume_delta_mul_six
 
 theorem baseValuationTensorPacketProduct_eq_nested_sum
     {kind : IUTStage1PlaceKind} {j : Nat}

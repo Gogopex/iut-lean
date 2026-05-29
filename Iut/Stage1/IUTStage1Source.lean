@@ -7951,6 +7951,44 @@ theorem generatorLogVolume_sum_mul_six
           action.evaluation.environmentDegree := by
       rw [hsum]
 
+theorem generatorLogVolume_average_mul_six
+    (action : LGPSplittingMonoidTensorPacketAction l) :
+    ((Finset.univ.sum action.generatorLogVolume) /
+        (Fintype.card
+          (IUTStage1ProcessionContainer (absLabelProcessionTop l)) : Real)) *
+      6 =
+      (absLabelProcessionTop l : Real) *
+        (2 * (absLabelProcessionTop l : Real) + 1) *
+          action.evaluation.environmentDegree := by
+  have hsum := action.generatorLogVolume_sum_mul_six
+  have hcard :
+      (Fintype.card
+        (IUTStage1ProcessionContainer (absLabelProcessionTop l)) : Real) =
+      ((absLabelProcessionTop l : Real) + 1) := by
+    rw [IUTStage1ProcessionContainer.card_eq]
+    norm_num
+  have hden : ((absLabelProcessionTop l : Real) + 1) ≠ 0 := by
+    positivity
+  rw [hcard]
+  calc
+    ((Finset.univ.sum action.generatorLogVolume) /
+        ((absLabelProcessionTop l : Real) + 1)) * 6 =
+        ((Finset.univ.sum action.generatorLogVolume) * 6) /
+          ((absLabelProcessionTop l : Real) + 1) := by
+      ring
+    _ =
+        (((absLabelProcessionTop l : Real) *
+          ((absLabelProcessionTop l : Real) + 1) *
+            (2 * (absLabelProcessionTop l : Real) + 1)) *
+          action.evaluation.environmentDegree) /
+          ((absLabelProcessionTop l : Real) + 1) := by
+      rw [hsum]
+    _ =
+        (absLabelProcessionTop l : Real) *
+          (2 * (absLabelProcessionTop l : Real) + 1) *
+            action.evaluation.environmentDegree := by
+      field_simp [hden]
+
 theorem normalizedActedLogVolume_eq_packetNormalized_plus_generatorAverage
     (action : LGPSplittingMonoidTensorPacketAction l) :
     action.normalizedActedLogVolume =
@@ -7974,6 +8012,30 @@ theorem normalizedActedLogVolume_eq_packetNormalized_plus_squareAverage
             (IUTStage1ProcessionContainer (absLabelProcessionTop l)) : Real) := by
   rw [action.normalizedActedLogVolume_eq_packetNormalized_plus_generatorAverage,
     action.generatorLogVolume_sum_eq_procession_square_sum]
+
+theorem normalizedActedLogVolume_delta_mul_six
+    (action : LGPSplittingMonoidTensorPacketAction l) :
+    (action.normalizedActedLogVolume - action.packet.normalizedLogVolume) * 6 =
+      (absLabelProcessionTop l : Real) *
+        (2 * (absLabelProcessionTop l : Real) + 1) *
+          action.evaluation.environmentDegree := by
+  rw [action.normalizedActedLogVolume_eq_packetNormalized_plus_generatorAverage]
+  have havg := action.generatorLogVolume_average_mul_six
+  calc
+    (action.packet.normalizedLogVolume +
+          (Finset.univ.sum action.generatorLogVolume) /
+            (Fintype.card
+              (IUTStage1ProcessionContainer (absLabelProcessionTop l)) : Real) -
+        action.packet.normalizedLogVolume) * 6 =
+        ((Finset.univ.sum action.generatorLogVolume) /
+          (Fintype.card
+            (IUTStage1ProcessionContainer (absLabelProcessionTop l)) : Real)) *
+          6 := by
+      ring
+    _ =
+        (absLabelProcessionTop l : Real) *
+          (2 * (absLabelProcessionTop l : Real) + 1) *
+            action.evaluation.environmentDegree := havg
 
 end LGPSplittingMonoidTensorPacketAction
 
