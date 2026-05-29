@@ -712,7 +712,10 @@ The code currently covers:
   The same classification is now proved for the actual hull/determinant upper
   ray already present in the corridor, using the boundary identification
   \(q=\Theta_{\mathrm{hull}}\), and then packaged with the determinant boundary
-  as a boundary-versus-strict endpoint theorem.
+  as a boundary-versus-strict endpoint theorem.  Lean also exposes the two
+  nonzero sign cases separately: negative local shifts are genuinely below q
+  but quotient-collapse to q in the actual upper ray, while positive local
+  shifts remain quotient-separated from q.
   Hence, if the collapsed region also contains a nonzero local shift, Lean
   proves that the quotient identifies it with the fixed q/determinant boundary
   while the underlying log-volumes remain unequal; this broad-collapse
