@@ -18582,3 +18582,36 @@ The hard audit now has four visible pieces of provenance: final checkpoint,
 simultaneous-comparison checkpoint, q/Theta pilots, and the package's real
 comparison chart.  Future source-level proofs must match all four before Lean
 will accept them as this 3.11.5-to-3.12 comparison.
+
+## Coordinate/nonzero Gaussian average sign split
+
+### Lean Move
+
+Added:
+
+```text
+environment_le_gaussianDegree_nonzero_of_environment_nonnegative
+nonzeroCarrierAveragedLogVolume_gt_zero_of_environment_positive
+coordinateAveragedLogVolume_lt_nonzeroCarrierAverage_of_positive
+gaussianCoordinateAverage_strictly_below_nonzeroAverage_of_positive
+```
+
+The negative branch was already present; the positive branch now completes the
+sign-dependent comparison between the all-\(F_\ell\) coordinate average and the
+auxiliary nonzero-coordinate average.
+
+### Mathematical Reason
+
+For nonzero labels the exponent is at least \(1\).  Hence, if the environment
+degree is positive, each nonzero Gaussian component is bounded below by the
+environment degree, so the nonzero average is positive.  Since the all-coordinate
+average is \((\ell-1)/\ell\) times the nonzero average, it is strictly smaller in
+the positive branch.  In the negative branch the same rescaling makes the
+all-coordinate average strictly larger than the nonzero average.
+
+### Source Check
+
+IUT II, Remark 4.7.3(iii), assigns weight \(1/\ell\) to volumes indexed by
+\(j\in F_\ell\) and separates the zero label from the nonzero Gaussian
+components.  The Lean theorem records that replacing this weighted all-label
+average by a nonzero-only average changes the value in a sign-dependent way.

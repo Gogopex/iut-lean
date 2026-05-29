@@ -8328,6 +8328,40 @@ theorem nonzeroCarrierAveragedLogVolume_lt_zero_of_environment_negative
       (le_of_lt henv_neg) (le_refl evaluation.environmentDegree)
   linarith
 
+theorem environment_le_gaussianDegree_nonzero_of_environment_nonnegative
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_nonneg : 0 <= evaluation.environmentDegree)
+    (label : (zmodSignAction l).SignLabelQuotient) :
+    evaluation.environmentDegree <=
+      evaluation.gaussianDegree (IUTStage1ZModCuspFullLabel.nonzero label) := by
+  rw [evaluation.gaussianDegree_eq_eval]
+  have hexp_ge_one := thetaExponentOnAbsLabel_nonzero_ge_one (l := l) label
+  have hmul :
+      1 * evaluation.environmentDegree <=
+        thetaExponentOnAbsLabel
+          (l := l) (IUTStage1ZModCuspFullLabel.nonzero label) *
+            evaluation.environmentDegree :=
+    mul_le_mul_of_nonneg_right hexp_ge_one henv_nonneg
+  simpa using hmul
+
+theorem nonzeroCarrierAveragedLogVolume_gt_zero_of_environment_positive
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_pos : 0 < evaluation.environmentDegree) :
+    0 < evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume := by
+  haveI : Nonempty (zmodPointedQuotient l).NonzeroCarrier :=
+    ⟨zmodOneNonzeroLabel l⟩
+  have henv_le :
+      evaluation.environmentDegree <=
+        evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume :=
+    IUTStage1LabelAveragedProcessionLogVolume.const_le_average_of_forall_le
+      evaluation.nonzeroCarrierAveragedLogVolume
+      (by
+        intro x
+        exact
+          evaluation.environment_le_gaussianDegree_nonzero_of_environment_nonnegative
+            (le_of_lt henv_pos) ((zmodSignAction l).toSignLabelQuotient x))
+  exact lt_of_lt_of_le henv_pos henv_le
+
 theorem coordinateAveragedLogVolume_gt_nonzeroCarrierAverage_of_negative
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (henv_neg : evaluation.environmentDegree < 0) :
@@ -8349,6 +8383,29 @@ theorem coordinateAveragedLogVolume_gt_nonzeroCarrierAverage_of_negative
   have havg_neg :=
     evaluation.nonzeroCarrierAveragedLogVolume_lt_zero_of_environment_negative
       henv_neg
+  nlinarith
+
+theorem coordinateAveragedLogVolume_lt_nonzeroCarrierAverage_of_positive
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_pos : 0 < evaluation.environmentDegree) :
+    evaluation.coordinateAveragedLogVolume.averageLogVolume <
+      evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume := by
+  rw [evaluation.coordinateAveragedLogVolume_eq_nonzero_mass_rescale]
+  let factor : Real := ((l.value - 1 : Nat) : Real) / (l.value : Real)
+  have hfactor_lt : factor < 1 := by
+    have hl_pos : 0 < (l.value : Real) := by
+      exact_mod_cast (lt_of_lt_of_le (by decide : 0 < 5) l.ge_five)
+    have hlt_nat : l.value - 1 < l.value := by
+      have hge : 5 ≤ l.value := l.ge_five
+      omega
+    have hlt_real : ((l.value - 1 : Nat) : Real) < (l.value : Real) := by
+      exact_mod_cast hlt_nat
+    dsimp [factor]
+    rw [div_lt_one hl_pos]
+    exact hlt_real
+  have havg_pos :=
+    evaluation.nonzeroCarrierAveragedLogVolume_gt_zero_of_environment_positive
+      henv_pos
   nlinarith
 
 theorem forall_coordinateFullLabel_le_implies_bound_nonnegative
