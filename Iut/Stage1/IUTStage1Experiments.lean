@@ -1210,6 +1210,21 @@ theorem stepXToHullUpperRay_statementEndpoint_cTheta_ge_neg_one
   data.statementEndpoint_cTheta_ge_neg_one
     pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
 
+theorem stepXToHullUpperRay_statementEndpoint_not_cTheta_lt_neg_one
+    {label : Type u} [Fintype label]
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    ¬ (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+        thetaHull_le_cTheta_absLogQ).cTheta < (-1 : Real) :=
+  data.statementEndpoint_not_cTheta_lt_neg_one
+    pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+
 theorem valuationFiberLogShellDirectSum_eq_sum
     {kind : IUTStage1PlaceKind}
     (directSum : IUTStage1ValuationFiberLogShellDirectSum kind) :
