@@ -340,6 +340,10 @@ is then derived.
 When the theta-source average is identified with the packet-normalized capsule
 log-volume, this target alignment is itself derived from calibration of
 \(U_{\Ind3}\) with the same packet-normalized value.
+The local entry target may now also be calibrated against this packet-normalized
+value, so the equality
+\(\mathrm{entry}_{\mathrm{target}}=U_{\Ind3}\) is derived rather than supplied
+directly in the strongest route.
 
 \subsection{Step (xi-f) algebra}
 
@@ -450,6 +454,8 @@ The project currently proves the following source-facing results in \Lean{}:
 \item The Step (x) theta-target alignment can itself be derived from
   packet-normalized theta-source equality and calibration of the upper-semi
   target with the packet-normalized value.
+\item The entry-target calibration can likewise be expressed by equality to the
+  packet-normalized value, deriving equality with the upper-semi target.
 \item The Step (xi-f) real algebra proves \(C_\Theta\ge-1\), strictness under
   strict upper-ray membership, and equality constraints in the boundary case.
 \item The final route rejects the balanced sign-compatible comparison level as
@@ -554,7 +560,7 @@ The practical priority order is:
 \item extend the Gaussian-derived factored \SHE{} construction beyond the
   finite degree-evaluation and canonical-label shadows toward actual
   Gaussian/Frobenioid material from \IUT{} II;
-\item derive the remaining upper-semi target calibrations from the actual
+\item derive the remaining packet-normalized target calibrations from the actual
   log-Kummer construction of \IUT{} III, Step (x), rather than treating them as
   named source-facing inputs;
 \item replace the hull/determinant endpoint records by the actual

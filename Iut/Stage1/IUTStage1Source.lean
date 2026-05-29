@@ -35103,6 +35103,58 @@ def ofQPilotKummerForgettingTargetAlignedEntry
           entryTarget_eq_ind3Target.symm)
     entryTarget_eq_ind3Target
 
+def ofQPilotKummerForgettingPacketTargetEntry
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealizedTensorPacketProductLogVolume
+        IUTStage1PlaceKind.nonarchimedean j}
+    (kummer :
+      IUTStage1KummerFTensorPacketToDTensorPacketTransfer
+        holomorphicF holomorphicD)
+    (forgetting :
+      IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+        holomorphicD monoAnalyticD)
+    (entry : IUTStage1NonarchimedeanInclusionData)
+    (entry_mem :
+      entry ∈ audited.choice.upper_semi_state.nonarchimedeanInclusions)
+    (packetLocalObject_eq_entrySource :
+      audited.choice.local_tensor_state.packetState.localObject =
+        entry.sourceLogVolume)
+    (entrySource_eq_monoAnalyticProduct :
+      entry.sourceLogVolume.finiteLogVolume =
+        monoAnalyticD.product.productLogVolume)
+    (ind3Source_eq_holomorphicFProduct :
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume =
+        holomorphicF.product.productLogVolume)
+    (thetaAverage_eq_packetNormalized :
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (ind3Target_eq_packetNormalized :
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (entryTarget_eq_packetNormalized :
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume) :
+    NonarchimedeanLogKummerUpperSemiCompatibility
+      audited thetaAverage logKummer :=
+  ofQPilotKummerForgettingTargetAlignedEntry kummer forgetting entry entry_mem
+    packetLocalObject_eq_entrySource entrySource_eq_monoAnalyticProduct
+    ind3Source_eq_holomorphicFProduct
+    (by
+      calc
+        thetaAverage =
+            audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+          thetaAverage_eq_packetNormalized
+        _ = audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
+          ind3Target_eq_packetNormalized.symm)
+    (by
+      calc
+        entry.targetLogVolume.finiteLogVolume =
+            audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+          entryTarget_eq_packetNormalized
+        _ = audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
+          ind3Target_eq_packetNormalized.symm)
+
 theorem qPilotLogKummerNonInterference
     (compat :
       NonarchimedeanLogKummerUpperSemiCompatibility
@@ -36311,6 +36363,92 @@ theorem boundarySignedEqualityOrStrictCTheta_of_gaussianKummerForgettingPacketTa
       entry_mem packetLocalObject_eq_entrySource entrySource_eq_monoAnalyticProduct
       ind3Source_eq_holomorphicFProduct thetaTargetAlignment
       entryTarget_eq_ind3Target q_pilot_positive cTheta thetaSigned_le_cTheta_absLogQ
+
+theorem boundarySignedEqualityOrStrictCTheta_of_gaussianKummerForgettingPacketCalibratedEntry
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (canonical_one_preserved :
+      targetEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        sourceEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)))
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_log_volume_eq_theta :
+      targetEvaluation.toCuspLabelLogVolumeCompatibility =
+        part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealizedTensorPacketProductLogVolume
+        IUTStage1PlaceKind.nonarchimedean j}
+    (kummer :
+      IUTStage1KummerFTensorPacketToDTensorPacketTransfer
+        holomorphicF holomorphicD)
+    (forgetting :
+      IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+        holomorphicD monoAnalyticD)
+    (entry : IUTStage1NonarchimedeanInclusionData)
+    (entry_mem :
+      entry ∈ audited.choice.upper_semi_state.nonarchimedeanInclusions)
+    (packetLocalObject_eq_entrySource :
+      audited.choice.local_tensor_state.packetState.localObject =
+        entry.sourceLogVolume)
+    (entrySource_eq_monoAnalyticProduct :
+      entry.sourceLogVolume.finiteLogVolume =
+        monoAnalyticD.product.productLogVolume)
+    (ind3Source_eq_holomorphicFProduct :
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume =
+        holomorphicF.product.productLogVolume)
+    (thetaSourceAverage_eq_packetNormalized :
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (ind3Target_eq_packetNormalized :
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (entryTarget_eq_packetNormalized :
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (q_pilot_positive : 0 < -packageN.preLedger.qSigned)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    (packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+        packageN.preLedger.thetaSigned < 0) ∨
+      (-1 : Real) < cTheta := by
+  let logKummerUpperSemi :
+      NonarchimedeanLogKummerUpperSemiCompatibility audited
+        (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer :=
+    NonarchimedeanLogKummerUpperSemiCompatibility.ofQPilotKummerForgettingPacketTargetEntry
+      kummer forgetting entry entry_mem packetLocalObject_eq_entrySource
+      entrySource_eq_monoAnalyticProduct ind3Source_eq_holomorphicFProduct
+      thetaSourceAverage_eq_packetNormalized ind3Target_eq_packetNormalized
+      entryTarget_eq_packetNormalized
+  exact
+    part.boundarySignedEqualityOrStrictCTheta_of_gaussianIdentityCanonicalOneLogKummerUpperSemiEntry
+      profile audited sourceProfile targetProfile sourceEvaluation
+      targetEvaluation canonical_one_preserved source_profile_eq
+      source_log_volume_eq target_log_volume_eq_theta logKummerUpperSemi
+      q_pilot_positive cTheta thetaSigned_le_cTheta_absLogQ
 
 theorem bridgeSource_eq_hodgeTheaterDescentPacketTransport
     (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :

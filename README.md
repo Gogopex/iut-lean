@@ -165,7 +165,9 @@ theta-to-entry-target equality; it derives that equality from a target-side
 Step (x) alignment plus calibration of the local entry target with the
 upper-semi target value. That target-side alignment can now be derived from
 packet-normalized theta-source equality plus calibration of the upper-semi
-target with the same packet-normalized value.
+target with the same packet-normalized value. The local entry target can also
+be calibrated against this packet-normalized value, deriving equality with the
+upper-semi target.
 
 This is deliberately not marked as settling the dispute. The experiment report
 keeps `disputeSettledByCurrentStage = false`. The remaining issue is whether the
@@ -282,7 +284,7 @@ Near-term mathematics:
 * Extend the Gaussian-derived factored SHE construction beyond finite
   degree-evaluation and canonical-label shadows toward actual Gaussian/Frobenioid
   material corresponding to IUT II.
-* Derive the remaining upper-semi target calibrations from the actual
+* Derive the remaining packet-normalized target calibrations from the actual
   log-Kummer construction of IUT III, Step (x), rather than treating them as
   named source-facing inputs.
 * Replace the current hull/determinant obligation records with formal
