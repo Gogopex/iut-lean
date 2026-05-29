@@ -5454,6 +5454,33 @@ theorem thetaFinite_tensorPower_warning
       rw [hFinite] at hmem
       exact hnot hmem⟩
 
+theorem thetaFinite_qPilot_lt_thetaRealLogVolume_of_mem_tensorPowerUpperRay
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (tensorPower : Nat)
+    (tensor_power_ge_two : 2 ≤ tensorPower)
+    (theta_neg : data.thetaHullLogVolume < 0)
+    (hmem :
+      data.toThetaFiniteLogVolumeEndpoint.upperRayData.qPilotLogVolume ∈
+        (data.toThetaPilotTensorPowerLogVolume
+          tensorPower tensor_power_ge_two).tensorPowerUpperRay) :
+    data.toThetaFiniteLogVolumeEndpoint.upperRayData.qPilotLogVolume <
+      data.toThetaFiniteLogVolumeEndpoint.thetaRealLogVolume := by
+  have hTensorNeg :
+      (data.toThetaPilotTensorPowerLogVolume
+        tensorPower tensor_power_ge_two).originalThetaPilotLogVolume < 0 := by
+    simpa [toThetaPilotTensorPowerLogVolume] using theta_neg
+  have hlt :=
+    (data.toThetaPilotTensorPowerLogVolume tensorPower tensor_power_ge_two)
+      |>.mem_tensorPowerUpperRay_lt_original_of_original_neg hTensorNeg hmem
+  have hFinite :
+      data.toThetaFiniteLogVolumeEndpoint.thetaRealLogVolume =
+        (data.toThetaPilotTensorPowerLogVolume
+          tensorPower tensor_power_ge_two).originalThetaPilotLogVolume := by
+    simpa [toThetaPilotTensorPowerLogVolume] using
+      data.toThetaFiniteLogVolumeEndpoint.thetaRealLogVolume_eq_hull
+  rw [hFinite]
+  exact hlt
+
 def toLocalFrobenioidLogVolumeAmbiguity
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (localExponent : Int)

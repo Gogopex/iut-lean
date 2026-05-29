@@ -2890,6 +2890,15 @@ theorem originalBoundary_not_mem_tensorPowerUpperRay_of_original_neg
   exact not_le_of_gt
     (data.tensorPowerLogVolume_lt_original_of_original_neg hTheta)
 
+theorem mem_tensorPowerUpperRay_lt_original_of_original_neg
+    (data : IUTStage1ThetaPilotTensorPowerLogVolume)
+    (hTheta : data.originalThetaPilotLogVolume < 0)
+    {value : Real}
+    (hvalue : value ∈ data.tensorPowerUpperRay) :
+    value < data.originalThetaPilotLogVolume :=
+  lt_of_le_of_lt hvalue
+    (data.tensorPowerLogVolume_lt_original_of_original_neg hTheta)
+
 theorem originalUpperRay_not_subset_tensorPowerUpperRay_of_original_neg
     (data : IUTStage1ThetaPilotTensorPowerLogVolume)
     (hTheta : data.originalThetaPilotLogVolume < 0) :

@@ -6498,6 +6498,14 @@ theorem thetaPilotTensorPower_originalBoundary_not_mem_tensorPowerUpperRay
     data.originalThetaPilotLogVolume ∉ data.tensorPowerUpperRay :=
   data.originalBoundary_not_mem_tensorPowerUpperRay_of_original_neg hTheta
 
+theorem thetaPilotTensorPower_mem_lt_original
+    (data : IUTStage1ThetaPilotTensorPowerLogVolume)
+    (hTheta : data.originalThetaPilotLogVolume < 0)
+    {value : Real}
+    (hvalue : value ∈ data.tensorPowerUpperRay) :
+    value < data.originalThetaPilotLogVolume :=
+  data.mem_tensorPowerUpperRay_lt_original_of_original_neg hTheta hvalue
+
 theorem thetaPilotTensorPower_originalUpperRay_not_subset_tensorPowerUpperRay
     (data : IUTStage1ThetaPilotTensorPowerLogVolume)
     (hTheta : data.originalThetaPilotLogVolume < 0) :
