@@ -809,15 +809,17 @@ all-label Gaussian bound cannot hold when the \(\Theta\)-source average is
 negative; under nonpositive environment it is equivalent to nonnegativity of
 that average.  The corresponding identity-coordinate final route can now be
 stated directly from canonical \(j=1\) equality, nonpositive target
-environment, and nonnegative \(\Theta\)-source average.  For nonzero labels,
-Lean proves the complementary bound: the
-absolute exponent is at least \(1\), so a nonpositive environment degree below
-the \(\Theta\)-source average bounds every nonzero Gaussian component and hence
-their finite nonzero-label average.  The square-weighted transport route has
-also been strengthened from an all-label pointwise bound to a weighted-summand
-bound, so the zero label requires no target upper bound.  The experiment theorem
-now delegates to the source-layer q-to-\(\Theta\) theorem for this nonzero
-Gaussian environment-comparison route.  Separately, Lean proves that the
+environment, and nonnegative \(\Theta\)-source average; if the all-label
+Gaussian target bound is supplied directly, the same endpoint no longer needs
+the nonpositive/nonnegative branch hypotheses.  For nonzero labels, Lean proves
+the complementary bound: the absolute exponent is at least \(1\), so a
+nonpositive environment degree below the \(\Theta\)-source average bounds every
+nonzero Gaussian component and hence their finite nonzero-label average.  The
+square-weighted transport route has also been strengthened from an all-label
+pointwise bound to a weighted-summand bound, so the zero label requires no
+target upper bound.  The experiment theorem now delegates to the source-layer
+q-to-\(\Theta\) theorem for this nonzero Gaussian environment-comparison route.
+Separately, Lean proves that the
 uniform \(F_\ell\)-average of the Gaussian shadow is
 \((\ell-1)/\ell\) times the auxiliary nonzero-carrier average, fixing the
 denominator at \(\ell\) when the zero label is present.
@@ -858,11 +860,12 @@ nonpositive environment branch, the nonzero coordinate target-bound formulation
 is equivalent to this environment bound against the \(\Theta\)-source average;
 the necessity direction does not use the nonpositive hypothesis, since the
 canonical \(j=1\) component is the environment degree itself.
-the final identity-coordinate route may now be stated directly from canonical
+The final identity-coordinate route may now be stated directly from canonical
 \(j=1\) equality and the nonzero Gaussian target-bound predicate.
-In the all-label branch, the analogous direct endpoint uses canonical \(j=1\)
-equality, nonpositive target environment, and nonnegative \(\Theta\)-source
-average.
+In the all-label branch, the analogous direct endpoint may either use canonical
+\(j=1\) equality plus the all-label Gaussian target-bound predicate, or derive
+that predicate from nonpositive target environment and nonnegative
+\(\Theta\)-source average.
 The
 zero/nonzero average split is now exact: the nonzero carrier has cardinality
 \(\ell-1=2j_{\max}\), the signed carrier is a twofold cover of the nonzero

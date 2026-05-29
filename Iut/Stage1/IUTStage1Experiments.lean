@@ -710,6 +710,45 @@ theorem gaussianFactoredSHEIdentityCanonicalOneAllLabelNonnegative_finalQTheta
     source_profile_eq source_log_volume_eq target_environment_nonpositive
     theta_average_nonnegative
 
+theorem gaussianFactoredSHEIdentityCanonicalOneAllLabelBound_finalQTheta
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (sourceProfile targetProfile : IUTStage1ZModSquareWeightProfile l)
+    (sourceEvaluation targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (canonical_one_preserved :
+      targetEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+        sourceEvaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)))
+    (source_profile_eq : profile = sourceProfile)
+    (source_log_volume_eq :
+      part.toThetaCuspClassContainerAudit.theta_source.compatible_average.cuspLogVolume
+          audited =
+        sourceEvaluation.toCuspLabelLogVolumeCompatibility)
+    (target_gaussian_le_thetaAverage :
+      ∀ j : ZMod l.value,
+        targetEvaluation.gaussianDegree
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l j) <=
+          part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+            audited) :
+    package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  part.toThetaCuspClassContainerAudit
+    |>.qSigned_le_thetaSigned_via_gaussianFactoredSHEIdentityCanonicalOneAllLabelBound
+      (bundle := part.bundle)
+      profile audited sourceProfile targetProfile
+    sourceEvaluation targetEvaluation canonical_one_preserved
+    source_profile_eq source_log_volume_eq target_gaussian_le_thetaAverage
+
 theorem gaussianFactoredSHEIdentityCanonicalOneNonzeroBound_finalQTheta
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :
