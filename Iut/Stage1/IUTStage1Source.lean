@@ -6971,6 +6971,52 @@ theorem boundaryCTheta_localShift_orderedAround_q_and_det
       rw [← hglobaldet]
       exact global.shiftedLogVolume_lt_calibrated_iff_shiftTerm_lt_zero⟩
 
+theorem boundaryCTheta_localShift_orderedAround_twoComputation
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hC : cTheta = (-1 : Real)) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    (twoComputation.inputPrimeStripLogVolume <
+        global.localData.shiftedLogVolume ↔
+        0 < (localExponent : Real) * localPrimeStepLogVolume) ∧
+      (global.localData.shiftedLogVolume <
+        twoComputation.inputPrimeStripLogVolume ↔
+        (localExponent : Real) * localPrimeStepLogVolume < 0) ∧
+      (twoComputation.outputHullLogVolume <
+        global.localData.shiftedLogVolume ↔
+        0 < (localExponent : Real) * localPrimeStepLogVolume) ∧
+      (global.localData.shiftedLogVolume <
+        twoComputation.outputHullLogVolume ↔
+        (localExponent : Real) * localPrimeStepLogVolume < 0) := by
+  intro twoComputation global
+  have hordered :=
+    data.boundaryCTheta_localShift_orderedAround_q_and_det
+      localExponent localPrimeStepLogVolume q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ hC
+  exact
+    ⟨by
+      rw [twoComputation.input_eq_q]
+      exact hordered.1,
+    by
+      rw [twoComputation.input_eq_q]
+      exact hordered.2.1,
+    by
+      rw [twoComputation.output_eq_q]
+      exact hordered.1,
+    by
+      rw [twoComputation.output_eq_q]
+      exact hordered.2.1⟩
+
 theorem boundaryCTheta_localShift_eq_q_or_det_iff_exponent_zero_of_step_nonzero
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (localExponent : Int)
