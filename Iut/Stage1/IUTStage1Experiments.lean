@@ -2389,6 +2389,22 @@ theorem representativeSquareWeightAudit_sourceAverage_le_of_target_bound
     audit.sourceAverage <= c :=
   audit.sourceAverage_le_of_forall_targetFullLabel_le hpointwise
 
+theorem structuredSHESquareWeightAudit_sourceAverage_le_of_target_bound
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    {l : PrimeGeFive}
+    (audit :
+      IUTStage1StructuredSHESquareWeightTransportAudit package bundle l)
+    {c : Real}
+    (hpointwise :
+      ∀ j : ZMod l.value,
+        audit.preservationAudit.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (audit.preservationAudit.coordinateEquiv j)) <= c) :
+    audit.preservationAudit.sourceAverage <= c :=
+  audit.sourceAverage_le_of_forall_targetFullLabel_le hpointwise
+
 theorem balancedNeg_preservesBalancedWeights
     {l : PrimeGeFive}
     (logVolume : IUTStage1ZModCuspLabelLogVolumeCompatibility l) :

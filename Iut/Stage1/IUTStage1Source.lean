@@ -16044,6 +16044,19 @@ theorem targetTransportedAverage_eq_sourceAverage
       audit.preservationAudit.sourceAverage :=
   audit.preservationAudit.targetTransportedAverage_eq_sourceAverage
 
+theorem sourceAverage_le_of_forall_targetFullLabel_le
+    (audit :
+      IUTStage1StructuredSHESquareWeightTransportAudit package bundle l)
+    {c : Real}
+    (hpointwise :
+      ∀ j : ZMod l.value,
+        audit.preservationAudit.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (audit.preservationAudit.coordinateEquiv j)) <= c) :
+    audit.preservationAudit.sourceAverage <= c :=
+  audit.preservationAudit.sourceAverage_le_of_forall_targetFullLabel_le
+    hpointwise
+
 theorem histories_not_identified
     (audit :
       IUTStage1StructuredSHESquareWeightTransportAudit package bundle l) :
@@ -21778,6 +21791,46 @@ theorem squareWeightedAverage_eq_transportSourceAverage
   exact Finset.sum_congr rfl (by
     intro j _hj
     rw [transport.sourceProfile.weight_eq_square_val j])
+
+theorem squareWeightedAverage_le_of_transportTargetFullLabel_le
+    (part : audit.FLZModCuspLabelCompatibleAveragedInd12Audit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport : IUTStage1ZModSquareWeightedFullLabelTransportAudit l)
+    (hprofile : profile = transport.sourceProfile)
+    (hlog : part.cuspLogVolume audited = transport.sourceLogVolume)
+    {c : Real}
+    (hpointwise :
+      ∀ j : ZMod l.value,
+        transport.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (transport.coordinateEquiv j)) <= c) :
+    (part.squareWeightedAveragedLogVolume profile audited).weightedAverageLogVolume <=
+      c := by
+  rw [part.squareWeightedAverage_eq_transportSourceAverage
+    profile audited transport hprofile hlog]
+  exact transport.sourceAverage_le_of_forall_targetFullLabel_le hpointwise
+
+theorem squareWeightedAverage_le_of_structuredSHETargetFullLabel_le
+    {bundle : IUTStage1Theorem311StructuredInputsWithSHE package}
+    (part : audit.FLZModCuspLabelCompatibleAveragedInd12Audit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (transport :
+      IUTStage1StructuredSHESquareWeightTransportAudit package bundle l)
+    (hprofile : profile = transport.preservationAudit.sourceProfile)
+    (hlog : part.cuspLogVolume audited =
+      transport.preservationAudit.sourceLogVolume)
+    {c : Real}
+    (hpointwise :
+      ∀ j : ZMod l.value,
+        transport.preservationAudit.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (transport.preservationAudit.coordinateEquiv j)) <= c) :
+    (part.squareWeightedAveragedLogVolume profile audited).weightedAverageLogVolume <=
+      c :=
+  part.squareWeightedAverage_le_of_transportTargetFullLabel_le
+    profile audited transport.preservationAudit hprofile hlog hpointwise
 
 theorem targetSigned_le_squareWeightedAveragedLogVolume_of_fullLabel
     (part : audit.FLZModCuspLabelCompatibleAveragedInd12Audit l)
