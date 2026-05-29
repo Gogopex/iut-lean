@@ -1055,6 +1055,51 @@ theorem gaussianAllLabelTargetBound_rejects_negative_thetaAverage
   targetEvaluation.not_forall_coordinateFullLabel_le_of_negative_bound
     coordinateEquiv theta_average_negative
 
+theorem gaussianNegativeTheta_separates_allLabel_from_nonzeroTargetBound
+    {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind)
+    (coordinateEquiv : ZMod l.value ≃ ZMod l.value)
+    (targetEvaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (theta_average_negative :
+      part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+          audited < 0)
+    (environment_le_thetaAverage :
+      targetEvaluation.environmentDegree <=
+        part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+          audited) :
+    (¬ ∀ j : ZMod l.value,
+        targetEvaluation.gaussianDegree
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (coordinateEquiv j)) <=
+          part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+            audited) ∧
+      ∀ j : ZMod l.value,
+        coordinateEquiv j ≠ 0 ->
+          targetEvaluation.gaussianDegree
+              (IUTStage1ZModCuspFullLabel.fromCoordinate l
+                (coordinateEquiv j)) <=
+            part.toThetaCuspClassContainerAudit.theta_source.thetaSourceAverage
+              audited := by
+  constructor
+  · exact gaussianAllLabelTargetBound_rejects_negative_thetaAverage
+      part audited coordinateEquiv targetEvaluation theta_average_negative
+  · have target_environment_nonpositive : targetEvaluation.environmentDegree <= 0 :=
+      le_trans environment_le_thetaAverage (le_of_lt theta_average_negative)
+    exact
+      (targetEvaluation
+        |>.forall_coordinateFullLabel_nonzero_le_iff_environment_le_bound
+          coordinateEquiv target_environment_nonpositive).mpr
+        environment_le_thetaAverage
+
 theorem gaussianAllLabelTargetBound_iff_thetaAverage_nonnegative
     {source target : Copy} {coric : Type u} {kind : IUTStage1PlaceKind}
     {package :

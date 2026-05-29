@@ -807,7 +807,10 @@ the Gaussian pointwise target bound is derived from the sign of the
 \(q^{j^2}\)-exponent rather than assumed.  Lean also proves that this
 all-label Gaussian bound cannot hold when the \(\Theta\)-source average is
 negative; under nonpositive environment it is equivalent to nonnegativity of
-that average.  More generally, Lean decomposes the all-label Gaussian bound
+that average.  Lean also packages the resulting separation: for negative
+\(\Theta\)-source average, the all-label bound fails, while the nonzero-label
+bound still holds whenever the Gaussian environment degree is bounded by that
+same average.  More generally, Lean decomposes the all-label Gaussian bound
 exactly into nonnegativity of the upper bound at the zero label and the
 corresponding nonzero-label bound.  The corresponding identity-coordinate final
 route can now be stated directly from canonical \(j=1\) equality, nonpositive
@@ -870,7 +873,8 @@ nonnegativity of \(j^2\) makes every nonpositive environment-degree Gaussian
 target value bounded above by that average.  The all-label version cannot be
 the negative branch: the core label contributes \(0\), so a negative upper bound
 is impossible; Lean now packages this as an exact equivalence with
-nonnegativity of the upper bound.  On the nonzero-label part, the formal
+nonnegativity of the upper bound and as a separation theorem from the
+nonzero-label bound under the environment comparison.  On the nonzero-label part, the formal
 obstruction disappears:
 exponent \(\ge1\) gives the expected bound from the environment comparison.  The
 square-weighted final route now accepts this nonzero-only bound, since the core
