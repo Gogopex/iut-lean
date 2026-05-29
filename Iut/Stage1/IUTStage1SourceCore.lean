@@ -2978,6 +2978,28 @@ theorem shiftedLogVolume_eq_unshifted_iff_shiftTerm_eq_zero
   · intro h
     rw [data.shifted_logVolume_eq, h, add_zero]
 
+theorem shiftTerm_eq_zero_iff_exponent_zero_or_step_zero
+    (data : IUTStage1LocalFrobenioidLogVolumeAmbiguity) :
+    (data.localExponent : Real) * data.localPrimeStepLogVolume = 0 ↔
+      data.localExponent = 0 ∨ data.localPrimeStepLogVolume = 0 := by
+  constructor
+  · intro h
+    rcases mul_eq_zero.mp h with hexp | hstep
+    · left
+      exact_mod_cast hexp
+    · exact Or.inr hstep
+  · rintro (hexp | hstep)
+    · rw [hexp]
+      norm_num
+    · rw [hstep, mul_zero]
+
+theorem shiftedLogVolume_eq_unshifted_iff_exponent_zero_or_step_zero
+    (data : IUTStage1LocalFrobenioidLogVolumeAmbiguity) :
+    data.shiftedLogVolume = data.unshiftedLogVolume ↔
+      data.localExponent = 0 ∨ data.localPrimeStepLogVolume = 0 := by
+  rw [data.shiftedLogVolume_eq_unshifted_iff_shiftTerm_eq_zero,
+    data.shiftTerm_eq_zero_iff_exponent_zero_or_step_zero]
+
 end IUTStage1LocalFrobenioidLogVolumeAmbiguity
 
 /--
@@ -3038,6 +3060,14 @@ theorem calibratedLogVolume_eq_shifted_iff_shiftTerm_eq_zero
     exact
       (data.localData.shiftedLogVolume_eq_unshifted_iff_shiftTerm_eq_zero.mpr
         hzero).symm
+
+theorem calibratedLogVolume_eq_shifted_iff_exponent_zero_or_step_zero
+    (data : IUTStage1GlobalFrobenioidLogVolumeCalibration) :
+    data.calibratedLogVolume = data.localData.shiftedLogVolume ↔
+      data.localData.localExponent = 0 ∨
+        data.localData.localPrimeStepLogVolume = 0 := by
+  rw [data.calibratedLogVolume_eq_shifted_iff_shiftTerm_eq_zero,
+    data.localData.shiftTerm_eq_zero_iff_exponent_zero_or_step_zero]
 
 end IUTStage1GlobalFrobenioidLogVolumeCalibration
 

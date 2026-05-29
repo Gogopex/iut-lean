@@ -6525,6 +6525,12 @@ theorem localFrobenioidLogVolume_shifted_eq_unshifted_iff_zero_shift
       (data.localExponent : Real) * data.localPrimeStepLogVolume = 0 :=
   data.shiftedLogVolume_eq_unshifted_iff_shiftTerm_eq_zero
 
+theorem localFrobenioidLogVolume_shifted_eq_unshifted_iff_zero_exponent_or_step
+    (data : IUTStage1LocalFrobenioidLogVolumeAmbiguity) :
+    data.shiftedLogVolume = data.unshiftedLogVolume ↔
+      data.localExponent = 0 ∨ data.localPrimeStepLogVolume = 0 :=
+  data.shiftedLogVolume_eq_unshifted_iff_exponent_zero_or_step_zero
+
 theorem globalFrobenioidCalibration_eq_unshifted
     (data : IUTStage1GlobalFrobenioidLogVolumeCalibration) :
     data.calibratedLogVolume = data.localData.unshiftedLogVolume :=
@@ -6543,6 +6549,13 @@ theorem globalFrobenioidCalibration_eq_localShifted_iff_zero_shift
       (data.localData.localExponent : Real) *
         data.localData.localPrimeStepLogVolume = 0 :=
   data.calibratedLogVolume_eq_shifted_iff_shiftTerm_eq_zero
+
+theorem globalFrobenioidCalibration_eq_localShifted_iff_zero_exponent_or_step
+    (data : IUTStage1GlobalFrobenioidLogVolumeCalibration) :
+    data.calibratedLogVolume = data.localData.shiftedLogVolume ↔
+      data.localData.localExponent = 0 ∨
+        data.localData.localPrimeStepLogVolume = 0 :=
+  data.calibratedLogVolume_eq_shifted_iff_exponent_zero_or_step_zero
 
 theorem remark3122_ringStructureDimensionSplit_endpoint
     {kind : IUTStage1PlaceKind} {j : Nat}

@@ -5540,6 +5540,19 @@ theorem thetaFinite_globalFrobenioidCalibration
         global.calibratedLogVolume_ne_shifted_of_local_nonzero
           hExponent hStep⟩
 
+theorem thetaFinite_globalFrobenioidCalibration_eq_shifted_iff_exponent_zero_or_step_zero
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (localExponent : Int)
+    (localPrimeStepLogVolume : Real) :
+    let global :=
+      data.toGlobalFrobenioidLogVolumeCalibration
+        localExponent localPrimeStepLogVolume;
+    global.calibratedLogVolume = global.localData.shiftedLogVolume ↔
+      localExponent = 0 ∨ localPrimeStepLogVolume = 0 := by
+  intro global
+  exact
+    global.calibratedLogVolume_eq_shifted_iff_exponent_zero_or_step_zero
+
 theorem ofZModCuspLabelLogVolumeCompatibilities_q_mem_upperRay
     {l : PrimeGeFive}
     (before afterInd1 afterInd2 :
