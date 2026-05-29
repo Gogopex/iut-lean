@@ -578,7 +578,9 @@ The code currently covers:
   \(C_\Theta=-1\), Lean proves
   \(-|\log(q)|=-|\log(\Theta)|\), hence equality with the determinant
   log-volume, and \(-|\log(\Theta)|<0\); hence the endpoint splits into the
-  boundary branch \(C_\Theta=-1\) or the strict branch \(C_\Theta>-1\);
+  boundary branch \(C_\Theta=-1\) or the strict branch \(C_\Theta>-1\); Lean also
+  proves the determinant-coordinate strict branch: if the fixed q-reading is
+  strictly below the determinant boundary, then \(C_\Theta>-1\);
 \item the signed-payload bridge:
   the existing Stage 1 comparison record \(q_{\mathrm{signed}}\le
   \Theta_{\mathrm{signed}}\), together with

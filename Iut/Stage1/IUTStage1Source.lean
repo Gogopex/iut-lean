@@ -6302,6 +6302,52 @@ theorem standardQLambdaCTheta_strict_of_qPilot_lt_thetaHullLogVolume
               using hstrict_before)
   simpa [toStandardQLambdaCThetaBound, toQLambdaCThetaBound] using h
 
+theorem standardQLambdaCTheta_strict_of_qPilot_lt_determinantLogVolume
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hstrict : data.qPilotLogVolume < data.determinant.determinantLogVolume) :
+    (-1 : Real) < cTheta := by
+  apply data.standardQLambdaCTheta_strict_of_qPilot_lt_thetaHullLogVolume
+    q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+  simpa [data.thetaHullLogVolume_eq_determinantLogVolume] using hstrict
+
+theorem standardQLambdaCTheta_strict_of_twoComputationInput_lt_determinantLogVolume
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hstrict :
+      data.toQPilotTwoComputationLogVolume.inputPrimeStripLogVolume <
+        data.determinant.determinantLogVolume) :
+    (-1 : Real) < cTheta := by
+  apply data.standardQLambdaCTheta_strict_of_qPilot_lt_determinantLogVolume
+    q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+  simpa [toQPilotTwoComputationLogVolume, data.q_eq_beforeAverage] using hstrict
+
+theorem standardQLambdaCTheta_strict_of_twoComputationOutput_lt_determinantLogVolume
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume))
+    (hstrict :
+      data.toQPilotTwoComputationLogVolume.outputHullLogVolume <
+        data.determinant.determinantLogVolume) :
+    (-1 : Real) < cTheta := by
+  apply data.standardQLambdaCTheta_strict_of_qPilot_lt_determinantLogVolume
+    q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+  simpa [toQPilotTwoComputationLogVolume] using hstrict
+
 theorem standardQLambdaCTheta_qPilot_eq_thetaHullLogVolume_of_cTheta_eq_neg_one
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (q_pilot_positive :
