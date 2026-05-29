@@ -1430,6 +1430,21 @@ theorem one_add_coefficient_le_one_add_delta_inv_sqrtH
       1 + data.delta / data.sqrtH := by
   linarith [data.coefficient_le_delta_inv_sqrtH]
 
+theorem coefficient_replacement_endpoint
+    (data : IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow) :
+    0 < (data.l.value : Real) ∧
+      0 < data.sqrtH ∧
+      0 <= data.delta ∧
+      80 * (data.dmod : Real) / (data.l.value : Real) <=
+        data.delta / data.sqrtH ∧
+      1 + 80 * (data.dmod : Real) / (data.l.value : Real) <=
+        1 + data.delta / data.sqrtH :=
+  ⟨data.l_real_pos,
+    data.sqrtH_pos,
+    data.delta_nonneg,
+    data.coefficient_le_delta_inv_sqrtH,
+    data.one_add_coefficient_le_one_add_delta_inv_sqrtH⟩
+
 end IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow
 
 /--

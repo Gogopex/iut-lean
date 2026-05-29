@@ -5462,6 +5462,17 @@ theorem iutIVCorollary22C1Theorem110_coefficient_bound
       data.delta / data.sqrtH :=
   data.coefficient_le_delta_inv_sqrtH
 
+theorem iutIVCorollary22C1Theorem110_coefficientEndpoint
+    (data : IUTStage1IUTIVCorollary22C1Theorem110CoefficientShadow) :
+    0 < (data.l.value : Real) ∧
+      0 < data.sqrtH ∧
+      0 <= data.delta ∧
+      80 * (data.dmod : Real) / (data.l.value : Real) <=
+        data.delta / data.sqrtH ∧
+      1 + 80 * (data.dmod : Real) / (data.l.value : Real) <=
+        1 + data.delta / data.sqrtH :=
+  data.coefficient_replacement_endpoint
+
 theorem iutIVCorollary22C1_errorTerm_bound
     (data : IUTStage1IUTIVCorollary22C1ErrorTermShadow) :
     20 * (data.dStarMod * (data.l.value : Real) + data.etaPrm) <=

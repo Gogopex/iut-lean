@@ -595,7 +595,9 @@ The code currently covers:
   now packages the full C1 window endpoint with these immediate consequences;
 \item the IUT IV, Corollary 2.2(ii) use of (C1) in Theorem 1.10:
   \(\sqrt h\le\ell\) and \(80d_{\mathrm{mod}}\le\delta\) imply
-  \(80d_{\mathrm{mod}}/\ell\le\delta h^{-1/2}\);
+  \(80d_{\mathrm{mod}}/\ell\le\delta h^{-1/2}\); Lean packages this with the
+  positive-denominator and nonnegative-numerator side conditions and the
+  resulting \(1+\cdots\) coefficient inequality;
 \item the IUT IV, Corollary 2.2(ii) error-term use of (C1):
   \(d^*_{\mathrm{mod}}\le\delta\) and
   \(\ell\le10\delta h^{1/2}\log(2\delta h)\) imply
@@ -1077,7 +1079,8 @@ derives nonnegativity of \(\log(q_\forall)\), positivity of
 \(1\le10\delta\log(2\delta\log(q_\forall))\), packaged as a single C1 endpoint.
 Lean also verifies the C1 coefficient replacement
 \(80d_{\mathrm{mod}}/\ell\le\delta h^{-1/2}\) used immediately after applying
-Theorem 1.10.
+Theorem 1.10, together with the positivity/nonnegativity facts needed for the
+division comparison.
 Lean also verifies the C1 upper-window replacement for the Theorem 1.10 error
 term \(20(d^*_{\mathrm{mod}}\ell+\eta_{\mathrm{prm}})\).
 Combining these, Lean proves the first displayed post-Theorem-1.10 bound in the
