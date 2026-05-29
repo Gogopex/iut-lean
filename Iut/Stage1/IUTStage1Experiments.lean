@@ -5643,6 +5643,19 @@ theorem iutIVCorollary22EpsilonMoveLeft_bound
         iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK :=
   data.moved_left_bound
 
+theorem iutIVCorollary22EpsilonMoveLeft_endpoint
+    (data : IUTStage1IUTIVCorollary22EpsilonMoveLeftShadow) :
+    0 < iutIVCorollary22EpsilonDenominator data.epsilonE ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + (1 / 5 : Real) * data.epsilonE) * data.logDegreeSum +
+          (1 / 6 : Real) * data.h * ((2 / 5 : Real) * data.epsilonE) +
+            (1 / 2 : Real) * data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        iutIVCorollary22EpsilonMainCoefficient data.epsilonE *
+            data.logDegreeSum +
+          iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK :=
+  data.move_left_endpoint
+
 theorem iutIVCorollary22EpsilonAbsorption_mainCoefficient_bound
     (data : IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow) :
     iutIVCorollary22EpsilonMainCoefficient data.epsilonE <=
@@ -5659,6 +5672,27 @@ theorem iutIVCorollary22EpsilonAbsorption_final_bound
     (1 / 6 : Real) * data.h <=
       (1 + data.epsilonE) * data.logDegreeSum + data.cK :=
   data.final_bound
+
+theorem iutIVCorollary22EpsilonAbsorption_endpoint
+    (data : IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow) :
+    0 < data.epsilonE ∧
+      data.epsilonE <= 1 ∧
+      0 <= data.logDegreeSum ∧
+      0 <= data.cK ∧
+      0 < iutIVCorollary22EpsilonDenominator data.epsilonE ∧
+      (1 / 2 : Real) <=
+        iutIVCorollary22EpsilonDenominator data.epsilonE ∧
+      iutIVCorollary22EpsilonMainCoefficient data.epsilonE <=
+        1 + data.epsilonE ∧
+      iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK <=
+        data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        iutIVCorollary22EpsilonMainCoefficient data.epsilonE *
+            data.logDegreeSum +
+          iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.epsilonE) * data.logDegreeSum + data.cK :=
+  data.epsilon_absorption_endpoint
 
 theorem iutIVCorollary22FinalHBound_bound
     (data : IUTStage1IUTIVCorollary22FinalHBoundShadow) :

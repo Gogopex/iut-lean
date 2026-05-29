@@ -2227,6 +2227,21 @@ theorem moved_left_bound
         rw [div_eq_mul_inv]
         ring
 
+theorem move_left_endpoint
+    (data : IUTStage1IUTIVCorollary22EpsilonMoveLeftShadow) :
+    0 < iutIVCorollary22EpsilonDenominator data.epsilonE ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + (1 / 5 : Real) * data.epsilonE) * data.logDegreeSum +
+          (1 / 6 : Real) * data.h * ((2 / 5 : Real) * data.epsilonE) +
+            (1 / 2 : Real) * data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        iutIVCorollary22EpsilonMainCoefficient data.epsilonE *
+            data.logDegreeSum +
+          iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK :=
+  ⟨data.denominator_pos,
+    data.preliminary_bound,
+    data.moved_left_bound⟩
+
 end IUTStage1IUTIVCorollary22EpsilonMoveLeftShadow
 
 /--
@@ -2328,6 +2343,36 @@ theorem final_bound
           data.preliminary_bound
     _ <= (1 + data.epsilonE) * data.logDegreeSum + data.cK :=
           add_le_add hmain_mul hconst
+
+theorem epsilon_absorption_endpoint
+    (data : IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow) :
+    0 < data.epsilonE ∧
+      data.epsilonE <= 1 ∧
+      0 <= data.logDegreeSum ∧
+      0 <= data.cK ∧
+      0 < iutIVCorollary22EpsilonDenominator data.epsilonE ∧
+      (1 / 2 : Real) <=
+        iutIVCorollary22EpsilonDenominator data.epsilonE ∧
+      iutIVCorollary22EpsilonMainCoefficient data.epsilonE <=
+        1 + data.epsilonE ∧
+      iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK <=
+        data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        iutIVCorollary22EpsilonMainCoefficient data.epsilonE *
+            data.logDegreeSum +
+          iutIVCorollary22EpsilonConstantTerm data.epsilonE data.cK ∧
+      (1 / 6 : Real) * data.h <=
+        (1 + data.epsilonE) * data.logDegreeSum + data.cK :=
+  ⟨data.epsilonE_pos,
+    data.epsilonE_le_one,
+    data.logDegreeSum_nonneg,
+    data.cK_nonneg,
+    data.denominator_pos,
+    data.denominator_ge_half,
+    data.mainCoefficient_le_one_add_epsilon,
+    data.constantTerm_le_cK,
+    data.preliminary_bound,
+    data.final_bound⟩
 
 end IUTStage1IUTIVCorollary22EpsilonAbsorptionShadow
 

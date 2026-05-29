@@ -650,7 +650,8 @@ The code currently covers:
 \item the IUT IV, Corollary 2.2(ii) denominator step:
   Lean moves the term
   \((2\epsilon_E/5)\frac16h\) to the left and obtains the denominator
-  \((1-2\epsilon_E/5)^{-1}\);
+  \((1-2\epsilon_E/5)^{-1}\), packaged with positivity of
+  \(1-2\epsilon_E/5\) and the preliminary inequality it acts on;
 \item the IUT IV, Corollary 2.2(ii) final \(\epsilon_E\)-absorption:
   from \(0<\epsilon_E\le1\), Lean proves
   \[
@@ -658,7 +659,8 @@ The code currently covers:
     \qquad
     (1-2\epsilon_E/5)^{-1}C_K/2\le C_K,
   \]
-  and hence the displayed C2 bound from the preceding denominator expression;
+  using nonnegativity of \(S\) and \(C_K\), and hence the displayed C2 bound
+  from the preceding denominator expression;
 \item the IUT IV, Corollary 2.2(ii) final \(h\)-bound:
   Lean composes the pre-\(\epsilon_E\) bound, error conversion, move-left step,
   and absorption to prove
@@ -1116,10 +1118,12 @@ Combining this with \(\delta h^{-1/2}\le\epsilon_E/5\), Lean proves the
 preliminary inequality needed for the move-left step, including the
 nonnegative log-degree premise used to scale the coefficient comparison.
 Lean then verifies the algebraic move-left step that introduces the denominator
-\((1-2\epsilon_E/5)^{-1}\).
+\((1-2\epsilon_E/5)^{-1}\), exposing denominator positivity and the input
+preliminary inequality.
 Lean also proves the final \(\epsilon_E\)-absorption step used just before C2:
 the intermediate expression with denominator \(1-2\epsilon_E/5\) is bounded by
-\((1+\epsilon_E)\) times the log-degree sum plus \(C_K\).
+\((1+\epsilon_E)\) times the log-degree sum plus \(C_K\), with denominator
+\(\ge1/2\) and nonnegativity of \(S\) and \(C_K\) explicit.
 Lean now composes these steps into the final displayed \(h=\log(q_\forall)\)
 bound.
 Lean also derives the displayed C2 chain from this \(h\)-bound and the
