@@ -729,6 +729,15 @@ theorem gaussianCoordinateAverage_strictly_below_nonzeroAverage_of_positive
   evaluation.coordinateAveragedLogVolume_lt_nonzeroCarrierAverage_of_positive
     henv_pos
 
+theorem gaussianCoordinateAverage_eq_nonzeroAverage_iff
+    {l : PrimeGeFive}
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    evaluation.coordinateAveragedLogVolume.averageLogVolume =
+        evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume ↔
+      evaluation.environmentDegree = 0 :=
+  evaluation.coordinateAveragedLogVolume_eq_nonzeroCarrierAverage_iff
+
 theorem gaussianCanonicalSignLabel_eq_environment
     {l : PrimeGeFive}
     (evaluation :

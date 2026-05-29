@@ -8408,6 +8408,57 @@ theorem coordinateAveragedLogVolume_lt_nonzeroCarrierAverage_of_positive
       henv_pos
   nlinarith
 
+theorem nonzeroCarrierAveragedLogVolume_eq_zero_of_environment_zero
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (henv_zero : evaluation.environmentDegree = 0) :
+    evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume = 0 := by
+  rw [evaluation.nonzeroCarrierAveragedLogVolume.average_eq]
+  change
+    (Finset.univ.sum
+          (fun x : (zmodPointedQuotient l).NonzeroCarrier =>
+            evaluation.gaussianDegree
+              (IUTStage1ZModCuspFullLabel.nonzero
+                ((zmodSignAction l).toSignLabelQuotient x)))) /
+        (Fintype.card (zmodPointedQuotient l).NonzeroCarrier : Real) = 0
+  have hsum :
+      Finset.univ.sum
+          (fun x : (zmodPointedQuotient l).NonzeroCarrier =>
+            evaluation.gaussianDegree
+              (IUTStage1ZModCuspFullLabel.nonzero
+                ((zmodSignAction l).toSignLabelQuotient x))) = 0 := by
+    apply Finset.sum_eq_zero
+    intro x _hx
+    rw [evaluation.gaussianDegree_eq_eval, henv_zero]
+    ring
+  rw [hsum]
+  simp
+
+theorem coordinateAveragedLogVolume_eq_nonzeroCarrierAverage_iff
+    (evaluation : GaussianMonoidDegreeEvaluation l) :
+    evaluation.coordinateAveragedLogVolume.averageLogVolume =
+        evaluation.nonzeroCarrierAveragedLogVolume.averageLogVolume ↔
+      evaluation.environmentDegree = 0 := by
+  constructor
+  · intro h
+    by_cases hneg : evaluation.environmentDegree < 0
+    · have hlt :=
+        evaluation.coordinateAveragedLogVolume_gt_nonzeroCarrierAverage_of_negative
+          hneg
+      linarith
+    · by_cases hpos : 0 < evaluation.environmentDegree
+      · have hlt :=
+          evaluation.coordinateAveragedLogVolume_lt_nonzeroCarrierAverage_of_positive
+            hpos
+        linarith
+      · linarith
+  · intro henv_zero
+    have hnonzero :=
+      evaluation.nonzeroCarrierAveragedLogVolume_eq_zero_of_environment_zero
+        henv_zero
+    rw [evaluation.coordinateAveragedLogVolume_eq_nonzero_mass_rescale]
+    rw [hnonzero]
+    ring
+
 theorem forall_coordinateFullLabel_le_implies_bound_nonnegative
     (evaluation : GaussianMonoidDegreeEvaluation l)
     (coordinateEquiv : ZMod l.value ≃ ZMod l.value)

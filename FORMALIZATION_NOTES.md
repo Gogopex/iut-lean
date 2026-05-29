@@ -18594,11 +18594,14 @@ environment_le_gaussianDegree_nonzero_of_environment_nonnegative
 nonzeroCarrierAveragedLogVolume_gt_zero_of_environment_positive
 coordinateAveragedLogVolume_lt_nonzeroCarrierAverage_of_positive
 gaussianCoordinateAverage_strictly_below_nonzeroAverage_of_positive
+coordinateAveragedLogVolume_eq_nonzeroCarrierAverage_iff
+gaussianCoordinateAverage_eq_nonzeroAverage_iff
 ```
 
 The negative branch was already present; the positive branch now completes the
 sign-dependent comparison between the all-\(F_\ell\) coordinate average and the
-auxiliary nonzero-coordinate average.
+auxiliary nonzero-coordinate average.  Lean also proves that equality between
+these two averages is equivalent to \(\deg(q)=0\).
 
 ### Mathematical Reason
 
@@ -18607,7 +18610,9 @@ degree is positive, each nonzero Gaussian component is bounded below by the
 environment degree, so the nonzero average is positive.  Since the all-coordinate
 average is \((\ell-1)/\ell\) times the nonzero average, it is strictly smaller in
 the positive branch.  In the negative branch the same rescaling makes the
-all-coordinate average strictly larger than the nonzero average.
+all-coordinate average strictly larger than the nonzero average.  The only way
+the denominator change can be invisible is the degenerate case
+\(\deg(q)=0\).
 
 ### Source Check
 
