@@ -5595,6 +5595,33 @@ theorem twoComputation_output_le_theta
       data.toQPilotTwoComputationLogVolume.upperRayData.thetaHullLogVolume :=
   data.toQPilotTwoComputationLogVolume.output_le_thetaHullLogVolume
 
+theorem twoComputation_fig38_endpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label) :
+    let twoComputation := data.toQPilotTwoComputationLogVolume;
+    twoComputation.inputPrimeStripLogVolume =
+        data.corridor.beforeIndeterminacy.averageLogVolume ∧
+      twoComputation.outputHullLogVolume = data.qPilotLogVolume ∧
+      twoComputation.inputPrimeStripLogVolume =
+        twoComputation.outputHullLogVolume ∧
+      twoComputation.inputPrimeStripLogVolume <= data.thetaHullLogVolume ∧
+      twoComputation.outputHullLogVolume <= data.thetaHullLogVolume ∧
+      twoComputation.outputHullLogVolume ∈
+        data.toHullDetPilotUpperRayLogVolume.upperRay := by
+  intro twoComputation
+  exact
+    ⟨rfl, rfl, data.twoComputation_input_eq_output,
+      by
+        simpa [toQPilotTwoComputationLogVolume,
+          toHullDetPilotUpperRayLogVolume] using
+          data.twoComputation_input_le_theta,
+      by
+        simpa [toQPilotTwoComputationLogVolume,
+          toHullDetPilotUpperRayLogVolume] using
+          data.twoComputation_output_le_theta,
+      by
+        simpa [toQPilotTwoComputationLogVolume] using
+          data.toUpperRay_q_mem⟩
+
 def toQPilotTwoComputationSignedEndpoint
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (q_pilot_positive :
