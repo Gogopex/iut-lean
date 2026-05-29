@@ -5261,6 +5261,26 @@ theorem qPilotLogVolume_le_thetaHullLogVolume
   rw [data.q_eq_beforeAverage, data.theta_eq_ind3Upper]
   exact data.corridor.before_average_le_ind3UpperBound
 
+theorem thetaHullLogVolume_eq_determinantLogVolume
+    (data : IUTStage1StepXToHullUpperRayLogVolume label) :
+    data.thetaHullLogVolume = data.determinant.determinantLogVolume := by
+  rw [data.theta_eq_normalized_determinant,
+    data.determinant.normalizedLogVolume_eq_determinant]
+
+theorem determinantLogVolume_endpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label) :
+    1 < data.determinant.rank ∧
+      0 < data.determinant.positiveTensorPower ∧
+      data.determinant.tensorPowerLogVolume =
+        (data.determinant.positiveTensorPower : Real) *
+          data.determinant.determinantLogVolume ∧
+      data.thetaHullLogVolume = data.determinant.determinantLogVolume := by
+  exact
+    ⟨data.determinant.rank_gt_one,
+      data.determinant.tensor_power_pos,
+      data.determinant.tensor_power_eq,
+      data.thetaHullLogVolume_eq_determinantLogVolume⟩
+
 def toHullDetPilotUpperRayLogVolume
     (data : IUTStage1StepXToHullUpperRayLogVolume label) :
     IUTStage1HullDetPilotUpperRayLogVolume :=
