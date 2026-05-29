@@ -56,6 +56,29 @@ theorem both_regions_absorbed_by_hull
       data.unitShiftedRegionLogVolume ∈ data.hullUpperRay :=
   ⟨data.original_mem_hullUpperRay, data.unitShifted_mem_hullUpperRay⟩
 
+theorem original_eq_hull_iff_hull_le_original
+    (data : IUTStage1ZeroColumnHullAbsorbsUnitIndeterminacy) :
+    data.originalRegionLogVolume = data.hullLogVolume ↔
+      data.hullLogVolume <= data.originalRegionLogVolume :=
+  ⟨fun h => by rw [h],
+    fun h => le_antisymm data.original_le_hull h⟩
+
+theorem unitShifted_eq_hull_iff_hull_le_unitShifted
+    (data : IUTStage1ZeroColumnHullAbsorbsUnitIndeterminacy) :
+    data.unitShiftedRegionLogVolume = data.hullLogVolume ↔
+      data.hullLogVolume <= data.unitShiftedRegionLogVolume :=
+  ⟨fun h => by rw [h],
+    fun h => le_antisymm data.unit_shifted_le_hull h⟩
+
+theorem hullEqualityRequiresReverseBounds
+    (data : IUTStage1ZeroColumnHullAbsorbsUnitIndeterminacy) :
+    (data.originalRegionLogVolume = data.hullLogVolume ↔
+        data.hullLogVolume <= data.originalRegionLogVolume) ∧
+      (data.unitShiftedRegionLogVolume = data.hullLogVolume ↔
+        data.hullLogVolume <= data.unitShiftedRegionLogVolume) :=
+  ⟨data.original_eq_hull_iff_hull_le_original,
+    data.unitShifted_eq_hull_iff_hull_le_unitShifted⟩
+
 end IUTStage1ZeroColumnHullAbsorbsUnitIndeterminacy
 
 /--

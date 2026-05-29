@@ -637,7 +637,8 @@ The code currently covers:
   by the Step (x) to Step (xi) corridor; Lean also records the exact
   inequality-versus-equality profile: two zero-column upper bounds and one
   one-column equality, hence inequalities in both directions on the one-column
-  side;
+  side; on the zero-column side, Lean proves that equality with the hull
+  boundary requires the corresponding reverse inequality as additional data;
 \item the Remark 3.12.3(i) metric analogy:
   \(\operatorname{vol}(S)>0\) and \(\chi_S=-\operatorname{vol}(S)\) imply
   \(\chi_S<0\), hence \(\chi_S\le0\), together with the stored
@@ -926,7 +927,9 @@ log-shell treatment distinguish the 0-column from the 1-column; the upper
 similarities are now exposed as a simultaneous zero/one-column theorem.
 The absorption flag records the zero-column upper-bound versus one-column
 equality distinction, tied to the two Fig. 3.9 log-shell treatments; the
-one-column equality is now exposed together with its two induced inequalities.
+one-column equality is now exposed together with its two induced inequalities,
+while zero-column hull equality is equivalent to adding the missing reverse
+bound.
 The metric flag records the Gauss--Bonnet sign calculation used as analogy for
 the upper semi-compatibility inequality, including the nonpositive inequality
 form following from strict negativity.
@@ -1185,7 +1188,9 @@ the upper-semi \((\mathrm{Ind3})\) endpoint: the averaged value is fixed through
 \((\mathrm{Ind1})\) and \((\mathrm{Ind2})\), then bounded from above.
 For Remark 3.12.2(v), Lean separates hull absorption of unit shifts from
 log-volume equality after logarithmic-conjugate compatibility, and records that
-q-pilot non-interference does not supply q-pilot multiradiality.
+q-pilot non-interference does not supply q-pilot multiradiality.  It also checks
+that zero-column hull upper bounds do not become hull equalities without
+reverse inequalities.
 For Remark 3.12.3(i), Lean proves the stated negative Euler-characteristic sign
 from positivity of metric volume.
 For Remark 3.12.4(iii), Lean checks the \(\ell\)-denominator normalization

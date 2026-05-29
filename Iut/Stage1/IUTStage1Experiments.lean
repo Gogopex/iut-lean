@@ -6332,6 +6332,14 @@ theorem zeroColumnHullAbsorption_bothRegions
       data.unitShiftedRegionLogVolume ∈ data.hullUpperRay :=
   data.both_regions_absorbed_by_hull
 
+theorem zeroColumnHullAbsorption_equalityRequiresReverseBounds
+    (data : IUTStage1ZeroColumnHullAbsorbsUnitIndeterminacy) :
+    (data.originalRegionLogVolume = data.hullLogVolume ↔
+        data.hullLogVolume <= data.originalRegionLogVolume) ∧
+      (data.unitShiftedRegionLogVolume = data.hullLogVolume ↔
+        data.hullLogVolume <= data.unitShiftedRegionLogVolume) :=
+  data.hullEqualityRequiresReverseBounds
+
 theorem oneColumnLogVolumeCompatibility_precise_eq
     (data :
       IUTStage1OneColumnLogVolumeCompatibilityAbsorbsConjugateChoice) :
