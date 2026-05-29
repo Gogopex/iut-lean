@@ -434,6 +434,7 @@ structure Ind3J2ScaleExperimentReport where
   canonicalSquareWeightProfileAvailable : Bool
   canonicalSquareWeightConstantAverageAvailable : Bool
   canonicalSquareWeightTotalFormulaAvailable : Bool
+  canonicalSquareWeightAverageFormulaAvailable : Bool
 
 /--
 For every `l >= 5`, the representative square scales at `j = 1` and `j = 2`
@@ -458,7 +459,8 @@ def ind3J2ScaleExperimentReport (l : PrimeGeFive) :
     gaussianDegreeEvaluationIdentityAtOne := true,
     canonicalSquareWeightProfileAvailable := true,
     canonicalSquareWeightConstantAverageAvailable := true,
-    canonicalSquareWeightTotalFormulaAvailable := true }
+    canonicalSquareWeightTotalFormulaAvailable := true,
+    canonicalSquareWeightAverageFormulaAvailable := true }
 
 theorem ind3J2ScaleExperimentReport_oneScale
     (l : PrimeGeFive) :
@@ -532,6 +534,12 @@ theorem ind3J2ScaleExperimentReport_canonicalSquareWeightTotalFormula
     (l : PrimeGeFive) :
     (ind3J2ScaleExperimentReport
       l).canonicalSquareWeightTotalFormulaAvailable = true :=
+  rfl
+
+theorem ind3J2ScaleExperimentReport_canonicalSquareWeightAverageFormula
+    (l : PrimeGeFive) :
+    (ind3J2ScaleExperimentReport
+      l).canonicalSquareWeightAverageFormulaAvailable = true :=
   rfl
 
 theorem no_labelIndependent_transport_scale_absorbs_j2
@@ -656,6 +664,14 @@ theorem canonicalSquareWeightProfile_total_formula
       ((l.value - 1 : Nat) : Real) * (l.value : Real) *
         (2 * ((l.value - 1 : Nat) : Real) + 1) :=
   IUTStage1ZModSquareWeightProfile.canonicalSquareWeights_weightTotal_mul_six
+
+theorem canonicalSquareWeightProfile_average_formula
+    (l : PrimeGeFive) :
+    ((IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l).weightTotal /
+        (l.value : Real)) * 6 =
+      ((l.value - 1 : Nat) : Real) *
+        (2 * ((l.value - 1 : Nat) : Real) + 1) :=
+  IUTStage1ZModSquareWeightProfile.canonicalSquareWeights_averageWeight_mul_six
 
 /--
 On half-range representatives, the degree-level Gaussian evaluation is exactly
@@ -1862,6 +1878,7 @@ structure Corollary312DisputeFirstPassReport where
   canonicalSquareWeightProfileAvailable : Bool
   canonicalSquareWeightConstantAverageAvailable : Bool
   canonicalSquareWeightTotalFormulaAvailable : Bool
+  canonicalSquareWeightAverageFormulaAvailable : Bool
   processionContainerSkeletonAvailable : Bool
   processionTensorPacketLogVolumeAvailable : Bool
   processionTensorPacketPermutationInvariant : Bool
@@ -1959,6 +1976,7 @@ def corollary312DisputeFirstPassReport :
     canonicalSquareWeightProfileAvailable := true,
     canonicalSquareWeightConstantAverageAvailable := true,
     canonicalSquareWeightTotalFormulaAvailable := true,
+    canonicalSquareWeightAverageFormulaAvailable := true,
     processionContainerSkeletonAvailable := true,
     processionTensorPacketLogVolumeAvailable := true,
     processionTensorPacketPermutationInvariant := true,
@@ -2084,6 +2102,11 @@ theorem corollary312Report_canonicalSquareWeightConstantAverageAvailable :
 
 theorem corollary312Report_canonicalSquareWeightTotalFormulaAvailable :
     corollary312DisputeFirstPassReport.canonicalSquareWeightTotalFormulaAvailable =
+      true :=
+  rfl
+
+theorem corollary312Report_canonicalSquareWeightAverageFormulaAvailable :
+    corollary312DisputeFirstPassReport.canonicalSquareWeightAverageFormulaAvailable =
       true :=
   rfl
 

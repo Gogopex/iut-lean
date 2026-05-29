@@ -6399,6 +6399,27 @@ theorem canonicalSquareWeights_weightTotal_mul_six :
         exact_mod_cast hsucc
       rw [hsucc_real]
 
+theorem canonicalSquareWeights_averageWeight_mul_six :
+    ((canonicalSquareWeights l).weightTotal / (l.value : Real)) * 6 =
+      ((l.value - 1 : Nat) : Real) *
+        (2 * ((l.value - 1 : Nat) : Real) + 1) := by
+  have htotal := canonicalSquareWeights_weightTotal_mul_six (l := l)
+  have hl_ne : (l.value : Real) ≠ 0 := by
+    exact_mod_cast l.ne_zero
+  calc
+    ((canonicalSquareWeights l).weightTotal / (l.value : Real)) * 6 =
+        ((canonicalSquareWeights l).weightTotal * 6) / (l.value : Real) := by
+      ring
+    _ =
+        (((l.value - 1 : Nat) : Real) * (l.value : Real) *
+          (2 * ((l.value - 1 : Nat) : Real) + 1)) /
+            (l.value : Real) := by
+      rw [htotal]
+    _ =
+        ((l.value - 1 : Nat) : Real) *
+          (2 * ((l.value - 1 : Nat) : Real) + 1) := by
+      field_simp [hl_ne]
+
 theorem representativeSquareScale_two :
     representativeSquareScale (l := l) (2 : ZMod l.value) = 4 := by
   have hlt : 2 < l.value :=
