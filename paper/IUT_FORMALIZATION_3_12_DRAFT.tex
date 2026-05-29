@@ -495,11 +495,13 @@ The code currently covers:
   characterization \(0<q\iff q=1\) for rational integer units \(q=\pm1\);
 \item the Remark 3.12.1(ii) generalized-link numerical bound
   \(C_\Theta\ge-\lambda\) for \(\lambda\in\mathbb{Q}_{>0}\), with strict
-  strengthening over the \(\lambda=1\) bound when \(\lambda<1\);
+  strengthening over the \(\lambda=1\) bound when \(\lambda<1\); Lean now proves
+  the resulting strict conclusion \(-1<C_\Theta\) in this case;
 \item the \(q^\lambda\)-pilot endpoint algebra:
   from a signed comparison for \(-\lambda|\log(q)|\) and the same
   \(C_\Theta|\log(q)|\) upper bound, Lean derives \(C_\Theta\ge-\lambda\), and
-  hence \(C_\Theta\ge-1\) when \(\lambda\le1\);
+  hence \(C_\Theta\ge-1\) when \(\lambda\le1\), with the strict
+  \(-1<C_\Theta\) conclusion when \(\lambda<1\);
 \item the Remark 3.12.2 distinct-label implication
   \(q\text{-itw}\Rightarrow q\text{-itw}\wedge\Theta\text{-itw}/\mathrm{indets}\),
   with q-native and \(\Theta\)-native labels proved distinct;

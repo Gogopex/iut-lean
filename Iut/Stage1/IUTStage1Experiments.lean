@@ -5010,6 +5010,12 @@ theorem generalizedThetaLGPLambda_sharper_boundary
     (-1 : Real) < -((data.lambda : Real)) :=
   data.sharper_boundary_of_lambda_lt_one hlambda
 
+theorem generalizedThetaLGPLambda_strict_standard_bound
+    (data : IUTStage1GeneralizedThetaLGPLambdaBound)
+    (hlambda : data.lambda < 1) :
+    (-1 : Real) < data.cTheta :=
+  data.strict_standard_bound_of_lambda_lt_one hlambda
+
 theorem generalizedQLambdaCTheta_lower_bound
     (data : IUTStage1Corollary312QLambdaCThetaBoundShadow) :
     -((data.lambda : Real)) <= data.cTheta :=
@@ -5020,6 +5026,12 @@ theorem generalizedQLambdaCTheta_standard_bound
     (hlambda : data.lambda <= 1) :
     (-1 : Real) <= data.cTheta :=
   data.standard_bound_of_lambda_le_one hlambda
+
+theorem generalizedQLambdaCTheta_strict_standard_bound
+    (data : IUTStage1Corollary312QLambdaCThetaBoundShadow)
+    (hlambda : data.lambda < 1) :
+    (-1 : Real) < data.cTheta :=
+  data.strict_standard_bound_of_lambda_lt_one hlambda
 
 theorem distinctLabelIntertwining_labels_distinct
     (data : IUTStage1DistinctLabelIntertwiningTransport) :

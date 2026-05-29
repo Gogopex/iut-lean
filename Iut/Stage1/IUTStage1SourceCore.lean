@@ -2248,6 +2248,16 @@ theorem standard_bound_of_lambda_le_one
     linarith
   exact le_trans hstandard data.cTheta_ge_neg_lambda
 
+theorem strict_standard_bound_of_lambda_lt_one
+    (data : IUTStage1Corollary312QLambdaCThetaBoundShadow)
+    (hlambda : data.lambda < 1) :
+    (-1 : Real) < data.cTheta := by
+  have hcast : (data.lambda : Real) < 1 := by
+    exact_mod_cast hlambda
+  have hstrict : (-1 : Real) < -((data.lambda : Real)) := by
+    linarith
+  exact lt_of_lt_of_le hstrict data.cTheta_ge_neg_lambda
+
 end IUTStage1Corollary312QLambdaCThetaBoundShadow
 
 /--
@@ -2750,6 +2760,13 @@ theorem sharper_boundary_of_lambda_lt_one
   have hcast : (data.lambda : Real) < 1 := by
     exact_mod_cast hlambda
   linarith
+
+theorem strict_standard_bound_of_lambda_lt_one
+    (data : IUTStage1GeneralizedThetaLGPLambdaBound)
+    (hlambda : data.lambda < 1) :
+    (-1 : Real) < data.cTheta :=
+  lt_of_lt_of_le (data.sharper_boundary_of_lambda_lt_one hlambda)
+    data.generalized_bound
 
 theorem standard_case_bound
     (data : IUTStage1GeneralizedThetaLGPLambdaBound)
