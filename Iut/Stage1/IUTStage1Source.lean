@@ -5445,6 +5445,26 @@ theorem cTheta_ge_neg_one
   (data.toQPilotTwoComputationCThetaEndpoint
     q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ).cTheta_ge_neg_one
 
+theorem fixedQPilotCTheta_endpoint
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    let endpoint :=
+      data.toQPilotTwoComputationCThetaEndpoint
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ;
+    -endpoint.absLogQ <= endpoint.cTheta * endpoint.absLogQ ∧
+      (-1 : Real) <= endpoint.cTheta ∧
+      ¬ (cTheta < (-1 : Real)) := by
+  intro endpoint
+  exact
+    ⟨endpoint.fixed_qPilotLogVolume_le_cTheta_absLogQ,
+      endpoint.cTheta_ge_neg_one_from_fixed_qPilot,
+      endpoint.not_cTheta_lt_neg_one_from_fixed_qPilot⟩
+
 def toStatementEndpoint
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
@@ -6112,6 +6132,48 @@ theorem ofZModCuspLabelLogVolumeCompatibilities_cThetaLowerBound
         pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ,
       data.statementEndpoint_not_cTheta_lt_neg_one
         pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ⟩
+
+theorem ofZModCuspLabelLogVolumeCompatibilities_fixedQPilotCThetaEndpoint
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume)
+    (q_pilot_positive :
+      0 < -before.toLabelAveraged.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      thetaHullLogVolume <= cTheta * (-before.toLabelAveraged.averageLogVolume)) :
+    let data :=
+      ofZModCuspLabelLogVolumeCompatibilities before afterInd1 afterInd2
+        ind3UpperBound hind1 hind2 hzero hcusp determinant thetaHullLogVolume
+        theta_eq_ind3Upper theta_eq_normalized_determinant;
+    let endpoint :=
+      data.toQPilotTwoComputationCThetaEndpoint
+        q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ;
+    -endpoint.absLogQ <= endpoint.cTheta * endpoint.absLogQ ∧
+      (-1 : Real) <= endpoint.cTheta ∧
+      ¬ (cTheta < (-1 : Real)) := by
+  intro data endpoint
+  exact data.fixedQPilotCTheta_endpoint
+    q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
 
 end IUTStage1StepXToHullUpperRayLogVolume
 
