@@ -5529,6 +5529,32 @@ theorem singletonOne_not_closed_under_translation_one (l : PrimeGeFive) :
   rw [zmodLabelTranslate_one_one_eq_two] at h
   exact zmod_two_ne_one l h
 
+theorem zmod_subset_eq_univ_of_nonempty_translation_closed
+    (l : PrimeGeFive) (s : Finset (ZMod l.value))
+    (hne : s.Nonempty)
+    (hclosed :
+      ∀ (t j : ZMod l.value), j ∈ s -> zmodLabelTranslate l t j ∈ s) :
+    s = Finset.univ := by
+  classical
+  rcases hne with ⟨base, hbase⟩
+  ext x
+  constructor
+  · intro _hx
+    exact Finset.mem_univ x
+  · intro _hx
+    have hmem := hclosed (x - base) base hbase
+    rw [zmodLabelTranslate_eq_add] at hmem
+    simpa [sub_add_cancel] using hmem
+
+theorem zmod_proper_nonempty_subset_not_translation_closed
+    (l : PrimeGeFive) (s : Finset (ZMod l.value))
+    (hne : s.Nonempty)
+    (hproper : s ≠ Finset.univ) :
+    ¬ ∀ (t j : ZMod l.value), j ∈ s -> zmodLabelTranslate l t j ∈ s := by
+  intro hclosed
+  exact hproper
+    (zmod_subset_eq_univ_of_nonempty_translation_closed l s hne hclosed)
+
 end IUTStage1FLLabelTorsorModel
 
 /--

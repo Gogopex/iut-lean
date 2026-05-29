@@ -18695,3 +18695,29 @@ This is another bookkeeping guard around IUT II's simultaneous use of
 \(F_\ell\), \(F_\ell^\times/\{\pm1\}\), and \(|F_\ell|\).  It shows that the
 formal model does not silently conflate the \(F_\ell\)-indexed weighted-volume
 average with the full absolute-label average.
+
+## Proper subset restrictions and additive symmetry
+
+### Lean Move
+
+Added:
+
+```text
+zmod_subset_eq_univ_of_nonempty_translation_closed
+zmod_proper_nonempty_subset_not_translation_closed
+properNonemptySubset_not_translationInvariant
+```
+
+### Mathematical Reason
+
+In the concrete \(F_\ell=\mathbb{Z}/\ell\mathbb{Z}\) torsor, a nonempty subset
+closed under all translations must be the whole carrier: from any base point in
+the subset, translating by \(x-\mathrm{base}\) reaches an arbitrary \(x\).  Thus
+no nonempty proper subset restriction can preserve the full additive
+\(F_\ell\)-torsor symmetry.
+
+### Source Check
+
+This generalizes the earlier singleton \(j=1\) check and matches the warning in
+IUT II, Remark 4.10.1(iii), that restriction to a proper subset may destroy the
+relevant \(F_\ell^\pm\) and \(F_\ell\) symmetries.

@@ -818,6 +818,14 @@ theorem singletonOneRestriction_not_translationInvariant
         j = 1 -> zmodLabelTranslate l (1 : ZMod l.value) j = 1 :=
   IUTStage1FLLabelTorsorModel.singletonOne_not_closed_under_translation_one l
 
+theorem properNonemptySubset_not_translationInvariant
+    (l : PrimeGeFive) (s : Finset (ZMod l.value))
+    (hne : s.Nonempty)
+    (hproper : s ≠ Finset.univ) :
+    ¬ ∀ (t j : ZMod l.value), j ∈ s -> zmodLabelTranslate l t j ∈ s :=
+  IUTStage1FLLabelTorsorModel.zmod_proper_nonempty_subset_not_translation_closed
+    l s hne hproper
+
 theorem nonzeroWeightedVolumeSubordinate_zero
     {l : PrimeGeFive}
     (label : (zmodSignAction l).SignLabelQuotient) :
