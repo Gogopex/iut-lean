@@ -6484,6 +6484,43 @@ theorem statementEndpoint_absLogQ_eq_neg_beforeAverage
   rw [data.statementEndpoint_qPilotLogVolume_eq_beforeAverage
     pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ]
 
+theorem statementEndpoint_absLogQ_pos
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    0 < -((data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ).finiteEndpoint.upperRayData.qPilotLogVolume) :=
+  (data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+    thetaHull_le_cTheta_absLogQ).q_pilot_positive
+
+theorem beforeAverage_neg_of_qPilotPositive
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume) :
+    data.corridor.beforeIndeterminacy.averageLogVolume < 0 := by
+  linarith
+
+theorem afterInd1Average_neg_of_qPilotPositive
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume) :
+    data.corridor.afterInd1.averageLogVolume < 0 := by
+  rw [data.corridor.afterInd1_average_eq_before]
+  exact data.beforeAverage_neg_of_qPilotPositive q_pilot_positive
+
+theorem afterInd2Average_neg_of_qPilotPositive
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume) :
+    data.corridor.afterInd2.averageLogVolume < 0 := by
+  rw [data.corridor.afterInd2_average_eq_before]
+  exact data.beforeAverage_neg_of_qPilotPositive q_pilot_positive
+
 theorem statementEndpoint_qPilotLogVolume_eq_afterInd1Average
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
     (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)

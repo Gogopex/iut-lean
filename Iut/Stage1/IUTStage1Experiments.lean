@@ -1108,6 +1108,45 @@ theorem stepXToHullUpperRay_statementEndpoint_absLogQ_eq_neg_beforeAverage
   data.statementEndpoint_absLogQ_eq_neg_beforeAverage
     pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
 
+theorem stepXToHullUpperRay_statementEndpoint_absLogQ_pos
+    {label : Type u} [Fintype label]
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (pilotBoundary : IUTStage1Corollary312PilotIndeterminacyBoundary)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume)
+    (cTheta : Real)
+    (thetaHull_le_cTheta_absLogQ :
+      data.thetaHullLogVolume <=
+        cTheta * (-data.corridor.beforeIndeterminacy.averageLogVolume)) :
+    0 < -((data.toStatementEndpoint pilotBoundary q_pilot_positive cTheta
+      thetaHull_le_cTheta_absLogQ).finiteEndpoint.upperRayData.qPilotLogVolume) :=
+  data.statementEndpoint_absLogQ_pos
+    pilotBoundary q_pilot_positive cTheta thetaHull_le_cTheta_absLogQ
+
+theorem stepXToHullUpperRay_beforeAverage_neg_of_qPilotPositive
+    {label : Type u} [Fintype label]
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume) :
+    data.corridor.beforeIndeterminacy.averageLogVolume < 0 :=
+  data.beforeAverage_neg_of_qPilotPositive q_pilot_positive
+
+theorem stepXToHullUpperRay_afterInd1Average_neg_of_qPilotPositive
+    {label : Type u} [Fintype label]
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume) :
+    data.corridor.afterInd1.averageLogVolume < 0 :=
+  data.afterInd1Average_neg_of_qPilotPositive q_pilot_positive
+
+theorem stepXToHullUpperRay_afterInd2Average_neg_of_qPilotPositive
+    {label : Type u} [Fintype label]
+    (data : IUTStage1StepXToHullUpperRayLogVolume label)
+    (q_pilot_positive :
+      0 < -data.corridor.beforeIndeterminacy.averageLogVolume) :
+    data.corridor.afterInd2.averageLogVolume < 0 :=
+  data.afterInd2Average_neg_of_qPilotPositive q_pilot_positive
+
 theorem stepXToHullUpperRay_statementEndpoint_q_eq_afterInd1Average
     {label : Type u} [Fintype label]
     (data : IUTStage1StepXToHullUpperRayLogVolume label)
