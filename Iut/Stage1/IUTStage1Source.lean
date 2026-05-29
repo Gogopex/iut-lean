@@ -5331,6 +5331,38 @@ theorem toUpperRay_q_mem
       data.toHullDetPilotUpperRayLogVolume.upperRay :=
   data.toHullDetPilotUpperRayLogVolume.qPilot_mem_upperRay
 
+theorem ofZModCuspLabelLogVolumeCompatibilities_q_mem_upperRay
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume) :
+    let data :=
+      ofZModCuspLabelLogVolumeCompatibilities before afterInd1 afterInd2
+        ind3UpperBound hind1 hind2 hzero hcusp determinant thetaHullLogVolume
+        theta_eq_ind3Upper theta_eq_normalized_determinant
+    data.qPilotLogVolume ∈
+      data.toHullDetPilotUpperRayLogVolume.upperRay := by
+  intro data
+  exact data.toUpperRay_q_mem
+
 def toQPilotTwoComputationLogVolume
     (data : IUTStage1StepXToHullUpperRayLogVolume label) :
     IUTStage1QPilotTwoComputationLogVolume :=

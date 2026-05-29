@@ -4037,6 +4037,41 @@ theorem zmodCuspLabelLogVolumeCompatibility_stepXToHull_endpoint
     determinant thetaHullLogVolume theta_eq_ind3Upper
     theta_eq_normalized_determinant
 
+theorem zmodCuspLabelLogVolumeCompatibility_stepXToHull_q_mem
+    {l : PrimeGeFive}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (determinant :
+      IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (thetaHullLogVolume : Real)
+    (theta_eq_ind3Upper :
+      thetaHullLogVolume = ind3UpperBound)
+    (theta_eq_normalized_determinant :
+      thetaHullLogVolume = determinant.normalizedLogVolume) :
+    let data :=
+      IUTStage1StepXToHullUpperRayLogVolume.ofZModCuspLabelLogVolumeCompatibilities
+        before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+        determinant thetaHullLogVolume theta_eq_ind3Upper
+        theta_eq_normalized_determinant
+    data.qPilotLogVolume ∈
+      data.toHullDetPilotUpperRayLogVolume.upperRay :=
+  IUTStage1StepXToHullUpperRayLogVolume.ofZModCuspLabelLogVolumeCompatibilities_q_mem_upperRay
+    before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+    determinant thetaHullLogVolume theta_eq_ind3Upper
+    theta_eq_normalized_determinant
+
 theorem stepXToHullUpperRay_q_mem
     {label : Type u} [Fintype label]
     (data : IUTStage1StepXToHullUpperRayLogVolume label) :
