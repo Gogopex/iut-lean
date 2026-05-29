@@ -138,7 +138,10 @@ The code currently covers:
   the core generator is zero, each procession generator is the procession
   square times the environment degree, acting on the tensor packet adds the
   generator log-volumes, and nonnegative environment degree gives monotonicity
-  of the normalized acted packet;
+  of the normalized acted packet; Lean now also identifies the averaged
+  splitting-generator contribution with the full-label Gaussian average, so the
+  normalized acted packet is the original packet plus either of these equivalent
+  finite \(q^{j^2}\) averages;
 \item proof that one label-independent scale cannot absorb all representative
   \(j^2\) scales in this model;
 \item proof that, for nonzero \(\deg(q)\), one label-independent scale cannot
@@ -246,7 +249,9 @@ The code currently covers:
   \(j^2\deg(q)\) contributions over the procession container; for
   \(S_{j+1}=\{0,\ldots,j\}\), Lean expands the total generator contribution to
   \(j(j+1)(2j+1)\deg(q)/6\), and the resulting normalized log-volume change to
-  \(j(2j+1)\deg(q)/6\); since \(j=\lfloor\ell/2\rfloor\ge2\), a nonnegative
+  \(j(2j+1)\deg(q)/6\); at the final procession length this averaged generator
+  contribution is equal to the full-label Gaussian average; since
+  \(j=\lfloor\ell/2\rfloor\ge2\), a nonnegative
   environment degree makes the acted normalized tensor-packet log-volume an
   upper bound for the original one;
 \item the finite procession containers

@@ -5828,6 +5828,29 @@ theorem lgpSplittingMonoid_normalizedActed_eq_packetNormalized_plus_squareAverag
                 Real) :=
   action.normalizedActedLogVolume_eq_packetNormalized_plus_squareAverage
 
+theorem lgpSplittingMonoid_generatorAverage_eq_gaussianFullLabelAverage
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    (Finset.univ.sum action.generatorLogVolume) /
+        (Fintype.card
+          (IUTStage1ProcessionContainer
+            (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
+              Real) =
+      (Finset.univ.sum action.evaluation.gaussianDegree) /
+        (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) :=
+  action.generatorLogVolume_average_eq_gaussianFullLabel_average
+
+theorem lgpSplittingMonoid_normalizedActed_eq_packetNormalized_plus_gaussianFullLabelAverage
+    {l : PrimeGeFive}
+    (action :
+      IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction l) :
+    action.normalizedActedLogVolume =
+      action.packet.normalizedLogVolume +
+        (Finset.univ.sum action.evaluation.gaussianDegree) /
+          (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) :=
+  action.normalizedActedLogVolume_eq_packetNormalized_plus_gaussianFullLabelAverage
+
 theorem lgpSplittingMonoid_normalizedActed_delta_mul_six
     {l : PrimeGeFive}
     (action :
@@ -5881,6 +5904,10 @@ theorem lgpSplittingMonoid_qSquaredGeneratorTensorPacketAction_endpoint
               (IUTStage1ProcessionContainer
                 (IUTStage1ZModSquareWeightProfile.absLabelProcessionTop l)) :
                   Real) ∧
+      action.normalizedActedLogVolume =
+        action.packet.normalizedLogVolume +
+          (Finset.univ.sum action.evaluation.gaussianDegree) /
+            (Fintype.card (IUTStage1ZModCuspFullLabel l) : Real) ∧
       (0 <= action.evaluation.environmentDegree ->
         action.packet.normalizedLogVolume <= action.normalizedActedLogVolume) :=
   action.qSquaredGeneratorTensorPacketAction_endpoint
