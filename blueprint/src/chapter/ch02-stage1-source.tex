@@ -1,0 +1,134 @@
+\chapter{The Source Stage 1 Route}
+\label{ch:stage1-source}
+
+\section{The source objects}
+
+\begin{definition}[Initial theta and theater data]
+  \label{def:initial-theta-data}
+  \lean{Iut.InitialThetaData}
+  \notready
+  The source construction begins with the initial \(\Theta\)-data of \IUT{} I:
+  a number field, an elliptic curve, bad places, label data, and the
+  arithmetic hypotheses from which Hodge theaters are built.  The repository
+  contains typed shadows of initial theta data, but the full arithmetic
+  construction is not yet the active Stage 1 input.
+\end{definition}
+
+\begin{definition}[Hodge theater histories]
+  \label{def:hodge-theater-histories}
+  \notready
+  A Hodge theater carries an arithmetic holomorphic structure.  The Stage 1
+  argument must keep the domain history of the \ThetaPilot{} and the codomain
+  history of the \qPilot{} distinct, even when their weakened data are compared
+  in a common container.
+\end{definition}
+
+\begin{definition}[Prime strips and links]
+  \label{def:prime-strip-links}
+  \notready
+  The \(\Theta^{\times\mu}_{\mathrm{LGP}}\)-link between the \(0\)- and
+  \(1\)-columns has a value-group portion and a unit portion.  The value-group
+  portion relates \ThetaPilot{} data at \((0,0)\) to \qPilot{} data at
+  \((1,0)\).  The input prime-strip link property \(\IPL\) records that the
+  output possibilities of the multiradial algorithm remain linked to the input
+  prime-strip data at the comparison boundary.
+\end{definition}
+
+\section{Theorem 3.11 and Step (x)}
+
+\begin{definition}[Indeterminacy generator interface]
+  \label{def:indeterminacy-generator-interface}
+  \lean{Iut.Stage1.IUTStage1Theorem311IndeterminacySourceData}
+  \leanok
+  The Stage 1 interface names the three source-facing indeterminacy
+  generators separately: procession automorphism, local tensor symmetry, and
+  upper-semi compatibility.  This is a Lean-checked naming interface, not yet
+  a construction of the source Step (x) estimates.
+\end{definition}
+
+\begin{definition}[Step (x) averaged corridor record]
+  \label{def:step-x-averaged-corridor-record}
+  \lean{Iut.Stage1.IUTStage1ProcessionNormalizedIndeterminacyCorridor,Iut.Stage1.IUTStage1ProcessionNormalizedIndeterminacyCorridor.before_average_le_ind3UpperBound}
+  \leanok
+  The averaged corridor record is the conditional Lean shape of Step (x):
+  \(\Ind{1}\) and \(\Ind{2}\) preserve the procession-normalized average, and
+  \(\Ind{3}\) supplies the upper-semi bound.  Its Lean theorem proves the
+  resulting averaged inequality from those record fields.
+\end{definition}
+
+\begin{proposition}[Step (x) corridor]
+  \label{prop:step-x-corridor}
+  \uses{def:indeterminacy-generator-interface,def:step-x-averaged-corridor-record}
+  \notready
+  The source Step (x) data should produce a corridor
+  \[
+    A_0 = A_1 = A_2 \le U_{\Ind{3}},
+  \]
+  where \(A_0,A_1,A_2\) are the averaged log-volumes before
+  indeterminacy, after \(\Ind{1}\), and after \(\Ind{2}\), and
+  \(U_{\Ind{3}}\) is the upper-semi target coming from \(\Ind{3}\).
+\end{proposition}
+
+\begin{proof}
+  In the current code this is an interface-level object.  The proof from the
+  source papers must still account for the log-volume invariance under
+  \(\Ind{1}\) and \(\Ind{2}\), the upper-semi orientation of \(\Ind{3}\), and
+  the normalization conventions for averaging over labels.
+\end{proof}
+
+\begin{theorem}[Theorem 3.11 source output]
+  \label{thm:theorem-311-source-output}
+  \uses{def:initial-theta-data,def:hodge-theater-histories,def:prime-strip-links,prop:step-x-corridor}
+  \notready
+  From the initial \(\Theta\)-data and the machinery of \IUT{} I--III,
+  Theorem 3.11 should construct multiradial output possibilities, equipped
+  with the \(\Ind{1}\), \(\Ind{2}\), and \(\Ind{3}\) behavior needed for
+  the Stage 1 comparison.
+\end{theorem}
+
+\section{Step (xi)}
+
+\begin{definition}[Simultaneous holomorphic expressibility]
+  \label{def:she}
+  \notready
+  The \(\SHE\) property says that the relevant output possibilities may be
+  expressed relative to the arithmetic holomorphic structure in the \(1\)-column
+  while keeping the \qPilot{} log-volume fixed as input data.
+\end{definition}
+
+\begin{definition}[Algorithmic parallel transport]
+  \label{def:apt}
+  \notready
+  The \(\APT\) property records how the multiradial algorithm transports data
+  through gluings up to indeterminacy.  It belongs primarily to the implication
+  from Theorem 3.11 to the reorganized hull-plus-determinant checkpoint.
+\end{definition}
+
+\begin{definition}[Hull plus determinant checkpoint]
+  \label{def:hdd}
+  \notready
+  The \(\HDD\) checkpoint is the composite of descent with holomorphic hull
+  and determinant formation.  It is the source-side operation that turns
+  multiradial output regions into objects comparable with the \qPilot{} at
+  the level of signed real log-volume.
+\end{definition}
+
+\begin{proposition}[Step (xi) upper-ray input]
+  \label{prop:step-xi-upper-ray-input}
+  \uses{thm:theorem-311-source-output,def:she,def:hdd}
+  \notready
+  The multiradial construction, followed by holomorphic hull, determinant, and
+  log-volume, should produce a signed upper ray
+  \[
+    \R_{\le -|\log(\Theta)|}
+  \]
+  of possible output log-volumes, and the \qPilot{} reading
+  \(-|\log(q)|\) should lie in this ray.
+\end{proposition}
+
+\begin{proof}
+  This is the central source obligation.  It is exactly where the comparison
+  must avoid identifying the arithmetic holomorphic histories too early while
+  still obtaining a common log-volume container in which the final inequality
+  is meaningful.
+\end{proof}

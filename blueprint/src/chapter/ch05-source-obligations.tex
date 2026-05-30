@@ -1,0 +1,122 @@
+\chapter{Open Source Obligations}
+\label{ch:source-obligations}
+
+\section{The obligation boundary}
+
+\begin{definition}[Source obligation gap]
+  \label{def:source-obligation-gap}
+  \uses{def:source-obligation-ledger}
+  \lean{Iut.Stage1.IUTStage1SourceObligationGap}
+  \leanok
+  The source obligation gap is the current formal boundary between proved
+  route algebra and unconstructed source mathematics.  It records the missing
+  certification of the algorithmic output, the \(\SHE\)-certificate alignment,
+  \qPilot{} positivity, and the normalization condition needed by the ledger.
+\end{definition}
+
+\begin{proposition}[Gap promotion is formal]
+  \label{prop:gap-promotion-formal}
+  \uses{def:source-obligation-gap,def:source-obligation-ledger}
+  \lean{Iut.Stage1.IUTStage1SourceObligationGap.toSourceObligations}
+  \leanok
+  Once the source obligation gap fields are supplied, they promote to the
+  source-obligation ledger consumed by the current Stage 1 route.
+\end{proposition}
+
+\begin{proof}
+  This promotion is bookkeeping.  It is valuable because it marks exactly which
+  source fields remain mathematical obligations rather than burying them inside
+  the final comparison theorem.
+\end{proof}
+
+\section{Obligations to discharge next}
+
+\begin{theorem}[Construct \(\SHE\) from source data]
+  \label{thm:construct-she}
+  \uses{def:she,def:initial-theta-data,def:hodge-theater-histories}
+  \notready
+  The simultaneous holomorphic expressibility data used in the current route
+  should be constructed from the arithmetic holomorphic structure of the
+  \(1\)-column, not supplied as a record field.
+\end{theorem}
+
+\begin{proof}
+  The source proof must show that the relevant operations are valid while the
+  \qPilot{} log-volume associated to the input prime strip remains fixed.
+\end{proof}
+
+\begin{theorem}[Construct \(\IPL\) from the prime-strip link]
+  \label{thm:construct-ipl}
+  \uses{def:prime-strip-links,thm:theorem-311-source-output}
+  \notready
+  The input prime-strip link property should be derived from the
+  \(\Theta^{\times\mu}_{\mathrm{LGP}}\)-link and the multiradial output of
+  Theorem 3.11.
+\end{theorem}
+
+\begin{proof}
+  The value-group and unit portions of the link must be tracked together.
+  Using different lattice arrows for the two portions would destroy the
+  simultaneous comparison needed in Step (xi).
+\end{proof}
+
+\begin{theorem}[Construct \(\APT\) and descent]
+  \label{thm:construct-apt}
+  \uses{def:apt,thm:theorem-311-source-output}
+  \notready
+  The descent and algorithmic parallel transport part of Theorem 3.11 should
+  produce the reorganized ``3.11.5'' input before the final simultaneous
+  comparison.
+\end{theorem}
+
+\begin{proof}
+  This is the proof content of the first, second, and third triangles in
+  Mochizuki's 2026 decomposition of the Stage 1 implication.
+\end{proof}
+
+\begin{theorem}[Construct hull plus determinant]
+  \label{thm:construct-hdd}
+  \uses{def:hdd,prop:step-xi-upper-ray-input}
+  \notready
+  The current hull/determinant endpoint records should be replaced by actual
+  holomorphic-hull and determinant operations corresponding to Remark 3.9.5
+  and Step (xi) of IUT III.
+\end{theorem}
+
+\begin{proof}
+  This must turn localizations of arithmetic vector bundles into determinant
+  line data whose log-volume can be compared with the \qPilot{} line-bundle
+  log-volume.
+\end{proof}
+
+\begin{theorem}[Construct log-Kummer upper-semi compatibility]
+  \label{thm:construct-log-kummer-upper-semi}
+  \uses{prop:step-x-corridor,thm:construct-hdd}
+  \notready
+  The log-Kummer correspondence in the \(1\)-column should supply the
+  nonarchimedean upper-semi compatibility currently consumed by the strongest
+  packet-calibrated route.
+\end{theorem}
+
+\begin{proof}
+  The current Lean route already uses a finite Kummer-plus-forgetting chain to
+  derive the source-side equality.  The remaining task is to replace the
+  packet-normalized target calibrations by source-level log-Kummer
+  constructions.
+\end{proof}
+
+\begin{theorem}[Preserve comparison levels]
+  \label{thm:preserve-comparison-levels}
+  \uses{def:real-line-copies,def:regions-and-measures,thm:construct-log-kummer-upper-semi}
+  \notready
+  The source construction must preserve the distinction between
+  representative \(j^2\)-coordinates, sign-quotient full labels, averaged
+  finite Gaussian data, ordered real-line transports, and the final
+  hull/log-volume endpoint.
+\end{theorem}
+
+\begin{proof}
+  This is the formal defense against an illicit collapse of comparison levels.
+  It is also the place where the Scholze--Stix objection should be tested most
+  carefully in Lean.
+\end{proof}
