@@ -231,13 +231,15 @@ Current modules:
   including named hull+det, HDD, HDD-after-SHE, common-container, and
   real-comparison-chart bridge slots plus chosen outputs, charted q-values,
   memberships, target volumes, and Theta bounds.
-* `Iut.Stage1.PilotComparison`: first neutral interface for the Corollary 3.12
-  target shape.
+* `Iut.Stage1.PilotComparison`: neutral endpoint package for the Corollary
+  3.12 target shape; its projection theorem only unpacks an already supplied
+  endpoint comparison.
 * `Iut.Stage1.CorollarySchema`: signed-real schema for producing the
   Corollary-3.12-shaped pilot inequality from bridge output.
 * `Iut.Stage1.SourceObligations`: source-obligation ledger for the structured
   Stage 1 final comparison, now requiring a charted common-container bridge and
-  chosen output with charted q/membership/target/Theta values.
+  chosen output with charted q/membership/target/Theta values; the stored
+  Theta common bound is tied to `chartedContainer.apply certificate`.
 * `Iut.Stage1.IUTSourceScaffold`: non-toy provider scaffold whose public Stage
   1 endpoints are obtained only from a completed source-obligation ledger.
 * `Iut.Stage1.IUTStage1Data`: pre-ledger data layer for future IUT-specific

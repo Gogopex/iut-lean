@@ -34,7 +34,12 @@ def AllTargetsAtMost (measure : RegionMeasure target)
   ∀ choice : index,
     RegionMeasure.targetVolume measure (family.comparison choice) <= bound
 
-/-- A comparison family whose target regions are coordinate upper rays. -/
+/--
+A comparison family whose target regions are signed-log upper rays.
+
+Each target is `{x | x.coord <= bound choice}`; see `Region.upperRay` for the
+sign convention behind the name.
+-/
 def upperRayFamily
     (transport : index -> Transport source target) (bound : index -> Real) :
     RegionComparisonFamily source target index :=

@@ -152,7 +152,8 @@ In \IUT{} III, Step (x) treats the procession-normalized log-volume as
 unchanged under \((\Ind1)\) and \((\Ind2)\), while \((\Ind3)\) supplies a
 one-sided upper-semi comparison.  Step (xi) then passes through multiradiality,
 \(\IPL\), \(\SHE\), holomorphic hulls, determinants, and log-volume to place
-the \(q\)-pilot reading in the upper ray determined by the \(\Theta\)-pilot:
+the \(q\)-pilot reading in the signed-log upper ray determined by the
+\(\Theta\)-pilot:
 \[
   -|\log(q)|\in\R_{\le -|\log(\Theta)|}.
 \]
@@ -201,7 +202,7 @@ procession-normalized log-volumes are invariant under \((\Ind1)\) and
 \((\Ind2)\), while \((\Ind3)\) becomes an upper-semi inequality after applying
 log-volume.  Step (xi) uses the multiradial construction, \(\IPL\), \(\SHE\),
 holomorphic hulls, determinants, and the 1-column log-Kummer correspondence to
-put the \(q\)-pilot log-volume in the upper ray
+put the \(q\)-pilot log-volume in the signed-log upper ray
 \(\R_{\le -|\log(\Theta)|}\).  Step (xii) warns that replacing global
 realified Frobenioids by local Frobenioids loses calibration because local
 objects admit \(p_v^N\)-type endomorphisms.  Remark 3.12.2 further stresses
@@ -520,6 +521,16 @@ mathematical incompleteness: several records are deliberately named
 obligation interfaces.  These interfaces are acceptable only as temporary
 boundaries.  The next phase must replace them by constructions from the source
 papers or mark them as unresolved.
+
+The endpoint type \texttt{Stage1Comparison} is not a source proof: its
+comparison field is the Corollary-3.12-shaped conclusion, and the corresponding
+theorem is only a projection.  The source-facing route must construct this
+endpoint from the ledger.  The ledger now records the opaque output
+certification and ties the \(\Theta\)-common bound used in the final inequality
+to \texttt{chartedContainer.apply certificate}, so the displayed charted
+container cannot be paired with an unrelated convenient bound.  Throughout the
+current corridor, ``upper ray'' means the signed-log region
+\(\{x\mid x\le b\}\), not the ordinary order-theoretic ray \(\{x\mid b\le x\}\).
 
 The largest engineering issue is
 \texttt{Iut/Stage1/IUTStage1Source.lean}, which currently contains most of the

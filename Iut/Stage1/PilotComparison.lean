@@ -33,11 +33,13 @@ def Corollary312Inequality (theta q : PilotLogVolume) : Prop :=
   -theta.value >= -q.value
 
 /--
-Minimal Stage 1 comparison data.
+Minimal endpoint package for a Stage 1 comparison.
 
-Later versions should replace `comparison` by hypotheses corresponding to
-Mochizuki's decomposed Stage 1 arrows: descent, hull+det, simultaneous
-holomorphic expressibility, input prime-strip link, and allowed indeterminacies.
+The field `comparison` is the Corollary-3.12-shaped conclusion itself. Thus
+`corollary312_from_stage1_comparison` is only a projection from this endpoint
+package, not a source proof of the comparison. Source-facing routes must derive
+such a package from descent, hull+det, simultaneous holomorphic expressibility,
+input prime-strip links, and allowed indeterminacies.
 -/
 structure Stage1Comparison where
   theta : PilotLogVolume
@@ -47,6 +49,7 @@ structure Stage1Comparison where
   q_positive : 0 < q.value
   comparison : Corollary312Inequality theta q
 
+/-- Projection of the conclusion stored in a completed endpoint package. -/
 theorem corollary312_from_stage1_comparison (data : Stage1Comparison) :
     Corollary312Inequality data.theta data.q :=
   data.comparison

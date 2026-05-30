@@ -38,7 +38,13 @@ def ExtEq (left right : Region line) : Prop :=
 def singleton (x : Point line) : Region line :=
   { Contains := fun y => y.coord = x.coord }
 
-/-- The upper ray consisting of points whose coordinate is at most `bound`. -/
+/--
+Signed-log upper ray.
+
+In the IUT signed log-volume convention used by this project, membership is
+`coord <= bound`. The name "upper ray" follows the source-facing convention
+after sign reversal; it is not the ordinary order-theoretic set `{x | bound <= x}`.
+-/
 def upperRay (line : Copy) (bound : Real) : Region line :=
   { Contains := fun y => y.coord <= bound }
 
@@ -233,7 +239,10 @@ def exact (transport : Transport source target) (targetPoint : Point target) :
     RegionComparison source target :=
   { transport := transport, targetRegion := Region.singleton targetPoint }
 
-/-- Upper-ray comparison is region comparison against a coordinate upper bound. -/
+/--
+Upper-ray comparison against the signed-log region `{x | x.coord <= bound}`.
+See `Region.upperRay` for the sign convention.
+-/
 def upperRay (transport : Transport source target) (bound : Real) :
     RegionComparison source target :=
   { transport := transport, targetRegion := Region.upperRay target bound }

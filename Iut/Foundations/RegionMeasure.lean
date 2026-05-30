@@ -54,8 +54,9 @@ def HasVolumeAtMost (measure : RegionMeasure line) (region : Region line)
   measure.volume region <= bound
 
 /--
-A measure is normalized on upper rays when it assigns the upper-ray bound as
-the numerical value of that upper ray.
+A measure is normalized on signed-log upper rays when it assigns the bound of
+`Region.upperRay`, i.e. `{x | x.coord <= bound}`, as the numerical value of
+that region.
 
 This is a calibration property for toy models and later comparison statements;
 it is not part of the definition of an arbitrary region measure.
