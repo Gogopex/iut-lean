@@ -829,6 +829,12 @@
         <a href="#core-group-algorithm-ii16">Core group algorithm</a>
         <a href="#elliptic-cuspidalization-ii16">Elliptic cuspidalization</a>
         <a href="#radial-coric-framework-ii17-19">Radial/coric framework 1.7-1.9</a>
+        <a href="#radial-environment-definition-ii17">Radial environment 1.7</a>
+        <a href="#multiradial-fullness-ii17">Multiradial fullness 1.7</a>
+        <a href="#tautological-multiradialization-ii17">Tautological multiradialization</a>
+        <a href="#parallel-transport-radial-ii171">Radial parallel transport</a>
+        <a href="#concrete-radial-examples-ii18">Concrete radial examples 1.8</a>
+        <a href="#graph-functorial-algorithms-ii19">Graphs of algorithms 1.9</a>
         <a href="#iut-ii-mono-theta-rigidity-110-112">Mono-theta rigidity 1.10-1.12</a>
         <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation 2</a>
         <a href="#tempered-covering-ladder-ii21-22">Tempered covering ladder 2.1-2.2</a>
@@ -23611,9 +23617,178 @@
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Examples 1.7-1.9</a>
           Related: <a href="#iut-ii-mono-theta-rigidity-110-112">mono-theta rigidity</a>
+          <a href="#radial-environment-definition-ii17">radial environments</a>
+          <a href="#multiradial-fullness-ii17">multiradial fullness</a>
           <a href="#multiradiality">multiradiality</a>
           <a href="#log-theta-lattice">log-theta lattice</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="radial-environment-definition-ii17" data-filter="iut ii example 1.7 radial environment coric data functor Phi R C categories">
+        <h2>Radial Environment</h2>
+        <p class="lede">
+          Example 1.7 begins with a type of radial data, a type of coric data, and a
+          functorial algorithm from the former to the latter. Concretely, the radial
+          data form a category <span class="math">R</span>, the coric data form a
+          category <span class="math">C</span>, and the algorithm gives an essentially
+          surjective functor <span class="math">Phi : R -> C</span>.
+        </p>
+        <div class="diagram fit" aria-label="radial environment definition">
+          <div class="diagramHeader">
+            <strong>Example 1.7(i)</strong>
+            <span>radial data mapped to a shared coric category</span>
+          </div>
+          <svg viewBox="0 0 900 310" role="img">
+            <defs>
+              <marker id="arrowRadialEnv17" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox gold" x="70" y="72" width="230" height="74"></rect>
+            <text class="nodeTitle" x="185" y="101" text-anchor="middle">R_i</text>
+            <text class="tinyText" x="185" y="126" text-anchor="middle">radial data with label i</text>
+            <rect class="nodeBox gold" x="70" y="188" width="230" height="74"></rect>
+            <text class="nodeTitle" x="185" y="217" text-anchor="middle">R_j</text>
+            <text class="tinyText" x="185" y="242" text-anchor="middle">another radial copy</text>
+            <rect class="nodeBox green" x="590" y="130" width="240" height="78"></rect>
+            <text class="nodeTitle" x="710" y="160" text-anchor="middle">C</text>
+            <text class="tinyText" x="710" y="186" text-anchor="middle">common coric category</text>
+            <path class="edge gold" d="M302 109 C410 118 492 138 588 160" marker-end="url(#arrowRadialEnv17)"></path>
+            <path class="edge gold" d="M302 225 C410 216 492 196 588 178" marker-end="url(#arrowRadialEnv17)"></path>
+            <text class="edgeLabel" x="438" y="126" text-anchor="middle">Phi_i</text>
+            <text class="edgeLabel" x="438" y="220" text-anchor="middle">Phi_j</text>
+          </svg>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.7(i)</a>
+          Related: <a href="#multiradial-fullness-ii17">multiradial fullness</a>
+          <a href="#coric-uniradial-multiradial-taxonomy-ii-intro">radial taxonomy</a>
+        </div>
+      </section>
+
+      <section id="multiradial-fullness-ii17" data-filter="iut ii example 1.7 multiradial fullness functor full rigidity loss uniradial">
+        <h2>Multiradial Fullness</h2>
+        <p class="lede">
+          In Example 1.7(ii), a radial environment is multiradial exactly when
+          <span class="math">Phi : R -> C</span> is full. If it is not full, the
+          environment is uniradial: an object may lose rigidity when mapped to
+          <span class="math">C</span>, while a chosen lift back to
+          <span class="math">R</span> adds rigidity.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Condition</th><th>Source meaning</th><th>Use in IUT</th></tr>
+          <tr>
+            <td>Full <span class="math">Phi</span></td>
+            <td>Every coric isomorphism between images lifts to a radial isomorphism.</td>
+            <td>No loss of rigidity under the radial algorithm.</td>
+          </tr>
+          <tr>
+            <td>Not full</td>
+            <td>The output in <span class="math">C</span> has less data than a chosen radial lift.</td>
+            <td>Uniradial; simultaneous execution across alien spokes is not automatic.</td>
+          </tr>
+          <tr>
+            <td>Fiber product test</td>
+            <td>Example 1.7(iii) characterizes multiradiality by behavior of the switching functor on <span class="math">R x_C R</span>.</td>
+            <td>Turns "can switch spokes" into a categorical condition.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.7(ii)-(iii)</a>
+          Related: <a href="#parallel-transport-radial-ii171">parallel transport</a>
+          <a href="#multiradiality">multiradiality</a>
+        </div>
+      </section>
+
+      <section id="tautological-multiradialization-ii17" data-filter="iut ii example 1.7 tautological multiradialization full poly isomorphism Rmtz forgetting uniradiality">
+        <h2>Tautological Multiradialization</h2>
+        <p class="lede">
+          Example 1.7(ii) also defines a tautological multiradialization. An object of
+          <span class="math">R_mtz</span> is a triple
+          <span class="math">(R, C, alpha)</span>, where
+          <span class="math">alpha : Phi(R) ~= C</span> is a full poly-isomorphism.
+          The radial algorithm then sends <span class="math">(R,C,alpha)</span> to
+          <span class="math">C</span>.
+        </p>
+        <div class="callout gold">
+          <strong>Interpretation.</strong> Mochizuki describes this as forgetting the
+          uniradiality of the original environment in a minimal possible fashion. For
+          the wiki, this means a claim of multiradiality may be genuine fullness or a
+          tautological upgrade; the source must say which one is being used.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.7(ii)</a>
+          Related: <a href="#multiradial-fullness-ii17">multiradial fullness</a>
+          <a href="#poly-isomorphisms-iut-i0">poly-isomorphisms</a>
+        </div>
+      </section>
+
+      <section id="parallel-transport-radial-ii171" data-filter="iut ii remark 1.7.1 parallel transport radial functor fullness connection fibration fibers">
+        <h2>Radial Parallel Transport</h2>
+        <p class="lede">
+          Remark 1.7.1 interprets fullness as a connection-like condition. A uniradial
+          environment is analogous to a fibration without a connection; a multiradial
+          environment is analogous to a fibration with a connection, allowing parallel
+          transport between fibers of <span class="math">Phi : R -> C</span>.
+        </p>
+        <div class="callout green">
+          <strong>Uniqueness caveat.</strong> Lifts of coric isomorphisms are unique
+          only up to the indeterminacy coming from the failure of
+          <span class="math">Phi</span> to be faithful. This is why multiradiality does
+          not mean "all radial copies are identical".
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 1.7.1</a>
+          Related: <a href="#radial-environment-definition-ii17">radial environments</a>
+          <a href="#mutually-alien-copies">mutually alien copies</a>
+        </div>
+      </section>
+
+      <section id="concrete-radial-examples-ii18" data-filter="iut ii example 1.8 concrete radial environments G O times O mu O times mu log shell exterior cyclotomic version">
+        <h2>Concrete Radial Examples in Example 1.8</h2>
+        <p class="lede">
+          Example 1.8 gives concrete multiradial environments built from
+          topological groups, MLF-Galois TM-pairs, unit monoids, cyclotomic and
+          co-cyclotomic quotients, exterior cyclotomes, groupifications, and log-shell
+          versions. The repeated pattern is: radial data includes a spoke-side object
+          and a comparison to a coric <span class="math">G</span>-side object.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Example item</th><th>Coric output</th><th>Role</th></tr>
+          <tr><td>1.8(i)</td><td><span class="math">G</span></td><td>Different arithmetic holomorphic structures on a single coric G.</td></tr>
+          <tr><td>1.8(ii)</td><td><span class="math">G O^triangleright(G)</span></td><td>Monoid version after sacrificing ring structure.</td></tr>
+          <tr><td>1.8(iii)-(iv)</td><td><span class="math">G O^x(G)</span>, <span class="math">G O^xmu(G)</span></td><td>Unit and co-cyclotomic variants with allowed isometry/orbit indeterminacy.</td></tr>
+          <tr><td>1.8(vi)</td><td>Exterior-cyclotomic version</td><td>Replaces <span class="math">M_TM^mu</span> by <span class="math">Pi_mu(MTheta_*) tensor Q/Z</span>.</td></tr>
+          <tr><td>1.8(ix)</td><td>Log-shell version</td><td>Adds the log-shell <span class="math">I(G) subset O^xmu(G)</span>.</td></tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8</a>
+          Related: <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
+          <a href="#theta-env-kummer-package-ii15">theta_env package</a>
+        </div>
+      </section>
+
+      <section id="graph-functorial-algorithms-ii19" data-filter="iut ii example 1.9 graph functorial group theoretic algorithms tautological multiradial uniradial">
+        <h2>Graphs of Functorial Algorithms</h2>
+        <p class="lede">
+          Example 1.9 packages a functorial algorithm
+          <span class="math">Xi : E -> F</span> by its graph category: objects are
+          pairs <span class="math">(E, Xi(E))</span> and morphisms are the compatible
+          pairs <span class="math">(f, Xi(f))</span>. For algorithms whose input is a
+          group isomorphic to <span class="math">Pi_X^tp</span>, the same graph can be
+          viewed as multiradial or uniradial depending on the radial environment used.
+        </p>
+        <div class="callout">
+          <strong>Source guardrail.</strong> This is why "there exists a group-theoretic
+          reconstruction algorithm" is not enough by itself. The radial/coric environment
+          determines whether that algorithm is meaningful across alien spokes or only
+          inside one spoke.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.9</a>
+          Related: <a href="#concrete-radial-examples-ii18">concrete radial examples</a>
+          <a href="#coric-uniradial-multiradial-taxonomy-ii-intro">radial taxonomy</a>
         </div>
       </section>
 
