@@ -473,6 +473,7 @@
         <a href="#bogomolov-szpiro-analogy">Bogomolov-Szpiro analogy</a>
         <a href="#concept-index">Concept index</a>
         <a href="#anabelian-background">Anabelian background</a>
+        <a href="#gt-species-perspective">GT species perspective</a>
         <a href="#hoshi-introduction-route">Hoshi introduction route</a>
         <a href="#iut-i-atlas">IUT I atlas</a>
         <a href="#iut-ii-atlas">IUT II atlas</a>
@@ -1265,6 +1266,18 @@
             <td>Collas, anabelian overview</td>
           </tr>
           <tr>
+            <td>Mochizuki GT species</td>
+            <td>GT/IUT comparison perspective</td>
+            <td>
+              <a href="#gt-species-perspective">GT species perspective</a>,
+              <a href="#complex-common-container">complex common container</a>,
+              <a href="#n-power-gluing-model">N-th power gluing model</a>,
+              <a href="#gt-genus-zero-quotient">GT genus-zero quotient</a>,
+              <a href="#ficsp-conjugate-synchronization">FICSP synchronization</a>
+            </td>
+            <td>Mochizuki-Tsujimura, GT species paper</td>
+          </tr>
+          <tr>
             <td>Essential Logical Structure</td>
             <td>Boolean-logical route</td>
             <td>
@@ -1853,6 +1866,203 @@
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#lana">LANA</a>
           <a href="#formalization">formalization</a>
+        </div>
+      </section>
+
+      <section id="gt-species-perspective">
+        <h2>GT Species Perspective</h2>
+        <p class="lede">
+          Mochizuki's October 2025 NGR talk notes, joint work in progress with
+          Tsujimura, compare three Teichmuller-type situations: classical complex
+          Teichmuller theory, IUT, and Grothendieck-Teichmuller theory. For this wiki
+          the value is diagnostic: it explains IUT's multiradial representation as an
+          arithmetic common-container analogue, while keeping the later GT statements
+          separate and explicitly marked as expected where the source does so.
+        </p>
+        <div class="diagram" aria-label="Complex IUT and GT common-container analogy">
+          <div class="diagramHeader">
+            <strong>Three common-container patterns</strong>
+            <span>complex Teichmuller, IUT, and GT</span>
+          </div>
+          <svg viewBox="0 0 1020 420" role="img">
+            <defs>
+              <marker id="arrowGTSpecies" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="42" y="58" width="210" height="90"></rect>
+            <text class="nodeTitle" x="147" y="88" text-anchor="middle">complex Teichmuller</text>
+            <text class="tinyText" x="147" y="112" text-anchor="middle">O_H1 and O_H2</text>
+            <text class="tinyText" x="147" y="130" text-anchor="middle">inside real analytic O_R</text>
+
+            <rect class="nodeBox green" x="405" y="58" width="210" height="90"></rect>
+            <text class="nodeTitle" x="510" y="88" text-anchor="middle">IUT</text>
+            <text class="tinyText" x="510" y="112" text-anchor="middle">theta-linked ring structures</text>
+            <text class="tinyText" x="510" y="130" text-anchor="middle">multiradial representation</text>
+
+            <rect class="nodeBox violet" x="768" y="58" width="210" height="90"></rect>
+            <text class="nodeTitle" x="873" y="88" text-anchor="middle">GT</text>
+            <text class="tinyText" x="873" y="112" text-anchor="middle">conjugates of G_Q in GT</text>
+            <text class="tinyText" x="873" y="130" text-anchor="middle">function spaces via D_G</text>
+
+            <rect class="nodeBox gold" x="96" y="252" width="200" height="82"></rect>
+            <text class="nodeTitle" x="196" y="282" text-anchor="middle">common container</text>
+            <text class="tinyText" x="196" y="306" text-anchor="middle">real analytic sheaf</text>
+
+            <rect class="nodeBox gold" x="410" y="252" width="200" height="82"></rect>
+            <text class="nodeTitle" x="510" y="282" text-anchor="middle">rotation</text>
+            <text class="tinyText" x="510" y="306" text-anchor="middle">Theta-link gap to log-link gap</text>
+
+            <rect class="nodeBox gold" x="724" y="252" width="220" height="82"></rect>
+            <text class="nodeTitle" x="834" y="282" text-anchor="middle">function-space recovery</text>
+            <text class="tinyText" x="834" y="306" text-anchor="middle">decomposition groups and S3</text>
+
+            <path class="arrow" d="M147 148 C147 198 196 210 196 252" marker-end="url(#arrowGTSpecies)"></path>
+            <path class="arrow" d="M510 148 V252" marker-end="url(#arrowGTSpecies)"></path>
+            <path class="arrow" d="M873 148 C873 198 834 210 834 252" marker-end="url(#arrowGTSpecies)"></path>
+            <line class="arrow" x1="296" y1="293" x2="410" y2="293" marker-end="url(#arrowGTSpecies)"></line>
+            <line class="arrow" x1="610" y1="293" x2="724" y2="293" marker-end="url(#arrowGTSpecies)"></line>
+
+            <text class="tinyText" x="510" y="378" text-anchor="middle">
+              The analogy is explanatory; the GT theorems in the source are labelled expected/work in progress.
+            </text>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source section</th><th>Concept</th><th>Wiki reading</th></tr>
+          <tr>
+            <td>§1</td>
+            <td>
+              Two holomorphic structures on the same topological surface embed into the
+              common sheaf of complex-valued real analytic functions.
+            </td>
+            <td>
+              This is the classical model for a common container that is larger than
+              either holomorphic structure.
+            </td>
+          </tr>
+          <tr>
+            <td>§2</td>
+            <td>
+              The <span class="math">N</span>-th power map gives a multiplicative
+              monoid isomorphism that is not compatible with addition and hence not a
+              ring homomorphism.
+            </td>
+            <td>
+              Mochizuki uses this as an elementary analogue for theta-link-type gluing:
+              common multiplicative/coric data does not identify ring histories.
+            </td>
+          </tr>
+          <tr>
+            <td>§2</td>
+            <td>
+              IUT's multiradial representation is described as a common container for
+              distinct arithmetic holomorphic structures, built using anabelian geometry,
+              logarithms, theta-function Galois evaluation, and Kummer theory.
+            </td>
+            <td>
+              This reinforces the wiki rule that multiradial comparison is not a direct
+              ring isomorphism between the two sides of a theta link.
+            </td>
+          </tr>
+          <tr>
+            <td>§3</td>
+            <td>
+              The expected Theorem A states faithfulness of the natural outer action of
+              <span class="math">GT</span> on a genus-zero quotient of the geometric
+              fundamental group of the tripod.
+            </td>
+            <td>
+              This is a GT-side anabelian analogue, not an established input to the four
+              IUT papers.
+            </td>
+          </tr>
+          <tr>
+            <td>§4</td>
+            <td>
+              The expected FICSP/COF route characterizes <span class="math">G_Q</span>
+              inside <span class="math">GT</span> by synchronization of decomposition
+              groups; the p-adic variant is stated as <span class="math">GT_p = G_Qp</span>.
+            </td>
+            <td>
+              The page records this as current adjacent research into anabelian/GT
+              rigidity, with the source's expected-status caveat intact.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="complex-common-container">
+            <h3>Complex common container</h3>
+            <p>
+              Section 1 reviews the classical pattern
+              <span class="math">O_H1 subset O_R superset O_H2</span>: two holomorphic
+              structures on one topological surface are compared inside a larger real
+              analytic sheaf.
+            </p>
+            <div class="tagRow"><span class="tag blue">§1</span><span class="tag">Teichmuller</span></div>
+          </div>
+          <div class="card" id="n-power-gluing-model">
+            <h3>N-th power gluing model</h3>
+            <p>
+              Section 2 uses the <span class="math">N</span>-th power map on a
+              multiplicative monoid as a simple non-ring-theoretic gluing. It is
+              compatible with multiplicative data and group action, but not with
+              addition.
+            </p>
+            <div class="tagRow"><span class="tag green">§2</span><span class="tag">monoid gluing</span></div>
+          </div>
+          <div class="card" id="iut-multiradial-common-container">
+            <h3>IUT multiradial container</h3>
+            <p>
+              The IUT paragraph identifies common multiplicative monoid and abstract
+              group structures as the logical-AND input for the multiradial
+              representation of the theta-pilot, with ring structures remaining distinct.
+            </p>
+            <div class="tagRow"><span class="tag red">IUT §2</span><span class="tag">multiradial</span></div>
+          </div>
+          <div class="card" id="gt-genus-zero-quotient">
+            <h3>GT genus-zero quotient</h3>
+            <p>
+              The expected GT theorem concerns the action of
+              <span class="math">GT</span> on the genus-zero quotient
+              <span class="math">Pi_X^0</span> attached to the tripod. The paper treats
+              this through combinatorial anabelian geometry.
+            </p>
+            <div class="tagRow"><span class="tag gold">§3</span><span class="tag">expected</span></div>
+          </div>
+          <div class="card" id="ficsp-conjugate-synchronization">
+            <h3>FICSP synchronization</h3>
+            <p>
+              The FICSP/COF condition asks whether restrictions of
+              GT-decomposition groups to conjugates of an arithmetic Galois group are
+              synchronized. Under this condition, the expected result characterizes
+              <span class="math">G_Q</span> inside <span class="math">GT</span>.
+            </p>
+            <div class="tagRow"><span class="tag gold">§4</span><span class="tag">decomposition groups</span></div>
+          </div>
+          <div class="card" id="gt-p-adic-analogy">
+            <h3>p-adic GT analogy</h3>
+            <p>
+              The notes state an expected p-adic analogue
+              <span class="math">GT_p = G_Qp</span> and a tempered absolute anabelian
+              result for graphic cuspidalizable outer automorphisms. These are recorded
+              as adjacent anabelian research, not as wiki prerequisites for IUT I-IV.
+            </p>
+            <div class="tagRow"><span class="tag violet">§4</span><span class="tag">p-adic</span></div>
+          </div>
+        </div>
+        <div class="callout gold">
+          Status caveat: the GT-side Theorem A, Theorem B, and Corollaries C-D are
+          labelled "Expected" in the source. The wiki therefore treats this page as an
+          explanatory and research-context bridge, not as a settled theorem page.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-gt-theory-species-teichmuller-2025.pdf" target="_blank">GT species paper</a>
+          Related: <a href="#anabelian-background">anabelian background</a>
+          <a href="#species-mutations">species and mutations</a>
+          <a href="#essential-logical-structure">logical structure</a>
+          <a href="#multiradiality">multiradiality</a>
         </div>
       </section>
 
@@ -11048,6 +11258,10 @@
           <div class="card sourceCard" data-filter="mochizuki current situation 2025 report set theoretic copies universes">
             <div><h3>Current Situation Surrounding IUT</h3><div class="sourceMeta">Shinichi Mochizuki, October 2025, 30 pp.</div><p>Recent report addressing mathematical misunderstandings, set-theoretic copies, universes, and anabelian developments.</p></div>
             <a class="pdf" href="papers/mochizuki-iut-report-2025-10.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki tsujimura grothendieck teichmuller species iut gt 2025">
+            <div><h3>GT as a Species of Teichmuller Theory</h3><div class="sourceMeta">Shinichi Mochizuki, joint work in progress with Tsujimura, October 2025, 14 pp.</div><p>Compares classical Teichmuller theory, IUT, and Grothendieck-Teichmuller theory through common-container and anabelian reconstruction patterns.</p></div>
+            <a class="pdf" href="papers/mochizuki-gt-theory-species-teichmuller-2025.pdf" target="_blank">PDF</a>
           </div>
           <div class="card sourceCard" data-filter="collas anabelian arithmetic geometry iut grothendieck monoids overview">
             <div><h3>Collas: Anabelian Arithmetic Geometry and IUT</h3><div class="sourceMeta">Benjamin Collas, revised overview, 24 pp.</div><p>Conceptual overview of IUT through Grothendieckian anabelian geometry and the geometry of monoids.</p></div>
