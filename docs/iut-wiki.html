@@ -601,6 +601,10 @@
         <a href="#kappa-sol-automorphisms-iut-i317">Kappa-sol automorphisms 3.1.7</a>
         <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
         <a href="#bad-nonarch-frobenioids-32">Bad nonarch Frobenioids 3.2</a>
+        <a href="#bad-frobenioid-base-category-iut-i32">Bad-place base category 3.2</a>
+        <a href="#theta-value-indeterminacy-iut-i32">Theta value indeterminacy 3.2</a>
+        <a href="#bad-split-frobenioids-iut-i32">Bad split Frobenioids 3.2</a>
+        <a href="#bad-frobenioid-reconstruction-iut-i32">Bad Frobenioid reconstruction 3.2</a>
         <a href="#good-arch-frobenioids-33-34">Good/arch Frobenioids 3.3-3.4</a>
         <a href="#global-realified-theater-35-36">Global realified theater 3.5-3.6</a>
         <a href="#theta-link-frobenius-etale-pictures">Theta/Frobenius pictures</a>
@@ -10626,6 +10630,304 @@
           Related: <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
           <a href="#theta-approach-abs-top-319">theta approach</a>
           <a href="#global-realified-theater-35-36">global realified theater</a>
+        </div>
+      </section>
+
+      <section id="bad-frobenioid-base-category-iut-i32" data-filter="iut i example 3.2 bad nonarchimedean tempered frobenioid dv d bottom btemp xv connected coverings">
+        <h2>Bad-Place Frobenioid Base Category</h2>
+        <p class="lede">
+          Example 3.2(i) begins the bad nonarchimedean construction with the tempered
+          Frobenioid <span class="math">F_v</span> determined by the hyperbolic curve
+          <span class="math">X_v</span>. Its base category <span class="math">D_v</span>
+          is the connected tempered-covering category, while
+          <span class="math">D_v^⊢</span> is pulled back from
+          <span class="math">Spec(K_v)</span>.
+        </p>
+        <div class="diagram fit" aria-label="Bad Frobenioid base category">
+          <div class="diagramHeader">
+            <strong>Tempered curve coverings and base-field coverings</strong>
+            <span>IUT I Example 3.2(i)</span>
+          </div>
+          <svg viewBox="0 0 1030 420" role="img">
+            <defs>
+              <marker id="arrowBadBaseI32" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox red" x="70" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="185" y="106" text-anchor="middle">v in V_bad</text>
+            <text class="tinyText" x="185" y="130" text-anchor="middle">multiplicative reduction</text>
+            <text class="tinyText" x="185" y="148" text-anchor="middle">Tate curve setting</text>
+
+            <rect class="nodeBox blue" x="400" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="515" y="106" text-anchor="middle">X_v</text>
+            <text class="tinyText" x="515" y="130" text-anchor="middle">hyperbolic curve</text>
+            <text class="tinyText" x="515" y="148" text-anchor="middle">bad-place local object</text>
+
+            <rect class="nodeBox green" x="730" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="845" y="106" text-anchor="middle">D_v = Btemp(X_v)^0</text>
+            <text class="tinyText" x="845" y="130" text-anchor="middle">connected tempered coverings</text>
+            <text class="tinyText" x="845" y="148" text-anchor="middle">base of F_v</text>
+
+            <rect class="nodeBox gold" x="240" y="282" width="250" height="84"></rect>
+            <text class="nodeTitle" x="365" y="312" text-anchor="middle">D_v^⊢ = B(K_v)^0</text>
+            <text class="tinyText" x="365" y="336" text-anchor="middle">base-field coverings</text>
+            <text class="tinyText" x="365" y="354" text-anchor="middle">full subcategory of D_v</text>
+
+            <rect class="nodeBox violet" x="560" y="282" width="250" height="84"></rect>
+            <text class="nodeTitle" x="685" y="312" text-anchor="middle">left adjoint projection</text>
+            <text class="tinyText" x="685" y="336" text-anchor="middle">D_v -> D_v^⊢</text>
+            <text class="tinyText" x="685" y="354" text-anchor="middle">base-field-theoretic hull route</text>
+
+            <path class="edge red" d="M302 119 H398" marker-end="url(#arrowBadBaseI32)"></path>
+            <path class="edge blue" d="M632 119 H728" marker-end="url(#arrowBadBaseI32)"></path>
+            <path class="edge gold" d="M515 164 C480 224 408 252 372 280" marker-end="url(#arrowBadBaseI32)"></path>
+            <path class="edge violet" d="M845 164 C812 224 724 252 692 280" marker-end="url(#arrowBadBaseI32)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Component</th><th>Example 3.2(i) role</th><th>Formalization guardrail</th></tr>
+          <tr>
+            <td><span class="math">F_v</span></td>
+            <td>Tempered Frobenioid determined by <span class="math">X_v</span>.</td>
+            <td>Depends on the bad-place tempered category, not a generic p-adic Frobenioid field.</td>
+          </tr>
+          <tr>
+            <td><span class="math">D_v</span></td>
+            <td>Category of connected tempered coverings of <span class="math">X_v</span>.</td>
+            <td>Keep the curve-covering base separate from base-field coverings.</td>
+          </tr>
+          <tr>
+            <td><span class="math">D_v^⊢</span></td>
+            <td>Full subcategory pulled back from <span class="math">B(K_v)^0</span>, with a left-adjoint projection from <span class="math">D_v</span>.</td>
+            <td>The inclusion/projection relation is part of the source structure.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Example 3.2(i)</a>
+          Related: <a href="#bad-nonarch-frobenioids-32">bad nonarch Frobenioids</a>
+          <a href="#theta-value-indeterminacy-iut-i32">theta value indeterminacy</a>
+          <a href="#tempered-covering-complements">tempered covering complements</a>
+        </div>
+      </section>
+
+      <section id="theta-value-indeterminacy-iut-i32" data-filter="iut i example 3.2 theta value reciprocal l-th root theta function birationalization mu 2l lz indeterminacy">
+        <h2>Theta Value and Indeterminacy at Bad Places</h2>
+        <p class="lede">
+          Example 3.2(ii) recalls the Frobenioid-theoretic
+          <span class="math">ell</span>-th root of the theta function. The source uses
+          its reciprocal <span class="math">Theta_v</span> inside the birationalized
+          Frobenioid and records that it is determined only up to
+          <span class="math">mu_2ell</span> and <span class="math">ell Z</span>
+          indeterminacies.
+        </p>
+        <div class="diagram fit" aria-label="Theta value indeterminacy">
+          <div class="diagramHeader">
+            <strong>Bad-place theta value before split Frobenioids</strong>
+            <span>IUT I Example 3.2(ii)</span>
+          </div>
+          <svg viewBox="0 0 1040 420" role="img">
+            <defs>
+              <marker id="arrowThetaValI32" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="185" y="106" text-anchor="middle">F_v^birat</text>
+            <text class="tinyText" x="185" y="130" text-anchor="middle">birationalization</text>
+            <text class="tinyText" x="185" y="148" text-anchor="middle">from F_v</text>
+
+            <rect class="nodeBox green" x="405" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="520" y="106" text-anchor="middle">Y_v -> X_v</text>
+            <text class="tinyText" x="520" y="130" text-anchor="middle">tempered covering</text>
+            <text class="tinyText" x="520" y="148" text-anchor="middle">EtTh theta setting</text>
+
+            <rect class="nodeBox gold" x="740" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="855" y="106" text-anchor="middle">Theta_v</text>
+            <text class="tinyText" x="855" y="130" text-anchor="middle">reciprocal ell-th root</text>
+            <text class="tinyText" x="855" y="148" text-anchor="middle">normalized at sqrt(-1)</text>
+
+            <rect class="nodeBox violet" x="230" y="282" width="250" height="84"></rect>
+            <text class="nodeTitle" x="355" y="312" text-anchor="middle">mu_2ell ambiguity</text>
+            <text class="tinyText" x="355" y="336" text-anchor="middle">root-of-unity multiple</text>
+            <text class="tinyText" x="355" y="354" text-anchor="middle">source indeterminacy</text>
+
+            <rect class="nodeBox red" x="560" y="282" width="250" height="84"></rect>
+            <text class="nodeTitle" x="685" y="312" text-anchor="middle">ell Z action</text>
+            <text class="tinyText" x="685" y="336" text-anchor="middle">automorphisms of T(Y_v)</text>
+            <text class="tinyText" x="685" y="354" text-anchor="middle">another source indeterminacy</text>
+
+            <path class="edge blue" d="M302 119 H403" marker-end="url(#arrowThetaValI32)"></path>
+            <path class="edge green" d="M637 119 H738" marker-end="url(#arrowThetaValI32)"></path>
+            <path class="edge violet" d="M855 164 C800 224 430 252 362 280" marker-end="url(#arrowThetaValI32)"></path>
+            <path class="edge red" d="M855 164 C812 224 724 252 692 280" marker-end="url(#arrowThetaValI32)"></path>
+          </svg>
+        </div>
+        <div class="callout">
+          These are not later audit labels. Example 3.2(ii) attaches the
+          <span class="math">mu_2ell</span> and <span class="math">ell Z</span>
+          indeterminacies directly to the reconstruction of <span class="math">Theta_v</span>.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Example 3.2(ii)</a>
+          Related: <a href="#bad-frobenioid-base-category-iut-i32">bad-place base category</a>
+          <a href="#bad-split-frobenioids-iut-i32">bad split Frobenioids</a>
+          <a href="#theta-links-cor37">theta links</a>
+        </div>
+      </section>
+
+      <section id="bad-split-frobenioids-iut-i32" data-filter="iut i example 3.2 split frobenioid q parameter qv theta side c bottom c theta characteristic splitting">
+        <h2>Bad-Place Split Frobenioids</h2>
+        <p class="lede">
+          Example 3.2(iv)-(v) constructs two split Frobenioids at a bad place:
+          <span class="math">F_v^⊢</span>, built from the divisor monoid generated
+          by the normalized Tate parameter <span class="math">q_v^(1/2ell)</span>, and
+          <span class="math">F_v^Theta</span>, built from powers of
+          <span class="math">Theta_v</span>. The source gives a natural equivalence
+          between them.
+        </p>
+        <div class="diagram fit" aria-label="Bad split Frobenioids">
+          <div class="diagramHeader">
+            <strong>q-normalized side and theta side</strong>
+            <span>IUT I Example 3.2(iv)-(v)</span>
+          </div>
+          <svg viewBox="0 0 1040 430" role="img">
+            <defs>
+              <marker id="arrowBadSplitI32" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="64" y="76" width="250" height="86"></rect>
+            <text class="nodeTitle" x="189" y="106" text-anchor="middle">q_v^(1/2ell)</text>
+            <text class="tinyText" x="189" y="130" text-anchor="middle">Theta_v(-q_v)</text>
+            <text class="tinyText" x="189" y="148" text-anchor="middle">up to mu_2ell</text>
+
+            <rect class="nodeBox green" x="395" y="76" width="250" height="86"></rect>
+            <text class="nodeTitle" x="520" y="106" text-anchor="middle">C_v^⊢</text>
+            <text class="tinyText" x="520" y="130" text-anchor="middle">N · log_Phi(q_v)</text>
+            <text class="tinyText" x="520" y="148" text-anchor="middle">characteristic splitting tau_⊢</text>
+
+            <rect class="nodeBox gold" x="726" y="76" width="250" height="86"></rect>
+            <text class="nodeTitle" x="851" y="106" text-anchor="middle">D_v^Theta</text>
+            <text class="tinyText" x="851" y="130" text-anchor="middle">products with Y_v</text>
+            <text class="tinyText" x="851" y="148" text-anchor="middle">equivalent to D_v^⊢</text>
+
+            <rect class="nodeBox violet" x="232" y="286" width="250" height="84"></rect>
+            <text class="nodeTitle" x="357" y="316" text-anchor="middle">C_v^Theta</text>
+            <text class="tinyText" x="357" y="340" text-anchor="middle">O^x · Theta_v^N</text>
+            <text class="tinyText" x="357" y="358" text-anchor="middle">theta monoid</text>
+
+            <rect class="nodeBox red" x="562" y="286" width="250" height="84"></rect>
+            <text class="nodeTitle" x="687" y="316" text-anchor="middle">F_v^⊢ ≃ F_v^Theta</text>
+            <text class="tinyText" x="687" y="340" text-anchor="middle">split Frobenioid equivalence</text>
+            <text class="tinyText" x="687" y="358" text-anchor="middle">splittings matched</text>
+
+            <path class="edge blue" d="M316 119 H393" marker-end="url(#arrowBadSplitI32)"></path>
+            <path class="edge green" d="M647 119 H724" marker-end="url(#arrowBadSplitI32)"></path>
+            <path class="edge violet" d="M851 164 C812 224 430 252 364 284" marker-end="url(#arrowBadSplitI32)"></path>
+            <path class="edge red" d="M520 164 C550 224 640 252 682 284" marker-end="url(#arrowBadSplitI32)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Side</th><th>Construction</th><th>Meaning</th></tr>
+          <tr>
+            <td>q-normalized side</td>
+            <td><span class="math">q_v^(1/2ell)</span> defines <span class="math">N · log_Phi(q_v)</span> and <span class="math">C_v^⊢</span>.</td>
+            <td>Reads the Tate parameter into a divisor-monoid generator.</td>
+          </tr>
+          <tr>
+            <td>Theta side</td>
+            <td>Powers of <span class="math">Theta_v</span> on products with <span class="math">Y_v</span> define <span class="math">C_v^Theta</span>.</td>
+            <td>Reads the theta function into the Frobenioid monoid.</td>
+          </tr>
+          <tr>
+            <td>Equivalence</td>
+            <td>The two split Frobenioids are naturally equivalent and characteristic splittings correspond.</td>
+            <td>Connects the q-normalized and theta-normalized descriptions at bad places.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Example 3.2(iv)-(v)</a>
+          Related: <a href="#theta-value-indeterminacy-iut-i32">theta value indeterminacy</a>
+          <a href="#bad-frobenioid-reconstruction-iut-i32">bad Frobenioid reconstruction</a>
+          <a href="#global-realified-theater-35-36">global realified theater</a>
+        </div>
+      </section>
+
+      <section id="bad-frobenioid-reconstruction-iut-i32" data-filter="iut i example 3.2 remark 3.2.1 3.2.4 category theoretic reconstruction mono anabelian tempered meromorphic correction">
+        <h2>Bad Frobenioid Reconstruction and Corrections</h2>
+        <p class="lede">
+          Example 3.2(vi) and Remarks 3.2.1-3.2.4 explain what is intrinsic in the
+          bad-place Frobenioid package. The source lists category-theoretic
+          reconstruction steps and clarifies that these reconstructions should be read
+          algorithmically, while Remark 3.2.4 corrects the range of the tempered
+          Frobenioid theory needed for arbitrary roots.
+        </p>
+        <div class="diagram fit" aria-label="Bad Frobenioid reconstruction and corrections">
+          <div class="diagramHeader">
+            <strong>Intrinsic reconstruction and tempered-meromorphic correction</strong>
+            <span>IUT I Example 3.2(vi), Remarks 3.2.1-3.2.4</span>
+          </div>
+          <svg viewBox="0 0 1040 430" role="img">
+            <defs>
+              <marker id="arrowBadReconI32" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="76" width="245" height="86"></rect>
+            <text class="nodeTitle" x="193" y="106" text-anchor="middle">base categories</text>
+            <text class="tinyText" x="193" y="130" text-anchor="middle">D_v^⊢, D_v^Theta, D_v</text>
+            <text class="tinyText" x="193" y="148" text-anchor="middle">reconstructed categorically</text>
+
+            <rect class="nodeBox green" x="398" y="76" width="245" height="86"></rect>
+            <text class="nodeTitle" x="521" y="106" text-anchor="middle">split Frobenioids</text>
+            <text class="tinyText" x="521" y="130" text-anchor="middle">F_v^Theta from F_v</text>
+            <text class="tinyText" x="521" y="148" text-anchor="middle">F_v^⊢ from C_v and F_v</text>
+
+            <rect class="nodeBox gold" x="726" y="76" width="245" height="86"></rect>
+            <text class="nodeTitle" x="849" y="106" text-anchor="middle">mono-anabelian reading</text>
+            <text class="tinyText" x="849" y="130" text-anchor="middle">explicit algorithms</text>
+            <text class="tinyText" x="849" y="148" text-anchor="middle">not fixed scheme reference model</text>
+
+            <rect class="nodeBox violet" x="230" y="286" width="270" height="84"></rect>
+            <text class="nodeTitle" x="365" y="316" text-anchor="middle">tempered-meromorphic issue</text>
+            <text class="tinyText" x="365" y="340" text-anchor="middle">root existence vs log-divisor</text>
+            <text class="tinyText" x="365" y="358" text-anchor="middle">EtTh oversight corrected</text>
+
+            <rect class="nodeBox red" x="570" y="286" width="270" height="84"></rect>
+            <text class="nodeTitle" x="705" y="316" text-anchor="middle">IUT convention</text>
+            <text class="tinyText" x="705" y="340" text-anchor="middle">use stronger approach (A)</text>
+            <text class="tinyText" x="705" y="358" text-anchor="middle">theta functions lie in range</text>
+
+            <path class="edge blue" d="M317 119 H396" marker-end="url(#arrowBadReconI32)"></path>
+            <path class="edge green" d="M645 119 H724" marker-end="url(#arrowBadReconI32)"></path>
+            <path class="edge violet" d="M521 164 C480 224 402 252 370 284" marker-end="url(#arrowBadReconI32)"></path>
+            <path class="edge red" d="M849 164 C812 224 744 252 712 284" marker-end="url(#arrowBadReconI32)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source note</th><th>Content</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Example 3.2(vi)</td>
+            <td>Lists category-theoretic reconstruction of <span class="math">D_v^⊢</span>, <span class="math">D_v^Theta</span>, <span class="math">D_v</span>, <span class="math">F_v^Theta</span>, and <span class="math">F_v^⊢</span>.</td>
+            <td>These are theorem interfaces, not arbitrary record fields.</td>
+          </tr>
+          <tr>
+            <td>Remark 3.2.1</td>
+            <td>“Reconstructed category-theoretically” is read mono-anabelianly as explicit algorithms from category structure.</td>
+            <td>Do not rely on a hidden reference scheme model when explaining reconstruction.</td>
+          </tr>
+          <tr>
+            <td>Remark 3.2.4</td>
+            <td>The needed function class is strengthened so roots of all positive orders exist over tempered coverings; theta functions satisfy the stronger condition.</td>
+            <td>Record the correction before using EtTh tempered Frobenioids downstream.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Example 3.2(vi), Remarks 3.2.1-3.2.4</a>
+          Related: <a href="#bad-split-frobenioids-iut-i32">bad split Frobenioids</a>
+          <a href="#bad-frobenioid-base-category-iut-i32">bad-place base category</a>
+          <a href="#mono-anabelian-transport-page">mono-anabelian transport</a>
         </div>
       </section>
 
