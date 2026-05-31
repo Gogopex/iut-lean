@@ -581,6 +581,10 @@
         <a href="#cyclic-cover-reconstruction">Cyclic cover reconstruction</a>
         <a href="#iut-i-cusp-edge-vertex-recognizers">Cusp/edge/vertex recognizers 1.2</a>
         <a href="#tempered-covering-complements">Tempered covering complements</a>
+        <a href="#iut-i-tempered-terminality-21-22">Tempered terminality 2.1-2.2</a>
+        <a href="#iut-i-subsemigraph-arithmetic-subgroups-23">Subgraph arithmetic groups 2.3</a>
+        <a href="#iut-i-arithmetic-tempered-recognition-24-25">Arithmetic tempered recognition 2.4-2.5</a>
+        <a href="#iut-i-discrete-topological-analogue-26-28">Discrete/topological analogue 2.6-2.8</a>
         <a href="#galois-countability-repairs">Galois-countability repairs</a>
         <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
         <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges 6.11</a>
@@ -1384,6 +1388,10 @@
               <a href="#tempered-fundamental-group">tempered fundamental group</a>,
               <a href="#decomposition-subgroup">decomposition subgroup</a>,
               <a href="#tempered-covering-complements">tempered covering complements</a>,
+              <a href="#iut-i-tempered-terminality-21-22">tempered terminality</a>,
+              <a href="#iut-i-subsemigraph-arithmetic-subgroups-23">sub-semi-graph arithmetic subgroups</a>,
+              <a href="#iut-i-arithmetic-tempered-recognition-24-25">arithmetic tempered recognition</a>,
+              <a href="#iut-i-discrete-topological-analogue-26-28">discrete/topological analogue</a>,
               <a href="#profinite-conjugates-compact-subgroups">profinite conjugacy rigidity</a>,
               <a href="#corollary-25-tempered-decomposition">tempered decomposition/inertia recognition</a>,
               <a href="#galois-countability-repairs">Galois-countability repairs</a>,
@@ -5063,6 +5071,686 @@
           <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
           <a href="#anabelian-background">anabelian background</a>
           <a href="#prime-strips-bridges">prime strips and bridges</a>
+        </div>
+      </section>
+
+      <section id="iut-i-tempered-terminality-21-22">
+        <h2>IUT I Propositions 2.1-2.2: Tempered Terminality</h2>
+        <p class="lede">
+          Propositions 2.1 and 2.2 are the first precise rigidity layer of IUT I
+          Section 2. They say that a profinite motion that returns nontrivial compact
+          tempered subgroup data to the tempered world is already a tempered motion,
+          and hence that the relevant decomposition subgroups have no larger
+          commensurator inside the completed group.
+        </p>
+        <div class="diagram fit" aria-label="Temperate terminality mechanism">
+          <div class="diagramHeader">
+            <strong>From compact subgroup test to commensurable terminality</strong>
+            <span>IUT I, Propositions 2.1-2.2</span>
+          </div>
+          <svg viewBox="0 0 1120 470" role="img">
+            <defs>
+              <marker id="arrowTempTerminality" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="44" y="78" width="214" height="92"></rect>
+            <text class="nodeTitle" x="151" y="108" text-anchor="middle">tempered group</text>
+            <text class="tinyText" x="151" y="132" text-anchor="middle">Pi_G^tp embedded in Pi_G</text>
+            <text class="tinyText" x="151" y="150" text-anchor="middle">via pro-Sigma completion</text>
+
+            <rect class="nodeBox green" x="330" y="78" width="214" height="92"></rect>
+            <text class="nodeTitle" x="437" y="108" text-anchor="middle">compact subgroup</text>
+            <text class="tinyText" x="437" y="132" text-anchor="middle">nontrivial Lambda subset Pi_G^tp</text>
+            <text class="tinyText" x="437" y="150" text-anchor="middle">lies in a verticial subgroup</text>
+
+            <rect class="nodeBox gold" x="616" y="78" width="214" height="92"></rect>
+            <text class="nodeTitle" x="723" y="108" text-anchor="middle">profinite conjugator</text>
+            <text class="tinyText" x="723" y="132" text-anchor="middle">gamma Lambda gamma^-1</text>
+            <text class="tinyText" x="723" y="150" text-anchor="middle">again lies in Pi_G^tp</text>
+
+            <rect class="nodeBox red" x="902" y="78" width="174" height="92"></rect>
+            <text class="nodeTitle" x="989" y="108" text-anchor="middle">conclusion</text>
+            <text class="tinyText" x="989" y="132" text-anchor="middle">gamma in Pi_G^tp</text>
+            <text class="tinyText" x="989" y="150" text-anchor="middle">Prop. 2.1</text>
+
+            <path class="edge blue" d="M258 124 H328" marker-end="url(#arrowTempTerminality)"></path>
+            <path class="edge green" d="M544 124 H614" marker-end="url(#arrowTempTerminality)"></path>
+            <path class="edge gold" d="M830 124 H900" marker-end="url(#arrowTempTerminality)"></path>
+
+            <rect class="nodeBox violet" x="118" y="296" width="250" height="86"></rect>
+            <text class="nodeTitle" x="243" y="326" text-anchor="middle">tempered vertices</text>
+            <text class="tinyText" x="243" y="350" text-anchor="middle">universal tempered graph maps</text>
+            <text class="tinyText" x="243" y="368" text-anchor="middle">densely to universal pro-Sigma graph</text>
+
+            <rect class="nodeBox blue" x="436" y="296" width="250" height="86"></rect>
+            <text class="nodeTitle" x="561" y="326" text-anchor="middle">adjacency test</text>
+            <text class="tinyText" x="561" y="350" text-anchor="middle">intersecting verticial subgroups</text>
+            <text class="tinyText" x="561" y="368" text-anchor="middle">force equal/adjacent vertices</text>
+
+            <rect class="nodeBox green" x="754" y="296" width="250" height="86"></rect>
+            <text class="nodeTitle" x="879" y="326" text-anchor="middle">commensurators collapse</text>
+            <text class="tinyText" x="879" y="350" text-anchor="middle">C(Pi_H^tp) = Pi_H^tp</text>
+            <text class="tinyText" x="879" y="368" text-anchor="middle">Prop. 2.2</text>
+
+            <path class="edge red" d="M989 171 C968 238 318 236 252 294" marker-end="url(#arrowTempTerminality)"></path>
+            <path class="edge blue" d="M368 339 H434" marker-end="url(#arrowTempTerminality)"></path>
+            <path class="edge green" d="M686 339 H752" marker-end="url(#arrowTempTerminality)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source item</th><th>Precise role</th><th>Do not weaken to</th></tr>
+          <tr>
+            <td>Setup before Proposition 2.1</td>
+            <td>
+              The tempered fundamental group <span class="math">Pi_G^tp</span> is
+              regarded as a subgroup of its pro-<span class="math">Sigma</span>
+              completion <span class="math">Pi_G</span>. For a connected
+              sub-semi-graph <span class="math">H</span>, the groups
+              <span class="math">Pi_H^tp</span> and <span class="math">Pi_H</span>
+              are decomposition subgroups, well-defined up to conjugacy.
+            </td>
+            <td>
+              A mere label saying “the subgroup associated to H exists.” The ambient
+              inclusions and completions are part of the statement.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 2.1</td>
+            <td>
+              If <span class="math">Lambda</span> is a nontrivial compact subgroup of
+              <span class="math">Pi_G^tp</span>, <span class="math">gamma in Pi_G</span>,
+              and <span class="math">gamma Lambda gamma^-1 subset Pi_G^tp</span>, then
+              <span class="math">gamma in Pi_G^tp</span>.
+            </td>
+            <td>
+              A general claim that all profinite conjugators are tempered. The compact
+              subgroup hypothesis is the detector.
+            </td>
+          </tr>
+          <tr>
+            <td>Proof of Proposition 2.1</td>
+            <td>
+              The proof passes through universal tempered and pro-<span class="math">Sigma</span>
+              semi-graphs. Compact subgroups lie in verticial subgroups; the nontrivial
+              intersection after conjugation forces the corresponding vertices to be
+              equal or adjacent; temperedness of the conjugated vertex forces the
+              conjugator to be tempered.
+            </td>
+            <td>
+              A black-box conjugacy principle detached from graph vertices and
+              adjacency.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 2.2</td>
+            <td>
+              <span class="math">Pi_H</span> and <span class="math">Pi_H^tp</span> are
+              commensurably terminal in the corresponding ambient groups, and
+              <span class="math">Pi_G^tp</span> is commensurably terminal in
+              <span class="math">Pi_G</span>.
+            </td>
+            <td>
+              Normalizer control only. The source statement is commensurator control,
+              hence stronger in the intended subgroup boundary sense.
+            </td>
+          </tr>
+          <tr>
+            <td>Remarks 2.2.1-2.2.2</td>
+            <td>
+              Mochizuki records generality beyond the displayed PSC-type case and notes
+              that, for all primes, the proof gives an alternative route to normal
+              terminality of finitely generated free groups in their profinite
+              completions.
+            </td>
+            <td>
+              Treating Section 2 as a disposable side lemma. It is a reusable rigidity
+              mechanism behind later arithmetic recognition.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="tempered-vertex-detector">
+            <h3>Tempered vertex detector</h3>
+            <p>
+              The source proof detects whether a pro-<span class="math">Sigma</span>
+              vertex is tempered by comparing it with images of vertices from the
+              universal tempered covering. This is the geometric content behind the
+              compact-subgroup test.
+            </p>
+            <div class="tagRow"><span class="tag green">Prop. 2.1 proof</span><span class="tag">vertices</span></div>
+          </div>
+          <div class="card" id="nontrivial-compact-subgroup-test">
+            <h3>Nontrivial compact subgroup test</h3>
+            <p>
+              The subgroup <span class="math">Lambda</span> must be nontrivial and
+              compact. This lets the proof place both <span class="math">Lambda</span>
+              and its conjugate inside verticial subgroups before invoking the
+              equal-or-adjacent vertex criterion.
+            </p>
+            <div class="tagRow"><span class="tag blue">Prop. 2.1</span><span class="tag">compactness</span></div>
+          </div>
+          <div class="card" id="commensurator-chain-collapse">
+            <h3>Commensurator chain collapse</h3>
+            <p>
+              Proposition 2.2 uses Proposition 2.1 over open subgroups of verticial
+              subgroups, then combines the resulting terminality with the pro-
+              <span class="math">Sigma</span> analogue of the subgroup equality
+              <span class="math">C(Pi_H)=Pi_H</span>.
+            </p>
+            <div class="tagRow"><span class="tag violet">Prop. 2.2</span><span class="tag">commensurator</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, §2, Propositions 2.1-2.2</a>
+          Related: <a href="#tempered-covering-complements">tempered covering complements</a>
+          <a href="#iut-i-subsemigraph-arithmetic-subgroups-23">subgraph arithmetic groups 2.3</a>
+          <a href="#iut-i-arithmetic-tempered-recognition-24-25">arithmetic recognition 2.4-2.5</a>
+        </div>
+      </section>
+
+      <section id="iut-i-subsemigraph-arithmetic-subgroups-23">
+        <h2>IUT I Corollary 2.3: Sub-Semi-Graph Arithmetic Subgroups</h2>
+        <p class="lede">
+          Corollary 2.3 transports the Section 2 terminality mechanism from an abstract
+          semi-graph of anabelioids to the tempered and profinite fundamental groups of
+          a hyperbolic curve over a mixed-characteristic local field. It is the page
+          where a connected sub-semi-graph <span class="math">H</span> becomes the
+          arithmetic subgroup data used by later local reconstruction.
+        </p>
+        <div class="diagram fit" aria-label="Corollary 2.3 arithmetic subgroup package">
+          <div class="diagramHeader">
+            <strong>Sub-semi-graph H as an arithmetic subgroup interface</strong>
+            <span>IUT I, Corollary 2.3</span>
+          </div>
+          <svg viewBox="0 0 1120 520" role="img">
+            <defs>
+              <marker id="arrowSubgraph23" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="58" y="68" width="230" height="92"></rect>
+            <text class="nodeTitle" x="173" y="98" text-anchor="middle">stable curve X/k</text>
+            <text class="tinyText" x="173" y="122" text-anchor="middle">MLF, p not in Sigma</text>
+            <text class="tinyText" x="173" y="140" text-anchor="middle">stable special fiber graph G</text>
+
+            <rect class="nodeBox green" x="374" y="68" width="230" height="92"></rect>
+            <text class="nodeTitle" x="489" y="98" text-anchor="middle">G_k-stable H subset G</text>
+            <text class="tinyText" x="489" y="122" text-anchor="middle">connected sub-semi-graph</text>
+            <text class="tinyText" x="489" y="140" text-anchor="middle">Pi_H^tp and Pi_H</text>
+
+            <rect class="nodeBox gold" x="690" y="68" width="258" height="92"></rect>
+            <text class="nodeTitle" x="819" y="98" text-anchor="middle">fiber-product subgroups</text>
+            <text class="tinyText" x="819" y="122" text-anchor="middle">Delta_X,H^tp = Delta_X^tp x Pi_H^tp</text>
+            <text class="tinyText" x="819" y="140" text-anchor="middle">Delta_X,H = Delta_X x Pi_H</text>
+
+            <path class="edge blue" d="M288 114 H372" marker-end="url(#arrowSubgraph23)"></path>
+            <path class="edge green" d="M604 114 H688" marker-end="url(#arrowSubgraph23)"></path>
+
+            <rect class="nodeBox violet" x="92" y="288" width="216" height="90"></rect>
+            <text class="nodeTitle" x="200" y="318" text-anchor="middle">terminality</text>
+            <text class="tinyText" x="200" y="342" text-anchor="middle">closed subgroups are</text>
+            <text class="tinyText" x="200" y="360" text-anchor="middle">commensurably terminal</text>
+
+            <rect class="nodeBox blue" x="360" y="288" width="216" height="90"></rect>
+            <text class="nodeTitle" x="468" y="318" text-anchor="middle">closure/intersection</text>
+            <text class="tinyText" x="468" y="342" text-anchor="middle">closure of tempered equals</text>
+            <text class="tinyText" x="468" y="360" text-anchor="middle">pro-Sigma subgroup</text>
+
+            <rect class="nodeBox green" x="628" y="288" width="216" height="90"></rect>
+            <text class="nodeTitle" x="736" y="318" text-anchor="middle">exact sequences</text>
+            <text class="tinyText" x="736" y="342" text-anchor="middle">center-free groups over G_k</text>
+            <text class="tinyText" x="736" y="360" text-anchor="middle">under slimness hypotheses</text>
+
+            <rect class="nodeBox red" x="896" y="288" width="178" height="90"></rect>
+            <text class="nodeTitle" x="985" y="318" text-anchor="middle">cusp incidence</text>
+            <text class="tinyText" x="985" y="342" text-anchor="middle">inertia in subgroup iff</text>
+            <text class="tinyText" x="985" y="360" text-anchor="middle">cusp meets H-component</text>
+
+            <path class="edge gold" d="M819 161 C774 226 260 226 206 286" marker-end="url(#arrowSubgraph23)"></path>
+            <path class="edge gold" d="M819 161 C792 228 518 228 474 286" marker-end="url(#arrowSubgraph23)"></path>
+            <path class="edge gold" d="M819 161 C820 226 746 238 740 286" marker-end="url(#arrowSubgraph23)"></path>
+            <path class="edge gold" d="M819 161 C856 226 954 238 982 286" marker-end="url(#arrowSubgraph23)"></path>
+
+            <text class="tinyText" x="560" y="452" text-anchor="middle">
+              Corollary 2.3 is the passage from graph-level decomposition groups to arithmetic curve-level subgroups.
+            </text>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Assertion</th><th>Content</th><th>Later use</th></tr>
+          <tr>
+            <td>Definitions in the statement</td>
+            <td>
+              <span class="math">Delta_X,H^tp</span> and
+              <span class="math">Delta_X,H</span> are fiber products over
+              <span class="math">Pi_G^tp</span> and <span class="math">Pi_G</span>.
+              They encode the subgroup of the curve fundamental group selected by
+              <span class="math">H</span>.
+            </td>
+            <td>
+              Later “selected component” statements should point to these fiber-product
+              subgroups, not to an informal subgraph label.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.3(i)-(ii)</td>
+            <td>
+              The closed subgroups are commensurably terminal, the
+              <span class="math">G_k</span> outer action restricts to them, and the
+              closure of the tempered subgroup inside the pro-<span class="math">Sigma</span>
+              group is the pro-<span class="math">Sigma</span> subgroup.
+            </td>
+            <td>
+              This is the exact point where graph terminality becomes arithmetic
+              subgroup terminality.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.3(iii)-(iv)</td>
+            <td>
+              Under either the auxiliary-prime hypothesis or the all-primes hypothesis,
+              <span class="math">Delta_X,H</span> is slim. This yields exact sequences
+              over <span class="math">G_k</span> and commensurable terminality of the
+              corresponding arithmetic images.
+            </td>
+            <td>
+              The hypotheses are part of the theorem. A formal interface must carry
+              which slimness route is being used.
+            </td>
+          </tr>
+          <tr>
+            <td>Proof of slimness</td>
+            <td>
+              Mochizuki gives two routes: an elementary route using a prime
+              <span class="math">l</span> outside the relevant sets, and a route using
+              Tama's theorem in the all-primes case. Both establish an infinite
+              nonabelian intersection condition for vertex and selected-subgraph data.
+            </td>
+            <td>
+              This is not a cosmetic proof detail; it is what makes center-free exact
+              sequences available.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.3(v)-(vi)</td>
+            <td>
+              The tempered/profinite intersection behaves as expected, and cusp inertia
+              lies in a conjugate of the selected subgroup exactly when the corresponding
+              stable-model cusp meets a component contained in <span class="math">H</span>.
+            </td>
+            <td>
+              The cusp-incidence test is the IUT-relevant recognizer: it turns geometric
+              component incidence into group-theoretic membership.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="corollary-23-fiber-product-subgroups">
+            <h3>Fiber-product subgroups</h3>
+            <p>
+              The source defines <span class="math">Delta_X,H^tp</span> and
+              <span class="math">Delta_X,H</span> by pulling back the graph subgroup
+              data along <span class="math">Delta_X^tp -> Pi_G^tp</span> and
+              <span class="math">Delta_X -> Pi_G</span>. This is the clean model for
+              a future Lean record.
+            </p>
+            <div class="tagRow"><span class="tag blue">Cor. 2.3</span><span class="tag">fiber product</span></div>
+          </div>
+          <div class="card" id="corollary-23-slimness-routes">
+            <h3>Slimness routes</h3>
+            <p>
+              The two proof routes for slimness should remain distinguishable:
+              auxiliary-prime arguments and the all-primes argument using Tama's theorem
+              have different dependencies.
+            </p>
+            <div class="tagRow"><span class="tag gold">Cor. 2.3(iii)</span><span class="tag">slim</span></div>
+          </div>
+          <div class="card" id="corollary-23-cusp-incidence">
+            <h3>Cusp incidence</h3>
+            <p>
+              Assertion (vi) is the operational recognizer. A cusp inertia subgroup is
+              in the selected subgroup precisely when the stable-model cusp meets an
+              irreducible component contained in <span class="math">H</span>.
+            </p>
+            <div class="tagRow"><span class="tag green">Cor. 2.3(vi)</span><span class="tag">inertia</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, §2, Corollary 2.3</a>
+          Related: <a href="#iut-i-tempered-terminality-21-22">tempered terminality 2.1-2.2</a>
+          <a href="#iut-i-arithmetic-tempered-recognition-24-25">arithmetic recognition 2.4-2.5</a>
+          <a href="#cyclic-cover-reconstruction">cyclic cover reconstruction</a>
+        </div>
+      </section>
+
+      <section id="iut-i-arithmetic-tempered-recognition-24-25">
+        <h2>IUT I Proposition 2.4 and Corollary 2.5: Arithmetic Tempered Recognition</h2>
+        <p class="lede">
+          Proposition 2.4 is the arithmetic analogue of the compact-subgroup rigidity
+          lemma. Corollary 2.5 then identifies exactly when profinite decomposition and
+          inertia groups associated to points or cusps are already tempered. Mochizuki
+          explicitly notes in Remark 2.5.2 that later IUT applications only need the
+          cusp-inertia part, which uses Proposition 2.4(i).
+        </p>
+        <div class="diagram fit" aria-label="Arithmetic tempered recognition route">
+          <div class="diagramHeader">
+            <strong>Arithmetic analogue and cusp-inertia recognition</strong>
+            <span>IUT I, Proposition 2.4 and Corollary 2.5</span>
+          </div>
+          <svg viewBox="0 0 1120 500" role="img">
+            <defs>
+              <marker id="arrowArithmeticRecognition" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="58" y="78" width="222" height="86"></rect>
+            <text class="nodeTitle" x="169" y="108" text-anchor="middle">Delta_X^tp in Delta_X</text>
+            <text class="tinyText" x="169" y="132" text-anchor="middle">geometric tempered group</text>
+            <text class="tinyText" x="169" y="150" text-anchor="middle">inside pro-Sigma completion</text>
+
+            <rect class="nodeBox green" x="344" y="78" width="222" height="86"></rect>
+            <text class="nodeTitle" x="455" y="108" text-anchor="middle">nontrivial pro-Sigma compact</text>
+            <text class="tinyText" x="455" y="132" text-anchor="middle">Lambda subset Delta_X^tp</text>
+            <text class="tinyText" x="455" y="150" text-anchor="middle">Prop. 2.4(i)</text>
+
+            <rect class="nodeBox gold" x="630" y="78" width="222" height="86"></rect>
+            <text class="nodeTitle" x="741" y="108" text-anchor="middle">conjugate lands back</text>
+            <text class="tinyText" x="741" y="132" text-anchor="middle">gamma Lambda gamma^-1</text>
+            <text class="tinyText" x="741" y="150" text-anchor="middle">inside Delta_X^tp</text>
+
+            <rect class="nodeBox red" x="916" y="78" width="154" height="86"></rect>
+            <text class="nodeTitle" x="993" y="108" text-anchor="middle">gamma tempered</text>
+            <text class="tinyText" x="993" y="132" text-anchor="middle">gamma in Pi_X^tp</text>
+            <text class="tinyText" x="993" y="150" text-anchor="middle">Prop. 2.4</text>
+
+            <path class="edge blue" d="M280 121 H342" marker-end="url(#arrowArithmeticRecognition)"></path>
+            <path class="edge green" d="M566 121 H628" marker-end="url(#arrowArithmeticRecognition)"></path>
+            <path class="edge gold" d="M852 121 H914" marker-end="url(#arrowArithmeticRecognition)"></path>
+
+            <rect class="nodeBox violet" x="104" y="286" width="236" height="92"></rect>
+            <text class="nodeTitle" x="222" y="316" text-anchor="middle">decomposition groups</text>
+            <text class="tinyText" x="222" y="340" text-anchor="middle">closed point or cusp</text>
+            <text class="tinyText" x="222" y="358" text-anchor="middle">use Prop. 2.4(ii)</text>
+
+            <rect class="nodeBox green" x="442" y="286" width="236" height="92"></rect>
+            <text class="nodeTitle" x="560" y="316" text-anchor="middle">cusp inertia groups</text>
+            <text class="tinyText" x="560" y="340" text-anchor="middle">unique maximal pro-Sigma part</text>
+            <text class="tinyText" x="560" y="358" text-anchor="middle">uses Prop. 2.4(i)</text>
+
+            <rect class="nodeBox blue" x="780" y="286" width="236" height="92"></rect>
+            <text class="nodeTitle" x="898" y="316" text-anchor="middle">Corollary 2.5</text>
+            <text class="tinyText" x="898" y="340" text-anchor="middle">contained in Pi_X^tp iff</text>
+            <text class="tinyText" x="898" y="358" text-anchor="middle">it is a tempered group</text>
+
+            <path class="edge red" d="M993 165 C958 236 292 228 232 284" marker-end="url(#arrowArithmeticRecognition)"></path>
+            <path class="edge red" d="M993 165 C944 234 608 228 568 284" marker-end="url(#arrowArithmeticRecognition)"></path>
+            <path class="edge green" d="M678 332 H778" marker-end="url(#arrowArithmeticRecognition)"></path>
+            <path class="edge violet" d="M340 332 H442" marker-end="url(#arrowArithmeticRecognition)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source item</th><th>Statement</th><th>Formalization checkpoint</th></tr>
+          <tr>
+            <td>Proposition 2.4(i)</td>
+            <td>
+              A profinite conjugator in <span class="math">Pi_X</span> that sends a
+              nontrivial pro-<span class="math">Sigma</span> compact subgroup of
+              <span class="math">Delta_X^tp</span> back into
+              <span class="math">Delta_X^tp</span> lies in
+              <span class="math">Pi_X^tp</span>.
+            </td>
+            <td>
+              This is the route used for cusp inertia in later IUT applications.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 2.4(ii)</td>
+            <td>
+              When <span class="math">Sigma</span> is the set of all primes, the same
+              conclusion holds for compact subgroups of
+              <span class="math">Pi_X^tp</span> whose image in
+              <span class="math">G_k</span> is open.
+            </td>
+            <td>
+              This part is used for decomposition groups in Corollary 2.5, but Mochizuki
+              says later IUT use does not require it.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 2.4(iii)</td>
+            <td>
+              <span class="math">Delta_X^tp</span> and
+              <span class="math">Pi_X^tp</span> are commensurably terminal in their
+              profinite counterparts.
+            </td>
+            <td>
+              This is the arithmetic terminality output of the proposition.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.5</td>
+            <td>
+              For all primes, a profinite decomposition or inertia group is contained in
+              <span class="math">Pi_X^tp</span> exactly when it is the corresponding
+              tempered decomposition or inertia group. A profinite conjugate of
+              <span class="math">Pi_X^tp</span> containing such a group must equal
+              <span class="math">Pi_X^tp</span>.
+            </td>
+            <td>
+              The result is a recognition theorem, not merely an existence statement for
+              decomposition or inertia groups.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 2.5.2</td>
+            <td>
+              Later IUT papers only apply the cusp-inertia portion of Corollary 2.5,
+              whose proof uses Proposition 2.4(i), essentially as a formal consequence
+              of Proposition 2.1.
+            </td>
+            <td>
+              This narrows the formalization priority: cusp inertia should be modeled
+              before the full closed-point decomposition statement.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="arithmetic-analogue-proposition-24">
+            <h3>Arithmetic analogue</h3>
+            <p>
+              Proposition 2.4 repeats the compact-subgroup conjugacy test inside the
+              arithmetic curve setting, using characteristic open subgroups and stable
+              model special fibers to reduce back to Proposition 2.1.
+            </p>
+            <div class="tagRow"><span class="tag blue">Prop. 2.4</span><span class="tag">arithmetic</span></div>
+          </div>
+          <div class="card" id="cusp-inertia-priority-252">
+            <h3>Cusp-inertia priority</h3>
+            <p>
+              Remark 2.5.2 is a useful implementation guide: the IUT series later needs
+              the cusp-inertia part, and that part avoids the more elaborate open-image
+              argument of Proposition 2.4(ii).
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 2.5.2</span><span class="tag">IUT use</span></div>
+          </div>
+          <div class="card" id="weak-section-conjecture-reading">
+            <h3>Weak section-conjecture reading</h3>
+            <p>
+              Remark 2.5.1 describes Corollary 2.5 as a very weak section-conjecture
+              type statement: certain sections visible profinitely are geometric in the
+              tempered setting.
+            </p>
+            <div class="tagRow"><span class="tag violet">Remark 2.5.1</span><span class="tag">anabelian</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, §2, Proposition 2.4 and Corollary 2.5</a>
+          Related: <a href="#iut-i-tempered-terminality-21-22">tempered terminality</a>
+          <a href="#iut-i-subsemigraph-arithmetic-subgroups-23">subgraph arithmetic groups</a>
+          <a href="#galois-countability-repairs">Galois-countability repairs</a>
+        </div>
+      </section>
+
+      <section id="iut-i-discrete-topological-analogue-26-28">
+        <h2>IUT I Theorem 2.6-Lemma 2.7-Corollary 2.8: Discrete and Topological Analogues</h2>
+        <p class="lede">
+          The final part of IUT I Section 2 records a classical group-theoretic analogue
+          of the tempered recognition statements. It is not a replacement for the
+          arithmetic theorem, but it explains the shape of the conjugator conclusion in
+          terms of virtually free groups, orientable surface groups, and topological
+          fundamental groups of complex hyperbolic curves.
+        </p>
+        <div class="diagram fit" aria-label="Discrete analogue of tempered recognition">
+          <div class="diagramHeader">
+            <strong>Classical shadow of the tempered conjugator theorem</strong>
+            <span>IUT I, Theorem 2.6 through Corollary 2.8</span>
+          </div>
+          <svg viewBox="0 0 1120 470" role="img">
+            <defs>
+              <marker id="arrowDiscreteAnalog" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="64" y="76" width="236" height="92"></rect>
+            <text class="nodeTitle" x="182" y="106" text-anchor="middle">F virtually G</text>
+            <text class="tinyText" x="182" y="130" text-anchor="middle">G free finite rank or</text>
+            <text class="tinyText" x="182" y="148" text-anchor="middle">orientable surface group</text>
+
+            <rect class="nodeBox green" x="386" y="76" width="236" height="92"></rect>
+            <text class="nodeTitle" x="504" y="106" text-anchor="middle">infinite subgroup H</text>
+            <text class="tinyText" x="504" y="130" text-anchor="middle">H_G = H cap G</text>
+            <text class="tinyText" x="504" y="148" text-anchor="middle">inside profinite completion</text>
+
+            <rect class="nodeBox gold" x="708" y="76" width="236" height="92"></rect>
+            <text class="nodeTitle" x="826" y="106" text-anchor="middle">profinite conjugator</text>
+            <text class="tinyText" x="826" y="130" text-anchor="middle">gamma H gamma^-1 subset F</text>
+            <text class="tinyText" x="826" y="148" text-anchor="middle">Theorem 2.6 hypothesis</text>
+
+            <path class="edge blue" d="M300 122 H384" marker-end="url(#arrowDiscreteAnalog)"></path>
+            <path class="edge green" d="M622 122 H706" marker-end="url(#arrowDiscreteAnalog)"></path>
+
+            <rect class="nodeBox violet" x="160" y="286" width="240" height="90"></rect>
+            <text class="nodeTitle" x="280" y="316" text-anchor="middle">abelian H_G</text>
+            <text class="tinyText" x="280" y="340" text-anchor="middle">cyclic; conclusion modulo</text>
+            <text class="tinyText" x="280" y="358" text-anchor="middle">normalizer of H_G</text>
+
+            <rect class="nodeBox red" x="460" y="286" width="240" height="90"></rect>
+            <text class="nodeTitle" x="580" y="316" text-anchor="middle">nonabelian H_G</text>
+            <text class="tinyText" x="580" y="340" text-anchor="middle">rank-two abelianization test</text>
+            <text class="tinyText" x="580" y="358" text-anchor="middle">forces gamma in F</text>
+
+            <rect class="nodeBox blue" x="760" y="286" width="214" height="90"></rect>
+            <text class="nodeTitle" x="867" y="316" text-anchor="middle">complex curve Z</text>
+            <text class="tinyText" x="867" y="340" text-anchor="middle">topological fundamental group</text>
+            <text class="tinyText" x="867" y="358" text-anchor="middle">Corollary 2.8</text>
+
+            <path class="edge gold" d="M826 169 C792 230 356 226 286 284" marker-end="url(#arrowDiscreteAnalog)"></path>
+            <path class="edge gold" d="M826 169 C790 230 626 230 588 284" marker-end="url(#arrowDiscreteAnalog)"></path>
+            <path class="edge red" d="M700 331 H758" marker-end="url(#arrowDiscreteAnalog)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Item</th><th>Content</th><th>Why it is included</th></tr>
+          <tr>
+            <td>Theorem 2.6</td>
+            <td>
+              For <span class="math">F</span> containing a finite-index free or
+              orientable-surface subgroup <span class="math">G</span>, an element of
+              the profinite completion that conjugates an infinite subgroup
+              <span class="math">H</span> back into <span class="math">F</span> lies in
+              <span class="math">F . N(H_G)</span>. If
+              <span class="math">H_G</span> is nonabelian, it lies in
+              <span class="math">F</span>.
+            </td>
+            <td>
+              This is the classical analogue of the tempered conjugator theorem.
+            </td>
+          </tr>
+          <tr>
+            <td>Abelian case</td>
+            <td>
+              If <span class="math">H_G</span> is abelian, Lemma 2.7 makes it cyclic
+              and a normalizer term remains. Remark 2.6.1 stresses that the stronger
+              tempered-style equality need not hold here.
+            </td>
+            <td>
+              Prevents importing a stronger conclusion into the discrete analogue.
+            </td>
+          </tr>
+          <tr>
+            <td>Nonabelian case</td>
+            <td>
+              Lemma 2.7 supplies finite-index subgroups and powers whose images generate
+              a rank-two free abelian subgroup in abelianization; comparing the two
+              cyclic normalizers forces the conjugator into the discrete group.
+            </td>
+            <td>
+              Explains why nonabelianity removes the normalizer ambiguity.
+            </td>
+          </tr>
+          <tr>
+            <td>Lemma 2.7</td>
+            <td>
+              The lemma records subgroup freeness, residual-finite separation into
+              abelianizations, cyclicity of abelian subgroups, normal terminality of
+              suitable procyclic closed subgroups, and triviality of certain profinite
+              centralizers.
+            </td>
+            <td>
+              These are the discrete ingredients replacing the graph-of-anabelioids
+              machinery used in Propositions 2.1 and 2.4.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.8</td>
+            <td>
+              For a complex hyperbolic curve, the same conclusion applies to the usual
+              topological fundamental group inside its profinite completion; Mochizuki
+              notes that the IUT series only needs the non-proper cusp-inertia case.
+            </td>
+            <td>
+              Gives the topological-curve form of the Section 2 analogy.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="theorem-26-normalizer-ambiguity">
+            <h3>Normalizer ambiguity</h3>
+            <p>
+              Theorem 2.6 gives <span class="math">gamma in F . N(H_G)</span> in
+              general. Only under nonabelianity of <span class="math">H_G</span> does
+              the normalizer ambiguity disappear.
+            </p>
+            <div class="tagRow"><span class="tag gold">Theorem 2.6</span><span class="tag">normalizer</span></div>
+          </div>
+          <div class="card" id="lemma-27-abelianization-toolkit">
+            <h3>Abelianization toolkit</h3>
+            <p>
+              Lemma 2.7 packages the finite-index and abelianization facts needed to
+              distinguish cyclic from nonabelian behavior in free and surface groups.
+            </p>
+            <div class="tagRow"><span class="tag green">Lemma 2.7</span><span class="tag">free/surface groups</span></div>
+          </div>
+          <div class="card" id="corollary-28-topological-curve-form">
+            <h3>Topological curve form</h3>
+            <p>
+              Corollary 2.8 translates the discrete theorem to complex hyperbolic
+              curves. The wiki keeps it separate from the arithmetic theorem because
+              its conclusion and hypotheses are not identical to the tempered setting.
+            </p>
+            <div class="tagRow"><span class="tag blue">Corollary 2.8</span><span class="tag">complex curves</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, §2, Theorem 2.6-Lemma 2.7-Corollary 2.8</a>
+          Related: <a href="#iut-i-arithmetic-tempered-recognition-24-25">arithmetic tempered recognition</a>
+          <a href="#galois-theoretic-context">Galois-theoretic context</a>
+          <a href="#anabelian-background">anabelian background</a>
         </div>
       </section>
 
