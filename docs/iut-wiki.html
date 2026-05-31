@@ -768,6 +768,12 @@
         <a href="#thetaell-model-iut-i63">Thetaell model 6.3</a>
         <a href="#thetaell-equivariance-iut-i63">Thetaell equivariance 6.3</a>
         <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base 6.4-6.6</a>
+        <a href="#d-theta-pm-bridge-iut-i64">D-Theta± bridge 6.4</a>
+        <a href="#d-thetaell-bridge-iut-i64">D-Thetaell bridge 6.4</a>
+        <a href="#d-theta-pmell-theater-iut-i64">D-Theta±ell theater 6.4</a>
+        <a href="#pm-label-transport-iut-i65">± label transport 6.5</a>
+        <a href="#pmell-isomorphism-torsors-iut-i66">Additive isomorphism torsors 6.6</a>
+        <a href="#pmell-gluing-algorithm-iut-i66">Additive gluing algorithm 6.6</a>
         <a href="#additive-to-multiplicative-67-610">Additive to D-Theta 6.7-6.10</a>
         <a href="#multiplicative-additive-bridges">Multiplicative/additive bridges</a>
         <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
@@ -20220,6 +20226,217 @@
           <a href="#model-theta-plus-minus-62-63">model bridges</a>
           <a href="#additive-to-multiplicative-67-610">additive to D-Theta</a>
           <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges 6.11</a>
+        </div>
+      </section>
+
+      <section id="d-theta-pm-bridge-iut-i64">
+        <h2>D-Theta± Bridge in IUT I 6.4</h2>
+        <p class="lede">
+          Definition 6.4(i) promotes the model of Example 6.2 to an abstract
+          D-Theta± bridge. The index set <span class="math">T</span> is an
+          <span class="math">F_l^±</span>-group, the capsule
+          <span class="math">D_T = {D_t}_{t in T}</span> is mapped to a
+          D-prime-strip <span class="math">D≻</span>, and the model comparison is
+          required to identify the index sets as <span class="math">F_l^±</span>-groups.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Definition 6.4(i)</th><th>Data</th><th>Consequence</th></tr>
+          <tr>
+            <td>Bridge map</td>
+            <td><span class="math">phi^{Theta±}_± : D_T -> D≻</span>.</td>
+            <td>The bridge target is the additive Theta± D-prime-strip target.</td>
+          </tr>
+          <tr>
+            <td>Quotient capsule</td>
+            <td><span class="math">|T| = T/{±1}</span> gives an <span class="math">l±</span>-capsule, and the nonzero part gives the later <span class="math">l⋇</span>-capsule.</td>
+            <td>The zero/nonzero split is built into the bridge, not added later.</td>
+          </tr>
+          <tr>
+            <td>Morphisms</td>
+            <td>Capsule-+-full poly-isomorphisms whose index maps are <span class="math">F_l^±</span>-group isomorphisms.</td>
+            <td>Signed additive structure controls bridge isomorphisms.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 6.4(i)</a>
+          Related: <a href="#theta-pm-model-iut-i62">Theta± model</a>
+          <a href="#positive-full-polyisom-iut-i61">+-full poly-isomorphisms</a>
+          <a href="#d-theta-pmell-theater-iut-i64">D-Theta±ell theater</a>
+        </div>
+      </section>
+
+      <section id="d-thetaell-bridge-iut-i64">
+        <h2>D-Thetaell Bridge in IUT I 6.4</h2>
+        <p class="lede">
+          Definition 6.4(ii) promotes the model of Example 6.3 to an abstract
+          D-Thetaell bridge. The same capsule type is now indexed by an
+          <span class="math">F_l^±</span>-torsor, and the target is a category
+          equivalent to <span class="math">D ±</span>. Target morphisms are taken up
+          to the <span class="math">Aut_csp(D ±)</span>-orbit of isomorphisms.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Torsor index</h3>
+            <p>The index set <span class="math">T</span> is an <span class="math">F_l^±</span>-torsor, not merely an additive group.</p>
+            <div class="tagRow"><span class="tag blue">Def. 6.4(ii)</span><span class="tag">torsor</span></div>
+          </div>
+          <div class="card">
+            <h3>Global target</h3>
+            <p>The target <span class="math">D ±</span> is a copy of the global elliptic double-cover category.</p>
+            <div class="tagRow"><span class="tag gold">D±</span><span class="tag">global</span></div>
+          </div>
+          <div class="card">
+            <h3>Morphisms</h3>
+            <p>The target arrow is an <span class="math">Aut_csp</span>-orbit, reflecting the cusp-fixing indeterminacy.</p>
+            <div class="tagRow"><span class="tag red">Aut_csp</span><span class="tag">orbit</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 6.4(ii)</a>
+          Related: <a href="#thetaell-model-iut-i63">Thetaell model</a>
+          <a href="#global-dpm-cover-iut-i61">global D± cover</a>
+          <a href="#d-theta-pmell-theater-iut-i64">D-Theta±ell theater</a>
+        </div>
+      </section>
+
+      <section id="d-theta-pmell-theater-iut-i64">
+        <h2>D-Theta±ell Theater in IUT I 6.4</h2>
+        <p class="lede">
+          Definition 6.4(iii) glues a D-Theta± bridge and a D-Thetaell bridge over a
+          common capsule. The data have the span shape
+          <span class="math">D≻ <- D_T -> D ±</span>, where the
+          <span class="math">F_l^±</span>-group structure on <span class="math">T</span>
+          induces the torsor structure needed by the Thetaell side.
+        </p>
+        <div class="flowDiagram" aria-label="D-Theta plus-minus ell theater span">
+          <div class="flowStep">
+            <strong>1. Theta± side</strong>
+            <p><span class="math">D_T -> D≻</span> is a D-Theta± bridge with group-indexed capsule.</p>
+          </div>
+          <div class="flowStep">
+            <strong>2. Thetaell side</strong>
+            <p><span class="math">D_T -> D ±</span> is a D-Thetaell bridge using the induced torsor structure.</p>
+          </div>
+          <div class="flowStep">
+            <strong>3. Common capsule</strong>
+            <p>Morphisms are compatible only when both bridge sides induce the same capsule poly-isomorphism.</p>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 6.4(iii)</a>
+          Related: <a href="#d-theta-pm-bridge-iut-i64">D-Theta± bridge</a>
+          <a href="#d-thetaell-bridge-iut-i64">D-Thetaell bridge</a>
+          <a href="#pm-label-transport-iut-i65">± label transport</a>
+        </div>
+      </section>
+
+      <section id="pm-label-transport-iut-i65">
+        <h2>± Label Transport in IUT I 6.5</h2>
+        <p class="lede">
+          Proposition 6.5 is the intrinsic version of the model constructions in
+          Examples 6.2 and 6.3. A D-Theta±ell-Hodge theater supplies well-defined
+          bijections of <span class="math">LabCusp±</span> sets along both bridge
+          sides, compatible with the relevant <span class="math">F_l^±</span>-group
+          or torsor structures.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Part</th><th>Transport statement</th><th>Use</th></tr>
+          <tr>
+            <td>6.5(i)</td>
+            <td>The Thetaell side induces <span class="math">zeta^{Thetaell}_{v,t}</span> from local ± cusp labels to global <span class="math">LabCusp±(D ±)</span>.</td>
+            <td>Globalizes additive labels through the elliptic target.</td>
+          </tr>
+          <tr>
+            <td>6.5(ii)</td>
+            <td>The Theta± side induces <span class="math">zeta^{Theta±}_{v,t}</span> from local ± cusp labels to the <span class="math">D≻</span> target, with compatible identifications across valuations.</td>
+            <td>Synchronizes additive labels on the Theta± side.</td>
+          </tr>
+          <tr>
+            <td>6.5(iii)-(iv)</td>
+            <td>The assignment <span class="math">t -> zeta^{Thetaell}_t(0)</span> identifies <span class="math">T</span> with global ± cusp labels; post-composition by target automorphisms is tracked explicitly.</td>
+            <td>Records how changing the Thetaell target action changes the transported labels.</td>
+          </tr>
+        </table>
+        <div class="callout good">
+          Proposition 6.5 prevents treating the labels on the two bridge sides as
+          merely "the same names". Their equality is replaced by explicit transported
+          bijections.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Proposition 6.5</a>
+          Related: <a href="#d-theta-pmell-theater-iut-i64">D-Theta±ell theater</a>
+          <a href="#pm-cusp-labels-iut-i61">± cusp labels</a>
+          <a href="#additive-to-multiplicative-67-610">additive to multiplicative</a>
+        </div>
+      </section>
+
+      <section id="pmell-isomorphism-torsors-iut-i66">
+        <h2>Additive Isomorphism Torsors in IUT I 6.6</h2>
+        <p class="lede">
+          Proposition 6.6(i)-(iii) computes the torsors of isomorphisms for
+          D-Theta± bridges, D-Thetaell bridges, and D-Theta±ell-Hodge theaters.
+          These torsors are the additive analogue of the Section 4 bridge dynamics.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Torsor in Proposition 6.6</th><th>Interpretation</th></tr>
+          <tr>
+            <td>D-Theta± bridges</td>
+            <td><span class="math">{±1} x {±1}^V</span></td>
+            <td>Global label negation plus valuation-wise sign choices.</td>
+          </tr>
+          <tr>
+            <td>D-Thetaell bridges</td>
+            <td><span class="math">F_l^±</span>-torsor, up to the stated outer isomorphism.</td>
+            <td>Affine signed motion of the global elliptic target labels.</td>
+          </tr>
+          <tr>
+            <td>D-Theta±ell theaters</td>
+            <td><span class="math">{±1}</span>-torsor.</td>
+            <td>Compatibility of both bridge sides reduces the remaining theater isomorphism freedom.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Proposition 6.6(i)-(iii)</a>
+          Related: <a href="#theta-pm-sign-actions-iut-i62">Theta± sign actions</a>
+          <a href="#thetaell-equivariance-iut-i63">Thetaell equivariance</a>
+          <a href="#pmell-gluing-algorithm-iut-i66">gluing algorithm</a>
+        </div>
+      </section>
+
+      <section id="pmell-gluing-algorithm-iut-i66">
+        <h2>Additive Gluing Algorithm in IUT I 6.6</h2>
+        <p class="lede">
+          Proposition 6.6(iv)-(v) describes the gluing choices and construction
+          algorithm. Given a D-Theta± bridge and a D-Thetaell bridge, compatible
+          capsule-+-full poly-isomorphisms that glue them into a D-Theta±ell-Hodge
+          theater form a torsor over <span class="math">F_l^± x {±1}^V</span>. Given
+          a D-Thetaell bridge, there is a functorial construction of a D-Theta±ell
+          theater up to <span class="math">F_l^±</span>-indeterminacy.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Gluing choices</h3>
+            <p>
+              The group <span class="math">F_l^± x {±1}^V</span> combines the
+              Thetaell affine signed motion with the Theta± valuation-wise sign data.
+            </p>
+            <div class="tagRow"><span class="tag gold">6.6(iv)</span><span class="tag">gluing</span></div>
+          </div>
+          <div class="card">
+            <h3>Construction from Thetaell</h3>
+            <p>
+              The source records a relatively simple functorial algorithm constructing
+              a D-Theta±ell theater from a D-Thetaell bridge, up to
+              <span class="math">F_l^±</span>-indeterminacy.
+            </p>
+            <div class="tagRow"><span class="tag green">6.6(v)</span><span class="tag">algorithm</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Proposition 6.6(iv)-(v), Figure 6.1</a>
+          Related: <a href="#pmell-isomorphism-torsors-iut-i66">isomorphism torsors</a>
+          <a href="#d-theta-pmell-theater-iut-i64">D-Theta±ell theater</a>
+          <a href="#additive-to-multiplicative-67-610">additive to multiplicative</a>
         </div>
       </section>
 
