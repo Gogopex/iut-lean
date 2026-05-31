@@ -451,6 +451,7 @@
         <a href="#home">Home</a>
         <a href="#orientation">Orientation</a>
         <a href="#reading-map">Reading map</a>
+        <a href="#official-corpus">Official corpus</a>
         <a href="#iut-i-atlas">IUT I atlas</a>
         <a href="#iut-ii-atlas">IUT II atlas</a>
         <a href="#iut-iii-atlas">IUT III atlas</a>
@@ -695,6 +696,39 @@
             <text class="edgeLabel" x="558" y="191" text-anchor="middle">proof-critical corridor</text>
             <text class="edgeLabel" x="735" y="208" text-anchor="middle">numerical estimates</text>
           </svg>
+        </div>
+      </section>
+
+      <section id="official-corpus">
+        <h2>Official Mochizuki IUT Corpus</h2>
+        <p class="lede">
+          The local library includes the ten papers listed under the Inter-universal
+          Teichmuller Theory heading on Mochizuki's official papers page. The wiki treats
+          these as the primary source spine; auxiliary papers are used for orientation,
+          critique, formalization, and independent checks.
+        </p>
+        <table>
+          <tr><th>No.</th><th>Paper</th><th>Wiki role</th><th>Local source</th></tr>
+          <tr><td>1</td><td>IUT I: Construction of Hodge Theaters</td><td>Initial theta data, Frobenioids, theta-Hodge theaters, D-prime-strips.</td><td><a href="papers/mochizuki-iut-i.pdf" target="_blank">PDF</a></td></tr>
+          <tr><td>2</td><td>IUT II: Hodge-Arakelov-theoretic Evaluation</td><td>Theta evaluation, mono-theta environments, Gaussian monoids, theta links.</td><td><a href="papers/mochizuki-iut-ii.pdf" target="_blank">PDF</a></td></tr>
+          <tr><td>3</td><td>IUT III: Canonical Splittings of the Log-Theta-Lattice</td><td>Log-theta lattice, Theorem 3.11, indeterminacies, Corollary 3.12.</td><td><a href="papers/mochizuki-iut-iii.pdf" target="_blank">PDF</a></td></tr>
+          <tr><td>4</td><td>IUT IV: Log-Volume Computations and Set-Theoretic Foundations</td><td>Explicit log-volume estimates, Diophantine consequences, species/mutations.</td><td><a href="papers/mochizuki-iut-iv.pdf" target="_blank">PDF</a></td></tr>
+          <tr><td>5</td><td>Panoramic Overview of IUT</td><td>Conceptual orientation for alien copies and non-scheme-theoretic deformation.</td><td><a href="papers/mochizuki-panorama.pdf" target="_blank">PDF</a></td></tr>
+          <tr><td>6</td><td>Bogomolov's Szpiro Proof from the IUT Viewpoint</td><td>Comparison with the geometric Szpiro proof and the role of theta/Gaussian data.</td><td><a href="papers/mochizuki-bogomolov-szpiro.pdf" target="_blank">PDF</a></td></tr>
+          <tr><td>7</td><td>Mathematics of Mutually Alien Copies</td><td>Extended explanation of alien copies, Gaussian analogies, and comparison discipline.</td><td><a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">PDF</a></td></tr>
+          <tr><td>8</td><td>Explicit Estimates in IUT</td><td>Numerical effective estimates attached to the IUT IV output layer.</td><td><a href="papers/mochizuki-explicit-estimates.pdf" target="_blank">PDF</a></td></tr>
+          <tr><td>9</td><td>Essential Logical Structure of IUT</td><td>Logical decomposition of the proof and the AND/OR structure around the dispute.</td><td><a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">PDF</a></td></tr>
+          <tr><td>10</td><td>IUT as an Anabelian Gateway</td><td>Short report linking IUT to anabelian geometry and analytic number theory.</td><td><a href="papers/mochizuki-anabelian-gateway.pdf" target="_blank">PDF</a></td></tr>
+        </table>
+        <div class="callout good">
+          Coverage checkpoint: all ten official IUT-category Mochizuki PDFs are present
+          locally and linked from this wiki. The next expansion pass can therefore focus
+          on concept pages instead of source acquisition for this core corpus.
+        </div>
+        <div class="related">
+          Related: <a href="#source-library">full source library</a>
+          <a href="#formalization">formalization route</a>
+          <a href="#iut-i-atlas">paper atlases</a>
         </div>
       </section>
 
@@ -1701,6 +1735,34 @@
           if a common container is supplied, Lean should still ask what numerical chart,
           transport, calibration, or bound converts it into the final signed inequality.
         </p>
+        <table>
+          <tr><th>Stage</th><th>Mochizuki's stated target</th><th>Wiki/formalization reading</th></tr>
+          <tr>
+            <td>1</td>
+            <td>IUT III Theorem 3.11 implies Corollary 3.12.</td>
+            <td>Primary public dispute corridor; our Lean work separates source obligations from ordered-real algebra.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Proof of Theorem 3.11 modulo IUT I-II.</td>
+            <td>Construct the multiradial output, APT/IPL behavior, and source side of the corridor.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>IUT I-II modulo earlier anabelian, Frobenioid, and theta-function results.</td>
+            <td>Replace record-level Hodge-theater and theta-link interfaces by constructions from the source machinery.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Earlier work from 1995-2015.</td>
+            <td>Long-range mathlib-scale formalization of p-adic/anabelian/Frobenioid background.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Numerical aspects from IUT IV and Explicit Estimates.</td>
+            <td>Formalize the effective estimate layer after the source corridor is mathematically pinned down.</td>
+          </tr>
+        </table>
         <div class="related">
           Sources: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report</a>
           <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure</a>
@@ -1752,8 +1814,9 @@
         <h2>Source Library</h2>
         <p class="lede">
           Local PDF links open from the repository, so the wiki remains usable offline.
-          The online references in the LANA section are retained because they are live
-          project pages rather than stable source PDFs.
+          The ten official Mochizuki IUT-category papers are listed separately in the
+          corpus audit; this library also includes auxiliary surveys, critiques, and
+          formalization-adjacent papers.
         </p>
         <div class="grid2" id="source-cards">
           <div class="card sourceCard" data-filter="mochizuki iut i hodge theaters initial theta data">
@@ -1827,6 +1890,10 @@
           <div class="card sourceCard" data-filter="dupuy hilado probabilistic szpiro baby szpiro explicit szpiro corollary 3.12">
             <div><h3>Dupuy-Hilado: Probabilistic Szpiro</h3><div class="sourceMeta">Taylor Dupuy and Anton Hilado, April 2020, 36 pp.</div><p>Derives transparent Szpiro-type inequalities from a probabilistic formulation of Mochizuki's Corollary 3.12, conditional on that input.</p></div>
             <a class="pdf" href="papers/dupuy-hilado-probabilistic-szpiro.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki fesenko hoshi minamide porowski explicit estimates iut kodai 2022">
+            <div><h3>Explicit Estimates in IUT</h3><div class="sourceMeta">Mochizuki, Fesenko, Hoshi, Minamide, Porowski, 58 pp.</div><p>Official source copy of the explicit estimates paper listed in Mochizuki's IUT corpus.</p></div>
+            <a class="pdf" href="papers/mochizuki-explicit-estimates.pdf" target="_blank">PDF</a>
           </div>
           <div class="card sourceCard" data-filter="fesenko hoshi minamide porowski mochizuki explicit estimates wrap 2022">
             <div><h3>Explicit Estimates, WRAP Copy</h3><div class="sourceMeta">Fesenko, Hoshi, Minamide, Mochizuki, Porowski, 59 pp.</div><p>Repository copy of the accepted-manuscript version of explicit estimates in IUT.</p></div>
