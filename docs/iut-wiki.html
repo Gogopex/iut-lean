@@ -962,6 +962,12 @@
               <a href="#species">species</a>,
               <a href="#mutation">mutation</a>,
               <a href="#mutation-history">mutation history</a>,
+              <a href="#zero-one-species">0/1-species</a>,
+              <a href="#formula-absoluteness">formula absoluteness</a>,
+              <a href="#morphism-of-mutations">morphisms of mutations</a>,
+              <a href="#category-species-example">category species example</a>,
+              <a href="#absolute-anabelian-species">absolute anabelian species</a>,
+              <a href="#frobenius-etale-core">Frobenius/etale core</a>,
               <a href="#model-free-object">model-free object</a>,
               <a href="#set-theoretic-copies">set-theoretic copies</a>
             </td>
@@ -7501,6 +7507,26 @@
           </svg>
         </div>
         <div class="grid3">
+          <div class="card" id="zero-one-species">
+            <h3>0-species and 1-species</h3>
+            <p>
+              Definition 3.1 starts with a 0-species: a set-theoretic formula for object
+              data. A 1-species adds formula-defined morphism data, unique composites,
+              associativity, and identities. A species is the pair consisting of these
+              object and morphism formulas.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 3.1(i)-(iii)</span><span class="tag">formulas</span></div>
+          </div>
+          <div class="card" id="formula-absoluteness">
+            <h3>Formula absoluteness</h3>
+            <p>
+              The formulas used in §3 are required to be absolute under universe
+              extension: if the relevant data lies in a universe, interpreting the same
+              formula in a larger universe gives the same validity. This is the technical
+              discipline behind model-free specimens.
+            </p>
+            <div class="tagRow"><span class="tag violet">Definition 3.1 setup</span><span class="tag">universes</span></div>
+          </div>
           <div class="card">
             <h3>Species</h3>
             <p>
@@ -7527,6 +7553,16 @@
               like a functor between the corresponding categories.
             </p>
             <div class="tagRow"><span class="tag green">Definition 3.3(i)</span><span class="tag">functorial</span></div>
+          </div>
+          <div class="card" id="morphism-of-mutations">
+            <h3>Morphisms of mutations</h3>
+            <p>
+              A morphism of mutations is a formula that assigns, to each source object, a
+              morphism between the two mutated outputs, compatibly with every source
+              morphism. In a fixed ZFC-model it is the species-theoretic analogue of a
+              natural transformation.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 3.3(ii)</span><span class="tag">natural transformation</span></div>
           </div>
           <div class="card">
             <h3>Mutation equivalence</h3>
@@ -7555,9 +7591,62 @@
             </p>
             <div class="tagRow"><span class="tag green">Definition 3.3(v)</span><span class="tag">coricity</span></div>
           </div>
+          <div class="card" id="category-species-example">
+            <h3>Category species example</h3>
+            <p>
+              Example 3.2 takes small categories as species-objects and isomorphism
+              classes of functors as species-morphisms. This gives the first template for
+              reading ordinary category-level constructions as species-level data.
+            </p>
+            <div class="tagRow"><span class="tag green">Example 3.2</span><span class="tag">categories</span></div>
+          </div>
+          <div class="card" id="absolute-anabelian-species">
+            <h3>Absolute anabelian species</h3>
+            <p>
+              Example 3.5 formulates anabelian reconstruction as a mutation from
+              universal profinite etale-cover data to topological-group data, together
+              with a quasi-inverse mutation back to schemes. This records reconstruction
+              algorithmically, not only as a fully faithful comparison.
+            </p>
+            <div class="tagRow"><span class="tag green">Example 3.5</span><span class="tag">anabelian</span></div>
+          </div>
+          <div class="card" id="frobenius-etale-core">
+            <h3>Frobenius and etale-site cores</h3>
+            <p>
+              Example 3.6 treats the etale site and perfection as cores of a Frobenius
+              mutation-history. The natural Frobenius morphism itself is non-coric, but
+              the perfection core relates this non-coric observable to invariant data.
+            </p>
+            <p>
+              The monoid version, based on multiplication by <span class="math">p</span>
+              and p-perfection, is the formal model for the coric/non-coric distinction
+              later used to read log-links and theta-links.
+            </p>
+            <div class="tagRow"><span class="tag green">Example 3.6</span><span class="tag">coric/non-coric</span></div>
+          </div>
+          <div class="card" id="simulate-membership-loops">
+            <h3>Simulated membership loops</h3>
+            <p>
+              Remark 3.3.1 explains that species-isomorphisms allow one to compare
+              objects occurring at different levels of the membership hierarchy without
+              violating foundation. This is one reason the framework is useful for
+              iterated mutation histories.
+            </p>
+            <div class="tagRow"><span class="tag gold">Remark 3.3.1</span><span class="tag">foundation</span></div>
+          </div>
         </div>
         <table>
           <tr><th>Example in IUT IV</th><th>What it illustrates</th><th>Wiki link</th></tr>
+          <tr>
+            <td>0/1-species</td>
+            <td>Object and morphism formulas with unique composites, identities, and associativity.</td>
+            <td><a href="#zero-one-species">0/1-species</a></td>
+          </tr>
+          <tr>
+            <td>Formula absoluteness</td>
+            <td>Descriptions must survive universe extension without depending on arbitrary choices.</td>
+            <td><a href="#formula-absoluteness">formula absoluteness</a></td>
+          </tr>
           <tr>
             <td>Topological spaces and fundamental groups</td>
             <td>The fundamental group can be treated as a mutation from universal-cover data to group data.</td>
@@ -7566,12 +7655,12 @@
           <tr>
             <td>Absolute anabelian geometry</td>
             <td>Anabelian reconstruction is expressed as a mutation quasi-inverse to the fundamental-group mutation.</td>
-            <td><a href="#anabelian-background">anabelian background</a></td>
+            <td><a href="#absolute-anabelian-species">absolute anabelian species</a></td>
           </tr>
           <tr>
             <td>Frobenius and etale sites</td>
             <td>The etale site and perfection are cores of Frobenius-type mutation histories.</td>
-            <td><a href="#log-theta-lattice">log-theta lattice</a></td>
+            <td><a href="#frobenius-etale-core">Frobenius/etale core</a></td>
           </tr>
           <tr>
             <td>Monoid Frobenius</td>
