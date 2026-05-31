@@ -197,6 +197,7 @@
       border-bottom: 1px solid var(--line);
       scroll-margin-top: 14px;
     }
+    section[hidden] { display: none; }
     section h2 {
       margin: 0 0 12px;
       font-size: clamp(1.75rem, 3vw, 2.6rem);
@@ -299,6 +300,9 @@
     }
     .diagram svg {
       min-width: 640px;
+    }
+    .hero .diagram svg {
+      min-width: 0;
     }
     svg text {
       font-family: inherit;
@@ -457,10 +461,9 @@
     <aside>
       <div class="brand">
         <h1>IUT Wiki</h1>
-        <p>A self-contained map of inter-universal Teichmuller theory, its source papers, and current Lean formalization efforts.</p>
       </div>
       <div class="searchBox">
-        <label for="wiki-search">Filter sources and glossary</label>
+        <label for="wiki-search">Filter page entries</label>
         <input id="wiki-search" type="search" placeholder="theta, Frobenioid, LANA...">
       </div>
       <nav id="nav">
@@ -482,6 +485,7 @@
         <h2>Core IUT</h2>
         <a href="#initial-theta-data">Initial theta data</a>
         <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
+        <a href="#projective-line-gluing-analogy">Projective-line gluing</a>
         <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
         <a href="#tempered-covering-complements">Tempered covering complements</a>
         <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
@@ -1273,6 +1277,7 @@
               <a href="#gt-species-perspective">GT species perspective</a>,
               <a href="#complex-common-container">complex common container</a>,
               <a href="#n-power-gluing-model">N-th power gluing model</a>,
+              <a href="#projective-line-gluing-analogy">projective-line gluing analogy</a>,
               <a href="#gt-genus-zero-quotient">GT genus-zero quotient</a>,
               <a href="#ficsp-conjugate-synchronization">FICSP synchronization</a>
             </td>
@@ -1817,7 +1822,7 @@
             </p>
             <div class="tagRow"><span class="tag blue">Gateway §2</span><span class="tag">monoid not ring</span></div>
           </div>
-          <div class="card" id="projective-line-gluing-analogy">
+          <div class="card" id="gateway-projective-line-gluing-card">
             <h3>Projective-line gluing analogy</h3>
             <p>
               The same report compares IUT gluing to constructing
@@ -1826,6 +1831,7 @@
               meaningful gluing into a contradiction unless one passes to a quotient or
               collection of possibilities.
             </p>
+            <p><a href="#projective-line-gluing-analogy">Open concept page</a></p>
             <div class="tagRow"><span class="tag gold">Gateway §3.1</span><span class="tag">labels</span></div>
           </div>
           <div class="card" id="zfcg-species-gateway">
@@ -2252,6 +2258,163 @@
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#theta-log-links">theta/log links</a>
           <a href="#multiradiality">multiradiality</a>
+        </div>
+      </section>
+
+      <section id="projective-line-gluing-analogy">
+        <h2>Projective-Line Gluing Analogy</h2>
+        <p class="lede">
+          Mochizuki's 2025 Anabelian Gateway notes use the construction of
+          <span class="math">P1</span> from two labeled affine lines as an elementary
+          model for a recurring IUT warning: a gluing can be meaningful at one
+          structural level while being incompatible with stronger ring-structure
+          identifications. The page records this as an analogy for labels,
+          indeterminacy, and multiradial transport, not as a proof of any IUT estimate.
+        </p>
+        <div class="diagram" aria-label="Projective-line and Riemann-sphere gluing analogy">
+          <div class="diagramHeader">
+            <strong>Two charts, one glued object</strong>
+            <span>labels prevent false self-identification</span>
+          </div>
+          <svg viewBox="0 0 1040 500" role="img">
+            <defs>
+              <marker id="arrowP1Glue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="42" y="58" width="160" height="74"></rect>
+            <text class="nodeTitle" x="122" y="86" text-anchor="middle">dagger A1</text>
+            <text class="tinyText" x="122" y="108" text-anchor="middle">ring scheme</text>
+            <text class="tinyText" x="122" y="124" text-anchor="middle">coordinate dagger T</text>
+
+            <rect class="nodeBox green" x="260" y="58" width="160" height="74"></rect>
+            <text class="nodeTitle" x="340" y="86" text-anchor="middle">dagger Gm</text>
+            <text class="tinyText" x="340" y="108" text-anchor="middle">multiplicative</text>
+            <text class="tinyText" x="340" y="124" text-anchor="middle">units only</text>
+
+            <rect class="nodeBox green" x="620" y="58" width="160" height="74"></rect>
+            <text class="nodeTitle" x="700" y="86" text-anchor="middle">double-dagger Gm</text>
+            <text class="tinyText" x="700" y="108" text-anchor="middle">multiplicative</text>
+            <text class="tinyText" x="700" y="124" text-anchor="middle">coordinate T^-1</text>
+
+            <rect class="nodeBox blue" x="838" y="58" width="160" height="74"></rect>
+            <text class="nodeTitle" x="918" y="86" text-anchor="middle">double-dagger A1</text>
+            <text class="tinyText" x="918" y="108" text-anchor="middle">ring scheme</text>
+            <text class="tinyText" x="918" y="124" text-anchor="middle">coordinate double-dagger T</text>
+
+            <path d="M202 95 H258" class="edge blue" marker-end="url(#arrowP1Glue)"></path>
+            <path d="M420 95 H618" class="edge gold" marker-end="url(#arrowP1Glue)"></path>
+            <path d="M780 95 H836" class="edge blue" marker-end="url(#arrowP1Glue)"></path>
+            <text class="edgeLabel" x="520" y="82" text-anchor="middle">inversion on Gm</text>
+            <text class="tinyText" x="520" y="116" text-anchor="middle">not a ring-scheme isomorphism of A1</text>
+
+            <rect class="nodeBox gold" x="372" y="174" width="296" height="76"></rect>
+            <text class="nodeTitle" x="520" y="202" text-anchor="middle">P1 by labeled gluing</text>
+            <text class="tinyText" x="520" y="224" text-anchor="middle">one overlap function: dagger T = double-dagger T^-1</text>
+            <text class="tinyText" x="520" y="240" text-anchor="middle">inside the glued overlap, not as one ring coordinate</text>
+            <path d="M340 134 C340 170 420 172 448 174" class="edge green" marker-end="url(#arrowP1Glue)"></path>
+            <path d="M700 134 C700 170 620 172 592 174" class="edge green" marker-end="url(#arrowP1Glue)"></path>
+
+            <rect class="nodeBox red" x="92" y="318" width="290" height="82"></rect>
+            <text class="nodeTitle" x="237" y="346" text-anchor="middle">delete labels arbitrarily</text>
+            <text class="tinyText" x="237" y="370" text-anchor="middle">single A1 glued to itself</text>
+            <text class="tinyText" x="237" y="388" text-anchor="middle">T forced to equal T^-1</text>
+
+            <rect class="nodeBox violet" x="420" y="318" width="250" height="82"></rect>
+            <text class="nodeTitle" x="545" y="346" text-anchor="middle">quotient / possibilities</text>
+            <text class="tinyText" x="545" y="370" text-anchor="middle">indeterminacy enters if labels vanish</text>
+            <text class="tinyText" x="545" y="388" text-anchor="middle">OR-space rather than equality</text>
+
+            <rect class="nodeBox green" x="710" y="318" width="260" height="82"></rect>
+            <text class="nodeTitle" x="840" y="346" text-anchor="middle">metric/geodesic relation</text>
+            <text class="tinyText" x="840" y="370" text-anchor="middle">Riemann sphere analogy</text>
+            <text class="tinyText" x="840" y="388" text-anchor="middle">transport, not label deletion</text>
+
+            <path d="M424 240 C312 262 254 286 238 316" class="edge red" marker-end="url(#arrowP1Glue)"></path>
+            <path d="M520 252 V316" class="edge violet" marker-end="url(#arrowP1Glue)"></path>
+            <path d="M616 240 C728 262 824 286 840 316" class="edge green" marker-end="url(#arrowP1Glue)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="affine-line-ring-scheme">
+            <h3>Affine line as ring scheme</h3>
+            <p>
+              For a field or ring <span class="math">k</span>, the affine line
+              <span class="math">A1 = Spec(k[T])</span> carries its usual ring-scheme
+              structure. Its open subscheme <span class="math">Gm = Spec(k[T,T^-1])</span>
+              carries the multiplicative group-scheme structure of units.
+            </p>
+            <div class="tagRow"><span class="tag blue">Gateway 2025 §3</span><span class="tag">A1/Gm</span></div>
+          </div>
+          <div class="card" id="gm-inversion-gluing">
+            <h3>Inversion is only multiplicative here</h3>
+            <p>
+              Between labeled copies there is a group-scheme isomorphism
+              <span class="math">dagger Gm -> double-dagger Gm</span> sending
+              <span class="math">dagger T</span> to <span class="math">double-dagger T^-1</span>.
+              Mochizuki stresses that this does not extend to an isomorphism of the
+              two affine-line ring schemes.
+            </p>
+            <div class="tagRow"><span class="tag gold">Gateway 2025 §3</span><span class="tag">multiplicative not ring</span></div>
+          </div>
+          <div class="card" id="p1-two-chart-gluing">
+            <h3>P1 as two-chart gluing</h3>
+            <p>
+              The standard construction of <span class="math">P1</span> glues two
+              affine-line charts along <span class="math">Gm</span> by inversion. On the
+              overlap, one rational function is read as <span class="math">dagger T</span>
+              from one chart and as <span class="math">double-dagger T^-1</span> from
+              the other.
+            </p>
+            <div class="tagRow"><span class="tag green">Gateway 2025 §3</span><span class="tag">gluing</span></div>
+          </div>
+          <div class="card" id="label-deletion-contradiction">
+            <h3>Why label deletion is dangerous</h3>
+            <p>
+              If the two labels are erased and both charts are treated as one copy of
+              <span class="math">A1</span>, the gluing forces the standard coordinate
+              <span class="math">T</span> to agree with <span class="math">T^-1</span>.
+              Mochizuki presents this as an elementary source of apparent consistency
+              problems in noncommutative gluing diagrams.
+            </p>
+            <div class="tagRow"><span class="tag red">Gateway 2025 §3</span><span class="tag">labels</span></div>
+          </div>
+          <div class="card" id="riemann-sphere-equator-flow">
+            <h3>Riemann-sphere picture</h3>
+            <p>
+              Over <span class="math">C</span>, the same gluing is pictured as the
+              Riemann sphere assembled from northern and southern hemispheres along the
+              equator. An oriented equatorial flow appears clockwise from one hemisphere
+              and counterclockwise from the other.
+            </p>
+            <div class="tagRow"><span class="tag violet">Gateway 2025 §3</span><span class="tag">orientation</span></div>
+          </div>
+          <div class="card" id="metric-geodesic-replacement">
+            <h3>Transport replaces naive identification</h3>
+            <p>
+              Rather than deleting hemisphere labels, the Gateway notes relate the two
+              sides by metric/geodesic geometry. Mochizuki identifies this, at the level
+              of analogy, with the anabelian-geometry-based multiradial algorithm for
+              the theta-pilot.
+            </p>
+            <div class="tagRow"><span class="tag green">Gateway 2025 §3</span><span class="tag">multiradial analogy</span></div>
+          </div>
+        </div>
+        <div class="callout gold">
+          <strong>Formalization use.</strong> This analogy is a guardrail for the wiki
+          and Lean work: it supports explicit labels for copied structures, separate
+          interfaces for multiplicative and ring data, and recorded indeterminacy when a
+          comparison passes through a weaker common interface.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-anabelian-gateway-iut-summit-2025.pdf" target="_blank">Anabelian Gateway 2025</a>
+          <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure</a>
+          <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies</a>
+          Related: <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
+          <a href="#mutually-alien-copies">mutually alien copies</a>
+          <a href="#indeterminacies">indeterminacies</a>
+          <a href="#multiradiality">multiradiality</a>
+          <a href="#gt-species-perspective">GT species perspective</a>
         </div>
       </section>
 
@@ -11548,16 +11711,46 @@
   <script>
     const sections = Array.from(document.querySelectorAll("main section[id]"));
     const navLinks = Array.from(document.querySelectorAll("nav a"));
-    const byHref = new Map(navLinks.map(a => [a.getAttribute("href"), a]));
-    const observer = new IntersectionObserver(entries => {
-      const visible = entries.filter(e => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
+    const sectionIds = new Set(sections.map(section => section.id));
+    const idOwners = new Map();
+    document.querySelectorAll("main [id]").forEach(el => {
+      const owner = el.closest("section[id]");
+      if (owner) idOwners.set(el.id, owner);
+    });
+
+    function setActivePage(hash, shouldScroll = true) {
+      const requested = (hash || "#home").slice(1);
+      const target = idOwners.get(requested) || document.getElementById("home");
+      const page = target.matches("section[id]") ? target : target.closest("section[id]");
+      sections.forEach(section => { section.hidden = section !== page; });
+
       navLinks.forEach(a => a.classList.remove("active"));
-      const active = byHref.get("#" + visible.target.id);
+      const active = navLinks.find(a => a.getAttribute("href") === "#" + page.id);
       if (active) active.classList.add("active");
-    }, { rootMargin: "-20% 0px -65% 0px", threshold: [0.1, 0.25, 0.5] });
-    sections.forEach(section => observer.observe(section));
+
+      if (sectionIds.has(requested)) {
+        history.replaceState(null, "", "#" + page.id);
+      }
+      if (shouldScroll) {
+        requestAnimationFrame(() => {
+          const scrollTarget = idOwners.get(requested) || page;
+          scrollTarget.scrollIntoView({ block: scrollTarget === page ? "start" : "center" });
+        });
+      }
+    }
+
+    document.addEventListener("click", event => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link) return;
+      const hash = link.getAttribute("href");
+      if (!hash || hash === "#") return;
+      event.preventDefault();
+      history.pushState(null, "", hash);
+      setActivePage(hash);
+    });
+
+    window.addEventListener("popstate", () => setActivePage(location.hash));
+    setActivePage(location.hash, Boolean(location.hash));
 
     const search = document.getElementById("wiki-search");
     const filterTargets = Array.from(document.querySelectorAll("[data-filter]"));
