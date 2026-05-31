@@ -674,6 +674,9 @@
         <a href="#infinity-kappa-structures-iut-i51">Infinity-kappa structures 5.1</a>
         <a href="#kummer-ready-blind-51-52">Kummer-ready/blind 5.1-5.2</a>
         <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips 5.2</a>
+        <a href="#f-prime-strip-definition-iut-i52">F-prime-strip 5.2</a>
+        <a href="#f-perp-prime-strip-definition-iut-i52">F⊢-prime-strip 5.2</a>
+        <a href="#f-realified-prime-strip-definition-iut-i52">F realified strip 5.2</a>
         <a href="#iut-i-pivotal-distributions-54">Pivotal distributions 5.4</a>
         <a href="#delta-valuations-localization-54">Delta-valuations 5.4</a>
         <a href="#theta-nf-bridges-definition-55-56">ThetaNF bridges 5.5-5.6</a>
@@ -17330,6 +17333,108 @@
           <a href="#kappa-coric-functions">κ-coric functions</a>
           <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
           <a href="#log-kummer-correspondences">log-Kummer correspondences</a>
+        </div>
+      </section>
+
+      <section id="f-prime-strip-definition-iut-i52" data-filter="iut i definition 5.2 holomorphic frobenioid prime strip f prime strip nonarchimedean archimedean kummer">
+        <h2>IUT I Definition 5.2(i): F-Prime-Strips</h2>
+        <p class="lede">
+          A holomorphic Frobenioid-prime-strip is a valuation-indexed collection
+          <span class="math">F = {F_v}_{v in V}</span>. At nonarchimedean places,
+          <span class="math">F_v</span> is a category equivalent to the local
+          Frobenioid. At archimedean places it is a triple consisting of a category, an
+          Aut-holomorphic orbispace, and a Kummer structure.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Place class</th><th>Definition 5.2(i) content</th><th>Guardrail</th></tr>
+          <tr>
+            <td><span class="math">V_non</span></td>
+            <td><span class="math">F_v</span> is a category equivalent to the local Frobenioid categories of Examples 3.2(iii) and 3.3(i).</td>
+            <td>The nonarchimedean F-strip is categorical Frobenioid data over the D-strip.</td>
+          </tr>
+          <tr>
+            <td><span class="math">V_arc</span></td>
+            <td><span class="math">F_v = (C_v,D_v,kappa_v)</span> up to isomorphism: category, Aut-holomorphic orbispace, and Kummer structure.</td>
+            <td>Archimedean F-data is not just a category.</td>
+          </tr>
+          <tr>
+            <td>Morphisms</td>
+            <td>Morphisms are valuation-indexed isomorphisms; Section 0 capsule conventions then apply.</td>
+            <td>Capsules of F-prime-strips are families of full F-level objects.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 5.2(i),(iii)</a>
+          Related: <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips overview</a>
+          <a href="#kummer-ready-blind-51-52">Kummer-ready/blind</a>
+        </div>
+      </section>
+
+      <section id="f-perp-prime-strip-definition-iut-i52" data-filter="iut i definition 5.2 mono analytic frobenioid prime strip f perp split frobenioid tm perp kummer blind">
+        <h2>IUT I Definition 5.2(ii): <span class="math">F^⊢</span>-Prime-Strips</h2>
+        <p class="lede">
+          A mono-analytic Frobenioid-prime-strip
+          <span class="math">F^⊢ = {F_v^⊢}_{v in V}</span> is the split,
+          mono-analytic counterpart of an F-prime-strip. It keeps enough Frobenioid
+          structure for mono-analytic comparison while losing Kummer readiness.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Place class</th><th>Definition 5.2(ii) content</th><th>Guardrail</th></tr>
+          <tr>
+            <td><span class="math">V_non</span></td>
+            <td><span class="math">F_v^⊢</span> is a split Frobenioid with underlying Frobenioid equivalent to the local mono-analytic model.</td>
+            <td>The split structure is part of the object.</td>
+          </tr>
+          <tr>
+            <td><span class="math">V_arc</span></td>
+            <td><span class="math">F_v^⊢</span> is a triple: Frobenioid, object of <span class="math">TM^⊢</span>, and splitting.</td>
+            <td>Archimedean mono-analytic data is still structured, not a bare monoid.</td>
+          </tr>
+          <tr>
+            <td>Kummer status</td>
+            <td>Remark 5.2.2 identifies <span class="math">F^⊢</span>-prime-strips as Kummer-blind.</td>
+            <td>Do not extract Kummer roots or additive field structure from this interface alone.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 5.2(ii),(iii), Remark 5.2.2</a>
+          Related: <a href="#f-prime-strip-definition-iut-i52">F-prime-strip</a>
+          <a href="#kummer-ready-blind-51-52">Kummer-ready/blind</a>
+        </div>
+      </section>
+
+      <section id="f-realified-prime-strip-definition-iut-i52" data-filter="iut i definition 5.2 globally realified mono analytic frobenioid prime strip prime c rho realified monoids">
+        <h2>IUT I Definition 5.2(iv): Globally Realified F-Prime-Strips</h2>
+        <p class="lede">
+          A globally realified mono-analytic Frobenioid-prime-strip packages a global
+          category <span class="math">C</span>, a bijection
+          <span class="math">Prime(C) -> V</span>, an
+          <span class="math">F^⊢</span>-prime-strip, and topological-monoid
+          isomorphisms <span class="math">rho_v</span> to the realified local divisor
+          monoids.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Component</th><th>Definition 5.2(iv) content</th><th>Use</th></tr>
+          <tr>
+            <td><span class="math">C</span></td>
+            <td>A category, equipped with Frobenioid structure, isomorphic to the model <span class="math">C_mod</span> of Example 3.5(i).</td>
+            <td>Provides the global realified base.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Prime(C) -> V</span></td>
+            <td>A specified bijection between primes of the global divisor monoid and valuations.</td>
+            <td>Aligns global realified divisors with the valuation index set.</td>
+          </tr>
+          <tr>
+            <td><span class="math">rho_v</span></td>
+            <td>Each <span class="math">rho_v</span> identifies the global realified valuation monoid with the local realified divisor monoid, both isomorphic to <span class="math">R_{>=0}</span>.</td>
+            <td>These maps are the real-valued comparison interface used later.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 5.2(iv)</a>
+          Related: <a href="#global-realified-cmod-iut-i35">global Cmod realification</a>
+          <a href="#theta-nf-bridges-definition-55-56">ThetaNF bridges</a>
         </div>
       </section>
 
