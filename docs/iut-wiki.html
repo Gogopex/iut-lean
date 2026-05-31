@@ -813,6 +813,13 @@
         <a href="#pmellnf-basepoint-relay-iut-i6126">Basepoint relay 6.12.6</a>
         <a href="#pmellnf-frobenioid-inventory-iut-i613fig66">Frobenioid inventory Fig. 6.6</a>
         <a href="#mono-theta-environments-ii11">Mono-theta environments 1.1</a>
+        <a href="#mono-theta-recovery-package-ii11">Mono-theta recovery package</a>
+        <a href="#mono-theta-cyclotomes-ii11">Interior/exterior cyclotomes</a>
+        <a href="#mono-theta-commutator-rigidity-ii111">Commutator rigidity 1.1.1</a>
+        <a href="#mono-theta-flpm-symmetry-ii111">F_l± symmetry 1.1.1</a>
+        <a href="#mono-theta-group-route-ii12">Group route 1.2</a>
+        <a href="#mono-theta-frobenioid-route-ii12">Frobenioid route 1.2</a>
+        <a href="#mono-theta-cyclotomic-compatibility-ii13">Cyclotomic compatibility 1.3</a>
         <a href="#mono-theta-construction-routes-ii12-15">Mono-theta construction 1.2-1.5</a>
         <a href="#cores-cuspidalizations-ii16">Cores/cuspidalizations 1.6</a>
         <a href="#radial-coric-framework-ii17-19">Radial/coric framework 1.7-1.9</a>
@@ -22746,10 +22753,279 @@
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a>
           Related: <a href="#theta-evaluation-kummer-route">theta evaluation route</a>
+          <a href="#mono-theta-recovery-package-ii11">recovery package</a>
+          <a href="#mono-theta-cyclotomes-ii11">interior/exterior cyclotomes</a>
+          <a href="#mono-theta-commutator-rigidity-ii111">commutator rigidity</a>
           <a href="#iut-ii-mono-theta-rigidity-110-112">mono-theta rigidity</a>
           <a href="#theta-plus-minus-ell-nf-613">Theta±ellNF theaters</a>
           <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
           <a href="#multiradiality">multiradiality</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-recovery-package-ii11" data-filter="iut ii definition 1.1 mono theta environment recovery package PiY PiX G Delta lDeltaTheta Pi_mu">
+        <h2>Mono-Theta Recovery Package</h2>
+        <p class="lede">
+          Definition 1.1(i) starts from a mod-<span class="math">N</span>
+          mono-theta environment <span class="math">MTheta</span> and records a
+          functorial recovery package. The output is not just one group: it includes
+          quotient groups, geometric kernels, a theta-side subquotient, an exterior
+          cyclotome, and actions by the recovered local group.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Recovered object</th><th>Definition 1.1 role</th><th>Later use</th></tr>
+          <tr>
+            <td><span class="math">Pi_Y(MTheta), Pi_X(MTheta), G(MTheta)</span></td>
+            <td>Quotient and ambient groups; <span class="math">Pi_Y</span> is a normal open subgroup of <span class="math">Pi_X</span>.</td>
+            <td>Provides the local group context for theta evaluation.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Delta_MTheta, Delta_Y, Delta_X</span></td>
+            <td>Closed normal kernels of the maps to <span class="math">G(MTheta)</span>.</td>
+            <td>Tracks the geometric tempered subgroup data.</td>
+          </tr>
+          <tr>
+            <td><span class="math">l·DeltaTheta</span></td>
+            <td>A subquotient of <span class="math">Pi_Y</span>, abstractly <span class="math">Z(1)</span>, with natural <span class="math">Pi_X</span>-action.</td>
+            <td>Interior cyclotome for theta-section comparison.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Pi_mu</span></td>
+            <td>Kernel of <span class="math">Pi_MTheta -> Pi_Y</span>, abstractly <span class="math">(Z/NZ)(1)</span>, with natural action.</td>
+            <td>Exterior cyclotome for the target of rigidity.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Formal reading.</strong> A wiki or Lean model should keep these
+          outputs typed separately. Collapsing them into one unlabeled local group
+          loses the distinction that Definition 1.1 needs for cyclotomic rigidity.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Definition 1.1(i)</a>
+          Related: <a href="#mono-theta-environments-ii11">mono-theta environments</a>
+          <a href="#mono-theta-cyclotomes-ii11">cyclotomes</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-cyclotomes-ii11" data-filter="iut ii definition 1.1 interior exterior cyclotomes lDeltaTheta Pi_mu cyclotomic rigidity">
+        <h2>Interior and Exterior Cyclotomes</h2>
+        <p class="lede">
+          Definition 1.1(ii) names two cyclotomes associated to
+          <span class="math">MTheta</span>. The interior cyclotome is
+          <span class="math">l·DeltaTheta</span>; the exterior cyclotome is
+          <span class="math">Pi_mu</span>. The theorem-level content is the functorial
+          cyclotomic rigidity isomorphism between their mod-
+          <span class="math">N</span> reductions.
+        </p>
+        <div class="diagram fit" aria-label="interior and exterior cyclotome rigidity">
+          <div class="diagramHeader">
+            <strong>Definition 1.1(ii)</strong>
+            <span>theta-side cyclotome to exterior cyclotome</span>
+          </div>
+          <svg viewBox="0 0 900 310" role="img">
+            <defs>
+              <marker id="arrowMonoThetaCyclotomes11" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox gold" x="72" y="88" width="270" height="88"></rect>
+            <text class="nodeTitle" x="207" y="120" text-anchor="middle">interior cyclotome</text>
+            <text class="tinyText" x="207" y="145" text-anchor="middle">l·DeltaTheta(MTheta)</text>
+            <text class="tinyText" x="207" y="164" text-anchor="middle">theta-side subquotient</text>
+            <rect class="nodeBox green" x="558" y="88" width="270" height="88"></rect>
+            <text class="nodeTitle" x="693" y="120" text-anchor="middle">exterior cyclotome</text>
+            <text class="tinyText" x="693" y="145" text-anchor="middle">Pi_mu(MTheta)</text>
+            <text class="tinyText" x="693" y="164" text-anchor="middle">kernel over Pi_Y</text>
+            <path class="edge green" d="M344 132 H556" marker-end="url(#arrowMonoThetaCyclotomes11)"></path>
+            <text class="edgeLabel" x="450" y="112" text-anchor="middle">mod N rigidity</text>
+            <rect class="nodeBox blue" x="270" y="224" width="360" height="54"></rect>
+            <text class="nodeTitle" x="450" y="248" text-anchor="middle">(l·DeltaTheta) tensor Z/NZ ~= Pi_mu</text>
+            <text class="tinyText" x="450" y="266" text-anchor="middle">functorial in the mono-theta environment</text>
+          </svg>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Definition 1.1(ii)</a>
+          Related: <a href="#mono-theta-commutator-rigidity-ii111">commutator rigidity</a>
+          <a href="#mono-theta-cyclotomic-compatibility-ii13">cyclotomic compatibility</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-commutator-rigidity-ii111" data-filter="iut ii remark 1.1.1 commutator rigidity theta section algebraic splitting difference cyclotomic rigidity">
+        <h2>Commutator Rigidity in Remark 1.1.1</h2>
+        <p class="lede">
+          Remark 1.1.1 explains that the mono-theta cyclotomic rigidity isomorphism is
+          reconstructed as a difference of two sections over
+          <span class="math">l·DeltaTheta</span>: the theta-section portion of the
+          mono-theta environment and an algebraic section obtained from a bilinear
+          commutator map.
+        </p>
+        <div class="diagram fit" aria-label="commutator construction of cyclotomic rigidity">
+          <div class="diagramHeader">
+            <strong>Two sections, one difference</strong>
+            <span>Remark 1.1.1(iii)</span>
+          </div>
+          <svg viewBox="0 0 980 390" role="img">
+            <defs>
+              <marker id="arrowCommutatorRigidity111" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="60" y="72" width="260" height="76"></rect>
+            <text class="nodeTitle" x="190" y="101" text-anchor="middle">theta section</text>
+            <text class="tinyText" x="190" y="127" text-anchor="middle">s_Theta over l·DeltaTheta</text>
+            <rect class="nodeBox gold" x="60" y="240" width="260" height="76"></rect>
+            <text class="nodeTitle" x="190" y="269" text-anchor="middle">algebraic section</text>
+            <text class="tinyText" x="190" y="295" text-anchor="middle">s_alg from commutators</text>
+            <rect class="nodeBox violet" x="390" y="156" width="260" height="78"></rect>
+            <text class="nodeTitle" x="520" y="185" text-anchor="middle">subquotient over l·DeltaTheta</text>
+            <text class="tinyText" x="520" y="211" text-anchor="middle">Pi_MTheta | (l·DeltaTheta)</text>
+            <rect class="nodeBox green" x="720" y="156" width="200" height="78"></rect>
+            <text class="nodeTitle" x="820" y="185" text-anchor="middle">rigidity isomorphism</text>
+            <text class="tinyText" x="820" y="211" text-anchor="middle">difference s_Theta - s_alg</text>
+            <path class="edge blue" d="M322 110 C372 126 408 144 448 154" marker-end="url(#arrowCommutatorRigidity111)"></path>
+            <path class="edge gold" d="M322 278 C372 260 408 240 448 236" marker-end="url(#arrowCommutatorRigidity111)"></path>
+            <path class="edge green" d="M652 195 H718" marker-end="url(#arrowCommutatorRigidity111)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source component</th><th>Meaning</th><th>Constraint</th></tr>
+          <tr>
+            <td><span class="math">s_Theta</span></td>
+            <td>The theta-section portion restricts to a subgroup mapping isomorphically to <span class="math">l·DeltaTheta</span>.</td>
+            <td>It depends on mono-theta environment structure.</td>
+          </tr>
+          <tr>
+            <td>Commutator map</td>
+            <td>A bilinear map from <span class="math">Delta_X/Delta_Y</span> and <span class="math">Delta_Y^ell</span> into the same subquotient.</td>
+            <td>It constructs the algebraic splitting <span class="math">s_alg</span>.</td>
+          </tr>
+          <tr>
+            <td>Difference</td>
+            <td>The difference between <span class="math">s_Theta</span> and <span class="math">s_alg</span> reconstructs cyclotomic rigidity.</td>
+            <td>The isomorphism is not inserted as an arbitrary external label.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 1.1.1(iii)</a>
+          Related: <a href="#mono-theta-cyclotomes-ii11">cyclotomes</a>
+          <a href="#mono-theta-flpm-symmetry-ii111">F_l± symmetry</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-flpm-symmetry-ii111" data-filter="iut ii remark 1.1.1 F_l plus minus symmetry mono theta cyclotomic rigidity line bundle curvature rational function">
+        <h2>F_l± Symmetry of Mono-Theta Rigidity</h2>
+        <p class="lede">
+          Remark 1.1.1(iv)-(v) states that the constructions underlying the
+          mono-theta cyclotomic rigidity isomorphism are stabilized by the natural
+          action of <span class="math">Delta_C/Delta_X ~= F_l^±</span>. Mochizuki then
+          contrasts this mono-theta route with the rational-function Kummer-class route:
+          the mono-theta construction behaves more like line-bundle or curvature data.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Naive action becomes natural</h3>
+            <p>
+              The action of <span class="math">Pi_C</span> on the relevant subquotient
+              coincides with the natural conjugation action arising from the model
+              embedding into a cyclotomic semidirect product.
+            </p>
+          </div>
+          <div class="card">
+            <h3>F_l± stabilization</h3>
+            <p>
+              The commutator map and its section data are stabilized by
+              <span class="math">Delta_C/Delta_X</span>, the quotient identified with
+              <span class="math">F_l^±</span>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Line bundle contrast</h3>
+            <p>
+              Mochizuki contrasts this with rational-function Kummer classes: the
+              mono-theta construction admits more symmetry, like line-bundle or first
+              Chern class data.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 1.1.1(iv)-(v)</a>
+          Related: <a href="#conjugate-synchronization-intro-ii">conjugate synchronization</a>
+          <a href="#theta-nf-fl-symmetry-ii47">ThetaNF Fl symmetry</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-group-route-ii12" data-filter="iut ii proposition 1.2 group theoretic construction mono theta environment Pi topological group Pi_X tempered">
+        <h2>Group-Theoretic Mono-Theta Route</h2>
+        <p class="lede">
+          Proposition 1.2(i) constructs a mod-<span class="math">N</span>
+          mono-theta environment from a topological group
+          <span class="math">Pi</span> isomorphic to the tempered fundamental group
+          <span class="math">Pi_X^tp</span>. The construction is functorial up to the
+          stated isomorphism indeterminacy.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Input</th><th>Algorithmic output</th><th>Indeterminacy</th></tr>
+          <tr>
+            <td><span class="math">Pi ~= Pi_X^tp</span></td>
+            <td><span class="math">MTheta(Pi)</span> and a functorial isomorphism back to <span class="math">Pi_X(MTheta(Pi))</span>.</td>
+            <td>Automorphisms modulo <span class="math">mu_N</span>-conjugacy classes, order 1 if <span class="math">N</span> is odd and order 2 if <span class="math">N</span> is even.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Proposition 1.2(i)</a>
+          Related: <a href="#mono-theta-frobenioid-route-ii12">Frobenioid route</a>
+          <a href="#mono-theta-recovery-package-ii11">recovery package</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-frobenioid-route-ii12" data-filter="iut ii proposition 1.2 frobenioid category theoretic construction mono theta environment tempered frobenioid base category">
+        <h2>Frobenioid-Theoretic Mono-Theta Route</h2>
+        <p class="lede">
+          Proposition 1.2(ii) constructs a mod-<span class="math">N</span>
+          mono-theta environment from a category equivalent to the tempered Frobenioid
+          determined by the curve. This is the category-theoretic access route matching
+          the Frobenius-like side of IUT II.
+        </p>
+        <div class="callout green">
+          <strong>Source precision.</strong> The input category carries a natural
+          Frobenioid structure over a base category equivalent to
+          <span class="math">Btemp(Pi_X^tp)^0</span>. The constructed
+          <span class="math">MTheta(C)</span> recovers the corresponding base category
+          through <span class="math">Pi_X(MTheta(C))</span>.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Proposition 1.2(ii)</a>
+          Related: <a href="#frobenius-etale-versions-ii-intro">Frobenius/etale versions</a>
+          <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-cyclotomic-compatibility-ii13" data-filter="iut ii proposition 1.3 compatibility cyclotomic rigidity mono theta base field galois MLF pair AbsTopIII">
+        <h2>Cyclotomic Compatibility in Proposition 1.3</h2>
+        <p class="lede">
+          Proposition 1.3 checks that the mono-theta cyclotomic rigidity isomorphism
+          arising from a tempered Frobenioid agrees with the corresponding
+          base-field/Galois cyclotomic rigidity isomorphism from the MLF-Galois pair
+          framework. Both identifications coincide with the conventional scheme-theoretic
+          cyclotome when the Frobenioid arises from familiar scheme objects.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Isomorphism</th><th>Source</th><th>Compatibility claim</th></tr>
+          <tr>
+            <td><span class="math">(*mono-Theta)</span></td>
+            <td>Interior cyclotome subquotient of <span class="math">Aut(S_bs)</span> to <span class="math">mu_N(S)</span>.</td>
+            <td>The two cyclotomic rigidity isomorphisms coincide.</td>
+          </tr>
+          <tr>
+            <td><span class="math">(*bs-Gal)</span></td>
+            <td>MLF-Galois pair cyclotome comparison through <span class="math">mu_Z</span> identifications.</td>
+            <td>The same compatibility assertion applies to the base-field/Galois route.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Proposition 1.3</a>
+          Related: <a href="#mono-theta-cyclotomes-ii11">interior/exterior cyclotomes</a>
+          <a href="#mono-theta-frobenioid-route-ii12">Frobenioid route</a>
         </div>
       </section>
 
