@@ -586,6 +586,9 @@
         <a href="#iut-iv-atlas">IUT IV atlas</a>
         <h2>Core IUT</h2>
         <a href="#initial-theta-data">Initial theta data</a>
+        <a href="#initial-theta-field-moduli-iut-i31">Theta data field/moduli 3.1</a>
+        <a href="#initial-theta-valuations-iut-i31">Theta data valuations 3.1</a>
+        <a href="#initial-theta-cusp-covers-iut-i31">Theta data cusp/covers 3.1</a>
         <a href="#theta-approach-abs-top-319">Theta approach 3.1.2</a>
         <a href="#kappa-coric-functions">Kappa-coric functions</a>
         <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
@@ -9040,6 +9043,247 @@
           Related: <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#iut-i-atlas">IUT I atlas</a>
           <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="initial-theta-field-moduli-iut-i31" data-filter="iut i definition 3.1 initial theta data number field fmod k galois torsion image sl2">
+        <h2>Initial Theta Field and Moduli Layer</h2>
+        <p class="lede">
+          Definition 3.1 begins with arithmetic base data. The number field
+          <span class="math">F</span>, its algebraic closure, the field of moduli
+          <span class="math">Fmod</span>, and the <span class="math">ell</span>-torsion
+          field <span class="math">K</span> set the Galois environment in which all
+          later Hodge-theater objects are built.
+        </p>
+        <div class="diagram fit" aria-label="Initial theta field and moduli layer">
+          <div class="diagramHeader">
+            <strong>Arithmetic base for initial theta data</strong>
+            <span>IUT I Definition 3.1(a)-(c)</span>
+          </div>
+          <svg viewBox="0 0 1040 420" role="img">
+            <defs>
+              <marker id="arrowThetaFieldI31" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="187" y="106" text-anchor="middle">number field F</text>
+            <text class="tinyText" x="187" y="130" text-anchor="middle">sqrt(-1) in F</text>
+            <text class="tinyText" x="187" y="148" text-anchor="middle">algebraic closure fixed</text>
+
+            <rect class="nodeBox green" x="405" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="520" y="106" text-anchor="middle">field of moduli Fmod</text>
+            <text class="tinyText" x="520" y="130" text-anchor="middle">from X_F</text>
+            <text class="tinyText" x="520" y="148" text-anchor="middle">valuation base Vmod</text>
+
+            <rect class="nodeBox gold" x="738" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="853" y="106" text-anchor="middle">ell-torsion field K</text>
+            <text class="tinyText" x="853" y="130" text-anchor="middle">kernel of G_F -> GL2(F_ell)</text>
+            <text class="tinyText" x="853" y="148" text-anchor="middle">image contains SL2(F_ell)</text>
+
+            <rect class="nodeBox violet" x="230" y="280" width="270" height="84"></rect>
+            <text class="nodeTitle" x="365" y="310" text-anchor="middle">Galois constraints</text>
+            <text class="tinyText" x="365" y="334" text-anchor="middle">F/Fmod Galois, degree prime to ell</text>
+            <text class="tinyText" x="365" y="352" text-anchor="middle">2*3 torsion rational over F</text>
+
+            <rect class="nodeBox red" x="575" y="280" width="270" height="84"></rect>
+            <text class="nodeTitle" x="710" y="310" text-anchor="middle">prime ell constraints</text>
+            <text class="tinyText" x="710" y="334" text-anchor="middle">ell >= 5</text>
+            <text class="tinyText" x="710" y="352" text-anchor="middle">prime to bad residue and q-orders</text>
+
+            <path class="edge blue" d="M304 119 H403" marker-end="url(#arrowThetaFieldI31)"></path>
+            <path class="edge green" d="M637 119 H736" marker-end="url(#arrowThetaFieldI31)"></path>
+            <path class="edge violet" d="M520 164 C482 224 405 250 372 278" marker-end="url(#arrowThetaFieldI31)"></path>
+            <path class="edge red" d="M853 164 C824 224 744 250 716 278" marker-end="url(#arrowThetaFieldI31)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Layer</th><th>Definition 3.1 data</th><th>Downstream use</th></tr>
+          <tr>
+            <td>Base field</td>
+            <td><span class="math">F</span> is a number field with <span class="math">sqrt(-1) in F</span>; an algebraic closure is fixed.</td>
+            <td>Supplies absolute Galois groups and the arithmetic base of the theater.</td>
+          </tr>
+          <tr>
+            <td>Moduli field</td>
+            <td><span class="math">Fmod</span> is the field of moduli of the once-punctured elliptic curve.</td>
+            <td>Provides the valuation base and later stack/Frobenioid constructions.</td>
+          </tr>
+          <tr>
+            <td>Torsion field</td>
+            <td><span class="math">K</span> is determined by the kernel of the <span class="math">ell</span>-torsion representation, whose image contains <span class="math">SL2(F_ell)</span>.</td>
+            <td>Controls the torsion-cover and Galois symmetry layer used in theta data.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Definition 3.1(a)-(c)</a>
+          Related: <a href="#initial-theta-data">initial theta data</a>
+          <a href="#initial-theta-valuations-iut-i31">valuation layer</a>
+          <a href="#initial-theta-cusp-covers-iut-i31">cusp/covers layer</a>
+        </div>
+      </section>
+
+      <section id="initial-theta-valuations-iut-i31" data-filter="iut i definition 3.1 valuations v vmod vbad vgood nonarchimedean archimedean bad multiplicative">
+        <h2>Initial Theta Valuation Layer</h2>
+        <p class="lede">
+          Definition 3.1 chooses a subset <span class="math">V</span> of valuations of
+          <span class="math">K</span> that is a section over the valuations of
+          <span class="math">Fmod</span>. This turns the global field data into
+          valuation-indexed local data and separates bad multiplicative places from good
+          places before Frobenioids and prime-strips are built.
+        </p>
+        <div class="diagram fit" aria-label="Initial theta valuation layer">
+          <div class="diagramHeader">
+            <strong>Valuation section and bad/good split</strong>
+            <span>IUT I Definition 3.1(b),(e)</span>
+          </div>
+          <svg viewBox="0 0 980 410" role="img">
+            <defs>
+              <marker id="arrowThetaValI31" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="78" width="220" height="86"></rect>
+            <text class="nodeTitle" x="182" y="108" text-anchor="middle">Vmod = V(Fmod)</text>
+            <text class="tinyText" x="182" y="132" text-anchor="middle">base valuation set</text>
+            <text class="tinyText" x="182" y="150" text-anchor="middle">bad subset nonempty</text>
+
+            <rect class="nodeBox green" x="380" y="78" width="220" height="86"></rect>
+            <text class="nodeTitle" x="490" y="108" text-anchor="middle">section V in V(K)</text>
+            <text class="tinyText" x="490" y="132" text-anchor="middle">bijection V -> Vmod</text>
+            <text class="tinyText" x="490" y="150" text-anchor="middle">chosen local representatives</text>
+
+            <rect class="nodeBox gold" x="688" y="78" width="220" height="86"></rect>
+            <text class="nodeTitle" x="798" y="108" text-anchor="middle">Vbad and Vgood</text>
+            <text class="tinyText" x="798" y="132" text-anchor="middle">multiplicative bad places</text>
+            <text class="tinyText" x="798" y="150" text-anchor="middle">good complement</text>
+
+            <rect class="nodeBox violet" x="220" y="280" width="240" height="84"></rect>
+            <text class="nodeTitle" x="340" y="310" text-anchor="middle">local base-change</text>
+            <text class="tinyText" x="340" y="334" text-anchor="middle">X_v, C_v and groups Pi_v</text>
+            <text class="tinyText" x="340" y="352" text-anchor="middle">outer maps to G_v</text>
+
+            <rect class="nodeBox red" x="540" y="280" width="240" height="84"></rect>
+            <text class="nodeTitle" x="660" y="310" text-anchor="middle">bad-place theta models</text>
+            <text class="tinyText" x="660" y="334" text-anchor="middle">extract ell-th root of theta</text>
+            <text class="tinyText" x="660" y="352" text-anchor="middle">type (1,Z/ellZ)^±</text>
+
+            <path class="edge blue" d="M294 121 H378" marker-end="url(#arrowThetaValI31)"></path>
+            <path class="edge green" d="M602 121 H686" marker-end="url(#arrowThetaValI31)"></path>
+            <path class="edge violet" d="M490 166 C452 224 382 250 348 278" marker-end="url(#arrowThetaValI31)"></path>
+            <path class="edge red" d="M798 166 C766 224 696 250 666 278" marker-end="url(#arrowThetaValI31)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card">
+            <h3>Section over moduli valuations</h3>
+            <p>
+              The choice <span class="math">V subset V(K)</span> induces a bijection
+              with <span class="math">Vmod</span>. Later local objects are indexed by
+              this chosen representative set.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Bad nonarchimedean places</h3>
+            <p>
+              <span class="math">Vbad_mod</span> is nonempty, nonarchimedean, of odd
+              residue characteristic, and consists of places where the elliptic curve has
+              multiplicative reduction.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Bad-place theta models</h3>
+            <p>
+              At bad places, the paper invokes the <span class="math">EtTh</span>
+              construction, described informally as extracting an
+              <span class="math">ell</span>-th root of the theta function, to obtain
+              the local torsion-theta orbicurve models.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Definition 3.1(b),(e)</a>
+          Related: <a href="#initial-theta-data">initial theta data</a>
+          <a href="#bad-nonarch-frobenioids-32">bad nonarch Frobenioids</a>
+          <a href="#theta-evaluation-sections-44-45">theta evaluation sections</a>
+        </div>
+      </section>
+
+      <section id="initial-theta-cusp-covers-iut-i31" data-filter="iut i definition 3.1 c_k x_k cusp epsilon arrow covers local covers pi groups">
+        <h2>Initial Theta Cusp and Cover Layer</h2>
+        <p class="lede">
+          The cover and cusp part of Definition 3.1 ties the Section 1 arrow-cover
+          machinery to the initial theta package. The orbicurve <span class="math">C_K</span>
+          determines <span class="math">X_K</span>, local covers and fundamental groups,
+          and a distinguished nonzero cusp <span class="math">epsilon</span> whose local
+          specializations become the label source for later theta and Kummer data.
+        </p>
+        <div class="diagram fit" aria-label="Initial theta cusp and cover layer">
+          <div class="diagramHeader">
+            <strong>Cover package plus distinguished cusp</strong>
+            <span>IUT I Definition 3.1(d)-(f)</span>
+          </div>
+          <svg viewBox="0 0 1040 430" role="img">
+            <defs>
+              <marker id="arrowThetaCuspI31" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="187" y="106" text-anchor="middle">C_K</text>
+            <text class="tinyText" x="187" y="130" text-anchor="middle">type (1,ell-tors)^±</text>
+            <text class="tinyText" x="187" y="148" text-anchor="middle">core C_F x_F K</text>
+
+            <rect class="nodeBox green" x="405" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="520" y="106" text-anchor="middle">X_K and groups</text>
+            <text class="tinyText" x="520" y="130" text-anchor="middle">finite etale cover diagrams</text>
+            <text class="tinyText" x="520" y="148" text-anchor="middle">Pi_X subset Pi_C</text>
+
+            <rect class="nodeBox gold" x="738" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="853" y="106" text-anchor="middle">cusp epsilon</text>
+            <text class="tinyText" x="853" y="130" text-anchor="middle">nonzero torsion cusp</text>
+            <text class="tinyText" x="853" y="148" text-anchor="middle">bad-place canonical generator</text>
+
+            <rect class="nodeBox violet" x="230" y="286" width="270" height="84"></rect>
+            <text class="nodeTitle" x="365" y="316" text-anchor="middle">arrow covers over K</text>
+            <text class="tinyText" x="365" y="340" text-anchor="middle">X_K arrow and C_K arrow</text>
+            <text class="tinyText" x="365" y="358" text-anchor="middle">Definition 1.1 interface</text>
+
+            <rect class="nodeBox red" x="575" y="286" width="270" height="84"></rect>
+            <text class="nodeTitle" x="710" y="316" text-anchor="middle">local cusp epsilon_v</text>
+            <text class="tinyText" x="710" y="340" text-anchor="middle">for every v in V</text>
+            <text class="tinyText" x="710" y="358" text-anchor="middle">feeds labels and theta evaluation</text>
+
+            <path class="edge blue" d="M304 119 H403" marker-end="url(#arrowThetaCuspI31)"></path>
+            <path class="edge green" d="M637 119 H736" marker-end="url(#arrowThetaCuspI31)"></path>
+            <path class="edge violet" d="M520 166 C476 226 402 256 372 284" marker-end="url(#arrowThetaCuspI31)"></path>
+            <path class="edge red" d="M853 166 C820 226 744 256 718 284" marker-end="url(#arrowThetaCuspI31)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Component</th><th>Definition 3.1 role</th><th>Guardrail</th></tr>
+          <tr>
+            <td><span class="math">C_K</span> and <span class="math">X_K</span></td>
+            <td>The signed torsion orbicurve over <span class="math">K</span> determines the associated cover and profinite group inclusions.</td>
+            <td>Do not model initial theta data as just an elliptic curve and prime.</td>
+          </tr>
+          <tr>
+            <td>Distinguished cusp</td>
+            <td><span class="math">epsilon</span> is a nonzero cusp of <span class="math">C_K</span>; at bad places it matches the canonical generator up to sign.</td>
+            <td>Cusp compatibility is part of the source data for labels and theta values.</td>
+          </tr>
+          <tr>
+            <td>Arrow cover output</td>
+            <td>The data determines <span class="math">X_K arrow</span> and <span class="math">C_K arrow</span> of Definition 1.1 type.</td>
+            <td>This ties Definition 3.1 back to the Section 1 cyclic-cover machinery.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Definition 3.1(d)-(f)</a>
+          Related: <a href="#arrow-torsion-types-iut-i1">arrow torsion types</a>
+          <a href="#initial-theta-valuations-iut-i31">valuation layer</a>
+          <a href="#theta-approach-abs-top-319">theta approach</a>
+          <a href="#theta-evaluation-sections-44-45">theta evaluation sections</a>
         </div>
       </section>
 
