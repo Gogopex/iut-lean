@@ -469,6 +469,7 @@
         <a href="#initial-theta-data">Initial theta data</a>
         <a href="#hodge-theaters">Hodge theaters</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
+        <a href="#multiplicative-additive-bridges">Multiplicative/additive bridges</a>
         <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
         <a href="#theta-log-links">Theta and log links</a>
         <a href="#log-theta-lattice">Log-theta lattice</a>
@@ -1947,6 +1948,152 @@
           Related: <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#theta-log-links">theta/log links</a>
           <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="multiplicative-additive-bridges">
+        <h2>Multiplicative and Additive Bridge Theory</h2>
+        <p class="lede">
+          IUT I separates two combinatorial directions before the later theta-value
+          estimates are attempted. Section 4 develops a multiplicative
+          <span class="math">F_l</span>-label theory for D-ThetaNF theaters. Section 6
+          develops an additive <span class="math">F_l^±</span>-label theory for
+          D-Theta±ell theaters and then glues the additive and multiplicative sides
+          into Theta±ellNF theaters.
+        </p>
+        <div class="diagram" aria-label="Multiplicative and additive bridge comparison">
+          <div class="diagramHeader">
+            <strong>Bridge split in IUT I</strong>
+            <span>multiplicative labels, additive labels, and the glued theater</span>
+          </div>
+          <svg viewBox="0 0 900 430" role="img">
+            <defs>
+              <marker id="arrowBridgeSplit" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="48" y="42" width="210" height="86"></rect>
+            <text class="nodeTitle" x="153" y="70" text-anchor="middle">D-ThetaNF</text>
+            <text class="smallText" x="153" y="94" text-anchor="middle">D-NF bridge + D-Theta bridge</text>
+            <text class="tinyText" x="153" y="113" text-anchor="middle">labels synchronized by LabCusp(D)</text>
+
+            <rect class="nodeBox gold" x="48" y="246" width="210" height="86"></rect>
+            <text class="nodeTitle" x="153" y="274" text-anchor="middle">D-Theta±ell</text>
+            <text class="smallText" x="153" y="298" text-anchor="middle">D-Theta± bridge + D-Thetaell bridge</text>
+            <text class="tinyText" x="153" y="317" text-anchor="middle">± labels synchronized by LabCusp±(D±)</text>
+
+            <rect class="nodeBox green" x="350" y="42" width="202" height="86"></rect>
+            <text class="nodeTitle" x="451" y="70" text-anchor="middle">F_l symmetry</text>
+            <text class="smallText" x="451" y="94" text-anchor="middle">cyclic, multiplicative</text>
+            <text class="tinyText" x="451" y="113" text-anchor="middle">forget labels: S_l symmetry</text>
+
+            <rect class="nodeBox violet" x="350" y="246" width="202" height="86"></rect>
+            <text class="nodeTitle" x="451" y="274" text-anchor="middle">F_l^± symmetry</text>
+            <text class="smallText" x="451" y="298" text-anchor="middle">additive with sign</text>
+            <text class="tinyText" x="451" y="317" text-anchor="middle">forget labels: S_l± symmetry</text>
+
+            <rect class="nodeBox red" x="642" y="140" width="230" height="116"></rect>
+            <text class="nodeTitle" x="757" y="170" text-anchor="middle">Theta±ellNF</text>
+            <text class="smallText" x="757" y="195" text-anchor="middle">unique gluing along</text>
+            <text class="smallText" x="757" y="214" text-anchor="middle">compatible Theta bridges</text>
+            <text class="tinyText" x="757" y="234" text-anchor="middle">relay between arithmetic</text>
+            <text class="tinyText" x="757" y="249" text-anchor="middle">and geometric basepoints</text>
+
+            <path d="M258 85 H348" stroke="#315b8f" stroke-width="1.6" fill="none" marker-end="url(#arrowBridgeSplit)"></path>
+            <path d="M258 289 H348" stroke="#8b6b24" stroke-width="1.6" fill="none" marker-end="url(#arrowBridgeSplit)"></path>
+            <path d="M552 86 C606 92 624 128 641 166" stroke="#2f6b4f" stroke-width="1.6" fill="none" marker-end="url(#arrowBridgeSplit)"></path>
+            <path d="M552 289 C606 282 624 248 641 222" stroke="#66508a" stroke-width="1.6" fill="none" marker-end="url(#arrowBridgeSplit)"></path>
+
+            <rect class="nodeBox" x="302" y="364" width="298" height="42"></rect>
+            <text class="smallText" x="451" y="390" text-anchor="middle">processions reduce independent label choices</text>
+            <path d="M451 128 V362" stroke="#5f676d" stroke-width="1.3" stroke-dasharray="5 5" fill="none" marker-end="url(#arrowBridgeSplit)"></path>
+            <path d="M451 246 V210" stroke="#5f676d" stroke-width="1.3" stroke-dasharray="5 5" fill="none" marker-end="url(#arrowBridgeSplit)"></path>
+          </svg>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>Multiplicative side: D-ThetaNF</h3>
+            <p>
+              IUT I Definition 4.6 defines a D-NF bridge, a D-Theta bridge, and the
+              D-ThetaNF-Hodge theater that combines them over the same capsule of
+              D-prime-strips. Proposition 4.7 extracts a label bijection
+              <span class="math">J ≃ F_l</span> and a global cusp-label bijection
+              <span class="math">LabCusp(D) ≃ J</span>.
+            </p>
+            <p>
+              The mathematical role of this side is synchronization: one global object
+              <span class="math">D = B(C_K)^0</span> prevents independent relabeling of
+              each capsule component. Mochizuki explicitly contrasts this with
+              nonsynchronized label choices in Remark 4.9.2.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT I, Definition 4.6</span><span class="tag green">Proposition 4.7</span></div>
+          </div>
+          <div class="card">
+            <h3>Forgetful functors and comparability</h3>
+            <p>
+              Proposition 4.9 records three outputs: the underlying D-NF bridge with
+              simply transitive <span class="math">F_l</span>-symmetry, the unlabeled
+              capsule with full symmetric-group freedom, and the mono-analytic capsule.
+              The point is not to forget information casually, but to expose exactly which
+              comparisons become available after labels are hidden.
+            </p>
+            <p>
+              Proposition 4.11 then organizes the unlabeled capsule into processions.
+              Processions retain enough order to reduce independent label ambiguity to
+              a factorial procession ambiguity, while preserving the comparisons needed
+              for later log-volume computations.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 4.9</span><span class="tag green">Proposition 4.11</span></div>
+          </div>
+          <div class="card">
+            <h3>Additive side: D-Theta±ell</h3>
+            <p>
+              IUT I Definition 6.1 introduces <span class="math">F_l^±</span>-groups,
+              <span class="math">F_l^±</span>-torsors, positive automorphisms, and
+              ±-label classes of cusps. Definition 6.4 uses this language to define
+              D-Theta± bridges, D-Thetaell bridges, and D-Theta±ell-Hodge theaters.
+            </p>
+            <p>
+              Proposition 6.5 supplies the additive analogue of Proposition 4.7: the
+              capsule index set is tied to global ±-label classes of cusps. Proposition
+              6.8 gives the corresponding <span class="math">F_l^±</span>-symmetry and
+              the coarser symmetric-group symmetry after labels are forgotten.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 6.1</span><span class="tag green">Definition 6.4</span><span class="tag green">Proposition 6.5</span></div>
+          </div>
+          <div class="card">
+            <h3>Gluing: Theta±ellNF</h3>
+            <p>
+              Proposition 6.7 constructs a D-Theta bridge from a D-Theta± bridge by a
+              functorial algorithm. Definition 6.13 then glues a Theta±ell-Hodge theater
+              to a ThetaNF-Hodge theater along the associated Theta bridges; the gluing
+              is unique in the sense cited in Remark 6.12.2.
+            </p>
+            <p>
+              Remark 6.12.6 describes the result as a relay between geometric and
+              arithmetic basepoints. This relay is why the wiki treats the bridge theory
+              as structural, not as peripheral notation.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 6.7</span><span class="tag green">Definition 6.13</span><span class="tag">basepoints</span></div>
+          </div>
+        </div>
+
+        <div class="callout gold">
+          For the IUT formalization project, this page marks a concrete boundary:
+          labels, torsors, capsules, processions, and mono-analyticization must be
+          represented as separate interfaces. A Lean model that identifies them too
+          early cannot express the distinction between synchronized
+          <span class="math">F_l</span>/<span class="math">F_l^±</span> data and
+          unlabeled symmetric-group data.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, §§4, 6</a>
+          Related: <a href="#prime-strips-bridges">prime strips</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#log-theta-lattice">log-theta lattice</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
         </div>
       </section>
 
