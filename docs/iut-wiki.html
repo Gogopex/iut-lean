@@ -865,6 +865,12 @@
               <a href="#local-log-link">local log-link</a>,
               <a href="#log-shell-containment">log-shell containment</a>,
               <a href="#log-link-kummer-incompatibility">log-link/Kummer incompatibility</a>,
+              <a href="#tautological-full-log-link">tautological/full log-link</a>,
+              <a href="#unit-only-log-link">unit-only log-link domain</a>,
+              <a href="#f-perp-times-mu-log-shells">F⊢×μ log-shells</a>,
+              <a href="#mono-analytic-log-shells">mono-analytic log-shells</a>,
+              <a href="#coric-holomorphic-log-shells">coric holomorphic log-shells</a>,
+              <a href="#log-link-frobenius-picture">log-link Frobenius-picture</a>,
               <a href="#vertical-bicoric-log-shells">bi-coric log-shells</a>,
               <a href="#vertical-cores">vertical cores</a>,
               <a href="#multiradial-theta-monoids">multiradial theta monoids</a>,
@@ -4576,6 +4582,213 @@
               LGP-monoids and the tensor-packet comparison.
             </p>
             <div class="tagRow"><span class="tag green">Theorem 1.5 preview</span><span class="tag">bi-coricity</span></div>
+          </div>
+        </div>
+        <table>
+          <tr>
+            <th>IUT III §1 source item</th>
+            <th>Precise interface</th>
+            <th>Audit consequence</th>
+          </tr>
+          <tr>
+            <td>Definition 1.1(i)</td>
+            <td>
+              For <span class="math">v in Vnon</span>, the p-adic logarithm on the
+              perfected unit monoid defines <span class="math">log(F_v)</span>, the
+              tautological log-link <span class="math">F_v -> log(F_v)</span>, and the
+              log-shell obtained by scaling the invariant pre-log-shell by
+              <span class="math">(p_v^*)^{-1}</span>.
+            </td>
+            <td>
+              The nonarchimedean log-link is built from local units, group action, and
+              the p-adic logarithm; it is not a map of the original full monoid.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 1.1(ii)</td>
+            <td>
+              For <span class="math">v in Varc</span>, a pointed universal cover of the
+              groupification, quotients by roots of unity, and the complex logarithm
+              construct <span class="math">log(F_v)</span> and an archimedean log-shell.
+            </td>
+            <td>
+              The archimedean case is Kummer/Aut-holomorphic and line-segment based;
+              it should not be copied from the nonarchimedean formula.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 1.1(iii)</td>
+            <td>
+              The local constructions assemble into a tautological log-link
+              <span class="math">F -> log(F)</span>. A general or full log-link is
+              obtained by post-composing with a poly-isomorphism
+              <span class="math">log(F) -> F'</span>.
+            </td>
+            <td>
+              The full log-link deliberately replaces the tautological rigidifying path
+              by poly-isomorphism data suitable for etale-like multiradial use.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 1.1(iv)-(vi)</td>
+            <td>
+              The modules <span class="math">I_F⊢×μ ⊆ log(F⊢×μ)</span> are constructed
+              solely from the <span class="math">F⊢×μ</span>-prime-strip, using only the
+              unit quotient data.
+            </td>
+            <td>
+              This is the source for treating log-shells as available after the
+              <span class="math">F⊢×μ</span> weakening used by theta-type links.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.1.1</td>
+            <td>
+              Iterates of log-links are understood only on the local unit groups in
+              their domains. Non-unit/value-group parts are not needed to construct
+              log-shells.
+            </td>
+            <td>
+              The wiki keeps value-group distortion separate from log-shell construction:
+              log-links render unit data additive.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.1.2</td>
+            <td>
+              The tautological log-link identifies the domain and codomain
+              <span class="math">Pi_v</span>'s by a rigidifying path built from
+              Frobenius-like monoids. The full log-link uses a tautologically
+              indeterminate isomorphism.
+            </td>
+            <td>
+              Multiradial algorithms need the full-log-link formulation because it can
+              be expressed in etale-like terms without depending on the monoid path.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 1.2(i)-(iv)</td>
+            <td>
+              A log-link induces poly-isomorphisms of associated D- and
+              <span class="math">D⊢</span>-prime-strips, is compatible with ring
+              structures and log-volumes, but the Kummer isomorphisms fail to be
+              compatible with the D-coric comparison at element level.
+            </td>
+            <td>
+              This is the exact reason that later log-Kummer compatibility must be
+              upper-semi rather than equality-based.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 1.2(v)-(ix)</td>
+            <td>
+              Holomorphic, mono-analytic, and coric holomorphic log-shells are
+              constructed with compatible log-volumes and poly-isomorphisms between
+              <span class="math">D⊢</span>, <span class="math">F⊢×μ</span>, and
+              <span class="math">F</span> versions.
+            </td>
+            <td>
+              The paper supplies several log-shell representations; they must not be
+              collapsed into one undifferentiated shell object.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 1.2(x)</td>
+            <td>
+              Full log-links generate an oriented Frobenius-picture chain of
+              F-prime-strips whose D and <span class="math">D⊢</span> cores are
+              identified up to full poly-isomorphism.
+            </td>
+            <td>
+              This vertical Frobenius-picture has translation symmetry fixing the core,
+              but no arbitrary adjacent-vertex permutation symmetry.
+            </td>
+          </tr>
+        </table>
+        <div class="grid2">
+          <div class="card" id="tautological-full-log-link">
+            <h3>Tautological and full log-links</h3>
+            <p>
+              Definition 1.1 first constructs a tautological log-link
+              <span class="math">F -> log(F)</span>. A full log-link post-composes this
+              with the full poly-isomorphism from <span class="math">log(F)</span> to a
+              target F-prime-strip.
+            </p>
+            <p>
+              Remark 1.1.2 explains the reason: the tautological link carries a specific
+              monoid-built rigidifying path, while the full link is expressed in
+              etale-like indeterminate terms needed later.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 1.1(iii)</span><span class="tag green">Remark 1.1.2</span></div>
+          </div>
+          <div class="card" id="unit-only-log-link">
+            <h3>Unit-only log-link domain</h3>
+            <p>
+              Remark 1.1.1 says that iterated log-links are to be understood on local
+              units in their domains. The purpose of the log-link is to construct
+              log-shells from units; non-unit value-group portions are not required for
+              this construction.
+            </p>
+            <p>
+              This is the local mechanism behind the later split between additive
+              log-shell data and multiplicative value-group distortion.
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 1.1.1</span><span class="tag">units</span></div>
+          </div>
+          <div class="card" id="f-perp-times-mu-log-shells">
+            <h3>F⊢×μ log-shells</h3>
+            <p>
+              Definition 1.1(iv)-(vi) reconstructs log-shell modules from
+              <span class="math">F⊢×μ</span>-prime-strip data alone. The construction
+              uses the unit quotient/perfection interface and is unaffected by quotienting
+              units by torsion.
+            </p>
+            <p>
+              This gives the log-shell side access to the weakened interface already used
+              by the modified theta links of IUT II.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 1.1(iv)-(vi)</span><span class="tag">F⊢×μ</span></div>
+          </div>
+          <div class="card" id="mono-analytic-log-shells">
+            <h3>Mono-analytic log-shells</h3>
+            <p>
+              Proposition 1.2(vi)-(viii) constructs mono-analytic log-shells from
+              <span class="math">D⊢</span>-prime-strip data and relates them by
+              compatible poly-isomorphisms to <span class="math">F⊢×μ</span> and
+              holomorphic F-prime-strip log-shells.
+            </p>
+            <p>
+              These are the shell objects that can be read without carrying a specific
+              arithmetic holomorphic history.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 1.2(vi)-(viii)</span><span class="tag">D⊢</span></div>
+          </div>
+          <div class="card" id="coric-holomorphic-log-shells">
+            <h3>Coric holomorphic log-shells</h3>
+            <p>
+              Proposition 1.2(ix) starts from a D-prime-strip, forms the corresponding
+              F-prime-strip <span class="math">F(D)</span>, and uses the full log-link to
+              construct coric holomorphic log-shells in the constant monoid data.
+            </p>
+            <p>
+              This is a separate representation from the mono-analytic shell, connected
+              to it by the natural isomorphisms supplied in the proposition.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 1.2(ix)</span><span class="tag">coric</span></div>
+          </div>
+          <div class="card" id="log-link-frobenius-picture">
+            <h3>Log-link Frobenius-picture</h3>
+            <p>
+              Proposition 1.2(x) organizes full log-links into an oriented
+              integer-indexed chain. The associated D and <span class="math">D⊢</span>
+              prime-strips form a fixed core under translation by
+              <span class="math">Z</span>.
+            </p>
+            <p>
+              As in the theta-link Frobenius-picture, arbitrary adjacent swaps are not
+              allowed.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 1.2(x)</span><span class="tag">Frobenius-picture</span></div>
           </div>
         </div>
         <table>
