@@ -481,6 +481,7 @@
         <a href="#collas-category-perspective">Collas category view</a>
         <a href="#gt-species-perspective">GT species perspective</a>
         <a href="#hoshi-introduction-route">Hoshi introduction route</a>
+        <a href="#iut-i-notation-primitives">IUT I notation primitives</a>
         <a href="#iut-i-atlas">IUT I atlas</a>
         <a href="#iut-ii-atlas">IUT II atlas</a>
         <a href="#iut-iii-atlas">IUT III atlas</a>
@@ -1259,6 +1260,21 @@
               <a href="#bad-good-primes">bad/good valuations</a>
             </td>
             <td>IUT I, Sections 1-3</td>
+          </tr>
+          <tr>
+            <td>IUT I</td>
+            <td>Notation and categorical primitives</td>
+            <td>
+              <a href="#iut-i-notation-primitives">notation primitives</a>,
+              <a href="#pseudo-monoid">pseudo-monoid</a>,
+              <a href="#cyclotomic-pseudo-monoid">cyclotomic pseudo-monoid</a>,
+              <a href="#category-isomorphism-convention">category-isomorphism convention</a>,
+              <a href="#poly-morphism">poly-morphism</a>,
+              <a href="#capsule-of-objects">capsule</a>,
+              <a href="#connected-temperoid">connected temperoid</a>,
+              <a href="#abstract-equivalence-of-functors">abstract equivalence</a>
+            </td>
+            <td>IUT I, Section 0</td>
           </tr>
           <tr>
             <td>IUT I</td>
@@ -3607,6 +3623,175 @@
           <a href="#theta-log-links">theta/log links</a>
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#indeterminacies">indeterminacies</a>
+        </div>
+      </section>
+
+      <section id="iut-i-notation-primitives">
+        <h2>IUT I Notation Primitives</h2>
+        <p class="lede">
+          IUT I Section 0 fixes conventions that later pages use constantly. These are
+          not optional stylistic choices: poly-isomorphisms, capsules, pseudo-monoids,
+          and connected temperoids determine what kind of comparison is being made when
+          a theorem says "isomorphism" or "full poly-isomorphism."
+        </p>
+        <div class="diagram" aria-label="IUT I notation primitives">
+          <div class="diagramHeader">
+            <strong>Conventions before the construction</strong>
+            <span>IUT I §0: monoids, categories, temperoids, valuations</span>
+          </div>
+          <svg viewBox="0 0 1040 500" role="img">
+            <defs>
+              <marker id="arrowNotation" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="64" y="76" width="210" height="84"></rect>
+            <text class="nodeTitle" x="169" y="106" text-anchor="middle">pseudo-monoids</text>
+            <text class="tinyText" x="169" y="130" text-anchor="middle">partial multiplication</text>
+            <text class="tinyText" x="169" y="148" text-anchor="middle">inside an ambient group</text>
+
+            <rect class="nodeBox blue" x="414" y="76" width="210" height="84"></rect>
+            <text class="nodeTitle" x="519" y="106" text-anchor="middle">poly-isomorphisms</text>
+            <text class="tinyText" x="519" y="130" text-anchor="middle">sets of isomorphisms</text>
+            <text class="tinyText" x="519" y="148" text-anchor="middle">multiplicity ignored</text>
+
+            <rect class="nodeBox gold" x="764" y="76" width="210" height="84"></rect>
+            <text class="nodeTitle" x="869" y="106" text-anchor="middle">capsules</text>
+            <text class="tinyText" x="869" y="130" text-anchor="middle">finite object families</text>
+            <text class="tinyText" x="869" y="148" text-anchor="middle">index injections and bijections</text>
+
+            <rect class="nodeBox violet" x="238" y="286" width="240" height="88"></rect>
+            <text class="nodeTitle" x="358" y="316" text-anchor="middle">connected temperoids</text>
+            <text class="tinyText" x="358" y="340" text-anchor="middle">Btemp(Pi) categories</text>
+            <text class="tinyText" x="358" y="358" text-anchor="middle">recover Pi up to inner automorphism</text>
+
+            <rect class="nodeBox red" x="578" y="286" width="240" height="88"></rect>
+            <text class="nodeTitle" x="698" y="316" text-anchor="middle">valuation notation</text>
+            <text class="tinyText" x="698" y="340" text-anchor="middle">NF, MLF, CAF, V(F)</text>
+            <text class="tinyText" x="698" y="358" text-anchor="middle">places, completions, curves</text>
+
+            <path d="M276 118 H412" class="edge green" marker-end="url(#arrowNotation)"></path>
+            <path d="M626 118 H762" class="edge blue" marker-end="url(#arrowNotation)"></path>
+            <path d="M474 160 C430 208 382 236 360 284" class="edge violet" marker-end="url(#arrowNotation)"></path>
+            <path d="M764 160 C724 214 704 240 698 284" class="edge red" marker-end="url(#arrowNotation)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="pseudo-monoid">
+            <h3>Pseudo-monoid</h3>
+            <p>
+              A topological pseudo-monoid is a topological space with a partially
+              defined multiplication obtained by embedding it in an ambient topological
+              abelian group and restricting the group law to products that remain inside
+              the embedded subspace.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT I §0</span><span class="tag">monoids</span></div>
+          </div>
+          <div class="card" id="cyclotomic-pseudo-monoid">
+            <h3>Divisible and cyclotomic cases</h3>
+            <p>
+              Divisibility is defined by the existence and compatibility of roots in the
+              ambient group. Cyclotomic pseudo-monoids carry a torsion subgroup
+              isomorphic to <span class="math">Q/Z</span> and stable under multiplication
+              with the pseudo-monoid.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT I §0</span><span class="tag">cyclotomic</span></div>
+          </div>
+          <div class="card" id="category-isomorphism-convention">
+            <h3>Category-isomorphism convention</h3>
+            <p>
+              Mochizuki uses "isomorphism of categories" to mean an isomorphism class of
+              equivalences of categories. This convention matters whenever later pages
+              speak about full poly-isomorphisms between categories or Hodge-theater
+              components.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §0</span><span class="tag">categories</span></div>
+          </div>
+          <div class="card" id="poly-morphism">
+            <h3>Poly-morphism and full poly-isomorphism</h3>
+            <p>
+              A poly-morphism is a collection of morphisms between two objects; a
+              poly-isomorphism is a collection of isomorphisms. The full
+              poly-isomorphism is the collection of all isomorphisms. Composites ignore
+              multiplicity and retain the set of all pairwise composites.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §0</span><span class="tag">poly</span></div>
+          </div>
+          <div class="card" id="capsule-of-objects">
+            <h3>Capsule of objects</h3>
+            <p>
+              A capsule is a finite indexed family of objects in a category. Morphisms
+              between capsules use injections of index sets and component morphisms;
+              capsule-full poly-isomorphisms use bijections of the index sets.
+            </p>
+            <div class="tagRow"><span class="tag gold">IUT I §0</span><span class="tag">capsules</span></div>
+          </div>
+          <div class="card" id="finite-etale-covering-category">
+            <h3>Finite etale covering categories</h3>
+            <p>
+              For a connected noetherian algebraic stack of the stated type,
+              <span class="math">B(X)</span> denotes finite etale coverings over
+              <span class="math">X</span>; <span class="math">B(X)_0</span> denotes the
+              connected-object subcategory. These categories feed the anabelian side of
+              the later Hodge-theater definitions.
+            </p>
+            <div class="tagRow"><span class="tag violet">IUT I §0</span><span class="tag">coverings</span></div>
+          </div>
+          <div class="card" id="connected-temperoid">
+            <h3>Connected temperoid</h3>
+            <p>
+              <span class="math">Btemp(Pi)</span> is the category of countable discrete
+              sets with continuous action by a tempered topological group
+              <span class="math">Pi</span>. For Galois-countable cases, the group
+              <span class="math">Pi</span> can be reconstructed from the category up to
+              inner automorphism.
+            </p>
+            <div class="tagRow"><span class="tag violet">IUT I §0</span><span class="tag">temperoids</span></div>
+          </div>
+          <div class="card" id="temperoid-morphisms">
+            <h3>Temperoid morphisms</h3>
+            <p>
+              Morphisms of connected temperoids are represented contravariantly by
+              functors preserving finite limits and countable colimits. For suitable
+              tempered groups, this matches continuous outer homomorphisms between the
+              groups.
+            </p>
+            <div class="tagRow"><span class="tag red">IUT I §0</span><span class="tag">outer homs</span></div>
+          </div>
+          <div class="card" id="abstract-equivalence-of-functors">
+            <h3>Abstract equivalence</h3>
+            <p>
+              Two functors are abstractly equivalent when they differ by isomorphisms of
+              their source and target categories. The wiki treats this as a warning that
+              many later comparisons are invariant up to the specified categorical
+              equivalence, not up to literal equality.
+            </p>
+            <div class="tagRow"><span class="tag gold">IUT I §0</span><span class="tag">equivalence</span></div>
+          </div>
+          <div class="card" id="valuation-and-curve-notation">
+            <h3>Valuations and curve notation</h3>
+            <p>
+              Section 0 fixes abbreviations such as NF, MLF, CAF, valuations
+              <span class="math">V(F)</span>, completions <span class="math">F_v</span>,
+              residue characteristics, and the curve/orbicurve terminology used by the
+              initial theta data.
+            </p>
+            <div class="tagRow"><span class="tag red">IUT I §0</span><span class="tag">notation</span></div>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>Formalization use.</strong> These conventions justify why the Lean
+          and wiki layers should represent collections of possible isomorphisms,
+          capsule indices, and reconstructed groups explicitly instead of replacing them
+          by single chosen maps or definitional equalities.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          Related: <a href="#iut-i-atlas">IUT I atlas</a>
+          <a href="#prime-strips-bridges">prime strips and bridges</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#anabelian-background">anabelian background</a>
+          <a href="#species-mutations">species and mutations</a>
         </div>
       </section>
 
