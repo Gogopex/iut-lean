@@ -1,0 +1,1319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IUT Wiki</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --panel: #ffffff;
+      --ink: #171717;
+      --muted: #5d6468;
+      --line: #d8d8d2;
+      --blue: #315b8f;
+      --green: #2f6b4f;
+      --red: #9a3f35;
+      --gold: #8b6b24;
+      --violet: #66508a;
+      --soft-blue: #e9f1fa;
+      --soft-green: #e8f3ec;
+      --soft-red: #f6e8e6;
+      --soft-gold: #f4ecd6;
+      --soft-violet: #eee9f5;
+      --shadow: 0 12px 30px rgba(24, 28, 32, 0.08);
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.58;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    code, .math {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: #f0f0ea;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.08rem 0.28rem;
+    }
+    .math { white-space: nowrap; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 286px minmax(0, 1fr);
+      min-height: 100vh;
+      min-width: 0;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: auto;
+      padding: 22px 18px;
+      border-right: 1px solid var(--line);
+      background: #fbfbf8;
+      min-width: 0;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.42rem;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    .brand p {
+      margin: 8px 0 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .searchBox {
+      margin: 0 0 16px;
+      padding: 10px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .searchBox label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .searchBox input {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 6px;
+      padding: 8px 9px;
+      font: inherit;
+      font-size: 0.92rem;
+    }
+
+    nav h2 {
+      margin: 15px 0 5px;
+      color: #697177;
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+    nav a {
+      display: block;
+      padding: 7px 9px;
+      border-radius: 6px;
+      color: #24292f;
+      text-decoration: none;
+      font-size: 0.91rem;
+      border: 1px solid transparent;
+    }
+    nav a:hover, nav a.active {
+      background: #eef1ed;
+      border-color: #dfe3dc;
+    }
+
+    .sourceLinks {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .sourceLinks a { display: block; margin: 6px 0; }
+
+    main {
+      padding: 34px min(5vw, 64px) 90px;
+      max-width: 1280px;
+      min-width: 0;
+    }
+
+    .hero {
+      min-height: 70vh;
+      display: grid;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+    .heroGrid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(330px, 0.98fr);
+      gap: 34px;
+      align-items: center;
+    }
+    .eyebrow {
+      color: var(--green);
+      font-weight: 750;
+      font-size: 0.84rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .hero h2 {
+      font-size: clamp(2.8rem, 7vw, 5.7rem);
+      line-height: 0.96;
+      margin: 9px 0 18px;
+      letter-spacing: 0;
+    }
+    .hero p {
+      max-width: 70ch;
+      color: #3d454a;
+      font-size: 1.08rem;
+    }
+    .heroActions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .button {
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: white;
+      border-radius: 6px;
+      padding: 9px 13px;
+      text-decoration: none;
+      font-weight: 650;
+      font-size: 0.94rem;
+    }
+    .button.secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    section {
+      padding: 30px 0 42px;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 14px;
+    }
+    section h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.75rem, 3vw, 2.6rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    section h3 {
+      margin: 30px 0 10px;
+      font-size: 1.22rem;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    .lede {
+      color: #3d454a;
+      font-size: 1.04rem;
+      max-width: 86ch;
+    }
+
+    .brand p, nav a, .lede, p, td, th {
+      overflow-wrap: anywhere;
+    }
+
+    .grid2, .grid3, .grid4 {
+      display: grid;
+      gap: 16px;
+      margin: 18px 0;
+    }
+    .grid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .card h3, .card h4 { margin-top: 0; }
+    .card h4 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+    .tagRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0 0;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: #394047;
+      background: #fafaf6;
+      font-size: 0.78rem;
+      font-weight: 650;
+    }
+    .tag.green { background: var(--soft-green); color: var(--green); border-color: #c9dfd0; }
+    .tag.blue { background: var(--soft-blue); color: var(--blue); border-color: #c8d9ee; }
+    .tag.gold { background: var(--soft-gold); color: var(--gold); border-color: #e3d099; }
+    .tag.red { background: var(--soft-red); color: var(--red); border-color: #e7c7c3; }
+
+    .callout {
+      border-left: 5px solid var(--blue);
+      background: var(--soft-blue);
+      padding: 14px 16px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 18px 0;
+    }
+    .callout.warn { border-left-color: var(--red); background: var(--soft-red); }
+    .callout.good { border-left-color: var(--green); background: var(--soft-green); }
+    .callout.gold { border-left-color: var(--gold); background: var(--soft-gold); }
+    .callout.violet { border-left-color: var(--violet); background: var(--soft-violet); }
+
+    .diagram {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      margin: 18px 0;
+      padding: 12px;
+      overflow: auto;
+      box-shadow: var(--shadow);
+    }
+    .diagramHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .diagramHeader strong { font-size: 0.98rem; }
+    .diagramHeader span { color: var(--muted); font-size: 0.85rem; }
+    svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    svg text {
+      font-family: inherit;
+      fill: var(--ink);
+      letter-spacing: 0;
+    }
+    .nodeBox { fill: #fff; stroke: #737b80; stroke-width: 1.2; rx: 7; }
+    .nodeBox.blue { fill: var(--soft-blue); stroke: var(--blue); }
+    .nodeBox.green { fill: var(--soft-green); stroke: var(--green); }
+    .nodeBox.red { fill: var(--soft-red); stroke: var(--red); }
+    .nodeBox.gold { fill: var(--soft-gold); stroke: var(--gold); }
+    .nodeBox.violet { fill: var(--soft-violet); stroke: var(--violet); }
+    .edge { stroke: #5f676d; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+    .edge.blue { stroke: var(--blue); }
+    .edge.green { stroke: var(--green); }
+    .edge.red { stroke: var(--red); }
+    .edge.gold { stroke: var(--gold); }
+    .edge.violet { stroke: var(--violet); }
+    .edgeLabel {
+      fill: #4b5359;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .smallText { font-size: 12px; fill: #424a50; }
+    .tinyText { font-size: 10.5px; fill: #525a60; }
+    .nodeTitle { font-size: 14px; font-weight: 750; }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 16px 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #eeeeea; font-size: 0.86rem; }
+    tr:last-child td { border-bottom: none; }
+
+    .sourceCard {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: start;
+    }
+    .sourceCard p { margin-bottom: 0; }
+    .sourceCard a.pdf {
+      white-space: nowrap;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 6px 9px;
+      text-decoration: none;
+      color: var(--ink);
+      background: #fafaf6;
+      font-weight: 700;
+      font-size: 0.83rem;
+    }
+    .sourceMeta {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin: 2px 0 7px;
+    }
+
+    .glossary {
+      columns: 2 320px;
+      column-gap: 22px;
+    }
+    .glossary div {
+      break-inside: avoid;
+      margin: 0 0 12px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: var(--radius);
+    }
+    .glossary dt { font-weight: 780; }
+    .glossary dd { margin: 4px 0 0; color: #3d454a; }
+
+    .related {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .related a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      text-decoration: none;
+      background: #fafaf6;
+    }
+
+    footer {
+      padding: 34px 0 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      aside {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+      nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 10px; }
+      nav h2 { grid-column: 1 / -1; }
+      main { padding: 24px 18px 70px; }
+      .hero { min-height: auto; padding: 30px 0; }
+      .heroGrid, .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+      .sourceCard { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      aside { padding: 20px 16px; }
+      nav { grid-template-columns: 1fr; }
+      nav a { font-size: 1rem; }
+      .hero h2 { font-size: clamp(2.35rem, 15vw, 3.35rem); }
+      .hero p { font-size: 1rem; }
+      .heroActions { flex-direction: column; align-items: stretch; }
+      .button { text-align: center; }
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand">
+        <h1>IUT Wiki</h1>
+        <p>A self-contained map of inter-universal Teichmuller theory, its source papers, and current Lean formalization efforts.</p>
+      </div>
+      <div class="searchBox">
+        <label for="wiki-search">Filter sources and glossary</label>
+        <input id="wiki-search" type="search" placeholder="theta, Frobenioid, LANA...">
+      </div>
+      <nav id="nav">
+        <h2>Start</h2>
+        <a href="#home">Home</a>
+        <a href="#orientation">Orientation</a>
+        <a href="#reading-map">Reading map</a>
+        <h2>Core IUT</h2>
+        <a href="#initial-theta-data">Initial theta data</a>
+        <a href="#hodge-theaters">Hodge theaters</a>
+        <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
+        <a href="#theta-log-links">Theta and log links</a>
+        <a href="#log-theta-lattice">Log-theta lattice</a>
+        <a href="#indeterminacies">Indeterminacies</a>
+        <a href="#multiradiality">Multiradiality</a>
+        <a href="#corollary-312">Corollary 3.12 corridor</a>
+        <a href="#iut-iv">IUT IV and consequences</a>
+        <h2>Context</h2>
+        <a href="#dispute">Scholze-Stix and responses</a>
+        <a href="#formalization">RIMS Lean effort</a>
+        <a href="#lana">LANA</a>
+        <a href="#source-library">Source library</a>
+        <a href="#glossary">Glossary</a>
+      </nav>
+      <div class="sourceLinks">
+        <strong>Local source PDFs</strong>
+        <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+        <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a>
+        <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+        <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV</a>
+        <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Formalization report</a>
+        <a href="papers/scholze-stix-why-abc-is-still-a-conjecture.pdf" target="_blank">Scholze-Stix note</a>
+      </div>
+    </aside>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="heroGrid">
+          <div>
+            <div class="eyebrow">Inter-universal Teichmuller theory</div>
+            <h2>IUT as a map of alien arithmetic worlds.</h2>
+            <p>
+              Inter-universal Teichmuller theory is Mochizuki's proposed arithmetic
+              deformation theory for number fields equipped with elliptic-curve data.
+              It replaces direct comparison of ring/scheme structures by a network of
+              Hodge theaters, theta links, log links, indeterminacies, and log-volume
+              estimates.
+            </p>
+            <div class="heroActions">
+              <a class="button" href="#orientation">Enter the wiki</a>
+              <a class="button secondary" href="#source-library">Open source library</a>
+              <a class="button secondary" href="#formalization">Lean efforts</a>
+            </div>
+          </div>
+          <div class="diagram" aria-label="IUT concept map">
+            <div class="diagramHeader">
+              <strong>Global route</strong>
+              <span>source objects to Diophantine bounds</span>
+            </div>
+            <svg viewBox="0 0 620 430" role="img">
+              <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                  <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+                </marker>
+              </defs>
+              <rect class="nodeBox blue" x="24" y="32" width="160" height="56"></rect>
+              <text class="nodeTitle" x="104" y="57" text-anchor="middle">Initial theta data</text>
+              <text class="tinyText" x="104" y="75" text-anchor="middle">elliptic curve, field, l >= 5</text>
+
+              <rect class="nodeBox green" x="230" y="32" width="160" height="56"></rect>
+              <text class="nodeTitle" x="310" y="57" text-anchor="middle">Hodge theaters</text>
+              <text class="tinyText" x="310" y="75" text-anchor="middle">miniature scheme worlds</text>
+
+              <rect class="nodeBox violet" x="436" y="32" width="160" height="56"></rect>
+              <text class="nodeTitle" x="516" y="57" text-anchor="middle">Alien copies</text>
+              <text class="tinyText" x="516" y="75" text-anchor="middle">same type, distinct history</text>
+
+              <path class="edge blue" d="M184 60 H228"></path>
+              <path class="edge green" d="M390 60 H434"></path>
+
+              <rect class="nodeBox gold" x="52" y="158" width="152" height="58"></rect>
+              <text class="nodeTitle" x="128" y="181" text-anchor="middle">Theta link</text>
+              <text class="tinyText" x="128" y="200" text-anchor="middle">Hodge-Arakelov evaluation</text>
+
+              <rect class="nodeBox gold" x="234" y="158" width="152" height="58"></rect>
+              <text class="nodeTitle" x="310" y="181" text-anchor="middle">Log link</text>
+              <text class="tinyText" x="310" y="200" text-anchor="middle">local logarithm, log-shells</text>
+
+              <rect class="nodeBox blue" x="416" y="158" width="152" height="58"></rect>
+              <text class="nodeTitle" x="492" y="181" text-anchor="middle">Log-theta lattice</text>
+              <text class="tinyText" x="492" y="200" text-anchor="middle">two-dimensional diagram</text>
+
+              <path class="edge gold" d="M310 88 V154"></path>
+              <text class="edgeLabel" x="324" y="126">links between theaters</text>
+              <path class="edge gold" d="M204 187 H232"></path>
+              <path class="edge gold" d="M386 187 H414"></path>
+
+              <rect class="nodeBox green" x="68" y="292" width="160" height="58"></rect>
+              <text class="nodeTitle" x="148" y="315" text-anchor="middle">Multiradial algorithms</text>
+              <text class="tinyText" x="148" y="334" text-anchor="middle">stable under alien holomorphy</text>
+
+              <rect class="nodeBox red" x="270" y="292" width="160" height="58"></rect>
+              <text class="nodeTitle" x="350" y="315" text-anchor="middle">Log-volume bounds</text>
+              <text class="tinyText" x="350" y="334" text-anchor="middle">Corollary 3.12 corridor</text>
+
+              <rect class="nodeBox violet" x="470" y="292" width="126" height="58"></rect>
+              <text class="nodeTitle" x="533" y="315" text-anchor="middle">Diophantine</text>
+              <text class="tinyText" x="533" y="334" text-anchor="middle">Szpiro, abc, Vojta</text>
+
+              <path class="edge green" d="M492 216 C488 262 224 250 168 290"></path>
+              <path class="edge red" d="M228 321 H268"></path>
+              <path class="edge violet" d="M430 321 H468"></path>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="orientation">
+        <h2>Orientation</h2>
+        <p class="lede">
+          IUT is not best approached as a single calculation. It is a theory of controlled
+          comparison between arithmetic structures that are deliberately not kept inside one
+          global ring or scheme history. The vocabulary is unusual because the comparison
+          method is unusual.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Objects</h3>
+            <p>
+              The starting objects are <a href="#initial-theta-data">initial theta data</a>,
+              hyperbolic orbicurves, Frobenioid-type structures, log-shells, and
+              <a href="#hodge-theaters">Hodge theaters</a>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Motion</h3>
+            <p>
+              The central motion is through <a href="#theta-log-links">theta links and log
+              links</a>, arranged in the <a href="#log-theta-lattice">log-theta lattice</a>.
+              These links compare weakened data rather than ordinary scheme identities.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Output</h3>
+            <p>
+              The proof-critical output is a log-volume comparison in
+              <a href="#corollary-312">IUT III, Corollary 3.12</a>. IUT IV then applies this
+              comparison to Diophantine inequalities.
+            </p>
+          </div>
+        </div>
+        <div class="callout gold">
+          <strong>Wiki convention.</strong> This page explains the source theory and its
+          formalization interfaces. It does not assert that the disputed proof is settled.
+          When a statement is a conditional interface, the page says so.
+        </div>
+        <div class="related">
+          Related: <a href="#reading-map">reading map</a>
+          <a href="#source-library">source library</a>
+          <a href="#glossary">glossary</a>
+        </div>
+      </section>
+
+      <section id="reading-map">
+        <h2>Reading Map</h2>
+        <p class="lede">
+          The best first pass is thematic, not chronological. Read the overview texts to
+          understand why alien copies and separated structures are introduced; then read
+          the four IUT papers with the route map below in mind.
+        </p>
+        <table>
+          <tr><th>Pass</th><th>Theme</th><th>Primary local sources</th><th>Goal</th></tr>
+          <tr>
+            <td>1</td>
+            <td>Global picture</td>
+            <td><a href="papers/mochizuki-panorama.pdf" target="_blank">Panoramic Overview</a>, <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies</a>, <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview</a></td>
+            <td>Know why IUT uses alien copies, non-scheme-theoretic deformation, and anabelian reconstruction.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Source machinery</td>
+            <td><a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>, <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a></td>
+            <td>Track initial theta data, Hodge theaters, theta values, Kummer theory, and theta links.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Proof-critical corridor</td>
+            <td><a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>, <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure</a></td>
+            <td>Locate Theorem 3.11, Step (x), Step (xi), and the Corollary 3.12 comparison.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Consequences</td>
+            <td><a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV</a>, <a href="papers/mochizuki-explicit-estimates.pdf" target="_blank">Explicit Estimates</a></td>
+            <td>Understand how log-volume estimates are converted into Szpiro, abc, and Vojta-type bounds.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Verification and critique</td>
+            <td><a href="papers/scholze-stix-why-abc-is-still-a-conjecture.pdf" target="_blank">Scholze-Stix</a>, <a href="papers/mochizuki-report-discussions-2018.pdf" target="_blank">2018 discussion report</a>, <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">2026 Lean report</a></td>
+            <td>Separate source claims, objections, responses, and formalization targets.</td>
+          </tr>
+        </table>
+      </section>
+
+      <section id="initial-theta-data">
+        <h2>Initial Theta Data</h2>
+        <p class="lede">
+          Initial theta data is the input package for the four-paper series. In IUT I,
+          it includes an elliptic curve over a number field, a prime <span class="math">l >= 5</span>,
+          selected places, torsion data, and technical hypotheses that allow Hodge theaters
+          and theta-link structures to be built.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Why it matters</h3>
+            <p>
+              Initial theta data fixes the arithmetic environment before the theory starts
+              moving between copies. Later comparisons must remember which objects are
+              input data, which are transported, and which have had their ring/scheme
+              history weakened.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Formalization role</h3>
+            <p>
+              This is one of the first places where a Lean development must choose between
+              a faithful construction and a typed record interface. Dupuy-Hilado show how
+              parts of the initial theta data can be made explicit for the curve 11a1.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          <a href="papers/dupuy-hilado-corollary-312-initial-theta-indeterminacies.pdf" target="_blank">Dupuy-Hilado initial theta data</a>
+          Related: <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="hodge-theaters">
+        <h2>Hodge Theaters</h2>
+        <p class="lede">
+          A Hodge theater is a miniature arithmetic universe built from the initial data.
+          Mochizuki describes these theaters as models in which the additive and
+          multiplicative dimensions of a number field are disentangled enough to support
+          comparisons unavailable in ordinary scheme theory.
+        </p>
+        <div class="diagram" aria-label="Hodge theater separated dimensions">
+          <div class="diagramHeader">
+            <strong>Separated dimensions</strong>
+            <span>one theater keeps linked data typed, not globally identified</span>
+          </div>
+          <svg viewBox="0 0 720 300" role="img">
+            <defs>
+              <marker id="arrow2" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect x="40" y="42" width="250" height="190" fill="#ffffff" stroke="#d8d8d2" rx="8"></rect>
+            <text class="nodeTitle" x="165" y="72" text-anchor="middle">Ordinary ring/scheme view</text>
+            <circle cx="165" cy="145" r="55" fill="#e9f1fa" stroke="#315b8f"></circle>
+            <text class="smallText" x="165" y="136" text-anchor="middle">addition and</text>
+            <text class="smallText" x="165" y="154" text-anchor="middle">multiplication</text>
+            <text class="smallText" x="165" y="172" text-anchor="middle">coherent together</text>
+
+            <path d="M305 138 H392" stroke="#5f676d" stroke-width="1.5" marker-end="url(#arrow2)"></path>
+            <text class="edgeLabel" x="348" y="120" text-anchor="middle">IUT dismantling</text>
+            <text class="edgeLabel" x="348" y="157" text-anchor="middle">and typing</text>
+
+            <rect x="410" y="42" width="270" height="190" fill="#ffffff" stroke="#d8d8d2" rx="8"></rect>
+            <text class="nodeTitle" x="545" y="72" text-anchor="middle">Hodge theater</text>
+            <rect class="nodeBox green" x="448" y="112" width="96" height="62"></rect>
+            <text class="smallText" x="496" y="138" text-anchor="middle">unit</text>
+            <text class="smallText" x="496" y="156" text-anchor="middle">portion</text>
+            <rect class="nodeBox gold" x="548" y="112" width="96" height="62"></rect>
+            <text class="smallText" x="596" y="138" text-anchor="middle">value</text>
+            <text class="smallText" x="596" y="156" text-anchor="middle">portion</text>
+            <path d="M544 143 H548" stroke="#737b80" stroke-dasharray="4 4"></path>
+            <text class="tinyText" x="545" y="204" text-anchor="middle">related by controlled structures, not collapsed into one ring history</text>
+          </svg>
+        </div>
+        <p>
+          The phrase "alien arithmetic holomorphic structure" refers to viewing data from
+          the standpoint of a theater related by a non-ring/scheme-theoretic link. This is
+          why the theory has to track histories, labels, and comparison levels explicitly.
+        </p>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          <a href="papers/mochizuki-panorama.pdf" target="_blank">Panoramic Overview</a>
+          Related: <a href="#theta-log-links">theta/log links</a>
+          <a href="#dispute">dispute</a>
+        </div>
+      </section>
+
+      <section id="frobenioids-log-shells">
+        <h2>Frobenioids and Log-Shells</h2>
+        <p class="lede">
+          Frobenioids and log-shells are part of the infrastructure that lets IUT talk
+          about arithmetic line bundles, monoids, units, value groups, and logarithmic
+          structures without immediately returning to ordinary schemes.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Frobenioid direction</h3>
+            <p>
+              Frobenioid language packages divisor-like and line-bundle-like data in a
+              categorical form. In the IUT route, this supports multiplicative/arithmetic
+              bookkeeping that later participates in log-volume estimates.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Log-shell direction</h3>
+            <p>
+              Log-shells arise from local logarithms and make it possible to discuss
+              additive logarithmic data associated to local units. They are essential for
+              the vertical direction of the log-theta lattice.
+            </p>
+          </div>
+        </div>
+        <div class="callout">
+          A formal wiki should not treat these as decorative names. They are the layer
+          where the theory prepares the exact kind of weakened, typed information that
+          later comparisons are allowed to see.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+          Related: <a href="#log-theta-lattice">log-theta lattice</a>
+          <a href="#multiradiality">multiradiality</a>
+        </div>
+      </section>
+
+      <section id="theta-log-links">
+        <h2>Theta Links and Log Links</h2>
+        <p class="lede">
+          The two principal directions of the log-theta lattice are different in kind.
+          Theta links come from Hodge-Arakelov-theoretic evaluation of theta values;
+          log links come from applying local logarithms and passing through log-shells.
+        </p>
+        <table>
+          <tr><th>Link</th><th>Source</th><th>Function in the theory</th><th>Risk if misread</th></tr>
+          <tr>
+            <td>Theta link</td>
+            <td>IUT II</td>
+            <td>Relates Hodge theaters via theta-value data at torsion points.</td>
+            <td>Reading it as an ordinary ring/scheme morphism remembers too much.</td>
+          </tr>
+          <tr>
+            <td>Log link</td>
+            <td>IUT III</td>
+            <td>Uses local logarithms to pass into log-shell data.</td>
+            <td>Forgetting calibration can destroy the intended comparison meaning.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a>
+          <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+          Related: <a href="#log-theta-lattice">log-theta lattice</a>
+        </div>
+      </section>
+
+      <section id="log-theta-lattice">
+        <h2>Log-Theta Lattice</h2>
+        <p class="lede">
+          The log-theta lattice is the two-dimensional noncommutative diagram of Hodge
+          theaters studied in IUT III. Horizontal motion is theta-link motion; vertical
+          motion is log-link motion. The noncommutativity is not incidental: it is a
+          source of the comparison constraints and indeterminacies.
+        </p>
+        <div class="diagram" aria-label="Log-theta lattice">
+          <div class="diagramHeader">
+            <strong>Log-theta lattice</strong>
+            <span>horizontal theta links, vertical log links</span>
+          </div>
+          <svg viewBox="0 0 760 360" role="img">
+            <defs>
+              <marker id="arrow3" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <g>
+              <rect class="nodeBox blue" x="70" y="48" width="110" height="54"></rect>
+              <rect class="nodeBox blue" x="325" y="48" width="110" height="54"></rect>
+              <rect class="nodeBox blue" x="580" y="48" width="110" height="54"></rect>
+              <rect class="nodeBox green" x="70" y="220" width="110" height="54"></rect>
+              <rect class="nodeBox green" x="325" y="220" width="110" height="54"></rect>
+              <rect class="nodeBox green" x="580" y="220" width="110" height="54"></rect>
+              <text class="smallText" x="125" y="78" text-anchor="middle">theater (0,0)</text>
+              <text class="smallText" x="380" y="78" text-anchor="middle">theater (1,0)</text>
+              <text class="smallText" x="635" y="78" text-anchor="middle">theater (2,0)</text>
+              <text class="smallText" x="125" y="250" text-anchor="middle">log shell (0,1)</text>
+              <text class="smallText" x="380" y="250" text-anchor="middle">log shell (1,1)</text>
+              <text class="smallText" x="635" y="250" text-anchor="middle">log shell (2,1)</text>
+            </g>
+            <path class="edge gold" d="M180 75 H323"></path>
+            <path class="edge gold" d="M435 75 H578"></path>
+            <path class="edge gold" d="M180 247 H323"></path>
+            <path class="edge gold" d="M435 247 H578"></path>
+            <path class="edge green" d="M125 102 V218"></path>
+            <path class="edge green" d="M380 102 V218"></path>
+            <path class="edge green" d="M635 102 V218"></path>
+            <text class="edgeLabel" x="252" y="56" text-anchor="middle">theta link</text>
+            <text class="edgeLabel" x="507" y="56" text-anchor="middle">theta link</text>
+            <text class="edgeLabel" x="145" y="166" text-anchor="start">log link</text>
+            <text class="edgeLabel" x="400" y="166" text-anchor="start">log link</text>
+            <text class="edgeLabel" x="655" y="166" text-anchor="start">log link</text>
+            <text class="smallText" x="380" y="322" text-anchor="middle">The square is deliberately not treated as a commuting diagram of ordinary schemes.</text>
+          </svg>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+          <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies</a>
+          Related: <a href="#indeterminacies">indeterminacies</a>
+          <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="indeterminacies">
+        <h2>Indeterminacies</h2>
+        <p class="lede">
+          Indeterminacies are controlled ambiguities that arise because IUT compares
+          weakened data across non-scheme-theoretic links. In the Theorem 3.11 to
+          Corollary 3.12 corridor, the important distinction is between invariance under
+          the first two indeterminacies and a one-sided upper-semi relation for the third.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Ind1</h3>
+            <p>Procession-type symmetry. In the current Lean route, it is modeled by preservation of the relevant normalized log-volume expression.</p>
+          </div>
+          <div class="card">
+            <h3>Ind2</h3>
+            <p>Local tensor or symmetry-type ambiguity. The corridor again treats the relevant normalized quantity as invariant.</p>
+          </div>
+          <div class="card">
+            <h3>Ind3</h3>
+            <p>Upper-semi ambiguity. This is not modeled as equality in the source-facing route; it supplies one-sided containment or inequality data.</p>
+          </div>
+        </div>
+        <div class="callout warn">
+          The most dangerous simplification is to turn one-sided upper-semi data into
+          equality of possible-image regions without proving that this stronger relation is
+          licensed by the source construction.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+          <a href="papers/dupuy-hilado-probabilistic-szpiro.pdf" target="_blank">Dupuy-Hilado probabilistic Szpiro</a>
+          Related: <a href="#corollary-312">Corollary 3.12</a>
+          <a href="#dispute">dispute</a>
+        </div>
+      </section>
+
+      <section id="multiradiality">
+        <h2>Multiradiality, SHE, IPL, APT</h2>
+        <p class="lede">
+          Multiradial algorithms are meant to make sense from the viewpoint of an alien
+          arithmetic holomorphic structure. The proof-critical corridor also uses named
+          properties such as simultaneous holomorphic expressibility (SHE), input
+          prime-strip linkage (IPL), and algorithmic parallel transport (APT).
+        </p>
+        <table>
+          <tr><th>Term</th><th>Function</th><th>Formalization burden</th></tr>
+          <tr><td>Multiradial</td><td>Stable or meaningful across alien holomorphic viewpoints.</td><td>Must prove invariance or controlled transformation, not merely label it.</td></tr>
+          <tr><td>SHE</td><td>Simultaneous expression relative to the chosen holomorphic structure.</td><td>Must keep the q-pilot input fixed while expressing output data.</td></tr>
+          <tr><td>IPL</td><td>Input prime-strip link property tying output possibilities to input data.</td><td>Must track value-group and unit portions without mixing arrows.</td></tr>
+          <tr><td>APT</td><td>Algorithmic parallel transport through gluings up to allowed indeterminacy.</td><td>Must state exactly what is transported and what remains only up to indeterminacy.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+          <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">2026 formalization report</a>
+          Related: <a href="#formalization">RIMS Lean effort</a>
+          <a href="#lana">LANA</a>
+        </div>
+      </section>
+
+      <section id="corollary-312">
+        <h2>Corollary 3.12 Corridor</h2>
+        <p class="lede">
+          The proof-critical corridor is the route from IUT III, Theorem 3.11 through
+          Step (x), Step (xi), and the final signed real inequality. The core issue is how
+          qualitative multiradial/common-container data becomes a numerical log-volume
+          comparison without illicitly identifying histories or comparison levels.
+        </p>
+        <div class="diagram" aria-label="Corollary 3.12 corridor">
+          <div class="diagramHeader">
+            <strong>Theorem 3.11 to Corollary 3.12</strong>
+            <span>conditional interfaces made explicit</span>
+          </div>
+          <svg viewBox="0 0 860 360" role="img">
+            <defs>
+              <marker id="arrow4" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="24" y="52" width="150" height="62"></rect>
+            <text class="nodeTitle" x="99" y="78" text-anchor="middle">Theorem 3.11</text>
+            <text class="tinyText" x="99" y="96" text-anchor="middle">multiradial output</text>
+
+            <rect class="nodeBox green" x="220" y="52" width="150" height="62"></rect>
+            <text class="nodeTitle" x="295" y="78" text-anchor="middle">Step (x)</text>
+            <text class="tinyText" x="295" y="96" text-anchor="middle">Ind1/Ind2 invariant</text>
+
+            <rect class="nodeBox gold" x="416" y="52" width="150" height="62"></rect>
+            <text class="nodeTitle" x="491" y="78" text-anchor="middle">Ind3</text>
+            <text class="tinyText" x="491" y="96" text-anchor="middle">one-sided upper-semi</text>
+
+            <rect class="nodeBox violet" x="612" y="52" width="150" height="62"></rect>
+            <text class="nodeTitle" x="687" y="78" text-anchor="middle">Step (xi)</text>
+            <text class="tinyText" x="687" y="96" text-anchor="middle">SHE/IPL/APT, hull+det</text>
+
+            <path class="edge blue" d="M174 83 H218"></path>
+            <path class="edge green" d="M370 83 H414"></path>
+            <path class="edge gold" d="M566 83 H610"></path>
+
+            <rect class="nodeBox red" x="92" y="226" width="196" height="64"></rect>
+            <text class="nodeTitle" x="190" y="251" text-anchor="middle">q-pilot log-volume</text>
+            <text class="tinyText" x="190" y="270" text-anchor="middle">- |log(q)|</text>
+
+            <rect class="nodeBox red" x="360" y="226" width="196" height="64"></rect>
+            <text class="nodeTitle" x="458" y="251" text-anchor="middle">Theta upper ray</text>
+            <text class="tinyText" x="458" y="270" text-anchor="middle">R_{<= -|log(Theta)|}</text>
+
+            <rect class="nodeBox blue" x="628" y="226" width="196" height="64"></rect>
+            <text class="nodeTitle" x="726" y="251" text-anchor="middle">C_Theta bound</text>
+            <text class="tinyText" x="726" y="270" text-anchor="middle">-1 <= C_Theta</text>
+
+            <path class="edge violet" d="M687 114 C682 162 498 168 458 224"></path>
+            <text class="edgeLabel" x="586" y="167" text-anchor="middle">bridge needing source construction</text>
+            <path class="edge red" d="M288 258 H358"></path>
+            <path class="edge blue" d="M556 258 H626"></path>
+          </svg>
+        </div>
+        <div class="grid2">
+          <div class="card">
+            <h3>What is formal algebra</h3>
+            <p>
+              Once Lean has <span class="math">q_signed <= theta_signed</span>,
+              <span class="math">0 < -q_signed</span>, and the displayed
+              <span class="math">theta_signed <= C_Theta * (-q_signed)</span>,
+              the lower bound <span class="math">-1 <= C_Theta</span> is elementary
+              ordered-real algebra.
+            </p>
+          </div>
+          <div class="card">
+            <h3>What remains mathematical source work</h3>
+            <p>
+              The hard part is constructing the bridge from IUT source data to the
+              signed-log upper-ray membership of the q-pilot, while preserving the
+              distinctions between labels, histories, real-line copies, and hull/log-volume
+              levels.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+          <a href="papers/higuchi-formal-negative-result-step-xi.pdf" target="_blank">Higuchi 2026</a>
+          <a href="papers/pajo-scale-free-common-container-comparisons.pdf" target="_blank">Pajo 2026</a>
+          Related: <a href="#dispute">dispute</a>
+          <a href="#formalization">formalization</a>
+        </div>
+      </section>
+
+      <section id="iut-iv">
+        <h2>IUT IV and Consequences</h2>
+        <p class="lede">
+          IUT IV applies the log-volume estimates obtained from the earlier papers to
+          Diophantine inequalities, including Vojta-type, Szpiro-type, and abc-type
+          consequences. Later work on explicit estimates modifies parts of the theory to
+          obtain numerical effective constants.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Log-volume computation</h3>
+            <p>IUT IV is where the abstract comparison machinery is converted into inequalities involving heights and conductors.</p>
+          </div>
+          <div class="card">
+            <h3>Set-theoretic foundations</h3>
+            <p>The paper also discusses foundational issues around moving between copies, universes, and set-theoretic implementations.</p>
+          </div>
+          <div class="card">
+            <h3>Effective estimates</h3>
+            <p>The 2022 explicit estimates paper gives numerically effective versions using a modified theory of etale theta functions.</p>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV</a>
+          <a href="papers/mochizuki-explicit-estimates.pdf" target="_blank">Explicit Estimates</a>
+          <a href="papers/wrap-explicit-estimates-iut-fesenko-et-al-2022.pdf" target="_blank">WRAP version</a>
+        </div>
+      </section>
+
+      <section id="dispute">
+        <h2>Scholze-Stix and Responses</h2>
+        <p class="lede">
+          The Scholze-Stix note focuses on the proof-critical comparison near IUT III,
+          Corollary 3.12. The wiki treats this as an important page, not as the main
+          theme of IUT. The theory itself remains the primary object.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Scholze-Stix objection</h3>
+            <p>
+              Their simplified model argues that the comparison needed for the abc
+              application cannot be obtained as claimed; in their reading, the attempted
+              passage loses the numerical content required for the inequality.
+            </p>
+            <div class="tagRow"><span class="tag red">critique</span><span class="tag">Corollary 3.12</span></div>
+          </div>
+          <div class="card">
+            <h3>Mochizuki-side response</h3>
+            <p>
+              Mochizuki and Hoshi maintain that the simplification remembers or identifies
+              structures in a way that violates the intended IUT boundary: Hodge-theater
+              histories are weakened before comparison, and this is essential.
+            </p>
+            <div class="tagRow"><span class="tag gold">response</span><span class="tag">Hodge theaters</span></div>
+          </div>
+        </div>
+        <div class="callout violet">
+          Formalization reframes the dispute into exact interfaces: what source data is
+          present, which histories are erased, which transports are allowed, and which
+          numerical bridge is actually proved.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/scholze-stix-why-abc-is-still-a-conjecture.pdf" target="_blank">Scholze-Stix note</a>
+          <a href="papers/mochizuki-report-discussions-2018.pdf" target="_blank">2018 discussion report</a>
+          <a href="papers/mochizuki-iut-report-2025-10.pdf" target="_blank">2025 current situation report</a>
+        </div>
+      </section>
+
+      <section id="formalization">
+        <h2>RIMS Lean Effort</h2>
+        <p class="lede">
+          Mochizuki's April 2026 progress report frames Lean formalization partly as a
+          communication tool. It proposes a staged path toward a LeanForm of IUT, with
+          early attention on the logical structure around the route from Theorem 3.11,
+          through a reorganized "3.11.5", to Corollary 3.12.
+        </p>
+        <div class="diagram" aria-label="Lean formalization route">
+          <div class="diagramHeader">
+            <strong>Formalization target</strong>
+            <span>source route decomposed into Lean-facing obligations</span>
+          </div>
+          <svg viewBox="0 0 760 260" role="img">
+            <defs>
+              <marker id="arrow5" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="36" y="70" width="145" height="62"></rect>
+            <text class="nodeTitle" x="108" y="96" text-anchor="middle">Theorem 3.11</text>
+            <text class="tinyText" x="108" y="114" text-anchor="middle">source output</text>
+            <rect class="nodeBox gold" x="228" y="70" width="145" height="62"></rect>
+            <text class="nodeTitle" x="300" y="96" text-anchor="middle">APT + IPL</text>
+            <text class="tinyText" x="300" y="114" text-anchor="middle">transport and linkage</text>
+            <rect class="nodeBox green" x="420" y="70" width="145" height="62"></rect>
+            <text class="nodeTitle" x="492" y="96" text-anchor="middle">3.11.5</text>
+            <text class="tinyText" x="492" y="114" text-anchor="middle">hull + determinant</text>
+            <rect class="nodeBox violet" x="612" y="70" width="112" height="62"></rect>
+            <text class="nodeTitle" x="668" y="96" text-anchor="middle">3.12</text>
+            <text class="tinyText" x="668" y="114" text-anchor="middle">signed bound</text>
+            <path class="edge blue" d="M181 101 H226"></path>
+            <path class="edge gold" d="M373 101 H418"></path>
+            <path class="edge green" d="M565 101 H610"></path>
+            <text class="smallText" x="380" y="202" text-anchor="middle">Lean should distinguish proved route algebra from source obligations still represented by records.</text>
+          </svg>
+        </div>
+        <p>
+          For this repository, the practical lesson is to keep every bridge explicit:
+          if a common container is supplied, Lean should still ask what numerical chart,
+          transport, calibration, or bound converts it into the final signed inequality.
+        </p>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report</a>
+          <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure</a>
+          Related: <a href="#lana">LANA</a>
+          <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="lana">
+        <h2>LANA</h2>
+        <p class="lede">
+          LANA stands for Lean for ANAbelian geometry. ZEN Mathematics Center announced
+          it publicly on 31 March 2026 as an international project involving ZEN
+          University, Utrecht University, and the University of Alberta. Its first aim is
+          Lean formalization of anabelian geometry; its second aim is formal verification
+          of IUT.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Core members reported by ZEN</h3>
+            <p>
+              Fumiharu Kato, Johan Commelin, Kiran Kedlaya, Yuichiro Hoshi, and Adam
+              Topaz, with additional junior participants.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Status as of public announcement</h3>
+            <p>
+              ZEN reports work since autumn 2023, a neutral stance, substantial clarity
+              about understood and unresolved points, and an interim progress report
+              planned for 17 July 2026.
+            </p>
+          </div>
+        </div>
+        <div class="callout good">
+          LANA is independent from the RIMS Lean effort, but public materials indicate
+          dialogue with Mochizuki and a focus on making points of contention precise enough
+          for Lean.
+        </div>
+        <div class="related">
+          Online sources:
+          <a href="https://zen.ac.jp/news/zmcpostevent0331e" target="_blank">ZEN announcement</a>
+          <a href="https://zen.ac.jp/en/zmc/topics/jwz-o8xr3v6f" target="_blank">Kato/ZMC remarks</a>
+          Related: <a href="#formalization">RIMS Lean effort</a>
+        </div>
+      </section>
+
+      <section id="source-library">
+        <h2>Source Library</h2>
+        <p class="lede">
+          Local PDF links open from the repository, so the wiki remains usable offline.
+          The online references in the LANA section are retained because they are live
+          project pages rather than stable source PDFs.
+        </p>
+        <div class="grid2" id="source-cards">
+          <div class="card sourceCard" data-filter="mochizuki iut i hodge theaters initial theta data">
+            <div><h3>IUT I: Construction of Hodge Theaters</h3><div class="sourceMeta">Shinichi Mochizuki, May 2020, 186 pp.</div><p>Initial theta data, hyperbolic orbicurves, Frobenioids, etale theta functions, log-shell background, and Hodge theaters.</p></div>
+            <a class="pdf" href="papers/mochizuki-iut-i.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki iut ii hodge arakelov theta link kummer">
+            <div><h3>IUT II: Hodge-Arakelov-theoretic Evaluation</h3><div class="sourceMeta">Shinichi Mochizuki, December 2020, 174 pp.</div><p>Kummer theory around Hodge-Arakelov theta evaluation and construction of theta links between theaters.</p></div>
+            <a class="pdf" href="papers/mochizuki-iut-ii.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki iut iii log theta lattice theorem 3.11 corollary 3.12 indeterminacy">
+            <div><h3>IUT III: Canonical Splittings of the Log-Theta-Lattice</h3><div class="sourceMeta">Shinichi Mochizuki, May 2020, 199 pp.</div><p>Log-theta lattice, multiradial algorithms, Theorem 3.11, and the proof-critical Corollary 3.12 corridor.</p></div>
+            <a class="pdf" href="papers/mochizuki-iut-iii.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki iut iv log volume computations abc szpiro vojta">
+            <div><h3>IUT IV: Log-Volume Computations and Set-Theoretic Foundations</h3><div class="sourceMeta">Shinichi Mochizuki, April 2020, 87 pp.</div><p>Log-volume estimates and their application to Diophantine consequences.</p></div>
+            <a class="pdf" href="papers/mochizuki-iut-iv.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki panorama overview inter-universal teichmuller theory">
+            <div><h3>Panoramic Overview</h3><div class="sourceMeta">Shinichi Mochizuki, survey, 45 pp.</div><p>Accessible survey of the motivation, non-scheme-theoretic deformation, and components of the log-theta lattice.</p></div>
+            <a class="pdf" href="papers/mochizuki-panorama.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki mutually alien copies gaussian integrals analogy">
+            <div><h3>Mutually Alien Copies</h3><div class="sourceMeta">Shinichi Mochizuki, 170 pp.</div><p>Survey organized around analogies with Gaussian integrals and the role of mutually alien copies.</p></div>
+            <a class="pdf" href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki bogomolov szpiro geometric version comparison iut">
+            <div><h3>Bogomolov's Szpiro Proof from the IUT Viewpoint</h3><div class="sourceMeta">Shinichi Mochizuki, January 2016, 24 pp.</div><p>Compares IUT with Bogomolov's proof of the geometric Szpiro conjecture, emphasizing shared hyperbolic geometry and differences involving theta functions and Gaussian distributions.</p></div>
+            <a class="pdf" href="papers/mochizuki-bogomolov-szpiro.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki anabelian gateway diophantine geometry analytic number theory 2023">
+            <div><h3>IUT as an Anabelian Gateway</h3><div class="sourceMeta">Shinichi Mochizuki, MFO-RIMS report, 7 pp.</div><p>Short report framing IUT as an anabelian gateway from Diophantine geometry toward analytic number theory.</p></div>
+            <a class="pdf" href="papers/mochizuki-anabelian-gateway.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki essential logical structure and or xor 2024">
+            <div><h3>Essential Logical Structure</h3><div class="sourceMeta">Shinichi Mochizuki, March 2024, 167 pp.</div><p>Logical decomposition of IUT in terms of AND, OR, and exclusive alternatives.</p></div>
+            <a class="pdf" href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki formalization lean 2026 progress report 3.11.5 3.12">
+            <div><h3>On the Formalization of IUT</h3><div class="sourceMeta">Shinichi Mochizuki, April 2026, 14 pp.</div><p>Preliminary LeanForm progress report and staged route around 3.11.5 to 3.12.</p></div>
+            <a class="pdf" href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="scholze stix why abc still conjecture critique">
+            <div><h3>Why abc is still a conjecture</h3><div class="sourceMeta">Peter Scholze and Jakob Stix, 10 pp.</div><p>The central published critique of the IUT proof of abc, focused near Corollary 3.12.</p></div>
+            <a class="pdf" href="papers/scholze-stix-why-abc-is-still-a-conjecture.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki report discussions 2018 scholze stix hoshi">
+            <div><h3>Report on Discussions, March 2018</h3><div class="sourceMeta">Shinichi Mochizuki, February 2019, 45 pp.</div><p>Mochizuki's report on the Kyoto discussions with Scholze, Stix, and Hoshi.</p></div>
+            <a class="pdf" href="papers/mochizuki-report-discussions-2018.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki current situation 2025 report set theoretic copies universes">
+            <div><h3>Current Situation Surrounding IUT</h3><div class="sourceMeta">Shinichi Mochizuki, October 2025, 30 pp.</div><p>Recent report addressing mathematical misunderstandings, set-theoretic copies, universes, and anabelian developments.</p></div>
+            <a class="pdf" href="papers/mochizuki-iut-report-2025-10.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="collas anabelian arithmetic geometry iut grothendieck monoids overview">
+            <div><h3>Collas: Anabelian Arithmetic Geometry and IUT</h3><div class="sourceMeta">Benjamin Collas, revised overview, 24 pp.</div><p>Conceptual overview of IUT through Grothendieckian anabelian geometry and the geometry of monoids.</p></div>
+            <a class="pdf" href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="collas anabelian perspectives galois teichmuller nakamura">
+            <div><h3>Collas: Anabelian Perspectives in Galois-Teichmuller Theory</h3><div class="sourceMeta">Benjamin Collas, 20 pp.</div><p>Context for anabelian reconstruction, Galois-Teichmuller theory, and the algorithmic viewpoint surrounding IUT-adjacent geometry.</p></div>
+            <a class="pdf" href="papers/collas-anabelian-perspectives-galois-teichmuller.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="hoshi introduction iut anabelian geometry log shells multiradial algorithms">
+            <div><h3>Hoshi: Introduction to IUT</h3><div class="sourceMeta">Yuichiro Hoshi, Japanese survey, 105 pp.</div><p>Survey covering cyclotomes, anabelian geometry, core objects, multiradial algorithms, log-shells, and log links.</p></div>
+            <a class="pdf" href="papers/hoshi-introduction-to-iut.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="dupuy hilado initial theta data corollary 3.12">
+            <div><h3>Dupuy-Hilado: Initial Theta Data</h3><div class="sourceMeta">Taylor Dupuy and Anton Hilado, arXiv v2 June 2025, 20 pp.</div><p>Explicit treatment of initial theta data and the hypothesis side of Corollary 3.12.</p></div>
+            <a class="pdf" href="papers/dupuy-hilado-corollary-312-initial-theta-indeterminacies.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="dupuy hilado probabilistic szpiro baby szpiro explicit szpiro corollary 3.12">
+            <div><h3>Dupuy-Hilado: Probabilistic Szpiro</h3><div class="sourceMeta">Taylor Dupuy and Anton Hilado, April 2020, 36 pp.</div><p>Derives transparent Szpiro-type inequalities from a probabilistic formulation of Mochizuki's Corollary 3.12, conditional on that input.</p></div>
+            <a class="pdf" href="papers/dupuy-hilado-probabilistic-szpiro.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="fesenko hoshi minamide porowski mochizuki explicit estimates wrap 2022">
+            <div><h3>Explicit Estimates, WRAP Copy</h3><div class="sourceMeta">Fesenko, Hoshi, Minamide, Mochizuki, Porowski, 59 pp.</div><p>Repository copy of the accepted-manuscript version of explicit estimates in IUT.</p></div>
+            <a class="pdf" href="papers/wrap-explicit-estimates-iut-fesenko-et-al-2022.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="pajo scale free common container no go theorem 2026">
+            <div><h3>Pajo: Scale-Free Common Containers</h3><div class="sourceMeta">Paul Pajo, April 2026, 14 pp.</div><p>Typed no-go theorem showing that a scale-free common container alone does not entail a numerical inequality.</p></div>
+            <a class="pdf" href="papers/pajo-scale-free-common-container-comparisons.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="higuchi formal negative result step xi step xi-f 2026">
+            <div><h3>Higuchi: Formal Negative Result</h3><div class="sourceMeta">Joaquim Reizi Higuchi, March 2026, 9 pp.</div><p>Countermodel-style analysis of the passage from Step (xi-e) to Step (xi-f) without a numerical bridge axiom.</p></div>
+            <a class="pdf" href="papers/higuchi-formal-negative-result-step-xi.pdf" target="_blank">PDF</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="glossary">
+        <h2>Glossary</h2>
+        <p class="lede">
+          Short definitions for navigation. Each entry is intentionally compact; follow
+          the internal links for context and source references.
+        </p>
+        <dl class="glossary" id="glossary-list">
+          <div data-filter="alien copy mutually alien copies"><dt>Alien copy</dt><dd>A typed copy of arithmetic data whose history is not identified with the original ring/scheme history.</dd></div>
+          <div data-filter="anabelian geometry"><dt>Anabelian geometry</dt><dd>Reconstruction of arithmetic/geometric objects from fundamental-group-like data; a major prerequisite background for IUT.</dd></div>
+          <div data-filter="apt algorithmic parallel transport"><dt>APT</dt><dd>Algorithmic parallel transport through IUT gluings, up to specified indeterminacy.</dd></div>
+          <div data-filter="corollary 3.12"><dt>Corollary 3.12</dt><dd>The proof-critical IUT III comparison that supplies the signed log-volume inequality used downstream.</dd></div>
+          <div data-filter="frobenioid"><dt>Frobenioid</dt><dd>Categorical packaging of arithmetic line-bundle/divisor/monoid data used in Mochizuki's earlier infrastructure.</dd></div>
+          <div data-filter="hodge theater"><dt>Hodge theater</dt><dd>A miniature arithmetic world associated to initial theta data, designed to separate additive and multiplicative structures.</dd></div>
+          <div data-filter="indeterminacy ind1 ind2 ind3"><dt>Indeterminacy</dt><dd>Controlled ambiguity allowed by the IUT comparison; in the key corridor, Ind3 is one-sided upper-semi rather than equality.</dd></div>
+          <div data-filter="ipl input prime strip link"><dt>IPL</dt><dd>Input prime-strip link property tying output possibilities to input prime-strip data at the comparison boundary.</dd></div>
+          <div data-filter="lana lean anabelian geometry"><dt>LANA</dt><dd>Lean for ANAbelian geometry, a ZEN Mathematics Center project to formalize anabelian geometry and verify IUT.</dd></div>
+          <div data-filter="log link"><dt>Log link</dt><dd>Vertical link in the log-theta lattice, formed via local logarithms and log-shells.</dd></div>
+          <div data-filter="log shell"><dt>Log-shell</dt><dd>Local logarithmic object associated to units; used to manage additive log data.</dd></div>
+          <div data-filter="log theta lattice"><dt>Log-theta lattice</dt><dd>Two-dimensional diagram of Hodge theaters whose horizontal arrows are theta links and vertical arrows are log links.</dd></div>
+          <div data-filter="multiradial"><dt>Multiradial</dt><dd>Meaningful from multiple radial or alien holomorphic viewpoints, rather than tied to one ordinary scheme history.</dd></div>
+          <div data-filter="prime strip"><dt>Prime strip</dt><dd>A local/global strip of prime-indexed data used in the IUT comparison machinery.</dd></div>
+          <div data-filter="she simultaneous holomorphic expressibility"><dt>SHE</dt><dd>Simultaneous holomorphic expressibility, a condition needed to express output data relative to the target holomorphic structure.</dd></div>
+          <div data-filter="theta link"><dt>Theta link</dt><dd>Horizontal link between Hodge theaters produced from Hodge-Arakelov theta evaluation.</dd></div>
+        </dl>
+      </section>
+
+      <footer>
+        IUT Wiki. Local offline edition updated 31 May 2026. Source PDFs are mirrored in <code>docs/papers/</code>; online project links remain external.
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const sections = Array.from(document.querySelectorAll("main section[id]"));
+    const navLinks = Array.from(document.querySelectorAll("nav a"));
+    const byHref = new Map(navLinks.map(a => [a.getAttribute("href"), a]));
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(e => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      navLinks.forEach(a => a.classList.remove("active"));
+      const active = byHref.get("#" + visible.target.id);
+      if (active) active.classList.add("active");
+    }, { rootMargin: "-20% 0px -65% 0px", threshold: [0.1, 0.25, 0.5] });
+    sections.forEach(section => observer.observe(section));
+
+    const search = document.getElementById("wiki-search");
+    const filterTargets = Array.from(document.querySelectorAll("[data-filter]"));
+    search.addEventListener("input", () => {
+      const query = search.value.trim().toLowerCase();
+      filterTargets.forEach(el => {
+        if (!query) {
+          el.style.display = "";
+          return;
+        }
+        const text = (el.dataset.filter + " " + el.textContent).toLowerCase();
+        el.style.display = text.includes(query) ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
