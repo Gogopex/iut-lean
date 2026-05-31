@@ -474,6 +474,7 @@
         <a href="#official-corpus">Official corpus</a>
         <a href="#panoramic-route">Panoramic route</a>
         <a href="#bogomolov-szpiro-analogy">Bogomolov-Szpiro analogy</a>
+        <a href="#classical-roots-route">Classical roots route</a>
         <a href="#concept-index">Concept index</a>
         <a href="#anabelian-background">Anabelian background</a>
         <a href="#collas-category-perspective">Collas category view</a>
@@ -1014,6 +1015,121 @@
         </div>
       </section>
 
+      <section id="classical-roots-route">
+        <h2>Classical Roots Route</h2>
+        <p class="lede">
+          Mochizuki's Classical Roots lecture notes give four classical analogies for
+          reading IUT: isogeny invariance of elliptic-curve heights, crystals and Hodge
+          filtrations, complex Teichmuller dilations, and the Jacobi theta identity.
+          The page uses them as orientation maps into the source papers, not as
+          replacements for the formal IUT constructions.
+        </p>
+        <div class="diagram" aria-label="Four classical roots of IUT">
+          <div class="diagramHeader">
+            <strong>Four classical roots</strong>
+            <span>source analogies pointing into IUT machinery</span>
+          </div>
+          <svg viewBox="0 0 1040 430" role="img">
+            <defs>
+              <marker id="arrowClassicalRoots" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="44" y="54" width="210" height="78"></rect>
+            <text class="nodeTitle" x="149" y="84" text-anchor="middle">Isogeny heights</text>
+            <text class="tinyText" x="149" y="108" text-anchor="middle">ql_E = q_E*</text>
+            <text class="tinyText" x="149" y="126" text-anchor="middle">global GMS model</text>
+
+            <rect class="nodeBox green" x="302" y="54" width="210" height="78"></rect>
+            <text class="nodeTitle" x="407" y="84" text-anchor="middle">Crystals / Hodge</text>
+            <text class="tinyText" x="407" y="108" text-anchor="middle">common container</text>
+            <text class="tinyText" x="407" y="126" text-anchor="middle">large enough, small enough</text>
+
+            <rect class="nodeBox gold" x="560" y="54" width="210" height="78"></rect>
+            <text class="nodeTitle" x="665" y="84" text-anchor="middle">Complex Teichmuller</text>
+            <text class="tinyText" x="665" y="108" text-anchor="middle">real analytic structure</text>
+            <text class="tinyText" x="665" y="126" text-anchor="middle">one dimension dilated</text>
+
+            <rect class="nodeBox violet" x="818" y="54" width="178" height="78"></rect>
+            <text class="nodeTitle" x="907" y="84" text-anchor="middle">Jacobi theta</text>
+            <text class="tinyText" x="907" y="108" text-anchor="middle">theta(t)=t^-1/2 theta(t^-1)</text>
+            <text class="tinyText" x="907" y="126" text-anchor="middle">descent plus factor</text>
+
+            <rect class="nodeBox red" x="390" y="254" width="260" height="86"></rect>
+            <text class="nodeTitle" x="520" y="284" text-anchor="middle">IUT reading target</text>
+            <text class="tinyText" x="520" y="308" text-anchor="middle">Hodge theaters, log-theta lattice</text>
+            <text class="tinyText" x="520" y="326" text-anchor="middle">theta/log links, multiradiality</text>
+
+            <path d="M149 134 C184 200 360 226 442 252" class="edge blue" marker-end="url(#arrowClassicalRoots)"></path>
+            <path d="M407 134 C430 184 470 218 494 252" class="edge green" marker-end="url(#arrowClassicalRoots)"></path>
+            <path d="M665 134 C634 184 580 218 548 252" class="edge gold" marker-end="url(#arrowClassicalRoots)"></path>
+            <path d="M907 134 C856 204 686 226 598 252" class="edge violet" marker-end="url(#arrowClassicalRoots)"></path>
+          </svg>
+        </div>
+        <div class="grid4">
+          <div class="card" id="classical-gms-isogeny">
+            <h3>Isogeny-height GMS model</h3>
+            <p>
+              In the hypothetical presence of a global multiplicative subspace,
+              quotienting an elliptic curve by it gives a relation like
+              <span class="math">q_E^l = q_E*</span>, hence
+              <span class="math">l log(q_E) = log(q_E*)</span>. The lecture presents
+              Hodge theaters as the apparatus for generalizing this key point when such
+              global objects do not exist.
+            </p>
+            <div class="tagRow"><span class="tag blue">Classical Roots §1</span><span class="tag">GMS</span></div>
+          </div>
+          <div class="card" id="classical-hodge-container">
+            <h3>Hodge-filtration container</h3>
+            <p>
+              The crystals/Hodge-filtration section uses
+              <span class="math">p1*E ~= p2*E</span> as a common container large enough
+              to house two Hodge subbundles but small enough to yield a nontrivial
+              height estimate. Mochizuki compares this to IUT's multiradial common
+              container for incompatible ring structures across the theta link.
+            </p>
+            <div class="tagRow"><span class="tag green">Classical Roots §2</span><span class="tag">container</span></div>
+          </div>
+          <div class="card" id="classical-teichmuller-dilation">
+            <h3>Complex Teichmuller dilation</h3>
+            <p>
+              Classical Teichmuller deformation keeps a common real-analytic structure
+              while one real direction is dilated and the other is fixed. The lecture
+              uses this to motivate the log-theta lattice's infinite-H portion, where
+              log links act like rotations of arithmetic holomorphic structure and theta
+              links perform the dilation-like move.
+            </p>
+            <div class="tagRow"><span class="tag gold">Classical Roots §3</span><span class="tag">dilation</span></div>
+          </div>
+          <div class="card" id="classical-jacobi-theta">
+            <h3>Jacobi theta identity</h3>
+            <p>
+              The identity <span class="math">theta(t)=t^-1/2 theta(t^-1)</span> is read
+              as descent to a quotient up to a factor. The lecture compares the identity
+              with IUT's multiradial representation, the factor with indeterminacy, and
+              the involution with the log-link rotation of holomorphic structure.
+            </p>
+            <div class="tagRow"><span class="tag violet">Classical Roots §4</span><span class="tag">theta</span></div>
+          </div>
+        </div>
+        <div class="callout good">
+          <strong>Use in the wiki.</strong> These analogies are particularly useful for
+          readers before the technical Frobenioid and Hodge-theater pages. They explain
+          why IUT repeatedly asks for a common container that is broad enough for alien
+          structures but narrow enough to preserve a numerical estimate.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-classical-roots-iut-2021-marked.pdf" target="_blank">Classical Roots of IUT</a>
+          <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies</a>
+          <a href="papers/mochizuki-panorama.pdf" target="_blank">Panoramic Overview</a>
+          Related: <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#log-theta-lattice">log-theta lattice</a>
+          <a href="#multiradiality">multiradiality</a>
+          <a href="#theta-log-links">theta/log links</a>
+        </div>
+      </section>
+
       <section id="concept-index">
         <h2>Core Concept Index</h2>
         <p class="lede">
@@ -1240,6 +1356,18 @@
               <a href="#explicit-flt-application">Fermat application</a>
             </td>
             <td>Explicit Estimates, Sections 3-5</td>
+          </tr>
+          <tr>
+            <td>Classical Roots</td>
+            <td>Classical analogies for IUT architecture</td>
+            <td>
+              <a href="#classical-roots-route">classical roots route</a>,
+              <a href="#classical-gms-isogeny">isogeny-height GMS model</a>,
+              <a href="#classical-hodge-container">Hodge-filtration container</a>,
+              <a href="#classical-teichmuller-dilation">complex Teichmuller dilation</a>,
+              <a href="#classical-jacobi-theta">Jacobi theta identity</a>
+            </td>
+            <td>Classical Roots, Sections 1-4</td>
           </tr>
           <tr>
             <td>IUT IV</td>
@@ -11873,6 +12001,10 @@
           <div class="card sourceCard" data-filter="mochizuki bogomolov szpiro geometric version comparison iut">
             <div><h3>Bogomolov's Szpiro Proof from the IUT Viewpoint</h3><div class="sourceMeta">Shinichi Mochizuki, January 2016, 24 pp.</div><p>Compares IUT with Bogomolov's proof of the geometric Szpiro conjecture, emphasizing shared hyperbolic geometry and differences involving theta functions and Gaussian distributions.</p></div>
             <a class="pdf" href="papers/mochizuki-bogomolov-szpiro.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki classical roots iut jacobi theta hodge filtrations teichmuller dilation">
+            <div><h3>Classical Roots of IUT</h3><div class="sourceMeta">Shinichi Mochizuki, marked-up lecture notes, December 2021, 27 pp.</div><p>Four classical entry points into IUT: isogeny-height invariance, crystals/Hodge filtrations, complex Teichmuller theory, and the Jacobi theta identity.</p></div>
+            <a class="pdf" href="papers/mochizuki-classical-roots-iut-2021-marked.pdf" target="_blank">PDF</a>
           </div>
           <div class="card sourceCard" data-filter="mochizuki anabelian gateway diophantine geometry analytic number theory 2023">
             <div><h3>IUT as an Anabelian Gateway</h3><div class="sourceMeta">Shinichi Mochizuki, MFO-RIMS report, 7 pp.</div><p>Short report framing IUT as an anabelian gateway from Diophantine geometry toward analytic number theory.</p></div>
