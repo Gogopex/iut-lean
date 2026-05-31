@@ -526,6 +526,7 @@
         <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation 2</a>
         <a href="#tempered-gaussian-monoids-ii3">Tempered Gaussian monoids 3</a>
         <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioid categories 3.8</a>
+        <a href="#good-prime-gaussian-monoids-ii41">Good-prime Gaussian monoids 4.1</a>
         <a href="#theta-evaluation-kummer-route">Theta evaluation route</a>
         <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
         <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
@@ -1510,6 +1511,8 @@
               <a href="#group-to-post-anabelian-gaussians-37">group-to-post-anabelian Gaussian monoids</a>,
               <a href="#local-frobenioids-from-monoids-38">local Frobenioids from monoids</a>,
               <a href="#conjugate-synchronization-gain-383">conjugate synchronization gain</a>,
+              <a href="#good-prime-gaussian-monoids-ii41">good-prime Gaussian monoids</a>,
+              <a href="#archimedean-gaussian-monoids-43">archimedean Gaussian monoids</a>,
               <a href="#gaussian-monoids">Gaussian monoids</a>,
               <a href="#tempered-gaussian-frobenioids">tempered Gaussian Frobenioids</a>,
               <a href="#split-theta-monoids">split theta monoids</a>,
@@ -4528,7 +4531,7 @@
           <tr>
             <td>§4</td>
             <td>Global Gaussian Frobenioids and the modified theta-link variants <span class="math">Theta×μ</span> and <span class="math">Theta×μ_gau</span>.</td>
-            <td><a href="#theta-log-links">theta/log links</a>, <a href="#log-theta-lattice">log-theta lattice</a></td>
+            <td><a href="#good-prime-gaussian-monoids-ii41">Good-prime Gaussian monoids</a>, <a href="#theta-log-links">theta/log links</a>, <a href="#log-theta-lattice">log-theta lattice</a></td>
           </tr>
         </table>
         <table>
@@ -10749,6 +10752,245 @@
           <a href="#theta-log-links">theta/log links</a>
           <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
           <a href="#log-theta-lattice">log-theta lattice</a>
+        </div>
+      </section>
+
+      <section id="good-prime-gaussian-monoids-ii41">
+        <h2>Good-Prime Gaussian Monoids in IUT II 4.1-4.4</h2>
+        <p class="lede">
+          Section 4 begins the globalization of Gaussian monoids by extending the
+          bad-prime construction of Section 3 to good nonarchimedean primes and
+          archimedean primes. The pattern is deliberately parallel: construct constant
+          monoids, pass to mono-analytic semi-simplifications, synchronize labels, then
+          define theta and Gaussian monoids together with a formal evaluation
+          isomorphism.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Section 4 local good-prime Gaussian construction">
+          <div class="diagramHeader">
+            <strong>Local good-prime extension</strong>
+            <span>good nonarchimedean and archimedean versions before globalization</span>
+          </div>
+          <svg viewBox="0 0 1120 600" role="img">
+            <defs>
+              <marker id="arrowGoodPrime41" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="70" y="60" width="240" height="78"></rect>
+            <text class="nodeTitle" x="190" y="88" text-anchor="middle">good nonarchimedean v</text>
+            <text class="tinyText" x="190" y="111" text-anchor="middle">topological group Pi_v</text>
+            <text class="tinyText" x="190" y="129" text-anchor="middle">Proposition 4.1</text>
+
+            <rect class="nodeBox green" x="440" y="60" width="240" height="78"></rect>
+            <text class="nodeTitle" x="560" y="88" text-anchor="middle">archimedean v</text>
+            <text class="tinyText" x="560" y="111" text-anchor="middle">Aut-holomorphic space U_v</text>
+            <text class="tinyText" x="560" y="129" text-anchor="middle">Proposition 4.3</text>
+
+            <rect class="nodeBox violet" x="810" y="60" width="240" height="78"></rect>
+            <text class="nodeTitle" x="930" y="88" text-anchor="middle">Frobenioid versions</text>
+            <text class="tinyText" x="930" y="111" text-anchor="middle">Theta-Hodge theater local data</text>
+            <text class="tinyText" x="930" y="129" text-anchor="middle">Propositions 4.2, 4.4</text>
+
+            <rect class="nodeBox gold" x="90" y="226" width="210" height="78"></rect>
+            <text class="nodeTitle" x="195" y="254" text-anchor="middle">constant monoids</text>
+            <text class="tinyText" x="195" y="277" text-anchor="middle">Psi_cns</text>
+            <text class="tinyText" x="195" y="295" text-anchor="middle">uniradial at this level</text>
+
+            <rect class="nodeBox blue" x="330" y="226" width="210" height="78"></rect>
+            <text class="nodeTitle" x="435" y="254" text-anchor="middle">semi-simplification</text>
+            <text class="tinyText" x="435" y="277" text-anchor="middle">units x R>=0</text>
+            <text class="tinyText" x="435" y="295" text-anchor="middle">distinguished log(p_v)</text>
+
+            <rect class="nodeBox green" x="570" y="226" width="210" height="78"></rect>
+            <text class="nodeTitle" x="675" y="254" text-anchor="middle">label synchronization</text>
+            <text class="tinyText" x="675" y="277" text-anchor="middle">F_l^± symmetrizing</text>
+            <text class="tinyText" x="675" y="295" text-anchor="middle">diagonal monoids</text>
+
+            <rect class="nodeBox red" x="810" y="226" width="220" height="78"></rect>
+            <text class="nodeTitle" x="920" y="254" text-anchor="middle">formal evaluation</text>
+            <text class="tinyText" x="920" y="277" text-anchor="middle">Psi_env -> Psi_gau</text>
+            <text class="tinyText" x="920" y="295" text-anchor="middle">j^2 log(p_v) profile</text>
+
+            <rect class="nodeBox blue" x="210" y="430" width="260" height="82"></rect>
+            <text class="nodeTitle" x="340" y="460" text-anchor="middle">group/aut-holomorphic algorithm</text>
+            <text class="tinyText" x="340" y="484" text-anchor="middle">constructs local theta/Gaussian monoids</text>
+            <text class="tinyText" x="340" y="502" text-anchor="middle">before Frobenioid transport</text>
+
+            <rect class="nodeBox violet" x="650" y="430" width="260" height="82"></rect>
+            <text class="nodeTitle" x="780" y="460" text-anchor="middle">Frobenioid-theoretic monoids</text>
+            <text class="tinyText" x="780" y="484" text-anchor="middle">Psi^{FTheta}_v and Psi^{Fgau}</text>
+            <text class="tinyText" x="780" y="502" text-anchor="middle">compatible with splittings</text>
+
+            <path d="M190 140 C184 176 186 202 194 224" class="edge blue" marker-end="url(#arrowGoodPrime41)"></path>
+            <path d="M560 140 C548 176 504 204 438 224" class="edge green" marker-end="url(#arrowGoodPrime41)"></path>
+            <path d="M930 140 C928 174 922 202 921 224" class="edge violet" marker-end="url(#arrowGoodPrime41)"></path>
+            <path d="M300 265 H328" class="edge gold" marker-end="url(#arrowGoodPrime41)"></path>
+            <path d="M540 265 H568" class="edge blue" marker-end="url(#arrowGoodPrime41)"></path>
+            <path d="M780 265 H808" class="edge green" marker-end="url(#arrowGoodPrime41)"></path>
+            <path d="M435 306 C410 350 374 386 346 428" class="edge blue" marker-end="url(#arrowGoodPrime41)"></path>
+            <path d="M920 306 C892 354 832 392 792 428" class="edge red" marker-end="url(#arrowGoodPrime41)"></path>
+            <path d="M470 470 H648" class="edge violet" marker-end="url(#arrowGoodPrime41)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source item</th><th>Local construction</th><th>Role in globalization</th></tr>
+          <tr>
+            <td>Proposition 4.1(i)</td>
+            <td>
+              For good nonarchimedean <span class="math">v</span>, the local
+              topological group <span class="math">Pi_v</span> functorially constructs
+              a constant monoid <span class="math">Psi_cns(Pi_v)</span> with
+              <span class="math">G_v(Pi_v)</span>-action.
+            </td>
+            <td>
+              This gives the good-place analogue of the constant monoids from bad
+              places.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 4.1(ii)</td>
+            <td>
+              The mono-analytic semi-simplification splits the constant monoid into
+              units and a realified value monoid <span class="math">R>=0</span>, with a
+              distinguished element <span class="math">log(p_v)</span>.
+            </td>
+            <td>
+              This is the value-group component needed to write the good-prime
+              Gaussian exponent profile.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 4.1(iii)-(iv)</td>
+            <td>
+              The <span class="math">F_l^±</span> action supplies symmetrizing
+              isomorphisms and diagonal monoids; the formal evaluation isomorphism sends
+              <span class="math">log(p_v) log(Theta)</span> to the
+              <span class="math">j^2 log(p_v)</span> profile.
+            </td>
+            <td>
+              This is the good nonarchimedean version of the Section 3 Gaussian
+              construction.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 4.1.1</td>
+            <td>
+              The good nonarchimedean generalization is mostly formal and tautological:
+              it is introduced so the bad and good local theories can be glued globally.
+              Constant monoids are uniradial, while semi-simplified, theta, and Gaussian
+              monoids are multiradial.
+            </td>
+            <td>
+              The page treats good-prime data as global glue, not as a second source of
+              deep theta evaluation.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 4.2</td>
+            <td>
+              The good nonarchimedean Frobenioid in a theta-Hodge theater yields
+              Frobenioid-theoretic constant, theta, and Gaussian monoids compatible with
+              the group-theoretic construction of Proposition 4.1.
+            </td>
+            <td>
+              This transports the formal group-theoretic good-place construction into
+              the Hodge-theater Frobenioid setting.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 4.3</td>
+            <td>
+              At archimedean places, Aut-holomorphic orbispaces replace tempered
+              topological groups. The same constant/semi-simplified/label/Gaussian
+              pattern is constructed from <span class="math">U_v</span>.
+            </td>
+            <td>
+              Archimedean places require their own source type; they are not modeled as
+              nonarchimedean groups.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 4.4</td>
+            <td>
+              Archimedean Frobenioid data in a theta-Hodge theater yields the
+              corresponding Frobenioid-theoretic theta and Gaussian monoids, with
+              compatible formal evaluation isomorphisms.
+            </td>
+            <td>
+              This completes the local place-by-place input for Corollary 4.5.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="good-nonarchimedean-gaussian-monoids-41">
+            <h3>Good nonarchimedean Gaussian monoids</h3>
+            <p>
+              Proposition 4.1 constructs <span class="math">Psi_env(Pi_v)</span> and
+              <span class="math">Psi_gau(Pi_v)</span> directly from the good
+              nonarchimedean topological group, after forming constant monoids and their
+              semi-simplified value-group part.
+            </p>
+            <div class="tagRow"><span class="tag blue">Prop. 4.1</span><span class="tag">good v</span></div>
+          </div>
+          <div class="card" id="good-prime-semi-simplification-41">
+            <h3>Mono-analytic semi-simplification</h3>
+            <p>
+              The semi-simplified monoid is the product of units with a realified
+              <span class="math">R>=0</span> component. This isolates the value-group
+              data that will be compatible with global realification.
+            </p>
+            <div class="tagRow"><span class="tag green">Prop. 4.1(ii)</span><span class="tag">R>=0</span></div>
+          </div>
+          <div class="card" id="good-prime-formal-evaluation-41">
+            <h3>Good-prime formal evaluation</h3>
+            <p>
+              The formal evaluation isomorphism maps the theta formal symbol to the
+              Gaussian tuple with <span class="math">j^2</span>-weighted
+              <span class="math">log(p_v)</span> entries, while preserving units and
+              splittings.
+            </p>
+            <div class="tagRow"><span class="tag gold">Prop. 4.1(iv)</span><span class="tag">j²</span></div>
+          </div>
+          <div class="card" id="good-frobenioid-gaussian-monoids-42">
+            <h3>Good Frobenioid Gaussian monoids</h3>
+            <p>
+              Proposition 4.2 transfers the good nonarchimedean construction to the
+              local Frobenioid of a theta-Hodge theater, using unique equivariant
+              isomorphisms and compatible splittings.
+            </p>
+            <div class="tagRow"><span class="tag violet">Prop. 4.2</span><span class="tag">Frobenioid</span></div>
+          </div>
+          <div class="card" id="archimedean-gaussian-monoids-43">
+            <h3>Archimedean Gaussian monoids</h3>
+            <p>
+              Proposition 4.3 constructs the archimedean analogue from Aut-holomorphic
+              orbispaces. The constant monoid is the nonzero closed unit-ball monoid of
+              the complex archimedean field.
+            </p>
+            <div class="tagRow"><span class="tag blue">Prop. 4.3</span><span class="tag">Aut-holomorphic</span></div>
+          </div>
+          <div class="card" id="archimedean-frobenioid-gaussian-monoids-44">
+            <h3>Archimedean Frobenioid monoids</h3>
+            <p>
+              Proposition 4.4 uses the archimedean Kummer structure and the equality of
+              the relevant Aut-holomorphic spaces to compare Frobenioid-theoretic and
+              Aut-holomorphic Gaussian monoids.
+            </p>
+            <div class="tagRow"><span class="tag violet">Prop. 4.4</span><span class="tag">Kummer</span></div>
+          </div>
+        </div>
+        <div class="callout">
+          Source warning: the good-prime construction is intentionally formal. Its
+          purpose is to provide compatible local data at every place so that Corollary
+          4.5 can build global Gaussian Frobenioids.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Propositions 4.1-4.4</a>
+          Related: <a href="#tempered-gaussian-monoids-ii3">tempered Gaussian monoids</a>
+          <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioid categories</a>
+          <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
+          <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
         </div>
       </section>
 
