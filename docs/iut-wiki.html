@@ -563,6 +563,7 @@
         <a href="#multiradiality">Multiradiality</a>
         <a href="#tensor-packets-iii31-33">Tensor packets 3.1-3.3</a>
         <a href="#local-lgp-monoids-iii34">Local LGP monoids 3.4</a>
+        <a href="#vertically-coric-lgp-iii35">Vertically coric LGP 3.5</a>
         <a href="#tensor-log-volume-corridor">Tensor/log-volume corridor</a>
         <a href="#corollary-312">Corollary 3.12 corridor</a>
         <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
@@ -1638,6 +1639,9 @@
               <a href="#local-lgp-monoids-iii34">local LGP monoids source page</a>,
               <a href="#single-packet-monoids-34">single packet monoids</a>,
               <a href="#lgp-splitting-monoids-act-on-packets-34">LGP splitting monoids act on packets</a>,
+              <a href="#vertically-coric-lgp-iii35">vertically coric LGP source page</a>,
+              <a href="#single-kummer-map-not-enough-35">single Kummer map not enough</a>,
+              <a href="#bad-prime-root-unity-zero-35">bad-prime root-of-unity indeterminacy</a>,
               <a href="#local-packet-frobenioids">local packet Frobenioids</a>,
               <a href="#local-lgp-monoids-source">local LGP monoids</a>,
               <a href="#vertically-coric-lgp">vertically coric LGP monoids</a>,
@@ -16385,6 +16389,252 @@
           <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
           <a href="#vertically-coric-lgp">vertically coric LGP monoids</a>
           <a href="#log-kummer-totality">log-Kummer totality</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="vertically-coric-lgp-iii35">
+        <h2>Vertically Coric Local LGP Monoids in IUT III 3.5</h2>
+        <p class="lede">
+          Proposition 3.5 takes the local LGP monoids of Proposition 3.4 and rebuilds
+          them in the vertically coric <span class="math">D-Theta±ellNF</span> Hodge
+          theater attached to a fixed column of the Gaussian log-theta lattice. Its
+          central point is that compatibility with vertical log-links is upper-semi:
+          one must use the totality of Kummer maps pre-composed with log-link iterates,
+          not a single Kummer isomorphism.
+        </p>
+        <div class="diagram fit" aria-label="IUT III Proposition 3.5 vertically coric LGP monoids">
+          <div class="diagramHeader">
+            <strong>Proposition 3.5</strong>
+            <span>vertical coricity, Kummer maps, and upper semi-compatibility</span>
+          </div>
+          <svg viewBox="0 0 1120 660" role="img">
+            <defs>
+              <marker id="arrowLGP35" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="64" y="66" width="230" height="86"></rect>
+            <text class="nodeTitle" x="179" y="96" text-anchor="middle">Gaussian column n</text>
+            <text class="tinyText" x="179" y="120" text-anchor="middle">theaters n,m over m in Z</text>
+            <text class="tinyText" x="179" y="138" text-anchor="middle">full vertical log-links</text>
+
+            <rect class="nodeBox green" x="420" y="66" width="250" height="86"></rect>
+            <text class="nodeTitle" x="545" y="96" text-anchor="middle">vertical coric D-theater</text>
+            <text class="tinyText" x="545" y="120" text-anchor="middle">n,◦ HT_D-Theta±ellNF</text>
+            <text class="tinyText" x="545" y="138" text-anchor="middle">from Theorem 1.5(i)</text>
+
+            <rect class="nodeBox gold" x="796" y="66" width="250" height="86"></rect>
+            <text class="nodeTitle" x="921" y="96" text-anchor="middle">F(n,◦D≻) prime-strips</text>
+            <text class="tinyText" x="921" y="120" text-anchor="middle">from Psi_cns and full log-links</text>
+            <text class="tinyText" x="921" y="138" text-anchor="middle">compatible with F_l^± symmetries</text>
+
+            <rect class="nodeBox violet" x="118" y="282" width="250" height="92"></rect>
+            <text class="nodeTitle" x="243" y="312" text-anchor="middle">vertical LGP monoids</text>
+            <text class="tinyText" x="243" y="336" text-anchor="middle">Psi_LGP and infty Psi_LGP</text>
+            <text class="tinyText" x="243" y="354" text-anchor="middle">actions; bad-prime splittings</text>
+
+            <rect class="nodeBox blue" x="440" y="282" width="250" height="92"></rect>
+            <text class="nodeTitle" x="565" y="312" text-anchor="middle">Kummer comparisons</text>
+            <text class="tinyText" x="565" y="336" text-anchor="middle">n,m FLGP -> n,◦ LGP</text>
+            <text class="tinyText" x="565" y="354" text-anchor="middle">for every horizontal index m</text>
+
+            <rect class="nodeBox red" x="762" y="282" width="250" height="92"></rect>
+            <text class="nodeTitle" x="887" y="312" text-anchor="middle">upper semi-compatibility</text>
+            <text class="tinyText" x="887" y="336" text-anchor="middle">containment, not equality</text>
+            <text class="tinyText" x="887" y="354" text-anchor="middle">nonarch, arch, bad-prime clauses</text>
+
+            <rect class="nodeBox green" x="254" y="494" width="270" height="92"></rect>
+            <text class="nodeTitle" x="389" y="524" text-anchor="middle">total log-Kummer correspondence</text>
+            <text class="tinyText" x="389" y="548" text-anchor="middle">Kummer maps pre-composed with log-link iterates</text>
+            <text class="tinyText" x="389" y="566" text-anchor="middle">acts on n,◦ IQ containers</text>
+
+            <rect class="nodeBox gold" x="646" y="494" width="270" height="92"></rect>
+            <text class="nodeTitle" x="781" y="524" text-anchor="middle">Ind3 source interface</text>
+            <text class="tinyText" x="781" y="548" text-anchor="middle">one-sided upper-semi directionality</text>
+            <text class="tinyText" x="781" y="566" text-anchor="middle">feeds Theorem 3.11 and Corollary 3.12</text>
+
+            <path d="M296 109 H418" class="edge blue" marker-end="url(#arrowLGP35)"></path>
+            <path d="M672 109 H794" class="edge green" marker-end="url(#arrowLGP35)"></path>
+            <path d="M921 154 C888 222 440 220 263 280" class="edge gold" marker-end="url(#arrowLGP35)"></path>
+            <path d="M370 328 H438" class="edge violet" marker-end="url(#arrowLGP35)"></path>
+            <path d="M692 328 H760" class="edge red" marker-end="url(#arrowLGP35)"></path>
+            <path d="M565 376 C540 424 462 454 404 492" class="edge green" marker-end="url(#arrowLGP35)"></path>
+            <path d="M887 376 C882 430 840 458 796 492" class="edge gold" marker-end="url(#arrowLGP35)"></path>
+            <path d="M526 540 H644" class="edge red" marker-end="url(#arrowLGP35)"></path>
+          </svg>
+        </div>
+
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Construction</th><th>Audit consequence</th></tr>
+          <tr>
+            <td>Proposition 3.5 setup</td>
+            <td>
+              Fix a family <span class="math">{n,m HT_Theta±ellNF}</span> arising
+              from a Gaussian log-theta lattice. For each <span class="math">n</span>,
+              use vertical coricity to determine a
+              <span class="math">D-Theta±ellNF</span> Hodge theater labelled
+              <span class="math">n,◦</span>.
+            </td>
+            <td>
+              The target for comparison is the columnwise vertically coric object, not
+              one of the ordinary <span class="math">n,m</span> holomorphic theaters.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 3.5(i)</td>
+            <td>
+              Apply Proposition 3.4(ii) to the prime-strips
+              <span class="math">F(n,◦D≻)_t</span> and the associated full log-links,
+              compatibly with the <span class="math">F_l^±</span> symmetries, to
+              construct vertically coric local LGP monoids
+              <span class="math">Psi_LGP</span> and <span class="math">infty Psi_LGP</span>.
+            </td>
+            <td>
+              A correct interface must remember both the prime-strip source and the
+              log-link data used to make the construction vertical.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 3.5(i), Kummer displays</td>
+            <td>
+              For every <span class="math">n,m</span>, Kummer isomorphisms compare
+              the ordinary local <span class="math">FLGP</span> monoids in the
+              <span class="math">n,m</span> theater with the vertically coric
+              <span class="math">LGP</span> monoids in the <span class="math">n,◦</span>
+              theater.
+            </td>
+            <td>
+              These maps are comparison inputs. They do not by themselves commute with
+              the vertical log-links.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 3.5(ii)(a)</td>
+            <td>
+              At nonarchimedean primes, the target module contains images obtained
+              directly from Kummer maps and images obtained after pre-composing Kummer
+              maps with positive iterates of the column's log-links.
+            </td>
+            <td>
+              The formal statement is a containment statement; replacing it by equality
+              would erase the upper-semi feature.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 3.5(ii)(b)</td>
+            <td>
+              At archimedean primes, the closed unit ball contains images of unit
+              groups and radius-<span class="math">pi</span> balls. These balls contain
+              subsets that surject onto the log-link domains for iterates.
+            </td>
+            <td>
+              The archimedean clause is not a copy of the nonarchimedean one; it uses
+              ball containment and surjectivity for partially defined log-link iterates.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 3.5(ii)(c)</td>
+            <td>
+              At bad primes and nonzero labels, the splitting submonoids
+              <span class="math">Psi_perp</span> and <span class="math">infty Psi_perp</span>
+              act on rational log-shell packet modules. Across the column, only
+              root-of-unity indeterminacies in log-link domains can be related, and
+              these become addition by zero at the next index.
+            </td>
+            <td>
+              This is the bad-prime source of the "no new indeterminacy after the
+              log-link" clause. It is not a global equality of all packet actions.
+            </td>
+          </tr>
+          <tr>
+            <td>Final paragraph</td>
+            <td>
+              The action is not via a single Kummer isomorphism. It is via the totality
+              of Kummer isomorphisms pre-composed with iterates of the log-links.
+            </td>
+            <td>
+              This is the page's main audit rule for the 3.11 to 3.12 corridor:
+              source-faithful models must encode total log-Kummer correspondence.
+            </td>
+          </tr>
+        </table>
+
+        <div class="grid3">
+          <div class="card" id="vertical-coric-target-35">
+            <h3>Columnwise target</h3>
+            <p>
+              The label <span class="math">n,◦</span> in this page denotes the
+              vertically coric target determined by the column. It is the object whose
+              rational log-shell packet modules receive the total correspondence.
+            </p>
+            <div class="tagRow"><span class="tag blue">3.5 setup</span><span class="tag">vertical coricity</span></div>
+          </div>
+          <div class="card" id="kummer-displays-35">
+            <h3>Kummer displays</h3>
+            <p>
+              The displayed Kummer isomorphisms compare
+              <span class="math">Psi_FLGP(n,m)</span> with
+              <span class="math">Psi_LGP(n,◦)</span>, and similarly for the realified
+              monoids. They preserve the local actions and splittings stated in 3.5(i).
+            </p>
+            <div class="tagRow"><span class="tag green">3.5(i)</span><span class="tag">Kummer</span></div>
+          </div>
+          <div class="card" id="single-kummer-map-not-enough-35">
+            <h3>Single Kummer map not enough</h3>
+            <p>
+              Proposition 3.5 explicitly rejects using one Kummer isomorphism as the
+              action. Such a map fails to be compatible with the column's log-links, so
+              the construction uses all relevant log-link pre-composites.
+            </p>
+            <div class="tagRow"><span class="tag red">3.5(ii)</span><span class="tag">audit rule</span></div>
+          </div>
+          <div class="card" id="nonarch-containment-35">
+            <h3>Nonarchimedean containment</h3>
+            <p>
+              For <span class="math">v_Q in V_Q^non</span>, the target
+              <span class="math">I(S_{j+1}^±F(n,◦D≻)_{v_Q})</span> contains images
+              from both direct Kummer maps and Kummer maps pre-composed with log-link
+              iterates.
+            </p>
+            <div class="tagRow"><span class="tag gold">3.5(ii)(a)</span><span class="tag">upper semi</span></div>
+          </div>
+          <div class="card" id="arch-ball-containment-35">
+            <h3>Archimedean ball containment</h3>
+            <p>
+              For archimedean primes, the closed unit ball contains images of units and
+              radius-<span class="math">pi</span> balls. This is the local real-analytic
+              version of the upper-semi containment.
+            </p>
+            <div class="tagRow"><span class="tag violet">3.5(ii)(b)</span><span class="tag">closed balls</span></div>
+          </div>
+          <div class="card" id="bad-prime-root-unity-zero-35">
+            <h3>Root-of-unity becomes zero</h3>
+            <p>
+              At bad primes, root-of-unity ambiguity in the domain of a log-link
+              corresponds, after the log-link, to addition by zero. The proposition uses
+              this to state mutual compatibility of bad-prime splitting actions without
+              turning upper-semi compatibility into equality.
+            </p>
+            <div class="tagRow"><span class="tag red">3.5(ii)(c)</span><span class="tag">Ind3 source</span></div>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <strong>Formalization warning.</strong> A Lean structure for this page should
+          not store only one Kummer isomorphism and a proof that it commutes with
+          log-links. The source statement asks for containment data generated by direct
+          Kummer maps and by their log-link iterates, with separate nonarchimedean,
+          archimedean, and bad-prime clauses.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Proposition 3.5</a>
+          Related: <a href="#local-lgp-monoids-iii34">local LGP monoids</a>
+          <a href="#upper-semi-compatibility">upper semi-compatibility</a>
+          <a href="#log-kummer-totality">log-Kummer totality</a>
+          <a href="#bad-prime-splitting-compatibility">bad-prime splitting compatibility</a>
+          <a href="#theorem-311-multiradial-representation">Theorem 3.11</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
         </div>
       </section>
