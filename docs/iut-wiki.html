@@ -862,6 +862,10 @@
               <a href="#theta-cyclotome">theta cyclotome</a>,
               <a href="#tautological-log-link">tautological log-link</a>,
               <a href="#gaussian-log-theta-lattice">Gaussian log-theta lattice</a>,
+              <a href="#local-log-link">local log-link</a>,
+              <a href="#log-shell-containment">log-shell containment</a>,
+              <a href="#log-link-kummer-incompatibility">log-link/Kummer incompatibility</a>,
+              <a href="#vertical-bicoric-log-shells">bi-coric log-shells</a>,
               <a href="#vertical-cores">vertical cores</a>,
               <a href="#multiradial-theta-monoids">multiradial theta monoids</a>,
               <a href="#lgp-monoids">LGP monoids</a>
@@ -4404,6 +4408,84 @@
             <text class="smallText" x="380" y="322" text-anchor="middle">The square is deliberately not treated as a commuting diagram of ordinary schemes.</text>
           </svg>
         </div>
+        <table>
+          <tr>
+            <th>IUT III introduction source item</th>
+            <th>Construction</th>
+            <th>Constraint recorded in the wiki</th>
+          </tr>
+          <tr>
+            <td>Abstract and Introduction</td>
+            <td>
+              The log-theta lattice is a noncommutative two-dimensional diagram of
+              <span class="math">Theta±ellNF</span>-Hodge theaters. Horizontal arrows
+              are theta-type links; vertical arrows are log-links.
+            </td>
+            <td>
+              The lattice is not a commuting square of schemes. Horizontal and vertical
+              arrows use incompatible pieces of local ring structure.
+            </td>
+          </tr>
+          <tr>
+            <td>Introduction, local log-link paragraph</td>
+            <td>
+              At a nonarchimedean valuation, the log-link is modeled by applying
+              <span class="math">log_v</span> to local units:
+              <span class="math">O×μ_Fv ⊗ Q -> F_v</span>.
+            </td>
+            <td>
+              The local group <span class="math">Pi_v</span> is coric for the log-link,
+              while the ring structure used to define the logarithm remains local to one
+              vertical line.
+            </td>
+          </tr>
+          <tr>
+            <td>Introduction, log-shell paragraph</td>
+            <td>
+              For bad nonarchimedean places, the log-shell is described as
+              <span class="math">I_v = p_v^{-1} log_v(O×_Kv)</span>, a compact additive
+              receptacle containing the Kummer images from both sides of the log-link.
+            </td>
+            <td>
+              The log-shell gives an upper container rather than a precise equality.
+              This is why later volume comparisons produce upper bounds.
+            </td>
+          </tr>
+          <tr>
+            <td>Introduction, upper-semi discussion</td>
+            <td>
+              Iterates of the log-link and Kummer isomorphisms form diagrams that are
+              only upper semi-compatible, not genuinely commutative.
+            </td>
+            <td>
+              This is the source-level motivation for treating <span class="math">Ind3</span>
+              separately in Theorem 3.11 and Corollary 3.12.
+            </td>
+          </tr>
+          <tr>
+            <td>Introduction, coricity vocabulary</td>
+            <td>
+              Vertical coricity means invariance under log-links; horizontal coricity
+              means invariance under theta-type links; bi-coricity means both.
+            </td>
+            <td>
+              Later multiradial algorithms must name which direction of invariance they
+              use. A single undifferentiated "invariant" flag would be misleading.
+            </td>
+          </tr>
+          <tr>
+            <td>Introduction, Theorem 1.5 preview</td>
+            <td>
+              Compatibility of the log-link with the <span class="math">F_l^{±}</span>
+              symmetry produces vertically coric <span class="math">F⊢×μ</span>
+              prime-strips and bi-coric mono-analytic log-shells.
+            </td>
+            <td>
+              These log-shells become the containers used in the multiradial
+              LGP-monoid and tensor-packet construction of IUT III §3.
+            </td>
+          </tr>
+        </table>
         <div class="grid2">
           <div class="card">
             <h3>Horizontal direction</h3>
@@ -4439,6 +4521,61 @@
               to a node that is a codomain of a vertical log-link. IUT III phrases this
               as every horizontal execution obligating a subsequent vertical execution.
             </p>
+          </div>
+          <div class="card" id="local-log-link">
+            <h3>Local log-link</h3>
+            <p>
+              The local log-link applies the <span class="math">p_v</span>-adic
+              logarithm to the unit quotient side of a local F-prime-strip. It uses the
+              additive and multiplicative structures of the same local ring, so it is
+              defined inside one arithmetic holomorphic structure.
+            </p>
+            <p>
+              This is why the vertical direction of the lattice is fundamentally
+              different from a theta-type horizontal link.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT III Introduction</span><span class="tag">log-link</span></div>
+          </div>
+          <div class="card" id="log-shell-containment">
+            <h3>Log-shell containment</h3>
+            <p>
+              The bad-place log-shell <span class="math">I_v</span> is designed to
+              contain the images of the Kummer isomorphisms associated to both the
+              domain and codomain of the log-link.
+            </p>
+            <p>
+              The containment is intentionally one-sided. It prepares an upper-bound
+              mechanism for log-volumes rather than a statement that the two Kummer
+              images are equal.
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 1.2.2</span><span class="tag red">upper container</span></div>
+          </div>
+          <div class="card" id="log-link-kummer-incompatibility">
+            <h3>Log-link/Kummer incompatibility</h3>
+            <p>
+              IUT III stresses that Kummer isomorphisms are not compatible with the
+              coricity of the group-theoretically reconstructed data at the element
+              level. The relevant compatibility is instead the upper-semi form obtained
+              after passing to log-shells.
+            </p>
+            <p>
+              This prevents replacing <span class="math">Ind3</span> by an ordinary
+              quotient-invariance assertion.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 1.2(iv)</span><span class="tag red">Ind3</span></div>
+          </div>
+          <div class="card" id="vertical-bicoric-log-shells">
+            <h3>Bi-coric log-shells</h3>
+            <p>
+              Theorem 1.5 is previewed in the introduction as producing vertically coric
+              <span class="math">F⊢×μ</span>-prime-strips and mono-analytic log-shells
+              that are bi-coric under the lattice arrows.
+            </p>
+            <p>
+              These are the log-shell objects that later support splitting monoids of
+              LGP-monoids and the tensor-packet comparison.
+            </p>
+            <div class="tagRow"><span class="tag green">Theorem 1.5 preview</span><span class="tag">bi-coricity</span></div>
           </div>
         </div>
         <table>
