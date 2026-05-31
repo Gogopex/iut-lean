@@ -612,6 +612,10 @@
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
         <a href="#iut-i-base-bridges-evaluation-sections">Base bridges/evaluation sections</a>
         <a href="#iut-i-additive-base-bridges-61-610">Additive base bridges 6.1-6.10</a>
+        <a href="#additive-labels-61">Additive labels 6.1</a>
+        <a href="#model-theta-plus-minus-62-63">Theta±/Thetaell models 6.2-6.3</a>
+        <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base 6.4-6.6</a>
+        <a href="#additive-to-multiplicative-67-610">Additive to D-Theta 6.7-6.10</a>
         <a href="#multiplicative-additive-bridges">Multiplicative/additive bridges</a>
         <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
         <a href="#mono-theta-environments-ii11">Mono-theta environments 1.1</a>
@@ -1615,6 +1619,10 @@
               <a href="#theta-nf-hodge-theater">ThetaNF-Hodge theater</a>,
               <a href="#nf-bridge-frobenioid-lift">NF bridge</a>,
               <a href="#theta-bridge-frobenioid-lift">Theta bridge</a>,
+              <a href="#additive-labels-61">additive labels 6.1</a>,
+              <a href="#model-theta-plus-minus-62-63">Theta±/Thetaell models 6.2-6.3</a>,
+              <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base 6.4-6.6</a>,
+              <a href="#additive-to-multiplicative-67-610">additive to D-Theta 6.7-6.10</a>,
               <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges 6.11</a>,
               <a href="#theta-plus-minus-bridge-611">Theta± bridge</a>,
               <a href="#theta-ell-bridge-611">Thetaell bridge</a>,
@@ -12934,6 +12942,474 @@
           <a href="#theta-plus-minus-ell-nf-613">Theta±ellNF 6.13</a>
           <a href="#iut-i-base-bridges-evaluation-sections">base bridges/evaluation sections</a>
           <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
+        </div>
+      </section>
+
+      <section id="additive-labels-61">
+        <h2>IUT I Definition 6.1: Signed Additive Labels</h2>
+        <p class="lede">
+          Definition 6.1 introduces the additive label structure used in Section 6:
+          signed affine motion by <span class="math">F_l^± = F_l ⋊ {±1}</span>,
+          ±-label classes of cusps, positive and negative automorphisms, and the
+          global double cover <span class="math">D± = B(X_K)^0</span>.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Definition 6.1 signed additive labels">
+          <div class="diagramHeader">
+            <strong>Signed additive label data</strong>
+            <span>Definition 6.1(i)-(vii)</span>
+          </div>
+          <svg viewBox="0 0 1120 500" role="img">
+            <defs>
+              <marker id="arrowAddLabels61" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox gold" x="50" y="52" width="230" height="92"></rect>
+            <text class="nodeTitle" x="165" y="82" text-anchor="middle">F_l^±</text>
+            <text class="smallText" x="165" y="108" text-anchor="middle">F_l ⋊ {±1}</text>
+            <text class="tinyText" x="165" y="130" text-anchor="middle">z maps to ±z + lambda</text>
+
+            <rect class="nodeBox blue" x="340" y="52" width="230" height="92"></rect>
+            <text class="nodeTitle" x="455" y="82" text-anchor="middle">F_l^± group</text>
+            <text class="tinyText" x="455" y="108" text-anchor="middle">{±1}-orbit of bijections</text>
+            <text class="tinyText" x="455" y="130" text-anchor="middle">underlying F_l-module</text>
+
+            <rect class="nodeBox violet" x="630" y="52" width="230" height="92"></rect>
+            <text class="nodeTitle" x="745" y="82" text-anchor="middle">F_l^± torsor</text>
+            <text class="tinyText" x="745" y="108" text-anchor="middle">affine signed orbit</text>
+            <text class="tinyText" x="745" y="130" text-anchor="middle">Aut+ translations</text>
+
+            <rect class="nodeBox green" x="890" y="52" width="180" height="92"></rect>
+            <text class="nodeTitle" x="980" y="82" text-anchor="middle">Aut±</text>
+            <text class="tinyText" x="980" y="108" text-anchor="middle">positive subgroup</text>
+            <text class="tinyText" x="980" y="130" text-anchor="middle">negative coset</text>
+
+            <rect class="nodeBox red" x="68" y="238" width="292" height="110"></rect>
+            <text class="nodeTitle" x="214" y="268" text-anchor="middle">LabCusp±(D_v)</text>
+            <text class="tinyText" x="214" y="294" text-anchor="middle">zero element eta^0_v</text>
+            <text class="tinyText" x="214" y="315" text-anchor="middle">±-canonical element eta^±_v</text>
+            <text class="tinyText" x="214" y="336" text-anchor="middle">(nonzero)/{±1} gives LabCusp(D_v)</text>
+
+            <rect class="nodeBox blue" x="438" y="238" width="292" height="110"></rect>
+            <text class="nodeTitle" x="584" y="268" text-anchor="middle">D± = B(X_K)^0</text>
+            <text class="tinyText" x="584" y="294" text-anchor="middle">finite etale double cover of D</text>
+            <text class="tinyText" x="584" y="315" text-anchor="middle">Aut(D±) -> GL_2(F_l)/{±1}</text>
+            <text class="tinyText" x="584" y="336" text-anchor="middle">rank-one quotient gives Aut±</text>
+
+            <rect class="nodeBox green" x="808" y="238" width="244" height="110"></rect>
+            <text class="nodeTitle" x="930" y="268" text-anchor="middle">V±</text>
+            <text class="tinyText" x="930" y="294" text-anchor="middle">Aut±(D±) orbit of V</text>
+            <text class="tinyText" x="930" y="315" text-anchor="middle">Aut_csp(D±) orbit of V</text>
+            <text class="tinyText" x="930" y="336" text-anchor="middle">Remark 6.1.1: V± = V±un</text>
+
+            <rect class="nodeBox gold" x="332" y="396" width="456" height="66"></rect>
+            <text class="nodeTitle" x="560" y="423" text-anchor="middle">+-full poly-isomorphisms</text>
+            <text class="tinyText" x="560" y="445" text-anchor="middle">orbits under positive automorphisms; signs indexed by {±1}^V</text>
+
+            <path d="M280 98 H338" class="edge gold" marker-end="url(#arrowAddLabels61)"></path>
+            <path d="M570 98 H628" class="edge blue" marker-end="url(#arrowAddLabels61)"></path>
+            <path d="M860 98 H888" class="edge violet" marker-end="url(#arrowAddLabels61)"></path>
+            <path d="M455 145 C402 182 320 205 242 236" class="edge blue" marker-end="url(#arrowAddLabels61)"></path>
+            <path d="M745 145 C708 184 645 209 603 236" class="edge violet" marker-end="url(#arrowAddLabels61)"></path>
+            <path d="M730 294 H806" class="edge blue" marker-end="url(#arrowAddLabels61)"></path>
+            <path d="M214 350 C296 386 392 400 464 396" class="edge red" marker-end="url(#arrowAddLabels61)"></path>
+            <path d="M930 350 C848 385 732 397 640 396" class="edge green" marker-end="url(#arrowAddLabels61)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Clause</th><th>Source content</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>6.1(i)</td>
+            <td>
+              <span class="math">F_l^±</span> is the semidirect product
+              <span class="math">F_l ⋊ {±1}</span>. Groups use signed linear
+              coordinates; torsors use signed affine coordinates.
+            </td>
+            <td>
+              Group and torsor pages must not be merged. The bridge definitions use
+              both structures for different purposes.
+            </td>
+          </tr>
+          <tr>
+            <td>6.1(ii)-(iv)</td>
+            <td>
+              A D-prime-strip determines <span class="math">D_v^±</span>;
+              <span class="math">LabCusp±(D_v)</span> carries zero, ±-canonical
+              class, and positive/negative automorphism data.
+            </td>
+            <td>
+              The zero label and sign quotient are part of the mathematical object,
+              not merely display conventions.
+            </td>
+          </tr>
+          <tr>
+            <td>6.1(v)-(vii)</td>
+            <td>
+              <span class="math">D± = B(X_K)^0</span> reconstructs automorphism
+              quotients, cusp classes, valuations, and archimedean Aut-holomorphic
+              morphism targets.
+            </td>
+            <td>
+              The global target page must cite elliptic-curve reconstruction and the
+              category-theoretic origin of the torsor, not just label arithmetic.
+            </td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          Guardrail: Definition 6.1 is not a generic additive labeling device. It
+          packages signed affine motion, cusp reconstruction, the zero/nonzero
+          transition, and the global <span class="math">D±</span> target that later
+          receives the Thetaell bridge.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 6.1</a>
+          Related: <a href="#iut-i-additive-base-bridges-61-610">Section 6 atlas</a>
+          <a href="#model-theta-plus-minus-62-63">Theta±/Thetaell models</a>
+          <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base theater</a>
+          <a href="#zero-nonzero-label-relation">zero/nonzero relation</a>
+        </div>
+      </section>
+
+      <section id="model-theta-plus-minus-62-63">
+        <h2>IUT I Examples 6.2-6.3: Model Theta± and Thetaell Bridges</h2>
+        <p class="lede">
+          Examples 6.2 and 6.3 give the model objects for the two additive bridge
+          directions. The same capsule <span class="math">D_T</span> is sent upward
+          to a signed D-prime-strip target <span class="math">D≻</span> and downward
+          to the global elliptic target <span class="math">D±</span>.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Examples 6.2 and 6.3 model additive bridges">
+          <div class="diagramHeader">
+            <strong>Two model bridge directions</strong>
+            <span>Examples 6.2 and 6.3</span>
+          </div>
+          <svg viewBox="0 0 1080 500" role="img">
+            <defs>
+              <marker id="arrowModels6263" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox violet" x="355" y="184" width="370" height="120"></rect>
+            <text class="nodeTitle" x="540" y="216" text-anchor="middle">D_T = {D_t}_{t in F_l}</text>
+            <text class="tinyText" x="540" y="244" text-anchor="middle">copies of the tautological D-prime-strip</text>
+            <text class="tinyText" x="540" y="266" text-anchor="middle">capsule indexed by signed additive labels</text>
+            <text class="tinyText" x="540" y="288" text-anchor="middle">-1_F_l sends t to -t with negative local sign</text>
+
+            <rect class="nodeBox green" x="395" y="48" width="290" height="86"></rect>
+            <text class="nodeTitle" x="540" y="78" text-anchor="middle">D≻ target</text>
+            <text class="tinyText" x="540" y="104" text-anchor="middle">positive +-full maps D_t -> D≻</text>
+            <text class="tinyText" x="540" y="124" text-anchor="middle">compatible with {±1}^V signs</text>
+
+            <rect class="nodeBox blue" x="395" y="364" width="290" height="86"></rect>
+            <text class="nodeTitle" x="540" y="394" text-anchor="middle">D± target</text>
+            <text class="tinyText" x="540" y="420" text-anchor="middle">LabCusp±(D±) identified with F_l</text>
+            <text class="tinyText" x="540" y="440" text-anchor="middle">F_l^±-equivariant poly-action</text>
+
+            <rect class="nodeBox gold" x="70" y="182" width="222" height="122"></rect>
+            <text class="nodeTitle" x="181" y="214" text-anchor="middle">Theta± model</text>
+            <text class="tinyText" x="181" y="242" text-anchor="middle">φ_t^{Theta±}: D_t -> D≻</text>
+            <text class="tinyText" x="181" y="264" text-anchor="middle">positive +-full isomorphisms</text>
+            <text class="tinyText" x="181" y="286" text-anchor="middle">α in {±1}^V acts locally</text>
+
+            <rect class="nodeBox red" x="788" y="182" width="222" height="122"></rect>
+            <text class="nodeTitle" x="899" y="214" text-anchor="middle">Thetaell model</text>
+            <text class="tinyText" x="899" y="242" text-anchor="middle">φ_t^{Thetaell}: D_t -> D±</text>
+            <text class="tinyText" x="899" y="264" text-anchor="middle">built from X_v -> X_K routes</text>
+            <text class="tinyText" x="899" y="286" text-anchor="middle">post-compose by F_l^±</text>
+
+            <path d="M540 184 V136" class="edge green" marker-end="url(#arrowModels6263)"></path>
+            <path d="M540 304 V362" class="edge blue" marker-end="url(#arrowModels6263)"></path>
+            <path d="M292 243 H353" class="edge gold" marker-end="url(#arrowModels6263)"></path>
+            <path d="M727 243 H786" class="edge red" marker-end="url(#arrowModels6263)"></path>
+            <path d="M242 182 C300 96 365 82 393 84" class="edge gold" marker-end="url(#arrowModels6263)"></path>
+            <path d="M838 304 C776 374 712 406 687 407" class="edge red" marker-end="url(#arrowModels6263)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Example</th><th>Construction</th><th>What must remain visible</th></tr>
+          <tr>
+            <td>6.2(i)</td>
+            <td>
+              The model base-Theta± bridge uses copies
+              <span class="math">D_t</span> indexed by <span class="math">F_l</span>
+              and positive +-full poly-isomorphisms
+              <span class="math">D_t -> D≻</span>.
+            </td>
+            <td>
+              Positivity is not decoration: it controls which signed automorphisms
+              survive in the model.
+            </td>
+          </tr>
+          <tr>
+            <td>6.2(ii)-(iii)</td>
+            <td>
+              The order-two operation <span class="math">-1_{F_l}</span> sends
+              <span class="math">t</span> to <span class="math">-t</span> and uses
+              negative local signs; <span class="math">{±1}^V</span> acts by
+              local signed +-full automorphisms.
+            </td>
+            <td>
+              The page separates the global sign operation from placewise sign
+              choices.
+            </td>
+          </tr>
+          <tr>
+            <td>6.3</td>
+            <td>
+              The model base-Thetaell bridge maps the capsule to
+              <span class="math">D±</span>, after fixing a torsor identification
+              <span class="math">LabCusp±(D±) ≃ F_l</span>.
+            </td>
+            <td>
+              The target is the global elliptic object. Its automorphism quotient
+              is identified with <span class="math">F_l^±</span> only after the
+              torsor choice.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Examples 6.2-6.3</a>
+          Related: <a href="#additive-labels-61">additive labels</a>
+          <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base theater</a>
+          <a href="#theta-plus-minus-ell-bridges-611">Theta±ell Frobenioid lift</a>
+        </div>
+      </section>
+
+      <section id="d-theta-plus-minus-ell-64-66">
+        <h2>IUT I Definition 6.4 and Propositions 6.5-6.6: D-Theta±ell Base Theaters</h2>
+        <p class="lede">
+          Definition 6.4 turns the two model bridge directions into the base
+          D-Theta±ell theater. Propositions 6.5 and 6.6 record the label transport
+          and the torsors of isomorphisms and gluing choices.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Definition 6.4 D-Theta plus-minus ell theater">
+          <div class="diagramHeader">
+            <strong>Compatible additive span</strong>
+            <span>Definition 6.4, Proposition 6.5, Proposition 6.6</span>
+          </div>
+          <svg viewBox="0 0 1120 520" role="img">
+            <defs>
+              <marker id="arrowDThetaPM64" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox green" x="420" y="46" width="280" height="86"></rect>
+            <text class="nodeTitle" x="560" y="76" text-anchor="middle">D≻</text>
+            <text class="tinyText" x="560" y="102" text-anchor="middle">Theta± target</text>
+            <text class="tinyText" x="560" y="122" text-anchor="middle">+-full target morphism</text>
+
+            <rect class="nodeBox violet" x="370" y="214" width="380" height="104"></rect>
+            <text class="nodeTitle" x="560" y="246" text-anchor="middle">D_T capsule</text>
+            <text class="tinyText" x="560" y="274" text-anchor="middle">T is both F_l^± group and induced torsor</text>
+            <text class="tinyText" x="560" y="296" text-anchor="middle">shared capsule poly-isomorphism</text>
+
+            <rect class="nodeBox blue" x="420" y="398" width="280" height="86"></rect>
+            <text class="nodeTitle" x="560" y="428" text-anchor="middle">D±</text>
+            <text class="tinyText" x="560" y="454" text-anchor="middle">Thetaell target</text>
+            <text class="tinyText" x="560" y="474" text-anchor="middle">Aut_csp orbit on target maps</text>
+
+            <rect class="nodeBox gold" x="62" y="207" width="230" height="118"></rect>
+            <text class="nodeTitle" x="177" y="238" text-anchor="middle">quotients</text>
+            <text class="tinyText" x="177" y="266" text-anchor="middle">|T| = T/{±1}</text>
+            <text class="tinyText" x="177" y="288" text-anchor="middle">D_|T| l±-capsule</text>
+            <text class="tinyText" x="177" y="310" text-anchor="middle">D_T' nonzero quotient</text>
+
+            <rect class="nodeBox red" x="828" y="88" width="230" height="116"></rect>
+            <text class="nodeTitle" x="943" y="118" text-anchor="middle">label transport</text>
+            <text class="tinyText" x="943" y="146" text-anchor="middle">zeta maps LabCusp±</text>
+            <text class="tinyText" x="943" y="168" text-anchor="middle">torsor-compatible</text>
+            <text class="tinyText" x="943" y="190" text-anchor="middle">post-composition tracked</text>
+
+            <rect class="nodeBox blue" x="828" y="324" width="230" height="116"></rect>
+            <text class="nodeTitle" x="943" y="354" text-anchor="middle">gluing torsors</text>
+            <text class="tinyText" x="943" y="382" text-anchor="middle">{±1} x {±1}^V</text>
+            <text class="tinyText" x="943" y="404" text-anchor="middle">F_l^± and {±1}</text>
+            <text class="tinyText" x="943" y="426" text-anchor="middle">F_l^± x {±1}^V</text>
+
+            <path d="M560 214 V134" class="edge green" marker-end="url(#arrowDThetaPM64)"></path>
+            <path d="M560 318 V396" class="edge blue" marker-end="url(#arrowDThetaPM64)"></path>
+            <path d="M370 266 H294" class="edge gold" marker-end="url(#arrowDThetaPM64)"></path>
+            <path d="M700 126 C768 120 806 126 826 140" class="edge red" marker-end="url(#arrowDThetaPM64)"></path>
+            <path d="M700 440 C764 418 804 398 826 386" class="edge blue" marker-end="url(#arrowDThetaPM64)"></path>
+            <path d="M750 266 C814 272 882 292 928 322" class="edge violet" marker-end="url(#arrowDThetaPM64)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source</th><th>Statement</th><th>Audit target</th></tr>
+          <tr>
+            <td>Definition 6.4(i)-(iii)</td>
+            <td>
+              A D-Theta± bridge is <span class="math">D_T -> D≻</span>; a
+              D-Thetaell bridge is <span class="math">D_T -> D±</span>; a
+              D-Theta±ell theater is the compatible span
+              <span class="math">D≻ &lt;- D_T -> D±</span>.
+            </td>
+            <td>
+              Compatibility means both bridge sides induce the same capsule
+              poly-isomorphism, not just the same index cardinality.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 6.5</td>
+            <td>
+              The two bridge sides transport ±-label classes by well-defined
+              bijections compatible with <span class="math">F_l^±</span>-group or
+              torsor structures.
+            </td>
+            <td>
+              Label transport is a theorem-level structure for later pages, not an
+              implicit consequence of naming labels the same way.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 6.6</td>
+            <td>
+              Isomorphisms and gluing choices form the stated torsors over
+              <span class="math">{±1} x {±1}^V</span>,
+              <span class="math">F_l^±</span>, <span class="math">{±1}</span>, and
+              <span class="math">F_l^± x {±1}^V</span>.
+            </td>
+            <td>
+              These torsors are the additive indeterminacy ledger. They must remain
+              explicit when the Frobenioid lift is introduced.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 6.4 and Propositions 6.5-6.6</a>
+          Related: <a href="#additive-labels-61">additive labels</a>
+          <a href="#model-theta-plus-minus-62-63">model bridges</a>
+          <a href="#additive-to-multiplicative-67-610">additive to D-Theta</a>
+          <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges 6.11</a>
+        </div>
+      </section>
+
+      <section id="additive-to-multiplicative-67-610">
+        <h2>IUT I Propositions 6.7-6.10: From Additive Bridges to D-Theta Etale-Pictures</h2>
+        <p class="lede">
+          Propositions 6.7-6.10 are the hinge from the additive Section 6 bridge
+          system back to the multiplicative Section 4 D-Theta bridge system. The
+          construction passes through the nonzero quotient capsule, processions, and
+          a mono-analytic etale-picture core.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Propositions 6.7 through 6.10 additive to multiplicative route">
+          <div class="diagramHeader">
+            <strong>Additive bridge conversion</strong>
+            <span>Proposition 6.7 through Corollary 6.10</span>
+          </div>
+          <svg viewBox="0 0 1120 540" role="img">
+            <defs>
+              <marker id="arrowAddToMult6710" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox violet" x="54" y="72" width="248" height="96"></rect>
+            <text class="nodeTitle" x="178" y="102" text-anchor="middle">D-Theta± bridge</text>
+            <text class="tinyText" x="178" y="130" text-anchor="middle">D_T -> D≻</text>
+            <text class="tinyText" x="178" y="152" text-anchor="middle">signed additive capsule</text>
+
+            <rect class="nodeBox gold" x="436" y="50" width="248" height="118"></rect>
+            <text class="nodeTitle" x="560" y="82" text-anchor="middle">Proposition 6.7</text>
+            <text class="tinyText" x="560" y="110" text-anchor="middle">pass to nonzero quotient</text>
+            <text class="tinyText" x="560" y="132" text-anchor="middle">identify D_0 and D≻</text>
+            <text class="tinyText" x="560" y="154" text-anchor="middle">replace +-full maps appropriately</text>
+
+            <rect class="nodeBox green" x="818" y="72" width="248" height="96"></rect>
+            <text class="nodeTitle" x="942" y="102" text-anchor="middle">D-Theta bridge</text>
+            <text class="tinyText" x="942" y="130" text-anchor="middle">ordinary multiplicative bridge</text>
+            <text class="tinyText" x="942" y="152" text-anchor="middle">Section 4 compatible</text>
+
+            <rect class="nodeBox blue" x="108" y="298" width="258" height="100"></rect>
+            <text class="nodeTitle" x="237" y="328" text-anchor="middle">forgetful symmetries</text>
+            <text class="tinyText" x="237" y="356" text-anchor="middle">F_l^± double transitivity</text>
+            <text class="tinyText" x="237" y="378" text-anchor="middle">S_l± symmetry on |T|</text>
+
+            <rect class="nodeBox red" x="430" y="298" width="260" height="100"></rect>
+            <text class="nodeTitle" x="560" y="328" text-anchor="middle">l±-processions</text>
+            <text class="tinyText" x="560" y="356" text-anchor="middle">{0,...,t-1} subcapsules</text>
+            <text class="tinyText" x="560" y="378" text-anchor="middle">(l±)^(l±) reduced to l±!</text>
+
+            <rect class="nodeBox blue" x="754" y="298" width="258" height="100"></rect>
+            <text class="nodeTitle" x="883" y="328" text-anchor="middle">D-Theta±ell link</text>
+            <text class="tinyText" x="883" y="356" text-anchor="middle">mono-analytic D_&gt;^⊢ core</text>
+            <text class="tinyText" x="883" y="378" text-anchor="middle">arbitrary spoke permutations</text>
+
+            <rect class="nodeBox gold" x="343" y="454" width="434" height="54"></rect>
+            <text class="nodeTitle" x="560" y="484" text-anchor="middle">Compatibility with Corollary 4.12 via Proposition 6.7</text>
+
+            <path d="M302 120 H434" class="edge violet" marker-end="url(#arrowAddToMult6710)"></path>
+            <path d="M684 120 H816" class="edge gold" marker-end="url(#arrowAddToMult6710)"></path>
+            <path d="M942 170 C896 226 878 264 879 296" class="edge green" marker-end="url(#arrowAddToMult6710)"></path>
+            <path d="M178 170 C200 225 222 260 234 296" class="edge blue" marker-end="url(#arrowAddToMult6710)"></path>
+            <path d="M366 348 H428" class="edge blue" marker-end="url(#arrowAddToMult6710)"></path>
+            <path d="M690 348 H752" class="edge red" marker-end="url(#arrowAddToMult6710)"></path>
+            <path d="M560 398 V452" class="edge red" marker-end="url(#arrowAddToMult6710)"></path>
+            <path d="M883 398 C812 442 724 458 668 454" class="edge blue" marker-end="url(#arrowAddToMult6710)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Result</th><th>Mathematical move</th><th>Why this page is separate</th></tr>
+          <tr>
+            <td>Proposition 6.7</td>
+            <td>
+              A D-Theta± bridge functorially gives a D-Theta bridge by replacing
+              the capsule with the nonzero quotient, identifying
+              <span class="math">D_0</span> with <span class="math">D≻</span>, and
+              switching to the full/evaluation morphisms required by Section 4.
+            </td>
+            <td>
+              This is not mere forgetting. It is the explicit source bridge between
+              additive and multiplicative combinatorial Teichmuller theories.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 6.8</td>
+            <td>
+              Forgetful functors expose <span class="math">F_l^±</span> symmetry on
+              D-Thetaell outputs and <span class="math">S_{l±}</span> symmetry on
+              holomorphic or mono-analytic capsules.
+            </td>
+            <td>
+              The wiki tracks the symmetry level before and after label forgetting.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 6.9</td>
+            <td>
+              Additive processions are nested subcapsules indexed by
+              <span class="math">S_t^± = {0,1,...,t-1}</span>. They reduce the
+              displayed ambiguity from <span class="math">(l±)^(l±)</span> to
+              <span class="math">l±!</span>.
+            </td>
+            <td>
+              Processions are the finite combinatorial discipline that makes the
+              bridge comparison auditable.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 6.10</td>
+            <td>
+              D-Theta±ell links are full poly-isomorphisms between the
+              mono-analyticized <span class="math">D_&gt;^⊢</span> cores; the
+              resulting etale-picture admits arbitrary permutation symmetries among
+              spokes.
+            </td>
+            <td>
+              This is the additive analogue of the Section 4 etale-picture and the
+              immediate precursor to the Frobenioid lift of Definition 6.11.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Propositions 6.7-6.9 and Corollary 6.10</a>
+          Related: <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base</a>
+          <a href="#section4-symmetries-processions-48-412">Section 4 processions</a>
+          <a href="#multiplicative-additive-bridges">multiplicative/additive bridge comparison</a>
+          <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges 6.11</a>
         </div>
       </section>
 
