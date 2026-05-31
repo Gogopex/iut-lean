@@ -8100,6 +8100,47 @@
           Aut-holomorphic orbispaces, split topological monoids, and Kummer structures
           compatible with the logarithm operation.
         </p>
+        <div class="diagram fit" aria-label="Good nonarchimedean and archimedean Frobenioid strata">
+          <div class="diagramHeader">
+            <strong>Non-bad local strata before global realification</strong>
+            <span>IUT I, Examples 3.3-3.4</span>
+          </div>
+          <svg viewBox="0 0 1120 430" role="img">
+            <defs>
+              <marker id="arrowGoodArch334" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="78" y="74" width="248" height="88"></rect>
+            <text class="nodeTitle" x="202" y="104" text-anchor="middle">good nonarchimedean v</text>
+            <text class="tinyText" x="202" y="128" text-anchor="middle">ord(O_L) and ord(Z_pv)</text>
+            <text class="tinyText" x="202" y="146" text-anchor="middle">C_v, C_v^⊢, F_v^⊢</text>
+
+            <rect class="nodeBox gold" x="436" y="74" width="248" height="88"></rect>
+            <text class="nodeTitle" x="560" y="104" text-anchor="middle">formal theta replacement</text>
+            <text class="tinyText" x="560" y="128" text-anchor="middle">log(p_v) -> log(p_v) log(Theta)</text>
+            <text class="tinyText" x="560" y="146" text-anchor="middle">F_v^Theta ≃ F_v^⊢</text>
+
+            <rect class="nodeBox blue" x="794" y="74" width="248" height="88"></rect>
+            <text class="nodeTitle" x="918" y="104" text-anchor="middle">category reconstruction</text>
+            <text class="tinyText" x="918" y="128" text-anchor="middle">p_v from Kummer image field</text>
+            <text class="tinyText" x="918" y="146" text-anchor="middle">strict Belyi type input</text>
+
+            <rect class="nodeBox violet" x="178" y="260" width="248" height="88"></rect>
+            <text class="nodeTitle" x="302" y="290" text-anchor="middle">archimedean v</text>
+            <text class="tinyText" x="302" y="314" text-anchor="middle">Aut-holomorphic orbispace D_v</text>
+            <text class="tinyText" x="302" y="332" text-anchor="middle">CAF A_Dv and C_v</text>
+
+            <rect class="nodeBox red" x="542" y="260" width="290" height="88"></rect>
+            <text class="nodeTitle" x="687" y="290" text-anchor="middle">Kummer structure kappa_v</text>
+            <text class="tinyText" x="687" y="314" text-anchor="middle">monoid inclusion plus co-holomorphicization</text>
+            <text class="tinyText" x="687" y="332" text-anchor="middle">log-compatible part separated</text>
+
+            <path class="edge green" d="M326 118 H434" marker-end="url(#arrowGoodArch334)"></path>
+            <path class="edge gold" d="M684 118 H792" marker-end="url(#arrowGoodArch334)"></path>
+            <path class="edge violet" d="M426 304 H540" marker-end="url(#arrowGoodArch334)"></path>
+          </svg>
+        </div>
         <table>
           <tr><th>Source item</th><th>Construction</th><th>Distinction</th></tr>
           <tr>
@@ -8160,6 +8201,49 @@
           divisor-monoid “currencies” across valuations. Definition 3.6 packages the
           local data and global realified data into a theta-Hodge theater.
         </p>
+        <div class="diagram fit" aria-label="Global realified Frobenioid and theta-Hodge theater">
+          <div class="diagramHeader">
+            <strong>Global currency exchange into a theta-Hodge theater</strong>
+            <span>IUT I, Example 3.5 and Definition 3.6</span>
+          </div>
+          <svg viewBox="0 0 1120 450" role="img">
+            <defs>
+              <marker id="arrowGlobal3536" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="68" y="76" width="252" height="90"></rect>
+            <text class="nodeTitle" x="194" y="106" text-anchor="middle">C_mod realification</text>
+            <text class="tinyText" x="194" y="130" text-anchor="middle">Prime(C_mod) ≃ V_mod</text>
+            <text class="tinyText" x="194" y="148" text-anchor="middle">rho_v to local divisor monoids</text>
+
+            <rect class="nodeBox green" x="434" y="76" width="252" height="90"></rect>
+            <text class="nodeTitle" x="560" y="106" text-anchor="middle">F_mod package</text>
+            <text class="tinyText" x="560" y="130" text-anchor="middle">C_mod, V, {F_v^⊢}, {rho_v}</text>
+            <text class="tinyText" x="560" y="148" text-anchor="middle">global mod-side data</text>
+
+            <rect class="nodeBox gold" x="800" y="76" width="252" height="90"></rect>
+            <text class="nodeTitle" x="926" y="106" text-anchor="middle">F_tht package</text>
+            <text class="tinyText" x="926" y="130" text-anchor="middle">C_tht = C_mod · log(Theta)</text>
+            <text class="tinyText" x="926" y="148" text-anchor="middle">source of theta-link</text>
+
+            <rect class="nodeBox violet" x="260" y="284" width="252" height="90"></rect>
+            <text class="nodeTitle" x="386" y="314" text-anchor="middle">F_D package</text>
+            <text class="tinyText" x="386" y="338" text-anchor="middle">D/log-shell version</text>
+            <text class="tinyText" x="386" y="356" text-anchor="middle">rho_v^D to R_ge0</text>
+
+            <rect class="nodeBox red" x="610" y="284" width="252" height="90"></rect>
+            <text class="nodeTitle" x="736" y="314" text-anchor="middle">Theta-Hodge theater</text>
+            <text class="tinyText" x="736" y="338" text-anchor="middle">({F_v}_{v in V}, F_mod)</text>
+            <text class="tinyText" x="736" y="356" text-anchor="middle">Definition 3.6</text>
+
+            <path class="edge blue" d="M320 121 H432" marker-end="url(#arrowGlobal3536)"></path>
+            <path class="edge green" d="M686 121 H798" marker-end="url(#arrowGlobal3536)"></path>
+            <path class="edge green" d="M560 168 C520 228 430 242 396 282" marker-end="url(#arrowGlobal3536)"></path>
+            <path class="edge gold" d="M926 168 C914 236 808 250 748 282" marker-end="url(#arrowGlobal3536)"></path>
+            <path class="edge violet" d="M512 329 H608" marker-end="url(#arrowGlobal3536)"></path>
+          </svg>
+        </div>
         <table>
           <tr><th>Source item</th><th>Construction</th><th>Purpose</th></tr>
           <tr>
