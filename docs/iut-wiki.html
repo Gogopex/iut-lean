@@ -311,6 +311,7 @@
     .nodeBox.red { fill: var(--soft-red); stroke: var(--red); }
     .nodeBox.gold { fill: var(--soft-gold); stroke: var(--gold); }
     .nodeBox.violet { fill: var(--soft-violet); stroke: var(--violet); }
+    .arrow { stroke: #5f676d; stroke-width: 1.5; fill: none; }
     .edge { stroke: #5f676d; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
     .edge.blue { stroke: var(--blue); }
     .edge.green { stroke: var(--green); }
@@ -499,6 +500,7 @@
         <a href="#corollary-312">Corollary 3.12 corridor</a>
         <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
         <a href="#iut-iv">IUT IV and consequences</a>
+        <a href="#iut-iv-diophantine-output">IUT IV output route</a>
         <a href="#probabilistic-szpiro">Probabilistic Szpiro</a>
         <a href="#species-mutations">Species and mutations</a>
         <h2>Context</h2>
@@ -1207,7 +1209,11 @@
               <a href="#corollary-22-height-comparison">q-height comparison</a>,
               <a href="#corollary-22-prime-choice">auxiliary prime choice</a>,
               <a href="#corollary-22-exception-sets">exceptional sets</a>,
-              <a href="#diophantine-inequalities">Diophantine inequalities</a>
+              <a href="#diophantine-inequalities">Diophantine inequalities</a>,
+              <a href="#iut-iv-diophantine-output">IUT IV output route</a>,
+              <a href="#bd-class-inequality">BD-class inequality</a>,
+              <a href="#compactly-bounded-subsets-iutiv">compactly bounded subsets</a>,
+              <a href="#genell-reduction-route">GenEll reduction route</a>
             </td>
             <td>IUT IV, Sections 1-2</td>
           </tr>
@@ -9525,6 +9531,211 @@
           Related: <a href="#iut-iv-atlas">IUT IV atlas</a>
           <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
           <a href="#source-library">source library</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-diophantine-output">
+        <h2>IUT IV Output Route</h2>
+        <p class="lede">
+          IUT IV Section 2 is the application layer. It converts the explicit
+          theta-pilot estimate of Theorem 1.10 into bounded-discrepancy
+          Diophantine inequalities by constructing suitable initial theta data
+          and then invoking the reduction theorem from GenEll.
+        </p>
+        <div class="diagram" aria-label="IUT IV Corollary 2.2 to Corollary 2.3 route">
+          <div class="diagramHeader">
+            <strong>Application route</strong>
+            <span>IUT III comparison data to Diophantine inequalities</span>
+          </div>
+          <svg viewBox="0 0 1050 420" role="img">
+            <defs>
+              <marker id="arrowIUTIVOutput" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox violet" x="42" y="58" width="180" height="92"></rect>
+            <text class="nodeTitle" x="132" y="88" text-anchor="middle">IUT input</text>
+            <text class="tinyText" x="132" y="112" text-anchor="middle">Cor. 3.12</text>
+            <text class="tinyText" x="132" y="130" text-anchor="middle">Thm. 1.10 estimate</text>
+
+            <rect class="nodeBox blue" x="282" y="58" width="190" height="92"></rect>
+            <text class="nodeTitle" x="377" y="88" text-anchor="middle">initial theta data</text>
+            <text class="tinyText" x="377" y="112" text-anchor="middle">lambda-line point</text>
+            <text class="tinyText" x="377" y="130" text-anchor="middle">Cor. 2.2 setup</text>
+
+            <rect class="nodeBox green" x="532" y="58" width="190" height="92"></rect>
+            <text class="nodeTitle" x="627" y="88" text-anchor="middle">large prime l</text>
+            <text class="tinyText" x="627" y="112" text-anchor="middle">bad mult. place</text>
+            <text class="tinyText" x="627" y="130" text-anchor="middle">SL2(F_l) image</text>
+
+            <rect class="nodeBox gold" x="782" y="58" width="205" height="92"></rect>
+            <text class="nodeTitle" x="884.5" y="88" text-anchor="middle">BD-class estimate</text>
+            <text class="tinyText" x="884.5" y="112" text-anchor="middle">height vs. diff+cond</text>
+            <text class="tinyText" x="884.5" y="130" text-anchor="middle">compact bounded locus</text>
+
+            <line class="arrow" x1="222" y1="104" x2="282" y2="104" marker-end="url(#arrowIUTIVOutput)"></line>
+            <line class="arrow" x1="472" y1="104" x2="532" y2="104" marker-end="url(#arrowIUTIVOutput)"></line>
+            <line class="arrow" x1="722" y1="104" x2="782" y2="104" marker-end="url(#arrowIUTIVOutput)"></line>
+
+            <rect class="nodeBox blue" x="168" y="242" width="210" height="94"></rect>
+            <text class="nodeTitle" x="273" y="272" text-anchor="middle">GenEll reduction</text>
+            <text class="tinyText" x="273" y="296" text-anchor="middle">reduce to P1 - {0,1,infty}</text>
+            <text class="tinyText" x="273" y="314" text-anchor="middle">bounded degree points</text>
+
+            <rect class="nodeBox green" x="442" y="242" width="210" height="94"></rect>
+            <text class="nodeTitle" x="547" y="272" text-anchor="middle">Vojta inequality</text>
+            <text class="tinyText" x="547" y="296" text-anchor="middle">omega_X(D)-height</text>
+            <text class="tinyText" x="547" y="314" text-anchor="middle">log-diff + log-cond</text>
+
+            <rect class="nodeBox violet" x="716" y="242" width="190" height="94"></rect>
+            <text class="nodeTitle" x="811" y="272" text-anchor="middle">abc and Szpiro</text>
+            <text class="tinyText" x="811" y="296" text-anchor="middle">special cases</text>
+            <text class="tinyText" x="811" y="314" text-anchor="middle">via Cor. 2.3</text>
+
+            <path class="arrow" d="M884.5 150 C884.5 205 358 194 305 242" fill="none" marker-end="url(#arrowIUTIVOutput)"></path>
+            <line class="arrow" x1="378" y1="289" x2="442" y2="289" marker-end="url(#arrowIUTIVOutput)"></line>
+            <line class="arrow" x1="652" y1="289" x2="716" y2="289" marker-end="url(#arrowIUTIVOutput)"></line>
+
+            <text class="tinyText" x="525" y="384" text-anchor="middle">
+              The diagram is downstream of the Corollary 3.12 corridor; it does not prove that corridor.
+            </text>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Item</th><th>IUT IV role</th><th>Wiki status</th></tr>
+          <tr>
+            <td>Corollary 2.2</td>
+            <td>Constructs initial theta data satisfying the hypotheses of Theorem 1.10 for the application setting.</td>
+            <td><a href="#corollary-22-initial-theta-data">expanded below</a></td>
+          </tr>
+          <tr>
+            <td>Large prime and torsion image conditions</td>
+            <td>Use the hypotheses on the lambda-line point to obtain the needed bad-place and Galois-image input.</td>
+            <td><a href="#sl2-torsion-image">expanded below</a></td>
+          </tr>
+          <tr>
+            <td>Corollary 2.3</td>
+            <td>Transfers the output to bounded-discrepancy Vojta-type inequalities for hyperbolic curves.</td>
+            <td><a href="#bd-class-inequality">expanded below</a></td>
+          </tr>
+          <tr>
+            <td>GenEll reduction</td>
+            <td>Reduces the general hyperbolic-curve statement to the thrice-punctured projective line setting.</td>
+            <td><a href="#genell-reduction-route">expanded below</a></td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="corollary-22-initial-theta-data">
+            <h3>Corollary 2.2 input package</h3>
+            <p>
+              Corollary 2.2 starts from a point in the lambda-line setting and, after
+              excluding controlled exceptional cases, chooses data that form initial
+              theta data in the sense of IUT I Definition 3.1. This is the bridge from
+              explicit Diophantine input to the hypotheses required by Theorem 1.10.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT IV Cor. 2.2</span><span class="tag">initial theta data</span></div>
+          </div>
+          <div class="card" id="sl2-torsion-image">
+            <h3>Torsion-image condition</h3>
+            <p>
+              The application checks that the Galois image on the selected
+              <span class="math">l</span>-torsion contains the required
+              <span class="math">SL_2(F_l)</span>-type subgroup. In IUT IV this is not
+              a new inter-universal construction; it is an arithmetic input verified
+              by the prime-choice and general-position hypotheses.
+            </p>
+            <div class="tagRow"><span class="tag">large l</span><span class="tag green">GenEll input</span></div>
+          </div>
+          <div class="card" id="epsilon-e-estimate">
+            <h3>Epsilon estimate</h3>
+            <p>
+              After the theta-pilot estimate is applied, IUT IV rewrites the bound
+              using a small error term of the form
+              <span class="math">epsilon_E = (60 delta)^2 h^{-1/2} log(2 delta h)</span>.
+              Enlarging the exceptional set allows the application to assume this
+              error term is at most one.
+            </p>
+            <div class="tagRow"><span class="tag gold">error term</span><span class="tag">height h</span></div>
+          </div>
+          <div class="card" id="bd-class-inequality">
+            <h3>BD-class inequality</h3>
+            <p>
+              Corollary 2.3 states the output as a bounded-discrepancy class
+              inequality: the log-canonical height attached to
+              <span class="math">omega_X(D)</span> is bounded, up to
+              <span class="math">1+epsilon</span> and an additive bounded term, by the
+              log-different and log-conductor terms on points of bounded degree.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT IV Cor. 2.3</span><span class="tag">Vojta form</span></div>
+          </div>
+          <div class="card" id="compactly-bounded-subsets-iutiv">
+            <h3>Compactly bounded subsets</h3>
+            <p>
+              The application is stated on compactly bounded subsets of the open
+              curve. Locally, the selected compact domains must lie inside the open
+              complement rather than crossing the removed divisor; this is part of
+              how the bounded-discrepancy formulation controls the application locus.
+            </p>
+            <div class="tagRow"><span class="tag">BD-class domain</span><span class="tag">local condition</span></div>
+          </div>
+          <div class="card" id="genell-reduction-route">
+            <h3>GenEll reduction route</h3>
+            <p>
+              The proof of Corollary 2.3 invokes the reduction theorem from GenEll:
+              it is enough to treat the thrice-punctured projective line
+              <span class="math">P^1 - {0,1,infty}</span> with bounded-degree points
+              satisfying the compact-boundedness and j-invariant conditions used by
+              Corollary 2.2.
+            </p>
+            <div class="tagRow"><span class="tag green">GenEll Thm. 2.1</span><span class="tag">lambda line</span></div>
+          </div>
+          <div class="card" id="abc-szpiro-special-cases">
+            <h3>abc and Szpiro special cases</h3>
+            <p>
+              IUT IV presents the Vojta-type inequality as the general output. The
+              familiar abc and Szpiro consequences are treated as special cases reached
+              through the same bounded-discrepancy inequality rather than as separate
+              estimates with independent input.
+            </p>
+            <div class="tagRow"><span class="tag">abc</span><span class="tag">Szpiro</span></div>
+          </div>
+          <div class="card" id="weight-one-half-output">
+            <h3>Weight-one-half term</h3>
+            <p>
+              Mochizuki highlights that the application estimate has a square-root
+              flavor, schematically a main term plus a
+              <span class="math">delta^{1/2} log(delta)</span>-type contribution. The
+              wiki records this as an output-side feature, not as a substitute for the
+              internal theta-link comparison.
+            </p>
+            <div class="tagRow"><span class="tag gold">Remark layer</span><span class="tag">asymptotic shape</span></div>
+          </div>
+          <div class="card" id="belyi-analytic-continuation">
+            <h3>Belyi and analytic continuation</h3>
+            <p>
+              The reduction from general hyperbolic curves to the lambda-line case is
+              mediated by the arithmetic-analytic continuation machinery cited from
+              GenEll. For the wiki this marks a dependency boundary: the IUT IV output
+              page records the use of that theorem and links the general statement back
+              to the lambda-line calculation.
+            </p>
+            <div class="tagRow"><span class="tag">Belyi maps</span><span class="tag">dependency</span></div>
+          </div>
+        </div>
+        <div class="callout">
+          Verification note: this page deliberately separates the downstream
+          Diophantine application from the disputed comparison corridor. The output
+          route uses <a href="#corollary-312">Corollary 3.12</a> and
+          <a href="#theta-pilot-log-volume-estimate">Theorem 1.10</a> as inputs; it is
+          not an alternate proof of the multiradial theta comparison.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV</a>
+          Related: <a href="#iut-iv">IUT IV</a>
+          <a href="#iut-iv-atlas">IUT IV atlas</a>
+          <a href="#probabilistic-szpiro">probabilistic Szpiro route</a>
+          <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
         </div>
       </section>
 
