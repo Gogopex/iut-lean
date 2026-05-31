@@ -669,6 +669,9 @@
         <a href="#kappa-sol-quotient-iut-i51">Kappa-sol quotient 5.1</a>
         <a href="#kappa-sol-synchronization-iut-i51">Kappa-sol synchronization 5.1</a>
         <a href="#global-reconstruction-51">Global reconstruction 5.1</a>
+        <a href="#model-frobenioid-construction-iut-i51">Model Frobenioid 5.1</a>
+        <a href="#birational-decomposition-groups-iut-i51">Birational decomposition 5.1</a>
+        <a href="#infinity-kappa-structures-iut-i51">Infinity-kappa structures 5.1</a>
         <a href="#kummer-ready-blind-51-52">Kummer-ready/blind 5.1-5.2</a>
         <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips 5.2</a>
         <a href="#iut-i-pivotal-distributions-54">Pivotal distributions 5.4</a>
@@ -16926,6 +16929,118 @@
           <a href="#kummer-ready-blind-51-52">Kummer-ready/blind</a>
           <a href="#local-analytic-sections-43">local analytic sections</a>
           <a href="#delta-valuations-localization-54">delta-valuations</a>
+        </div>
+      </section>
+
+      <section id="model-frobenioid-construction-iut-i51" data-filter="iut i example 5.1 model frobenioid valuations divisor monoids f d f mod restrictions">
+        <h2>IUT I Example 5.1(ii)-(iii): Model Frobenioid Construction</h2>
+        <p class="lede">
+          From the reconstructed field structure on <span class="math">M*(D)</span>,
+          Example 5.1(ii) reconstructs valuations and arithmetic divisor monoids.
+          Frobenioid theory then produces the model Frobenioid
+          <span class="math">F*(D)</span>; Example 5.1(iii) records its restrictions
+          over <span class="math">D</span> and over terminal objects.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Example 5.1 content</th><th>Consequence</th></tr>
+          <tr>
+            <td>Valuations</td>
+            <td>The field structure on <span class="math">M*(D)</span> reconstructs the valuation set <span class="math">V(D)</span>.</td>
+            <td>Valuations are recovered from the anabelian field layer.</td>
+          </tr>
+          <tr>
+            <td>Divisors</td>
+            <td>For each object, the monoid <span class="math">Phi(D)(A)</span> of stack-theoretic arithmetic divisors is reconstructed together with the natural map from field units.</td>
+            <td>This is the input for Frobenioid reconstruction.</td>
+          </tr>
+          <tr>
+            <td>Frobenioid</td>
+            <td>Applying Frobenioid theory yields <span class="math">F*(D)</span>, with restrictions <span class="math">F</span> over <span class="math">D</span> and <span class="math">F*_mod</span> over terminal objects.</td>
+            <td>The source moves from group/field data to categorical line-bundle data.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 5.1(ii)-(iii)</a>
+          Related: <a href="#mstar-field-reconstruction-iut-i51">M* field reconstruction</a>
+          <a href="#birational-decomposition-groups-iut-i51">birational decomposition</a>
+        </div>
+      </section>
+
+      <section id="birational-decomposition-groups-iut-i51" data-filter="iut i example 5.1 birationalization integral submonoids decomposition groups prime p cohomological dimension">
+        <h2>IUT I Example 5.1(iv): Birationalization and Decomposition Groups</h2>
+        <p class="lede">
+          Example 5.1(iv) birationalizes the reconstructed Frobenioids. For
+          Frobenius-trivial objects over Galois objects, this recovers nonzero field
+          elements, integral submonoids at prime divisors, unit submonoids, and closed
+          decomposition subgroups inside <span class="math">pi_1(D*)</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Example 5.1(iv) content</th><th>Use</th></tr>
+          <tr>
+            <td>Birational units</td>
+            <td><span class="math">O^x(A^birat)</span> is identified with the multiplicative group of the corresponding number field.</td>
+            <td>Birationalization exposes field-unit data inside the Frobenioid.</td>
+          </tr>
+          <tr>
+            <td>Integral submonoids</td>
+            <td>Each prime of the divisor monoid determines <span class="math">O_p^triangleright subset O^x(A^birat)</span>, the elements integral for the corresponding valuation.</td>
+            <td>Valuation-theoretic integrality is recovered categorically.</td>
+          </tr>
+          <tr>
+            <td>Decomposition groups</td>
+            <td>Stabilizers of compatible systems of integral submonoids give closed subgroups <span class="math">Pi_p subset pi_1(D*)</span>, well-defined up to conjugacy.</td>
+            <td>Local decomposition groups are reconstructed from Frobenioid data.</td>
+          </tr>
+          <tr>
+            <td>Nonarchimedean test</td>
+            <td>A prime is nonarchimedean iff the <span class="math">p</span>-cohomological dimension of its decomposition group is <span class="math">3</span> for infinitely many primes <span class="math">p</span>.</td>
+            <td>The place-type distinction is group-theoretically visible.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 5.1(iv)</a>
+          Related: <a href="#model-frobenioid-construction-iut-i51">model Frobenioid</a>
+          <a href="#infinity-kappa-structures-iut-i51">infinity-kappa structures</a>
+        </div>
+      </section>
+
+      <section id="infinity-kappa-structures-iut-i51" data-filter="iut i example 5.1 infinity kappa infinity kappa times coric structures kummer classes cyclotomes strict critical points">
+        <h2>IUT I Example 5.1(v): Infinity-Kappa Structures</h2>
+        <p class="lede">
+          Example 5.1(v) attaches uniquely determined
+          <span class="math">∞κ</span>-coric and <span class="math">∞κ×</span>-coric
+          structures to the Frobenioid. Kummer classes and cyclotome identifications
+          compare the reconstructed pseudo-monoids with the source models, and a strict
+          critical torsion test recovers <span class="math">∞κ</span> from
+          <span class="math">∞κ×</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Step</th><th>Example 5.1(v) content</th><th>Consequence</th></tr>
+          <tr>
+            <td>Definition</td>
+            <td>An <span class="math">∞κ</span>-coric or <span class="math">∞κ×</span>-coric structure is a pseudo-monoid with continuous <span class="math">pi_1^rat(D*)</span>-action isomorphic to the model structure.</td>
+            <td>The structure is attached as action-bearing pseudo-monoid data.</td>
+          </tr>
+          <tr>
+            <td>Cyclotomes</td>
+            <td>Kummer cohomology gives unique cyclotome isomorphisms using the divisor-of-zeroes-and-poles comparison and <span class="math">Q_{>0} cap Zhat^x = {1}</span>.</td>
+            <td>Cyclotome rigidity fixes the pseudo-monoid identifications.</td>
+          </tr>
+          <tr>
+            <td>Uniqueness</td>
+            <td>The Frobenioid always admits <span class="math">∞κ</span> and <span class="math">∞κ×</span> structures, unique up to uniquely determined isomorphism.</td>
+            <td>The wiki should treat these structures as canonical once the source hypotheses are present.</td>
+          </tr>
+          <tr>
+            <td>Strict critical test</td>
+            <td>An <span class="math">∞κ×</span>-coric structure determines <span class="math">∞κ</span> by requiring the associated Kummer class to restrict to torsion at decomposition groups of strictly critical points.</td>
+            <td>The recovery is a sourced criterion, not a chosen subobject.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 5.1(v)</a>
+          Related: <a href="#global-kappa-pseudomonoids-iut-i51">global kappa pseudo-monoids</a>
+          <a href="#kummer-ready-blind-51-52">Kummer-ready/blind</a>
         </div>
       </section>
 
