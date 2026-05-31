@@ -563,6 +563,9 @@
         <a href="#collas-current-anabelian-work">Collas current anabelian work</a>
         <a href="#gt-species-perspective">GT species perspective</a>
         <a href="#hoshi-introduction-route">Hoshi introduction route</a>
+        <a href="#hoshi-cyclotome-synchronization-page">Hoshi cyclotomes</a>
+        <a href="#hoshi-kummer-transport-page">Hoshi Kummer transport</a>
+        <a href="#hoshi-link-indeterminacy-page">Hoshi link/indeterminacy route</a>
         <a href="#iut-i-notation-primitives">IUT I notation primitives</a>
         <a href="#iut-i-atlas">IUT I atlas</a>
         <a href="#iut-i-orbicurve-cover-package">IUT I orbicurve covers 1</a>
@@ -4808,6 +4811,260 @@
           <a href="#theta-log-links">theta/log links</a>
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#indeterminacies">indeterminacies</a>
+        </div>
+      </section>
+
+      <section id="hoshi-cyclotome-synchronization-page" data-filter="hoshi cyclotome synchronization roots of unity cohomology inertia frobenioid monoids zhat one">
+        <h2>Hoshi Cyclotome Synchronization</h2>
+        <p class="lede">
+          Hoshi begins his introduction with cyclotomes because IUT repeatedly compares
+          Tate-twist objects that arise from different mathematical sources. The same
+          symbol <span class="math">Zhat(1)</span> may be represented by roots of unity,
+          by curve cohomology, by cusp inertia, or by Frobenioid data. The mathematical
+          work is to control when these presentations may be synchronized.
+        </p>
+        <div class="diagram fit" aria-label="Hoshi cyclotome synchronization">
+          <div class="diagramHeader">
+            <strong>One cyclotomic type, several sources</strong>
+            <span>Hoshi §1, used as prerequisite for later transport</span>
+          </div>
+          <svg viewBox="0 0 1000 420" role="img">
+            <defs>
+              <marker id="arrowHoshiCyclotome" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="80" y="70" width="210" height="82"></rect>
+            <text class="nodeTitle" x="185" y="100" text-anchor="middle">roots of unity</text>
+            <text class="tinyText" x="185" y="124" text-anchor="middle">mu_n over algebraic closures</text>
+            <text class="tinyText" x="185" y="142" text-anchor="middle">inverse limit data</text>
+
+            <rect class="nodeBox green" x="395" y="70" width="210" height="82"></rect>
+            <text class="nodeTitle" x="500" y="100" text-anchor="middle">curve cohomology</text>
+            <text class="tinyText" x="500" y="124" text-anchor="middle">Chern class orientation</text>
+            <text class="tinyText" x="500" y="142" text-anchor="middle">degree-one normalization</text>
+
+            <rect class="nodeBox violet" x="710" y="70" width="210" height="82"></rect>
+            <text class="nodeTitle" x="815" y="100" text-anchor="middle">cusp inertia</text>
+            <text class="tinyText" x="815" y="124" text-anchor="middle">local punctured formal data</text>
+            <text class="tinyText" x="815" y="142" text-anchor="middle">etale fundamental group source</text>
+
+            <rect class="nodeBox gold" x="320" y="260" width="360" height="88"></rect>
+            <text class="nodeTitle" x="500" y="292" text-anchor="middle">cyclotomic synchronization</text>
+            <text class="tinyText" x="500" y="316" text-anchor="middle">compatibility data must be specified</text>
+            <text class="tinyText" x="500" y="334" text-anchor="middle">before Kummer transport is meaningful</text>
+
+            <path class="edge blue" d="M187 154 C235 224 345 242 418 260" marker-end="url(#arrowHoshiCyclotome)"></path>
+            <path class="edge green" d="M500 154 V258" marker-end="url(#arrowHoshiCyclotome)"></path>
+            <path class="edge violet" d="M813 154 C765 224 655 242 582 260" marker-end="url(#arrowHoshiCyclotome)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source presentation</th><th>Why it matters</th><th>Wiki link</th></tr>
+          <tr>
+            <td>Roots of unity</td>
+            <td>Provides the elementary Tate-twist model used in local field and Kummer settings.</td>
+            <td><a href="#theta-cyclotome">theta cyclotome</a></td>
+          </tr>
+          <tr>
+            <td>Curve cohomology</td>
+            <td>Connects cyclotomic orientation to degree and Chern-class conventions.</td>
+            <td><a href="#iut-i-notation-primitives">notation primitives</a></td>
+          </tr>
+          <tr>
+            <td>Cusp inertia</td>
+            <td>Supplies a group-theoretic cyclotomic source in the anabelian setting.</td>
+            <td><a href="#iut-i-cusp-edge-vertex-recognizers">cusp recognizers</a></td>
+          </tr>
+          <tr>
+            <td>Frobenioid monoids</td>
+            <td>Keeps multiplicative data compatible with the categorical line-bundle package.</td>
+            <td><a href="#iut-i-frobenioid-package">Frobenioid package</a></td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Reader warning.</strong> Hoshi's first section is not preliminary
+          notation only. It is a guardrail against silently identifying cyclotomic
+          structures that arise from different containers.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/hoshi-introduction-to-iut.pdf" target="_blank">Hoshi introduction §1</a>
+          Related: <a href="#hoshi-introduction-route">Hoshi route</a>
+          <a href="#hoshi-kummer-transport-page">Kummer transport</a>
+          <a href="#kummer-ready-blind-51-52">Kummer-ready/blind</a>
+        </div>
+      </section>
+
+      <section id="hoshi-kummer-transport-page" data-filter="hoshi kummer transport etale-like frobenius-like local units monoids ind1 ind2 cyclotomes">
+        <h2>Hoshi Kummer Transport</h2>
+        <p class="lede">
+          Hoshi's early local model presents Kummer theory as a transport mechanism:
+          Frobenius-like monoid data can be moved through etale-like containers only
+          after the cyclotomic comparison has been fixed. The result is never a raw
+          equality of ring histories. It is a controlled passage with specified
+          indeterminacy.
+        </p>
+        <div class="diagram fit" aria-label="Hoshi Kummer transport">
+          <div class="diagramHeader">
+            <strong>Etale container, Frobenius-like payload</strong>
+            <span>Hoshi §3 before the full Hodge-theater setting</span>
+          </div>
+          <svg viewBox="0 0 1010 430" role="img">
+            <defs>
+              <marker id="arrowHoshiKummer" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="76" width="225" height="88"></rect>
+            <text class="nodeTitle" x="185" y="108" text-anchor="middle">source monoid</text>
+            <text class="tinyText" x="185" y="132" text-anchor="middle">local units or integral monoid</text>
+            <text class="tinyText" x="185" y="150" text-anchor="middle">Frobenius-like side</text>
+
+            <rect class="nodeBox green" x="392" y="76" width="225" height="88"></rect>
+            <text class="nodeTitle" x="505" y="108" text-anchor="middle">Kummer image</text>
+            <text class="tinyText" x="505" y="132" text-anchor="middle">cohomological container</text>
+            <text class="tinyText" x="505" y="150" text-anchor="middle">cyclotome-sensitive</text>
+
+            <rect class="nodeBox violet" x="712" y="76" width="225" height="88"></rect>
+            <text class="nodeTitle" x="825" y="108" text-anchor="middle">transported monoid</text>
+            <text class="tinyText" x="825" y="132" text-anchor="middle">same type, new context</text>
+            <text class="tinyText" x="825" y="150" text-anchor="middle">up to indeterminacy</text>
+
+            <path class="edge blue" d="M299 120 H390" marker-end="url(#arrowHoshiKummer)"></path>
+            <path class="edge green" d="M619 120 H710" marker-end="url(#arrowHoshiKummer)"></path>
+
+            <rect class="nodeBox red" x="248" y="260" width="220" height="82"></rect>
+            <text class="nodeTitle" x="358" y="290" text-anchor="middle">Kummer detachment</text>
+            <text class="tinyText" x="358" y="314" text-anchor="middle">payload separated from ring</text>
+            <text class="tinyText" x="358" y="332" text-anchor="middle">Ind2-type ambiguity</text>
+
+            <rect class="nodeBox gold" x="548" y="260" width="220" height="82"></rect>
+            <text class="nodeTitle" x="658" y="290" text-anchor="middle">etale transport</text>
+            <text class="tinyText" x="658" y="314" text-anchor="middle">group-theoretic comparison</text>
+            <text class="tinyText" x="658" y="332" text-anchor="middle">Ind1-type ambiguity</text>
+
+            <path class="edge red" d="M410 166 C388 205 372 230 362 258" marker-end="url(#arrowHoshiKummer)"></path>
+            <path class="edge gold" d="M600 166 C620 205 642 230 654 258" marker-end="url(#arrowHoshiKummer)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card">
+            <h3>Etale-like carrier</h3>
+            <p>
+              The Galois or fundamental-group side carries symmetry information and
+              permits transport without preserving a chosen ring structure.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Frobenius-like payload</h3>
+            <p>
+              Unit monoids and integral monoids carry quantity data. Kummer maps expose
+              them to the etale carrier but do not turn them into scheme-identical data.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Indeterminacy is part of transport</h3>
+            <p>
+              The local toy model already shows why later IUT comparisons must track
+              indeterminacies as typed structure, not as post-proof noise.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/hoshi-introduction-to-iut.pdf" target="_blank">Hoshi introduction §3</a>
+          Related: <a href="#hoshi-cyclotome-synchronization-page">cyclotomes</a>
+          <a href="#log-kummer-correspondences">Log-Kummer correspondences</a>
+          <a href="#indeterminacies">indeterminacies</a>
+        </div>
+      </section>
+
+      <section id="hoshi-link-indeterminacy-page" data-filter="hoshi link approach core objects multiradial algorithms hulls log links mild indeterminacies q parameter field data">
+        <h2>Hoshi Link and Indeterminacy Route</h2>
+        <p class="lede">
+          Hoshi's sections 4 through 12 explain the strategic middle of IUT before the
+          full Hodge-theater construction. The aim is to protect q-parameter data,
+          field data, and hull/log-link containers while moving through links. The
+          indeterminacies are introduced before the numerical output because they are
+          necessary to state what remains comparable.
+        </p>
+        <div class="diagram fit" aria-label="Hoshi link and indeterminacy route">
+          <div class="diagramHeader">
+            <strong>From link strategy to controlled output</strong>
+            <span>Hoshi §§4-12 as the pedagogical middle route</span>
+          </div>
+          <svg viewBox="0 0 1060 430" role="img">
+            <defs>
+              <marker id="arrowHoshiLinks" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="54" y="74" width="180" height="82"></rect>
+            <text class="nodeTitle" x="144" y="104" text-anchor="middle">link strategy</text>
+            <text class="tinyText" x="144" y="128" text-anchor="middle">Diophantine target</text>
+            <text class="tinyText" x="144" y="146" text-anchor="middle">q and field data</text>
+
+            <rect class="nodeBox green" x="304" y="74" width="180" height="82"></rect>
+            <text class="nodeTitle" x="394" y="104" text-anchor="middle">core objects</text>
+            <text class="tinyText" x="394" y="128" text-anchor="middle">transport-stable portions</text>
+            <text class="tinyText" x="394" y="146" text-anchor="middle">not full ring history</text>
+
+            <rect class="nodeBox violet" x="554" y="74" width="180" height="82"></rect>
+            <text class="nodeTitle" x="644" y="104" text-anchor="middle">multiradiality</text>
+            <text class="tinyText" x="644" y="128" text-anchor="middle">many viewpoints</text>
+            <text class="tinyText" x="644" y="146" text-anchor="middle">one algorithmic output</text>
+
+            <rect class="nodeBox gold" x="804" y="74" width="180" height="82"></rect>
+            <text class="nodeTitle" x="894" y="104" text-anchor="middle">hulls/log links</text>
+            <text class="tinyText" x="894" y="128" text-anchor="middle">containers and vertical moves</text>
+            <text class="tinyText" x="894" y="146" text-anchor="middle">prepare log-theta lattice</text>
+
+            <rect class="nodeBox red" x="400" y="266" width="260" height="86"></rect>
+            <text class="nodeTitle" x="530" y="296" text-anchor="middle">mild indeterminacies</text>
+            <text class="tinyText" x="530" y="320" text-anchor="middle">Ind1, Ind2, Ind3 allowed</text>
+            <text class="tinyText" x="530" y="338" text-anchor="middle">comparison only after absorption</text>
+
+            <path class="edge blue" d="M236 115 H302" marker-end="url(#arrowHoshiLinks)"></path>
+            <path class="edge green" d="M486 115 H552" marker-end="url(#arrowHoshiLinks)"></path>
+            <path class="edge violet" d="M736 115 H802" marker-end="url(#arrowHoshiLinks)"></path>
+            <path class="edge red" d="M644 158 C630 210 590 238 548 264" marker-end="url(#arrowHoshiLinks)"></path>
+            <path class="edge red" d="M894 158 C854 224 724 248 662 286" marker-end="url(#arrowHoshiLinks)"></path>
+            <path class="edge red" d="M394 158 C410 214 462 240 506 264" marker-end="url(#arrowHoshiLinks)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Survey section group</th><th>Role in the route</th><th>Detailed wiki target</th></tr>
+          <tr>
+            <td>§§4-6</td>
+            <td>Set up the link approach and isolate core objects that survive transport.</td>
+            <td><a href="#iut-i-base-bridges-evaluation-sections">base bridges/evaluation sections</a></td>
+          </tr>
+          <tr>
+            <td>§7</td>
+            <td>Introduces multiradial algorithms before the full technical theater setup.</td>
+            <td><a href="#multiradiality">multiradiality</a></td>
+          </tr>
+          <tr>
+            <td>§§8-9</td>
+            <td>Introduce hulls and log links as controlled containers and movements.</td>
+            <td><a href="#theta-log-links">theta/log links</a></td>
+          </tr>
+          <tr>
+            <td>§10</td>
+            <td>Explains mild indeterminacies before numerical and Hodge-theater output.</td>
+            <td><a href="#indeterminacies">indeterminacies</a></td>
+          </tr>
+        </table>
+        <div class="callout red">
+          <strong>3.12 relevance.</strong> This Hoshi route supports the wiki's main
+          warning about the disputed corridor: the q-pilot and theta-pilot comparison is
+          not a comparison of bare numbers before the link, hull, and indeterminacy
+          apparatus is applied.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/hoshi-introduction-to-iut.pdf" target="_blank">Hoshi introduction §§4-12</a>
+          Related: <a href="#hoshi-introduction-route">Hoshi route</a>
+          <a href="#collas-log-theta-wandering-page">Collas log-theta wandering</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
         </div>
       </section>
 
