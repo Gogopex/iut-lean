@@ -565,6 +565,7 @@
         <a href="#iut-iv-atlas">IUT IV atlas</a>
         <h2>Core IUT</h2>
         <a href="#initial-theta-data">Initial theta data</a>
+        <a href="#theta-approach-abs-top-319">Theta approach 3.1.2</a>
         <a href="#kappa-coric-functions">Kappa-coric functions</a>
         <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
         <a href="#theta-link-frobenius-etale-pictures">Theta/Frobenius pictures</a>
@@ -1491,6 +1492,19 @@
               <a href="#iut-i-cusp-edge-vertex-recognizers">cusp/edge/vertex recognizers</a>
             </td>
             <td>IUT I, Section 1</td>
+          </tr>
+          <tr>
+            <td>IUT I</td>
+            <td>Theta-approach to anabelian reconstruction</td>
+            <td>
+              <a href="#theta-approach-abs-top-319">theta approach</a>,
+              <a href="#open-subgroup-pixk">open subgroup Pi_XK</a>,
+              <a href="#theta-approach-function-field">function-field reconstruction</a>,
+              <a href="#cyclotome-mx-delta-theta">cyclotome M_X and Delta^Theta</a>,
+              <a href="#theta-approach-local-versions">local theta approach</a>,
+              <a href="#large-l-covering-analogy">large-l covering analogy</a>
+            </td>
+            <td>IUT I, Remarks 3.1.1-3.1.2</td>
           </tr>
           <tr>
             <td>IUT I</td>
@@ -7308,6 +7322,227 @@
           Related: <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#iut-i-atlas">IUT I atlas</a>
           <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="theta-approach-abs-top-319">
+        <h2>IUT I Remark 3.1.2: The Theta Approach to Anabelian Reconstruction</h2>
+        <p class="lede">
+          Remark 3.1.2 explains how the absolute anabelian reconstruction algorithm is
+          used in IUT I Section 3. Instead of reconstructing directly from the full
+          orbicurve group <span class="math">Pi_CK</span>, Mochizuki routes the
+          reconstruction through the group-theoretically recoverable open subgroup
+          <span class="math">Pi_XK</span>. This is the “theta approach” to
+          <span class="math">AbsTopIII</span> Theorem 1.9.
+        </p>
+        <div class="diagram fit" aria-label="Theta approach to AbsTopIII reconstruction">
+          <div class="diagramHeader">
+            <strong>Why reconstruction is routed through <span class="math">X_K</span></strong>
+            <span>IUT I, Remark 3.1.2</span>
+          </div>
+          <svg viewBox="0 0 1120 560" role="img">
+            <defs>
+              <marker id="arrowThetaApproach" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="58" y="72" width="232" height="92"></rect>
+            <text class="nodeTitle" x="174" y="102" text-anchor="middle">Pi_CK</text>
+            <text class="tinyText" x="174" y="126" text-anchor="middle">topological group of C_K</text>
+            <text class="tinyText" x="174" y="144" text-anchor="middle">orbicurve group</text>
+
+            <rect class="nodeBox green" x="374" y="72" width="232" height="92"></rect>
+            <text class="nodeTitle" x="490" y="102" text-anchor="middle">recover Delta_X</text>
+            <text class="tinyText" x="490" y="126" text-anchor="middle">closed subgroup characterized</text>
+            <text class="tinyText" x="490" y="144" text-anchor="middle">by explicit group algorithm</text>
+
+            <rect class="nodeBox gold" x="690" y="72" width="260" height="92"></rect>
+            <text class="nodeTitle" x="820" y="102" text-anchor="middle">recover Pi_XK subset Pi_CK</text>
+            <text class="tinyText" x="820" y="126" text-anchor="middle">nonzero cusp decomposition images</text>
+            <text class="tinyText" x="820" y="144" text-anchor="middle">match image in Pi_CK / Delta_X</text>
+
+            <path class="edge blue" d="M290 118 H372" marker-end="url(#arrowThetaApproach)"></path>
+            <path class="edge green" d="M606 118 H688" marker-end="url(#arrowThetaApproach)"></path>
+
+            <rect class="nodeBox violet" x="170" y="290" width="260" height="96"></rect>
+            <text class="nodeTitle" x="300" y="320" text-anchor="middle">apply AbsTopIII 1.9</text>
+            <text class="tinyText" x="300" y="344" text-anchor="middle">to Pi_XK, not directly Pi_CK</text>
+            <text class="tinyText" x="300" y="362" text-anchor="middle">reconstruct function field of X_K</text>
+
+            <rect class="nodeBox blue" x="516" y="290" width="260" height="96"></rect>
+            <text class="nodeTitle" x="646" y="320" text-anchor="middle">Gal(X_K/C_K) action</text>
+            <text class="tinyText" x="646" y="344" text-anchor="middle">Pi_CK / Pi_XK acts on field</text>
+            <text class="tinyText" x="646" y="362" text-anchor="middle">theta-compatible output</text>
+
+            <rect class="nodeBox red" x="862" y="290" width="210" height="96"></rect>
+            <text class="nodeTitle" x="967" y="320" text-anchor="middle">cyclotome target</text>
+            <text class="tinyText" x="967" y="344" text-anchor="middle">M_X ≃ l · Delta^Theta</text>
+            <text class="tinyText" x="967" y="362" text-anchor="middle">cyclotomic rigidity</text>
+
+            <path class="edge gold" d="M820 166 C772 230 408 232 314 288" marker-end="url(#arrowThetaApproach)"></path>
+            <path class="edge violet" d="M430 338 H514" marker-end="url(#arrowThetaApproach)"></path>
+            <path class="edge blue" d="M776 338 H860" marker-end="url(#arrowThetaApproach)"></path>
+
+            <text class="tinyText" x="560" y="480" text-anchor="middle">
+              The theta approach is a reconstruction route with a specific cyclotomic output, not a slogan for using theta notation.
+            </text>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source checkpoint</th><th>Content</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Remark 3.1.1</td>
+            <td>
+              For nonarchimedean <span class="math">v</span>, the local profinite
+              groups also have corresponding tempered fundamental groups whose
+              profinite completions recover the profinite groups. The geometric
+              tempered group <span class="math">Delta^tp</span> depends a priori on
+              <span class="math">v</span>.
+            </td>
+            <td>
+              Local reconstruction interfaces must distinguish profinite and tempered
+              inputs and should not assume the tempered group is globally constant.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.1.2(i)</td>
+            <td>
+              The open subgroup <span class="math">Pi_XK subset Pi_CK</span> is
+              constructed group-theoretically from <span class="math">Pi_CK</span>.
+              The subgroup <span class="math">Delta_X</span> is characterized by an
+              explicit algorithm, and nonzero cusp decomposition groups determine the
+              image of <span class="math">Pi_XK</span> in
+              <span class="math">Pi_CK / Delta_X</span>.
+            </td>
+            <td>
+              <span class="math">Pi_XK</span> should be modeled as reconstructible data,
+              not as an arbitrary chosen open subgroup.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.1.2(ii)</td>
+            <td>
+              The reconstruction algorithm of <span class="math">AbsTopIII</span>
+              Theorem 1.9 is applied to <span class="math">Pi_XK</span> to reconstruct
+              the function field of <span class="math">X_K</span>, equipped with the
+              natural <span class="math">Gal(X_K/C_K)</span> action.
+            </td>
+            <td>
+              This is the theta approach: the reconstruction is routed through the
+              torsion cover rather than through the full orbicurve group directly.
+            </td>
+          </tr>
+          <tr>
+            <td>Local versions</td>
+            <td>
+              The same approach is used for the good nonarchimedean local groups
+              <span class="math">Pi_Cv</span>, <span class="math">Pi_Xv</span>,
+              <span class="math">Pi_Cv</span> with arrows, and for bad places using
+              tempered groups together with Corollary 1.2 and EtTh Proposition 2.4.
+            </td>
+            <td>
+              The wiki should keep the valuation-stratum-specific local routes separate
+              from the global <span class="math">Pi_CK</span> route.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.1.2(iii)</td>
+            <td>
+              The tautological extension
+              <span class="math">1 -> Delta^Theta -> Delta_X^Theta -> Delta_X^ell -> 1</span>
+              gives an isomorphism between the cyclotome
+              <span class="math">M_X</span> and <span class="math">l · Delta^Theta</span>.
+              This is the stated significance of the theta approach.
+            </td>
+            <td>
+              The cyclotome is not decorative. It is the target through which the later
+              bad-place theta/Kummer theory reads the reconstruction.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.1.2(iv)</td>
+            <td>
+              Mochizuki compares the role of the covering <span class="math">X</span>
+              for large <span class="math">l</span> to the universal covering of a
+              complex elliptic curve by the complex plane in holomorphic reconstruction.
+            </td>
+            <td>
+              This analogy belongs on the orientation layer only; the formal content is
+              the subgroup reconstruction and cyclotome identification above.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="open-subgroup-pixk">
+            <h3>Open subgroup <span class="math">Pi_XK</span></h3>
+            <p>
+              Remark 3.1.2(i) says <span class="math">Pi_XK</span> is recovered from
+              the abstract topological group <span class="math">Pi_CK</span>. The
+              recovery uses the subgroup <span class="math">Delta_X</span> and the
+              group-theoreticity of nonzero cusp decomposition groups.
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 3.1.2(i)</span><span class="tag">reconstructible</span></div>
+          </div>
+          <div class="card" id="theta-approach-function-field">
+            <h3>Function-field reconstruction</h3>
+            <p>
+              Applying <span class="math">AbsTopIII</span> Theorem 1.9 through
+              <span class="math">Pi_XK</span> reconstructs the function field of
+              <span class="math">X_K</span> together with the natural
+              <span class="math">Gal(X_K/C_K)</span>-action.
+            </p>
+            <div class="tagRow"><span class="tag blue">Remark 3.1.2(ii)</span><span class="tag">AbsTopIII</span></div>
+          </div>
+          <div class="card" id="cyclotome-mx-delta-theta">
+            <h3>Cyclotome <span class="math">M_X</span></h3>
+            <p>
+              The extension class of the tautological extension identifies the
+              cyclotome <span class="math">M_X</span> from
+              <span class="math">AbsTopIII</span> with
+              <span class="math">l · Delta^Theta</span>. Mochizuki names this as the
+              significance of the theta approach.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 3.1.2(iii)</span><span class="tag">cyclotome</span></div>
+          </div>
+          <div class="card" id="theta-approach-local-versions">
+            <h3>Local theta approach</h3>
+            <p>
+              At good nonarchimedean and bad nonarchimedean places the same convention
+              is applied to local group inputs, with the bad-place route passing through
+              tempered groups. This is why later local Frobenioid pages are valuation
+              sensitive.
+            </p>
+            <div class="tagRow"><span class="tag gold">Remark 3.1.2(ii)</span><span class="tag">local groups</span></div>
+          </div>
+          <div class="card" id="large-l-covering-analogy">
+            <h3>Large-<span class="math">l</span> covering analogy</h3>
+            <p>
+              The comparison with the universal cover of a complex elliptic curve is an
+              analogy for why the covering <span class="math">X</span> is useful. It
+              does not replace the precise group-theoretic construction of
+              <span class="math">Pi_XK</span>.
+            </p>
+            <div class="tagRow"><span class="tag violet">Remark 3.1.2(iv)</span><span class="tag">orientation</span></div>
+          </div>
+          <div class="card" id="theta-approach-formalization-duty">
+            <h3>Formalization duty</h3>
+            <p>
+              A faithful interface needs fields for: reconstructibility of
+              <span class="math">Pi_XK</span>, applicability of the
+              <span class="math">AbsTopIII</span> algorithm, the resulting
+              <span class="math">Gal(X_K/C_K)</span>-action, and the
+              <span class="math">M_X ≃ l · Delta^Theta</span> cyclotome comparison.
+            </p>
+            <div class="tagRow"><span class="tag red">Lean guardrail</span><span class="tag">not a label</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Remarks 3.1.1-3.1.2</a>
+          Related: <a href="#initial-theta-data">initial theta data</a>
+          <a href="#cyclic-cover-reconstruction">cyclic cover reconstruction</a>
+          <a href="#kappa-coric-functions">kappa-coric functions</a>
+          <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
         </div>
       </section>
 
