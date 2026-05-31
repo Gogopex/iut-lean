@@ -565,6 +565,7 @@
         <a href="#local-lgp-monoids-iii34">Local LGP monoids 3.4</a>
         <a href="#vertically-coric-lgp-iii35">Vertically coric LGP 3.5</a>
         <a href="#global-packet-frobenioids-iii36-38">Global packets 3.6-3.8</a>
+        <a href="#lgp-lgp-log-theta-lattice-iii38">LGP/lgp lattice 3.8</a>
         <a href="#tensor-log-volume-corridor">Tensor/log-volume corridor</a>
         <a href="#corollary-312">Corollary 3.12 corridor</a>
         <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
@@ -1646,6 +1647,8 @@
               <a href="#global-packet-frobenioids-iii36-38">global packet Frobenioids source page</a>,
               <a href="#fmod-fmod-two-models-36">FMOD/Fmod two models</a>,
               <a href="#theta-q-pilot-objects-38">theta/q pilot objects</a>,
+              <a href="#lgp-lgp-log-theta-lattice-iii38">LGP/lgp log-theta lattice source page</a>,
+              <a href="#log-shells-alone-not-enough-38">log-shells alone are not enough</a>,
               <a href="#local-packet-frobenioids">local packet Frobenioids</a>,
               <a href="#local-lgp-monoids-source">local LGP monoids</a>,
               <a href="#vertically-coric-lgp">vertically coric LGP monoids</a>,
@@ -16879,6 +16882,233 @@
           <a href="#global-packet-frobenioids">global packet Frobenioids</a>
           <a href="#theta-pilot-q-pilot">theta/q pilot objects</a>
           <a href="#lgp-gaussian-log-theta-lattice">LGP Gaussian log-theta lattice</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="lgp-lgp-log-theta-lattice-iii38">
+        <h2>LGP and lgp Gaussian Log-Theta Lattices in IUT III 3.8</h2>
+        <p class="lede">
+          Definition 3.8(ii)-(iii) defines the horizontal
+          <span class="math">Theta×mu_LGP</span> and
+          <span class="math">Theta×mu_lgp</span> links as full poly-isomorphisms of
+          <span class="math">F×mu</span>-prime-strips, then places them with full
+          vertical log-links into two Gaussian log-theta lattices. The following remarks
+          state which earlier results transfer formally and why unit portions cannot be
+          replaced by log-shells alone.
+        </p>
+        <div class="diagram fit" aria-label="LGP and lgp Gaussian log-theta lattice">
+          <div class="diagramHeader">
+            <strong>Definition 3.8(ii)-(iii)</strong>
+            <span>horizontal LGP/lgp links plus vertical full log-links</span>
+          </div>
+          <svg viewBox="0 0 1120 620" role="img">
+            <defs>
+              <marker id="arrowLattice38" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="92" y="58" width="218" height="78"></rect>
+            <text class="nodeTitle" x="201" y="86" text-anchor="middle">log-link input</text>
+            <text class="tinyText" x="201" y="110" text-anchor="middle">‡HT -> †HT</text>
+            <text class="tinyText" x="201" y="126" text-anchor="middle">relative datum for horizontal link</text>
+
+            <rect class="nodeBox green" x="450" y="58" width="218" height="78"></rect>
+            <text class="nodeTitle" x="559" y="86" text-anchor="middle">F×mu prime-strips</text>
+            <text class="tinyText" x="559" y="110" text-anchor="middle">F_delta, F_LGP, F_lgp</text>
+            <text class="tinyText" x="559" y="126" text-anchor="middle">from Prop. 3.7 and IUT II 4.10</text>
+
+            <rect class="nodeBox gold" x="808" y="58" width="218" height="78"></rect>
+            <text class="nodeTitle" x="917" y="86" text-anchor="middle">horizontal links</text>
+            <text class="tinyText" x="917" y="110" text-anchor="middle">Theta×mu_LGP, Theta×mu_lgp</text>
+            <text class="tinyText" x="917" y="126" text-anchor="middle">full poly-isomorphisms</text>
+
+            <rect class="nodeBox violet" x="144" y="242" width="210" height="82"></rect>
+            <text class="nodeTitle" x="249" y="272" text-anchor="middle">n,m theater</text>
+            <text class="tinyText" x="249" y="296" text-anchor="middle">Hodge theater vertex</text>
+
+            <rect class="nodeBox violet" x="454" y="242" width="210" height="82"></rect>
+            <text class="nodeTitle" x="559" y="272" text-anchor="middle">n+1,m theater</text>
+            <text class="tinyText" x="559" y="296" text-anchor="middle">horizontal LGP/lgp image</text>
+
+            <rect class="nodeBox violet" x="144" y="422" width="210" height="82"></rect>
+            <text class="nodeTitle" x="249" y="452" text-anchor="middle">n,m-1 theater</text>
+            <text class="tinyText" x="249" y="476" text-anchor="middle">vertical predecessor</text>
+
+            <rect class="nodeBox violet" x="454" y="422" width="210" height="82"></rect>
+            <text class="nodeTitle" x="559" y="452" text-anchor="middle">n+1,m-1 theater</text>
+            <text class="tinyText" x="559" y="476" text-anchor="middle">log-linked predecessor</text>
+
+            <rect class="nodeBox red" x="784" y="280" width="250" height="116"></rect>
+            <text class="nodeTitle" x="909" y="312" text-anchor="middle">unit portions retained</text>
+            <text class="tinyText" x="909" y="338" text-anchor="middle">nontrivial local Galois action</text>
+            <text class="tinyText" x="909" y="356" text-anchor="middle">needed for Kummer theory</text>
+            <text class="tinyText" x="909" y="374" text-anchor="middle">log-shells are containers only</text>
+
+            <path d="M312 97 H448" class="edge blue" marker-end="url(#arrowLattice38)"></path>
+            <path d="M670 97 H806" class="edge green" marker-end="url(#arrowLattice38)"></path>
+            <path d="M354 283 H452" class="edge gold" marker-end="url(#arrowLattice38)"></path>
+            <path d="M354 463 H452" class="edge gold" marker-end="url(#arrowLattice38)"></path>
+            <path d="M249 420 V326" class="edge blue" marker-end="url(#arrowLattice38)"></path>
+            <path d="M559 420 V326" class="edge blue" marker-end="url(#arrowLattice38)"></path>
+            <path d="M666 283 C726 294 746 312 782 330" class="edge red" marker-end="url(#arrowLattice38)"></path>
+            <path d="M666 463 C734 444 766 410 802 398" class="edge red" marker-end="url(#arrowLattice38)"></path>
+          </svg>
+        </div>
+
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Statement</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Definition 3.8(ii)</td>
+            <td>
+              From a log-link <span class="math">‡HT -> †HT</span> and a target
+              Hodge theater <span class="math">*HT</span>, form the associated
+              <span class="math">F×mu</span>-prime-strips
+              <span class="math">*F_delta</span>, <span class="math">†F_LGP</span>,
+              and <span class="math">†F_lgp</span>.
+            </td>
+            <td>
+              The horizontal links are defined relative to the vertical log-link; they
+              are not free-standing identifications of Hodge theaters.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 3.8(ii)</td>
+            <td>
+              The <span class="math">Theta×mu_LGP</span> link and
+              <span class="math">Theta×mu_lgp</span> link are full poly-isomorphisms
+              from <span class="math">†F×mu_LGP</span> or
+              <span class="math">†F×mu_lgp</span> to
+              <span class="math">*F×mu_delta</span>.
+            </td>
+            <td>
+              A page or Lean interface should store which prime-strip variant supplies
+              the horizontal arrow: LGP and lgp are related but distinct.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 3.8(iii)</td>
+            <td>
+              Arrange <span class="math">Theta±ellNF</span> Hodge theaters in a
+              <span class="math">Z×Z</span>-indexed grid. Vertical arrows are full
+              log-links; horizontal arrows are the LGP or lgp links defined relative to
+              the preceding vertical log-link.
+            </td>
+            <td>
+              The diagram is a routed lattice of typed arrows, not merely a rectangular
+              array of copies.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.8.1</td>
+            <td>
+              The LGP and lgp lattices are closely related. The later theory mainly uses
+              the LGP lattice, but computation of the <span class="math">Theta×mu_LGP</span>
+              link uses the <span class="math">Theta×mu_lgp</span> link and related
+              theta-pilot objects. Both link types map theta-pilots to q-pilots.
+            </td>
+            <td>
+              The lgp side is auxiliary but essential; it should not be dropped from the
+              explanatory map.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.8.2</td>
+            <td>
+              Theorem 1.5, Proposition 2.1, Corollary 2.3, and Proposition 3.5
+              generalize formally to the LGP and lgp Gaussian log-theta lattices.
+            </td>
+            <td>
+              Earlier vertical coricity and upper-semi pages can be reused here, but only
+              because their substantive portions are unaffected by the LGP/lgp transition.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.8.3</td>
+            <td>
+              It is not sufficient to replace the unit portions of the
+              <span class="math">F×mu</span>-prime-strips by the associated log-shells.
+              The nontrivial local Galois action on unit portions is necessary for the
+              Kummer theory of the local and global objects contained by log-shells.
+            </td>
+            <td>
+              This is a source-level anti-simplification rule: log-shells are multiradial
+              containers, not substitutes for the Kummer-theoretic unit data.
+            </td>
+          </tr>
+        </table>
+
+        <div class="grid3">
+          <div class="card" id="theta-mu-lgp-link-38">
+            <h3>Theta×mu_LGP link</h3>
+            <p>
+              The LGP horizontal arrow is the full poly-isomorphism of
+              <span class="math">F×mu</span>-prime-strips from the global realified
+              LGP construction to the delta target, relative to the fixed log-link.
+            </p>
+            <div class="tagRow"><span class="tag blue">Definition 3.8(ii)</span><span class="tag">LGP</span></div>
+          </div>
+          <div class="card" id="theta-mu-lgp-lowercase-link-38">
+            <h3>Theta×mu_lgp link</h3>
+            <p>
+              The lgp horizontal arrow is built analogously from the
+              <span class="math">lgp</span> prime-strip. Remark 3.8.1 says this link is
+              needed in the computation of the LGP link.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 3.8(ii)</span><span class="tag">lgp</span></div>
+          </div>
+          <div class="card" id="lattice-arrow-dependence-38">
+            <h3>Horizontal arrows depend on vertical log-links</h3>
+            <p>
+              In Definition 3.8(iii), the horizontal arrow from
+              <span class="math">n,m</span> to <span class="math">n+1,m</span> is
+              defined relative to the full log-link from <span class="math">n,m-1</span>
+              to <span class="math">n,m</span>.
+            </p>
+            <div class="tagRow"><span class="tag gold">Definition 3.8(iii)</span><span class="tag">grid</span></div>
+          </div>
+          <div class="card" id="lgp-vs-lgp-lowercase-38">
+            <h3>LGP versus lgp</h3>
+            <p>
+              The later theory is mainly organized around the LGP lattice, while the lgp
+              lattice supplies related objects needed for computation. The wiki keeps
+              both names because their source roles differ.
+            </p>
+            <div class="tagRow"><span class="tag violet">Remark 3.8.1</span><span class="tag">do not merge</span></div>
+          </div>
+          <div class="card" id="formal-transfer-38">
+            <h3>Formal transfer</h3>
+            <p>
+              Vertical coricity, theta-monoid Kummer theory, multiradiality, and
+              upper-semi compatibility transfer formally to these lattices according to
+              Remark 3.8.2.
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 3.8.2</span><span class="tag">reuse</span></div>
+          </div>
+          <div class="card" id="log-shells-alone-not-enough-38">
+            <h3>Log-shells alone are not enough</h3>
+            <p>
+              Remark 3.8.3 blocks a common simplification: trivial Galois action on
+              log-shell containers cannot replace the nontrivial Galois action on
+              unit portions required by Kummer theory.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 3.8.3</span><span class="tag">Kummer data</span></div>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <strong>Audit rule.</strong> In the 3.11 to 3.12 corridor, any simplification
+          that keeps log-shell containers but discards the unit portions of the
+          <span class="math">F×mu</span>-prime-strips has lost source data that
+          Mochizuki explicitly calls necessary for Kummer theory.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Definition 3.8 and Remarks 3.8.1-3.8.3</a>
+          Related: <a href="#global-packet-frobenioids-iii36-38">global packet Frobenioids</a>
+          <a href="#theta-q-pilot-objects-38">theta/q pilot objects</a>
+          <a href="#lgp-gaussian-log-theta-lattice">LGP Gaussian log-theta lattice</a>
+          <a href="#log-shells-not-enough">log-shells warning</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
         </div>
       </section>
