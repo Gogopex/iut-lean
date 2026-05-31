@@ -328,13 +328,15 @@
 
     table {
       border-collapse: collapse;
+      display: block;
       width: 100%;
+      max-width: 100%;
       min-width: 720px;
       margin: 16px 0;
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      overflow: hidden;
+      overflow-x: auto;
       box-shadow: var(--shadow);
     }
     th, td {
@@ -348,6 +350,9 @@
     th:first-child, td:first-child {
       width: 52px;
       white-space: nowrap;
+    }
+    th:nth-child(2), td:nth-child(2) {
+      min-width: 76px;
     }
     th:last-child, td:last-child {
       min-width: 132px;
@@ -2642,15 +2647,33 @@
           <tr><th>Link</th><th>Source</th><th>Function in the theory</th><th>Risk if misread</th></tr>
           <tr>
             <td>Theta link</td>
-            <td>IUT II</td>
-            <td>Relates Hodge theaters via theta-value data at torsion points.</td>
+            <td>IUT I</td>
+            <td>Full poly-isomorphism from the theta-side F-prime-strip to the model q-parameter F-prime-strip.</td>
             <td>Reading it as an ordinary ring/scheme morphism remembers too much.</td>
+          </tr>
+          <tr>
+            <td>Theta^xmu link</td>
+            <td>IUT II</td>
+            <td>Modified theta link that preserves the weakened <span class="math">F^|xmu</span> prime-strip portion.</td>
+            <td>Treating it as preservation of the whole Frobenioid hides the value-group loss.</td>
+          </tr>
+          <tr>
+            <td>Theta^xmu_gau link</td>
+            <td>IUT II</td>
+            <td>Gaussian version obtained after replacing theta monoids by Gaussian monoids.</td>
+            <td>Forgetting the Gaussian replacement loses the source of later <span class="math">j^2</span>-weighted data.</td>
+          </tr>
+          <tr>
+            <td>Theta^xmu_LGP / lgp links</td>
+            <td>IUT III</td>
+            <td>LGP/log-shell versions used in the log-theta lattice and multiradial representation.</td>
+            <td>Collapsing them into the earlier theta link erases the log-shell stage.</td>
           </tr>
           <tr>
             <td>Log link</td>
             <td>IUT III</td>
-            <td>Uses local logarithms to pass into log-shell data.</td>
-            <td>Forgetting calibration can destroy the intended comparison meaning.</td>
+            <td>Applies local p-adic logarithmic structures and induces log-shell comparisons along a vertical line.</td>
+            <td>Forgetting calibration and upper-semi behavior can destroy the intended comparison meaning.</td>
           </tr>
         </table>
         <div class="grid3">
@@ -2704,10 +2727,19 @@
             </p>
           </div>
         </div>
+        <div class="callout">
+          A useful mnemonic is that theta-type links are horizontal filters between
+          mutually alien Hodge theaters, while log-links are vertical logarithmic
+          operations inside a fixed arithmetic holomorphic structure. The log-theta
+          lattice is built precisely because both operations are needed and they do not
+          commute as ordinary maps.
+        </div>
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a>
           <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
           Related: <a href="#log-theta-lattice">log-theta lattice</a>
+          <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
+          <a href="#multiradiality">multiradiality</a>
         </div>
       </section>
 
