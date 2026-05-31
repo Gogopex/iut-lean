@@ -494,6 +494,7 @@
         <a href="#basepoints-inter-universality">Basepoints/inter-universality</a>
         <a href="#teichmuller-analogy-iut-i">Teichmuller analogy</a>
         <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
+        <a href="#cyclic-cover-reconstruction">Cyclic cover reconstruction</a>
         <a href="#tempered-covering-complements">Tempered covering complements</a>
         <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
         <a href="#hodge-theaters">Hodge theaters</a>
@@ -1330,6 +1331,20 @@
               <a href="#holomorphic-procession">holomorphic procession</a>
             </td>
             <td>IUT I, Section 4</td>
+          </tr>
+          <tr>
+            <td>IUT I</td>
+            <td>Cyclic torsion covers and characteristic reconstruction</td>
+            <td>
+              <a href="#cyclic-cover-reconstruction">cyclic cover reconstruction</a>,
+              <a href="#torsion-orbicurve-setup">torsion orbicurve setup</a>,
+              <a href="#epsilon-quotient-exact-sequence">epsilon quotient exact sequence</a>,
+              <a href="#plus-minus-eigenspace-cover">plus/minus eigenspace cover</a>,
+              <a href="#two-epsilon-section">2 epsilon section</a>,
+              <a href="#type-one-l-tors-arrow">arrow torsion types</a>,
+              <a href="#corollary-12-characteristic-reconstruction">Corollary 1.2</a>
+            </td>
+            <td>IUT I, Section 1</td>
           </tr>
           <tr>
             <td>IUT I</td>
@@ -5776,6 +5791,174 @@
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#prime-strips-bridges">prime strips</a>
           <a href="#multiplicative-additive-bridges">bridge theory</a>
+        </div>
+      </section>
+
+      <section id="cyclic-cover-reconstruction">
+        <h2>Cyclic Cover Reconstruction</h2>
+        <p class="lede">
+          IUT I Section 1 constructs arrow-decorated cyclic covers of once-punctured
+          elliptic curves and proves that the relevant covering and cusp data are
+          characteristic in the arithmetic fundamental group. This page records the
+          source theorem interface behind later uses of cusp labels and anabelian
+          reconstruction.
+        </p>
+        <div class="diagram" aria-label="Cyclic cover construction and reconstruction">
+          <div class="diagramHeader">
+            <strong>From cusp data to characteristic cyclic covers</strong>
+            <span>IUT I §1, Definition 1.1 and Corollary 1.2</span>
+          </div>
+          <svg viewBox="0 0 1080 560" role="img">
+            <defs>
+              <marker id="arrowCyclicCover" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="52" y="70" width="210" height="86"></rect>
+            <text class="nodeTitle" x="157" y="100" text-anchor="middle">X and C</text>
+            <text class="tinyText" x="157" y="124" text-anchor="middle">type (1,1) curve</text>
+            <text class="tinyText" x="157" y="142" text-anchor="middle">type (1,l-tors)^± orbicurve</text>
+
+            <rect class="nodeBox green" x="330" y="70" width="210" height="86"></rect>
+            <text class="nodeTitle" x="435" y="100" text-anchor="middle">epsilon cusp quotient</text>
+            <text class="tinyText" x="435" y="124" text-anchor="middle">I_e' x I_e'' to Delta_e</text>
+            <text class="tinyText" x="435" y="142" text-anchor="middle">then elliptic l-torsion</text>
+
+            <rect class="nodeBox gold" x="608" y="70" width="210" height="86"></rect>
+            <text class="nodeTitle" x="713" y="100" text-anchor="middle">iota eigenspaces</text>
+            <text class="tinyText" x="713" y="124" text-anchor="middle">+ and - decomposition</text>
+            <text class="tinyText" x="713" y="142" text-anchor="middle">quotients J_X and J_C</text>
+
+            <rect class="nodeBox violet" x="866" y="70" width="170" height="86"></rect>
+            <text class="nodeTitle" x="951" y="100" text-anchor="middle">2 epsilon section</text>
+            <text class="tinyText" x="951" y="124" text-anchor="middle">normal image</text>
+            <text class="tinyText" x="951" y="142" text-anchor="middle">cyclic covers</text>
+
+            <rect class="nodeBox blue" x="230" y="288" width="238" height="86"></rect>
+            <text class="nodeTitle" x="349" y="318" text-anchor="middle">arrow torsion types</text>
+            <text class="tinyText" x="349" y="342" text-anchor="middle">(1,l-tors arrow)</text>
+            <text class="tinyText" x="349" y="360" text-anchor="middle">and signed orbicurve version</text>
+
+            <rect class="nodeBox red" x="610" y="288" width="238" height="86"></rect>
+            <text class="nodeTitle" x="729" y="318" text-anchor="middle">characteristic reconstruction</text>
+            <text class="tinyText" x="729" y="342" text-anchor="middle">recover groups and cusp classes</text>
+            <text class="tinyText" x="729" y="360" text-anchor="middle">functorially from topological group</text>
+
+            <path d="M264 113 H328" class="edge blue" marker-end="url(#arrowCyclicCover)"></path>
+            <path d="M542 113 H606" class="edge green" marker-end="url(#arrowCyclicCover)"></path>
+            <path d="M820 113 H864" class="edge gold" marker-end="url(#arrowCyclicCover)"></path>
+            <path d="M951 158 C928 226 790 248 730 286" class="edge violet" marker-end="url(#arrowCyclicCover)"></path>
+            <path d="M951 158 C836 228 488 248 350 286" class="edge blue" marker-end="url(#arrowCyclicCover)"></path>
+            <path d="M470 331 H608" class="edge red" marker-end="url(#arrowCyclicCover)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="torsion-orbicurve-setup">
+            <h3>Torsion orbicurve setup</h3>
+            <p>
+              Section 1 starts with <span class="math">l >= 5</span> prime to 6, a
+              type <span class="math">(1,1)</span> hyperbolic curve
+              <span class="math">X</span>, and a type
+              <span class="math">(1,l-tors)^±</span> hyperbolic orbicurve
+              <span class="math">C</span> over a characteristic-zero field
+              <span class="math">k</span>. Their common core produces a type
+              <span class="math">(1,l-tors)</span> cover.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §1</span><span class="tag">setup</span></div>
+          </div>
+          <div class="card" id="epsilon-quotient-exact-sequence">
+            <h3>Epsilon quotient exact sequence</h3>
+            <p>
+              A nonzero cusp <span class="math">epsilon</span> of
+              <span class="math">C</span> has two inverse-image cusps
+              <span class="math">epsilon'</span> and <span class="math">epsilon''</span>
+              on <span class="math">X</span>. Quotienting the geometric fundamental
+              group by the inertia images of the other nonzero cusps gives an exact
+              sequence with inertia term and elliptic <span class="math">l</span>-torsion
+              quotient.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT I §1</span><span class="tag">cusps</span></div>
+          </div>
+          <div class="card" id="plus-minus-eigenspace-cover">
+            <h3>Plus/minus eigenspace cover</h3>
+            <p>
+              The involution from <span class="math">Gal(X/C)</span> switches the two
+              cusp inertia factors and acts by <span class="math">-1</span> on the
+              elliptic quotient. Since <span class="math">l</span> is odd, this yields
+              plus and minus eigenspaces and quotient groups
+              <span class="math">J_X</span> and <span class="math">J_C</span>.
+            </p>
+            <div class="tagRow"><span class="tag gold">IUT I §1</span><span class="tag">eigenspaces</span></div>
+          </div>
+          <div class="card" id="two-epsilon-section">
+            <h3>The 2 epsilon section</h3>
+            <p>
+              The cusp <span class="math">2 epsilon</span> determines a section
+              <span class="math">G_k -> J_C</span>. The condition
+              <span class="math">2 != ±1 mod l</span> and the triviality hypothesis on
+              the relevant mod-<span class="math">l</span> action make the resulting
+              image normal and place it inside <span class="math">J_X</span>.
+            </p>
+            <div class="tagRow"><span class="tag violet">IUT I §1</span><span class="tag">section</span></div>
+          </div>
+          <div class="card" id="type-one-l-tors-arrow">
+            <h3>Arrow torsion types</h3>
+            <p>
+              Definition 1.1 names the resulting covers as type
+              <span class="math">(1,l-tors arrow)</span> and
+              <span class="math">(1,l-tors arrow)^±</span>. The arrow records the
+              ordered-label information determined by the chosen nonzero cusp
+              <span class="math">epsilon</span>.
+            </p>
+            <div class="tagRow"><span class="tag blue">Definition 1.1</span><span class="tag">arrow labels</span></div>
+          </div>
+          <div class="card" id="cyclic-galois-groups">
+            <h3>Cyclic Galois groups</h3>
+            <p>
+              The construction gives finite etale cyclic coverings with Galois groups
+              <span class="math">Z/lZ</span>, <span class="math">Z/2Z</span>, and
+              <span class="math">Z/2lZ</span> in the indicated curve/orbicurve tower.
+              These finite symmetry packages later become label and cusp data.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT I §1</span><span class="tag">cyclic covers</span></div>
+          </div>
+          <div class="card" id="corollary-12-characteristic-reconstruction">
+            <h3>Corollary 1.2 reconstruction</h3>
+            <p>
+              For <span class="math">k</span> an NF or MLF, Corollary 1.2 asserts a
+              functorial group-theoretic algorithm that reconstructs the relevant
+              arithmetic fundamental groups and cusp decomposition classes from the
+              arrow cover's fundamental group.
+            </p>
+            <div class="tagRow"><span class="tag red">Corollary 1.2</span><span class="tag">characteristic</span></div>
+          </div>
+          <div class="card" id="aut-cover-consequence">
+            <h3>Automorphism consequence</h3>
+            <p>
+              Remark 1.2.1 records that the automorphism groups of the arrow covers
+              over <span class="math">k</span> are the expected cyclic Galois groups.
+              This is another way the cover construction becomes rigid enough for later
+              reconstruction.
+            </p>
+            <div class="tagRow"><span class="tag gold">Remark 1.2.1</span><span class="tag">automorphisms</span></div>
+          </div>
+          <div class="card" id="formalization-cyclic-cover-rule">
+            <h3>Formalization rule</h3>
+            <p>
+              A Lean model should separate the cover construction, the section from
+              <span class="math">2 epsilon</span>, and the Corollary 1.2 reconstruction
+              algorithm. Treating the cusp labels as arbitrary names loses the
+              characteristic group-theoretic content of this section.
+            </p>
+            <div class="tagRow"><span class="tag violet">Lean guardrail</span><span class="tag">reconstruction</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          Related: <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
+          <a href="#tempered-covering-complements">tempered covering complements</a>
+          <a href="#initial-theta-data">initial theta data</a>
+          <a href="#anabelian-background">anabelian background</a>
         </div>
       </section>
 
