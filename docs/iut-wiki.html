@@ -385,6 +385,10 @@
       width: 35%;
       min-width: 0;
     }
+    table.sourceTable3 .math {
+      white-space: normal;
+      word-break: break-word;
+    }
 
     .sourceCard {
       display: grid;
@@ -582,6 +586,7 @@
         <a href="#iut-iv-prime-averaging-16-17">IUT IV prime/averaging 1.6-1.7</a>
         <a href="#iut-iv-elliptic-torsion-18">IUT IV elliptic torsion 1.8</a>
         <a href="#iut-iv-arithmetic-divisors-19">IUT IV arithmetic divisors 1.9</a>
+        <a href="#iut-iv-theorem-110-theta-pilot-estimate">IUT IV theta-pilot estimate 1.10</a>
         <a href="#iut-iv">IUT IV and consequences</a>
         <a href="#iut-iv-diophantine-output">IUT IV output route</a>
         <a href="#probabilistic-szpiro">Probabilistic Szpiro</a>
@@ -1721,7 +1726,7 @@
               <a href="#prime-number-theorem-input">prime number theorem input</a>,
               <a href="#elliptic-torsion-input">elliptic torsion input</a>,
               <a href="#arithmetic-divisors-iut-iv">arithmetic divisor bookkeeping</a>,
-              <a href="#theta-pilot-log-volume-estimate">theta-pilot estimate</a>,
+              <a href="#iut-iv-theorem-110-theta-pilot-estimate">theta-pilot estimate</a>,
               <a href="#distinguished-valuations">distinguished valuations</a>,
               <a href="#theorem-110-local-bound">Theorem 1.10 local bounds</a>,
               <a href="#theorem-110-final-bound">Theorem 1.10 final bound</a>,
@@ -5631,7 +5636,7 @@
               <a href="#iut-iv-elliptic-torsion-18">elliptic torsion input</a>,
               <a href="#elliptic-torsion-input">elliptic torsion</a>,
               <a href="#iut-iv-arithmetic-divisors-19">arithmetic divisors</a>,
-              <a href="#theta-pilot-log-volume-estimate">theta-pilot estimate</a>,
+              <a href="#iut-iv-theorem-110-theta-pilot-estimate">theta-pilot estimate</a>,
               <a href="#iut-iv">estimate pipeline</a>
             </td>
           </tr>
@@ -21619,7 +21624,7 @@
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Propositions 1.1-1.5</a>
           Related: <a href="#iut-iv">IUT IV overview</a>
-          <a href="#theta-pilot-log-volume-estimate">theta-pilot estimate</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">theta-pilot estimate</a>
           <a href="#packet-procession-log-volume-iii39">IUT III packet log-volume</a>
           <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
         </div>
@@ -21822,7 +21827,7 @@
           Related: <a href="#iut-iv-local-log-volume-estimates-11-15">local estimates</a>
           <a href="#weighted-averages">weighted averages atlas card</a>
           <a href="#prime-number-theorem-source">prime-number estimate atlas card</a>
-          <a href="#theta-pilot-log-volume-estimate">theta-pilot estimate</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">theta-pilot estimate</a>
         </div>
       </section>
 
@@ -22076,7 +22081,7 @@
           Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Proposition 1.8</a>
           Related: <a href="#iut-iv-prime-averaging-16-17">prime/averaging input</a>
           <a href="#arithmetic-divisors">arithmetic divisors</a>
-          <a href="#theta-pilot-log-volume-estimate">theta-pilot estimate</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">theta-pilot estimate</a>
           <a href="#iut-iv-diophantine-output">IUT IV output route</a>
         </div>
       </section>
@@ -22283,8 +22288,291 @@
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Definition 1.9</a>
           Related: <a href="#iut-iv-elliptic-torsion-18">elliptic torsion input</a>
-          <a href="#theta-pilot-log-volume-estimate">theta-pilot estimate</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">theta-pilot estimate</a>
           <a href="#iut-iv">IUT IV overview</a>
+          <a href="#iut-iv-diophantine-output">IUT IV output route</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-theorem-110-theta-pilot-estimate">
+        <h2>IUT IV Theorem 1.10: Theta-Pilot Estimate</h2>
+        <p class="lede">
+          Theorem 1.10 is the explicit numerical meeting point of IUT III
+          Corollary 3.12 and the local estimates of IUT IV Section 1. It starts with
+          initial theta data satisfying the Corollary 3.12 hypotheses, adds torsion and
+          field-of-moduli assumptions, and converts the theta-pilot log-volume bound
+          into a concrete inequality for <span class="math">log(q)</span>.
+        </p>
+        <div class="diagram fit" aria-label="IUT IV Theorem 1.10 theta-pilot estimate route">
+          <div class="diagramHeader">
+            <strong>Theta-pilot estimate route</strong>
+            <span>Corollary 3.12 plus local numerical estimates</span>
+          </div>
+          <svg viewBox="0 0 1160 650" role="img">
+            <defs>
+              <marker id="arrowIUTIVThm110" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox violet" x="62" y="60" width="236" height="86"></rect>
+            <text class="nodeTitle" x="180" y="90" text-anchor="middle">IUT III Cor. 3.12</text>
+            <text class="tinyText" x="180" y="114" text-anchor="middle">CTheta >= -1</text>
+            <text class="tinyText" x="180" y="132" text-anchor="middle">theta-pilot log-volume</text>
+
+            <rect class="nodeBox blue" x="462" y="60" width="236" height="86"></rect>
+            <text class="nodeTitle" x="580" y="90" text-anchor="middle">field tower</text>
+            <text class="tinyText" x="580" y="114" text-anchor="middle">Fmod -> Ftpd -> F, K</text>
+            <text class="tinyText" x="580" y="132" text-anchor="middle">torsion and good reduction</text>
+
+            <rect class="nodeBox green" x="862" y="60" width="236" height="86"></rect>
+            <text class="nodeTitle" x="980" y="90" text-anchor="middle">arithmetic divisors</text>
+            <text class="tinyText" x="980" y="114" text-anchor="middle">d_ADiv, q_ADiv, f_ADiv</text>
+            <text class="tinyText" x="980" y="132" text-anchor="middle">normalized degrees</text>
+
+            <rect class="nodeBox gold" x="102" y="260" width="236" height="92"></rect>
+            <text class="nodeTitle" x="220" y="290" text-anchor="middle">distinguished local case</text>
+            <text class="tinyText" x="220" y="314" text-anchor="middle">Prop. 1.4(iii), Step (v)</text>
+            <text class="tinyText" x="220" y="332" text-anchor="middle">different + q + ramification</text>
+
+            <rect class="nodeBox red" x="462" y="260" width="236" height="92"></rect>
+            <text class="nodeTitle" x="580" y="290" text-anchor="middle">nondistinguished case</text>
+            <text class="tinyText" x="580" y="314" text-anchor="middle">Prop. 1.4(iv), Step (vi)</text>
+            <text class="tinyText" x="580" y="332" text-anchor="middle">zero upper contribution</text>
+
+            <rect class="nodeBox blue" x="822" y="260" width="236" height="92"></rect>
+            <text class="nodeTitle" x="940" y="290" text-anchor="middle">archimedean case</text>
+            <text class="tinyText" x="940" y="314" text-anchor="middle">Prop. 1.5(iii),(iv)</text>
+            <text class="tinyText" x="940" y="332" text-anchor="middle">tensor ball bound</text>
+
+            <rect class="nodeBox green" x="250" y="474" width="250" height="92"></rect>
+            <text class="nodeTitle" x="375" y="504" text-anchor="middle">procession average</text>
+            <text class="tinyText" x="375" y="528" text-anchor="middle">Prop. 1.7 weights</text>
+            <text class="tinyText" x="375" y="546" text-anchor="middle">sum local log-volumes</text>
+
+            <rect class="nodeBox violet" x="662" y="474" width="250" height="92"></rect>
+            <text class="nodeTitle" x="787" y="504" text-anchor="middle">prime absorption</text>
+            <text class="tinyText" x="787" y="528" text-anchor="middle">Prop. 1.6 and eta_prm</text>
+            <text class="tinyText" x="787" y="546" text-anchor="middle">explicit CTheta choice</text>
+
+            <rect class="nodeBox red" x="420" y="592" width="320" height="44"></rect>
+            <text class="nodeTitle" x="580" y="620" text-anchor="middle">final log(q) inequality</text>
+
+            <path d="M300 103 H460" class="edge violet" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M700 103 H860" class="edge blue" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M180 148 C170 206 190 230 216 258" class="edge gold" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M580 148 V258" class="edge red" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M980 148 C978 208 958 230 944 258" class="edge blue" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M222 354 C242 410 312 442 368 472" class="edge gold" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M580 354 C544 410 458 442 388 472" class="edge red" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M940 354 C920 410 846 442 798 472" class="edge blue" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M502 520 H660" class="edge green" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M787 568 C748 588 704 596 642 604" class="edge violet" marker-end="url(#arrowIUTIVThm110)"></path>
+            <path d="M375 568 C412 590 456 600 518 604" class="edge green" marker-end="url(#arrowIUTIVThm110)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Theorem 1.10 item</th><th>Paper content</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Hypotheses</td>
+            <td>
+              The theorem assumes initial theta data in the situation of IUT III
+              Corollary 3.12, with good reduction at good nonarchimedean places not
+              dividing <span class="math">2*ell</span>, and with specified torsion-field
+              conditions.
+            </td>
+            <td>
+              The page is downstream of the <a href="#corollary-312">Corollary 3.12</a>
+              corridor; it does not independently prove that corridor.
+            </td>
+          </tr>
+          <tr>
+            <td>Tripodal field</td>
+            <td>
+              The field tower includes
+              <span class="math">Fmod</span>, the tripodal field
+              <span class="math">Ftpd = Fmod(E[2])</span>, and
+              <span class="math">F</span>, together with 2, 3, and 5 torsion conditions
+              used in the explicit estimates.
+            </td>
+            <td>
+              Field data and torsion data must be represented before the inequality can
+              be read as a Diophantine estimate.
+            </td>
+          </tr>
+          <tr>
+            <td>Divisor inputs</td>
+            <td>
+              For an intermediate field <span class="math">F'</span> between
+              <span class="math">Fmod</span> and <span class="math">K</span>, Galois
+              over <span class="math">Fmod</span>, the theorem uses arithmetic divisors
+              <span class="math">d_ADiv^F'</span>, <span class="math">q_ADiv^F'</span>,
+              and <span class="math">f_ADiv^F'</span> for differents, q-parameters, and
+              bad-place conductor support.
+            </td>
+            <td>
+              These are Definition 1.9 objects with normalized degrees, not informal
+              height labels.
+            </td>
+          </tr>
+          <tr>
+            <td>Theta-pilot target</td>
+            <td>
+              Step (iv) estimates the procession-normalized mono-analytic log-volume of
+              the holomorphic hull of possible images of the theta-pilot object,
+              relative to the Kummer isomorphisms of IUT III Theorem 3.11 and subject to
+              Ind1, Ind2, and Ind3.
+            </td>
+            <td>
+              This is the bridge from the IUT III comparison corridor to the explicit
+              IUT IV numerical calculation.
+            </td>
+          </tr>
+          <tr>
+            <td>Local cases</td>
+            <td>
+              Step (v) handles distinguished nonarchimedean valuations using Proposition
+              1.4(iii); Step (vi) gives zero contribution at nondistinguished
+              nonarchimedean valuations; Step (vii) applies Proposition 1.5 to
+              archimedean valuations.
+            </td>
+            <td>
+              The local estimates should remain as three separate formal gates, because
+              their hypotheses and error terms differ.
+            </td>
+          </tr>
+          <tr>
+            <td>Averaging and primes</td>
+            <td>
+              Step (viii) sums the local bounds using the weighted-average formalism and
+              absorbs prime-counting terms by Proposition 1.6 and
+              <span class="math">eta_prm</span>.
+            </td>
+            <td>
+              The final constant is a composed estimate, not a single unexplained
+              numerical axiom.
+            </td>
+          </tr>
+          <tr>
+            <td>Final inequality</td>
+            <td>
+              Taking the displayed value of <span class="math">CTheta</span> and using
+              <span class="math">CTheta >= -1</span> yields an upper bound for
+              <span class="math">(1/6) log(q)</span> by normalized different/conductor
+              degrees and the explicit <span class="math">e*_mod ell + eta_prm</span>
+              term.
+            </td>
+            <td>
+              The formal target is a theorem transforming certified Corollary 3.12 input
+              plus local Section 1 estimates into this explicit inequality.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="theorem-110-field-tower">
+            <h3>Field tower</h3>
+            <p>
+              The theorem works over <span class="math">Fmod</span>,
+              <span class="math">Ftpd</span>, <span class="math">F</span>, and
+              <span class="math">K</span>. The tripodal intermediate field is generated
+              by 2-torsion, while the 3- and 5-torsion hypotheses enter the explicit
+              bound through the chosen initial theta data.
+            </p>
+            <div class="tagRow"><span class="tag blue">Thm. 1.10</span><span class="tag">field data</span></div>
+          </div>
+          <div class="card" id="theorem-110-divisor-inputs">
+            <h3>Divisor inputs</h3>
+            <p>
+              The theorem's <span class="math">d</span>, <span class="math">q</span>,
+              and <span class="math">f</span> terms are normalized arithmetic-divisor
+              degrees. This keeps ramification, bad places, and theta q-parameters on
+              the same global scale.
+            </p>
+            <div class="tagRow"><span class="tag green">Def. 1.9</span><span class="tag">normalized degree</span></div>
+          </div>
+          <div class="card" id="theorem-110-theta-hull-target">
+            <h3>Theta-pilot hull</h3>
+            <p>
+              The object estimated is a holomorphic hull of possible theta-pilot images
+              under the multiradial comparison machinery of Theorem 3.11. Ind3 is used
+              as an upper-semi containment, matching the sign-sensitive log-volume
+              convention.
+            </p>
+            <div class="tagRow"><span class="tag violet">Step (iv)</span><span class="tag">theta-pilot</span></div>
+          </div>
+          <div class="card" id="theorem-110-distinguished-local-case">
+            <h3>Distinguished local case</h3>
+            <p>
+              At distinguished nonarchimedean valuations, the proof applies Proposition
+              1.4(iii) to bound automorphism-distorted local regions by different,
+              q-parameter, prime, and ramification terms.
+            </p>
+            <div class="tagRow"><span class="tag gold">Step (v)</span><span class="tag">Prop. 1.4</span></div>
+          </div>
+          <div class="card" id="theorem-110-nondistinguished-case">
+            <h3>Nondistinguished case</h3>
+            <p>
+              At nondistinguished nonarchimedean valuations, Proposition 1.4(iv) gives
+              an exactly stable normalized tensor-product region, hence zero upper
+              contribution to the relevant log-volume.
+            </p>
+            <div class="tagRow"><span class="tag red">Step (vi)</span><span class="tag">zero bound</span></div>
+          </div>
+          <div class="card" id="theorem-110-archimedean-case">
+            <h3>Archimedean case</h3>
+            <p>
+              At archimedean valuations, Proposition 1.5 bounds the tensor-product
+              region by a power of the integral ball <span class="math">B_I</span>,
+              giving the archimedean term used in the total estimate.
+            </p>
+            <div class="tagRow"><span class="tag blue">Step (vii)</span><span class="tag">metric</span></div>
+          </div>
+          <div class="card" id="theorem-110-procession-averaging">
+            <h3>Procession averaging</h3>
+            <p>
+              The proof averages over the packet/procession indices using Proposition
+              1.7, so the local log-volume bounds become a single
+              procession-normalized global estimate.
+            </p>
+            <div class="tagRow"><span class="tag green">Step (viii)</span><span class="tag">weighted average</span></div>
+          </div>
+          <div class="card" id="theorem-110-eta-prm-absorption">
+            <h3>Prime absorption</h3>
+            <p>
+              Proposition 1.6 controls the prime-sum contribution by
+              <span class="math">eta_prm</span>. This is where the elementary analytic
+              estimate enters the otherwise arithmetic divisor calculation.
+            </p>
+            <div class="tagRow"><span class="tag violet">Prop. 1.6</span><span class="tag">eta_prm</span></div>
+          </div>
+          <div class="card" id="theorem-110-final-inequality">
+            <h3>Final inequality</h3>
+            <p>
+              The theorem derives
+              <span class="math">(1/6)log(q)</span> bounded by a multiple of
+              <span class="math">log(d)+log(f)</span> plus the explicit torsion/prime
+              term. The sign-sensitive input is
+              <span class="math">|log(q)| = (1/(2*ell))log(q)</span> in the IUT
+              convention.
+            </p>
+            <div class="tagRow"><span class="tag red">output</span><span class="tag">log(q)</span></div>
+          </div>
+        </div>
+        <div class="callout violet">
+          Formalization warning: Theorem 1.10 is not a substitute proof of IUT III
+          Corollary 3.12. It assumes the Corollary 3.12 lower bound
+          <span class="math">CTheta >= -1</span> and then performs the explicit local,
+          averaged, and prime-counting estimates needed to turn that lower bound into a
+          Diophantine numerical inequality.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Theorem 1.10</a>
+          Related: <a href="#corollary-312">Corollary 3.12</a>
+          <a href="#theorem-311-lgp-algorithms">Theorem 3.11 algorithms</a>
+          <a href="#iut-iv-local-log-volume-estimates-11-15">local estimates</a>
+          <a href="#iut-iv-prime-averaging-16-17">prime/averaging input</a>
+          <a href="#iut-iv-elliptic-torsion-18">elliptic torsion input</a>
+          <a href="#iut-iv-arithmetic-divisors-19">arithmetic divisors</a>
           <a href="#iut-iv-diophantine-output">IUT IV output route</a>
         </div>
       </section>
@@ -22423,7 +22711,7 @@
           <tr>
             <td>Definition 1.9 and Theorem 1.10</td>
             <td>Arithmetic divisors and the explicit theta-pilot log-volume estimate.</td>
-            <td><a href="#iut-iv-elliptic-torsion-18">elliptic torsion input</a>, <a href="#iut-iv-arithmetic-divisors-19">arithmetic divisor route</a>, <a href="#arithmetic-divisors">arithmetic divisors</a>, <a href="#theta-pilot-log-volume-estimate">theta-pilot estimate</a></td>
+            <td><a href="#iut-iv-elliptic-torsion-18">elliptic torsion input</a>, <a href="#iut-iv-arithmetic-divisors-19">arithmetic divisor route</a>, <a href="#arithmetic-divisors">arithmetic divisors</a>, <a href="#iut-iv-theorem-110-theta-pilot-estimate">theta-pilot estimate</a></td>
           </tr>
           <tr>
             <td>Corollaries 2.2-2.3</td>
@@ -22651,7 +22939,7 @@
           Verification note: this page deliberately separates the downstream
           Diophantine application from the disputed comparison corridor. The output
           route uses <a href="#corollary-312">Corollary 3.12</a> and
-          <a href="#theta-pilot-log-volume-estimate">Theorem 1.10</a> as inputs; it is
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">Theorem 1.10</a> as inputs; it is
           not an alternate proof of the multiradial theta comparison.
         </div>
         <div class="related">
