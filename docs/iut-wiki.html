@@ -571,6 +571,7 @@
         <a href="#theorem-311-lgp-algorithms">Theorem 3.11 algorithms</a>
         <a href="#tensor-log-volume-corridor">Tensor/log-volume corridor</a>
         <a href="#corollary-312">Corollary 3.12 corridor</a>
+        <a href="#corollary-312-proof-steps">3.12 proof steps</a>
         <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
         <a href="#iut-iv">IUT IV and consequences</a>
         <a href="#iut-iv-diophantine-output">IUT IV output route</a>
@@ -1662,6 +1663,10 @@
               <a href="#theorem-311-data-abc">Theorem 3.11 data (a),(b),(c)</a>,
               <a href="#ind1-ind2-ind3-311">Ind1/Ind2/Ind3 in Theorem 3.11</a>,
               <a href="#ipl-she-apt-source-311">source IPL/SHE/APT</a>,
+              <a href="#corollary-312-proof-steps">Corollary 3.12 proof steps</a>,
+              <a href="#single-theta-link-312">single theta-link rule</a>,
+              <a href="#coarse-space-step-x-312">Step (x) coarse space</a>,
+              <a href="#membership-step-xif-312">Step (xi-f) membership</a>,
               <a href="#local-packet-frobenioids">local packet Frobenioids</a>,
               <a href="#local-lgp-monoids-source">local LGP monoids</a>,
               <a href="#vertically-coric-lgp">vertically coric LGP monoids</a>,
@@ -19637,6 +19642,340 @@
           <a href="papers/pajo-scale-free-common-container-comparisons.pdf" target="_blank">Pajo 2026</a>
           Related: <a href="#dispute">dispute</a>
           <a href="#formalization">formalization</a>
+        </div>
+      </section>
+
+      <section id="corollary-312-proof-steps">
+        <h2>Corollary 3.12 Proof Steps</h2>
+        <p class="lede">
+          This page maps the proof of IUT III Corollary 3.12 at the level needed for
+          audit. The statement is an ordered-real inequality, but the proof route passes
+          through possible images, holomorphic hulls, one fixed
+          <span class="math">Theta×mu_LGP</span> link, bi-coric log-shell containers,
+          log-Kummer correspondences, Kummer-detachment indeterminacies, and finally
+          the membership assertion
+          <span class="math">-|log(q)| in R_{&lt;= -|log(Theta)|}</span>.
+        </p>
+
+        <div class="diagram fit" aria-label="Corollary 3.12 proof steps">
+          <div class="diagramHeader">
+            <strong>Proof Skeleton</strong>
+            <span>from source regions to membership in an ordered-real upper ray</span>
+          </div>
+          <svg viewBox="0 0 1120 650" role="img">
+            <defs>
+              <marker id="arrowCor312Steps" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="58" y="64" width="214" height="86"></rect>
+            <text class="nodeTitle" x="165" y="94" text-anchor="middle">statement</text>
+            <text class="tinyText" x="165" y="118" text-anchor="middle">Theta hull log-volume</text>
+            <text class="tinyText" x="165" y="136" text-anchor="middle">q-pilot log-volume</text>
+
+            <rect class="nodeBox green" x="330" y="64" width="214" height="86"></rect>
+            <text class="nodeTitle" x="437" y="94" text-anchor="middle">possible images</text>
+            <text class="tinyText" x="437" y="118" text-anchor="middle">regions U, holomorphic hulls</text>
+            <text class="tinyText" x="437" y="136" text-anchor="middle">F-prime-strip restriction</text>
+
+            <rect class="nodeBox gold" x="602" y="64" width="214" height="86"></rect>
+            <text class="nodeTitle" x="709" y="94" text-anchor="middle">Steps (i)-(iv)</text>
+            <text class="tinyText" x="709" y="118" text-anchor="middle">one theta-link</text>
+            <text class="tinyText" x="709" y="136" text-anchor="middle">vertical shift via log-Kummer</text>
+
+            <rect class="nodeBox violet" x="874" y="64" width="214" height="86"></rect>
+            <text class="nodeTitle" x="981" y="94" text-anchor="middle">Steps (v)-(ix)</text>
+            <text class="tinyText" x="981" y="118" text-anchor="middle">bi-coric containers</text>
+            <text class="tinyText" x="981" y="136" text-anchor="middle">rigidity and FMOD/Fmod</text>
+
+            <rect class="nodeBox red" x="154" y="310" width="240" height="94"></rect>
+            <text class="nodeTitle" x="274" y="342" text-anchor="middle">Step (x)</text>
+            <text class="tinyText" x="274" y="366" text-anchor="middle">formal quotient / coarse space</text>
+            <text class="tinyText" x="274" y="384" text-anchor="middle">Ind3 becomes upper inequality</text>
+
+            <rect class="nodeBox green" x="440" y="310" width="240" height="94"></rect>
+            <text class="nodeTitle" x="560" y="342" text-anchor="middle">Step (xi)</text>
+            <text class="tinyText" x="560" y="366" text-anchor="middle">IPL, SHE, APT</text>
+            <text class="tinyText" x="560" y="384" text-anchor="middle">hull, determinant, log-volume</text>
+
+            <rect class="nodeBox blue" x="726" y="310" width="240" height="94"></rect>
+            <text class="nodeTitle" x="846" y="342" text-anchor="middle">membership</text>
+            <text class="tinyText" x="846" y="366" text-anchor="middle">q-pilot value lies in Theta ray</text>
+            <text class="tinyText" x="846" y="384" text-anchor="middle">then signed inequality follows</text>
+
+            <rect class="nodeBox gold" x="440" y="512" width="240" height="86"></rect>
+            <text class="nodeTitle" x="560" y="542" text-anchor="middle">Step (xii)</text>
+            <text class="tinyText" x="560" y="566" text-anchor="middle">global Frobenioids required</text>
+            <text class="tinyText" x="560" y="584" text-anchor="middle">local-only route loses scale</text>
+
+            <path d="M274 107 H328" class="edge blue" marker-end="url(#arrowCor312Steps)"></path>
+            <path d="M546 107 H600" class="edge green" marker-end="url(#arrowCor312Steps)"></path>
+            <path d="M818 107 H872" class="edge gold" marker-end="url(#arrowCor312Steps)"></path>
+            <path d="M981 152 C920 238 426 234 304 308" class="edge violet" marker-end="url(#arrowCor312Steps)"></path>
+            <path d="M394 357 H438" class="edge red" marker-end="url(#arrowCor312Steps)"></path>
+            <path d="M680 357 H724" class="edge green" marker-end="url(#arrowCor312Steps)"></path>
+            <path d="M846 406 C790 480 652 488 588 510" class="edge blue" marker-end="url(#arrowCor312Steps)"></path>
+          </svg>
+        </div>
+
+        <table class="sourceTable3">
+          <tr><th>Proof location</th><th>Source content</th><th>Audit reading</th></tr>
+          <tr>
+            <td>Statement</td>
+            <td>
+              Defines <span class="math">-|log(Theta)|</span> from the holomorphic hull
+              of possible theta-pilot images in the multiradial representation, and
+              <span class="math">-|log(q)|</span> from the q-pilot image.
+            </td>
+            <td>
+              The theta quantity is indeterminacy-sensitive; the q quantity is the fixed
+              comparison value.
+            </td>
+          </tr>
+          <tr>
+            <td>Before Step (i)</td>
+            <td>
+              Introduces regions <span class="math">U</span>, their holomorphic hulls,
+              proves finiteness under the negative case, and restricts to possible
+              images interpretable as <span class="math">F</span>-prime-strip data.
+            </td>
+            <td>
+              The proof does not compare arbitrary subsets; it first filters to the
+              source-compatible prime-strip interpretation.
+            </td>
+          </tr>
+          <tr>
+            <td id="single-theta-link-312">Steps (i)-(iii)</td>
+            <td>
+              Fix one <span class="math">Theta×mu_LGP</span> link from
+              <span class="math">(0,0)</span> to <span class="math">(1,0)</span>, with a
+              unit portion and a value-group portion. The value portion maps theta-pilot
+              objects to q-pilot objects, and the proof explains why unit and value
+              portions must not be compared through different horizontal links.
+            </td>
+            <td>
+              This is a strict single-link discipline. Splitting the unit and value
+              comparisons across different horizontal positions would not track the
+              source proof.
+            </td>
+          </tr>
+          <tr>
+            <td>Step (iv)</td>
+            <td>
+              The desired vertical shift for units conflicts with the single-link
+              requirement. The source resolves this by using vertically coric structures
+              and log-Kummer correspondences, at the cost of Ind3 upper-semi
+              compatibility.
+            </td>
+            <td>
+              Ind3 is introduced as the price of reconciling vertical-shift needs with
+              noncommutativity of the log-theta lattice.
+            </td>
+          </tr>
+          <tr>
+            <td>Step (v)</td>
+            <td>
+              Use the unit portion of the theta-link and bi-coricity of units/log-shells
+              to treat log-shells as multiradial mono-analytic containers for local and
+              global value-group structures of the theta-pilot.
+            </td>
+            <td>
+              Log-shells function as containers for theta-side regions; this is not a
+              direct equality with the original holomorphic units.
+            </td>
+          </tr>
+          <tr>
+            <td>Step (vi)</td>
+            <td>
+              Recalls that the log-Kummer correspondences for splitting monoids and
+              global Frobenioids depend on Galois evaluation, mono-theta rigidity,
+              basepoint compatibility, and compatible cyclotomic rigidity mechanisms.
+            </td>
+            <td>
+              The proof relies on earlier rigidity inputs; they are not decorative
+              references.
+            </td>
+          </tr>
+          <tr>
+            <td>Steps (vii)-(ix)</td>
+            <td>
+              Separates <span class="math">F_l^{±}</span> and
+              <span class="math">F_l</span> symmetries, records the role of global
+              synchronizations, and explains how copies of
+              <span class="math">Fmod</span> translate between multiplicative
+              Frobenioid data and additive log-shell containers.
+            </td>
+            <td>
+              This is the source explanation of why both FMOD-style rigidity and
+              Fmod-style estimate machinery appear.
+            </td>
+          </tr>
+          <tr>
+            <td id="coarse-space-step-x-312">Step (x)</td>
+            <td>
+              Kummer-detachment relates Frobenius-like structures at
+              <span class="math">(0,0)</span> to the multiradial representation but
+              introduces Ind1, Ind2, and Ind3. Procession-normalized log-volume acts as
+              a coarse numerical object: invariant under Ind1/Ind2 and converting Ind3
+              into an upper inequality.
+            </td>
+            <td>
+              This is where the proof moves from formal quotient data to a real-valued
+              comparison object.
+            </td>
+          </tr>
+          <tr>
+            <td>Steps (xi-a)-(xi-c)</td>
+            <td>
+              The q-pilot at <span class="math">(1,0)</span> is fixed in its arithmetic
+              holomorphic structure. The multiradial algorithm produces output
+              possibilities satisfying IPL and SHE, and these are viewed from the
+              <span class="math">1,◦</span> structure.
+            </td>
+            <td>
+              The proof reads the theta output inside the codomain structure, not by
+              identifying the two ring structures.
+            </td>
+          </tr>
+          <tr>
+            <td>Step (xi-d)</td>
+            <td>
+              Formation of holomorphic hulls, determinants of higher-rank arithmetic
+              vector bundles, and log-volume produces comparable objects:
+              <span class="math">R_{&lt;= -|log(Theta)|}</span> and
+              <span class="math">-|log(q)|</span>.
+            </td>
+            <td>
+              The hull/determinant/log-volume passage is the comparable-object stage.
+            </td>
+          </tr>
+          <tr>
+            <td>Step (xi-e)</td>
+            <td>
+              SHE is interpreted as expressibility by operations still valid when the
+              pilot-object log-volume of the input prime-strip is fixed to
+              <span class="math">-|log(q)|</span>. The output possible log-volumes remain
+              IPL-linked to that q-pilot value.
+            </td>
+            <td>
+              The fixed q-pilot value is a constraint on the construction, not a later
+              informal substitution.
+            </td>
+          </tr>
+          <tr>
+            <td id="membership-step-xif-312">Step (xi-f)</td>
+            <td>
+              The construction of output possibilities is said to include, perhaps up
+              to approximation from indeterminacies, the pilot-object log-volume of the
+              input prime-strip. Thus
+              <span class="math">-|log(q)| in R_{&lt;= -|log(Theta)|}</span>, so
+              <span class="math">-|log(q)| &lt;= -|log(Theta)|</span>.
+            </td>
+            <td>
+              This membership is the central audit point. Once supplied, the final
+              ordered-real inequality is formal.
+            </td>
+          </tr>
+          <tr>
+            <td>Steps (xi-g),(xi-h)</td>
+            <td>
+              The proof summarizes the argument as two equivalent ways to compute the
+              q-pilot log-volume. It also warns that a routine extension to
+              <span class="math">N</span>-th tensor powers would give sharper false
+              inequalities and is not available.
+            </td>
+            <td>
+              The first-power theta-function theory is essential; tensor-power
+              extrapolation is explicitly rejected.
+            </td>
+          </tr>
+          <tr>
+            <td>Step (xii)</td>
+            <td>
+              Global realified Frobenioids cannot be replaced by local Frobenioids
+              alone, since local Frobenioid objects have non-automorphism endomorphisms
+              that create uncontrolled <span class="math">p_v^N</span>-scale ambiguity.
+            </td>
+            <td>
+              A local-only log-volume reconstruction would destroy the precise
+              computation required in Step (xi).
+            </td>
+          </tr>
+        </table>
+
+        <div class="grid3">
+          <div class="card" id="single-theta-link-rule-312">
+            <h3>Single theta-link rule</h3>
+            <p>
+              Steps (i)-(iii) force the proof to use one horizontal
+              <span class="math">Theta×mu_LGP</span> link for both unit and value
+              portions. The noncommutativity of the lattice is exactly why a
+              two-link simplification is not source-faithful.
+            </p>
+            <div class="tagRow"><span class="tag green">Steps (i)-(iii)</span><span class="tag">one link</span></div>
+          </div>
+          <div class="card" id="vertical-shift-cost-312">
+            <h3>Vertical-shift cost</h3>
+            <p>
+              Step (iv) says the vertical shift needed for unit-group computation is
+              implemented through vertically coric structures and log-Kummer
+              correspondences. The cost is Ind3, i.e. upper-semi compatibility.
+            </p>
+            <div class="tagRow"><span class="tag red">Step (iv)</span><span class="tag">Ind3</span></div>
+          </div>
+          <div class="card" id="rigidity-inputs-step-vi-312">
+            <h3>Rigidity inputs</h3>
+            <p>
+              Step (vi) ties the proof back to mono-theta environments, discrete
+              rigidity, isomorphism-class compatibility, and cyclotomic rigidity. A
+              formal model must expose these as dependencies of the log-Kummer bridge.
+            </p>
+            <div class="tagRow"><span class="tag blue">Step (vi)</span><span class="tag">EtTh</span></div>
+          </div>
+          <div class="card" id="coarse-space-card-step-x-312">
+            <h3>Coarse numerical space</h3>
+            <p>
+              Step (x) is the transition from indeterminacy-laden multiradial data to
+              real log-volumes: Ind1 and Ind2 become invariance, and Ind3 becomes an
+              upper inequality.
+            </p>
+            <div class="tagRow"><span class="tag gold">Step (x)</span><span class="tag">log-volume</span></div>
+          </div>
+          <div class="card" id="hull-det-logvol-step-xid-312">
+            <h3>Hull, determinant, log-volume</h3>
+            <p>
+              Step (xi-d) explains why output regions must pass through holomorphic
+              hulls, determinants, and log-volumes before they can be compared with the
+              q-pilot arithmetic line-bundle value.
+            </p>
+            <div class="tagRow"><span class="tag violet">Step (xi-d)</span><span class="tag">comparable objects</span></div>
+          </div>
+          <div class="card" id="membership-card-step-xif-312">
+            <h3>Membership assertion</h3>
+            <p>
+              Step (xi-f) is the exact numerical bridge:
+              <span class="math">-|log(q)|</span> must belong to the theta-side upper
+              ray <span class="math">R_{&lt;= -|log(Theta)|}</span>. The inequality is
+              then immediate.
+            </p>
+            <div class="tagRow"><span class="tag red">Step (xi-f)</span><span class="tag">audit point</span></div>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          Source-faithful summaries should not replace Step (xi-f) by an assumed equality
+          of theta and q regions. The proof route is a membership in an upper ray after
+          the permitted weakening, hull, determinant, log-volume, and indeterminacy
+          operations.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 3.12 proof and Remarks 3.12.1-3.12.4</a>
+          Related: <a href="#corollary-312">3.12 corridor</a>
+          <a href="#theorem-311-lgp-algorithms">Theorem 3.11 source page</a>
+          <a href="#theorem-311-log-kummer">3.11 log-Kummer card</a>
+          <a href="#packet-procession-log-volume-iii39">packet log-volume</a>
+          <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
         </div>
       </section>
 
