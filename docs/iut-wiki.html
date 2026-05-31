@@ -718,6 +718,8 @@
         <a href="#current-situation-reports">Current situation reports</a>
         <a href="#dispute">Scholze-Stix and responses</a>
         <a href="#formalization">RIMS Lean effort</a>
+        <a href="#rims-lean-stage-plan-2026">RIMS Lean stages 2026</a>
+        <a href="#rims-four-triangle-route-2026">Four-triangle 3.11→3.12 route</a>
         <a href="#lana">LANA</a>
         <a href="#galois-orbit-iut-preview">Galois-orbit IUT preview</a>
         <a href="#galois-theoretic-context">Galois-theoretic context</a>
@@ -33909,9 +33911,217 @@
         <div class="related">
           Sources: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report</a>
           <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure</a>
-          Related: <a href="#lana">LANA</a>
+          Related: <a href="#rims-lean-stage-plan-2026">RIMS Lean stages</a>
+          <a href="#rims-four-triangle-route-2026">four-triangle route</a>
+          <a href="#lana">LANA</a>
           <a href="#species-mutations">species and mutations</a>
           <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="rims-lean-stage-plan-2026">
+        <h2>Mochizuki 2026 LeanForm Stage Plan</h2>
+        <p class="lede">
+          Mochizuki's April 2026 report proposes a five-stage formalization path. The
+          stated immediate focus is Stage 1 and Stage 2: first the implication from
+          IUT III Theorem 3.11 to Corollary 3.12, then the proof of Theorem 3.11
+          modulo IUT I-II. The later stages move backward into the anabelian,
+          Frobenioid, theta-function, and numerical source layers.
+        </p>
+        <div class="diagram fit" aria-label="Mochizuki 2026 LeanForm five-stage plan">
+          <div class="diagramHeader">
+            <strong>Five-stage LeanForm plan</strong>
+            <span>formalization report, §2</span>
+          </div>
+          <svg viewBox="0 0 1120 560" role="img">
+            <defs>
+              <marker id="arrowRimsStages" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox red" x="60" y="88" width="180" height="86"></rect>
+            <text class="nodeTitle" x="150" y="118" text-anchor="middle">Stage 1</text>
+            <text class="tinyText" x="150" y="142" text-anchor="middle">Theorem 3.11 => 3.12</text>
+            <text class="tinyText" x="150" y="160" text-anchor="middle">early skeletal focus</text>
+
+            <rect class="nodeBox gold" x="280" y="88" width="180" height="86"></rect>
+            <text class="nodeTitle" x="370" y="118" text-anchor="middle">Stage 2</text>
+            <text class="tinyText" x="370" y="142" text-anchor="middle">prove Theorem 3.11</text>
+            <text class="tinyText" x="370" y="160" text-anchor="middle">modulo IUT I-II</text>
+
+            <rect class="nodeBox green" x="500" y="88" width="180" height="86"></rect>
+            <text class="nodeTitle" x="590" y="118" text-anchor="middle">Stage 3</text>
+            <text class="tinyText" x="590" y="142" text-anchor="middle">IUT I-II from prior</text>
+            <text class="tinyText" x="590" y="160" text-anchor="middle">source machinery</text>
+
+            <rect class="nodeBox blue" x="720" y="88" width="180" height="86"></rect>
+            <text class="nodeTitle" x="810" y="118" text-anchor="middle">Stage 4</text>
+            <text class="tinyText" x="810" y="142" text-anchor="middle">1995-2015 background</text>
+            <text class="tinyText" x="810" y="160" text-anchor="middle">anabelian/Frobenioid/etc.</text>
+
+            <rect class="nodeBox violet" x="940" y="88" width="160" height="86"></rect>
+            <text class="nodeTitle" x="1020" y="118" text-anchor="middle">Stage 5</text>
+            <text class="tinyText" x="1020" y="142" text-anchor="middle">IUT IV and</text>
+            <text class="tinyText" x="1020" y="160" text-anchor="middle">Explicit Estimates</text>
+
+            <rect class="nodeBox green" x="240" y="320" width="280" height="90"></rect>
+            <text class="nodeTitle" x="380" y="350" text-anchor="middle">species/mutations</text>
+            <text class="tinyText" x="380" y="374" text-anchor="middle">formal language of functorial algorithms</text>
+            <text class="tinyText" x="380" y="392" text-anchor="middle">ZFC LeanForm helpful but not early prerequisite</text>
+
+            <rect class="nodeBox red" x="602" y="320" width="280" height="90"></rect>
+            <text class="nodeTitle" x="742" y="350" text-anchor="middle">human intervention</text>
+            <text class="tinyText" x="742" y="374" text-anchor="middle">Stages 1-2 need close source judgment</text>
+            <text class="tinyText" x="742" y="392" text-anchor="middle">later stages may suit broader formalization</text>
+
+            <path d="M242 131 H278" class="edge red" marker-end="url(#arrowRimsStages)"></path>
+            <path d="M462 131 H498" class="edge gold" marker-end="url(#arrowRimsStages)"></path>
+            <path d="M682 131 H718" class="edge green" marker-end="url(#arrowRimsStages)"></path>
+            <path d="M902 131 H938" class="edge blue" marker-end="url(#arrowRimsStages)"></path>
+            <path d="M370 176 C364 238 368 274 378 318" class="edge green" marker-end="url(#arrowRimsStages)"></path>
+            <path d="M590 176 C638 244 702 274 736 318" class="edge red" marker-end="url(#arrowRimsStages)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Stage</th><th>Report target</th><th>Wiki reading</th></tr>
+          <tr>
+            <td>Stage 1</td>
+            <td>IUT III Theorem 3.11 implies Corollary 3.12.</td>
+            <td>Most public dispute focus; should remain a typed corridor, not a proof-completion claim.</td>
+          </tr>
+          <tr>
+            <td>Stage 2</td>
+            <td>Proof of Theorem 3.11 modulo IUT I-II.</td>
+            <td>Where APT, IPL, multiradial representation, and log-Kummer source obligations become central.</td>
+          </tr>
+          <tr>
+            <td>Stage 3</td>
+            <td>IUT I-II from earlier anabelian, Frobenioid, and theta-function results.</td>
+            <td>Replace blackbox Hodge-theater/theta-link interfaces by source constructions.</td>
+          </tr>
+          <tr>
+            <td>Stage 4</td>
+            <td>Formalize earlier background papers from roughly 1995-2015.</td>
+            <td>Long-range library work, close to LANA's anabelian-library orientation.</td>
+          </tr>
+          <tr>
+            <td>Stage 5</td>
+            <td>Numerical aspects of IUT IV and Explicit Estimates.</td>
+            <td>Downstream effective estimates once the disputed comparison corridor is pinned down.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report, §2</a>
+          Related: <a href="#formalization">RIMS Lean effort</a>
+          <a href="#rims-four-triangle-route-2026">four-triangle route</a>
+          <a href="#lana">LANA</a>
+          <a href="#species-vs-categories-iv31">species versus categories</a>
+        </div>
+      </section>
+
+      <section id="rims-four-triangle-route-2026">
+        <h2>Mochizuki 2026: Four-Triangle Route from 3.11 to 3.12</h2>
+        <p class="lede">
+          The report reorganizes the implication from Theorem 3.11 to Corollary 3.12
+          into four Lean-facing triangles. The final triangle is described as
+          "3.11.5 => 3.12", where "3.11.5" is a bookkeeping name for Theorem 3.11
+          plus the hull-and-determinant operation moved before the final simultaneous
+          comparison.
+        </p>
+        <div class="diagram fit" aria-label="RIMS four triangle route from 3.11 to 3.12">
+          <div class="diagramHeader">
+            <strong>Four-triangle decomposition</strong>
+            <span>formalization report, §4</span>
+          </div>
+          <svg viewBox="0 0 1120 620" role="img">
+            <defs>
+              <marker id="arrowRimsTriangles" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="88" width="210" height="86"></rect>
+            <text class="nodeTitle" x="175" y="118" text-anchor="middle">Theorem 3.11</text>
+            <text class="tinyText" x="175" y="142" text-anchor="middle">multiradial output</text>
+            <text class="tinyText" x="175" y="160" text-anchor="middle">dsc starts here</text>
+
+            <rect class="nodeBox green" x="352" y="88" width="210" height="86"></rect>
+            <text class="nodeTitle" x="457" y="118" text-anchor="middle">APT + IPL</text>
+            <text class="tinyText" x="457" y="142" text-anchor="middle">parallel transport</text>
+            <text class="tinyText" x="457" y="160" text-anchor="middle">input prime-strip link</text>
+
+            <rect class="nodeBox gold" x="634" y="88" width="210" height="86"></rect>
+            <text class="nodeTitle" x="739" y="118" text-anchor="middle">3.11.5</text>
+            <text class="tinyText" x="739" y="142" text-anchor="middle">(hull+det) after descent</text>
+            <text class="tinyText" x="739" y="160" text-anchor="middle">not an IUT paper theorem number</text>
+
+            <rect class="nodeBox red" x="916" y="88" width="160" height="86"></rect>
+            <text class="nodeTitle" x="996" y="118" text-anchor="middle">Cor. 3.12</text>
+            <text class="tinyText" x="996" y="142" text-anchor="middle">q-pilot vs Theta-pilot</text>
+            <text class="tinyText" x="996" y="160" text-anchor="middle">signed comparison</text>
+
+            <rect class="nodeBox violet" x="216" y="330" width="250" height="90"></rect>
+            <text class="nodeTitle" x="341" y="360" text-anchor="middle">first/second/third triangles</text>
+            <text class="tinyText" x="341" y="384" text-anchor="middle">Theorem 3.11 => 3.11.5</text>
+            <text class="tinyText" x="341" y="402" text-anchor="middle">APT and IPL appear here</text>
+
+            <rect class="nodeBox red" x="654" y="330" width="250" height="90"></rect>
+            <text class="nodeTitle" x="779" y="360" text-anchor="middle">fourth triangle</text>
+            <text class="tinyText" x="779" y="384" text-anchor="middle">SHE-restricted comparison</text>
+            <text class="tinyText" x="779" y="402" text-anchor="middle">q-pilot and Theta-pilot in one container</text>
+
+            <rect class="nodeBox green" x="392" y="500" width="340" height="66"></rect>
+            <text class="nodeTitle" x="562" y="526" text-anchor="middle">Lean audit consequence</text>
+            <text class="tinyText" x="562" y="548" text-anchor="middle">separate source obligations from final ordered comparison</text>
+
+            <path d="M282 131 H350" class="edge blue" marker-end="url(#arrowRimsTriangles)"></path>
+            <path d="M564 131 H632" class="edge green" marker-end="url(#arrowRimsTriangles)"></path>
+            <path d="M846 131 H914" class="edge gold" marker-end="url(#arrowRimsTriangles)"></path>
+            <path d="M457 176 C410 250 366 282 346 328" class="edge violet" marker-end="url(#arrowRimsTriangles)"></path>
+            <path d="M739 176 C754 250 774 282 778 328" class="edge red" marker-end="url(#arrowRimsTriangles)"></path>
+            <path d="M466 376 H652" class="edge violet" marker-end="url(#arrowRimsTriangles)"></path>
+            <path d="M779 422 C734 460 642 476 580 498" class="edge red" marker-end="url(#arrowRimsTriangles)"></path>
+            <path d="M341 422 C386 460 482 476 544 498" class="edge violet" marker-end="url(#arrowRimsTriangles)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Report component</th><th>Meaning</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Descent arrow (dsc)</td>
+            <td>Part of the route from Theorem 3.11 output toward the comparison stage.</td>
+            <td>Do not fold descent into the final inequality without naming it.</td>
+          </tr>
+          <tr>
+            <td>APT</td>
+            <td>Algorithmic parallel transport for expressing gluings up to indeterminacies.</td>
+            <td>Central to the first/second/third triangles and to Stage 2 work.</td>
+          </tr>
+          <tr>
+            <td>IPL</td>
+            <td>Input prime-strip link property connecting input BPS data and multiradial output data.</td>
+            <td>Needed both before and at the final comparison interface.</td>
+          </tr>
+          <tr>
+            <td>Hull + determinant</td>
+            <td>Moved into the intermediate "3.11.5" bookkeeping target.</td>
+            <td>Separates construction of the comparison object from the final q/Theta comparison.</td>
+          </tr>
+          <tr>
+            <td>SHE</td>
+            <td>Simultaneous holomorphic expressibility restricts the final comparison to the q-pilot input case.</td>
+            <td>The final triangle is not a generic ordered-real inequality; it is a specialized container comparison.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          The report's "3.11.5" label is not an additional theorem in the IUT papers.
+          It is a Lean-facing decomposition tool. The wiki keeps this convention visible
+          so readers do not mistake reorganization for a new source result.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report, §4</a>
+          Related: <a href="#rims-lean-stage-plan-2026">RIMS Lean stages</a>
+          <a href="#theorem-311-lgp-algorithms">Theorem 3.11</a>
+          <a href="#corollary-312-proof-steps">Corollary 3.12 proof steps</a>
+          <a href="#formalization">RIMS Lean effort</a>
         </div>
       </section>
 
