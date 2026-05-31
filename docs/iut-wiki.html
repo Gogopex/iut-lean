@@ -900,6 +900,10 @@
               <a href="#weighted-log-volume-measure">weighted log-volume measure</a>,
               <a href="#local-packet-frobenioids">local packet Frobenioids</a>,
               <a href="#local-lgp-monoids-source">local LGP monoids</a>,
+              <a href="#vertically-coric-lgp">vertically coric LGP monoids</a>,
+              <a href="#upper-semi-local-clauses">upper-semi local clauses</a>,
+              <a href="#bad-prime-splitting-compatibility">bad-prime splitting compatibility</a>,
+              <a href="#log-kummer-totality">log-Kummer totality</a>,
               <a href="#log-kummer-correspondence">log-Kummer correspondence</a>,
               <a href="#upper-semi-compatibility">upper semi-compatibility</a>,
               <a href="#packet-normalization">packet log-volume</a>,
@@ -2046,6 +2050,12 @@
               over a vertical column and actions on invariant log-shell data. It is a key
               bridge between Kummer theory and log-link compatibility.
             </p>
+            <p>
+              The correspondence is deliberately not a single Kummer isomorphism: the
+              source statement says such a single isomorphism fails compatibility with
+              the log-links, so one must use the totality of Kummer isomorphisms
+              pre-composed with log-link iterates.
+            </p>
             <div class="tagRow"><span class="tag green">Proposition 3.5</span><span class="tag">Kummer</span></div>
           </div>
           <div class="card" id="kummer-detachment">
@@ -2102,6 +2112,11 @@
               The third indeterminacy supplies an upper-semi comparison rather than
               equality. This directionality is essential for any faithful formalization of
               the Theorem 3.11 to Corollary 3.12 route.
+            </p>
+            <p>
+              In Proposition 3.5 this means containment of images in the vertically coric
+              target modules or balls, after allowing the relevant log-link iterates; it
+              is not a symmetric identification of packet regions.
             </p>
             <div class="tagRow"><span class="tag red">Ind3</span><span class="tag">one-sided</span></div>
           </div>
@@ -5576,6 +5591,11 @@
             <td>Local packet-theoretic Frobenioids and logarithmic Gaussian procession monoids.</td>
             <td>Builds the LGP monoids that act on tensor-packet containers and feed the later log-Kummer correspondence.</td>
           </tr>
+          <tr>
+            <td>Proposition 3.5</td>
+            <td>Vertically coric local LGP monoids and upper semi-compatibility.</td>
+            <td>Replaces a single incompatible Kummer isomorphism by the totality of Kummer isomorphisms pre-composed with vertical log-link iterates.</td>
+          </tr>
         </table>
 
         <div class="grid2">
@@ -5701,6 +5721,115 @@
             </p>
             <div class="tagRow"><span class="tag green">IUT III, Proposition 3.4(ii)</span><span class="tag">LGP</span></div>
           </div>
+          <div class="card" id="vertically-coric-lgp">
+            <h3>Vertically coric LGP monoids</h3>
+            <p>
+              Proposition 3.5(i) fixes a Gaussian log-theta lattice and, for each
+              vertical index <span class="math">n</span>, uses the vertically coric
+              <span class="math">D-Θ±ellNF</span>-Hodge theater to construct local
+              LGP monoids <span class="math">ΨLGP</span> and their realified versions.
+              These are built functorially from the associated
+              <span class="math">F(n,◦D≻)</span> prime-strips and full log-links.
+            </p>
+            <p>
+              For every horizontal index <span class="math">m</span>, Kummer
+              isomorphisms compare the ordinary local LGP monoids in
+              <span class="math">n,m</span> with this vertically coric target in
+              <span class="math">n,◦</span>.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT III, Proposition 3.5(i)</span><span class="tag">vertical coricity</span></div>
+          </div>
+          <div class="card" id="upper-semi-local-clauses">
+            <h3>Upper-semi local clauses</h3>
+            <p>
+              Proposition 3.5(ii) states that the Kummer isomorphisms are upper
+              semi-compatible with the vertical log-links. At nonarchimedean places, the
+              target module contains images obtained directly by Kummer isomorphisms and
+              images obtained after pre-composing these Kummer isomorphisms with positive
+              iterates of the vertical log-links.
+            </p>
+            <p>
+              At archimedean places, the closed unit ball contains images of the unit
+              groups and of closed balls of radius <span class="math">π</span>. The
+              statement uses the fact that the log-link concerns units and that these
+              radius-<span class="math">π</span> balls contain subsets surjecting to the
+              domains on which log-link iterates are defined.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT III, Proposition 3.5(ii)(a),(b)</span><span class="tag red">upper semi</span></div>
+          </div>
+          <div class="card" id="bad-prime-splitting-compatibility">
+            <h3>Bad-prime splitting compatibility</h3>
+            <p>
+              Proposition 3.5(ii)(c), for bad primes and nonzero labels, restricts to the
+              splitting submonoids <span class="math">Ψ⊥</span> and
+              <span class="math">∞Ψ⊥</span>. As <span class="math">m</span> varies, their
+              actions on the rational log-shell modules are mutually compatible relative
+              to the vertical log-links.
+            </p>
+            <p>
+              The only portions possibly related through the log-links are root-of-unity
+              indeterminacies in the domains. Under the log-link these correspond to
+              addition by zero in the next theater, hence to no new indeterminacy there.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT III, Proposition 3.5(ii)(c)</span><span class="tag">bad primes</span></div>
+          </div>
+          <div class="card" id="log-kummer-totality">
+            <h3>Log-Kummer totality</h3>
+            <p>
+              The final paragraph of Proposition 3.5 is explicit: the relevant action is
+              not via one Kummer isomorphism, because such an isomorphism fails to be
+              compatible with the log-links of the Gaussian log-theta lattice. Instead,
+              one uses the totality of Kummer isomorphisms pre-composed with all relevant
+              log-link iterates.
+            </p>
+            <p>
+              This total correspondence acts on the invariant
+              <span class="math">n,◦</span>-labeled rational log-shell container and is
+              the local source of the later Ind3/upper-semi directionality.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT III, Proposition 3.5(ii)</span><span class="tag red">not a single isomorphism</span></div>
+          </div>
+        </div>
+
+        <div class="diagram" aria-label="Proposition 3.5 log-Kummer totality">
+          <div class="diagramHeader">
+            <strong>Proposition 3.5</strong>
+            <span>single Kummer maps are replaced by a total log-Kummer correspondence</span>
+          </div>
+          <svg viewBox="0 0 920 300" role="img">
+            <defs>
+              <marker id="arrowProp35" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="52" y="58" width="168" height="66"></rect>
+            <text class="nodeTitle" x="136" y="84" text-anchor="middle">n,m LGP data</text>
+            <text class="tinyText" x="136" y="104" text-anchor="middle">units and splitting monoids</text>
+
+            <rect class="nodeBox gold" x="282" y="58" width="180" height="66"></rect>
+            <text class="nodeTitle" x="372" y="84" text-anchor="middle">Kummer isomorphisms</text>
+            <text class="tinyText" x="372" y="104" text-anchor="middle">not log-link compatible alone</text>
+
+            <rect class="nodeBox violet" x="528" y="58" width="178" height="66"></rect>
+            <text class="nodeTitle" x="617" y="84" text-anchor="middle">log-link iterates</text>
+            <text class="tinyText" x="617" y="104" text-anchor="middle">pre-composition over column n</text>
+
+            <rect class="nodeBox green" x="754" y="58" width="132" height="66"></rect>
+            <text class="nodeTitle" x="820" y="84" text-anchor="middle">n,◦ IQ</text>
+            <text class="tinyText" x="820" y="104" text-anchor="middle">vertical invariant target</text>
+
+            <path d="M220 91 H280" stroke="#315b8f" stroke-width="1.5" fill="none" marker-end="url(#arrowProp35)"></path>
+            <path d="M462 91 H526" stroke="#8b6b24" stroke-width="1.5" fill="none" marker-end="url(#arrowProp35)"></path>
+            <path d="M706 91 H752" stroke="#66508a" stroke-width="1.5" fill="none" marker-end="url(#arrowProp35)"></path>
+
+            <rect class="nodeBox red" x="256" y="194" width="408" height="56"></rect>
+            <text class="nodeTitle" x="460" y="218" text-anchor="middle">upper semi-compatible containment</text>
+            <text class="tinyText" x="460" y="238" text-anchor="middle">nonarchimedean, archimedean, and bad-prime clauses</text>
+
+            <path d="M372 126 C370 154 412 166 440 191" stroke="#9a3f35" stroke-width="1.4" fill="none" marker-end="url(#arrowProp35)"></path>
+            <path d="M617 126 C614 154 536 166 480 191" stroke="#9a3f35" stroke-width="1.4" fill="none" marker-end="url(#arrowProp35)"></path>
+            <path d="M664 222 C720 212 774 182 810 127" stroke="#2f6b4f" stroke-width="1.4" fill="none" marker-end="url(#arrowProp35)"></path>
+          </svg>
         </div>
 
         <div class="grid2">
