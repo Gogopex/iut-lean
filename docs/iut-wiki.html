@@ -854,6 +854,17 @@
         <a href="#two-torsion-translates-ii24">Two-torsion translates 2.4</a>
         <a href="#theta-evaluation-orbits-ii25">Theta evaluation orbits 2.5</a>
         <a href="#square-weight-exponent-ii251">Square-weight exponent 2.5.1</a>
+        <a href="#independent-conjugacy-ii252">Independent conjugacy 2.5.2</a>
+        <a href="#subgraph-splittings-zero-label-ii26">Zero-label splittings 2.6</a>
+        <a href="#conjugate-synchronization-single-basepoint-ii261">Conjugate synchronization 2.6.1</a>
+        <a href="#theta-plusminus-basepoint-compatibility-ii262">Theta±ell basepoint 2.6.2</a>
+        <a href="#distinguished-subgraph-criterion-ii263">Subgraph criterion 2.6.3</a>
+        <a href="#mono-theta-projective-system-ii27">MTheta projective system 2.7</a>
+        <a href="#mono-theta-evaluation-env-ii28">MTheta evaluation 2.8</a>
+        <a href="#mono-theta-frobenioid-significance-ii282">MTheta Frobenioid route 2.8.2</a>
+        <a href="#archimedean-discrete-rigidity-ii283">Discrete rigidity 2.8.3</a>
+        <a href="#base-field-cyclotome-evaluation-ii29">Base-field cyclotomes 2.9</a>
+        <a href="#uniradial-price-logshell-repair-ii291">Uniradial price 2.9.1</a>
         <a href="#tempered-covering-ladder-ii21-22">Tempered covering ladder 2.1-2.2</a>
         <a href="#signed-cusp-labels-ii23">Signed cusp labels 2.3</a>
         <a href="#theta-evaluation-orbits-ii24-26">Theta evaluation orbits 2.4-2.6</a>
@@ -25288,6 +25299,604 @@
           Related: <a href="#theta-evaluation-orbits-ii25">theta evaluation orbits</a>
           <a href="#gaussian-value-profiles-ii35">Gaussian value profiles</a>
           <a href="#iut-iv-local-log-volume-estimates-11-15">log-volume estimates</a>
+        </div>
+      </section>
+
+      <section id="independent-conjugacy-ii252">
+        <h2>IUT II Remark 2.5.2: Independent Conjugacy</h2>
+        <p class="lede">
+          Remark 2.5.2 explains why the conjugacy indeterminacies acting on cusp
+          inertia groups and on the subgraph groups are independent. Both live in a
+          common ambient container, but their horizontal translation actions are not
+          synchronized.
+        </p>
+        <div class="diagram fit" aria-label="Independent conjugacy indeterminacies in IUT II Remark 2.5.2">
+          <div class="diagramHeader">
+            <strong>Two unsynchronized translation lines</strong>
+            <span>Figure 2.1 and Remark 2.5.2</span>
+          </div>
+          <svg viewBox="0 0 1040 420" role="img">
+            <defs>
+              <marker id="arrowIndConj252" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <text class="nodeTitle" x="150" y="78" text-anchor="middle">conjugates of I_t</text>
+            <line x1="220" y1="104" x2="900" y2="104" class="edge gold"></line>
+            <circle class="dot gold" cx="270" cy="104" r="10"></circle>
+            <circle class="dot gold" cx="390" cy="104" r="10"></circle>
+            <circle class="dot gold" cx="510" cy="104" r="10"></circle>
+            <circle class="dot gold" cx="630" cy="104" r="10"></circle>
+            <circle class="dot gold" cx="750" cy="104" r="10"></circle>
+            <circle class="dot gold" cx="870" cy="104" r="10"></circle>
+            <path d="M900 104 H948" class="edge gold" marker-end="url(#arrowIndConj252)"></path>
+
+            <text class="nodeTitle" x="164" y="242" text-anchor="middle">conjugates of Pi_vdd</text>
+            <line x1="220" y1="272" x2="900" y2="272" class="edge blue"></line>
+            <circle class="dot blue" cx="250" cy="272" r="10"></circle>
+            <circle class="dot blue" cx="370" cy="272" r="10"></circle>
+            <circle class="dot blue" cx="490" cy="272" r="10"></circle>
+            <circle class="dot blue" cx="610" cy="272" r="10"></circle>
+            <circle class="dot blue" cx="730" cy="272" r="10"></circle>
+            <circle class="dot blue" cx="850" cy="272" r="10"></circle>
+            <path d="M900 272 H948" class="edge blue" marker-end="url(#arrowIndConj252)"></path>
+
+            <path d="M510 116 C508 160 490 200 490 260" class="edge violet" marker-end="url(#arrowIndConj252)"></path>
+            <path d="M510 116 C550 164 598 204 610 260" class="edge red" marker-end="url(#arrowIndConj252)"></path>
+            <text class="tinyText" x="558" y="196" text-anchor="middle">no synchronized left/right choice</text>
+            <rect class="nodeBox green" x="350" y="332" width="340" height="58"></rect>
+            <text class="nodeTitle" x="520" y="356" text-anchor="middle">single ambient container Pi_v±</text>
+            <text class="tinyText" x="520" y="376" text-anchor="middle">nested Galois evaluation, nonnormal subgroups</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Remark part</th><th>Content</th><th>Modeling consequence</th></tr>
+          <tr>
+            <td>2.5.2(i)</td>
+            <td>
+              Inclusions <span class="math">I_t^gamma -> Pi_vdd^gamma</span> are
+              interpreted as morphisms between quotient-like families inside one
+              ambient container.
+            </td>
+            <td>Record both families, not just the resulting theta orbit.</td>
+          </tr>
+          <tr>
+            <td>2.5.2(ii)-(iii)</td>
+            <td>
+              The global bridge <span class="math">Delta^±</span> relates local labels to
+              global data, while <span class="math">Pi_vdd</span> does not globalize over
+              multiple places.
+            </td>
+            <td>Do not identify local subgraph conjugacy with global label conjugacy.</td>
+          </tr>
+          <tr>
+            <td>2.5.2(iv)</td>
+            <td>Figure 2.1 visualizes two independent translation actions.</td>
+            <td>This is the diagrammatic source of the “no synchronized separator” warning.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 2.5.2</a>
+          Related: <a href="#theta-evaluation-orbits-ii25">theta evaluation orbits</a>
+          <a href="#conjugate-synchronization-single-basepoint-ii261">conjugate synchronization</a>
+          <a href="#distinguished-subgraph-criterion-ii263">subgraph criterion</a>
+        </div>
+      </section>
+
+      <section id="subgraph-splittings-zero-label-ii26">
+        <h2>IUT II Corollary 2.6: Zero-Label Splittings</h2>
+        <p class="lede">
+          Corollary 2.6 extends the <span class="math">M_TM^x</span> construction to the
+          subgraph group and records the splitting that occurs at the zero-labeled
+          evaluation point. This is the place where the zero label connects the theta
+          evaluation algorithm back to constant-multiple rigidity.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Part</th><th>Construction</th><th>Role</th></tr>
+          <tr>
+            <td>2.6(i)</td>
+            <td>
+              Defines <span class="math">M_TM^x(Pi_vdd^gamma)</span> and its products
+              with <span class="math">theta_iota</span> and
+              <span class="math">infty theta_iota</span> after restriction to the
+              subgraph group.
+            </td>
+            <td>Transfers the mono-theta multiplicative module package to the evaluation domain.</td>
+          </tr>
+          <tr>
+            <td>2.6(ii)</td>
+            <td>
+              When <span class="math">t = 0</span>, the theta-value orbit is the orbit of
+              the identity element; after quotienting by torsion, restriction to
+              <span class="math">D_t,mu-</span> gives splittings.
+            </td>
+            <td>
+              Supplies the zero-label comparison used in Remark 2.6.2 and later
+              Gaussian constructions.
+            </td>
+          </tr>
+        </table>
+        <div class="callout violet">
+          Precision point: Corollary 2.6 is not a general splitting for arbitrary labels.
+          The splitting statement is attached to the zero-labeled evaluation point after
+          quotienting by the torsion submodule.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 2.6</a>
+          Related: <a href="#constant-multiple-rigidity-ii112">constant-multiple rigidity</a>
+          <a href="#theta-plusminus-basepoint-compatibility-ii262">Theta±ell basepoint</a>
+        </div>
+      </section>
+
+      <section id="conjugate-synchronization-single-basepoint-ii261">
+        <h2>IUT II Remark 2.6.1: Conjugate Synchronization</h2>
+        <p class="lede">
+          Remark 2.6.1 names conjugate synchronization: all label-indexed theta values
+          are computed relative to the same copy of
+          <span class="math">G_v(Pi_vdd^gamma)</span> and the same cyclotome
+          <span class="math">l·DeltaTheta(Pi_vdd^gamma)</span>. This is what permits
+          simultaneous Kummer theory.
+        </p>
+        <div class="diagram fit" aria-label="Conjugate synchronization in IUT II Remark 2.6.1">
+          <div class="diagramHeader">
+            <strong>One Galois group, one cyclotome, many theta values</strong>
+            <span>Remark 2.6.1</span>
+          </div>
+          <svg viewBox="0 0 1040 430" role="img">
+            <defs>
+              <marker id="arrowConjSync261" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="350" y="62" width="340" height="78"></rect>
+            <text class="nodeTitle" x="520" y="92" text-anchor="middle">single basepoint Pi_vdd^gamma</text>
+            <text class="tinyText" x="520" y="116" text-anchor="middle">connected subgraph Gamma_X</text>
+
+            <rect class="nodeBox green" x="126" y="218" width="250" height="82"></rect>
+            <text class="nodeTitle" x="251" y="249" text-anchor="middle">G_v(Pi_vdd^gamma)</text>
+            <text class="tinyText" x="251" y="274" text-anchor="middle">one Galois group</text>
+            <rect class="nodeBox gold" x="395" y="218" width="250" height="82"></rect>
+            <text class="nodeTitle" x="520" y="249" text-anchor="middle">l·DeltaTheta</text>
+            <text class="tinyText" x="520" y="274" text-anchor="middle">one cyclotome</text>
+            <rect class="nodeBox violet" x="664" y="218" width="250" height="82"></rect>
+            <text class="nodeTitle" x="789" y="249" text-anchor="middle">theta_|t| collection</text>
+            <text class="tinyText" x="789" y="274" text-anchor="middle">all |t| in |F_l|</text>
+
+            <rect class="nodeBox red" x="342" y="342" width="356" height="58"></rect>
+            <text class="nodeTitle" x="520" y="366" text-anchor="middle">simultaneous N-th root extraction</text>
+            <text class="tinyText" x="520" y="386" text-anchor="middle">Kummer theory compatible with base field</text>
+
+            <path d="M470 142 C416 172 328 188 264 216" class="edge blue" marker-end="url(#arrowConjSync261)"></path>
+            <path d="M520 142 V216" class="edge gold" marker-end="url(#arrowConjSync261)"></path>
+            <path d="M570 142 C630 174 724 188 780 216" class="edge violet" marker-end="url(#arrowConjSync261)"></path>
+            <path d="M251 302 C300 332 390 336 502 340" class="edge green" marker-end="url(#arrowConjSync261)"></path>
+            <path d="M789 302 C740 332 650 336 538 340" class="edge violet" marker-end="url(#arrowConjSync261)"></path>
+          </svg>
+        </div>
+        <div class="callout green">
+          The point is not that there are no indeterminacies. The point is that the
+          theta values for all labels are represented in one Kummer-theoretic ambient
+          setting, rather than in unrelated copies of the base-field Galois data.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 2.6.1</a>
+          Related: <a href="#section2-single-basepoint-setup">single basepoint setup</a>
+          <a href="#independent-conjugacy-ii252">independent conjugacy</a>
+          <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioids</a>
+        </div>
+      </section>
+
+      <section id="theta-plusminus-basepoint-compatibility-ii262">
+        <h2>IUT II Remark 2.6.2: Theta±ell Basepoint Compatibility</h2>
+        <p class="lede">
+          Remark 2.6.2 relates conjugate synchronization to the
+          D-Theta±ell-Hodge theaters of IUT I. The single basepoint used for the
+          theta-evaluation algorithm is compatible with the label synchronization
+          behind the <span class="math">F_l^±</span>-symmetry.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Compatible symmetry</h3>
+            <p>
+              The local group <span class="math">Pi_v</span>, its signed commensurator
+              <span class="math">Pi_v^±</span>, and the
+              <span class="math">Delta_v^cor/Delta_v^± -> F_l^±</span> action are read
+              through the D-Theta±ell theater.
+            </p>
+            <div class="tagRow"><span class="tag green">2.6.2(i)</span><span class="tag">F_l^±</span></div>
+          </div>
+          <div class="card">
+            <h3>Incompatible symmetry</h3>
+            <p>
+              The plain <span class="math">F_l</span>-symmetry of D-ThetaNF theaters
+              involves permuting multiple local copies and forces label crushing if one
+              tries to identify them directly.
+            </p>
+            <div class="tagRow"><span class="tag red">2.6.2(ii)</span><span class="tag">label crushing</span></div>
+          </div>
+          <div class="card">
+            <h3>Zero-label comparison</h3>
+            <p>
+              The <span class="math">F_l^±</span>-symmetry allows comparison with label
+              zero, hence with the unit terms appearing in the Corollary 1.12
+              splittings.
+            </p>
+            <div class="tagRow"><span class="tag violet">2.6.2(iii)</span><span class="tag">zero label</span></div>
+          </div>
+          <div class="card">
+            <h3>Formalization cue</h3>
+            <p>
+              A model should distinguish the additive signed symmetry used here from
+              the unsigned symmetry that appears in D-ThetaNF contexts.
+            </p>
+            <div class="tagRow"><span class="tag blue">audit</span><span class="tag">symmetry type</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 2.6.2</a>
+          Related: <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges</a>
+          <a href="#subgraph-splittings-zero-label-ii26">zero-label splittings</a>
+          <a href="#additive-labels-61">additive labels</a>
+        </div>
+      </section>
+
+      <section id="distinguished-subgraph-criterion-ii263">
+        <h2>IUT II Remark 2.6.3: Distinguished Subgraph Criterion</h2>
+        <p class="lede">
+          Remark 2.6.3 explains why the chosen subgraph is not arbitrary. Connectedness,
+          the zero label, independent conjugacy, a square-average maximization, and
+          product-formula compatibility all point back to the distinguished graph
+          <span class="math">Gamma_Ydd</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Condition</th><th>Source</th><th>Effect</th></tr>
+          <tr>
+            <td>Connectedness</td>
+            <td>Remark 2.6.3(i), using Remark 2.6.1</td>
+            <td>The alternative subgraph <span class="math">Gamma'</span> must be connected.</td>
+          </tr>
+          <tr>
+            <td>Zero vertex</td>
+            <td>Remark 2.6.3(i), using Corollary 2.6(ii)</td>
+            <td>The subgraph must contain label <span class="math">0</span>.</td>
+          </tr>
+          <tr>
+            <td>Fiber restriction</td>
+            <td>Remark 2.6.3(ii), using Remark 2.5.2</td>
+            <td>
+              One cannot restrict to one representative of a fiber over
+              <span class="math">|F_l|</span> without the other representatives in that fiber.
+            </td>
+          </tr>
+          <tr>
+            <td>Average maximization</td>
+            <td>Remark 2.6.3(ii)-(iii)</td>
+            <td>
+              The quantity <span class="math">||Gamma'||</span> reaches its relevant
+              maximum at the distinguished size.
+            </td>
+          </tr>
+          <tr>
+            <td>Product formula</td>
+            <td>Remark 2.6.3(iv)-(v)</td>
+            <td>
+              Multiple representatives in a fiber are incompatible with the later
+              globalization by product formula.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 2.6.3</a>
+          Related: <a href="#iut-ii-distinguished-subgraph-263">distinguished subgraph overview</a>
+          <a href="#square-weight-exponent-ii251">square-weight exponent</a>
+          <a href="#global-gaussian-frobenioids-ii45">global Gaussian Frobenioids</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-projective-system-ii27">
+        <h2>IUT II Definition 2.7: Mono-Theta Projective System</h2>
+        <p class="lede">
+          Definition 2.7 introduces a projective system of mono-theta environments
+          <span class="math">MTheta_*</span> whose associated
+          <span class="math">Pi_X(MTheta_*)</span> is identified with
+          <span class="math">Pi_v</span>. It then pulls the Section 2 subgraph groups
+          into the mono-theta environment.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Part</th><th>Definition</th><th>Use in Corollary 2.8</th></tr>
+          <tr>
+            <td>2.7(i)</td>
+            <td>
+              Defines <span class="math">Pi_MTheta*</span> as the inverse limit of the
+              induced topological groups. Its kernel over
+              <span class="math">Pi_X(MTheta_*)</span> is the exterior cyclotome
+              <span class="math">Pi_mu(MTheta_*)</span>.
+            </td>
+            <td>Supplies the mono-theta cyclotome container.</td>
+          </tr>
+          <tr>
+            <td>2.7(ii)</td>
+            <td>
+              Defines inverse images of
+              <span class="math">Pi_vdd subset Pi_vbar subset Pi_v</span> and the
+              subquotients <span class="math">Pi_mu</span>,
+              <span class="math">l·DeltaTheta</span>, <span class="math">Pi_vdd</span>,
+              and <span class="math">G_v</span>.
+            </td>
+            <td>
+              Allows cyclotomic rigidity to replace
+              <span class="math">l·DeltaTheta</span> by
+              <span class="math">Pi_mu</span> on the subgraph.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Definition 2.7</a>
+          Related: <a href="#projective-mono-theta-systems-ii15">projective MTheta systems</a>
+          <a href="#theta-env-kummer-package-ii15">Theta_env package</a>
+          <a href="#mono-theta-evaluation-env-ii28">MTheta evaluation</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-evaluation-env-ii28">
+        <h2>IUT II Corollary 2.8: Mono-Theta Evaluation</h2>
+        <p class="lede">
+          Corollary 2.8 repeats the theta-evaluation algorithm after using the
+          mono-theta cyclotomic rigidity isomorphism to replace
+          <span class="math">l·DeltaTheta</span> by the exterior cyclotome
+          <span class="math">Pi_mu</span>. This is the multiradial route out of Section 2.
+        </p>
+        <div class="diagram fit" aria-label="Mono-theta theta evaluation in IUT II Corollary 2.8">
+          <div class="diagramHeader">
+            <strong>Replace the cyclotome, keep the evaluation pattern</strong>
+            <span>Definition 2.7 and Corollary 2.8</span>
+          </div>
+          <svg viewBox="0 0 1040 400" role="img">
+            <defs>
+              <marker id="arrowMTheta28" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="82" y="80" width="250" height="84"></rect>
+            <text class="nodeTitle" x="207" y="112" text-anchor="middle">MTheta_* projective system</text>
+            <text class="tinyText" x="207" y="138" text-anchor="middle">Pi_X(MTheta_*) = Pi_v</text>
+            <rect class="nodeBox green" x="395" y="80" width="250" height="84"></rect>
+            <text class="nodeTitle" x="520" y="112" text-anchor="middle">l·DeltaTheta -> Pi_mu</text>
+            <text class="tinyText" x="520" y="138" text-anchor="middle">mono-theta cyclotomic rigidity</text>
+            <rect class="nodeBox violet" x="708" y="80" width="250" height="84"></rect>
+            <text class="nodeTitle" x="833" y="112" text-anchor="middle">theta_env,|t|</text>
+            <text class="tinyText" x="833" y="138" text-anchor="middle">orbits indexed by |F_l|</text>
+
+            <rect class="nodeBox gold" x="232" y="270" width="250" height="76"></rect>
+            <text class="nodeTitle" x="357" y="300" text-anchor="middle">independent conjugacy</text>
+            <text class="tinyText" x="357" y="324" text-anchor="middle">same compatibility as Cor. 2.5</text>
+            <rect class="nodeBox red" x="558" y="270" width="250" height="76"></rect>
+            <text class="nodeTitle" x="683" y="300" text-anchor="middle">zero-label splitting</text>
+            <text class="tinyText" x="683" y="324" text-anchor="middle">transport of Cor. 2.6(ii)</text>
+
+            <path d="M334 122 H393" class="edge blue" marker-end="url(#arrowMTheta28)"></path>
+            <path d="M647 122 H706" class="edge green" marker-end="url(#arrowMTheta28)"></path>
+            <path d="M833 166 C776 220 668 238 548 268" class="edge violet" marker-end="url(#arrowMTheta28)"></path>
+            <path d="M520 166 C470 216 410 238 365 268" class="edge gold" marker-end="url(#arrowMTheta28)"></path>
+            <path d="M484 308 H556" class="edge red" marker-end="url(#arrowMTheta28)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Part</th><th>Corollary 2.8 content</th><th>Consequence</th></tr>
+          <tr>
+            <td>(i)</td>
+            <td>Restricts the mono-theta theta classes to subgraphs and evaluation points.</td>
+            <td>Produces <span class="math">theta_env,|t|</span> and <span class="math">infty theta_env,|t|</span>.</td>
+          </tr>
+          <tr>
+            <td>(ii)</td>
+            <td>Packages the construction as a functorial algorithm in <span class="math">MTheta_*</span>.</td>
+            <td>Maintains independent conjugacy compatibility.</td>
+          </tr>
+          <tr>
+            <td>(iii)</td>
+            <td>Transports the zero-label splitting of Corollary 2.6.</td>
+            <td>Connects mono-theta evaluation to the later Gaussian splitting data.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 2.8</a>
+          Related: <a href="#mono-theta-projective-system-ii27">MTheta projective system</a>
+          <a href="#mono-theta-frobenioid-significance-ii282">Frobenioid route</a>
+          <a href="#base-field-cyclotome-evaluation-ii29">base-field cyclotomes</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-frobenioid-significance-ii282">
+        <h2>IUT II Remark 2.8.2: Frobenioid Significance of Mono-Theta Evaluation</h2>
+        <p class="lede">
+          Remark 2.8.2 explains why Corollary 2.8 is not just a notational variant of
+          Corollary 2.5. The mono-theta version connects group-theoretic theta
+          evaluation to Frobenioid-theoretic theta functions associated to tempered
+          Frobenioids.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Special case</h3>
+            <p>
+              Remark 2.8.1 says Corollaries 2.5 and 2.6 are recovered when the
+              projective mono-theta system is obtained from <span class="math">Pi_v</span>
+              by the algorithm of Proposition 1.2.
+            </p>
+            <div class="tagRow"><span class="tag blue">Rem. 2.8.1</span><span class="tag">specialization</span></div>
+          </div>
+          <div class="card">
+            <h3>Frobenioid route</h3>
+            <p>
+              Remark 2.8.2 says the value of Corollary 2.8 is that it relates the
+              Section 2 evaluation theory to Frobenioid-theoretic theta functions and
+              Frobenioid cyclotomes.
+            </p>
+            <div class="tagRow"><span class="tag green">Rem. 2.8.2</span><span class="tag">Frobenioid</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remarks 2.8.1-2.8.2</a>
+          Related: <a href="#tempered-gaussian-monoids-ii3">tempered Gaussian monoids</a>
+          <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioid categories</a>
+          <a href="#collas-category-perspective">Collas category view</a>
+        </div>
+      </section>
+
+      <section id="archimedean-discrete-rigidity-ii283">
+        <h2>IUT II Remark 2.8.3: Archimedean Segment and Discrete Rigidity</h2>
+        <p class="lede">
+          Remark 2.8.3 interprets the finite archimedean line segment
+          <span class="math">Gamma_X</span> as selecting integer representatives
+          <span class="math">-l,...,l</span> of congruence classes modulo
+          <span class="math">l</span>. Mochizuki relates this selection to discrete
+          rigidity and to cyclotomic rigidity.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Remark part</th><th>Content</th><th>Downstream role</th></tr>
+          <tr>
+            <td>2.8.3(i)</td>
+            <td>
+              The archimedean line segment singles out integer representatives with
+              absolute value at most <span class="math">l</span>.
+            </td>
+            <td>Explains why the value profile is not merely a residue-class list.</td>
+          </tr>
+          <tr>
+            <td>2.8.3(ii)</td>
+            <td>
+              The argument depends on discreteness of <span class="math">Z</span> and
+              on the square map modulo the <span class="math">{±1}</span> action.
+            </td>
+            <td>Links the square-weighted profile to discrete and cyclotomic rigidity.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 2.8.3</a>
+          Related: <a href="#dual-graph-subgraphs-ii211">dual graph subgraphs</a>
+          <a href="#square-weight-exponent-ii251">square-weight exponent</a>
+          <a href="#mono-theta-cyclotomic-compatibility-ii13">cyclotomic compatibility</a>
+        </div>
+      </section>
+
+      <section id="base-field-cyclotome-evaluation-ii29">
+        <h2>IUT II Corollary 2.9: Base-Field Cyclotome Evaluation</h2>
+        <p class="lede">
+          Corollary 2.9 repeats the theta-evaluation construction using base-field
+          cyclotomes <span class="math">mu_Z(G_v(-))</span> instead of the mono-theta
+          exterior cyclotome <span class="math">Pi_mu</span>. The pattern is parallel to
+          Corollary 2.8, but the radiality status is different.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Part</th><th>Construction</th><th>Output</th></tr>
+          <tr>
+            <td>(i)</td>
+            <td>
+              Applies base-field cyclotomic rigidity to replace
+              <span class="math">l·DeltaTheta</span> by
+              <span class="math">mu_Z(G_v(-))</span>, then restricts to subgraphs and
+              evaluation groups.
+            </td>
+            <td>Produces <span class="math">theta_bs,|t|</span> and <span class="math">infty theta_bs,|t|</span>.</td>
+          </tr>
+          <tr>
+            <td>(ii)</td>
+            <td>Packages the construction as a functorial group-theoretic algorithm in <span class="math">Pi_v</span>.</td>
+            <td>Maintains the independent conjugacy actions from Corollary 2.5.</td>
+          </tr>
+          <tr>
+            <td>(iii)</td>
+            <td>Transports the zero-label splitting using the base-field cyclotome notation.</td>
+            <td>Gives the base-field analogue of the Corollary 2.8 splitting.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 2.9</a>
+          Related: <a href="#mono-theta-evaluation-env-ii28">MTheta evaluation</a>
+          <a href="#uniradial-price-logshell-repair-ii291">uniradial price</a>
+        </div>
+      </section>
+
+      <section id="uniradial-price-logshell-repair-ii291">
+        <h2>IUT II Remark 2.9.1: Uniradial Price and Log-Shell Repair</h2>
+        <p class="lede">
+          Remark 2.9.1 records the tradeoff between the mono-theta cyclotome route and
+          the base-field cyclotome route. The mono-theta route is multiradial; the
+          base-field route gives useful maps to <span class="math">Z</span> but is only
+          uniradial until the log-shell modifications developed in IUT III.
+        </p>
+        <div class="diagram fit" aria-label="Mono-theta and base-field cyclotome route comparison">
+          <div class="diagramHeader">
+            <strong>Two cyclotome routes, different radiality</strong>
+            <span>Remark 2.9.1</span>
+          </div>
+          <svg viewBox="0 0 1040 390" role="img">
+            <defs>
+              <marker id="arrowUniradial291" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="84" y="88" width="260" height="92"></rect>
+            <text class="nodeTitle" x="214" y="120" text-anchor="middle">Pi_mu route</text>
+            <text class="tinyText" x="214" y="145" text-anchor="middle">Corollary 2.8</text>
+            <text class="tinyText" x="214" y="164" text-anchor="middle">multiradial formulation</text>
+            <rect class="nodeBox gold" x="390" y="88" width="260" height="92"></rect>
+            <text class="nodeTitle" x="520" y="120" text-anchor="middle">mu_Z(G_v) route</text>
+            <text class="tinyText" x="520" y="145" text-anchor="middle">Corollary 2.9</text>
+            <text class="tinyText" x="520" y="164" text-anchor="middle">uniradial, but maps to Z</text>
+            <rect class="nodeBox violet" x="696" y="88" width="260" height="92"></rect>
+            <text class="nodeTitle" x="826" y="120" text-anchor="middle">log-shell modification</text>
+            <text class="tinyText" x="826" y="145" text-anchor="middle">IUT III</text>
+            <text class="tinyText" x="826" y="164" text-anchor="middle">multiradial with mild indeterminacy</text>
+
+            <rect class="nodeBox green" x="234" y="270" width="260" height="72"></rect>
+            <text class="nodeTitle" x="364" y="299" text-anchor="middle">cyclotomic rigidity kept</text>
+            <text class="tinyText" x="364" y="322" text-anchor="middle">do not sacrifice the rigidity datum</text>
+            <rect class="nodeBox red" x="548" y="270" width="260" height="72"></rect>
+            <text class="nodeTitle" x="678" y="299" text-anchor="middle">radiality repaired later</text>
+            <text class="tinyText" x="678" y="322" text-anchor="middle">not by ignoring the distinction</text>
+
+            <path d="M346 134 H388" class="edge blue" marker-end="url(#arrowUniradial291)"></path>
+            <path d="M652 134 H694" class="edge gold" marker-end="url(#arrowUniradial291)"></path>
+            <path d="M520 182 C486 222 420 244 370 268" class="edge green" marker-end="url(#arrowUniradial291)"></path>
+            <path d="M826 182 C804 224 734 246 686 268" class="edge violet" marker-end="url(#arrowUniradial291)"></path>
+            <path d="M496 306 H546" class="edge red" marker-end="url(#arrowUniradial291)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Remark part</th><th>Claim</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>2.9.1(i)</td>
+            <td>
+              <span class="math">Pi_mu</span> admits a multiradial formulation, whereas
+              <span class="math">mu_Z(G_v)</span> is only uniradial unless one gives up
+              the cyclotomic rigidity in question.
+            </td>
+            <td>Keep the two routes separate.</td>
+          </tr>
+          <tr>
+            <td>2.9.1(ii)</td>
+            <td>
+              The base-field cyclotome route allows use of the natural surjection from
+              <span class="math">H^1(G_v, mu_Z(G_v))</span> to
+              <span class="math">Z</span>.
+            </td>
+            <td>It is useful, but not a replacement for the multiradial route.</td>
+          </tr>
+          <tr>
+            <td>2.9.1(iii)</td>
+            <td>
+              IUT III log-shell theory modifies the algorithms to obtain manifestly
+              multiradial functors, with relatively mild indeterminacies.
+            </td>
+            <td>This is a bridge into the log-link/log-shell pages.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 2.9.1</a>
+          Related: <a href="#base-field-cyclotome-evaluation-ii29">base-field cyclotomes</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#conjugate-synchronization-logwall-ii383">synchronization/log-wall</a>
         </div>
       </section>
 
