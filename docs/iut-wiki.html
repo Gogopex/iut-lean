@@ -566,6 +566,7 @@
         <a href="#vertically-coric-lgp-iii35">Vertically coric LGP 3.5</a>
         <a href="#global-packet-frobenioids-iii36-38">Global packets 3.6-3.8</a>
         <a href="#lgp-lgp-log-theta-lattice-iii38">LGP/lgp lattice 3.8</a>
+        <a href="#packet-procession-log-volume-iii39">Packet log-volume 3.9</a>
         <a href="#tensor-log-volume-corridor">Tensor/log-volume corridor</a>
         <a href="#corollary-312">Corollary 3.12 corridor</a>
         <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
@@ -1649,6 +1650,9 @@
               <a href="#theta-q-pilot-objects-38">theta/q pilot objects</a>,
               <a href="#lgp-lgp-log-theta-lattice-iii38">LGP/lgp log-theta lattice source page</a>,
               <a href="#log-shells-alone-not-enough-38">log-shells alone are not enough</a>,
+              <a href="#packet-procession-log-volume-iii39">packet log-volume source page</a>,
+              <a href="#forced-procession-average-39">forced procession average</a>,
+              <a href="#realified-semisimplification-39">realified semi-simplification</a>,
               <a href="#local-packet-frobenioids">local packet Frobenioids</a>,
               <a href="#local-lgp-monoids-source">local LGP monoids</a>,
               <a href="#vertically-coric-lgp">vertically coric LGP monoids</a>,
@@ -17109,6 +17113,279 @@
           <a href="#theta-q-pilot-objects-38">theta/q pilot objects</a>
           <a href="#lgp-gaussian-log-theta-lattice">LGP Gaussian log-theta lattice</a>
           <a href="#log-shells-not-enough">log-shells warning</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="packet-procession-log-volume-iii39">
+        <h2>Packet and Procession Log-Volumes in IUT III 3.9</h2>
+        <p class="lede">
+          Proposition 3.9 defines the log-volume layer for the tensor-packet and
+          LGP/lgp constructions. It fixes local packet normalizations, transfers them to
+          mono-analytic log-shell packets, forms global sums, and records compatibility
+          with vertical log-links. The following remarks explain why the procession
+          average is forced and why the result must remain real-valued, not valued
+          modulo a dilation period.
+        </p>
+        <div class="diagram fit" aria-label="IUT III Proposition 3.9 packet and procession log-volumes">
+          <div class="diagramHeader">
+            <strong>Proposition 3.9</strong>
+            <span>local packets, mono-analytic transfer, global sum, and log-link compatibility</span>
+          </div>
+          <svg viewBox="0 0 1120 650" role="img">
+            <defs>
+              <marker id="arrowLogVol39" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="62" y="66" width="230" height="86"></rect>
+            <text class="nodeTitle" x="177" y="96" text-anchor="middle">local holomorphic packets</text>
+            <text class="tinyText" x="177" y="120" text-anchor="middle">IQ(alpha F), IQ(AF), IQ(A,alpha F)</text>
+            <text class="tinyText" x="177" y="138" text-anchor="middle">integral structures have volume 0</text>
+
+            <rect class="nodeBox green" x="444" y="66" width="230" height="86"></rect>
+            <text class="nodeTitle" x="559" y="96" text-anchor="middle">packet normalization</text>
+            <text class="tinyText" x="559" y="120" text-anchor="middle">nonarch: multiply by p_v adds -log(p_v)</text>
+            <text class="tinyText" x="559" y="138" text-anchor="middle">arch: multiply by e adds 1</text>
+
+            <rect class="nodeBox gold" x="826" y="66" width="230" height="86"></rect>
+            <text class="nodeTitle" x="941" y="96" text-anchor="middle">procession average</text>
+            <text class="tinyText" x="941" y="120" text-anchor="middle">products over capsules</text>
+            <text class="tinyText" x="941" y="138" text-anchor="middle">equal weights forced by inclusions</text>
+
+            <rect class="nodeBox violet" x="128" y="282" width="260" height="92"></rect>
+            <text class="nodeTitle" x="258" y="312" text-anchor="middle">mono-analytic packets</text>
+            <text class="tinyText" x="258" y="336" text-anchor="middle">D⊢ and F⊢×mu log-shells</text>
+            <text class="tinyText" x="258" y="354" text-anchor="middle">discrepancy adjusted from theta data</text>
+
+            <rect class="nodeBox blue" x="484" y="282" width="260" height="92"></rect>
+            <text class="nodeTitle" x="614" y="312" text-anchor="middle">global log-volume</text>
+            <text class="tinyText" x="614" y="336" text-anchor="middle">sum over v_Q, finite support</text>
+            <text class="tinyText" x="614" y="354" text-anchor="middle">degree of fractional-ideal object</text>
+
+            <rect class="nodeBox red" x="780" y="282" width="260" height="92"></rect>
+            <text class="nodeTitle" x="910" y="312" text-anchor="middle">vertical log-link compatibility</text>
+            <text class="tinyText" x="910" y="336" text-anchor="middle">Q-spans of log-shells</text>
+            <text class="tinyText" x="910" y="354" text-anchor="middle">LGP/lgp objects across n,m-1 -> n,m</text>
+
+            <rect class="nodeBox green" x="268" y="492" width="260" height="92"></rect>
+            <text class="nodeTitle" x="398" y="522" text-anchor="middle">realified semi-simplification</text>
+            <text class="tinyText" x="398" y="546" text-anchor="middle">measure spaces -> Rss -> R_>=0</text>
+            <text class="tinyText" x="398" y="564" text-anchor="middle">compatibility with log-volume maps</text>
+
+            <rect class="nodeBox gold" x="628" y="492" width="260" height="92"></rect>
+            <text class="nodeTitle" x="758" y="522" text-anchor="middle">no period ambiguity</text>
+            <text class="tinyText" x="758" y="546" text-anchor="middle">not R / Z log(lambda)</text>
+            <text class="tinyText" x="758" y="564" text-anchor="middle">needed for Corollary 3.12 estimates</text>
+
+            <path d="M294 109 H442" class="edge blue" marker-end="url(#arrowLogVol39)"></path>
+            <path d="M676 109 H824" class="edge green" marker-end="url(#arrowLogVol39)"></path>
+            <path d="M558 154 C520 220 346 238 274 280" class="edge violet" marker-end="url(#arrowLogVol39)"></path>
+            <path d="M390 328 H482" class="edge blue" marker-end="url(#arrowLogVol39)"></path>
+            <path d="M746 328 H778" class="edge red" marker-end="url(#arrowLogVol39)"></path>
+            <path d="M910 376 C844 440 560 438 414 490" class="edge green" marker-end="url(#arrowLogVol39)"></path>
+            <path d="M530 538 H626" class="edge gold" marker-end="url(#arrowLogVol39)"></path>
+          </svg>
+        </div>
+
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Definition or assertion</th><th>Audit consequence</th></tr>
+          <tr>
+            <td>3.9(i), nonarch.</td>
+            <td>
+              On nonempty compact open subsets of the direct-sum fields in
+              <span class="math">IQ(alpha F)</span>, <span class="math">IQ(AF)</span>,
+              and <span class="math">IQ(A,alpha F)</span>, the local holomorphic
+              integral structures have log-volume zero, and multiplication by the local
+              prime adds <span class="math">-log(p_v)</span>.
+            </td>
+            <td>
+              The sign convention is part of the source definition and must be preserved
+              when later upper-ray inequalities are stated.
+            </td>
+          </tr>
+          <tr>
+            <td>3.9(i), arch.</td>
+            <td>
+              On compact closures of nonempty open subsets of the direct-sum complex
+              fields, radial log-volumes are summed over direct summands; local
+              holomorphic integral structures have log-volume zero, and multiplication
+              by <span class="math">e</span> adds <span class="math">1</span>.
+            </td>
+            <td>
+              The archimedean clause has its own normalization and object class for
+              measurable regions.
+            </td>
+          </tr>
+          <tr>
+            <td>3.9(i), processions</td>
+            <td>
+              For processions, log-volumes on products of packet-region spaces are
+              normalized by averaging over the capsules under consideration.
+            </td>
+            <td>
+              The procession-normalized number is not an arbitrary weighted average.
+            </td>
+          </tr>
+          <tr>
+            <td>3.9(ii)</td>
+            <td>
+              The packet-normalized log-volumes are transferred to mono-analytic
+              <span class="math">D⊢</span> packets by applying the relevant p-adic or
+              radial log-volumes to log-shells and adjusting for the holomorphic versus
+              mono-analytic integral-structure discrepancy. The same construction is
+              available for <span class="math">F⊢×mu</span>.
+            </td>
+            <td>
+              A source-faithful interface must store the integral-structure discrepancy,
+              not only the final real number.
+            </td>
+          </tr>
+          <tr>
+            <td>3.9(iii)</td>
+            <td>
+              The global log-volume is obtained by summing local log-volumes over
+              <span class="math">v_Q</span>, with all but finitely many terms zero. It is
+              invariant under multiplication by the labeled global field and under
+              permutations of packet labels; on fractional-ideal objects it agrees with
+              the arithmetic line-bundle degree up to normalization.
+            </td>
+            <td>
+              This connects the packet/log-shell numerical layer to the global
+              Frobenioid degree layer.
+            </td>
+          </tr>
+          <tr>
+            <td>3.9(iv)</td>
+            <td>
+              In an LGP-Gaussian log-theta lattice, these log-volumes apply to the
+              local/global LGP and lgp monoids/Frobenioids relative to the log-link
+              <span class="math">n,m-1 -> n,m</span>, and are compatible along that
+              log-link at the level of rational log-shell spans.
+            </td>
+            <td>
+              This is the numerical compatibility needed later when 3.5's log-Kummer
+              correspondence is used in Theorem 3.11.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.9.1</td>
+            <td>
+              The discrepancy between holomorphic and mono-analytic integral structures
+              is computable from the initial theta data: p-adically via
+              <span class="math">p_v^*</span>-scaled logarithmic unit lattices, and
+              archimedeanly via Hermitian metric comparisons such as
+              <span class="math">C tensor_R C -> C plus C</span>.
+            </td>
+            <td>
+              The discrepancy is not an unspecified error term; it is source-level data
+              that should eventually be formalized.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.9.3</td>
+            <td>
+              General weighted averages over capsules are disallowed because the same
+              log-shell label can contribute to different capsule index sets. Equal
+              capsule weights are forced by compatibility with procession inclusions.
+            </td>
+            <td>
+              This prevents changing the final numerical estimate by choosing convenient
+              capsule weights.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.9.4</td>
+            <td>
+              Log-link/log-volume compatibility can be formulated using realified
+              semi-simplifications of measure spaces. If a log-link only preserved
+              volumes up to a nontrivial dilation factor, log-volumes would be defined
+              only modulo <span class="math">Z log(lambda)</span>, which is unacceptable
+              for the later real-valued estimates.
+            </td>
+            <td>
+              The compatibility requirement is not cosmetic; it rules out circular or
+              periodic ambiguity in the Corollary 3.12 numerical comparison.
+            </td>
+          </tr>
+        </table>
+
+        <div class="grid3">
+          <div class="card" id="packet-normalization-39">
+            <h3>Packet normalization</h3>
+            <p>
+              Proposition 3.9(i) defines local packet log-volumes with integral
+              structures normalized to zero. The nonarchimedean sign convention is
+              multiplication by <span class="math">p_v</span> adding
+              <span class="math">-log(p_v)</span>.
+            </p>
+            <div class="tagRow"><span class="tag blue">3.9(i)</span><span class="tag">local packets</span></div>
+          </div>
+          <div class="card" id="mono-analytic-transfer-39">
+            <h3>Mono-analytic transfer</h3>
+            <p>
+              The same log-volume layer is transported to
+              <span class="math">D⊢</span> and <span class="math">F⊢×mu</span>
+              log-shell packet objects after correcting the holomorphic versus
+              mono-analytic integral-structure discrepancy.
+            </p>
+            <div class="tagRow"><span class="tag green">3.9(ii)</span><span class="tag">log-shells</span></div>
+          </div>
+          <div class="card" id="global-degree-log-volume-39">
+            <h3>Global degree link</h3>
+            <p>
+              The global packet log-volume is a finite-support sum over
+              <span class="math">v_Q</span>. For fractional-ideal objects, it recovers
+              the arithmetic line-bundle degree, up to the normalization specified in
+              the source.
+            </p>
+            <div class="tagRow"><span class="tag gold">3.9(iii)</span><span class="tag">degree</span></div>
+          </div>
+          <div class="card" id="forced-procession-average-39">
+            <h3>Forced procession average</h3>
+            <p>
+              Remark 3.9.3 gives a specific no-go statement: unequal capsule weights
+              would conflict with the way the same log-shell label appears in different
+              procession capsules.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 3.9.3</span><span class="tag">no weighted choice</span></div>
+          </div>
+          <div class="card" id="realified-semisimplification-39">
+            <h3>Realified semi-simplification</h3>
+            <p>
+              Remark 3.9.4 packages measure spaces into commutative monoids with
+              <span class="math">R_>0</span>-action and then into
+              <span class="math">R_>=0</span>. This is the formal layer used to compare
+              log-volumes across log-links.
+            </p>
+            <div class="tagRow"><span class="tag violet">Remark 3.9.4</span><span class="tag">Rss</span></div>
+          </div>
+          <div class="card" id="no-log-volume-period-39">
+            <h3>No log-volume period</h3>
+            <p>
+              If log-links introduced a nontrivial volume dilation
+              <span class="math">lambda</span>, the numbers would live in
+              <span class="math">R / Z log(lambda)</span>. The source rejects this
+              because Corollary 3.12 requires real-valued estimates.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 3.9.4(ii)</span><span class="tag">real-valued</span></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Formalization consequence.</strong> The 3.9 interface should not be
+          just a function from packet regions to real numbers. It should include the
+          local place type, packet normalization, procession averaging rule,
+          holomorphic/mono-analytic discrepancy data, finite-support global summation,
+          and log-link compatibility evidence.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Proposition 3.9 and Remarks 3.9.1-3.9.4</a>
+          Related: <a href="#tensor-packets-iii31-33">tensor packets</a>
+          <a href="#lgp-lgp-log-theta-lattice-iii38">LGP/lgp lattice</a>
+          <a href="#packet-log-volume-definition">packet log-volume card</a>
+          <a href="#procession-average-forced">procession average card</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
         </div>
       </section>
