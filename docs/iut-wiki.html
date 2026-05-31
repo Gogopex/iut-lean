@@ -871,6 +871,11 @@
               <a href="#mono-analytic-log-shells">mono-analytic log-shells</a>,
               <a href="#coric-holomorphic-log-shells">coric holomorphic log-shells</a>,
               <a href="#log-link-frobenius-picture">log-link Frobenius-picture</a>,
+              <a href="#hodge-theater-log-link">Hodge-theater log-link</a>,
+              <a href="#gaussian-log-theta-lattice-source">Gaussian log-theta lattice</a>,
+              <a href="#vertical-horizontal-coricity">vertical/horizontal coricity</a>,
+              <a href="#bicoric-f-perp-times-mu-prime-strips">bi-coric F⊢×μ-prime-strips</a>,
+              <a href="#bicoric-realified-frobenioids">bi-coric realified Frobenioids</a>,
               <a href="#vertical-bicoric-log-shells">bi-coric log-shells</a>,
               <a href="#vertical-cores">vertical cores</a>,
               <a href="#multiradial-theta-monoids">multiradial theta monoids</a>,
@@ -4789,6 +4794,191 @@
               allowed.
             </p>
             <div class="tagRow"><span class="tag green">Proposition 1.2(x)</span><span class="tag">Frobenius-picture</span></div>
+          </div>
+        </div>
+        <table>
+          <tr>
+            <th>IUT III §1 source item</th>
+            <th>Hodge-theater/lattice construction</th>
+            <th>Reason it is proof-critical</th>
+          </tr>
+          <tr>
+            <td>Proposition 1.3(i)</td>
+            <td>
+              An isomorphism of associated D-Theta±ellNF-Hodge theaters determines
+              log-links on each constituent F-prime-strip of the theta and
+              plus-minus bridges; the full case uses the full poly-isomorphism.
+            </td>
+            <td>
+              The theater-level log-link is built over D-theater data. It is not chosen
+              independently for each F-prime-strip without synchronization.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 1.3(ii)-(iv)</td>
+            <td>
+              A theater log-link lies over a D-theater poly-isomorphism, inherits the
+              Proposition 1.2 compatibility/log-shell/Kummer facts, and generates a
+              vertical Frobenius-picture chain.
+            </td>
+            <td>
+              This lifts the log-link interface from prime-strips to complete
+              Theta±ellNF-Hodge theaters.
+            </td>
+          </tr>
+          <tr>
+            <td>Remarks 1.3.1-1.3.2</td>
+            <td>
+              The construction first fixes a single D-theater isomorphism to preserve
+              plus-minus synchronization, and the resulting log-links are compatible
+              with <span class="math">F_l^{±}</span>-symmetrizing isomorphisms.
+            </td>
+            <td>
+              Conjugate synchronization is already a constraint at the log-link stage,
+              before Theorem 3.11.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 1.4</td>
+            <td>
+              The log-theta lattice is the <span class="math">Z × Z</span>-indexed
+              diagram with full log-links vertically and either
+              <span class="math">Theta×μ</span> or
+              <span class="math">Theta×μ_gau</span> links horizontally.
+            </td>
+            <td>
+              The Gaussian lattice is the §1 object used for Theorem 1.5 and the later
+              multiradial construction.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.4.1</td>
+            <td>
+              Lattice squares are far from 1-commutative. Each horizontal execution
+              obligates a subsequent vertical execution if one wants log-shells.
+            </td>
+            <td>
+              Multiradiality must be built from vertical cores, not by pretending
+              horizontal theta motion preserves local ring histories.
+            </td>
+          </tr>
+          <tr>
+            <td>Theorem 1.5(i)-(ii)</td>
+            <td>
+              Vertical arrows induce full poly-isomorphisms between D-Theta±ellNF
+              theaters; horizontal arrows induce full poly-isomorphisms between the
+              associated <span class="math">F⊢×μ_△</span>-prime-strips.
+            </td>
+            <td>
+              The theorem separates vertical coricity from horizontal coricity before
+              composing them into bi-coric objects.
+            </td>
+          </tr>
+          <tr>
+            <td>Theorem 1.5(iii)-(iv)</td>
+            <td>
+              <span class="math">F⊢×μ_△(D⊢_△)</span> and the corresponding
+              mono-analytic log-shells are bi-coric across arbitrary lattice indices
+              <span class="math">(n,m)</span> and <span class="math">(n',m')</span>.
+            </td>
+            <td>
+              These are the §1 bi-cores used downstream for the multiradial
+              LGP-monoid representation.
+            </td>
+          </tr>
+          <tr>
+            <td>Theorem 1.5(v), Remark 1.5.1</td>
+            <td>
+              The D-prime-strip poly-isomorphisms induce compatible bi-coric global
+              realified Frobenioids, and conjugate synchronization is essential for the
+              subscript-<span class="math">△</span> constructions.
+            </td>
+            <td>
+              The realified Frobenioid layer is the bridge to later log-volume
+              computation, not just a formal add-on.
+            </td>
+          </tr>
+        </table>
+        <div class="grid2">
+          <div class="card" id="hodge-theater-log-link">
+            <h3>Hodge-theater log-link</h3>
+            <p>
+              Proposition 1.3 constructs a log-link between
+              Theta±ellNF-Hodge theaters from an isomorphism of their associated
+              D-Theta±ellNF-Hodge theaters. Each constituent F-prime-strip then receives
+              the corresponding log-link.
+            </p>
+            <p>
+              The construction is synchronized at the D-theater level; it is not a
+              collection of unrelated local log choices.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 1.3(i)</span><span class="tag">D-theater</span></div>
+          </div>
+          <div class="card" id="gaussian-log-theta-lattice-source">
+            <h3>Gaussian log-theta lattice</h3>
+            <p>
+              Definition 1.4 defines two log-theta lattices: non-Gaussian with
+              <span class="math">Theta×μ</span> horizontal arrows and Gaussian with
+              <span class="math">Theta×μ_gau</span> horizontal arrows. The vertical
+              arrows in both are full log-links.
+            </p>
+            <p>
+              Theorem 1.5 is stated for the Gaussian lattice.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 1.4</span><span class="tag">Gaussian</span></div>
+          </div>
+          <div class="card" id="vertical-horizontal-coricity">
+            <h3>Vertical and horizontal coricity</h3>
+            <p>
+              Theorem 1.5(i) supplies vertical coricity of associated
+              D-Theta±ellNF-Hodge theaters along log-links. Theorem 1.5(ii) supplies
+              horizontal coricity of <span class="math">F⊢×μ_△</span>-prime-strips
+              along Gaussian theta-links.
+            </p>
+            <p>
+              The distinction is structural: one direction controls D-theaters, the
+              other controls the weakened <span class="math">F⊢×μ</span> interface.
+            </p>
+            <div class="tagRow"><span class="tag green">Theorem 1.5(i)-(ii)</span><span class="tag">coricity</span></div>
+          </div>
+          <div class="card" id="bicoric-f-perp-times-mu-prime-strips">
+            <h3>Bi-coric F⊢×μ-prime-strips</h3>
+            <p>
+              Theorem 1.5(iii) constructs
+              <span class="math">F⊢×μ_△(D⊢_△)</span> as an invariant under both lattice
+              directions, up to the specified class of poly-isomorphisms.
+            </p>
+            <p>
+              The result also records compatibility with Kummer isomorphisms and
+              <span class="math">×μ</span>-Kummer structures.
+            </p>
+            <div class="tagRow"><span class="tag green">Theorem 1.5(iii)</span><span class="tag">bi-coric</span></div>
+          </div>
+          <div class="card" id="bicoric-monoanalytic-log-shells">
+            <h3>Bi-coric mono-analytic log-shells</h3>
+            <p>
+              Theorem 1.5(iv) transports the bi-coricity of
+              <span class="math">F⊢×μ_△(D⊢_△)</span> to the corresponding
+              mono-analytic log-shells and their enveloping log modules.
+            </p>
+            <p>
+              These shells are also related to holomorphic log-shells arising from the
+              constant monoid data used in IUT II Corollary 4.10.
+            </p>
+            <div class="tagRow"><span class="tag green">Theorem 1.5(iv)</span><span class="tag">log-shells</span></div>
+          </div>
+          <div class="card" id="bicoric-realified-frobenioids">
+            <h3>Bi-coric realified Frobenioids</h3>
+            <p>
+              Theorem 1.5(v) promotes the bi-coric D-prime-strip comparison to global
+              realified Frobenioid data, compatible with the
+              <span class="math">R&gt;0</span>-orbits already present in IUT II.
+            </p>
+            <p>
+              This is the §1 preparation for later determinant and log-volume
+              comparisons.
+            </p>
+            <div class="tagRow"><span class="tag green">Theorem 1.5(v)</span><span class="tag">realified</span></div>
           </div>
         </div>
         <table>
