@@ -3048,6 +3048,76 @@
           </svg>
         </div>
 
+        <table>
+          <tr>
+            <th>IUT I §5 source item</th>
+            <th>Construction</th>
+            <th>Role in the later theory</th>
+          </tr>
+          <tr>
+            <td>Remark 5.2.1</td>
+            <td>
+              F-prime-strips functorially determine D-prime-strips; F⊢-prime-strips
+              determine D⊢-prime-strips. An F-prime-strip also has a mono-analyticization
+              to an F⊢-prime-strip.
+            </td>
+            <td>
+              This justifies treating Frobenioid data as lying over the D-strip layer
+              rather than as an unrelated package.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 5.2.2</td>
+            <td>
+              F-prime-strips are Kummer-ready, while F⊢-prime-strips are Kummer-blind.
+            </td>
+            <td>
+              The wiki keeps Kummer-ready and mono-analytic data separate because later
+              Kummer transport cannot be recovered from the weakened interface alone.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 5.3</td>
+            <td>
+              Isomorphisms of F-prime-strips are determined by the associated
+              D-prime-strip isomorphisms; for F⊢-prime-strips the corresponding map to
+              D⊢-isomorphisms is surjective.
+            </td>
+            <td>
+              This is a rigidity statement: once the base side is fixed, much of the
+              Frobenioid-side isomorphism data is forced.
+            </td>
+          </tr>
+          <tr>
+            <td>Example 5.4(iii)-(iv)</td>
+            <td>
+              A cusp-label class <span class="math">delta in LabCusp(D)</span> determines
+              δ-valuations in <span class="math">V(D)</span>; localizing at them constructs
+              an F-prime-strip <span class="math">F|delta</span>, well-defined up to
+              isomorphism.
+            </td>
+            <td>
+              This is where global cusp-label synchronization becomes a Frobenioid
+              localization mechanism.
+            </td>
+          </tr>
+          <tr>
+            <td>Example 5.4(v)-(vii)</td>
+            <td>
+              There is a unique NF-side poly-morphism
+              <span class="math">psi^NF : F_J -> F</span> lying over
+              <span class="math">phi^NF</span>. Restriction functors attached to
+              <span class="math">Fmod</span> are immune to the relevant
+              <span class="math">F_l</span>-conjugacy choices; the case
+              <span class="math">j = 1</span> gives the pivotal distribution.
+            </td>
+            <td>
+              Pivotal distributions are the number-field/Frobenioid precursor to later
+              theta-value and q-parameter comparisons.
+            </td>
+          </tr>
+        </table>
+
         <div class="grid2">
           <div class="card">
             <h3>Categorical package</h3>
@@ -3070,6 +3140,54 @@
               <span class="math">F_v^|</span> and <span class="math">F_v^Theta</span>.
               The constructions are asserted to be reconstructible from categorical data.
             </p>
+          </div>
+          <div class="card" id="delta-valuations">
+            <h3>Delta-valuations</h3>
+            <p>
+              In IUT I, Example 5.4, a class
+              <span class="math">delta in LabCusp(D)</span> selects valuations of
+              <span class="math">D</span> by transporting delta to the distinguished
+              cusp class and then reading off the corresponding image of the
+              <span class="math">D_j</span> component labeled <span class="math">1</span>.
+            </p>
+            <p>
+              This definition can also be read intrinsically from the D-NF bridge. The
+              point is that the label-class synchronization of Proposition 4.7 becomes a
+              localization rule for Frobenioid data.
+            </p>
+            <div class="tagRow"><span class="tag green">Example 5.4(iii)</span><span class="tag">localization</span></div>
+          </div>
+          <div class="card" id="f-prime-strip-delta">
+            <h3>F-prime-strip <span class="math">F|delta</span></h3>
+            <p>
+              Localizing at the δ-valuations constructs an F-prime-strip
+              <span class="math">F|delta</span>. At nonarchimedean places this uses
+              p-adic Frobenioids and suitable open subgroups; at bad places the tempered
+              analogue is required; at archimedean places the construction uses
+              Aut-holomorphic reconstruction.
+            </p>
+            <p>
+              Because the projection from the relevant valuation set to
+              <span class="math">Vmod</span> is not injective, the result is only
+              well-defined up to isomorphism.
+            </p>
+            <div class="tagRow"><span class="tag green">Example 5.4(iv)</span><span class="tag">F-prime-strip</span></div>
+          </div>
+          <div class="card" id="pivotal-distributions">
+            <h3>Pivotal distributions</h3>
+            <p>
+              Example 5.4 defines natural restriction functors and realifications for the
+              Frobenioid data over the capsule <span class="math">J</span>. The objects
+              obtained in the label <span class="math">j = 1</span> case are called
+              pivotal distributions.
+            </p>
+            <p>
+              These distributions are immune to the relevant
+              <span class="math">F_l</span>-conjugacy indeterminacy because the
+              <span class="math">Fmod</span> object is defined through terminal objects
+              of the global D-side category.
+            </p>
+            <div class="tagRow"><span class="tag green">Example 5.4(vii)</span><span class="tag">pivotal</span></div>
           </div>
           <div class="card">
             <h3>Gaussian Frobenioids</h3>
