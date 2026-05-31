@@ -430,7 +430,11 @@
       font-size: 0.9rem;
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1180px) {
+      .grid3, .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
       .layout { grid-template-columns: 1fr; }
       aside {
         position: relative;
@@ -494,6 +498,7 @@
         <a href="#theta-link-frobenius-etale-pictures">Theta/Frobenius pictures</a>
         <a href="#multiplicative-combinatorial-teichmuller">Multiplicative combinatorics</a>
         <a href="#iut-i-global-frobenioids-example51">Global Frobenioids 5.1</a>
+        <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips 5.2</a>
         <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
         <a href="#projective-line-gluing-analogy">Projective-line gluing</a>
         <a href="#iut-i-gluing-models">IUT I gluing models</a>
@@ -1417,6 +1422,12 @@
               <a href="#kappa-sol-conjugate-synchronization">κ-sol conjugate synchronization</a>,
               <a href="#kummer-ready-blind-split">Kummer-ready/blind split</a>,
               <a href="#constant-distributions-vj">constant distributions</a>,
+              <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips 5.2</a>,
+              <a href="#f-prime-strip-definition52">F-prime-strip definition</a>,
+              <a href="#f-perp-prime-strip-definition52">F⊢-prime-strip definition</a>,
+              <a href="#f-realified-prime-strip-definition52">F⊩-prime-strip definition</a>,
+              <a href="#local-kappa-coric-structures52">local κ-coric structures</a>,
+              <a href="#corollary-53-rigidity">Corollary 5.3 rigidity</a>,
               <a href="#theta-nf-hodge-theater">ThetaNF-Hodge theater</a>,
               <a href="#nf-bridge-frobenioid-lift">NF bridge</a>,
               <a href="#theta-bridge-frobenioid-lift">Theta bridge</a>,
@@ -7978,6 +7989,201 @@
           <a href="#multiplicative-combinatorial-teichmuller">multiplicative combinatorics</a>
           <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
           <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
+          <a href="#log-kummer-correspondences">log-Kummer correspondences</a>
+        </div>
+      </section>
+
+      <section id="iut-i-frobenioid-prime-strips-52">
+        <h2>Frobenioid Prime-Strips in IUT I 5.2</h2>
+        <p class="lede">
+          Definition 5.2 introduces the F-level prime-strip interfaces over the
+          D-prime-strips of Section 4: holomorphic F-prime-strips, mono-analytic
+          split F⊢-prime-strips, globally realified F⊩-prime-strips, and the local
+          ∞κ/∞κ× coric structures. Corollary 5.3 then records the rigidity that lets
+          F-data be controlled by its D-data.
+        </p>
+        <div class="diagram" aria-label="IUT I Definition 5.2 Frobenioid prime-strips">
+          <div class="diagramHeader">
+            <strong>F-prime-strip interfaces over D-prime-strips</strong>
+            <span>IUT I Definition 5.2 and Corollary 5.3</span>
+          </div>
+          <svg viewBox="0 0 1080 520" role="img">
+            <defs>
+              <marker id="arrowFStrip52" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="52" y="64" width="220" height="84"></rect>
+            <text class="nodeTitle" x="162" y="94" text-anchor="middle">D-prime-strip</text>
+            <text class="tinyText" x="162" y="118" text-anchor="middle">base categories/orbispaces</text>
+            <text class="tinyText" x="162" y="136" text-anchor="middle">Definition 4.1</text>
+
+            <rect class="nodeBox green" x="428" y="64" width="220" height="84"></rect>
+            <text class="nodeTitle" x="538" y="94" text-anchor="middle">F-prime-strip</text>
+            <text class="tinyText" x="538" y="118" text-anchor="middle">local Frobenioids</text>
+            <text class="tinyText" x="538" y="136" text-anchor="middle">Kummer-ready</text>
+
+            <rect class="nodeBox gold" x="804" y="64" width="220" height="84"></rect>
+            <text class="nodeTitle" x="914" y="94" text-anchor="middle">F⊢-prime-strip</text>
+            <text class="tinyText" x="914" y="118" text-anchor="middle">split mono-analytic data</text>
+            <text class="tinyText" x="914" y="136" text-anchor="middle">Kummer-blind</text>
+
+            <rect class="nodeBox violet" x="262" y="250" width="240" height="88"></rect>
+            <text class="nodeTitle" x="382" y="280" text-anchor="middle">F⊩-prime-strip</text>
+            <text class="tinyText" x="382" y="304" text-anchor="middle">global realification</text>
+            <text class="tinyText" x="382" y="322" text-anchor="middle">Prime(C⊩) -> V, rho_v</text>
+
+            <rect class="nodeBox red" x="578" y="250" width="240" height="88"></rect>
+            <text class="nodeTitle" x="698" y="280" text-anchor="middle">∞κ / ∞κ× structures</text>
+            <text class="tinyText" x="698" y="304" text-anchor="middle">Kummer classes and cyclotomes</text>
+            <text class="tinyText" x="698" y="322" text-anchor="middle">strict critical torsion test</text>
+
+            <rect class="nodeBox green" x="420" y="402" width="250" height="72"></rect>
+            <text class="nodeTitle" x="545" y="431" text-anchor="middle">Corollary 5.3 rigidity</text>
+            <text class="tinyText" x="545" y="454" text-anchor="middle">F isomorphisms determined by D-side data</text>
+
+            <path d="M274 106 H426" class="edge blue" marker-end="url(#arrowFStrip52)"></path>
+            <path d="M650 106 H802" class="edge green" marker-end="url(#arrowFStrip52)"></path>
+            <path d="M538 150 C494 196 424 220 386 248" class="edge violet" marker-end="url(#arrowFStrip52)"></path>
+            <path d="M538 150 C588 196 660 220 696 248" class="edge red" marker-end="url(#arrowFStrip52)"></path>
+            <path d="M382 338 C412 374 480 388 536 400" class="edge violet" marker-end="url(#arrowFStrip52)"></path>
+            <path d="M698 338 C676 374 612 388 556 400" class="edge red" marker-end="url(#arrowFStrip52)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="f-prime-strip-definition52">
+            <h3>F-prime-strip definition</h3>
+            <p>
+              Definition 5.2(i) defines a holomorphic Frobenioid-prime-strip
+              <span class="math">F = {F_v}_{v in V}</span>. At nonarchimedean places
+              the components are categories equivalent to the local Frobenioids
+              <span class="math">C_v</span>; at archimedean places the component includes
+              a category, an Aut-holomorphic orbispace, and a Kummer structure.
+            </p>
+            <div class="tagRow"><span class="tag green">Def. 5.2(i)</span><span class="tag">F-strip</span></div>
+          </div>
+          <div class="card" id="f-perp-prime-strip-definition52">
+            <h3>F⊢-prime-strip definition</h3>
+            <p>
+              Definition 5.2(ii) defines mono-analytic Frobenioid-prime-strips
+              <span class="math">F⊢</span>. Nonarchimedean components are split
+              Frobenioids equivalent to <span class="math">F_v^⊢</span>; archimedean
+              components are triples with a Frobenioid, an object of
+              <span class="math">TM⊢</span>, and a splitting.
+            </p>
+            <div class="tagRow"><span class="tag gold">Def. 5.2(ii)</span><span class="tag">mono-analytic</span></div>
+          </div>
+          <div class="card" id="f-realified-prime-strip-definition52">
+            <h3>F⊩-prime-strip definition</h3>
+            <p>
+              Definition 5.2(iv) packages global realification:
+              <span class="math">(C⊩, Prime(C⊩) -> V, F⊢, {rho_v})</span>. It is
+              isomorphic to the <span class="math">F_mod^⊩</span> collection of
+              Example 3.5 and carries the real-valued comparison maps
+              <span class="math">rho_v</span>.
+            </p>
+            <div class="tagRow"><span class="tag violet">Def. 5.2(iv)</span><span class="tag">realified</span></div>
+          </div>
+          <div class="card" id="associated-d-strip-from-f">
+            <h3>Associated D-strips</h3>
+            <p>
+              Remark 5.2.1(i) gives functorial algorithms from F-prime-strips to
+              D-prime-strips, and from F⊢-prime-strips to D⊢-prime-strips. The F-layer
+              lies over the D-layer; it is not independent extra decoration.
+            </p>
+            <div class="tagRow"><span class="tag blue">Remark 5.2.1(i)</span><span class="tag">over D</span></div>
+          </div>
+          <div class="card" id="monoanalyticization-f-strip">
+            <h3>Mono-analyticization of F</h3>
+            <p>
+              Remark 5.2.1(ii) constructs <span class="math">F -> F⊢</span> and also
+              constructs <span class="math">F⊩</span> from <span class="math">F</span>.
+              The latter uses the simple product-formula structure of the global
+              realified Frobenioid and the rigidity of local divisor monoids.
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 5.2.1(ii)</span><span class="tag">functorial</span></div>
+          </div>
+          <div class="card" id="local-kappa-coric-structures52">
+            <h3>Local ∞κ/∞κ× structures</h3>
+            <p>
+              Definition 5.2(v)-(viii) reconstructs local κ-, ∞κ-, and ∞κ×-coric
+              pseudo-monoids from D-side fundamental-group or Aut-holomorphic data and
+              attaches the uniquely determined ∞κ/∞κ× structures to F-components.
+            </p>
+            <div class="tagRow"><span class="tag red">Def. 5.2(v)-(viii)</span><span class="tag">κ-coric</span></div>
+          </div>
+          <div class="card" id="cyclotome-uniqueness-local52">
+            <h3>Cyclotome uniqueness</h3>
+            <p>
+              The local construction compares Kummer cohomology classes and divisors of
+              zeroes and poles. The same elementary intersection
+              <span class="math">Q_&gt;0 ∩ Zhat^x = {1}</span> gives the unique
+              cyclotomic identifications needed to recover the pseudo-monoids.
+            </p>
+            <div class="tagRow"><span class="tag gold">Def. 5.2(vi),(viii)</span><span class="tag">cyclotome</span></div>
+          </div>
+          <div class="card" id="strict-critical-torsion52">
+            <h3>Strict critical torsion test</h3>
+            <p>
+              An ∞κ structure is recovered from ∞κ× by restricting the associated
+              Kummer class to decomposition groups, or systems of strictly critical
+              points, and requiring torsion/root-of-unity behavior. Remark 5.2.3
+              singles out the bad-place point coming from label zero.
+            </p>
+            <div class="tagRow"><span class="tag red">Def. 5.2; Rem. 5.2.3</span><span class="tag">critical points</span></div>
+          </div>
+          <div class="card" id="kummer-ready-blind-primestrips52">
+            <h3>Kummer-ready versus Kummer-blind</h3>
+            <p>
+              Remark 5.2.2 states the interface rule: F-prime-strips are Kummer-ready,
+              while F⊢-prime-strips are Kummer-blind. Later formalization should
+              therefore not infer Kummer classes from the weakened F⊢ interface alone.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 5.2.2</span><span class="tag">guardrail</span></div>
+          </div>
+          <div class="card" id="corollary-53-rigidity">
+            <h3>Corollary 5.3 rigidity</h3>
+            <p>
+              Corollary 5.3(i)-(ii) says isomorphisms of global Frobenioids and
+              F-prime-strips are determined bijectively by isomorphisms of their base
+              categories or associated D-prime-strips. The F⊢ version is only stated
+              surjectively.
+            </p>
+            <div class="tagRow"><span class="tag green">Cor. 5.3(i)-(iii)</span><span class="tag">rigidity</span></div>
+          </div>
+          <div class="card" id="tempered-frobenioid-aut-rigidity">
+            <h3>Bad tempered Frobenioid automorphisms</h3>
+            <p>
+              Corollary 5.3(iv) states that for bad places the natural map
+              <span class="math">Aut(F_v) -> Aut(D_v)</span> is bijective. The proof
+              uses Kummer readiness, rational function monoids, theta divisors, and
+              cuspidal/non-cuspidal divisor control.
+            </p>
+            <div class="tagRow"><span class="tag blue">Cor. 5.3(iv)</span><span class="tag">bad places</span></div>
+          </div>
+          <div class="card" id="f-arrow-over-d-morphism">
+            <h3>Morphisms over D</h3>
+            <p>
+              Remark 5.3.1 extends rigidity to certain D-prime-strip morphisms, not only
+              isomorphisms: after pullback of target Frobenioids, Corollary 5.3 gives a
+              uniquely determined F-arrow lying over the D-arrow.
+            </p>
+            <div class="tagRow"><span class="tag violet">Remark 5.3.1</span><span class="tag">lifting</span></div>
+          </div>
+        </div>
+        <div class="callout warn">
+          Formalization warning: the map from F⊢ isomorphisms to D⊢ isomorphisms is
+          only recorded as surjective in Corollary 5.3(iii), unlike the bijective
+          statements for global Frobenioids and F-prime-strips. Encoding all three as
+          bijections would overstate the source.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          Related: <a href="#iut-i-global-frobenioids-example51">global Frobenioids 5.1</a>
+          <a href="#prime-strips-bridges">prime strips and bridges</a>
+          <a href="#kappa-coric-functions">κ-coric functions</a>
+          <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
           <a href="#log-kummer-correspondences">log-Kummer correspondences</a>
         </div>
       </section>
@@ -14740,7 +14946,11 @@
       const requested = (hash || "#home").slice(1);
       const target = idElements.get(requested) || document.getElementById("home");
       const page = idOwners.get(requested) || document.getElementById("home");
-      sections.forEach(section => { section.hidden = section !== page; });
+      sections.forEach(section => {
+        const isCurrent = section === page;
+        section.hidden = !isCurrent;
+        section.setAttribute("aria-hidden", String(!isCurrent));
+      });
 
       navLinks.forEach(a => a.classList.remove("active"));
       const active = navLinks.find(a => a.getAttribute("href") === "#" + page.id);
@@ -14753,7 +14963,11 @@
         requestAnimationFrame(() => {
           const scrollTarget = idElements.get(requested) || page;
           setTimeout(() => {
-            scrollTarget.scrollIntoView({ block: scrollTarget === page ? "start" : "center" });
+            if (scrollTarget === page) {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+              scrollTarget.scrollIntoView({ block: "center" });
+            }
           }, 0);
         });
       }
