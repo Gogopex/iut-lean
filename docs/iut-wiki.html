@@ -560,6 +560,17 @@
       main { padding: 24px 14px 70px; }
       .hero { min-height: auto; padding: 30px 0; }
       .heroGrid, .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+      .diagramHeader {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .diagram:not(.fit) svg {
+        width: 620px;
+        max-width: none;
+      }
+      .hero .diagram svg {
+        width: 520px;
+      }
       .flowDiagram { grid-template-columns: 1fr; }
       .sourceCard { grid-template-columns: 1fr; }
     }
@@ -620,6 +631,12 @@
         <a href="#iut-i-atlas">IUT I atlas</a>
         <a href="#iut-i-orbicurve-cover-package">IUT I orbicurve covers 1</a>
         <a href="#iut-ii-atlas">IUT II atlas</a>
+        <a href="#iut-ii-kummer-evaluation-square-intro">Kummer evaluation square</a>
+        <a href="#theta-values-q-j-squared-intro-ii">Theta values q^j^2</a>
+        <a href="#frobenius-etale-versions-ii-intro">Frobenius/etale versions</a>
+        <a href="#theta-values-etale-picture-ii-intro">Theta-values etale picture</a>
+        <a href="#coric-uniradial-multiradial-taxonomy-ii-intro">Coric/radial taxonomy</a>
+        <a href="#conjugate-synchronization-intro-ii">Conjugate synchronization</a>
         <a href="#iut-iii-atlas">IUT III atlas</a>
         <a href="#iut-iv-atlas">IUT IV atlas</a>
         <h2>Core IUT</h2>
@@ -7782,12 +7799,12 @@
           <tr>
             <td>§1</td>
             <td>Multiradial mono-theta environments, interior/exterior cyclotomes, cyclotomic rigidity, constant-multiple rigidity.</td>
-            <td><a href="#mono-theta-environments-ii11">mono-theta environments</a>, <a href="#iut-ii-mono-theta-rigidity-110-112">mono-theta rigidity</a>, <a href="#multiradiality">multiradiality</a></td>
+            <td><a href="#iut-ii-kummer-evaluation-square-intro">Kummer evaluation square</a>, <a href="#mono-theta-environments-ii11">mono-theta environments</a>, <a href="#iut-ii-mono-theta-rigidity-110-112">mono-theta rigidity</a>, <a href="#coric-uniradial-multiradial-taxonomy-ii-intro">radial taxonomy</a></td>
           </tr>
           <tr>
             <td>§2</td>
             <td>Galois-theoretic theta evaluation at torsion labels and conjugate synchronization.</td>
-            <td><a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>, <a href="#iut-ii-distinguished-subgraph-263">distinguished subgraph</a>, <a href="#theta-value-labels">theta-value labels</a></td>
+            <td><a href="#theta-values-q-j-squared-intro-ii">theta values</a>, <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>, <a href="#conjugate-synchronization-intro-ii">conjugate synchronization</a>, <a href="#iut-ii-distinguished-subgraph-263">distinguished subgraph</a></td>
           </tr>
           <tr>
             <td>§3</td>
@@ -8198,6 +8215,312 @@
           Related: <a href="#theta-log-links">theta links</a>
           <a href="#multiradiality">multiradiality</a>
           <a href="#indeterminacies">indeterminacies</a>
+        </div>
+      </section>
+
+      <section id="iut-ii-kummer-evaluation-square-intro" data-filter="iut ii introduction kummer evaluation square hodge arakelov theta function theta values frobenioid galois">
+        <h2>IUT II Kummer Evaluation Square</h2>
+        <p class="lede">
+          IUT II begins with the Kummer theory surrounding Hodge-Arakelov evaluation
+          of the reciprocal <span class="math">ell</span>-th root theta function at
+          <span class="math">ell</span>-torsion points. Figure I.1 is a four-corner
+          square: Frobenioid-theoretic and Galois-theoretic versions of the theta
+          function sit above their corresponding theta-value versions, with Kummer
+          comparison horizontal and evaluation vertical.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Kummer evaluation square">
+          <div class="diagramHeader">
+            <strong>Figure I.1 structure</strong>
+            <span>Kummer comparison commutes with theta evaluation data</span>
+          </div>
+          <svg viewBox="0 0 960 480" role="img">
+            <defs>
+              <marker id="arrowIutIiKummerIntro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox gold" x="78" y="76" width="280" height="86"></rect>
+            <text class="nodeTitle" x="218" y="108" text-anchor="middle">Frobenioid theta function</text>
+            <text class="tinyText" x="218" y="132" text-anchor="middle">Frobenius-like monoid data</text>
+            <text class="tinyText" x="218" y="150" text-anchor="middle">theta function before evaluation</text>
+            <rect class="nodeBox blue" x="602" y="76" width="280" height="86"></rect>
+            <text class="nodeTitle" x="742" y="108" text-anchor="middle">Galois etale theta function</text>
+            <text class="tinyText" x="742" y="132" text-anchor="middle">etale-like group data</text>
+            <text class="tinyText" x="742" y="150" text-anchor="middle">theta function in Galois form</text>
+            <rect class="nodeBox green" x="78" y="306" width="280" height="86"></rect>
+            <text class="nodeTitle" x="218" y="338" text-anchor="middle">Frobenioid theta values</text>
+            <text class="tinyText" x="218" y="362" text-anchor="middle">Frobenius-like evaluated values</text>
+            <text class="tinyText" x="218" y="380" text-anchor="middle">monoid-side theta value package</text>
+            <rect class="nodeBox violet" x="602" y="306" width="280" height="86"></rect>
+            <text class="nodeTitle" x="742" y="338" text-anchor="middle">Galois theta values</text>
+            <text class="tinyText" x="742" y="362" text-anchor="middle">etale-like evaluated values</text>
+            <text class="tinyText" x="742" y="380" text-anchor="middle">torsion-point evaluation package</text>
+            <path class="edge blue" d="M360 119 H600" marker-end="url(#arrowIutIiKummerIntro)"></path>
+            <path class="edge blue" d="M360 349 H600" marker-end="url(#arrowIutIiKummerIntro)"></path>
+            <path class="edge gold" d="M218 164 V304" marker-end="url(#arrowIutIiKummerIntro)"></path>
+            <path class="edge violet" d="M742 164 V304" marker-end="url(#arrowIutIiKummerIntro)"></path>
+            <text class="edgeLabel" x="480" y="106" text-anchor="middle">Kummer</text>
+            <text class="edgeLabel" x="480" y="336" text-anchor="middle">Kummer</text>
+            <text class="edgeLabel" x="257" y="236" text-anchor="middle">evaluation</text>
+            <text class="edgeLabel" x="786" y="236" text-anchor="middle">evaluation</text>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card">
+            <h3>Source object</h3>
+            <p>
+              The source object is the reciprocal of the
+              <span class="math">ell</span>-th root theta function at bad places,
+              evaluated at <span class="math">ell</span>-torsion points shifted by a
+              suitable two-torsion point.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Reason for Kummer theory</h3>
+            <p>
+              Frobenius-like and etale-like versions play different roles. Kummer
+              theory is the comparison mechanism between the monoid/Frobenioid side
+              and the Galois/fundamental-group side.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Later role</h3>
+            <p>
+              The square is the entrance to the
+              <span class="math">Theta×mu_gau</span> link and to the theta-value
+              comparison machinery used by IUT III.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II Introduction, Fig. I.1</a>
+          Related: <a href="#theta-values-q-j-squared-intro-ii">theta values</a>
+          <a href="#frobenius-etale-versions-ii-intro">Frobenius/etale versions</a>
+          <a href="#theta-times-mu-frobenius-pictures-ii410">Theta×mu Frobenius-pictures</a>
+        </div>
+      </section>
+
+      <section id="theta-values-q-j-squared-intro-ii" data-filter="iut ii introduction theta values q j squared ell torsion gaussian distribution square weights">
+        <h2>Theta Values and Square Weights</h2>
+        <p class="lede">
+          In the IUT II introduction, theta values at
+          <span class="math">ell</span>-torsion points are, up to a
+          <span class="math">2ell</span>-th root of unity, of the form
+          <span class="math">q_v^{j^2}</span>. The label
+          <span class="math">j</span> is determined by its image in
+          <span class="math">|F_l| = F_l/{±1}</span>, so the square exponent is already
+          a quotient-label phenomenon.
+        </p>
+        <div class="diagram fit" aria-label="theta value square-weight labels">
+          <div class="diagramHeader">
+            <strong>Labels become square exponents</strong>
+            <span>the Gaussian-looking profile enters before Corollary 3.12</span>
+          </div>
+          <svg viewBox="0 0 940 360" role="img">
+            <defs>
+              <marker id="arrowThetaSquaresIntro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="58" y="80" width="210" height="84"></rect>
+            <text class="nodeTitle" x="163" y="112" text-anchor="middle">torsion label</text>
+            <text class="tinyText" x="163" y="136" text-anchor="middle">j in {0,...,(ell-1)/2}</text>
+            <text class="tinyText" x="163" y="154" text-anchor="middle">or class in |F_l|</text>
+            <rect class="nodeBox gold" x="365" y="80" width="210" height="84"></rect>
+            <text class="nodeTitle" x="470" y="112" text-anchor="middle">evaluation weight</text>
+            <text class="tinyText" x="470" y="136" text-anchor="middle">j squared</text>
+            <text class="tinyText" x="470" y="154" text-anchor="middle">in the q exponent</text>
+            <rect class="nodeBox green" x="672" y="80" width="210" height="84"></rect>
+            <text class="nodeTitle" x="777" y="112" text-anchor="middle">theta value</text>
+            <text class="tinyText" x="777" y="136" text-anchor="middle">q_v^{j^2}</text>
+            <text class="tinyText" x="777" y="154" text-anchor="middle">up to 2ell-root of unity</text>
+            <path class="edge blue" d="M270 122 H363" marker-end="url(#arrowThetaSquaresIntro)"></path>
+            <path class="edge gold" d="M577 122 H670" marker-end="url(#arrowThetaSquaresIntro)"></path>
+            <rect class="nodeBox violet" x="226" y="238" width="490" height="62"></rect>
+            <text class="nodeTitle" x="471" y="264" text-anchor="middle">Gaussian analogy</text>
+            <text class="tinyText" x="471" y="286" text-anchor="middle">j -> q_v^{j^2} resembles x -> exp(-x^2)</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source phrase</th><th>Technical content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>IUT II Introduction</td>
+            <td>The values are attached to torsion points at bad places, after the two-torsion shift.</td>
+            <td><a href="#theta-evaluation-points-iut-i44">theta evaluation points</a></td>
+          </tr>
+          <tr>
+            <td>Remark 2.5.1 preview</td>
+            <td>The theta-value orbit for label <span class="math">j</span> has exponent <span class="math">j^2</span>.</td>
+            <td><a href="#theta-evaluation-orbits-ii24-26">theta evaluation orbits</a></td>
+          </tr>
+          <tr>
+            <td>Corollary 3.12 corridor</td>
+            <td>Square weights reappear in theta-pilot and q-pilot comparison, so this convention must not be flattened.</td>
+            <td><a href="#corollary-312">Corollary 3.12</a></td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II Introduction and Remark 2.5.1</a>
+          Related: <a href="#iut-ii-kummer-evaluation-square-intro">Kummer square</a>
+          <a href="#theta-value-labels">theta-value labels</a>
+          <a href="#ind1-ind2-ind3-311">Ind3 in Theorem 3.11</a>
+        </div>
+      </section>
+
+      <section id="frobenius-etale-versions-ii-intro" data-filter="iut ii introduction frobenius-like etale-like frobenioid monoid galois arithmetic fundamental group kummer collas category">
+        <h2>Frobenius-Like and Etale-Like Versions</h2>
+        <p class="lede">
+          IUT II separates Frobenius-like structures, concretely monoidal portions of
+          Frobenioids, from etale-like structures, concretely Galois and arithmetic
+          fundamental groups. The former support gluing isomorphisms outside ordinary
+          scheme/ring theory; the latter provide canonical splittings via etale-pictures.
+          Kummer theory relates corresponding versions of the same theta objects.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Frobenius-like</h3>
+            <p>Monoid and Frobenioid data carry the multiplicative side used to construct theta links and Frobenius-pictures.</p>
+            <div class="tagRow"><span class="tag gold">monoids</span><span class="tag">Frobenioids</span></div>
+          </div>
+          <div class="card">
+            <h3>Etale-like</h3>
+            <p>Galois groups and arithmetic fundamental groups carry the splitting and reconstruction side used in etale-pictures.</p>
+            <div class="tagRow"><span class="tag blue">Galois</span><span class="tag">pi1</span></div>
+          </div>
+          <div class="card">
+            <h3>Kummer bridge</h3>
+            <p>The paper explicitly assigns Kummer theory the task of relating Frobenius-like and etale-like theta functions and theta values.</p>
+            <div class="tagRow"><span class="tag green">Kummer</span><span class="tag">comparison</span></div>
+          </div>
+        </div>
+        <div class="callout green">
+          <strong>Collas connection.</strong> Collas's category-theoretic view helps
+          explain why these versions must remain typed. Frobenius-like monoid packages
+          and etale-like group packages are distinct containers related by reconstruction
+          and Kummer comparison.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II Introduction</a>
+          Related: <a href="#collas-category-perspective">Collas category view</a>
+          <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
+          <a href="#anabelian-background">anabelian background</a>
+        </div>
+      </section>
+
+      <section id="theta-values-etale-picture-ii-intro" data-filter="iut ii introduction etale picture theta values spokes mono analytic core alien holomorphic structures">
+        <h2>Etale-Picture of Theta Values</h2>
+        <p class="lede">
+          Figure I.2 of IUT II depicts etale-like versions of the theta function and
+          theta values in multiple spokes over the mono-analytic core
+          <span class="math">D_>^perp</span>. Algorithms applied to one spoke must be
+          classified by whether their output is tied to that spoke or expressible from
+          the shared core.
+        </p>
+        <div class="diagram fit" aria-label="theta values in an etale picture over a mono-analytic core">
+          <div class="diagramHeader">
+            <strong>Spokes over a mono-analytic core</strong>
+            <span>where radiality terminology becomes operational</span>
+          </div>
+          <svg viewBox="0 0 980 430" role="img">
+            <defs>
+              <marker id="arrowEtaleThetaIntro" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="370" y="178" width="240" height="74"></rect>
+            <text class="nodeTitle" x="490" y="207" text-anchor="middle">mono-analytic core</text>
+            <text class="tinyText" x="490" y="232" text-anchor="middle">common data shared by spokes</text>
+            <rect class="nodeBox blue" x="74" y="54" width="260" height="72"></rect>
+            <text class="nodeTitle" x="204" y="83" text-anchor="middle">spoke A</text>
+            <text class="tinyText" x="204" y="107" text-anchor="middle">etale theta values q_v^{j^2}</text>
+            <rect class="nodeBox gold" x="646" y="54" width="260" height="72"></rect>
+            <text class="nodeTitle" x="776" y="83" text-anchor="middle">spoke B</text>
+            <text class="tinyText" x="776" y="107" text-anchor="middle">same type, distinct history</text>
+            <rect class="nodeBox violet" x="74" y="304" width="260" height="72"></rect>
+            <text class="nodeTitle" x="204" y="333" text-anchor="middle">spoke C</text>
+            <text class="tinyText" x="204" y="357" text-anchor="middle">alien holomorphic view</text>
+            <rect class="nodeBox red" x="646" y="304" width="260" height="72"></rect>
+            <text class="nodeTitle" x="776" y="333" text-anchor="middle">spoke D</text>
+            <text class="tinyText" x="776" y="357" text-anchor="middle">parallel execution target</text>
+            <path class="edge blue" d="M333 98 C390 120 432 150 466 176" marker-end="url(#arrowEtaleThetaIntro)"></path>
+            <path class="edge gold" d="M646 98 C586 120 544 150 512 176" marker-end="url(#arrowEtaleThetaIntro)"></path>
+            <path class="edge violet" d="M333 338 C390 312 432 282 466 254" marker-end="url(#arrowEtaleThetaIntro)"></path>
+            <path class="edge red" d="M646 338 C586 312 544 282 512 254" marker-end="url(#arrowEtaleThetaIntro)"></path>
+          </svg>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II Introduction, Fig. I.2</a>
+          Related: <a href="#coric-uniradial-multiradial-taxonomy-ii-intro">radial taxonomy</a>
+          <a href="#mutually-alien-copies">mutually alien copies</a>
+          <a href="#multiradiality">multiradiality</a>
+        </div>
+      </section>
+
+      <section id="coric-uniradial-multiradial-taxonomy-ii-intro" data-filter="iut ii introduction coric uniradial multiradial algorithms mono analytic core spokes radial taxonomy collas category">
+        <h2>Coric, Uniradial, and Multiradial Algorithms</h2>
+        <p class="lede">
+          IUT II introduces a precise vocabulary for algorithms on spokes of an
+          etale-picture. Coric algorithms depend only on the mono-analytic core;
+          uniradial algorithms construct objects in terms meaningful only inside one
+          spoke; multiradial algorithms express spoke-side objects in terms of coric
+          objects, possibly with controlled indeterminacy.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Type</th><th>Definition in the introduction</th><th>Operational consequence</th></tr>
+          <tr><td>Coric</td><td>Depends only on input data common to all spokes.</td><td>Safe to read from every spoke because it is core data.</td></tr>
+          <tr><td>Uniradial</td><td>Expresses objects in terms that only make sense in the given spoke.</td><td>Useful locally, but not simultaneously across alien spokes.</td></tr>
+          <tr><td>Multiradial</td><td>Expresses objects from a spoke in terms of corically constructed objects.</td><td>Can be used from other spokes, usually after allowing indeterminacy.</td></tr>
+        </table>
+        <div class="callout gold">
+          <strong>Classical analogy.</strong> Mochizuki compares coric algorithms to
+          constructions from an underlying real analytic structure, uniradial algorithms
+          to constructions dependent on one holomorphic structure, and multiradial
+          algorithms to holomorphic objects described in terms of the underlying real
+          analytic structure.
+        </div>
+        <div class="callout green">
+          <strong>Collas connection.</strong> This is the same conceptual pressure that
+          Collas emphasizes categorically: distinguish internal source objects, common
+          containers, and transitions that make an object readable after changing the
+          surrounding arithmetic universe.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II Introduction and Example 1.7</a>
+          Related: <a href="#radial-coric-framework-ii17-19">radial/coric framework</a>
+          <a href="#collas-log-theta-wandering-page">Collas log-theta wandering</a>
+          <a href="#indeterminacies">indeterminacies</a>
+        </div>
+      </section>
+
+      <section id="conjugate-synchronization-intro-ii" data-filter="iut ii introduction conjugate synchronization F_l plus minus symmetry local galois theta values">
+        <h2>Conjugate Synchronization</h2>
+        <p class="lede">
+          IUT II identifies conjugate synchronization as a major ingredient of the
+          <span class="math">Theta×mu_gau</span> link. Via the
+          <span class="math">F_l^±</span> symmetry of a
+          <span class="math">Theta±ellNF</span>-Hodge theater, one obtains comparison
+          isomorphisms free of conjugacy indeterminacy between copies of local absolute
+          Galois groups at the torsion points where the theta function is evaluated.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>What is synchronized</h3>
+            <p>Copies of local absolute Galois groups attached to the various <span class="math">ell</span>-torsion evaluation points are compared without the usual conjugacy ambiguity.</p>
+          </div>
+          <div class="card">
+            <h3>Symmetry source</h3>
+            <p>The source is the <span class="math">F_l^±</span> symmetry of the <span class="math">Theta±ellNF</span>-Hodge theater.</p>
+          </div>
+          <div class="card">
+            <h3>Use in IUT II</h3>
+            <p>It supports simultaneous Kummer theory for all theta values and the study of coricity properties of the <span class="math">Theta×mu_gau</span> link.</p>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II Introduction</a>
+          Related: <a href="#theta-evaluation-orbits-ii24-26">theta evaluation orbits</a>
+          <a href="#conjugate-synchronization-logwall-ii383">synchronization/log-wall</a>
+          <a href="#theta-nf-fl-symmetry-ii47">ThetaNF Fl symmetry</a>
         </div>
       </section>
 
