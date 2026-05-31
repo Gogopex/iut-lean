@@ -476,6 +476,7 @@
         <a href="#bogomolov-szpiro-analogy">Bogomolov-Szpiro analogy</a>
         <a href="#concept-index">Concept index</a>
         <a href="#anabelian-background">Anabelian background</a>
+        <a href="#collas-category-perspective">Collas category view</a>
         <a href="#gt-species-perspective">GT species perspective</a>
         <a href="#hoshi-introduction-route">Hoshi introduction route</a>
         <a href="#iut-i-atlas">IUT I atlas</a>
@@ -1265,6 +1266,8 @@
               <a href="#two-step-monoid-recovery">two-step monoid recovery</a>,
               <a href="#mono-anabelian-transport">mono-anabelian transport</a>,
               <a href="#iut-second-regeometrization">second regeometrization</a>,
+              <a href="#collas-category-perspective">Collas category view</a>,
+              <a href="#collas-categorification-diophantine">categorification of a Diophantine problem</a>,
               <a href="#collas-hodge-synchronization">Hodge-theater synchronization</a>,
               <a href="#collas-indeterminacies">Collas indeterminacy map</a>
             </td>
@@ -1875,6 +1878,155 @@
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#lana">LANA</a>
           <a href="#formalization">formalization</a>
+        </div>
+      </section>
+
+      <section id="collas-category-perspective">
+        <h2>Collas Category View</h2>
+        <p class="lede">
+          Benjamin Collas presents IUT as a Grothendieck-style categorification of a
+          Diophantine problem: the classical ring/scheme framework is not discarded, but
+          it is reorganized through functorial anabelian reconstruction, monoid
+          geometry, Frobenioids, Hodge theaters, species, and logical structure. This is
+          an interpretive map for reading the source papers; the definitions and proof
+          obligations still come from Mochizuki's IUT papers.
+        </p>
+        <div class="diagram" aria-label="Collas category-theoretic perspective on IUT">
+          <div class="diagramHeader">
+            <strong>From schemes to category-theoretic containers</strong>
+            <span>Collas's expository route into IUT</span>
+          </div>
+          <svg viewBox="0 0 1040 430" role="img">
+            <defs>
+              <marker id="arrowCollasCat" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="42" y="56" width="210" height="76"></rect>
+            <text class="nodeTitle" x="147" y="84" text-anchor="middle">Grothendieck setting</text>
+            <text class="tinyText" x="147" y="108" text-anchor="middle">schemes, rings, etale pi1</text>
+            <text class="tinyText" x="147" y="124" text-anchor="middle">functorial reconstruction</text>
+
+            <rect class="nodeBox green" x="310" y="56" width="210" height="76"></rect>
+            <text class="nodeTitle" x="415" y="84" text-anchor="middle">mono-anabelian recovery</text>
+            <text class="tinyText" x="415" y="108" text-anchor="middle">recover data from groups</text>
+            <text class="tinyText" x="415" y="124" text-anchor="middle">one-for-all algorithms</text>
+
+            <rect class="nodeBox gold" x="578" y="56" width="210" height="76"></rect>
+            <text class="nodeTitle" x="683" y="84" text-anchor="middle">monoid geometry</text>
+            <text class="tinyText" x="683" y="108" text-anchor="middle">multiplicative/additive sides</text>
+            <text class="tinyText" x="683" y="124" text-anchor="middle">ring structure untangled</text>
+
+            <rect class="nodeBox violet" x="846" y="56" width="150" height="76"></rect>
+            <text class="nodeTitle" x="921" y="84" text-anchor="middle">IUT containers</text>
+            <text class="tinyText" x="921" y="108" text-anchor="middle">Hodge theaters</text>
+            <text class="tinyText" x="921" y="124" text-anchor="middle">Frobenioids</text>
+
+            <path d="M252 94 H308" class="edge blue" marker-end="url(#arrowCollasCat)"></path>
+            <path d="M520 94 H576" class="edge green" marker-end="url(#arrowCollasCat)"></path>
+            <path d="M788 94 H844" class="edge gold" marker-end="url(#arrowCollasCat)"></path>
+
+            <rect class="nodeBox red" x="124" y="222" width="230" height="82"></rect>
+            <text class="nodeTitle" x="239" y="250" text-anchor="middle">Diophantine problem</text>
+            <text class="tinyText" x="239" y="274" text-anchor="middle">height inequality for elliptic data</text>
+            <text class="tinyText" x="239" y="292" text-anchor="middle">requires simulated GMS</text>
+
+            <rect class="nodeBox green" x="406" y="222" width="230" height="82"></rect>
+            <text class="nodeTitle" x="521" y="250" text-anchor="middle">log-theta wandering</text>
+            <text class="tinyText" x="521" y="274" text-anchor="middle">noncommutative Hodge-theater lattice</text>
+            <text class="tinyText" x="521" y="292" text-anchor="middle">multiradial invariants</text>
+
+            <rect class="nodeBox violet" x="688" y="222" width="230" height="82"></rect>
+            <text class="nodeTitle" x="803" y="250" text-anchor="middle">species and universes</text>
+            <text class="tinyText" x="803" y="274" text-anchor="middle">typed packages, not raw sets</text>
+            <text class="tinyText" x="803" y="292" text-anchor="middle">logical AND/OR structure</text>
+
+            <path d="M921 134 C920 176 860 206 803 220" class="edge violet" marker-end="url(#arrowCollasCat)"></path>
+            <path d="M683 134 C650 178 588 202 522 220" class="edge green" marker-end="url(#arrowCollasCat)"></path>
+            <path d="M415 134 C364 170 294 196 240 220" class="edge red" marker-end="url(#arrowCollasCat)"></path>
+            <path d="M354 264 H404" class="edge red" marker-end="url(#arrowCollasCat)"></path>
+            <path d="M636 264 H686" class="edge green" marker-end="url(#arrowCollasCat)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="collas-grothendieck-unification">
+            <h3>Functorial unification</h3>
+            <p>
+              Collas frames Grothendieck's program as a functorial and
+              category-theoretic reconciliation of discrete arithmetic and continuous
+              geometry. In that setting, absolute Galois groups and etale path groups
+              are treated as related manifestations of one reconstruction language.
+            </p>
+            <div class="tagRow"><span class="tag blue">Collas §1</span><span class="tag">functoriality</span></div>
+          </div>
+          <div class="card" id="collas-monoid-geometry">
+            <h3>Geometry of monoids</h3>
+            <p>
+              The Collas overview emphasizes IUT's shift beyond the direct geometry of
+              rings and schemes toward additive and multiplicative monoid structures.
+              The point is not to forget rings, but to separate the two operations so
+              that non-ring-theoretic comparisons can be made explicit.
+            </p>
+            <div class="tagRow"><span class="tag green">Collas §2.2</span><span class="tag">monoids</span></div>
+          </div>
+          <div class="card" id="collas-categorification-diophantine">
+            <h3>Categorifying a Diophantine problem</h3>
+            <p>
+              Section 3.1 describes IUT as categorifying the problem of constructing a
+              global multiplicative subspace for elliptic-curve height estimates. The
+              category-theoretic simulation uses local multiplicative data, Frobenioid
+              packages, and Hodge theaters instead of an actual global subspace in the
+              general case.
+            </p>
+            <div class="tagRow"><span class="tag gold">Collas §3.1</span><span class="tag">GMS simulation</span></div>
+          </div>
+          <div class="card" id="collas-hodge-theater-category">
+            <h3>Hodge theaters as containers</h3>
+            <p>
+              In Collas's reading, Hodge theaters synchronize geometric and arithmetic
+              symmetries while keeping multiplicative and additive structures separated.
+              This matches the wiki's treatment of theaters as typed containers rather
+              than as ordinary copies of one scheme.
+            </p>
+            <div class="tagRow"><span class="tag violet">Collas §3.1.1</span><span class="tag">containers</span></div>
+          </div>
+          <div class="card" id="collas-log-theta-wandering">
+            <h3>Log-theta wandering</h3>
+            <p>
+              Collas describes the log-theta lattice as a category-theoretic setting for
+              relating distinct Frobenius-like objects by multiradial algorithms. This
+              is the interpretive bridge from Hodge-theater construction to the
+              Theorem 3.11 and Corollary 3.12 corridor.
+            </p>
+            <div class="tagRow"><span class="tag red">Collas §3.1.2</span><span class="tag">multiradial</span></div>
+          </div>
+          <div class="card" id="collas-universes-species">
+            <h3>Universes, species, and logic</h3>
+            <p>
+              Collas separates an external logical level, described in terms of AND/OR
+              articulation, from an internal category-theoretic level involving objects,
+              morphisms, functors, and Grothendieck universes. This supports the wiki's
+              page model: concepts must retain their type and source context.
+            </p>
+            <div class="tagRow"><span class="tag blue">Collas §3.1.3</span><span class="tag">species</span></div>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>Scope.</strong> Collas's text is highly useful for orientation and for
+          designing human-auditable Lean interfaces, but it does not replace the exact
+          definitions in IUT I-IV. In the wiki, Collas pages should point back to the
+          corresponding Mochizuki source objects whenever a construction becomes formal.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview</a>
+          <a href="papers/collas-anabelian-perspectives-galois-teichmuller.pdf" target="_blank">Collas GT perspectives</a>
+          <a href="papers/collas-murotani-yamaguchi-symmetries-anabelian-geometry.pdf" target="_blank">Collas-Murotani-Yamaguchi</a>
+          Related: <a href="#anabelian-background">anabelian background</a>
+          <a href="#frobenioids-log-shells">Frobenioids</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
+          <a href="#projective-line-gluing-analogy">projective-line gluing</a>
+          <a href="#essential-logical-structure">logical structure</a>
         </div>
       </section>
 
