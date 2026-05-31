@@ -663,6 +663,11 @@
         <a href="#procession-indeterminacy-iut-i411">Procession indeterminacy 4.11</a>
         <a href="#d-theta-nf-etale-picture-iut-i412">D-ThetaNF etale-picture 4.12</a>
         <a href="#iut-i-global-frobenioids-example51">Global Frobenioids 5.1</a>
+        <a href="#mstar-field-reconstruction-iut-i51">M* field reconstruction 5.1</a>
+        <a href="#dstar-cfmod-reconstruction-iut-i51">D*/C_Fmod reconstruction 5.1</a>
+        <a href="#global-kappa-pseudomonoids-iut-i51">Global kappa pseudo-monoids 5.1</a>
+        <a href="#kappa-sol-quotient-iut-i51">Kappa-sol quotient 5.1</a>
+        <a href="#kappa-sol-synchronization-iut-i51">Kappa-sol synchronization 5.1</a>
         <a href="#global-reconstruction-51">Global reconstruction 5.1</a>
         <a href="#kummer-ready-blind-51-52">Kummer-ready/blind 5.1-5.2</a>
         <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips 5.2</a>
@@ -16582,6 +16587,209 @@
           <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
           <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
           <a href="#log-kummer-correspondences">log-Kummer correspondences</a>
+        </div>
+      </section>
+
+      <section id="mstar-field-reconstruction-iut-i51" data-filter="iut i example 5.1 m star field reconstruction theta approach pi1 d abs top iii theorem 1.9">
+        <h2>IUT I Example 5.1(i): <span class="math">M*</span> Field Reconstruction</h2>
+        <p class="lede">
+          Example 5.1(i) begins by applying the theta-approach and absolute anabelian
+          reconstruction to <span class="math">pi_1(D)</span>. The output is an
+          isomorph of <span class="math">F^x</span>, denoted
+          <span class="math">M*(D)</span>, together with the field structure on
+          <span class="math">M*(D) union {0}</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Input</th><th>Example 5.1(i) content</th><th>Consequence</th></tr>
+          <tr>
+            <td><span class="math">pi_1(D)</span></td>
+            <td>Apply the theta-approach of Remark 3.1.2 and [AbsTopIII], Theorem 1.9.</td>
+            <td>The field data is reconstructed group-theoretically from the global D-side.</td>
+          </tr>
+          <tr>
+            <td><span class="math">M*(D)</span></td>
+            <td>The reconstructed multiplicative group is equipped with its natural <span class="math">pi_1(D)</span>-action.</td>
+            <td>This is the global multiplicative object used by the Frobenioid lift.</td>
+          </tr>
+          <tr>
+            <td>Field structure</td>
+            <td>The construction includes the field law on <span class="math">M*(D) union {0}</span>.</td>
+            <td>The wiki should treat <span class="math">M*</span> as more than a bare group once the source reconstruction is invoked.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 5.1(i)</a>
+          Related: <a href="#theta-approach-abs-top-319">theta approach</a>
+          <a href="#dstar-cfmod-reconstruction-iut-i51">D*/C_Fmod reconstruction</a>
+        </div>
+      </section>
+
+      <section id="dstar-cfmod-reconstruction-iut-i51" data-filter="iut i example 5.1 d star c fmod reconstruction open subgroup invariants m mod">
+        <h2>IUT I Example 5.1(i): <span class="math">D*</span> and <span class="math">C_Fmod</span></h2>
+        <p class="lede">
+          The same global reconstruction produces a profinite group corresponding to
+          the model <span class="math">C_Fmod</span>. Its connected-object category is
+          denoted <span class="math">D*</span>; the original
+          <span class="math">D</span> appears as an open-subgroup layer, and invariants
+          recover the <span class="math">Fmod</span> part.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Example 5.1 D star and C_Fmod reconstruction">
+          <div class="diagramHeader">
+            <strong>Global D opens into the model core</strong>
+            <span>IUT I, Example 5.1(i)</span>
+          </div>
+          <svg viewBox="0 0 1120 410" role="img">
+            <defs>
+              <marker id="arrowDStar51" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="102" y="96" width="260" height="92"></rect>
+            <text class="nodeTitle" x="232" y="128" text-anchor="middle">pi_1(D)</text>
+            <text class="tinyText" x="232" y="154" text-anchor="middle">global D input</text>
+            <rect class="nodeBox green" x="430" y="96" width="260" height="92"></rect>
+            <text class="nodeTitle" x="560" y="128" text-anchor="middle">C_Fmod group</text>
+            <text class="tinyText" x="560" y="154" text-anchor="middle">reconstructed functorially</text>
+            <rect class="nodeBox gold" x="758" y="96" width="260" height="92"></rect>
+            <text class="nodeTitle" x="888" y="128" text-anchor="middle">D*</text>
+            <text class="tinyText" x="888" y="154" text-anchor="middle">B(-)^0, contains D open</text>
+            <rect class="nodeBox violet" x="374" y="280" width="372" height="66"></rect>
+            <text class="nodeTitle" x="560" y="308" text-anchor="middle">M*_mod from invariants</text>
+            <text class="tinyText" x="560" y="330" text-anchor="middle">Fmod^x subset F^x and Fmod subset F</text>
+            <path class="edge blue" d="M364 142 H428" marker-end="url(#arrowDStar51)"></path>
+            <path class="edge green" d="M692 142 H756" marker-end="url(#arrowDStar51)"></path>
+            <path class="edge violet" d="M560 190 V278" marker-end="url(#arrowDStar51)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Source content</th><th>Consequence</th></tr>
+          <tr>
+            <td><span class="math">D*</span></td>
+            <td>Constructed as <span class="math">B(-)^0</span> of the reconstructed profinite group corresponding to <span class="math">C_Fmod</span>.</td>
+            <td>Section 5 works over a model core that contains the original D-layer.</td>
+          </tr>
+          <tr>
+            <td><span class="math">D -> D*</span></td>
+            <td>A natural category-theoretic version of <span class="math">C_K -> C_Fmod</span>.</td>
+            <td>The global curve-to-core morphism becomes categorical data.</td>
+          </tr>
+          <tr>
+            <td>Invariants</td>
+            <td>Taking <span class="math">pi_1(D*)</span>-invariants yields <span class="math">M*_mod subset M*</span> and the corresponding field subset.</td>
+            <td>The <span class="math">Fmod</span> layer is recovered through the larger reconstructed object.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 5.1(i)</a>
+          Related: <a href="#mstar-field-reconstruction-iut-i51">M* field reconstruction</a>
+          <a href="#global-kappa-pseudomonoids-iut-i51">global kappa pseudo-monoids</a>
+        </div>
+      </section>
+
+      <section id="global-kappa-pseudomonoids-iut-i51" data-filter="iut i example 5.1 kappa coric pseudo monoids rational function field pi rat m kappa infinity kappa">
+        <h2>IUT I Example 5.1(i): Global Kappa-Coric Pseudo-Monoids</h2>
+        <p class="lede">
+          Example 5.1(i) next reconstructs the rational function-field Galois group
+          <span class="math">pi_1^rat(D*)</span> and the pseudo-monoids
+          <span class="math">M_κ*</span>, <span class="math">M_∞κ*</span>, and
+          <span class="math">M_∞κ×*</span> with their natural actions.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Example 5.1(i) content</th><th>Consequence</th></tr>
+          <tr>
+            <td><span class="math">pi_1^rat(D*)</span></td>
+            <td>An isomorph of the absolute Galois group of the function field of <span class="math">C_Fmod</span>, well-defined up to inner automorphisms from the kernel.</td>
+            <td>Rational function-field data enters the global Frobenioid lift.</td>
+          </tr>
+          <tr>
+            <td><span class="math">M_κ*</span></td>
+            <td>Identified with the invariant subset of <span class="math">M_∞κ*</span>.</td>
+            <td>κ-coric data is recovered from the ∞κ layer.</td>
+          </tr>
+          <tr>
+            <td><span class="math">M*</span></td>
+            <td>Identified with a sub-pseudo-monoid of <span class="math">M_∞κ×*</span>.</td>
+            <td>The reconstructed field units are embedded into the κ-coric pseudo-monoid environment.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 5.1(i)</a>
+          Related: <a href="#kappa-coric-functions">kappa-coric functions</a>
+          <a href="#kappa-sol-quotient-iut-i51">kappa-sol quotient</a>
+        </div>
+      </section>
+
+      <section id="kappa-sol-quotient-iut-i51" data-filter="iut i example 5.1 kappa sol quotient pi kappa sol m kappa sol m sol maximal solvable">
+        <h2>IUT I Example 5.1(i): Kappa-Sol Quotient</h2>
+        <p class="lede">
+          The κ-sol quotient is formed from <span class="math">pi_1^rat(D*)</span> by
+          combining the kernel of the ∞κ action with the inverse image of the kernel of
+          the maximal solvable quotient over <span class="math">Fmod</span>. This gives
+          <span class="math">pi_1^{κ-sol}(D*)</span> and the monoids
+          <span class="math">M_κ-sol*</span> and <span class="math">M_sol*</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Construction</th><th>Source content</th><th>Use</th></tr>
+          <tr>
+            <td>Quotient</td>
+            <td><span class="math">pi_1^rat(D*) -> pi_1^{κ-sol}(D*)</span> corresponds to the quotient described in Remark 3.1.7(iv).</td>
+            <td>This packages the κ-solvable outer representation used below.</td>
+          </tr>
+          <tr>
+            <td>Kernel</td>
+            <td>The kernel is denoted <span class="math">pi_1^{rat/κ-sol}(D*)</span>.</td>
+            <td>The kernel controls invariant subsets of the pseudo-monoids.</td>
+          </tr>
+          <tr>
+            <td>Invariant monoids</td>
+            <td><span class="math">M_κ-sol*</span> and <span class="math">M_sol*</span> are invariant subsets of <span class="math">M_∞κ×*</span> and <span class="math">M*</span>.</td>
+            <td>These are Kummer-ready objects in the later Section 5 split.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 5.1(i)</a>
+          Related: <a href="#global-kappa-pseudomonoids-iut-i51">global kappa pseudo-monoids</a>
+          <a href="#kappa-sol-synchronization-iut-i51">kappa-sol synchronization</a>
+        </div>
+      </section>
+
+      <section id="kappa-sol-synchronization-iut-i51" data-filter="iut i example 5.1 kappa sol conjugate synchronization fl poly action outer representation trivial no conjugacy">
+        <h2>IUT I Example 5.1(i): Kappa-Sol Conjugate Synchronization</h2>
+        <p class="lede">
+          Example 5.1(i) ends with a synchronization statement. Although the
+          <span class="math">F_l</span> poly-action on
+          <span class="math">pi_1^rat(D*)</span> is initially defined only up to
+          conjugacy, linear disjointness makes the induced action on the κ-sol outer
+          representation well-defined without conjugacy indeterminacy, and equal to the
+          trivial action.
+        </p>
+        <div class="callout good">
+          This is a source-side no-drift statement: at the κ-sol outer-representation
+          level, the relevant <span class="math">F_l</span> action has no remaining
+          conjugacy ambiguity and is trivial.
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Step</th><th>Example 5.1(i) content</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Initial ambiguity</td>
+            <td>The poly-action on <span class="math">pi_1^rat(D*)</span> is well-defined only up to conjugation by elements of the subgroup over <span class="math">pi_1(D)</span>.</td>
+            <td>The raw rational action still carries conjugacy indeterminacy.</td>
+          </tr>
+          <tr>
+            <td>Linear disjointness</td>
+            <td>Remark 3.1.7(iii) lets the action descend to the quotient up to <span class="math">pi_1^{rat/κ-sol}</span>-conjugacy.</td>
+            <td>The quotient is the correct level for synchronization.</td>
+          </tr>
+          <tr>
+            <td>Outer representation</td>
+            <td>The induced poly-action on <span class="math">pi_1^{κ-sol}(D*) -> Out_{κ-sol}(pi_1^{rat/κ-sol}(D*))</span> is well-defined without conjugacy indeterminacy and is trivial.</td>
+            <td>Lean-facing interfaces should express this as an invariant of the κ-sol outer representation, not of the raw rational group.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 5.1(i)</a>
+          Related: <a href="#kappa-sol-quotient-iut-i51">kappa-sol quotient</a>
+          <a href="#conjugate-synchronization-logwall-ii383">conjugate synchronization/log-wall</a>
         </div>
       </section>
 
