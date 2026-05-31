@@ -720,6 +720,12 @@
         <a href="#pivotal-distribution-iut-i54">Pivotal distribution 5.4</a>
         <a href="#log-volume-average-sum-iut-i542">Average/sum convention 5.4.2</a>
         <a href="#theta-nf-bridges-definition-55-56">ThetaNF bridges 5.5-5.6</a>
+        <a href="#nf-bridge-definition-iut-i55">NF-bridge definition 5.5</a>
+        <a href="#theta-bridge-definition-iut-i55">Theta-bridge definition 5.5</a>
+        <a href="#theta-nf-hodge-theater-iut-i55">ThetaNF theater 5.5</a>
+        <a href="#theta-hodge-isomorphism-iut-i56">Theta isomorphisms 5.6</a>
+        <a href="#bridge-isomorphism-rigidity-iut-i56">Bridge rigidity 5.6</a>
+        <a href="#gluing-torsor-iut-i56">Gluing torsor 5.6</a>
         <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
         <a href="#projective-line-gluing-analogy">Projective-line gluing</a>
         <a href="#iut-i-gluing-models">IUT I gluing models</a>
@@ -18423,7 +18429,7 @@
             <td>
               Compatible gluing poly-isomorphisms between the F-prime-strip capsules of
               an NF-bridge and Theta-bridge form an
-              <span class="math">F_l^x/{±1}</span>-torsor.
+              <span class="math">F_l</span>-torsor.
             </td>
             <td>Gluing indeterminacy is inherited from Section 4.</td>
           </tr>
@@ -18447,6 +18453,236 @@
           <a href="#d-theta-nf-bridges-46-47">D-ThetaNF bridges</a>
           <a href="#section4-symmetries-processions-48-412">Section 4 symmetries/processions</a>
           <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges</a>
+        </div>
+      </section>
+
+      <section id="nf-bridge-definition-iut-i55">
+        <h2>NF-Bridge Definition in IUT I 5.5</h2>
+        <p class="lede">
+          Definition 5.5(i) defines an NF-bridge as the Frobenioid lift of a D-NF
+          bridge. It consists of an F-prime-strip capsule
+          <span class="math">F_J = {F_j}_{j in J}</span>, two Frobenioid categories
+          modeled on the global categories of Example 5.1(iii), the structural arrow
+          between their base categories, and a uniquely lifted poly-morphism over a
+          D-NF bridge.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Component</th><th>Definition 5.5(i)</th><th>Audit point</th></tr>
+          <tr>
+            <td><span class="math">F_J</span></td>
+            <td>A capsule of F-prime-strips indexed by a finite set <span class="math">J</span>, with associated D-capsule <span class="math">D_J</span>.</td>
+            <td>The F-capsule and D-capsule must be tracked together.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F</span>, <span class="math">F*</span></td>
+            <td>Categories equivalent to the global Frobenioid categories of Example 5.1(iii), with base categories <span class="math">D</span>, <span class="math">D*</span>.</td>
+            <td>The bridge is not just a map of labels; it carries Frobenioid structure.</td>
+          </tr>
+          <tr>
+            <td><span class="math">psi^NF</span></td>
+            <td>A poly-morphism lifting uniquely, by Corollary 5.3(ii), a D-NF bridge <span class="math">phi^NF : D_J -> D</span>.</td>
+            <td>The F-level arrow is controlled by D-level rigidity.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 5.5(i)</a>
+          Related: <a href="#nf-polymorphism-psinf-iut-i54">NF poly-morphism 5.4</a>
+          <a href="#corollary-53-rigidity-page">Corollary 5.3 rigidity</a>
+          <a href="#bridge-isomorphism-rigidity-iut-i56">bridge rigidity</a>
+        </div>
+      </section>
+
+      <section id="theta-bridge-definition-iut-i55">
+        <h2>Theta-Bridge Definition in IUT I 5.5</h2>
+        <p class="lede">
+          Definition 5.5(ii) defines a Theta-bridge as the Frobenioid lift of a
+          D-Theta bridge. It combines the same kind of F-prime-strip capsule
+          <span class="math">F_J</span>, a Theta-Hodge theater
+          <span class="math">HT^Theta</span>, its tautologically associated
+          theta-side F-prime-strip <span class="math">F_&gt;</span>, and the family of
+          poly-morphisms determined by a D-Theta bridge.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Capsule</h3>
+            <p>
+              The source capsule is again <span class="math">{F_j}_{j in J}</span>,
+              with associated D-prime-strips <span class="math">D_J</span>.
+            </p>
+            <div class="tagRow"><span class="tag blue">Def. 5.5(ii)(a)</span><span class="tag">capsule</span></div>
+          </div>
+          <div class="card">
+            <h3>Theater side</h3>
+            <p>
+              The target object <span class="math">F_&gt;</span> is tautologically
+              associated to the Theta-Hodge theater, with associated D-strip
+              <span class="math">D_&gt;</span>.
+            </p>
+            <div class="tagRow"><span class="tag gold">Def. 5.5(ii)(b-c)</span><span class="tag">Theta</span></div>
+          </div>
+          <div class="card">
+            <h3>Lifted arrows</h3>
+            <p>
+              The family <span class="math">psi^Theta_j : F_j -> F_&gt;</span> is
+              determined by the D-Theta bridge family
+              <span class="math">phi^Theta_j : D_j -> D_&gt;</span>.
+            </p>
+            <div class="tagRow"><span class="tag green">Def. 5.5(ii)(d)</span><span class="tag">lift</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 5.5(ii)</a>
+          Related: <a href="#theta-polymorphisms-iut-i54">theta poly-morphisms 5.4</a>
+          <a href="#theta-hodge-theater-definition-iut-i36">Theta-Hodge theater 3.6</a>
+          <a href="#theta-hodge-isomorphism-iut-i56">Theta isomorphisms</a>
+        </div>
+      </section>
+
+      <section id="theta-nf-hodge-theater-iut-i55">
+        <h2>ThetaNF-Hodge Theater in IUT I 5.5</h2>
+        <p class="lede">
+          Definition 5.5(iii) glues an NF-bridge and a Theta-bridge over the same
+          F-prime-strip capsule. The associated D-data
+          <span class="math">{phi^NF, phi^Theta}</span> must form a D-ThetaNF-Hodge
+          theater, and a morphism of ThetaNF-Hodge theaters is a compatible pair of
+          NF-bridge and Theta-bridge morphisms inducing the same bijection on capsule
+          indices.
+        </p>
+        <div class="flowDiagram" aria-label="ThetaNF-Hodge theater gluing requirements">
+          <div class="flowStep">
+            <strong>1. NF side</strong>
+            <p><span class="math">F <- F_J</span> is an NF-bridge lifting a D-NF bridge.</p>
+          </div>
+          <div class="flowStep">
+            <strong>2. Theta side</strong>
+            <p><span class="math">F_J -> F_&gt; -> HT^Theta</span> is a Theta-bridge lifting a D-Theta bridge.</p>
+          </div>
+          <div class="flowStep">
+            <strong>3. Shared index motion</strong>
+            <p>Bridge morphisms must induce the same bijection on the capsule index set.</p>
+          </div>
+        </div>
+        <div class="callout warn">
+          The shared capsule is structural. A formal model that stores independent
+          NF-side and Theta-side index maps has not yet encoded Definition 5.5(iii).
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 5.5(iii)</a>
+          Related: <a href="#nf-bridge-definition-iut-i55">NF-bridge</a>
+          <a href="#theta-bridge-definition-iut-i55">Theta-bridge</a>
+          <a href="#d-theta-nf-theater-definition-iut-i46">D-ThetaNF theater</a>
+        </div>
+      </section>
+
+      <section id="theta-hodge-isomorphism-iut-i56">
+        <h2>Theta-Hodge Isomorphisms in IUT I 5.6</h2>
+        <p class="lede">
+          Corollary 5.6(i) states that the functorially induced map from
+          isomorphisms of Theta-Hodge theaters to isomorphisms of their associated
+          D-prime-strips is bijective. The proof uses the fact that the associated
+          F-prime-strip contains all but the explicitly listed global and bad-place
+          tempered Frobenioid data, and then applies Corollary 5.3.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Proof ingredient</th><th>Source statement</th><th>Consequence</th></tr>
+          <tr>
+            <td>Associated <span class="math">F_&gt;</span></td>
+            <td>Most Theta-Hodge theater data is contained in the associated F-prime-strip.</td>
+            <td>The theater isomorphism problem descends to the strip interface.</td>
+          </tr>
+          <tr>
+            <td>Global data recovery</td>
+            <td>The remaining global data is obtained by the functorial algorithm of Remark 5.2.1(ii).</td>
+            <td>No extra arbitrary choices are added at this stage.</td>
+          </tr>
+          <tr>
+            <td>Corollary 5.3</td>
+            <td>Parts (ii) and (iv) control associated F-prime-strips and bad-place tempered Frobenioids.</td>
+            <td>The induced map to D-prime-strip isomorphisms is bijective.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Corollary 5.6(i)</a>
+          Related: <a href="#theta-hodge-theater-definition-iut-i36">Theta-Hodge theater</a>
+          <a href="#f-to-d-strip-algorithms-iut-i521">F-to-D algorithms</a>
+          <a href="#corollary-53-rigidity-page">Corollary 5.3 rigidity</a>
+        </div>
+      </section>
+
+      <section id="bridge-isomorphism-rigidity-iut-i56">
+        <h2>Bridge Isomorphism Rigidity in IUT I 5.6</h2>
+        <p class="lede">
+          Corollary 5.6(ii) extends the rigidity statement from Theta-Hodge theaters to
+          NF-bridges, Theta-bridges, and ThetaNF-Hodge theaters. In each case, the
+          natural map from F-level isomorphisms to the corresponding D-level bridge
+          isomorphisms is bijective.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>F-level object</th><th>D-level controller</th><th>Reason this matters</th></tr>
+          <tr>
+            <td>NF-bridge</td>
+            <td>D-NF bridge</td>
+            <td>The number-field side remains rigid over its D-prime-strip data.</td>
+          </tr>
+          <tr>
+            <td>Theta-bridge</td>
+            <td>D-Theta bridge</td>
+            <td>The theta-side lift carries no independent isomorphism freedom.</td>
+          </tr>
+          <tr>
+            <td>ThetaNF-Hodge theater</td>
+            <td>D-ThetaNF-Hodge theater</td>
+            <td>Compatibility of the two bridge sides is checked at the D-level.</td>
+          </tr>
+        </table>
+        <div class="callout good">
+          This is the Section 5 analogue of the anti-drift rule used throughout the
+          wiki: F-level bridge records should expose their associated D-level record as
+          the isomorphism controller.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Corollary 5.6(ii)</a>
+          Related: <a href="#nf-bridge-definition-iut-i55">NF-bridge</a>
+          <a href="#theta-bridge-definition-iut-i55">Theta-bridge</a>
+          <a href="#theta-nf-hodge-theater-iut-i55">ThetaNF theater</a>
+        </div>
+      </section>
+
+      <section id="gluing-torsor-iut-i56">
+        <h2>Gluing Torsor in IUT I 5.6</h2>
+        <p class="lede">
+          Corollary 5.6(iii) states that, given an NF-bridge and a Theta-bridge, the
+          capsule-full poly-isomorphisms between their F-prime-strip capsules that
+          allow the two bridges to glue into a ThetaNF-Hodge theater form an
+          <span class="math">F_l</span>-torsor.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Input</h3>
+            <p>One NF-bridge and one Theta-bridge, each with an F-prime-strip capsule.</p>
+            <div class="tagRow"><span class="tag blue">given</span><span class="tag">bridges</span></div>
+          </div>
+          <div class="card">
+            <h3>Allowed gluings</h3>
+            <p>Capsule-full poly-isomorphisms that make the combined data a ThetaNF-Hodge theater.</p>
+            <div class="tagRow"><span class="tag green">poly-isomorphisms</span><span class="tag">compatibility</span></div>
+          </div>
+          <div class="card">
+            <h3>Structure</h3>
+            <p>The set of such gluings is an <span class="math">F_l</span>-torsor.</p>
+            <div class="tagRow"><span class="tag gold">Cor. 5.6(iii)</span><span class="tag">torsor</span></div>
+          </div>
+        </div>
+        <div class="callout warn">
+          This page intentionally uses <span class="math">F_l</span>-torsor, following
+          the local IUT I text for Corollary 5.6(iii). The earlier multiplicative
+          Section 4 labels use the quotient-by-sign notation on separate pages.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Corollary 5.6(iii)</a>
+          Related: <a href="#theta-nf-hodge-theater-iut-i55">ThetaNF theater</a>
+          <a href="#section4-symmetries-processions-48-412">Section 4 symmetries</a>
+          <a href="#bridge-isomorphism-rigidity-iut-i56">bridge rigidity</a>
         </div>
       </section>
 
