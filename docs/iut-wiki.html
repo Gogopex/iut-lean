@@ -480,6 +480,7 @@
         <h2>Core IUT</h2>
         <a href="#initial-theta-data">Initial theta data</a>
         <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
+        <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
         <a href="#hodge-theaters">Hodge theaters</a>
         <a href="#mutually-alien-copies">Mutually alien copies</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
@@ -1038,6 +1039,11 @@
             <td>ThetaNF and additive theory</td>
             <td>
               <a href="#theta-nf-hodge-theater">ThetaNF-Hodge theater</a>,
+              <a href="#nf-bridge-frobenioid-lift">NF bridge</a>,
+              <a href="#theta-bridge-frobenioid-lift">Theta bridge</a>,
+              <a href="#theta-link-source-definition">Theta link source definition</a>,
+              <a href="#theta-nf-gluing-section5">ThetaNF gluing</a>,
+              <a href="#frobenius-picture-chain">Frobenius-picture chain</a>,
               <a href="#theta-hodge-theater-source">theta-Hodge theater</a>,
               <a href="#theta-link-poly-isomorphism">theta-link poly-isomorphism</a>,
               <a href="#fmod-global-frobenioid">Fmod</a>,
@@ -1324,7 +1330,7 @@
               discipline.
             </p>
           </div>
-          <div class="card" id="theta-nf-hodge-theater">
+          <div class="card" id="theta-nf-gluing-section5">
             <h3>ThetaNF-Hodge theater</h3>
             <p>
               A ThetaNF-Hodge theater glues theta and number-field bridge structures
@@ -3735,6 +3741,306 @@
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#prime-strips-bridges">prime strips</a>
           <a href="#multiplicative-additive-bridges">bridge theory</a>
+        </div>
+      </section>
+
+      <section id="theta-nf-frobenioid-lift">
+        <h2>ThetaNF Frobenioid Lift</h2>
+        <p class="lede">
+          IUT I Section 5 lifts the D-level bridge formalism of Section 4 to
+          Frobenioid-prime-strips. The result is the ThetaNF-Hodge theater: an
+          NF-bridge, a Theta-bridge, and a common capsule of F-prime-strips whose
+          associated D-bridges form the D-ThetaNF-Hodge theater.
+        </p>
+        <div class="diagram" aria-label="ThetaNF Frobenioid lift">
+          <div class="diagramHeader">
+            <strong>From D-bridges to ThetaNF theaters</strong>
+            <span>Section 5 adds Frobenioid data without losing the D-level dynamics</span>
+          </div>
+          <svg viewBox="0 0 980 430" role="img">
+            <defs>
+              <marker id="arrowThetaNFLift" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="48" y="58" width="180" height="76"></rect>
+            <text class="nodeTitle" x="138" y="86" text-anchor="middle">D-ThetaNF</text>
+            <text class="tinyText" x="138" y="107" text-anchor="middle">Section 4 bridge</text>
+
+            <rect class="nodeBox green" x="290" y="42" width="184" height="74"></rect>
+            <text class="nodeTitle" x="382" y="69" text-anchor="middle">NF-bridge</text>
+            <text class="tinyText" x="382" y="91" text-anchor="middle">F_J -> F_o -> F_*</text>
+
+            <rect class="nodeBox gold" x="290" y="146" width="184" height="74"></rect>
+            <text class="nodeTitle" x="382" y="173" text-anchor="middle">Theta-bridge</text>
+            <text class="tinyText" x="382" y="195" text-anchor="middle">F_J -> F_> -> HT_Theta</text>
+
+            <rect class="nodeBox violet" x="544" y="92" width="188" height="84"></rect>
+            <text class="nodeTitle" x="638" y="120" text-anchor="middle">ThetaNF-Hodge</text>
+            <text class="tinyText" x="638" y="142" text-anchor="middle">same F_J index set</text>
+            <text class="tinyText" x="638" y="160" text-anchor="middle">compatible D-bridges</text>
+
+            <rect class="nodeBox red" x="798" y="92" width="136" height="84"></rect>
+            <text class="nodeTitle" x="866" y="120" text-anchor="middle">Cor. 5.6</text>
+            <text class="tinyText" x="866" y="142" text-anchor="middle">D-level</text>
+            <text class="tinyText" x="866" y="160" text-anchor="middle">isomorphisms</text>
+
+            <path d="M228 94 H288" class="edge blue" marker-end="url(#arrowThetaNFLift)"></path>
+            <path d="M228 104 C250 135 261 162 288 177" class="edge blue" marker-end="url(#arrowThetaNFLift)"></path>
+            <path d="M474 79 C508 86 523 103 544 117" class="edge green" marker-end="url(#arrowThetaNFLift)"></path>
+            <path d="M474 183 C508 176 523 159 544 145" class="edge gold" marker-end="url(#arrowThetaNFLift)"></path>
+            <path d="M732 134 H796" class="edge red" marker-end="url(#arrowThetaNFLift)"></path>
+
+            <rect class="nodeBox green" x="124" y="288" width="184" height="76"></rect>
+            <text class="nodeTitle" x="216" y="316" text-anchor="middle">F_mod strip</text>
+            <text class="tinyText" x="216" y="338" text-anchor="middle">q-parameters + product formula</text>
+
+            <rect class="nodeBox gold" x="398" y="288" width="184" height="76"></rect>
+            <text class="nodeTitle" x="490" y="316" text-anchor="middle">F_theta strip</text>
+            <text class="tinyText" x="490" y="338" text-anchor="middle">theta values as Frobenioid data</text>
+
+            <rect class="nodeBox violet" x="674" y="288" width="184" height="76"></rect>
+            <text class="nodeTitle" x="766" y="316" text-anchor="middle">Theta-link</text>
+            <text class="tinyText" x="766" y="338" text-anchor="middle">full poly-isomorphism</text>
+
+            <path d="M308 326 H396" class="edge green" marker-end="url(#arrowThetaNFLift)"></path>
+            <path d="M582 326 H672" class="edge violet" marker-end="url(#arrowThetaNFLift)"></path>
+            <text class="edgeLabel" x="490" y="264" text-anchor="middle">Section 5 is the Frobenioid-theoretic lifting of the bridge diagram</text>
+          </svg>
+        </div>
+
+        <table>
+          <tr>
+            <th>IUT I Section 5 item</th>
+            <th>What is added</th>
+            <th>Why it matters</th>
+          </tr>
+          <tr>
+            <td>Example 5.1</td>
+            <td>
+              Group-theoretic reconstruction of global Frobenioid data attached to
+              <span class="math">D_o</span>, including field/unit data and the
+              <span class="math">F_mod</span> subfield obtained by invariants.
+            </td>
+            <td>
+              The number-field side is not inserted as an untyped field copy; it is
+              recovered from the D-side anabelian input and then repackaged
+              Frobenioid-theoretically.
+            </td>
+          </tr>
+          <tr>
+            <td>Example 5.4</td>
+            <td>
+              Cusp-label classes determine delta-valuations and hence localized
+              F-prime-strips <span class="math">F|delta</span>. The same example
+              constructs pivotal distributions for the label <span class="math">j=1</span>.
+            </td>
+            <td>
+              Section 4 label synchronization becomes a localization mechanism for
+              Frobenioids; this is where labels begin to control arithmetic-degree
+              bookkeeping.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 5.4.2</td>
+            <td>
+              Log-volumes of <span class="math">F_*_J</span> may be read either as
+              averages over labels or as sums, depending on whether one normalizes by
+              the cardinality of the label set.
+            </td>
+            <td>
+              The later height inequalities depend on keeping these normalization
+              conventions explicit instead of silently identifying all arithmetic
+              degrees.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 5.5(i)</td>
+            <td>
+              An NF-bridge is a capsule of F-prime-strips
+              <span class="math">F_J</span>, Frobenioid categories
+              <span class="math">F_o</span> and <span class="math">F_*</span>, and a
+              poly-morphism lifting a D-NF bridge.
+            </td>
+            <td>
+              It is the Frobenioid lift of the number-field bridge. Its associated
+              D-NF bridge remains the controlling lower-level object.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 5.5(ii)</td>
+            <td>
+              A Theta-bridge is a capsule <span class="math">F_J</span>, an
+              F-prime-strip <span class="math">F_></span> tautologically associated
+              to a Theta-Hodge theater, and poly-morphisms determined by a D-Theta bridge.
+            </td>
+            <td>
+              It lifts theta-side comparison to Frobenioid data while keeping the
+              source of the morphisms in the D-Theta bridge.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 5.5(iii)</td>
+            <td>
+              A ThetaNF-Hodge theater glues an NF-bridge and a Theta-bridge with the
+              same F-prime-strip capsule, requiring the associated D-data to form a
+              D-ThetaNF-Hodge theater.
+            </td>
+            <td>
+              The construction is not a new independent theater type; it is the
+              Frobenioid lift of the Section 4 D-ThetaNF package.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 5.6</td>
+            <td>
+              Isomorphisms of Theta-Hodge theaters, NF-bridges, Theta-bridges, and
+              ThetaNF-Hodge theaters are controlled by the associated D-prime-strip or
+              D-bridge isomorphisms; compatible gluings form an
+              <span class="math">F_l^*/±</span>-torsor.
+            </td>
+            <td>
+              The Frobenioid lift preserves the functorial dynamics of Section 4.
+              This is the source-level justification for modeling the lifted layer as
+              a controlled extension of D-level bridge data.
+            </td>
+          </tr>
+        </table>
+
+        <div class="grid3">
+          <div class="card" id="global-frobenioid-reconstruction">
+            <h3>Global Frobenioid reconstruction</h3>
+            <p>
+              Example 5.1 reconstructs field and unit data from
+              <span class="math">pi_1(D_o)</span>, extends the action to the
+              reconstructed <span class="math">D_*</span>, and obtains the
+              <span class="math">F_mod</span> part by invariants.
+            </p>
+            <div class="tagRow"><span class="tag green">Example 5.1</span><span class="tag">anabelian</span></div>
+          </div>
+          <div class="card" id="kappa-coric-functions">
+            <h3>Kappa-coric functions</h3>
+            <p>
+              Section 5 uses kappa-coric rational-function pseudo-monoids and their
+              nonzero variants to recover function data from the orbicurve side. At
+              strictly critical points, constant multiples split into coric functions
+              and constants up to roots of unity.
+            </p>
+            <div class="tagRow"><span class="tag gold">Example 5.1</span><span class="tag">coric data</span></div>
+          </div>
+          <div class="card" id="kummer-ready-rigidity">
+            <h3>Kummer-ready rigidity</h3>
+            <p>
+              Corollary 5.3 and Remark 5.3.2 state that F-prime-strip isomorphisms
+              are rigid over their D-side data because the Frobenioid package is
+              Kummer-ready. The corresponding mono-analytic weakened strips are
+              Kummer-blind.
+            </p>
+            <div class="tagRow"><span class="tag blue">Cor. 5.3</span><span class="tag">rigidity</span></div>
+          </div>
+          <div class="card" id="fmod-prime-strip">
+            <h3><span class="math">F_mod</span> prime-strip</h3>
+            <p>
+              In the introductory summary of Section 5, the natural realified
+              F-prime-strip <span class="math">F_mod</span> is built from
+              <span class="math">2l</span>-th roots of bad-place q-parameters and
+              compatible good-place data satisfying the product formula.
+            </p>
+            <div class="tagRow"><span class="tag green">Def. 5.2(iv)</span><span class="tag">q-parameters</span></div>
+          </div>
+          <div class="card" id="ftht-prime-strip">
+            <h3>Theta prime-strip</h3>
+            <p>
+              Replacing those q-parameter roots by reciprocals of
+              <span class="math">l</span>-th roots of the Frobenioid-theoretic theta
+              function <span class="math">Theta_v</span> gives the theta-side
+              F-prime-strip used in the source theta link.
+            </p>
+            <div class="tagRow"><span class="tag gold">IUT I Intro §I1</span><span class="tag">Theta_v</span></div>
+          </div>
+          <div class="card" id="theta-link-source-definition">
+            <h3>Theta link source definition</h3>
+            <p>
+              The full poly-isomorphism from the theta-side realified F-prime-strip to
+              the <span class="math">F_mod</span> realified F-prime-strip is the
+              theta link. It relates Frobenioid-theoretic data, not ordinary ring or
+              scheme structures.
+            </p>
+            <div class="tagRow"><span class="tag violet">Cor. 3.7</span><span class="tag">poly-isomorphism</span></div>
+          </div>
+          <div class="card" id="theta-link-f-times-preservation">
+            <h3>Unit-level preservation</h3>
+            <p>
+              The theta link also induces a full poly-isomorphism on the associated
+              <span class="math">F⊢×</span> prime-strips. This is the source-level
+              unit/mono-analytic preservation statement, not a preservation statement
+              for full arithmetic holomorphic structures.
+            </p>
+            <div class="tagRow"><span class="tag violet">Cor. 3.7</span><span class="tag">F⊢×</span></div>
+          </div>
+          <div class="card" id="nf-bridge-frobenioid-lift">
+            <h3>NF bridge</h3>
+            <p>
+              Definition 5.5(i) packages <span class="math">F_J</span>,
+              <span class="math">F_o</span>, and <span class="math">F_*</span> together
+              with a lifting poly-morphism. The lift is unique over the D-NF bridge in
+              the sense supplied by Corollary 5.3.
+            </p>
+            <div class="tagRow"><span class="tag green">Def. 5.5(i)</span><span class="tag">NF side</span></div>
+          </div>
+          <div class="card" id="theta-bridge-frobenioid-lift">
+            <h3>Theta bridge</h3>
+            <p>
+              Definition 5.5(ii) packages <span class="math">F_J</span>,
+              <span class="math">F_></span>, and a Theta-Hodge theater. Its
+              constituent poly-morphisms are determined by the corresponding
+              D-Theta bridge.
+            </p>
+            <div class="tagRow"><span class="tag gold">Def. 5.5(ii)</span><span class="tag">Theta side</span></div>
+          </div>
+          <div class="card" id="theta-nf-hodge-theater">
+            <h3>ThetaNF-Hodge theater</h3>
+            <p>
+              Definition 5.5(iii) glues the NF and Theta bridges. Morphisms must be
+              compatible in the concrete sense that they induce the same bijection
+              between the two capsule index sets.
+            </p>
+            <div class="tagRow"><span class="tag red">Def. 5.5(iii)</span><span class="tag">gluing</span></div>
+          </div>
+          <div class="card" id="frobenius-picture-chain">
+            <h3>Frobenius-picture chain</h3>
+            <p>
+              Iterating theta-linked ThetaNF-Hodge theaters gives the integer-indexed
+              Frobenius-picture. Mochizuki emphasizes that this chain does not admit
+              arbitrary adjacent permutation symmetries among its links.
+            </p>
+            <div class="tagRow"><span class="tag violet">Cor. 3.8</span><span class="tag">chain</span></div>
+          </div>
+          <div class="card" id="etale-picture-monoanalytic-core">
+            <h3>Etale-picture core</h3>
+            <p>
+              Passing to the associated <span class="math">D⊢</span> prime-strips
+              yields a mono-analytic core that is invariant up to isomorphism. This is
+              the etale-picture setting where spokes can be split and permuted.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I Intro §I1</span><span class="tag">mono-analytic</span></div>
+          </div>
+        </div>
+
+        <div class="callout gold">
+          Formalization warning: Section 5 should not be represented by a single
+          generic “bridge” type. The NF-bridge and Theta-bridge share an F-prime-strip
+          capsule, but their source obligations differ, and Corollary 5.6 reads their
+          isomorphisms through the associated D-level bridges.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Section 5</a>
+          Related: <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
+          <a href="#prime-strips-bridges">prime strips</a>
+          <a href="#theta-log-links">theta/log links</a>
         </div>
       </section>
 
