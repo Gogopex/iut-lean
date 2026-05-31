@@ -375,7 +375,7 @@
     }
     table.sourceTable3 > tbody {
       table-layout: fixed;
-      min-width: 940px;
+      min-width: min(940px, 100%);
     }
     table.sourceTable3 th,
     table.sourceTable3 td {
@@ -611,6 +611,10 @@
         <a href="#arch-aut-holomorphic-frobenioids-iut-i34">Arch Aut-holomorphic 3.4</a>
         <a href="#arch-kummer-log-frobenioids-iut-i34">Arch Kummer/log 3.4</a>
         <a href="#global-realified-theater-35-36">Global realified theater 3.5-3.6</a>
+        <a href="#global-realified-cmod-iut-i35">Global Cmod realification 3.5</a>
+        <a href="#global-theta-version-iut-i35">Global theta version 3.5</a>
+        <a href="#global-d-log-shell-version-iut-i35">Global D/log-shell version 3.5</a>
+        <a href="#theta-hodge-theater-definition-iut-i36">Theta-Hodge theater 3.6</a>
         <a href="#theta-link-frobenius-etale-pictures">Theta/Frobenius pictures</a>
         <a href="#theta-links-cor37">Theta links 3.7</a>
         <a href="#frobenius-picture-cor38">Frobenius-picture 3.8</a>
@@ -11517,6 +11521,398 @@
           Related: <a href="#bad-nonarch-frobenioids-32">bad nonarch Frobenioids</a>
           <a href="#good-arch-frobenioids-33-34">good/arch Frobenioids</a>
           <a href="#theta-link-frobenius-etale-pictures">theta/Frobenius pictures</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+        </div>
+      </section>
+
+      <section id="global-realified-cmod-iut-i35" data-filter="iut i example 3.5 global realified frobenioid cmod prime valuation divisor monoid rho currency exchange">
+        <h2>IUT I Example 3.5(i): Global Realified <span class="math">C_mod</span></h2>
+        <p class="lede">
+          The first global Frobenioid in Example 3.5 is the realification
+          <span class="math">C_mod</span> attached to <span class="math">F_mod</span>
+          and the trivial Galois extension. It packages the local realified divisor
+          monoids into a single global comparison device whose primes are identified
+          with <span class="math">V_mod</span>.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Example 3.5 Cmod realification">
+          <div class="diagramHeader">
+            <strong>Global mod-side currency exchange</strong>
+            <span>IUT I, Example 3.5(i)</span>
+          </div>
+          <svg viewBox="0 0 1120 450" role="img">
+            <defs>
+              <marker id="arrowCmod35" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="74" y="80" width="270" height="96"></rect>
+            <text class="nodeTitle" x="209" y="110" text-anchor="middle">C_mod</text>
+            <text class="tinyText" x="209" y="136" text-anchor="middle">realification over F_mod</text>
+            <text class="tinyText" x="209" y="156" text-anchor="middle">one-morphism base category</text>
+
+            <rect class="nodeBox green" x="424" y="80" width="270" height="96"></rect>
+            <text class="nodeTitle" x="559" y="110" text-anchor="middle">Prime(C_mod) ≃ V_mod</text>
+            <text class="tinyText" x="559" y="136" text-anchor="middle">submonoids Phi_Cmod,v</text>
+            <text class="tinyText" x="559" y="156" text-anchor="middle">each isomorphic to R_ge0</text>
+
+            <rect class="nodeBox gold" x="774" y="80" width="270" height="96"></rect>
+            <text class="nodeTitle" x="909" y="110" text-anchor="middle">local realification</text>
+            <text class="tinyText" x="909" y="136" text-anchor="middle">(C_v^⊢)^rlf</text>
+            <text class="tinyText" x="909" y="156" text-anchor="middle">Phi_Cv^⊢,rlf ≃ R_ge0</text>
+
+            <rect class="nodeBox violet" x="228" y="286" width="298" height="92"></rect>
+            <text class="nodeTitle" x="377" y="316" text-anchor="middle">restriction functor C rho_v</text>
+            <text class="tinyText" x="377" y="342" text-anchor="middle">C_mod -> (C_v^⊢)^rlf</text>
+            <text class="tinyText" x="377" y="362" text-anchor="middle">determined by topological monoid map</text>
+
+            <rect class="nodeBox red" x="602" y="286" width="298" height="92"></rect>
+            <text class="nodeTitle" x="751" y="316" text-anchor="middle">normalization</text>
+            <text class="tinyText" x="751" y="342" text-anchor="middle">log_mod^⊢(p_v)</text>
+            <text class="tinyText" x="751" y="362" text-anchor="middle">maps to [K_v:(F_mod)_v]^-1 log_Phi(p_v)</text>
+
+            <path class="edge blue" d="M344 128 H422" marker-end="url(#arrowCmod35)"></path>
+            <path class="edge green" d="M694 128 H772" marker-end="url(#arrowCmod35)"></path>
+            <path class="edge gold" d="M910 178 C872 238 794 258 760 284" marker-end="url(#arrowCmod35)"></path>
+            <path class="edge violet" d="M526 332 H600" marker-end="url(#arrowCmod35)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Component</th><th>Example 3.5(i) content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td><span class="math">C_mod</span></td>
+            <td>
+              The realification of the Frobenioid associated to
+              <span class="math">F_mod</span> and the trivial Galois extension.
+            </td>
+            <td>This is the mod-side global Frobenioid used before theta-linking.</td>
+          </tr>
+          <tr>
+            <td>Prime indexing</td>
+            <td>
+              <span class="math">Prime(C_mod)</span> is naturally bijective with
+              <span class="math">V_mod</span>, and each component
+              <span class="math">Phi_Cmod,v</span> is a realified local valuation
+              monoid.
+            </td>
+            <td>Global comparison is organized valuation-by-valuation.</td>
+          </tr>
+          <tr>
+            <td><span class="math">rho_v</span></td>
+            <td>
+              The restriction functor
+              <span class="math">C rho_v : C_mod -> (C_v^⊢)^rlf</span> is determined
+              by a topological monoid isomorphism
+              <span class="math">Phi_Cmod,v -> Phi_Cv^⊢,rlf</span>.
+            </td>
+            <td>Local divisor monoids receive a normalized global currency.</td>
+          </tr>
+          <tr>
+            <td>Volume normalization</td>
+            <td>
+              <span class="math">log_mod^⊢(p_v)</span> maps to
+              <span class="math">[K_v:(F_mod)_v]^-1 log_Phi(p_v)</span>.
+            </td>
+            <td>The degree factor is part of the data, not an after-the-fact scaling convention.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 3.5(i)</a>
+          Related: <a href="#global-theta-version-iut-i35">global theta version</a>
+          <a href="#global-realified-theater-35-36">global realified overview</a>
+          <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
+        </div>
+      </section>
+
+      <section id="global-theta-version-iut-i35" data-filter="iut i example 3.5 global theta version ctht log theta ftht bad good rho theta">
+        <h2>IUT I Example 3.5(ii): Global Theta Version <span class="math">C_tht</span></h2>
+        <p class="lede">
+          The theta-side global Frobenioid <span class="math">C_tht</span> is an
+          isomorphic copy of <span class="math">C_mod</span> generated by a formal
+          <span class="math">log(Theta)</span>. Its local restriction maps distinguish
+          good and bad valuations: good places use the formal generator, while bad
+          places use the theta-value quotient from Example 3.2.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Example 3.5 theta version Ctht">
+          <div class="diagramHeader">
+            <strong>Theta-side global currency</strong>
+            <span>IUT I, Example 3.5(ii)</span>
+          </div>
+          <svg viewBox="0 0 1120 470" role="img">
+            <defs>
+              <marker id="arrowCtht35" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="76" width="278" height="96"></rect>
+            <text class="nodeTitle" x="209" y="106" text-anchor="middle">Phi_Ctht = Phi_Cmod log(Theta)</text>
+            <text class="tinyText" x="209" y="132" text-anchor="middle">formal isomorphic copy</text>
+            <text class="tinyText" x="209" y="152" text-anchor="middle">Prime(C_tht) ≃ V_mod</text>
+
+            <rect class="nodeBox green" x="420" y="76" width="278" height="96"></rect>
+            <text class="nodeTitle" x="559" y="106" text-anchor="middle">good valuations</text>
+            <text class="tinyText" x="559" y="132" text-anchor="middle">log_mod(p_v) log(Theta)</text>
+            <text class="tinyText" x="559" y="152" text-anchor="middle">maps to normalized log_Phi(p_v) log(Theta)</text>
+
+            <rect class="nodeBox red" x="770" y="76" width="278" height="96"></rect>
+            <text class="nodeTitle" x="909" y="106" text-anchor="middle">bad valuations</text>
+            <text class="tinyText" x="909" y="132" text-anchor="middle">log_Phi(Theta_v)</text>
+            <text class="tinyText" x="909" y="152" text-anchor="middle">divided by log_Phi(q_v)</text>
+
+            <rect class="nodeBox gold" x="246" y="296" width="276" height="92"></rect>
+            <text class="nodeTitle" x="384" y="326" text-anchor="middle">F_tht package</text>
+            <text class="tinyText" x="384" y="352" text-anchor="middle">(C_tht, Prime, {F_v^Theta}, {rho_v^Theta})</text>
+            <text class="tinyText" x="384" y="372" text-anchor="middle">theta-side global data</text>
+
+            <rect class="nodeBox violet" x="598" y="296" width="276" height="92"></rect>
+            <text class="nodeTitle" x="736" y="326" text-anchor="middle">F_mod ≃ F_tht</text>
+            <text class="tinyText" x="736" y="352" text-anchor="middle">isomorphism of data collections</text>
+            <text class="tinyText" x="736" y="372" text-anchor="middle">compatible with local maps</text>
+
+            <path class="edge blue" d="M348 124 H418" marker-end="url(#arrowCtht35)"></path>
+            <path class="edge blue" d="M348 124 C472 218 350 244 382 294" marker-end="url(#arrowCtht35)"></path>
+            <path class="edge green" d="M698 124 H768" marker-end="url(#arrowCtht35)"></path>
+            <path class="edge red" d="M910 174 C870 236 808 260 748 294" marker-end="url(#arrowCtht35)"></path>
+            <path class="edge gold" d="M522 342 H596" marker-end="url(#arrowCtht35)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Case</th><th>Example 3.5(ii) content</th><th>Role</th></tr>
+          <tr>
+            <td>Global formal copy</td>
+            <td>
+              <span class="math">Phi_Ctht := Phi_Cmod log(Theta)</span>, producing
+              <span class="math">C_tht</span>, a natural equivalence
+              <span class="math">C_mod -> C_tht</span>, and a prime bijection.
+            </td>
+            <td>Creates the theta-side global Frobenioid.</td>
+          </tr>
+          <tr>
+            <td>Good valuations</td>
+            <td>
+              <span class="math">rho_v^Theta</span> sends the formal generator to
+              <span class="math">[K_v:(F_mod)_v]^-1 log_Phi(p_v) log(Theta)</span>.
+            </td>
+            <td>Matches the formal local theta construction of Example 3.3.</td>
+          </tr>
+          <tr>
+            <td>Bad valuations</td>
+            <td>
+              <span class="math">rho_v^Theta</span> uses
+              <span class="math">log_Phi(Theta_v)</span>, scaled by
+              <span class="math">log_Phi(p_v)/log_Phi(q_v)</span> and the same local
+              degree factor.
+            </td>
+            <td>Imports the bad-prime theta-value normalization from Example 3.2.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F_tht</span></td>
+            <td>
+              <span class="math">(C_tht, Prime(C_tht) -> V, {F_v^Theta}, {rho_v^Theta})</span>,
+              naturally isomorphic to <span class="math">F_mod</span>.
+            </td>
+            <td>This package is the source side of the theta link in Corollary 3.7.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 3.5(ii), Remark 3.5.1(i)</a>
+          Related: <a href="#global-realified-cmod-iut-i35">global Cmod realification</a>
+          <a href="#theta-links-cor37">theta links</a>
+          <a href="#theta-value-indeterminacy-iut-i32">theta value indeterminacy</a>
+        </div>
+      </section>
+
+      <section id="global-d-log-shell-version-iut-i35" data-filter="iut i example 3.5 d version log shell dmod abs top rho d frobenius element r ge0">
+        <h2>IUT I Example 3.5(iii): Global <span class="math">D</span>/Log-Shell Version</h2>
+        <p class="lede">
+          The <span class="math">D</span>-version is a log-shell version of the same
+          global comparison architecture. It replaces the local Frobenioid divisor
+          monoids by algorithmically reconstructed topological monoids
+          <span class="math">(R_ge0^⊢)_v</span>, with a distinguished Frobenius element
+          normalized differently at nonarchimedean and archimedean places.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Example 3.5 D log-shell version">
+          <div class="diagramHeader">
+            <strong>D-side/log-shell global package</strong>
+            <span>IUT I, Example 3.5(iii)</span>
+          </div>
+          <svg viewBox="0 0 1120 450" role="img">
+            <defs>
+              <marker id="arrowDmod35" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="76" y="82" width="268" height="96"></rect>
+            <text class="nodeTitle" x="210" y="112" text-anchor="middle">D_mod</text>
+            <text class="tinyText" x="210" y="138" text-anchor="middle">copy of C_mod</text>
+            <text class="tinyText" x="210" y="158" text-anchor="middle">Phi_Dmod and Prime(D_mod)</text>
+
+            <rect class="nodeBox green" x="426" y="82" width="268" height="96"></rect>
+            <text class="nodeTitle" x="560" y="112" text-anchor="middle">local D_v^⊢</text>
+            <text class="tinyText" x="560" y="138" text-anchor="middle">algorithmic R_ge0^⊢ monoids</text>
+            <text class="tinyText" x="560" y="158" text-anchor="middle">from AbsTopIII Prop. 5.8</text>
+
+            <rect class="nodeBox gold" x="776" y="82" width="268" height="96"></rect>
+            <text class="nodeTitle" x="910" y="112" text-anchor="middle">rho_v^D</text>
+            <text class="tinyText" x="910" y="138" text-anchor="middle">Phi_Dmod,v -> (R_ge0^⊢)_v</text>
+            <text class="tinyText" x="910" y="158" text-anchor="middle">normalized by local degree</text>
+
+            <rect class="nodeBox violet" x="246" y="286" width="278" height="92"></rect>
+            <text class="nodeTitle" x="385" y="316" text-anchor="middle">nonarchimedean v</text>
+            <text class="tinyText" x="385" y="342" text-anchor="middle">Frobenius element times ramification index e_v</text>
+            <text class="tinyText" x="385" y="362" text-anchor="middle">log_DPhi(p_v)</text>
+
+            <rect class="nodeBox red" x="596" y="286" width="278" height="92"></rect>
+            <text class="nodeTitle" x="735" y="316" text-anchor="middle">archimedean v</text>
+            <text class="tinyText" x="735" y="342" text-anchor="middle">Frobenius element divided by 2pi</text>
+            <text class="tinyText" x="735" y="362" text-anchor="middle">log_DPhi(p_v)</text>
+
+            <path class="edge blue" d="M344 130 H424" marker-end="url(#arrowDmod35)"></path>
+            <path class="edge green" d="M694 130 H774" marker-end="url(#arrowDmod35)"></path>
+            <path class="edge green" d="M560 180 C516 234 436 256 394 284" marker-end="url(#arrowDmod35)"></path>
+            <path class="edge gold" d="M910 180 C866 236 780 256 742 284" marker-end="url(#arrowDmod35)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Example 3.5(iii) content</th><th>Use</th></tr>
+          <tr>
+            <td><span class="math">D_mod</span></td>
+            <td>
+              A copy of <span class="math">C_mod</span> with corresponding
+              <span class="math">Phi_Dmod</span>, prime bijection, and local generators
+              <span class="math">log_Dmod(p_v)</span>.
+            </td>
+            <td>Moves the global comparison to the D/log-shell side.</td>
+          </tr>
+          <tr>
+            <td>Nonarchimedean local monoid</td>
+            <td>
+              From <span class="math">D_v^⊢</span>, AbsTopIII gives
+              <span class="math">(R_ge0^⊢)_v</span> with a Frobenius element; multiply
+              by the absolute ramification index <span class="math">e_v</span>.
+            </td>
+            <td>Defines <span class="math">log_DPhi(p_v)</span> at nonarchimedean places.</td>
+          </tr>
+          <tr>
+            <td>Archimedean local monoid</td>
+            <td>
+              From <span class="math">D_v^⊢ in TM^⊢</span>, AbsTopIII gives
+              <span class="math">(R_ge0^⊢)_v</span>; divide the Frobenius element by
+              <span class="math">2pi</span>.
+            </td>
+            <td>Defines the archimedean normalization in the same target monoid type.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F_D</span></td>
+            <td>
+              <span class="math">(D_mod, Prime(D_mod) -> V, {D_v^⊢}, {rho_v^D})</span>,
+              algorithmically reconstructible from <span class="math">{D_v^⊢}</span>.
+            </td>
+            <td>Provides the log-shell-facing package used by later D-side comparisons.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 3.5(iii), Remark 3.5.1(ii)</a>
+          Related: <a href="#global-realified-cmod-iut-i35">global Cmod realification</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#frobenioids-log-shells">log-shells</a>
+        </div>
+      </section>
+
+      <section id="theta-hodge-theater-definition-iut-i36" data-filter="iut i definition 3.6 theta hodge theater local frobenioids fmod nonarchimedean archimedean kappa">
+        <h2>IUT I Definition 3.6: Theta-Hodge Theater</h2>
+        <p class="lede">
+          Definition 3.6 packages the local Frobenioid data and the global mod-side
+          Frobenioid data into the first complete theta-Hodge theater object:
+          <span class="math">HT^Theta = ({F_v}_{v in V}, F_mod)</span>. The definition
+          is explicitly typed by valuation kind.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Definition 3.6 theta-Hodge theater">
+          <div class="diagramHeader">
+            <strong>The typed object assembled by Definition 3.6</strong>
+            <span>IUT I, Definition 3.6</span>
+          </div>
+          <svg viewBox="0 0 1120 470" role="img">
+            <defs>
+              <marker id="arrowHT36" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="72" width="282" height="104"></rect>
+            <text class="nodeTitle" x="213" y="102" text-anchor="middle">nonarchimedean local entries</text>
+            <text class="tinyText" x="213" y="128" text-anchor="middle">F_v category equivalent to source F_v</text>
+            <text class="tinyText" x="213" y="148" text-anchor="middle">construct D_v, D_v^⊢, D_v^Theta</text>
+
+            <rect class="nodeBox violet" x="418" y="72" width="282" height="104"></rect>
+            <text class="nodeTitle" x="559" y="102" text-anchor="middle">archimedean local entries</text>
+            <text class="tinyText" x="559" y="128" text-anchor="middle">(C_v, D_v, kappa_v)</text>
+            <text class="tinyText" x="559" y="148" text-anchor="middle">Aut-holomorphic and Kummer data</text>
+
+            <rect class="nodeBox green" x="764" y="72" width="282" height="104"></rect>
+            <text class="nodeTitle" x="905" y="102" text-anchor="middle">global F_mod</text>
+            <text class="tinyText" x="905" y="128" text-anchor="middle">C_mod, Prime -> V</text>
+            <text class="tinyText" x="905" y="148" text-anchor="middle">{F_v^⊢}, {rho_v}</text>
+
+            <rect class="nodeBox gold" x="250" y="300" width="278" height="94"></rect>
+            <text class="nodeTitle" x="389" y="330" text-anchor="middle">constructed companions</text>
+            <text class="tinyText" x="389" y="356" text-anchor="middle">F_tht and F_D from F_mod</text>
+            <text class="tinyText" x="389" y="376" text-anchor="middle">algorithmic data attached to theater</text>
+
+            <rect class="nodeBox red" x="600" y="300" width="278" height="94"></rect>
+            <text class="nodeTitle" x="739" y="330" text-anchor="middle">theta-Hodge theater</text>
+            <text class="tinyText" x="739" y="356" text-anchor="middle">({F_v}_{v in V}, F_mod)</text>
+            <text class="tinyText" x="739" y="376" text-anchor="middle">source object for theta links</text>
+
+            <path class="edge blue" d="M354 124 H416" marker-end="url(#arrowHT36)"></path>
+            <path class="edge violet" d="M700 124 H762" marker-end="url(#arrowHT36)"></path>
+            <path class="edge green" d="M906 178 C858 250 790 266 748 298" marker-end="url(#arrowHT36)"></path>
+            <path class="edge gold" d="M528 347 H598" marker-end="url(#arrowHT36)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Clause</th><th>Definition 3.6 content</th><th>Formalization guardrail</th></tr>
+          <tr>
+            <td>(a) nonarchimedean</td>
+            <td>
+              For <span class="math">v in V_non</span>, the entry
+              <span class="math">F_v</span> is a category equivalent to the local
+              Frobenioid category from Examples 3.2 or 3.3.
+            </td>
+            <td>The category alone must carry enough structure to reconstruct the listed local companions.</td>
+          </tr>
+          <tr>
+            <td>(b) archimedean</td>
+            <td>
+              For <span class="math">v in V_arc</span>, the entry is a triple
+              <span class="math">(C_v,D_v,kappa_v)</span>, with
+              <span class="math">D_v</span> an Aut-holomorphic orbispace and
+              <span class="math">kappa_v</span> the Kummer-structure inclusion.
+            </td>
+            <td>Archimedean entries are not forced into the same type as p-adic Frobenioids.</td>
+          </tr>
+          <tr>
+            <td>(c) global package</td>
+            <td>
+              <span class="math">F_mod</span> consists of
+              <span class="math">C_mod</span>, <span class="math">Prime(C_mod) -> V</span>,
+              the local split Frobenioids <span class="math">{F_v^⊢}</span>, and
+              the maps <span class="math">{rho_v}</span>.
+            </td>
+            <td>The theater’s global object is not just a label; it carries local comparison maps.</td>
+          </tr>
+          <tr>
+            <td>constructed outputs</td>
+            <td>
+              <span class="math">F_tht</span> and <span class="math">F_D</span> are
+              constructed algorithmically from <span class="math">F_mod</span>.
+            </td>
+            <td>Later theta-link and D-side pages should refer to these outputs, not rebuild them ad hoc.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 3.6 and Remarks 3.6.1-3.6.2</a>
+          Related: <a href="#global-realified-cmod-iut-i35">global Cmod realification</a>
+          <a href="#global-theta-version-iut-i35">global theta version</a>
+          <a href="#theta-links-cor37">theta links</a>
           <a href="#hodge-theaters">Hodge theaters</a>
         </div>
       </section>
