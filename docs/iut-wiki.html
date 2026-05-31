@@ -491,6 +491,7 @@
         <a href="#initial-theta-data">Initial theta data</a>
         <a href="#kappa-coric-functions">Kappa-coric functions</a>
         <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
+        <a href="#theta-link-frobenius-etale-pictures">Theta/Frobenius pictures</a>
         <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
         <a href="#projective-line-gluing-analogy">Projective-line gluing</a>
         <a href="#iut-i-gluing-models">IUT I gluing models</a>
@@ -1381,6 +1382,22 @@
               <a href="#theta-hodge-theater-definition-36-page">Definition 3.6 theater package</a>
             </td>
             <td>IUT I, Examples 3.2-3.5 and Definition 3.6</td>
+          </tr>
+          <tr>
+            <td>IUT I</td>
+            <td>Theta links, Frobenius-pictures, and etale-pictures</td>
+            <td>
+              <a href="#theta-link-frobenius-etale-pictures">theta/Frobenius pictures</a>,
+              <a href="#theta-link-37-source">Corollary 3.7 theta link</a>,
+              <a href="#full-poly-isomorphism-no-distinguished">no distinguished isomorphism</a>,
+              <a href="#d-perp-preservation-cor37">D⊢ preservation</a>,
+              <a href="#unit-preservation-cor37">unit preservation</a>,
+              <a href="#frobenius-picture-chain-iut-i">Frobenius-picture chain</a>,
+              <a href="#theta-to-q-cross-theater">Theta-to-q cross-theater assignment</a>,
+              <a href="#etale-picture-core-cor39">etale-picture core</a>,
+              <a href="#scheme-theory-distinctness-394">distinct scheme theories</a>
+            </td>
+            <td>IUT I, Corollaries 3.7-3.9 and Remarks 3.7.1-3.9.4</td>
           </tr>
           <tr>
             <td>IUT I</td>
@@ -6251,6 +6268,212 @@
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#theta-log-links">theta/log links</a>
           <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
+        </div>
+      </section>
+
+      <section id="theta-link-frobenius-etale-pictures">
+        <h2>Theta Links and Pictures</h2>
+        <p class="lede">
+          Corollary 3.7 defines theta links between theta-Hodge theaters as full
+          poly-isomorphisms from the theta-side global package of one theater to the
+          mod-side global package of another. Corollary 3.8 then chains these links into
+          the order-conscious Frobenius-picture, while Corollary 3.9 extracts an
+          etale-picture core that admits arbitrary label permutations.
+        </p>
+        <div class="diagram" aria-label="Theta link Frobenius picture and etale picture">
+          <div class="diagramHeader">
+            <strong>Order-conscious theta movement versus etale core</strong>
+            <span>IUT I Corollaries 3.7-3.9</span>
+          </div>
+          <svg viewBox="0 0 1080 560" role="img">
+            <defs>
+              <marker id="arrowThetaPic" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="66" y="70" width="220" height="88"></rect>
+            <text class="nodeTitle" x="176" y="100" text-anchor="middle">n HT^Theta</text>
+            <text class="tinyText" x="176" y="124" text-anchor="middle">q_v and Theta_v</text>
+            <text class="tinyText" x="176" y="142" text-anchor="middle">one scheme history</text>
+
+            <rect class="nodeBox blue" x="430" y="70" width="220" height="88"></rect>
+            <text class="nodeTitle" x="540" y="100" text-anchor="middle">(n+1) HT^Theta</text>
+            <text class="tinyText" x="540" y="124" text-anchor="middle">next q_v and Theta_v</text>
+            <text class="tinyText" x="540" y="142" text-anchor="middle">distinct scheme history</text>
+
+            <rect class="nodeBox blue" x="794" y="70" width="220" height="88"></rect>
+            <text class="nodeTitle" x="904" y="100" text-anchor="middle">(n+2) HT^Theta</text>
+            <text class="tinyText" x="904" y="124" text-anchor="middle">continues by translation</text>
+            <text class="tinyText" x="904" y="142" text-anchor="middle">not arbitrary permutation</text>
+
+            <path d="M288 114 H428" class="edge gold" marker-end="url(#arrowThetaPic)"></path>
+            <path d="M652 114 H792" class="edge gold" marker-end="url(#arrowThetaPic)"></path>
+            <text class="edgeLabel" x="358" y="94" text-anchor="middle">Theta link</text>
+            <text class="edgeLabel" x="722" y="94" text-anchor="middle">Theta link</text>
+
+            <rect class="nodeBox gold" x="246" y="218" width="230" height="88"></rect>
+            <text class="nodeTitle" x="361" y="248" text-anchor="middle">Theta_v -> q_v</text>
+            <text class="tinyText" x="361" y="272" text-anchor="middle">n Theta_v maps to</text>
+            <text class="tinyText" x="361" y="290" text-anchor="middle">(n+1) q_v</text>
+
+            <rect class="nodeBox green" x="604" y="218" width="230" height="88"></rect>
+            <text class="nodeTitle" x="719" y="248" text-anchor="middle">D^⊢ core</text>
+            <text class="tinyText" x="719" y="272" text-anchor="middle">constant up to isomorphism</text>
+            <text class="tinyText" x="719" y="290" text-anchor="middle">etale-picture permits permutations</text>
+
+            <rect class="nodeBox violet" x="168" y="394" width="250" height="88"></rect>
+            <text class="nodeTitle" x="293" y="424" text-anchor="middle">Frobenius-picture</text>
+            <text class="tinyText" x="293" y="448" text-anchor="middle">order-conscious chain</text>
+            <text class="tinyText" x="293" y="466" text-anchor="middle">translation by Z only</text>
+
+            <rect class="nodeBox red" x="662" y="394" width="250" height="88"></rect>
+            <text class="nodeTitle" x="787" y="424" text-anchor="middle">Etale-picture</text>
+            <text class="tinyText" x="787" y="448" text-anchor="middle">canonical splitting core</text>
+            <text class="tinyText" x="787" y="466" text-anchor="middle">labels permutable</text>
+
+            <path d="M361 306 C348 342 316 366 296 392" class="edge gold" marker-end="url(#arrowThetaPic)"></path>
+            <path d="M719 306 C728 342 762 366 784 392" class="edge green" marker-end="url(#arrowThetaPic)"></path>
+            <path d="M540 158 C516 190 436 202 366 216" class="edge gold" marker-end="url(#arrowThetaPic)"></path>
+            <path d="M540 158 C576 190 646 202 714 216" class="edge green" marker-end="url(#arrowThetaPic)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="theta-link-37-source">
+            <h3>Corollary 3.7 theta link</h3>
+            <p>
+              Given two theta-Hodge theaters <span class="math">†HT^Theta</span> and
+              <span class="math">‡HT^Theta</span> for the same initial theta data, the
+              theta link is the full poly-isomorphism
+              <span class="math">†F_tht -> ‡F_mod</span>. It is asserted nonempty by
+              the definitions and the preceding local/global Frobenioid constructions.
+            </p>
+            <div class="tagRow"><span class="tag green">Cor. 3.7(i)</span><span class="tag">poly-isomorphism</span></div>
+          </div>
+          <div class="card" id="full-poly-isomorphism-no-distinguished">
+            <h3>No distinguished member</h3>
+            <p>
+              Remark 3.7.1 says there are many distinct isomorphisms in the theta-link
+              poly-isomorphism, and none is distinguished in the way the internal
+              <span class="math">F_mod -> F_tht</span> equivalence of Example 3.5 is.
+              This is why the wiki treats theta links as relations, not chosen maps.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 3.7.1</span><span class="tag">no chosen map</span></div>
+          </div>
+          <div class="card" id="d-perp-preservation-cor37">
+            <h3><span class="math">D^⊢</span> preservation</h3>
+            <p>
+              Corollary 3.7(ii) uses tautological identifications
+              <span class="math">D_v^⊢ -> D_v^Theta</span> on both sides, together
+              with the theta link, to obtain a full poly-isomorphism from
+              <span class="math">†D_v^⊢</span> to <span class="math">‡D_v^⊢</span>.
+            </p>
+            <div class="tagRow"><span class="tag blue">Cor. 3.7(ii)</span><span class="tag">mono-analytic</span></div>
+          </div>
+          <div class="card" id="unit-preservation-cor37">
+            <h3>Unit preservation</h3>
+            <p>
+              Corollary 3.7(iii) similarly obtains a full poly-isomorphism between the
+              unit monoids <span class="math">O^x_{†C_v^⊢}</span> and
+              <span class="math">O^x_{‡C_v^⊢}</span>. This preservation is local and
+              mono-analytic; it is not an identification of full ring histories.
+            </p>
+            <div class="tagRow"><span class="tag blue">Cor. 3.7(iii)</span><span class="tag">units</span></div>
+          </div>
+          <div class="card" id="frobenius-picture-chain-iut-i">
+            <h3>Frobenius-picture chain</h3>
+            <p>
+              Corollary 3.8 applies the theta link successively to an integer-indexed
+              family of distinct theaters. The resulting oriented graph admits the
+              translation action of <span class="math">Z</span>, but not arbitrary
+              permutations of adjacent vertices.
+            </p>
+            <div class="tagRow"><span class="tag gold">Cor. 3.8</span><span class="tag">order-conscious</span></div>
+          </div>
+          <div class="card" id="theta-to-q-cross-theater">
+            <h3>Theta-to-q cross-theater assignment</h3>
+            <p>
+              Remark 3.8.1 identifies the central feature of the Frobenius-picture:
+              at bad places, <span class="math">n Theta_v</span> is sent to
+              <span class="math">(n+1) q_v</span>. The target value belongs to the next
+              theater, not to the same scheme theory in which the source theta function
+              was constructed.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 3.8.1(i)</span><span class="tag">bad primes</span></div>
+          </div>
+          <div class="card" id="order-conscious-no-adjacent-swap">
+            <h3>Order-conscious structure</h3>
+            <p>
+              The Frobenius-picture is Frobenius-like because its divisor-monoid portion
+              carries an ordered chain structure. Swapping two adjacent theaters while
+              fixing the rest is not an automorphism of the oriented graph.
+            </p>
+            <div class="tagRow"><span class="tag gold">Cor. 3.8</span><span class="tag">Frobenius-like</span></div>
+          </div>
+          <div class="card" id="etale-picture-core-cor39">
+            <h3>Etale-picture core</h3>
+            <p>
+              Corollary 3.9 extracts the diagrams centered on
+              <span class="math">D_v^⊢</span>. Unlike the Frobenius-picture, this
+              etale-picture admits arbitrary permutations of theater labels. Remark
+              3.9.1 identifies <span class="math">D_v^⊢</span> as the mono-analytic core.
+            </p>
+            <div class="tagRow"><span class="tag green">Cor. 3.9(i)</span><span class="tag">core</span></div>
+          </div>
+          <div class="card" id="units-temporary-invariant">
+            <h3>Units as temporary invariant</h3>
+            <p>
+              Corollary 3.9(ii) adds local units to the etale-picture. Remark 3.9.2
+              warns that these units cease to be constant invariants after later
+              enhancements involving the rotation of addition and multiplication in IUT
+              III.
+            </p>
+            <div class="tagRow"><span class="tag violet">Cor. 3.9(ii)</span><span class="tag">temporary</span></div>
+          </div>
+          <div class="card" id="teichmuller-geodesic-analogy-source">
+            <h3>Teichmuller geodesic analogy</h3>
+            <p>
+              Remark 3.9.3 compares the mono-analytic core to a fixed real-analytic
+              surface with varying holomorphic structures. Units correspond to the fixed
+              dimension, while local value groups undergo theta-dilations along the
+              Frobenius-picture.
+            </p>
+            <div class="tagRow"><span class="tag blue">Remark 3.9.3</span><span class="tag">analogy</span></div>
+          </div>
+          <div class="card" id="scheme-theory-distinctness-394">
+            <h3>Distinct scheme theories</h3>
+            <p>
+              Remark 3.9.4 distinguishes the theta link from ordinary evaluation of a
+              theta function at a torsion point. The value
+              <span class="math">(n+1) q_v</span> belongs to the next theta-Hodge
+              theater's scheme theory, while <span class="math">n Theta_v</span> was
+              constructed over the preceding theater.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 3.9.4</span><span class="tag">not evaluation</span></div>
+          </div>
+          <div class="card" id="formalization-theta-picture-rule">
+            <h3>Formalization rule</h3>
+            <p>
+              A formal model should represent the Frobenius-picture and etale-picture as
+              different structures on the same indexed family: one order-conscious and
+              one permutation-symmetric after passing to the mono-analytic core.
+            </p>
+            <div class="tagRow"><span class="tag red">Lean guardrail</span><span class="tag">pictures</span></div>
+          </div>
+        </div>
+        <div class="callout">
+          Source consequence: the theta link is not merely a conventional evaluation map
+          inside one theater. Its target lies in the adjacent theater's scheme theory,
+          while only the mono-analytic core supplies the permutation-symmetric
+          etale-picture.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          Related: <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#basepoints-inter-universality">basepoints/inter-universality</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#teichmuller-analogy-iut-i">Teichmuller analogy</a>
         </div>
       </section>
 
