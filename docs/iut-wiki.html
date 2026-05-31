@@ -652,6 +652,9 @@
         <a href="#theta-plus-minus-f-side-lift-ii46">Theta±ell F-side lift 4.6</a>
         <a href="#theta-plus-minus-ell-gaussian-lift-ii46">Theta±ell Gaussian lift 4.6</a>
         <a href="#theta-nf-fl-symmetry-ii47">ThetaNF Fl symmetry 4.7</a>
+        <a href="#d-theta-nf-nonrealified-ii47">D-ThetaNF non-realified 4.7</a>
+        <a href="#fl-symmetry-indeterminacy-ii47">Fl symmetry indeterminacy 4.7</a>
+        <a href="#theta-nf-f-side-kummer-localization-ii48">ThetaNF F-side localization 4.8</a>
         <a href="#theta-nf-frobenioid-localization-ii48">ThetaNF Frobenioid localization 4.8</a>
         <a href="#f-times-mu-kummer-prime-strips-ii49">F×μ Kummer prime-strips 4.9</a>
         <a href="#theta-times-mu-frobenius-pictures-ii410">Theta×μ Frobenius-pictures 4.10</a>
@@ -1750,6 +1753,9 @@
               <a href="#theta-plus-minus-ell-gaussian-lift-ii46">Theta±ell Gaussian lift</a>,
               <a href="#cenv-cgau-global-frobenioids-46">Cenv/Cgau</a>,
               <a href="#theta-nf-fl-symmetry-ii47">ThetaNF Fl symmetry</a>,
+              <a href="#d-theta-nf-nonrealified-ii47">D-ThetaNF non-realified structures 4.7</a>,
+              <a href="#fl-symmetry-indeterminacy-ii47">Fl symmetry indeterminacy 4.7</a>,
+              <a href="#theta-nf-f-side-kummer-localization-ii48">ThetaNF F-side localization 4.8</a>,
               <a href="#fl-symmetry-no-conjugate-sync-472">Fl without conjugate synchronization</a>,
               <a href="#theta-nf-frobenioid-localization-ii48">ThetaNF Frobenioid localization</a>,
               <a href="#realified-localization-functor-481">realified localization functor</a>,
@@ -19446,6 +19452,333 @@
           <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges</a>
           <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
           <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips</a>
+        </div>
+      </section>
+
+      <section id="d-theta-nf-nonrealified-ii47">
+        <h2>IUT II Corollary 4.7(i): D-ThetaNF Non-Realified Global Structures</h2>
+        <p class="lede">
+          Corollary 4.7 begins the ThetaNF passage by reconstructing non-realified
+          global structures from the D-ThetaNF side: global monoids and fields,
+          invariant subobjects, Frobenioids, and the realification functor. This is
+          the global base-field layer that only makes sense after isolating the
+          <span class="math">F_l</span>-symmetry context.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Corollary 4.7 non-realified global structures">
+          <div class="diagramHeader">
+            <strong>D-ThetaNF global base-field package</strong>
+            <span>Corollary 4.7(i), Remarks 4.7.6-4.7.7</span>
+          </div>
+          <svg viewBox="0 0 1120 520" role="img">
+            <defs>
+              <marker id="arrowDNFNonreal47" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="70" y="72" width="250" height="92"></rect>
+            <text class="nodeTitle" x="195" y="102" text-anchor="middle">D-ThetaNF theater</text>
+            <text class="tinyText" x="195" y="128" text-anchor="middle">D <- DJ -> D&gt;</text>
+            <text class="tinyText" x="195" y="148" text-anchor="middle">glued to D-Theta±ell</text>
+
+            <rect class="nodeBox gold" x="438" y="72" width="250" height="92"></rect>
+            <text class="nodeTitle" x="563" y="102" text-anchor="middle">global monoids/fields</text>
+            <text class="tinyText" x="563" y="128" text-anchor="middle">M, M, M^infty-kappa</text>
+            <text class="tinyText" x="563" y="148" text-anchor="middle">group actions and conjugacy data</text>
+
+            <rect class="nodeBox green" x="812" y="72" width="250" height="92"></rect>
+            <text class="nodeTitle" x="937" y="102" text-anchor="middle">invariant subobjects</text>
+            <text class="tinyText" x="937" y="128" text-anchor="middle">Mmod, Msol, Mkappa</text>
+            <text class="tinyText" x="937" y="148" text-anchor="middle">mod/sol/kappa-sol layers</text>
+
+            <rect class="nodeBox violet" x="270" y="304" width="270" height="92"></rect>
+            <text class="nodeTitle" x="405" y="334" text-anchor="middle">global Frobenioids</text>
+            <text class="tinyText" x="405" y="360" text-anchor="middle">Fmod subset F <- F</text>
+            <text class="tinyText" x="405" y="380" text-anchor="middle">Prime(Fmod) ~= V</text>
+
+            <rect class="nodeBox red" x="654" y="304" width="270" height="92"></rect>
+            <text class="nodeTitle" x="789" y="334" text-anchor="middle">realification functor</text>
+            <text class="tinyText" x="789" y="360" text-anchor="middle">Fmod -> Fmod^R</text>
+            <text class="tinyText" x="789" y="380" text-anchor="middle">needed for later localization</text>
+
+            <path d="M322 118 H436" class="edge blue" marker-end="url(#arrowDNFNonreal47)"></path>
+            <path d="M690 118 H810" class="edge gold" marker-end="url(#arrowDNFNonreal47)"></path>
+            <path d="M563 166 C516 228 458 270 420 302" class="edge violet" marker-end="url(#arrowDNFNonreal47)"></path>
+            <path d="M937 166 C894 230 830 272 802 302" class="edge green" marker-end="url(#arrowDNFNonreal47)"></path>
+            <path d="M542 350 H652" class="edge violet" marker-end="url(#arrowDNFNonreal47)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Construction</th><th>Role</th></tr>
+          <tr>
+            <td>Global monoids and fields</td>
+            <td>
+              Constructs <span class="math">M(D)</span>,
+              <span class="math">M(D)</span>, and
+              <span class="math">M^infty-kappa(D)</span>, equipped with the relevant
+              fundamental-group actions and conjugacy indeterminacies.
+            </td>
+            <td>
+              Provides the non-realified global arithmetic data needed by the
+              ThetaNF side.
+            </td>
+          </tr>
+          <tr>
+            <td>Invariant subobjects</td>
+            <td>
+              Extracts <span class="math">Mmod</span>,
+              <span class="math">Msol</span>, and
+              <span class="math">Mkappa</span> layers, including
+              <span class="math">kappa-sol</span> and
+              <span class="math">infty-kappa</span> versions.
+            </td>
+            <td>
+              These layers let the later <span class="math">F_l</span>-symmetric
+              argument avoid non-synchronizable conjugacy at raw labels.
+            </td>
+          </tr>
+          <tr>
+            <td>Frobenioids</td>
+            <td>
+              Constructs <span class="math">Fmod(D)</span>,
+              <span class="math">F(D)</span>, and the realification
+              <span class="math">Fmod(D) -> Fmod^R(D)</span>.
+            </td>
+            <td>
+              Remark 4.7.6 says non-realified global Frobenioids belong naturally to
+              the <span class="math">F_l</span>-symmetry context.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 4.7(i) and Remarks 4.7.6-4.7.7</a>
+          Related: <a href="#theta-nf-fl-symmetry-ii47">ThetaNF Fl symmetry atlas</a>
+          <a href="#fl-symmetry-indeterminacy-ii47">Fl symmetry indeterminacy</a>
+          <a href="#theta-nf-f-side-kummer-localization-ii48">ThetaNF F-side localization</a>
+        </div>
+      </section>
+
+      <section id="fl-symmetry-indeterminacy-ii47">
+        <h2>IUT II Corollary 4.7(ii) and Remarks 4.7.2-4.7.5: Fl Symmetry and Indeterminacy</h2>
+        <p class="lede">
+          The <span class="math">F_l</span>-symmetry of the ThetaNF side is not the
+          conjugate-synchronizing <span class="math">F_l^±</span>-symmetry. It
+          separates the zero label from the nonzero labels, supports the internal
+          Gaussian-distribution structure, and carries independent conjugacy
+          indeterminacies at distinct labels.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Corollary 4.7 Fl symmetry and indeterminacy">
+          <div class="diagramHeader">
+            <strong>Fl symmetry is multiradial, not conjugate-synchronizing</strong>
+            <span>Corollary 4.7(ii), Remarks 4.7.2-4.7.5</span>
+          </div>
+          <svg viewBox="0 0 1120 570" role="img">
+            <defs>
+              <marker id="arrowFlIndet47" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="72" y="72" width="246" height="92"></rect>
+            <text class="nodeTitle" x="195" y="102" text-anchor="middle">LabCusp(D) ~= F_l</text>
+            <text class="tinyText" x="195" y="128" text-anchor="middle">nonzero labels separated from 0</text>
+            <text class="tinyText" x="195" y="148" text-anchor="middle">ThetaNF bridge</text>
+
+            <rect class="nodeBox green" x="442" y="72" width="246" height="92"></rect>
+            <text class="nodeTitle" x="565" y="102" text-anchor="middle">Fl symmetrizing isomorphisms</text>
+            <text class="tinyText" x="565" y="128" text-anchor="middle">diagonal formal shorthand</text>
+            <text class="tinyText" x="565" y="148" text-anchor="middle">compatible with D-NF bridge</text>
+
+            <rect class="nodeBox red" x="812" y="72" width="246" height="92"></rect>
+            <text class="nodeTitle" x="935" y="102" text-anchor="middle">no conjugate synchronization</text>
+            <text class="tinyText" x="935" y="128" text-anchor="middle">arithmetic Galois action</text>
+            <text class="tinyText" x="935" y="148" text-anchor="middle">independent label conjugacies</text>
+
+            <rect class="nodeBox violet" x="242" y="304" width="280" height="96"></rect>
+            <text class="nodeTitle" x="382" y="334" text-anchor="middle">multiplicative dimension</text>
+            <text class="tinyText" x="382" y="360" text-anchor="middle">F_l approximates Z^x side</text>
+            <text class="tinyText" x="382" y="382" text-anchor="middle">internal Gaussian structure</text>
+
+            <rect class="nodeBox gold" x="638" y="304" width="280" height="96"></rect>
+            <text class="nodeTitle" x="778" y="334" text-anchor="middle">subordination j << 0</text>
+            <text class="tinyText" x="778" y="360" text-anchor="middle">nonzero labels have weight 1/l</text>
+            <text class="tinyText" x="778" y="382" text-anchor="middle">zero label remains coric</text>
+
+            <rect class="nodeBox green" x="424" y="468" width="320" height="58"></rect>
+            <text class="nodeTitle" x="584" y="494" text-anchor="middle">multiradial combinatorial model</text>
+            <text class="tinyText" x="584" y="514" text-anchor="middle">actions at different spokes commute when 0 is excluded</text>
+
+            <path d="M320 118 H440" class="edge blue" marker-end="url(#arrowFlIndet47)"></path>
+            <path d="M690 118 H810" class="edge green" marker-end="url(#arrowFlIndet47)"></path>
+            <path d="M565 166 C514 230 438 270 396 302" class="edge violet" marker-end="url(#arrowFlIndet47)"></path>
+            <path d="M935 166 C888 230 820 270 786 302" class="edge red" marker-end="url(#arrowFlIndet47)"></path>
+            <path d="M522 352 H636" class="edge violet" marker-end="url(#arrowFlIndet47)"></path>
+            <path d="M778 402 C734 436 654 460 612 466" class="edge gold" marker-end="url(#arrowFlIndet47)"></path>
+            <path d="M382 402 C426 436 512 460 560 466" class="edge violet" marker-end="url(#arrowFlIndet47)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source</th><th>Claim</th><th>Consequence</th></tr>
+          <tr>
+            <td>4.7(ii)</td>
+            <td>
+              <span class="math">F_l</span>-symmetry acts on labeled
+              F-prime-strips, mod/sol/kappa-sol objects, and realified global
+              Frobenioids. Diagonal objects are formal shorthand for these
+              symmetrizing isomorphisms.
+            </td>
+            <td>
+              The construction avoids crushing labels while still packaging
+              multiplicative symmetry.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 4.7.2</td>
+            <td>
+              Unlike <span class="math">F_l^±</span>-symmetry,
+              <span class="math">F_l</span>-symmetry arises through the arithmetic
+              portion of global fundamental groups and does not establish conjugate
+              synchronization.
+            </td>
+            <td>
+              This is why Corollary 4.7 works with F-prime-strips and mod/sol layers
+              rather than raw Galois-action monoids.
+            </td>
+          </tr>
+          <tr>
+            <td>Remarks 4.7.3-4.7.5</td>
+            <td>
+              <span class="math">F_l^±</span> corresponds to the additive/unit
+              dimension and includes the zero label; <span class="math">F_l</span>
+              corresponds to the multiplicative/value dimension and separates zero
+              from nonzero labels.
+            </td>
+            <td>
+              The <span class="math">F_l</span> side is multiradial and suited to the
+              internal Gaussian distribution, while <span class="math">F_l^±</span>
+              is the single-basepoint synchronization side.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 4.7(ii) and Remarks 4.7.2-4.7.5</a>
+          Related: <a href="#d-theta-nf-nonrealified-ii47">D-ThetaNF non-realified</a>
+          <a href="#theta-plus-minus-f-side-lift-ii46">Theta±ell F-side lift</a>
+          <a href="#theta-nf-f-side-kummer-localization-ii48">ThetaNF F-side localization</a>
+        </div>
+      </section>
+
+      <section id="theta-nf-f-side-kummer-localization-ii48">
+        <h2>IUT II Corollary 4.8: ThetaNF F-Side Kummer and Localization</h2>
+        <p class="lede">
+          Corollary 4.8 lifts the D-ThetaNF construction to a ThetaNF-Hodge theater.
+          Kummer isomorphisms compare F-side pseudo-monoids and Frobenioids with the
+          D-side objects, while localization functors relate global realified
+          Frobenioids to label-indexed local F-prime-strips.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Corollary 4.8 ThetaNF F-side Kummer localization">
+          <div class="diagramHeader">
+            <strong>ThetaNF F-side lift of Fl-localized data</strong>
+            <span>Corollary 4.8 and Remark 4.8.1</span>
+          </div>
+          <svg viewBox="0 0 1120 540" role="img">
+            <defs>
+              <marker id="arrowFNFLoc48" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="70" y="70" width="250" height="92"></rect>
+            <text class="nodeTitle" x="195" y="100" text-anchor="middle">ThetaNF-Hodge theater</text>
+            <text class="tinyText" x="195" y="126" text-anchor="middle">F <- FJ -> F&gt;</text>
+            <text class="tinyText" x="195" y="146" text-anchor="middle">lifts D-ThetaNF and glued to Theta±ell</text>
+
+            <rect class="nodeBox gold" x="438" y="70" width="250" height="92"></rect>
+            <text class="nodeTitle" x="563" y="100" text-anchor="middle">Kummer isomorphisms</text>
+            <text class="tinyText" x="563" y="126" text-anchor="middle">F-side M, Mmod, Msol</text>
+            <text class="tinyText" x="563" y="146" text-anchor="middle">to D-side objects</text>
+
+            <rect class="nodeBox green" x="812" y="70" width="250" height="92"></rect>
+            <text class="nodeTitle" x="937" y="100" text-anchor="middle">Fl-labeled comparison</text>
+            <text class="tinyText" x="937" y="126" text-anchor="middle">F_j -> F|j -> F(D)|j</text>
+            <text class="tinyText" x="937" y="146" text-anchor="middle">same indeterminacy discipline</text>
+
+            <rect class="nodeBox violet" x="238" y="300" width="280" height="92"></rect>
+            <text class="nodeTitle" x="378" y="330" text-anchor="middle">localization functors</text>
+            <text class="tinyText" x="378" y="356" text-anchor="middle">Fmod_j -> F_j, Fmod^R_j -> F_j^R</text>
+            <text class="tinyText" x="378" y="376" text-anchor="middle">M^infty-kappa to local pieces</text>
+
+            <rect class="nodeBox red" x="638" y="300" width="280" height="92"></rect>
+            <text class="nodeTitle" x="778" y="330" text-anchor="middle">global Gaussian embeddings</text>
+            <text class="tinyText" x="778" y="356" text-anchor="middle">Cgau into product of Fmod^R_j</text>
+            <text class="tinyText" x="778" y="376" text-anchor="middle">Fgau^R into product of F&gt;^R_j</text>
+
+            <path d="M322 116 H436" class="edge blue" marker-end="url(#arrowFNFLoc48)"></path>
+            <path d="M690 116 H810" class="edge gold" marker-end="url(#arrowFNFLoc48)"></path>
+            <path d="M563 164 C510 226 432 270 392 298" class="edge violet" marker-end="url(#arrowFNFLoc48)"></path>
+            <path d="M938 164 C896 226 820 270 786 298" class="edge green" marker-end="url(#arrowFNFLoc48)"></path>
+            <path d="M520 346 H636" class="edge violet" marker-end="url(#arrowFNFLoc48)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Clause</th><th>Construction</th><th>Function</th></tr>
+          <tr>
+            <td>4.8(i)</td>
+            <td>
+              Kummer isomorphisms identify F-side pseudo-monoids, mod/sol layers, and
+              Frobenioids with the D-side global structures of Corollary 4.7.
+            </td>
+            <td>
+              Lifts the non-realified ThetaNF base-field apparatus from D-side to
+              F-side.
+            </td>
+          </tr>
+          <tr>
+            <td>4.8(ii)</td>
+            <td>
+              Label-indexed comparisons identify
+              <span class="math">F_j</span>,
+              <span class="math">F|j</span>, and
+              <span class="math">F(D)|j</span>, with the same
+              <span class="math">F_l</span>-symmetrizing and conjugacy-indeterminacy
+              conventions as Corollary 4.7.
+            </td>
+            <td>
+              Preserves the multiplicative label symmetry without claiming conjugate
+              synchronization.
+            </td>
+          </tr>
+          <tr>
+            <td>4.8(iii)</td>
+            <td>
+              Constructs compatible localization functors and an isomorphism
+              <span class="math">C_j ~= Fmod^R_j</span>, compatible with primes,
+              local monoids, and Kummer comparisons.
+            </td>
+            <td>
+              Supplies the local realified F-side containers used by the later
+              Gaussian embeddings.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 4.8.1</td>
+            <td>
+              The global <span class="math">Cgau</span> of Corollary 4.6 can be viewed
+              inside the product of <span class="math">Fmod^R_j</span>, and the
+              local realified <span class="math">Fgau</span> data embeds into the
+              product of the corresponding local realified F-side pieces.
+            </td>
+            <td>
+              Makes explicit how global Gaussian objects localize into the
+              <span class="math">F_l</span>-indexed ThetaNF framework.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 4.8 and Remark 4.8.1</a>
+          Related: <a href="#fl-symmetry-indeterminacy-ii47">Fl symmetry indeterminacy</a>
+          <a href="#theta-nf-frobenioid-localization-ii48">ThetaNF localization atlas</a>
+          <a href="#f-times-mu-kummer-prime-strips-ii49">F-times-mu Kummer prime-strips</a>
         </div>
       </section>
 
