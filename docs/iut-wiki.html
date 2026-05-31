@@ -481,6 +481,7 @@
         <h2>Core IUT</h2>
         <a href="#initial-theta-data">Initial theta data</a>
         <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
+        <a href="#tempered-covering-complements">Tempered covering complements</a>
         <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
         <a href="#hodge-theaters">Hodge theaters</a>
         <a href="#mutually-alien-copies">Mutually alien copies</a>
@@ -1021,6 +1022,9 @@
               <a href="#hyperbolic-orbicurve">hyperbolic orbicurve</a>,
               <a href="#tempered-fundamental-group">tempered fundamental group</a>,
               <a href="#decomposition-subgroup">decomposition subgroup</a>,
+              <a href="#tempered-covering-complements">tempered covering complements</a>,
+              <a href="#profinite-conjugates-compact-subgroups">profinite conjugacy rigidity</a>,
+              <a href="#tempered-inertia-cusp-test">inertia cusp test</a>,
               <a href="#initial-theta-components">initial theta data</a>,
               <a href="#bad-good-primes">bad/good valuations</a>
             </td>
@@ -2133,6 +2137,238 @@
           Related: <a href="#initial-theta-data">initial theta data</a>
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#theta-log-links">theta links</a>
+        </div>
+      </section>
+
+      <section id="tempered-covering-complements">
+        <h2>Tempered Covering Complements</h2>
+        <p class="lede">
+          IUT I Section 2 supplies group-theoretic control over tempered covering
+          subgroups before the Hodge-theater construction starts. The point is to
+          recognize decomposition and inertia data inside tempered and profinite
+          fundamental groups, so that later anabelian reconstruction has a rigid source
+          interface.
+        </p>
+        <div class="diagram" aria-label="IUT I Section 2 tempered subgroup route">
+          <div class="diagramHeader">
+            <strong>Tempered subgroup control</strong>
+            <span>from sub-semi-graphs to arithmetic exact sequences</span>
+          </div>
+          <svg viewBox="0 0 980 390" role="img">
+            <defs>
+              <marker id="arrowTemperedComplements" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="36" y="58" width="178" height="82"></rect>
+            <text class="nodeTitle" x="125" y="88" text-anchor="middle">semi-graph G</text>
+            <text class="tinyText" x="125" y="112" text-anchor="middle">tempered group Pi_G^tp</text>
+            <text class="tinyText" x="125" y="130" text-anchor="middle">pro completion hat Pi_G</text>
+
+            <rect class="nodeBox green" x="276" y="58" width="178" height="82"></rect>
+            <text class="nodeTitle" x="365" y="88" text-anchor="middle">subgraph H</text>
+            <text class="tinyText" x="365" y="112" text-anchor="middle">decomposition subgroup</text>
+            <text class="tinyText" x="365" y="130" text-anchor="middle">Pi_H^tp, hat Pi_H</text>
+
+            <rect class="nodeBox gold" x="516" y="58" width="178" height="82"></rect>
+            <text class="nodeTitle" x="605" y="88" text-anchor="middle">conjugacy rigidity</text>
+            <text class="tinyText" x="605" y="112" text-anchor="middle">compact subgroup test</text>
+            <text class="tinyText" x="605" y="130" text-anchor="middle">Prop. 2.1, 2.4</text>
+
+            <rect class="nodeBox violet" x="756" y="58" width="184" height="82"></rect>
+            <text class="nodeTitle" x="848" y="88" text-anchor="middle">terminality</text>
+            <text class="tinyText" x="848" y="112" text-anchor="middle">commensurator equals source</text>
+            <text class="tinyText" x="848" y="130" text-anchor="middle">Prop. 2.2</text>
+
+            <line class="arrow" x1="214" y1="99" x2="276" y2="99" marker-end="url(#arrowTemperedComplements)"></line>
+            <line class="arrow" x1="454" y1="99" x2="516" y2="99" marker-end="url(#arrowTemperedComplements)"></line>
+            <line class="arrow" x1="694" y1="99" x2="756" y2="99" marker-end="url(#arrowTemperedComplements)"></line>
+
+            <rect class="nodeBox blue" x="158" y="238" width="218" height="86"></rect>
+            <text class="nodeTitle" x="267" y="268" text-anchor="middle">arithmetic curve X/k</text>
+            <text class="tinyText" x="267" y="292" text-anchor="middle">Delta_X,H and Pi_X,H</text>
+            <text class="tinyText" x="267" y="310" text-anchor="middle">over G_k</text>
+
+            <rect class="nodeBox green" x="452" y="238" width="218" height="86"></rect>
+            <text class="nodeTitle" x="561" y="268" text-anchor="middle">inertia recognition</text>
+            <text class="tinyText" x="561" y="292" text-anchor="middle">cusp meets component in H</text>
+            <text class="tinyText" x="561" y="310" text-anchor="middle">Cor. 2.3(vi)</text>
+
+            <rect class="nodeBox gold" x="746" y="238" width="176" height="86"></rect>
+            <text class="nodeTitle" x="834" y="268" text-anchor="middle">later IUT use</text>
+            <text class="tinyText" x="834" y="292" text-anchor="middle">anabelian source data</text>
+            <text class="tinyText" x="834" y="310" text-anchor="middle">prime strips, theaters</text>
+
+            <path class="arrow" d="M848 140 C824 210 374 188 300 238" marker-end="url(#arrowTemperedComplements)"></path>
+            <line class="arrow" x1="376" y1="281" x2="452" y2="281" marker-end="url(#arrowTemperedComplements)"></line>
+            <line class="arrow" x1="670" y1="281" x2="746" y2="281" marker-end="url(#arrowTemperedComplements)"></line>
+
+            <text class="tinyText" x="490" y="362" text-anchor="middle">
+              Section 2 is a rigidity layer, not a new Hodge-theater object.
+            </text>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source item</th><th>Statement shape</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Setup before Proposition 2.1</td>
+            <td>
+              The tempered fundamental group <span class="math">Pi_G^tp</span> embeds
+              naturally in the pro-<span class="math">hat Sigma</span> completion
+              <span class="math">hat Pi_G</span>. A connected sub-semi-graph
+              <span class="math">H subset G</span> gives decomposition subgroups
+              <span class="math">Pi_H^tp</span> and <span class="math">hat Pi_H</span>.
+            </td>
+            <td>
+              Decomposition subgroups are not informal labels; they are subgroups inside
+              the ambient tempered/profinite group system.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 2.1</td>
+            <td>
+              If a profinite conjugate of a nontrivial compact subgroup of
+              <span class="math">Pi_G^tp</span> lands back in
+              <span class="math">Pi_G^tp</span>, then the conjugating element already
+              lies in <span class="math">Pi_G^tp</span>.
+            </td>
+            <td>
+              This prevents hidden profinite motion from producing a new tempered
+              realization indistinguishable at the compact-subgroup level.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 2.2</td>
+            <td>
+              The decomposition subgroups associated to sub-semi-graphs are
+              commensurably terminal in the corresponding ambient groups.
+            </td>
+            <td>
+              Commensurators do not enlarge the subgroup beyond the subgroup itself;
+              this is the rigidity used by later reconstruction arguments.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.3</td>
+            <td>
+              For a stable hyperbolic curve over an MLF, sub-semi-graphs determine
+              subgroups <span class="math">Delta_X,H</span> and
+              <span class="math">Pi_X,H</span>, their profinite closures, and exact
+              sequences over <span class="math">G_k</span> under the stated slimness
+              hypotheses.
+            </td>
+            <td>
+              The curve-level arithmetic subgroup is tied to the graph-level component
+              data, so later local prime-strip inputs can be read group-theoretically.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.3(vi)</td>
+            <td>
+              A cusp inertia group lies in a conjugate of the subgroup attached to
+              <span class="math">H</span> exactly when the corresponding cusp of the
+              stable model meets a component contained in <span class="math">H</span>.
+            </td>
+            <td>
+              Inertia data detects geometric incidence with selected components; it is
+              not merely external decoration on the group.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 2.4</td>
+            <td>
+              The profinite-conjugacy rigidity of Proposition 2.1 has arithmetic
+              analogues for the geometric and arithmetic tempered fundamental groups of
+              <span class="math">X/k</span>.
+            </td>
+            <td>
+              The same rigidity principle survives the passage from graph coverings to
+              arithmetic curve fundamental groups.
+            </td>
+          </tr>
+          <tr>
+            <td>Theorem 2.6</td>
+            <td>
+              A discrete analogue is proved for groups virtually free or orientable
+              surface groups, with a stronger conclusion when the relevant intersection
+              is nonabelian.
+            </td>
+            <td>
+              The section records both the tempered arithmetic result and the classical
+              group-theoretic shadow behind it.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="profinite-conjugates-compact-subgroups">
+            <h3>Profinite conjugacy rigidity</h3>
+            <p>
+              Proposition 2.1 is the central local rigidity lemma of the section. It
+              says that a profinite conjugator that sends a nontrivial compact subgroup
+              back into the tempered group is already a tempered element.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 2.1</span><span class="tag">compact subgroup</span></div>
+          </div>
+          <div class="card" id="commensurably-terminal-subgroups">
+            <h3>Commensurably terminal subgroups</h3>
+            <p>
+              Proposition 2.2 turns the conjugacy rigidity into commensurator control
+              for decomposition subgroups attached to connected sub-semi-graphs. This
+              keeps the subgroup boundary sharp under profinite completion.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 2.2</span><span class="tag">decomposition</span></div>
+          </div>
+          <div class="card" id="tempered-subsemigraph-subgroups">
+            <h3>Sub-semi-graph subgroups</h3>
+            <p>
+              Section 2 treats a connected sub-semi-graph as determining compatible
+              tempered and pro-completed subgroups. These are the group-theoretic form
+              of selecting components in the stable reduction graph.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §2 setup</span><span class="tag">subgraph H</span></div>
+          </div>
+          <div class="card" id="arithmetic-compact-conjugates">
+            <h3>Arithmetic compact conjugates</h3>
+            <p>
+              Proposition 2.4 repeats the rigidity phenomenon for arithmetic compact
+              subgroups inside the tempered fundamental group of a hyperbolic curve over
+              a mixed-characteristic local field.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 2.4</span><span class="tag">MLF curve</span></div>
+          </div>
+          <div class="card" id="tempered-inertia-cusp-test">
+            <h3>Inertia cusp test</h3>
+            <p>
+              Corollary 2.3(vi) gives the useful incidence test: membership of a cusp
+              inertia group in the selected subgroup is equivalent to the corresponding
+              stable-model cusp meeting a component contained in the selected subgraph.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 2.3(vi)</span><span class="tag">cusps</span></div>
+          </div>
+          <div class="card" id="discrete-conjugate-analogue">
+            <h3>Discrete analogue</h3>
+            <p>
+              Theorem 2.6 isolates a parallel statement for groups with finite-index
+              free or orientable surface subgroups. Its role in the wiki is diagnostic:
+              the tempered statement has a recognizable classical group-theoretic
+              analogue, but the IUT application uses the tempered arithmetic version.
+            </p>
+            <div class="tagRow"><span class="tag green">Theorem 2.6</span><span class="tag">free/surface groups</span></div>
+          </div>
+        </div>
+        <div class="callout">
+          Formalization note: this page should eventually become a library interface for
+          subgroup recognition and terminality lemmas. It should not be replaced by an
+          opaque field saying that decomposition subgroups exist, because Section 2
+          proves how they behave inside the ambient completed groups.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, §2</a>
+          Related: <a href="#iut-i-atlas">IUT I atlas</a>
+          <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
+          <a href="#anabelian-background">anabelian background</a>
+          <a href="#prime-strips-bridges">prime strips and bridges</a>
         </div>
       </section>
 
