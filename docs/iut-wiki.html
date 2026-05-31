@@ -677,6 +677,11 @@
         <a href="#f-prime-strip-definition-iut-i52">F-prime-strip 5.2</a>
         <a href="#f-perp-prime-strip-definition-iut-i52">F⊢-prime-strip 5.2</a>
         <a href="#f-realified-prime-strip-definition-iut-i52">F realified strip 5.2</a>
+        <a href="#local-nonarch-kappa-coric-iut-i52">Local nonarch κ-coric 5.2</a>
+        <a href="#local-arch-kappa-coric-iut-i52">Local arch κ-coric 5.2</a>
+        <a href="#f-to-d-strip-algorithms-iut-i521">F-to-D strip algorithms 5.2.1</a>
+        <a href="#corollary-53-rigidity-page">Corollary 5.3 rigidity</a>
+        <a href="#d-morphism-lift-iut-i531">D-morphism lift 5.3.1</a>
         <a href="#iut-i-pivotal-distributions-54">Pivotal distributions 5.4</a>
         <a href="#delta-valuations-localization-54">Delta-valuations 5.4</a>
         <a href="#theta-nf-bridges-definition-55-56">ThetaNF bridges 5.5-5.6</a>
@@ -17434,6 +17439,210 @@
         <div class="related">
           Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 5.2(iv)</a>
           Related: <a href="#global-realified-cmod-iut-i35">global Cmod realification</a>
+          <a href="#theta-nf-bridges-definition-55-56">ThetaNF bridges</a>
+        </div>
+      </section>
+
+      <section id="local-nonarch-kappa-coric-iut-i52" data-filter="iut i definition 5.2 nonarchimedean local kappa coric infinity kappa pi rat d v m v decomposition strict critical">
+        <h2>IUT I Definition 5.2(v)-(vi): Local Nonarchimedean Kappa-Coric Structures</h2>
+        <p class="lede">
+          For a nonarchimedean valuation, Definition 5.2 reconstructs local
+          <span class="math">C_v</span>, <span class="math">pi_1^rat(D_v)</span>,
+          the ind-topological monoid <span class="math">M_v(D_v)</span>, and the
+          pseudo-monoids <span class="math">M_{κ,v}</span>,
+          <span class="math">M_{∞κ,v}</span>, and
+          <span class="math">M_{∞κ×,v}</span>. These data then define the local
+          <span class="math">∞κ</span> and <span class="math">∞κ×</span> structures
+          associated to an F-prime-strip component.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Step</th><th>Definition 5.2(v)-(vi) content</th><th>Consequence</th></tr>
+          <tr>
+            <td>Local core</td>
+            <td>From <span class="math">pi_1(D_v)</span>, reconstruct a group corresponding to <span class="math">C_v</span> and a category-theoretic morphism <span class="math">D_v -> D_v^*</span>.</td>
+            <td>The local curve-to-core map is recovered from D-side fundamental-group data.</td>
+          </tr>
+          <tr>
+            <td>Local monoid</td>
+            <td>Construct <span class="math">M_v(D_v)</span>, naturally isomorphic to the nonzero integral local monoid, with its group action.</td>
+            <td>Local multiplicative topology enters as an ind-topological monoid.</td>
+          </tr>
+          <tr>
+            <td>Coric structures</td>
+            <td>Define <span class="math">∞κ</span>- and <span class="math">∞κ×</span>-coric structures as action-bearing pseudo-monoids isomorphic to the reconstructed models.</td>
+            <td>The F-component carries canonical local κ-coric pseudo-monoid data.</td>
+          </tr>
+          <tr>
+            <td>Strict critical recovery</td>
+            <td><span class="math">∞κ×</span> determines <span class="math">∞κ</span> by selecting elements whose Kummer classes restrict to torsion at decomposition groups of strictly critical points.</td>
+            <td>The <span class="math">∞κ</span> substructure is recovered by a source criterion.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 5.2(v)-(vi)</a>
+          Related: <a href="#infinity-kappa-structures-iut-i51">global infinity-kappa structures</a>
+          <a href="#theta-evaluation-points-iut-i44">theta evaluation points</a>
+        </div>
+      </section>
+
+      <section id="local-arch-kappa-coric-iut-i52" data-filter="iut i definition 5.2 archimedean local kappa coric aut holomorphic orbispaces meromorphic functions kummer structure">
+        <h2>IUT I Definition 5.2(vii)-(viii): Local Archimedean Kappa-Coric Structures</h2>
+        <p class="lede">
+          At archimedean valuations, Definition 5.2 replaces profinite group
+          reconstruction by Aut-holomorphic reconstruction. It constructs an
+          Aut-holomorphic model of <span class="math">C_v</span>, a projective system
+          of covering orbispaces, and meromorphic-function pseudo-monoids representing
+          <span class="math">κ</span>, <span class="math">∞κ</span>, and
+          <span class="math">∞κ×</span> structures.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Definition 5.2(vii)-(viii) content</th><th>Guardrail</th></tr>
+          <tr>
+            <td>Aut-holomorphic core</td>
+            <td>Construct <span class="math">D_v^*</span> corresponding to <span class="math">C_v</span> and a natural morphism from the archimedean <span class="math">D_v</span>.</td>
+            <td>Archimedean reconstruction uses Aut-holomorphic orbispaces, not profinite Galois groups alone.</td>
+          </tr>
+          <tr>
+            <td>Topological field</td>
+            <td>The topological field <span class="math">A_{D_v}</span> and its norm-≤1 monoid provide the target for Kummer structures.</td>
+            <td>The Kummer structure is an isomorphism of topological monoids.</td>
+          </tr>
+          <tr>
+            <td>Meromorphic functions</td>
+            <td>The local pseudo-monoids are represented by maps from covering orbispaces to the groupification of the monoid, satisfying the κ-coric conditions.</td>
+            <td>Archimedean κ-coric data is analytic/topological in form.</td>
+          </tr>
+          <tr>
+            <td>Cyclotomic reconstruction</td>
+            <td>Divisors of zeroes and poles, together with strict-critical splittings, reconstruct the Kummer cyclotomic isomorphism and the pseudo-monoid isomorphisms.</td>
+            <td>The local archimedean recovery is canonical only with the listed covering and splitting data.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 5.2(vii)-(viii)</a>
+          Related: <a href="#arch-kummer-log-frobenioids-iut-i34">archimedean Kummer/log Frobenioids</a>
+          <a href="#local-nonarch-kappa-coric-iut-i52">local nonarch kappa-coric</a>
+        </div>
+      </section>
+
+      <section id="f-to-d-strip-algorithms-iut-i521" data-filter="iut i remark 5.2.1 f to d prime strip mono analyticization globally realified algorithm">
+        <h2>IUT I Remark 5.2.1: F-to-D Strip Algorithms</h2>
+        <p class="lede">
+          Remark 5.2.1 records the functorial algorithms connecting the Frobenioid
+          layer back to the D-layer. F-prime-strips determine D-prime-strips,
+          <span class="math">F^⊢</span>-prime-strips determine
+          <span class="math">D^⊢</span>-prime-strips, and every F-prime-strip has
+          functorial mono-analytic and globally realified outputs.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Algorithm</th><th>Remark 5.2.1 content</th><th>Use</th></tr>
+          <tr>
+            <td>Associated D-strip</td>
+            <td>Construct D-prime-strips from F-prime-strips and <span class="math">D^⊢</span>-prime-strips from <span class="math">F^⊢</span>-prime-strips.</td>
+            <td>This supplies the D-side control used in Corollary 5.3.</td>
+          </tr>
+          <tr>
+            <td>Mono-analyticization</td>
+            <td>Construct <span class="math">F -> F^⊢</span> functorially from an F-prime-strip.</td>
+            <td>The F-level holomorphic interface can be weakened in a controlled way.</td>
+          </tr>
+          <tr>
+            <td>Global realification</td>
+            <td>Construct <span class="math">F -> F^⊩</span> using the product-formula structure of the global realified Frobenioid and rigidity of local divisor monoids.</td>
+            <td>Real-valued comparison data is output of the F-strip, not separately chosen.</td>
+          </tr>
+          <tr>
+            <td>Kummer status</td>
+            <td>Remark 5.2.2 adds that F-prime-strips are Kummer-ready, whereas <span class="math">F^⊢</span>-prime-strips are Kummer-blind.</td>
+            <td>Mono-analyticization loses Kummer access even though it preserves comparison structure.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Remarks 5.2.1-5.2.2</a>
+          Related: <a href="#corollary-53-rigidity-page">Corollary 5.3 rigidity</a>
+          <a href="#kummer-ready-blind-51-52">Kummer-ready/blind</a>
+        </div>
+      </section>
+
+      <section id="corollary-53-rigidity-page" data-filter="iut i corollary 5.3 rigidity isomorphisms global frobenioids f prime strips d prime strips surjective f perp tempered frobenioids">
+        <h2>IUT I Corollary 5.3: Rigidity over D-Data</h2>
+        <p class="lede">
+          Corollary 5.3 is the rigidity statement that lets Section 5 be controlled by
+          the D-side. Global Frobenioid isomorphisms are determined by base-category
+          isomorphisms; F-prime-strip isomorphisms are determined by D-prime-strip
+          isomorphisms; <span class="math">F^⊢</span>-prime-strip isomorphisms map
+          surjectively to <span class="math">D^⊢</span>-isomorphisms; and bad-place
+          tempered Frobenioids are rigid over their D-base.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Assertion</th><th>Corollary 5.3 content</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>(i)</td>
+            <td>Isomorphisms of the global Frobenioids <span class="math">F*</span> and their restrictions map bijectively to isomorphisms of base categories.</td>
+            <td>Global Frobenioid isomorphism is base-controlled.</td>
+          </tr>
+          <tr>
+            <td>(ii)</td>
+            <td><span class="math">Isom(F_1,F_2) -> Isom(D_1,D_2)</span> is bijective for F-prime-strips and associated D-prime-strips.</td>
+            <td>This is the main F-over-D rigidity used by later bridge lifts.</td>
+          </tr>
+          <tr>
+            <td>(iii)</td>
+            <td><span class="math">Isom(F_1^⊢,F_2^⊢) -> Isom(D_1^⊢,D_2^⊢)</span> is surjective, not stated as bijective.</td>
+            <td>The wiki must keep the weaker mono-analytic rigidity level explicit.</td>
+          </tr>
+          <tr>
+            <td>(iv)</td>
+            <td>At bad places, <span class="math">Aut(F_v) -> Aut(D_v)</span> is bijective for the tempered Frobenioid.</td>
+            <td>Bad-place Frobenioid automorphisms are determined by the D-base.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          Do not upgrade Corollary 5.3(iii) from surjectivity to bijectivity. The
+          source states a weaker map for <span class="math">F^⊢</span>-prime-strips
+          than for F-prime-strips.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Corollary 5.3</a>
+          Related: <a href="#f-to-d-strip-algorithms-iut-i521">F-to-D algorithms</a>
+          <a href="#theta-nf-bridges-definition-55-56">ThetaNF bridges</a>
+        </div>
+      </section>
+
+      <section id="d-morphism-lift-iut-i531" data-filter="iut i remark 5.3.1 d prime strip morphism lift f prime strip pullback poly morphisms uniquely determined arrow">
+        <h2>IUT I Remark 5.3.1: Lifting D-Morphisms to F-Morphisms</h2>
+        <p class="lede">
+          Remark 5.3.1 extends Corollary 5.3 beyond isomorphisms. Under the stated
+          hypotheses, a morphism of D-prime-strips determines a pullback F-prime-strip
+          and hence a uniquely determined arrow of F-prime-strips lying over the
+          D-morphism. The same convention applies to poly-morphisms.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Step</th><th>Remark 5.3.1 content</th><th>Use</th></tr>
+          <tr>
+            <td>D-morphism</td>
+            <td>Start with <span class="math">phi : D_1 -> D_2</span> that is isomorphic on good-place data and induces an isomorphism on associated <span class="math">D^⊢</span>-prime-strips.</td>
+            <td>Not every arbitrary relation is covered; the hypotheses are part of the lift rule.</td>
+          </tr>
+          <tr>
+            <td>Pullback</td>
+            <td>Pull back the Frobenioids in <span class="math">F_2</span> along the components of <span class="math">phi</span> to obtain <span class="math">phi^*(F_2)</span>.</td>
+            <td>The F-target is changed by categorical pullback before comparison.</td>
+          </tr>
+          <tr>
+            <td>Unique arrow</td>
+            <td>Corollary 5.3(ii) gives a unique isomorphism <span class="math">F_1 ≃ phi^*(F_2)</span>, defining the arrow <span class="math">F_1 -> F_2</span> lying over <span class="math">phi</span>.</td>
+            <td>F-level arrows used by bridges are determined by D-level morphisms.</td>
+          </tr>
+          <tr>
+            <td>Poly-morphisms</td>
+            <td>The same convention applies to poly-morphisms.</td>
+            <td>This is the source for later NF/Theta bridge lifts.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Remark 5.3.1</a>
+          Related: <a href="#corollary-53-rigidity-page">Corollary 5.3 rigidity</a>
           <a href="#theta-nf-bridges-definition-55-56">ThetaNF bridges</a>
         </div>
       </section>
