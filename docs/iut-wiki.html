@@ -655,6 +655,13 @@
         <a href="#bridge-label-transport-iut-i47">Bridge label transport 4.7</a>
         <a href="#global-label-kodaira-spencer-iut-i471">Global labels/Kodaira-Spencer 4.7</a>
         <a href="#section4-symmetries-processions-48-412">Symmetries/processions 4.8-4.12</a>
+        <a href="#bridge-first-properties-iut-i48">Bridge first properties 4.8</a>
+        <a href="#forgetful-functor-symmetry-iut-i49">Forgetful symmetries 4.9</a>
+        <a href="#nonlabeled-output-log-volumes-iut-i491">Non-labeled output 4.9.1</a>
+        <a href="#synchronized-labels-iut-i492">Synchronized labels 4.9.2</a>
+        <a href="#processions-definition-iut-i410">Processions 4.10</a>
+        <a href="#procession-indeterminacy-iut-i411">Procession indeterminacy 4.11</a>
+        <a href="#d-theta-nf-etale-picture-iut-i412">D-ThetaNF etale-picture 4.12</a>
         <a href="#iut-i-global-frobenioids-example51">Global Frobenioids 5.1</a>
         <a href="#global-reconstruction-51">Global reconstruction 5.1</a>
         <a href="#kummer-ready-blind-51-52">Kummer-ready/blind 5.1-5.2</a>
@@ -15821,6 +15828,333 @@
           Related: <a href="#d-theta-nf-bridges-46-47">D-ThetaNF bridges</a>
           <a href="#etale-picture-cor39">etale-picture 3.9</a>
           <a href="#packet-procession-log-volume-iii39">packet/procession log-volume</a>
+          <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
+        </div>
+      </section>
+
+      <section id="bridge-first-properties-iut-i48" data-filter="iut i proposition 4.8 first properties d nf d theta d theta nf fl torsor uniqueness gluing algorithm">
+        <h2>IUT I Proposition 4.8: First Properties of Base Bridges</h2>
+        <p class="lede">
+          Proposition 4.8 records the first formal consequences of Definition 4.6.
+          D-NF bridge isomorphisms carry an <span class="math">F_l</span>-torsor
+          ambiguity, while D-Theta bridges and D-ThetaNF-Hodge theaters have unique
+          isomorphism data. Gluing an NF bridge to a Theta bridge again carries an
+          <span class="math">F_l</span>-torsor of choices.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Assertion</th><th>Proposition 4.8 content</th><th>Use</th></tr>
+          <tr>
+            <td>(i)</td>
+            <td>Isomorphisms between two D-NF bridges form an <span class="math">F_l</span>-torsor.</td>
+            <td>The global NF side retains cyclic label ambiguity.</td>
+          </tr>
+          <tr>
+            <td>(ii)</td>
+            <td>Isomorphisms between two D-Theta bridges, and between two D-ThetaNF-Hodge theaters, have cardinality one.</td>
+            <td>The theta and glued theater side have a uniqueness regime distinct from D-NF.</td>
+          </tr>
+          <tr>
+            <td>(iii)</td>
+            <td>Capsule-full poly-isomorphisms that glue a D-NF bridge and a D-Theta bridge into a D-ThetaNF-Hodge theater form an <span class="math">F_l</span>-torsor.</td>
+            <td>Gluing has the same cyclic ambiguity as NF bridge isomorphism.</td>
+          </tr>
+          <tr>
+            <td>(iv)</td>
+            <td>From a D-NF bridge there is a functorial algorithm, up to <span class="math">F_l</span>-indeterminacy, constructing a D-ThetaNF-Hodge theater over it.</td>
+            <td>This is the source for later algorithmic bridge construction pages.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Proposition 4.8</a>
+          Related: <a href="#d-theta-nf-theater-definition-iut-i46">D-ThetaNF theater</a>
+          <a href="#forgetful-functor-symmetry-iut-i49">forgetful symmetries</a>
+        </div>
+      </section>
+
+      <section id="forgetful-functor-symmetry-iut-i49" data-filter="iut i proposition 4.9 forgetful functors fl sl symmetry d nf bridge holomorphic mono analytic capsules">
+        <h2>IUT I Proposition 4.9: Symmetries from Forgetful Functors</h2>
+        <p class="lede">
+          Proposition 4.9 separates three outputs of a D-ThetaNF-Hodge theater:
+          the underlying D-NF bridge, the underlying holomorphic capsule, and the
+          mono-analytic capsule. The D-NF output preserves an
+          <span class="math">F_l</span>-torsor structure; the capsule outputs forget
+          the labeling bijection and admit full symmetric-group behavior.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Proposition 4.9 forgetful functor symmetries">
+          <div class="diagramHeader">
+            <strong>Forgetting changes the symmetry group</strong>
+            <span>IUT I, Proposition 4.9</span>
+          </div>
+          <svg viewBox="0 0 1120 430" role="img">
+            <defs>
+              <marker id="arrowForget49" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox violet" x="390" y="48" width="340" height="78"></rect>
+            <text class="nodeTitle" x="560" y="78" text-anchor="middle">D-ThetaNF-Hodge theater</text>
+            <text class="tinyText" x="560" y="102" text-anchor="middle">labeled bridge package</text>
+            <rect class="nodeBox blue" x="70" y="246" width="280" height="88"></rect>
+            <text class="nodeTitle" x="210" y="278" text-anchor="middle">D-NF bridge output</text>
+            <text class="tinyText" x="210" y="304" text-anchor="middle">F_l acts simply transitively on J</text>
+            <rect class="nodeBox gold" x="420" y="246" width="280" height="88"></rect>
+            <text class="nodeTitle" x="560" y="278" text-anchor="middle">holomorphic capsule</text>
+            <text class="tinyText" x="560" y="304" text-anchor="middle">forget J -> F_l; S_l symmetry</text>
+            <rect class="nodeBox green" x="770" y="246" width="280" height="88"></rect>
+            <text class="nodeTitle" x="910" y="278" text-anchor="middle">mono-analytic capsule</text>
+            <text class="tinyText" x="910" y="304" text-anchor="middle">same label symmetry after mono-analyticization</text>
+            <path class="edge blue" d="M500 128 C420 176 310 204 216 244" marker-end="url(#arrowForget49)"></path>
+            <path class="edge gold" d="M560 128 V244" marker-end="url(#arrowForget49)"></path>
+            <path class="edge green" d="M620 128 C700 176 808 204 902 244" marker-end="url(#arrowForget49)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Functor</th><th>Proposition 4.9 content</th><th>Consequence</th></tr>
+          <tr>
+            <td>D-NF bridge</td>
+            <td>Forgetting to the underlying D-NF bridge yields output with <span class="math">F_l</span>-symmetry acting simply transitively on the capsule index set.</td>
+            <td>Cyclic structure on <span class="math">J</span> remains.</td>
+          </tr>
+          <tr>
+            <td>Holomorphic capsule</td>
+            <td>Forgetting to the underlying capsule gives <span class="math">S_l</span>-symmetry and forgets the bijection <span class="math">J -> F_l</span>.</td>
+            <td>There are <span class="math">l</span> possible labels for a given index before applying the functor.</td>
+          </tr>
+          <tr>
+            <td>Mono-analytic capsule</td>
+            <td>Composing with mono-analyticization gives the same label-symmetry properties for capsules of <span class="math">D^⊢</span>-prime-strips.</td>
+            <td>Mono-analyticization preserves the unlabeled comparison regime.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Proposition 4.9</a>
+          Related: <a href="#nonlabeled-output-log-volumes-iut-i491">non-labeled output</a>
+          <a href="#synchronized-labels-iut-i492">synchronized labels</a>
+        </div>
+      </section>
+
+      <section id="nonlabeled-output-log-volumes-iut-i491" data-filter="iut i remark 4.9.1 non labeled output log volumes compare different labels cyclic full symmetry">
+        <h2>IUT I Remark 4.9.1: Non-Labeled Output and Log-Volume Comparison</h2>
+        <p class="lede">
+          Remark 4.9.1 explains why forgetting labels is not cosmetic. IUT II evaluates
+          the etale theta function at D-prime-strips with labels, constructs arithmetic
+          line bundles, and later compares their arithmetic degrees as log-volumes.
+          Non-labeled output makes comparison across different labels possible.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Point</th><th>Remark 4.9.1 content</th><th>Guardrail</th></tr>
+          <tr>
+            <td>Need</td>
+            <td>Log-volumes constructed relative to different labeled D-prime-strips must be comparable.</td>
+            <td>A formal model may not keep labels so rigid that cross-label comparison becomes impossible.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F_l</span> route</td>
+            <td>The <span class="math">F_l</span>-symmetry of the D-NF output permits comparisons while retaining cyclic structure on <span class="math">J</span>.</td>
+            <td>This is still comparison inside one cyclicly structured index set.</td>
+          </tr>
+          <tr>
+            <td><span class="math">S_l</span> route</td>
+            <td>To compare D-prime-strips absolutely to prime-strips unrelated to <span class="math">J</span>, one must forget the cyclic structure and use full <span class="math">S_l</span>-symmetry.</td>
+            <td>Absolute comparison requires a stronger forgetting operation.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Remark 4.9.1</a>
+          Related: <a href="#forgetful-functor-symmetry-iut-i49">forgetful symmetries</a>
+          <a href="#packet-procession-log-volume-iii39">packet/procession log-volume</a>
+        </div>
+      </section>
+
+      <section id="synchronized-labels-iut-i492" data-filter="iut i remark 4.9.2 synchronized labels nonsynchronized labels single d basepoint zeta holomorphic real analytic">
+        <h2>IUT I Remark 4.9.2: Synchronized Labels</h2>
+        <p class="lede">
+          Remark 4.9.2 isolates why the single global <span class="math">D</span> in
+          a D-NF bridge is load-bearing. It synchronizes the correspondence between
+          capsule indices and labels up to one global <span class="math">F_l</span>
+          action. Independent globalizations would allow nonsynchronized label choices,
+          incompatible with the bijection <span class="math">zeta</span> of
+          Proposition 4.7.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Remark 4.9.2 synchronized versus nonsynchronized labels">
+          <div class="diagramHeader">
+            <strong>One global basepoint prevents independent label drift</strong>
+            <span>IUT I, Remark 4.9.2</span>
+          </div>
+          <svg viewBox="0 0 1120 430" role="img">
+            <defs>
+              <marker id="arrowSync492" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="92" y="92" width="310" height="94"></rect>
+            <text class="nodeTitle" x="247" y="124" text-anchor="middle">single D</text>
+            <text class="tinyText" x="247" y="150" text-anchor="middle">one connected component / basepoint</text>
+            <rect class="nodeBox blue" x="718" y="92" width="310" height="94"></rect>
+            <text class="nodeTitle" x="873" y="124" text-anchor="middle">synchronized labels</text>
+            <text class="tinyText" x="873" y="150" text-anchor="middle">one global F_l indeterminacy</text>
+            <rect class="nodeBox red" x="248" y="286" width="624" height="78"></rect>
+            <text class="nodeTitle" x="560" y="316" text-anchor="middle">independent globalizations</text>
+            <text class="tinyText" x="560" y="340" text-anchor="middle">nonsynchronized labels; zeta no longer compatible</text>
+            <path class="edge green" d="M404 139 H716" marker-end="url(#arrowSync492)"></path>
+            <path class="edge red" d="M560 188 V284" marker-end="url(#arrowSync492)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Theme</th><th>Remark 4.9.2 content</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Cohesion</td>
+            <td>The labels in the D-NF bridge are synchronized up to one <span class="math">F_l</span>-action because the number field is represented by a single copy of <span class="math">D</span>.</td>
+            <td>Do not replace the single global base object by independent per-strip bases.</td>
+          </tr>
+          <tr>
+            <td>Basepoint</td>
+            <td>The single copy of <span class="math">D</span> may be viewed as a single connected component, hence a single basepoint in the Galois-category sense.</td>
+            <td>Basepoint cohesion is mathematical structure, not notation.</td>
+          </tr>
+          <tr>
+            <td>Holomorphic analogy</td>
+            <td>Synchronized indeterminacy models a combinatorial holomorphic structure; nonsynchronized indeterminacies model a combinatorial real analytic structure.</td>
+            <td>This is the Teichmuller-theoretic meaning of the label-synchronization pages.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Remark 4.9.2</a>
+          Related: <a href="#global-label-kodaira-spencer-iut-i471">global labels/Kodaira-Spencer</a>
+          <a href="#nonlabeled-output-log-volumes-iut-i491">non-labeled output</a>
+        </div>
+      </section>
+
+      <section id="processions-definition-iut-i410" data-filter="iut i definition 4.10 procession n procession capsule chain order preserving injection">
+        <h2>IUT I Definition 4.10: Processions</h2>
+        <p class="lede">
+          A procession of length <span class="math">n</span> in a category
+          <span class="math">C</span> is a diagram
+          <span class="math">P_1 -> P_2 -> ... -> P_n</span>, where
+          <span class="math">P_j</span> is a <span class="math">j</span>-capsule
+          and each arrow denotes all capsule-full poly-morphisms to the next capsule.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Definition item</th><th>Definition 4.10 content</th><th>Use</th></tr>
+          <tr>
+            <td>Object</td>
+            <td>A chain <span class="math">P_1 -> ... -> P_n</span> of capsules whose sizes increase from one to <span class="math">n</span>.</td>
+            <td>Encodes ordered growth of comparison capsules.</td>
+          </tr>
+          <tr>
+            <td>Arrows</td>
+            <td>Each arrow denotes the collection of all capsule-full poly-morphisms.</td>
+            <td>Processions are built from the capsule-full relation-like morphism notion of Section 0.</td>
+          </tr>
+          <tr>
+            <td>Morphisms</td>
+            <td>A morphism of processions uses an order-preserving injection of index sets plus capsule-full poly-morphisms to the selected targets.</td>
+            <td>The order structure is part of the procession category.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 4.10</a>
+          Related: <a href="#procession-indeterminacy-iut-i411">procession indeterminacy</a>
+        </div>
+      </section>
+
+      <section id="procession-indeterminacy-iut-i411" data-filter="iut i proposition 4.11 processions base prime strips l factorial indeterminacy mono analytic holomorphic">
+        <h2>IUT I Proposition 4.11: Procession Indeterminacy</h2>
+        <p class="lede">
+          Proposition 4.11 applies processions to the capsule of a D-Theta bridge.
+          The nested subcapsules determined by
+          <span class="math">{1,...,j} subset F_l</span> reduce the total label
+          indeterminacy from <span class="math">l^l</span> possibilities to
+          <span class="math">l!</span> possibilities while preserving comparison
+          symmetry.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Assertion</th><th>Proposition 4.11 content</th><th>Consequence</th></tr>
+          <tr>
+            <td>(i)</td>
+            <td>The D-Theta bridge determines a holomorphic procession of D-prime-strips from nested subcapsules indexed by initial subsets of <span class="math">F_l</span>.</td>
+            <td>The label order supplied by <span class="math">chi : J -> F_l</span> becomes procession structure.</td>
+          </tr>
+          <tr>
+            <td>Count</td>
+            <td>For the <span class="math">n</span>-capsule, there are precisely <span class="math">n</span> possibilities for the label of a given index; multiplying over labels gives <span class="math">l!</span>.</td>
+            <td>This is the precise minimization claim for label indeterminacy.</td>
+          </tr>
+          <tr>
+            <td>(ii)</td>
+            <td>Composing with mono-analyticization gives processions of <span class="math">D^⊢</span>-prime-strips with the same indeterminacy properties.</td>
+            <td>The procession reduction survives passage to the mono-analytic side.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Proposition 4.11</a>
+          Related: <a href="#processions-definition-iut-i410">processions</a>
+          <a href="#packet-procession-log-volume-iii39">packet/procession log-volume</a>
+        </div>
+      </section>
+
+      <section id="d-theta-nf-etale-picture-iut-i412" data-filter="iut i corollary 4.12 etale picture d theta nf link mono analytic core spokes permutation symmetries">
+        <h2>IUT I Corollary 4.12: D-ThetaNF Etale-Picture</h2>
+        <p class="lede">
+          Corollary 4.12 extracts the D-ThetaNF link by mono-analyticizing the
+          theta-target prime-strip <span class="math">D_></span>. In an infinite
+          chain of D-ThetaNF-linked theaters, the mono-analytic targets form a constant
+          core, and the theaters appear as spokes with arbitrary permutation symmetries.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Corollary 4.12 D-ThetaNF etale-picture">
+          <div class="diagramHeader">
+            <strong>Constant mono-analytic core with permutable spokes</strong>
+            <span>IUT I, Corollary 4.12</span>
+          </div>
+          <svg viewBox="0 0 1120 430" role="img">
+            <defs>
+              <marker id="arrowEtale412" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="412" y="170" width="296" height="82"></rect>
+            <text class="nodeTitle" x="560" y="202" text-anchor="middle">D_>^⊢ core</text>
+            <text class="tinyText" x="560" y="228" text-anchor="middle">constant mono-analytic invariant</text>
+            <rect class="nodeBox blue" x="106" y="70" width="250" height="76"></rect>
+            <text class="nodeTitle" x="231" y="100" text-anchor="middle">spoke n-1</text>
+            <text class="tinyText" x="231" y="124" text-anchor="middle">D-ThetaNF theater</text>
+            <rect class="nodeBox gold" x="436" y="48" width="250" height="76"></rect>
+            <text class="nodeTitle" x="561" y="78" text-anchor="middle">spoke n</text>
+            <text class="tinyText" x="561" y="102" text-anchor="middle">D-ThetaNF theater</text>
+            <rect class="nodeBox red" x="766" y="70" width="250" height="76"></rect>
+            <text class="nodeTitle" x="891" y="100" text-anchor="middle">spoke n+1</text>
+            <text class="tinyText" x="891" y="124" text-anchor="middle">D-ThetaNF theater</text>
+            <rect class="nodeBox violet" x="388" y="318" width="344" height="66"></rect>
+            <text class="nodeTitle" x="560" y="346" text-anchor="middle">arbitrary spoke permutations</text>
+            <text class="tinyText" x="560" y="368" text-anchor="middle">etale-picture symmetry</text>
+            <path class="edge blue" d="M286 148 L462 168" marker-end="url(#arrowEtale412)"></path>
+            <path class="edge gold" d="M560 126 V168" marker-end="url(#arrowEtale412)"></path>
+            <path class="edge red" d="M836 148 L658 168" marker-end="url(#arrowEtale412)"></path>
+            <path class="edge violet" d="M560 254 V316" marker-end="url(#arrowEtale412)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Assertion</th><th>Corollary 4.12 content</th><th>Use</th></tr>
+          <tr>
+            <td>(i)</td>
+            <td>The D-ThetaNF link is the full poly-isomorphism between the mono-analyticized theta targets <span class="math">D_>^⊢</span>.</td>
+            <td>The link is taken after passing to mono-analytic target data.</td>
+          </tr>
+          <tr>
+            <td>(ii)</td>
+            <td>In an infinite chain, the <span class="math">D_>^⊢</span> outputs form a constant invariant, a mono-analytic core.</td>
+            <td>This repeats the etale-picture pattern of Corollaries 3.8-3.9 for D-ThetaNF theaters.</td>
+          </tr>
+          <tr>
+            <td>(iii)</td>
+            <td>The resulting etale-picture has spokes indexed by the linked theaters and admits arbitrary permutation symmetries among spokes.</td>
+            <td>This is the source-side comparison format used before later log-volume machinery.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Corollary 4.12</a>
+          Related: <a href="#etale-picture-cor39">etale-picture 3.9</a>
+          <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
           <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
         </div>
       </section>
