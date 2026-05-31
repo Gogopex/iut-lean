@@ -815,6 +815,11 @@
               <a href="#constant-multiple-rigidity">constant multiple rigidity</a>,
               <a href="#pointed-inversion-automorphism">pointed inversion automorphism</a>,
               <a href="#theta-evaluation">theta evaluation</a>,
+              <a href="#evaluation-decomposition-groups">evaluation decomposition groups</a>,
+              <a href="#theta-value-orbits">theta-value orbits</a>,
+              <a href="#conjugate-synchronization-source">conjugate synchronization</a>,
+              <a href="#mono-theta-theta-evaluation">mono-theta theta evaluation</a>,
+              <a href="#base-field-theta-evaluation">base-field theta evaluation</a>,
               <a href="#theta-monoids">theta monoids</a>
             </td>
             <td>IUT II, Sections 1-3</td>
@@ -1544,6 +1549,100 @@
             </td>
           </tr>
         </table>
+        <table>
+          <tr>
+            <th>IUT II §2 source item</th>
+            <th>Theta-evaluation construction</th>
+            <th>Later role</th>
+          </tr>
+          <tr>
+            <td>Proposition 2.1</td>
+            <td>
+              The tempered-covering diagram
+              <span class="math">Pi_Ydd -> Pi_Y -> Pi_X</span>, together with the
+              corresponding lower-level objects, is reconstructed functorially from the
+              local tempered group at a bad place.
+            </td>
+            <td>
+              This supplies the connected covering on which theta values are evaluated.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.4</td>
+            <td>
+              Cusp-label classes, two-torsion translation by <span class="math">mu-</span>,
+              and decomposition groups <span class="math">D_{t,mu-}</span> are
+              reconstructed with the relevant <span class="math">F_l^±</span> symmetry.
+            </td>
+            <td>
+              Evaluation points are not chosen analytically; they are recovered from
+              group-theoretic cusp and torsion-point data.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.5</td>
+            <td>
+              Restricting etale theta functions to the subgraph and then to
+              <span class="math">D_{t,mu-}</span> gives
+              <span class="math">mu_{2l}</span>- and <span class="math">mu</span>-orbits
+              of theta values indexed by <span class="math">|t| in |F_l|</span>.
+            </td>
+            <td>
+              This is the group-theoretic theta-evaluation algorithm used before passage
+              to mono-theta and Frobenioid forms.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 2.5.1</td>
+            <td>
+              Relative to the standard cyclotomic rigidity isomorphism, the theta-value
+              orbit for a label <span class="math">j</span> is the orbit of the value with
+              exponent <span class="math">j^2</span>.
+            </td>
+            <td>
+              This is the source of the square-weight phenomenon that reappears in the
+              Corollary 3.12 discussion.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 2.6.1</td>
+            <td>
+              All theta values for <span class="math">|t| in |F_l|</span> are computed
+              relative to one basepoint, one local Galois group, and one cyclotome.
+              Mochizuki calls this conjugate synchronization.
+            </td>
+            <td>
+              Simultaneous Kummer theory for all theta values requires this single
+              shared basepoint/cyclotome.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.8</td>
+            <td>
+              Replacing <span class="math">l DeltaTheta</span> by
+              <span class="math">Pi_mu</span> via mono-theta cyclotomic rigidity gives
+              mono-theta-theoretic theta values and zero-label splittings compatible with
+              Corollary 1.12.
+            </td>
+            <td>
+              This is the route that connects group-theoretic evaluation to
+              Frobenioid-theoretic theta functions.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.9, Remark 2.9.1</td>
+            <td>
+              Replacing <span class="math">l DeltaTheta</span> by base-field
+              cyclotomes <span class="math">mu_Z(G_v)</span> gives a useful evaluation
+              route, but as stated it is only uniradial; IUT III log-shells later modify
+              it into a multiradial form with mild indeterminacy.
+            </td>
+            <td>
+              This marks an explicit source boundary: base-field numerical access is
+              useful, but it is not automatically multiradial.
+            </td>
+          </tr>
+        </table>
         <div class="grid3">
           <div class="card" id="mono-theta-environment">
             <h3>Mono-theta environment</h3>
@@ -1648,6 +1747,54 @@
             </p>
             <div class="tagRow"><span class="tag blue">IUT II §2</span><span class="tag">theta values</span></div>
           </div>
+          <div class="card" id="evaluation-decomposition-groups">
+            <h3>Evaluation decomposition groups</h3>
+            <p>
+              Corollary 2.4 reconstructs decomposition groups for cusp translates by the
+              two-torsion point <span class="math">mu-</span>. These groups are the
+              local targets to which theta functions are restricted for evaluation.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 2.4</span><span class="tag">torsion translate</span></div>
+          </div>
+          <div class="card" id="theta-value-orbits">
+            <h3>Theta-value orbits</h3>
+            <p>
+              Corollary 2.5 produces <span class="math">mu_{2l}</span>- and
+              <span class="math">mu</span>-orbits of theta values
+              <span class="math">theta_|t|</span> indexed by
+              <span class="math">|F_l|</span>. Remark 2.5.1 identifies the source of
+              the <span class="math">j^2</span> exponent.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 2.5</span><span class="tag gold">j²</span></div>
+          </div>
+          <div class="card" id="conjugate-synchronization-source">
+            <h3>Conjugate synchronization</h3>
+            <p>
+              Remark 2.6.1 requires all label-indexed theta values to be computed with
+              one Galois group and one cyclotome. This is what makes simultaneous
+              Kummer extraction across all theta values meaningful.
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 2.6.1</span><span class="tag">single basepoint</span></div>
+          </div>
+          <div class="card" id="mono-theta-theta-evaluation">
+            <h3>Mono-theta theta evaluation</h3>
+            <p>
+              Corollary 2.8 transports theta evaluation through mono-theta cyclotomic
+              rigidity, replacing <span class="math">l DeltaTheta</span> by
+              <span class="math">Pi_mu</span> and preserving the zero-label splittings.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 2.8</span><span class="tag">MTheta</span></div>
+          </div>
+          <div class="card" id="base-field-theta-evaluation">
+            <h3>Base-field theta evaluation</h3>
+            <p>
+              Corollary 2.9 instead uses base-field cyclotomes
+              <span class="math">mu_Z(G_v)</span>. Remark 2.9.1 records the price:
+              this route gives numerical access but is uniradial until the later
+              log-shell modification.
+            </p>
+            <div class="tagRow"><span class="tag gold">Corollary 2.9</span><span class="tag">uniradial</span></div>
+          </div>
           <div class="card" id="theta-monoids">
             <h3>Theta monoids</h3>
             <p>
@@ -1667,7 +1814,7 @@
             <div class="tagRow"><span class="tag green">Corollary 3.5</span><span class="tag">Gaussian</span></div>
           </div>
           <div class="card" id="conjugate-synchronization">
-            <h3>Conjugate synchronization</h3>
+            <h3>Global conjugate synchronization</h3>
             <p>
               The global Gaussian Frobenioid theory requires synchronization among
               conjugates. The point is to compare many local pieces without pretending
