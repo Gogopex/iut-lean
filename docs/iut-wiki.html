@@ -808,9 +808,12 @@
             <td>Mono-theta and rigidity</td>
             <td>
               <a href="#mono-theta-environment">mono-theta environment</a>,
+              <a href="#mono-theta-reconstruction">mono-theta reconstruction</a>,
               <a href="#radial-coric-data">radial/coric data</a>,
+              <a href="#fullness-multiradiality">fullness condition</a>,
               <a href="#cyclotomic-rigidity">cyclotomic rigidity</a>,
               <a href="#constant-multiple-rigidity">constant multiple rigidity</a>,
+              <a href="#pointed-inversion-automorphism">pointed inversion automorphism</a>,
               <a href="#theta-evaluation">theta evaluation</a>,
               <a href="#theta-monoids">theta monoids</a>
             </td>
@@ -1440,6 +1443,107 @@
             <td><a href="#theta-log-links">theta/log links</a>, <a href="#log-theta-lattice">log-theta lattice</a></td>
           </tr>
         </table>
+        <table>
+          <tr>
+            <th>IUT II §1 source item</th>
+            <th>Construction</th>
+            <th>Later role</th>
+          </tr>
+          <tr>
+            <td>Definition 1.1(i)</td>
+            <td>
+              A mod-<span class="math">N</span> mono-theta environment
+              <span class="math">MTheta</span> algorithmically yields
+              <span class="math">Pi_Y</span>, <span class="math">Pi_X</span>,
+              <span class="math">G</span>, the geometric kernels
+              <span class="math">Delta</span>, <span class="math">Delta_Y</span>,
+              <span class="math">Delta_X</span>, the subquotient
+              <span class="math">l DeltaTheta</span>, and the exterior subgroup
+              <span class="math">Pi_mu</span>.
+            </td>
+            <td>
+              These are the group-theoretic pieces from which the theta-environment
+              rigidity statements are formed.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 1.1(ii)</td>
+            <td>
+              <span class="math">l DeltaTheta</span> is the interior cyclotome and
+              <span class="math">Pi_mu</span> is the exterior cyclotome. The source
+              constructs a cyclotomic rigidity isomorphism between their mod-
+              <span class="math">N</span> reductions.
+            </td>
+            <td>
+              This is the first IUT II rigidity comparison between theta-section data and
+              roots-of-unity data.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.1.1</td>
+            <td>
+              The cyclotomic rigidity isomorphism is reconstructed by comparing the
+              theta-section subgroup with an algebraic subgroup produced from a
+              commutator map; the relevant construction is stable under the
+              <span class="math">F_l^±</span> symmetry.
+            </td>
+            <td>
+              The rigidity is not an arbitrary isomorphism: it is tied to the internal
+              mono-theta construction and its symmetry properties.
+            </td>
+          </tr>
+          <tr>
+            <td>Propositions 1.2-1.3</td>
+            <td>
+              Mono-theta environments may be reconstructed either from the tempered
+              fundamental group or from the tempered Frobenioid. The resulting
+              cyclotomic rigidity agrees with the corresponding MLF-Galois pair
+              rigidity.
+            </td>
+            <td>
+              This links the group-theoretic and Frobenioid-theoretic routes used later
+              in theta evaluation and Gaussian Frobenioids.
+            </td>
+          </tr>
+          <tr>
+            <td>Example 1.7</td>
+            <td>
+              A radial environment is a functor <span class="math">Phi : R -> C</span>
+              from radial data to coric data. It is multiradial when
+              <span class="math">Phi</span> is full; otherwise it is uniradial.
+            </td>
+            <td>
+              Multiradiality is a precise fullness condition, not a slogan about many
+              copies. It controls whether gluing in coric data can be lifted to radial
+              data.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 1.10</td>
+            <td>
+              The mono-theta cyclotomic rigidity isomorphism
+              <span class="math">l DeltaTheta(Pi) -> Pi_mu(MTheta*(Pi))</span>
+              determines a multiradially defined functor relative to the
+              <span class="math">G O×mu(G)</span> coric environment.
+            </td>
+            <td>
+              This is the clean multiradial rigidity input: roots of unity are quotiented
+              away in the coric unit-quotient object.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 1.12</td>
+            <td>
+              Pointed inversion automorphisms and theta subsets give direct-product
+              splittings after quotienting by torsion. The resulting assignment is
+              multiradially defined.
+            </td>
+            <td>
+              This is the constant-multiple rigidity input that prevents uncontrolled
+              scalar ambiguity in later theta-value comparison.
+            </td>
+          </tr>
+        </table>
         <div class="grid3">
           <div class="card" id="mono-theta-environment">
             <h3>Mono-theta environment</h3>
@@ -1450,6 +1554,16 @@
             </p>
             <div class="tagRow"><span class="tag green">Definition 1.1</span><span class="tag">MΘ</span></div>
           </div>
+          <div class="card" id="mono-theta-reconstruction">
+            <h3>Mono-theta reconstruction</h3>
+            <p>
+              IUT II Proposition 1.2 records two construction routes for
+              <span class="math">MTheta</span>: from a topological group isomorphic to
+              the tempered fundamental group, and from the corresponding tempered
+              Frobenioid category.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 1.2</span><span class="tag">group/Frobenioid</span></div>
+          </div>
           <div class="card" id="interior-exterior-cyclotomes">
             <h3>Interior and exterior cyclotomes</h3>
             <p>
@@ -1459,6 +1573,16 @@
             </p>
             <div class="tagRow"><span class="tag">cyclotomes</span><span class="tag">rigidity</span></div>
           </div>
+          <div class="card" id="theta-section-commutator">
+            <h3>Theta-section commutator</h3>
+            <p>
+              Remark 1.1.1 explains the cyclotomic rigidity isomorphism by comparing the
+              theta-section subgroup with a subgroup produced from a commutator map. This
+              is the source-level reason the isomorphism is tied to the mono-theta
+              environment, not simply chosen.
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 1.1.1</span><span class="tag">commutator</span></div>
+          </div>
           <div class="card" id="radial-coric-data">
             <h3>Radial and coric data</h3>
             <p>
@@ -1467,6 +1591,16 @@
               this passage does not lose the relevant rigidity.
             </p>
             <div class="tagRow"><span class="tag green">Example 1.7</span><span class="tag">radial/coric</span></div>
+          </div>
+          <div class="card" id="fullness-multiradiality">
+            <h3>Fullness condition</h3>
+            <p>
+              In Example 1.7, multiradiality is the fullness of
+              <span class="math">Phi : R -> C</span>. This lets isomorphisms of coric
+              data lift to isomorphisms of radial data, which is why simultaneous
+              execution across spokes becomes meaningful.
+            </p>
+            <div class="tagRow"><span class="tag green">Example 1.7(ii),(v)</span><span class="tag">parallel transport</span></div>
           </div>
           <div class="card" id="multiradialization">
             <h3>Tautological multiradialization</h3>
@@ -1495,6 +1629,15 @@
               theta-value comparison.
             </p>
             <div class="tagRow"><span class="tag green">Corollary 1.12</span><span class="tag">scalar control</span></div>
+          </div>
+          <div class="card" id="pointed-inversion-automorphism">
+            <h3>Pointed inversion automorphism</h3>
+            <p>
+              Corollary 1.12 uses pointed inversion automorphisms to isolate invariant
+              theta subsets modulo torsion. These invariants produce the splittings that
+              express constant-multiple rigidity in a multiradial form.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 1.12(i)-(ii)</span><span class="tag">splitting</span></div>
           </div>
           <div class="card" id="galois-theoretic-theta-evaluation">
             <h3>Galois-theoretic theta evaluation</h3>
