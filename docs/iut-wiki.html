@@ -511,6 +511,7 @@
         <a href="#galois-countability-repairs">Galois-countability repairs</a>
         <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
         <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges 6.11</a>
+        <a href="#theta-plus-minus-ell-nf-613">Theta±ellNF 6.13</a>
         <a href="#hodge-theaters">Hodge theaters</a>
         <a href="#mutually-alien-copies">Mutually alien copies</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
@@ -1439,6 +1440,8 @@
               <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges 6.11</a>,
               <a href="#theta-plus-minus-bridge-611">Theta± bridge</a>,
               <a href="#theta-ell-bridge-611">Thetaell bridge</a>,
+              <a href="#theta-plus-minus-ell-nf-613">Theta±ellNF 6.13</a>,
+              <a href="#d-theta-plus-minus-ell-nf-613">D-Theta±ellNF theater</a>,
               <a href="#theta-link-source-definition">Theta link source definition</a>,
               <a href="#theta-nf-gluing-section5">ThetaNF gluing</a>,
               <a href="#frobenius-picture-chain">Frobenius-picture chain</a>,
@@ -9167,6 +9170,172 @@
           Related: <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
           <a href="#multiplicative-additive-bridges">multiplicative/additive bridges</a>
           <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
+          <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
+        </div>
+      </section>
+
+      <section id="theta-plus-minus-ell-nf-613">
+        <h2>Theta±ellNF Hodge Theaters in IUT I 6.13</h2>
+        <p class="lede">
+          Definition 6.13 glues the additive Theta±ell-Hodge theater of Definition
+          6.11 to the multiplicative ThetaNF-Hodge theater of Definition 5.5. The
+          gluing is unique in the sense of Remark 6.12.2, and the same definition has
+          a D-level version using D-Theta±ell and D-ThetaNF theaters.
+        </p>
+        <div class="diagram" aria-label="IUT I Definition 6.13 Theta plus-minus ell NF Hodge theater">
+          <div class="diagramHeader">
+            <strong>Definition 6.13 combined theater</strong>
+            <span>additive Theta±ell side glued to multiplicative ThetaNF side</span>
+          </div>
+          <svg viewBox="0 0 1080 500" role="img">
+            <defs>
+              <marker id="arrowThetaPMNF613" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox gold" x="70" y="72" width="250" height="92"></rect>
+            <text class="nodeTitle" x="195" y="104" text-anchor="middle">Theta±ell-Hodge theater</text>
+            <text class="tinyText" x="195" y="128" text-anchor="middle">Theta± bridge + Thetaell bridge</text>
+            <text class="tinyText" x="195" y="146" text-anchor="middle">Definition 6.11(iii)</text>
+
+            <rect class="nodeBox green" x="70" y="304" width="250" height="92"></rect>
+            <text class="nodeTitle" x="195" y="336" text-anchor="middle">ThetaNF-Hodge theater</text>
+            <text class="tinyText" x="195" y="360" text-anchor="middle">NF bridge + Theta bridge</text>
+            <text class="tinyText" x="195" y="378" text-anchor="middle">Definition 5.5(iii)</text>
+
+            <rect class="nodeBox violet" x="438" y="188" width="260" height="96"></rect>
+            <text class="nodeTitle" x="568" y="220" text-anchor="middle">unique gluing isomorphism</text>
+            <text class="tinyText" x="568" y="244" text-anchor="middle">via Proposition 6.7 algorithm</text>
+            <text class="tinyText" x="568" y="262" text-anchor="middle">Remark 6.12.2(i),(ii)</text>
+
+            <rect class="nodeBox red" x="810" y="188" width="220" height="96"></rect>
+            <text class="nodeTitle" x="920" y="220" text-anchor="middle">Theta±ellNF theater</text>
+            <text class="tinyText" x="920" y="244" text-anchor="middle">triple: additive side,</text>
+            <text class="tinyText" x="920" y="262" text-anchor="middle">multiplicative side, gluing</text>
+
+            <rect class="nodeBox blue" x="400" y="380" width="314" height="74"></rect>
+            <text class="nodeTitle" x="557" y="409" text-anchor="middle">D-Theta±ellNF version</text>
+            <text class="tinyText" x="557" y="433" text-anchor="middle">D-Theta±ell + D-ThetaNF + unique D-gluing</text>
+
+            <path d="M322 118 C386 134 410 172 436 220" class="edge gold" marker-end="url(#arrowThetaPMNF613)"></path>
+            <path d="M322 350 C386 332 410 296 436 252" class="edge green" marker-end="url(#arrowThetaPMNF613)"></path>
+            <path d="M700 236 H808" class="edge violet" marker-end="url(#arrowThetaPMNF613)"></path>
+            <path d="M568 286 V378" class="edge blue" marker-end="url(#arrowThetaPMNF613)"></path>
+
+            <rect class="nodeBox" x="810" y="382" width="220" height="72"></rect>
+            <text class="nodeTitle" x="920" y="410" text-anchor="middle">Frobenioid inventory</text>
+            <text class="tinyText" x="920" y="433" text-anchor="middle">local F_v, Fmod, F layers</text>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Definition 6.13 item</th><th>Data</th><th>Why it matters</th></tr>
+          <tr>
+            <td>6.13(i)(a)</td>
+            <td>
+              A Theta±ell-Hodge theater, i.e. the additive theater from
+              Definition 6.11(iii).
+            </td>
+            <td>
+              Supplies the signed additive label system, the zero/nonzero comparison
+              interface, and the geometric basepoint side.
+            </td>
+          </tr>
+          <tr>
+            <td>6.13(i)(b)</td>
+            <td>
+              A ThetaNF-Hodge theater, i.e. the multiplicative Frobenioid lift from
+              Definition 5.5(iii).
+            </td>
+            <td>
+              Supplies the NF/theta bridge pair, the number-field construction, and the
+              multiplicative label system.
+            </td>
+          </tr>
+          <tr>
+            <td>6.13(i)(c)</td>
+            <td>
+              The necessarily unique gluing isomorphism between these two theaters,
+              cited back to Remark 6.12.2.
+            </td>
+            <td>
+              The combined theater is not a free product of structures; the two sides
+              are connected through the functorial Theta± to Theta algorithm.
+            </td>
+          </tr>
+          <tr>
+            <td>6.13(ii)</td>
+            <td>
+              The D-Theta±ellNF-Hodge theater is the analogous triple of a
+              D-Theta±ell-Hodge theater, a D-ThetaNF-Hodge theater, and the unique
+              D-level gluing isomorphism.
+            </td>
+            <td>
+              The D-level shadow must be available because later rigidity and
+              multiradial constructions repeatedly read lifted data through D-theater
+              isomorphisms.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="theta-plus-minus-ell-side-613">
+            <h3>Additive side</h3>
+            <p>
+              The Theta±ell side carries the <span class="math">F_l^±</span> additive
+              symmetry, including the zero label and the sign quotient structure.
+            </p>
+            <div class="tagRow"><span class="tag gold">Def. 6.13(i)(a)</span><span class="tag">additive</span></div>
+          </div>
+          <div class="card" id="theta-nf-side-613">
+            <h3>Multiplicative side</h3>
+            <p>
+              The ThetaNF side carries the Section 5 Frobenioid package: the NF bridge,
+              the theta bridge, and their common F-prime-strip capsule.
+            </p>
+            <div class="tagRow"><span class="tag green">Def. 6.13(i)(b)</span><span class="tag">multiplicative</span></div>
+          </div>
+          <div class="card" id="unique-gluing-613">
+            <h3>Unique gluing</h3>
+            <p>
+              Remark 6.12.2 says the relevant gluing isomorphism is unique, using
+              Proposition 6.7 and the isomorphism rigidity of Corollary 5.6.
+            </p>
+            <div class="tagRow"><span class="tag violet">Rem. 6.12.2</span><span class="tag">unique</span></div>
+          </div>
+          <div class="card" id="d-theta-plus-minus-ell-nf-613">
+            <h3>D-level version</h3>
+            <p>
+              Definition 6.13(ii) repeats the construction at D-level. This is the
+              version used when later arguments work only with mono-analytic or
+              D-prime-strip structure.
+            </p>
+            <div class="tagRow"><span class="tag blue">Def. 6.13(ii)</span><span class="tag">D-theater</span></div>
+          </div>
+          <div class="card" id="frobenioid-inventory-figure66">
+            <h3>Frobenioid inventory</h3>
+            <p>
+              Figure 6.6 lists the Frobenioids appearing in the combined theater:
+              local F-prime-strip data at places, tempered Frobenioids over
+              <span class="math">D_></span> at bad places, and global
+              <span class="math">Fmod</span> and <span class="math">F</span> layers.
+            </p>
+            <div class="tagRow"><span class="tag red">Fig. 6.6</span><span class="tag">inventory</span></div>
+          </div>
+          <div class="card" id="relay-meaning-6126">
+            <h3>Relay meaning</h3>
+            <p>
+              Remark 6.12.6 reads the combined theater as a relay between geometric
+              basepoints for theta evaluation and arithmetic basepoints for constructing
+              <span class="math">Fmod</span>.
+            </p>
+            <div class="tagRow"><span class="tag violet">Rem. 6.12.6(v)</span><span class="tag">relay</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          Related: <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges 6.11</a>
+          <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
+          <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
           <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
         </div>
       </section>
