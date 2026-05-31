@@ -836,6 +836,13 @@
         <a href="#concrete-radial-examples-ii18">Concrete radial examples 1.8</a>
         <a href="#graph-functorial-algorithms-ii19">Graphs of algorithms 1.9</a>
         <a href="#iut-ii-mono-theta-rigidity-110-112">Mono-theta rigidity 1.10-1.12</a>
+        <a href="#mono-theta-rigidity-isomorphism-ii110">Mono-theta rigidity 1.10</a>
+        <a href="#coric-unit-quotient-ii1102">Coric unit quotient 1.10.2</a>
+        <a href="#mlf-galois-rigidity-indeterminacies-ii111">MLF-Galois orbits 1.11</a>
+        <a href="#post-anabelian-algorithm-content-ii1113">Algorithm content 1.11.3</a>
+        <a href="#constant-multiple-rigidity-ii112">Constant multiple 1.12</a>
+        <a href="#mu2l-normalization-ii1122">mu_2l normalization</a>
+        <a href="#galois-evaluation-principle-ii1124">Galois evaluation principle</a>
         <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation 2</a>
         <a href="#tempered-covering-ladder-ii21-22">Tempered covering ladder 2.1-2.2</a>
         <a href="#signed-cusp-labels-ii23">Signed cusp labels 2.3</a>
@@ -24020,9 +24027,202 @@
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollaries 1.10-1.12</a>
           Related: <a href="#mono-theta-environments-ii11">mono-theta environments</a>
+          <a href="#mono-theta-rigidity-isomorphism-ii110">Corollary 1.10</a>
+          <a href="#mlf-galois-rigidity-indeterminacies-ii111">Corollary 1.11</a>
+          <a href="#constant-multiple-rigidity-ii112">Corollary 1.12</a>
           <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>
           <a href="#theta-evaluation-kummer-route">theta evaluation route</a>
           <a href="#multiradiality">multiradiality</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-rigidity-isomorphism-ii110" data-filter="iut ii corollary 1.10 multiradial mono theta cyclotomic rigidity lDeltaTheta Pi_mu exterior cyclotome">
+        <h2>Multiradial Mono-Theta Cyclotomic Rigidity</h2>
+        <p class="lede">
+          Corollary 1.10 applies the exterior-cyclotomic radial environment of Example
+          1.8(vi). The cyclotomic rigidity isomorphism
+          <span class="math">l·DeltaTheta(Pi) ~= Pi_mu(MTheta_*(Pi))</span> is
+          constructed from the group-theoretic mono-theta system and determines a
+          multiradially defined functor via the graph construction of Example 1.9.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Input</th><th>Rigidified data</th><th>Multiradial output</th></tr>
+          <tr>
+            <td><span class="math">Pi</span> in the exterior-cyclotomic radial environment</td>
+            <td>Domain <span class="math">l·DeltaTheta(Pi)</span>, codomain <span class="math">Pi_mu(MTheta_*(Pi))</span>, and the rigidity isomorphism.</td>
+            <td>A graph category <span class="math">R^dagger</span> whose natural functor from <span class="math">R</span> is multiradially defined.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 1.10</a>
+          Related: <a href="#mono-theta-cyclotomes-ii11">interior/exterior cyclotomes</a>
+          <a href="#coric-unit-quotient-ii1102">coric unit quotient</a>
+        </div>
+      </section>
+
+      <section id="coric-unit-quotient-ii1102" data-filter="iut ii remark 1.10.2 O times mu quotient roots of unity coricity mono theta rigidity">
+        <h2>Coric Unit Quotient in Remark 1.10.2</h2>
+        <p class="lede">
+          Remark 1.10.2 explains why Corollary 1.10 is multiradial: the coric object
+          <span class="math">O^xmu(G)</span> is obtained by quotienting
+          <span class="math">O^x(G)</span> by roots of unity. The homomorphism from
+          <span class="math">Pi_mu(MTheta_*) tensor Q/Z</span> to this quotient is
+          trivial, so rigidifying the exterior cyclotome is compatible with sharing the
+          coric <span class="math">O^xmu(G)</span> across distinct holomorphic spokes.
+        </p>
+        <div class="callout gold">
+          <strong>Guardrail.</strong> This is not an equality of the cyclotomes in
+          different arithmetic holomorphic structures. It is compatibility after passing
+          to a coric quotient where the roots-of-unity contribution has disappeared.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 1.10.2</a>
+          Related: <a href="#concrete-radial-examples-ii18">Example 1.8</a>
+          <a href="#mono-theta-rigidity-isomorphism-ii110">Corollary 1.10</a>
+        </div>
+      </section>
+
+      <section id="mlf-galois-rigidity-indeterminacies-ii111" data-filter="iut ii corollary 1.11 MLF Galois cyclotomic rigidity indeterminacies Aut(G) Gamma orbit">
+        <h2>MLF-Galois Rigidity with Indeterminacies</h2>
+        <p class="lede">
+          Corollary 1.11 gives a multiradial form of base-field/Galois cyclotomic
+          rigidity, but only with explicit orbit indeterminacies: a
+          <span class="math">Gamma</span>-orbit for the
+          <span class="math">G O^triangleright(G)</span> route and an
+          <span class="math">Aut(G)</span>-orbit for the comparison from
+          <span class="math">mu_Z(G)</span> to
+          <span class="math">l·DeltaTheta(Pi)</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Orbit</th><th>Object compared</th><th>Reason it matters</th></tr>
+          <tr>
+            <td><span class="math">Gamma</span>-orbit</td>
+            <td><span class="math">mu_Z(G) ~= mu_Z(O^x(G))</span></td>
+            <td>Records the indeterminacy from forgetting the full anabelian construction of the monoid data.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Aut(G)</span>-orbit</td>
+            <td><span class="math">mu_Z(G) ~= l·DeltaTheta(Pi)</span></td>
+            <td>Records that <span class="math">G</span> is shared only up to isomorphism.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 1.11</a>
+          Related: <a href="#post-anabelian-algorithm-content-ii1113">algorithm content</a>
+          <a href="#coric-unit-quotient-ii1102">Corollary 1.10 contrast</a>
+        </div>
+      </section>
+
+      <section id="post-anabelian-algorithm-content-ii1113" data-filter="iut ii remark 1.11.3 post anabelian algorithm content reconstruction algorithm coric data O times mu">
+        <h2>Algorithm Content in Remark 1.11.3</h2>
+        <p class="lede">
+          Remark 1.11.3 is a methodological warning. It is not enough to know that some
+          reconstruction algorithm exists; the content of the algorithm and the point at
+          which anabelian structure is forgotten determine which indeterminacies appear
+          in the multiradial statement.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Coric data must be specified</h3>
+            <p>
+              If <span class="math">G</span> is coric, objects constructed from
+              <span class="math">G</span> are coric only while their anabelian
+              construction history is retained or explicitly declared as coric data.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Corollary 1.10 is strict</h3>
+            <p>
+              Its strict rigidity comes from the trivial relationship between the
+              cyclotomic portion and the coric <span class="math">O^xmu</span> quotient.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Corollary 1.11 has orbits</h3>
+            <p>
+              Its orbits arise from the nontrivial relationship between
+              <span class="math">O^triangleright</span> input and
+              <span class="math">O^xmu</span> coric data.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 1.11.3</a>
+          Related: <a href="#graph-functorial-algorithms-ii19">graphs of algorithms</a>
+          <a href="#mlf-galois-rigidity-indeterminacies-ii111">MLF-Galois orbits</a>
+        </div>
+      </section>
+
+      <section id="constant-multiple-rigidity-ii112" data-filter="iut ii corollary 1.12 multiradial constant multiple rigidity pointed inversion theta subsets splittings">
+        <h2>Multiradial Constant Multiple Rigidity</h2>
+        <p class="lede">
+          Corollary 1.12 constructs pointed inversion automorphisms, restricts the
+          theta package to the associated decomposition subgroup, and obtains splittings
+          after quotienting torsion. The result separates a coric
+          <span class="math">M_TM^xmu</span> component from the theta-orbit component
+          needed for constant-multiple rigidity.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Corollary 1.12 item</th><th>Content</th><th>Use</th></tr>
+          <tr>
+            <td>(i)</td>
+            <td>Group-theoretically constructs pointed inversion automorphisms <span class="math">(iota,D)</span>.</td>
+            <td>Supplies the invariant subgroup for theta restriction.</td>
+          </tr>
+          <tr>
+            <td>(ii)</td>
+            <td>Restricts to <span class="math">D</span> and compares <span class="math">M_TM^x · infty theta</span> with the environment version.</td>
+            <td>Moves from standard theta to the exterior-cyclotome theta package.</td>
+          </tr>
+          <tr>
+            <td>(iii)</td>
+            <td>Forms the direct-product-style quotient by torsion.</td>
+            <td>Controls scalar ambiguity in the later theta-value comparison.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 1.12</a>
+          Related: <a href="#pointed-inversion-automorphism-ii141">pointed inversion</a>
+          <a href="#theta-env-kummer-package-ii15">theta_env package</a>
+        </div>
+      </section>
+
+      <section id="mu2l-normalization-ii1122" data-filter="iut ii remark 1.12.2 mu_2l normalization multiradial theta functions ring dependent unit">
+        <h2>mu_2l Normalization</h2>
+        <p class="lede">
+          Remark 1.12.2 explains that the theta functions used in this multiradial
+          construction are normalized only up to a
+          <span class="math">mu_2l</span>-indeterminacy. A stronger normalization by a
+          ring-dependent unit, such as choosing a value tied to
+          <span class="math">2 = 1+1</span>, would be uniradial and would fail at the
+          log-shell stage.
+        </p>
+        <div class="callout red">
+          <strong>Guardrail.</strong> For the wiki and for later formalization, this is
+          a hard source constraint: do not replace the allowed
+          <span class="math">mu_2l</span> ambiguity by a normalization that remembers
+          one spoke's ring structure.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 1.12.2</a>
+          Related: <a href="#constant-multiple-rigidity-ii112">constant multiple rigidity</a>
+          <a href="#frobenioids-log-shells">log-shells</a>
+        </div>
+      </section>
+
+      <section id="galois-evaluation-principle-ii1124" data-filter="iut ii remark 1.12.4 Galois evaluation principle Kummer compatible theta evaluation sections coverings">
+        <h2>Galois Evaluation Principle</h2>
+        <p class="lede">
+          Remark 1.12.4 explains why theta evaluation in the next section is forced
+          into a Galois-theoretic form. A Kummer-compatible evaluation algorithm must
+          extend to coverings; by functoriality, it then arises from a section
+          <span class="math">G -> Pi_Ydd(Pi)</span> rather than from an external
+          analytic choice of values.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 1.12.4</a>
+          Related: <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>
+          <a href="#tempered-covering-ladder-ii21-22">tempered covering ladder</a>
         </div>
       </section>
 
