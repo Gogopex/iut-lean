@@ -518,6 +518,7 @@
         <a href="#multiplicative-additive-bridges">Multiplicative/additive bridges</a>
         <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
         <a href="#mono-theta-environments-ii11">Mono-theta environments 1.1</a>
+        <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation 2</a>
         <a href="#theta-evaluation-kummer-route">Theta evaluation route</a>
         <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
         <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
@@ -1467,6 +1468,9 @@
               <a href="#mono-theta-environment">mono-theta environment</a>,
               <a href="#mono-theta-environments-ii11">mono-theta environments 1.1</a>,
               <a href="#mono-theta-reconstruction">mono-theta reconstruction</a>,
+              <a href="#galois-theoretic-theta-evaluation-ii2">Galois-theoretic theta evaluation</a>,
+              <a href="#two-torsion-translates-24">two-torsion translates</a>,
+              <a href="#conjugate-synchronization-261">conjugate synchronization</a>,
               <a href="#radial-coric-data">radial/coric data</a>,
               <a href="#fullness-multiradiality">fullness condition</a>,
               <a href="#cyclotomic-rigidity">cyclotomic rigidity</a>,
@@ -4495,7 +4499,7 @@
           <tr>
             <td>§2</td>
             <td>Galois-theoretic theta evaluation at torsion labels and conjugate synchronization.</td>
-            <td><a href="#galois-theoretic-theta-evaluation">theta evaluation</a>, <a href="#theta-value-labels">theta-value labels</a></td>
+            <td><a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>, <a href="#theta-value-labels">theta-value labels</a></td>
           </tr>
           <tr>
             <td>§3</td>
@@ -9804,6 +9808,325 @@
         </div>
       </section>
 
+      <section id="galois-theoretic-theta-evaluation-ii2">
+        <h2>Galois-Theoretic Theta Evaluation in IUT II 2</h2>
+        <p class="lede">
+          IUT II Section 2 develops the group-theoretic algorithm for evaluating the
+          etale theta function at <span class="math">l</span>-torsion labels. The route
+          passes through tempered covering reconstruction, subgraph decomposition
+          groups, signed cusp labels, two-torsion translates, theta-value orbits, and
+          the single-basepoint conjugate synchronization needed for simultaneous
+          Kummer theory.
+        </p>
+        <div class="diagram" aria-label="IUT II Section 2 Galois theta evaluation route">
+          <div class="diagramHeader">
+            <strong>Section 2 evaluation pipeline</strong>
+            <span>from tempered coverings to synchronized theta-value orbits</span>
+          </div>
+          <svg viewBox="0 0 1080 530" role="img">
+            <defs>
+              <marker id="arrowGaloisThetaII2" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="56" y="70" width="224" height="84"></rect>
+            <text class="nodeTitle" x="168" y="100" text-anchor="middle">tempered coverings</text>
+            <text class="tinyText" x="168" y="124" text-anchor="middle">Pi_Ydd -> Pi_Y -> Pi_X</text>
+            <text class="tinyText" x="168" y="142" text-anchor="middle">Proposition 2.1</text>
+
+            <rect class="nodeBox green" x="428" y="70" width="224" height="84"></rect>
+            <text class="nodeTitle" x="540" y="100" text-anchor="middle">subgraph groups</text>
+            <text class="tinyText" x="540" y="124" text-anchor="middle">Pi_vbullet, Pi_vbar, iota</text>
+            <text class="tinyText" x="540" y="142" text-anchor="middle">Proposition 2.2</text>
+
+            <rect class="nodeBox gold" x="800" y="70" width="224" height="84"></rect>
+            <text class="nodeTitle" x="912" y="100" text-anchor="middle">signed cusp labels</text>
+            <text class="tinyText" x="912" y="124" text-anchor="middle">LabCusp±, F_l^± torsor</text>
+            <text class="tinyText" x="912" y="142" text-anchor="middle">Definition 2.3</text>
+
+            <rect class="nodeBox red" x="120" y="260" width="240" height="92"></rect>
+            <text class="nodeTitle" x="240" y="291" text-anchor="middle">two-torsion translates</text>
+            <text class="tinyText" x="240" y="315" text-anchor="middle">I_t, D_t, D_mu-, D_t,mu-</text>
+            <text class="tinyText" x="240" y="333" text-anchor="middle">Corollary 2.4</text>
+
+            <rect class="nodeBox violet" x="420" y="260" width="240" height="92"></rect>
+            <text class="nodeTitle" x="540" y="291" text-anchor="middle">theta-value orbits</text>
+            <text class="tinyText" x="540" y="315" text-anchor="middle">theta_|t|(Pi_vdd^gamma)</text>
+            <text class="tinyText" x="540" y="333" text-anchor="middle">Corollary 2.5</text>
+
+            <rect class="nodeBox green" x="720" y="260" width="240" height="92"></rect>
+            <text class="nodeTitle" x="840" y="291" text-anchor="middle">single basepoint</text>
+            <text class="tinyText" x="840" y="315" text-anchor="middle">one Galois group, one cyclotome</text>
+            <text class="tinyText" x="840" y="333" text-anchor="middle">Remark 2.6.1</text>
+
+            <rect class="nodeBox blue" x="208" y="430" width="260" height="72"></rect>
+            <text class="nodeTitle" x="338" y="459" text-anchor="middle">mono-theta replacement</text>
+            <text class="tinyText" x="338" y="483" text-anchor="middle">l·DeltaTheta -> Pi_mu, Cor. 2.8</text>
+
+            <rect class="nodeBox gold" x="612" y="430" width="260" height="72"></rect>
+            <text class="nodeTitle" x="742" y="459" text-anchor="middle">base-field route</text>
+            <text class="tinyText" x="742" y="483" text-anchor="middle">useful but uniradial, Cor. 2.9</text>
+
+            <path d="M282 112 H426" class="edge blue" marker-end="url(#arrowGaloisThetaII2)"></path>
+            <path d="M654 112 H798" class="edge green" marker-end="url(#arrowGaloisThetaII2)"></path>
+            <path d="M912 156 C800 208 532 216 254 258" class="edge gold" marker-end="url(#arrowGaloisThetaII2)"></path>
+            <path d="M362 306 H418" class="edge red" marker-end="url(#arrowGaloisThetaII2)"></path>
+            <path d="M662 306 H718" class="edge violet" marker-end="url(#arrowGaloisThetaII2)"></path>
+            <path d="M502 354 C458 384 396 402 348 428" class="edge blue" marker-end="url(#arrowGaloisThetaII2)"></path>
+            <path d="M582 354 C624 386 684 404 734 428" class="edge gold" marker-end="url(#arrowGaloisThetaII2)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source item</th><th>Construction</th><th>Conceptual role</th></tr>
+          <tr>
+            <td>Proposition 2.1</td>
+            <td>
+              Reconstructs the diagram of tempered covering groups
+              <span class="math">Pi_Ydd -> Pi_Y -> Pi_X</span> and its lower-level
+              companion diagram functorially from the local tempered group
+              <span class="math">Pi_v</span>.
+            </td>
+            <td>
+              Supplies the covering ladder on which theta functions and theta values are
+              evaluated.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 2.1.1</td>
+            <td>
+              Describes the dual-graph chain, the inversion automorphisms, the finite
+              tree <span class="math">Gamma_X</span>, and the one-vertex subgraph
+              <span class="math">Gamma_X^bullet</span>.
+            </td>
+            <td>
+              Identifies the connected subgraphs that later give the single evaluation
+              basepoint.
+            </td>
+          </tr>
+          <tr>
+            <td>Proposition 2.2</td>
+            <td>
+              Constructs decomposition groups
+              <span class="math">Pi_v^bullet subset Pi_vbar subset Pi_v</span> and
+              the inversion-invariant theta-function orbit
+              <span class="math">theta_iota(Pi_v)</span>.
+            </td>
+            <td>
+              Turns graph-theoretic components into group-theoretic domains for the
+              evaluation algorithm.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 2.3</td>
+            <td>
+              Defines the ambient groups <span class="math">Pi_v</span>,
+              <span class="math">Pi_v^±</span>, <span class="math">Pi_v^cor</span>,
+              signed cusp-label classes, and the induced
+              <span class="math">F_l^±</span>-torsor structure.
+            </td>
+            <td>
+              Provides the label system that later matches the additive Theta±ell
+              symmetry.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.4</td>
+            <td>
+              From a signed cusp label <span class="math">t</span>, constructs the
+              inertia group <span class="math">I_t</span>, decomposition group
+              <span class="math">D_t</span>, the two-torsion decomposition group
+              <span class="math">D_mu-</span>, and the translated evaluation group
+              <span class="math">D_t,mu-</span>, compatibly with
+              <span class="math">F_l^±</span>-symmetry.
+            </td>
+            <td>
+              This is the group-theoretic replacement for choosing torsion-shifted
+              analytic evaluation points.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.5</td>
+            <td>
+              Restricts etale theta functions to the subgraph group and then to
+              <span class="math">D_t,mu-</span>, producing
+              <span class="math">mu_2l</span>- and <span class="math">mu</span>-orbits
+              <span class="math">theta_|t|(Pi_vdd^gamma)</span> indexed by
+              <span class="math">|t| in |F_l|</span>.
+            </td>
+            <td>
+              This is the actual group-theoretic theta evaluation algorithm.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 2.5.1</td>
+            <td>
+              Relative to the standard cyclotomic rigidity isomorphism, the label
+              <span class="math">j in |F_l|</span> gives the
+              <span class="math">mu_2l</span>-orbit of the theta value with exponent
+              <span class="math">j^2</span>.
+            </td>
+            <td>
+              This is the source of the square-weighted value profile used in the later
+              Gaussian and log-volume constructions.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.6</td>
+            <td>
+              Defines <span class="math">M_TM^x</span> on the subgraph and gives
+              zero-label splittings after quotienting by torsion.
+            </td>
+            <td>
+              Supplies the constant-multiple control needed before passing to
+              mono-theta and Gaussian data.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.8</td>
+            <td>
+              Uses mono-theta cyclotomic rigidity to replace
+              <span class="math">l·DeltaTheta</span> by
+              <span class="math">Pi_mu</span>, producing mono-theta-theoretic theta
+              evaluation and compatible splittings.
+            </td>
+            <td>
+              Converts group-theoretic evaluation into the multiradial mono-theta route.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 2.9</td>
+            <td>
+              Uses base-field-theoretic cyclotomes instead of the mono-theta exterior
+              cyclotome.
+            </td>
+            <td>
+              Useful for base-field access, but Remark 2.9.1 says this route is only
+              uniradial until later log-shell modifications.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="tempered-covering-diagram-21">
+            <h3>Tempered covering diagram</h3>
+            <p>
+              Proposition 2.1 reconstructs the covering ladder
+              <span class="math">Pi_Ydd -> Pi_Y -> Pi_X</span> at a bad place.
+              Both squares in the diagram are cartesian, and the construction is
+              functorial in the topological group.
+            </p>
+            <div class="tagRow"><span class="tag blue">Prop. 2.1</span><span class="tag">coverings</span></div>
+          </div>
+          <div class="card" id="subgraph-decomposition-groups-22">
+            <h3>Subgraph decomposition groups</h3>
+            <p>
+              Proposition 2.2 uses the finite tree and one-vertex subgraph of the dual
+              graph to define <span class="math">Pi_vbar</span> and
+              <span class="math">Pi_v^bullet</span>, up to the stated conjugacy.
+            </p>
+            <div class="tagRow"><span class="tag green">Prop. 2.2</span><span class="tag">subgraphs</span></div>
+          </div>
+          <div class="card" id="signed-cusp-labels-23">
+            <h3>Signed cusp labels</h3>
+            <p>
+              Definition 2.3 recovers <span class="math">LabCusp±</span> from cuspidal
+              inertia groups and equips the relevant label set with its
+              <span class="math">F_l^±</span>-torsor structure.
+            </p>
+            <div class="tagRow"><span class="tag gold">Def. 2.3</span><span class="tag">labels</span></div>
+          </div>
+          <div class="card" id="two-torsion-translates-24">
+            <h3>Two-torsion translates</h3>
+            <p>
+              Corollary 2.4 constructs the decomposition group for the
+              <span class="math">mu-</span>-translate of the cusp that gives rise to
+              <span class="math">I_t</span>. This group is the image of the evaluation
+              section used by theta evaluation.
+            </p>
+            <div class="tagRow"><span class="tag red">Cor. 2.4</span><span class="tag">evaluation point</span></div>
+          </div>
+          <div class="card" id="theta-value-orbits-25">
+            <h3>Theta-value orbits</h3>
+            <p>
+              Corollary 2.5 produces orbits
+              <span class="math">theta_|t|(Pi_vdd^gamma)</span> after restriction to
+              the translated decomposition groups. The result depends only on
+              <span class="math">|t|</span>, not the sign representative.
+            </p>
+            <div class="tagRow"><span class="tag violet">Cor. 2.5</span><span class="tag">orbits</span></div>
+          </div>
+          <div class="card" id="square-weight-theta-value-251">
+            <h3>Square-weight value</h3>
+            <p>
+              Remark 2.5.1 identifies the theta-value orbit for
+              <span class="math">j</span> with the orbit of the value whose exponent is
+              <span class="math">j^2</span>. This is source-level data, not later
+              notation.
+            </p>
+            <div class="tagRow"><span class="tag gold">Rem. 2.5.1</span><span class="tag">j²</span></div>
+          </div>
+          <div class="card" id="independent-conjugacy-252">
+            <h3>Independent conjugacy</h3>
+            <p>
+              Remark 2.5.2 explains why conjugacy indeterminacies acting on cusp inertia
+              groups and on the subgraph groups are independent. Figure 2.1 visualizes
+              the two unsynchronized translation lines.
+            </p>
+            <div class="tagRow"><span class="tag red">Rem. 2.5.2</span><span class="tag">indeterminacy</span></div>
+          </div>
+          <div class="card" id="conjugate-synchronization-261">
+            <h3>Conjugate synchronization</h3>
+            <p>
+              Remark 2.6.1 says all theta values for
+              <span class="math">|t| in |F_l|</span> are computed relative to one
+              Galois group and one cyclotome arising from one basepoint. This is what
+              allows simultaneous Kummer theory for all theta values.
+            </p>
+            <div class="tagRow"><span class="tag green">Rem. 2.6.1</span><span class="tag">single basepoint</span></div>
+          </div>
+          <div class="card" id="theta-plus-minus-compatibility-262">
+            <h3>Theta±ell compatibility</h3>
+            <p>
+              Remark 2.6.2 identifies the same single-basepoint phenomenon with the
+              basepoint behind the <span class="math">F_l^±</span>-symmetry of
+              D-Theta±ell-Hodge theaters.
+            </p>
+            <div class="tagRow"><span class="tag blue">Rem. 2.6.2</span><span class="tag">F_l^±</span></div>
+          </div>
+          <div class="card" id="mono-theta-evaluation-28">
+            <h3>Mono-theta evaluation</h3>
+            <p>
+              Corollary 2.8 is the multiradial route: it applies mono-theta cyclotomic
+              rigidity to express the evaluated theta data through
+              <span class="math">Pi_mu</span>.
+            </p>
+            <div class="tagRow"><span class="tag green">Cor. 2.8</span><span class="tag">multiradial</span></div>
+          </div>
+          <div class="card" id="base-field-evaluation-29">
+            <h3>Base-field evaluation</h3>
+            <p>
+              Corollary 2.9 gives the base-field cyclotome version. Remark 2.9.1 marks
+              it as uniradial in this form, so it cannot simply replace the mono-theta
+              route in multiradial arguments.
+            </p>
+            <div class="tagRow"><span class="tag gold">Cor. 2.9</span><span class="tag">uniradial</span></div>
+          </div>
+        </div>
+        <div class="callout violet">
+          Formalization warning: the single-basepoint condition is not cosmetic. The
+          simultaneous Kummer description of all theta values depends on one shared
+          Galois group and one shared cyclotome; independent local evaluations would
+          lose conjugate synchronization.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a>
+          Related: <a href="#mono-theta-environments-ii11">mono-theta environments</a>
+          <a href="#theta-evaluation-kummer-route">theta evaluation route</a>
+          <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges</a>
+          <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
+        </div>
+      </section>
+
       <section id="theta-evaluation-kummer-route">
         <h2>Theta Evaluation Route</h2>
         <p class="lede">
@@ -9996,7 +10319,8 @@
         </div>
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Introduction and §§1-2</a>
-          Related: <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
+          Related: <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>
+          <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
           <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
           <a href="#multiradiality">multiradiality</a>
           <a href="#theta-log-links">theta/log links</a>
