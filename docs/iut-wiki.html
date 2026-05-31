@@ -2806,21 +2806,139 @@
         <h2>Multiradiality, SHE, IPL, APT</h2>
         <p class="lede">
           Multiradial algorithms are meant to make sense from the viewpoint of an alien
-          arithmetic holomorphic structure. The proof-critical corridor also uses named
-          properties such as simultaneous holomorphic expressibility (SHE), input
-          prime-strip linkage (IPL), and algorithmic parallel transport (APT).
+          arithmetic holomorphic structure. In IUT III this is achieved by replacing
+          holomorphic prime-strip data with mono-analytic processions, tensor packets of
+          log-shells, and controlled indeterminacies.
         </p>
+
+        <div class="diagram" aria-label="Multiradial construction pipeline">
+          <div class="diagramHeader">
+            <strong>From labeled theta data to multiradial output</strong>
+            <span>processions, tensor packets, LGP monoids, and source obligations</span>
+          </div>
+          <svg viewBox="0 0 920 430" role="img">
+            <defs>
+              <marker id="arrowMulti" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="38" y="58" width="156" height="76"></rect>
+            <text class="nodeTitle" x="116" y="86" text-anchor="middle">F_l labels</text>
+            <text class="tinyText" x="116" y="107" text-anchor="middle">theta evaluation side</text>
+
+            <rect class="nodeBox green" x="252" y="58" width="174" height="76"></rect>
+            <text class="nodeTitle" x="339" y="86" text-anchor="middle">processions</text>
+            <text class="tinyText" x="339" y="107" text-anchor="middle">S_j+1 = {0,...,j}</text>
+
+            <rect class="nodeBox gold" x="484" y="58" width="184" height="76"></rect>
+            <text class="nodeTitle" x="576" y="86" text-anchor="middle">tensor packets</text>
+            <text class="tinyText" x="576" y="107" text-anchor="middle">direct sums of log-shells</text>
+
+            <rect class="nodeBox violet" x="726" y="58" width="156" height="76"></rect>
+            <text class="nodeTitle" x="804" y="86" text-anchor="middle">R_LGP</text>
+            <text class="tinyText" x="804" y="107" text-anchor="middle">multiradial output</text>
+
+            <path d="M194 96 H250" stroke="#315b8f" stroke-width="1.6" fill="none" marker-end="url(#arrowMulti)"></path>
+            <path d="M426 96 H482" stroke="#2f6b4f" stroke-width="1.6" fill="none" marker-end="url(#arrowMulti)"></path>
+            <path d="M668 96 H724" stroke="#8b6b24" stroke-width="1.6" fill="none" marker-end="url(#arrowMulti)"></path>
+
+            <rect class="nodeBox blue" x="100" y="248" width="170" height="82"></rect>
+            <text class="nodeTitle" x="185" y="276" text-anchor="middle">Ind1</text>
+            <text class="tinyText" x="185" y="297" text-anchor="middle">procession automorphisms</text>
+
+            <rect class="nodeBox green" x="374" y="248" width="170" height="82"></rect>
+            <text class="nodeTitle" x="459" y="276" text-anchor="middle">Ind2</text>
+            <text class="tinyText" x="459" y="297" text-anchor="middle">F^|xmu automorphisms</text>
+
+            <rect class="nodeBox gold" x="646" y="248" width="170" height="82"></rect>
+            <text class="nodeTitle" x="731" y="276" text-anchor="middle">Ind3</text>
+            <text class="tinyText" x="731" y="297" text-anchor="middle">upper semi-compatibility</text>
+
+            <path d="M339 134 C339 188 185 188 185 246" stroke="#315b8f" stroke-width="1.2" fill="none" marker-end="url(#arrowMulti)"></path>
+            <path d="M576 134 C576 188 459 188 459 246" stroke="#2f6b4f" stroke-width="1.2" fill="none" marker-end="url(#arrowMulti)"></path>
+            <path d="M804 134 V246" stroke="#8b6b24" stroke-width="1.2" fill="none" marker-end="url(#arrowMulti)"></path>
+
+            <text class="edgeLabel" x="460" y="374" text-anchor="middle">SHE/IPL/APT name the formal comparison obligations used near 3.11 to 3.12</text>
+          </svg>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>Procession reduction</h3>
+            <p>
+              IUT III replaces the full label set by nested containers
+              <span class="math">S_{j+1}^{±} = {0,...,j}</span>. This reduces the
+              label ambiguity from all independent label choices to procession
+              automorphisms and keeps the core label <span class="math">0</span>
+              insulated from later label indeterminacy.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Tensor packets</h3>
+            <p>
+              For each valuation of <span class="math">Q</span>, the construction forms
+              direct sums of log-shells over valuations above it, then tensor products
+              over the elements of <span class="math">S_{j+1}^{±}</span>. These packets
+              are the mono-analytic containers for LGP monoids and labeled copies of
+              <span class="math">F_mod^x</span>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>LGP monoids</h3>
+            <p>
+              Logarithmic Gaussian procession monoids are the log-shell-theoretic
+              versions of the Gaussian monoids from IUT II. Their splitting monoids act
+              on tensor packets and later feed the log-volume estimates in
+              <a href="#corollary-312">Corollary 3.12</a>.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Alien viewpoint</h3>
+            <p>
+              The final representation forgets the arithmetic holomorphic structure of a
+              specific vertical line and is formulated in terms meaningful from a
+              horizontally related, non-ring/scheme-theoretic Hodge theater.
+            </p>
+          </div>
+        </div>
+
         <table>
-          <tr><th>Term</th><th>Function</th><th>Formalization burden</th></tr>
-          <tr><td>Multiradial</td><td>Stable or meaningful across alien holomorphic viewpoints.</td><td>Must prove invariance or controlled transformation, not merely label it.</td></tr>
-          <tr><td>SHE</td><td>Simultaneous expression relative to the chosen holomorphic structure.</td><td>Must keep the q-pilot input fixed while expressing output data.</td></tr>
-          <tr><td>IPL</td><td>Input prime-strip link property tying output possibilities to input data.</td><td>Must track value-group and unit portions without mixing arrows.</td></tr>
-          <tr><td>APT</td><td>Algorithmic parallel transport through gluings up to allowed indeterminacy.</td><td>Must state exactly what is transported and what remains only up to indeterminacy.</td></tr>
+          <tr><th>Term</th><th>Source meaning</th><th>Formalization burden</th></tr>
+          <tr>
+            <td>Multiradial</td>
+            <td>Constructed from mono-analytic data so it is meaningful from alien holomorphic viewpoints.</td>
+            <td>Represent the processions, log-shell tensor packets, and permitted indeterminacies.</td>
+          </tr>
+          <tr>
+            <td>IPL</td>
+            <td>Output data remains linked to the fixed input q-pilot prime-strip through full poly-isomorphisms of F-prime-strips.</td>
+            <td>Prove the output/input relation, not merely a shared label or postulated comparison.</td>
+          </tr>
+          <tr>
+            <td>SHE</td>
+            <td>The construction and its output are simultaneously valid relative to the domain and codomain holomorphic structures of the theta link.</td>
+            <td>Track which operations are executable in both holomorphic structures while the q-pilot value is held fixed.</td>
+          </tr>
+          <tr>
+            <td>APT</td>
+            <td>Algorithmic parallel transport: not a direct set-map on regions, but an algorithm valid on both sides up to controlled indeterminacy.</td>
+            <td>Model the algorithmic transport and its allowable hull/Ind1/Ind2/Ind3 losses explicitly.</td>
+          </tr>
         </table>
+        <div class="callout warn">
+          The source text warns against reading APT as ordinary transport of a
+          set-theoretic region. The output may be a family of possible regions; comparison
+          with the q-pilot requires further passage through holomorphic hulls,
+          determinants, log-volumes, and the log-Kummer correspondence.
+        </div>
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+          <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV</a>
           <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">2026 formalization report</a>
+          <a href="papers/higuchi-formal-negative-result-step-xi.pdf" target="_blank">Higuchi 2026</a>
           Related: <a href="#formalization">RIMS Lean effort</a>
+          <a href="#indeterminacies">indeterminacies</a>
+          <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
           <a href="#lana">LANA</a>
         </div>
       </section>
