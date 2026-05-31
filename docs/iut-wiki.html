@@ -496,6 +496,7 @@
         <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
         <a href="#cyclic-cover-reconstruction">Cyclic cover reconstruction</a>
         <a href="#tempered-covering-complements">Tempered covering complements</a>
+        <a href="#galois-countability-repairs">Galois-countability repairs</a>
         <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
         <a href="#hodge-theaters">Hodge theaters</a>
         <a href="#mutually-alien-copies">Mutually alien copies</a>
@@ -1256,6 +1257,8 @@
               <a href="#decomposition-subgroup">decomposition subgroup</a>,
               <a href="#tempered-covering-complements">tempered covering complements</a>,
               <a href="#profinite-conjugates-compact-subgroups">profinite conjugacy rigidity</a>,
+              <a href="#corollary-25-tempered-decomposition">tempered decomposition/inertia recognition</a>,
+              <a href="#galois-countability-repairs">Galois-countability repairs</a>,
               <a href="#tempered-inertia-cusp-test">inertia cusp test</a>,
               <a href="#initial-theta-components">initial theta data</a>,
               <a href="#bad-good-primes">bad/good valuations</a>
@@ -4089,6 +4092,20 @@
             </td>
           </tr>
           <tr>
+            <td>Corollary 2.5</td>
+            <td>
+              In the full profinite case, a profinite decomposition or inertia group is
+              contained in the tempered fundamental group exactly when it is the
+              corresponding tempered decomposition or inertia group. A profinite conjugate
+              of the tempered group containing such a subgroup must equal the tempered
+              group.
+            </td>
+            <td>
+              This is the theorem-level form of Theorem B from the introduction. Later
+              applications use especially the cusp-inertia portion.
+            </td>
+          </tr>
+          <tr>
             <td>Theorem 2.6</td>
             <td>
               A discrete analogue is proved for groups virtually free or orientable
@@ -4138,6 +4155,16 @@
             </p>
             <div class="tagRow"><span class="tag green">Proposition 2.4</span><span class="tag">MLF curve</span></div>
           </div>
+          <div class="card" id="corollary-25-tempered-decomposition">
+            <h3>Tempered decomposition recognition</h3>
+            <p>
+              Corollary 2.5 identifies which profinite decomposition and inertia groups
+              actually come from the tempered fundamental group. It also states that a
+              profinite conjugate of the tempered group containing one such subgroup is
+              already the original tempered group.
+            </p>
+            <div class="tagRow"><span class="tag red">Corollary 2.5</span><span class="tag">Theorem B</span></div>
+          </div>
           <div class="card" id="tempered-inertia-cusp-test">
             <h3>Inertia cusp test</h3>
             <p>
@@ -4170,6 +4197,140 @@
           <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
           <a href="#anabelian-background">anabelian background</a>
           <a href="#prime-strips-bridges">prime strips and bridges</a>
+        </div>
+      </section>
+
+      <section id="galois-countability-repairs">
+        <h2>Galois-Countability Repairs</h2>
+        <p class="lede">
+          IUT I Remark 2.5.3 records a technical correction to the background theory of
+          tempered fundamental groups in SemiAnbd. The issue is not a new IUT
+          construction: universal tempered covering pro-objects require countability
+          hypotheses so compatible basepoints exist. Mochizuki then checks that the
+          examples used in IUT remain unaffected.
+        </p>
+        <div class="diagram" aria-label="Galois-countability repair route">
+          <div class="diagramHeader">
+            <strong>Why countability enters tempered groups</strong>
+            <span>IUT I Remark 2.5.3</span>
+          </div>
+          <svg viewBox="0 0 1040 520" role="img">
+            <defs>
+              <marker id="arrowGaloisCount" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox red" x="70" y="78" width="228" height="86"></rect>
+            <text class="nodeTitle" x="184" y="108" text-anchor="middle">pathology risk</text>
+            <text class="tinyText" x="184" y="132" text-anchor="middle">universal covering pro-object</text>
+            <text class="tinyText" x="184" y="150" text-anchor="middle">may lack compatible basepoints</text>
+
+            <rect class="nodeBox green" x="406" y="78" width="228" height="86"></rect>
+            <text class="nodeTitle" x="520" y="108" text-anchor="middle">Galois-countable</text>
+            <text class="tinyText" x="520" y="132" text-anchor="middle">countable topology / cover base</text>
+            <text class="tinyText" x="520" y="150" text-anchor="middle">tempered group well-defined</text>
+
+            <rect class="nodeBox blue" x="742" y="78" width="228" height="86"></rect>
+            <text class="nodeTitle" x="856" y="108" text-anchor="middle">IUT examples</text>
+            <text class="tinyText" x="856" y="132" text-anchor="middle">absolute Galois subquotients</text>
+            <text class="tinyText" x="856" y="150" text-anchor="middle">strictly coherent graphs</text>
+
+            <rect class="nodeBox gold" x="236" y="300" width="252" height="88"></rect>
+            <text class="nodeTitle" x="362" y="330" text-anchor="middle">affected SemiAnbd items</text>
+            <text class="tinyText" x="362" y="354" text-anchor="middle">§3 definitions/propositions</text>
+            <text class="tinyText" x="362" y="372" text-anchor="middle">need countability assumption</text>
+
+            <rect class="nodeBox violet" x="554" y="300" width="252" height="88"></rect>
+            <text class="nodeTitle" x="680" y="330" text-anchor="middle">no effect on IUT use</text>
+            <text class="tinyText" x="680" y="354" text-anchor="middle">examples 2.10, 3.10, 5.6</text>
+            <text class="tinyText" x="680" y="372" text-anchor="middle">and subsequent IUT papers</text>
+
+            <path d="M300 121 H404" class="edge red" marker-end="url(#arrowGaloisCount)"></path>
+            <path d="M636 121 H740" class="edge green" marker-end="url(#arrowGaloisCount)"></path>
+            <path d="M520 166 C466 222 402 250 362 298" class="edge gold" marker-end="url(#arrowGaloisCount)"></path>
+            <path d="M856 166 C822 226 742 258 690 298" class="edge violet" marker-end="url(#arrowGaloisCount)"></path>
+            <path d="M488 344 H552" class="edge blue" marker-end="url(#arrowGaloisCount)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="galois-countable-tempered-group">
+            <h3>Galois-countable tempered group</h3>
+            <p>
+              Remark 2.5.3 defines a tempered group as Galois-countable when its
+              topology admits a countable basis. Connected temperoids,
+              quasi-temperoids, and families of these objects inherit corresponding
+              Galois-countability conditions.
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 2.5.3(T1)</span><span class="tag">tempered</span></div>
+          </div>
+          <div class="card" id="galois-countable-semigraph">
+            <h3>Galois-countable semi-graph</h3>
+            <p>
+              A semi-graph of anabelioids is Galois-countable when it is countable and
+              has a countable cofinal family of finite etale coverings that split after
+              base change over each component. Strictly coherent countable examples are
+              Galois-countable.
+            </p>
+            <div class="tagRow"><span class="tag blue">T2-T4</span><span class="tag">semi-graphs</span></div>
+          </div>
+          <div class="card" id="basepoint-obstruction-countability">
+            <h3>Basepoint obstruction</h3>
+            <p>
+              Mochizuki explains the need for countability through universal covering
+              pro-objects: countable index sets make compatible systems of basepoints
+              available, while without them an obstruction analogous to a nonabelian
+              inverse-limit obstruction may appear.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 2.5.3</span><span class="tag">basepoints</span></div>
+          </div>
+          <div class="card" id="semi-anbd-no-effect-examples">
+            <h3>No effect on IUT examples</h3>
+            <p>
+              The examples of SemiAnbd used in IUT are declared unaffected: topological
+              subquotients of absolute Galois groups of countable fields are
+              Galois-countable, and the semi-graphs in the cited examples are strictly
+              coherent.
+            </p>
+            <div class="tagRow"><span class="tag green">E1-E5</span><span class="tag">no effect</span></div>
+          </div>
+          <div class="card" id="semi-anbd-section3-repair">
+            <h3>SemiAnbd §3 repair</h3>
+            <p>
+              Remark 2.5.3 states that selected definitions, propositions, theorems, and
+              corollaries in SemiAnbd §3 should assume the tempered groups, temperoids,
+              and semi-graphs involved are Galois-countable. The rest of the cited uses
+              are then covered by the examples above.
+            </p>
+            <div class="tagRow"><span class="tag gold">E7</span><span class="tag">repair</span></div>
+          </div>
+          <div class="card" id="other-semi-anbd-corrections">
+            <h3>Other SemiAnbd corrections</h3>
+            <p>
+              The same remark lists further textual corrections: a false automorphism
+              assertion involving Dehn-twist counterexamples, strengthened component-wise
+              conditions for actions on semi-graphs, and small phrase changes in several
+              SemiAnbd statements.
+            </p>
+            <div class="tagRow"><span class="tag violet">Remark 2.5.3(iii)-(vi)</span><span class="tag">errata</span></div>
+          </div>
+          <div class="card" id="formalization-countability-rule">
+            <h3>Formalization rule</h3>
+            <p>
+              A formal interface for tempered fundamental groups should carry the
+              countability hypotheses needed to define the reconstructed group and its
+              basepoint choices. The hypotheses may often be discharged automatically for
+              IUT's source examples, but they should not be silently omitted.
+            </p>
+            <div class="tagRow"><span class="tag red">Lean guardrail</span><span class="tag">hypotheses</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          Related: <a href="#tempered-covering-complements">tempered covering complements</a>
+          <a href="#connected-temperoid">connected temperoid</a>
+          <a href="#basepoints-inter-universality">basepoints/inter-universality</a>
+          <a href="#anabelian-background">anabelian background</a>
         </div>
       </section>
 
