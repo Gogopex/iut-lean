@@ -763,6 +763,10 @@
         <a href="#global-dpm-cover-iut-i61">Global D± cover 6.1</a>
         <a href="#dpm-valuation-arch-reconstruction-iut-i61">D± valuations/arch 6.1</a>
         <a href="#model-theta-plus-minus-62-63">Theta±/Thetaell models 6.2-6.3</a>
+        <a href="#theta-pm-model-iut-i62">Theta± model 6.2</a>
+        <a href="#theta-pm-sign-actions-iut-i62">Theta± sign actions 6.2</a>
+        <a href="#thetaell-model-iut-i63">Thetaell model 6.3</a>
+        <a href="#thetaell-equivariance-iut-i63">Thetaell equivariance 6.3</a>
         <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base 6.4-6.6</a>
         <a href="#additive-to-multiplicative-67-610">Additive to D-Theta 6.7-6.10</a>
         <a href="#multiplicative-additive-bridges">Multiplicative/additive bridges</a>
@@ -19956,6 +19960,156 @@
           Related: <a href="#additive-labels-61">additive labels</a>
           <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base theater</a>
           <a href="#theta-plus-minus-ell-bridges-611">Theta±ell Frobenioid lift</a>
+        </div>
+      </section>
+
+      <section id="theta-pm-model-iut-i62">
+        <h2>Theta± Model Bridge in IUT I 6.2</h2>
+        <p class="lede">
+          Example 6.2(i) treats <span class="math">F_l</span> as an
+          <span class="math">F_l^±</span>-group and forms copies
+          <span class="math">D_t = {D_{v,t}}_{v in V}</span> of the tautological
+          D-prime-strip. For each <span class="math">t in F_l</span>, the map
+          <span class="math">phi_t^{Theta±} : D_t -> D≻</span> is the positive
+          +-full poly-isomorphism relative to the tautological identifications.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Component</th><th>Example 6.2(i)</th><th>Consequence</th></tr>
+          <tr>
+            <td><span class="math">D_t</span></td>
+            <td>Copies of the tautological D-prime-strip indexed by <span class="math">t in F_l</span>.</td>
+            <td>The additive capsule is indexed by a signed additive group, not by multiplicative Section 4 labels.</td>
+          </tr>
+          <tr>
+            <td><span class="math">D≻</span></td>
+            <td>A copy of the same tautological D-prime-strip used as the Theta± target.</td>
+            <td>The model bridge compares copies through +-full poly-isomorphism classes.</td>
+          </tr>
+          <tr>
+            <td><span class="math">phi^{Theta±}_±</span></td>
+            <td>The collection of positive +-full poly-isomorphisms <span class="math">{phi_t^{Theta±}}_{t in F_l}</span>.</td>
+            <td>Positivity is part of the model data.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 6.2(i)</a>
+          Related: <a href="#positive-full-polyisom-iut-i61">+-full poly-isomorphisms</a>
+          <a href="#theta-pm-sign-actions-iut-i62">Theta± sign actions</a>
+          <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base</a>
+        </div>
+      </section>
+
+      <section id="theta-pm-sign-actions-iut-i62">
+        <h2>Theta± Sign Actions in IUT I 6.2</h2>
+        <p class="lede">
+          Example 6.2(ii)-(iii) records two different sign operations on the model
+          Theta± bridge. The global order-two operation
+          <span class="math">-1_{F_l}</span> sends <span class="math">t</span> to
+          <span class="math">-t</span> and uses negative signs at every valuation.
+          Separately, each <span class="math">alpha in {±1}^V</span> gives a
+          placewise signed automorphism that acts trivially on the
+          <span class="math">F_l</span> index set.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Global sign</h3>
+            <p>
+              <span class="math">-1_{F_l}</span> acts on labels by multiplication by
+              <span class="math">-1</span> and on each strip by negative +-full
+              poly-automorphisms at all valuations.
+            </p>
+            <div class="tagRow"><span class="tag red">Example 6.2(ii)</span><span class="tag">order two</span></div>
+          </div>
+          <div class="card">
+            <h3>Placewise signs</h3>
+            <p>
+              <span class="math">alpha^{Theta±}</span> for
+              <span class="math">alpha in {±1}^V</span> fixes the label set and acts
+              by the corresponding signed +-full poly-automorphism at each valuation.
+            </p>
+            <div class="tagRow"><span class="tag gold">Example 6.2(iii)</span><span class="tag">placewise</span></div>
+          </div>
+        </div>
+        <div class="callout warn">
+          The global label negation and the valuation-wise sign action are different
+          symmetries. Keeping them separate prevents a later collapse of additive label
+          motion into one undifferentiated sign flag.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 6.2(ii)-(iii)</a>
+          Related: <a href="#theta-pm-model-iut-i62">Theta± model</a>
+          <a href="#positive-full-polyisom-iut-i61">+-full poly-isomorphisms</a>
+          <a href="#pm-cusp-labels-iut-i61">± cusp labels</a>
+        </div>
+      </section>
+
+      <section id="thetaell-model-iut-i63">
+        <h2>Thetaell Model Bridge in IUT I 6.3</h2>
+        <p class="lede">
+          Example 6.3(i) treats <span class="math">F_l</span> as an
+          <span class="math">F_l^±</span>-torsor and maps the same model capsule
+          <span class="math">D± = {D_t}_{t in F_l}</span> to the global elliptic
+          target <span class="math">D ±</span>. After fixing an
+          <span class="math">F_l^±</span>-torsor isomorphism
+          <span class="math">LabCusp±(D ±) ≃ F_l</span>, the automorphism quotient
+          <span class="math">Aut^±(D ±)/Aut_csp(D ±)</span> is identified with
+          <span class="math">F_l^±</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Case</th><th>Source construction of <span class="math">phi_{v,0}^{Thetaell}</span></th><th>Role</th></tr>
+          <tr>
+            <td>Good nonarchimedean</td>
+            <td>Restriction functor from the natural composite <span class="math">X_v -> X_K</span>.</td>
+            <td>Finite etale covering route to the global target.</td>
+          </tr>
+          <tr>
+            <td>Bad nonarchimedean</td>
+            <td>The analogous tempered/local route through <span class="math">X_v -> X_K</span>.</td>
+            <td>Bad-place version of the same global elliptic target map.</td>
+          </tr>
+          <tr>
+            <td>Archimedean</td>
+            <td>The tautological Aut-holomorphic morphism to <span class="math">X(D ±, v)</span>.</td>
+            <td>Archimedean compatibility for the additive bridge.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 6.3(i)</a>
+          Related: <a href="#global-dpm-cover-iut-i61">global D± cover</a>
+          <a href="#dpm-valuation-arch-reconstruction-iut-i61">D± valuations/arch</a>
+          <a href="#thetaell-equivariance-iut-i63">Thetaell equivariance</a>
+        </div>
+      </section>
+
+      <section id="thetaell-equivariance-iut-i63">
+        <h2>Thetaell Equivariance in IUT I 6.3</h2>
+        <p class="lede">
+          Example 6.3(ii) defines a natural poly-action of
+          <span class="math">F_l^±</span> on the capsule
+          <span class="math">D±</span> and on the target
+          <span class="math">D ±</span>. The bridge
+          <span class="math">phi^{Thetaell}_± : D± -> D ±</span> is equivariant for
+          these actions.
+        </p>
+        <div class="flowDiagram" aria-label="Thetaell equivariance">
+          <div class="flowStep">
+            <strong>1. Capsule action</strong>
+            <p><span class="math">gamma in F_l^±</span> sends <span class="math">D_t</span> to <span class="math">D_{gamma(t)}</span> with sign equal to <span class="math">gamma</span>.</p>
+          </div>
+          <div class="flowStep">
+            <strong>2. Target action</strong>
+            <p>The quotient <span class="math">Aut^±(D ±)/Aut_csp(D ±)</span> supplies the target poly-action.</p>
+          </div>
+          <div class="flowStep">
+            <strong>3. Equivariance</strong>
+            <p><span class="math">phi^{Thetaell}_±</span> is compatible with both actions, producing an <span class="math">F_l^±</span>-action on the whole model data.</p>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 6.3(ii)</a>
+          Related: <a href="#thetaell-model-iut-i63">Thetaell model</a>
+          <a href="#flpm-groups-torsors-iut-i61">F_l± groups/torsors</a>
+          <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base</a>
         </div>
       </section>
 
