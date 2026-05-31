@@ -456,6 +456,7 @@
         <a href="#orientation">Orientation</a>
         <a href="#reading-map">Reading map</a>
         <a href="#official-corpus">Official corpus</a>
+        <a href="#anabelian-background">Anabelian background</a>
         <a href="#iut-i-atlas">IUT I atlas</a>
         <a href="#iut-ii-atlas">IUT II atlas</a>
         <a href="#iut-iii-atlas">IUT III atlas</a>
@@ -734,6 +735,115 @@
           Related: <a href="#source-library">full source library</a>
           <a href="#formalization">formalization route</a>
           <a href="#iut-i-atlas">paper atlases</a>
+        </div>
+      </section>
+
+      <section id="anabelian-background">
+        <h2>Anabelian Background</h2>
+        <p class="lede">
+          IUT is built on anabelian reconstruction: information about arithmetic curves is
+          recovered from fundamental groups and related Galois-theoretic structures.
+          Collas describes IUT as a continuation of Grothendieck's anabelian program
+          through a new geometry of monoids; Mochizuki's gateway report frames IUT as a
+          route from Diophantine geometry toward analytic number theory.
+        </p>
+        <div class="diagram" aria-label="Anabelian reconstruction route">
+          <div class="diagramHeader">
+            <strong>Anabelian route</strong>
+            <span>from curves and covers to group-theoretic reconstruction</span>
+          </div>
+          <svg viewBox="0 0 820 330" role="img">
+            <defs>
+              <marker id="arrowAnab" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="40" y="64" width="150" height="68"></rect>
+            <text class="nodeTitle" x="115" y="91" text-anchor="middle">hyperbolic curve</text>
+            <text class="tinyText" x="115" y="111" text-anchor="middle">punctures, covers, cusps</text>
+
+            <rect class="nodeBox green" x="245" y="64" width="150" height="68"></rect>
+            <text class="nodeTitle" x="320" y="91" text-anchor="middle">fundamental group</text>
+            <text class="tinyText" x="320" y="111" text-anchor="middle">tempered / etale data</text>
+
+            <rect class="nodeBox gold" x="450" y="64" width="150" height="68"></rect>
+            <text class="nodeTitle" x="525" y="91" text-anchor="middle">algorithmic recovery</text>
+            <text class="tinyText" x="525" y="111" text-anchor="middle">cusps, valuations, fields</text>
+
+            <rect class="nodeBox violet" x="655" y="64" width="130" height="68"></rect>
+            <text class="nodeTitle" x="720" y="91" text-anchor="middle">IUT input</text>
+            <text class="tinyText" x="720" y="111" text-anchor="middle">typed arithmetic worlds</text>
+
+            <path class="edge blue" d="M190 98 H243" marker-end="url(#arrowAnab)"></path>
+            <path class="edge green" d="M395 98 H448" marker-end="url(#arrowAnab)"></path>
+            <path class="edge gold" d="M600 98 H653" marker-end="url(#arrowAnab)"></path>
+
+            <rect class="nodeBox red" x="190" y="222" width="440" height="64"></rect>
+            <text class="nodeTitle" x="410" y="247" text-anchor="middle">not a replacement for IUT's later comparisons</text>
+            <text class="tinyText" x="410" y="267" text-anchor="middle">anabelian recovery supplies source machinery, not the final log-volume inequality by itself</text>
+
+            <path d="M525 132 C520 172 452 184 420 220" stroke="#9a3f35" stroke-width="1.5" fill="none" marker-end="url(#arrowAnab)"></path>
+            <path d="M720 132 C720 188 630 197 585 222" stroke="#66508a" stroke-width="1.5" fill="none" marker-end="url(#arrowAnab)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card">
+            <h3>Classical anabelian input</h3>
+            <p>
+              Hyperbolic curves, their coverings, and their arithmetic fundamental groups
+              are the base objects. IUT I uses this input when reconstructing local
+              decomposition data, cusps, and valuation-indexed structures.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Combinatorial and mono-anabelian methods</h3>
+            <p>
+              Hoshi and Mochizuki's background work turns reconstruction into
+              functorial algorithms. The wiki treats these algorithms as a prerequisite
+              layer for Hodge theaters and prime-strips.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Geometry of monoids</h3>
+            <p>
+              Collas emphasizes IUT's monoid geometry as a way to move beyond direct
+              ring/scheme comparison. This is exactly why the wiki keeps separate pages
+              for Frobenioids, log-shells, and prime-strip interfaces.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Galois-Teichmuller perspective</h3>
+            <p>
+              Collas's 2026 paper places anabelian reconstruction near braid, mapping
+              class, and Grothendieck-Teichmuller structures. This is context, not a
+              substitute for the IUT III proof corridor.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Gateway framing</h3>
+            <p>
+              Mochizuki's anabelian gateway report presents IUT as a bridge from
+              Diophantine geometry to analytic number theory. The practical link inside
+              the main series is through log-volume estimates.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Formalization implication</h3>
+            <p>
+              Lean development should not treat anabelian reconstruction as a black box
+              forever. It can start as typed interfaces, but the long-term project must
+              replace those interfaces by constructions from anabelian source results.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview</a>
+          <a href="papers/collas-anabelian-perspectives-galois-teichmuller.pdf" target="_blank">Collas 2026</a>
+          <a href="papers/hoshi-introduction-to-iut.pdf" target="_blank">Hoshi introduction</a>
+          <a href="papers/mochizuki-anabelian-gateway.pdf" target="_blank">Anabelian Gateway</a>
+          Related: <a href="#prime-strips-bridges">prime strips</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#formalization">formalization</a>
         </div>
       </section>
 
