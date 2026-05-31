@@ -587,6 +587,7 @@
         <a href="#iut-iv-elliptic-torsion-18">IUT IV elliptic torsion 1.8</a>
         <a href="#iut-iv-arithmetic-divisors-19">IUT IV arithmetic divisors 1.9</a>
         <a href="#iut-iv-theorem-110-theta-pilot-estimate">IUT IV theta-pilot estimate 1.10</a>
+        <a href="#iut-iv-suitable-initial-theta-data-22">IUT IV suitable theta data 2.2</a>
         <a href="#iut-iv">IUT IV and consequences</a>
         <a href="#iut-iv-diophantine-output">IUT IV output route</a>
         <a href="#probabilistic-szpiro">Probabilistic Szpiro</a>
@@ -22643,7 +22644,246 @@
           <a href="#iut-iv-prime-averaging-16-17">prime/averaging input</a>
           <a href="#iut-iv-elliptic-torsion-18">elliptic torsion input</a>
           <a href="#iut-iv-arithmetic-divisors-19">arithmetic divisors</a>
+          <a href="#iut-iv-suitable-initial-theta-data-22">suitable initial theta data</a>
           <a href="#iut-iv-diophantine-output">IUT IV output route</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-suitable-initial-theta-data-22">
+        <h2>IUT IV Corollary 2.2: Suitable Initial Theta Data</h2>
+        <p class="lede">
+          Corollary 2.2 is the application gate. It starts from the lambda-line
+          <span class="math">P^1 - {0,1,infty}</span>, imposes compact-boundedness and
+          a 2-adic j-invariant condition, removes controlled exceptional points, chooses
+          a large auxiliary prime <span class="math">ell</span>, and produces initial
+          theta data satisfying the hypotheses of Theorem 1.10.
+        </p>
+        <div class="diagram fit" aria-label="IUT IV Corollary 2.2 suitable initial theta data route">
+          <div class="diagramHeader">
+            <strong>Corollary 2.2 application gate</strong>
+            <span>lambda-line data to Theorem 1.10 hypotheses</span>
+          </div>
+          <svg viewBox="0 0 1120 620" role="img">
+            <defs>
+              <marker id="arrowIUTIVCor22" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="56" y="58" width="220" height="88"></rect>
+            <text class="nodeTitle" x="166" y="88" text-anchor="middle">lambda-line input</text>
+            <text class="tinyText" x="166" y="112" text-anchor="middle">P1 minus {0,1,infty}</text>
+            <text class="tinyText" x="166" y="130" text-anchor="middle">Legendre elliptic curve</text>
+
+            <rect class="nodeBox green" x="450" y="58" width="220" height="88"></rect>
+            <text class="nodeTitle" x="560" y="88" text-anchor="middle">compact subset KV</text>
+            <text class="tinyText" x="560" y="112" text-anchor="middle">support contains prime 2</text>
+            <text class="tinyText" x="560" y="130" text-anchor="middle">2-adic j bounded</text>
+
+            <rect class="nodeBox gold" x="844" y="58" width="220" height="88"></rect>
+            <text class="nodeTitle" x="954" y="88" text-anchor="middle">BD height identity</text>
+            <text class="tinyText" x="954" y="112" text-anchor="middle">q, q_2, ht_infty</text>
+            <text class="tinyText" x="954" y="130" text-anchor="middle">height omega_X(D)</text>
+
+            <rect class="nodeBox red" x="118" y="262" width="230" height="92"></rect>
+            <text class="nodeTitle" x="233" y="292" text-anchor="middle">exceptional set</text>
+            <text class="tinyText" x="233" y="316" text-anchor="middle">automorphisms, low height</text>
+            <text class="tinyText" x="233" y="334" text-anchor="middle">finite, controlled by KV,d</text>
+
+            <rect class="nodeBox violet" x="444" y="262" width="230" height="92"></rect>
+            <text class="nodeTitle" x="559" y="292" text-anchor="middle">choose large ell</text>
+            <text class="tinyText" x="559" y="316" text-anchor="middle">sqrt(h) <= ell <= bound</text>
+            <text class="tinyText" x="559" y="334" text-anchor="middle">avoid bad divisibilities</text>
+
+            <rect class="nodeBox green" x="770" y="262" width="230" height="92"></rect>
+            <text class="nodeTitle" x="885" y="292" text-anchor="middle">Galois image gate</text>
+            <text class="tinyText" x="885" y="316" text-anchor="middle">bad multiplicative place</text>
+            <text class="tinyText" x="885" y="334" text-anchor="middle">SL2(F_ell) contained</text>
+
+            <rect class="nodeBox blue" x="250" y="478" width="250" height="88"></rect>
+            <text class="nodeTitle" x="375" y="508" text-anchor="middle">initial theta data</text>
+            <text class="tinyText" x="375" y="532" text-anchor="middle">IUT I Definition 3.1</text>
+            <text class="tinyText" x="375" y="550" text-anchor="middle">Theorem 1.10 hypotheses</text>
+
+            <rect class="nodeBox red" x="620" y="478" width="250" height="88"></rect>
+            <text class="nodeTitle" x="745" y="508" text-anchor="middle">C1/C2 inequalities</text>
+            <text class="tinyText" x="745" y="532" text-anchor="middle">ell range and q bound</text>
+            <text class="tinyText" x="745" y="550" text-anchor="middle">diff + conductor output</text>
+
+            <path d="M278 102 H448" class="edge blue" marker-end="url(#arrowIUTIVCor22)"></path>
+            <path d="M672 102 H842" class="edge green" marker-end="url(#arrowIUTIVCor22)"></path>
+            <path d="M166 148 C170 204 196 230 226 260" class="edge red" marker-end="url(#arrowIUTIVCor22)"></path>
+            <path d="M560 148 V260" class="edge violet" marker-end="url(#arrowIUTIVCor22)"></path>
+            <path d="M954 148 C942 208 912 232 888 260" class="edge green" marker-end="url(#arrowIUTIVCor22)"></path>
+            <path d="M348 308 H442" class="edge red" marker-end="url(#arrowIUTIVCor22)"></path>
+            <path d="M676 308 H768" class="edge violet" marker-end="url(#arrowIUTIVCor22)"></path>
+            <path d="M885 356 C836 416 642 444 455 476" class="edge green" marker-end="url(#arrowIUTIVCor22)"></path>
+            <path d="M500 522 H618" class="edge blue" marker-end="url(#arrowIUTIVCor22)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Corollary 2.2 item</th><th>Paper content</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Lambda line</td>
+            <td>
+              The source curve is <span class="math">P^1_Q</span> with divisor
+              <span class="math">{0,1,infty}</span>, viewed as the lambda-line for the
+              Legendre equation <span class="math">y^2=x(x-1)(x-lambda)</span>.
+            </td>
+            <td>
+              The application is first proved in the concrete thrice-punctured-line
+              setting before GenEll transfers it to general hyperbolic curves.
+            </td>
+          </tr>
+          <tr>
+            <td>Compact set</td>
+            <td>
+              A compactly bounded subset <span class="math">KV</span> is chosen with
+              support containing the prime 2. The extra condition
+              <span class="math">(*j-inv)</span> requires the 2-adic j-invariant image
+              to be bounded.
+            </td>
+            <td>
+              This is a real application hypothesis, not a stylistic restriction: it
+              controls the comparison of all-prime and odd-prime q-parameter heights.
+            </td>
+          </tr>
+          <tr>
+            <td>BD identity</td>
+            <td>
+              Part (i) identifies, up to bounded discrepancy on
+              <span class="math">KV</span>, the normalized q-parameter height away from
+              2, the all-prime q-height, the height at infinity, and
+              <span class="math">ht_{omega_X(D)}</span>.
+            </td>
+            <td>
+              The output is an equality of bounded-discrepancy classes, not pointwise
+              equality of functions.
+            </td>
+          </tr>
+          <tr>
+            <td>Exceptions</td>
+            <td>
+              Part (ii) removes a finite set depending on
+              <span class="math">KV</span>, <span class="math">d</span>, and the chosen
+              error parameter. It contains points whose elliptic curves have
+              automorphisms of order greater than 2.
+            </td>
+            <td>
+              The formal object should record which constants are uniform in
+              <span class="math">KV</span> and which depend on it.
+            </td>
+          </tr>
+          <tr>
+            <td>Prime ell</td>
+            <td>
+              The proof chooses a prime <span class="math">ell</span> with
+              <span class="math">sqrt(h) <= ell</span> and an explicit upper bound,
+              avoiding divisibility by local height terms and avoiding l-cyclic subgroup
+              pathologies after enlarging the exceptional set.
+            </td>
+            <td>
+              This is the arithmetic source of condition (C1), and it explains the
+              square-root scale later visible in the error term.
+            </td>
+          </tr>
+          <tr>
+            <td>Theta data</td>
+            <td>
+              The prime-choice, bad multiplicative place, and torsion-image properties
+              give initial theta data satisfying IUT I Definition 3.1 and the hypotheses
+              of Theorem 1.10.
+            </td>
+            <td>
+              This page is the link from explicit Diophantine input to the inter-universal
+              machinery; it is not part of the Corollary 3.12 proof itself.
+            </td>
+          </tr>
+          <tr>
+            <td>C2 bound</td>
+            <td>
+              Applying Theorem 1.10 yields the displayed q-height bound by
+              <span class="math">(1+epsilon_E)</span> times
+              <span class="math">log-diff + log-cond</span> plus a constant depending
+              on <span class="math">KV</span>.
+            </td>
+            <td>
+              Corollary 2.2 is the immediate numerical precursor to Corollary 2.3.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="cor22-lambda-line">
+            <h3>Lambda line</h3>
+            <p>
+              The point <span class="math">lambda</span> classifies a Legendre elliptic
+              curve. The removed points <span class="math">0,1,infty</span> are exactly
+              the degenerations excluded from the open curve.
+            </p>
+            <div class="tagRow"><span class="tag blue">Cor. 2.2</span><span class="tag">Legendre</span></div>
+          </div>
+          <div class="card" id="cor22-j-invariant-condition">
+            <h3>2-adic j condition</h3>
+            <p>
+              The condition <span class="math">(*j-inv)</span> controls the image of
+              <span class="math">KV</span> under the j-invariant at the prime 2. This is
+              what makes the away-from-2 and all-prime q-height functions equivalent up
+              to bounded discrepancy on <span class="math">KV</span>.
+            </p>
+            <div class="tagRow"><span class="tag green">condition</span><span class="tag">prime 2</span></div>
+          </div>
+          <div class="card" id="cor22-bd-class-identity">
+            <h3>BD-class identity</h3>
+            <p>
+              The identity
+              <span class="math">(1/6)log(q_2) ~= (1/6)log(q_all) ~= ht_{omega_X(D)}</span>
+              is the translation from q-parameter data to the Vojta height language.
+            </p>
+            <div class="tagRow"><span class="tag gold">part (i)</span><span class="tag">BD class</span></div>
+          </div>
+          <div class="card" id="cor22-prime-choice">
+            <h3>Prime choice</h3>
+            <p>
+              Proposition 2.1 supplies a prime outside a finite prohibited set. Its size
+              is controlled by the q-height and degree parameter, which is why
+              <span class="math">ell</span> is comparable to a square root of the height
+              up to logarithmic factors.
+            </p>
+            <div class="tagRow"><span class="tag violet">Prop. 2.1</span><span class="tag">large ell</span></div>
+          </div>
+          <div class="card" id="cor22-galois-image">
+            <h3>Galois image gate</h3>
+            <p>
+              After excluding an l-cyclic subgroup case and ensuring a bad multiplicative
+              place remains, GenEll gives the required large image condition on
+              <span class="math">ell</span>-torsion.
+            </p>
+            <div class="tagRow"><span class="tag red">SL2(F_ell)</span><span class="tag">torsion</span></div>
+          </div>
+          <div class="card" id="cor22-c1-c2-output">
+            <h3>C1/C2 output</h3>
+            <p>
+              Condition (C1) records the prime range. Condition (C2) records the
+              q-height estimate by log-different and log-conductor terms, with
+              <span class="math">epsilon_E</span> controlled after enlarging the
+              exceptional set.
+            </p>
+            <div class="tagRow"><span class="tag green">part (ii)</span><span class="tag">output</span></div>
+          </div>
+        </div>
+        <div class="callout violet">
+          Formalization warning: Corollary 2.2 mixes ordinary arithmetic gates with
+          inter-universal input. The prime-choice, exceptional-set, BD-class, and
+          torsion-image arguments should remain separate from the assumed Theorem 1.10
+          estimate, which itself is downstream of Corollary 3.12.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Corollary 2.2</a>
+          Related: <a href="#iut-iv-theorem-110-theta-pilot-estimate">Theorem 1.10</a>
+          <a href="#iut-iv-diophantine-output">IUT IV output route</a>
+          <a href="#initial-theta-data">initial theta data</a>
+          <a href="#iut-iv-elliptic-torsion-18">elliptic torsion input</a>
+          <a href="#iut-iv">IUT IV overview</a>
         </div>
       </section>
 
@@ -22787,7 +23027,7 @@
             <td>Corollaries 2.2-2.3</td>
             <td>Construction of suitable initial theta data and extraction of Diophantine inequalities.</td>
             <td>
-              <a href="#suitable-initial-theta-data">initial theta data</a>,
+              <a href="#iut-iv-suitable-initial-theta-data-22">suitable initial theta data</a>,
               <a href="#compactly-bounded-lambda-line">lambda-line setup</a>,
               <a href="#corollary-22-prime-choice">prime choice</a>,
               <a href="#corollary-23-genell-reduction">GenEll reduction</a>
@@ -22889,7 +23129,7 @@
           <tr>
             <td>Corollary 2.2</td>
             <td>Constructs initial theta data satisfying the hypotheses of Theorem 1.10 for the application setting.</td>
-            <td><a href="#corollary-22-initial-theta-data">expanded below</a></td>
+            <td><a href="#iut-iv-suitable-initial-theta-data-22">standalone page</a></td>
           </tr>
           <tr>
             <td>Large prime and torsion image conditions</td>
