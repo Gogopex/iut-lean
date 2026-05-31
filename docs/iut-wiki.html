@@ -2445,37 +2445,146 @@
       <section id="frobenioids-log-shells">
         <h2>Frobenioids and Log-Shells</h2>
         <p class="lede">
-          Frobenioids and log-shells are part of the infrastructure that lets IUT talk
-          about arithmetic line bundles, monoids, units, value groups, and logarithmic
-          structures without immediately returning to ordinary schemes.
+          Frobenioids and log-shells are two complementary interfaces in IUT.
+          Frobenioids package divisor, line-bundle, and monoid data categorically;
+          log-shells provide the mono-analytic logarithmic receptacles in which the
+          later multiradial algorithms are expressed.
         </p>
+
+        <div class="diagram" aria-label="Frobenioid and log-shell interface">
+          <div class="diagramHeader">
+            <strong>Multiplicative package to logarithmic receptacle</strong>
+            <span>bad-prime Frobenioids, Gaussian monoids, and log-shell versions</span>
+          </div>
+          <svg viewBox="0 0 900 430" role="img">
+            <defs>
+              <marker id="arrowFrobShell" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="42" y="52" width="172" height="76"></rect>
+            <text class="nodeTitle" x="128" y="80" text-anchor="middle">tempered cover</text>
+            <text class="tinyText" x="128" y="101" text-anchor="middle">D_v from X_v</text>
+
+            <rect class="nodeBox green" x="276" y="52" width="188" height="76"></rect>
+            <text class="nodeTitle" x="370" y="80" text-anchor="middle">tempered Frobenioid</text>
+            <text class="tinyText" x="370" y="101" text-anchor="middle">F_v over D_v</text>
+
+            <rect class="nodeBox gold" x="526" y="52" width="164" height="76"></rect>
+            <text class="nodeTitle" x="608" y="80" text-anchor="middle">theta Frobenioids</text>
+            <text class="tinyText" x="608" y="101" text-anchor="middle">C_v^| and C_v^Theta</text>
+
+            <rect class="nodeBox violet" x="742" y="52" width="124" height="76"></rect>
+            <text class="nodeTitle" x="804" y="80" text-anchor="middle">prime-strips</text>
+            <text class="tinyText" x="804" y="101" text-anchor="middle">F, F^|, F^|xmu</text>
+
+            <path d="M214 90 H274" stroke="#315b8f" stroke-width="1.6" fill="none" marker-end="url(#arrowFrobShell)"></path>
+            <path d="M464 90 H524" stroke="#2f6b4f" stroke-width="1.6" fill="none" marker-end="url(#arrowFrobShell)"></path>
+            <path d="M690 90 H740" stroke="#8b6b24" stroke-width="1.6" fill="none" marker-end="url(#arrowFrobShell)"></path>
+
+            <rect class="nodeBox blue" x="142" y="246" width="180" height="80"></rect>
+            <text class="nodeTitle" x="232" y="274" text-anchor="middle">Gaussian monoids</text>
+            <text class="tinyText" x="232" y="295" text-anchor="middle">IUT II theta values</text>
+
+            <rect class="nodeBox green" x="396" y="246" width="176" height="80"></rect>
+            <text class="nodeTitle" x="484" y="274" text-anchor="middle">log-shell I(G)</text>
+            <text class="tinyText" x="484" y="295" text-anchor="middle">inside O^xmu(G)</text>
+
+            <rect class="nodeBox gold" x="646" y="246" width="170" height="80"></rect>
+            <text class="nodeTitle" x="731" y="274" text-anchor="middle">multiradial form</text>
+            <text class="tinyText" x="731" y="295" text-anchor="middle">with mild indeterminacy</text>
+
+            <path d="M232 128 V244" stroke="#315b8f" stroke-width="1.3" fill="none" marker-end="url(#arrowFrobShell)"></path>
+            <path d="M322 286 H394" stroke="#2f6b4f" stroke-width="1.6" fill="none" marker-end="url(#arrowFrobShell)"></path>
+            <path d="M572 286 H644" stroke="#8b6b24" stroke-width="1.6" fill="none" marker-end="url(#arrowFrobShell)"></path>
+
+            <text class="edgeLabel" x="348" y="186" text-anchor="middle">category-theoretic reconstruction</text>
+            <text class="tinyText" x="348" y="207" text-anchor="middle">distinguishes intrinsic data from choices</text>
+            <text class="edgeLabel" x="484" y="360" text-anchor="middle">log-shell version replaces raw unit quotient data by a controlled additive interface</text>
+          </svg>
+        </div>
+
         <div class="grid2">
           <div class="card">
-            <h3>Frobenioid direction</h3>
+            <h3>Categorical package</h3>
             <p>
-              Frobenioid language packages divisor-like and line-bundle-like data in a
-              categorical form. In the IUT route, this supports multiplicative/arithmetic
-              bookkeeping that later participates in log-volume estimates.
+              IUT I describes a Frobenioid as a categorical abstraction of line bundles
+              or divisor monoids over a base category of topological localizations. This
+              is the source of the <a href="#prime-strips-bridges">F-prime-strip</a>
+              interfaces, where the concrete bad-prime models include
+              <span class="math">O_Fv^&#9657;</span>,
+              <span class="math">O_Fv^x × q_v^N</span>, and their quotient variants.
             </p>
           </div>
           <div class="card">
-            <h3>Log-shell direction</h3>
+            <h3>Bad-prime theta package</h3>
             <p>
-              Log-shells arise from local logarithms and make it possible to discuss
-              additive logarithmic data associated to local units. They are essential for
-              the vertical direction of the log-theta lattice.
+              In IUT I, Example 3.2, a bad nonarchimedean place produces a tempered
+              Frobenioid <span class="math">F_v</span>, its birationalization, a
+              Frobenioid-theoretic reciprocal theta value
+              <span class="math">Theta_v</span>, and split Frobenioids
+              <span class="math">F_v^|</span> and <span class="math">F_v^Theta</span>.
+              The constructions are asserted to be reconstructible from categorical data.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Gaussian Frobenioids</h3>
+            <p>
+              IUT II turns Hodge-Arakelov-theoretic theta evaluations into Gaussian
+              monoids and then interprets those monoids as local Frobenioids. This is
+              where the Frobenioid-theoretic and mono-theta-theoretic versions are
+              compared before the <a href="#theta-log-links">theta-link</a> machinery
+              is assembled.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Log-shell versions</h3>
+            <p>
+              For a topological group <span class="math">G</span> isomorphic to a local
+              Galois group, IUT II recalls the log-shell
+              <span class="math">I(G) subset O^xmu(G)</span>. Replacing raw
+              <span class="math">O^xmu(G)</span> data by the pair
+              <span class="math">(O^xmu(G), I(G))</span> yields log-shell versions of
+              multiradial environments.
             </p>
           </div>
         </div>
+        <table>
+          <tr><th>Layer</th><th>Source role</th><th>Why it matters later</th></tr>
+          <tr>
+            <td>D and D^| bases</td>
+            <td>Categories of coverings or Galois-category data attached to local curves.</td>
+            <td>Separate holomorphic local structure from mono-analytic structure.</td>
+          </tr>
+          <tr>
+            <td>Frobenioids</td>
+            <td>Monoid/divisor/line-bundle package over the base category.</td>
+            <td>Carry theta and q-parameter information in a categorical form.</td>
+          </tr>
+          <tr>
+            <td>Gaussian monoids</td>
+            <td>Monoids obtained from theta evaluations at torsion labels.</td>
+            <td>Supply the weighted multiplicative input for later log-volume estimates.</td>
+          </tr>
+          <tr>
+            <td>Log-shells</td>
+            <td>Subobjects inside local unit-quotient data, controlled by local logarithms.</td>
+            <td>Make the relevant algorithms multiradial, at the cost of mild indeterminacy.</td>
+          </tr>
+        </table>
         <div class="callout">
-          A formal wiki should not treat these as decorative names. They are the layer
-          where the theory prepares the exact kind of weakened, typed information that
-          later comparisons are allowed to see.
+          The formalization burden is not merely to name these objects. A useful Lean
+          model must represent which information is intrinsic to the category, which
+          information is transported through Frobenioid isomorphisms, and which
+          information is visible only after passage to the mono-analytic log-shell layer.
         </div>
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a>
           <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
           Related: <a href="#log-theta-lattice">log-theta lattice</a>
+          <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
           <a href="#multiradiality">multiradiality</a>
         </div>
       </section>
