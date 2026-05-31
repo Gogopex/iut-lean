@@ -706,6 +706,9 @@
         <a href="#iut-iv">IUT IV and consequences</a>
         <a href="#iut-iv-diophantine-output">IUT IV output route</a>
         <a href="#probabilistic-szpiro">Probabilistic Szpiro</a>
+        <a href="#species-vs-categories-iv31">Species vs categories 3.1</a>
+        <a href="#mutation-histories-cores-iv33">Mutation histories/cores 3.3</a>
+        <a href="#same-species-parity-iv36">Same-species parity 3.6</a>
         <a href="#species-mutations">Species and mutations</a>
         <a href="#topological-fundamental-group-mutation">Fundamental group mutation 3.4</a>
         <a href="#absolute-anabelian-mutation-35">Absolute anabelian mutation 3.5</a>
@@ -2014,6 +2017,9 @@
               <a href="#species">species</a>,
               <a href="#mutation">mutation</a>,
               <a href="#mutation-history">mutation history</a>,
+              <a href="#species-vs-categories-iv31">species versus categories page</a>,
+              <a href="#mutation-histories-cores-iv33">mutation histories and cores page</a>,
+              <a href="#same-species-parity-iv36">same-species parity page</a>,
               <a href="#zero-one-species">0/1-species</a>,
               <a href="#formula-absoluteness">formula absoluteness</a>,
               <a href="#morphism-of-mutations">morphisms of mutations</a>,
@@ -31795,6 +31801,331 @@
           Related: <a href="#iut-iv">IUT IV consequences</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
           <a href="#initial-theta-data">initial theta data</a>
+        </div>
+      </section>
+
+      <section id="species-vs-categories-iv31">
+        <h2>IUT IV Definition 3.1: Species Versus Categories</h2>
+        <p class="lede">
+          IUT IV introduces species to formalize "types of mathematical objects" by
+          set-theoretic formulas. A category determined in one ZFC-model is only a
+          representation of such a type. The species carries the rules for producing
+          objects and morphisms across universes, which is why it is stronger than one
+          ordinary category of specimens.
+        </p>
+        <div class="diagram fit" aria-label="Species versus categories">
+          <div class="diagramHeader">
+            <strong>Rules versus one model's output</strong>
+            <span>Definition 3.1 and Remarks 3.1.2-3.1.4</span>
+          </div>
+          <svg viewBox="0 0 1120 560" role="img">
+            <defs>
+              <marker id="arrowSpecies31" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="118" y="68" width="300" height="92"></rect>
+            <text class="nodeTitle" x="268" y="98" text-anchor="middle">species</text>
+            <text class="tinyText" x="268" y="124" text-anchor="middle">set-theoretic formulas</text>
+            <text class="tinyText" x="268" y="144" text-anchor="middle">object and morphism rules</text>
+
+            <rect class="nodeBox blue" x="702" y="68" width="300" height="92"></rect>
+            <text class="nodeTitle" x="852" y="98" text-anchor="middle">category in one model</text>
+            <text class="tinyText" x="852" y="124" text-anchor="middle">specimens inside a ZFC-model</text>
+            <text class="tinyText" x="852" y="144" text-anchor="middle">objects and arrows after interpretation</text>
+
+            <rect class="nodeBox gold" x="118" y="294" width="300" height="92"></rect>
+            <text class="nodeTitle" x="268" y="324" text-anchor="middle">model-free specimen</text>
+            <text class="tinyText" x="268" y="350" text-anchor="middle">same formula after universe extension</text>
+            <text class="tinyText" x="268" y="370" text-anchor="middle">not a chosen representative set</text>
+
+            <rect class="nodeBox violet" x="702" y="294" width="300" height="92"></rect>
+            <text class="nodeTitle" x="852" y="324" text-anchor="middle">category species example</text>
+            <text class="tinyText" x="852" y="350" text-anchor="middle">categories as 0-specimens</text>
+            <text class="tinyText" x="852" y="370" text-anchor="middle">functor isomorphism classes as 1-specimens</text>
+
+            <rect class="nodeBox red" x="390" y="438" width="340" height="70"></rect>
+            <text class="nodeTitle" x="560" y="466" text-anchor="middle">canonicality discipline</text>
+            <text class="tinyText" x="560" y="490" text-anchor="middle">avoid arbitrary choices not encoded by formulas</text>
+
+            <path d="M420 114 H700" class="edge green" marker-end="url(#arrowSpecies31)"></path>
+            <text class="edgeLabel" x="560" y="94" text-anchor="middle">interpret in a model</text>
+            <path d="M268 162 V292" class="edge gold" marker-end="url(#arrowSpecies31)"></path>
+            <path d="M852 162 V292" class="edge violet" marker-end="url(#arrowSpecies31)"></path>
+            <path d="M418 340 C492 386 518 406 546 436" class="edge red" marker-end="url(#arrowSpecies31)"></path>
+            <path d="M702 340 C628 386 602 406 574 436" class="edge red" marker-end="url(#arrowSpecies31)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Definition or warning</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Definition 3.1(i)-(iii)</td>
+            <td>
+              A 0-species is a formula for object data. A 1-species supplies formula
+              defined morphism data, composition, associativity, and identities. A
+              species is the pair of these two layers.
+            </td>
+            <td>Do not describe a species as just "a category"; the formulas are part of the object.</td>
+          </tr>
+          <tr>
+            <td>Definition 3.1(iv)</td>
+            <td>
+              A species determines a category after interpretation inside a chosen
+              ZFC-model.
+            </td>
+            <td>The category is output of the species program, not the whole program.</td>
+          </tr>
+          <tr>
+            <td>Remark 3.1.2</td>
+            <td>
+              The essence of a species lies in the rules or programs, not in the
+              particular output sets in one model.
+            </td>
+            <td>This is the formal counterpart of Collas's category-theoretic orientation.</td>
+          </tr>
+          <tr>
+            <td>Remark 3.1.3</td>
+            <td>
+              Conventional descriptions are acceptable only when they avoid arbitrary
+              choices not expressible by well-defined formulas.
+            </td>
+            <td>Formal wiki pages should mark which objects are canonical and which require choices.</td>
+          </tr>
+          <tr>
+            <td>Remark 3.1.4</td>
+            <td>
+              Formula-defined species are immune to universe extension; this is the
+              sense attached here to "inter-universal".
+            </td>
+            <td>Inter-universal movement is tracked at the rule/species level, not by one ambient set.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Definition 3.1 and Remarks 3.1.2-3.1.4</a>
+          Related: <a href="#collas-category-perspective">Collas category view</a>
+          <a href="#species-mutations">species and mutations</a>
+          <a href="#set-theoretic-copies">set-theoretic copies</a>
+        </div>
+      </section>
+
+      <section id="mutation-histories-cores-iv33">
+        <h2>IUT IV Definition 3.3: Mutation Histories, Observables, and Cores</h2>
+        <p class="lede">
+          A mutation is the species-level analogue of a functor. A mutation history is
+          an oriented graph of species and mutations. An observable reads such a history
+          into a fixed species, while a core is an observable whose transition morphisms
+          are isomorphisms. This is the formal source of the word coric in the later
+          IUT architecture.
+        </p>
+        <div class="diagram fit" aria-label="Mutation histories observables and cores">
+          <div class="diagramHeader">
+            <strong>What survives a mutation history</strong>
+            <span>Definition 3.3 and Remark 3.3.1</span>
+          </div>
+          <svg viewBox="0 0 1120 570" role="img">
+            <defs>
+              <marker id="arrowMutation33" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="92" y="90" width="180" height="76"></rect>
+            <text class="nodeTitle" x="182" y="120" text-anchor="middle">species S0</text>
+            <text class="tinyText" x="182" y="144" text-anchor="middle">vertex 0</text>
+
+            <rect class="nodeBox blue" x="470" y="90" width="180" height="76"></rect>
+            <text class="nodeTitle" x="560" y="120" text-anchor="middle">species S1</text>
+            <text class="tinyText" x="560" y="144" text-anchor="middle">vertex 1</text>
+
+            <rect class="nodeBox blue" x="848" y="90" width="180" height="76"></rect>
+            <text class="nodeTitle" x="938" y="120" text-anchor="middle">species S2</text>
+            <text class="tinyText" x="938" y="144" text-anchor="middle">vertex 2</text>
+
+            <rect class="nodeBox green" x="230" y="306" width="260" height="82"></rect>
+            <text class="nodeTitle" x="360" y="336" text-anchor="middle">observable</text>
+            <text class="tinyText" x="360" y="360" text-anchor="middle">reads vertices into a target species</text>
+
+            <rect class="nodeBox gold" x="630" y="306" width="260" height="82"></rect>
+            <text class="nodeTitle" x="760" y="336" text-anchor="middle">core</text>
+            <text class="tinyText" x="760" y="360" text-anchor="middle">observable with isomorphic transitions</text>
+
+            <rect class="nodeBox red" x="360" y="458" width="400" height="66"></rect>
+            <text class="nodeTitle" x="560" y="484" text-anchor="middle">non-coric observables described by cores</text>
+            <text class="tinyText" x="560" y="506" text-anchor="middle">Remark 3.3.1(iii)</text>
+
+            <path d="M274 128 H468" class="edge blue" marker-end="url(#arrowMutation33)"></path>
+            <text class="edgeLabel" x="371" y="108" text-anchor="middle">mutation</text>
+            <path d="M652 128 H846" class="edge blue" marker-end="url(#arrowMutation33)"></path>
+            <text class="edgeLabel" x="749" y="108" text-anchor="middle">mutation</text>
+            <path d="M560 168 C516 232 420 270 372 304" class="edge green" marker-end="url(#arrowMutation33)"></path>
+            <path d="M938 168 C906 238 810 274 768 304" class="edge gold" marker-end="url(#arrowMutation33)"></path>
+            <path d="M490 348 H628" class="edge green" marker-end="url(#arrowMutation33)"></path>
+            <path d="M760 390 C736 426 670 442 600 456" class="edge red" marker-end="url(#arrowMutation33)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Content</th><th>IUT use</th></tr>
+          <tr>
+            <td>Definition 3.3(i)-(iii)</td>
+            <td>
+              Mutations, morphisms of mutations, and mutation-equivalences are
+              formula-defined analogues of functors, natural transformations, and
+              equivalences.
+            </td>
+            <td>Reconstruction data should be represented as transformations with history, not only as isomorphisms.</td>
+          </tr>
+          <tr>
+            <td>Definition 3.3(iv)</td>
+            <td>
+              A mutation history is an oriented graph with a species at each vertex and
+              a mutation on each directed edge.
+            </td>
+            <td>The log-theta-lattice is naturally read as a mutation-history-shaped object.</td>
+          </tr>
+          <tr>
+            <td>Definition 3.3(v)</td>
+            <td>
+              An observable maps vertices into a fixed species. A covariant observable
+              is a core if all edge comparison morphisms are isomorphisms.
+            </td>
+            <td>This is the formal counterpart of invariant, or coric, data.</td>
+          </tr>
+          <tr>
+            <td>Remark 3.3.1(i)</td>
+            <td>
+              Species-isomorphisms let one simulate membership loops across levels of
+              the set-theoretic hierarchy without violating foundation.
+            </td>
+            <td>This explains why copies can be related without forcing them into one set-theoretic identity.</td>
+          </tr>
+          <tr>
+            <td>Remark 3.3.1(iii)</td>
+            <td>
+              Cores can be used to describe non-coric observables, i.e. portions altered
+              by mutations, in terms of invariant portions.
+            </td>
+            <td>This is the species-level pattern behind coric containers for altered theta/log data.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Definition 3.3 and Remark 3.3.1</a>
+          Related: <a href="#vertical-horizontal-coricity-page-iii">vertical/horizontal coricity</a>
+          <a href="#bi-cores-log-theta-lattice-iii15">bi-cores of the log-theta-lattice</a>
+          <a href="#frobenius-etale-mutation-36">Frobenius/etale mutation</a>
+        </div>
+      </section>
+
+      <section id="same-species-parity-iv36">
+        <h2>IUT IV Example 3.6: Same-Species Parity of Source and Target</h2>
+        <p class="lede">
+          Example 3.6 explains the Frobenius mutation as the prototype for the
+          log-theta-lattice. The construction of a target may be subordinate to the
+          source, but the resulting source and target are still treated as objects of
+          the same species. Mochizuki uses this as the formal model for treating the
+          domain and codomain of log-links and <span class="math">Theta×mu_LGP</span>
+          links as Hodge theaters on a par, even when their construction is asymmetric.
+        </p>
+        <div class="diagram fit" aria-label="Same species parity for Frobenius and IUT links">
+          <div class="diagramHeader">
+            <strong>Asymmetric construction, equal species status</strong>
+            <span>Example 3.6 and Remark 3.6.1</span>
+          </div>
+          <svg viewBox="0 0 1120 600" role="img">
+            <defs>
+              <marker id="arrowParity36" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="84" y="72" width="210" height="82"></rect>
+            <text class="nodeTitle" x="189" y="102" text-anchor="middle">scheme S</text>
+            <text class="tinyText" x="189" y="126" text-anchor="middle">reduced over F_p</text>
+            <text class="tinyText" x="189" y="144" text-anchor="middle">source specimen</text>
+
+            <rect class="nodeBox blue" x="456" y="72" width="210" height="82"></rect>
+            <text class="nodeTitle" x="561" y="102" text-anchor="middle">scheme S(p)</text>
+            <text class="tinyText" x="561" y="126" text-anchor="middle">p-th power structure sheaf</text>
+            <text class="tinyText" x="561" y="144" text-anchor="middle">same scheme species</text>
+
+            <rect class="nodeBox green" x="828" y="72" width="210" height="82"></rect>
+            <text class="nodeTitle" x="933" y="102" text-anchor="middle">etale-site core</text>
+            <text class="tinyText" x="933" y="126" text-anchor="middle">invariant under Frobenius</text>
+            <text class="tinyText" x="933" y="144" text-anchor="middle">category-valued core</text>
+
+            <rect class="nodeBox violet" x="138" y="318" width="270" height="88"></rect>
+            <text class="nodeTitle" x="273" y="348" text-anchor="middle">HT source</text>
+            <text class="tinyText" x="273" y="374" text-anchor="middle">log or Theta×mu_LGP link domain</text>
+            <text class="tinyText" x="273" y="394" text-anchor="middle">construction has direction</text>
+
+            <rect class="nodeBox violet" x="712" y="318" width="270" height="88"></rect>
+            <text class="nodeTitle" x="847" y="348" text-anchor="middle">HT target</text>
+            <text class="tinyText" x="847" y="374" text-anchor="middle">same Hodge-theater species</text>
+            <text class="tinyText" x="847" y="394" text-anchor="middle">not subordinate after mutation is formed</text>
+
+            <rect class="nodeBox red" x="390" y="480" width="340" height="68"></rect>
+            <text class="nodeTitle" x="560" y="506" text-anchor="middle">outside conventional scheme gluing</text>
+            <text class="tinyText" x="560" y="528" text-anchor="middle">distinct models treated on a par</text>
+
+            <path d="M296 113 H454" class="edge blue" marker-end="url(#arrowParity36)"></path>
+            <text class="edgeLabel" x="375" y="92" text-anchor="middle">Frobenius mutation</text>
+            <path d="M668 113 H826" class="edge green" marker-end="url(#arrowParity36)"></path>
+            <text class="edgeLabel" x="747" y="92" text-anchor="middle">core</text>
+            <path d="M408 362 H710" class="edge violet" marker-end="url(#arrowParity36)"></path>
+            <text class="edgeLabel" x="560" y="342" text-anchor="middle">log-link / Theta×mu_LGP mutation</text>
+            <path d="M560 156 C532 236 430 278 316 316" class="edge gold" marker-end="url(#arrowParity36)"></path>
+            <path d="M561 156 C622 240 764 278 834 316" class="edge gold" marker-end="url(#arrowParity36)"></path>
+            <path d="M560 408 V478" class="edge red" marker-end="url(#arrowParity36)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Statement</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Example 3.6(i)</td>
+            <td>
+              For a reduced scheme <span class="math">S/F_p</span>,
+              <span class="math">S^(p)</span> has the same topological space but
+              structure sheaf of <span class="math">p</span>-th powers. The etale site
+              and perfection are formula-defined mutations.
+            </td>
+            <td>The example provides the formal template for altered structures with invariant cores.</td>
+          </tr>
+          <tr>
+            <td>Example 3.6(ii)</td>
+            <td>
+              The etale-site mutation and perfection mutation exhibit cores of the
+              Frobenius mutation-history, while the natural map
+              <span class="math">S -> S^(p)</span> is generally non-coric.
+            </td>
+            <td>This separates invariant readout from non-coric structure transport.</td>
+          </tr>
+          <tr>
+            <td>Example 3.6(iii)</td>
+            <td>
+              The monoid version uses <span class="math">M -> pM</span>, p-perfection,
+              and a non-coric inclusion observable.
+            </td>
+            <td>This is the immediate combinatorial model for log/theta monoid deformation.</td>
+          </tr>
+          <tr>
+            <td>Introduction to §3</td>
+            <td>
+              Although <span class="math">S^(p)</span> is constructed from
+              <span class="math">S</span>, both lie in the same species; this models
+              log- and <span class="math">Theta×mu_LGP</span>-links between
+              <span class="math">Theta±ellNF</span> Hodge theaters.
+            </td>
+            <td>The source and target of an IUT link must not be collapsed into one conventional scheme.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          This page is a foundations guardrail. Same-species status does not mean
+          equality of histories; it means that after the mutation has been formed, the
+          source and target are read as specimens of the same type.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Introduction to §3 and Example 3.6</a>
+          Related: <a href="#frobenius-etale-mutation-36">Frobenius/etale mutation</a>
+          <a href="#iut-coric-noncoric-principle-361">coric/non-coric principle</a>
+          <a href="#collas-category-perspective">Collas category view</a>
+          <a href="#log-theta-lattice">log-theta lattice</a>
         </div>
       </section>
 
