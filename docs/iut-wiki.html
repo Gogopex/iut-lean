@@ -2717,7 +2717,7 @@
           The log-theta lattice is the two-dimensional noncommutative diagram of Hodge
           theaters studied in IUT III. Horizontal motion is theta-link motion; vertical
           motion is log-link motion. The noncommutativity is not incidental: it is a
-          source of the comparison constraints and indeterminacies.
+          source of the comparison constraints, coricity distinctions, and indeterminacies.
         </p>
         <div class="diagram" aria-label="Log-theta lattice">
           <div class="diagramHeader">
@@ -2759,10 +2759,80 @@
             <text class="smallText" x="380" y="322" text-anchor="middle">The square is deliberately not treated as a commuting diagram of ordinary schemes.</text>
           </svg>
         </div>
+        <div class="grid2">
+          <div class="card">
+            <h3>Horizontal direction</h3>
+            <p>
+              Horizontal arrows are theta-type links: <span class="math">Theta</span>,
+              <span class="math">Theta^xmu</span>, Gaussian
+              <span class="math">Theta^xmu_gau</span>, and later LGP/lgp variants.
+              They are not ring or scheme morphisms, and they are incompatible with the
+              local ring structures that define logarithms.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Vertical direction</h3>
+            <p>
+              Vertical arrows are log-links. They apply local logarithmic structures
+              inside a fixed arithmetic holomorphic structure, i.e. inside a single
+              vertical line. This is the direction in which log-shells become available.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Coricity vocabulary</h3>
+            <p>
+              IUT III distinguishes vertical coricity, horizontal coricity, and
+              bi-coricity. A structure is vertically coric if it is invariant along
+              log-links, horizontally coric if invariant along theta-type links, and
+              bi-coric if it survives both directions of the lattice.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Forced vertical step</h3>
+            <p>
+              To use log-shells after a horizontal theta-type link, the theory must move
+              to a node that is a codomain of a vertical log-link. IUT III phrases this
+              as every horizontal execution obligating a subsequent vertical execution.
+            </p>
+          </div>
+        </div>
+        <table>
+          <tr><th>Feature</th><th>Source claim</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Noncommutativity</td>
+            <td>Squares in the log-theta lattice are far from 1-commutative.</td>
+            <td>Do not model the lattice as a commuting square of ordinary maps.</td>
+          </tr>
+          <tr>
+            <td>Vertical cores</td>
+            <td>Multiradiality requires objects invariant with respect to vertical arrows.</td>
+            <td>Distinguish data attached to a vertical line from data transported across theta links.</td>
+          </tr>
+          <tr>
+            <td>Z^x effects</td>
+            <td>Horizontal linking data is subject to unit-quotient indeterminacy.</td>
+            <td>Do not force horizontal arrows to identify full arithmetic holomorphic structures.</td>
+          </tr>
+          <tr>
+            <td>p-adic analogy</td>
+            <td>Vertical arrows correspond to Frobenius; horizontal arrows to mixed-characteristic extension structure.</td>
+            <td>Use the analogy only as orientation; the formal objects remain the IUT lattice data.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          The lattice page is therefore the bridge between the Hodge-theater taxonomy and
+          the proof-critical corridor: it explains why the later comparison must be
+          expressed through <a href="#multiradiality">multiradial</a> containers and
+          <a href="#indeterminacies">controlled indeterminacies</a>, rather than through
+          an ordinary transport map between two schemes.
+        </div>
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+          <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV</a>
           <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies</a>
           Related: <a href="#indeterminacies">indeterminacies</a>
+          <a href="#theta-log-links">theta and log links</a>
+          <a href="#multiradiality">multiradiality</a>
           <a href="#corollary-312">Corollary 3.12</a>
         </div>
       </section>
