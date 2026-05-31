@@ -521,6 +521,7 @@
         <a href="#formalization">RIMS Lean effort</a>
         <a href="#lana">LANA</a>
         <a href="#galois-orbit-iut-preview">Galois-orbit IUT preview</a>
+        <a href="#galois-theoretic-context">Galois-theoretic context</a>
         <a href="#source-library">Source library</a>
         <a href="#glossary">Glossary</a>
       </nav>
@@ -1527,6 +1528,19 @@
               <a href="#invitation-inter-universality">inter-universality/anabelian geometry</a>
             </td>
             <td>Invitation Expanded, Sections 1-4</td>
+          </tr>
+          <tr>
+            <td>IUT I</td>
+            <td>Galois-theoretic context</td>
+            <td>
+              <a href="#galois-theoretic-context">Galois-theoretic context</a>,
+              <a href="#grothendieck-section-route">Grothendieck section route</a>,
+              <a href="#iut-anabelian-diophantine-route">IUT anabelian route</a>,
+              <a href="#padic-absolute-relative-gap">p-adic absolute/relative gap</a>,
+              <a href="#anabelian-vs-representation-route">anabelian versus representation route</a>,
+              <a href="#asymptotic-diophantine-output">asymptotic output</a>
+            </td>
+            <td>IUT I, Introduction §I5</td>
           </tr>
           <tr>
             <td>IUT IV</td>
@@ -12315,6 +12329,152 @@
           <a href="#log-theta-lattice">log-theta lattice</a>
           <a href="#collas-category-perspective">Collas category view</a>
           <a href="#formalization">formalization</a>
+        </div>
+      </section>
+
+      <section id="galois-theoretic-context">
+        <h2>Galois-Theoretic Context</h2>
+        <p class="lede">
+          IUT I Introduction §I5 situates IUT among other Galois-theoretic approaches
+          to Diophantine geometry. Mochizuki's comparison separates the historical
+          Grothendieck section-conjecture route, representation-theoretic developments
+          of p-adic Teichmuller theory, and IUT's use of absolute anabelian geometry to
+          control asymptotic Diophantine estimates.
+        </p>
+        <div class="diagram" aria-label="Galois-theoretic context for IUT">
+          <div class="diagramHeader">
+            <strong>Three Galois-theoretic routes</strong>
+            <span>IUT I §I5: historical positioning, not a proof substitute</span>
+          </div>
+          <svg viewBox="0 0 1080 520" role="img">
+            <defs>
+              <marker id="arrowGalContext" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox gold" x="54" y="76" width="250" height="96"></rect>
+            <text class="nodeTitle" x="179" y="106" text-anchor="middle">Section-conjecture route</text>
+            <text class="tinyText" x="179" y="132" text-anchor="middle">rational points via sections</text>
+            <text class="tinyText" x="179" y="150" text-anchor="middle">historical Grothendieck motivation</text>
+
+            <rect class="nodeBox blue" x="416" y="76" width="250" height="96"></rect>
+            <text class="nodeTitle" x="541" y="106" text-anchor="middle">IUT route</text>
+            <text class="tinyText" x="541" y="132" text-anchor="middle">absolute anabelian reconstruction</text>
+            <text class="tinyText" x="541" y="150" text-anchor="middle">p-adic local input, global estimates</text>
+
+            <rect class="nodeBox violet" x="778" y="76" width="250" height="96"></rect>
+            <text class="nodeTitle" x="903" y="106" text-anchor="middle">representation route</text>
+            <text class="tinyText" x="903" y="132" text-anchor="middle">SL_n(Z_p), GL_n(Q_p)</text>
+            <text class="tinyText" x="903" y="150" text-anchor="middle">limited access to asymptotic data</text>
+
+            <rect class="nodeBox green" x="232" y="278" width="258" height="90"></rect>
+            <text class="nodeTitle" x="361" y="308" text-anchor="middle">additive/multiplicative problem</text>
+            <text class="tinyText" x="361" y="332" text-anchor="middle">central in anabelian proofs</text>
+            <text class="tinyText" x="361" y="350" text-anchor="middle">central in IUT IV estimates</text>
+
+            <rect class="nodeBox red" x="590" y="278" width="258" height="90"></rect>
+            <text class="nodeTitle" x="719" y="308" text-anchor="middle">asymptotic output</text>
+            <text class="tinyText" x="719" y="332" text-anchor="middle">varying points and fields</text>
+            <text class="tinyText" x="719" y="350" text-anchor="middle">finite-extension invariance</text>
+
+            <path d="M304 124 H414" class="edge gold" marker-end="url(#arrowGalContext)"></path>
+            <path d="M666 124 H776" class="edge violet" marker-end="url(#arrowGalContext)"></path>
+            <path d="M541 174 C516 228 420 250 362 276" class="edge green" marker-end="url(#arrowGalContext)"></path>
+            <path d="M541 174 C574 226 664 250 718 276" class="edge red" marker-end="url(#arrowGalContext)"></path>
+            <path d="M903 174 C900 244 842 258 784 278" class="edge violet" marker-end="url(#arrowGalContext)"></path>
+            <path d="M490 322 H588" class="edge green" marker-end="url(#arrowGalContext)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="grothendieck-section-route">
+            <h3>Grothendieck section route</h3>
+            <p>
+              Mochizuki recalls Grothendieck's anabelian motivation for Diophantine
+              geometry: use sections of arithmetic fundamental groups to control
+              rational points. IUT is presented as related in spirit but not the same
+              strategy.
+            </p>
+            <div class="tagRow"><span class="tag gold">IUT I §I5</span><span class="tag">historical route</span></div>
+          </div>
+          <div class="card" id="iut-anabelian-diophantine-route">
+            <h3>IUT anabelian route</h3>
+            <p>
+              The four-paper route applies absolute anabelian geometry to compare
+              structures inside Hodge theaters and eventually obtain Diophantine
+              inequalities. The paper stresses the role of p-adic absolute anabelian
+              results rather than only number-field section conjectures.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §I5</span><span class="tag">IUT route</span></div>
+          </div>
+          <div class="card" id="padic-absolute-relative-gap">
+            <h3>p-adic absolute/relative gap</h3>
+            <p>
+              Mochizuki identifies a fundamental gap between relative and absolute
+              anabelian geometry over p-adic fields as a key difference from the
+              historical number-field section-conjecture viewpoint. This gap is tied to
+              arithmetic Teichmuller deformation of the number field itself.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT I §I5</span><span class="tag">p-adic anabelian</span></div>
+          </div>
+          <div class="card" id="addition-multiplication-context">
+            <h3>Addition versus multiplication</h3>
+            <p>
+              The relationship between additive and multiplicative structure is
+              described as central both in anabelian proofs and in the Diophantine
+              estimates of IUT IV. This connects the historical discussion back to the
+              log-theta lattice's two combinatorial dimensions.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT I §I5</span><span class="tag">+ / x</span></div>
+          </div>
+          <div class="card" id="anabelian-vs-representation-route">
+            <h3>Anabelian versus representation route</h3>
+            <p>
+              IUT I contrasts an anabelian development of p-adic Teichmuller theory
+              with representation-theoretic generalizations into groups such as
+              <span class="math">SL_n(Z_p)</span>. The source argues that
+              representation-theoretic targets cannot access the same asymptotic
+              phenomena as anabelian fundamental groups.
+            </p>
+            <div class="tagRow"><span class="tag violet">IUT I §I5</span><span class="tag">route split</span></div>
+          </div>
+          <div class="card" id="asymptotic-diophantine-output">
+            <h3>Asymptotic output</h3>
+            <p>
+              The Diophantine results derived in IUT IV concern asymptotic behavior of
+              varying rational points over varying number fields. This is different from
+              approaches centered on a specific rational point over a distinguished
+              number field.
+            </p>
+            <div class="tagRow"><span class="tag red">IUT I §I5</span><span class="tag">IUT IV output</span></div>
+          </div>
+          <div class="card" id="finite-extension-invariance">
+            <h3>Finite-extension invariance</h3>
+            <p>
+              Because the output is asymptotic, Mochizuki says no distinguished number
+              field occurs in the theory; the framework is invariant under passing to
+              finite extensions. This source claim belongs with the IUT IV height-output
+              pages.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §I5</span><span class="tag">extensions</span></div>
+          </div>
+          <div class="card" id="formalization-context-boundary">
+            <h3>Formalization boundary</h3>
+            <p>
+              This page records motivation and positioning. It should not be encoded as
+              a proof dependency for Corollary 3.12, except where it points to precise
+              constructions already represented elsewhere: anabelian reconstruction,
+              addition/multiplication separation, and asymptotic height output.
+            </p>
+            <div class="tagRow"><span class="tag gold">wiki scope</span><span class="tag">context</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          Related: <a href="#teichmuller-analogy-iut-i">IUT I Teichmuller analogy</a>
+          <a href="#anabelian-background">anabelian background</a>
+          <a href="#galois-orbit-iut-preview">Galois-orbit IUT preview</a>
+          <a href="#iut-iv-diophantine-output">IUT IV output route</a>
+          <a href="#log-theta-lattice">log-theta lattice</a>
         </div>
       </section>
 
