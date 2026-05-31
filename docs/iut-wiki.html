@@ -606,6 +606,10 @@
         <a href="#bad-split-frobenioids-iut-i32">Bad split Frobenioids 3.2</a>
         <a href="#bad-frobenioid-reconstruction-iut-i32">Bad Frobenioid reconstruction 3.2</a>
         <a href="#good-arch-frobenioids-33-34">Good/arch Frobenioids 3.3-3.4</a>
+        <a href="#good-nonarch-base-frobenioids-iut-i33">Good base Frobenioids 3.3</a>
+        <a href="#good-formal-theta-frobenioids-iut-i33">Good formal theta 3.3</a>
+        <a href="#arch-aut-holomorphic-frobenioids-iut-i34">Arch Aut-holomorphic 3.4</a>
+        <a href="#arch-kummer-log-frobenioids-iut-i34">Arch Kummer/log 3.4</a>
         <a href="#global-realified-theater-35-36">Global realified theater 3.5-3.6</a>
         <a href="#theta-link-frobenius-etale-pictures">Theta/Frobenius pictures</a>
         <a href="#theta-links-cor37">Theta links 3.7</a>
@@ -11031,6 +11035,380 @@
           Related: <a href="#bad-nonarch-frobenioids-32">bad nonarch Frobenioids</a>
           <a href="#global-realified-theater-35-36">global realified theater</a>
           <a href="#theta-log-links">theta/log links</a>
+        </div>
+      </section>
+
+      <section id="good-nonarch-base-frobenioids-iut-i33" data-filter="iut i example 3.3 good nonarchimedean frobenioid base category valuation monoid ord ol zpv primitive submonoid">
+        <h2>IUT I Example 3.3(i): Good Nonarchimedean Base Frobenioids</h2>
+        <p class="lede">
+          At a good nonarchimedean valuation <span class="math">v in V_good cap V_non</span>,
+          the local Frobenioid is not built from a Tate theta value. It is built from
+          valuation monoids over the tempered base category of the curve and its
+          base-field subcategory.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Example 3.3 good nonarchimedean base Frobenioids">
+          <div class="diagramHeader">
+            <strong>Good nonarchimedean base construction</strong>
+            <span>IUT I, Example 3.3(i)</span>
+          </div>
+          <svg viewBox="0 0 1120 460" role="img">
+            <defs>
+              <marker id="arrowGoodBase33" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="78" width="250" height="96"></rect>
+            <text class="nodeTitle" x="197" y="108" text-anchor="middle">D_v = B(X_v)^0</text>
+            <text class="tinyText" x="197" y="134" text-anchor="middle">tempered curve base category</text>
+            <text class="tinyText" x="197" y="154" text-anchor="middle">natural projection to D_v^⊢</text>
+
+            <rect class="nodeBox green" x="438" y="78" width="250" height="96"></rect>
+            <text class="nodeTitle" x="563" y="108" text-anchor="middle">D_v^⊢ = B(K_v)^0</text>
+            <text class="tinyText" x="563" y="134" text-anchor="middle">finite separable extensions L/K_v</text>
+            <text class="tinyText" x="563" y="154" text-anchor="middle">full subcategory of D_v</text>
+
+            <rect class="nodeBox gold" x="804" y="78" width="250" height="96"></rect>
+            <text class="nodeTitle" x="929" y="108" text-anchor="middle">valuation monoids</text>
+            <text class="tinyText" x="929" y="134" text-anchor="middle">Phi_Cv: Spec(L) -> ord(O_L)^pf</text>
+            <text class="tinyText" x="929" y="154" text-anchor="middle">Phi_Cv^⊢: Spec(L) -> ord(Z_pv)</text>
+
+            <rect class="nodeBox violet" x="244" y="284" width="266" height="98"></rect>
+            <text class="nodeTitle" x="377" y="314" text-anchor="middle">C_v</text>
+            <text class="tinyText" x="377" y="340" text-anchor="middle">p_v-adic Frobenioid over D_v</text>
+            <text class="tinyText" x="377" y="360" text-anchor="middle">F_v := C_v</text>
+
+            <rect class="nodeBox red" x="610" y="284" width="266" height="98"></rect>
+            <text class="nodeTitle" x="743" y="314" text-anchor="middle">C_v^⊢ subset C_v|D_v^⊢</text>
+            <text class="tinyText" x="743" y="340" text-anchor="middle">absolutely primitive submonoid</text>
+            <text class="tinyText" x="743" y="360" text-anchor="middle">p_v gives splitting tau_v^⊢</text>
+
+            <path class="edge blue" d="M322 126 H436" marker-end="url(#arrowGoodBase33)"></path>
+            <path class="edge green" d="M688 126 H802" marker-end="url(#arrowGoodBase33)"></path>
+            <path class="edge gold" d="M930 176 C882 238 800 256 756 282" marker-end="url(#arrowGoodBase33)"></path>
+            <path class="edge green" d="M562 176 C520 238 432 252 390 282" marker-end="url(#arrowGoodBase33)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Definition in Example 3.3(i)</th><th>Use in the wiki model</th></tr>
+          <tr>
+            <td><span class="math">D_v</span></td>
+            <td>
+              <span class="math">B(X_v)^0</span>, with
+              <span class="math">D_v^⊢ = B(K_v)^0</span> embedded as a full
+              subcategory by pullback from <span class="math">Spec(K_v)</span>.
+            </td>
+            <td>Records the same curve/base-field separation used at bad primes.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Phi_Cv</span></td>
+            <td>
+              For <span class="math">Spec(L) in D_v^⊢</span>,
+              <span class="math">Spec(L) |-> ord(O_L^triangleright)^pf</span>,
+              pulled back from <span class="math">D_v^⊢</span> to
+              <span class="math">D_v</span>.
+            </td>
+            <td>Provides the divisor monoid for the ambient p-adic Frobenioid.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Phi_Cv^⊢</span></td>
+            <td>
+              <span class="math">Spec(L) |-> ord(Z_pv^triangleright)</span>,
+              an absolutely primitive submonoid of the ambient valuation monoid.
+            </td>
+            <td>Provides the mono-analytic split side.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F_v^⊢</span></td>
+            <td>
+              The element <span class="math">p_v in Z_pv^triangleright</span>
+              determines the characteristic splitting
+              <span class="math">tau_v^⊢</span> on <span class="math">C_v^⊢</span>.
+            </td>
+            <td>Creates the non-theta split Frobenioid to be compared with the theta version.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 3.3(i)</a>
+          Related: <a href="#good-formal-theta-frobenioids-iut-i33">good formal theta</a>
+          <a href="#bad-frobenioid-base-category-iut-i32">bad-place base category</a>
+          <a href="#global-realified-theater-35-36">global realified theater</a>
+        </div>
+      </section>
+
+      <section id="good-formal-theta-frobenioids-iut-i33" data-filter="iut i example 3.3 good nonarchimedean formal theta log pv log theta reconstruction kummer image">
+        <h2>IUT I Example 3.3(ii)-(iii): Formal Theta at Good Nonarchimedean Primes</h2>
+        <p class="lede">
+          Good nonarchimedean primes use a formal theta generator. The construction
+          replaces <span class="math">log(p_v)</span> by
+          <span class="math">log(p_v) log(Theta)</span>, obtains a split Frobenioid
+          isomorphic to the non-theta split Frobenioid, and then records that the
+          ingredients are category-theoretically recoverable from <span class="math">F_v</span>.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Example 3.3 formal theta replacement">
+          <div class="diagramHeader">
+            <strong>Formal theta replacement at good primes</strong>
+            <span>IUT I, Example 3.3(ii)-(iii)</span>
+          </div>
+          <svg viewBox="0 0 1120 430" role="img">
+            <defs>
+              <marker id="arrowGoodTheta33" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="74" y="78" width="272" height="96"></rect>
+            <text class="nodeTitle" x="210" y="108" text-anchor="middle">O(C_v^⊢)</text>
+            <text class="tinyText" x="210" y="134" text-anchor="middle">O^x(C_v^⊢) x N log(p_v)</text>
+            <text class="tinyText" x="210" y="154" text-anchor="middle">split by tau_v^⊢</text>
+
+            <rect class="nodeBox gold" x="424" y="78" width="272" height="96"></rect>
+            <text class="nodeTitle" x="560" y="108" text-anchor="middle">formal replacement</text>
+            <text class="tinyText" x="560" y="134" text-anchor="middle">log(p_v) -> log(p_v) log(Theta)</text>
+            <text class="tinyText" x="560" y="154" text-anchor="middle">same unit part</text>
+
+            <rect class="nodeBox violet" x="774" y="78" width="272" height="96"></rect>
+            <text class="nodeTitle" x="910" y="108" text-anchor="middle">F_v^Theta</text>
+            <text class="tinyText" x="910" y="134" text-anchor="middle">D_v^Theta := D_v^⊢</text>
+            <text class="tinyText" x="910" y="154" text-anchor="middle">F_v^⊢ ≃ F_v^Theta</text>
+
+            <rect class="nodeBox blue" x="214" y="274" width="302" height="92"></rect>
+            <text class="nodeTitle" x="365" y="304" text-anchor="middle">category reconstruction</text>
+            <text class="tinyText" x="365" y="330" text-anchor="middle">D_v^⊢ from D_v; D_v from F_v</text>
+            <text class="tinyText" x="365" y="350" text-anchor="middle">C_v^⊢ from F_v</text>
+
+            <rect class="nodeBox red" x="604" y="274" width="302" height="92"></rect>
+            <text class="nodeTitle" x="755" y="304" text-anchor="middle">recover p_v</text>
+            <text class="tinyText" x="755" y="330" text-anchor="middle">field structure on Kummer-image</text>
+            <text class="tinyText" x="755" y="350" text-anchor="middle">strict Belyi type input</text>
+
+            <path class="edge green" d="M346 126 H422" marker-end="url(#arrowGoodTheta33)"></path>
+            <path class="edge gold" d="M696 126 H772" marker-end="url(#arrowGoodTheta33)"></path>
+            <path class="edge violet" d="M910 176 C884 236 814 248 768 272" marker-end="url(#arrowGoodTheta33)"></path>
+            <path class="edge blue" d="M516 320 H602" marker-end="url(#arrowGoodTheta33)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Claim</th><th>Source content</th><th>Why it matters later</th></tr>
+          <tr>
+            <td>Formal theta is not a theta value</td>
+            <td>
+              Example 3.3(ii) introduces
+              <span class="math">N log(p_v) log(Theta)</span> and keeps
+              <span class="math">O^x(C_v^Theta) := O^x(C_v^⊢)</span>.
+            </td>
+            <td>Prevents importing bad-prime theta-value indeterminacy into good primes.</td>
+          </tr>
+          <tr>
+            <td>Split equivalence</td>
+            <td>
+              The resulting <span class="math">F_v^Theta</span> is naturally
+              equivalent to <span class="math">F_v^⊢</span> as a split Frobenioid.
+            </td>
+            <td>Supplies the good-prime local input for global theta-side packages.</td>
+          </tr>
+          <tr>
+            <td>Recoverability</td>
+            <td>
+              Example 3.3(iii) lists category-theoretic reconstructions of
+              <span class="math">D_v^⊢</span>, <span class="math">D_v^Theta</span>,
+              <span class="math">D_v</span>, <span class="math">C_v^⊢</span>, and
+              finally <span class="math">F_v^⊢, F_v^Theta</span> from
+              <span class="math">F_v</span>.
+            </td>
+            <td>Marks which good-prime structures may be transported without choosing coordinates.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 3.3(ii)-(iii), Remarks 3.3.1-3.3.2</a>
+          Related: <a href="#good-nonarch-base-frobenioids-iut-i33">good base Frobenioids</a>
+          <a href="#theta-value-indeterminacy-iut-i32">bad theta-value indeterminacy</a>
+          <a href="#kummer-ready-blind-51-52">Kummer-ready/blind</a>
+        </div>
+      </section>
+
+      <section id="arch-aut-holomorphic-frobenioids-iut-i34" data-filter="iut i example 3.4 archimedean aut holomorphic orbispaces caf frobenioid kappa structure">
+        <h2>IUT I Example 3.4(i): Archimedean Aut-Holomorphic Frobenioids</h2>
+        <p class="lede">
+          At an archimedean valuation, Mochizuki replaces the p-adic local
+          Frobenioid picture by an Aut-holomorphic orbispace and a complex
+          archimedean topological field. The local object is the triple
+          <span class="math">F_v := (C_v,D_v,kappa_v)</span>.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Example 3.4 archimedean Aut-holomorphic Frobenioid">
+          <div class="diagramHeader">
+            <strong>Archimedean local Frobenioid data</strong>
+            <span>IUT I, Example 3.4(i)</span>
+          </div>
+          <svg viewBox="0 0 1120 430" role="img">
+            <defs>
+              <marker id="arrowArchAuto34" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox violet" x="72" y="82" width="274" height="104"></rect>
+            <text class="nodeTitle" x="209" y="112" text-anchor="middle">Aut-holomorphic orbispaces</text>
+            <text class="tinyText" x="209" y="138" text-anchor="middle">X_v, C_v, X_v, C_v, arrows</text>
+            <text class="tinyText" x="209" y="158" text-anchor="middle">each gives a CAF A</text>
+
+            <rect class="nodeBox blue" x="424" y="82" width="274" height="104"></rect>
+            <text class="nodeTitle" x="561" y="112" text-anchor="middle">D_v := X_v arrow</text>
+            <text class="tinyText" x="561" y="138" text-anchor="middle">A_Dv algorithmically constructed</text>
+            <text class="tinyText" x="561" y="158" text-anchor="middle">K_v ≃ A_Dv topologically</text>
+
+            <rect class="nodeBox green" x="776" y="82" width="274" height="104"></rect>
+            <text class="nodeTitle" x="913" y="112" text-anchor="middle">C_v</text>
+            <text class="tinyText" x="913" y="138" text-anchor="middle">archimedean Frobenioid</text>
+            <text class="tinyText" x="913" y="158" text-anchor="middle">one-morphism base Spec(K_v)</text>
+
+            <rect class="nodeBox gold" x="244" y="274" width="286" height="92"></rect>
+            <text class="nodeTitle" x="387" y="304" text-anchor="middle">O(C_v) ≃ O(K_v)</text>
+            <text class="tinyText" x="387" y="330" text-anchor="middle">topological monoid reconstructed from C_v</text>
+            <text class="tinyText" x="387" y="350" text-anchor="middle">linear morphisms among pseudo-terminals</text>
+
+            <rect class="nodeBox red" x="614" y="274" width="286" height="92"></rect>
+            <text class="nodeTitle" x="757" y="304" text-anchor="middle">kappa_v</text>
+            <text class="tinyText" x="757" y="330" text-anchor="middle">O(C_v) -> A_Dv</text>
+            <text class="tinyText" x="757" y="350" text-anchor="middle">Kummer structure</text>
+
+            <path class="edge violet" d="M346 134 H422" marker-end="url(#arrowArchAuto34)"></path>
+            <path class="edge blue" d="M698 134 H774" marker-end="url(#arrowArchAuto34)"></path>
+            <path class="edge green" d="M914 188 C884 244 814 256 770 272" marker-end="url(#arrowArchAuto34)"></path>
+            <path class="edge gold" d="M530 320 H612" marker-end="url(#arrowArchAuto34)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Example 3.4(i) content</th><th>Interpretation</th></tr>
+          <tr>
+            <td>Aut-holomorphic input</td>
+            <td>
+              The hyperbolic orbicurves at <span class="math">v</span> determine
+              Aut-holomorphic orbispaces and corresponding CAFs
+              <span class="math">A</span>.
+            </td>
+            <td>Archimedean local geometry is encoded topologically/holomorphically.</td>
+          </tr>
+          <tr>
+            <td><span class="math">C_v</span></td>
+            <td>
+              An archimedean Frobenioid over the one-morphism base category
+              determined by <span class="math">Spec(K_v)</span>.
+            </td>
+            <td>Represents the topological monoid <span class="math">O_Kv^triangleright</span>.</td>
+          </tr>
+          <tr>
+            <td><span class="math">kappa_v</span></td>
+            <td>
+              The topological isomorphism <span class="math">K_v ≃ A_Dv</span>
+              restricts to a monoid inclusion
+              <span class="math">O(C_v) -> A_Dv</span>.
+            </td>
+            <td>This is the archimedean Kummer structure in the local Frobenioid triple.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 3.4(i)</a>
+          Related: <a href="#arch-kummer-log-frobenioids-iut-i34">arch Kummer/log</a>
+          <a href="#good-nonarch-base-frobenioids-iut-i33">good nonarch Frobenioids</a>
+          <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips</a>
+        </div>
+      </section>
+
+      <section id="arch-kummer-log-frobenioids-iut-i34" data-filter="iut i example 3.4 archimedean tm bottom split topological monoid kummer structure co holomorphicization logarithm theta">
+        <h2>IUT I Example 3.4(ii)-(iii): Archimedean Splitting, Kummer, and Log Compatibility</h2>
+        <p class="lede">
+          The archimedean split side uses the category
+          <span class="math">TM^⊢</span> of split topological monoids. The noncompact
+          factor is written additively, <span class="math">log(p_v)</span> is a
+          generator, and the theta version again replaces it by a formal
+          <span class="math">log(p_v) log(Theta)</span>. Remark 3.4.2 explains why
+          this Kummer structure must be viewed through co-holomorphicization when
+          logarithms are involved.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Example 3.4 archimedean Kummer and log compatibility">
+          <div class="diagramHeader">
+            <strong>Archimedean split monoid and log-compatible Kummer reading</strong>
+            <span>IUT I, Example 3.4(ii)-(iii), Remark 3.4.2</span>
+          </div>
+          <svg viewBox="0 0 1120 470" role="img">
+            <defs>
+              <marker id="arrowArchLog34" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="78" width="278" height="98"></rect>
+            <text class="nodeTitle" x="209" y="108" text-anchor="middle">TM^⊢ object</text>
+            <text class="tinyText" x="209" y="134" text-anchor="middle">C^x x C^⊢ ≃ C</text>
+            <text class="tinyText" x="209" y="154" text-anchor="middle">S^1 factor and R_ge0 factor</text>
+
+            <rect class="nodeBox green" x="420" y="78" width="278" height="98"></rect>
+            <text class="nodeTitle" x="559" y="108" text-anchor="middle">F_v^⊢</text>
+            <text class="tinyText" x="559" y="134" text-anchor="middle">(C_v^⊢, D_v^⊢, tau_v^⊢)</text>
+            <text class="tinyText" x="559" y="154" text-anchor="middle">algorithmically reconstructed</text>
+
+            <rect class="nodeBox gold" x="770" y="78" width="278" height="98"></rect>
+            <text class="nodeTitle" x="909" y="108" text-anchor="middle">F_v^Theta</text>
+            <text class="tinyText" x="909" y="134" text-anchor="middle">R_ge0 log(p_v) log(Theta)</text>
+            <text class="tinyText" x="909" y="154" text-anchor="middle">forget log(Theta): F_v^⊢ ≃ F_v^Theta</text>
+
+            <rect class="nodeBox violet" x="158" y="286" width="312" height="104"></rect>
+            <text class="nodeTitle" x="314" y="316" text-anchor="middle">Kummer structure kappa_v</text>
+            <text class="tinyText" x="314" y="342" text-anchor="middle">O(C_v)^gp gets Aut-holomorphic structure</text>
+            <text class="tinyText" x="314" y="362" text-anchor="middle">plus co-holomorphicization to A_Dv</text>
+
+            <rect class="nodeBox red" x="650" y="286" width="312" height="104"></rect>
+            <text class="nodeTitle" x="806" y="316" text-anchor="middle">logarithm warning</text>
+            <text class="tinyText" x="806" y="342" text-anchor="middle">co-holomorphicization is log-compatible</text>
+            <text class="tinyText" x="806" y="362" text-anchor="middle">monoid structures are the incompatible part</text>
+
+            <path class="edge blue" d="M348 127 H418" marker-end="url(#arrowArchLog34)"></path>
+            <path class="edge green" d="M698 127 H768" marker-end="url(#arrowArchLog34)"></path>
+            <path class="edge green" d="M560 178 C512 238 408 258 330 284" marker-end="url(#arrowArchLog34)"></path>
+            <path class="edge violet" d="M470 338 H648" marker-end="url(#arrowArchLog34)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Source content</th><th>Precision point</th></tr>
+          <tr>
+            <td><span class="math">TM^⊢</span></td>
+            <td>
+              Objects split a topological monoid into a compact unit factor
+              isomorphic to <span class="math">S^1</span> and a noncompact factor
+              isomorphic to <span class="math">R_ge0</span>.
+            </td>
+            <td>The archimedean split object is a topological monoid object, not a p-adic valuation monoid.</td>
+          </tr>
+          <tr>
+            <td>Formal theta</td>
+            <td>
+              <span class="math">log(p_v)</span> generates the noncompact factor;
+              replacing it by <span class="math">log(p_v) log(Theta)</span>
+              defines <span class="math">F_v^Theta</span>, isomorphic to
+              <span class="math">F_v^⊢</span> after forgetting the formal symbol.
+            </td>
+            <td>This parallels Example 3.3 but in the archimedean topological setting.</td>
+          </tr>
+          <tr>
+            <td>Kummer/co-holomorphic reading</td>
+            <td>
+              Remark 3.4.2 identifies <span class="math">kappa_v</span> with an
+              Aut-holomorphic structure on <span class="math">O(C_v)^gp</span>
+              plus a co-holomorphicization to <span class="math">A_Dv</span>.
+            </td>
+            <td>The co-holomorphicization is the log-compatible part; the monoid structure is not.</td>
+          </tr>
+          <tr>
+            <td>Archimedean theta approach</td>
+            <td>
+              Remark 3.4.3 views <span class="math">A_Xv = A_Dv</span> through
+              cuspidal inertia and holomorphic elliptic/Belyi cuspidalization.
+            </td>
+            <td>Explains how archimedean reconstruction enters later prime-strip algorithms.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Example 3.4(ii)-(iii), Remarks 3.4.2-3.4.3</a>
+          Related: <a href="#arch-aut-holomorphic-frobenioids-iut-i34">arch Aut-holomorphic data</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips</a>
         </div>
       </section>
 
