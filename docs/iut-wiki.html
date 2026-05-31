@@ -2156,8 +2156,74 @@
           directions. Collapsing these loses exactly the bookkeeping needed later in the
           log-theta lattice.
         </div>
+        <table>
+          <tr><th>Prime-strip</th><th>Bad-prime model in IUT I, Fig. I1.2</th><th>Interpretive role</th><th>Later use</th></tr>
+          <tr>
+            <td>D</td>
+            <td><span class="math">Pi_v</span>, via tempered coverings at bad places and finite etale coverings at good places.</td>
+            <td>Holomorphic local arithmetic structure attached to the curve data.</td>
+            <td>Base object for D-NF and D-Theta bridges.</td>
+          </tr>
+          <tr>
+            <td>D^|</td>
+            <td><span class="math">G_v</span>, via the corresponding Galois-category data.</td>
+            <td>Mono-analyticization of D; keeps the underlying arithmetic-real-analytic information.</td>
+            <td>Processions of D^|-prime-strips generate tensor packets in IUT III.</td>
+          </tr>
+          <tr>
+            <td>F</td>
+            <td><span class="math">O_Fv^&#9657;</span> with its natural group action.</td>
+            <td>Frobenioid/monoid interface for divisor-like multiplicative data.</td>
+            <td>Theta links compare F-prime-strips built from theta values and q-parameters.</td>
+          </tr>
+          <tr>
+            <td>F^|</td>
+            <td><span class="math">O_Fv^x × q_v^N</span>.</td>
+            <td>Mono-analytic Frobenioid interface retaining unit and q-power data.</td>
+            <td>Input to weakened F^|x and F^|xmu variants.</td>
+          </tr>
+          <tr>
+            <td>F^|x</td>
+            <td><span class="math">O_Fv^x</span>.</td>
+            <td>Unit portion after dropping q-power value data.</td>
+            <td>Appears in the original theta-link preservation statements.</td>
+          </tr>
+          <tr>
+            <td>F^|xmu</td>
+            <td><span class="math">O_Fv^x / O_Fv^mu</span>.</td>
+            <td>Unit quotient modulo roots of unity.</td>
+            <td>Central weakened portion in Theta^xmu, Gaussian, and LGP links.</td>
+          </tr>
+          <tr>
+            <td>F^|xmu + q</td>
+            <td><span class="math">(O_Fv^x / O_Fv^mu) × q_v^N</span>.</td>
+            <td>Unit quotient together with q-power value data.</td>
+            <td>Tracks the split between unit data and value-group data.</td>
+          </tr>
+        </table>
+        <div class="grid2">
+          <div class="card">
+            <h3>Local analytic sections</h3>
+            <p>
+              Remark 4.3.1 interprets D-prime-strips as arithmetic collections of local
+              analytic sections of <span class="math">Spec(K) -> Spec(F_mod)</span>.
+              This is how IUT simulates a global multiplicative subspace and a global
+              canonical generator without an actual global scheme-theoretic section.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Cost of the simulation</h3>
+            <p>
+              The same remark emphasizes that this simulation dismantles the global
+              prime structure into valuation-indexed local pieces. The resulting
+              bookkeeping is not cosmetic: it is why later bridge, label, Frobenioid, and
+              log-shell structures must remain carefully typed.
+            </p>
+          </div>
+        </div>
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 4.1 and Definition 4.6</a>
+          <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Definition 4.9</a>
           <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Definition 1.1</a>
           Related: <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#theta-log-links">theta/log links</a>
