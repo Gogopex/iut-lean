@@ -664,6 +664,8 @@
         <a href="#theta-xmu-links-ii410">Theta×μ links 4.10</a>
         <a href="#frobenius-picture-chain-ii410">Frobenius-picture chain 4.10</a>
         <a href="#d-theta-etale-pictures-ii411">D-Theta etale-pictures 4.11</a>
+        <a href="#line-bundle-log-wall-juggling-ii4113">Line-bundle log-wall juggling 4.11.3</a>
+        <a href="#teichmuller-analogy-ii4114">Teichmuller analogy 4.11.4</a>
         <a href="#theta-evaluation-kummer-route">Theta evaluation route</a>
         <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
         <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
@@ -1776,6 +1778,8 @@
               <a href="#coric-fperp-times-mu-invariant-410">coric F⊢×μ invariant</a>,
               <a href="#frobenius-picture-chain-410">Frobenius-picture chain</a>,
               <a href="#d-theta-etale-pictures-ii411">D-Theta etale-pictures</a>,
+              <a href="#line-bundle-log-wall-juggling-ii4113">line-bundle log-wall juggling 4.11.3</a>,
+              <a href="#teichmuller-analogy-ii4114">Teichmuller analogy 4.11.4</a>,
               <a href="#d-prime-strip-monoanalytic-core-411">D⊢ mono-analytic core</a>,
               <a href="#theta-exponent-commutativity-4111">theta-exponent commutativity</a>,
               <a href="#gaussian-monoids">Gaussian monoids</a>,
@@ -21551,6 +21555,213 @@
           <a href="#theta-nf-fl-symmetry-ii47">ThetaNF Fl symmetry</a>
           <a href="#multiradiality">multiradiality</a>
           <a href="#log-theta-lattice">log-theta lattice</a>
+        </div>
+      </section>
+
+      <section id="line-bundle-log-wall-juggling-ii4113">
+        <h2>IUT II Remark 4.11.3: Line-Bundle Log-Wall Juggling</h2>
+        <p class="lede">
+          Remark 4.11.3 compares two alignments that run in opposite directions.
+          Combinatorially, the <span class="math">Thetaell</span>-bridge belongs to
+          the additive <span class="math">F_l^±</span> symmetry and the
+          <span class="math">NF</span>-bridge to the multiplicative
+          <span class="math">F_l</span> symmetry. At the line-bundle level, however,
+          arithmetic line bundles are treated multiplicatively in the
+          <span class="math">Thetaell</span>-bridge, while their module-line-bundle
+          interpretation requires the global ring structure of the
+          <span class="math">NF</span>-bridge.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Remark 4.11.3 line-bundle log-wall juggling">
+          <div class="diagramHeader">
+            <strong>Two crossed correspondences</strong>
+            <span>Remark 4.11.3</span>
+          </div>
+          <svg viewBox="0 0 1120 440" role="img">
+            <defs>
+              <marker id="arrowLogWall4113" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="110" y="70" width="250" height="86"></rect>
+            <text class="nodeTitle" x="235" y="100" text-anchor="middle">Thetaell bridge</text>
+            <text class="tinyText" x="235" y="124" text-anchor="middle">additive F_l^± symmetry</text>
+            <text class="tinyText" x="235" y="142" text-anchor="middle">combinatorial side</text>
+
+            <rect class="nodeBox green" x="760" y="70" width="250" height="86"></rect>
+            <text class="nodeTitle" x="885" y="100" text-anchor="middle">NF bridge</text>
+            <text class="tinyText" x="885" y="124" text-anchor="middle">multiplicative F_l symmetry</text>
+            <text class="tinyText" x="885" y="142" text-anchor="middle">combinatorial side</text>
+
+            <rect class="nodeBox gold" x="110" y="266" width="250" height="86"></rect>
+            <text class="nodeTitle" x="235" y="296" text-anchor="middle">arithmetic line bundles</text>
+            <text class="tinyText" x="235" y="320" text-anchor="middle">monoids and Frobenioids</text>
+            <text class="tinyText" x="235" y="338" text-anchor="middle">multiplicative treatment</text>
+
+            <rect class="nodeBox red" x="760" y="266" width="250" height="86"></rect>
+            <text class="nodeTitle" x="885" y="296" text-anchor="middle">module line bundles</text>
+            <text class="tinyText" x="885" y="320" text-anchor="middle">requires global ring structure</text>
+            <text class="tinyText" x="885" y="338" text-anchor="middle">NF-side comparison</text>
+
+            <rect class="nodeBox violet" x="420" y="168" width="280" height="88"></rect>
+            <text class="nodeTitle" x="560" y="198" text-anchor="middle">log-wall analogue</text>
+            <text class="tinyText" x="560" y="222" text-anchor="middle">juggling of multiplicative</text>
+            <text class="tinyText" x="560" y="240" text-anchor="middle">and additive line-bundle readings</text>
+
+            <path d="M362 113 H758" class="edge blue" marker-end="url(#arrowLogWall4113)"></path>
+            <path d="M362 309 H758" class="edge gold" marker-end="url(#arrowLogWall4113)"></path>
+            <path d="M235 158 V264" class="edge gold" marker-end="url(#arrowLogWall4113)"></path>
+            <path d="M885 158 V264" class="edge red" marker-end="url(#arrowLogWall4113)"></path>
+            <path d="M360 308 C420 280 470 258 520 254" class="edge violet" marker-end="url(#arrowLogWall4113)"></path>
+            <path d="M760 308 C700 280 650 258 598 254" class="edge violet" marker-end="url(#arrowLogWall4113)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Level</th><th>Remark 4.11.3 correspondence</th><th>Formal reading</th></tr>
+          <tr>
+            <td>Symmetry combinatorics</td>
+            <td>
+              <span class="math">Thetaell</span> aligns with additive
+              <span class="math">F_l^±</span>; <span class="math">NF</span> aligns
+              with multiplicative <span class="math">F_l</span>.
+            </td>
+            <td>Keep the two label symmetries distinct; they encode different dimensions.</td>
+          </tr>
+          <tr>
+            <td>Line bundles</td>
+            <td>
+              Arithmetic line bundles are treated multiplicatively by monoids and
+              Frobenioids in the <span class="math">Thetaell</span> bridge, while
+              equivalence with module-line-bundle data uses the global ring structure
+              of number fields on the <span class="math">NF</span> side.
+            </td>
+            <td>Do not collapse line-bundle meanings into one untyped object.</td>
+          </tr>
+          <tr>
+            <td>Log-wall</td>
+            <td>
+              Mochizuki identifies this crossing as a combinatorial counterpart of the
+              multiplicative/additive juggling in the log-wall.
+            </td>
+            <td>This page is a bridge from IUT II Gaussian data to IUT III log-shells.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 4.11.3</a>
+          Related: <a href="#theta-nf-fl-symmetry-ii47">ThetaNF Fl symmetry</a>
+          <a href="#conjugate-synchronization-logwall-ii383">synchronization/log-wall</a>
+          <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
+        </div>
+      </section>
+
+      <section id="teichmuller-analogy-ii4114">
+        <h2>IUT II Remark 4.11.4: Hodge-Arakelov and p-Adic Teichmuller Analogy</h2>
+        <p class="lede">
+          Remark 4.11.4 explains how the IUT II Gaussian construction should be read
+          against Hodge-Arakelov theory and p-adic Teichmuller theory. The
+          <span class="math">l</span>-torsion labels are rough finite approximations
+          to deformation dimensions, the Gaussian values behave like a deformation
+          between identity and Frobenius, and the paired
+          <span class="math">F_l^±</span>/<span class="math">F_l</span> symmetries
+          echo additive and multiplicative monodromy patterns in canonical lifting.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Remark 4.11.4 Teichmuller analogy">
+          <div class="diagramHeader">
+            <strong>Three analogy layers</strong>
+            <span>Remark 4.11.4 and correction Remark 4.11.5</span>
+          </div>
+          <svg viewBox="0 0 1120 560" role="img">
+            <defs>
+              <marker id="arrowTeich4114" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="70" width="280" height="90"></rect>
+            <text class="nodeTitle" x="212" y="100" text-anchor="middle">l-torsion labels</text>
+            <text class="tinyText" x="212" y="126" text-anchor="middle">rough finite approximation</text>
+            <text class="tinyText" x="212" y="146" text-anchor="middle">deformation of holomorphic structure</text>
+
+            <rect class="nodeBox green" x="420" y="70" width="280" height="90"></rect>
+            <text class="nodeTitle" x="560" y="100" text-anchor="middle">Theta×μ chain</text>
+            <text class="tinyText" x="560" y="126" text-anchor="middle">canonical lifting analogue</text>
+            <text class="tinyText" x="560" y="146" text-anchor="middle">theta functions specify deformation</text>
+
+            <rect class="nodeBox gold" x="768" y="70" width="280" height="90"></rect>
+            <text class="nodeTitle" x="908" y="100" text-anchor="middle">Theta×μ_gau chain</text>
+            <text class="tinyText" x="908" y="126" text-anchor="middle">Galois-representation analogue</text>
+            <text class="tinyText" x="908" y="146" text-anchor="middle">after Hodge-Arakelov evaluation</text>
+
+            <rect class="nodeBox red" x="158" y="280" width="280" height="90"></rect>
+            <text class="nodeTitle" x="298" y="310" text-anchor="middle">F_l^± symmetry</text>
+            <text class="tinyText" x="298" y="336" text-anchor="middle">additive, uniradial</text>
+            <text class="tinyText" x="298" y="356" text-anchor="middle">ordinary-locus monodromy analogue</text>
+
+            <rect class="nodeBox violet" x="682" y="280" width="280" height="90"></rect>
+            <text class="nodeTitle" x="822" y="310" text-anchor="middle">F_l symmetry</text>
+            <text class="tinyText" x="822" y="336" text-anchor="middle">multiplicative, multiradial</text>
+            <text class="tinyText" x="822" y="356" text-anchor="middle">supersingular toral analogue</text>
+
+            <rect class="nodeBox green" x="420" y="438" width="280" height="70"></rect>
+            <text class="nodeTitle" x="560" y="466" text-anchor="middle">conjugate synchronization</text>
+            <text class="tinyText" x="560" y="490" text-anchor="middle">analogue of H1 deformation links</text>
+
+            <path d="M354 115 H418" class="edge blue" marker-end="url(#arrowTeich4114)"></path>
+            <path d="M702 115 H766" class="edge green" marker-end="url(#arrowTeich4114)"></path>
+            <path d="M298 372 C348 418 444 438 522 436" class="edge red" marker-end="url(#arrowTeich4114)"></path>
+            <path d="M822 372 C772 418 676 438 598 436" class="edge violet" marker-end="url(#arrowTeich4114)"></path>
+            <path d="M560 162 C496 214 398 244 318 278" class="edge red" marker-end="url(#arrowTeich4114)"></path>
+            <path d="M908 162 C890 214 852 244 830 278" class="edge violet" marker-end="url(#arrowTeich4114)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Remark item</th><th>Analogy</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>4.11.4(i)</td>
+            <td>
+              <span class="math">l</span>-torsion points are rough finite
+              approximations to the two real deformation dimensions; theta values at
+              labels represent possible deformations of holomorphic structure.
+            </td>
+            <td>Gaussian value profiles are deformation data, not bare numerical labels.</td>
+          </tr>
+          <tr>
+            <td>4.11.4(ii)</td>
+            <td>
+              The semi-infinite <span class="math">Theta×μ</span> chain resembles
+              canonical lifting, while passage to the Gaussian chain resembles the
+              move from <span class="math">MF∇</span>-objects to Galois
+              representations.
+            </td>
+            <td>This explains why the Gaussian link is kept as a representation-facing object.</td>
+          </tr>
+          <tr>
+            <td>4.11.4(iii)(c)</td>
+            <td>
+              <span class="math">F_l^±</span> is additive/uniradial and analogous to
+              ordinary-locus unipotent monodromy; <span class="math">F_l</span> is
+              multiplicative/multiradial and analogous to supersingular toral
+              monodromy.
+            </td>
+            <td>The additive/multiplicative symmetry split is a structural input.</td>
+          </tr>
+          <tr>
+            <td>4.11.4(iii)(d), 4.11.5</td>
+            <td>
+              Conjugate synchronization is compared with deformation links in
+              cohomology. Remark 4.11.5 then corrects Tate-twist signs and a
+              cohomology-submodule dimension condition in the cited canonical-lifting
+              statement.
+            </td>
+            <td>
+              The analogy is source guidance, but formal references to the canonical
+              lifting lemma must use the corrected notation.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remarks 4.11.4-4.11.5</a>
+          Related: <a href="#frobenius-picture-chain-ii410">Frobenius-picture chain</a>
+          <a href="#theta-nf-fl-symmetry-ii47">ThetaNF Fl symmetry</a>
+          <a href="#theta-evaluation-kummer-route">theta evaluation route</a>
         </div>
       </section>
 
