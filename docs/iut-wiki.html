@@ -472,6 +472,7 @@
         <a href="#bogomolov-szpiro-analogy">Bogomolov-Szpiro analogy</a>
         <a href="#concept-index">Concept index</a>
         <a href="#anabelian-background">Anabelian background</a>
+        <a href="#hoshi-introduction-route">Hoshi introduction route</a>
         <a href="#iut-i-atlas">IUT I atlas</a>
         <a href="#iut-ii-atlas">IUT II atlas</a>
         <a href="#iut-iii-atlas">IUT III atlas</a>
@@ -1802,6 +1803,159 @@
           <a href="#hodge-theaters">Hodge theaters</a>
           <a href="#lana">LANA</a>
           <a href="#formalization">formalization</a>
+        </div>
+      </section>
+
+      <section id="hoshi-introduction-route">
+        <h2>Hoshi Introduction Route</h2>
+        <p class="lede">
+          Hoshi's Japanese introduction is organized as a pedagogical route into IUT:
+          first cyclotomes and object types, then the link-based strategy for
+          Diophantine inequalities, then local/additive machinery, then global
+          Frobenioid and multiplicative Hodge-theater machinery. The wiki uses it as a
+          reader's map of dependencies, not as a substitute for the four IUT papers.
+        </p>
+        <div class="diagram" aria-label="Hoshi introduction route">
+          <div class="diagramHeader">
+            <strong>Survey route</strong>
+            <span>from cyclotomes to full Hodge theaters</span>
+          </div>
+          <svg viewBox="0 0 940 340" role="img">
+            <defs>
+              <marker id="arrowHoshiRoute" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="38" y="70" width="150" height="78"></rect>
+            <text class="nodeTitle" x="113" y="99" text-anchor="middle">§§1-3</text>
+            <text class="tinyText" x="113" y="121" text-anchor="middle">cyclotomes, types,</text>
+            <text class="tinyText" x="113" y="138" text-anchor="middle">Kummer transport</text>
+
+            <rect class="nodeBox violet" x="238" y="70" width="150" height="78"></rect>
+            <text class="nodeTitle" x="313" y="99" text-anchor="middle">§§4-12</text>
+            <text class="tinyText" x="313" y="121" text-anchor="middle">link route, cores,</text>
+            <text class="tinyText" x="313" y="138" text-anchor="middle">indeterminacies</text>
+
+            <rect class="nodeBox green" x="438" y="70" width="150" height="78"></rect>
+            <text class="nodeTitle" x="513" y="99" text-anchor="middle">§§13-20</text>
+            <text class="tinyText" x="513" y="121" text-anchor="middle">local objects and</text>
+            <text class="tinyText" x="513" y="138" text-anchor="middle">additive theaters</text>
+
+            <rect class="nodeBox gold" x="638" y="70" width="150" height="78"></rect>
+            <text class="nodeTitle" x="713" y="99" text-anchor="middle">§§21-25</text>
+            <text class="tinyText" x="713" y="121" text-anchor="middle">global Frobenioids,</text>
+            <text class="tinyText" x="713" y="138" text-anchor="middle">multiplicative theaters</text>
+
+            <rect class="nodeBox red" x="378" y="238" width="185" height="70"></rect>
+            <text class="nodeTitle" x="470" y="266" text-anchor="middle">§26</text>
+            <text class="tinyText" x="470" y="288" text-anchor="middle">combined Hodge theater</text>
+
+            <line class="arrow" x1="188" y1="109" x2="238" y2="109" marker-end="url(#arrowHoshiRoute)"></line>
+            <line class="arrow" x1="388" y1="109" x2="438" y2="109" marker-end="url(#arrowHoshiRoute)"></line>
+            <line class="arrow" x1="588" y1="109" x2="638" y2="109" marker-end="url(#arrowHoshiRoute)"></line>
+            <path class="edge red" d="M513 148 C505 184 485 202 474 238" marker-end="url(#arrowHoshiRoute)"></path>
+            <path class="edge red" d="M713 148 C692 194 582 207 522 238" marker-end="url(#arrowHoshiRoute)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="hoshi-cyclotomes">
+            <h3>Cyclotomes first</h3>
+            <p>
+              Hoshi begins with cyclotomes because IUT repeatedly needs to compare
+              cyclotomic structures arising from different sources: roots of unity,
+              curve cohomology, inertia at cusps, and Frobenioid monoids. The survey
+              presents cyclotomic synchronization and rigidity as a prerequisite for
+              later transport.
+            </p>
+            <div class="tagRow"><span class="tag green">Hoshi §1</span><span class="tag">cyclotomes</span></div>
+          </div>
+          <div class="card" id="hoshi-types">
+            <h3>Types of objects</h3>
+            <p>
+              The early sections distinguish etale-like parts from Frobenius-like parts.
+              In the local model, the Galois group is the symmetry-bearing etale side,
+              while monoids such as local units or integral multiplicative monoids form
+              the quantity-bearing Frobenius side.
+            </p>
+            <div class="tagRow"><span class="tag blue">Hoshi §2</span><span class="tag">etale/Frobenius</span></div>
+          </div>
+          <div class="card" id="hoshi-kummer-transport">
+            <h3>Kummer transport</h3>
+            <p>
+              Hoshi's local toy model explains Kummer theory as a way to transport a
+              Frobenius-like monoid through etale containers. The inevitable ambiguity is
+              split into Kummer-detachment indeterminacy and etale-transport
+              indeterminacy.
+            </p>
+            <div class="tagRow"><span class="tag gold">Hoshi §3</span><span class="tag">transport</span></div>
+          </div>
+          <div class="card" id="hoshi-link-approach">
+            <h3>Link approach</h3>
+            <p>
+              Sections 4-12 describe the strategy for obtaining Diophantine consequences
+              through links: protect q-parameter and field data from destructive
+              identifications by handling them as special values inside appropriate
+              containers rather than as bare numbers in one fixed ring.
+            </p>
+            <div class="tagRow"><span class="tag violet">Hoshi §§4-12</span><span class="tag">links</span></div>
+          </div>
+          <div class="card" id="hoshi-core-objects">
+            <h3>Core objects</h3>
+            <p>
+              The survey frames core objects as the portions that remain usable across
+              transport. This matches the wiki's distinction between the data retained
+              by prime-strips, log-shells, and Hodge theaters, and the ring/scheme
+              histories deliberately not transported as-is.
+            </p>
+            <div class="tagRow"><span class="tag red">Hoshi §§5-6</span><span class="tag">cores</span></div>
+          </div>
+          <div class="card" id="hoshi-multiradial-algorithms">
+            <h3>Multiradial algorithms</h3>
+            <p>
+              Hoshi isolates multiradiality before the technical Hodge-theater
+              construction. In this wiki, that order is important: multiradial algorithms
+              are the formal reason output may be read from many theater positions after
+              allowing the specified indeterminacies.
+            </p>
+            <div class="tagRow"><span class="tag green">Hoshi §7</span><span class="tag">multiradiality</span></div>
+          </div>
+          <div class="card" id="hoshi-hulls-and-log-links">
+            <h3>Hulls and log links</h3>
+            <p>
+              The middle survey route introduces hulls and log links before the full
+              global setup. Hulls absorb indeterminacy into controlled regions; log links
+              provide the vertical movement later visible in the log-theta lattice.
+            </p>
+            <div class="tagRow"><span class="tag blue">Hoshi §§8-9</span><span class="tag">hulls/log links</span></div>
+          </div>
+          <div class="card" id="hoshi-mild-indeterminacy">
+            <h3>Mild indeterminacies</h3>
+            <p>
+              Hoshi's route explicitly pauses on the "mild" indeterminacies before
+              numerical output. This is a useful reading warning: Ind1, Ind2, and Ind3
+              are not cleanup details after the comparison, but part of the comparison
+              interface itself.
+            </p>
+            <div class="tagRow"><span class="tag red">Hoshi §10</span><span class="tag">Ind1/2/3</span></div>
+          </div>
+          <div class="card" id="hoshi-additive-multiplicative-theaters">
+            <h3>Additive and multiplicative theaters</h3>
+            <p>
+              The later sections split the construction into additive Hodge theaters
+              built from local/log-theta data and multiplicative Hodge theaters built
+              from global Frobenioid and Kummer data. Section 26 explains the combined
+              Hodge theater as the interface between these two symmetry packages.
+            </p>
+            <div class="tagRow"><span class="tag gold">Hoshi §§13-26</span><span class="tag">Hodge theaters</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/hoshi-introduction-to-iut.pdf" target="_blank">Hoshi introduction</a>
+          Related: <a href="#theta-cyclotome">theta cyclotome</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#indeterminacies">indeterminacies</a>
         </div>
       </section>
 
