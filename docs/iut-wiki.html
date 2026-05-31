@@ -197,8 +197,10 @@
       border-bottom: 1px solid var(--line);
       scroll-margin-top: 14px;
     }
-    section[hidden] { display: none; }
+    section[hidden] { display: none !important; }
     body:not(.wiki-ready) main section:not(#home) { display: none; }
+    body.wiki-ready main section:not(.active-page) { display: none !important; }
+    body.wiki-ready main section.active-page.hero { display: grid; }
     section h2 {
       margin: 0 0 12px;
       font-size: clamp(1.75rem, 3vw, 2.6rem);
@@ -571,6 +573,7 @@
             <div class="heroActions">
               <a class="button" href="#orientation">Enter the wiki</a>
               <a class="button secondary" href="#source-library">Open source library</a>
+              <a class="button secondary" href="#collas-category-perspective">Collas category view</a>
               <a class="button secondary" href="#formalization">Lean efforts</a>
             </div>
           </div>
@@ -16047,6 +16050,7 @@
       sections.forEach(section => {
         const isCurrent = section === page;
         section.hidden = !isCurrent;
+        section.classList.toggle("active-page", isCurrent);
         section.setAttribute("aria-hidden", String(!isCurrent));
       });
 
