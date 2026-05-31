@@ -297,6 +297,9 @@
       max-width: 100%;
       height: auto;
     }
+    .diagram svg {
+      min-width: 640px;
+    }
     svg text {
       font-family: inherit;
       fill: var(--ink);
@@ -459,6 +462,7 @@
         <h2>Core IUT</h2>
         <a href="#initial-theta-data">Initial theta data</a>
         <a href="#hodge-theaters">Hodge theaters</a>
+        <a href="#prime-strips-bridges">Prime strips and bridges</a>
         <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
         <a href="#theta-log-links">Theta and log links</a>
         <a href="#log-theta-lattice">Log-theta lattice</a>
@@ -1354,6 +1358,133 @@
           <a href="papers/mochizuki-panorama.pdf" target="_blank">Panoramic Overview</a>
           Related: <a href="#theta-log-links">theta/log links</a>
           <a href="#dispute">dispute</a>
+        </div>
+      </section>
+
+      <section id="prime-strips-bridges">
+        <h2>Prime Strips and Bridges</h2>
+        <p class="lede">
+          Prime-strips are valuation-indexed interfaces extracted from Hodge-theater
+          data. They are not decorative labels: D-prime-strips, their mono-analytic
+          versions, F-prime-strips, and bridge data determine which information is
+          retained when the theory moves between holomorphic and mono-analytic views.
+        </p>
+        <div class="diagram" aria-label="Prime strips and bridge structure">
+          <div class="diagramHeader">
+            <strong>Prime-strip interface</strong>
+            <span>holomorphic data, mono-analyticization, and bridges</span>
+          </div>
+          <svg viewBox="0 0 840 360" role="img">
+            <defs>
+              <marker id="arrowStrip" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="38" y="52" width="160" height="66"></rect>
+            <text class="nodeTitle" x="118" y="78" text-anchor="middle">D-prime-strip</text>
+            <text class="tinyText" x="118" y="98" text-anchor="middle">{D_v}_{v in V}</text>
+
+            <rect class="nodeBox green" x="258" y="52" width="170" height="66"></rect>
+            <text class="nodeTitle" x="343" y="78" text-anchor="middle">D^|-prime-strip</text>
+            <text class="tinyText" x="343" y="98" text-anchor="middle">mono-analyticization</text>
+
+            <rect class="nodeBox gold" x="498" y="52" width="145" height="66"></rect>
+            <text class="nodeTitle" x="570" y="78" text-anchor="middle">F-prime-strip</text>
+            <text class="tinyText" x="570" y="98" text-anchor="middle">Frobenioid interface</text>
+
+            <rect class="nodeBox violet" x="690" y="52" width="120" height="66"></rect>
+            <text class="nodeTitle" x="750" y="78" text-anchor="middle">F^|xmu</text>
+            <text class="tinyText" x="750" y="98" text-anchor="middle">weakened source</text>
+
+            <path class="edge blue" d="M198 85 H256" marker-end="url(#arrowStrip)"></path>
+            <path class="edge green" d="M428 85 H496" marker-end="url(#arrowStrip)"></path>
+            <path class="edge gold" d="M643 85 H688" marker-end="url(#arrowStrip)"></path>
+            <text class="tinyText" x="228" y="145" text-anchor="middle">forget holomorphic history</text>
+            <text class="tinyText" x="464" y="145" text-anchor="middle">associated interface</text>
+
+            <rect class="nodeBox blue" x="110" y="226" width="145" height="62"></rect>
+            <text class="nodeTitle" x="182" y="251" text-anchor="middle">D-NF bridge</text>
+            <text class="tinyText" x="182" y="270" text-anchor="middle">number-field side</text>
+
+            <rect class="nodeBox red" x="348" y="214" width="160" height="86"></rect>
+            <text class="nodeTitle" x="428" y="241" text-anchor="middle">D-ThetaNF</text>
+            <text class="smallText" x="428" y="263" text-anchor="middle">shared capsule</text>
+            <text class="tinyText" x="428" y="282" text-anchor="middle">compatible bridge pair</text>
+
+            <rect class="nodeBox gold" x="604" y="226" width="145" height="62"></rect>
+            <text class="nodeTitle" x="676" y="251" text-anchor="middle">D-Theta bridge</text>
+            <text class="tinyText" x="676" y="270" text-anchor="middle">theta-label side</text>
+
+            <path d="M255 257 H346" stroke="#315b8f" stroke-width="1.5" fill="none" marker-end="url(#arrowStrip)"></path>
+            <path d="M604 257 H510" stroke="#8b6b24" stroke-width="1.5" fill="none" marker-end="url(#arrowStrip)"></path>
+            <text class="edgeLabel" x="305" y="241" text-anchor="middle">same index set</text>
+            <text class="edgeLabel" x="558" y="241" text-anchor="middle">same labels</text>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card">
+            <h3>D-prime-strip</h3>
+            <p>
+              IUT I Definition 4.1 defines a D-prime-strip as a collection
+              <span class="math">{D_v}_{v in V}</span>. At nonarchimedean places these
+              are categories equivalent to the local D-data; at archimedean places they
+              are Aut-holomorphic orbispaces.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Mono-analyticization</h3>
+            <p>
+              The associated <span class="math">D^|</span>-prime-strip keeps the
+              mono-analytic information obtained by passing to the appropriate
+              subcategories or topological-monoid objects. This is one controlled way to
+              weaken holomorphic history.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Label classes</h3>
+            <p>
+              Label classes of cusps are reconstructed from the prime-strip and carry an
+              <span class="math">F_l</span>-torsor structure together with a canonical
+              class determined by the initial cusp datum.
+            </p>
+          </div>
+          <div class="card">
+            <h3>D-NF bridge</h3>
+            <p>
+              A D-NF bridge is a poly-morphism from a capsule of D-prime-strips to a
+              number-field side D-prime-strip. It tracks the number-field component of a
+              bridge without conflating it with theta evaluation.
+            </p>
+          </div>
+          <div class="card">
+            <h3>D-Theta bridge</h3>
+            <p>
+              A D-Theta bridge is a poly-morphism from a capsule of D-prime-strips to a
+              theta-side D-prime-strip. At bad places it transports the label information
+              used later by theta-value and Gaussian constructions.
+            </p>
+          </div>
+          <div class="card">
+            <h3>D-ThetaNF theater</h3>
+            <p>
+              A D-ThetaNF-Hodge theater combines compatible D-NF and D-Theta bridges
+              over the same capsule. This compatibility is an early instance of the
+              "same interface, different permitted histories" discipline.
+            </p>
+          </div>
+        </div>
+        <div class="callout">
+          Formalization checkpoint: a Lean model should distinguish the strip object,
+          the mono-analyticized strip, the capsule index set, and the two bridge
+          directions. Collapsing these loses exactly the bookkeeping needed later in the
+          log-theta lattice.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 4.1 and Definition 4.6</a>
+          <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Definition 1.1</a>
+          Related: <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#corollary-312">Corollary 3.12</a>
         </div>
       </section>
 
