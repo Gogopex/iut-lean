@@ -508,6 +508,7 @@
         <a href="#hoshi-introduction-route">Hoshi introduction route</a>
         <a href="#iut-i-notation-primitives">IUT I notation primitives</a>
         <a href="#iut-i-atlas">IUT I atlas</a>
+        <a href="#iut-i-orbicurve-cover-package">IUT I orbicurve covers 1</a>
         <a href="#iut-ii-atlas">IUT II atlas</a>
         <a href="#iut-iii-atlas">IUT III atlas</a>
         <a href="#iut-iv-atlas">IUT IV atlas</a>
@@ -4157,6 +4158,245 @@
           <a href="#theta-log-links">theta/log links</a>
           <a href="#anabelian-background">anabelian background</a>
           <a href="#species-mutations">species and mutations</a>
+        </div>
+      </section>
+
+      <section id="iut-i-orbicurve-cover-package">
+        <h2>IUT I Section 1: Orbicurve Cover Package</h2>
+        <p class="lede">
+          IUT I begins by fixing a cyclic covering package attached to a once-punctured
+          elliptic curve and a distinguished cusp. The point is not only to have
+          curves, but to have coverings, quotient orbicurves, cusp labels, and
+          fundamental groups that can later be reconstructed group-theoretically.
+        </p>
+
+        <div class="diagram fit" aria-label="IUT I Section 1 orbicurve covering package">
+          <div class="diagramHeader">
+            <strong>Section 1 Source Package</strong>
+            <span>cyclic covers, quotient orbicurves, cusps, and reconstruction</span>
+          </div>
+          <svg viewBox="0 0 1120 620" role="img">
+            <defs>
+              <marker id="arrowIutIOrb" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="70" y="62" width="230" height="88"></rect>
+            <text class="nodeTitle" x="185" y="94" text-anchor="middle">elliptic input</text>
+            <text class="tinyText" x="185" y="118" text-anchor="middle">X over k, cusp epsilon</text>
+            <text class="tinyText" x="185" y="136" text-anchor="middle">prime ell and ordered labels</text>
+
+            <rect class="nodeBox green" x="445" y="62" width="230" height="88"></rect>
+            <text class="nodeTitle" x="560" y="94" text-anchor="middle">cyclic covers</text>
+            <text class="tinyText" x="560" y="118" text-anchor="middle">X-arrow, C-arrow</text>
+            <text class="tinyText" x="560" y="136" text-anchor="middle">Galois groups Z/2ellZ, Z/ellZ</text>
+
+            <rect class="nodeBox gold" x="820" y="62" width="230" height="88"></rect>
+            <text class="nodeTitle" x="935" y="94" text-anchor="middle">orbicurve types</text>
+            <text class="tinyText" x="935" y="118" text-anchor="middle">(1,ell-tors arrow)</text>
+            <text class="tinyText" x="935" y="136" text-anchor="middle">and plus-minus version</text>
+
+            <rect class="nodeBox violet" x="165" y="300" width="250" height="94"></rect>
+            <text class="nodeTitle" x="290" y="332" text-anchor="middle">fundamental groups</text>
+            <text class="tinyText" x="290" y="356" text-anchor="middle">Pi_X-arrow, Pi_C-arrow</text>
+            <text class="tinyText" x="290" y="374" text-anchor="middle">Delta_X, Delta_C, cusps</text>
+
+            <rect class="nodeBox red" x="516" y="300" width="250" height="94"></rect>
+            <text class="nodeTitle" x="641" y="332" text-anchor="middle">Corollary 1.2</text>
+            <text class="tinyText" x="641" y="356" text-anchor="middle">functorial group reconstruction</text>
+            <text class="tinyText" x="641" y="374" text-anchor="middle">inside automorphism groups</text>
+
+            <rect class="nodeBox blue" x="335" y="476" width="450" height="82"></rect>
+            <text class="nodeTitle" x="560" y="506" text-anchor="middle">cusp/decomposition recognizers</text>
+            <text class="tinyText" x="560" y="530" text-anchor="middle">Remark 1.2.2 repairs group-theoretic cusp algorithms</text>
+            <text class="tinyText" x="560" y="548" text-anchor="middle">Remark 1.2.3 repairs related combinatorial graph-cover arguments</text>
+
+            <path d="M302 106 H443" class="edge blue" marker-end="url(#arrowIutIOrb)"></path>
+            <path d="M677 106 H818" class="edge green" marker-end="url(#arrowIutIOrb)"></path>
+            <path d="M560 152 C538 222 378 244 302 298" class="edge gold" marker-end="url(#arrowIutIOrb)"></path>
+            <path d="M416 347 H514" class="edge violet" marker-end="url(#arrowIutIOrb)"></path>
+            <path d="M641 396 C624 436 594 454 574 474" class="edge red" marker-end="url(#arrowIutIOrb)"></path>
+          </svg>
+        </div>
+
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Construction or statement</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Setup before Definition 1.1</td>
+            <td>
+              Starting from a hyperbolic orbicurve built from a once-punctured elliptic
+              curve, the paper forms finite etale cyclic coverings and quotient
+              orbicurves. The displayed covering diagram has Galois groups
+              <span class="math">Z/ell Z</span>, <span class="math">Z/2Z</span>, and
+              <span class="math">Z/2ell Z</span> in the indicated layers.
+            </td>
+            <td>
+              The base curve data carries a rigid cyclic-cover hierarchy before theta
+              data is packaged.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 1.1</td>
+            <td>
+              Defines hyperbolic orbicurves of type
+              <span class="math">(1,ell-tors arrow)</span> and
+              <span class="math">(1,ell-tors arrow)^{±}</span> by arising, up to
+              isomorphism, from the constructed <span class="math">X-arrow</span> or
+              <span class="math">C-arrow</span> package.
+            </td>
+            <td>
+              These are source-defined curve types, not informal labels for arbitrary
+              elliptic-curve covers.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.1.1</td>
+            <td>
+              The arrow notation records ordered archimedean labels
+              <span class="math">1,2,...</span> determined by the distinguished
+              <span class="math">epsilon</span> on the relevant plus-minus orbits.
+            </td>
+            <td>
+              Label order enters already at the orbicurve-cover layer; later label
+              discipline is not introduced only at Gaussian or log-theta stages.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.1.2</td>
+            <td>
+              The constructed <span class="math">X-arrow</span> and
+              <span class="math">C-arrow</span> are determined, up to
+              <span class="math">k</span>-isomorphism, by
+              <span class="math">(X/k, C, epsilon)</span>.
+            </td>
+            <td>
+              The cover package is canonical relative to the chosen source data.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 1.2</td>
+            <td>
+              For <span class="math">k</span> an NF or MLF, there is a functorial
+              group-theoretic algorithm to reconstruct the indicated fundamental groups,
+              together with cusp decomposition-group conjugacy classes, from the
+              top-level group. The reconstructed groups are viewed as subgroups of the
+              relevant automorphism group.
+            </td>
+            <td>
+              The later anabelian interface has an explicit reconstruction theorem
+              behind it: groups and cusp classes are recovered from group structure.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.2.1</td>
+            <td>
+              The automorphism groups of the constructed covers identify with the
+              corresponding cyclic Galois groups.
+            </td>
+            <td>
+              The cover automorphism data is exactly the cyclic symmetry data used in
+              the package.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.2.2</td>
+            <td>
+              Corrects background cusp-reconstruction algorithms by characterizing cusp
+              inertia through cyclic pro-<span class="math">ell</span> coverings that
+              are totally ramified at a cusp.
+            </td>
+            <td>
+              Cusp recovery requires the repaired total-ramification test, not a vague
+              assertion that cusps are visible.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.2.3</td>
+            <td>
+              Repairs related combinatorial anabelian graph-cover arguments, including
+              characterizations of cuspidal and nodal edge-like subgroups and verticial
+              subgroups by ramification properties.
+            </td>
+            <td>
+              The graph-of-anabelioids input to tempered covering theory relies on
+              corrected recognizers for cusps, nodes, and vertices.
+            </td>
+          </tr>
+        </table>
+
+        <div class="grid3">
+          <div class="card" id="cyclic-orbicurve-cover-hierarchy">
+            <h3>Cyclic cover hierarchy</h3>
+            <p>
+              Section 1 organizes the elliptic curve, its quotient orbicurve, and cyclic
+              covers into a hierarchy whose Galois groups include
+              <span class="math">Z/ell Z</span>, <span class="math">Z/2Z</span>, and
+              <span class="math">Z/2ell Z</span>.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §1</span><span class="tag">cyclic covers</span></div>
+          </div>
+          <div class="card" id="ordered-archimedean-cusp-labels">
+            <h3>Ordered cusp labels</h3>
+            <p>
+              The arrow in the notation records ordered labels determined by the chosen
+              cusp data. This is an early source of the label discipline that later
+              appears in processions and theta-value labels.
+            </p>
+            <div class="tagRow"><span class="tag gold">Remark 1.1.1</span><span class="tag">labels</span></div>
+          </div>
+          <div class="card" id="group-theoretic-cover-reconstruction">
+            <h3>Group-theoretic reconstruction</h3>
+            <p>
+              Corollary 1.2 reconstructs the lower fundamental groups and cusp
+              decomposition classes from the top group, functorially with respect to
+              topological-group isomorphisms.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 1.2</span><span class="tag">anabelian</span></div>
+          </div>
+          <div class="card" id="cusp-inertia-total-ramification-test">
+            <h3>Cusp inertia test</h3>
+            <p>
+              Remark 1.2.2 repairs the cusp algorithm by using cyclic coverings whose
+              degree-<span class="math">ell</span> quotient is totally ramified at a
+              cusp. The total-ramification condition is then group-theoretic.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 1.2.2</span><span class="tag">repair</span></div>
+          </div>
+          <div class="card" id="comb-gc-edge-recognizers">
+            <h3>Edge and vertex recognizers</h3>
+            <p>
+              Remark 1.2.3 repairs the combinatorial graph-cover background by replacing
+              several informal descent and ramification claims with explicit
+              group-theoretic characterizations of cuspidal, nodal, and verticial data.
+            </p>
+            <div class="tagRow"><span class="tag red">Remark 1.2.3</span><span class="tag">CombGC</span></div>
+          </div>
+          <div class="card" id="section-one-formalization-duty">
+            <h3>Formalization duty</h3>
+            <p>
+              A faithful formalization should eventually expose cyclic cover maps,
+              Galois group identifications, cusp decomposition classes, and repaired
+              total-ramification recognizers. A bare record saying that the cover exists
+              would miss the Section 1 content used downstream.
+            </p>
+            <div class="tagRow"><span class="tag violet">Lean target</span><span class="tag">source interface</span></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          The role of this page is foundational: it records the first anabelian
+          reconstruction mechanism in the series. Later Hodge theaters should be read as
+          carrying this repaired curve/cover/cusp recognition layer, not as untyped
+          copies of elliptic-curve data.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, §1</a>
+          Related: <a href="#anabelian-background">anabelian background</a>
+          <a href="#iut-i-atlas">IUT I atlas</a>
+          <a href="#tempered-covering-complements">tempered covering complements</a>
+          <a href="#initial-theta-data">initial theta data</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
         </div>
       </section>
 
