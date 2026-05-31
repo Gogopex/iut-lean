@@ -331,13 +331,18 @@
       display: block;
       width: 100%;
       max-width: 100%;
-      min-width: 720px;
+      min-width: 0;
       margin: 16px 0;
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow-x: auto;
       box-shadow: var(--shadow);
+    }
+    table > tbody {
+      display: table;
+      width: 100%;
+      min-width: 720px;
     }
     th, td {
       border-bottom: 1px solid var(--line);
@@ -443,7 +448,6 @@
       .hero p { font-size: 1rem; }
       .heroActions { flex-direction: column; align-items: stretch; }
       .button { text-align: center; }
-      table { display: block; overflow-x: auto; }
     }
   </style>
 </head>
@@ -835,9 +839,14 @@
               <a href="#gaussian-value-profiles">Gaussian value-profiles</a>,
               <a href="#symmetrizing-isomorphisms">symmetrizing isomorphisms</a>,
               <a href="#global-gaussian-frobenioids">global Gaussian Frobenioids</a>,
+              <a href="#kummer-frobenioid-structures">Kummer Frobenioid structures</a>,
+              <a href="#f-times-mu-prime-strip">F×μ-prime-strip</a>,
+              <a href="#constant-prime-strips">constant prime-strips</a>,
+              <a href="#theta-gaussian-prime-strips">theta/Gaussian prime-strips</a>,
               <a href="#theta-xmu-link">Theta×μ link</a>,
               <a href="#theta-xmu-gau-link">Theta×μ-gau link</a>,
-              <a href="#coric-f-prime-strip">coric F-prime-strip</a>
+              <a href="#coric-f-prime-strip">coric F-prime-strip</a>,
+              <a href="#value-group-distortion">value-group distortion</a>
             </td>
             <td>IUT II, Section 4</td>
           </tr>
@@ -1030,22 +1039,28 @@
           <div class="card" id="theta-xmu-link">
             <h3>Theta×μ link</h3>
             <p>
-              The Theta×μ link is the F⊢×μ-prime-strip comparison produced from
-              theta-environment data in IUT II Corollary 4.10.
+              The Theta×μ link is the full poly-isomorphism
+              <span class="math">F×μ_env -> F×μ_△</span> of IUT II Corollary
+              4.10(iii). It is obtained by functorially upgrading a nonempty set of
+              isomorphisms of F-prime-strips to isomorphisms of F×μ-prime-strips.
             </p>
           </div>
           <div class="card" id="theta-xmu-gau-link">
             <h3>Theta×μ-gau link</h3>
             <p>
-              The Gaussian version of the theta link is the link ultimately emphasized
-              in the later log-theta-lattice route.
+              The Gaussian version is the full poly-isomorphism
+              <span class="math">F×μ_gau -> F×μ_△</span>. Corollary 4.10 treats
+              it parallel to the Theta×μ link, while Remark 4.10.2 explains why the
+              later papers mainly use its enhanced descendants.
             </p>
           </div>
           <div class="card" id="coric-f-prime-strip">
             <h3>Coric F-prime-strip</h3>
             <p>
-              Coric F-prime-strip data is invariant under the allowed theta/Gaussian
-              link comparison after passage to the weakened F⊢×μ interface.
+              Coric <span class="math">F⊢×μ</span>-prime-strip data is invariant
+              under both theta-link variants. Corollary 4.10(iv) identifies
+              <span class="math">F⊢×μ_△</span> across theaters and then induces
+              the corresponding <span class="math">D⊢_△</span> poly-isomorphism.
             </p>
           </div>
           <div class="card" id="multiradial-theta-monoids">
@@ -3405,6 +3420,119 @@
           stage by another.
         </div>
 
+        <table>
+          <tr>
+            <th>IUT II §4 source item</th>
+            <th>Object or link</th>
+            <th>Formal meaning for the wiki</th>
+          </tr>
+          <tr>
+            <td>Definition 4.9(i)</td>
+            <td>
+              <span class="math">×</span>- and <span class="math">×μ</span>-Kummer
+              structures on a Frobenioid, expressed as orbits of isomorphisms
+              <span class="math">O×(G) -> O×(A)</span> and
+              <span class="math">O×μ(G) -> O×μ(A)</span>.
+            </td>
+            <td>
+              This fixes the unit-quotient interface used later by theta links.
+              <span class="math">×</span>-Kummer structures are unique; a
+              <span class="math">×μ</span>-Kummer structure is equivalently the
+              system of invariant submodules <span class="math">I_H^κ(A)</span>.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 4.9(ii)-(vi)</td>
+            <td>
+              From an <span class="math">F⊢</span>-prime-strip, construct local
+              <span class="math">F⊢×</span>, <span class="math">F⊢×μ</span>, and
+              <span class="math">F⊢ ×μ</span> data at bad, good nonarchimedean, and
+              archimedean places.
+            </td>
+            <td>
+              The construction is place-sensitive: bad places use the
+              <span class="math">2l</span>-torsion quotient generated by splittings,
+              good nonarchimedean places use the splitting image, and archimedean
+              places use an inductive system of torsion quotients.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 4.9(vii)-(viii)</td>
+            <td>
+              <span class="math">F⊢×μ</span>-prime-strips and
+              <span class="math">F×μ</span>-prime-strips, including the pilot object
+              of negative arithmetic degree determined by the bad-place generators.
+            </td>
+            <td>
+              This is the precise object class on which the modified theta links act.
+              It is stronger than a bare coric category but weaker than preservation
+              of the full original Frobenioid.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 4.10(i)</td>
+            <td>
+              Constant prime-strips <span class="math">F_△</span>, naturally
+              identified with <span class="math">Fmod</span>.
+            </td>
+            <td>
+              The target side of the link is the constant/model q-parameter
+              prime-strip, not a new unrelated global object.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 4.10(ii)</td>
+            <td>
+              Theta and Gaussian prime-strips <span class="math">F_env</span> and
+              <span class="math">F_gau</span>, naturally identified with
+              <span class="math">Ftht</span> and related by evaluation.
+            </td>
+            <td>
+              The Gaussian side is produced from the theta side by the evaluation
+              isomorphism before the <span class="math">F×μ</span> upgrade.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 4.10(iii)</td>
+            <td>
+              Full poly-isomorphisms
+              <span class="math">F×μ_env -> F×μ_△</span> and
+              <span class="math">F×μ_gau -> F×μ_△</span>.
+            </td>
+            <td>
+              These are the Theta×μ and Theta×μ-gau links. Their definition depends on
+              functorial passage from F-prime-strip isomorphisms to
+              <span class="math">F×μ</span>-prime-strip isomorphisms.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 4.10(iv)-(v)</td>
+            <td>
+              Coric invariants <span class="math">F⊢×μ_△</span> and
+              <span class="math">D⊢_△</span>, plus associated global realified
+              Frobenioids modulo <span class="math">R&gt;0</span>-orbits.
+            </td>
+            <td>
+              The preserved part is the unit/coric interface. It is exactly the portion
+              later used when log-wall and volume comparisons require common
+              mono-analytic data.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 4.10(vi), Remark 4.10.3</td>
+            <td>
+              Infinite oriented chains of linked theaters and non-preserved
+              divisor/value-group data.
+            </td>
+            <td>
+              Translation by <span class="math">Z</span> is allowed, arbitrary
+              permutation of theaters is not. The value-group distortion is the
+              arithmetic Teichmuller deformation whose log-volume effect is computed
+              later.
+            </td>
+          </tr>
+        </table>
+
         <div class="grid2">
           <div class="card" id="split-theta-monoids">
             <h3>Theta monoids before Gaussian monoids</h3>
@@ -3479,6 +3607,71 @@
             </p>
             <div class="tagRow"><span class="tag green">IUT II §4</span><span class="tag green">Corollary 4.5</span></div>
           </div>
+          <div class="card" id="kummer-frobenioid-structures">
+            <h3>Kummer Frobenioid structures</h3>
+            <p>
+              Definition 4.9 starts from a Frobenioid whose base category is the
+              category of connected finite etale covers of a local or archimedean field.
+              A universal covering pro-object <span class="math">A</span> has
+              automorphism group <span class="math">G</span>; Kummer structures
+              compare group-theoretically reconstructed unit quotients with the units
+              evaluated at <span class="math">A</span>.
+            </p>
+            <p>
+              The <span class="math">×</span>-structure is unique. The
+              <span class="math">×μ</span>-structure keeps torsion quotients and is
+              recorded by the family <span class="math">I_H^κ(A)</span> as
+              <span class="math">H</span> ranges over open subgroups of
+              <span class="math">G</span>.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 4.9(i)</span><span class="tag">Kummer</span></div>
+          </div>
+          <div class="card" id="f-times-mu-prime-strip">
+            <h3>F×μ-prime-strips</h3>
+            <p>
+              Definition 4.9 upgrades an <span class="math">F⊢</span>-prime-strip to
+              the <span class="math">F⊢×μ</span> and <span class="math">F×μ</span>
+              interfaces by keeping unit quotients and controlled splitting data while
+              weakening the original Frobenioid.
+            </p>
+            <p>
+              At bad places the monoid generated by <span class="math">2l</span>-torsion
+              and splitting images supplies the quotient used in
+              the unit/value monoid <span class="math">O×μ(A)</span>. The resulting
+              <span class="math">F×μ</span>-prime-strip also carries a pilot object of
+              negative arithmetic degree.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 4.9(ii)-(viii)</span><span class="tag red">link domain</span></div>
+          </div>
+          <div class="card" id="constant-prime-strips">
+            <h3>Constant prime-strips</h3>
+            <p>
+              Corollary 4.10(i) turns the constant monoid data
+              <span class="math">Psi_cns(F≻)_t</span> into F-prime-strips and then
+              identifies the zero-label and diagonal-label versions. The resulting
+              <span class="math">F_△</span> is naturally identified with
+              <span class="math">Fmod</span>.
+            </p>
+            <p>
+              This is the q-parameter or model side of the modified theta links.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 4.10(i)</span><span class="tag">Fmod</span></div>
+          </div>
+          <div class="card" id="theta-gaussian-prime-strips">
+            <h3>Theta and Gaussian prime-strips</h3>
+            <p>
+              Corollary 4.10(ii) constructs <span class="math">F_env</span> from
+              theta-environment monoids and <span class="math">F_gau</span> from
+              Gaussian monoids, together with global realified Frobenioids and local
+              comparison isomorphisms.
+            </p>
+            <p>
+              The evaluation isomorphism <span class="math">F_env -> F_gau</span>
+              is the source of the Gaussian version of the link, not an extra symmetry
+              imposed after the fact.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 4.10(ii)</span><span class="tag">evaluation</span></div>
+          </div>
           <div class="card">
             <h3>Theta×μ and Theta×μ-gau links</h3>
             <p>
@@ -3495,6 +3688,24 @@
               effect is later computed.
             </p>
             <div class="tagRow"><span class="tag green">Corollary 4.10</span><span class="tag green">Remark 4.10.3</span></div>
+          </div>
+          <div class="card" id="value-group-distortion">
+            <h3>Value-group distortion</h3>
+            <p>
+              Remark 4.10.3 separates preserved unit/coric data from the divisor or
+              value-group part, which is explicitly not preserved by the
+              <span class="math">Theta×μ</span> and <span class="math">Theta×μ_gau</span>
+              links.
+            </p>
+            <p>
+              Mochizuki describes this non-preserved part as the arithmetic Teichmuller
+              deformation. Restricting the Gaussian value-group correspondence to the
+              label <span class="math">j = 1</span> recovers the pivotal distribution,
+              but restriction to proper label subsets generally breaks the relevant
+              <span class="math">F_l^{±}</span> and <span class="math">F_l</span>
+              symmetries.
+            </p>
+            <div class="tagRow"><span class="tag green">Remark 4.10.3</span><span class="tag red">not preserved</span></div>
           </div>
         </div>
         <div class="callout">
