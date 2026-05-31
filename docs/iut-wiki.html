@@ -341,6 +341,10 @@
     }
     th { background: #eeeeea; font-size: 0.86rem; }
     tr:last-child td { border-bottom: none; }
+    th:first-child, td:first-child {
+      width: 52px;
+      white-space: nowrap;
+    }
 
     .sourceCard {
       display: grid;
@@ -447,6 +451,10 @@
         <a href="#home">Home</a>
         <a href="#orientation">Orientation</a>
         <a href="#reading-map">Reading map</a>
+        <a href="#iut-i-atlas">IUT I atlas</a>
+        <a href="#iut-ii-atlas">IUT II atlas</a>
+        <a href="#iut-iii-atlas">IUT III atlas</a>
+        <a href="#iut-iv-atlas">IUT IV atlas</a>
         <h2>Core IUT</h2>
         <a href="#initial-theta-data">Initial theta data</a>
         <a href="#hodge-theaters">Hodge theaters</a>
@@ -643,6 +651,586 @@
             <td>Separate source claims, objections, responses, and formalization targets.</td>
           </tr>
         </table>
+        <div class="diagram" aria-label="IUT paper layer map">
+          <div class="diagramHeader">
+            <strong>Four-paper layer map</strong>
+            <span>what each paper contributes to the route</span>
+          </div>
+          <svg viewBox="0 0 900 360" role="img">
+            <defs>
+              <marker id="arrowPaper" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="35" y="58" width="170" height="78"></rect>
+            <text class="nodeTitle" x="120" y="86" text-anchor="middle">IUT I</text>
+            <text class="smallText" x="120" y="108" text-anchor="middle">initial data</text>
+            <text class="tinyText" x="120" y="126" text-anchor="middle">Hodge theaters, prime strips</text>
+
+            <rect class="nodeBox green" x="255" y="58" width="170" height="78"></rect>
+            <text class="nodeTitle" x="340" y="86" text-anchor="middle">IUT II</text>
+            <text class="smallText" x="340" y="108" text-anchor="middle">theta evaluation</text>
+            <text class="tinyText" x="340" y="126" text-anchor="middle">cyclotomic and Gaussian rigidity</text>
+
+            <rect class="nodeBox gold" x="475" y="58" width="170" height="78"></rect>
+            <text class="nodeTitle" x="560" y="86" text-anchor="middle">IUT III</text>
+            <text class="smallText" x="560" y="108" text-anchor="middle">log-theta lattice</text>
+            <text class="tinyText" x="560" y="126" text-anchor="middle">Theorem 3.11, Corollary 3.12</text>
+
+            <rect class="nodeBox violet" x="695" y="58" width="170" height="78"></rect>
+            <text class="nodeTitle" x="780" y="86" text-anchor="middle">IUT IV</text>
+            <text class="smallText" x="780" y="108" text-anchor="middle">estimates and output</text>
+            <text class="tinyText" x="780" y="126" text-anchor="middle">Szpiro, abc, Vojta route</text>
+
+            <path class="edge blue" d="M205 97 H253" marker-end="url(#arrowPaper)"></path>
+            <path class="edge green" d="M425 97 H473" marker-end="url(#arrowPaper)"></path>
+            <path class="edge gold" d="M645 97 H693" marker-end="url(#arrowPaper)"></path>
+
+            <rect class="nodeBox red" x="250" y="226" width="400" height="74"></rect>
+            <text class="nodeTitle" x="450" y="253" text-anchor="middle">Audit focus: Theorem 3.11 to Corollary 3.12</text>
+            <text class="smallText" x="450" y="275" text-anchor="middle">weakening, indeterminacies, hulls, determinants, log-volume</text>
+
+            <path d="M560 136 C560 176 488 187 455 224" stroke="#9a3f35" stroke-width="1.7" fill="none" marker-end="url(#arrowPaper)"></path>
+            <path d="M780 136 C780 205 650 208 604 226" stroke="#66508a" stroke-width="1.5" fill="none" marker-end="url(#arrowPaper)"></path>
+            <text class="edgeLabel" x="558" y="191" text-anchor="middle">proof-critical corridor</text>
+            <text class="edgeLabel" x="735" y="208" text-anchor="middle">numerical estimates</text>
+          </svg>
+        </div>
+      </section>
+
+      <section id="iut-i-atlas">
+        <h2>IUT I Atlas: From Initial Data to Hodge Theaters</h2>
+        <p class="lede">
+          IUT I builds the starting universe of the theory. Its central move is not yet
+          the Corollary 3.12 comparison, but the construction of typed theaters, prime
+          strips, label classes, and Frobenioid-theoretic links that make later alien
+          comparisons possible.
+        </p>
+        <div class="grid3">
+          <div class="card" id="punctured-elliptic-curves">
+            <h3>Punctured elliptic curves and orbicurves</h3>
+            <p>
+              The curve <span class="math">X_F</span> is a once-punctured elliptic curve
+              over a number field. The quotient by the involution gives the orbicurve
+              <span class="math">C_F</span>. These curves provide the hyperbolic objects
+              whose fundamental groups and coverings are reconstructed anabelianly.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §1</span><span class="tag">initial data</span></div>
+          </div>
+          <div class="card" id="tempered-coverings">
+            <h3>Tempered coverings</h3>
+            <p>
+              IUT I records complements on tempered coverings and decomposition
+              subgroups. This is part of the absolute anabelian input: local and global
+              curve data must be recoverable from group-theoretic information.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §2</span><span class="tag">anabelian</span></div>
+          </div>
+          <div class="card" id="initial-theta-components">
+            <h3>Initial theta data components</h3>
+            <p>
+              Definition 3.1 fixes an algebraic closure <span class="math">Fbar/F</span>,
+              a once-punctured elliptic curve, a prime <span class="math">l >= 5</span>,
+              a cover <span class="math">C_K</span>, valuation sets, bad reduction
+              places, and a distinguished cusp. It also imposes torsion, Galois, and
+              mod-<span class="math">l</span> image conditions.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 3.1</span><span class="tag">input package</span></div>
+          </div>
+          <div class="card" id="bad-good-primes">
+            <h3>Bad and good valuation sets</h3>
+            <p>
+              The distinction between <span class="math">V_bad</span> and
+              <span class="math">V_good</span> controls where multiplicative reduction,
+              theta evaluation, local logarithms, and log-volume estimates behave in
+              different ways.
+            </p>
+            <div class="tagRow"><span class="tag">valuations</span><span class="tag">local data</span></div>
+          </div>
+          <div class="card" id="frobenioids-bad-primes">
+            <h3>Frobenioids at bad primes</h3>
+            <p>
+              At bad nonarchimedean places, Frobenioids encode base-field and
+              divisor-like arithmetic data. Later log-volume estimates read this material
+              through monoids, units, realifications, and Kummer-compatible actions.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §3</span><span class="tag">Frobenioids</span></div>
+          </div>
+          <div class="card" id="realified-frobenioids">
+            <h3>Global realified Frobenioids</h3>
+            <p>
+              Realification passes Frobenioid data into a form where degrees and
+              log-volumes become real-valued. This is one reason the theory must track
+              exactly which real-valued quantity is being compared.
+            </p>
+            <div class="tagRow"><span class="tag">realification</span><span class="tag">degree</span></div>
+          </div>
+          <div class="card" id="theta-hodge-theater-definition">
+            <h3>Theta-Hodge theater</h3>
+            <p>
+              Definition 3.6 defines a theta-Hodge theater as valuation-indexed local
+              categories, Frobenioid/Kummer data, and global modular Frobenioid data
+              attached to the fixed initial theta data. It is a miniature arithmetic
+              world built category-theoretically.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 3.6</span><span class="tag">theater</span></div>
+          </div>
+          <div class="card" id="theta-link">
+            <h3>Theta-link</h3>
+            <p>
+              Corollary 3.7 gives full poly-isomorphisms between theta-Hodge theaters.
+              The point is that the link is Frobenioid-theoretic and does not live inside
+              ordinary ring/scheme morphisms.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 3.7</span><span class="tag">horizontal motion</span></div>
+          </div>
+          <div class="card" id="frobenius-picture">
+            <h3>Frobenius-picture chains</h3>
+            <p>
+              Corollary 3.8 arranges theta-Hodge theaters in integer-indexed chains.
+              These chains are the first visible form of the later lattice-like world of
+              mutually alien but structurally linked copies.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §3</span><span class="tag">chains</span></div>
+          </div>
+          <div class="card" id="d-prime-strip">
+            <h3>D-prime-strips</h3>
+            <p>
+              A holomorphic base-prime-strip is a valuation-indexed collection of local
+              objects. Its mono-analyticization produces a <span class="math">D^|-prime-strip</span>,
+              a recurring interface for stripping away holomorphic history.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 4.1</span><span class="tag">prime strips</span></div>
+          </div>
+          <div class="card" id="label-classes-cusps">
+            <h3>Label classes of cusps</h3>
+            <p>
+              IUT I attaches <span class="math">F_l</span>-torsor structures to cusp
+              label classes. These labels are later essential when Gaussian and
+              <span class="math">j^2</span>-weighted theta data are averaged or descended.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 4.2</span><span class="tag">labels</span></div>
+          </div>
+          <div class="card" id="base-bridges">
+            <h3>Base-NF and base-theta bridges</h3>
+            <p>
+              Model base bridges describe how prime-strips and label classes are moved
+              while preserving only the structures allowed at that stage. They are early
+              prototypes of the later bridge discipline needed for Corollary 3.12.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §4</span><span class="tag">bridges</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          Related: <a href="#initial-theta-data">initial theta data</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#theta-log-links">theta links</a>
+        </div>
+      </section>
+
+      <section id="iut-ii-atlas">
+        <h2>IUT II Atlas: Theta Evaluation and Gaussian Structures</h2>
+        <p class="lede">
+          IUT II supplies the theta-value and Kummer-theoretic machinery that feeds the
+          horizontal direction of the log-theta lattice. It is also where radial/coric
+          language and multiradiality become explicit formal principles.
+        </p>
+        <div class="grid3">
+          <div class="card" id="mono-theta-environment">
+            <h3>Mono-theta environment</h3>
+            <p>
+              A mono-theta environment packages tempered fundamental groups,
+              theta-section data, and cyclotomic subquotients. IUT II studies what can
+              be recovered functorially from this environment.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 1.1</span><span class="tag">MΘ</span></div>
+          </div>
+          <div class="card" id="interior-exterior-cyclotomes">
+            <h3>Interior and exterior cyclotomes</h3>
+            <p>
+              IUT II distinguishes an interior cyclotome from an exterior cyclotome and
+              constructs rigidity isomorphisms between their reductions. This controls
+              how roots of unity and theta sections are compared.
+            </p>
+            <div class="tagRow"><span class="tag">cyclotomes</span><span class="tag">rigidity</span></div>
+          </div>
+          <div class="card" id="radial-coric-data">
+            <h3>Radial and coric data</h3>
+            <p>
+              Radial data is source-side data for a functorial algorithm; coric data is
+              the target data shared after applying the algorithm. Multiradiality means
+              this passage does not lose the relevant rigidity.
+            </p>
+            <div class="tagRow"><span class="tag green">Example 1.7</span><span class="tag">radial/coric</span></div>
+          </div>
+          <div class="card" id="multiradialization">
+            <h3>Tautological multiradialization</h3>
+            <p>
+              When ordinary radial data is not multiradial, IUT II describes a
+              tautological multiradialization by remembering a full poly-isomorphism to
+              the coric target. This clarifies the difference between real multiradiality
+              and multiradiality obtained by adding bookkeeping.
+            </p>
+            <div class="tagRow"><span class="tag">poly-isomorphism</span><span class="tag">rigidity</span></div>
+          </div>
+          <div class="card" id="cyclotomic-rigidity">
+            <h3>Cyclotomic rigidity</h3>
+            <p>
+              Corollary 1.10 proves multiradial mono-theta cyclotomic rigidity
+              isomorphisms. These are central because the later theta-value evaluation
+              depends on comparing cyclotomic structures across alien viewpoints.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 1.10</span><span class="tag">multiradial</span></div>
+          </div>
+          <div class="card" id="constant-multiple-rigidity">
+            <h3>Constant multiple rigidity</h3>
+            <p>
+              Corollary 1.12 gives multiradial constant multiple rigidity. In the series,
+              this rigidity controls the scalar ambiguity that would otherwise undermine
+              theta-value comparison.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 1.12</span><span class="tag">scalar control</span></div>
+          </div>
+          <div class="card" id="galois-theoretic-theta-evaluation">
+            <h3>Galois-theoretic theta evaluation</h3>
+            <p>
+              Section 2 reconstructs theta-evaluation data from Galois-theoretic and
+              mono-theta information, including theta values, theta sections, and the
+              compatibility of torsion labels.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT II §2</span><span class="tag">theta values</span></div>
+          </div>
+          <div class="card" id="theta-monoids">
+            <h3>Theta monoids</h3>
+            <p>
+              Theta monoids are constructed in mono-theta, Frobenioid-theoretic, and
+              group-theoretic forms. Their comparison is one of the mechanisms by which
+              theta values are turned into algebraic objects suitable for transport.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT II §3</span><span class="tag">monoids</span></div>
+          </div>
+          <div class="card" id="gaussian-monoids">
+            <h3>Gaussian monoids</h3>
+            <p>
+              Gaussian monoids encode theta-value distributions with the Gaussian
+              structure that Mochizuki repeatedly compares to the classical Gaussian
+              integral. They prepare the later LGP monoids of IUT III.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 3.5</span><span class="tag">Gaussian</span></div>
+          </div>
+          <div class="card" id="conjugate-synchronization">
+            <h3>Conjugate synchronization</h3>
+            <p>
+              The global Gaussian Frobenioid theory requires synchronization among
+              conjugates. The point is to compare many local pieces without pretending
+              they arise from one fixed holomorphic history.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT II §4</span><span class="tag">global Gaussian</span></div>
+          </div>
+          <div class="card" id="theta-value-labels">
+            <h3>Theta-value labels</h3>
+            <p>
+              The nonzero labels in <span class="math">F_l/{±1}</span> index where theta
+              evaluations are taken. Their square weights later become visible in the
+              Scholze-Stix discussion and in finite formalization models.
+            </p>
+            <div class="tagRow"><span class="tag">labels</span><span class="tag gold">j²</span></div>
+          </div>
+          <div class="card" id="theta-link-source">
+            <h3>Theta link source</h3>
+            <p>
+              The horizontal theta links of IUT III depend on the Hodge-Arakelov
+              theta-evaluation machinery of IUT II. The link is not merely a named arrow;
+              it packages the evaluation of theta functions at torsion points.
+            </p>
+            <div class="tagRow"><span class="tag">theta link</span><span class="tag">Hodge-Arakelov</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a>
+          Related: <a href="#theta-log-links">theta links</a>
+          <a href="#multiradiality">multiradiality</a>
+          <a href="#indeterminacies">indeterminacies</a>
+        </div>
+      </section>
+
+      <section id="iut-iii-atlas">
+        <h2>IUT III Atlas: Log-Theta Lattice to Corollary 3.12</h2>
+        <p class="lede">
+          IUT III is the conceptual culmination of the series. It builds the
+          log-theta lattice, constructs multiradial theta and logarithmic Gaussian
+          procession monoids, introduces log-volume for packets and processions, and
+          states the proof-critical Corollary 3.12 route.
+        </p>
+        <div class="grid3">
+          <div class="card" id="f-prime-strip">
+            <h3>F-prime-strip</h3>
+            <p>
+              An F-prime-strip is the local valuation-indexed setting in which log-links
+              act. It carries Frobenioid, unit, group-action, and log-shell data in the
+              form needed for later Kummer and log-volume arguments.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 1.1</span><span class="tag">prime strip</span></div>
+          </div>
+          <div class="card" id="tautological-log-link">
+            <h3>Tautological log-link</h3>
+            <p>
+              At a nonarchimedean place, the local p-adic logarithm turns the unit part
+              into log-shell data. A log-link from one Frobenioid to another is obtained
+              by composing this tautological log-link with a Frobenioid poly-isomorphism.
+            </p>
+            <div class="tagRow"><span class="tag">local logarithm</span><span class="tag">log-shell</span></div>
+          </div>
+          <div class="card" id="pre-log-shell">
+            <h3>Pre-log-shell and log-shell</h3>
+            <p>
+              The pre-log-shell is built from invariant units; the log-shell is a scaled
+              version of it. Log-shells are codomain-side objects of log-links, determined
+              by selected domain-side unit data.
+            </p>
+            <div class="tagRow"><span class="tag">IUT III §1</span><span class="tag">units</span></div>
+          </div>
+          <div class="card" id="gaussian-log-theta-lattice">
+            <h3>Gaussian log-theta lattice</h3>
+            <p>
+              Definition 1.4 gives non-Gaussian and Gaussian log-theta lattices. The
+              Gaussian version uses <span class="math">Theta^{×μ}_{gau}</span>-links and
+              is the setting for LGP monoids and Corollary 3.12.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 1.4</span><span class="tag">lattice</span></div>
+          </div>
+          <div class="card" id="noncommutative-squares">
+            <h3>Noncommutative squares</h3>
+            <p>
+              IUT III stresses that log-theta lattice squares are far from commutative.
+              Horizontal theta links and vertical log links are incompatible with local
+              ring structures in different ways.
+            </p>
+            <div class="tagRow"><span class="tag red">warning</span><span class="tag">history</span></div>
+          </div>
+          <div class="card" id="vertical-cores">
+            <h3>Vertical cores and coricity</h3>
+            <p>
+              Because horizontal motion obligates subsequent vertical motion, meaningful
+              multiradiality is obtained through objects invariant under vertical
+              translation symmetries. These are the vertical cores.
+            </p>
+            <div class="tagRow"><span class="tag green">Theorem 1.5</span><span class="tag">coric</span></div>
+          </div>
+          <div class="card" id="lgp-monoids">
+            <h3>LGP monoids</h3>
+            <p>
+              Logarithmic Gaussian procession monoids are built by applying local packet
+              Frobenioid constructions through log-links and processions. They are the
+              monoid layer where labels, packets, and Gaussian structure meet.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 3.4</span><span class="tag">LGP</span></div>
+          </div>
+          <div class="card" id="log-kummer-correspondence">
+            <h3>Log-Kummer correspondence</h3>
+            <p>
+              Proposition 3.5 describes a correspondence between units/splitting monoids
+              over a vertical column and actions on invariant log-shell data. It is a key
+              bridge between Kummer theory and log-link compatibility.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 3.5</span><span class="tag">Kummer</span></div>
+          </div>
+          <div class="card" id="processions">
+            <h3>Processions and capsules</h3>
+            <p>
+              A procession organizes capsules indexed by label sets such as
+              <span class="math">S^{±}_{j+1}</span>. Procession-normalized quantities must
+              use compatible averaging across overlapping label components.
+            </p>
+            <div class="tagRow"><span class="tag">capsules</span><span class="tag">averaging</span></div>
+          </div>
+          <div class="card" id="packet-normalization">
+            <h3>Packet-normalized log-volume</h3>
+            <p>
+              Proposition 3.9 normalizes nonarchimedean packet log-volume so multiplying
+              by <span class="math">p_v</span> adds <span class="math">-log(p_v)</span>,
+              and normalizes archimedean radial log-volume so multiplying by
+              <span class="math">e</span> adds <span class="math">1</span>.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 3.9</span><span class="tag">log-volume</span></div>
+          </div>
+          <div class="card" id="procession-normalization">
+            <h3>Procession-normalized log-volume</h3>
+            <p>
+              IUT III explains that arbitrary weighted averages are not allowed here:
+              compatibility with overlapping capsule labels forces the ordinary averaged
+              normalization used by the procession.
+            </p>
+            <div class="tagRow"><span class="tag">normalization</span><span class="tag">labels</span></div>
+          </div>
+          <div class="card" id="holomorphic-hull">
+            <h3>Holomorphic hull</h3>
+            <p>
+              In the Corollary 3.12 route, possible images of a theta-pilot object are
+              placed inside a holomorphic hull. The determinant/log-volume of this hull is
+              where the final signed upper ray is read.
+            </p>
+            <div class="tagRow"><span class="tag">Step (xi)</span><span class="tag">hull</span></div>
+          </div>
+          <div class="card" id="upper-semi-compatibility">
+            <h3>Upper semi-compatibility</h3>
+            <p>
+              The third indeterminacy supplies an upper-semi comparison rather than
+              equality. This directionality is essential for any faithful formalization of
+              the Theorem 3.11 to Corollary 3.12 route.
+            </p>
+            <div class="tagRow"><span class="tag red">Ind3</span><span class="tag">one-sided</span></div>
+          </div>
+          <div class="card" id="theta-pilot-q-pilot">
+            <h3>Theta-pilot and q-pilot</h3>
+            <p>
+              The theta-pilot and q-pilot are compared only after passing through the
+              allowed weakening, hull, determinant, log-volume, and real-line charting
+              operations. Treating them as already living in one concrete history is the
+              wrong interface.
+            </p>
+            <div class="tagRow"><span class="tag">pilots</span><span class="tag">comparison</span></div>
+          </div>
+          <div class="card" id="remark-3122">
+            <h3>Remark 3.12.2</h3>
+            <p>
+              Remark 3.12.2 is a guide to the intended weakening of data, the distinction
+              between q/theta labels, and the asymmetry of columns. It is an important
+              checkpoint for formalization decisions around the disputed passage.
+            </p>
+            <div class="tagRow"><span class="tag gold">Remark 3.12.2</span><span class="tag">audit point</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III</a>
+          Related: <a href="#log-theta-lattice">log-theta lattice</a>
+          <a href="#corollary-312">Corollary 3.12</a>
+          <a href="#dispute">dispute</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-atlas">
+        <h2>IUT IV Atlas: Estimates, Diophantine Output, and Species</h2>
+        <p class="lede">
+          IUT IV turns the log-volume machinery into Diophantine consequences and then
+          gives a formal language for inter-universal movement. It is both the application
+          paper and the foundational paper of the four-part series.
+        </p>
+        <div class="grid3">
+          <div class="card" id="multiple-tensor-products">
+            <h3>Multiple tensor products and differents</h3>
+            <p>
+              Proposition 1.1 estimates normalizations of tensor products of local rings
+              via different ideals. These estimates feed the explicit local log-volume
+              bounds for theta-pilot objects.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 1.1</span><span class="tag">local fields</span></div>
+          </div>
+          <div class="card" id="nonarchimedean-log-volume-estimates">
+            <h3>Nonarchimedean log-volume estimates</h3>
+            <p>
+              IUT IV makes the nonarchimedean estimates explicit by combining local
+              different bounds, p-adic logarithms, and the normalization conventions from
+              IUT III.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT IV §1</span><span class="tag">p-adic</span></div>
+          </div>
+          <div class="card" id="archimedean-metric-estimates">
+            <h3>Archimedean metric estimates</h3>
+            <p>
+              Archimedean estimates use radial log-volume and Hermitian metric behavior.
+              They are needed so the global log-volume bound treats all valuation types.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT IV §1</span><span class="tag">archimedean</span></div>
+          </div>
+          <div class="card" id="weighted-averages">
+            <h3>Weighted averages</h3>
+            <p>
+              Proposition 1.7 supplies elementary weighted-average tools. These are used
+              when translating local bounds and label-indexed data into global estimates.
+            </p>
+            <div class="tagRow"><span class="tag green">Proposition 1.7</span><span class="tag">averaging</span></div>
+          </div>
+          <div class="card" id="theta-pilot-log-volume-estimate">
+            <h3>Theta-pilot log-volume estimate</h3>
+            <p>
+              Theorem 1.10 gives explicit log-volume estimates for theta-pilot objects in
+              the situation of IUT III Corollary 3.12. It is the bridge from the abstract
+              corridor to numerical inequalities.
+            </p>
+            <div class="tagRow"><span class="tag green">Theorem 1.10</span><span class="tag">theta-pilot</span></div>
+          </div>
+          <div class="card" id="tripodal-field">
+            <h3>Tripodal intermediate field</h3>
+            <p>
+              The field <span class="math">F_tpd</span> is obtained by adjoining the
+              2-torsion data of a Legendre model. It is used in IUT IV to organize
+              suitable initial theta data for Diophantine applications.
+            </p>
+            <div class="tagRow"><span class="tag">F_tpd</span><span class="tag">Legendre</span></div>
+          </div>
+          <div class="card" id="suitable-initial-theta-data">
+            <h3>Suitable initial theta data</h3>
+            <p>
+              Corollary 2.2 constructs initial theta data from points on the thrice
+              punctured projective line, outside an exceptional finite set, with controlled
+              q-parameter and height behavior.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 2.2</span><span class="tag">application input</span></div>
+          </div>
+          <div class="card" id="diophantine-inequalities">
+            <h3>Diophantine inequalities</h3>
+            <p>
+              Corollary 2.3 applies the log-volume estimates to Vojta-type inequalities
+              for hyperbolic curves; this is the route by which the series claims abc and
+              Szpiro-type consequences.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 2.3</span><span class="tag">Vojta/abc</span></div>
+          </div>
+          <div class="card" id="species">
+            <h3>Species</h3>
+            <p>
+              A species is a type of mathematical object specified by set-theoretic
+              formulas, not by one fixed set-theoretic realization. This is Mochizuki's
+              formal language for inter-universal movement.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 3.1</span><span class="tag">foundations</span></div>
+          </div>
+          <div class="card" id="mutation">
+            <h3>Mutation</h3>
+            <p>
+              A mutation sends objects and morphisms of one species to another by
+              formulas. Mutation histories organize sequences of such changes along an
+              oriented graph.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 3.3</span><span class="tag">species</span></div>
+          </div>
+          <div class="card" id="model-free-object">
+            <h3>Model-free object</h3>
+            <p>
+              A model-free specimen is described independently of the ZFC model in which
+              it is interpreted. This explains how the word "inter-universal" is tied to
+              rules and formulas rather than to one ambient universe.
+            </p>
+            <div class="tagRow"><span class="tag">ZFCG</span><span class="tag">universes</span></div>
+          </div>
+          <div class="card" id="set-theoretic-copies">
+            <h3>Set-theoretic copies</h3>
+            <p>
+              IUT IV's foundational section is relevant to the dispute because it explains
+              why distinct copies and mutation histories are not meant to be identified
+              simply because they have isomorphic ordinary output.
+            </p>
+            <div class="tagRow"><span class="tag red">copy discipline</span><span class="tag">history</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV</a>
+          Related: <a href="#iut-iv">IUT IV consequences</a>
+          <a href="#formalization">formalization</a>
+          <a href="#dispute">dispute</a>
+        </div>
       </section>
 
       <section id="initial-theta-data">
