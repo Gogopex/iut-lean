@@ -554,6 +554,7 @@
         <a href="#concept-index">Concept index</a>
         <a href="#anabelian-background">Anabelian background</a>
         <a href="#collas-category-perspective">Collas category view</a>
+        <a href="#collas-current-anabelian-work">Collas current anabelian work</a>
         <a href="#gt-species-perspective">GT species perspective</a>
         <a href="#hoshi-introduction-route">Hoshi introduction route</a>
         <a href="#iut-i-notation-primitives">IUT I notation primitives</a>
@@ -1875,7 +1876,8 @@
               <a href="#collas-category-perspective">Collas category view</a>,
               <a href="#collas-categorification-diophantine">categorification of a Diophantine problem</a>,
               <a href="#collas-hodge-synchronization">Hodge-theater synchronization</a>,
-              <a href="#collas-indeterminacies">Collas indeterminacy map</a>
+              <a href="#collas-indeterminacies">Collas indeterminacy map</a>,
+              <a href="#collas-current-anabelian-work">current anabelian papers</a>
             </td>
             <td>Collas, anabelian overview</td>
           </tr>
@@ -2869,6 +2871,136 @@
           <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
           <a href="#projective-line-gluing-analogy">projective-line gluing</a>
           <a href="#essential-logical-structure">logical structure</a>
+        </div>
+      </section>
+
+      <section id="collas-current-anabelian-work">
+        <h2>Collas Current Anabelian Work</h2>
+        <p class="lede">
+          Collas' recent papers are useful context for the wiki because they explain the
+          anabelian and category-theoretic environment in which IUT and LANA sit. They
+          should be read as orientation and adjacent reconstruction work: source
+          definitions for IUT still come from Mochizuki's IUT I-IV and related official
+          notes.
+        </p>
+        <div class="diagram" aria-label="Collas current anabelian work map">
+          <div class="diagramHeader">
+            <strong>Current anabelian route</strong>
+            <span>from symmetry reconstruction to IUT context</span>
+          </div>
+          <svg viewBox="0 0 940 400" role="img">
+            <defs>
+              <marker id="arrowCollasCurrent" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="58" y="72" width="190" height="82"></rect>
+            <text class="nodeTitle" x="153" y="102" text-anchor="middle">symmetries</text>
+            <text class="tinyText" x="153" y="126" text-anchor="middle">reconstruction from groups</text>
+            <text class="tinyText" x="153" y="144" text-anchor="middle">CMY 2025</text>
+
+            <rect class="nodeBox green" x="330" y="72" width="190" height="82"></rect>
+            <text class="nodeTitle" x="425" y="102" text-anchor="middle">GT/anabelian bridge</text>
+            <text class="tinyText" x="425" y="126" text-anchor="middle">braids, mapping classes</text>
+            <text class="tinyText" x="425" y="144" text-anchor="middle">Collas 2026</text>
+
+            <rect class="nodeBox gold" x="602" y="72" width="190" height="82"></rect>
+            <text class="nodeTitle" x="697" y="102" text-anchor="middle">DM curves</text>
+            <text class="tinyText" x="697" y="126" text-anchor="middle">stack inertia and quotients</text>
+            <text class="tinyText" x="697" y="144" text-anchor="middle">CPY 2026</text>
+
+            <rect class="nodeBox violet" x="226" y="248" width="220" height="76"></rect>
+            <text class="nodeTitle" x="336" y="276" text-anchor="middle">IUT orientation</text>
+            <text class="tinyText" x="336" y="298" text-anchor="middle">monoids, Hodge theaters, species</text>
+
+            <rect class="nodeBox red" x="520" y="248" width="220" height="76"></rect>
+            <text class="nodeTitle" x="630" y="276" text-anchor="middle">LANA substrate</text>
+            <text class="tinyText" x="630" y="298" text-anchor="middle">anabelian Lean library first</text>
+
+            <path class="edge blue" d="M248 113 H328" marker-end="url(#arrowCollasCurrent)"></path>
+            <path class="edge green" d="M520 113 H600" marker-end="url(#arrowCollasCurrent)"></path>
+            <path class="edge violet" d="M425 154 C410 202 366 218 346 246" marker-end="url(#arrowCollasCurrent)"></path>
+            <path class="edge red" d="M697 154 C700 208 652 218 636 246" marker-end="url(#arrowCollasCurrent)"></path>
+            <path class="edge green" d="M520 286 H448" marker-end="url(#arrowCollasCurrent)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Paper</th><th>Main content</th><th>Use in this wiki</th></tr>
+          <tr>
+            <td>Symmetries of Spaces and Numbers</td>
+            <td>
+              Collas, Murotani, and Yamaguchi introduce anabelian geometry through the
+              question of reconstructing numbers and spaces from their symmetries, moving
+              from Galois theory to etale fundamental groups and current trends.
+            </td>
+            <td>
+              Use as the lowest-barrier entry to the anabelian reconstruction idea behind
+              IUT's source machinery.
+            </td>
+          </tr>
+          <tr>
+            <td>Anabelian Perspectives in GT Theory</td>
+            <td>
+              Collas reviews the interface between braid/mapping-class groups,
+              Galois-Teichmuller theory, moduli spaces of curves, Nakamura-style
+              anabelian geometry, and combinatorial reconstruction of
+              <span class="math">G_Q</span>.
+            </td>
+            <td>
+              Use to explain why GT and IUT are both discussed through algorithmic,
+              group-theoretic reconstruction, while keeping their technical claims
+              separate.
+            </td>
+          </tr>
+          <tr>
+            <td>Anabelian Geometry for Deligne-Mumford Curves</td>
+            <td>
+              Collas, Philip, and Yamaguchi develop reconstruction results for
+              Deligne-Mumford curves, including stack inertia, rigidification,
+              coarsification, and low-step solvable quotient detection.
+            </td>
+            <td>
+              Use as current background for orbicurve and stack-inertia themes relevant
+              to anabelian formalization; do not read it as an IUT 3.12 proof input.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card">
+            <h3>Algorithmic reconstruction</h3>
+            <p>
+              The common thread is not just group comparison, but reconstruction by
+              explicit procedures. This matches the species/mutation emphasis in IUT IV
+              and Mochizuki's formalization report.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Container caution</h3>
+            <p>
+              Collas' GT paper explicitly discusses group-theoretic containers. In this
+              wiki, such containers are orientation tools unless the IUT source supplies
+              the exact comparison and numerical bridge.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Formalization relevance</h3>
+            <p>
+              The Deligne-Mumford curve paper explains why stack inertia and low-step
+              quotient information matter. This is adjacent to LANA's anabelian-library
+              work before direct IUT formalization.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Sources:
+          <a href="papers/collas-murotani-yamaguchi-symmetries-anabelian-geometry.pdf" target="_blank">CMY 2025</a>
+          <a href="papers/collas-anabelian-perspectives-galois-teichmuller.pdf" target="_blank">Collas GT 2026</a>
+          <a href="papers/collas-philip-yamaguchi-anabelian-deligne-mumford-curves-2026.pdf" target="_blank">CPY 2026</a>
+          Related: <a href="#collas-category-perspective">Collas category view</a>
+          <a href="#anabelian-background">anabelian background</a>
+          <a href="#lana">LANA</a>
+          <a href="#species-mutations">species and mutations</a>
         </div>
       </section>
 
