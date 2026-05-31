@@ -70,11 +70,6 @@
       line-height: 1.05;
       letter-spacing: 0;
     }
-    .brand p {
-      margin: 8px 0 18px;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
 
     .searchBox {
       margin: 0 0 16px;
@@ -193,14 +188,16 @@
     }
 
     section {
+      display: none;
       padding: 30px 0 42px;
       border-bottom: 1px solid var(--line);
       scroll-margin-top: 14px;
     }
     section[hidden] { display: none !important; }
-    body:not(.wiki-ready) main section:not(#home) { display: none; }
-    body.wiki-ready main section:not(.active-page) { display: none !important; }
-    body.wiki-ready main section.active-page.hero { display: grid; }
+    main section.active-page,
+    body:not(.wiki-ready) main section#home { display: block; }
+    main section.active-page.hero,
+    body:not(.wiki-ready) main section#home.hero { display: grid; }
     section h2 {
       margin: 0 0 12px;
       font-size: clamp(1.75rem, 3vw, 2.6rem);
@@ -219,7 +216,7 @@
       max-width: 86ch;
     }
 
-    .brand p, nav a, .lede, p, td, th {
+    nav a, .lede, p, td, th {
       overflow-wrap: anywhere;
     }
 
@@ -600,7 +597,7 @@
     </aside>
 
     <main>
-      <section id="home" class="hero">
+      <section id="home" class="hero active-page">
         <div class="heroGrid">
           <div>
             <div class="eyebrow">Inter-universal Teichmuller theory</div>
@@ -2712,6 +2709,14 @@
           designing human-auditable Lean interfaces, but it does not replace the exact
           definitions in IUT I-IV. In the wiki, Collas pages should point back to the
           corresponding Mochizuki source objects whenever a construction becomes formal.
+        </div>
+        <div class="callout green">
+          <strong>Wiki design consequence.</strong> Collas's category-theoretic reading
+          supports treating IUT concepts as separate typed pages rather than as one
+          narrative scroll. Anabelian reconstruction, monoid geometry, Hodge theaters,
+          and species/logical structure are linked as containers and transitions; their
+          source definitions remain on the Mochizuki pages where the formal data is
+          introduced.
         </div>
         <div class="related">
           Sources: <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview</a>
@@ -22451,6 +22456,9 @@
     const filterTargets = Array.from(document.querySelectorAll("[data-filter]"));
     search.addEventListener("input", () => {
       const query = search.value.trim().toLowerCase();
+      navLinks.forEach(link => {
+        link.style.display = !query || link.textContent.toLowerCase().includes(query) ? "" : "none";
+      });
       filterTargets.forEach(el => {
         if (!query) {
           el.style.display = "";
