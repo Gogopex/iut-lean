@@ -540,6 +540,7 @@
         <a href="#mono-theta-environments-ii11">Mono-theta environments 1.1</a>
         <a href="#iut-ii-mono-theta-rigidity-110-112">Mono-theta rigidity 1.10-1.12</a>
         <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation 2</a>
+        <a href="#iut-ii-distinguished-subgraph-263">Distinguished subgraph 2.6.3</a>
         <a href="#tempered-gaussian-monoids-ii3">Tempered Gaussian monoids 3</a>
         <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioid categories 3.8</a>
         <a href="#good-prime-gaussian-monoids-ii41">Good-prime Gaussian monoids 4.1</a>
@@ -4946,7 +4947,7 @@
           <tr>
             <td>§2</td>
             <td>Galois-theoretic theta evaluation at torsion labels and conjugate synchronization.</td>
-            <td><a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>, <a href="#theta-value-labels">theta-value labels</a></td>
+            <td><a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>, <a href="#iut-ii-distinguished-subgraph-263">distinguished subgraph</a>, <a href="#theta-value-labels">theta-value labels</a></td>
           </tr>
           <tr>
             <td>§3</td>
@@ -11350,9 +11351,210 @@
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a>
           Related: <a href="#mono-theta-environments-ii11">mono-theta environments</a>
+          <a href="#iut-ii-distinguished-subgraph-263">distinguished subgraph</a>
           <a href="#theta-evaluation-kummer-route">theta evaluation route</a>
           <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges</a>
           <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
+        </div>
+      </section>
+
+      <section id="iut-ii-distinguished-subgraph-263">
+        <h2>IUT II Remark 2.6.3: Distinguished Subgraph</h2>
+        <p class="lede">
+          Remark 2.6.3 explains why the theta-value collection used later is not an
+          arbitrary finite sample of labels. Connectedness, the zero-label splitting,
+          independent conjugacy indeterminacy, the averaging quantity
+          <span class="math">||Gamma'||</span>, and the product formula single out the
+          full subgraph <span class="math">Gamma_Ydd</span>.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Remark 2.6.3 distinguished subgraph argument">
+          <div class="diagramHeader">
+            <strong>Subgraph selection argument</strong>
+            <span>from local basepoint discipline to product-formula compatibility</span>
+          </div>
+          <svg viewBox="0 0 1120 610" role="img">
+            <defs>
+              <marker id="arrowSubgraph263" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="60" y="74" width="220" height="86"></rect>
+            <text class="nodeTitle" x="170" y="105" text-anchor="middle">candidate subgraph</text>
+            <text class="tinyText" x="170" y="128" text-anchor="middle">Gamma' in Gamma_Ydd</text>
+            <text class="tinyText" x="170" y="146" text-anchor="middle">vertices in Z</text>
+
+            <rect class="nodeBox green" x="448" y="74" width="224" height="86"></rect>
+            <text class="nodeTitle" x="560" y="105" text-anchor="middle">single basepoint</text>
+            <text class="tinyText" x="560" y="128" text-anchor="middle">Gamma' connected</text>
+            <text class="tinyText" x="560" y="146" text-anchor="middle">Remark 2.6.1</text>
+
+            <rect class="nodeBox gold" x="840" y="74" width="224" height="86"></rect>
+            <text class="nodeTitle" x="952" y="105" text-anchor="middle">zero label retained</text>
+            <text class="tinyText" x="952" y="128" text-anchor="middle">splittings at j = 0</text>
+            <text class="tinyText" x="952" y="146" text-anchor="middle">Corollary 2.6(ii)</text>
+
+            <rect class="nodeBox red" x="174" y="268" width="252" height="94"></rect>
+            <text class="nodeTitle" x="300" y="299" text-anchor="middle">fiber restriction</text>
+            <text class="tinyText" x="300" y="323" text-anchor="middle">cannot isolate one j</text>
+            <text class="tinyText" x="300" y="341" text-anchor="middle">Remark 2.5.2</text>
+
+            <rect class="nodeBox violet" x="566" y="268" width="252" height="94"></rect>
+            <text class="nodeTitle" x="692" y="299" text-anchor="middle">average ||Gamma'||</text>
+            <text class="tinyText" x="692" y="323" text-anchor="middle">monotone, max at l</text>
+            <text class="tinyText" x="692" y="341" text-anchor="middle">Remark 2.6.3(ii)</text>
+
+            <rect class="nodeBox green" x="126" y="468" width="266" height="84"></rect>
+            <text class="nodeTitle" x="259" y="498" text-anchor="middle">product formula test</text>
+            <text class="tinyText" x="259" y="522" text-anchor="middle">exclude multi-element fibers</text>
+            <text class="tinyText" x="259" y="540" text-anchor="middle">Remark 2.6.3(iv)</text>
+
+            <rect class="nodeBox gold" x="720" y="468" width="266" height="84"></rect>
+            <text class="nodeTitle" x="853" y="498" text-anchor="middle">distinguished values</text>
+            <text class="tinyText" x="853" y="522" text-anchor="middle">q_v^{j^2}, j in F_l</text>
+            <text class="tinyText" x="853" y="540" text-anchor="middle">Gamma' = Gamma_Ydd</text>
+
+            <path d="M282 117 H446" class="edge blue" marker-end="url(#arrowSubgraph263)"></path>
+            <path d="M674 117 H838" class="edge green" marker-end="url(#arrowSubgraph263)"></path>
+            <path d="M548 160 C484 206 394 226 320 266" class="edge green" marker-end="url(#arrowSubgraph263)"></path>
+            <path d="M950 162 C920 216 820 244 714 266" class="edge gold" marker-end="url(#arrowSubgraph263)"></path>
+            <path d="M428 315 H564" class="edge red" marker-end="url(#arrowSubgraph263)"></path>
+            <path d="M660 364 C592 414 434 432 280 466" class="edge violet" marker-end="url(#arrowSubgraph263)"></path>
+            <path d="M394 510 H718" class="edge green" marker-end="url(#arrowSubgraph263)"></path>
+            <path d="M784 364 C830 406 850 432 854 466" class="edge violet" marker-end="url(#arrowSubgraph263)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Statement</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Remark 2.6.3(i)</td>
+            <td>
+              A replacement subgraph <span class="math">Gamma'</span> must be
+              connected because the theta evaluation algorithm is performed relative to
+              a single basepoint.
+            </td>
+            <td>
+              A formal model should not allow independent basepoints for independently
+              selected theta labels.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 2.6.3(i)</td>
+            <td>
+              The same <span class="math">Gamma'</span> must contain the vertex labeled
+              <span class="math">0</span>, since the splittings of Corollary 2.6(ii)
+              use the zero-labeled evaluation point.
+            </td>
+            <td>
+              Constant-multiple rigidity and theta-value sampling share the same
+              subgraph constraint.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 2.6.3(ii)</td>
+            <td>
+              Independent conjugacy indeterminacies force selection by fibers over
+              <span class="math">|F_l|</span>: one cannot restrict to a single chosen
+              representative without the other representatives in the same fiber.
+            </td>
+            <td>
+              The label interface must encode fiber-wise indeterminacy, not a free list
+              of evaluation points.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 2.6.3(ii)-(iii)</td>
+            <td>
+              The average <span class="math">||Gamma'||</span> is monotone in the
+              projected label count, reaches its maximum at
+              <span class="math">l</span>, and the infinite case adds no larger value.
+            </td>
+            <td>
+              The later height optimization should refer to the distinguished full
+              label collection, not to an arbitrary truncation.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 2.6.3(iv)-(v)</td>
+            <td>
+              Multi-element fibers are incompatible with globalization by the product
+              formula, so the subgraph <span class="math">Gamma_Ydd</span> is singled
+              out for the collection <span class="math">q_v^{j^2}</span>.
+            </td>
+            <td>
+              The passage from local theta evaluation to global Gaussian Frobenioids
+              must preserve product-formula compatibility as a separate constraint.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="single-basepoint-subgraph-condition-263">
+            <h3>Single-basepoint condition</h3>
+            <p>
+              The connectedness condition is not graph-theoretic decoration. It is the
+              local geometric form of using one fundamental group, one Galois group, and
+              one cyclotome for simultaneous Kummer theory.
+            </p>
+            <div class="tagRow"><span class="tag blue">Rem. 2.6.1</span><span class="tag">connected</span></div>
+          </div>
+          <div class="card" id="zero-vertex-splitting-condition-263">
+            <h3>Zero-vertex condition</h3>
+            <p>
+              Corollary 2.6(ii) identifies zero-labeled theta-value orbits with the
+              identity orbit after quotienting by torsion. Any candidate subgraph for
+              the evaluation collection must retain this zero-labeled reference point.
+            </p>
+            <div class="tagRow"><span class="tag gold">Cor. 2.6(ii)</span><span class="tag">zero label</span></div>
+          </div>
+          <div class="card" id="fiber-indeterminacy-condition-263">
+            <h3>Fiber indeterminacy</h3>
+            <p>
+              The source restriction is fiber-wise over <span class="math">|F_l|</span>.
+              This is how Remark 2.5.2 reappears inside the height-relevant subgraph
+              discussion.
+            </p>
+            <div class="tagRow"><span class="tag red">Rem. 2.5.2</span><span class="tag">fibers</span></div>
+          </div>
+          <div class="card" id="average-gamma-norm-263">
+            <h3>Average <span class="math">||Gamma'||</span></h3>
+            <p>
+              The quantity averages minimum square representatives across projected
+              label classes. Mochizuki uses its monotonicity to justify why the full
+              projected set is optimal for the later height comparison.
+            </p>
+            <div class="tagRow"><span class="tag violet">Rem. 2.6.3(ii)</span><span class="tag">height</span></div>
+          </div>
+          <div class="card" id="product-formula-subgraph-test-263">
+            <h3>Product-formula test</h3>
+            <p>
+              Globalization in IUT II Section 4 imposes product-formula compatibility.
+              This removes the remaining fiber-rich alternatives even when the local
+              average has already reached its maximum.
+            </p>
+            <div class="tagRow"><span class="tag green">Rem. 2.6.3(iv)</span><span class="tag">global</span></div>
+          </div>
+          <div class="card" id="distinguished-theta-value-collection-263">
+            <h3>Distinguished collection</h3>
+            <p>
+              The resulting collection is the full set of values
+              <span class="math">q_v^{j^2}</span> determined by
+              <span class="math">Gamma_Ydd</span>. This is the input later treated as a
+              Gaussian distribution, not an optional choice of sample.
+            </p>
+            <div class="tagRow"><span class="tag gold">Rem. 2.6.3(v)</span><span class="tag">q^{j²}</span></div>
+          </div>
+        </div>
+        <div class="callout violet">
+          Formalization warning: the subgraph argument must carry both local conditions
+          and the later product-formula constraint. A record that only stores a finite
+          list of labels would erase why this collection is distinguished.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 2.6.3</a>
+          Related: <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>
+          <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges</a>
+          <a href="#tempered-gaussian-monoids-ii3">Tempered Gaussian monoids</a>
+          <a href="#global-gaussian-frobenioids-ii45">Global Gaussian Frobenioids</a>
         </div>
       </section>
 
