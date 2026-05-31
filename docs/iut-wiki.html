@@ -525,6 +525,7 @@
         <a href="#mono-theta-environments-ii11">Mono-theta environments 1.1</a>
         <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation 2</a>
         <a href="#tempered-gaussian-monoids-ii3">Tempered Gaussian monoids 3</a>
+        <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioid categories 3.8</a>
         <a href="#theta-evaluation-kummer-route">Theta evaluation route</a>
         <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
         <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
@@ -1493,7 +1494,9 @@
               <a href="#theta-monoids">theta monoids</a>,
               <a href="#tempered-gaussian-monoids-ii3">tempered Gaussian monoids</a>,
               <a href="#kummer-theta-monoid-isomorphisms-33">Kummer theta-monoid isomorphisms</a>,
-              <a href="#multiradial-split-theta-34">multiradial split theta monoids</a>
+              <a href="#multiradial-split-theta-34">multiradial split theta monoids</a>,
+              <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioid categories</a>,
+              <a href="#narrow-mono-theta-bridge-364">narrow mono-theta bridge</a>
             </td>
             <td>IUT II, Sections 1-3</td>
           </tr>
@@ -1504,6 +1507,9 @@
               <a href="#tempered-gaussian-monoids-ii3">tempered Gaussian monoids</a>,
               <a href="#value-profiles-35">value profiles</a>,
               <a href="#frobenioid-gaussian-monoids-36">Frobenioid Gaussian monoids</a>,
+              <a href="#group-to-post-anabelian-gaussians-37">group-to-post-anabelian Gaussian monoids</a>,
+              <a href="#local-frobenioids-from-monoids-38">local Frobenioids from monoids</a>,
+              <a href="#conjugate-synchronization-gain-383">conjugate synchronization gain</a>,
               <a href="#gaussian-monoids">Gaussian monoids</a>,
               <a href="#tempered-gaussian-frobenioids">tempered Gaussian Frobenioids</a>,
               <a href="#split-theta-monoids">split theta monoids</a>,
@@ -4517,7 +4523,7 @@
           <tr>
             <td>§3</td>
             <td>Tempered Gaussian Frobenioids: theta monoids, Gaussian monoids, Kummer/Galois comparison, post-anabelian forgetting.</td>
-            <td><a href="#tempered-gaussian-monoids-ii3">Tempered Gaussian monoids</a>, <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>, <a href="#frobenioids-log-shells">Frobenioids/log-shells</a></td>
+            <td><a href="#tempered-gaussian-monoids-ii3">Tempered Gaussian monoids</a>, <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioid categories</a>, <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>, <a href="#frobenioids-log-shells">Frobenioids/log-shells</a></td>
           </tr>
           <tr>
             <td>§4</td>
@@ -10435,6 +10441,314 @@
           <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
           <a href="#theta-log-links">theta/log links</a>
           <a href="#multiradiality">multiradiality</a>
+        </div>
+      </section>
+
+      <section id="gaussian-frobenioid-categories-ii38">
+        <h2>Gaussian Frobenioid Categories in IUT II 3.6-3.8</h2>
+        <p class="lede">
+          After constructing local Gaussian monoids, Mochizuki explains the categorical
+          status of the construction: Kummer theory compares Frobenius-like and
+          etale-like structures, Galois evaluation produces Gaussian monoids, a
+          post-anabelian forgetting step removes the construction history, and
+          Definition 3.8 turns the resulting monoids with group action into local
+          Frobenioids.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Section 3 Frobenioid interpretation and uniradiality">
+          <div class="diagramHeader">
+            <strong>From theta monoids to Frobenioid categories</strong>
+            <span>Remarks 3.6.2-3.8.3 and Definition 3.8</span>
+          </div>
+          <svg viewBox="0 0 1140 620" role="img">
+            <defs>
+              <marker id="arrowGaussFrob38" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox green" x="70" y="70" width="220" height="84"></rect>
+            <text class="nodeTitle" x="180" y="99" text-anchor="middle">Frobenioid theta monoids</text>
+            <text class="tinyText" x="180" y="123" text-anchor="middle">Frobenius-like structures</text>
+            <text class="tinyText" x="180" y="141" text-anchor="middle">theta function side</text>
+
+            <rect class="nodeBox blue" x="460" y="70" width="220" height="84"></rect>
+            <text class="nodeTitle" x="570" y="99" text-anchor="middle">group-theoretic theta monoids</text>
+            <text class="tinyText" x="570" y="123" text-anchor="middle">etale-like structures</text>
+            <text class="tinyText" x="570" y="141" text-anchor="middle">Kummer comparison</text>
+
+            <rect class="nodeBox violet" x="850" y="70" width="220" height="84"></rect>
+            <text class="nodeTitle" x="960" y="99" text-anchor="middle">group-theoretic Gaussian</text>
+            <text class="tinyText" x="960" y="123" text-anchor="middle">Galois evaluation</text>
+            <text class="tinyText" x="960" y="141" text-anchor="middle">theta values</text>
+
+            <rect class="nodeBox gold" x="640" y="238" width="240" height="86"></rect>
+            <text class="nodeTitle" x="760" y="268" text-anchor="middle">post-anabelian Gaussian</text>
+            <text class="tinyText" x="760" y="292" text-anchor="middle">forget construction algorithm</text>
+            <text class="tinyText" x="760" y="310" text-anchor="middle">abstract monoids/Frobenioids</text>
+
+            <rect class="nodeBox red" x="250" y="238" width="240" height="86"></rect>
+            <text class="nodeTitle" x="370" y="268" text-anchor="middle">uniradial warning</text>
+            <text class="tinyText" x="370" y="292" text-anchor="middle">Corollary 3.7(ii)</text>
+            <text class="tinyText" x="370" y="310" text-anchor="middle">fixed later by log-shells</text>
+
+            <rect class="nodeBox blue" x="94" y="430" width="250" height="86"></rect>
+            <text class="nodeTitle" x="219" y="460" text-anchor="middle">F_cns, F_env, F_gau</text>
+            <text class="tinyText" x="219" y="484" text-anchor="middle">local Frobenioids from monoids</text>
+            <text class="tinyText" x="219" y="502" text-anchor="middle">Definition 3.8</text>
+
+            <rect class="nodeBox green" x="446" y="430" width="250" height="86"></rect>
+            <text class="nodeTitle" x="571" y="460" text-anchor="middle">constant and Gaussian distributions</text>
+            <text class="tinyText" x="571" y="484" text-anchor="middle">diagonal and product embeddings</text>
+            <text class="tinyText" x="571" y="502" text-anchor="middle">labels remain synchronized</text>
+
+            <rect class="nodeBox violet" x="798" y="430" width="250" height="86"></rect>
+            <text class="nodeTitle" x="923" y="460" text-anchor="middle">log-wall preparation</text>
+            <text class="tinyText" x="923" y="484" text-anchor="middle">need units and cyclotomes</text>
+            <text class="tinyText" x="923" y="502" text-anchor="middle">Galois orbits are insufficient</text>
+
+            <path d="M292 112 H458" class="edge green" marker-end="url(#arrowGaussFrob38)"></path>
+            <text class="edgeLabel" x="375" y="100" text-anchor="middle">Kummer</text>
+            <path d="M682 112 H848" class="edge blue" marker-end="url(#arrowGaussFrob38)"></path>
+            <text class="edgeLabel" x="765" y="100" text-anchor="middle">Galois evaluation</text>
+            <path d="M940 156 C910 206 850 234 790 246" class="edge violet" marker-end="url(#arrowGaussFrob38)"></path>
+            <text class="edgeLabel" x="930" y="216" text-anchor="middle">forget</text>
+            <path d="M680 281 H492" class="edge red" marker-end="url(#arrowGaussFrob38)"></path>
+            <path d="M370 326 C350 370 292 402 236 428" class="edge red" marker-end="url(#arrowGaussFrob38)"></path>
+            <path d="M760 326 C708 368 638 402 582 428" class="edge gold" marker-end="url(#arrowGaussFrob38)"></path>
+            <path d="M760 326 C812 368 880 402 918 428" class="edge violet" marker-end="url(#arrowGaussFrob38)"></path>
+            <path d="M344 473 H444" class="edge green" marker-end="url(#arrowGaussFrob38)"></path>
+            <path d="M696 473 H796" class="edge violet" marker-end="url(#arrowGaussFrob38)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source item</th><th>Construction or diagnosis</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Remark 3.6.2</td>
+            <td>
+              Figure 3.1 decomposes the route into Kummer comparison, Galois evaluation,
+              and a final post-anabelian forgetting step.
+            </td>
+            <td>
+              The wiki records all three arrows separately; a post-anabelian monoid is
+              meaningful only after the construction path has been exhibited.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.6.2(ii)</td>
+            <td>
+              Etale-like structures are functorial and anabelian-rigid; Frobenius-like
+              monoids are less rigid and therefore can support non-ring/scheme-theoretic
+              filters such as the theta link and log-wall.
+            </td>
+            <td>
+              IUT needs both sides. Treating one side as merely redundant destroys the
+              logic of the comparison.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.6.2(iii)</td>
+            <td>
+              Composing the theta link with Kummer, Galois evaluation, and forgetting
+              gives the distinguished correspondence
+              <span class="math">q_v -> {q_v^(j^2)}</span>.
+            </td>
+            <td>
+              Mochizuki interprets this as an abstract combinatorial Frobenius lifting,
+              not as an arbitrary exponent profile.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.6.3</td>
+            <td>
+              Non-ring/scheme-theoretic filters produce distinct unrelated basepoints.
+              Ordinary Frobenioid <span class="math">N</span>-th power morphisms are
+              milder and only give inner automorphism ambiguity.
+            </td>
+            <td>
+              Basepoint bookkeeping is part of the mathematical content, especially
+              once the log-wall enters in IUT III.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.6.4</td>
+            <td>
+              The mono-theta environment is a narrow bridge between Frobenius-like and
+              etale-like worlds. The first power of the reciprocal theta root is the
+              power that crosses this bridge via cyclotomic rigidity.
+            </td>
+            <td>
+              Arbitrary powers/roots occur in theta and Gaussian monoids, but the
+              bridge used by theta-link comparison is controlled by the first-power
+              Galois evaluation.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 3.7</td>
+            <td>
+              Group-theoretic Gaussian monoids map to post-anabelian Frobenioid
+              Gaussian monoids, but the resulting algorithms depend on cyclotomic
+              rigidity in a way that is only uniradial at this stage.
+            </td>
+            <td>
+              Remark 3.7.1 says IUT III log-shells modify these algorithms to obtain
+              multiradial computation, with mild indeterminacy.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 3.8</td>
+            <td>
+              Monoids with Galois action give local Frobenioids of monoid type
+              <span class="math">Z</span>: constant Frobenioids
+              <span class="math">F_cns</span>, theta Frobenioids
+              <span class="math">F_env</span>, and Gaussian Frobenioids
+              <span class="math">F_gau</span>.
+            </td>
+            <td>
+              This is the precise categorical upgrade from monoid data to local
+              Frobenioid categories used by the global Gaussian layer.
+            </td>
+          </tr>
+          <tr>
+            <td>Remarks 3.8.1-3.8.3</td>
+            <td>
+              Category isomorphisms are isomorphism classes of equivalences; the
+              labeled Frobenioids must be synchronized up to an inner automorphism
+              independent of the label; Galois invariants or Galois orbits are
+              insufficient for Kummer theory through the log-wall.
+            </td>
+            <td>
+              This is the exact place where label synchronization, not label erasure,
+              becomes a necessary condition for later log-wall compatibility.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="kummer-galois-forget-362">
+            <h3>Kummer, Galois, forget</h3>
+            <p>
+              Remark 3.6.2 separates the comparison into three operations: Kummer
+              identifies Frobenius-like theta monoids with etale-like theta monoids,
+              Galois evaluation forms theta values, and forgetting produces
+              post-anabelian abstract monoids.
+            </p>
+            <div class="tagRow"><span class="tag violet">Rem. 3.6.2</span><span class="tag">Fig. 3.1</span></div>
+          </div>
+          <div class="card" id="etale-frobenius-complementarity-362">
+            <h3>Etale/Frobenius complementarity</h3>
+            <p>
+              Etale-like groups carry functoriality and anabelian rigidity; Frobenius-like
+              monoids are less rigid and can therefore host the non-scheme-theoretic
+              filters.
+            </p>
+            <div class="tagRow"><span class="tag blue">Rem. 3.6.2(ii)</span><span class="tag">two sides</span></div>
+          </div>
+          <div class="card" id="abstract-combinatorial-frobenius-lift-362">
+            <h3>Combinatorial Frobenius lift</h3>
+            <p>
+              The correspondence <span class="math">q_v -> {q_v^(j^2)}</span> is
+              described as a homotopy between the identity and a highly
+              non-scheme-theoretic Frobenius-type operation.
+            </p>
+            <div class="tagRow"><span class="tag gold">Rem. 3.6.2(iii)</span><span class="tag">j²</span></div>
+          </div>
+          <div class="card" id="basepoints-non-ring-filters-363">
+            <h3>Basepoints and non-ring filters</h3>
+            <p>
+              Remark 3.6.3 explains that basepoints depend essentially on ring/scheme
+              structure. Across the theta link or log-wall, the basepoints on the two
+              sides are distinct and unrelated.
+            </p>
+            <div class="tagRow"><span class="tag red">Rem. 3.6.3</span><span class="tag">basepoints</span></div>
+          </div>
+          <div class="card" id="narrow-mono-theta-bridge-364">
+            <h3>Narrow mono-theta bridge</h3>
+            <p>
+              Remark 3.6.4 says the mono-theta environment bridges tempered
+              Frobenioids and tempered fundamental groups. For theta-link comparison,
+              the bridge is crossed by the first power of the reciprocal theta root.
+            </p>
+            <div class="tagRow"><span class="tag green">Rem. 3.6.4</span><span class="tag">first power</span></div>
+          </div>
+          <div class="card" id="cyclotome-holomorphic-skeleton-365">
+            <h3>Cyclotome as holomorphic skeleton</h3>
+            <p>
+              Remark 3.6.5 treats cyclotomes as local skeleta of arithmetic holomorphic
+              structures. This explains why cyclotomic rigidity and constant-multiple
+              rigidity act like local uniformization data.
+            </p>
+            <div class="tagRow"><span class="tag blue">Rem. 3.6.5</span><span class="tag">cyclotome</span></div>
+          </div>
+          <div class="card" id="group-to-post-anabelian-gaussians-37">
+            <h3>Group to post-anabelian Gaussian monoids</h3>
+            <p>
+              Corollary 3.7 transports the group-theoretic Gaussian monoids through the
+              mono-theta comparison to Frobenioid-theoretic Gaussian monoids, then
+              records that the resulting algorithms are only uniradial in this form.
+            </p>
+            <div class="tagRow"><span class="tag red">Cor. 3.7</span><span class="tag">uniradial</span></div>
+          </div>
+          <div class="card" id="local-frobenioids-from-monoids-38">
+            <h3>Local Frobenioids from monoids</h3>
+            <p>
+              Definition 3.8 turns constant, theta, and Gaussian monoids with group
+              action into local Frobenioids. Constant versions have divisor monoids
+              isomorphic to <span class="math">Q>=0</span>; theta/Gaussian split
+              versions have divisor monoids isomorphic to <span class="math">N</span>.
+            </p>
+            <div class="tagRow"><span class="tag green">Def. 3.8</span><span class="tag">Frobenioid</span></div>
+          </div>
+          <div class="card" id="gaussian-constant-distributions-38">
+            <h3>Gaussian and constant distributions</h3>
+            <p>
+              Definition 3.8(iii) interprets Gaussian monoids as embeddings into
+              products of labeled constant Frobenioids, while constant distributions are
+              diagonal embeddings.
+            </p>
+            <div class="tagRow"><span class="tag gold">Def. 3.8(iii)</span><span class="tag">distributions</span></div>
+          </div>
+          <div class="card" id="category-isomorphism-label-independence-381">
+            <h3>Label-independent inner ambiguity</h3>
+            <p>
+              Remark 3.8.1 says labeled Frobenioids are determined up to an
+              isomorphism of the identity functor independent of
+              <span class="math">|t|</span>. If this becomes ambiguous, Mochizuki says
+              to use the original monoid formulation.
+            </p>
+            <div class="tagRow"><span class="tag violet">Rem. 3.8.1</span><span class="tag">labels</span></div>
+          </div>
+          <div class="card" id="fl-symmetry-transition-382">
+            <h3>F_l± to F_l symmetry</h3>
+            <p>
+              Remark 3.8.2 compares the Section 3 Gaussian construction with the
+              <span class="math">F_l^±</span> symmetry of D-Theta±ell theaters and the
+              <span class="math">F_l</span> symmetry obtained after passing to the
+              D-ThetaNF local portion.
+            </p>
+            <div class="tagRow"><span class="tag blue">Rem. 3.8.2</span><span class="tag">symmetry</span></div>
+          </div>
+          <div class="card" id="conjugate-synchronization-gain-383">
+            <h3>Conjugate synchronization gain</h3>
+            <p>
+              Remark 3.8.3 lists the concrete gains from synchronization: diagonal
+              constant submonoids, zero-label identifications, and a units isomorphism
+              needed when composing with the theta link.
+            </p>
+            <div class="tagRow"><span class="tag green">Rem. 3.8.3</span><span class="tag">log-wall</span></div>
+          </div>
+        </div>
+        <div class="callout warn">
+          Source warning: without conjugate synchronization, one can at best form
+          diagonal embeddings of Galois-invariants or sets of Galois-orbits of constant
+          monoids. Remark 3.8.3 says this is insufficient for Kummer theory and
+          incompatible with the ring structure needed for the log-wall.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remarks 3.6.2-3.8.3</a>
+          Related: <a href="#tempered-gaussian-monoids-ii3">tempered Gaussian monoids</a>
+          <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
+          <a href="#log-theta-lattice">log-theta lattice</a>
         </div>
       </section>
 
