@@ -594,6 +594,11 @@
         <a href="#theta-approach-function-field-iut-i312">Function-field recovery 3.1.2</a>
         <a href="#theta-approach-cyclotome-iut-i312">Cyclotome comparison 3.1.2</a>
         <a href="#kappa-coric-functions">Kappa-coric functions</a>
+        <a href="#cfmod-critical-points-iut-i317">C_Fmod critical points 3.1.7</a>
+        <a href="#kappa-coric-definition-iut-i317">Kappa-coric definition 3.1.7</a>
+        <a href="#infinity-kappa-pseudomonoids-iut-i317">Infinity-kappa pseudo-monoids 3.1.7</a>
+        <a href="#kappa-solvable-disjointness-iut-i317">Kappa-solvable disjointness 3.1.7</a>
+        <a href="#kappa-sol-automorphisms-iut-i317">Kappa-sol automorphisms 3.1.7</a>
         <a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>
         <a href="#bad-nonarch-frobenioids-32">Bad nonarch Frobenioids 3.2</a>
         <a href="#good-arch-frobenioids-33-34">Good/arch Frobenioids 3.3-3.4</a>
@@ -9868,6 +9873,386 @@
           <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
           <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
           <a href="#log-kummer-correspondences">log-Kummer correspondences</a>
+        </div>
+      </section>
+
+      <section id="cfmod-critical-points-iut-i317" data-filter="iut i remark 3.1.7 cfmod model affine line critical points strictly critical 2 torsion">
+        <h2>C_Fmod Model and Critical Points</h2>
+        <p class="lede">
+          Remark 3.1.7 starts from the model <span class="math">C_Fmod</span> of
+          <span class="math">C_F</span> over the field of moduli. Its coarse space is
+          the affine line, and its compactification carries critical points coming from
+          the <span class="math">2</span>-torsion points of the elliptic curve. The
+          strictly critical points are the non-cuspidal ones.
+        </p>
+        <div class="diagram fit" aria-label="C_Fmod critical point model">
+          <div class="diagramHeader">
+            <strong>Affine-line model with critical-point tests</strong>
+            <span>IUT I Remark 3.1.7(i)</span>
+          </div>
+          <svg viewBox="0 0 1040 420" role="img">
+            <defs>
+              <marker id="arrowCFmodCritI317" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="76" width="240" height="86"></rect>
+            <text class="nodeTitle" x="190" y="106" text-anchor="middle">C_Fmod</text>
+            <text class="tinyText" x="190" y="130" text-anchor="middle">unique model over Fmod</text>
+            <text class="tinyText" x="190" y="148" text-anchor="middle">from K-coricity of C_K</text>
+
+            <rect class="nodeBox green" x="400" y="76" width="240" height="86"></rect>
+            <text class="nodeTitle" x="520" y="106" text-anchor="middle">coarse space |C_L|</text>
+            <text class="tinyText" x="520" y="130" text-anchor="middle">isomorphic to A1 over L</text>
+            <text class="tinyText" x="520" y="148" text-anchor="middle">function-field stage</text>
+
+            <rect class="nodeBox gold" x="730" y="76" width="240" height="86"></rect>
+            <text class="nodeTitle" x="850" y="106" text-anchor="middle">compactification</text>
+            <text class="tinyText" x="850" y="130" text-anchor="middle">critical points over 2-torsion</text>
+            <text class="tinyText" x="850" y="148" text-anchor="middle">one cusp point excluded</text>
+
+            <rect class="nodeBox violet" x="220" y="282" width="250" height="84"></rect>
+            <text class="nodeTitle" x="345" y="312" text-anchor="middle">strictly critical</text>
+            <text class="tinyText" x="345" y="336" text-anchor="middle">critical but not cusp</text>
+            <text class="tinyText" x="345" y="354" text-anchor="middle">canonical non-cuspidal tests</text>
+
+            <rect class="nodeBox red" x="560" y="282" width="250" height="84"></rect>
+            <text class="nodeTitle" x="685" y="312" text-anchor="middle">κ-coric constraints</text>
+            <text class="tinyText" x="685" y="336" text-anchor="middle">avoid critical points</text>
+            <text class="tinyText" x="685" y="354" text-anchor="middle">roots of unity at strict critical points</text>
+
+            <path class="edge blue" d="M312 119 H398" marker-end="url(#arrowCFmodCritI317)"></path>
+            <path class="edge green" d="M642 119 H728" marker-end="url(#arrowCFmodCritI317)"></path>
+            <path class="edge violet" d="M850 164 C806 224 426 250 352 280" marker-end="url(#arrowCFmodCritI317)"></path>
+            <path class="edge red" d="M850 164 C812 224 724 250 692 280" marker-end="url(#arrowCFmodCritI317)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Object</th><th>Source definition</th><th>Role</th></tr>
+          <tr>
+            <td><span class="math">C_Fmod</span></td>
+            <td>The unique model of <span class="math">C_F</span> over <span class="math">Fmod</span>, obtained from Definition 3.1 data.</td>
+            <td>Base curve for κ-coric rational functions.</td>
+          </tr>
+          <tr>
+            <td>Critical point</td>
+            <td>A closed point over a compactification point arising from a <span class="math">2</span>-torsion point.</td>
+            <td>Forbidden support for zero/pole divisors.</td>
+          </tr>
+          <tr>
+            <td>Strictly critical point</td>
+            <td>A critical point not mapping to the compactification point arising from the unique cusp.</td>
+            <td>Root-of-unity value tests split constants up to roots of unity.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Remark 3.1.7(i)</a>
+          Related: <a href="#kappa-coric-functions">kappa-coric functions</a>
+          <a href="#kappa-coric-definition-iut-i317">κ-coric definition</a>
+          <a href="#initial-theta-field-moduli-iut-i31">theta field/moduli layer</a>
+        </div>
+      </section>
+
+      <section id="kappa-coric-definition-iut-i317" data-filter="iut i remark 3.1.7 kappa coric rational function one pole two zeroes roots unity critical points">
+        <h2>Kappa-Coric Rational Functions</h2>
+        <p class="lede">
+          A rational function <span class="math">f</span> on <span class="math">C_L</span>
+          is κ-coric when its divisor and critical-point behavior satisfy the three
+          conditions in Remark 3.1.7(i). The κ is explicitly mnemonic for Kummer: the
+          functions are designed as Kummer-compatible rational functions on the
+          reconstructed affine-line model.
+        </p>
+        <div class="diagram fit" aria-label="Kappa-coric definition conditions">
+          <div class="diagramHeader">
+            <strong>Three source conditions for κ-coricity</strong>
+            <span>IUT I Remark 3.1.7(i)</span>
+          </div>
+          <svg viewBox="0 0 1040 430" role="img">
+            <defs>
+              <marker id="arrowKappaDefI317" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="185" y="106" text-anchor="middle">one pole</text>
+            <text class="tinyText" x="185" y="130" text-anchor="middle">if f is nonconstant</text>
+            <text class="tinyText" x="185" y="148" text-anchor="middle">at least two distinct zeroes</text>
+
+            <rect class="nodeBox green" x="405" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="520" y="106" text-anchor="middle">divisor support</text>
+            <text class="tinyText" x="520" y="130" text-anchor="middle">defined over a number field</text>
+            <text class="tinyText" x="520" y="148" text-anchor="middle">avoids critical points</text>
+
+            <rect class="nodeBox gold" x="740" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="855" y="106" text-anchor="middle">strict critical values</text>
+            <text class="tinyText" x="855" y="130" text-anchor="middle">roots of unity</text>
+            <text class="tinyText" x="855" y="148" text-anchor="middle">constant splitting test</text>
+
+            <rect class="nodeBox violet" x="222" y="286" width="260" height="84"></rect>
+            <text class="nodeTitle" x="352" y="316" text-anchor="middle">polynomial reading</text>
+            <text class="tinyText" x="352" y="340" text-anchor="middle">unique non-critical infinity</text>
+            <text class="tinyText" x="352" y="358" text-anchor="middle">non-critical zeroes</text>
+
+            <rect class="nodeBox red" x="560" y="286" width="260" height="84"></rect>
+            <text class="nodeTitle" x="690" y="316" text-anchor="middle">orientation is not symmetric</text>
+            <text class="tinyText" x="690" y="340" text-anchor="middle">f and f^-1 not both κ-coric</text>
+            <text class="tinyText" x="690" y="358" text-anchor="middle">unless constant case</text>
+
+            <path class="edge blue" d="M302 119 H403" marker-end="url(#arrowKappaDefI317)"></path>
+            <path class="edge green" d="M637 119 H738" marker-end="url(#arrowKappaDefI317)"></path>
+            <path class="edge violet" d="M520 164 C480 224 400 252 360 284" marker-end="url(#arrowKappaDefI317)"></path>
+            <path class="edge red" d="M855 164 C820 224 728 252 696 284" marker-end="url(#arrowKappaDefI317)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card">
+            <h3>One-pole condition</h3>
+            <p>
+              For nonconstant <span class="math">f</span>, the source requires precisely
+              one pole of unrestricted order and at least two distinct zeroes.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Critical-point avoidance</h3>
+            <p>
+              The divisor of zeroes and poles is defined over a number field and avoids
+              the critical points from the <span class="math">2</span>-torsion geometry.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Root-of-unity values</h3>
+            <p>
+              At every strictly critical point, <span class="math">f</span> restricts to
+              a root of unity; this later controls constants up to roots of unity.
+            </p>
+          </div>
+        </div>
+        <div class="callout">
+          κ-coricity is not a boolean label in the source. It packages geometric
+          support conditions, a preferred polynomial orientation, and root-of-unity
+          normalization data.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Remark 3.1.7(i)</a>
+          Related: <a href="#cfmod-critical-points-iut-i317">C_Fmod critical points</a>
+          <a href="#infinity-kappa-pseudomonoids-iut-i317">∞κ pseudo-monoids</a>
+          <a href="#log-kummer-correspondences">log-Kummer correspondences</a>
+        </div>
+      </section>
+
+      <section id="infinity-kappa-pseudomonoids-iut-i317" data-filter="iut i remark 3.1.7 infinity kappa infinity kappa times pseudo-monoid divisible cyclotomic units">
+        <h2>Infinity-Kappa Pseudo-Monoids</h2>
+        <p class="lede">
+          Remark 3.1.7(ii) extends κ-coric functions by allowing positive powers and
+          unit multiples. These ∞κ and ∞κ× classes are not ordinary monoids; under
+          multiplication they form pseudo-monoids, and the ∞κ and ∞κ× versions are
+          divisible and cyclotomic in the Section 0 sense.
+        </p>
+        <div class="diagram fit" aria-label="Infinity kappa pseudo-monoids">
+          <div class="diagramHeader">
+            <strong>Root closure and unit-twist closure</strong>
+            <span>IUT I Remark 3.1.7(ii)</span>
+          </div>
+          <svg viewBox="0 0 1030 420" role="img">
+            <defs>
+              <marker id="arrowInfKappaI317" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="78" width="230" height="86"></rect>
+            <text class="nodeTitle" x="185" y="108" text-anchor="middle">κ-coric</text>
+            <text class="tinyText" x="185" y="132" text-anchor="middle">source rational functions</text>
+            <text class="tinyText" x="185" y="150" text-anchor="middle">Remark 3.1.7(i)</text>
+
+            <rect class="nodeBox green" x="400" y="78" width="230" height="86"></rect>
+            <text class="nodeTitle" x="515" y="108" text-anchor="middle">∞κ-coric</text>
+            <text class="tinyText" x="515" y="132" text-anchor="middle">some positive power is κ-coric</text>
+            <text class="tinyText" x="515" y="150" text-anchor="middle">root-closed variant</text>
+
+            <rect class="nodeBox gold" x="730" y="78" width="230" height="86"></rect>
+            <text class="nodeTitle" x="845" y="108" text-anchor="middle">∞κ×-coric</text>
+            <text class="tinyText" x="845" y="132" text-anchor="middle">unit multiple is ∞κ-coric</text>
+            <text class="tinyText" x="845" y="150" text-anchor="middle">uses U_L</text>
+
+            <rect class="nodeBox violet" x="230" y="282" width="250" height="84"></rect>
+            <text class="nodeTitle" x="355" y="312" text-anchor="middle">strict-critical test</text>
+            <text class="tinyText" x="355" y="336" text-anchor="middle">∞κ× is ∞κ iff</text>
+            <text class="tinyText" x="355" y="354" text-anchor="middle">root of unity at strict critical point</text>
+
+            <rect class="nodeBox red" x="560" y="282" width="250" height="84"></rect>
+            <text class="nodeTitle" x="685" y="312" text-anchor="middle">pseudo-monoids</text>
+            <text class="tinyText" x="685" y="336" text-anchor="middle">multiplication partial</text>
+            <text class="tinyText" x="685" y="354" text-anchor="middle">divisible and cyclotomic</text>
+
+            <path class="edge blue" d="M302 121 H398" marker-end="url(#arrowInfKappaI317)"></path>
+            <path class="edge green" d="M632 121 H728" marker-end="url(#arrowInfKappaI317)"></path>
+            <path class="edge violet" d="M515 166 C480 224 398 252 362 280" marker-end="url(#arrowInfKappaI317)"></path>
+            <path class="edge red" d="M845 166 C810 224 724 252 692 280" marker-end="url(#arrowInfKappaI317)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Class</th><th>Definition</th><th>Extra structure</th></tr>
+          <tr>
+            <td>κ-coric</td>
+            <td>Directly satisfies the divisor, critical-point, and root-of-unity conditions.</td>
+            <td>Pseudo-monoid under multiplication.</td>
+          </tr>
+          <tr>
+            <td>∞κ-coric</td>
+            <td>Some positive power is κ-coric.</td>
+            <td>Divisible and cyclotomic pseudo-monoid.</td>
+          </tr>
+          <tr>
+            <td>∞κ×-coric</td>
+            <td>Some unit multiple is ∞κ-coric.</td>
+            <td>Divisible and cyclotomic pseudo-monoid; strict-critical values test whether it is ∞κ.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Remark 3.1.7(ii)</a>
+          Related: <a href="#pseudo-monoids-iut-i0">pseudo-monoids</a>
+          <a href="#kappa-coric-definition-iut-i317">κ-coric definition</a>
+          <a href="#kappa-solvable-disjointness-iut-i317">κ-solvable disjointness</a>
+        </div>
+      </section>
+
+      <section id="kappa-solvable-disjointness-iut-i317" data-filter="iut i remark 3.1.7 kappa solvable fsol linear disjointness ck field sl2 perfect">
+        <h2>Kappa-Solvable Elements and Linear Disjointness</h2>
+        <p class="lede">
+          Remark 3.1.7(iii) specializes to <span class="math">L = Fmod</span> and
+          defines κ-solvable elements by allowing <span class="math">F_sol^x</span>
+          multiples of ∞κ-coric elements. The same paragraph records the Galois-theoretic
+          payoff: a linear disjointness statement between the field generated by
+          <span class="math">C_K</span> and the κ-solvable field.
+        </p>
+        <div class="diagram fit" aria-label="Kappa-solvable linear disjointness">
+          <div class="diagramHeader">
+            <strong>κ-solvability feeds a Galois disjointness statement</strong>
+            <span>IUT I Remark 3.1.7(iii)</span>
+          </div>
+          <svg viewBox="0 0 1060 430" role="img">
+            <defs>
+              <marker id="arrowKappaSolvI317" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="60" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="175" y="106" text-anchor="middle">κ-solvable f</text>
+            <text class="tinyText" x="175" y="130" text-anchor="middle">F_sol^x multiple</text>
+            <text class="tinyText" x="175" y="148" text-anchor="middle">of ∞κ-coric element</text>
+
+            <rect class="nodeBox green" x="410" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="525" y="106" text-anchor="middle">equivalent power test</text>
+            <text class="tinyText" x="525" y="130" text-anchor="middle">some f^n is ∞κ×-coric</text>
+            <text class="tinyText" x="525" y="148" text-anchor="middle">over F_sol · L_C</text>
+
+            <rect class="nodeBox gold" x="760" y="76" width="230" height="86"></rect>
+            <text class="nodeTitle" x="875" y="106" text-anchor="middle">fields generated</text>
+            <text class="tinyText" x="875" y="130" text-anchor="middle">L_C(κ-sol) and L_C(C_K)</text>
+            <text class="tinyText" x="875" y="148" text-anchor="middle">over F(μ_ell) · L_C</text>
+
+            <rect class="nodeBox violet" x="220" y="286" width="270" height="84"></rect>
+            <text class="nodeTitle" x="355" y="316" text-anchor="middle">SL2(F_ell) subgroup</text>
+            <text class="tinyText" x="355" y="340" text-anchor="middle">normal, uniquely characterized</text>
+            <text class="tinyText" x="355" y="358" text-anchor="middle">perfect finite group</text>
+
+            <rect class="nodeBox red" x="570" y="286" width="270" height="84"></rect>
+            <text class="nodeTitle" x="705" y="316" text-anchor="middle">linear disjointness</text>
+            <text class="tinyText" x="705" y="340" text-anchor="middle">C_K field independent</text>
+            <text class="tinyText" x="705" y="358" text-anchor="middle">from κ-sol field over base</text>
+
+            <path class="edge blue" d="M292 119 H408" marker-end="url(#arrowKappaSolvI317)"></path>
+            <path class="edge green" d="M642 119 H758" marker-end="url(#arrowKappaSolvI317)"></path>
+            <path class="edge violet" d="M525 164 C480 224 400 254 362 284" marker-end="url(#arrowKappaSolvI317)"></path>
+            <path class="edge red" d="M875 164 C828 224 746 254 710 284" marker-end="url(#arrowKappaSolvI317)"></path>
+          </svg>
+        </div>
+        <div class="callout">
+          The linear disjointness argument uses both group theory, especially the
+          perfectness of <span class="math">SL2(F_ell)</span>, and the critical-point
+          avoidance built into ∞κ×-coricity.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Remark 3.1.7(iii)</a>
+          Related: <a href="#infinity-kappa-pseudomonoids-iut-i317">∞κ pseudo-monoids</a>
+          <a href="#initial-theta-field-moduli-iut-i31">theta field/moduli layer</a>
+          <a href="#kappa-sol-automorphisms-iut-i317">κ-sol automorphisms</a>
+        </div>
+      </section>
+
+      <section id="kappa-sol-automorphisms-iut-i317" data-filter="iut i remark 3.1.7 kappa sol open automorphism outer automorphism cartesian center free galois">
+        <h2>Kappa-Sol Automorphism Control</h2>
+        <p class="lede">
+          Remark 3.1.7(iv) defines κ-sol-open subgroups and the associated
+          κ-sol automorphism and outer-automorphism groups. These groups carry profinite
+          topologies from their finite quotients, and the conjugation diagram attached to
+          the Galois exact sequence is cartesian because the kernel is center-free.
+        </p>
+        <div class="diagram fit" aria-label="Kappa-sol automorphism control">
+          <div class="diagramHeader">
+            <strong>Outer automorphism control from κ-sol-open subgroups</strong>
+            <span>IUT I Remark 3.1.7(iv)</span>
+          </div>
+          <svg viewBox="0 0 1040 430" role="img">
+            <defs>
+              <marker id="arrowKappaSolAutI317" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="76" width="250" height="86"></rect>
+            <text class="nodeTitle" x="195" y="106" text-anchor="middle">Galois exact sequence</text>
+            <text class="tinyText" x="195" y="130" text-anchor="middle">Gal(L_C/L_C(κ-sol))</text>
+            <text class="tinyText" x="195" y="148" text-anchor="middle">inside Gal(L_C/L_C)</text>
+
+            <rect class="nodeBox green" x="395" y="76" width="250" height="86"></rect>
+            <text class="nodeTitle" x="520" y="106" text-anchor="middle">κ-sol-open subgroups</text>
+            <text class="tinyText" x="520" y="130" text-anchor="middle">intersections with normal opens</text>
+            <text class="tinyText" x="520" y="148" text-anchor="middle">finite quotient system</text>
+
+            <rect class="nodeBox gold" x="720" y="76" width="250" height="86"></rect>
+            <text class="nodeTitle" x="845" y="106" text-anchor="middle">Autκ-sol and Outκ-sol</text>
+            <text class="tinyText" x="845" y="130" text-anchor="middle">preserve κ-sol-open subgroups</text>
+            <text class="tinyText" x="845" y="148" text-anchor="middle">profinite topologies</text>
+
+            <rect class="nodeBox violet" x="240" y="286" width="250" height="84"></rect>
+            <text class="nodeTitle" x="365" y="316" text-anchor="middle">continuous conjugation</text>
+            <text class="tinyText" x="365" y="340" text-anchor="middle">maps into automorphism groups</text>
+            <text class="tinyText" x="365" y="358" text-anchor="middle">compatible with quotients</text>
+
+            <rect class="nodeBox red" x="570" y="286" width="250" height="84"></rect>
+            <text class="nodeTitle" x="695" y="316" text-anchor="middle">cartesian diagram</text>
+            <text class="tinyText" x="695" y="340" text-anchor="middle">kernel center-free</text>
+            <text class="tinyText" x="695" y="358" text-anchor="middle">Belyi/Galois injectivity input</text>
+
+            <path class="edge blue" d="M322 119 H393" marker-end="url(#arrowKappaSolAutI317)"></path>
+            <path class="edge green" d="M647 119 H718" marker-end="url(#arrowKappaSolAutI317)"></path>
+            <path class="edge violet" d="M520 164 C482 224 408 254 372 284" marker-end="url(#arrowKappaSolAutI317)"></path>
+            <path class="edge red" d="M845 164 C812 224 730 254 702 284" marker-end="url(#arrowKappaSolAutI317)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Term</th><th>Meaning in Remark 3.1.7(iv)</th><th>Reason it matters</th></tr>
+          <tr>
+            <td>κ-sol-open</td>
+            <td>Intersection with <span class="math">Gal(L_C/L_C(κ-sol))</span> of a normal open subgroup of <span class="math">Gal(L_C/L_C)</span>.</td>
+            <td>Defines the finite quotient system used for the profinite topology.</td>
+          </tr>
+          <tr>
+            <td>κ-sol automorphism</td>
+            <td>An automorphism preserving every κ-sol-open subgroup.</td>
+            <td>Gives compatible maps to automorphism groups of all κ-sol-open quotients.</td>
+          </tr>
+          <tr>
+            <td>Cartesian conjugation diagram</td>
+            <td>The natural Galois-to-automorphism square is cartesian.</td>
+            <td>Depends on center-freeness of the kernel, proved via genus-zero curve groups and Galois injectivity.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I Remark 3.1.7(iv)</a>
+          Related: <a href="#kappa-solvable-disjointness-iut-i317">κ-solvable disjointness</a>
+          <a href="#theta-approach-function-field-iut-i312">function-field recovery</a>
+          <a href="#anabelian-background">anabelian background</a>
         </div>
       </section>
 
