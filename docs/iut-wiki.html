@@ -538,6 +538,7 @@
         <a href="#multiplicative-additive-bridges">Multiplicative/additive bridges</a>
         <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
         <a href="#mono-theta-environments-ii11">Mono-theta environments 1.1</a>
+        <a href="#iut-ii-mono-theta-rigidity-110-112">Mono-theta rigidity 1.10-1.12</a>
         <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation 2</a>
         <a href="#tempered-gaussian-monoids-ii3">Tempered Gaussian monoids 3</a>
         <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioid categories 3.8</a>
@@ -4940,7 +4941,7 @@
           <tr>
             <td>§1</td>
             <td>Multiradial mono-theta environments, interior/exterior cyclotomes, cyclotomic rigidity, constant-multiple rigidity.</td>
-            <td><a href="#mono-theta-environment">mono-theta environments</a>, <a href="#multiradiality">multiradiality</a></td>
+            <td><a href="#mono-theta-environments-ii11">mono-theta environments</a>, <a href="#iut-ii-mono-theta-rigidity-110-112">mono-theta rigidity</a>, <a href="#multiradiality">multiradiality</a></td>
           </tr>
           <tr>
             <td>§2</td>
@@ -10795,8 +10796,243 @@
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II</a>
           Related: <a href="#theta-evaluation-kummer-route">theta evaluation route</a>
+          <a href="#iut-ii-mono-theta-rigidity-110-112">mono-theta rigidity</a>
           <a href="#theta-plus-minus-ell-nf-613">Theta±ellNF theaters</a>
           <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
+          <a href="#multiradiality">multiradiality</a>
+        </div>
+      </section>
+
+      <section id="iut-ii-mono-theta-rigidity-110-112">
+        <h2>IUT II Section 1: Mono-Theta Rigidity</h2>
+        <p class="lede">
+          Corollaries 1.10 through 1.12 turn mono-theta cyclotomic rigidity and
+          constant-multiple rigidity into multiradial data. This is the local source
+          for the distinction between an evaluation route that is already compatible
+          with alien spokes and a base-field route that remains uniradial until
+          log-shells enter.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Corollaries 1.10 through 1.12 mono-theta rigidity route">
+          <div class="diagramHeader">
+            <strong>Rigidity route</strong>
+            <span>from radial input to coric unit-quotient data</span>
+          </div>
+          <svg viewBox="0 0 1120 560" role="img">
+            <defs>
+              <marker id="arrowMonoThetaRigidity" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="56" y="62" width="250" height="88"></rect>
+            <text class="nodeTitle" x="181" y="92" text-anchor="middle">radial input</text>
+            <text class="tinyText" x="181" y="117" text-anchor="middle">Pi and mono-theta system</text>
+            <text class="tinyText" x="181" y="135" text-anchor="middle">arithmetic holomorphic spoke</text>
+
+            <rect class="nodeBox gold" x="436" y="62" width="250" height="88"></rect>
+            <text class="nodeTitle" x="561" y="92" text-anchor="middle">cyclotomic rigidity</text>
+            <text class="tinyText" x="561" y="117" text-anchor="middle">l·DeltaTheta -> Pi_mu</text>
+            <text class="tinyText" x="561" y="135" text-anchor="middle">Corollary 1.10</text>
+
+            <rect class="nodeBox green" x="814" y="62" width="250" height="88"></rect>
+            <text class="nodeTitle" x="939" y="92" text-anchor="middle">coric unit quotient</text>
+            <text class="tinyText" x="939" y="117" text-anchor="middle">G O×mu(G)</text>
+            <text class="tinyText" x="939" y="135" text-anchor="middle">shared by spokes</text>
+
+            <rect class="nodeBox violet" x="122" y="260" width="260" height="92"></rect>
+            <text class="nodeTitle" x="252" y="291" text-anchor="middle">MLF-Galois route</text>
+            <text class="tinyText" x="252" y="316" text-anchor="middle">orbits and indeterminacy</text>
+            <text class="tinyText" x="252" y="334" text-anchor="middle">Corollary 1.11</text>
+
+            <rect class="nodeBox red" x="430" y="260" width="260" height="92"></rect>
+            <text class="nodeTitle" x="560" y="291" text-anchor="middle">pointed inversion</text>
+            <text class="tinyText" x="560" y="316" text-anchor="middle">theta subsets modulo torsion</text>
+            <text class="tinyText" x="560" y="334" text-anchor="middle">Corollary 1.12(i)</text>
+
+            <rect class="nodeBox green" x="738" y="260" width="260" height="92"></rect>
+            <text class="nodeTitle" x="868" y="291" text-anchor="middle">constant-multiple split</text>
+            <text class="tinyText" x="868" y="316" text-anchor="middle">M_TM×mu x theta-orbit quotient</text>
+            <text class="tinyText" x="868" y="334" text-anchor="middle">Corollary 1.12(ii)-(iii)</text>
+
+            <rect class="nodeBox blue" x="156" y="436" width="250" height="78"></rect>
+            <text class="nodeTitle" x="281" y="466" text-anchor="middle">log-shell versions</text>
+            <text class="tinyText" x="281" y="490" text-anchor="middle">Remark 1.12.1</text>
+
+            <rect class="nodeBox gold" x="744" y="436" width="250" height="78"></rect>
+            <text class="nodeTitle" x="869" y="466" text-anchor="middle">Galois evaluation</text>
+            <text class="tinyText" x="869" y="490" text-anchor="middle">Remark 1.12.4</text>
+
+            <path d="M306 106 H434" class="edge blue" marker-end="url(#arrowMonoThetaRigidity)"></path>
+            <path d="M686 106 H812" class="edge gold" marker-end="url(#arrowMonoThetaRigidity)"></path>
+            <path d="M561 152 C508 190 404 220 284 258" class="edge gold" marker-end="url(#arrowMonoThetaRigidity)"></path>
+            <path d="M561 152 V258" class="edge red" marker-end="url(#arrowMonoThetaRigidity)"></path>
+            <path d="M939 152 C902 196 878 226 872 258" class="edge green" marker-end="url(#arrowMonoThetaRigidity)"></path>
+            <path d="M382 306 H428" class="edge violet" marker-end="url(#arrowMonoThetaRigidity)"></path>
+            <path d="M690 306 H736" class="edge red" marker-end="url(#arrowMonoThetaRigidity)"></path>
+            <path d="M560 354 C492 404 382 426 294 434" class="edge blue" marker-end="url(#arrowMonoThetaRigidity)"></path>
+            <path d="M868 354 V434" class="edge gold" marker-end="url(#arrowMonoThetaRigidity)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Statement</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Example 1.7 and Remark 1.9.1</td>
+            <td>
+              A functor from radial data to coric data is multiradial when it is full;
+              otherwise it is uniradial. The point is to compute which outputs depend
+              essentially on a spoke's arithmetic holomorphic structure and which can be
+              described through the mono-analytic core.
+            </td>
+            <td>
+              This supplies the formal meaning of "multiradial" used throughout the
+              later theta and log-volume arguments.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 1.10</td>
+            <td>
+              The mono-theta cyclotomic rigidity isomorphism
+              sends the interior cyclotome <span class="math">l·DeltaTheta(Pi)</span>
+              to the exterior cyclotome <span class="math">Pi_mu</span> of the
+              mono-theta package and gives a multiradially defined functor
+              relative to the coric
+              <span class="math">G O×mu(G)</span> environment.
+            </td>
+            <td>
+              Roots of unity disappear in the unit quotient
+              <span class="math">O×mu</span>, so mono-theta cyclotomic rigidity is
+              compatible with sharing this coric object across spokes.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.10.2</td>
+            <td>
+              The reason for Corollary 1.10 is not a generic identification: the
+              exterior cyclotome maps trivially into <span class="math">O×mu(G)</span>.
+            </td>
+            <td>
+              The formal model should distinguish a genuine coric quotient from a
+              direct equality of cyclotomes across holomorphic structures.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 1.11</td>
+            <td>
+              The base-field/Galois cyclotomic rigidity route can be represented
+              multiradially only after allowing specified
+              <span class="math">Aut(G)</span>- or <span class="math">Gamma</span>-orbit
+              indeterminacies.
+            </td>
+            <td>
+              This foreshadows why base-field numerical access is useful but not
+              automatically compatible with alien-spoke comparison.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 1.12(i)-(ii)</td>
+            <td>
+              Pointed inversion automorphisms and restriction to the subgroup
+              <span class="math">D</span> yield invariant theta subsets and splittings
+              after quotienting by torsion:
+              <span class="math">M_TM×mu x {theta-invariants / torsion}</span>.
+            </td>
+            <td>
+              This is the constant-multiple rigidity input used later to control scalar
+              ambiguity in theta-value comparison.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.12.2</td>
+            <td>
+              The multiradiality depends on constructing theta functions up to a
+              <span class="math">mu_2l</span>-indeterminacy, not up to a larger
+              ring-dependent unit such as a chosen value <span class="math">2 = 1+1</span>.
+            </td>
+            <td>
+              This is a source-level guardrail: a normalization tied to one ring
+              structure would be uniradial and would fail at the log-shell stage.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 1.12.4</td>
+            <td>
+              A Kummer-compatible theta-evaluation algorithm must extend to coverings;
+              functoriality then forces it to arise from a section
+              <span class="math">G -> Pi_Ydd(Pi)</span>.
+            </td>
+            <td>
+              This is the Galois-evaluation principle used in IUT II Section 2.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="mono-theta-coric-unit-quotient-110">
+            <h3>Coric unit quotient</h3>
+            <p>
+              Corollary 1.10 works because <span class="math">O×mu(G)</span> has already
+              divided out roots of unity. The exterior cyclotome can be rigidified
+              without reintroducing a spoke-specific unit choice.
+            </p>
+            <div class="tagRow"><span class="tag green">Cor. 1.10</span><span class="tag">O×mu</span></div>
+          </div>
+          <div class="card" id="orbit-indeterminacy-111">
+            <h3>Orbit indeterminacy</h3>
+            <p>
+              Corollary 1.11 permits the cyclotomic comparison through specified orbits.
+              This is weaker than strict rigidity, but it is the price for a multiradial
+              formulation of the base-field route.
+            </p>
+            <div class="tagRow"><span class="tag violet">Cor. 1.11</span><span class="tag">orbits</span></div>
+          </div>
+          <div class="card" id="pointed-inversion-rigidity-112">
+            <h3>Pointed inversion</h3>
+            <p>
+              A pointed inversion automorphism is reconstructed group-theoretically and
+              isolates theta subsets invariant modulo torsion. This is the input for
+              the direct-product splittings of Corollary 1.12.
+            </p>
+            <div class="tagRow"><span class="tag red">Cor. 1.12(i)</span><span class="tag">invariants</span></div>
+          </div>
+          <div class="card" id="constant-multiple-splitting-112">
+            <h3>Constant-multiple split</h3>
+            <p>
+              The split separates a coric component
+              <span class="math">M_TM×mu</span> from a radial theta-orbit component.
+              This is how scalar ambiguity is controlled before theta evaluation.
+            </p>
+            <div class="tagRow"><span class="tag green">Cor. 1.12(ii)</span><span class="tag">splitting</span></div>
+          </div>
+          <div class="card" id="mu2l-normalization">
+            <h3><span class="math">mu_2l</span> normalization</h3>
+            <p>
+              The source normalization uses values over the two-torsion point
+              <span class="math">mu-</span> and gives only
+              <span class="math">mu_2l</span>-indeterminacy. A larger
+              ring-dependent unit normalization would not be multiradial.
+            </p>
+            <div class="tagRow"><span class="tag gold">Rem. 1.12.2</span><span class="tag">normalization</span></div>
+          </div>
+          <div class="card" id="galois-evaluation-principle-1124">
+            <h3>Galois evaluation</h3>
+            <p>
+              Remark 1.12.4 explains why the later evaluation at torsion points is
+              expressed through Galois groups and sections, not through an external
+              analytic choice of values.
+            </p>
+            <div class="tagRow"><span class="tag blue">Rem. 1.12.4</span><span class="tag">sections</span></div>
+          </div>
+        </div>
+        <div class="callout violet">
+          Formalization warning: mono-theta rigidity should be modeled as a package of
+          algorithms, quotient choices, and permitted indeterminacies. A single field
+          named "rigidity isomorphism" would hide the source distinction between
+          multiradial mono-theta rigidity and the initially uniradial base-field route.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollaries 1.10-1.12</a>
+          Related: <a href="#mono-theta-environments-ii11">mono-theta environments</a>
+          <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation</a>
+          <a href="#theta-evaluation-kummer-route">theta evaluation route</a>
           <a href="#multiradiality">multiradiality</a>
         </div>
       </section>
