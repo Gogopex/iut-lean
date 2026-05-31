@@ -477,6 +477,7 @@
         <h2>Core IUT</h2>
         <a href="#initial-theta-data">Initial theta data</a>
         <a href="#hodge-theaters">Hodge theaters</a>
+        <a href="#mutually-alien-copies">Mutually alien copies</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
         <a href="#multiplicative-additive-bridges">Multiplicative/additive bridges</a>
         <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
@@ -1011,6 +1012,19 @@
               <a href="#label-reconstruction">label reconstruction</a>
             </td>
             <td>Essential Logical Structure, Section 3</td>
+          </tr>
+          <tr>
+            <td>Mutually Alien Copies</td>
+            <td>Expository model</td>
+            <td>
+              <a href="#alien-two-copy-method">two-copy method</a>,
+              <a href="#gaussian-integral-analogy">Gaussian analogy</a>,
+              <a href="#theta-link-q-power-model">q-power model</a>,
+              <a href="#mono-anabelian-transport-page">mono-anabelian transport</a>,
+              <a href="#closed-loop-prime-strip">closed-loop prime-strip</a>,
+              <a href="#and-or-alien-model">AND/OR alien model</a>
+            </td>
+            <td>Mutually Alien Copies, Sections 1-3</td>
           </tr>
         </table>
         <div class="grid4">
@@ -3236,6 +3250,158 @@
           Related: <a href="#theta-log-links">theta/log links</a>
           <a href="#multiplicative-additive-bridges">multiplicative/additive bridges</a>
           <a href="#dispute">dispute</a>
+        </div>
+      </section>
+
+      <section id="mutually-alien-copies">
+        <h2>Mutually Alien Copies</h2>
+        <p class="lede">
+          In Mochizuki's survey, "alien" means abstract otherness: two copies of the
+          same kind of mathematical world are held apart so that a simultaneous
+          comparison can be made through weaker structures. The phrase is therefore a
+          bookkeeping constraint on comparison, not a claim that the copies have different
+          internal theorems.
+        </p>
+        <div class="diagram" aria-label="Mutually alien copies and theta comparison">
+          <div class="diagramHeader">
+            <strong>Two-copy comparison</strong>
+            <span>distinct labels make simultaneous gluing meaningful</span>
+          </div>
+          <svg viewBox="0 0 880 390" role="img">
+            <defs>
+              <marker id="arrowAlien" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="48" y="62" width="230" height="92"></rect>
+            <text class="nodeTitle" x="163" y="91" text-anchor="middle">left Hodge theater</text>
+            <text class="tinyText" x="163" y="113" text-anchor="middle">theta-pilot / q^N side</text>
+            <text class="tinyText" x="163" y="132" text-anchor="middle">label kept distinct</text>
+
+            <rect class="nodeBox green" x="602" y="62" width="230" height="92"></rect>
+            <text class="nodeTitle" x="717" y="91" text-anchor="middle">right Hodge theater</text>
+            <text class="tinyText" x="717" y="113" text-anchor="middle">q-pilot side</text>
+            <text class="tinyText" x="717" y="132" text-anchor="middle">label kept distinct</text>
+
+            <rect class="nodeBox gold" x="332" y="84" width="216" height="70"></rect>
+            <text class="nodeTitle" x="440" y="112" text-anchor="middle">weakened interface</text>
+            <text class="tinyText" x="440" y="134" text-anchor="middle">multiplicative/profinite data</text>
+
+            <path d="M278 119 H330" class="edge blue" marker-end="url(#arrowAlien)"></path>
+            <path d="M550 119 H600" class="edge green" marker-end="url(#arrowAlien)"></path>
+            <text class="edgeLabel" x="440" y="55" text-anchor="middle">theta-link works through weaker data, not ring identity</text>
+
+            <rect class="nodeBox violet" x="185" y="264" width="226" height="76"></rect>
+            <text class="nodeTitle" x="298" y="291" text-anchor="middle">AND reading</text>
+            <text class="tinyText" x="298" y="313" text-anchor="middle">both gluings valid with distinct labels</text>
+
+            <rect class="nodeBox red" x="470" y="264" width="226" height="76"></rect>
+            <text class="nodeTitle" x="583" y="291" text-anchor="middle">OR collapse risk</text>
+            <text class="tinyText" x="583" y="313" text-anchor="middle">identifying labels erases the content</text>
+
+            <path d="M440 154 C440 211 298 212 298 262" class="edge violet" marker-end="url(#arrowAlien)"></path>
+            <path d="M440 154 C440 212 583 212 583 262" class="edge red" marker-end="url(#arrowAlien)"></path>
+          </svg>
+        </div>
+
+        <div class="grid3">
+          <div class="card" id="alien-two-copy-method">
+            <h3>Two-copy method</h3>
+            <p>
+              The survey begins from the Gaussian integral: squaring the integral
+              introduces two identical but independent copies. In IUT, the analogous
+              move is to use two copies of conventional scheme theory around the same
+              initial theta data, then compare them through weak common structures.
+            </p>
+            <div class="tagRow"><span class="tag blue">Alien §1.3</span><span class="tag">two copies</span></div>
+          </div>
+          <div class="card" id="gaussian-integral-analogy">
+            <h3>Gaussian integral analogy</h3>
+            <p>
+              The survey aligns the Gaussian calculation with IUT: introduce alien
+              copies, pass through two-dimensional coordinate changes, split value-group
+              and unit-group directions, evaluate the radial portion by quadraticity, and
+              control the angular portion by logarithmic unit geometry.
+            </p>
+            <div class="tagRow"><span class="tag green">Alien intro</span><span class="tag">radial/angular</span></div>
+          </div>
+          <div class="card" id="theta-link-q-power-model">
+            <h3>q-power model</h3>
+            <p>
+              The introductory model identifies the left-side family
+              <span class="math">q^{j^2}</span> with the right-side
+              <span class="math">q</span> through the theta-link. The desired height
+              bound comes from computing the theta-side data in terms of the q-side,
+              modulo the permitted indeterminacies.
+            </p>
+            <div class="tagRow"><span class="tag gold">Alien intro</span><span class="tag">q^j^2</span></div>
+          </div>
+          <div class="card" id="mono-anabelian-transport-page">
+            <h3>Mono-anabelian transport</h3>
+            <p>
+              Section 2.7 describes links as walls or filters between mutually alien
+              scheme-theoretic copies. Frobenius-like objects live on one side of a link,
+              while mono-anabelian transport reconstructs selected monoid or group data
+              in forms that can cross the wall.
+            </p>
+            <div class="tagRow"><span class="tag green">Alien §2.7</span><span class="tag">transport</span></div>
+          </div>
+          <div class="card" id="closed-loop-prime-strip">
+            <h3>Closed-loop prime-strip</h3>
+            <p>
+              Section 3.11 explains that the multiradial algorithm must produce a closed
+              loop on a single weakened <span class="math">F⊢×μ</span>-prime-strip.
+              A mere open path from one non-comparable object type to another would not
+              yield an intrinsic numerical conclusion.
+            </p>
+            <div class="tagRow"><span class="tag red">Alien §3.11</span><span class="tag">closed loop</span></div>
+          </div>
+          <div class="card" id="and-or-alien-model">
+            <h3>AND versus OR model</h3>
+            <p>
+              Examples 3.11.3-3.11.4 give elementary combinatorial and numerical models
+              of the risk: the theta-link is meaningful as a simultaneous AND relation
+              between distinct labeled copies; replacing it by OR makes the distinct
+              copies look redundant and the final estimate appear unlicensed.
+            </p>
+            <div class="tagRow"><span class="tag violet">Alien §3.11</span><span class="tag">∧/∨</span></div>
+          </div>
+        </div>
+        <table>
+          <tr><th>Alien-copy feature</th><th>Source role</th><th>Connection to other wiki pages</th></tr>
+          <tr>
+            <td>Distinct copies</td>
+            <td>Keep simultaneous theta-link assignments well typed.</td>
+            <td><a href="#essential-logical-structure">logical structure</a>, <a href="#hodge-theaters">Hodge theaters</a></td>
+          </tr>
+          <tr>
+            <td>Weakened interface</td>
+            <td>Use multiplicative monoids, profinite groups, and prime-strips instead of ring isomorphisms.</td>
+            <td><a href="#prime-strips-bridges">prime-strips</a>, <a href="#theta-log-links">theta/log links</a></td>
+          </tr>
+          <tr>
+            <td>Value/unit decoupling</td>
+            <td>Separate radial/value-group and angular/unit-group portions.</td>
+            <td><a href="#multiplicative-additive-bridges">multiplicative/additive bridges</a>, <a href="#log-theta-lattice">log-theta lattice</a></td>
+          </tr>
+          <tr>
+            <td>Closed loop</td>
+            <td>Return to comparable q-intertwined data before taking log-volume.</td>
+            <td><a href="#corollary-312">Corollary 3.12 corridor</a>, <a href="#indeterminacies">indeterminacies</a></td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          For formalization, the key engineering lesson is that "same mathematical kind"
+          and "same labeled copy" must remain separate. Collapsing those two notions is
+          exactly the simplification that the alien-copy exposition warns against.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies</a>
+          <a href="papers/mochizuki-panorama.pdf" target="_blank">Panoramic Overview</a>
+          Related: <a href="#essential-logical-structure">logical structure</a>
+          <a href="#theta-log-links">theta and log links</a>
+          <a href="#multiradiality">multiradiality</a>
+          <a href="#corollary-312">Corollary 3.12</a>
         </div>
       </section>
 
