@@ -2800,29 +2800,164 @@
       <section id="iut-iv">
         <h2>IUT IV and Consequences</h2>
         <p class="lede">
-          IUT IV applies the log-volume estimates obtained from the earlier papers to
-          Diophantine inequalities, including Vojta-type, Szpiro-type, and abc-type
-          consequences. Later work on explicit estimates modifies parts of the theory to
-          obtain numerical effective constants.
+          IUT IV converts the IUT III log-volume corridor into explicit estimates and then
+          into Diophantine inequalities. Section 1 is the numerical engine: local
+          different estimates, normalized nonarchimedean log-volume, archimedean metric
+          estimates, prime-number-theorem input, weighted averages, arithmetic divisors,
+          and finally Theorem 1.10 for theta-pilot objects. Section 2 applies this output
+          to suitable initial theta data and then to Vojta, abc, and Szpiro-type
+          consequences.
         </p>
+        <div class="diagram" aria-label="IUT IV estimate pipeline">
+          <div class="diagramHeader">
+            <strong>IUT IV estimate pipeline</strong>
+            <span>from the Corollary 3.12 corridor to Diophantine inequalities</span>
+          </div>
+          <svg viewBox="0 0 960 380" role="img">
+            <defs>
+              <marker id="arrowIUTIV" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox violet" x="35" y="72" width="155" height="76"></rect>
+            <text class="nodeTitle" x="112" y="99" text-anchor="middle">IUT III output</text>
+            <text class="tinyText" x="112" y="120" text-anchor="middle">Cor. 3.12</text>
+            <text class="tinyText" x="112" y="138" text-anchor="middle">log-volume corridor</text>
+
+            <rect class="nodeBox blue" x="246" y="42" width="165" height="96"></rect>
+            <text class="nodeTitle" x="328" y="72" text-anchor="middle">local estimates</text>
+            <text class="tinyText" x="328" y="95" text-anchor="middle">differents, logarithms</text>
+            <text class="tinyText" x="328" y="113" text-anchor="middle">Props. 1.1-1.5</text>
+
+            <rect class="nodeBox green" x="246" y="188" width="165" height="96"></rect>
+            <text class="nodeTitle" x="328" y="218" text-anchor="middle">global averaging</text>
+            <text class="tinyText" x="328" y="241" text-anchor="middle">PNT and weights</text>
+            <text class="tinyText" x="328" y="259" text-anchor="middle">Props. 1.6-1.7</text>
+
+            <rect class="nodeBox gold" x="482" y="112" width="178" height="100"></rect>
+            <text class="nodeTitle" x="571" y="144" text-anchor="middle">theta-pilot estimate</text>
+            <text class="tinyText" x="571" y="168" text-anchor="middle">arithmetic divisors</text>
+            <text class="tinyText" x="571" y="186" text-anchor="middle">Def. 1.9, Thm. 1.10</text>
+
+            <rect class="nodeBox red" x="735" y="42" width="170" height="96"></rect>
+            <text class="nodeTitle" x="820" y="72" text-anchor="middle">initial theta data</text>
+            <text class="tinyText" x="820" y="95" text-anchor="middle">general position</text>
+            <text class="tinyText" x="820" y="113" text-anchor="middle">Cor. 2.2</text>
+
+            <rect class="nodeBox blue" x="735" y="210" width="170" height="96"></rect>
+            <text class="nodeTitle" x="820" y="240" text-anchor="middle">Diophantine output</text>
+            <text class="tinyText" x="820" y="263" text-anchor="middle">Vojta, abc, Szpiro</text>
+            <text class="tinyText" x="820" y="281" text-anchor="middle">Cor. 2.3</text>
+
+            <line class="arrow" x1="190" y1="110" x2="246" y2="91" marker-end="url(#arrowIUTIV)"></line>
+            <line class="arrow" x1="190" y1="127" x2="246" y2="218" marker-end="url(#arrowIUTIV)"></line>
+            <line class="arrow" x1="411" y1="92" x2="482" y2="141" marker-end="url(#arrowIUTIV)"></line>
+            <line class="arrow" x1="411" y1="236" x2="482" y2="180" marker-end="url(#arrowIUTIV)"></line>
+            <line class="arrow" x1="660" y1="149" x2="735" y2="103" marker-end="url(#arrowIUTIV)"></line>
+            <line class="arrow" x1="820" y1="138" x2="820" y2="210" marker-end="url(#arrowIUTIV)"></line>
+            <text class="smallText" x="480" y="338" text-anchor="middle">Theorem 1.10 is the numerical meeting point of local estimates, averaging, and the IUT III corridor.</text>
+          </svg>
+        </div>
         <div class="grid3">
           <div class="card">
-            <h3>Log-volume computation</h3>
-            <p>IUT IV is where the abstract comparison machinery is converted into inequalities involving heights and conductors.</p>
+            <h3>Local estimate layer</h3>
+            <p>
+              Propositions 1.1-1.5 estimate tensor products of local rings, different
+              ideals, p-adic logarithms, normalized nonarchimedean log-volume, and
+              archimedean metric containers. This is the local numerical substrate under
+              the global theta-pilot estimate.
+            </p>
+            <div class="tagRow"><span class="tag green">Props. 1.1-1.5</span><span class="tag">local fields</span></div>
           </div>
           <div class="card">
-            <h3>Set-theoretic foundations</h3>
-            <p>The paper also discusses foundational issues around moving between copies, universes, and set-theoretic implementations.</p>
+            <h3>Averaging layer</h3>
+            <p>
+              Proposition 1.6 supplies the prime-number-theorem estimate used to sum over
+              primes in the explicit computation, while Proposition 1.7 supplies the
+              weighted-average formalism for packet-normalized log-volumes.
+            </p>
+            <div class="tagRow"><span class="tag green">Props. 1.6-1.7</span><span class="tag">global sums</span></div>
           </div>
           <div class="card">
-            <h3>Effective estimates</h3>
-            <p>The 2022 explicit estimates paper gives numerically effective versions using a modified theory of etale theta functions.</p>
+            <h3>Arithmetic divisors</h3>
+            <p>
+              Definition 1.9 packages finite and archimedean valuation data as arithmetic
+              divisors. The theorem then expresses the q-parameter and theta-pilot
+              estimates in terms of degrees, supports, and height-like quantities.
+            </p>
+            <div class="tagRow"><span class="tag green">Definition 1.9</span><span class="tag">heights</span></div>
           </div>
+          <div class="card">
+            <h3>Theorem 1.10</h3>
+            <p>
+              Theorem 1.10 estimates the procession-normalized mono-analytic log-volume
+              of the holomorphic hull attached to theta-pilot objects. It is the direct
+              numerical continuation of IUT III's Corollary 3.12 setting.
+            </p>
+            <div class="tagRow"><span class="tag gold">theta-pilot</span><span class="tag">log-volume</span></div>
+          </div>
+          <div class="card">
+            <h3>Suitable initial theta data</h3>
+            <p>
+              Corollary 2.2 constructs initial theta data from points on the thrice
+              punctured projective line, outside controlled exceptional loci, so that the
+              hypotheses needed for Theorem 1.10 are available in Diophantine applications.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 2.2</span><span class="tag">application input</span></div>
+          </div>
+          <div class="card">
+            <h3>Diophantine inequalities</h3>
+            <p>
+              Corollary 2.3 applies the estimate to Vojta-type inequalities for
+              hyperbolic curves; the IUT series identifies abc and Szpiro-type statements
+              as consequences through this route.
+            </p>
+            <div class="tagRow"><span class="tag green">Corollary 2.3</span><span class="tag">Vojta/abc/Szpiro</span></div>
+          </div>
+        </div>
+        <table>
+          <tr><th>IUT IV step</th><th>Role in the wiki map</th><th>Nearby concept pages</th></tr>
+          <tr>
+            <td>Propositions 1.1-1.5</td>
+            <td>Local estimates for differents, logarithms, and nonarchimedean/archimedean log-volume containers.</td>
+            <td><a href="#different-estimates">different estimates</a>, <a href="#normalized-log-volume-estimates">normalized log-volume</a></td>
+          </tr>
+          <tr>
+            <td>Propositions 1.6-1.7</td>
+            <td>Analytic and averaging input used to assemble local estimates into global bounds.</td>
+            <td><a href="#prime-number-theorem-input">prime number theorem input</a>, <a href="#weighted-averages">weighted averages</a></td>
+          </tr>
+          <tr>
+            <td>Definition 1.9 and Theorem 1.10</td>
+            <td>Arithmetic divisors and the explicit theta-pilot log-volume estimate.</td>
+            <td><a href="#arithmetic-divisors">arithmetic divisors</a>, <a href="#theta-pilot-log-volume-estimate">theta-pilot estimate</a></td>
+          </tr>
+          <tr>
+            <td>Corollaries 2.2-2.3</td>
+            <td>Construction of suitable initial theta data and extraction of Diophantine inequalities.</td>
+            <td><a href="#suitable-initial-theta-data">initial theta data</a>, <a href="#diophantine-inequalities">Diophantine inequalities</a></td>
+          </tr>
+          <tr>
+            <td>Section 3</td>
+            <td>Set-theoretic language of species, mutations, and copies used to describe inter-universal movement.</td>
+            <td><a href="#species">species</a>, <a href="#mutation">mutation</a>, <a href="#set-theoretic-copies">set-theoretic copies</a></td>
+          </tr>
+        </table>
+        <div class="callout">
+          Reading rule: IUT IV does not replace the disputed Corollary 3.12 corridor. It
+          assumes the earlier log-volume comparison machinery and computes its numerical
+          consequences. A faithful wiki therefore keeps the estimate pipeline linked back
+          to <a href="#corollary-312">Corollary 3.12</a> rather than presenting the
+          Diophantine inequalities as independent elementary estimates.
         </div>
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV</a>
           <a href="papers/mochizuki-explicit-estimates.pdf" target="_blank">Explicit Estimates</a>
           <a href="papers/wrap-explicit-estimates-iut-fesenko-et-al-2022.pdf" target="_blank">WRAP version</a>
+          Related: <a href="#iut-iv-atlas">IUT IV atlas</a>
+          <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
+          <a href="#source-library">source library</a>
         </div>
       </section>
 
