@@ -618,6 +618,8 @@
         <a href="#additive-to-multiplicative-67-610">Additive to D-Theta 6.7-6.10</a>
         <a href="#multiplicative-additive-bridges">Multiplicative/additive bridges</a>
         <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
+        <a href="#theta-plus-minus-ell-lift-611-612">Theta±ell lift 6.11-6.12</a>
+        <a href="#theta-plus-minus-ell-nf-gluing-613">Theta±ellNF gluing 6.13</a>
         <a href="#mono-theta-environments-ii11">Mono-theta environments 1.1</a>
         <a href="#iut-ii-mono-theta-rigidity-110-112">Mono-theta rigidity 1.10-1.12</a>
         <a href="#galois-theoretic-theta-evaluation-ii2">Galois theta evaluation 2</a>
@@ -1624,9 +1626,11 @@
               <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base 6.4-6.6</a>,
               <a href="#additive-to-multiplicative-67-610">additive to D-Theta 6.7-6.10</a>,
               <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges 6.11</a>,
+              <a href="#theta-plus-minus-ell-lift-611-612">Theta±ell lift 6.11-6.12</a>,
               <a href="#theta-plus-minus-bridge-611">Theta± bridge</a>,
               <a href="#theta-ell-bridge-611">Thetaell bridge</a>,
               <a href="#theta-plus-minus-ell-nf-613">Theta±ellNF 6.13</a>,
+              <a href="#theta-plus-minus-ell-nf-gluing-613">Theta±ellNF gluing 6.13</a>,
               <a href="#d-theta-plus-minus-ell-nf-613">D-Theta±ellNF theater</a>,
               <a href="#theta-link-source-definition">Theta link source definition</a>,
               <a href="#theta-nf-gluing-section5">ThetaNF gluing</a>,
@@ -13947,6 +13951,122 @@
         </div>
       </section>
 
+      <section id="theta-plus-minus-ell-lift-611-612">
+        <h2>IUT I Definition 6.11 and Corollary 6.12: Theta±ell Frobenioid Lift</h2>
+        <p class="lede">
+          Definition 6.11 lifts the additive D-Theta±ell bridge package to
+          F-prime-strips. Corollary 6.12 then says that the lifted isomorphism theory
+          is read bijectively from the associated D-bridges, with gluing choices
+          forming an <span class="math">F_l^± x {±1}^V</span>-torsor.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Definition 6.11 and Corollary 6.12 lift">
+          <div class="diagramHeader">
+            <strong>Lift from D-bridges to F-prime-strip bridges</strong>
+            <span>Definition 6.11 and Corollary 6.12</span>
+          </div>
+          <svg viewBox="0 0 1120 510" role="img">
+            <defs>
+              <marker id="arrowLift611612" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox gold" x="74" y="76" width="244" height="94"></rect>
+            <text class="nodeTitle" x="196" y="106" text-anchor="middle">Theta± bridge</text>
+            <text class="tinyText" x="196" y="132" text-anchor="middle">F_T -> F_≻</text>
+            <text class="tinyText" x="196" y="152" text-anchor="middle">T an F_l^±-group</text>
+
+            <rect class="nodeBox blue" x="74" y="306" width="244" height="94"></rect>
+            <text class="nodeTitle" x="196" y="336" text-anchor="middle">Thetaell bridge</text>
+            <text class="tinyText" x="196" y="362" text-anchor="middle">F_T -> D±</text>
+            <text class="tinyText" x="196" y="382" text-anchor="middle">T an F_l^±-torsor</text>
+
+            <rect class="nodeBox violet" x="438" y="190" width="270" height="96"></rect>
+            <text class="nodeTitle" x="573" y="222" text-anchor="middle">Theta±ell-Hodge theater</text>
+            <text class="tinyText" x="573" y="248" text-anchor="middle">F_≻ <- F_T -> D±</text>
+            <text class="tinyText" x="573" y="268" text-anchor="middle">associated D-data is D-Theta±ell</text>
+
+            <rect class="nodeBox green" x="820" y="76" width="244" height="94"></rect>
+            <text class="nodeTitle" x="942" y="106" text-anchor="middle">D-level bijection</text>
+            <text class="tinyText" x="942" y="132" text-anchor="middle">Corollary 6.12(i)</text>
+            <text class="tinyText" x="942" y="152" text-anchor="middle">lifted isomorphisms read from D</text>
+
+            <rect class="nodeBox red" x="820" y="306" width="244" height="94"></rect>
+            <text class="nodeTitle" x="942" y="336" text-anchor="middle">gluing torsor</text>
+            <text class="tinyText" x="942" y="362" text-anchor="middle">F_l^± x {±1}^V</text>
+            <text class="tinyText" x="942" y="382" text-anchor="middle">Corollary 6.12(ii)</text>
+
+            <rect class="nodeBox gold" x="398" y="404" width="350" height="58"></rect>
+            <text class="nodeTitle" x="573" y="432" text-anchor="middle">quotient capsule F_|T| and nonzero part</text>
+            <text class="tinyText" x="573" y="450" text-anchor="middle">constituents well-defined up to positive automorphism</text>
+
+            <path d="M318 123 C378 142 406 178 436 220" class="edge gold" marker-end="url(#arrowLift611612)"></path>
+            <path d="M318 353 C380 333 410 292 436 256" class="edge blue" marker-end="url(#arrowLift611612)"></path>
+            <path d="M710 222 C768 188 802 146 818 124" class="edge green" marker-end="url(#arrowLift611612)"></path>
+            <path d="M710 256 C770 285 802 326 818 354" class="edge red" marker-end="url(#arrowLift611612)"></path>
+            <path d="M573 286 V402" class="edge violet" marker-end="url(#arrowLift611612)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Content</th><th>Formalization note</th></tr>
+          <tr>
+            <td>Definition 6.11(i)</td>
+            <td>
+              The Theta± bridge is a poly-morphism
+              <span class="math">F_T -> F_≻</span> lifting a D-Theta± bridge. It
+              forms <span class="math">F_|T|</span> by quotienting the label set by
+              <span class="math">{±1}</span> and also forms the nonzero subcapsule.
+            </td>
+            <td>
+              The quotient capsule is part of the lifted structure, not a later
+              convenience. Its positive-automorphism ambiguity must be explicit.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 6.11(ii)</td>
+            <td>
+              The Thetaell bridge keeps an F-prime-strip capsule but maps to
+              <span class="math">D±</span>; its associated D-prime-strip capsule is
+              the D-Thetaell bridge.
+            </td>
+            <td>
+              The right-hand target remains D-level. A wiki or Lean model that forces
+              both bridge targets to be F-prime-strips changes the definition.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 6.11(iii)</td>
+            <td>
+              A Theta±ell-Hodge theater is the compatible span
+              <span class="math">F_≻ &lt;- F_T -> D±</span>, whose associated D-data
+              forms a D-Theta±ell-Hodge theater.
+            </td>
+            <td>
+              Compatibility is checked through induced poly-isomorphisms of the
+              F-prime-strip capsules.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 6.12</td>
+            <td>
+              Lifted isomorphism sets map bijectively to D-level isomorphism sets, and
+              compatible gluings form an <span class="math">F_l^± x {±1}^V</span>
+              torsor.
+            </td>
+            <td>
+              This is the additive lift analogue of Section 5 rigidity: the new
+              information is the signed gluing torsor, not hidden extra lift choices.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Definition 6.11 and Corollary 6.12</a>
+          Related: <a href="#d-theta-plus-minus-ell-64-66">D-Theta±ell base</a>
+          <a href="#additive-to-multiplicative-67-610">Proposition 6.7 hinge</a>
+          <a href="#theta-plus-minus-ell-nf-gluing-613">Theta±ellNF gluing</a>
+        </div>
+      </section>
+
       <section id="theta-plus-minus-ell-nf-613">
         <h2>Theta±ellNF Hodge Theaters in IUT I 6.13</h2>
         <p class="lede">
@@ -14110,6 +14230,120 @@
           <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
           <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
           <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
+        </div>
+      </section>
+
+      <section id="theta-plus-minus-ell-nf-gluing-613">
+        <h2>IUT I Definition 6.13: Theta±ellNF Gluing</h2>
+        <p class="lede">
+          Definition 6.13 combines the additive Theta±ell theater with the
+          multiplicative ThetaNF theater. The gluing is along the Theta±/Theta bridge
+          relation supplied by Proposition 6.7 and Remark 6.12.2, and is described by
+          Mochizuki as a relay between geometric and arithmetic basepoints.
+        </p>
+        <div class="diagram fit" aria-label="IUT I Definition 6.13 Theta plus-minus ell NF gluing">
+          <div class="diagramHeader">
+            <strong>Combined additive/multiplicative theater</strong>
+            <span>Definition 6.13 with Remarks 6.12.2 and 6.12.6</span>
+          </div>
+          <svg viewBox="0 0 1120 520" role="img">
+            <defs>
+              <marker id="arrowNFGlue613" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox gold" x="64" y="78" width="260" height="106"></rect>
+            <text class="nodeTitle" x="194" y="110" text-anchor="middle">Theta±ell side</text>
+            <text class="tinyText" x="194" y="138" text-anchor="middle">signed additive F_l^± labels</text>
+            <text class="tinyText" x="194" y="160" text-anchor="middle">geometric basepoint V±</text>
+
+            <rect class="nodeBox green" x="64" y="330" width="260" height="106"></rect>
+            <text class="nodeTitle" x="194" y="362" text-anchor="middle">ThetaNF side</text>
+            <text class="tinyText" x="194" y="390" text-anchor="middle">multiplicative F_l labels</text>
+            <text class="tinyText" x="194" y="412" text-anchor="middle">number-field/Fmod basepoint data</text>
+
+            <rect class="nodeBox violet" x="432" y="202" width="282" height="98"></rect>
+            <text class="nodeTitle" x="573" y="234" text-anchor="middle">unique gluing</text>
+            <text class="tinyText" x="573" y="260" text-anchor="middle">Theta± -> Theta by Proposition 6.7</text>
+            <text class="tinyText" x="573" y="280" text-anchor="middle">Remark 6.12.2: gluing isomorphism unique</text>
+
+            <rect class="nodeBox red" x="806" y="124" width="250" height="100"></rect>
+            <text class="nodeTitle" x="931" y="154" text-anchor="middle">Theta±ellNF theater</text>
+            <text class="tinyText" x="931" y="180" text-anchor="middle">additive side + multiplicative side</text>
+            <text class="tinyText" x="931" y="202" text-anchor="middle">plus unique gluing isomorphism</text>
+
+            <rect class="nodeBox blue" x="806" y="320" width="250" height="100"></rect>
+            <text class="nodeTitle" x="931" y="350" text-anchor="middle">D-Theta±ellNF theater</text>
+            <text class="tinyText" x="931" y="376" text-anchor="middle">D-level analogue of same triple</text>
+            <text class="tinyText" x="931" y="398" text-anchor="middle">used for D-prime-strip readings</text>
+
+            <rect class="nodeBox gold" x="386" y="426" width="374" height="58"></rect>
+            <text class="nodeTitle" x="573" y="454" text-anchor="middle">relay between geometric and arithmetic basepoints</text>
+            <text class="tinyText" x="573" y="472" text-anchor="middle">Remark 6.12.6(v): two dimensions of ring-like structure</text>
+
+            <path d="M324 132 C384 148 410 194 430 232" class="edge gold" marker-end="url(#arrowNFGlue613)"></path>
+            <path d="M324 384 C384 366 412 314 430 270" class="edge green" marker-end="url(#arrowNFGlue613)"></path>
+            <path d="M716 246 C758 218 776 190 804 174" class="edge red" marker-end="url(#arrowNFGlue613)"></path>
+            <path d="M716 262 C762 294 780 344 804 370" class="edge blue" marker-end="url(#arrowNFGlue613)"></path>
+            <path d="M573 302 V424" class="edge violet" marker-end="url(#arrowNFGlue613)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source</th><th>Statement</th><th>Interpretive constraint</th></tr>
+          <tr>
+            <td>Remark 6.12.2(i)</td>
+            <td>
+              A Theta bridge portion can be regarded as constructed from a Theta±
+              bridge by the functorial algorithm parallel to Proposition 6.7.
+            </td>
+            <td>
+              The final gluing depends on the explicit additive-to-multiplicative
+              bridge conversion, not on an arbitrary identification of label sets.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 6.12.2(ii)</td>
+            <td>
+              Gluing a Theta±ell-Hodge theater to a ThetaNF-Hodge theater along their
+              associated Theta±/Theta bridges yields the Theta±ellNF-Hodge theater;
+              the gluing isomorphism is unique.
+            </td>
+            <td>
+              The combined theater has one additive component, one multiplicative
+              component, and a specified unique compatibility witness.
+            </td>
+          </tr>
+          <tr>
+            <td>Definition 6.13(i)-(ii)</td>
+            <td>
+              The Theta±ellNF theater and its D-level analogue are triples consisting
+              of the two component theaters and their unique gluing isomorphism.
+            </td>
+            <td>
+              The F-level and D-level versions should be linked but not conflated.
+              Later arguments may read only D-level or mono-analytic information.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 6.12.6(v)</td>
+            <td>
+              The combined theater is presented as a relay between geometric
+              basepoints suited to theta evaluation and arithmetic basepoints suited
+              to constructing <span class="math">Fmod</span>.
+            </td>
+            <td>
+              This page records why both additive and multiplicative sides are present
+              before later Hodge-Arakelov and Gaussian Frobenioid material is read.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I, Remark 6.12.2, Remark 6.12.6, Definition 6.13</a>
+          Related: <a href="#theta-plus-minus-ell-lift-611-612">Theta±ell lift</a>
+          <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
+          <a href="#theta-plus-minus-ell-relay">Theta±ell relay</a>
+          <a href="#theta-plus-minus-ell-nf-613">Theta±ellNF atlas</a>
         </div>
       </section>
 
