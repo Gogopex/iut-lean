@@ -528,6 +528,7 @@
         <a href="#gaussian-frobenioid-categories-ii38">Gaussian Frobenioid categories 3.8</a>
         <a href="#good-prime-gaussian-monoids-ii41">Good-prime Gaussian monoids 4.1</a>
         <a href="#global-gaussian-frobenioids-ii45">Global Gaussian Frobenioids 4.5</a>
+        <a href="#theta-plus-minus-ell-gaussian-lift-ii46">Theta±ell Gaussian lift 4.6</a>
         <a href="#theta-evaluation-kummer-route">Theta evaluation route</a>
         <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
         <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
@@ -1516,6 +1517,8 @@
               <a href="#archimedean-gaussian-monoids-43">archimedean Gaussian monoids</a>,
               <a href="#global-gaussian-frobenioids-ii45">global Gaussian Frobenioids</a>,
               <a href="#global-fpm-synchronization-453">global F_l± synchronization</a>,
+              <a href="#theta-plus-minus-ell-gaussian-lift-ii46">Theta±ell Gaussian lift</a>,
+              <a href="#cenv-cgau-global-frobenioids-46">Cenv/Cgau</a>,
               <a href="#gaussian-monoids">Gaussian monoids</a>,
               <a href="#tempered-gaussian-frobenioids">tempered Gaussian Frobenioids</a>,
               <a href="#split-theta-monoids">split theta monoids</a>,
@@ -4534,7 +4537,7 @@
           <tr>
             <td>§4</td>
             <td>Global Gaussian Frobenioids and the modified theta-link variants <span class="math">Theta×μ</span> and <span class="math">Theta×μ_gau</span>.</td>
-            <td><a href="#good-prime-gaussian-monoids-ii41">Good-prime Gaussian monoids</a>, <a href="#global-gaussian-frobenioids-ii45">Global Gaussian Frobenioids</a>, <a href="#theta-log-links">theta/log links</a>, <a href="#log-theta-lattice">log-theta lattice</a></td>
+            <td><a href="#good-prime-gaussian-monoids-ii41">Good-prime Gaussian monoids</a>, <a href="#global-gaussian-frobenioids-ii45">Global Gaussian Frobenioids</a>, <a href="#theta-plus-minus-ell-gaussian-lift-ii46">Theta±ell Gaussian lift</a>, <a href="#theta-log-links">theta/log links</a>, <a href="#log-theta-lattice">log-theta lattice</a></td>
           </tr>
         </table>
         <table>
@@ -11255,6 +11258,236 @@
           <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges</a>
           <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
           <a href="#log-theta-lattice">log-theta lattice</a>
+        </div>
+      </section>
+
+      <section id="theta-plus-minus-ell-gaussian-lift-ii46">
+        <h2>Theta±ell Gaussian Lift in IUT II 4.6</h2>
+        <p class="lede">
+          Corollary 4.6 transfers the D-side global Gaussian construction of
+          Corollary 4.5 to a <span class="math">Theta±ell</span>-Hodge theater. The
+          input is an F-prime-strip whose associated D-prime-strip is the one used in
+          Corollary 4.5. Kummer-theoretic identifications lift constant monoids,
+          semi-simplifications, label synchronization, local theta/Gaussian assignments,
+          and global realified Frobenioids from the D-side to the F-side.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Corollary 4.6 Theta plus-minus ell Gaussian lift">
+          <div class="diagramHeader">
+            <strong>Frobenioid lift of global Gaussian data</strong>
+            <span>Corollary 4.6 over the Corollary 4.5 D-side construction</span>
+          </div>
+          <svg viewBox="0 0 1120 610" role="img">
+            <defs>
+              <marker id="arrowThetaEllLift46" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox violet" x="74" y="54" width="250" height="82"></rect>
+            <text class="nodeTitle" x="199" y="84" text-anchor="middle">Theta±ell theater</text>
+            <text class="tinyText" x="199" y="108" text-anchor="middle">F-prime-strip and F⊢</text>
+            <text class="tinyText" x="199" y="126" text-anchor="middle">associated D-side from 4.5</text>
+
+            <rect class="nodeBox blue" x="438" y="54" width="250" height="82"></rect>
+            <text class="nodeTitle" x="563" y="84" text-anchor="middle">Kummer identifications</text>
+            <text class="tinyText" x="563" y="108" text-anchor="middle">Psi_cns(F) ≃ Psi_cns(D)</text>
+            <text class="tinyText" x="563" y="126" text-anchor="middle">Psi_ss(F⊢) ≃ Psi_ss(D⊢)</text>
+
+            <rect class="nodeBox green" x="802" y="54" width="250" height="82"></rect>
+            <text class="nodeTitle" x="927" y="84" text-anchor="middle">global Frobenioid C</text>
+            <text class="tinyText" x="927" y="108" text-anchor="middle">C ≃ D(D⊢)</text>
+            <text class="tinyText" x="927" y="126" text-anchor="middle">global currency exchange</text>
+
+            <rect class="nodeBox gold" x="104" y="246" width="236" height="82"></rect>
+            <text class="nodeTitle" x="222" y="276" text-anchor="middle">F_l± synchronization</text>
+            <text class="tinyText" x="222" y="300" text-anchor="middle">Psi_cns(F≻)_t -> Psi_cns(D≻)_t</text>
+            <text class="tinyText" x="222" y="318" text-anchor="middle">indeterminacy independent of label</text>
+
+            <rect class="nodeBox blue" x="442" y="246" width="236" height="82"></rect>
+            <text class="nodeTitle" x="560" y="276" text-anchor="middle">local F-theta/Gaussian</text>
+            <text class="tinyText" x="560" y="300" text-anchor="middle">Psi_Fenv, Psi_Fgau</text>
+            <text class="tinyText" x="560" y="318" text-anchor="middle">via glued Theta bridge</text>
+
+            <rect class="nodeBox red" x="780" y="246" width="236" height="82"></rect>
+            <text class="nodeTitle" x="898" y="276" text-anchor="middle">global Cenv/Cgau</text>
+            <text class="tinyText" x="898" y="300" text-anchor="middle">Frobenioids over Prime ≃ V</text>
+            <text class="tinyText" x="898" y="318" text-anchor="middle">conjugated from Denv/Dgau</text>
+
+            <rect class="nodeBox green" x="248" y="448" width="268" height="84"></rect>
+            <text class="nodeTitle" x="382" y="478" text-anchor="middle">evaluation chain</text>
+            <text class="tinyText" x="382" y="502" text-anchor="middle">Psi_Fenv -> Psi_env(D>)</text>
+            <text class="tinyText" x="382" y="520" text-anchor="middle">-> Psi_gau(D>) -> Psi_Fgau</text>
+
+            <rect class="nodeBox violet" x="642" y="448" width="268" height="84"></rect>
+            <text class="nodeTitle" x="776" y="478" text-anchor="middle">global evaluation chain</text>
+            <text class="tinyText" x="776" y="502" text-anchor="middle">Cenv -> Denv -> Dgau -> Cgau</text>
+            <text class="tinyText" x="776" y="520" text-anchor="middle">compatible locally at all v</text>
+
+            <path d="M326 95 H436" class="edge violet" marker-end="url(#arrowThetaEllLift46)"></path>
+            <path d="M690 95 H800" class="edge blue" marker-end="url(#arrowThetaEllLift46)"></path>
+            <path d="M563 138 C520 182 422 220 238 244" class="edge gold" marker-end="url(#arrowThetaEllLift46)"></path>
+            <path d="M563 138 V244" class="edge blue" marker-end="url(#arrowThetaEllLift46)"></path>
+            <path d="M927 138 C932 184 920 220 904 244" class="edge red" marker-end="url(#arrowThetaEllLift46)"></path>
+            <path d="M560 330 C522 378 438 414 392 446" class="edge green" marker-end="url(#arrowThetaEllLift46)"></path>
+            <path d="M898 330 C868 378 816 414 784 446" class="edge violet" marker-end="url(#arrowThetaEllLift46)"></path>
+            <path d="M516 490 H640" class="edge red" marker-end="url(#arrowThetaEllLift46)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Source item</th><th>F-side construction</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Corollary 4.6(i)</td>
+            <td>
+              From an F-prime-strip <span class="math">F</span>, construct
+              <span class="math">Psi_cns(F)</span> and a Kummer-theoretic collection of
+              isomorphisms <span class="math">Psi_cns(F) -> Psi_cns(D)</span>.
+            </td>
+            <td>
+              This is the constant-monoid lift from D-data to Frobenioid-theoretic
+              F-data.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 4.6(ii)</td>
+            <td>
+              From the mono-analytic F-prime-strip <span class="math">F⊢</span>,
+              construct semi-simplifications and isomorphisms to the D-side
+              semi-simplifications. The global F-prime-strip supplies a Frobenioid
+              <span class="math">C</span> isomorphic to
+              <span class="math">D(D⊢)</span>.
+            </td>
+            <td>
+              This identifies the global realified F-side degree object with the D-side
+              realified container.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 4.6(iii)</td>
+            <td>
+              The isomorphisms of constant monoids produce labeled isomorphisms
+              <span class="math">Psi_cns(F≻)_t -> Psi_cns(D≻)_t</span>, with
+              nonarchimedean conjugacy indeterminacy independent of the label, and
+              compatible <span class="math">F_l^±</span>-symmetrizing isomorphisms.
+            </td>
+            <td>
+              This lifts the global conjugate synchronization of Corollary 4.5 to the
+              F-prime-strip setting.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 4.6(iv)</td>
+            <td>
+              A theta bridge glued to the <span class="math">Theta±</span>-bridge
+              constructs <span class="math">Psi_Fenv</span>,
+              <span class="math">Psi_Fgau</span>, and infinity variants, together with
+              evaluation isomorphisms through the D-side
+              <span class="math">Psi_env(D>)</span> and
+              <span class="math">Psi_gau(D>)</span>.
+            </td>
+            <td>
+              This is the local F-theoretic theta/Gaussian assignment used by the
+              theta-link side.
+            </td>
+          </tr>
+          <tr>
+            <td>Corollary 4.6(v)</td>
+            <td>
+              Applying the F/D isomorphism to <span class="math">Denv</span> and
+              <span class="math">Dgau</span> constructs global Frobenioids
+              <span class="math">Cenv</span> and <span class="math">Cgau</span>, with
+              evaluation isomorphisms
+              <span class="math">Cenv -> Denv -> Dgau -> Cgau</span>.
+            </td>
+            <td>
+              This conjugates the D-side global formal evaluation into the F-side
+              Frobenioid-theoretic world.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 4.6.1</td>
+            <td>
+              At nonarchimedean places, the semi-simplification isomorphism is
+              algorithmically reconstructed from <span class="math">F⊢_v</span>. At
+              archimedean places the distinguished non-unit element is not reconstructed
+              from <span class="math">F⊢_v</span> alone; the global Frobenioids act as
+              currency-exchange devices between local divisor monoids.
+            </td>
+            <td>
+              The archimedean step needs the global object, not just local copying.
+            </td>
+          </tr>
+        </table>
+        <div class="grid3">
+          <div class="card" id="f-prime-strip-constant-monoids-46">
+            <h3>F-prime-strip constant monoids</h3>
+            <p>
+              Corollary 4.6(i) constructs constant monoids directly from an
+              F-prime-strip and compares them to the associated D-prime-strip constant
+              monoids through Kummer-theoretic isomorphisms.
+            </p>
+            <div class="tagRow"><span class="tag green">Cor. 4.6(i)</span><span class="tag">F-prime-strip</span></div>
+          </div>
+          <div class="card" id="f-semi-simplification-46">
+            <h3>F⊢ semi-simplification</h3>
+            <p>
+              The F⊢-prime-strip supplies semi-simplified constant data with splittings.
+              Corollary 4.6(ii) matches this data with the D⊢ semi-simplification and
+              the global realified Frobenioid.
+            </p>
+            <div class="tagRow"><span class="tag blue">Cor. 4.6(ii)</span><span class="tag">mono-analytic</span></div>
+          </div>
+          <div class="card" id="theta-ell-fpm-synchronization-46">
+            <h3>F_l± synchronization on F-data</h3>
+            <p>
+              Corollary 4.6(iii) lifts the label-synchronized
+              <span class="math">F_l^±</span> symmetry from D-data to F-data, with the
+              nonarchimedean conjugacy ambiguity independent of the label.
+            </p>
+            <div class="tagRow"><span class="tag violet">Cor. 4.6(iii)</span><span class="tag">labels</span></div>
+          </div>
+          <div class="card" id="theta-bridge-f-gaussian-46">
+            <h3>Theta-bridge F-Gaussian assignments</h3>
+            <p>
+              The glued theta bridge constructs
+              <span class="math">Psi_Fenv(HT_Theta)</span> and
+              <span class="math">Psi_Fgau(HT_Theta)</span>, together with local
+              evaluation chains through the D-side monoids.
+            </p>
+            <div class="tagRow"><span class="tag gold">Cor. 4.6(iv)</span><span class="tag">Theta bridge</span></div>
+          </div>
+          <div class="card" id="cenv-cgau-global-frobenioids-46">
+            <h3>Cenv and Cgau</h3>
+            <p>
+              <span class="math">Cenv</span> and <span class="math">Cgau</span> are the
+              F-side global realified theta and Gaussian Frobenioids. They are obtained
+              by conjugating <span class="math">Denv</span> and
+              <span class="math">Dgau</span> through the F/D Frobenioid isomorphism.
+            </p>
+            <div class="tagRow"><span class="tag red">Cor. 4.6(v)</span><span class="tag">global</span></div>
+          </div>
+          <div class="card" id="global-currency-exchange-461">
+            <h3>Global currency exchange</h3>
+            <p>
+              Remark 4.6.1 describes global Frobenioids as devices for translating
+              between local divisor-monoid currencies. This is necessary at archimedean
+              places where the local F⊢ data alone does not reconstruct the distinguished
+              non-unit element.
+            </p>
+            <div class="tagRow"><span class="tag blue">Rem. 4.6.1</span><span class="tag">archimedean</span></div>
+          </div>
+        </div>
+        <div class="callout violet">
+          Formalization warning: Corollary 4.6 is not just another copy of Corollary
+          4.5. It records the Kummer-theoretic transport from D-prime-strip data to
+          F-prime-strip/Frobenioid data and exposes the archimedean dependence on the
+          global realified Frobenioid.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 4.6</a>
+          Related: <a href="#global-gaussian-frobenioids-ii45">global Gaussian Frobenioids</a>
+          <a href="#theta-plus-minus-ell-bridges-611">Theta±ell bridges</a>
+          <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
+          <a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips</a>
         </div>
       </section>
 
