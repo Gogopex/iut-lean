@@ -490,6 +490,7 @@
         <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
         <a href="#projective-line-gluing-analogy">Projective-line gluing</a>
         <a href="#iut-i-gluing-models">IUT I gluing models</a>
+        <a href="#basepoints-inter-universality">Basepoints/inter-universality</a>
         <a href="#iut-i-coverings-symmetries">IUT I coverings/symmetries</a>
         <a href="#tempered-covering-complements">Tempered covering complements</a>
         <a href="#theta-nf-frobenioid-lift">ThetaNF Frobenioid lift</a>
@@ -1270,6 +1271,20 @@
               <a href="#kummer-gluing-cycle">Kummer gluing cycle</a>
             </td>
             <td>IUT I, Introduction §I2</td>
+          </tr>
+          <tr>
+            <td>IUT I</td>
+            <td>Basepoints and inter-universality</td>
+            <td>
+              <a href="#basepoints-inter-universality">basepoints/inter-universality</a>,
+              <a href="#non-ring-filter">non-ring filter</a>,
+              <a href="#fundamental-group-basepoint">fundamental-group basepoint</a>,
+              <a href="#abstract-topological-group-interface">abstract topological group interface</a>,
+              <a href="#inter-universal-fiber-functors">fiber functors and universes</a>,
+              <a href="#species-type-discipline">species type discipline</a>,
+              <a href="#conjugate-synchronization-basepoints">conjugate synchronization</a>
+            </td>
+            <td>IUT I, Introduction §I3</td>
           </tr>
           <tr>
             <td>IUT I</td>
@@ -3053,6 +3068,179 @@
           <a href="#theta-log-links">theta/log links</a>
           <a href="#log-theta-lattice">log-theta lattice</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="basepoints-inter-universality">
+        <h2>Basepoints and Inter-universality</h2>
+        <p class="lede">
+          IUT I Introduction §I3 explains why theta-links and log-links are called
+          inter-universal. A non-ring/scheme-theoretic filter does not preserve the
+          auxiliary basepoint and fiber-functor data used to construct an etale
+          fundamental group. Across such a filter, the common object is only the
+          underlying abstract topological group, so anabelian reconstruction and
+          species-level type discipline become structural necessities.
+        </p>
+        <div class="diagram" aria-label="Basepoints and inter-universal comparison">
+          <div class="diagramHeader">
+            <strong>What survives a non-ring filter</strong>
+            <span>IUT I §I3: from scheme histories to abstract topological groups</span>
+          </div>
+          <svg viewBox="0 0 1080 560" role="img">
+            <defs>
+              <marker id="arrowBasepointIU" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="52" y="58" width="238" height="106"></rect>
+            <text class="nodeTitle" x="171" y="88" text-anchor="middle">domain theater</text>
+            <text class="tinyText" x="171" y="114" text-anchor="middle">scheme/ring history</text>
+            <text class="tinyText" x="171" y="132" text-anchor="middle">geometric point and fiber functor</text>
+            <text class="tinyText" x="171" y="150" text-anchor="middle">etale fundamental group</text>
+
+            <rect class="nodeBox green" x="421" y="70" width="238" height="82"></rect>
+            <text class="nodeTitle" x="540" y="101" text-anchor="middle">theta/log filter</text>
+            <text class="tinyText" x="540" y="126" text-anchor="middle">not compatible with ring structure</text>
+            <text class="tinyText" x="540" y="144" text-anchor="middle">not a scheme morphism</text>
+
+            <rect class="nodeBox blue" x="790" y="58" width="238" height="106"></rect>
+            <text class="nodeTitle" x="909" y="88" text-anchor="middle">codomain theater</text>
+            <text class="tinyText" x="909" y="114" text-anchor="middle">different scheme/ring history</text>
+            <text class="tinyText" x="909" y="132" text-anchor="middle">different geometric point data</text>
+            <text class="tinyText" x="909" y="150" text-anchor="middle">etale fundamental group</text>
+
+            <path d="M292 111 H419" class="edge green" marker-end="url(#arrowBasepointIU)"></path>
+            <path d="M660 111 H788" class="edge green" marker-end="url(#arrowBasepointIU)"></path>
+
+            <rect class="nodeBox red" x="250" y="228" width="236" height="82"></rect>
+            <text class="nodeTitle" x="368" y="258" text-anchor="middle">basepoint data lost</text>
+            <text class="tinyText" x="368" y="282" text-anchor="middle">fiber-functor construction</text>
+            <text class="tinyText" x="368" y="300" text-anchor="middle">cannot be transported as such</text>
+
+            <rect class="nodeBox gold" x="594" y="228" width="236" height="82"></rect>
+            <text class="nodeTitle" x="712" y="258" text-anchor="middle">common interface</text>
+            <text class="tinyText" x="712" y="282" text-anchor="middle">abstract topological group</text>
+            <text class="tinyText" x="712" y="300" text-anchor="middle">etale-like, no auxiliary history</text>
+
+            <path d="M454 154 C386 182 368 204 368 226" class="edge red" marker-end="url(#arrowBasepointIU)"></path>
+            <path d="M626 154 C694 182 712 204 712 226" class="edge gold" marker-end="url(#arrowBasepointIU)"></path>
+
+            <rect class="nodeBox violet" x="108" y="404" width="254" height="86"></rect>
+            <text class="nodeTitle" x="235" y="434" text-anchor="middle">absolute anabelian problem</text>
+            <text class="tinyText" x="235" y="459" text-anchor="middle">recover ring/scheme structure</text>
+            <text class="tinyText" x="235" y="477" text-anchor="middle">from topological group data</text>
+
+            <rect class="nodeBox green" x="414" y="404" width="254" height="86"></rect>
+            <text class="nodeTitle" x="541" y="434" text-anchor="middle">species discipline</text>
+            <text class="tinyText" x="541" y="459" text-anchor="middle">record type of object</text>
+            <text class="tinyText" x="541" y="477" text-anchor="middle">before comparing copies</text>
+
+            <rect class="nodeBox blue" x="720" y="404" width="254" height="86"></rect>
+            <text class="nodeTitle" x="847" y="434" text-anchor="middle">later synchronization</text>
+            <text class="tinyText" x="847" y="459" text-anchor="middle">conjugacy indeterminacies</text>
+            <text class="tinyText" x="847" y="477" text-anchor="middle">theta-function rigidity</text>
+
+            <path d="M368 312 C344 358 294 376 244 402" class="edge violet" marker-end="url(#arrowBasepointIU)"></path>
+            <path d="M540 154 V402" class="edge green" marker-end="url(#arrowBasepointIU)"></path>
+            <path d="M712 312 C758 356 816 374 844 402" class="edge blue" marker-end="url(#arrowBasepointIU)"></path>
+          </svg>
+        </div>
+        <div class="grid3">
+          <div class="card" id="non-ring-filter">
+            <h3>Non-ring filter</h3>
+            <p>
+              IUT I §I3 describes the theta-link, and later the log-link, as filters
+              between distinct theaters that are not compatible with the respective ring
+              structures. This is the concrete setting for "surgery on the number field."
+            </p>
+            <div class="tagRow"><span class="tag green">IUT I §I3</span><span class="tag">filter</span></div>
+          </div>
+          <div class="card" id="fundamental-group-basepoint">
+            <h3>Fundamental-group basepoint</h3>
+            <p>
+              Etale fundamental groups are constructed from a basepoint, equivalently a
+              geometric point and fiber functor into separably closed field data. That
+              construction depends on the surrounding scheme/ring structure.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §I3</span><span class="tag">fiber functor</span></div>
+          </div>
+          <div class="card" id="abstract-topological-group-interface">
+            <h3>Abstract topological group interface</h3>
+            <p>
+              Since the non-ring filter is not a scheme morphism, ordinary functoriality
+              of etale fundamental groups is unavailable. Mochizuki's point is that the
+              shared type that still makes sense on both sides is the abstract
+              topological group underlying the etale fundamental group.
+            </p>
+            <div class="tagRow"><span class="tag gold">IUT I §I3</span><span class="tag">etale-like</span></div>
+          </div>
+          <div class="card" id="inter-universal-fiber-functors">
+            <h3>Fiber functors and universes</h3>
+            <p>
+              The phrase inter-universal refers here to relating distinct
+              set-theoretic universes associated with distinct fiber functors and
+              basepoints on the two sides of a non-ring/scheme-theoretic filter.
+            </p>
+            <div class="tagRow"><span class="tag violet">IUT I §I3</span><span class="tag">inter-universal</span></div>
+          </div>
+          <div class="card" id="absolute-anabelian-pressure">
+            <h3>Absolute anabelian pressure</h3>
+            <p>
+              Once only the abstract topological group can be compared, the project is
+              forced toward absolute anabelian geometry: understand which ring/scheme
+              structures can be recovered from the topological group alone.
+            </p>
+            <div class="tagRow"><span class="tag red">IUT I §I3</span><span class="tag">reconstruction</span></div>
+          </div>
+          <div class="card" id="species-type-discipline">
+            <h3>Species type discipline</h3>
+            <p>
+              IUT I explicitly says this discussion depends on distinguishing different
+              types of mathematical objects, and points forward to the language of
+              species developed in IUT IV. This is why the wiki treats species as part
+              of the core formalism rather than as later notation.
+            </p>
+            <div class="tagRow"><span class="tag green">IUT I §I3</span><span class="tag">species</span></div>
+          </div>
+          <div class="card" id="conjugate-synchronization-basepoints">
+            <h3>Conjugate synchronization</h3>
+            <p>
+              The same source paragraph points to synchronization between conjugacy
+              indeterminacies of distinct copies of local Galois groups. This is a
+              basepoint-sensitive inter-universal phenomenon that later reappears in
+              theta evaluation and log-Kummer transport.
+            </p>
+            <div class="tagRow"><span class="tag blue">IUT I §I3</span><span class="tag">synchronization</span></div>
+          </div>
+          <div class="card" id="theta-function-rigidity-inter-universal">
+            <h3>Theta-function rigidity</h3>
+            <p>
+              IUT I also flags rigidity properties of the etale theta function as an
+              inter-universal phenomenon needed in later papers. This connects §I3 to
+              the Hodge-Arakelov evaluation and theta-value Kummer pages.
+            </p>
+            <div class="tagRow"><span class="tag gold">IUT I §I3</span><span class="tag">theta rigidity</span></div>
+          </div>
+          <div class="card" id="formalization-basepoint-rule">
+            <h3>Formalization rule</h3>
+            <p>
+              A formal model should not identify etale fundamental groups by silently
+              transporting basepoints through theta-links or log-links. It should expose
+              the weakening to abstract topological groups and state which anabelian
+              reconstruction theorem restores which structure.
+            </p>
+            <div class="tagRow"><span class="tag red">Lean guardrail</span><span class="tag">no hidden basepoints</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-i.pdf" target="_blank">IUT I</a>
+          Related: <a href="#iut-i-gluing-models">IUT I gluing models</a>
+          <a href="#anabelian-background">anabelian background</a>
+          <a href="#theta-plus-minus-ell-relay">theta±ell relay</a>
+          <a href="#theta-evaluation-kummer-route">theta evaluation route</a>
+          <a href="#species-mutations">species and mutations</a>
+          <a href="#collas-category-perspective">Collas category view</a>
         </div>
       </section>
 
