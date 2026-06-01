@@ -1028,6 +1028,12 @@
         <a href="#first-power-cyclotomic-rigidity-211">First-power cyclotomic rigidity</a>
         <a href="#discrete-rigidity-no-z-completion-211">Discrete rigidity/positivity</a>
         <a href="#theta-monoid-multiradiality-iii22">Theta monoid multiradiality 2.2</a>
+        <a href="#prime-strip-automorphism-route-22">Prime-strip automorphism route 2.2</a>
+        <a href="#bad-prime-radial-insulation-22">Bad-prime radial insulation 2.2</a>
+        <a href="#mono-theta-vs-mlf-rigidity-221">Mono-theta vs MLF rigidity</a>
+        <a href="#no-naive-power-map-222">No naive power map 2.2.2</a>
+        <a href="#radial-coric-etale-picture-23">Radial/coric etale picture 2.3</a>
+        <a href="#spoke-symmetry-23">Spoke symmetry 2.3</a>
         <a href="#f-perp-prime-strips-pilot-iii24">F-perp prime-strips 2.4</a>
         <a href="#multiradiality">Multiradiality</a>
         <a href="#tensor-packets-iii31-33">Tensor packets 3.1-3.3</a>
@@ -39501,7 +39507,7 @@
           </tr>
         </table>
         <div class="grid3">
-          <div class="card" id="prime-strip-automorphism-route-22">
+          <div class="card" id="prime-strip-automorphism-route-22-card">
             <h3>Prime-strip automorphism route</h3>
             <p>
               Theorem 2.2(i) does not leave automorphism groups informal: it routes
@@ -39512,7 +39518,7 @@
             </p>
             <div class="tagRow"><span class="tag blue">Theorem 2.2(i)</span><span class="tag">automorphisms</span></div>
           </div>
-          <div class="card" id="bad-prime-radial-insulation-22">
+          <div class="card" id="bad-prime-radial-insulation-22-card">
             <h3>Bad-prime radial insulation</h3>
             <p>
               The bad-prime clause makes the identity on radial mono-theta data
@@ -39522,7 +39528,7 @@
             </p>
             <div class="tagRow"><span class="tag red">Theorem 2.2(ii)</span><span class="tag">insulation</span></div>
           </div>
-          <div class="card" id="mono-theta-vs-mlf-rigidity-221">
+          <div class="card" id="mono-theta-vs-mlf-rigidity-221-card">
             <h3>Mono-theta vs MLF rigidity</h3>
             <p>
               Remark 2.2.1 contrasts mono-theta cyclotomic rigidity with MLF-Galois-pair
@@ -39531,7 +39537,7 @@
             </p>
             <div class="tagRow"><span class="tag violet">Remark 2.2.1</span><span class="tag">Z× orbit</span></div>
           </div>
-          <div class="card" id="no-naive-power-map-222">
+          <div class="card" id="no-naive-power-map-222-card">
             <h3>No naive power map</h3>
             <p>
               Remark 2.2.2 says that a replacement
@@ -39541,7 +39547,7 @@
             </p>
             <div class="tagRow"><span class="tag gold">Remark 2.2.2</span><span class="tag">warning</span></div>
           </div>
-          <div class="card" id="radial-coric-etale-picture-23">
+          <div class="card" id="radial-coric-etale-picture-23-card">
             <h3>Radial/coric etale picture</h3>
             <p>
               Corollary 2.3 packages D-Theta theater data, theta-environment
@@ -39551,7 +39557,7 @@
             </p>
             <div class="tagRow"><span class="tag green">Corollary 2.3</span><span class="tag">radial to coric</span></div>
           </div>
-          <div class="card" id="spoke-symmetry-23">
+          <div class="card" id="spoke-symmetry-23-card">
             <h3>Spoke symmetry</h3>
             <p>
               The etale-picture identifies radial data along vertical lines and coric
@@ -39575,6 +39581,353 @@
           <a href="#log-kummer-correspondences">log-Kummer correspondences</a>
           <a href="#theta-times-mu-frobenius-pictures-ii410">Theta×μ Frobenius-pictures</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="prime-strip-automorphism-route-22" data-filter="iut iii theorem 2.2 prime strip automorphism route f f times mu f perp times mu kummer compatibility surjection">
+        <h2>IUT III Theorem 2.2(i): Prime-Strip Automorphism Route</h2>
+        <p class="lede">
+          Theorem 2.2(i) records the automorphism passage from an
+          <span class="math">F</span>-prime-strip to its
+          <span class="math">F×μ</span> and <span class="math">F⊢×μ</span>
+          descendants. The second arrows are stated to be surjective and the whole
+          route is compatible with the Kummer isomorphisms of Proposition 2.1(ii)
+          and Theorem 1.5(iii).
+        </p>
+        <div class="diagram fit" aria-label="Prime-strip automorphism route in Theorem 2.2(i)">
+          <div class="diagramHeader">
+            <strong>Automorphism Route</strong>
+            <span>weakened prime-strip interfaces keep Kummer compatibility</span>
+          </div>
+          <svg viewBox="0 0 960 260" role="img">
+            <defs>
+              <marker id="arrowAuto22" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="56" y="68" width="210" height="92"></rect>
+            <text class="nodeTitle" x="161" y="100" text-anchor="middle">Aut_F(Fenv)</text>
+            <text class="tinyText" x="161" y="128" text-anchor="middle">F-prime-strip</text>
+            <rect class="nodeBox green" x="374" y="68" width="210" height="92"></rect>
+            <text class="nodeTitle" x="479" y="100" text-anchor="middle">Aut_F×μ(F×μ_env)</text>
+            <text class="tinyText" x="479" y="128" text-anchor="middle">associated strip</text>
+            <rect class="nodeBox gold" x="692" y="68" width="210" height="92"></rect>
+            <text class="nodeTitle" x="797" y="100" text-anchor="middle">Aut_F⊢×μ(F⊢×μ_△)</text>
+            <text class="tinyText" x="797" y="128" text-anchor="middle">surjective target</text>
+            <path d="M268 114 H372" class="edge blue" marker-end="url(#arrowAuto22)"></path>
+            <path d="M586 114 H690" class="edge green" marker-end="url(#arrowAuto22)"></path>
+            <text class="tinyText" x="320" y="92" text-anchor="middle">natural</text>
+            <text class="tinyText" x="638" y="92" text-anchor="middle">surjective</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Part</th><th>Source statement</th><th>Wiki guardrail</th></tr>
+          <tr>
+            <td>Input</td>
+            <td>Automorphisms of the <span class="math">F</span>-prime-strip attached to <span class="math">Fenv(D&gt;)</span> or <span class="math">Fenv</span>.</td>
+            <td>Do not replace these by automorphisms of a single untyped object.</td>
+          </tr>
+          <tr>
+            <td>Middle and target</td>
+            <td>Associated <span class="math">F×μ</span> and <span class="math">F⊢×μ</span> prime-strips, with the second arrows surjective.</td>
+            <td>The weakened interfaces are where coric unit-quotient freedom enters.</td>
+          </tr>
+          <tr>
+            <td>Kummer condition</td>
+            <td>Compatibility with Proposition 2.1(ii) and Theorem 1.5(iii).</td>
+            <td>The route is not merely functorial; it is constrained by earlier Kummer identifications.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Theorem 2.2(i)</a>
+          Related: <a href="#f-side-kummer-readout-21">F-side Kummer readout</a>
+          <a href="#theta-monoid-multiradiality-iii22">theta monoid multiradiality</a>
+          <a href="#bad-prime-radial-insulation-22">bad-prime radial insulation</a>
+        </div>
+      </section>
+
+      <section id="bad-prime-radial-insulation-22" data-filter="iut iii theorem 2.2 bad prime radial insulation mono theta exterior cyclotome zero map x mu quotient">
+        <h2>IUT III Theorem 2.2(ii): Bad-Prime Radial Insulation</h2>
+        <p class="lede">
+          At a bad prime, Theorem 2.2(ii) isolates radial mono-theta data from
+          arbitrary automorphisms of the coric <span class="math">F⊢×μ</span>
+          prime-strip. The key source clause is that the composite maps from the
+          torsion/exterior-cyclotome side to the <span class="math">×μ</span>
+          quotient are zero.
+        </p>
+        <div class="diagram fit" aria-label="Bad-prime radial insulation in Theorem 2.2(ii)">
+          <div class="diagramHeader">
+            <strong>Bad-Prime Insulation</strong>
+            <span>radial mono-theta data remain fixed under coric ×μ motion</span>
+          </div>
+          <svg viewBox="0 0 1040 340" role="img">
+            <defs>
+              <marker id="arrowBad22" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox red" x="70" y="64" width="260" height="92"></rect>
+            <text class="nodeTitle" x="200" y="96" text-anchor="middle">∞Ψ⊥_env ⊇ ∞Ψ^μ_env</text>
+            <text class="tinyText" x="200" y="124" text-anchor="middle">theta splitting monoid</text>
+            <rect class="nodeBox blue" x="408" y="64" width="260" height="92"></rect>
+            <text class="nodeTitle" x="538" y="96" text-anchor="middle">Π_μ(MΘ) ⊗ Q/Z</text>
+            <text class="tinyText" x="538" y="124" text-anchor="middle">exterior cyclotome</text>
+            <rect class="nodeBox gold" x="746" y="64" width="230" height="92"></rect>
+            <text class="nodeTitle" x="861" y="96" text-anchor="middle">Ψ^ss_cns(F⊢_△)^×μ</text>
+            <text class="tinyText" x="861" y="124" text-anchor="middle">coric quotient</text>
+            <rect class="nodeBox green" x="236" y="220" width="260" height="82"></rect>
+            <text class="nodeTitle" x="366" y="252" text-anchor="middle">mono-theta environments</text>
+            <text class="tinyText" x="366" y="278" text-anchor="middle">identity action</text>
+            <rect class="nodeBox violet" x="610" y="220" width="260" height="82"></rect>
+            <text class="nodeTitle" x="740" y="252" text-anchor="middle">arbitrary ×μ automorphisms</text>
+            <text class="tinyText" x="740" y="278" text-anchor="middle">compatible through zero map</text>
+            <path d="M332 110 H406" class="edge blue" marker-end="url(#arrowBad22)"></path>
+            <path d="M670 110 H744" class="edge red" marker-end="url(#arrowBad22)"></path>
+            <path d="M538 158 C538 188 484 204 414 218" class="edge green" marker-end="url(#arrowBad22)"></path>
+            <path d="M862 158 C846 188 806 204 760 218" class="edge violet" marker-end="url(#arrowBad22)"></path>
+            <text class="tinyText" x="705" y="92" text-anchor="middle">zero composite</text>
+          </svg>
+        </div>
+        <div class="callout">
+          <strong>Formalization guardrail.</strong> This page should not be encoded as
+          "the coric automorphism is trivial." The source statement is subtler:
+          identity on the listed radial objects is compatible with arbitrary
+          automorphisms of the coric <span class="math">×μ</span> quotient because the
+          relevant torsion contribution maps trivially into that quotient.
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Radial object</th><th>Source label</th><th>Function</th></tr>
+          <tr><td>Theta splitting monoid and torsion subgroup</td><td>(av)</td><td>Domain of the bad-prime identity statement.</td></tr>
+          <tr><td>Exterior cyclotome tensor <span class="math">Q/Z</span></td><td>(bv)</td><td>Identified with the torsion subgroup before the zero map.</td></tr>
+          <tr><td>Projective mono-theta environments</td><td>(cv)</td><td>Carry the cyclotomic-rigidity data.</td></tr>
+          <tr><td>Zero-labeled evaluation splittings</td><td>(dv)</td><td>Supply the evaluation splitting used in radial/coric decoupling.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Theorem 2.2(ii)</a>
+          Related: <a href="#bad-prime-zero-map-21">bad-prime zero map</a>
+          <a href="#mono-theta-rigidity-five-properties-211">mono-theta rigidity</a>
+          <a href="#radial-coric-etale-picture-23">radial/coric etale picture</a>
+        </div>
+      </section>
+
+      <section id="mono-theta-vs-mlf-rigidity-221" data-filter="iut iii remark 2.2.1 mono theta mlf galois pair cyclotomic rigidity z times orbit insulation">
+        <h2>IUT III Remark 2.2.1: Mono-Theta vs MLF Rigidity</h2>
+        <p class="lede">
+          Remark 2.2.1 explains why the mono-theta route is used in Theorem
+          2.2(ii). Mono-theta environments amalgamate <span class="math">Π_v</span>
+          and <span class="math">Π_μ</span> so as to recover a cyclotomic-rigidity
+          isomorphism itself, not merely its <span class="math">Z×</span>-orbit.
+          The MLF-Galois-pair route does not have this insulation once
+          <span class="math">O×μ</span> is involved.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Mono-theta route</h3>
+            <p>
+              The exterior cyclotome <span class="math">Π_μ</span> is treated as
+              radial data. The identity action on it sits under the
+              <span class="math">×μ</span> quotient, so coric automorphism freedom
+              does not disturb the cyclotomic-rigidity isomorphism.
+            </p>
+            <div class="tagRow"><span class="tag green">Fig. 2.2</span><span class="tag">insulated</span></div>
+          </div>
+          <div class="card">
+            <h3>MLF-Galois-pair route</h3>
+            <p>
+              The source input uses monoids whose <span class="math">×μ</span>
+              quotient already carries <span class="math">Z×</span>-indeterminacy.
+              That indeterminacy lifts to unit and group-completion levels, so only
+              a <span class="math">Z×</span>-orbit remains.
+            </p>
+            <div class="tagRow"><span class="tag red">Fig. 2.1</span><span class="tag">orbit only</span></div>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Issue</th><th>Mono-theta</th><th>MLF-Galois-pair</th></tr>
+          <tr>
+            <td>Cyclotomic rigidity</td>
+            <td>Recovers the isomorphism <span class="math">l·ΔΘ ≃ Π_μ</span>.</td>
+            <td>Recovers only a <span class="math">Z×</span>-orbit.</td>
+          </tr>
+          <tr>
+            <td>Relation to <span class="math">×μ</span></td>
+            <td><span class="math">Π_μ</span> is radial and insulated from <span class="math">×μ</span> automorphisms.</td>
+            <td>The construction uses <span class="math">O×μ</span> essentially.</td>
+          </tr>
+          <tr>
+            <td>Role in §3</td>
+            <td>Essential first step for Gaussian-monoid multiradiality.</td>
+            <td>Too coarse for theta values because <span class="math">Z×</span>-powers would be confused.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 2.2.1</a>
+          Related: <a href="#first-power-cyclotomic-rigidity-211">first-power cyclotomic rigidity</a>
+          <a href="#bad-prime-radial-insulation-22">bad-prime radial insulation</a>
+          <a href="#theta-monoid-multiradiality-iii22">theta monoid multiradiality</a>
+        </div>
+      </section>
+
+      <section id="no-naive-power-map-222" data-filter="iut iii remark 2.2.2 no naive power map q lambda theta values mono theta rigidity zero labeled evaluation">
+        <h2>IUT III Remark 2.2.2: No Naive Power Map</h2>
+        <p class="lede">
+          Remark 2.2.2 rejects replacing the theta-value correspondence by an
+          arbitrary map <span class="math">q ↦ q^λ</span>. Such a map lacks the
+          mono-theta cyclotomic rigidity, zero-labeled evaluation splittings, and
+          <span class="math">F_l^±</span>-symmetry used by the source construction.
+        </p>
+        <div class="diagram fit" aria-label="Why q maps to q power lambda is not a substitute">
+          <div class="diagramHeader">
+            <strong>Naive Power Map Failure</strong>
+            <span>the theta-function machinery is not optional source decoration</span>
+          </div>
+          <svg viewBox="0 0 980 340" role="img">
+            <defs>
+              <marker id="arrowNaive222" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="58" y="74" width="250" height="86"></rect>
+            <text class="nodeTitle" x="183" y="104" text-anchor="middle">etale theta function</text>
+            <text class="tinyText" x="183" y="130" text-anchor="middle">mono-theta environments</text>
+            <rect class="nodeBox blue" x="398" y="74" width="250" height="86"></rect>
+            <text class="nodeTitle" x="523" y="104" text-anchor="middle">zero-labeled splitting</text>
+            <text class="tinyText" x="523" y="130" text-anchor="middle">Kummer-compatible decoupling</text>
+            <rect class="nodeBox gold" x="738" y="74" width="190" height="86"></rect>
+            <text class="nodeTitle" x="833" y="104" text-anchor="middle">multiradiality</text>
+            <text class="tinyText" x="833" y="130" text-anchor="middle">Corollary 2.3</text>
+            <rect class="nodeBox red" x="210" y="238" width="250" height="70"></rect>
+            <text class="nodeTitle" x="335" y="268" text-anchor="middle">q ↦ q^λ</text>
+            <text class="tinyText" x="335" y="292" text-anchor="middle">no source machinery</text>
+            <rect class="nodeBox red" x="562" y="238" width="250" height="70"></rect>
+            <text class="nodeTitle" x="687" y="268" text-anchor="middle">Kummer incompatibility</text>
+            <text class="tinyText" x="687" y="292" text-anchor="middle">q^λ is not trivial in classes</text>
+            <path d="M310 117 H396" class="edge green" marker-end="url(#arrowNaive222)"></path>
+            <path d="M650 117 H736" class="edge blue" marker-end="url(#arrowNaive222)"></path>
+            <path d="M462 273 H560" class="edge red" marker-end="url(#arrowNaive222)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Missing from <span class="math">q ↦ q^λ</span></th><th>Source role</th><th>Consequence</th></tr>
+          <tr><td>Mono-theta cyclotomic rigidity</td><td>Insulates theta Kummer classes from <span class="math">Z×</span>-indeterminacy.</td><td>No exact theta-monoid multiradiality.</td></tr>
+          <tr><td>Zero-labeled evaluation splittings</td><td>Decouple radial value-group data from coric <span class="math">×μ</span> log-shells.</td><td>No Kummer-compatible radial/coric split.</td></tr>
+          <tr><td><span class="math">F_l^±</span>-symmetric evaluation package</td><td>Controls symmetry among theta labels.</td><td>Arbitrary evaluation points impose incompatible constraints.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 2.2.2</a>
+          Related: <a href="#theta-function-rigidity-inter-universal">theta-function rigidity</a>
+          <a href="#mono-theta-vs-mlf-rigidity-221">mono-theta vs MLF rigidity</a>
+          <a href="#corollary-312-proof-steps">3.12 proof steps</a>
+        </div>
+      </section>
+
+      <section id="radial-coric-etale-picture-23" data-filter="iut iii corollary 2.3 etale picture radial data coric data radial algorithm full essentially surjective">
+        <h2>IUT III Corollary 2.3: Radial/Coric Etale Picture</h2>
+        <p class="lede">
+          Corollary 2.3 packages Theorem 2.2 into an etale-picture of radial data.
+          A radial object consists of a D-theater, the associated
+          <span class="math">Fenv(D&gt;)</span>, the bad-prime data of Theorem
+          2.2(ii), a target <span class="math">F⊢×μ</span>-prime-strip, and a full
+          poly-isomorphism to that target. The radial algorithm sends this package to
+          the coric pair <span class="math">(D⊢_△, F⊢×μ_△(D⊢_△))</span>.
+        </p>
+        <div class="diagram fit" aria-label="Radial to coric etale picture in Corollary 2.3">
+          <div class="diagramHeader">
+            <strong>Radial Algorithm</strong>
+            <span>full and essentially surjective functor from radial data to coric data</span>
+          </div>
+          <svg viewBox="0 0 1060 360" role="img">
+            <defs>
+              <marker id="arrowCor23" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="56" y="70" width="250" height="88"></rect>
+            <text class="nodeTitle" x="181" y="102" text-anchor="middle">D-Θ±ellNF theater</text>
+            <text class="tinyText" x="181" y="130" text-anchor="middle">D-side source</text>
+            <rect class="nodeBox green" x="388" y="70" width="250" height="88"></rect>
+            <text class="nodeTitle" x="513" y="102" text-anchor="middle">radial data R</text>
+            <text class="tinyText" x="513" y="130" text-anchor="middle">Fenv + Rbad + poly-isomorphism</text>
+            <rect class="nodeBox gold" x="720" y="70" width="250" height="88"></rect>
+            <text class="nodeTitle" x="845" y="102" text-anchor="middle">coric data C</text>
+            <text class="tinyText" x="845" y="130" text-anchor="middle">D⊢_△ and F⊢×μ_△</text>
+            <rect class="nodeBox violet" x="388" y="230" width="250" height="76"></rect>
+            <text class="nodeTitle" x="513" y="260" text-anchor="middle">functor</text>
+            <text class="tinyText" x="513" y="284" text-anchor="middle">full + essentially surjective</text>
+            <path d="M308 114 H386" class="edge blue" marker-end="url(#arrowCor23)"></path>
+            <path d="M640 114 H718" class="edge green" marker-end="url(#arrowCor23)"></path>
+            <path d="M513 160 V228" class="edge violet" marker-end="url(#arrowCor23)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Radial component</th><th>Source label</th><th>Coric output role</th></tr>
+          <tr><td>D-Θ±ellNF Hodge theater</td><td>(aR)</td><td>Provides the D-side source theater.</td></tr>
+          <tr><td><span class="math">Fenv(D&gt;)</span></td><td>(bR)</td><td>Holds the F-prime-strip attached to the D-side data.</td></tr>
+          <tr><td>Bad-prime data from Theorem 2.2(ii)</td><td>(cR)</td><td>Keeps radial insulation visible.</td></tr>
+          <tr><td><span class="math">F⊢×μ_△(D⊢_△)</span> and full poly-isomorphism</td><td>(dR)-(eR)</td><td>Supplies the coric target and comparison map.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 2.3(i)</a>
+          Related: <a href="#bad-prime-radial-insulation-22">bad-prime radial insulation</a>
+          <a href="#spoke-symmetry-23">spoke symmetry</a>
+          <a href="#multiradiality">multiradiality overview</a>
+        </div>
+      </section>
+
+      <section id="spoke-symmetry-23" data-filter="iut iii corollary 2.3 spoke symmetry vertical arrows horizontal arrows gaussian log theta lattice arbitrary permutations">
+        <h2>IUT III Corollary 2.3(ii)-(iv): Spoke Symmetry</h2>
+        <p class="lede">
+          Corollary 2.3 identifies radial data along vertical log-theta-lattice
+          columns, identifies coric data along horizontal arrows, and obtains an
+          etale-picture with arbitrary permutation symmetries among the
+          <span class="math">n ∈ Z</span> spokes. This is a source-level symmetry
+          statement, not a claim that all underlying holomorphic structures have
+          been merged.
+        </p>
+        <div class="diagram fit" aria-label="Spoke symmetry in Corollary 2.3">
+          <div class="diagramHeader">
+            <strong>Etale-Picture Spokes</strong>
+            <span>many radial spokes, one common coric center</span>
+          </div>
+          <svg viewBox="0 0 860 440" role="img">
+            <defs>
+              <marker id="arrowSpoke23" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <circle cx="430" cy="220" r="72" fill="#f4ecd6" stroke="#c9ab5c"></circle>
+            <text class="nodeTitle" x="430" y="214" text-anchor="middle">◦,◦C</text>
+            <text class="tinyText" x="430" y="240" text-anchor="middle">common coric data</text>
+            <rect class="nodeBox blue" x="68" y="54" width="196" height="76"></rect>
+            <text class="nodeTitle" x="166" y="84" text-anchor="middle">n,◦R</text>
+            <text class="tinyText" x="166" y="108" text-anchor="middle">vertical column</text>
+            <rect class="nodeBox green" x="596" y="54" width="196" height="76"></rect>
+            <text class="nodeTitle" x="694" y="84" text-anchor="middle">n',◦R</text>
+            <text class="tinyText" x="694" y="108" text-anchor="middle">vertical column</text>
+            <rect class="nodeBox violet" x="68" y="310" width="196" height="76"></rect>
+            <text class="nodeTitle" x="166" y="340" text-anchor="middle">n'',◦R</text>
+            <text class="tinyText" x="166" y="364" text-anchor="middle">radial spoke</text>
+            <rect class="nodeBox red" x="596" y="310" width="196" height="76"></rect>
+            <text class="nodeTitle" x="694" y="340" text-anchor="middle">n''',◦R</text>
+            <text class="tinyText" x="694" y="364" text-anchor="middle">radial spoke</text>
+            <path d="M264 100 L368 182" class="edge blue" marker-end="url(#arrowSpoke23)"></path>
+            <path d="M596 100 L492 182" class="edge green" marker-end="url(#arrowSpoke23)"></path>
+            <path d="M264 348 L368 258" class="edge violet" marker-end="url(#arrowSpoke23)"></path>
+            <path d="M596 348 L492 258" class="edge red" marker-end="url(#arrowSpoke23)"></path>
+            <text class="tinyText" x="430" y="32" text-anchor="middle">arbitrary permutation symmetry among spokes</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Clause</th><th>Source content</th><th>Audit use</th></tr>
+          <tr><td>Vertical arrows</td><td>Identify radial data <span class="math">n,mR</span> along a column.</td><td>Preserve radial packages before horizontal coric identification.</td></tr>
+          <tr><td>Horizontal arrows</td><td>Induce full poly-isomorphisms of <span class="math">D⊢</span>-prime-strips and coric data.</td><td>Construct the common coric center.</td></tr>
+          <tr><td>Equivariance</td><td>Constructions are stabilized/equivariant/functorial for arbitrary automorphisms of horizontal-arrow domains and codomains.</td><td>Marks the symmetry that later §3 algorithms inherit.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 2.3(ii)-(iv)</a>
+          Related: <a href="#radial-coric-etale-picture-23">radial/coric etale picture</a>
+          <a href="#gaussian-log-theta-lattice-source">Gaussian log-theta lattice</a>
+          <a href="#theta-monoid-multiradiality-iii22">theta monoid multiradiality</a>
         </div>
       </section>
 
