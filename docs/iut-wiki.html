@@ -1299,6 +1299,10 @@
         <a href="#iut-iv">IUT IV and consequences</a>
         <a href="#iut-iv-diophantine-output">IUT IV output route</a>
         <a href="#probabilistic-szpiro">Probabilistic Szpiro</a>
+        <a href="#explicit-mu6-evaluation-points-page">Explicit μ6 evaluation</a>
+        <a href="#explicit-mu6-theorem-51-page">Explicit μ6 Theorem 5.1</a>
+        <a href="#explicit-mono-complex-abc-szpiro-page">Explicit ABC/Szpiro</a>
+        <a href="#explicit-fermat-application-page">Explicit Fermat application</a>
         <a href="#iut-iv-zfcg-universes-31">ZFCG universes 3.1</a>
         <a href="#iut-iv-zero-one-species-31">0/1-species 3.1</a>
         <a href="#iut-iv-model-free-specimens-31">Model-free specimens 3.1</a>
@@ -55726,6 +55730,274 @@
           <a href="#iut-iv-atlas">IUT IV atlas</a>
           <a href="#probabilistic-szpiro">probabilistic Szpiro route</a>
           <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
+        </div>
+      </section>
+
+      <section id="explicit-mu6-evaluation-points-page" data-filter="explicit estimates mu6 etale theta function evaluation points six torsion bad places prime 2 porowski standard type">
+        <h2>Explicit Estimates: μ6 Evaluation Points</h2>
+        <p class="lede">
+          The Explicit Estimates paper modifies the etale-theta-function input by
+          replacing the original 2-torsion evaluation points with 6-torsion evaluation
+          points. The purpose is narrow and technical: make the theta-function
+          normalization work at arbitrary bad places, including bad places above 2.
+        </p>
+        <div class="diagram fit" aria-label="Mu six evaluation point modification">
+          <div class="diagramHeader">
+            <strong>Why the μ6 modification is introduced</strong>
+            <span>Explicit Estimates, Introduction and §3</span>
+          </div>
+          <svg viewBox="0 0 1050 430" role="img">
+            <defs>
+              <marker id="arrowExplicitMu6" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox red" x="58" y="74" width="240" height="88"></rect>
+            <text class="nodeTitle" x="178" y="106" text-anchor="middle">old evaluation points</text>
+            <text class="tinyText" x="178" y="130" text-anchor="middle">cusp translated by 2-torsion</text>
+            <text class="tinyText" x="178" y="148" text-anchor="middle">does not handle every bad p=2 case</text>
+
+            <rect class="nodeBox blue" x="405" y="74" width="240" height="88"></rect>
+            <text class="nodeTitle" x="525" y="106" text-anchor="middle">Porowski observation</text>
+            <text class="tinyText" x="525" y="130" text-anchor="middle">conditions hold precisely for n=6</text>
+            <text class="tinyText" x="525" y="148" text-anchor="middle">root-of-unity ratios and unit values</text>
+
+            <rect class="nodeBox green" x="752" y="74" width="240" height="88"></rect>
+            <text class="nodeTitle" x="872" y="106" text-anchor="middle">μ6-standard type</text>
+            <text class="tinyText" x="872" y="130" text-anchor="middle">normalization at 6-torsion points</text>
+            <text class="tinyText" x="872" y="148" text-anchor="middle">works at arbitrary bad places</text>
+
+            <rect class="nodeBox gold" x="230" y="276" width="250" height="84"></rect>
+            <text class="nodeTitle" x="355" y="306" text-anchor="middle">IUT I-III effect</text>
+            <text class="tinyText" x="355" y="330" text-anchor="middle">minor technical modifications</text>
+            <text class="tinyText" x="355" y="348" text-anchor="middle">odd-residue restriction removed</text>
+
+            <rect class="nodeBox violet" x="585" y="276" width="250" height="84"></rect>
+            <text class="nodeTitle" x="710" y="306" text-anchor="middle">IUT IV effect</text>
+            <text class="tinyText" x="710" y="330" text-anchor="middle">μ6 version of theta-pilot estimate</text>
+            <text class="tinyText" x="710" y="348" text-anchor="middle">feeds effective applications</text>
+
+            <path class="edge red" d="M300 118 H403" marker-end="url(#arrowExplicitMu6)"></path>
+            <path class="edge blue" d="M647 118 H750" marker-end="url(#arrowExplicitMu6)"></path>
+            <path class="edge gold" d="M525 164 C475 224 405 248 365 274" marker-end="url(#arrowExplicitMu6)"></path>
+            <path class="edge violet" d="M872 164 C825 224 750 248 718 274" marker-end="url(#arrowExplicitMu6)"></path>
+            <path class="edge green" d="M482 318 H583" marker-end="url(#arrowExplicitMu6)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Paper content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Original issue</td>
+            <td>2-torsion evaluation points do not function properly at bad places above 2.</td>
+            <td>Keep the p=2 obstruction visible in the output-layer map.</td>
+          </tr>
+          <tr>
+            <td>Porowski observation</td>
+            <td>The two desired conditions for n-torsion evaluation points hold exactly for n=6.</td>
+            <td>Explain why the modification is μ6, not an arbitrary torsion replacement.</td>
+          </tr>
+          <tr>
+            <td>μ6 standard type</td>
+            <td>Definition 3.3 introduces etale theta functions normalized at 6-torsion points.</td>
+            <td>Use as a downstream modification of theta evaluation, not as a new 3.12 proof step.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-explicit-estimates.pdf" target="_blank">Explicit Estimates, Introduction and §3</a>
+          <a href="papers/wrap-explicit-estimates-iut-fesenko-et-al-2022.pdf" target="_blank">WRAP version</a>
+          Related: <a href="#theta-evaluation-points-iut-i44">theta evaluation points</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">IUT IV Theorem 1.10</a>
+          <a href="#explicit-mu6-theorem-51-page">μ6 Theorem 5.1</a>
+        </div>
+      </section>
+
+      <section id="explicit-mu6-theorem-51-page" data-filter="explicit estimates mu6 theorem 5.1 iut iv theorem 1.10 ctheta large prime l bad places corollary 5.2 initial theta data">
+        <h2>Explicit Estimates: μ6 Theorem 5.1</h2>
+        <p class="lede">
+          Theorem 5.1 is the μ6 analogue of IUT IV Theorem 1.10. It takes the modified
+          theta-function setup and produces a numerically effective theta-pilot
+          log-volume estimate, then Corollary 5.2 uses it to build suitable μ6 initial
+          theta data without the earlier p=2 compactness restrictions.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>§1 height input</strong>
+            <p>Faltings, toric, and Weil-height comparisons; the mono-complex product-formula feature appears later.</p>
+          </div>
+          <div class="flowStep">
+            <strong>§2 numerical input</strong>
+            <p>Explicit estimates for arithmetic elliptic curves and prime-number-theorem choices.</p>
+          </div>
+          <div class="flowStep">
+            <strong>§3-4 μ6 theta input</strong>
+            <p>6-torsion evaluation points and minor IUT I-III modifications remove the odd-residue restriction.</p>
+          </div>
+          <div class="flowStep">
+            <strong>§5 output</strong>
+            <p>Theorem 5.1 and Corollary 5.2 provide effective θ-pilot and suitable-data estimates.</p>
+          </div>
+        </div>
+        <table>
+          <tr><th>Result</th><th>Role</th><th>Boundary</th></tr>
+          <tr>
+            <td>Theorem 5.1</td>
+            <td>μ6 version of IUT IV Theorem 1.10, with an explicit CTheta-type bound under a large-prime hypothesis.</td>
+            <td>Downstream of the IUT III comparison corridor.</td>
+          </tr>
+          <tr>
+            <td>Corollary 5.2</td>
+            <td>μ6 version of IUT IV Corollary 2.2; constructs effective suitable initial theta data.</td>
+            <td>Uses Theorem 5.1 plus §1-§2 numerical estimates.</td>
+          </tr>
+          <tr>
+            <td>p=2 removal</td>
+            <td>Eliminates the earlier CBS1/CBS2 restrictions tied to the nonarchimedean place 2.</td>
+            <td>Does not alter the logical status of Corollary 3.12.</td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          The page should be read as the effective-output branch of IUT IV: it strengthens
+          numerical applicability if the IUT III/IUT IV source pipeline is accepted.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-explicit-estimates.pdf" target="_blank">Explicit Estimates §5</a>
+          Related: <a href="#explicit-mu6-evaluation-points-page">μ6 evaluation points</a>
+          <a href="#iut-iv">IUT IV output route</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="explicit-mono-complex-abc-szpiro-page" data-filter="explicit estimates theorem 5.3 theorem 5.4 mono-complex number field abc szpiro radical height j invariant discriminant">
+        <h2>Explicit ABC/Szpiro over Mono-Complex Fields</h2>
+        <p class="lede">
+          Theorem 5.3 applies Corollary 5.2 to mono-complex number fields, meaning
+          <span class="math">Q</span> or an imaginary quadratic field. The source then
+          derives explicit ABC/Szpiro inequalities with very large constants; Theorem 5.4
+          specializes this to an effective Szpiro-style inequality over
+          <span class="math">Q</span>.
+        </p>
+        <div class="diagram fit" aria-label="Explicit ABC and Szpiro route">
+          <div class="diagramHeader">
+            <strong>Effective output route</strong>
+            <span>Explicit Estimates, Theorems 5.3-5.4</span>
+          </div>
+          <svg viewBox="0 0 1060 410" role="img">
+            <defs>
+              <marker id="arrowExplicitABC" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="52" y="64" width="230" height="88"></rect>
+            <text class="nodeTitle" x="167" y="96" text-anchor="middle">mono-complex field</text>
+            <text class="tinyText" x="167" y="120" text-anchor="middle">Q or imaginary quadratic</text>
+            <text class="tinyText" x="167" y="138" text-anchor="middle">one archimedean place</text>
+
+            <rect class="nodeBox green" x="415" y="64" width="230" height="88"></rect>
+            <text class="nodeTitle" x="530" y="96" text-anchor="middle">Corollary 5.2</text>
+            <text class="tinyText" x="530" y="120" text-anchor="middle">effective suitable data</text>
+            <text class="tinyText" x="530" y="138" text-anchor="middle">plus product formula</text>
+
+            <rect class="nodeBox gold" x="778" y="64" width="230" height="88"></rect>
+            <text class="nodeTitle" x="893" y="96" text-anchor="middle">Theorem 5.3</text>
+            <text class="tinyText" x="893" y="120" text-anchor="middle">ABC/Szpiro over L</text>
+            <text class="tinyText" x="893" y="138" text-anchor="middle">huge explicit constants</text>
+
+            <rect class="nodeBox violet" x="235" y="262" width="250" height="84"></rect>
+            <text class="nodeTitle" x="360" y="292" text-anchor="middle">height side</text>
+            <text class="tinyText" x="360" y="316" text-anchor="middle">j-invariant and H_L(a,b,c)</text>
+            <text class="tinyText" x="360" y="334" text-anchor="middle">nonarchimedean height</text>
+
+            <rect class="nodeBox red" x="575" y="262" width="250" height="84"></rect>
+            <text class="nodeTitle" x="700" y="292" text-anchor="middle">radical side</text>
+            <text class="tinyText" x="700" y="316" text-anchor="middle">discriminant and rad_L</text>
+            <text class="tinyText" x="700" y="334" text-anchor="middle">Theorem 5.4 over Q</text>
+
+            <path class="edge blue" d="M284 108 H413" marker-end="url(#arrowExplicitABC)"></path>
+            <path class="edge green" d="M647 108 H776" marker-end="url(#arrowExplicitABC)"></path>
+            <path class="edge violet" d="M893 154 C830 218 474 202 374 260" marker-end="url(#arrowExplicitABC)"></path>
+            <path class="edge red" d="M893 154 C860 218 744 226 708 260" marker-end="url(#arrowExplicitABC)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Paper content</th><th>Wiki handling</th></tr>
+          <tr>
+            <td>Mono-complex field</td>
+            <td>A number field with exactly one archimedean place: <span class="math">Q</span> or an imaginary quadratic field.</td>
+            <td>Explain why the archimedean/product-formula step is special.</td>
+          </tr>
+          <tr>
+            <td>Theorem 5.3</td>
+            <td>Bounds the nonarchimedean height of the associated j-invariant and the height product <span class="math">H_L(a,b,c)</span>.</td>
+            <td>Use as an explicit downstream ABC/Szpiro page.</td>
+          </tr>
+          <tr>
+            <td>Theorem 5.4</td>
+            <td>Specializes to nonzero coprime integers <span class="math">a+b+c=0</span> and an explicit Szpiro-style radical bound.</td>
+            <td>Keep separate from IUT IV Corollary 2.3's non-effective output.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          The source itself notes that the constants are astronomically large; the wiki
+          should present them as effective constants, not as numerically sharp estimates.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-explicit-estimates.pdf" target="_blank">Explicit Estimates, Theorems 5.3-5.4</a>
+          Related: <a href="#explicit-mu6-theorem-51-page">μ6 Theorem 5.1</a>
+          <a href="#iut-iv-diophantine-output">IUT IV output route</a>
+          <a href="#explicit-fermat-application-page">Fermat application</a>
+        </div>
+      </section>
+
+      <section id="explicit-fermat-application-page" data-filter="explicit estimates corollary 5.8 fermat last theorem prime exponent coppersmith vandiver mihailescu rassias abc application">
+        <h2>Explicit Fermat Application</h2>
+        <p class="lede">
+          Corollary 5.8 applies the effective ABC/Szpiro inequality to Fermat-type
+          equations. The paper states that no positive integer solution exists for prime
+          exponents <span class="math">p > 1.615 * 10^14</span>, and then combines this
+          with external classical and computational estimates for first- and second-case
+          Fermat statements.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Elementary lower bound</strong>
+            <p>Lemmas 5.5-5.7 give lower bounds on a hypothetical solution size.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Apply Theorem 5.3</strong>
+            <p>Set <span class="math">(a,b,c)=(x^p,y^p,-z^p)</span> over <span class="math">Q</span> with <span class="math">epsilon=1</span>.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Contradict the threshold</strong>
+            <p>The lower and upper bounds conflict once <span class="math">p > 1.615 * 10^14</span>.</p>
+          </div>
+          <div class="flowStep">
+            <strong>External inputs</strong>
+            <p>Coppersmith, Vandiver, and Mihailescu-Rassias estimates are cited for broader FLT consequences.</p>
+          </div>
+        </div>
+        <table>
+          <tr><th>Item</th><th>Source role</th><th>Boundary</th></tr>
+          <tr>
+            <td>Corollary 5.8</td>
+            <td>States the explicit prime-exponent no-solution result for <span class="math">p > 1.615 * 10^14</span>.</td>
+            <td>Depends on Theorem 5.3 and the IUT pipeline behind it.</td>
+          </tr>
+          <tr>
+            <td>Remarks 5.8.1-5.8.3</td>
+            <td>Combine the result with Coppersmith, Vandiver, and Mihailescu-Rassias estimates.</td>
+            <td>These are application-layer combinations, not new IUT constructions.</td>
+          </tr>
+          <tr>
+            <td>Corollary 5.9</td>
+            <td>Applies Theorem 5.4 to a generalized Fermat-type equation.</td>
+            <td>Useful for the output map, peripheral to the Corollary 3.12 dispute.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-explicit-estimates.pdf" target="_blank">Explicit Estimates, Corollaries 5.8-5.9</a>
+          Related: <a href="#explicit-mono-complex-abc-szpiro-page">explicit ABC/Szpiro</a>
+          <a href="#iut-iv-diophantine-output">IUT IV output route</a>
+          <a href="#probabilistic-szpiro">probabilistic Szpiro route</a>
         </div>
       </section>
 
