@@ -824,6 +824,12 @@
         <a class="subLink" href="#etale-theta-bikummer-roots-page">EtTh bi-Kummer roots 4.2-4.3</a>
         <a class="subLink" href="#etale-theta-bikummer-category-page">EtTh category-theoreticity 4.4</a>
         <a class="subLink" href="#etale-theta-no-reciprocity-page">EtTh no reciprocity 4.4.1</a>
+        <a class="subLink" href="#etale-theta-section5-frobenioid-theta-page">EtTh §5 Frobenioid theta</a>
+        <a class="subLink" href="#etale-theta-section5-theta-bikummer-page">EtTh theta bi-Kummer 5.1-5.2</a>
+        <a class="subLink" href="#etale-theta-section5-divisor-geometry-page">EtTh divisor geometry 5.3</a>
+        <a class="subLink" href="#etale-theta-section5-cyclotomic-rigidity-page">EtTh Frobenioid cyclotome 5.5-5.6</a>
+        <a class="subLink" href="#etale-theta-section5-mono-theta-extraction-page">EtTh mono-theta extraction 5.10</a>
+        <a class="subLink" href="#etale-theta-section5-constant-multiple-page">EtTh constant multiple 5.12</a>
         <a href="#abs-anabelian-reconstruction-page">Absolute anabelian algorithms</a>
         <a href="#abs-anabelian-cores-telecores-page">Cores and telecores</a>
         <a href="#abs-anabelian-log-frobenius-page">Log-Frobenius compatibility</a>
@@ -3534,6 +3540,274 @@
           Related: <a href="#etale-theta-bikummer-category-page">category-theoreticity</a>
           <a href="#etale-theta-first-power-origin-page">first-power origin</a>
           <a href="#mono-theta-cyclotomic-compatibility-ii13">IUT II cyclotomic compatibility</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-section5-frobenioid-theta-page" data-filter="etale theta section 5 frobenioid theta function tempered frobenioids mono theta environments theorem 5.10 corollary 5.12">
+        <h2>EtTh Section 5: The Etale Theta Function via Tempered Frobenioids</h2>
+        <p class="lede">
+          Section 5 applies the general bi-Kummer theory of Section 4 to the theta
+          functions of Sections 1-2. Its endpoint is Theorem 5.10: a mono-theta
+          environment can be extracted from the relevant tempered Frobenioid in a
+          category-theoretic fashion.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>EtTh Section 5 unit</th><th>Source content</th><th>Leaf page</th></tr>
+          <tr>
+            <td>Proposition 5.1 and 5.2</td>
+            <td>Verify the Section 4 hypotheses and identify the sections <span class="math">s_{lN}</span>, <span class="math">tau_{lN}</span> with bi-Kummer roots whose classes are the etale theta classes.</td>
+            <td><a href="#etale-theta-section5-theta-bikummer-page">theta bi-Kummer</a></td>
+          </tr>
+          <tr>
+            <td>Proposition 5.3</td>
+            <td>Shows categorical preservation of non-cuspidal/cuspidal divisor geometry, the special-fiber chain, and the theta divisor orbit.</td>
+            <td><a href="#etale-theta-section5-divisor-geometry-page">divisor geometry</a></td>
+          </tr>
+          <tr>
+            <td>Definition 5.4, Proposition 5.5, Theorem 5.6</td>
+            <td>Define theta-saturated objects and prove Frobenioid-theoretic cyclotomic rigidity, then prove this rigidity is category-theoretic.</td>
+            <td><a href="#etale-theta-section5-cyclotomic-rigidity-page">Frobenioid cyclotome</a></td>
+          </tr>
+          <tr>
+            <td>Theorem 5.7</td>
+            <td>Proves category-theoreticity of the Frobenioid-theoretic l-th root of the theta function up to the specified root-of-unity and translation indeterminacies.</td>
+            <td><a href="#etale-theta-section5-cyclotomic-rigidity-page">Frobenioid theta function</a></td>
+          </tr>
+          <tr>
+            <td>Lemma 5.8, Lemma 5.9, Theorem 5.10</td>
+            <td>Construct the automorphism group package <span class="math">E_N</span>, identify the resulting environment with the model bi-/mono-theta environment, and prove category-theoretic extraction.</td>
+            <td><a href="#etale-theta-section5-mono-theta-extraction-page">mono-theta extraction</a></td>
+          </tr>
+          <tr>
+            <td>Lemma 5.11, Corollary 5.12, Remarks 5.12.1-5.12.9</td>
+            <td>Explain constant-multiple indeterminacy of systems and why finite mono-theta environments maximize rigidity.</td>
+            <td><a href="#etale-theta-section5-constant-multiple-page">constant multiple indeterminacy</a></td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Section 5</a>
+          Related: <a href="#etale-theta-bi-kummer-page">bi-Kummer theory</a>
+          <a href="#etale-theta-cor218-group-construction-page">Corollary 2.18 construction</a>
+          <a href="#etale-theta-cor219-rigidity-package-page">Corollary 2.19 rigidity</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-section5-theta-bikummer-page" data-filter="etale theta proposition 5.1 proposition 5.2 applicability general theory theta function bi kummer roots etale theta class">
+        <h2>EtTh Propositions 5.1-5.2: Applying Bi-Kummer Theory to Theta</h2>
+        <p class="lede">
+          Proposition 5.1 checks that the tempered Frobenioid built from Example 3.9 has
+          all hypotheses needed for Corollary 3.8 and Theorem 4.4. Proposition 5.2 then
+          identifies the Section 1 theta sections with bi-Kummer roots of the Frobenioid
+          theta function.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Result</th><th>Source content</th><th>Use</th></tr>
+          <tr>
+            <td>Proposition 5.1</td>
+            <td>The Frobenioid is rationally standard, over a slim base category, with integral monoid type and perfect, perf-factorial, non-dilating, cuspidally pure divisor monoid.</td>
+            <td>This makes the category-theoreticity theorem of Section 4 applicable.</td>
+          </tr>
+          <tr>
+            <td>Remark 5.1.1</td>
+            <td>The paper restricts to self-equivalences mostly for notation; the arguments yield functorial category-theoretic algorithms like Corollaries 2.18-2.19.</td>
+            <td>Records the intended functorial reading of the construction.</td>
+          </tr>
+          <tr>
+            <td>Proposition 5.2(i)</td>
+            <td>The sections <span class="math">s_{lN}</span> and <span class="math">tau_{lN}</span> form an <span class="math">lN</span>-th root of a fraction-pair for theta, or an <span class="math">N</span>-th root of a fraction-pair for an l-th root of theta.</td>
+            <td>Connects the scheme-theoretic theta data to Section 4 root diagrams.</td>
+          </tr>
+          <tr>
+            <td>Proposition 5.2(ii)-(iii)</td>
+            <td>The resulting group actions are the bi-Kummer group actions, and their Kummer classes are exactly the reductions of the etale theta classes.</td>
+            <td>Identifies the Frobenioid bi-Kummer object with the etale theta class, modulo the cyclotome issue of Remark 5.2.1.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Propositions 5.1-5.2 and Remark 5.1.1</a>
+          Related: <a href="#etale-theta-bikummer-roots-page">bi-Kummer roots</a>
+          <a href="#etale-theta-section5-cyclotomic-rigidity-page">Frobenioid cyclotome</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-section5-divisor-geometry-page" data-filter="etale theta proposition 5.3 category theoreticity geometry divisors noncuspidal cuspidal chain projective line theta divisor">
+        <h2>EtTh Proposition 5.3: Category-Theoreticity of Theta Divisor Geometry</h2>
+        <p class="lede">
+          Proposition 5.3 shows that the divisor geometry of the special fiber chain is
+          visible categorically inside the tempered Frobenioid. This includes the
+          cuspidal/non-cuspidal split, adjacency in the infinite chain, and the orbit of
+          the theta divisor.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Preserved object</th><th>Source content</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Cuspidal split</td>
+            <td>Equivalences preserve non-cuspidal and cuspidal elements and the natural isomorphisms between primary components.</td>
+            <td>Retains the two kinds of divisor support used by theta functions.</td>
+          </tr>
+          <tr>
+            <td>Cusp-to-component map</td>
+            <td>The natural surjection from cuspidal primes to non-cuspidal primes is preserved.</td>
+            <td>Connects cusps to the component of the special fiber containing them.</td>
+          </tr>
+          <tr>
+            <td>Chain coordinate</td>
+            <td>The bijection from non-cuspidal primes to <span class="math">Z</span> is preserved up to translation and sign.</td>
+            <td>Records the intrinsic ambiguity of choosing an origin and orientation on the infinite projective-line chain.</td>
+          </tr>
+          <tr>
+            <td>Theta divisor orbit</td>
+            <td>The automorphism orbit of the zero/pole divisor of the Frobenioid theta function is preserved.</td>
+            <td>This is the divisor-level input used before the stronger theta-function rigidity of Theorem 5.7.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Proposition 5.3</a>
+          Related: <a href="#etale-theta-log-divisor-filter-page">log-divisor filters</a>
+          <a href="#etale-theta-section5-theta-bikummer-page">theta bi-Kummer</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-section5-cyclotomic-rigidity-page" data-filter="etale theta definition 5.4 proposition 5.5 theorem 5.6 theorem 5.7 frobenioid theoretic cyclotomic rigidity theta function category theoreticity">
+        <h2>EtTh Definition 5.4, Proposition 5.5, Theorems 5.6-5.7: Frobenioid Cyclotomic Rigidity</h2>
+        <p class="lede">
+          Section 5 resolves the cyclotome issue left open by Remark 4.4.1. It defines
+          theta-saturated objects, constructs a Frobenioid-theoretic cyclotomic rigidity
+          isomorphism, proves that this isomorphism is preserved categorically, and then
+          applies it to the Frobenioid-theoretic theta function.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Item</th><th>Source content</th><th>Formalization reading</th></tr>
+          <tr>
+            <td>Definition 5.4</td>
+            <td>An object is <span class="math">(l,N)</span>-theta-saturated when it is <span class="math">mu_{lN}</span>-saturated and the theta subquotient has the required cardinality modulo <span class="math">N</span>.</td>
+            <td>The cyclotome comparison is stated only on a controlled class of objects.</td>
+          </tr>
+          <tr>
+            <td>Proposition 5.5</td>
+            <td>The second Kummer class of Proposition 5.2(iii) determines a functorial isomorphism <span class="math">(l*Delta_Theta) tensor Z/NZ -> mu_N(S)</span> for theta-saturated objects.</td>
+            <td>This is the Frobenioid-theoretic replacement for the missing reciprocity/cyclotome rigidity.</td>
+          </tr>
+          <tr>
+            <td>Theorem 5.6</td>
+            <td>Self-equivalences preserve theta-saturated objects and the isomorphism of Proposition 5.5.</td>
+            <td>Promotes the cyclotome isomorphism from constructed data to category-theoretic data.</td>
+          </tr>
+          <tr>
+            <td>Theorem 5.7</td>
+            <td>The Frobenioid-theoretic l-th root of the theta function is preserved up to a <span class="math">2l</span>-th root of unity and the specified <span class="math">Z</span> or <span class="math">lZ</span> translation.</td>
+            <td>Uses the compatible Kummer systems and cyclotomic rigidity to strengthen divisor-level preservation.</td>
+          </tr>
+          <tr>
+            <td>Remark 5.7.1</td>
+            <td>The root-of-unity rigidity is stronger than the earlier divisor argument, which only preserved theta up to arbitrary constant function.</td>
+            <td>Separates genuine theta-function rigidity from mere divisor preservation.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Definition 5.4, Proposition 5.5, Theorems 5.6-5.7, Remark 5.7.1</a>
+          Related: <a href="#etale-theta-no-reciprocity-page">no reciprocity warning</a>
+          <a href="#etale-theta-first-power-origin-page">first-power origin</a>
+          <a href="#etale-theta-section5-mono-theta-extraction-page">mono-theta extraction</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-section5-mono-theta-extraction-page" data-filter="etale theta lemma 5.8 lemma 5.9 theorem 5.10 frobenioid theoretic theta environments mono theta environment extraction category theoreticity">
+        <h2>EtTh Lemmas 5.8-5.9 and Theorem 5.10: Frobenioid-Theoretic Mono-Theta Extraction</h2>
+        <p class="lede">
+          Theorem 5.10 is the main Section 5 bridge theorem. Starting from the
+          Frobenioid-theoretic theta root data, it constructs the topological group package
+          that matches the model bi-theta environment, and then omits the algebraic section
+          to obtain the mono-theta environment.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Item</th><th>Source content</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Lemma 5.8</td>
+            <td>Identifies the units normalizing <span class="math">E_N</span> with <span class="math">(O_K^x)^{1/N}</span>, giving the outer action of <span class="math">O_K^x</span> and <span class="math">K^x</span> on <span class="math">E_N</span>.</td>
+            <td>Records the constant-multiple action that later causes system-level indeterminacy.</td>
+          </tr>
+          <tr>
+            <td>Lemma 5.9(i)-(iv)</td>
+            <td>Defines <span class="math">E_N</span> and <span class="math">E_N^Pi</span>, obtains the exact sequence with <span class="math">mu_N</span>, identifies <span class="math">E_N^Pi</span> with the cyclotomic envelope, and obtains the bi-/mono-theta environment structure.</td>
+            <td>Constructs the environment from Frobenioid automorphism data.</td>
+          </tr>
+          <tr>
+            <td>Lemma 5.9(v)</td>
+            <td>The cyclotomic rigidity isomorphism from Section 2 coincides with the Frobenioid-theoretic isomorphism of Proposition 5.5.</td>
+            <td>This is the compatibility hinge between the group-theoretic and Frobenioid-theoretic routes.</td>
+          </tr>
+          <tr>
+            <td>Theorem 5.10(i)-(ii)</td>
+            <td>Self-equivalences preserve the isomorphism classes of the root-domain and root-codomain objects and preserve the unit, constant-root, <span class="math">E_N</span>, and section-image data up to the stated conjugacy factors.</td>
+            <td>Specifies the exact indeterminacies in the Frobenioid construction.</td>
+          </tr>
+          <tr>
+            <td>Theorem 5.10(iii)</td>
+            <td>The extracted <span class="math">mu_N</span>-outer homomorphism is preserved compatibly with the mono-theta environment structure and with the induced tempered-group automorphism class.</td>
+            <td>States the category-theoretic extraction of mono-theta environments from tempered Frobenioids.</td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          Remarks 5.10.1-5.10.4 explain the conceptual meaning: the mono-theta
+          environment is a minimal common core of the tempered-etale and Frobenioid
+          approaches, its theta section is a canonical splitting-like object, and its
+          distinct cyclotome is a "Frobenius germ" rather than a full Frobenius action.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Lemmas 5.8-5.9, Theorem 5.10, Remarks 5.10.1-5.10.4</a>
+          Related: <a href="#etale-theta-cor218-group-construction-page">Corollary 2.18 construction</a>
+          <a href="#etale-theta-cor219-rigidity-package-page">Corollary 2.19 rigidity</a>
+          <a href="#etale-theta-section5-constant-multiple-page">constant multiple indeterminacy</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-section5-constant-multiple-page" data-filter="etale theta lemma 5.11 corollary 5.12 constant multiple indeterminacy systems projective systems finite mono theta environments rigidity">
+        <h2>EtTh Lemma 5.11 and Corollary 5.12: Constant-Multiple Indeterminacy of Systems</h2>
+        <p class="lede">
+          The end of Section 5 explains why one should not replace finite mono-theta
+          environments by whole projective systems without tracking new indeterminacies.
+          Lemma 5.11 is a general category-theoretic warning about particular morphisms
+          inside an abstract equivalence class; Corollary 5.12 applies it to roots of theta.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Item</th><th>Source content</th><th>Interpretation</th></tr>
+          <tr>
+            <td>Lemma 5.11</td>
+            <td>In an abstract category, a self-equivalence isomorphic to the identity can conjugate selected morphisms by chosen automorphisms of their source and target objects.</td>
+            <td>There is no category-theoretic choice of a particular connecting morphism among its automorphic variants.</td>
+          </tr>
+          <tr>
+            <td>Corollary 5.12</td>
+            <td>For <span class="math">N|N'</span> with quotient not equal to <span class="math">1</span>, the relevant objects are distinct, linear connecting morphisms exist, and self-equivalences can alter the connecting data by constant multiples.</td>
+            <td>Projective-system comparison introduces constant-multiple indeterminacy.</td>
+          </tr>
+          <tr>
+            <td>Remark 5.12.3</td>
+            <td>Relating whole external and internal projective systems forces one to sacrifice constant-multiple rigidity; finite mono-theta environments maximize cyclotomic, discrete, and constant-multiple rigidity.</td>
+            <td>This is a core reason the wiki should keep finite mono-theta environments distinct from pro-objects.</td>
+          </tr>
+          <tr>
+            <td>Remark 5.12.4</td>
+            <td>Applying Theorem 5.10 at each finite level avoids the loss that occurs when comparing whole systems at once.</td>
+            <td>Records the "parentheses" distinction in the projective-system comparison.</td>
+          </tr>
+          <tr>
+            <td>Remarks 5.12.5-5.12.7</td>
+            <td>Higher-power variants force cyclotomic or constant-multiple indeterminacies; semisimplifying the Frobenioid extension loses Kummer information and additive structure.</td>
+            <td>Links the Section 5 analysis back to first-power rigidity and the warning against flattening to multiplicative/profinite data.</td>
+          </tr>
+          <tr>
+            <td>Remark 5.12.9</td>
+            <td>More pieces of data can create more internal indeterminacy and ultimately less usable information.</td>
+            <td>Explains the source logic behind preferring the lean mono-theta package.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Lemma 5.11, Corollary 5.12, Remarks 5.12.1-5.12.9</a>
+          Related: <a href="#etale-theta-first-power-origin-page">first-power origin</a>
+          <a href="#etale-theta-section5-mono-theta-extraction-page">mono-theta extraction</a>
+          <a href="#projective-mono-theta-systems-ii15">IUT II projective mono-theta systems</a>
         </div>
       </section>
 
