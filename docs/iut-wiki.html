@@ -1092,6 +1092,12 @@
         <a href="#kummer-detachment-310">Kummer detachment 3.10.1</a>
         <a href="#kummer-conjugated-horizontal-arrows-310">Kummer-conjugated arrows</a>
         <a href="#theorem-311-lgp-algorithms">Theorem 3.11 algorithms</a>
+        <a href="#theorem-311-data-abc">3.11 data (a),(b),(c)</a>
+        <a href="#ind1-ind2-ind3-311">3.11 Ind1/Ind2/Ind3</a>
+        <a href="#mod-versus-mod-311">MOD versus mod 3.11</a>
+        <a href="#theta-link-compatibility-source-311">3.11 horizontal compatibility</a>
+        <a href="#ipl-she-apt-source-311">IPL/SHE/APT source</a>
+        <a href="#label-discipline-311">3.11 label discipline</a>
         <a href="#tensor-log-volume-corridor">Tensor/log-volume corridor</a>
         <a href="#corollary-312">Corollary 3.12 corridor</a>
         <a href="#corollary-312-proof-steps">3.12 proof steps</a>
@@ -44074,7 +44080,7 @@
         </table>
 
         <div class="grid3">
-          <div class="card" id="theorem-311-data-abc">
+          <div class="card" id="theorem-311-data-abc-card">
             <h3>Data (a),(b),(c)</h3>
             <p>
               The theorem's multiradial representation has three visible layers:
@@ -44082,9 +44088,10 @@
               splitting monoids acting on packet modules, and global number-field/
               Frobenioid data with degrees measured by the packet log-volumes.
             </p>
+            <p><a href="#theorem-311-data-abc">Open the 3.11 data page</a></p>
             <div class="tagRow"><span class="tag green">3.11(i)</span><span class="tag">source interface</span></div>
           </div>
-          <div class="card" id="ind1-ind2-ind3-311">
+          <div class="card" id="ind1-ind2-ind3-311-card">
             <h3>Ind1, Ind2, Ind3</h3>
             <p>
               Ind1 comes from automorphisms of the procession. Ind2 comes from
@@ -44093,9 +44100,10 @@
               compatibility of local packet Kummer isomorphisms as the horizontal
               index varies.
             </p>
+            <p><a href="#ind1-ind2-ind3-311">Open the indeterminacy page</a></p>
             <div class="tagRow"><span class="tag red">3.11(i),(ii)</span><span class="tag">indeterminacy</span></div>
           </div>
-          <div class="card" id="mod-versus-mod-311">
+          <div class="card" id="mod-versus-mod-311-card">
             <h3>MOD versus mod</h3>
             <p>
               Theorem 3.11(ii) explicitly transfers exact mutual compatibility from
@@ -44103,9 +44111,10 @@
               global Frobenioids, while warning that this does not apply in the same
               way to <span class="math">mod</span>-subscripted isomorphisms.
             </p>
+            <p><a href="#mod-versus-mod-311">Open the MOD/mod page</a></p>
             <div class="tagRow"><span class="tag gold">3.11(ii)</span><span class="tag">FMOD/Fmod</span></div>
           </div>
-          <div class="card" id="theta-link-compatibility-source-311">
+          <div class="card" id="theta-link-compatibility-source-311-card">
             <h3>Horizontal compatibility</h3>
             <p>
               Part (iii) says that the Kummer constructions, projective systems, and
@@ -44113,9 +44122,10 @@
               <span class="math">Theta×mu_LGP</span> arrows in the stabilized,
               equivariant, functorial sense specified by the source.
             </p>
+            <p><a href="#theta-link-compatibility-source-311">Open the horizontal compatibility page</a></p>
             <div class="tagRow"><span class="tag blue">3.11(iii)</span><span class="tag">horizontal arrows</span></div>
           </div>
-          <div class="card" id="ipl-she-apt-source-311">
+          <div class="card" id="ipl-she-apt-source-311-card">
             <h3>IPL, SHE, APT</h3>
             <p>
               Remark 3.11.1 recasts the theorem as an algorithm whose input is an
@@ -44125,9 +44135,10 @@
               holomorphic structures. Its transport is algorithmic, not a direct map
               of set-theoretic regions.
             </p>
+            <p><a href="#ipl-she-apt-source-311">Open the IPL/SHE/APT source page</a></p>
             <div class="tagRow"><span class="tag violet">Remark 3.11.1</span><span class="tag">IPL/SHE/APT</span></div>
           </div>
-          <div class="card" id="label-discipline-311">
+          <div class="card" id="label-discipline-311-card">
             <h3>Label discipline</h3>
             <p>
               Remark 3.11.2 emphasizes that the label transitions require all labels
@@ -44136,6 +44147,7 @@
               in the multiradial representation are naked finite sets; they are not
               arbitrary omissions of arithmetic labels.
             </p>
+            <p><a href="#label-discipline-311">Open the label discipline page</a></p>
             <div class="tagRow"><span class="tag green">Remark 3.11.2</span><span class="tag">labels</span></div>
           </div>
         </div>
@@ -44156,6 +44168,322 @@
           <a href="#theorem-311-log-kummer">3.11 log-Kummer card</a>
           <a href="#theta-link-compatibility">Theta-link compatibility card</a>
           <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="theorem-311-data-abc">
+        <h2>IUT III Theorem 3.11(i): Data (a), (b), (c)</h2>
+        <p class="lede">
+          The multiradial representation <span class="math">n,◦R_LGP</span> is the
+          collection of three visible data layers, taken modulo Ind1 and Ind2. These
+          layers tie local mono-analytic tensor packets, bad-prime LGP splitting
+          monoids, and global Frobenioid degree data to the same vertically coric
+          column.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Source content</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Data (a)</td>
+            <td>
+              Local mono-analytic tensor packets
+              <span class="math">I(S_{j+1}^{±}; n,◦D⊢_{v_Q})</span> and Q-spans,
+              including labelled local variants, equipped with procession-normalized
+              log-volumes from Proposition 3.9(ii).
+            </td>
+            <td>
+              This is the log-shell packet container layer in which local possible
+              images and their log-volumes are read.
+            </td>
+          </tr>
+          <tr>
+            <td>Data (b)</td>
+            <td>
+              For <span class="math">v∈V_bad</span>, the LGP splitting monoid
+              <span class="math">Psi^⊥_{LGP}(n,◦HT_D)_v</span>, regarded through the
+              Proposition 3.2 poly-isomorphisms as a subset of packet Q-spans and
+              acting multiplicatively on packet modules.
+            </td>
+            <td>
+              The bad-prime splitting monoid is an operator on the packet container,
+              not a passive label.
+            </td>
+          </tr>
+          <tr>
+            <td>Data (c)</td>
+            <td>
+              Global number fields/monoids and non-realified/realified
+              <span class="math">FMOD/Fmod</span> Frobenioids, with global degrees
+              computable by the log-volumes from data (a).
+            </td>
+            <td>
+              This is where global arithmetic line-bundle data is made comparable with
+              local packet log-volumes.
+            </td>
+          </tr>
+        </table>
+        <div class="callout blue">
+          The source statement binds the three layers together. A wiki or Lean model
+          should not split them into unrelated packet, monoid, and Frobenioid oracles.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Theorem 3.11(i)(a)-(c)</a>
+          Related: <a href="#theorem-311-lgp-algorithms">Theorem 3.11 overview</a>
+          <a href="#packet-procession-log-volume-iii39">packet log-volume 3.9</a>
+          <a href="#global-kummer-noninterference-iii310">global Kummer 3.10</a>
+        </div>
+      </section>
+
+      <section id="ind1-ind2-ind3-311">
+        <h2>IUT III Theorem 3.11: Ind1, Ind2, Ind3</h2>
+        <p class="lede">
+          Theorem 3.11 names three indeterminacy mechanisms. Ind1 and Ind2 are part of
+          the multiradial representation of Theorem 3.11(i). Ind3 appears in Theorem
+          3.11(ii), where local packet Kummer isomorphisms vary along the horizontal
+          index and are only upper-semi-compatible with log-links.
+        </p>
+        <div class="diagram" aria-label="Indeterminacies in Theorem 3.11">
+          <div class="diagramHeader">
+            <strong>3.11 indeterminacies</strong>
+            <span>two quotienting mechanisms plus one upper-semi compatibility mechanism</span>
+          </div>
+          <svg viewBox="0 0 900 300" role="img">
+            <defs>
+              <marker id="arrowInd311Page" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="58" y="82" width="206" height="86"></rect>
+            <text class="nodeTitle" x="161" y="114" text-anchor="middle">Ind1</text>
+            <text class="tinyText" x="161" y="138" text-anchor="middle">procession automorphisms</text>
+            <rect class="nodeBox green" x="346" y="82" width="206" height="86"></rect>
+            <text class="nodeTitle" x="449" y="114" text-anchor="middle">Ind2</text>
+            <text class="tinyText" x="449" y="138" text-anchor="middle">local tensor-summand actions</text>
+            <rect class="nodeBox red" x="634" y="82" width="206" height="86"></rect>
+            <text class="nodeTitle" x="737" y="114" text-anchor="middle">Ind3</text>
+            <text class="tinyText" x="737" y="138" text-anchor="middle">upper-semi local Kummer</text>
+            <path d="M264 125 H344" class="edge blue" marker-end="url(#arrowInd311Page)"></path>
+            <path d="M552 125 H632" class="edge red" marker-end="url(#arrowInd311Page)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Name</th><th>Source location</th><th>Correct reading</th></tr>
+          <tr>
+            <td>Ind1</td>
+            <td>Theorem 3.11(i), after data (a)-(c).</td>
+            <td>Automorphisms of the procession of <span class="math">D⊢</span>-prime-strips.</td>
+          </tr>
+          <tr>
+            <td>Ind2</td>
+            <td>Theorem 3.11(i), after data (a)-(c).</td>
+            <td>Independent local automorphism actions on direct summands of tensor-product packets.</td>
+          </tr>
+          <tr>
+            <td>Ind3</td>
+            <td>Theorem 3.11(ii), after the log-Kummer comparison.</td>
+            <td>Upper-semi compatibility for local packet isomorphisms: nonarchimedean inclusions and archimedean surjections, not exact equality.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Theorem 3.11(i)-(ii)</a>
+          Related: <a href="#indeterminacies">indeterminacies overview</a>
+          <a href="#nonarch-containment-35">nonarch containment 3.5</a>
+          <a href="#arch-ball-containment-35">arch ball containment 3.5</a>
+        </div>
+      </section>
+
+      <section id="mod-versus-mod-311">
+        <h2>IUT III Theorem 3.11(ii): MOD versus mod</h2>
+        <p class="lede">
+          Theorem 3.11(ii) transfers exact mutual log-link compatibility to the
+          <span class="math">MOD</span>-subscripted global Frobenioid isomorphisms, but
+          explicitly does not give the same exact compatibility for the
+          <span class="math">mod</span>-subscripted isomorphisms. This is the theorem
+          version of the FMOD/Fmod asymmetry of Remark 3.10.1.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Side</th><th>Compatibility status</th><th>Reason</th></tr>
+          <tr>
+            <td><span class="math">MMOD/FM0D/F^R_MOD</span></td>
+            <td>Mutually compatible with log-links as <span class="math">m</span> varies.</td>
+            <td>Roots-of-unity non-interference makes adjacent ambiguity harmless.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Mmod/Fmod/F^R_mod</span></td>
+            <td>Not granted the same exact mutual compatibility.</td>
+            <td>The local monoid layer is subject to upper-semi compatibility and distortion.</td>
+          </tr>
+          <tr>
+            <td>Local packet data (a)</td>
+            <td>Precisely compatible with log-volumes, but only upper-semi-compatible as Kummer data.</td>
+            <td>This is the route from Ind3 to numerical upper estimates.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          This page is an audit guardrail: exact compatibility may be used on the
+          uppercase <span class="math">MOD</span> route, but the lowercase
+          <span class="math">mod</span> route must remain estimate-oriented.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Theorem 3.11(ii)</a>
+          Related: <a href="#fmod-fmod-bias-310">FMOD/Fmod bias 3.10.1</a>
+          <a href="#roots-of-unity-noninterference-310">roots-of-unity non-interference</a>
+        </div>
+      </section>
+
+      <section id="theta-link-compatibility-source-311">
+        <h2>IUT III Theorem 3.11(iii): Horizontal Link Compatibility</h2>
+        <p class="lede">
+          Part (iii) states compatibility of the Kummer constructions with the
+          horizontal <span class="math">Theta×mu_LGP</span> arrows. The compatibility is
+          not a commutative-square simplification. It is formulated through
+          <span class="math">F⊢×mu</span> prime-strips, environmental prime-strips,
+          mono-theta projective systems, evaluation maps, and stabilization under
+          automorphisms of the horizontal-arrow domain and codomain.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Part</th><th>Object compared</th><th>Compatibility form</th></tr>
+          <tr>
+            <td>3.11(iii)(a)</td>
+            <td><span class="math">F⊢×mu_△</span> prime-strips.</td>
+            <td>Kummer isomorphisms commute with full horizontal poly-isomorphisms after applying the relevant symmetry.</td>
+          </tr>
+          <tr>
+            <td>3.11(iii)(b)</td>
+            <td>Environmental <span class="math">F⊢×mu</span> prime-strips.</td>
+            <td>Natural isomorphisms to the environmental side preserve the horizontal comparison.</td>
+          </tr>
+          <tr>
+            <td>3.11(iii)(c)</td>
+            <td>Mono-theta environments, <span class="math">n,◦R</span>, and evaluation maps.</td>
+            <td>Algorithmic constructions are stabilized/equivariant/functorial under arbitrary automorphisms, modulo Ind1/Ind2/Ind3 where stated.</td>
+          </tr>
+          <tr>
+            <td>3.11(iii)(d)</td>
+            <td>Kummer maps and poly-isomorphisms involving <span class="math">M^∞κ</span> data.</td>
+            <td>The same horizontal compatibility condition is imposed on the global Kummer/evaluation route.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Theorem 3.11(iii)</a>
+          Related: <a href="#kummer-conjugated-horizontal-arrows-310">Kummer-conjugated arrows 3.10.2</a>
+          <a href="#theta-mu-lgp-link-38">Theta×mu_LGP link 3.8</a>
+          <a href="#corollary-312-proof-steps">3.12 proof steps</a>
+        </div>
+      </section>
+
+      <section id="ipl-she-apt-source-311">
+        <h2>IUT III Remark 3.11.1: IPL, SHE, APT, HIS</h2>
+        <p class="lede">
+          Remark 3.11.1 recasts Theorem 3.11 as a functorial construction algorithm:
+          input is an <span class="math">F×mu</span>-prime-strip up to isomorphism;
+          output is linked to that input by full poly-isomorphisms and is
+          simultaneously expressible in the domain and codomain arithmetic
+          holomorphic structures. The transport is algorithmic, not a direct map of
+          regions.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Name</th><th>Source meaning</th><th>Corollary 3.12 relevance</th></tr>
+          <tr>
+            <td>IPL</td>
+            <td>Output data is linked to the fixed input q-pilot prime-strip through full poly-isomorphisms of <span class="math">F×mu</span>-prime-strips.</td>
+            <td>The q-pilot remains the fixed input object for the later comparison.</td>
+          </tr>
+          <tr>
+            <td>SHE</td>
+            <td>The construction and output are expressible relative to both theta-side and q-side arithmetic holomorphic structures.</td>
+            <td>This is the simultaneous-executability claim used before the final qualitative comparison.</td>
+          </tr>
+          <tr>
+            <td>APT</td>
+            <td>Parallel transport is an algorithm, not a set-theoretic function carrying one region to another.</td>
+            <td>Possible output regions still require hull/log-volume processing before comparison.</td>
+          </tr>
+          <tr>
+            <td>HIS</td>
+            <td>Theta functions and theta values are hidden internal structures for qualitative uses of the algorithm.</td>
+            <td>IUT IV cannot ignore them, because explicit log-volume estimates depend on how theta values occur.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          The source explicitly warns that possible regions produced by the algorithm
+          cannot necessarily be directly compared with structures in the codomain of
+          the theta link. This is why the later hull and log-volume corridor is
+          essential.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.11.1</a>
+          Related: <a href="#multiradiality">multiradiality overview</a>
+          <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
+          <a href="#corollary-312-proof-steps">Corollary 3.12 proof steps</a>
+        </div>
+      </section>
+
+      <section id="label-discipline-311">
+        <h2>IUT III Remark 3.11.2: Label Discipline</h2>
+        <p class="lede">
+          Remark 3.11.2 explains why the theorem uses all labels in the finite
+          multiplicative/additive Teichmuller systems, while the mono-analytic
+          procession index sets are "naked" finite sets determined only by cardinality.
+          This distinction is what makes the procession layer suitable for a
+          multiradial representation.
+        </p>
+        <div class="diagram" aria-label="Label transitions in Remark 3.11.2">
+          <div class="diagramHeader">
+            <strong>Remark 3.11.2</strong>
+            <span>symmetries to labels to processions</span>
+          </div>
+          <svg viewBox="0 0 900 360" role="img">
+            <defs>
+              <marker id="arrowLabels311" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="56" width="190" height="70"></rect>
+            <text class="nodeTitle" x="165" y="88" text-anchor="middle">F_l^± symmetry</text>
+            <rect class="nodeBox green" x="70" y="178" width="190" height="70"></rect>
+            <text class="nodeTitle" x="165" y="210" text-anchor="middle">labels in F_l</text>
+            <rect class="nodeBox gold" x="354" y="178" width="190" height="70"></rect>
+            <text class="nodeTitle" x="449" y="210" text-anchor="middle">labels in |F_l|</text>
+            <rect class="nodeBox violet" x="640" y="178" width="190" height="70"></rect>
+            <text class="nodeTitle" x="735" y="210" text-anchor="middle">labels in F_l</text>
+            <rect class="nodeBox blue" x="354" y="286" width="190" height="58"></rect>
+            <text class="nodeTitle" x="449" y="320" text-anchor="middle">±-processions</text>
+            <rect class="nodeBox green" x="640" y="286" width="190" height="58"></rect>
+            <text class="nodeTitle" x="735" y="320" text-anchor="middle">processions</text>
+            <rect class="nodeBox red" x="640" y="56" width="190" height="70"></rect>
+            <text class="nodeTitle" x="735" y="88" text-anchor="middle">F_l symmetry</text>
+            <path d="M165 128 V176" class="edge blue" marker-end="url(#arrowLabels311)"></path>
+            <path d="M262 213 H352" class="edge green" marker-end="url(#arrowLabels311)"></path>
+            <path d="M546 213 H638" class="edge gold" marker-end="url(#arrowLabels311)"></path>
+            <path d="M449 250 V284" class="edge violet" marker-end="url(#arrowLabels311)"></path>
+            <path d="M735 250 V284" class="edge green" marker-end="url(#arrowLabels311)"></path>
+            <path d="M735 128 V176" class="edge red" marker-end="url(#arrowLabels311)"></path>
+            <path d="M638 315 H546" class="edge gold" marker-end="url(#arrowLabels311)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Point</th><th>Source warning</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>All labels</td>
+            <td>The transitions require all labels in <span class="math">F_l</span> or <span class="math">|F_l|</span>; arbitrary omissions are not allowed.</td>
+            <td>Do not simplify the representation by dropping inconvenient labels.</td>
+          </tr>
+          <tr>
+            <td>Arithmetic labels</td>
+            <td>The labels depend on local and global arithmetic fundamental groups.</td>
+            <td>They are arithmetic holomorphic data, not anonymous finite indices.</td>
+          </tr>
+          <tr>
+            <td>Procession indices</td>
+            <td>The mono-analytic procession index sets are naked finite sets determined up to isomorphism by cardinality.</td>
+            <td>This loss of arithmetic label history is precisely why they can serve in a multiradial representation.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.11.2 and Fig. 3.3</a>
+          Related: <a href="#theorem-311-data-abc">3.11 data</a>
+          <a href="#d-theta-nf-etale-picture-iut-i412">etale-picture symmetries</a>
+          <a href="#multiradiality">multiradiality</a>
         </div>
       </section>
 
