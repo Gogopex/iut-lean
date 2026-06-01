@@ -396,11 +396,11 @@ from product-log-volume preservation along
 The remaining target calibration and packet-to-entry identifications are still
 explicit source obligations.
 There is now a stronger packet-target constructor for this nonarchimedean
-upper-semi object.  It calibrates the theta average, the \((\Ind3)\) target, and
-the local entry target against the same packet-normalized capsule log-volume;
-from these three packet-normalized equalities \Lean{} derives the direct
-theta-to-entry and entry-to-\((\Ind3)\)-target equalities consumed by the
-upper-semi route.
+upper-semi object.  The target-side data is no longer passed as three unrelated
+equalities: a single log-Kummer packet-target calibration object carries the
+common packet-normalized capsule value, and \Lean{} derives the direct
+theta-to-entry, theta-to-packet, and entry-to-\((\Ind3)\)-target equalities
+consumed by the upper-semi route.
 The integrated route now composes the Hodge--Arakelov theta-value sources with
 this packet-target nonarchimedean source.  The resulting theorem derives the
 same boundary/strict \(C_\Theta\) dichotomy from source-facing Gaussian
@@ -542,11 +542,11 @@ The project currently proves the following source-facing results in \Lean{}:
   tensor-packet chain.
 \item A theta-root attached Kummer/forgetting source package now combines the
   canonical bad-local \(|F_\ell|\)-label source with that finite chain, deriving
-  the nonarchimedean source equality while retaining the remaining target and
-  packet-entry calibrations as explicit obligations.
-\item A packet-target nonarchimedean constructor now derives the direct target
-  equalities from calibration of the theta average, entry target, and
-  \((\Ind3)\) target against the same packet-normalized capsule value.
+  the nonarchimedean source equality.
+\item A packet-target nonarchimedean constructor now packages target-side
+  Step (x) calibration as one log-Kummer packet-target object.  Its projections
+  derive the theta-to-packet, theta-to-entry, entry-to-\((\Ind3)\)-target, and
+  packet-normalized target equalities used by the route.
 \item The current integrated route composes Hodge--Arakelov theta-value sources
   with the packet-target nonarchimedean source to obtain the same
   \(C_\Theta=-1\) boundary alternative or strict \(C_\Theta>-1\) conclusion.
@@ -697,9 +697,9 @@ The practical priority order is:
 \item extend the Gaussian-derived factored \SHE{} construction beyond the
   finite degree-evaluation and canonical-label shadows toward actual
   Gaussian/Frobenioid material from \IUT{} II;
-\item derive the remaining packet-normalized target calibrations from the actual
-  log-Kummer construction of \IUT{} III, Step (x), rather than treating them as
-  named source-facing inputs;
+\item construct the packet-target calibration object from the actual
+  log-Kummer/Frobenioid machinery of \IUT{} III, Step (x), rather than treating
+  the object itself as source-facing input;
 \item replace the hull/determinant endpoint records by the actual
   holomorphic-hull and determinant operations from Remark 3.9.5 and
   Step (xi);
