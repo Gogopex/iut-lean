@@ -1321,6 +1321,11 @@
         <a href="#leanform-stage12-interface-page">Stage 1-2 Lean interface</a>
         <a href="#rims-lean-stage-plan-2026">RIMS Lean stages 2026</a>
         <a href="#rims-four-triangle-route-2026">Four-triangle 3.11→3.12 route</a>
+        <a href="#leanform-n-power-model-page">LeanForm N-power model</a>
+        <a href="#leanform-common-container-page">LeanForm common container</a>
+        <a href="#leanform-infinite-h-descent-page">Infinite H descent</a>
+        <a href="#leanform-apt-ipl-page">APT and IPL</a>
+        <a href="#leanform-fourth-triangle-page">Fourth triangle</a>
         <a href="#lana">LANA</a>
         <a href="#galois-orbit-iut-preview">Galois-orbit IUT preview</a>
         <a href="#galois-theoretic-context">Galois-theoretic context</a>
@@ -59415,6 +59420,320 @@
         </div>
       </section>
 
+      <section id="leanform-n-power-model-page" data-filter="mochizuki formalization iut nth power model multiplicative monoid ring structure not homomorphism common data dagger double dagger">
+        <h2>LeanForm N-Power Model</h2>
+        <p class="lede">
+          In §3 of the 2026 report, Mochizuki uses an elementary N-th power model as
+          a controlled analogue for the IUT comparison problem. For an integral domain
+          with group action and no nontrivial N-th roots of unity, the N-th power map
+          identifies multiplicative monoids with group action, but it is not a ring
+          homomorphism and does not preserve addition.
+        </p>
+        <div class="diagram fit" aria-label="N-power model as formalization analogue">
+          <div class="diagramHeader">
+            <strong>N-th power model</strong>
+            <span>formalization report §3</span>
+          </div>
+          <svg viewBox="0 0 1020 430" role="img">
+            <defs>
+              <marker id="arrowLeanNPower" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="74" width="230" height="86"></rect>
+            <text class="nodeTitle" x="187" y="104" text-anchor="middle">†R ring structure</text>
+            <text class="tinyText" x="187" y="128" text-anchor="middle">addition and multiplication</text>
+            <text class="tinyText" x="187" y="146" text-anchor="middle">not transported as a ring</text>
+
+            <rect class="nodeBox green" x="395" y="74" width="230" height="86"></rect>
+            <text class="nodeTitle" x="510" y="104" text-anchor="middle">multiplicative monoid</text>
+            <text class="tinyText" x="510" y="128" text-anchor="middle">R without zero, G-action</text>
+            <text class="tinyText" x="510" y="146" text-anchor="middle">N-th powers give common data</text>
+
+            <rect class="nodeBox red" x="718" y="74" width="230" height="86"></rect>
+            <text class="nodeTitle" x="833" y="104" text-anchor="middle">‡R ring structure</text>
+            <text class="tinyText" x="833" y="128" text-anchor="middle">distinct additive history</text>
+            <text class="tinyText" x="833" y="146" text-anchor="middle">not identified with †R</text>
+
+            <rect class="nodeBox gold" x="234" y="272" width="250" height="84"></rect>
+            <text class="nodeTitle" x="359" y="302" text-anchor="middle">height/log-volume</text>
+            <text class="tinyText" x="359" y="326" text-anchor="middle">x ↦ x^N becomes scaling by N</text>
+            <text class="tinyText" x="359" y="344" text-anchor="middle">after passing to logs</text>
+
+            <rect class="nodeBox violet" x="560" y="272" width="250" height="84"></rect>
+            <text class="nodeTitle" x="685" y="302" text-anchor="middle">IUT analogy</text>
+            <text class="tinyText" x="685" y="326" text-anchor="middle">Theta-link behaves like N-th power</text>
+            <text class="tinyText" x="685" y="344" text-anchor="middle">log-link controls comparison</text>
+
+            <path class="edge blue" d="M304 117 H393" marker-end="url(#arrowLeanNPower)"></path>
+            <path class="edge green" d="M627 117 H716" marker-end="url(#arrowLeanNPower)"></path>
+            <path class="edge gold" d="M510 162 C470 220 410 246 370 270" marker-end="url(#arrowLeanNPower)"></path>
+            <path class="edge violet" d="M510 162 C556 220 636 246 678 270" marker-end="url(#arrowLeanNPower)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Model item</th><th>Formal reading</th><th>IUT warning</th></tr>
+          <tr>
+            <td>N-th power map</td>
+            <td>Isomorphism on suitable multiplicative monoid data with group action.</td>
+            <td>Do not read it as a transport of ring structure.</td>
+          </tr>
+          <tr>
+            <td>†/‡ copies</td>
+            <td>Distinct ring structures can share multiplicative and abstract group data.</td>
+            <td>The common part is a logical AND layer, not a scheme-theoretic identification.</td>
+          </tr>
+          <tr>
+            <td>Modulo p and Faltings examples</td>
+            <td>The report gives these as elementary and height-theoretic guide cases.</td>
+            <td>They orient the final comparison but do not replace the IUT constructions.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report §3</a>
+          Related: <a href="#gt-n-power-iut-analogy-page">GT N-power analogy</a>
+          <a href="#theta-link">theta link</a>
+          <a href="#theta-log-links">log link</a>
+        </div>
+      </section>
+
+      <section id="leanform-common-container-page" data-filter="mochizuki formalization iut common container multiplicative monoid abstract group multiradial representation theta pilot q pilot hodge theater">
+        <h2>LeanForm Common Container</h2>
+        <p class="lede">
+          The N-power model is used to explain the role of a common container: the
+          multiplicative monoid and abstract group structures are shared, while the
+          arithmetic holomorphic ring structures remain distinct. In IUT the analogous
+          container is the multiradial representation for the Theta-pilot.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Common input</strong>
+            <p>Multiplicative monoid data and abstract group data survive the passage between alien copies.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Algorithmic construction</strong>
+            <p>Anabelian reconstruction, logarithms, theta evaluation, and Kummer theory produce the multiradial representation.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Separated rings</strong>
+            <p>The two arithmetic holomorphic structures are compared through the container, not identified as one ring.</p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source phrase</th><th>Wiki interpretation</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Common multiplicative monoid and abstract group structures</td>
+            <td>The shared layer is weaker than ring or scheme data.</td>
+            <td>Lean interfaces must type the common layer separately from ring histories.</td>
+          </tr>
+          <tr>
+            <td>Multiradial representation for the Theta-pilot</td>
+            <td>A container built so the Theta-pilot can be expressed from multiple alien viewpoints.</td>
+            <td>Do not replace multiradiality by ordinary equality in one ambient category.</td>
+          </tr>
+          <tr>
+            <td>q-pilot versus Theta-pilot</td>
+            <td>The final comparison reads domain-like and image-like data in one comparison environment.</td>
+            <td>This page is the conceptual bridge to the fourth triangle and SHE/IPL pages.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          The container is not a hidden global ring. Its point is to make a controlled
+          comparison possible without restoring the ring/scheme history that the IUT
+          links deliberately leave behind.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report §3</a>
+          Related: <a href="#common-container-chain">common-container chain</a>
+          <a href="#collas-category-perspective">Collas category view</a>
+          <a href="#leanform-fourth-triangle-page">fourth triangle</a>
+        </div>
+      </section>
+
+      <section id="leanform-infinite-h-descent-page" data-filter="mochizuki formalization iut infinite h log theta lattice descent fuzzification indeterminacies miraculous rotation log link theta link">
+        <h2>Infinite H Descent</h2>
+        <p class="lede">
+          The report explains the multiradial representation as arising from an
+          analytic-continuation-like process along an infinite H in the log-theta
+          lattice. Descent operations gradually introduce fuzzifications corresponding
+          to the named indeterminacies, while log-link invariants juggle additive and
+          multiplicative parts of ring structures.
+        </p>
+        <div class="diagram fit" aria-label="Infinite H descent and miraculous rotation">
+          <div class="diagramHeader">
+            <strong>Descent along the log-theta lattice</strong>
+            <span>formalization report §3; Essential Logical Structure §3.3, §3.10, §3.11</span>
+          </div>
+          <svg viewBox="0 0 1040 450" role="img">
+            <defs>
+              <marker id="arrowLeanInfH" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="74" width="210" height="82"></rect>
+            <text class="nodeTitle" x="175" y="104" text-anchor="middle">log-theta lattice</text>
+            <text class="tinyText" x="175" y="128" text-anchor="middle">theta horizontal</text>
+            <text class="tinyText" x="175" y="146" text-anchor="middle">log vertical</text>
+
+            <rect class="nodeBox green" x="330" y="74" width="210" height="82"></rect>
+            <text class="nodeTitle" x="435" y="104" text-anchor="middle">infinite H</text>
+            <text class="tinyText" x="435" y="128" text-anchor="middle">continuation route</text>
+            <text class="tinyText" x="435" y="146" text-anchor="middle">across lattice positions</text>
+
+            <rect class="nodeBox gold" x="590" y="74" width="210" height="82"></rect>
+            <text class="nodeTitle" x="695" y="104" text-anchor="middle">descent/fuzzification</text>
+            <text class="tinyText" x="695" y="128" text-anchor="middle">Ind1, Ind2, Ind3</text>
+            <text class="tinyText" x="695" y="146" text-anchor="middle">controlled ambiguity</text>
+
+            <rect class="nodeBox red" x="410" y="282" width="250" height="84"></rect>
+            <text class="nodeTitle" x="535" y="312" text-anchor="middle">miraculous rotation</text>
+            <text class="tinyText" x="535" y="336" text-anchor="middle">Theta-link log-volume gap</text>
+            <text class="tinyText" x="535" y="354" text-anchor="middle">read through log-link invariance</text>
+
+            <path class="edge blue" d="M282 115 H328" marker-end="url(#arrowLeanInfH)"></path>
+            <path class="edge green" d="M542 115 H588" marker-end="url(#arrowLeanInfH)"></path>
+            <path class="edge gold" d="M695 158 C658 220 596 248 548 280" marker-end="url(#arrowLeanInfH)"></path>
+            <path class="edge violet" d="M435 158 C468 220 506 248 528 280" marker-end="url(#arrowLeanInfH)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Operation</th><th>Report role</th><th>Audit consequence</th></tr>
+          <tr>
+            <td>Log-link invariance</td>
+            <td>Constructs invariants with respect to the log-link.</td>
+            <td>The log-link cannot be treated as incidental to the Theta-link comparison.</td>
+          </tr>
+          <tr>
+            <td>Fuzzification</td>
+            <td>Introduces indeterminacies through descent.</td>
+            <td>Indeterminacies should be typed operations, not vague error labels.</td>
+          </tr>
+          <tr>
+            <td>Miraculous rotation</td>
+            <td>Relates the log-volume-dilating Theta-link gap to a log-volume-preserving log-link gap.</td>
+            <td>This is a core page for the disputed corridor and for Collas's log-theta wandering view.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report §3</a>
+          Related: <a href="#collas-log-theta-wandering-page">Collas log-theta wandering</a>
+          <a href="#cat-miraculous-rotation-page">CAT miraculous rotation</a>
+          <a href="#theorem-311-lgp-algorithms">IUT III Theorem 3.11</a>
+        </div>
+      </section>
+
+      <section id="leanform-apt-ipl-page" data-filter="mochizuki formalization iut apt algorithmic parallel transport ipl input prime strip link descent hull determinant theorem 3.11 3.11.5">
+        <h2>APT and IPL in the LeanForm Route</h2>
+        <p class="lede">
+          The 2026 report separates the route from Theorem 3.11 to the final
+          comparison into source obligations. The first, second, and third triangles
+          use APT and IPL to pass from descent data to the intermediate
+          "3.11.5" object, while IPL remains relevant at the final comparison boundary.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Abbreviation</th><th>Report role</th><th>Where it enters</th></tr>
+          <tr>
+            <td>APT</td>
+            <td>Algorithmic parallel transport: expresses gluings up to indeterminacies such as Ind1/2/3 plus hull.</td>
+            <td>Central in the second and third triangles, especially the route to HDD.</td>
+          </tr>
+          <tr>
+            <td>IPL</td>
+            <td>Input prime-strip link: relates input BPS data and output data of the multiradial algorithm.</td>
+            <td>Used in the 3.11 to 3.11.5 part and again in the final comparison.</td>
+          </tr>
+          <tr>
+            <td>HDD</td>
+            <td>The composite of descent with hull+det.</td>
+            <td>Defines the intermediate object compared with the SHE/q-pilot side.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          This page is a staging map, not a proof of APT or IPL. The report says the
+          RIMS group is making progress on skeletal Lean code for APT in the
+          second/third triangles; the source constructions still point back to IUT III.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report §4</a>
+          Related: <a href="#ipl-she-apt-source-311">IPL/SHE/APT source</a>
+          <a href="#multiradiality">multiradiality</a>
+          <a href="#rims-four-triangle-route-2026">four-triangle route</a>
+        </div>
+      </section>
+
+      <section id="leanform-fourth-triangle-page" data-filter="mochizuki formalization iut fourth triangle 3.11.5 corollary 3.12 she simultaneous holomorphic expressibility q pilot theta pilot common container">
+        <h2>LeanForm Fourth Triangle</h2>
+        <p class="lede">
+          The report identifies the fourth triangle as the skeletal-code focus
+          discussed in §1: simultaneous comparison, relative to a single comparison
+          container, of the Theta-pilot side and the q-pilot side. The Theta-pilot
+          corresponds to HDD, or the image side of the N-th power analogy; the q-pilot
+          corresponds to SHE, or the domain side.
+        </p>
+        <div class="diagram fit" aria-label="Fourth triangle common-container comparison">
+          <div class="diagramHeader">
+            <strong>Fourth triangle: 3.11.5 to 3.12</strong>
+            <span>SHE + IPL comparison</span>
+          </div>
+          <svg viewBox="0 0 980 420" role="img">
+            <defs>
+              <marker id="arrowLeanFourthTriangle" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox gold" x="84" y="76" width="230" height="88"></rect>
+            <text class="nodeTitle" x="199" y="108" text-anchor="middle">q-pilot + etHT</text>
+            <text class="tinyText" x="199" y="132" text-anchor="middle">SHE input side</text>
+            <text class="tinyText" x="199" y="150" text-anchor="middle">domain of N-power analogy</text>
+
+            <rect class="nodeBox blue" x="374" y="76" width="230" height="88"></rect>
+            <text class="nodeTitle" x="489" y="108" text-anchor="middle">common container</text>
+            <text class="tinyText" x="489" y="132" text-anchor="middle">single comparison structure</text>
+            <text class="tinyText" x="489" y="150" text-anchor="middle">not a restored global ring</text>
+
+            <rect class="nodeBox red" x="664" y="76" width="230" height="88"></rect>
+            <text class="nodeTitle" x="779" y="108" text-anchor="middle">Theta-pilot</text>
+            <text class="tinyText" x="779" y="132" text-anchor="middle">HDD/image side</text>
+            <text class="tinyText" x="779" y="150" text-anchor="middle">hull+det after descent</text>
+
+            <rect class="nodeBox green" x="344" y="276" width="290" height="84"></rect>
+            <text class="nodeTitle" x="489" y="306" text-anchor="middle">Corollary 3.12 comparison</text>
+            <text class="tinyText" x="489" y="330" text-anchor="middle">height equals N times height</text>
+            <text class="tinyText" x="489" y="348" text-anchor="middle">up to Ind1/2/3 plus hull discrepancy</text>
+
+            <path class="edge gold" d="M316 120 H372" marker-end="url(#arrowLeanFourthTriangle)"></path>
+            <path class="edge red" d="M606 120 H662" marker-end="url(#arrowLeanFourthTriangle)"></path>
+            <path class="edge blue" d="M489 166 V274" marker-end="url(#arrowLeanFourthTriangle)"></path>
+            <path class="edge violet" d="M199 166 C260 236 372 248 456 274" marker-end="url(#arrowLeanFourthTriangle)"></path>
+            <path class="edge violet" d="M779 166 C718 236 606 248 522 274" marker-end="url(#arrowLeanFourthTriangle)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Side</th><th>Report identification</th><th>3.12 relevance</th></tr>
+          <tr>
+            <td>q-pilot</td>
+            <td>Data constructed from etHT by applying SHE; analogous to the domain of the N-th power map.</td>
+            <td>Supplies the comparison side tied to the original q-pilot input.</td>
+          </tr>
+          <tr>
+            <td>Theta-pilot</td>
+            <td>Corresponds to HDD, or the image of the N-th power map after descent and hull+det.</td>
+            <td>Supplies the multiradial output side.</td>
+          </tr>
+          <tr>
+            <td>Final content</td>
+            <td>Height is equal to N times height up to a small discrepancy from Ind1/2/3 plus hull.</td>
+            <td>This is the public-dispute corridor that LeanForm Stage 1 isolates.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-formalization-iut-2026-04.pdf" target="_blank">Mochizuki 2026 Lean report §4</a>
+          Related: <a href="#corollary-312-proof-steps">Corollary 3.12 proof steps</a>
+          <a href="#ipl-she-apt-source-311">SHE</a>
+          <a href="#leanform-common-container-page">common container</a>
+        </div>
+      </section>
+
       <section id="lana">
         <h2>LANA</h2>
         <p class="lede">
@@ -59773,10 +60092,20 @@
       if (owner) idOwners.set(el.id, owner);
     });
 
-    function setActivePage(hash, shouldScroll = true) {
+    function routePage(hash) {
       const requested = (hash || "#home").slice(1);
       const target = idElements.get(requested) || document.getElementById("home");
       const page = idOwners.get(requested) || document.getElementById("home");
+      return { requested, target, page };
+    }
+
+    function canonicalHash(hash) {
+      const { page } = routePage(hash);
+      return "#" + page.id;
+    }
+
+    function setActivePage(hash, shouldScroll = true) {
+      const { requested, page } = routePage(hash);
       sections.forEach(section => {
         const isCurrent = section === page;
         section.hidden = !isCurrent;
@@ -59797,19 +60126,18 @@
         ? baseTitle
         : `${heading.textContent.trim()} | ${baseTitle}`;
 
-      if (sectionIds.has(requested)) {
+      if (!sectionIds.has(requested) || location.hash !== "#" + page.id) {
         history.replaceState(null, "", "#" + page.id);
       }
       if (shouldScroll) {
+        window.scrollTo({ top: 0, behavior: "auto" });
         requestAnimationFrame(() => {
-          const scrollTarget = idElements.get(requested) || page;
           setTimeout(() => {
-            if (scrollTarget === page) {
-              window.scrollTo({ top: 0, behavior: "auto" });
-            } else {
-              scrollTarget.scrollIntoView({ block: "center" });
-            }
+            window.scrollTo({ top: 0, behavior: "auto" });
           }, 0);
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: "auto" });
+          }, 80);
         });
       }
     }
@@ -59820,8 +60148,9 @@
       const hash = link.getAttribute("href");
       if (!hash || hash === "#") return;
       event.preventDefault();
-      history.pushState(null, "", hash);
-      setActivePage(hash);
+      const canonical = canonicalHash(hash);
+      history.pushState(null, "", canonical);
+      setActivePage(canonical);
     });
 
     function bootWiki() {
