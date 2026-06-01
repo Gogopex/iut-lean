@@ -1485,6 +1485,94 @@ structure IUTStage1RealizedTensorPacketProductLogVolume
   product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j
 
 /--
+Finite realified Frobenioid degree object.
+
+IUT III treats the relevant global/non-realified and realified Frobenioids as
+the source of the log-volume quantities later used in Step (x).  This record is
+still a finite shadow, but it separates the Frobenioid object degree from the
+real log-volume extracted from it.
+-/
+structure IUTStage1RealifiedFrobenioidDegreeObject where
+  object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean
+  divisorDegree : Int
+  unitLogVolume : Real
+  realifiedLogVolume : Real
+  realified_logVolume_eq :
+    realifiedLogVolume = (divisorDegree : Real) + unitLogVolume
+
+namespace IUTStage1RealifiedFrobenioidDegreeObject
+
+theorem realifiedLogVolume_eq
+    (object : IUTStage1RealifiedFrobenioidDegreeObject) :
+    object.realifiedLogVolume =
+      (object.divisorDegree : Real) + object.unitLogVolume :=
+  object.realified_logVolume_eq
+
+theorem realifiedLogVolume_eq_of_degree_unit
+    {source target : IUTStage1RealifiedFrobenioidDegreeObject}
+    (hdegree : source.divisorDegree = target.divisorDegree)
+    (hunit : source.unitLogVolume = target.unitLogVolume) :
+    source.realifiedLogVolume = target.realifiedLogVolume := by
+  rw [source.realifiedLogVolume_eq, target.realifiedLogVolume_eq,
+    hdegree, hunit]
+
+end IUTStage1RealifiedFrobenioidDegreeObject
+
+/--
+Realified Frobenioid source for a realized tensor-packet product.
+
+The existing tensor-packet product record is retained as the finite
+base-valuation packet data.  The new field `frobenioidDegree` records the
+Frobenioid-theoretic degree/log-volume source whose realification is the
+product log-volume.
+-/
+structure IUTStage1RealifiedFrobenioidTensorPacketProductSource
+    (kind : IUTStage1PlaceKind) (j : Nat) where
+  realization : IUTStage1TensorPacketRealizationKind
+  theater : QualitativeData.HodgeTheaterId
+  product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j
+  frobenioidDegree : IUTStage1RealifiedFrobenioidDegreeObject
+  productLogVolume_eq_realified :
+    product.productLogVolume = frobenioidDegree.realifiedLogVolume
+
+namespace IUTStage1RealifiedFrobenioidTensorPacketProductSource
+
+variable {kind : IUTStage1PlaceKind} {j : Nat}
+
+def toRealized
+    (source :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j) :
+    IUTStage1RealizedTensorPacketProductLogVolume kind j :=
+  { realization := source.realization,
+    theater := source.theater,
+    product := source.product }
+
+theorem toRealized_productLogVolume_eq_realified
+    (source :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j) :
+    source.toRealized.product.productLogVolume =
+      source.frobenioidDegree.realifiedLogVolume :=
+  source.productLogVolume_eq_realified
+
+theorem productLogVolume_eq_of_realifiedLogVolume_eq
+    {source target :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j}
+    (hrealified :
+      target.frobenioidDegree.realifiedLogVolume =
+        source.frobenioidDegree.realifiedLogVolume) :
+    target.toRealized.product.productLogVolume =
+      source.toRealized.product.productLogVolume := by
+  calc
+    target.toRealized.product.productLogVolume =
+        target.frobenioidDegree.realifiedLogVolume :=
+      target.toRealized_productLogVolume_eq_realified
+    _ = source.frobenioidDegree.realifiedLogVolume := hrealified
+    _ = source.toRealized.product.productLogVolume :=
+      source.toRealized_productLogVolume_eq_realified.symm
+
+end IUTStage1RealifiedFrobenioidTensorPacketProductSource
+
+/--
 Finite log-volume shadow of the Kummer/coric transfer from one realized
 tensor-packet product to another.
 
@@ -1597,6 +1685,103 @@ theorem structureForgotten
   data.holomorphic_structure_forgotten
 
 end IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+
+/--
+Frobenioid-level source for a Kummer/log-link compatible tensor-packet
+transfer.
+
+This is a finite realified shadow of the IUT III statement that the
+Frobenioid-theoretic side and the vertically coric/etale side are related by
+Kummer/log-Kummer correspondences.  The theorem below projects it to the older
+`IUTStage1TensorPacketCoricTransfer` by deriving product-log-volume equality
+from equality of realified Frobenioid log-volumes.
+-/
+structure IUTStage1RealifiedFrobenioidKummerCompatibility
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    (source target :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j) where
+  sourceRealization : IUTStage1TensorPacketRealizationKind
+  targetRealization : IUTStage1TensorPacketRealizationKind
+  source_realization_eq : source.realization = sourceRealization
+  target_realization_eq : target.realization = targetRealization
+  histories_not_identified : source.theater.side ≠ target.theater.side
+  baseCount_eq : source.product.baseCount = target.product.baseCount
+  realifiedLogVolume_eq :
+    target.frobenioidDegree.realifiedLogVolume =
+      source.frobenioidDegree.realifiedLogVolume
+
+namespace IUTStage1RealifiedFrobenioidKummerCompatibility
+
+variable {kind : IUTStage1PlaceKind} {j : Nat}
+variable {source target :
+  IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j}
+
+def toTensorPacketCoricTransfer
+    (compat :
+      IUTStage1RealifiedFrobenioidKummerCompatibility source target) :
+    IUTStage1TensorPacketCoricTransfer
+      source.toRealized target.toRealized :=
+  { sourceRealization := compat.sourceRealization,
+    targetRealization := compat.targetRealization,
+    source_realization_eq := compat.source_realization_eq,
+    target_realization_eq := compat.target_realization_eq,
+    histories_not_identified := compat.histories_not_identified,
+    baseCount_eq := compat.baseCount_eq,
+    productLogVolume_eq :=
+      source.productLogVolume_eq_of_realifiedLogVolume_eq
+        compat.realifiedLogVolume_eq }
+
+theorem toTransfer_preserves_productLogVolume
+    (compat :
+      IUTStage1RealifiedFrobenioidKummerCompatibility source target) :
+    target.toRealized.product.productLogVolume =
+      source.toRealized.product.productLogVolume :=
+  compat.toTensorPacketCoricTransfer.preserves_productLogVolume
+
+def toKummerFTensorPacketToDTensorPacketTransfer
+    (compat :
+      IUTStage1RealifiedFrobenioidKummerCompatibility source target)
+    (source_is_holomorphicF :
+      source.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.holomorphicF)
+    (target_is_holomorphicD :
+      target.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.holomorphicD) :
+    IUTStage1KummerFTensorPacketToDTensorPacketTransfer
+      source.toRealized target.toRealized :=
+  { transfer := compat.toTensorPacketCoricTransfer,
+    source_is_holomorphicF := source_is_holomorphicF,
+    target_is_holomorphicD := target_is_holomorphicD }
+
+def toMonoAnalyticTensorPacketForgettingTransfer
+    (compat :
+      IUTStage1RealifiedFrobenioidKummerCompatibility source target)
+    (source_is_holomorphicD :
+      source.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.holomorphicD)
+    (target_is_monoAnalyticD :
+      target.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.monoAnalyticD)
+    (holomorphicStructureForgotten : Prop)
+    (holomorphic_structure_forgotten : holomorphicStructureForgotten) :
+    IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+      source.toRealized target.toRealized :=
+  { transfer := compat.toTensorPacketCoricTransfer,
+    source_is_holomorphicD := source_is_holomorphicD,
+    target_is_monoAnalyticD := target_is_monoAnalyticD,
+    holomorphicStructureForgotten := holomorphicStructureForgotten,
+    holomorphic_structure_forgotten := holomorphic_structure_forgotten }
+
+theorem frobenioidKummerCompatibility_endpoint
+    (compat :
+      IUTStage1RealifiedFrobenioidKummerCompatibility source target) :
+    target.toRealized.product.productLogVolume =
+        source.toRealized.product.productLogVolume ∧
+      source.toRealized.theater.side ≠ target.toRealized.theater.side :=
+  ⟨compat.toTransfer_preserves_productLogVolume,
+    compat.histories_not_identified⟩
+
+end IUTStage1RealifiedFrobenioidKummerCompatibility
 
 /--
 Remark 3.9.5 holomorphic-hull shadow.

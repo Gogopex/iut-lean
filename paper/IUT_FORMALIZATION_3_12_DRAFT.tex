@@ -411,6 +411,16 @@ The first-pass Gaussian route also has a one-correspondence form: it consumes
 a finite log-Kummer packet-correspondence source and projects the source
 packet/product calibration and target packet-normalized calibration from that
 single object before entering the upper-semi corridor.
+Below the packet layer, the code now has a first realified Frobenioid degree
+source.  A finite Frobenioid object carries a divisor degree, a unit
+log-volume, and their realified log-volume; a tensor-packet product may be
+declared to have product log-volume equal to this realified value.  A
+Frobenioid Kummer-compatibility certificate then projects to the older coric
+tensor-packet transfer by deriving equality of product log-volumes from
+equality of realified Frobenioid log-volumes, while retaining the
+Hodge-theater history guard.  This is still a finite degree-level shadow, not
+a construction of Mochizuki's Frobenioids, but it moves one equality source
+below the packet-correspondence interface.
 \IUT{} III, Remark 3.11.4 further says that the root-of-unity and cyclotomic
 indeterminacies arising from forgetting Frobenius-like labels are invisible
 for the objects under consideration.  The present code formalizes the finite
@@ -581,6 +591,10 @@ The project currently proves the following source-facing results in \Lean{}:
   packet-correspondence source and project both its source and target faces,
   instead of taking source packet equalities and target calibration as separate
   route inputs.
+\item A first realified Frobenioid degree layer is present: equality of
+  realified Frobenioid log-volumes now derives the product-log-volume equality
+  used by the tensor-packet coric transfer, with theater histories still kept
+  distinct.
 \item The finite sign-unit/root-of-unity part of Remark 3.11.4 is formalized:
   sign-unit action preserves full cusp labels, full-label log-volume readings,
   Gaussian degrees, and averaged Gaussian log-volume.

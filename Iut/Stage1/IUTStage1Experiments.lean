@@ -256,6 +256,17 @@ theorem logKummerNoFurtherIndeterminacy_endpoint
   NonarchimedeanLogKummerRootUnityInvisibility.noFurtherIndeterminacy_endpoint
     evaluation henv a t
 
+theorem realifiedFrobenioidKummerCompatibility_endpoint
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    {source target :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j}
+    (compat :
+      IUTStage1RealifiedFrobenioidKummerCompatibility source target) :
+    target.toRealized.product.productLogVolume =
+        source.toRealized.product.productLogVolume ∧
+      source.toRealized.theater.side ≠ target.toRealized.theater.side :=
+  compat.frobenioidKummerCompatibility_endpoint
+
 theorem hodgeArakelovThetaValueSource_constructsGaussianEvaluation
     {l : PrimeGeFive} {F : Type u} [Field F]
     {X C : HyperbolicOrbicurveModel F}
