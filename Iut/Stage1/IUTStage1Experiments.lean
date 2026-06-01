@@ -28,6 +28,7 @@ open IUTStage1ZModSquareWeightProfile
 open IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation
 open IUTStage1ZModSquareWeightProfile.LGPSplittingMonoidTensorPacketAction
 open IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+open IUTStage1HullDetPilotUpperRayLogVolume
 
 /-- First pass: no real-line/log-volume alignment has been supplied. -/
 def ind3MissingRealAlignmentReport :
@@ -448,6 +449,71 @@ theorem hullLogVolumeApproximant_endpoint
         data.logVolume (data.hullRegion region) ∧
       data.hullRegion approximant.approximant = approximant.approximant :=
   approximant.endpoint
+
+theorem hullApproximantUpperRay_qPilot_le_theta
+    {α : Type u}
+    {hullData : IUTStage1HolomorphicHullLogVolumeShadow α}
+    {region : Set α}
+    (approximant : IUTStage1HullLogVolumeApproximant hullData region)
+    (qRegion : Set α)
+    (q_subset_approximant : qRegion ⊆ approximant.approximant)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (approximant_eq_normalized_determinant :
+      hullData.logVolume approximant.approximant =
+        determinant.normalizedLogVolume) :
+    (IUTStage1HullDetPilotUpperRayLogVolume.ofHullApproximant
+      approximant qRegion q_subset_approximant determinant
+      approximant_eq_normalized_determinant).qPilotLogVolume <=
+      (IUTStage1HullDetPilotUpperRayLogVolume.ofHullApproximant
+        approximant qRegion q_subset_approximant determinant
+        approximant_eq_normalized_determinant).thetaHullLogVolume :=
+  ofHullApproximant_qPilotLogVolume_le_thetaHullLogVolume
+    approximant qRegion q_subset_approximant determinant
+    approximant_eq_normalized_determinant
+
+theorem hullApproximantUpperRay_endpoint
+    {α : Type u}
+    {hullData : IUTStage1HolomorphicHullLogVolumeShadow α}
+    {region : Set α}
+    (approximant : IUTStage1HullLogVolumeApproximant hullData region)
+    (qRegion : Set α)
+    (q_subset_approximant : qRegion ⊆ approximant.approximant)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (approximant_eq_normalized_determinant :
+      hullData.logVolume approximant.approximant =
+        determinant.normalizedLogVolume) :
+    let upperRay :=
+      IUTStage1HullDetPilotUpperRayLogVolume.ofHullApproximant
+        approximant qRegion q_subset_approximant determinant
+        approximant_eq_normalized_determinant;
+    upperRay.qPilotLogVolume <= upperRay.thetaHullLogVolume ∧
+      upperRay.thetaHullLogVolume <=
+        hullData.logVolume (hullData.hullRegion region) ∧
+      upperRay.qPilotLogVolume <=
+        hullData.logVolume (hullData.hullRegion region) ∧
+      upperRay.qPilotLogVolume <= determinant.determinantLogVolume :=
+  by
+    intro upperRay
+    have hq_theta :
+        upperRay.qPilotLogVolume <= upperRay.thetaHullLogVolume :=
+      ofHullApproximant_qPilotLogVolume_le_thetaHullLogVolume
+        approximant qRegion q_subset_approximant determinant
+        approximant_eq_normalized_determinant
+    have htheta_hull :
+        upperRay.thetaHullLogVolume <=
+          hullData.logVolume (hullData.hullRegion region) :=
+      ofHullApproximant_thetaHullLogVolume_le_canonicalHull
+        approximant qRegion q_subset_approximant determinant
+        approximant_eq_normalized_determinant
+    have hq_hull :
+        upperRay.qPilotLogVolume <=
+          hullData.logVolume (hullData.hullRegion region) :=
+      ofHullApproximant_qPilotLogVolume_le_canonicalHull
+        approximant qRegion q_subset_approximant determinant
+        approximant_eq_normalized_determinant
+    exact
+      ⟨hq_theta, htheta_hull, hq_hull,
+        upperRay.qPilotLogVolume_le_determinant⟩
 
 theorem realifiedFrobenioidLogKummerPacket_endpoint
     {coric : Type u}

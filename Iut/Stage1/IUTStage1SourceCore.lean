@@ -2381,6 +2381,24 @@ def ofHolomorphicHull
     qPilotLogVolume := hullData.logVolume qRegion,
     q_mem_upperRay := hullData.logVolume_le_of_subset_hull q_subset_hull }
 
+def ofHullApproximant
+    {α : Type u}
+    {hullData : IUTStage1HolomorphicHullLogVolumeShadow α}
+    {region : Set α}
+    (approximant : IUTStage1HullLogVolumeApproximant hullData region)
+    (qRegion : Set α)
+    (q_subset_approximant : qRegion ⊆ approximant.approximant)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (approximant_eq_normalized_determinant :
+      hullData.logVolume approximant.approximant =
+        determinant.normalizedLogVolume) :
+    IUTStage1HullDetPilotUpperRayLogVolume :=
+  { determinant := determinant,
+    thetaHullLogVolume := hullData.logVolume approximant.approximant,
+    theta_eq_normalized_determinant := approximant_eq_normalized_determinant,
+    qPilotLogVolume := hullData.logVolume qRegion,
+    q_mem_upperRay := hullData.logVolume_mono q_subset_approximant }
+
 def upperRay
     (data : IUTStage1HullDetPilotUpperRayLogVolume) : Set Real :=
   { value | value <= data.thetaHullLogVolume }
@@ -2421,6 +2439,61 @@ theorem ofHolomorphicHull_qPilotLogVolume_le_thetaHullLogVolume
       (ofHolomorphicHull hullData qRegion thetaRegion q_subset_hull
         determinant theta_eq_normalized_determinant).thetaHullLogVolume :=
   hullData.logVolume_le_of_subset_hull q_subset_hull
+
+theorem ofHullApproximant_qPilotLogVolume_le_thetaHullLogVolume
+    {α : Type u}
+    {hullData : IUTStage1HolomorphicHullLogVolumeShadow α}
+    {region : Set α}
+    (approximant : IUTStage1HullLogVolumeApproximant hullData region)
+    (qRegion : Set α)
+    (q_subset_approximant : qRegion ⊆ approximant.approximant)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (approximant_eq_normalized_determinant :
+      hullData.logVolume approximant.approximant =
+        determinant.normalizedLogVolume) :
+    (ofHullApproximant approximant qRegion q_subset_approximant
+      determinant approximant_eq_normalized_determinant).qPilotLogVolume <=
+      (ofHullApproximant approximant qRegion q_subset_approximant
+        determinant approximant_eq_normalized_determinant).thetaHullLogVolume :=
+  hullData.logVolume_mono q_subset_approximant
+
+theorem ofHullApproximant_thetaHullLogVolume_le_canonicalHull
+    {α : Type u}
+    {hullData : IUTStage1HolomorphicHullLogVolumeShadow α}
+    {region : Set α}
+    (approximant : IUTStage1HullLogVolumeApproximant hullData region)
+    (qRegion : Set α)
+    (q_subset_approximant : qRegion ⊆ approximant.approximant)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (approximant_eq_normalized_determinant :
+      hullData.logVolume approximant.approximant =
+        determinant.normalizedLogVolume) :
+    (ofHullApproximant approximant qRegion q_subset_approximant
+      determinant approximant_eq_normalized_determinant).thetaHullLogVolume <=
+      hullData.logVolume (hullData.hullRegion region) :=
+  approximant.approximant_logVolume_le_hull
+
+theorem ofHullApproximant_qPilotLogVolume_le_canonicalHull
+    {α : Type u}
+    {hullData : IUTStage1HolomorphicHullLogVolumeShadow α}
+    {region : Set α}
+    (approximant : IUTStage1HullLogVolumeApproximant hullData region)
+    (qRegion : Set α)
+    (q_subset_approximant : qRegion ⊆ approximant.approximant)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (approximant_eq_normalized_determinant :
+      hullData.logVolume approximant.approximant =
+        determinant.normalizedLogVolume) :
+    (ofHullApproximant approximant qRegion q_subset_approximant
+      determinant approximant_eq_normalized_determinant).qPilotLogVolume <=
+      hullData.logVolume (hullData.hullRegion region) :=
+  le_trans
+    (ofHullApproximant_qPilotLogVolume_le_thetaHullLogVolume
+      approximant qRegion q_subset_approximant determinant
+      approximant_eq_normalized_determinant)
+    (ofHullApproximant_thetaHullLogVolume_le_canonicalHull
+      approximant qRegion q_subset_approximant determinant
+      approximant_eq_normalized_determinant)
 
 theorem thetaHullLogVolume_eq_determinant
     (data : IUTStage1HullDetPilotUpperRayLogVolume) :

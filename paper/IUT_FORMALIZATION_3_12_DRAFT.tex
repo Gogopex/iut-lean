@@ -437,6 +437,17 @@ The canonical hull \(\phi(P)\) is itself an approximant, and every approximant
 is fixed by hull formation.  This is the compactness guard emphasized in the
 paper: the indeterminacy in choosing a hull approximant remains inside
 \(\phi(P)\).
+The same approximant now feeds the Step (xi) upper-ray constructor.  If the
+\(q\)-pilot region lies in an approximant \(H\), and if
+\(\mu_{\log}(H)\) is the determinant-normalized log-volume, then \Lean{}
+derives
+\[
+  \mu_{\log}(q)\le \mu_{\log}(H)\le \mu_{\log}(\phi(P)),
+  \qquad
+  \mu_{\log}(q)\le \det_{\mathrm{norm}} .
+\]
+Thus this part of the corridor no longer has to use only the canonical hull
+itself; it can use any certified hull-approximant inside \(\phi(P)\).
 Below the packet layer, the code now has a first realified Frobenioid degree
 source.  A finite Frobenioid object carries a divisor degree, a unit
 log-volume, and their realified log-volume; a tensor-packet product may be
@@ -683,6 +694,11 @@ The project currently proves the following source-facing results in \Lean{}:
 \item Remark 3.9.5(iii)'s hull-approximant family is now represented directly:
   an approximant lies inside the canonical hull \(\phi(P)\), has log-volume
   between \(P\) and \(\phi(P)\), and is fixed by hull formation.
+\item Such a certified hull-approximant now also constructs the Step (xi)
+  upper-ray datum: if the \(q\)-pilot region is contained in the approximant
+  and the approximant log-volume is determinant-normalized, then \Lean{}
+  derives the \(q\)-pilot bound by the approximant, by the canonical hull, and
+  by the determinant log-volume.
 \item A first realified Frobenioid degree layer is present: equality of
   realified Frobenioid log-volumes now derives the product-log-volume equality
   used by the tensor-packet coric transfer, with theater histories still kept
