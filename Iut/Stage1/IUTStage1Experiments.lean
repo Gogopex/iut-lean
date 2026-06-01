@@ -343,6 +343,29 @@ theorem iplLogVolumeTransport_endpoint
     endpoint.2.2.2.2.2.1,
     endpoint.2.2.2.2.2.2⟩
 
+theorem sheSynchronizationSource_endpoint
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {record : IUTStage1Theorem311MultiradialSourceRecord package}
+    {l : PrimeGeFive} {F : Type v} [Field F]
+    {X C : HyperbolicOrbicurveModel F}
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+    QualitativeData.HasStructuredSHE package.preLedger.output.family ∧
+      sync.toFactoredObligations.comparisonLevel =
+        IUTStage1SquareComparisonLevel.pointwiseRepresentative ∧
+      sync.toFactoredObligations.coordinateEquiv =
+        Equiv.refl (ZMod l.value) ∧
+      sync.toStructuredSHESquareWeightTransportAudit.preservationAudit.targetTransportedAverage =
+        sync.toStructuredSHESquareWeightTransportAudit.preservationAudit.sourceAverage ∧
+      record.bundle.structuredSHE.context.domainStructure.theater.side ≠
+        record.bundle.structuredSHE.context.codomainStructure.theater.side :=
+  let endpoint := sync.synchronization_endpoint
+  ⟨endpoint.1,
+    endpoint.2.1,
+    endpoint.2.2.1,
+    endpoint.2.2.2.2.1,
+    endpoint.2.2.2.2.2⟩
+
 /-- Summary of the first diagnostic pass through the local `(Ind3)` route. -/
 structure Ind3FirstPassDashboard where
   missingRealAlignmentBlocks : Bool

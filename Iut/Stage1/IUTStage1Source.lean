@@ -23249,6 +23249,133 @@ theorem coordinateEquiv_ne_balancedNegSelf
 end IUTStage1StructuredSHEFactoredSquareFullLabelObligations
 
 /--
+Source-facing SHE synchronization package for the Theorem 3.11 route.
+
+The paper-side SHE role is that the output construction is executable relative
+to the arithmetic holomorphic structure in the 1-column.  At the current Stage 1
+level, the available semantic source is Hodge--Arakelov theta-value data:
+equality of the canonical one-label degree synchronizes the Gaussian
+environment degrees, which then constructs the factored square/full-label
+preservation package used by the route.
+-/
+structure IUTStage1SHESynchronizationSource
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    (record : IUTStage1Theorem311MultiradialSourceRecord package)
+    (l : PrimeGeFive) {F : Type v} [Field F]
+    (X C : HyperbolicOrbicurveModel F) where
+  sourceHA :
+    IUTStage1ZModSquareWeightProfile.IUTStage1HodgeArakelovThetaValueEvaluationSource
+      l X C
+  targetHA :
+    IUTStage1ZModSquareWeightProfile.IUTStage1HodgeArakelovThetaValueEvaluationSource
+      l X C
+  canonicalOneDegree_preserved :
+    targetHA.toGaussianMonoidDegreeEvaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value)) =
+      sourceHA.toGaussianMonoidDegreeEvaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l (1 : ZMod l.value))
+
+namespace IUTStage1SHESynchronizationSource
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+variable {record : IUTStage1Theorem311MultiradialSourceRecord package}
+variable {l : PrimeGeFive} {F : Type v} [Field F]
+variable {X C : HyperbolicOrbicurveModel F}
+
+noncomputable def toFactoredObligations
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+  IUTStage1StructuredSHEFactoredSquareFullLabelObligations
+      package record.bundle l :=
+  IUTStage1StructuredSHEFactoredSquareFullLabelObligations.fromHodgeArakelovThetaValueEvaluations
+    (package := package) (bundle := record.bundle)
+    sync.sourceHA sync.targetHA sync.canonicalOneDegree_preserved
+
+noncomputable def toStructuredSHESquareWeightTransportAudit
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+    IUTStage1StructuredSHESquareWeightTransportAudit
+      package record.bundle l :=
+  sync.toFactoredObligations.toStructuredSHESquareWeightTransportAudit
+
+theorem hasStructuredSHE
+    (_sync : IUTStage1SHESynchronizationSource record l X C) :
+    QualitativeData.HasStructuredSHE package.preLedger.output.family :=
+  IUTStage1Theorem311MultiradialSourceRecord.hasStructuredSHE record
+
+theorem coordinateEquiv_eq_refl
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+    sync.toFactoredObligations.coordinateEquiv =
+      Equiv.refl (ZMod l.value) :=
+  sync.toFactoredObligations.coordinateEquiv_eq_refl
+
+theorem comparisonLevel_eq_pointwiseRepresentative
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+    sync.toFactoredObligations.comparisonLevel =
+      IUTStage1SquareComparisonLevel.pointwiseRepresentative :=
+  sync.toFactoredObligations.comparisonLevel_eq_pointwiseRepresentative
+
+theorem fullLabelLogVolume_preserved
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+    ∀ j : ZMod l.value,
+      sync.toFactoredObligations.targetLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            (sync.toFactoredObligations.coordinateEquiv j)) =
+        sync.toFactoredObligations.sourceLogVolume.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) :=
+  sync.toFactoredObligations.fullLabelLogVolume_preserved
+
+theorem transportedAverage_eq
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+    sync.toStructuredSHESquareWeightTransportAudit.preservationAudit.targetTransportedAverage =
+      sync.toStructuredSHESquareWeightTransportAudit.preservationAudit.sourceAverage :=
+  sync.toFactoredObligations.transportedAverage_eq
+
+theorem histories_not_identified
+    (_sync : IUTStage1SHESynchronizationSource record l X C) :
+    record.bundle.structuredSHE.context.domainStructure.theater.side ≠
+      record.bundle.structuredSHE.context.codomainStructure.theater.side :=
+  record.hodgeHistories_not_identified
+
+theorem sourceThetaRootLabel_ne_zero
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+    sync.sourceHA.thetaRootSource.canonicalFullLabel ≠
+      IUTStage1ZModCuspFullLabel.zero :=
+  sync.sourceHA.canonicalThetaRootLabel_ne_zero
+
+theorem targetThetaRootLabel_ne_zero
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+    sync.targetHA.thetaRootSource.canonicalFullLabel ≠
+      IUTStage1ZModCuspFullLabel.zero :=
+  sync.targetHA.canonicalThetaRootLabel_ne_zero
+
+theorem synchronization_endpoint
+    (sync : IUTStage1SHESynchronizationSource record l X C) :
+    QualitativeData.HasStructuredSHE package.preLedger.output.family ∧
+      sync.toFactoredObligations.comparisonLevel =
+        IUTStage1SquareComparisonLevel.pointwiseRepresentative ∧
+      sync.toFactoredObligations.coordinateEquiv =
+        Equiv.refl (ZMod l.value) ∧
+      (∀ j : ZMod l.value,
+        sync.toFactoredObligations.targetLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l
+              (sync.toFactoredObligations.coordinateEquiv j)) =
+          sync.toFactoredObligations.sourceLogVolume.fullLabelLogVolume
+            (IUTStage1ZModCuspFullLabel.fromCoordinate l j)) ∧
+      sync.toStructuredSHESquareWeightTransportAudit.preservationAudit.targetTransportedAverage =
+        sync.toStructuredSHESquareWeightTransportAudit.preservationAudit.sourceAverage ∧
+      record.bundle.structuredSHE.context.domainStructure.theater.side ≠
+        record.bundle.structuredSHE.context.codomainStructure.theater.side :=
+  ⟨sync.hasStructuredSHE,
+    sync.comparisonLevel_eq_pointwiseRepresentative,
+    sync.coordinateEquiv_eq_refl,
+    sync.fullLabelLogVolume_preserved,
+    sync.transportedAverage_eq,
+    sync.histories_not_identified⟩
+
+end IUTStage1SHESynchronizationSource
+
+/--
 Boundary comparing the strengthened SHE/common-container route with the factored
 square/full-label preservation interface.
 

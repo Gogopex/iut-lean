@@ -172,6 +172,11 @@ it carries the source and target Hodge-theater sides, identifies the prime-strip
 link endpoints with the input and output prime strips, records equality of the
 transported real log-volume, and retains the no-history-identification guard.
 It is not yet a construction of the full log-link.
+The current \(\SHE\) layer now has a synchronization constructor: equality of
+the canonical one-label Hodge--Arakelov theta-value degree constructs the
+factored square/full-label preservation package used by the route.  This is a
+Stage 1 source constructor for the available finite-label shadow of \(\SHE\),
+not yet the full simultaneous-holomorphic-expressibility theorem.
 The final numerical step is elementary:
 \[
   -|\log(q)|\le -|\log(\Theta)|
@@ -539,6 +544,10 @@ The project currently proves the following source-facing results in \Lean{}:
 \item The \(\IPL\) source layer now has an explicit log-volume transport record
   with source and target Hodge-theater sides, prime-strip endpoint
   compatibility, log-volume preservation, and no-history-identification.
+\item The \(\SHE\) source layer now derives the current square/full-label
+  preservation package from Hodge--Arakelov canonical-one synchronization,
+  exposing pointwise representative comparison, transported-average equality,
+  and the retained Hodge-history separation.
 \item The target-side theta-to-entry equality is no longer a direct input in the
   strongest route.  It is derived from a Step (x) theta-target alignment and
   calibration of the entry target with the upper-semi target value.
@@ -587,8 +596,9 @@ to the code:
   Theorem 3.11;
 \item the genuine holomorphic hull and determinant constructions used in
   Step (xi), beyond the present ordered-real upper-ray model;
-\item the proof that the typed \SHE{} and Hodge-descent transport obligations
-  follow from Mochizuki's source constructions;
+\item the full proof that the typed \SHE{} and Hodge-descent transport
+  obligations follow from Mochizuki's source constructions, beyond the current
+  Hodge--Arakelov canonical-one synchronization shadow;
 \item the construction of the input prime-strip link \((\IPL)\), simultaneous
   holomorphic expressibility \((\SHE)\), and algorithmic parallel transport
   \((\APT)\) properties as actual consequences of Theorem 3.11 rather than
