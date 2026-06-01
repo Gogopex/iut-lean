@@ -786,6 +786,13 @@
         <a href="#alien-frobenius-lifting-25">Alien Frobenius lifting 2.5</a>
         <a href="#alien-positive-characteristic-transport-26">Alien positive-char transport 2.6</a>
         <a href="#alien-mono-anabelian-transport-27">Alien mono-anabelian transport 2.7</a>
+        <a href="#alien-terminology-28">Alien terminology 2.8</a>
+        <a href="#alien-kodaira-spencer-29">Alien Kodaira-Spencer 2.9</a>
+        <a href="#alien-inter-universality-210">Alien inter-universality 2.10</a>
+        <a href="#alien-ring-dimensions-211">Alien ring dimensions 2.11</a>
+        <a href="#alien-mlf-transport-212">Alien MLF transport 2.12</a>
+        <a href="#alien-rational-function-monoids-213">Alien rational functions 2.13</a>
+        <a href="#alien-finite-harmonic-214">Alien finite harmonic 2.14</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
         <a href="#iut-i-base-bridges-evaluation-sections">Base bridges/evaluation sections</a>
         <a href="#iut-i-additive-base-bridges-61-610">Additive base bridges 6.1-6.10</a>
@@ -15511,6 +15518,409 @@
           Related: <a href="#mono-anabelian-transport-page">mono-anabelian transport card</a>
           <a href="#kummer-detachment">Kummer detachment</a>
           <a href="#frobenius-etale-versions-ii-intro">Frobenius/etale versions</a>
+        </div>
+      </section>
+
+      <section id="alien-terminology-28" data-filter="mutually alien copies 2.8 terminology Frobenius-like etale-like coric link multiradial Kummer detachment cyclotomic rigidity mono-analytic arithmetic holomorphic">
+        <h2>Alien Copies 2.8: Terminology Discipline</h2>
+        <p class="lede">
+          Section 2.8 warns that core IUT words are local to the links in which they
+          occur. Terms such as link, Frobenius-like, etale-like, coric,
+          mono-anabelian transport, Kummer-detachment, cyclotomic rigidity,
+          mono-analytic, arithmetic holomorphic, and multiradial are not introduced as
+          one global dictionary of context-free definitions.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Stage</th><th>Mochizuki's description</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>(1Fr/et)</td>
+            <td>Early philosophical contrast: Frobenius-like as order-conscious, etale-like as indifferent to order.</td>
+            <td>Useful as intuition only; do not formalize from this slogan.</td>
+          </tr>
+          <tr>
+            <td>(2Fr/et)</td>
+            <td>Log-theta-lattice notation: Frobenius-like data uses coordinates such as <span class="math">(n,m)</span>; etale-like data uses vertically coric coordinates such as <span class="math">(n,*)</span> or <span class="math">(*,*)</span>.</td>
+            <td>This is the technically sufficient reading for IUT I-IV and for our corridor pages.</td>
+          </tr>
+          <tr>
+            <td>(3Fr/et)</td>
+            <td>Abstract link-theoretic terminology: Frobenius-like and etale-like are defined relative to a specific link.</td>
+            <td>Use for general orientation, but route back to concrete theta/log links before making proof claims.</td>
+          </tr>
+        </table>
+        <p>
+          This page is an audit guard: an internal link named "Frobenius-like" or
+          "etale-like" must say which link or lattice coordinate system is in force.
+          Collas's categorical perspective is compatible with this guard, since his
+          exposition treats the categories as containers whose meaning depends on the
+          surrounding functorial apparatus.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.8</a>
+          Related: <a href="#alien-mono-anabelian-transport-27">mono-anabelian transport</a>
+          <a href="#frobenius-etale-versions-ii-intro">Frobenius/etale versions</a>
+          <a href="#collas-category-perspective">Collas category view</a>
+        </div>
+      </section>
+
+      <section id="alien-kodaira-spencer-29" data-filter="mutually alien copies 2.9 Kodaira Spencer mono anabelian transport Kummer discrepancy Hodge filtration Gauss Manin positive mass zero mass indeterminacy">
+        <h2>Alien Copies 2.9: Kodaira-Spencer Analogy</h2>
+        <p class="lede">
+          Section 2.9 identifies a central IUT task: compute the discrepancy between
+          two Kummer theories after a link, while one side is held fixed. Mochizuki
+          compares this with the classical Kodaira-Spencer construction for a family
+          of elliptic curves, where a positive-mass Hodge line is compared through a
+          zero-mass local system.
+        </p>
+        <div class="diagram fit" aria-label="Kodaira-Spencer analogy for mono-anabelian transport">
+          <div class="diagramHeader">
+            <strong>Kodaira-Spencer as transport pattern</strong>
+            <span>positive-mass Hodge line through a zero-mass container</span>
+          </div>
+          <svg viewBox="0 0 1000 420" role="img">
+            <defs>
+              <marker id="arrowAlien29" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="88" y="250" width="210" height="76"></rect>
+            <text class="nodeTitle" x="193" y="280" text-anchor="middle">omega_E</text>
+            <text class="tinyText" x="193" y="304" text-anchor="middle">Hodge filtration, positive mass</text>
+            <rect class="nodeBox green" x="88" y="82" width="210" height="76"></rect>
+            <text class="nodeTitle" x="193" y="112" text-anchor="middle">E with nabla_E</text>
+            <text class="tinyText" x="193" y="136" text-anchor="middle">Gauss-Manin local system</text>
+            <rect class="nodeBox green" x="704" y="82" width="210" height="76"></rect>
+            <text class="nodeTitle" x="809" y="112" text-anchor="middle">E tensor omega_S</text>
+            <text class="tinyText" x="809" y="136" text-anchor="middle">connection output</text>
+            <rect class="nodeBox red" x="704" y="250" width="210" height="76"></rect>
+            <text class="nodeTitle" x="809" y="280" text-anchor="middle">tau_E tensor omega_S</text>
+            <text class="tinyText" x="809" y="304" text-anchor="middle">quotient with bound</text>
+            <path class="edge blue" d="M193 248 V160" marker-end="url(#arrowAlien29)"></path>
+            <text class="edgeLabel" x="240" y="207" text-anchor="middle">include</text>
+            <path class="edge green" d="M300 120 H702" marker-end="url(#arrowAlien29)"></path>
+            <text class="edgeLabel" x="501" y="99" text-anchor="middle">nabla_E</text>
+            <path class="edge red" d="M809 160 V248" marker-end="url(#arrowAlien29)"></path>
+            <text class="edgeLabel" x="858" y="207" text-anchor="middle">project</text>
+            <path class="edge gold" d="M300 288 H702" marker-end="url(#arrowAlien29)"></path>
+            <text class="edgeLabel" x="501" y="319" text-anchor="middle">alien comparison, indeterminacy omega_S</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Classical object</th><th>IUT reading in §2.9</th><th>Bound</th></tr>
+          <tr>
+            <td><span class="math">omega_E subset E</span></td>
+            <td>Positive-mass Frobenius-like object on one side of a deformation.</td>
+            <td rowspan="3"><span class="math">2 deg(omega_E) &lt;= deg(omega_Slog/C)</span></td>
+          </tr>
+          <tr>
+            <td><span class="math">(E, nabla_E)</span></td>
+            <td>Zero-mass etale-like container used to relate the alien Hodge-line copies.</td>
+          </tr>
+          <tr>
+            <td><span class="math">omega_Slog/C</span></td>
+            <td>The tensor factor that measures the indeterminacy admitted in the comparison.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.9</a>
+          Related: <a href="#alien-positive-characteristic-transport-26">positive-characteristic model</a>
+          <a href="#kummer-detachment">Kummer detachment</a>
+          <a href="#invitation-hodge-arakelov">Hodge-Arakelov theory</a>
+        </div>
+      </section>
+
+      <section id="alien-inter-universality-210" data-filter="mutually alien copies 2.10 inter-universality change of universe coordinates abstract topological groups labelling apparatus ring structures anabelian reconstruction">
+        <h2>Alien Copies 2.10: Inter-Universality</h2>
+        <p class="lede">
+          Section 2.10 gives the literal reason for "inter-universal": theta and log
+          links do not preserve the ring or scheme structures that normally label
+          Galois groups. After transport, the group must be treated as an abstract
+          topological group; anabelian reconstruction supplies controlled ways to recover
+          scheme-theoretic structure without identifying the old labels with the new ones.
+        </p>
+        <div class="diagram fit" aria-label="Inter-universal coordinate change">
+          <div class="diagramHeader">
+            <strong>Change of universe as coordinate change</strong>
+            <span>only the abstract object is shared across incompatible labels</span>
+          </div>
+          <svg viewBox="0 0 1000 360" role="img">
+            <defs>
+              <marker id="arrowAlien210" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="74" width="260" height="96"></rect>
+            <text class="nodeTitle" x="200" y="108" text-anchor="middle">Universe A</text>
+            <text class="tinyText" x="200" y="132" text-anchor="middle">ring/scheme labels</text>
+            <text class="tinyText" x="200" y="152" text-anchor="middle">left substring coordinates: 01</text>
+            <rect class="nodeBox green" x="670" y="74" width="260" height="96"></rect>
+            <text class="nodeTitle" x="800" y="108" text-anchor="middle">Universe B</text>
+            <text class="tinyText" x="800" y="132" text-anchor="middle">different ring/scheme labels</text>
+            <text class="tinyText" x="800" y="152" text-anchor="middle">right substring coordinates: 10</text>
+            <circle cx="500" cy="122" r="56" fill="#fff" stroke="#d8d8d2" stroke-width="2"></circle>
+            <text class="nodeTitle" x="500" y="116" text-anchor="middle">abstract</text>
+            <text class="nodeTitle" x="500" y="139" text-anchor="middle">symbol 1</text>
+            <path class="edge blue" d="M332 122 H442" marker-end="url(#arrowAlien210)"></path>
+            <path class="edge green" d="M558 122 H668" marker-end="url(#arrowAlien210)"></path>
+            <rect class="nodeBox red" x="270" y="242" width="460" height="72"></rect>
+            <text class="nodeTitle" x="500" y="272" text-anchor="middle">link dismantles ring-history labels</text>
+            <text class="tinyText" x="500" y="296" text-anchor="middle">Galois groups travel as abstract topological groups</text>
+          </svg>
+        </div>
+        <p>
+          Mochizuki's elementary string <span class="math">010</span> example is the
+          local model: the middle symbol has a left-coordinate description in
+          <span class="math">01</span> and a right-coordinate description in
+          <span class="math">10</span>, but only the abstract symbol is common to both.
+          Likewise, a Frobenius-induced Galois-group isomorphism can be the identity
+          from ordinary ring theory while remaining indeterminate relative to class
+          field theory or Kummer labels.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.10</a>
+          Related: <a href="#absolute-anabelian-mutation-35">absolute anabelian mutation</a>
+          <a href="#inter-universal-fiber-functors">fiber functors/universes</a>
+          <a href="#collas-universes-species-page">Collas universes/species</a>
+        </div>
+      </section>
+
+      <section id="alien-ring-dimensions-211" data-filter="mutually alien copies 2.11 two underlying combinatorial dimensions ring addition multiplication local field cohomological dimensions unit value group">
+        <h2>Alien Copies 2.11: Two Ring Dimensions</h2>
+        <p class="lede">
+          Section 2.11 isolates the two combinatorial dimensions of a ring: addition
+          and multiplication. Mochizuki expresses the pair through semidirect products
+          such as <span class="math">Z_l rtimes Z_l^x</span> and
+          <span class="math">F_l rtimes F_l^x</span>, then relates the same two-fold
+          structure to local and global Galois cohomological dimension.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Arithmetic object</th><th>Two-dimensional reading</th><th>IUT use</th></tr>
+          <tr>
+            <td><span class="math">Z_l rtimes Z_l^x</span>, <span class="math">F_l rtimes F_l^x</span></td>
+            <td>Additive group acted on by multiplicative units.</td>
+            <td>Finite and profinite prototypes for separating additive/multiplicative information.</td>
+          </tr>
+          <tr>
+            <td>Mixed-characteristic local field <span class="math">k</span></td>
+            <td>The two cohomological dimensions of <span class="math">G_k</span>.</td>
+            <td>Moves the ring-dimension split into Galois-theoretic language.</td>
+          </tr>
+          <tr>
+            <td><span class="math">1 -> O_k^x -> k^x -> k^x/O_k^x -> 1</span></td>
+            <td>Unit-group and value-group components; not functorially split in the required sense.</td>
+            <td>Source of the unit/value separation later handled by log-shells.</td>
+          </tr>
+          <tr>
+            <td><span class="math">C^x ~= S^1 x R_&gt;0</span></td>
+            <td>Classical split analogue.</td>
+            <td>Explains the Gaussian/polar-coordinate analogy without replacing the arithmetic case.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.11</a>
+          Related: <a href="#alien-polar-decoupling-16">polar decoupling</a>
+          <a href="#alien-mlf-transport-212">MLF transport</a>
+          <a href="#frobenioids-log-shells">log-shells</a>
+        </div>
+      </section>
+
+      <section id="alien-mlf-transport-212" data-filter="mutually alien copies 2.12 mono anabelian transport mixed characteristic local fields MLF local class field theory Kummer log shell upper semi commutativity log volume">
+        <h2>Alien Copies 2.12: Mixed-Characteristic Local Fields</h2>
+        <p class="lede">
+          Section 2.12 is the local-field transport laboratory. Local class field theory
+          and Kummer theory reconstruct multiplicative monoids from abstract Galois
+          data; the p-adic logarithm converts multiplication into addition; log-shells
+          give regions large enough for upper semi-commutativity and compatible
+          log-volume comparison.
+        </p>
+        <div class="diagram fit" aria-label="Mixed characteristic local field transport">
+          <div class="diagramHeader">
+            <strong>MLF log-link model</strong>
+            <span>noncommuting element transport controlled by regions</span>
+          </div>
+          <svg viewBox="0 0 1000 430" role="img">
+            <defs>
+              <marker id="arrowAlien212" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="88" y="250" width="235" height="78"></rect>
+            <text class="nodeTitle" x="205" y="280" text-anchor="middle">O_k^triangleright</text>
+            <text class="tinyText" x="205" y="304" text-anchor="middle">Frobenius-like monoid</text>
+            <rect class="nodeBox red" x="677" y="250" width="235" height="78"></rect>
+            <text class="nodeTitle" x="795" y="280" text-anchor="middle">log_k(O_k^x)</text>
+            <text class="tinyText" x="795" y="304" text-anchor="middle">additive image</text>
+            <rect class="nodeBox green" x="88" y="80" width="235" height="78"></rect>
+            <text class="nodeTitle" x="205" y="110" text-anchor="middle">O_k^triangleright(Pi_X)</text>
+            <text class="tinyText" x="205" y="134" text-anchor="middle">etale-like Kummer image</text>
+            <rect class="nodeBox green" x="677" y="80" width="235" height="78"></rect>
+            <text class="nodeTitle" x="795" y="110" text-anchor="middle">I(Pi_X)</text>
+            <text class="tinyText" x="795" y="134" text-anchor="middle">log-shell container</text>
+            <path class="edge blue" d="M323 289 H675" marker-end="url(#arrowAlien212)"></path>
+            <text class="edgeLabel" x="500" y="319" text-anchor="middle">log: box to plus</text>
+            <path class="edge green" d="M323 119 H675" marker-end="url(#arrowAlien212)"></path>
+            <text class="edgeLabel" x="500" y="98" text-anchor="middle">indeterminate abstract group isomorphism</text>
+            <path class="edge gold" d="M205 248 V160" marker-end="url(#arrowAlien212)"></path>
+            <text class="edgeLabel" x="258" y="209" text-anchor="middle">Kummer</text>
+            <path class="edge red" d="M795 160 V248" marker-end="url(#arrowAlien212)"></path>
+            <text class="edgeLabel" x="846" y="209" text-anchor="middle">region bound</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Component</th><th>Source role</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Local CFT and Kummer</td>
+            <td>Recover monoids and Kummer images from Galois data.</td>
+            <td>Makes etale-like transport meaningful after ring labels are dropped.</td>
+          </tr>
+          <tr>
+            <td>p-adic log</td>
+            <td>Maps <span class="math">box</span>-multiplication to <span class="math">plus</span>-addition.</td>
+            <td>Models the log-link as a rotation of the two ring dimensions.</td>
+          </tr>
+          <tr>
+            <td>Log-shell <span class="math">I</span></td>
+            <td>A compact region containing possible images of noncommuting transports.</td>
+            <td>Provides upper semi-commutativity rather than pointwise commutativity.</td>
+          </tr>
+          <tr>
+            <td>Log-volume</td>
+            <td>Normalized so <span class="math">vol_log(O_k)=0</span> and <span class="math">vol_log(pO_k)=-log(p)</span>.</td>
+            <td>Supplies the region-based numerical comparison used later.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.12</a>
+          Related: <a href="#alien-ring-dimensions-211">two ring dimensions</a>
+          <a href="#frobenioids-log-shells">log-shells</a>
+          <a href="#upper-semi-log-kummer-iii">upper semi-commutativity</a>
+        </div>
+      </section>
+
+      <section id="alien-rational-function-monoids-213" data-filter="mutually alien copies 2.13 mono anabelian transport monoids rational functions hyperbolic curve strictly Belyi Kummer Chern class cyclotomic rigidity evaluation special points">
+        <h2>Alien Copies 2.13: Rational-Function Monoids</h2>
+        <p class="lede">
+          Section 2.13 adds the geometric dimension missing from the local-field
+          monoids of §2.12: nonconstant rational functions on a hyperbolic curve and
+          evaluation at special points. This is the setting in which Kummer theory is
+          essential, because it is functorial for evaluation of functions.
+        </p>
+        <div class="diagram fit" aria-label="Rational function Kummer transport">
+          <div class="diagramHeader">
+            <strong>Rational functions through Kummer theory</strong>
+            <span>geometric functions reconstructed from abstract fundamental groups</span>
+          </div>
+          <svg viewBox="0 0 1000 360" role="img">
+            <defs>
+              <marker id="arrowAlien213" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="64" y="78" width="230" height="82"></rect>
+            <text class="nodeTitle" x="179" y="108" text-anchor="middle">Pi_X</text>
+            <text class="tinyText" x="179" y="132" text-anchor="middle">abstract fundamental group</text>
+            <rect class="nodeBox green" x="386" y="78" width="230" height="82"></rect>
+            <text class="nodeTitle" x="501" y="108" text-anchor="middle">G_X, M_X</text>
+            <text class="tinyText" x="501" y="132" text-anchor="middle">group-theoretic reconstruction</text>
+            <rect class="nodeBox red" x="708" y="78" width="230" height="82"></rect>
+            <text class="nodeTitle" x="823" y="108" text-anchor="middle">K_X^x(Pi_X)^Kum</text>
+            <text class="tinyText" x="823" y="132" text-anchor="middle">Kummer image with field structure</text>
+            <path class="edge blue" d="M296 119 H384" marker-end="url(#arrowAlien213)"></path>
+            <path class="edge green" d="M618 119 H706" marker-end="url(#arrowAlien213)"></path>
+            <rect class="nodeBox gold" x="226" y="230" width="548" height="76"></rect>
+            <text class="nodeTitle" x="500" y="260" text-anchor="middle">evaluation at special points</text>
+            <text class="tinyText" x="500" y="284" text-anchor="middle">reason for Kummer rather than class-field-only transport</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Step</th><th>Content</th><th>Precision guard</th></tr>
+          <tr>
+            <td>Cyclotome</td>
+            <td><span class="math">M_X = Hom(H^2(Delta_X^cp, Zhat), Zhat)</span> is constructed group-theoretically from <span class="math">Pi_X</span>.</td>
+            <td>Do not treat it as an externally labelled copy of roots of unity.</td>
+          </tr>
+          <tr>
+            <td>Chern class</td>
+            <td>A degree-one line bundle gives <span class="math">lambda : mu_k^Zhat ~= M_X</span>.</td>
+            <td>The relevant cyclotomic rigidity is only controlled up to the stated orbit.</td>
+          </tr>
+          <tr>
+            <td>Kummer map</td>
+            <td><span class="math">K_X^x -> H^1(G_X, mu_k^Zhat)</span>, then through <span class="math">lambda</span>.</td>
+            <td>This is the bridge between Frobenius-like functions and etale-like cohomology.</td>
+          </tr>
+          <tr>
+            <td>Evaluation</td>
+            <td>Kummer theory is functorial for evaluating rational functions at special points.</td>
+            <td>This is why class-field-theory analogues are insufficient here.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.13</a>
+          Related: <a href="#kappa-coric-functions">kappa-coric functions</a>
+          <a href="#kappa-coric-definition-iut-i317">IUT I kappa-coric reconstruction</a>
+          <a href="#collas-category-perspective">Collas category view</a>
+        </div>
+      </section>
+
+      <section id="alien-finite-harmonic-214" data-filter="mutually alien copies 2.14 finite discrete approximations harmonic analysis differential calculus Fourier unit circle torsion points Hodge Arakelov theta functions Kummer logarithmic derivative">
+        <h2>Alien Copies 2.14: Finite Harmonic Approximation</h2>
+        <p class="lede">
+          Section 2.14 explains why derivatives give way to Galois groups and etale
+          fundamental groups. Mochizuki presents finite discrete approximations of
+          differential calculus, Fourier analysis on the unit circle, and Hodge-Arakelov
+          harmonic analysis on elliptic curves.
+        </p>
+        <div class="diagram fit" aria-label="Finite discrete approximations of harmonic analysis">
+          <div class="diagramHeader">
+            <strong>Discrete approximation ladder</strong>
+            <span>from finite differences to Hodge-Arakelov evaluation</span>
+          </div>
+          <svg viewBox="0 0 1000 390" role="img">
+            <defs>
+              <marker id="arrowAlien214" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="60" y="92" width="240" height="82"></rect>
+            <text class="nodeTitle" x="180" y="122" text-anchor="middle">finite differences</text>
+            <text class="tinyText" x="180" y="146" text-anchor="middle">polynomials evaluated at 0,...,d-1</text>
+            <rect class="nodeBox green" x="380" y="92" width="240" height="82"></rect>
+            <text class="nodeTitle" x="500" y="122" text-anchor="middle">torsion on G_m</text>
+            <text class="tinyText" x="500" y="146" text-anchor="middle">finite Fourier on mu_d</text>
+            <rect class="nodeBox red" x="700" y="92" width="240" height="82"></rect>
+            <text class="nodeTitle" x="820" y="122" text-anchor="middle">torsion on E</text>
+            <text class="tinyText" x="820" y="146" text-anchor="middle">Hodge-Arakelov evaluation</text>
+            <path class="edge blue" d="M302 133 H378" marker-end="url(#arrowAlien214)"></path>
+            <path class="edge green" d="M622 133 H698" marker-end="url(#arrowAlien214)"></path>
+            <rect class="nodeBox gold" x="205" y="252" width="590" height="76"></rect>
+            <text class="nodeTitle" x="500" y="282" text-anchor="middle">Galois groups as arithmetic tangent bundles</text>
+            <text class="tinyText" x="500" y="306" text-anchor="middle">Kummer classes as arithmetic logarithmic derivatives</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Example</th><th>Finite approximation</th><th>IUT relevance</th></tr>
+          <tr>
+            <td>2.14.1</td>
+            <td>Difference operators replace derivatives; degree <span class="math">&lt; d</span> polynomials are evaluated at <span class="math">0,...,d-1</span>.</td>
+            <td>Prototype for Hodge-Arakelov discrete function theory.</td>
+          </tr>
+          <tr>
+            <td>2.14.2</td>
+            <td>Functions on <span class="math">G_m</span> are evaluated at <span class="math">mu_d</span>; torsion points approximate <span class="math">S^1</span>.</td>
+            <td>Motivates Galois/fundamental groups as arithmetic tangent data and Kummer classes as logarithmic derivatives.</td>
+          </tr>
+          <tr>
+            <td>2.14.3</td>
+            <td>Sections on the universal extension of an elliptic curve are evaluated at <span class="math">l</span>-torsion points.</td>
+            <td>Gives the Hodge-Arakelov evaluation theorem behind theta-function comparison.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.14</a>
+          Related: <a href="#invitation-hodge-arakelov">Hodge-Arakelov theory</a>
+          <a href="#mono-theta-evaluation-env-ii28">mono-theta evaluation</a>
+          <a href="#alien-kodaira-spencer-29">Kodaira-Spencer analogy</a>
         </div>
       </section>
 
