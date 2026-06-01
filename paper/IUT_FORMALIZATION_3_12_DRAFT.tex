@@ -472,6 +472,12 @@ source directly.  The equality between the approximant log-volume
 by a named Ob3-3 compatibility certificate.  After this certificate is supplied,
 the old determinant record is only a projection used by the common upper-ray
 interface.
+Remark 3.9.5(vii), (Ob4), is represented at the same finite level: a naive
+Frobenius/tensor-power log-volume object records the passage
+\(L\mapsto M L\) for \(M>0\), and \Lean{} proves that normalized log-volume
+recovers \(L\).  The weighted determinant source projects to this object, so
+the \(M\)-th tensor-power copy does not add a further log-volume ambiguity in
+the current corridor.
 Below the packet layer, the code now has a first realified Frobenioid degree
 source.  A finite Frobenioid object carries a divisor degree, a unit
 log-volume, and their realified log-volume; a tensor-packet product may be
@@ -738,6 +744,10 @@ The project currently proves the following source-facing results in \Lean{}:
   source and projects to the common upper-ray interface only after a named
   Ob3-3 compatibility certificate identifies the approximant log-volume with
   the weighted normalized determinant value.
+\item The Ob4 tensor-power passage is now represented at log-volume level:
+  \(M\)-th tensor-power formation multiplies by \(M>0\), and normalization
+  recovers the base log-volume.  The weighted determinant source projects to
+  this tensor-power object.
 \item A first realified Frobenioid degree layer is present: equality of
   realified Frobenioid log-volumes now derives the product-log-volume equality
   used by the tensor-packet coric transfer, with theater histories still kept

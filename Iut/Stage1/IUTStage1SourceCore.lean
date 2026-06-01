@@ -2559,6 +2559,75 @@ theorem endpoint
 end IUTStage1HullApproximantWeightedDeterminantCompatibility
 
 /--
+Finite log-volume skeleton of Remark 3.9.5(vii), (Ob4).
+
+The passage from an object to its `M`-th tensor-power Frobenioid copy is modeled
+only at the level relevant for Corollary 3.12 estimates: tensor-powering scales
+the log-volume by `M`, and the normalized log-volume recovers the original
+base value.
+-/
+structure IUTStage1NaiveFrobeniusTensorPowerLogVolume where
+  baseLogVolume : Real
+  tensorDegree : Nat
+  tensor_degree_pos : 0 < tensorDegree
+  tensorPowerLogVolume : Real
+  tensor_power_eq :
+    tensorPowerLogVolume = (tensorDegree : Real) * baseLogVolume
+  normalizedLogVolume : Real
+  normalized_eq :
+    normalizedLogVolume = tensorPowerLogVolume / (tensorDegree : Real)
+
+namespace IUTStage1NaiveFrobeniusTensorPowerLogVolume
+
+theorem tensorDegree_ne_zero
+    (data : IUTStage1NaiveFrobeniusTensorPowerLogVolume) :
+    (data.tensorDegree : Real) ≠ 0 := by
+  exact_mod_cast Nat.ne_of_gt data.tensor_degree_pos
+
+theorem normalizedLogVolume_eq_base
+    (data : IUTStage1NaiveFrobeniusTensorPowerLogVolume) :
+    data.normalizedLogVolume = data.baseLogVolume := by
+  rw [data.normalized_eq, data.tensor_power_eq]
+  exact mul_div_cancel_left₀ data.baseLogVolume data.tensorDegree_ne_zero
+
+theorem normalizedLogVolume_eq_of_base_eq
+    (source target : IUTStage1NaiveFrobeniusTensorPowerLogVolume)
+    (hbase : source.baseLogVolume = target.baseLogVolume) :
+    source.normalizedLogVolume = target.normalizedLogVolume := by
+  rw [source.normalizedLogVolume_eq_base,
+    target.normalizedLogVolume_eq_base, hbase]
+
+noncomputable def ofWeightedDeterminant
+    {β : Type u} [Fintype β]
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    IUTStage1NaiveFrobeniusTensorPowerLogVolume :=
+  { baseLogVolume := determinantSource.determinantLogVolume,
+    tensorDegree := determinantSource.positiveTensorPower,
+    tensor_degree_pos := determinantSource.tensor_power_pos,
+    tensorPowerLogVolume := determinantSource.tensorPowerLogVolume,
+    tensor_power_eq := determinantSource.tensorPowerLogVolume_eq,
+    normalizedLogVolume := determinantSource.normalizedLogVolume,
+    normalized_eq := rfl }
+
+theorem ofWeightedDeterminant_normalizedLogVolume_eq
+    {β : Type u} [Fintype β]
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    (ofWeightedDeterminant determinantSource).normalizedLogVolume =
+      determinantSource.determinantLogVolume :=
+  (ofWeightedDeterminant determinantSource).normalizedLogVolume_eq_base
+
+theorem endpoint
+    (data : IUTStage1NaiveFrobeniusTensorPowerLogVolume) :
+    data.tensorPowerLogVolume =
+        (data.tensorDegree : Real) * data.baseLogVolume ∧
+      data.normalizedLogVolume = data.baseLogVolume :=
+  ⟨data.tensor_power_eq, data.normalizedLogVolume_eq_base⟩
+
+end IUTStage1NaiveFrobeniusTensorPowerLogVolume
+
+/--
 Step (xi-e)/(xi-f) upper-ray comparison after hull, determinant, and normalized
 log-volume.
 

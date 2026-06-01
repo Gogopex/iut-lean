@@ -544,6 +544,31 @@ theorem weightedDeterminantSource_endpoint
         data.determinantLogVolume :=
   data.endpoint
 
+theorem naiveFrobeniusTensorPowerLogVolume_endpoint
+    (data : IUTStage1NaiveFrobeniusTensorPowerLogVolume) :
+    data.tensorPowerLogVolume =
+        (data.tensorDegree : Real) * data.baseLogVolume ∧
+      data.normalizedLogVolume = data.baseLogVolume :=
+  data.endpoint
+
+theorem weightedDeterminant_tensorPower_endpoint
+    {β : Type u} [Fintype β]
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    let tensorPower :=
+      IUTStage1NaiveFrobeniusTensorPowerLogVolume.ofWeightedDeterminant
+        determinantSource;
+    tensorPower.tensorPowerLogVolume =
+        (tensorPower.tensorDegree : Real) *
+          determinantSource.determinantLogVolume ∧
+      tensorPower.normalizedLogVolume =
+        determinantSource.determinantLogVolume :=
+  by
+    intro tensorPower
+    exact
+      ⟨tensorPower.tensor_power_eq,
+        tensorPower.normalizedLogVolume_eq_base⟩
+
 theorem thetaPossibleImagesWeightedDeterminant_endpoint
     {α : Type u} {ι : Type v} {β : Type w} [Fintype β]
     (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
