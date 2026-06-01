@@ -799,6 +799,9 @@
         <a href="#etale-theta-ha-translation-page">Etale theta HA translation</a>
         <a href="#etale-theta-mono-bi-rigidity-page">Mono/Bi-theta rigidity tradeoff</a>
         <a href="#etale-theta-section0-primitives-page">EtTh §0 primitives</a>
+        <a href="#etale-theta-tate-covering-tower-page">EtTh §1 Tate tower</a>
+        <a href="#etale-theta-classical-kummer-page">Etale theta class</a>
+        <a href="#etale-theta-anabelian-rigidity-page">EtTh §1 anabelian rigidity</a>
         <a href="#frobenioid-standard-model-page">Frobenioid standard model</a>
         <a href="#frobenioid-reconstruction-page">Frobenioid reconstruction</a>
         <a href="#frobenioid-operations-page">Frobenioid operations</a>
@@ -2052,6 +2055,9 @@
               function and its preservation by tempered fundamental-group isomorphisms.
             </td>
             <td>
+              <a href="#etale-theta-tate-covering-tower-page">Tate covering tower</a>,
+              <a href="#etale-theta-classical-kummer-page">theta class</a>,
+              <a href="#etale-theta-anabelian-rigidity-page">anabelian rigidity</a>,
               <a href="#theta-evaluation-kummer-route">theta evaluation route</a>,
               <a href="#etale-theta-standard-type-ii14">standard type in IUT II</a>
             </td>
@@ -2262,6 +2268,157 @@
           Related: <a href="#etale-theta-source-cluster">EtTh source cluster</a>
           <a href="#capsules-temperoids-iut-i0">capsules/temperoids</a>
           <a href="#frobenioid-operations-page">Frobenioid operations</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-tate-covering-tower-page" data-filter="etale theta section 1 tate curve covering tower y yn zn tempered fundamental group delta theta line bundle theta trivialization">
+        <h2>EtTh §1: Tate-Curve Covering Tower</h2>
+        <p class="lede">
+          Section 1 begins with a split singular stable log curve of type
+          <span class="math">(1,1)</span> over a finite extension of
+          <span class="math">Q_p</span>. Its logarithmic tempered fundamental group
+          supplies the tower on which the etale theta class is constructed:
+          <span class="math">X</span>, the infinite graph covering
+          <span class="math">Y</span>, the finite Kummer coverings
+          <span class="math">Y_N</span>, and the further coverings
+          <span class="math">Z_N</span> that trivialize the theta-root data.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>EtTh construction</th><th>Role in theta class</th></tr>
+          <tr>
+            <td><span class="math">Pi_X^tp</span></td>
+            <td>Logarithmic tempered fundamental group of the once-punctured elliptic curve.</td>
+            <td>Ambient group whose automorphisms are later tested for theta-function rigidity.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Y -> X</span></td>
+            <td>Infinite etale covering from the universal graph-covering of the split special fiber; Galois group is <span class="math">Z</span>.</td>
+            <td>Separates the graph direction and supplies component labels.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Y_N -> Y</span></td>
+            <td>Kummer covering over <span class="math">K_N=K(zeta_N,q_X^{1/N})</span> with special fiber an infinite chain of projective lines.</td>
+            <td>Produces line bundles <span class="math">L_N</span> with degrees controlled by component labels.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Z_N -> Y_N</span></td>
+            <td>Further covering over <span class="math">J_N=K_N(a^{1/N})_{a in K_N}</span> that makes splittings agree over <span class="math">G_{J_N}</span>.</td>
+            <td>Allows the N-th root section and the theta action of Proposition 1.1.</td>
+          </tr>
+          <tr>
+            <td><span class="math">L_N</span></td>
+            <td>Line bundle on <span class="math">Y_N</span> determined by degree one on every component.</td>
+            <td>Receives the section whose root and trivialization define the cohomology class.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          Source-faithfulness checkpoint: the labels are not free finite indices. They
+          come from the oriented dual-graph covering, and the line-bundle degrees on the
+          infinite chain determine the Picard data used by the theta construction.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, §1, pp. 10-17</a>
+          Related: <a href="#etale-theta-source-cluster">EtTh source cluster</a>
+          <a href="#etale-theta-classical-kummer-page">etale theta class</a>
+          <a href="#tempered-covering-ladder-ii21-22">IUT II tempered covering ladder</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-classical-kummer-page" data-filter="etale theta class proposition 1.1 1.2 1.3 1.4 theta trivialization classical theta function kummer cohomology denominator one half">
+        <h2>EtTh §1: Etale Theta Class and Classical Theta Function</h2>
+        <p class="lede">
+          Propositions 1.1-1.4 construct the etale theta class by comparing two actions
+          on theta trivializations. One action comes from the tempered fundamental group
+          acting on line-bundle roots; the other comes from compatible theta
+          trivializations <span class="math">tau_N</span>. Their difference is a
+          cohomology class, and Proposition 1.4 identifies it with the Kummer classes of
+          the classical theta function.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Step</th><th>Source content</th><th>Consequence</th></tr>
+          <tr>
+            <td>Proposition 1.1</td>
+            <td>The section <span class="math">s_1|Y_N</span> admits an N-th root over <span class="math">Z_N</span>, and <span class="math">Pi_X^tp</span> acts uniquely on the corresponding line bundle.</td>
+            <td>Defines the theta action of the tempered fundamental group.</td>
+          </tr>
+          <tr>
+            <td>Lemma 1.2</td>
+            <td>The theta trivializations <span class="math">tau_N</span> may be chosen compatibly under divisibility of positive integers.</td>
+            <td>Provides a projective system of actions preserving the trivializations.</td>
+          </tr>
+          <tr>
+            <td>Proposition 1.3</td>
+            <td>The difference between the two action systems gives classes <span class="math">eta_Theta</span>; the denominators <span class="math">1/2</span> are essential because the divisor does not descend from <span class="math">Ydot</span> to <span class="math">Y</span>.</td>
+            <td>Defines the etale theta class up to the specified unit/Kummer indeterminacy.</td>
+          </tr>
+          <tr>
+            <td>Proposition 1.4</td>
+            <td>The meromorphic series <span class="math">Theta(U)</span> has zeros at cusps, pole divisor <span class="math">D_1</span>, and transformation formulas under inversion, sign, and <span class="math">q_X^{a/2}</span>-translation.</td>
+            <td>Identifies the cohomology classes with Kummer classes of classical theta-function values.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          The source does not define the etale theta function as a raw analytic series
+          alone. The analytic series checks the constructed cohomology class against the
+          classical theta function; the formal object used downstream is the Kummer
+          cohomology class with its precise indeterminacies.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Propositions 1.1-1.4 and Remark 1.3.1</a>
+          Related: <a href="#etale-theta-tate-covering-tower-page">Tate covering tower</a>
+          <a href="#theta-values-q-j-squared-intro-ii">theta values q^j^2</a>
+          <a href="#square-weight-exponent-ii251">IUT II square weight</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-anabelian-rigidity-page" data-filter="etale theta theorem 1.6 theorem 1.10 tempered anabelian rigidity standard type constant multiple rigidity orbicurves type 1 mu2">
+        <h2>EtTh §1: Tempered Anabelian Rigidity and Standard Type</h2>
+        <p class="lede">
+          Theorem 1.6 proves that the etale theta function is preserved, up to the stated
+          mild indeterminacies, by arbitrary isomorphisms of the relevant tempered
+          fundamental groups. The later part of §1 introduces
+          <span class="math">(1,mu_2)</span> and
+          <span class="math">(1,mu_2)^±</span> orbicurves, then uses non-cuspidal
+          torsion values to formulate standard type and constant-multiple rigidity.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Statement content</th><th>Downstream meaning</th></tr>
+          <tr>
+            <td>Theorem 1.6</td>
+            <td>An isomorphism of tempered fundamental groups preserves the doubled covering and the <span class="math">Delta_Theta</span> line, and sends the etale theta class to a <span class="math">Z</span>-conjugate of the target class.</td>
+            <td>Etale theta data is anabelianly recognizable, not chosen after reconstructing a scheme.</td>
+          </tr>
+          <tr>
+            <td>Remarks 1.6.1-1.6.4</td>
+            <td>Indeterminacy may be reduced by cusps or non-cuspidal torsion points; the theorem is interpreted as invariance under changes of underlying set theory.</td>
+            <td>Feeds the later IUT emphasis on source-independent theta data.</td>
+          </tr>
+          <tr>
+            <td>Definition 1.7</td>
+            <td>Defines orbicurves of type <span class="math">(1,mu_2)</span> and <span class="math">(1,mu_2)^±</span> through quotient diagrams involving the degree-four cover.</td>
+            <td>Sets the stage for standard values of the theta class.</td>
+          </tr>
+          <tr>
+            <td>Proposition 1.8</td>
+            <td>Shows characteristic nature of the covering diagram under tempered or profinite group isomorphisms.</td>
+            <td>Ensures the covering apparatus used for standard type is group-theoretically visible.</td>
+          </tr>
+          <tr>
+            <td>Definition 1.9 and Theorem 1.10</td>
+            <td>Defines standard sets of values at the two fourth-torsion points and proves preservation of standard type and the resulting constant-multiple rigidity.</td>
+            <td>Source of the constant-multiple rigidity later abstracted in mono-theta environments.</td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          This page is an early source for the “standard type” language that reappears
+          in IUT II and in the explicit μ6 estimates. The normalization is tied to
+          torsion-point values and a ± indeterminacy, not to an arbitrary scalar choice.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Theorems 1.6 and 1.10, Definitions 1.7 and 1.9, Proposition 1.8</a>
+          Related: <a href="#etale-theta-classical-kummer-page">etale theta class</a>
+          <a href="#etale-theta-standard-type-ii14">IUT II standard type</a>
+          <a href="#explicit-mu6-evaluation-points-page">explicit μ6 evaluation</a>
         </div>
       </section>
 
