@@ -1019,6 +1019,17 @@
         <a href="#bicoric-realified-frobenioids">Bi-coric realified Frobenioids</a>
         <a href="#bi-cores-log-theta-lattice-iii15">Bi-cores 1.5</a>
         <a href="#essential-logical-structure">Logical structure</a>
+        <a href="#esslgc-two-dimensionality-31">Logic 3.1 two dimensions</a>
+        <a href="#esslgc-frobenius-etale-32">Logic 3.2 Frobenius/etale</a>
+        <a href="#esslgc-log-link-33">Logic 3.3 log-link copies</a>
+        <a href="#esslgc-theta-link-34">Logic 3.4 theta-link copies</a>
+        <a href="#esslgc-gluings-indeterminacies-35">Logic 3.5 gluings</a>
+        <a href="#esslgc-and-chain-36">Logic 3.6 AND chain</a>
+        <a href="#esslgc-polymorphisms-37">Logic 3.7 poly-morphisms</a>
+        <a href="#esslgc-interuniversality-38">Logic 3.8 inter-universality</a>
+        <a href="#esslgc-underlying-descent-39">Logic 3.9 descent</a>
+        <a href="#esslgc-and-xor-310">Logic 3.10 AND/XOR</a>
+        <a href="#esslgc-log-kummer-311">Logic 3.11 log-Kummer</a>
         <a href="#indeterminacies">Indeterminacies</a>
         <a href="#log-kummer-correspondences">Log-Kummer correspondences</a>
         <a href="#theta-monoid-vertical-coricity-iii21">Theta monoid vertical coricity 2.1</a>
@@ -2508,7 +2519,12 @@
               <a href="#step-chain-stp1-stp8">Stp1-Stp8</a>,
               <a href="#log-kummer-centrality">log-Kummer centrality</a>,
               <a href="#common-container-chain">common-container chain</a>,
-              <a href="#label-reconstruction">label reconstruction</a>
+              <a href="#label-reconstruction">label reconstruction</a>,
+              <a href="#esslgc-two-dimensionality-31">§3.1 two dimensions</a>,
+              <a href="#esslgc-log-link-33">§3.3 log-link</a>,
+              <a href="#esslgc-theta-link-34">§3.4 theta-link</a>,
+              <a href="#esslgc-and-xor-310">§3.10 AND/XOR</a>,
+              <a href="#esslgc-log-kummer-311">§3.11 log-Kummer</a>
             </td>
             <td>Essential Logical Structure, Section 3</td>
           </tr>
@@ -50987,6 +51003,426 @@
           <a href="#multiradiality">multiradiality</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
           <a href="#formalization">RIMS Lean effort</a>
+        </div>
+      </section>
+
+      <section id="esslgc-two-dimensionality-31" data-filter="essential logical structure 3.1 one dimensionality two dimensions RCS redundant copies theta q intertwinings unit value F times mu prime strips">
+        <h2>Essential Logic 3.1: Two Dimensions</h2>
+        <p class="lede">
+          Section 3.1 sets the basic logical target. IUT studies the variable relation
+          between two combinatorial/arithmetic dimensions of a ring, represented in the
+          local picture by unit-group and value-group directions. The redundant-copies
+          criticism is formulated here as the move that crushes these two dimensions
+          into one fixed relation.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Paper content</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>2-Dim</td>
+            <td>
+              The theta-intertwining on <span class="math">F⊢×μ</span>-prime-strips is
+              to be described in terms of the q-intertwining through log-links and
+              Kummer theory.
+            </td>
+            <td>Keep q-pilot and theta-pilot histories as linked but non-identical data.</td>
+          </tr>
+          <tr>
+            <td>1-Dim</td>
+            <td>
+              A fixed one-dimensional identification of the two directions produces a
+              superficial contradiction by changing the problem before IUT begins.
+            </td>
+            <td>Do not encode the target corridor as equality in one ambient real line.</td>
+          </tr>
+          <tr>
+            <td>Example 3.1.1</td>
+            <td>
+              Gluing two labeled copies is harmless; identifying the copies first can
+              force unwanted equalities such as <span class="math">x = y</span>.
+            </td>
+            <td>Labels are not cosmetic. They prevent source histories from being erased too early.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.1</a>
+          Related: <a href="#essential-logical-structure">logical overview</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#f-times-mu-kummer-prime-strips-ii49">F×μ Kummer prime-strips</a>
+        </div>
+      </section>
+
+      <section id="esslgc-frobenius-etale-32" data-filter="essential logical structure 3.2 RCS Frobenius-like etale-like coricity symmetry log-theta-lattice Theorem 3.11">
+        <h2>Essential Logic 3.2: Frobenius/Etale Copies</h2>
+        <p class="lede">
+          Section 3.2 explains why Frobenius-like and etale-like versions of objects
+          cannot be treated as redundant copies. Etale-like objects have horizontal and
+          vertical coricity and symmetry properties obtained from abstract fundamental
+          groups; Frobenius-like objects depend on their Hodge-theater coordinates.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Distinction</th><th>Source role</th><th>Downstream use</th></tr>
+          <tr>
+            <td>Frobenius-like</td>
+            <td>Depends on the coordinate <span class="math">(n,m)</span> in the log-theta lattice.</td>
+            <td>Supplies the holomorphic/ring-theoretic side whose history cannot be freely transported.</td>
+          </tr>
+          <tr>
+            <td>Etale-like</td>
+            <td>Reconstructed from arithmetic fundamental groups treated as abstract topological groups.</td>
+            <td>Provides coric/symmetric data used by multiradial algorithms.</td>
+          </tr>
+          <tr>
+            <td>RC-FrEt</td>
+            <td>The redundant-copies move makes Frobenius-like data appear artificially coric.</td>
+            <td>Formalization should expose whether coricity is proved or assumed by identification.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>3.12 relevance.</strong> Theorem 3.11 relies on etale-like
+          coricity/symmetry while retaining Frobenius-like source information. A model
+          that makes Frobenius-like data coric by identification has changed the source
+          situation.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.2</a>
+          Related: <a href="#frobenius-picture-chain-ii410">Frobenius-picture chain</a>
+          <a href="#theta-monoid-vertical-coricity-iii21">vertical coricity</a>
+          <a href="#theorem-311-lgp-algorithms">Theorem 3.11 algorithms</a>
+        </div>
+      </section>
+
+      <section id="esslgc-log-link-33" data-filter="essential logical structure 3.3 RCS log-link domain codomain unit value groups theta link Ind3 log-Kummer upper semi commutativity">
+        <h2>Essential Logic 3.3: Log-Link Copies</h2>
+        <p class="lede">
+          Section 3.3 analyzes the claim that the domain and codomain of a log-link are
+          redundant. The source point is that a log-link rotates or juggles unit and
+          value directions, so identifying its two sides destroys the local splitting
+          needed to define the neighboring theta-links.
+        </p>
+        <div class="diagram fit" aria-label="Log-link redundancy obstruction">
+          <div class="diagramHeader">
+            <strong>Why RC-log is not neutral</strong>
+            <span>the theta-link requires splittings that the log-link moves</span>
+          </div>
+          <svg viewBox="0 0 920 360" role="img">
+            <defs>
+              <marker id="arrowEssLog33" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="80" y="60" width="210" height="74"></rect>
+            <text class="nodeTitle" x="185" y="88" text-anchor="middle">source theater</text>
+            <text class="tinyText" x="185" y="112" text-anchor="middle">unit/value splitting</text>
+            <rect class="nodeBox green" x="628" y="60" width="210" height="74"></rect>
+            <text class="nodeTitle" x="733" y="88" text-anchor="middle">theta neighbor</text>
+            <text class="tinyText" x="733" y="112" text-anchor="middle">theta-link needs splitting</text>
+            <rect class="nodeBox gold" x="80" y="226" width="210" height="74"></rect>
+            <text class="nodeTitle" x="185" y="254" text-anchor="middle">log-linked theater</text>
+            <text class="tinyText" x="185" y="278" text-anchor="middle">units may become non-units</text>
+            <rect class="nodeBox red" x="628" y="226" width="210" height="74"></rect>
+            <text class="nodeTitle" x="733" y="254" text-anchor="middle">no natural ??</text>
+            <text class="tinyText" x="733" y="278" text-anchor="middle">commutative square fails</text>
+            <path class="edge blue" d="M292 97 H626" marker-end="url(#arrowEssLog33)"></path>
+            <path class="edge gold" d="M185 136 V224" marker-end="url(#arrowEssLog33)"></path>
+            <path class="edge red" d="M292 263 H626" marker-end="url(#arrowEssLog33)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Claim</th><th>Source content</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>RC-log</td>
+            <td>Identifying the two sides of a log-link makes local unit/value splittings ill-defined.</td>
+            <td>Keep log-link domain and codomain as distinct theaters with explicit transport.</td>
+          </tr>
+          <tr>
+            <td>Ind3</td>
+            <td>The failure of the log-Kummer diagram to commute is controlled by upper-semi commutativity.</td>
+            <td>Model Ind3 as one-sided comparison data, not equality.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.3</a>
+          Related: <a href="#local-log-link-mechanism-iii11">local log-link mechanism</a>
+          <a href="#upper-semi-log-kummer-iii">upper-semi log-Kummer</a>
+          <a href="#log-wall-ring-incompatibility-iii124">log-wall incompatibility</a>
+        </div>
+      </section>
+
+      <section id="esslgc-theta-link-34" data-filter="essential logical structure 3.4 RCS theta-link domain codomain full poly-isomorphism q pilot theta pilot q j squared arithmetic degree">
+        <h2>Essential Logic 3.4: Theta-Link Copies</h2>
+        <p class="lede">
+          Section 3.4 turns to the theta-link itself. The theta-link glues the
+          theta-pilot side to the q-pilot side through a full poly-isomorphism of
+          <span class="math">F⊢×μ</span>-prime-strips. This does not identify the
+          surrounding ring theories or erase the difference between
+          <span class="math">q_v</span> and the collection <span class="math">q_v^{j^2}</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Source role</th><th>Guardrail</th></tr>
+          <tr>
+            <td>q-pilot</td>
+            <td>Line-bundle data determined by the root of the q-parameter at bad places.</td>
+            <td>Keep fixed on the q side when the theta side is enlarged.</td>
+          </tr>
+          <tr>
+            <td>Theta-pilot</td>
+            <td>Collection of line-bundle data determined by <span class="math">q_v^{j^2}</span>.</td>
+            <td>Do not replace the collection by the single q-pilot value.</td>
+          </tr>
+          <tr>
+            <td>Full poly-isomorphism</td>
+            <td>The gluing is the set of all isomorphisms of the abstract prime-strip data.</td>
+            <td>Represent the theta-link as relation-like poly-data, not a chosen map.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.4</a>
+          Related: <a href="#theta-links-cor37">IUT I theta links</a>
+          <a href="#f-times-mu-to-theta-links-49">F×μ to theta links</a>
+          <a href="#square-weight-exponent-ii251">square-weight exponent</a>
+        </div>
+      </section>
+
+      <section id="esslgc-gluings-indeterminacies-35" data-filter="essential logical structure 3.5 gluings indeterminacies pilot discrepancy holomorphic hull q pilot theta pilot crystals AND OR RCS">
+        <h2>Essential Logic 3.5: Gluings and Indeterminacies</h2>
+        <p class="lede">
+          Section 3.5 explains the apparent discrepancy between the q-pilot and
+          theta-pilot. IUT does not assert equal log-volumes at the start. Instead, it
+          uses the multiradial representation, indeterminacies, and the holomorphic hull
+          of possible theta-pilot images before taking the final log-volume comparison.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source label</th><th>Meaning</th><th>3.12 consequence</th></tr>
+          <tr>
+            <td>ThetaGl</td>
+            <td>Both sides of the theta-link gluing can be treated in one ring theory after the multiradial/hull passage.</td>
+            <td>The common setting is an output of the route, not an initial equality.</td>
+          </tr>
+          <tr>
+            <td>NonInf</td>
+            <td>The q-pilot Kummer theory is held fixed while the theta-pilot side ranges over allowed possibilities.</td>
+            <td>Encodes simultaneous executability, not collapse.</td>
+          </tr>
+          <tr>
+            <td>CrAND / CrOR / CrRCS</td>
+            <td>The crystal analogy separates a meaningful AND relation from vacuous OR or diagonal-only collapse.</td>
+            <td>Use containers/thickenings as a model for why naive commutative squares are insufficient.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.5</a>
+          Related: <a href="#hull-det-logvol-step-xid-312">hull/determinant/log-volume step</a>
+          <a href="#common-container-chain">common-container chain</a>
+          <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="esslgc-and-chain-36" data-filter="essential logical structure 3.6 chains logical AND theorem 3.11 corollary 3.12 not chain of inequalities SHE subquotients">
+        <h2>Essential Logic 3.6: Chain of AND Relations</h2>
+        <p class="lede">
+          Section 3.6 says the proof architecture is not a chain of intermediate
+          inequalities. The bulk of IUT I-III preserves the AND relation that begins at
+          the theta-link and reaches the multiradial representation; after that, the
+          passage to Corollary 3.12 is described as relatively formal.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Symptom/structure</th><th>Source point</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Syp1</td>
+            <td>The 3.11 to 3.12 passage can feel abrupt if the preceding AND chain is missed.</td>
+            <td>Document all upstream AND-preserving transitions.</td>
+          </tr>
+          <tr>
+            <td>Syp2</td>
+            <td>One should not expect a false equality of log-volumes across the theta-link.</td>
+            <td>Do not formalize the corridor as a commutative log-volume square.</td>
+          </tr>
+          <tr>
+            <td>Syp3</td>
+            <td>The final estimate is not obtained by concatenating ordinary inequalities.</td>
+            <td>Separate logical relation preservation from final ordered-real algebra.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.6</a>
+          Related: <a href="#theorem-311-lgp-algorithms">Theorem 3.11</a>
+          <a href="#cor312-statement-setup">Corollary 3.12 setup</a>
+          <a href="#ipl-she-apt-source-311">IPL/SHE/APT source</a>
+        </div>
+      </section>
+
+      <section id="esslgc-polymorphisms-37" data-filter="essential logical structure 3.7 poly-morphisms logical AND OR full poly-isomorphism theta link possibilities stacks">
+        <h2>Essential Logic 3.7: Poly-Morphisms</h2>
+        <p class="lede">
+          Section 3.7 explains poly-morphisms as explicit enumerations of possibilities.
+          A full poly-isomorphism such as the theta-link can be read as an AND relation
+          together with an OR/XOR family of possible gluing isomorphisms.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Feature</th><th>Source role</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Poly-morphism</td>
+            <td>A set of morphisms between objects, composed by composing all compatible members.</td>
+            <td>Use relation/set-valued interfaces where the source uses poly-data.</td>
+          </tr>
+          <tr>
+            <td>Possibility enumeration</td>
+            <td>Poly-morphisms encode OR/XOR alternatives created by indeterminacy.</td>
+            <td>Do not pick an arbitrary representative unless the source supplies a choice.</td>
+          </tr>
+          <tr>
+            <td>Stack analogy</td>
+            <td>Gluing by poly-morphisms is compared with stack-like gluing rather than spaces.</td>
+            <td>Keep isomorphism-class and quotient status explicit.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.7</a>
+          Related: <a href="#theta-links-cor37">theta links</a>
+          <a href="#poly-isomorphisms-iut-i0">poly-isomorphisms</a>
+          <a href="#esslgc-and-xor-310">AND/XOR chain</a>
+        </div>
+      </section>
+
+      <section id="esslgc-interuniversality-38" data-filter="essential logical structure 3.8 inter-universality logical AND coric SGA1 Galois categories inner automorphism indeterminacy">
+        <h2>Essential Logic 3.8: Inter-Universality</h2>
+        <p class="lede">
+          Section 3.8 places IUT's universe changes beside the familiar use of Galois
+          categories in SGA 1. The novelty is not merely that distinct universes occur;
+          it is that the relations between the relevant schemes are log- and theta-links,
+          not morphisms of schemes or rings.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Comparison</th><th>Source point</th><th>Consequence</th></tr>
+          <tr>
+            <td>SGA 1</td>
+            <td>Distinct Galois categories are related by scheme/ring morphisms, with inner automorphism indeterminacy.</td>
+            <td>Inner automorphism indeterminacy is normal, not a defect.</td>
+          </tr>
+          <tr>
+            <td>IUT</td>
+            <td>Log- and theta-links are non-ring/scheme-theoretic relations between contexts.</td>
+            <td>Specify which structures are coric/common across each relation.</td>
+          </tr>
+          <tr>
+            <td>Coric as AND</td>
+            <td>Being common to distinct objects is read as a logical AND relation.</td>
+            <td>Represent common structures separately from non-coric holomorphic histories.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.8</a>
+          Related: <a href="#collas-universes-species-page">Collas universes/species</a>
+          <a href="#species-vs-categories-iv31">IUT IV species</a>
+          <a href="#coric-holomorphic-log-shells">coric holomorphic log-shells</a>
+        </div>
+      </section>
+
+      <section id="esslgc-underlying-descent-39" data-filter="essential logical structure 3.9 underlying structures output data input data functorial algorithms descent q theta intertwinings">
+        <h2>Essential Logic 3.9: Descent to Underlying Structures</h2>
+        <p class="lede">
+          Section 3.9 distinguishes output data treated independently from output data
+          equipped with its input and construction algorithm. This is essential for
+          q-/theta-intertwinings: the same apparent object may have different status
+          depending on whether its source algorithm remains attached.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Label</th><th>Meaning</th><th>Use</th></tr>
+          <tr>
+            <td>UdOut</td>
+            <td>Output data treated as underlying structure, independently of source input.</td>
+            <td>Permits descent only after the source route justifies it.</td>
+          </tr>
+          <tr>
+            <td>InOut</td>
+            <td>Output data together with input data and the algorithm that produced it.</td>
+            <td>Records source history needed to avoid accidental identification.</td>
+          </tr>
+          <tr>
+            <td>ItwOut</td>
+            <td>q-/theta-intertwinings on <span class="math">F⊢×μ</span>-prime-strips depend on how the prime-strip was constructed.</td>
+            <td>Keep q-pilot and theta-pilot intertwinings as source-dependent interfaces.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.9</a>
+          Related: <a href="#label-reconstruction">label reconstruction</a>
+          <a href="#f-times-mu-pilot-object-ii49">F×μ pilot object</a>
+          <a href="#remark-3122-intertwining">Remark 3.12.2 intertwining</a>
+        </div>
+      </section>
+
+      <section id="esslgc-and-xor-310" data-filter="essential logical structure 3.10 AND XOR chain Stp1 Stp8 indeterminacies poly-morphisms subquotients log-volume closed loop">
+        <h2>Essential Logic 3.10: AND/XOR Chain</h2>
+        <p class="lede">
+          Section 3.10 gives the detailed Boolean form of the proof route. AND
+          corresponds to simultaneous execution/gluing; OR, and under disjointness XOR,
+          corresponds to indeterminacy, poly-morphism, projection, subquotient, and
+          splitting alternatives.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Boolean component</th><th>IUT reading</th><th>Route consequence</th></tr>
+          <tr>
+            <td>AND</td>
+            <td>Common multiplicative structure in the theta-link and simultaneous execution.</td>
+            <td>Preserve both sides of the source relation.</td>
+          </tr>
+          <tr>
+            <td>OR/XOR</td>
+            <td>Alternatives created mainly by log-Kummer indeterminacies and quotient/splitting operations.</td>
+            <td>Represent possibility containers explicitly.</td>
+          </tr>
+          <tr>
+            <td>Stp1-Stp8</td>
+            <td>Log-Kummer/Galois evaluation, descents, hulls, determinant, log-shift loop, log-volume.</td>
+            <td>Do not compress the proof route into a one-shot numerical inequality.</td>
+          </tr>
+        </table>
+        <div class="callout green">
+          <strong>Closed-loop point.</strong> The source says set-theoretic membership in
+          a set of possibilities is obtained only after the closed-loop/log-volume
+          passage. Before that, possibility is stack-like or quotient-like, not naive set
+          containment.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.10</a>
+          Related: <a href="#step-chain-stp1-stp8">Stp1-Stp8</a>
+          <a href="#membership-step-xif-312">membership step (xi-f)</a>
+          <a href="#hull-det-logvol-step-xid-312">hull/determinant/log-volume</a>
+        </div>
+      </section>
+
+      <section id="esslgc-log-kummer-311" data-filter="essential logical structure 3.11 log Kummer correspondence Galois evaluation Ind3 Ind1 Ind2 theta pilot saturation 3.12">
+        <h2>Essential Logic 3.11: Log-Kummer Centrality</h2>
+        <p class="lede">
+          Section 3.11 identifies the log-Kummer correspondence and Galois evaluation as
+          the technically heavy core. Steps 2 through 8 are described as comparatively
+          elementary; Step 1 is where IUT uses the anabelian/log-Kummer machinery that
+          makes the theta-pilot multiradial output possible.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Content</th><th>3.12 consequence</th></tr>
+          <tr>
+            <td>Stp1</td>
+            <td>Log-Kummer correspondence and Galois evaluation occupy the bulk of IUT I-III.</td>
+            <td>This is the main source-obligation target before the final ordered-real algebra.</td>
+          </tr>
+          <tr>
+            <td>Ind3 &gt; Ind1+2</td>
+            <td>Once local tensor-packet output is stable under Ind3, Ind1 and Ind2 stability is essentially subordinate.</td>
+            <td>Do not treat all indeterminacies as equal labels; Ind3 is the central one-sided mechanism.</td>
+          </tr>
+          <tr>
+            <td>logORInd</td>
+            <td>The theta-pilot is saturated by possibilities from the 0-column log-link sequence.</td>
+            <td>This saturation is potent, unlike theta-domain/codomain confusion.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-essential-logical-structure.pdf" target="_blank">Essential Logical Structure §3.11</a>
+          Related: <a href="#log-kummer-correspondences">Log-Kummer correspondences</a>
+          <a href="#ind1-ind2-ind3-311">Ind1/Ind2/Ind3 3.11</a>
+          <a href="#coarse-space-step-x-312">coarse space step (x)</a>
         </div>
       </section>
 
