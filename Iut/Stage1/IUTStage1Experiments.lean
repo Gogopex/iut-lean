@@ -580,6 +580,18 @@ theorem tensorPowerPresentationComparison_endpoint
         data.target.normalizedLogVolume :=
   data.endpoint
 
+theorem boundedFamilyHullQuotient_endpoint
+    {α : Type u} {ι : Type v}
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    (i j : ι)
+    (hnei : (data.possibleRegion i).Nonempty)
+    (hnej : (data.possibleRegion j).Nonempty) :
+    data.possibleRegion i ⊆ data.familyHull ∧
+      data.possibleRegion j ⊆ data.familyHull ∧
+      data.quotientMap '' data.possibleRegion i =
+        data.quotientMap '' data.possibleRegion j :=
+  data.endpoint i j hnei hnej
+
 theorem thetaPossibleImagesWeightedDeterminant_endpoint
     {α : Type u} {ι : Type v} {β : Type w} [Fintype β]
     (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)

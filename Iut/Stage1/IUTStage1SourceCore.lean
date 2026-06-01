@@ -2284,6 +2284,93 @@ theorem quotientMap_eq_iff_of_not_mem
 end IUTStage1UpperSemiSetQuotient
 
 /--
+Remark 3.9.5(v)--(vi) bounded-family hull quotient.
+
+For a bounded family of possible regions `Pβ`, the source text takes the
+upper-semi quotient determined by the hull of the family.  This finite skeleton
+uses the hull of the union as the family hull and proves that every nonempty
+possible region maps to the collapsed quotient point; hence any two nonempty
+choices have the same quotient image.
+-/
+structure IUTStage1BoundedFamilyHullQuotientSource
+    (α : Type u) (ι : Type v) where
+  hullData : IUTStage1HolomorphicHullLogVolumeShadow α
+  possibleRegion : ι -> Set α
+
+namespace IUTStage1BoundedFamilyHullQuotientSource
+
+variable {α : Type u} {ι : Type v}
+
+open IUTStage1UpperSemiSetQuotient
+
+def familyUnion
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι) :
+    Set α :=
+  ⋃ i, data.possibleRegion i
+
+def familyHull
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι) :
+    Set α :=
+  data.hullData.hullRegion data.familyUnion
+
+noncomputable def quotientMap
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    (x : α) :
+    IUTStage1UpperSemiSetQuotient α data.familyHull :=
+  IUTStage1UpperSemiSetQuotient.quotientMap data.familyHull x
+
+theorem possibleRegion_subset_familyUnion
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    (i : ι) :
+    data.possibleRegion i ⊆ data.familyUnion := by
+  intro x hx
+  exact Set.mem_iUnion.mpr ⟨i, hx⟩
+
+theorem possibleRegion_subset_familyHull
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    (i : ι) :
+    data.possibleRegion i ⊆ data.familyHull :=
+  fun _ hx =>
+    data.hullData.region_subset_hull data.familyUnion
+      (data.possibleRegion_subset_familyUnion i hx)
+
+theorem quotientMap_image_possibleRegion_eq_collapsed
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    (i : ι)
+    (hne : (data.possibleRegion i).Nonempty) :
+    data.quotientMap '' data.possibleRegion i =
+      {IUTStage1UpperSemiSetQuotient.collapsed} := by
+  simpa [quotientMap] using
+    quotientMap_image_eq_singleton_collapsed_of_nonempty_subset
+      (S := data.familyHull) hne
+      (data.possibleRegion_subset_familyHull i)
+
+theorem quotientMap_images_eq
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    (i j : ι)
+    (hnei : (data.possibleRegion i).Nonempty)
+    (hnej : (data.possibleRegion j).Nonempty) :
+    data.quotientMap '' data.possibleRegion i =
+      data.quotientMap '' data.possibleRegion j := by
+  rw [data.quotientMap_image_possibleRegion_eq_collapsed i hnei,
+    data.quotientMap_image_possibleRegion_eq_collapsed j hnej]
+
+theorem endpoint
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    (i j : ι)
+    (hnei : (data.possibleRegion i).Nonempty)
+    (hnej : (data.possibleRegion j).Nonempty) :
+    data.possibleRegion i ⊆ data.familyHull ∧
+      data.possibleRegion j ⊆ data.familyHull ∧
+      data.quotientMap '' data.possibleRegion i =
+        data.quotientMap '' data.possibleRegion j :=
+  ⟨data.possibleRegion_subset_familyHull i,
+    data.possibleRegion_subset_familyHull j,
+    data.quotientMap_images_eq i j hnei hnej⟩
+
+end IUTStage1BoundedFamilyHullQuotientSource
+
+/--
 Finite log-volume shadow of the Step (xi-d) determinant passage.
 
 The paper passes from localizations of arithmetic vector bundles of rank `> 1` to

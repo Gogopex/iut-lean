@@ -437,6 +437,10 @@ The canonical hull \(\phi(P)\) is itself an approximant, and every approximant
 is fixed by hull formation.  This is the compactness guard emphasized in the
 paper: the indeterminacy in choosing a hull approximant remains inside
 \(\phi(P)\).
+The bounded-family version of Remark 3.9.5(v)--(vi) is now represented by a
+family-hull quotient source.  For a family \(P_\beta\), the code forms the hull
+of the union, uses it as the collapsed subset in the upper-semi quotient, and
+proves that any two nonempty possible regions have the same quotient image.
 The same approximant now feeds the Step (xi) upper-ray constructor.  If the
 \(q\)-pilot region lies in an approximant \(H\), and if
 \(\mu_{\log}(H)\) is the determinant-normalized log-volume, then \Lean{}
@@ -726,6 +730,10 @@ The project currently proves the following source-facing results in \Lean{}:
 \item Remark 3.9.5(iii)'s hull-approximant family is now represented directly:
   an approximant lies inside the canonical hull \(\phi(P)\), has log-volume
   between \(P\) and \(\phi(P)\), and is fixed by hull formation.
+\item The bounded-family upper-semi quotient of Remark 3.9.5(v)--(vi) is
+  represented: each possible region lies in the hull of the family union, and
+  any two nonempty possible regions have identical images in the quotient that
+  collapses this family hull.
 \item Such a certified hull-approximant now also constructs the Step (xi)
   upper-ray datum: if the \(q\)-pilot region is contained in the approximant
   and the approximant log-volume is determinant-normalized, then \Lean{}
