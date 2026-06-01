@@ -414,6 +414,11 @@ the packet-normalized capsule value.  The corresponding target calibration
 therefore no longer needs an independent proof for the entry-target equality;
 only the theta-average and \((\Ind3)\)-target identifications with the same
 packet-normalized value remain as inputs at this level.
+The latter can now be reduced further: if the Step (x) target-side
+\((\Ind3)\) alignment gives equality of the theta average with the \((\Ind3)\)
+target, then \Lean{} derives the \((\Ind3)\)-target-to-packet-normalized
+equality from this alignment and the theta-average-to-packet-normalized
+equality.
 The first-pass Gaussian route also has a one-correspondence form: it consumes
 a finite log-Kummer packet-correspondence source and projects the source
 packet/product calibration and target packet-normalized calibration from that
@@ -842,6 +847,10 @@ The project currently proves the following source-facing results in \Lean{}:
   target side of a nonarchimedean upper-semi entry from the capsule-family
   normalized log-volume.  The target-calibration constructor derived from this
   source removes the separate entry-target-to-packet-normalized equality.
+\item The same target-calibration layer can now derive the
+  \((\Ind3)\)-target-to-packet-normalized equality from theta-target alignment
+  and theta-average packet normalization, instead of accepting that equality
+  directly.
 \item The finite sign-unit/root-of-unity part of Remark 3.11.4 is formalized:
   sign-unit action preserves full cusp labels, full-label log-volume readings,
   Gaussian degrees, and averaged Gaussian log-volume.

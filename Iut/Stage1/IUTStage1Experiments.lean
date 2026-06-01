@@ -762,6 +762,42 @@ theorem packetTargetCalibrationFromPacketNormalizedEntryTarget_endpoint
     (logKummer := logKummer)
     entrySource thetaAverage_eq_packetNormalized ind3Target_eq_packetNormalized
 
+open NonarchimedeanLogKummerPacketTargetCalibration in
+theorem packetTargetCalibrationFromEntryTargetAndThetaAlignment_endpoint
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {thetaAverage : Real}
+    {logKummer : LogKummerCorrespondenceId}
+    (entrySource : NonarchimedeanPacketNormalizedEntryTargetSource audited)
+    (thetaAverage_eq_packetNormalized :
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (thetaAverage_eq_ind3Target :
+      thetaAverage =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume) :
+    let calibration :
+      NonarchimedeanLogKummerPacketTargetCalibration
+        audited thetaAverage logKummer entrySource.toEntry :=
+      NonarchimedeanLogKummerPacketTargetCalibration.ofPacketNormalizedEntryTargetAndThetaTarget
+        entrySource thetaAverage_eq_packetNormalized
+        thetaAverage_eq_ind3Target;
+    calibration.ind3Target_eq_packetNormalized =
+        thetaAverage_eq_ind3Target.symm.trans
+          thetaAverage_eq_packetNormalized ∧
+      calibration.entryTarget_eq_packetNormalized =
+        entrySource.toEntry_targetLogVolume_eq_packetNormalized ∧
+      calibration.entryTarget_eq_ind3Target =
+        entrySource.toEntry_targetLogVolume_eq_packetNormalized.trans
+          (thetaAverage_eq_ind3Target.symm.trans
+            thetaAverage_eq_packetNormalized).symm :=
+  by
+    exact
+      ofPacketNormalizedEntryTargetAndThetaTarget_endpoint
+        (logKummer := logKummer)
+        entrySource thetaAverage_eq_packetNormalized thetaAverage_eq_ind3Target
+
 theorem realifiedFrobenioidLogKummerPacket_endpoint
     {coric : Type u}
     {audited :

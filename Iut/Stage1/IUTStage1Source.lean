@@ -36498,6 +36498,25 @@ def ofPacketNormalizedEntryTargetSource
     entryTarget_eq_normalized :=
       entrySource.toEntry_targetLogVolume_eq_packetNormalized }
 
+def ofPacketNormalizedEntryTargetAndThetaTarget
+    (entrySource :
+      NonarchimedeanPacketNormalizedEntryTargetSource audited)
+    (thetaAverage_eq_packetNormalized :
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (thetaAverage_eq_ind3Target :
+      thetaAverage =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume)
+    (calibration_source :
+      IUTStage1PacketNormalizedIdentificationSource :=
+        IUTStage1PacketNormalizedIdentificationSource.directPacketNormalization) :
+    NonarchimedeanLogKummerPacketTargetCalibration
+      audited thetaAverage logKummer entrySource.toEntry :=
+  ofPacketNormalizedEntryTargetSource entrySource
+    thetaAverage_eq_packetNormalized
+    (thetaAverage_eq_ind3Target.symm.trans thetaAverage_eq_packetNormalized)
+    calibration_source
+
 theorem thetaAverage_eq_packetNormalized
     (calibration :
       NonarchimedeanLogKummerPacketTargetCalibration
@@ -36589,6 +36608,33 @@ theorem ofPacketNormalizedEntryTargetSource_endpoint
       calibration.entryTarget_eq_ind3Target =
         entrySource.toEntry_targetLogVolume_eq_packetNormalized.trans
           ind3Target_eq_packetNormalized.symm :=
+  by
+    intro calibration
+    exact ⟨rfl, rfl, rfl⟩
+
+theorem ofPacketNormalizedEntryTargetAndThetaTarget_endpoint
+    (entrySource :
+      NonarchimedeanPacketNormalizedEntryTargetSource audited)
+    (thetaAverage_eq_packetNormalized :
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (thetaAverage_eq_ind3Target :
+      thetaAverage =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume) :
+    let calibration :
+      NonarchimedeanLogKummerPacketTargetCalibration
+        audited thetaAverage logKummer entrySource.toEntry :=
+      ofPacketNormalizedEntryTargetAndThetaTarget entrySource
+        thetaAverage_eq_packetNormalized thetaAverage_eq_ind3Target;
+    calibration.ind3Target_eq_packetNormalized =
+        thetaAverage_eq_ind3Target.symm.trans
+          thetaAverage_eq_packetNormalized ∧
+      calibration.entryTarget_eq_packetNormalized =
+        entrySource.toEntry_targetLogVolume_eq_packetNormalized ∧
+      calibration.entryTarget_eq_ind3Target =
+        entrySource.toEntry_targetLogVolume_eq_packetNormalized.trans
+          (thetaAverage_eq_ind3Target.symm.trans
+            thetaAverage_eq_packetNormalized).symm :=
   by
     intro calibration
     exact ⟨rfl, rfl, rfl⟩
