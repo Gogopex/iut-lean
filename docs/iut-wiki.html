@@ -1475,6 +1475,7 @@
         <a href="#local-rss-loglink-394">Local Rss log-link compatibility</a>
         <a href="#bad-prime-qpower-rss-394">Bad-prime q^N Rss embedding</a>
         <a href="#tensor-product-rss-394">Tensor-product Rss extension</a>
+        <a href="#archimedean-rss-loglink-394">Archimedean Rss compatibility</a>
         <a href="#holomorphic-hull-formalism-iii395">Holomorphic hull 3.9.5</a>
         <a href="#hull-approximants-iii395">Hull approximants 3.9.5</a>
         <a href="#nabla-hull-formalism-iii395">Nabla hull formalism</a>
@@ -52002,6 +52003,23 @@
               handled by an unrelated measure convention.
             </td>
           </tr>
+          <tr>
+            <td>Remark 3.9.4(vi)</td>
+            <td>
+              At complex archimedean places, the Euclidean metric gives measures on
+              <span class="math">|k| = k/O_k^×</span> and
+              <span class="math">O_k^×</span>. By decomposing
+              <span class="math">O_k^×</span> into small arcs, translating endpoints to
+              <span class="math">0</span>, projecting to <span class="math">|k|</span>,
+              and passing to the limit, one obtains
+              <span class="math">rho_k : Rss(O_k^×) -> Rss(|k|)</span> compatible with
+              radial/angular log-volume maps.
+            </td>
+            <td>
+              The archimedean log-link has its own Rss construction; it is not inferred
+              by copying the nonarchimedean unit-log argument.
+            </td>
+          </tr>
         </table>
 
         <div class="grid3">
@@ -52098,6 +52116,16 @@
               fields, using product measure spaces and finite-extension compatibility.
             </p>
             <div class="tagRow"><span class="tag violet">Remark 3.9.4(v)</span><span class="tag">packets</span></div>
+          </div>
+          <div class="card" id="archimedean-rss-loglink-394-card">
+            <h3>Archimedean Rss compatibility</h3>
+            <p>
+              Remark 3.9.4(vi) builds the archimedean analogue using arcs in
+              <span class="math">O_k^×</span>, the quotient
+              <span class="math">|k|</span>, and the exponential covering of the log
+              shell.
+            </p>
+            <div class="tagRow"><span class="tag blue">Remark 3.9.4(vi)</span><span class="tag">archimedean</span></div>
           </div>
         </div>
 
@@ -52361,6 +52389,7 @@
           Related: <a href="#realified-semisimplification-39">realified semi-simplification</a>
           <a href="#bad-prime-qpower-rss-394">bad-prime q-power Rss</a>
           <a href="#tensor-product-rss-394">tensor-product Rss extension</a>
+          <a href="#archimedean-rss-loglink-394">archimedean Rss compatibility</a>
         </div>
       </section>
 
@@ -52455,7 +52484,113 @@
           Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.4(v)</a>
           Related: <a href="#packet-normalization-39">packet normalization</a>
           <a href="#local-rss-loglink-394">local Rss compatibility</a>
+          <a href="#archimedean-rss-loglink-394">archimedean Rss compatibility</a>
           <a href="#tensor-packets-iii31-33">tensor packets</a>
+        </div>
+      </section>
+
+      <section id="archimedean-rss-loglink-394" data-filter="iut iii remark 3.9.4 vi archimedean rss log link compatibility euclidean metric ok units arcs quotient radial angular log volume exp universal covering">
+        <h2>IUT III Remark 3.9.4(vi): Archimedean Rss Log-Link Compatibility</h2>
+        <p class="lede">
+          Remark 3.9.4(vi) gives the complex archimedean analogue of the
+          nonarchimedean Rss construction. The field <span class="math">k</span> is
+          equipped with its standard Euclidean metric, normalized so that
+          <span class="math">O_k^×</span> has length <span class="math">2π</span>.
+          This metric gives ample measure spaces on the quotient
+          <span class="math">|k| = k/O_k^×</span> and on
+          <span class="math">O_k^×</span>. The resulting Rss identifications are
+          compatible with the radial and angular log-volume maps used in Proposition
+          3.9(iv).
+        </p>
+        <div class="diagram fit" aria-label="Archimedean Rss log-link compatibility">
+          <div class="diagramHeader">
+            <strong>Archimedean Rss Compatibility</strong>
+            <span>small arcs, quotient projection, and the exponential covering</span>
+          </div>
+          <svg viewBox="0 0 1080 520" role="img">
+            <defs>
+              <marker id="arrowArchRss394" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+
+            <rect class="nodeBox blue" x="70" y="72" width="210" height="82"></rect>
+            <text class="nodeTitle" x="175" y="102" text-anchor="middle">O_k^×</text>
+            <text class="tinyText" x="175" y="126" text-anchor="middle">circle of length 2π</text>
+
+            <rect class="nodeBox gold" x="420" y="72" width="240" height="82"></rect>
+            <text class="nodeTitle" x="540" y="102" text-anchor="middle">small closed arcs</text>
+            <text class="tinyText" x="540" y="126" text-anchor="middle">measure less than epsilon</text>
+
+            <rect class="nodeBox green" x="800" y="72" width="210" height="82"></rect>
+            <text class="nodeTitle" x="905" y="102" text-anchor="middle">|k| = k/O_k^×</text>
+            <text class="tinyText" x="905" y="126" text-anchor="middle">quotient measure space</text>
+
+            <rect class="nodeBox violet" x="118" y="254" width="260" height="86"></rect>
+            <text class="nodeTitle" x="248" y="284" text-anchor="middle">endpoint translate</text>
+            <text class="tinyText" x="248" y="308" text-anchor="middle">move one endpoint to 0</text>
+
+            <rect class="nodeBox blue" x="470" y="254" width="240" height="86"></rect>
+            <text class="nodeTitle" x="590" y="284" text-anchor="middle">rho_k on Rss</text>
+            <text class="tinyText" x="590" y="308" text-anchor="middle">limit epsilon -> 0</text>
+
+            <rect class="nodeBox red" x="770" y="254" width="230" height="86"></rect>
+            <text class="nodeTitle" x="885" y="284" text-anchor="middle">log_k(O_k^×)</text>
+            <text class="tinyText" x="885" y="308" text-anchor="middle">exp_k universal cover</text>
+
+            <rect class="nodeBox green" x="330" y="412" width="430" height="64"></rect>
+            <text class="nodeTitle" x="545" y="438" text-anchor="middle">compatible radial/angular log-volume maps</text>
+            <text class="tinyText" x="545" y="458" text-anchor="middle">after log : R_>=0 -> R union {-infty} and normalization</text>
+
+            <path d="M282 113 H418" class="edge blue" marker-end="url(#arrowArchRss394)"></path>
+            <path d="M662 113 H798" class="edge gold" marker-end="url(#arrowArchRss394)"></path>
+            <path d="M540 156 C506 212 355 220 278 252" class="edge violet" marker-end="url(#arrowArchRss394)"></path>
+            <path d="M380 297 H468" class="edge blue" marker-end="url(#arrowArchRss394)"></path>
+            <path d="M712 297 H768" class="edge red" marker-end="url(#arrowArchRss394)"></path>
+            <path d="M590 342 V410" class="edge green" marker-end="url(#arrowArchRss394)"></path>
+            <path d="M885 342 C826 392 740 404 636 412" class="edge red" marker-end="url(#arrowArchRss394)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Archimedean component</th><th>Source construction</th><th>Compatibility role</th></tr>
+          <tr>
+            <td>Metric and measures</td>
+            <td>The Euclidean metric makes <span class="math">O_k^×</span> length <span class="math">2π</span> and determines measures on <span class="math">|k|</span> and <span class="math">O_k^×</span>.</td>
+            <td>Provides the measure spaces whose Rss quotients are compared.</td>
+          </tr>
+          <tr>
+            <td>Arc construction</td>
+            <td>Decompose <span class="math">O_k^×</span> into closed arcs of measure less than <span class="math">epsilon</span>, translate an endpoint to <span class="math">0</span>, project to <span class="math">|k|</span>, then take <span class="math">epsilon -> 0</span>.</td>
+            <td>Defines the natural isomorphism <span class="math">rho_k : Rss(O_k^×) -> Rss(|k|)</span>.</td>
+          </tr>
+          <tr>
+            <td>Log shell side</td>
+            <td><span class="math">log_k(O_k^×) = exp_k^{-1}(O_k^×)</span> carries the pullback measure from <span class="math">|k|</span> via the induced homeomorphism.</td>
+            <td>Connects the angular unit side with the radial quotient side.</td>
+          </tr>
+          <tr>
+            <td>Exponential covering</td>
+            <td>The universal covering <span class="math">exp_k : log_k(O_k^×) -> O_k^×</span> induces the middle Rss isomorphism by using ample subsets mapped bijectively to their exponentials.</td>
+            <td>Supplies the archimedean log-link analogue of the local logarithm map.</td>
+          </tr>
+          <tr>
+            <td>Log-volume maps</td>
+            <td>After composing <span class="math">R_{>=0}</span> with logarithm and a positive normalization factor, the Rss isomorphisms restrict to the usual radial/angular log-volume maps on subsets.</td>
+            <td>This is the archimedean instance of Proposition 3.9(iv)'s log-link/log-volume compatibility.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          The source explicitly says that analogues of the bad-prime and tensor-product
+          clauses also exist for archimedean valuations. A faithful formalization should
+          model the radial/angular distinction before reusing the nonarchimedean
+          q-power or product-measure interfaces.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.4(vi)</a>
+          Related: <a href="#realified-semisimplification-39">realified semi-simplification</a>
+          <a href="#local-rss-loglink-394">local Rss compatibility</a>
+          <a href="#tensor-product-rss-394">tensor-product Rss extension</a>
+          <a href="#arch-ball-containment-35">archimedean log-link domains</a>
         </div>
       </section>
 
