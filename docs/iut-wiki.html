@@ -769,6 +769,12 @@
         <a href="#concept-index">Concept index</a>
         <a href="#anabelian-background">Anabelian background</a>
         <a href="#collas-category-perspective">Collas category view</a>
+        <a href="#collas-functorial-unification-page">Collas functorial unification</a>
+        <a href="#collas-monoid-geometry-page">Collas monoid geometry</a>
+        <a href="#collas-diophantine-categorification-page">Collas Diophantine categorification</a>
+        <a href="#collas-local-global-gms-page">Collas local/global GMS</a>
+        <a href="#collas-non-ring-dilation-page">Collas non-ring dilation</a>
+        <a href="#collas-basepoints-log-shells-page">Collas basepoints/log-shells</a>
         <a href="#collas-iut-source-alignment-page">Collas source alignment</a>
         <a href="#collas-formalization-audit-page">Collas audit guide</a>
         <a href="#collas-gms-categorification-page">Collas GMS categorification</a>
@@ -3785,7 +3791,7 @@
               <a href="#iut-second-regeometrization">second regeometrization</a>,
               <a href="#collas-category-perspective">Collas category view</a>,
               <a href="#collas-formalization-audit-page">Collas audit guide</a>,
-              <a href="#collas-categorification-diophantine">categorification of a Diophantine problem</a>,
+              <a href="#collas-diophantine-categorification-page">categorification of a Diophantine problem</a>,
               <a href="#collas-hodge-synchronization">Hodge-theater synchronization</a>,
               <a href="#collas-indeterminacies">Collas indeterminacy map</a>,
               <a href="#collas-current-anabelian-work">current anabelian papers</a>
@@ -4732,7 +4738,7 @@
           locally but typically not globally, while keeping track of operations that are
           not compatible with one fixed ring structure.
         </p>
-        <div class="diagram fit" aria-label="Collas category-theoretic perspective on IUT">
+        <div class="diagram fit desktopOnlyDiagram" aria-label="Collas category-theoretic perspective on IUT">
           <div class="diagramHeader">
             <strong>From schemes to category-theoretic containers</strong>
             <span>Collas's expository route into IUT</span>
@@ -4789,135 +4795,44 @@
             <path d="M636 264 H686" class="edge green" marker-end="url(#arrowCollasCat)"></path>
           </svg>
         </div>
+        <div class="flowDiagram mobileOnlyDiagram" aria-label="Collas category-theoretic perspective on IUT">
+          <div class="flowStep"><strong>Grothendieck setting</strong><p>Schemes, rings, and etale fundamental groups supply the reconstruction language.</p></div>
+          <div class="flowStep"><strong>Mono-anabelian recovery</strong><p>Group-theoretic algorithms recover arithmetic data without fixing a second comparison scheme.</p></div>
+          <div class="flowStep"><strong>Monoid geometry</strong><p>Additive and multiplicative sides are separated so non-ring-theoretic transport is visible.</p></div>
+          <div class="flowStep"><strong>IUT containers</strong><p>Hodge theaters, Frobenioids, and log-shells hold data across alien ring histories.</p></div>
+          <div class="flowStep"><strong>Log-theta wandering</strong><p>Multiradial algorithms compare Frobenius-like data through the log-theta lattice.</p></div>
+          <div class="flowStep"><strong>Species/universes</strong><p>Logical and set-theoretic bookkeeping records which comparisons are legitimate.</p></div>
+        </div>
         <div class="grid3">
-          <div class="card" id="collas-grothendieck-unification">
-            <h3>Functorial unification</h3>
-            <p>
-              Collas frames Grothendieck's program as a functorial and
-              category-theoretic reconciliation of discrete arithmetic and continuous
-              geometry. In that setting, absolute Galois groups and etale path groups
-              are treated as related manifestations of one reconstruction language.
-            </p>
-            <div class="tagRow"><span class="tag blue">Collas §1</span><span class="tag">functoriality</span></div>
+          <div class="card">
+            <h3><a href="#collas-functorial-unification-page">Functorial unification</a></h3>
+            <p>Grothendieckian reconstruction as a common language for arithmetic discreteness and geometric continuity.</p>
+            <div class="tagRow"><span class="tag blue">Collas §1</span><span class="tag">standalone page</span></div>
           </div>
-          <div class="card" id="collas-monoid-geometry">
-            <h3>Geometry of monoids</h3>
-            <p>
-              The Collas overview emphasizes IUT's shift beyond the direct geometry of
-              rings and schemes toward additive and multiplicative monoid structures.
-              The point is not to forget rings, but to separate the two operations so
-              that non-ring-theoretic comparisons can be made explicit.
-            </p>
-            <div class="tagRow"><span class="tag green">Collas §2.2</span><span class="tag">monoids</span></div>
+          <div class="card">
+            <h3><a href="#collas-monoid-geometry-page">Geometry of monoids</a></h3>
+            <p>The shift from ring/scheme geometry to separated additive and multiplicative monoid structures.</p>
+            <div class="tagRow"><span class="tag green">Collas §2.2</span><span class="tag">standalone page</span></div>
           </div>
-          <div class="card" id="collas-categorification-diophantine">
-            <h3>Categorifying a Diophantine problem</h3>
-            <p>
-              Section 3.1 describes IUT as categorifying the problem of constructing a
-              global multiplicative subspace for elliptic-curve height estimates. The
-              category-theoretic simulation uses local multiplicative data, Frobenioid
-              packages, and Hodge theaters instead of an actual global subspace in the
-              general case.
-            </p>
-            <div class="tagRow"><span class="tag gold">Collas §3.1</span><span class="tag">GMS simulation</span></div>
+          <div class="card">
+            <h3><a href="#collas-diophantine-categorification-page">Categorifying a Diophantine problem</a></h3>
+            <p>The height problem is reframed through categorical containers rather than a single global scheme.</p>
+            <div class="tagRow"><span class="tag gold">Collas §3.1</span><span class="tag">standalone page</span></div>
           </div>
-          <div class="card" id="collas-nonexistent-global-subspace">
-            <h3>Local existence, global failure</h3>
-            <p>
-              Collas isolates the first obstruction: the desired
-              <span class="math">ell</span>-torsion multiplicative subspace exists at
-              suitable local places, but typically not as a single global subspace over
-              the number field. Hodge theaters are the categorical replacement for this
-              missing global object.
-            </p>
-            <div class="tagRow"><span class="tag red">Collas §3.1</span><span class="tag">local/global</span></div>
+          <div class="card">
+            <h3><a href="#collas-local-global-gms-page">Local/global GMS obstruction</a></h3>
+            <p>Local multiplicative subspaces do not automatically assemble into the required global object.</p>
+            <div class="tagRow"><span class="tag red">Collas §3.1</span><span class="tag">standalone page</span></div>
           </div>
-          <div class="card" id="collas-non-ring-dilation">
-            <h3>Dilation is not ring-theoretic</h3>
-            <p>
-              The second obstruction is that the quotient/dilation operation behind the
-              height estimate behaves like a Frobenius operation but is not a ring
-              homomorphism. This is the source of the separation between multiplicative
-              and additive monoid structures across theta links.
-            </p>
-            <div class="tagRow"><span class="tag blue">Collas §3.1</span><span class="tag">ring break</span></div>
+          <div class="card">
+            <h3><a href="#collas-non-ring-dilation-page">Non-ring dilation</a></h3>
+            <p>The theta-side dilation behaves Frobenius-like but is not compatible with one fixed ring structure.</p>
+            <div class="tagRow"><span class="tag blue">Collas §3.1</span><span class="tag">standalone page</span></div>
           </div>
-          <div class="card" id="collas-labels-basepoints">
-            <h3>Labels and basepoints are structural</h3>
-            <p>
-              In Collas's account, distinct but isomorphic copies, multiple basepoints,
-              and log-shell containers are not presentation overhead. They record that
-              theta and log links compare weakened structures without identifying their
-              original ring histories.
-            </p>
-            <div class="tagRow"><span class="tag green">Collas §3.1.1</span><span class="tag">non-identification</span></div>
-          </div>
-          <div class="card" id="collas-hodge-theater-category">
-            <h3>Hodge theaters as containers</h3>
-            <p>
-              In Collas's reading, Hodge theaters synchronize geometric and arithmetic
-              symmetries while keeping multiplicative and additive structures separated.
-              This matches the wiki's treatment of theaters as typed containers rather
-              than as ordinary copies of one scheme.
-            </p>
-            <div class="tagRow"><span class="tag violet">Collas §3.1.1</span><span class="tag">containers</span></div>
-          </div>
-          <div class="card" id="collas-log-theta-wandering">
-            <h3>Log-theta wandering</h3>
-            <p>
-              Collas describes the log-theta lattice as a category-theoretic setting for
-              relating distinct Frobenius-like objects by multiradial algorithms. This
-              is the interpretive bridge from Hodge-theater construction to the
-              Theorem 3.11 and Corollary 3.12 corridor.
-            </p>
-            <div class="tagRow"><span class="tag red">Collas §3.1.2</span><span class="tag">multiradial</span></div>
-          </div>
-          <div class="card" id="collas-universes-species">
-            <h3>Universes, species, and logic</h3>
-            <p>
-              Collas separates an external logical level, described in terms of AND/OR
-              articulation, from an internal category-theoretic level involving objects,
-              morphisms, functors, and Grothendieck universes. This supports the wiki's
-              page model: concepts must retain their type and source context.
-            </p>
-            <div class="tagRow"><span class="tag blue">Collas §3.1.3</span><span class="tag">species</span></div>
-          </div>
-          <div class="card" id="collas-height-comparison-universes">
-            <h3>Height comparison across universes</h3>
-            <p>
-              Collas stresses that local heights may live in distinct copies of the real
-              numbers attached to distinct reconstruction contexts. The IUT comparison
-              becomes meaningful only after the species/mutation and indeterminacy
-              apparatus supplies a common comparison setting.
-            </p>
-            <div class="tagRow"><span class="tag violet">Collas §3.1.3</span><span class="tag">heights</span></div>
-          </div>
-          <div class="card" id="collas-bgt-models">
-            <h3>BGT combinatorial models</h3>
-            <p>
-              Collas's 2026 GT paper treats Belyi-Galois-Teichmuller diagrams as
-              combinatorial anabelian containers from which field operations on
-              realizations of <span class="math">Qbar</span> are reconstructed.
-            </p>
-            <div class="tagRow"><span class="tag green">Collas GT §4.2</span><span class="tag">field reconstruction</span></div>
-          </div>
-          <div class="card" id="collas-dm-curves">
-            <h3>Deligne-Mumford curves</h3>
-            <p>
-              Collas-Philip-Yamaguchi extend the reconstruction viewpoint to stacky
-              curves by tracking stack inertia, rigidification, and low-step solvable
-              quotients of etale fundamental groups.
-            </p>
-            <div class="tagRow"><span class="tag violet">CPY 2026</span><span class="tag">stack inertia</span></div>
-          </div>
-          <div class="card" id="collas-methodological-status">
-            <h3>Status for IUT reading</h3>
-            <p>
-              The Collas corpus is best used as a category-theoretic orientation layer:
-              it explains why IUT isolates containers, reconstructions, and species,
-              but Mochizuki's IUT I-IV remain the source for formal definitions.
-            </p>
-            <div class="tagRow"><span class="tag red">scope</span><span class="tag">orientation only</span></div>
+          <div class="card">
+            <h3><a href="#collas-basepoints-log-shells-page">Basepoints and log-shells</a></h3>
+            <p>Multiple basepoints and log-shell containers are structural consequences of changing ring histories.</p>
+            <div class="tagRow"><span class="tag green">Collas §3.1.1</span><span class="tag">standalone page</span></div>
           </div>
         </div>
         <table>
@@ -5090,6 +5005,207 @@
           <a href="#collas-formalization-audit-page">Collas audit guide</a>
           <a href="#projective-line-gluing-analogy">projective-line gluing</a>
           <a href="#essential-logical-structure">logical structure</a>
+        </div>
+      </section>
+
+      <section id="collas-functorial-unification-page" data-filter="collas functorial unification grothendieck discrete continuous anabelian reconstruction category theoretic">
+        <h2>Collas: Functorial Unification</h2>
+        <p class="lede">
+          Collas reads IUT against a Grothendieckian background: arithmetic
+          discreteness and geometric continuity are compared by functorial
+          reconstruction rather than by ad hoc coordinate choices. This is an
+          orientation page, not an independent IUT definition.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Anabelian reconstruction</h3>
+            <p>
+              The starting model is reconstruction of a space from its etale
+              fundamental group. Collas emphasizes the classical bi-anabelian form,
+              the mono-anabelian form, and the absolute form that detaches the object
+              from a fixed base scheme.
+            </p>
+          </div>
+          <div class="card">
+            <h3>IUT consequence</h3>
+            <p>
+              In IUT this reconstruction style is used to transport weakened
+              arithmetic data between contexts where the original ring/scheme history
+              is deliberately not identified.
+            </p>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview, §§1-2.2</a>
+          Related: <a href="#anabelian-background">anabelian background</a>
+          <a href="#abs-anabelian-reconstruction-page">absolute anabelian algorithms</a>
+          <a href="#collas-monoid-geometry-page">monoid geometry</a>
+        </div>
+      </section>
+
+      <section id="collas-monoid-geometry-page" data-filter="collas geometry of monoids additive multiplicative monoid ring scheme absolute mono anabelian transport">
+        <h2>Collas: Geometry of Monoids</h2>
+        <p class="lede">
+          Collas identifies a central IUT shift: instead of treating the ring as an
+          indivisible object, IUT works with the multiplicative and additive monoid
+          structures separately, then tracks the cost of comparison.
+        </p>
+        <div class="diagram fit desktopOnlyDiagram" aria-label="Collas monoid geometry split">
+          <div class="diagramHeader">
+            <strong>Ring data split into monoid data</strong>
+            <span>orientation for IUT theta/log links</span>
+          </div>
+          <svg viewBox="0 0 760 270" role="img">
+            <defs>
+              <marker id="arrowCollasMonoid" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="40" y="92" width="170" height="72"></rect>
+            <text class="nodeTitle" x="125" y="120" text-anchor="middle">ring structure</text>
+            <text class="tinyText" x="125" y="142" text-anchor="middle">addition and multiplication</text>
+            <path class="edge blue" d="M212 128 H292" marker-end="url(#arrowCollasMonoid)"></path>
+            <rect class="nodeBox green" x="300" y="38" width="190" height="72"></rect>
+            <text class="nodeTitle" x="395" y="66" text-anchor="middle">multiplicative monoid</text>
+            <text class="tinyText" x="395" y="88" text-anchor="middle">Frobenius-like side</text>
+            <rect class="nodeBox gold" x="300" y="156" width="190" height="72"></rect>
+            <text class="nodeTitle" x="395" y="184" text-anchor="middle">additive monoid</text>
+            <text class="tinyText" x="395" y="206" text-anchor="middle">logarithmic/additive side</text>
+            <path class="edge green" d="M492 74 H550" marker-end="url(#arrowCollasMonoid)"></path>
+            <path class="edge gold" d="M492 192 H550" marker-end="url(#arrowCollasMonoid)"></path>
+            <rect class="nodeBox violet" x="558" y="92" width="160" height="72"></rect>
+            <text class="nodeTitle" x="638" y="120" text-anchor="middle">IUT comparison</text>
+            <text class="tinyText" x="638" y="142" text-anchor="middle">with indeterminacies</text>
+          </svg>
+        </div>
+        <div class="flowDiagram mobileOnlyDiagram" aria-label="Collas monoid geometry split">
+          <div class="flowStep"><strong>Ring structure</strong><p>The ordinary object packages addition and multiplication together.</p></div>
+          <div class="flowStep"><strong>Multiplicative monoid</strong><p>The Frobenius-like side retains multiplicative transport data.</p></div>
+          <div class="flowStep"><strong>Additive monoid</strong><p>The logarithmic side carries additive comparison data.</p></div>
+          <div class="flowStep"><strong>IUT comparison</strong><p>Indeterminacies and containers control the comparison without pretending one ring history survived unchanged.</p></div>
+        </div>
+        <div class="callout">
+          Collas' point matches the IUT source route through Frobenioids, Kummer
+          theory, theta links, log links, and indeterminacies. It should not be read
+          as saying that IUT forgets ring structures without replacement.
+        </div>
+        <div class="related">
+          Source: <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview, §2.2</a>
+          Related: <a href="#frobenioid-standard-model-page">Frobenioid standard model</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#collas-non-ring-dilation-page">non-ring dilation</a>
+        </div>
+      </section>
+
+      <section id="collas-diophantine-categorification-page" data-filter="collas categorification diophantine problem height inequality global multiplicative subspace hodge theaters">
+        <h2>Collas: Diophantine Categorification</h2>
+        <p class="lede">
+          Collas describes IUT as categorifying a Diophantine height problem. The
+          desired comparison is not made by constructing one ordinary global
+          multiplicative subspace, but by replacing that missing object with Hodge
+          theater and Frobenioid containers.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Collas reading</th><th>IUT wiki target</th></tr>
+          <tr>
+            <td>Diophantine</td>
+            <td>Height estimates for elliptic-curve data motivate the construction.</td>
+            <td><a href="#iut-iv-theorem-a-page">IUT IV Diophantine output</a></td>
+          </tr>
+          <tr>
+            <td>Categorical</td>
+            <td>Hodge theaters simulate the unavailable global multiplicative subspace.</td>
+            <td><a href="#hodge-theaters">Hodge theaters</a></td>
+          </tr>
+          <tr>
+            <td>Comparison</td>
+            <td>The log-theta lattice supplies the route to theta/q-pilot comparison.</td>
+            <td><a href="#corollary-312">Corollary 3.12</a></td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview, §3.1</a>
+          Related: <a href="#collas-local-global-gms-page">local/global GMS</a>
+          <a href="#collas-hodge-synchronization-page">Hodge synchronization</a>
+          <a href="#iut-iii-ab-pipeline-page">IUT III A/B pipeline</a>
+        </div>
+      </section>
+
+      <section id="collas-local-global-gms-page" data-filter="collas local global multiplicative subspace gms ell torsion obstruction hodge theater simulation">
+        <h2>Collas: Local/Global GMS Obstruction</h2>
+        <p class="lede">
+          In Collas' account, a key obstruction is that the relevant
+          <span class="math">ell</span>-torsion multiplicative subspaces exist locally
+          at suitable places, but not as a single global multiplicative subspace over
+          the number field. IUT replaces this unavailable object by synchronized
+          Hodge-theater data.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep"><strong>Local data</strong><p>At selected local places, multiplicative subspaces attached to elliptic data are available.</p></div>
+          <div class="flowStep"><strong>Global obstruction</strong><p>These local pieces do not generally glue into the needed global subspace.</p></div>
+          <div class="flowStep"><strong>IUT replacement</strong><p>Theater containers and links encode the comparison without postulating the missing global object.</p></div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview, §3.1</a>
+          Related: <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
+          <a href="#theta-hodge-theater-definition-iut-i36">theta-Hodge theater</a>
+          <a href="#collas-diophantine-categorification-page">Diophantine categorification</a>
+        </div>
+      </section>
+
+      <section id="collas-non-ring-dilation-page" data-filter="collas non ring dilation theta link q to q j squared frobenius like not ring homomorphism">
+        <h2>Collas: Non-Ring Dilation</h2>
+        <p class="lede">
+          Collas presents the theta-side dilation as Frobenius-like on the
+          multiplicative side, for example through the Tate parameter pattern
+          <span class="math">q_E -> q_E^(j^2)</span>. The operation is not compatible
+          with a single fixed additive ring structure.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>What survives</h3>
+            <p>The multiplicative/Frobenius-like reading of the theta link is retained and becomes the useful transport route.</p>
+          </div>
+          <div class="card">
+            <h3>What fails</h3>
+            <p>The same move is not a ring homomorphism for one fixed ring history, so additive information must be handled through log-shell and link machinery.</p>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview, §3.1.1</a>
+          Related: <a href="#theta-links-cor37">theta links 3.7</a>
+          <a href="#theta-values-q-j-squared-intro-ii">theta values q^j^2</a>
+          <a href="#collas-monoid-geometry-page">monoid geometry</a>
+        </div>
+      </section>
+
+      <section id="collas-basepoints-log-shells-page" data-filter="collas basepoints log shells multiple base points theta link log link common container mono anabelian">
+        <h2>Collas: Basepoints and Log-Shells</h2>
+        <p class="lede">
+          Collas stresses that multiple basepoints and log-shell containers are not
+          cosmetic. They record the fact that theta and log links compare structures
+          across distinct ring histories while retaining enough common mono-analytic
+          information for controlled comparison.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Theater labels</h3>
+            <p>Labels such as source and target theaters remember that isomorphic copies are not identified as one ringed object.</p>
+          </div>
+          <div class="card">
+            <h3>Log-shell container</h3>
+            <p>The log-shell supplies a common place to compare multiplicative and additive readings after logarithmic transport.</p>
+          </div>
+          <div class="card">
+            <h3>Formalization cue</h3>
+            <p>Lean records should keep labels, source histories, and allowed indeterminacies visible instead of quotienting them away too early.</p>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/collas-anabelian-arithmetic-geometry-iut.pdf" target="_blank">Collas overview, §3.1.1</a>
+          Related: <a href="#basepoints-inter-universality">basepoints</a>
+          <a href="#abs-anabelian-log-shells-page">log-shell properties</a>
+          <a href="#collas-log-theta-wandering-page">log-theta wandering</a>
         </div>
       </section>
 
