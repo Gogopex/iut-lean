@@ -200,7 +200,6 @@
     section {
       display: none;
       padding: 30px 0 42px;
-      border-bottom: 1px solid var(--line);
       scroll-margin-top: 14px;
     }
     section[hidden] { display: none !important; }
@@ -967,8 +966,15 @@
         <a href="#weakened-link-domain-49">Weakened link domain 4.9</a>
         <a href="#f-times-mu-to-theta-links-49">F×μ to theta links 4.9</a>
         <a href="#theta-times-mu-frobenius-pictures-ii410">Theta×μ Frobenius-pictures 4.10</a>
+        <a href="#constant-prime-strips-410">Constant F_△ 4.10</a>
+        <a href="#theta-gaussian-prime-strips-410">Theta/Gaussian prime-strips</a>
         <a href="#theta-xmu-links-ii410">Theta×μ links 4.10</a>
+        <a href="#coric-fperp-times-mu-invariant-410">Coric F⊢×μ invariant</a>
+        <a href="#d-theta-nf-link-410">D-Theta±ellNF link</a>
+        <a href="#coric-realified-frobenioids-410">Coric realified Frobenioids</a>
         <a href="#frobenius-picture-chain-ii410">Frobenius-picture chain 4.10</a>
+        <a href="#theta-gau-multiradiality-4102">Theta×μ_gau multiradiality</a>
+        <a href="#value-group-distortion-410">Value-group distortion 4.10</a>
         <a href="#d-theta-etale-pictures-ii411">D-Theta etale-pictures 4.11</a>
         <a href="#line-bundle-log-wall-juggling-ii4113">Line-bundle log-wall juggling 4.11.3</a>
         <a href="#teichmuller-analogy-ii4114">Teichmuller analogy 4.11.4</a>
@@ -2096,7 +2102,7 @@
               <a href="#theta-xmu-links-ii410">Theta×μ links 4.10</a>,
               <a href="#frobenius-picture-chain-ii410">Frobenius-picture chain page 4.10</a>,
               <a href="#coric-fperp-times-mu-invariant-410">coric F⊢×μ invariant</a>,
-              <a href="#frobenius-picture-chain-410">Frobenius-picture chain</a>,
+              <a href="#frobenius-picture-chain-ii410">Frobenius-picture chain</a>,
               <a href="#d-theta-etale-pictures-ii411">D-Theta etale-pictures</a>,
               <a href="#line-bundle-log-wall-juggling-ii4113">line-bundle log-wall juggling 4.11.3</a>,
               <a href="#teichmuller-analogy-ii4114">Teichmuller analogy 4.11.4</a>,
@@ -31324,11 +31330,12 @@
           <tr>
             <td><span class="math">Psi_Fenv(HT_Theta)</span></td>
             <td>Valuationwise <span class="math">Psi_FTheta_v</span>.</td>
-            <td rowspan="2">Ordinary chain: <span class="math">Psi_Fenv -> Psi_env(D>) -> Psi_gau(D>) -> Psi_Fgau</span>.</td>
+            <td>Begins the ordinary chain through D-side theta monoids.</td>
           </tr>
           <tr>
             <td><span class="math">Psi_Fgau(HT_Theta)</span></td>
             <td>Valuationwise <span class="math">Psi_Fgau(F_v)</span>.</td>
+            <td>Completes the ordinary chain <span class="math">Psi_Fenv -> Psi_env(D>) -> Psi_gau(D>) -> Psi_Fgau</span>.</td>
           </tr>
           <tr>
             <td>Infinity versions</td>
@@ -33934,7 +33941,7 @@
           </tr>
         </table>
         <div class="grid3">
-          <div class="card" id="constant-prime-strips-410">
+          <div class="card" id="constant-prime-strips-410-card">
             <h3>Constant F_△</h3>
             <p>
               The constant prime-strip is built from
@@ -33944,7 +33951,7 @@
             </p>
             <div class="tagRow"><span class="tag blue">Cor. 4.10(i)</span><span class="tag">Fmod</span></div>
           </div>
-          <div class="card" id="theta-gaussian-prime-strips-410">
+          <div class="card" id="theta-gaussian-prime-strips-410-card">
             <h3>Theta and Gaussian prime-strips</h3>
             <p>
               <span class="math">F_env</span> comes from theta-environment monoids;
@@ -33954,7 +33961,7 @@
             </p>
             <div class="tagRow"><span class="tag green">Cor. 4.10(ii)</span><span class="tag">evaluation</span></div>
           </div>
-          <div class="card" id="theta-xmu-links-410">
+          <div class="card" id="theta-xmu-links-410-card">
             <h3>Modified theta links</h3>
             <p>
               The <span class="math">Theta×μ</span> link is
@@ -33963,7 +33970,7 @@
             </p>
             <div class="tagRow"><span class="tag violet">Cor. 4.10(iii)</span><span class="tag">full poly-isomorphism</span></div>
           </div>
-          <div class="card" id="coric-fperp-times-mu-invariant-410">
+          <div class="card" id="coric-fperp-times-mu-invariant-410-card">
             <h3>Coric F⊢×μ invariant</h3>
             <p>
               The common <span class="math">F⊢×μ_△</span> portion is invariant
@@ -33972,7 +33979,7 @@
             </p>
             <div class="tagRow"><span class="tag green">Cor. 4.10(iv)</span><span class="tag">coric</span></div>
           </div>
-          <div class="card" id="d-theta-nf-link-410">
+          <div class="card" id="d-theta-nf-link-410-card">
             <h3>D-Theta±ellNF link</h3>
             <p>
               The preserved <span class="math">F⊢×μ_△</span> data induces the full
@@ -33981,7 +33988,7 @@
             </p>
             <div class="tagRow"><span class="tag blue">Cor. 4.10(iv)</span><span class="tag">D-side</span></div>
           </div>
-          <div class="card" id="coric-realified-frobenioids-410">
+          <div class="card" id="coric-realified-frobenioids-410-card">
             <h3>Coric realified Frobenioids</h3>
             <p>
               Corollary 4.10(v) transports global realified Frobenioid collections
@@ -33990,7 +33997,7 @@
             </p>
             <div class="tagRow"><span class="tag gold">Cor. 4.10(v)</span><span class="tag">realified</span></div>
           </div>
-          <div class="card" id="frobenius-picture-chain-410">
+          <div class="card" id="frobenius-picture-chain-410-card">
             <h3>Frobenius-picture chain</h3>
             <p>
               Iterating the modified theta links gives an oriented integer-indexed
@@ -33999,7 +34006,7 @@
             </p>
             <div class="tagRow"><span class="tag red">Cor. 4.10(vi)</span><span class="tag">oriented</span></div>
           </div>
-          <div class="card" id="theta-gau-multiradiality-4102">
+          <div class="card" id="theta-gau-multiradiality-4102-card">
             <h3>Why keep Theta×μ before Gaussian evaluation</h3>
             <p>
               Remark 4.10.2 says the later focus is the Gaussian link, but
@@ -34008,7 +34015,7 @@
             </p>
             <div class="tagRow"><span class="tag violet">Rem. 4.10.2</span><span class="tag">multiradial</span></div>
           </div>
-          <div class="card" id="value-group-distortion-410">
+          <div class="card" id="value-group-distortion-410-card">
             <h3>Value-group distortion</h3>
             <p>
               Remark 4.10.3 says divisor/value-group data is not preserved by the
@@ -34031,6 +34038,253 @@
           <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
           <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
           <a href="#theta-log-links">theta/log links</a>
+        </div>
+      </section>
+
+      <section id="constant-prime-strips-410">
+        <h2>IUT II 4.10(i): Constant F_△ Prime-Strip</h2>
+        <p class="lede">
+          Corollary 4.10(i) constructs the constant/model prime-strip
+          <span class="math">F_△</span> from the constant monoid data of the underlying
+          <span class="math">Theta±ell</span>-Hodge theater. The zero-label and
+          diagonal-label constant data are identified before forming the prime-strip.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Construction</th><th>Source statement</th><th>Role</th></tr>
+          <tr>
+            <td>Label input</td>
+            <td><span class="math">Psi_cns(F^≻)_t</span> for <span class="math">t in LabCusp^±(D^≻)</span>.</td>
+            <td>Uses the globally synchronized constant data from Corollary 4.6.</td>
+          </tr>
+          <tr>
+            <td>Zero/diagonal identification</td>
+            <td>Identify <span class="math">Psi_cns(F^≻)_0</span> with the <span class="math">F_l</span>-diagonal constant data.</td>
+            <td>Produces the constant prime-strip target of the modified theta links.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F_△ -> Fmod</span></td>
+            <td>Natural identification with the model prime-strip of the underlying theta-Hodge theater.</td>
+            <td>Connects the modified link target to the familiar mod-side object.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 4.10(i)</a>
+          Related: <a href="#global-fpm-synchronization-453">global F_l± synchronization</a>
+          <a href="#f-times-mu-to-theta-links-49">F×μ to theta links</a>
+          <a href="#theta-xmu-links-ii410">Theta×μ links</a>
+        </div>
+      </section>
+
+      <section id="theta-gaussian-prime-strips-410">
+        <h2>IUT II 4.10(ii): Theta and Gaussian Prime-Strips</h2>
+        <p class="lede">
+          Corollary 4.10(ii) constructs <span class="math">F_env</span> from the
+          theta-environment monoids and <span class="math">F_gau</span> from the
+          Gaussian monoids. The evaluation isomorphisms of Corollary 4.6 induce an
+          isomorphism of these F-prime-strips before the <span class="math">F×μ</span>
+          upgrade is applied.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Prime-strip</th><th>Source data</th><th>Identification</th></tr>
+          <tr>
+            <td><span class="math">F_env</span></td>
+            <td><span class="math">Psi_Fenv</span>, <span class="math">Cenv</span>, and local realified monoid maps.</td>
+            <td>Naturally identified with the theta prime-strip <span class="math">Ftht</span>.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F_gau</span></td>
+            <td><span class="math">Psi_Fgau</span>, <span class="math">Cgau</span>, and local realified monoid maps.</td>
+            <td>Receives the formal Gaussian evaluation from <span class="math">F_env</span>.</td>
+          </tr>
+          <tr>
+            <td>Evaluation</td>
+            <td><span class="math">F_env -> F_gau</span>.</td>
+            <td>Feeds the relation between <span class="math">Theta×μ</span> and <span class="math">Theta×μ_gau</span>.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 4.10(ii)</a>
+          Related: <a href="#theta-bridge-f-gaussian-46">Theta-bridge F-Gaussians</a>
+          <a href="#cenv-cgau-global-frobenioids-46">Cenv/Cgau</a>
+          <a href="#theta-xmu-links-ii410">Theta×μ links</a>
+        </div>
+      </section>
+
+      <section id="coric-fperp-times-mu-invariant-410">
+        <h2>IUT II 4.10(iv): Coric F⊢×μ Invariant</h2>
+        <p class="lede">
+          Corollary 4.10(iv) states that the unit portions of the constant, theta, and
+          Gaussian monoids yield natural isomorphisms
+          <span class="math">F⊢×μ_△ -> F⊢×μ_env -> F⊢×μ_gau</span>. After composing
+          with the modified theta links, the common
+          <span class="math">F⊢×μ_△</span> portion is invariant.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Invariant</th><th>Construction</th><th>Why it matters</th></tr>
+          <tr>
+            <td><span class="math">F⊢×μ_△</span></td>
+            <td>Common unit/coric weakened prime-strip portion.</td>
+            <td>Survives both <span class="math">Theta×μ</span> and <span class="math">Theta×μ_gau</span> links.</td>
+          </tr>
+          <tr>
+            <td>Link-induced poly-isomorphism</td>
+            <td><span class="math">F⊢×μ_△(source) -> F⊢×μ_△(target)</span>.</td>
+            <td>Coincides with the full poly-isomorphism of these weakened prime-strips.</td>
+          </tr>
+          <tr>
+            <td>Associated D-data</td>
+            <td>Induces <span class="math">D⊢_△(source) -> D⊢_△(target)</span>.</td>
+            <td>Defines the D-Theta±ellNF link.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 4.10(iv)</a>
+          Related: <a href="#weakened-link-domain-49">weakened link domain</a>
+          <a href="#d-theta-nf-link-410">D-Theta±ellNF link</a>
+          <a href="#value-group-distortion-410">value-group distortion</a>
+        </div>
+      </section>
+
+      <section id="d-theta-nf-link-410">
+        <h2>IUT II 4.10(iv): D-Theta±ellNF Link</h2>
+        <p class="lede">
+          The invariant <span class="math">F⊢×μ_△</span> data of Corollary 4.10(iv)
+          induces a full poly-isomorphism of associated
+          <span class="math">D⊢_△</span>-prime-strips. Mochizuki calls this the
+          D-Theta±ellNF-link between the associated D-Hodge theaters.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source</th><th>Target</th><th>Function</th></tr>
+          <tr>
+            <td>F-side invariant</td>
+            <td><span class="math">F⊢×μ_△</span> full poly-isomorphism.</td>
+            <td>Provides the preserved coric unit/Kummer interface.</td>
+          </tr>
+          <tr>
+            <td>D-side associated prime-strip</td>
+            <td><span class="math">D⊢_△</span> full poly-isomorphism.</td>
+            <td>Transfers the preserved data to the D-side.</td>
+          </tr>
+          <tr>
+            <td>Named link</td>
+            <td>D-Theta±ellNF-link.</td>
+            <td>Feeds the etale-picture comparison in Corollary 4.11.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 4.10(iv)</a>
+          Related: <a href="#coric-fperp-times-mu-invariant-410">coric F⊢×μ invariant</a>
+          <a href="#d-theta-etale-pictures-ii411">D-Theta etale-pictures</a>
+          <a href="#coric-realified-frobenioids-410">coric realified Frobenioids</a>
+        </div>
+      </section>
+
+      <section id="coric-realified-frobenioids-410">
+        <h2>IUT II 4.10(v): Coric Global Realified Frobenioids</h2>
+        <p class="lede">
+          Corollary 4.10(v) applies the preserved <span class="math">D⊢_△</span>
+          data to global realified Frobenioids. The resulting isomorphism preserves
+          the Frobenioid, the prime bijection with <span class="math">V</span>, and
+          the local topological monoid maps, modulo the expected
+          <span class="math">R&gt;0</span>-orbits of arithmetic-degree scaling.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Data</th><th>Preserved structure</th><th>Indeterminacy</th></tr>
+          <tr>
+            <td><span class="math">D(D⊢_△)</span></td>
+            <td>Global realified Frobenioid.</td>
+            <td>Compared through the preserved <span class="math">D⊢_△</span> data.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Prime(D(D⊢_△)) -> V</span></td>
+            <td>Valuation-indexed prime bijection.</td>
+            <td>Kept compatible with the Frobenioid isomorphism.</td>
+          </tr>
+          <tr>
+            <td><span class="math">rho_D,v</span></td>
+            <td>Local topological monoid isomorphisms.</td>
+            <td>All three layers are considered modulo <span class="math">R&gt;0</span>-orbits of arithmetic-degree scaling.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Corollary 4.10(v)</a>
+          Related: <a href="#d-theta-nf-link-410">D-Theta±ellNF link</a>
+          <a href="#global-semi-simplifications-45">global semi-simplifications</a>
+          <a href="#d-theta-etale-pictures-ii411">D-Theta etale-pictures</a>
+        </div>
+      </section>
+
+      <section id="theta-gau-multiradiality-4102">
+        <h2>IUT II Remark 4.10.2: Why Θ×μ Comes Before Gaussian Evaluation</h2>
+        <p class="lede">
+          Remark 4.10.2 says the later theory mainly uses the
+          <span class="math">Theta×μ_gau</span> link, but the fact that it is
+          constructed as the <span class="math">Theta×μ</span> link followed by Galois
+          evaluation is essential for the multiradiality properties used in IUT III
+          Theorem 3.11.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Link</th><th>Meaning</th><th>Reason retained</th></tr>
+          <tr>
+            <td><span class="math">Theta×μ</span></td>
+            <td>Modified theta link before Gaussian evaluation.</td>
+            <td>Displays the construction route needed for multiradiality.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Theta×μ_gau</span></td>
+            <td>Gaussian link obtained through evaluation.</td>
+            <td>Later central link for the log-volume comparison.</td>
+          </tr>
+          <tr>
+            <td>Bad-place warning</td>
+            <td>Constant-monoid splittings do not arise from Galois evaluation.</td>
+            <td>They do not admit the same natural multiradial formulation as theta monoids.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 4.10.2</a>
+          Related: <a href="#theta-xmu-links-ii410">Theta×μ links</a>
+          <a href="#theorem-311-lgp-algorithms">Theorem 3.11</a>
+          <a href="#value-group-distortion-410">value-group distortion</a>
+        </div>
+      </section>
+
+      <section id="value-group-distortion-410">
+        <h2>IUT II Remark 4.10.3: Value-Group Distortion</h2>
+        <p class="lede">
+          Remark 4.10.3 separates what is preserved from what is intentionally not
+          preserved. The unit/coric <span class="math">F⊢×μ</span> and associated
+          <span class="math">D⊢</span> data are preserved; the divisor/value-group
+          portion is not preserved by the modified theta links.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Part</th><th>Status under links</th><th>Interpretation</th></tr>
+          <tr>
+            <td>Units modulo torsion</td>
+            <td>Coric/preserved.</td>
+            <td>Used later through the log-wall to compare volumes.</td>
+          </tr>
+          <tr>
+            <td>Divisor/value group</td>
+            <td>Not preserved.</td>
+            <td>Behaves like a Frobenius morphism or arithmetic Teichmuller deformation.</td>
+          </tr>
+          <tr>
+            <td><span class="math">j = 1</span> restriction</td>
+            <td>Looks like the identity at the pivotal distribution level.</td>
+            <td>But restriction to proper label subsets generally violates the crucial symmetries.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          This page is central for the disputed corridor: the theory is not claiming
+          full preservation across the link. The distortion is the intended arithmetic
+          deformation whose volume effect is computed later.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 4.10.3</a>
+          Related: <a href="#coric-fperp-times-mu-invariant-410">coric F⊢×μ invariant</a>
+          <a href="#theta-gau-multiradiality-4102">Theta×μ_gau multiradiality</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
         </div>
       </section>
 
