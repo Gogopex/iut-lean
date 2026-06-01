@@ -1350,12 +1350,20 @@
         <a class="subLink" href="#fixed-reference-model-coricity-iii125">Reference-model coricity 1.2.5</a>
         <a href="#log-shell-variants-prop12-iii">Log-shell variants 1.2</a>
         <a href="#hodge-theater-log-link">Hodge-theater log-link 1.3</a>
+        <a class="subLink" href="#theta-pm-single-xi-loglink-iii131">Single-Xi log-link 1.3.1</a>
+        <a class="subLink" href="#theta-pm-flpm-loglink-compat-iii132">F_l± log-link compatibility</a>
+        <a class="subLink" href="#d-theater-control-loglink-iii133">D-theater control 1.3.3</a>
         <a href="#gaussian-log-theta-lattice-source">Gaussian log-theta lattice 1.4</a>
+        <a class="subLink" href="#horizontal-vertical-obligation-iii141">Horizontal/vertical obligation</a>
+        <a class="subLink" href="#forcing-horizontal-paths-iii142">Forced horizontal paths</a>
         <a href="#vertical-horizontal-coricity">Vertical/horizontal coricity 1.5</a>
         <a class="subLink" href="#bicoric-f-perp-times-mu-prime-strips">Bi-coric F⊢×μ prime-strips</a>
         <a class="subLink" href="#bicoric-monoanalytic-log-shells">Bi-coric log-shells</a>
         <a class="subLink" href="#bicoric-realified-frobenioids">Bi-coric realified Frobenioids</a>
         <a class="subLink" href="#bi-cores-log-theta-lattice-iii15">Bi-cores 1.5</a>
+        <a class="subLink" href="#diagonal-conjugacy-no-go-iii151">Diagonal-conjugacy no-go</a>
+        <a class="subLink" href="#no-bicoric-fsol-containers-iii152">No bi-coric F_sol</a>
+        <a class="subLink" href="#kummer-detachment-etale-transport-iii154">Kummer/etale indeterminacy</a>
         <a href="#essential-logical-structure">Logical structure</a>
         <a href="#esslgc-limits-integration-21">Logic 2.1 limits/integration</a>
         <a href="#esslgc-derivative-integral-22">Logic 2.2 derivative/integral</a>
@@ -45991,6 +45999,176 @@
         </div>
       </section>
 
+      <section id="theta-pm-single-xi-loglink-iii131" data-filter="iut iii remark 1.3.1 single Xi log link plus minus synchronization poly isomorphism">
+        <h2>IUT III Remark 1.3.1: Single-Xi Log-Link Construction</h2>
+        <p class="lede">
+          Remark 1.3.1 says that Proposition 1.3 must first construct the log-link
+          from a single isomorphism <span class="math">Xi</span> of associated
+          D-Theta±ellNF-Hodge theaters, before replacing <span class="math">Xi</span>
+          by a poly-isomorphism. The reason is plus-minus synchronization in the
+          underlying Theta±ell-Hodge theater.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Stage</th><th>Source instruction</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Single isomorphism</td>
+            <td>Build the theater log-link for one fixed <span class="math">Xi</span>.</td>
+            <td>The synchronized plus/minus labels are still controlled by one chosen D-side comparison.</td>
+          </tr>
+          <tr>
+            <td>Poly-isomorphism</td>
+            <td>Only after the single-isomorphism construction, range over constituent isomorphisms of a poly-isomorphism.</td>
+            <td>A formal record should not start with an unordered bag of local log-links.</td>
+          </tr>
+          <tr>
+            <td>Guardrail</td>
+            <td>The order of construction protects the plus-minus synchronization cited from IUT I and IUT II.</td>
+            <td>This is a source-level reason for representing theater-level log-links as structured data, not merely as independent local links.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 1.3.1</a>
+          Related: <a href="#hodge-theater-log-link">Hodge-theater log-link</a>
+          <a href="#theta-pmell-isomorphism-rigidity-iut-i612">Theta±ell rigidity</a>
+          <a href="#pmellnf-basepoint-relay-iut-i6126">basepoint relay</a>
+        </div>
+      </section>
+
+      <section id="theta-pm-flpm-loglink-compat-iii132" data-filter="iut iii remark 1.3.2 fl plus minus symmetrizing isomorphisms log links conjugate synchronization labeled monoids">
+        <h2>IUT III Remark 1.3.2: F_l± Compatibility of Log-Links</h2>
+        <p class="lede">
+          Remark 1.3.2 records that the constituent F-prime-strips of the capsule
+          <span class="math">F_T</span> are initially treated without using the
+          <span class="math">F_l^{±}</span>-symmetry, but the resulting log-links are
+          compatible with the <span class="math">F_l^{±}</span>-symmetrizing
+          isomorphisms and the conjugate synchronization they determine.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Source statement</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Constituent <span class="math">F_t</span></td>
+            <td>The construction of Proposition 1.3(i) considers each constituent F-prime-strip first.</td>
+            <td>The local link is not obtained by quotienting away label information in advance.</td>
+          </tr>
+          <tr>
+            <td>Labeled monoids</td>
+            <td>The associated labeled monoid collections are compatible with the <span class="math">F_l^{±}</span>-symmetrizing isomorphisms.</td>
+            <td>The source ties the log-link to IUT II conjugate synchronization rather than treating it as free extra structure.</td>
+          </tr>
+          <tr>
+            <td>Corollary 3.12 proof</td>
+            <td>Mochizuki explicitly points forward to Step (vi) of the proof of Corollary 3.12.</td>
+            <td>This page is a dependency edge from Section 1 log-link construction into the disputed corridor.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 1.3.2</a>
+          Related: <a href="#conjugate-synchronization-intro-ii">IUT II conjugate synchronization</a>
+          <a href="#conjugate-synchronization-units-4112">unit synchronization</a>
+          <a href="#corollary-312-proof-steps">Corollary 3.12 proof steps</a>
+        </div>
+      </section>
+
+      <section id="d-theater-control-loglink-iii133" data-filter="iut iii remark 1.3.3 d theater control frobenioid portions no ring scheme incompatible data basepoints plus minus synchronization">
+        <h2>IUT III Remark 1.3.3: D-Theater Control of Frobenioid Portions</h2>
+        <p class="lede">
+          Remark 1.3.3 explains why the Frobenioid-theoretic portions of the
+          Theta±ellNF-Hodge theaters in Proposition 1.3 do not introduce the
+          ring/scheme incompatibility described in Remark 1.2.4. The claim is that
+          these portions are fully faithfully controlled by the associated etale-like
+          D-Theta±ellNF-Hodge theater structures.
+        </p>
+        <div class="diagram fit desktopOnlyDiagram" aria-label="D-theater control of Frobenioid portions">
+          <div class="diagramHeader">
+            <strong>Remark 1.3.3 control statement</strong>
+            <span>Frobenioid portions are governed through the D-theater spine</span>
+          </div>
+          <svg viewBox="0 0 1120 460" role="img">
+            <defs>
+              <marker id="arrowDTheaterControl133" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="64" y="76" width="250" height="96"></rect>
+            <text class="nodeTitle" x="189" y="108" text-anchor="middle">domain theater</text>
+            <text class="tinyText" x="189" y="132" text-anchor="middle">Frobenioid portions</text>
+            <text class="tinyText" x="189" y="150" text-anchor="middle">with independent basepoints</text>
+
+            <rect class="nodeBox green" x="434" y="76" width="250" height="96"></rect>
+            <text class="nodeTitle" x="559" y="108" text-anchor="middle">D-theater spine</text>
+            <text class="tinyText" x="559" y="132" text-anchor="middle">etale-like coric structure</text>
+            <text class="tinyText" x="559" y="150" text-anchor="middle">full faithful control</text>
+
+            <rect class="nodeBox blue" x="804" y="76" width="250" height="96"></rect>
+            <text class="nodeTitle" x="929" y="108" text-anchor="middle">codomain theater</text>
+            <text class="tinyText" x="929" y="132" text-anchor="middle">corresponding portions</text>
+            <text class="tinyText" x="929" y="150" text-anchor="middle">not scheme-linked</text>
+
+            <rect class="nodeBox red" x="228" y="286" width="300" height="88"></rect>
+            <text class="nodeTitle" x="378" y="318" text-anchor="middle">excluded relationship</text>
+            <text class="tinyText" x="378" y="342" text-anchor="middle">ring/scheme data of Remark 1.2.4</text>
+            <text class="tinyText" x="378" y="360" text-anchor="middle">not part of the log-link</text>
+
+            <rect class="nodeBox violet" x="610" y="286" width="300" height="88"></rect>
+            <text class="nodeTitle" x="760" y="318" text-anchor="middle">delicate portion</text>
+            <text class="tinyText" x="760" y="342" text-anchor="middle">Theta±ell F-prime-strips</text>
+            <text class="tinyText" x="760" y="360" text-anchor="middle">handled intrinsically by D-Theta±ell</text>
+
+            <path class="edge blue" d="M316 124 H432" marker-end="url(#arrowDTheaterControl133)"></path>
+            <path class="edge green" d="M686 124 H802" marker-end="url(#arrowDTheaterControl133)"></path>
+            <path class="edge red" d="M435 206 C400 236 386 256 382 284" marker-end="url(#arrowDTheaterControl133)"></path>
+            <path class="edge violet" d="M684 206 C724 236 746 256 756 284" marker-end="url(#arrowDTheaterControl133)"></path>
+          </svg>
+        </div>
+        <div class="flowDiagram mobileOnlyDiagram" aria-label="D-theater control mobile summary">
+          <div class="flowStep">
+            <strong>Domain/codomain theaters</strong>
+            <p>
+              Frobenioid portions occur on both sides of the theater log-link, but are
+              not connected by scheme-theoretic data of the kind excluded in Remark 1.2.4.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>D-theater spine</strong>
+            <p>
+              The associated D-Theta±ellNF-Hodge theater gives the etale-like coric
+              structure that fully faithfully controls these portions.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Delicate plus-minus part</strong>
+            <p>
+              The underlying Theta±ell F-prime-strips are handled by intrinsic
+              D-Theta±ell structure, preserving plus-minus synchronization.
+            </p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Portion</th><th>Source treatment</th><th>Audit consequence</th></tr>
+          <tr>
+            <td>Global Thetaell bridge</td>
+            <td>Its global portion contains no global Frobenioid-theoretic data.</td>
+            <td>Do not invent a global Frobenioid comparison for this bridge.</td>
+          </tr>
+          <tr>
+            <td>NF-bridge global data</td>
+            <td>May have independent basepoints under <span class="math">F_l</span>-symmetry.</td>
+            <td>Basepoint independence is tracked, not erased.</td>
+          </tr>
+          <tr>
+            <td>Underlying Theta±ell portion</td>
+            <td>The delicate plus-minus synchronization is defined via intrinsic D-Theta±ell structure.</td>
+            <td>The coric D-side control is the reason the log-link avoids the Remark 1.2.4 incompatibility.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 1.3.3</a>
+          Related: <a href="#log-wall-ring-incompatibility-iii124">log-wall ring incompatibility</a>
+          <a href="#fixed-reference-model-coricity-iii125">reference-model coricity</a>
+          <a href="#theta-pm-single-xi-loglink-iii131">single-Xi construction</a>
+        </div>
+      </section>
+
       <section id="gaussian-log-theta-lattice-source">
         <h2>IUT III Definition 1.4: Gaussian Log-Theta Lattice</h2>
         <p class="lede">
@@ -46024,6 +46202,79 @@
           Related: <a href="#theta-xmu-links-ii410">Theta×μ links</a>
           <a href="#theta-gau-multiradiality-4102">Theta×μ_gau multiradiality</a>
           <a href="#bi-cores-log-theta-lattice-iii15">bi-cores</a>
+        </div>
+      </section>
+
+      <section id="horizontal-vertical-obligation-iii141" data-filter="iut iii remark 1.4.1 horizontal arrow obligates vertical arrow log shells vertical cores noncommutative squares">
+        <h2>IUT III Remark 1.4.1: Horizontal Arrows Obligate Vertical Arrows</h2>
+        <p class="lede">
+          Remark 1.4.1 says that log-theta-lattice squares are far from commutative.
+          Horizontal theta motion is incompatible with the local ring structures used
+          by vertical logarithms; after a horizontal arrow, the theory of log-shells
+          requires operating in a theater that is the codomain of a vertical log-link.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Move</th><th>Source content</th><th>Consequence</th></tr>
+          <tr>
+            <td>Vertical log-link</td>
+            <td>Uses local logarithms defined through local ring structures.</td>
+            <td>Vertical motion is where log-shell access is created.</td>
+          </tr>
+          <tr>
+            <td>Horizontal theta-link</td>
+            <td>Identifies unit-type data but is essentially incompatible with those local ring structures.</td>
+            <td>Horizontal motion alone is not enough for the later multiradial representation.</td>
+          </tr>
+          <tr>
+            <td>Obligation</td>
+            <td>Each horizontal execution obligates a subsequent vertical execution.</td>
+            <td>The relevant common objects must be vertical cores, not arbitrary objects in a square.</td>
+          </tr>
+        </table>
+        <div class="callout violet">
+          This is one of the local source reasons the wiki treats the log-theta lattice
+          as a noncommutative two-dimensional apparatus rather than a commutative grid.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 1.4.1</a>
+          Related: <a href="#gaussian-log-theta-lattice-source">Gaussian log-theta lattice</a>
+          <a href="#lattice-arrow-dependence-38">later arrow-dependence page</a>
+          <a href="#vertical-horizontal-coricity">vertical/horizontal coricity</a>
+        </div>
+      </section>
+
+      <section id="forcing-horizontal-paths-iii142" data-filter="iut iii remark 1.4.2 force horizontal arrows Pi_v Z times indeterminacy path bookkeeping universal covering loops">
+        <h2>IUT III Remark 1.4.2: Why Forced Horizontal Compatibility Does Not Simplify</h2>
+        <p class="lede">
+          Remark 1.4.2 considers a tempting simplification: force horizontal theta
+          arrows to be compatible with arithmetic holomorphic structures by declaring
+          isomorphisms of the corresponding <span class="math">Pi_v</span>'s. Mochizuki's
+          answer is that the <span class="math">Z^x</span>-indeterminacy acting on
+          <span class="math">O^{x,mu}</span> immediately reintroduces path bookkeeping.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Attempt</th><th>Failure mode</th><th>Source interpretation</th></tr>
+          <tr>
+            <td>Rigidify horizontally by <span class="math">Pi_v</span></td>
+            <td>One must still track each nontrivial <span class="math">Z^x</span> action on <span class="math">O^{x,mu}</span>.</td>
+            <td>The common holomorphic structure is obliterated whenever the indeterminacy is applied.</td>
+          </tr>
+          <tr>
+            <td>Record operation histories</td>
+            <td>The bookkeeping becomes paths alternating between rigidification and indeterminacy operations.</td>
+            <td>The horizontal lines of the log-theta lattice already serve as universal covers of these loops.</td>
+          </tr>
+          <tr>
+            <td>Claimed simplification</td>
+            <td>No substantive simplification results.</td>
+            <td>The lattice apparatus is not avoidable by forcing scheme-style compatibility on horizontal arrows.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 1.4.2</a>
+          Related: <a href="#horizontal-vertical-obligation-iii141">horizontal/vertical obligation</a>
+          <a href="#iut-iv-ring-incompatibility-363">IUT IV ring incompatibility</a>
+          <a href="#alien-closed-loops-3115">closed-loop analogy</a>
         </div>
       </section>
 
@@ -46162,6 +46413,174 @@
           Related: <a href="#coric-realified-frobenioids-410">coric realified Frobenioids</a>
           <a href="#conjugate-synchronization-units-4112">conjugate synchronization</a>
           <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
+        </div>
+      </section>
+
+      <section id="diagonal-conjugacy-no-go-iii151" data-filter="iut iii remark 1.5.1 diagonal conjugacy no-go nonabelian G x G commutator conjugate synchronization Kummer classes">
+        <h2>IUT III Remark 1.5.1: Diagonal-Conjugacy No-Go</h2>
+        <p class="lede">
+          Remark 1.5.1 explains why conjugate synchronization cannot be replaced by
+          the simpler idea of working with the conjugacy class of a diagonal embedding
+          <span class="math">G -> G x G</span>. In a nonabelian Galois group, conjugating
+          one component changes the component by a commutator, which would identify
+          distinct Kummer classes attached to distinct theta values.
+        </p>
+        <div class="diagram fit desktopOnlyDiagram" aria-label="Diagonal conjugacy no-go">
+          <div class="diagramHeader">
+            <strong>Naive diagonal quotient loses component information</strong>
+            <span>the obstruction is nonabelian and Kummer-theoretic</span>
+          </div>
+          <svg viewBox="0 0 1120 430" role="img">
+            <defs>
+              <marker id="arrowDiagNoGo151" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="80" width="270" height="90"></rect>
+            <text class="nodeTitle" x="205" y="112" text-anchor="middle">diagonal copy</text>
+            <text class="tinyText" x="205" y="136" text-anchor="middle">(g,g) in G x G</text>
+            <text class="tinyText" x="205" y="154" text-anchor="middle">two Kummer components</text>
+
+            <rect class="nodeBox gold" x="425" y="80" width="270" height="90"></rect>
+            <text class="nodeTitle" x="560" y="112" text-anchor="middle">conjugate one side</text>
+            <text class="tinyText" x="560" y="136" text-anchor="middle">(g,hgh^-1)</text>
+            <text class="tinyText" x="560" y="154" text-anchor="middle">equals (g,[h,g]g)</text>
+
+            <rect class="nodeBox red" x="780" y="80" width="270" height="90"></rect>
+            <text class="nodeTitle" x="915" y="112" text-anchor="middle">bad identification</text>
+            <text class="tinyText" x="915" y="136" text-anchor="middle">factor (1,[h,g]) erased</text>
+            <text class="tinyText" x="915" y="154" text-anchor="middle">distinct Kummer classes collapse</text>
+
+            <rect class="nodeBox green" x="304" y="274" width="512" height="82"></rect>
+            <text class="nodeTitle" x="560" y="306" text-anchor="middle">conjugate synchronization remains necessary</text>
+            <text class="tinyText" x="560" y="330" text-anchor="middle">label-dependent Galois data descends without quotienting away component distinctions</text>
+
+            <path class="edge blue" d="M342 125 H423" marker-end="url(#arrowDiagNoGo151)"></path>
+            <path class="edge gold" d="M697 125 H778" marker-end="url(#arrowDiagNoGo151)"></path>
+            <path class="edge green" d="M916 172 C860 234 720 262 628 272" marker-end="url(#arrowDiagNoGo151)"></path>
+            <path class="edge green" d="M204 172 C276 236 414 262 492 272" marker-end="url(#arrowDiagNoGo151)"></path>
+          </svg>
+        </div>
+        <div class="flowDiagram mobileOnlyDiagram" aria-label="Diagonal conjugacy no-go mobile summary">
+          <div class="flowStep">
+            <strong>Diagonal copy</strong>
+            <p>
+              The tempting replacement starts from a diagonal element
+              <span class="math">(g,g)</span> in <span class="math">G x G</span>.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Conjugate one side</strong>
+            <p>
+              Passing to conjugacy classes identifies it with
+              <span class="math">(g,hgh^-1)</span>, equivalently
+              <span class="math">(g,[h,g]g)</span>.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Kummer data collapses</strong>
+            <p>
+              The commutator factor in one component is meaningful for distinct
+              Kummer classes, so the quotient is not a valid substitute for synchronization.
+            </p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Naive replacement</th><th>Source objection</th><th>Consequence</th></tr>
+          <tr>
+            <td>Use a conjugacy class of diagonals.</td>
+            <td>It identifies <span class="math">(g,g)</span> with <span class="math">(g,hgh^-1)</span>.</td>
+            <td>The second component changes by <span class="math">[h,g]</span>, which is meaningful in a nonabelian group.</td>
+          </tr>
+          <tr>
+            <td>Ignore component distinction.</td>
+            <td>Distinct components encode distinct Galois-theoretic Kummer classes attached to distinct theta values.</td>
+            <td>The quotient destroys exactly the data conjugate synchronization is built to preserve.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 1.5.1(ii)</a>
+          Related: <a href="#theta-pm-flpm-loglink-compat-iii132">F_l± compatibility</a>
+          <a href="#conjugate-synchronization-intro-ii">conjugate synchronization</a>
+          <a href="#bicoric-realified-frobenioids">bi-coric realified Frobenioids</a>
+        </div>
+      </section>
+
+      <section id="no-bicoric-fsol-containers-iii152" data-filter="iut iii remark 1.5.2 no bi-coric Fsol Fmod multiradial containers log volume realified Frobenioids localization">
+        <h2>IUT III Remark 1.5.2: No Bi-Coric F_sol and Multiradial Containers</h2>
+        <p class="lede">
+          Remark 1.5.2 states a negative boundary. The <span class="math">F_l</span>
+          symmetry on labeled copies of <span class="math">F_mod subset F_sol subset F</span>
+          does not support an analogue of the local conjugate synchronization for
+          <span class="math">G_v</span>. In particular, there is no bi-coric
+          <span class="math">F_sol^x</span> with its ring structure analogous to the
+          bi-coric unit/log-shell objects of Theorem 1.5.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Boundary</th><th>Source content</th><th>Replacement</th></tr>
+          <tr>
+            <td>No full algebraic-closure synchronization</td>
+            <td><span class="math">F_l</span>-symmetry does not give conjugate synchronization for labeled copies of the full algebraic closure.</td>
+            <td>Only weaker action on <span class="math">F_mod</span>, <span class="math">F_sol</span>, and infinity-kappa-coric pseudo-monoids is available.</td>
+          </tr>
+          <tr>
+            <td>No bi-coric <span class="math">F_sol^x</span></td>
+            <td>Solvable ring reconstruction is incompatible with localization operations in a D-ThetaNF-Hodge theater.</td>
+            <td>Do not model the lattice as transporting a full ring/object unchanged.</td>
+          </tr>
+          <tr>
+            <td>Closest approximation</td>
+            <td>Bi-coric global realified Frobenioids, essentially log-volume, are the closest possible approximation.</td>
+            <td>Bi-coric log-shells act as multiradial containers for labeled <span class="math">F_mod</span> copies up to indeterminacy.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 1.5.2</a>
+          Related: <a href="#bicoric-monoanalytic-log-shells">bi-coric mono-analytic log-shells</a>
+          <a href="#bicoric-realified-frobenioids">bi-coric realified Frobenioids</a>
+          <a href="#fl-symmetry-no-conjugate-sync-472">F_l without conjugate synchronization</a>
+        </div>
+      </section>
+
+      <section id="kummer-detachment-etale-transport-iii154" data-filter="iut iii remark 1.5.4 kummer detachment etale transport indeterminacies frobenius-like etale-like multiradiality">
+        <h2>IUT III Remark 1.5.4: Kummer-Detachment and Etale-Transport Indeterminacies</h2>
+        <p class="lede">
+          Remark 1.5.4 splits the comparison of one arithmetic holomorphic structure
+          from another into two operations. First, Frobenius-like objects are converted
+          to etale-like objects via Kummer isomorphisms. Second, the etale-like objects
+          are transported between arithmetic holomorphic structures by multiradiality.
+          The corresponding losses of rigidity are named Kummer-detachment and
+          etale-transport indeterminacies.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Step</th><th>Operation</th><th>Indeterminacy computed</th></tr>
+          <tr>
+            <td>(a)</td>
+            <td>Pass from Frobenius-like structures to etale-like structures via Kummer isomorphisms.</td>
+            <td>Kummer-detachment indeterminacies, including Frobenius-picture path choices and <span class="math">Z^x</span> effects.</td>
+          </tr>
+          <tr>
+            <td>(b)</td>
+            <td>Transport the resulting etale-like structures between arithmetic holomorphic structures by multiradiality.</td>
+            <td>Etale-transport indeterminacies, often from anabelian/group-theoretic algorithms.</td>
+          </tr>
+          <tr>
+            <td>Use in the wiki</td>
+            <td>The taxonomy separates damage incurred during detachment from damage incurred during transport.</td>
+            <td>Later Corollary 3.12 pages should not merge these two audit categories.</td>
+          </tr>
+        </table>
+        <div class="callout violet">
+          Source examples: Frobenius-picture diagrams in Propositions 1.2(x) and
+          1.3(iv) illustrate Kummer-detachment path issues; non-scheme-theoretic
+          automorphisms of local absolute Galois groups illustrate etale-transport
+          indeterminacy.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 1.5.4</a>
+          Related: <a href="#kummer-detachment-310">Kummer detachment</a>
+          <a href="#indeterminacies">indeterminacies</a>
+          <a href="#theorem-311-lgp-algorithms">Theorem 3.11 algorithms</a>
         </div>
       </section>
 
