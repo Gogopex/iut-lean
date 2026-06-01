@@ -1367,6 +1367,13 @@
         <a href="#forced-procession-average-39">Forced procession average</a>
         <a href="#realified-semisimplification-39">Realified semi-simplification</a>
         <a href="#no-log-volume-period-39">No log-volume period</a>
+        <a href="#holomorphic-hull-formalism-iii395">Holomorphic hull 3.9.5</a>
+        <a href="#hull-approximants-iii395">Hull approximants 3.9.5</a>
+        <a href="#nabla-hull-formalism-iii395">Nabla hull formalism</a>
+        <a href="#hull-det-closed-loop-iii395">Hull-det closed loop</a>
+        <a href="#region-category-no-shortcut-iii395">No region-category shortcut</a>
+        <a href="#log-link-product-formula-iii396">Product formula 3.9.6</a>
+        <a href="#general-region-log-volume-iii397">General-region log-volume</a>
         <a href="#global-kummer-noninterference-iii310">Global Kummer 3.10</a>
         <a href="#vertical-global-objects-310">Vertical global objects 3.10</a>
         <a href="#roots-of-unity-noninterference-310">Roots-of-unity non-interference</a>
@@ -49368,6 +49375,536 @@
           Related: <a href="#realified-semisimplification-39">realified semi-simplification</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
           <a href="#iut-iv-theorem-110-theta-pilot-estimate">IUT IV theta-pilot estimate</a>
+        </div>
+      </section>
+
+      <section id="holomorphic-hull-formalism-iii395" data-filter="iut iii remark 3.9.5 holomorphic hull formalism direct product regions hull map phi p1 p2 p3 compact finite log volume">
+        <h2>IUT III Remark 3.9.5: Holomorphic Hull Formalism</h2>
+        <p class="lede">
+          Remark 3.9.5 introduces holomorphic hulls for regions in the packet fields
+          of Proposition 3.9. For a relatively compact region, the hull is the smallest
+          region of the form <span class="math">&lambda; · O</span>, with nonzero
+          components of <span class="math">&lambda;</span>, that contains the region.
+          For a non-relatively-compact region, the hull is the full ambient
+          <span class="math">IQ((-))</span>. The resulting operation is a source-level
+          bridge from arbitrary direct-product regions to unit-stable hulls.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Region P</strong>
+            <p>A direct product region in <span class="math">IQ((-))</span>, possibly not stabilized by local units.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Hull &phi;(P)</strong>
+            <p>The smallest containing region of the form <span class="math">&lambda; · O((-))</span>, or the whole ambient field if compactness fails.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Preorder control</strong>
+            <p>The hull map preserves inclusions and therefore supports later upper-semi log-volume estimates.</p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Paper content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Remark 3.9.5(i)</td>
+            <td>
+              The hull of a relatively compact subset of
+              <span class="math">IQ(&alpha;F_{v_Q})</span>,
+              <span class="math">IQ(AF_{v_Q})</span>, or
+              <span class="math">IQ(A,&alpha;F_v)</span> is the smallest
+              <span class="math">&lambda; · O</span> region containing it; otherwise
+              the hull is the entire ambient direct-sum field.
+            </td>
+            <td>
+              The hull is not merely a numerical enlargement. It is a new region with
+              arithmetic holomorphic form.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.9.5(ii)</td>
+            <td>
+              Let <span class="math">P</span> be the set of direct product regions and
+              <span class="math">H</span> the set of hulls. Then
+              <span class="math">H &sube; P</span>, and hull formation gives
+              <span class="math">&phi; : P -> H</span>.
+            </td>
+            <td>
+              The wiki keeps direct-product regions and hulls as separate concept
+              pages because later comparison uses their difference.
+            </td>
+          </tr>
+          <tr>
+            <td>Properties P1-P3</td>
+            <td>
+              <span class="math">&phi;(H)=H</span> for hulls,
+              <span class="math">P &sube; &phi;(P)</span>, and
+              <span class="math">P_1 &sube; P_2 => &phi;(P_1) &sube; &phi;(P_2)</span>.
+              Equivalently, <span class="math">&phi;(P)</span> is the intersection of
+              all hulls containing <span class="math">P</span>.
+            </td>
+            <td>
+              These are the formal constraints any Lean hull interface must expose
+              before it can be used in the 3.12 inequality corridor.
+            </td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Formalization consequence.</strong> A source-faithful model should
+          represent <span class="math">P</span>, <span class="math">H</span>, and
+          <span class="math">&phi;</span> with the P1-P3 laws. Treating the hull as
+          only a real-valued bound loses the preorder structure used by the paper.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.5(i),(ii)</a>
+          Related: <a href="#packet-procession-log-volume-iii39">packet log-volume</a>
+          <a href="#hull-approximants-iii395">hull approximants</a>
+          <a href="#hull-det-closed-loop-iii395">hull/determinant closed loop</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="hull-approximants-iii395" data-filter="iut iii remark 3.9.5 phi xi hull approximants log volume compact indeterminacy xi nonempty strict inequality">
+        <h2>IUT III Remark 3.9.5: Hull Approximants</h2>
+        <p class="lede">
+          After defining the hull map, Remark 3.9.5 defines log-volume hull
+          approximants. For a region <span class="math">P</span>, the sets
+          <span class="math">&Phi;(P)</span> and <span class="math">&Xi;(P)</span>
+          collect hulls contained in <span class="math">&phi;(P)</span> whose
+          log-volume lies between <span class="math">&mu;log(P)</span> and
+          <span class="math">&mu;log(&phi;(P))</span>, with equality to
+          <span class="math">&mu;log(P)</span> in the <span class="math">&Xi;</span>
+          case. This is an indeterminacy of hull choices, but the paper stresses that
+          the indeterminacy is compact because all choices remain inside
+          <span class="math">&phi;(P)</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Paper content</th><th>Audit consequence</th></tr>
+          <tr>
+            <td><span class="math">&Phi;(P)</span></td>
+            <td>
+              Hulls <span class="math">H &sube; &phi;(P)</span> with
+              <span class="math">&mu;log(&phi;(P)) &ge; &mu;log(H) &ge; &mu;log(P)</span>.
+            </td>
+            <td>
+              The containment <span class="math">H &sube; &phi;(P)</span> is essential;
+              omitting it destroys compactness of the choice set.
+            </td>
+          </tr>
+          <tr>
+            <td><span class="math">&Xi;(P)</span></td>
+            <td>
+              Hulls <span class="math">H &sube; &phi;(P)</span> with
+              <span class="math">&mu;log(H)=&mu;log(P)</span>.
+            </td>
+            <td>
+              The paper records useful nonempty cases, but does not assert nonemptiness
+              in complete generality.
+            </td>
+          </tr>
+          <tr>
+            <td><span class="math">H<sub>Phi</sub>(P)</span></td>
+            <td>
+              The union over <span class="math">&Phi;(P)</span> satisfies
+              <span class="math">H<sub>Phi</sub>(P)=&phi;(P)</span>.
+            </td>
+            <td>
+              The final hull can be recovered from the approximant family.
+            </td>
+          </tr>
+          <tr>
+            <td>Strictness example</td>
+            <td>
+              The source gives a <span class="math">Q_p x Q_p</span> example where
+              <span class="math">&mu;(P)</span> is strictly smaller than the volume of
+              the union of exact-volume approximants.
+            </td>
+            <td>
+              Formal pages must not silently replace a possible region by its hull
+              without recording that the log-volume can increase.
+            </td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          <strong>No exact-approximant shortcut.</strong> A model that assumes
+          <span class="math">&Xi;(P)</span> is always nonempty, or that
+          <span class="math">&mu;log(P)=&mu;log(&phi;(P))</span> generally, is stronger
+          than the paper and would distort the Corollary 3.12 audit.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.5(iii),(iv)</a>
+          Related: <a href="#holomorphic-hull-formalism-iii395">holomorphic hull formalism</a>
+          <a href="#nabla-hull-formalism-iii395">nabla hull formalism</a>
+          <a href="#hull-det-closed-loop-iii395">hull/determinant closed loop</a>
+        </div>
+      </section>
+
+      <section id="nabla-hull-formalism-iii395" data-filter="iut iii remark 3.9.5 abstract set theoretic nabla formalism quotient upper semi compatibility bounded family hull phi pb">
+        <h2>IUT III Remark 3.9.5: Nabla Hull Formalism</h2>
+        <p class="lede">
+          Remark 3.9.5(v),(vi) introduces an abstract set-theoretic quotient formalism,
+          denoted here by the paper's nabla-style operation. If
+          <span class="math">S &sube; E</span>, passing to the quotient that identifies
+          all elements of <span class="math">S</span> makes maps between nonempty
+          subsets of <span class="math">S</span> become identity maps on the image of
+          <span class="math">S</span>. Mochizuki presents this as an abstract
+          formulation of upper semi-commutativity/semi-compatibility.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Subset S in E</strong>
+            <p>All elements of <span class="math">S</span> are identified in the quotient.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Maps inside S</strong>
+            <p>Maps between nonempty subsets of <span class="math">S</span> descend to the identity on the quotient image.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Hull application</strong>
+            <p>Take <span class="math">S=&phi;(P)</span> or a bounded-family hull <span class="math">&phi;(P_B)</span>.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Indeterminacy removed</strong>
+            <p>Possible regions and their hull approximants become identified at the quotient level.</p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Paper content</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Set quotient</td>
+            <td>
+              For a proper subset <span class="math">S</span> of a set
+              <span class="math">E</span>, identify all elements of
+              <span class="math">S</span> and leave <span class="math">E - S</span>
+              unaffected.
+            </td>
+            <td>
+              The quotient is a controlled collapse of a specified subset, not a global
+              collapse of all regions.
+            </td>
+          </tr>
+          <tr>
+            <td>Formal empty sets</td>
+            <td>
+              Formal empty intersections inside <span class="math">S</span> may also
+              map to the quotient image of <span class="math">S</span>.
+            </td>
+            <td>
+              This records the role of domains of partial logarithm maps in upper-semi
+              diagrams.
+            </td>
+          </tr>
+          <tr>
+            <td>Apply to hulls</td>
+            <td>
+              Taking <span class="math">S=&phi;(P)</span> identifies
+              <span class="math">P</span> with its hull approximants in
+              <span class="math">&Phi;(P)</span> or <span class="math">&Xi;(P)</span>.
+            </td>
+            <td>
+              This is the formal mechanism by which the hull-choice indeterminacy is
+              suppressed for later comparison.
+            </td>
+          </tr>
+          <tr>
+            <td>Bounded families</td>
+            <td>
+              For bounded possible-region families <span class="math">P<sub>B</sub>={P<sub>&beta;</sub>}</span>,
+              use <span class="math">&phi;(P_B)</span>, the intersection of all hulls
+              containing every <span class="math">P<sub>&beta;</sub></span>.
+            </td>
+            <td>
+              The Corollary 3.12 route must work with the family of possible outputs,
+              not a secretly selected output region.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.5(v),(vi)</a>
+          Related: <a href="#upper-semi-compatibility-card">upper semi-compatibility</a>
+          <a href="#hull-approximants-iii395">hull approximants</a>
+          <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
+        </div>
+      </section>
+
+      <section id="hull-det-closed-loop-iii395" data-filter="iut iii remark 3.9.5 obstructions ob1 ob9 determinant tensor power log kummer vertical shift subquotient sq3 sq4 sq5 closed loop corollary 3.12">
+        <h2>IUT III Remark 3.9.5: Hull, Determinant, and Closed Loop</h2>
+        <p class="lede">
+          Remark 3.9.5(vii)-(ix) explains why hulls are not decorative. The possible
+          images produced by Theorem 3.11 cannot be directly compared to the
+          q-pilot arithmetic line-bundle objects in the codomain
+          <span class="math">F×mu</span>-prime-strip. The paper passes from possible
+          regions to hulls, then to determinant/tensor-power line-bundle data, then
+          through log-Kummer vertical-shift adjustment, and only then to log-volume.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Possible regions</strong>
+            <p>Theorem 3.11 outputs regions in tensor packets of log-shells.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Hulls</strong>
+            <p>Passing to <span class="math">&phi;(P_B)</span> gives unit-stable arithmetic vector-bundle regions.</p>
+          </div>
+          <div class="flowStep">
+            <strong>det&otimes;M</strong>
+            <p>Determinants and positive tensor powers produce arithmetic line-bundle objects comparable to q-pilot data.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Log-Kummer shift</strong>
+            <p>Vertical shifts are adjusted by log-Kummer correspondences, with the expected indeterminacy.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Log-volume</strong>
+            <p>Only after the comparable-object stage does the realified log-volume quotient give the numerical comparison.</p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Operation</th><th>Paper content</th><th>Why it matters</th></tr>
+          <tr>
+            <td>(Ob1)-(Ob2)</td>
+            <td>
+              Arbitrary log-shell regions need not be stabilized by local units, while
+              q-pilot line-bundle data is only generated up to unit indeterminacy.
+              Hulls give unit-stable regions that can be read as local pieces of
+              arithmetic vector bundles.
+            </td>
+            <td>
+              The hull step is the first source bridge from possible-image regions to
+              objects compatible with arithmetic line-bundle comparison.
+            </td>
+          </tr>
+          <tr>
+            <td>(Ob3)-(Ob4)</td>
+            <td>
+              Determinants, weighted positive tensor powers, and normalization by the
+              structure sheaf convert hull vector-bundle data into arithmetic
+              line-bundle objects; tensor-power twists do not affect later log-volume
+              computations.
+            </td>
+            <td>
+              A 3.12 model should distinguish region, hull, determinant/tensor, and
+              final numerical layers.
+            </td>
+          </tr>
+          <tr>
+            <td>(Ob5)-(Ob6)</td>
+            <td>
+              Independence from choosing one possible output is obtained by using the
+              bounded-family hull <span class="math">&phi;(P_B)</span> and the quotient
+              formalism. Exact-volume approximants may be unavailable, so
+              <span class="math">&Phi;</span> is more robust than
+              <span class="math">&Xi;</span>.
+            </td>
+            <td>
+              Formal interfaces must prevent selecting a convenient possible region as
+              if it were canonical.
+            </td>
+          </tr>
+          <tr>
+            <td>(Ob7)-(Ob9)</td>
+            <td>
+              Local Galois groups and unit portions cannot be removed from
+              <span class="math">F×mu</span>-prime-strips. Log-Kummer correspondences
+              adjust vertical shifts; realified semi-simplification then gives a
+              log-volume bijection for hulls across the log-link.
+            </td>
+            <td>
+              The loop closes only if comparable objects are built before the
+              log-volume quotient forgets Galois/unit data.
+            </td>
+          </tr>
+          <tr>
+            <td>(sQ3),(sQ4),(sQ5)</td>
+            <td>
+              Hull/determinant/quotient, log-Kummer vertical-shift adjustment, and
+              log-volume are all subquotient operations. The paper emphasizes the
+              qualitative difference: (sQ3),(sQ4) preserve arithmetic holomorphic
+              compatibility, while (sQ5) forgets it.
+            </td>
+            <td>
+              Skipping directly to log-volume breaks the closed loop and leaves no
+              nontrivial 3.12 conclusion according to the source.
+            </td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          <strong>3.12 guardrail.</strong> Do not formalize the disputed passage as
+          "possible region -> real number" alone. The source route is
+          possible regions -> hulls -> determinant/tensor line-bundle objects ->
+          log-Kummer vertical adjustment -> log-volume.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.5(vii)-(ix)</a>
+          Related: <a href="#theorem-311-lgp-algorithms">Theorem 3.11 algorithms</a>
+          <a href="#corollary-312-proof-steps">Corollary 3.12 proof steps</a>
+          <a href="#log-link-product-formula-iii396">product formula compatibility</a>
+          <a href="#region-category-no-shortcut-iii395">no region-category shortcut</a>
+        </div>
+      </section>
+
+      <section id="region-category-no-shortcut-iii395" data-filter="iut iii remark 3.9.5 no shortcut categories of regions additive rank greater one arithmetic line bundles theta link multiplicative norm determinant galois equivariant">
+        <h2>IUT III Remark 3.9.5: No Region-Category Shortcut</h2>
+        <p class="lede">
+          Remark 3.9.5(x) rejects a natural shortcut: replacing the local and global
+          Frobenioids of arithmetic line bundles by more general categories of regions.
+          Such categories would have to use the additive rank-greater-than-one module
+          structure of <span class="math">IQ((-))</span>, while the
+          <span class="math">Theta×mu_LGP</span>-link is not compatible with the
+          additive structures in its domain and codomain. The glued categories must
+          remain purely multiplicative at the relevant stage.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Candidate shortcut</th><th>Source obstruction</th><th>Audit consequence</th></tr>
+          <tr>
+            <td>Use categories of arbitrary regions</td>
+            <td>
+              Regions live in a multidimensional additive module; comparing lines inside
+              it naturally invokes addition.
+            </td>
+            <td>
+              This conflicts with the multiplicative nature of the
+              <span class="math">Theta×mu_LGP</span> gluing.
+            </td>
+          </tr>
+          <tr>
+            <td>Use higher-rank arithmetic vector bundles directly</td>
+            <td>
+              Rank-greater-than-one vector-bundle data is not the purely
+              multiplicative line-bundle data used in the Frobenioid prime-strip.
+            </td>
+            <td>
+              The determinant step is not optional bookkeeping; it restores the line
+              bundle level.
+            </td>
+          </tr>
+          <tr>
+            <td>Norm/determinant down to <span class="math">Q</span> or <span class="math">Q_p</span></td>
+            <td>
+              The relevant decomposition group need not split in a way that makes such
+              a norm operation Galois-equivariant on algebraic closures.
+            </td>
+            <td>
+              This would be incompatible with the local Galois action central to
+              log-Kummer and log-shell theory.
+            </td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Formalization consequence.</strong> The wiki should not replace the
+          hull/determinant/Frobenioid route with a convenient category of measured
+          regions. That would model a different comparison than the one used by the
+          source.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.5(x)</a>
+          Related: <a href="#hull-det-closed-loop-iii395">hull/determinant closed loop</a>
+          <a href="#log-shells-alone-not-enough-38">log-shells alone not enough</a>
+          <a href="#theta-mu-lgp-link-38">Theta×mu_LGP link</a>
+        </div>
+      </section>
+
+      <section id="log-link-product-formula-iii396" data-filter="iut iii remark 3.9.6 log link compatibility product formula ratios of conversion sufficiently small regions global arithmetic degrees">
+        <h2>IUT III Remark 3.9.6: Product Formula Compatibility</h2>
+        <p class="lede">
+          Remark 3.9.6 clarifies the scope of log-link/log-volume compatibility. The
+          compatibility is not asserted for arbitrary regions in the domain and codomain
+          of the log-link. It concerns certain sufficiently small regions. This is still
+          enough for product formulas, because the ratios of conversion between
+          log-volumes at distinct valuations may be formulated using such sufficiently
+          small regions.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Point</th><th>Paper content</th><th>Use in the wiki</th></tr>
+          <tr>
+            <td>Scope</td>
+            <td>Log-link compatibility applies to certain sufficiently small regions, not arbitrary regions.</td>
+            <td>Prevents overstating Proposition 3.9(iv) as a universal region equality.</td>
+          </tr>
+          <tr>
+            <td>Product formula</td>
+            <td>Ratios of conversion between log-volumes at distinct places can be expressed using sufficiently small regions.</td>
+            <td>Connects local log-link compatibility to global arithmetic degree comparison.</td>
+          </tr>
+          <tr>
+            <td>Global degrees</td>
+            <td>Proposition 3.9(iv) implies compatibility between global arithmetic degrees in the log-link domain and codomain.</td>
+            <td>Explains why the local compatibility still feeds into Corollary 3.12's global numerical estimate.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.6</a>
+          Related: <a href="#realified-semisimplification-39">realified semi-simplification</a>
+          <a href="#global-degree-log-volume-39">global degree log-volume</a>
+          <a href="#hull-det-closed-loop-iii395">closed-loop hull passage</a>
+        </div>
+      </section>
+
+      <section id="general-region-log-volume-iii397" data-filter="iut iii remark 3.9.7 general region log volume infimum inverse systems finite support direct product pre regions holomorphic hull">
+        <h2>IUT III Remark 3.9.7: General-Region Log-Volumes</h2>
+        <p class="lede">
+          Remark 3.9.7 records elementary extensions of the log-volume formalism. The
+          finite-support condition in the global product can be satisfied by taking the
+          standard integral regions at all but finitely many unramified nonarchimedean
+          places; these standard regions have zero log-volume, are mono-analytic
+          invariants, and equal their own holomorphic hulls. More general relatively
+          compact subsets are handled by infima over finite-log-volume covering regions,
+          equivalently by inverse systems.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Case</th><th>Paper content</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Almost all places</td>
+            <td>
+              At all but finitely many unramified nonarchimedean places, one may use
+              <span class="math">I((-)) &sube; IQ((-))</span>; it has zero log-volume,
+              is mono-analytic invariant, and equals its own hull.
+            </td>
+            <td>
+              Global products need a finite-support condition, but the source provides
+              a canonical almost-everywhere zero-volume choice.
+            </td>
+          </tr>
+          <tr>
+            <td>Single local region</td>
+            <td>
+              For a relatively compact subset <span class="math">E</span>, define
+              its log-volume as the infimum of log-volumes of finite-log-volume
+              regions <span class="math">E*</span> containing <span class="math">E</span>;
+              allow <span class="math">-&infin;</span>.
+            </td>
+            <td>
+              A formal definition must permit extended values or use inverse systems
+              of finite-log-volume approximants.
+            </td>
+          </tr>
+          <tr>
+            <td>Direct product pre-regions</td>
+            <td>
+              For direct product pre-regions, use inverse systems of direct product
+              regions covering the pre-region.
+            </td>
+            <td>
+              The direct-product shape is preserved in the approximating system.
+            </td>
+          </tr>
+          <tr>
+            <td>Global collections</td>
+            <td>
+              For collections <span class="math">{E_{v_Q}}</span>, define log-volume
+              by the infimum over covering global collections satisfying the finite
+              support condition, or equivalently by inverse systems of such collections.
+            </td>
+            <td>
+              The global layer should not be modeled only for exact product regions;
+              it needs the infimum/inverse-system extension.
+            </td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.7</a>
+          Related: <a href="#packet-normalization-39">packet normalization</a>
+          <a href="#holomorphic-hull-formalism-iii395">holomorphic hull formalism</a>
+          <a href="#iut-iv-proposition-14-nonarch-log-volume">IUT IV normalized log-volume</a>
         </div>
       </section>
 
