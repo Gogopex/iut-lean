@@ -796,6 +796,12 @@
         <a href="#alien-multiradiality-section-3">Alien multiradiality §3</a>
         <a href="#alien-multiradiality-notion-31">Alien multiradiality 3.1</a>
         <a href="#alien-multiradiality-examples-32">Alien multiradial examples 3.2</a>
+        <a href="#alien-log-theta-lattice-33">Alien log-theta lattice 3.3</a>
+        <a href="#alien-initial-theta-data-331">Alien initial theta data 3.3(i)</a>
+        <a href="#alien-hodge-theater-frobenioids-3334">Alien Hodge theaters 3.3(iii-iv)</a>
+        <a href="#alien-hodge-theater-symmetries-335">Alien theater symmetries 3.3(v)</a>
+        <a href="#alien-log-links-336">Alien log-links 3.3(vi)</a>
+        <a href="#alien-theta-links-337">Alien theta-links 3.3(vii)</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
         <a href="#iut-i-base-bridges-evaluation-sections">Base bridges/evaluation sections</a>
         <a href="#iut-i-additive-base-bridges-61-610">Additive base bridges 6.1-6.10</a>
@@ -16109,6 +16115,286 @@
           Related: <a href="#tautological-multiradialization-ii17">tautological multiradialization</a>
           <a href="#alien-inter-universality-210">inter-universality</a>
           <a href="#collas-category-perspective">Collas category view</a>
+        </div>
+      </section>
+
+      <section id="alien-log-theta-lattice-33" data-filter="mutually alien copies 3.3 log theta lattice hodge theaters log links theta links horizontally coric vertically coric bicoric noncommutative infinite H">
+        <h2>Alien Copies 3.3: Log-Theta-Lattice</h2>
+        <p class="lede">
+          Section 3.3 introduces the stage on which IUT operates: the log-theta-lattice.
+          It is a noncommutative two-dimensional diagram of Hodge theaters, vertical
+          log-links, and horizontal theta-links. The whole lattice is translation-symmetric,
+          while the proof ultimately uses an "infinite H" shaped portion.
+        </p>
+        <div class="diagram fit" aria-label="Log-theta lattice overview">
+          <div class="diagramHeader">
+            <strong>Two-dimensional lattice</strong>
+            <span>vertical log-links, horizontal theta-links, Hodge theaters at nodes</span>
+          </div>
+          <svg viewBox="0 0 1000 410" role="img">
+            <defs>
+              <marker id="arrowAlien33" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <g>
+              <circle cx="210" cy="90" r="18" fill="#fff" stroke="#315b8f" stroke-width="3"></circle>
+              <circle cx="420" cy="90" r="18" fill="#fff" stroke="#315b8f" stroke-width="3"></circle>
+              <circle cx="630" cy="90" r="18" fill="#fff" stroke="#315b8f" stroke-width="3"></circle>
+              <circle cx="210" cy="205" r="18" fill="#fff" stroke="#315b8f" stroke-width="3"></circle>
+              <circle cx="420" cy="205" r="18" fill="#fff" stroke="#315b8f" stroke-width="3"></circle>
+              <circle cx="630" cy="205" r="18" fill="#fff" stroke="#315b8f" stroke-width="3"></circle>
+              <circle cx="210" cy="320" r="18" fill="#fff" stroke="#315b8f" stroke-width="3"></circle>
+              <circle cx="420" cy="320" r="18" fill="#fff" stroke="#315b8f" stroke-width="3"></circle>
+              <circle cx="630" cy="320" r="18" fill="#fff" stroke="#315b8f" stroke-width="3"></circle>
+              <path class="edge blue" d="M232 90 H398" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge blue" d="M442 90 H608" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge blue" d="M232 205 H398" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge blue" d="M442 205 H608" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge blue" d="M232 320 H398" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge blue" d="M442 320 H608" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge green" d="M210 112 V183" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge green" d="M210 227 V298" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge green" d="M420 112 V183" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge green" d="M420 227 V298" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge green" d="M630 112 V183" marker-end="url(#arrowAlien33)"></path>
+              <path class="edge green" d="M630 227 V298" marker-end="url(#arrowAlien33)"></path>
+            </g>
+            <text class="edgeLabel" x="320" y="68" text-anchor="middle">theta-link</text>
+            <text class="edgeLabel" x="178" y="158" text-anchor="middle">log-link</text>
+            <rect class="nodeBox gold" x="742" y="96" width="190" height="220"></rect>
+            <text class="nodeTitle" x="837" y="134" text-anchor="middle">infinite H</text>
+            <text class="tinyText" x="837" y="160" text-anchor="middle">portion actually used</text>
+            <text class="tinyText" x="837" y="190" text-anchor="middle">entire vertical lines</text>
+            <text class="tinyText" x="837" y="214" text-anchor="middle">needed for symmetry</text>
+            <text class="tinyText" x="837" y="244" text-anchor="middle">one horizontal theta-link</text>
+            <text class="tinyText" x="837" y="268" text-anchor="middle">between vertical lines</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Meaning in §3.3(ii)</th><th>Formal caution</th></tr>
+          <tr><td>Node</td><td>A <span class="math">Theta^{+-ellNF}</span>-Hodge theater.</td><td>Not just a copy; it packages a miniature arithmetic geometry around the initial theta data.</td></tr>
+          <tr><td>Vertical arrow</td><td>A log-link, modeled on the local logarithm and log-shell construction.</td><td>It rotates/juggles additive and multiplicative dimensions and is not ring-compatible.</td></tr>
+          <tr><td>Horizontal arrow</td><td>A theta-link, modeled on <span class="math">q -> {q^{j^2}}</span>.</td><td>It uses multiplicative structure and requires distinct vertical coordinates.</td></tr>
+          <tr><td>Coricity</td><td>Horizontal, vertical, or bi-coric invariance under translations of the full lattice.</td><td>Finite vertical segments do not have the same symmetry as entire vertical lines.</td></tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.3(ii)</a>
+          Related: <a href="#log-theta-lattice">log-theta lattice</a>
+          <a href="#alien-log-links-336">log-links</a>
+          <a href="#alien-theta-links-337">theta-links</a>
+        </div>
+      </section>
+
+      <section id="alien-initial-theta-data-331" data-filter="mutually alien copies 3.3 initial theta data elliptic curve number field l torsion valuations bad multiplicative reduction K core hyperbolic orbicurve">
+        <h2>Alien Copies 3.3(i): Initial Theta Data</h2>
+        <p class="lede">
+          The log-theta-lattice is determined, up to isomorphism, by initial theta data.
+          Mochizuki's summary lists an elliptic curve over a number field, an algebraic
+          closure, a prime <span class="math">l >= 5</span>, selected valuations, and bad
+          multiplicative reduction data satisfying the technical conditions of IUT I
+          Definition 3.1.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Data</th><th>Source role</th><th>Downstream use</th></tr>
+          <tr>
+            <td><span class="math">E_F/F</span>, <span class="math">Fbar</span>, <span class="math">l >= 5</span></td>
+            <td>Elliptic curve, ambient algebraic closure, and torsion prime.</td>
+            <td>Provides the <span class="math">l</span>-torsion combinatorics and theta values.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F_mod</span>, <span class="math">K</span></td>
+            <td><span class="math">F_mod</span> is generated by the <span class="math">j</span>-invariant; <span class="math">K</span> adjoins fields of definition of <span class="math">l</span>-torsion.</td>
+            <td>Base for the prime-strip and Galois-action bookkeeping.</td>
+          </tr>
+          <tr>
+            <td><span class="math">X_F</span>, <span class="math">C_F</span></td>
+            <td>Once-punctured elliptic curve and its quotient by <span class="math">{+/-1}</span>.</td>
+            <td>Supplies the hyperbolic orbicurve used in anabelian reconstruction.</td>
+          </tr>
+          <tr>
+            <td><span class="math">V</span>, <span class="math">V_bad</span></td>
+            <td>Chosen valuation set and nonempty bad multiplicative reduction subset of odd residue characteristic.</td>
+            <td>Index the prime-strips and the local theta-value data.</td>
+          </tr>
+          <tr>
+            <td><span class="math">C_K -> C_K</span></td>
+            <td>A finite etale cover of degree <span class="math">l</span> from a rank-one quotient of <span class="math">E_K[l]</span>.</td>
+            <td>Feeds the cusp-label and symmetry apparatus of the Hodge theater.</td>
+          </tr>
+        </table>
+        <p>
+          This page intentionally points back to IUT I for the exact definition. The
+          wiki summary is not a replacement for the initial theta data record; it is a
+          route map for the pieces used in the later Mutually Alien Copies explanation.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.3(i)</a>
+          Related: <a href="#initial-theta-data">initial theta data</a>
+          <a href="#hodge-theaters">ThetaNF Hodge theaters</a>
+          <a href="#alien-hodge-theater-symmetries-335">theater symmetries</a>
+        </div>
+      </section>
+
+      <section id="alien-hodge-theater-frobenioids-3334" data-filter="mutually alien copies 3.3 frobenioid hodge theater prime strips global multiplicative subspace global Gaussian distribution divisors line bundles multiplicative structures">
+        <h2>Alien Copies 3.3(iii-iv): Frobenioids and Hodge Theaters</h2>
+        <p class="lede">
+          §3.3(iii)-(iv) describes the categorical packaging. Frobenioids encode
+          divisor, line-bundle, rational-function, and base-category data. A
+          <span class="math">Theta^{+-ellNF}</span>-Hodge theater is a system of such
+          Frobenioids and related fundamental-group data, arranged to give a
+          tautological solution to a global multiplicative-subspace problem.
+        </p>
+        <div class="diagram fit" aria-label="Hodge theater packaging">
+          <div class="diagramHeader">
+            <strong>Hodge theater as multiplicative packaging</strong>
+            <span>prime-strips ignore additive structure to reassemble selected primes</span>
+          </div>
+          <svg viewBox="0 0 1000 360" role="img">
+            <defs>
+              <marker id="arrowAlien3334" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="60" y="76" width="235" height="86"></rect>
+            <text class="nodeTitle" x="178" y="107" text-anchor="middle">base category</text>
+            <text class="tinyText" x="178" y="132" text-anchor="middle">arithmetic fundamental groups</text>
+            <rect class="nodeBox green" x="382" y="76" width="235" height="86"></rect>
+            <text class="nodeTitle" x="500" y="107" text-anchor="middle">Frobenioid</text>
+            <text class="tinyText" x="500" y="132" text-anchor="middle">rational functions, divisors</text>
+            <rect class="nodeBox red" x="705" y="76" width="235" height="86"></rect>
+            <text class="nodeTitle" x="822" y="107" text-anchor="middle">Hodge theater</text>
+            <text class="tinyText" x="822" y="132" text-anchor="middle">system over prime-strips</text>
+            <path class="edge blue" d="M297 119 H380" marker-end="url(#arrowAlien3334)"></path>
+            <path class="edge green" d="M619 119 H703" marker-end="url(#arrowAlien3334)"></path>
+            <rect class="nodeBox gold" x="216" y="242" width="568" height="72"></rect>
+            <text class="nodeTitle" x="500" y="270" text-anchor="middle">global q^{j^2} distribution problem</text>
+            <text class="tinyText" x="500" y="294" text-anchor="middle">solved tautologically by selected-prime multiplicative data</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Source description</th><th>Why it is used</th></tr>
+          <tr><td>Frobenioid</td><td>Abstract category encoding divisors and line bundles on coverings of a normal integral scheme.</td><td>Captures multiplicative portions while forgetting additive structure when needed.</td></tr>
+          <tr><td>Model Frobenioids</td><td>The only non-negligible Frobenioids in IUT are essentially model Frobenioids over arithmetic fundamental-group-like base categories.</td><td>Keeps the category tied to anabelian reconstruction and prime strips.</td></tr>
+          <tr><td>Prime-strips</td><td>Collections of local data indexed by the selected valuation set <span class="math">V</span>.</td><td>Monoid/Galois-theoretic analogue of adeles/ideles, but with selected primes.</td></tr>
+          <tr><td>Global Gaussian analogue</td><td>Build a global version of the local <span class="math">{q^{j^2}}</span> distribution.</td><td>Motivates the entire Hodge-theater packaging.</td></tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.3(iii)-(iv)</a>
+          Related: <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
+          <a href="#prime-strips-bridges">prime strips</a>
+          <a href="#alien-rational-function-monoids-213">rational-function monoids</a>
+        </div>
+      </section>
+
+      <section id="alien-hodge-theater-symmetries-335" data-filter="mutually alien copies 3.3 symmetries F_l semidirect plus minus F_l star additive multiplicative toral ordinary supersingular monodromy Kummer theory">
+        <h2>Alien Copies 3.3(v): Hodge-Theater Symmetries</h2>
+        <p class="lede">
+          Once the Hodge theater supplies the tautological combinatorial solution, the
+          quotient of <span class="math">E_K[l]</span> is interpreted through cusp labels.
+          The resulting additive and multiplicative symmetry groups are
+          <span class="math">F_l rtimes {+/-1}</span> and
+          <span class="math">F_l^x/{+/-1}</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Symmetry</th><th>Set acted on</th><th>Geometric reading</th></tr>
+          <tr>
+            <td><span class="math">F_l rtimes {+/-1}</span></td>
+            <td><span class="math">F_l = {-l*,...,0,...,l*}</span></td>
+            <td>Geometric automorphisms of <span class="math">X_K</span>; additive/unipotent side.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F_l^x/{+/-1}</span></td>
+            <td><span class="math">F_l^* = {1,...,l*}</span></td>
+            <td>Quotient of arithmetic automorphisms of <span class="math">C_K</span>; multiplicative/toral side.</td>
+          </tr>
+          <tr>
+            <td>Gluing</td>
+            <td><span class="math">F_l superset F_l^x -> F_l^*</span></td>
+            <td>Connects individual prime-strips, entire label sets, and symmetry actions.</td>
+          </tr>
+        </table>
+        <p>
+          Mochizuki stresses that these symmetries are not decorative. They are used
+          in the Kummer-theoretic arguments of §3.6, and they mirror additive and
+          toral symmetries from the upper half-plane and p-adic Hecke correspondence
+          analogies.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.3(v)</a>
+          Related: <a href="#flpm-groups-torsors-iut-i61">F_l± groups/torsors</a>
+          <a href="#fl-multiradial-combinatorics-474">F_l multiradial combinatorics</a>
+          <a href="#alien-theta-links-337">theta-links</a>
+        </div>
+      </section>
+
+      <section id="alien-log-links-336" data-filter="mutually alien copies 3.3 log links vertical arrows indeterminate isomorphism D hodge theater vertically coric arithmetic analytic continuation Belyi cuspidalization">
+        <h2>Alien Copies 3.3(vi): Log-Links</h2>
+        <p class="lede">
+          A log-link is a vertical arrow of the log-theta-lattice. It relates copies of
+          the local data <span class="math">Pi_X acts O_k^triangleright</span> by the
+          logarithmic operation of §2.12, but the underlying copies of
+          <span class="math">Pi_X</span> must be regarded as distinct abstract topological
+          groups related only by an indeterminate isomorphism.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Log-link point</th><th>Content</th><th>Consequence</th></tr>
+          <tr><td>D-Hodge theaters</td><td>The log-link induces an indeterminate isomorphism between the associated D-Hodge theaters.</td><td>D-Hodge theaters are vertically coric.</td></tr>
+          <tr><td>Arithmetic holomorphic structures</td><td>Each <span class="math">Pi_X</span> can reconstruct base-field ring structure by mono-anabelian algorithms.</td><td>The group is an abstract representative of arithmetic holomorphic structure.</td></tr>
+          <tr><td>Arithmetic analytic continuation</td><td>Localizations and gluings in a theater or log-link act like analytic continuation between number fields along prime-strips.</td><td>Implemented through mono-anabelian reconstruction and Belyi cuspidalization.</td></tr>
+          <tr><td>Cuspidalization</td><td>Dense opens of <span class="math">P^1 minus {0,1,infty}</span> can be recovered via suitable Belyi maps and open subgroups.</td><td>Relates function theory on a curve and on dense opens, formally resembling analytic continuation.</td></tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.3(vi)</a>
+          Related: <a href="#alien-mlf-transport-212">MLF transport</a>
+          <a href="#absolute-anabelian-mutation-35">absolute anabelian mutation</a>
+          <a href="#tautological-full-log-link-page-iii112">full log-link</a>
+        </div>
+      </section>
+
+      <section id="alien-theta-links-337" data-filter="mutually alien copies 3.3 theta links q to q j squared unit group value group local global Frobenius-like etale-like bicoric theta pilot q pilot">
+        <h2>Alien Copies 3.3(vii): Theta-Links</h2>
+        <p class="lede">
+          The theta-link is the horizontal gluing, roughly modeled on
+          <span class="math">q -> {q^{j^2}}</span> for
+          <span class="math">j=1,...,l*</span>. Technically, it glues domain and codomain
+          Hodge-theater data through unit-group portions, local value-group portions,
+          and global realified Frobenioids.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Portion</th><th>Domain side</th><th>Codomain side</th></tr>
+          <tr>
+            <td>Unit group</td>
+            <td><span class="math">(a_Theta)</span>: local data <span class="math">G_k acts O_k^{x,mu}</span> with integral structures for open subgroups.</td>
+            <td><span class="math">(a_q)</span>: analogous local unit data in the codomain theater.</td>
+          </tr>
+          <tr>
+            <td>Local value group</td>
+            <td><span class="math">(b_Theta)</span>: formal monoids generated by <span class="math">{q_v^{j^2}}</span>.</td>
+            <td><span class="math">(b_q)</span>: formal monoids generated by <span class="math">q_v</span>.</td>
+          </tr>
+          <tr>
+            <td>Global value group</td>
+            <td><span class="math">(c_Theta)</span>: global realified Frobenioid with product-formula relations.</td>
+            <td><span class="math">(c_q)</span>: corresponding global realified Frobenioid.</td>
+          </tr>
+          <tr>
+            <td>Coricity</td>
+            <td colspan="2">Unit data is horizontally coric; the topological group portion is bi-coric.</td>
+          </tr>
+        </table>
+        <p>
+          The theta-link is ring-incompatible just like the log-link. Its Frobenius-like
+          portions are initially confined to a fixed Hodge theater, while the etale-like
+          topological group portions are only meaningful up to indeterminate
+          isomorphism. The associated global realified Frobenioid objects are the
+          theta-pilot and q-pilot objects used in the later log-volume estimates.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.3(vii)</a>
+          Related: <a href="#theta-mu-lgp-link-38">theta-link definition</a>
+          <a href="#theta-q-pilot-objects-38">theta-pilot object</a>
+          <a href="#alien-hodge-theater-symmetries-335">Hodge-theater symmetries</a>
         </div>
       </section>
 
