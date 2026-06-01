@@ -1035,6 +1035,12 @@
         <a href="#radial-coric-etale-picture-23">Radial/coric etale picture 2.3</a>
         <a href="#spoke-symmetry-23">Spoke symmetry 2.3</a>
         <a href="#f-perp-prime-strips-pilot-iii24">F-perp prime-strips 2.4</a>
+        <a href="#f-perp-subquotient-frobenioids-24">Subquotient Frobenioids 2.4</a>
+        <a href="#f-perp-global-prime-strip-24">Global F⊥ variants 2.4</a>
+        <a href="#multiradial-f-perp-env-241">Inherited F⊥ multiradiality</a>
+        <a href="#pilot-object-common-container-242">Pilot common container 2.4.2</a>
+        <a href="#pilot-weights-rv-242">Pilot weights r_v</a>
+        <a href="#positive-negative-pilot-warning-242">Positive/negative pilot warning</a>
         <a href="#multiradiality">Multiradiality</a>
         <a href="#tensor-packets-iii31-33">Tensor packets 3.1-3.3</a>
         <a href="#local-lgp-monoids-iii34">Local LGP monoids 3.4</a>
@@ -40093,7 +40099,7 @@
           </tr>
         </table>
         <div class="grid3">
-          <div class="card" id="f-perp-subquotient-frobenioids-24">
+          <div class="card" id="f-perp-subquotient-frobenioids-24-card">
             <h3>Subquotient Frobenioids</h3>
             <p>
               Definition 2.4 starts with local split Frobenioids and replaces their
@@ -40103,7 +40109,7 @@
             </p>
             <div class="tagRow"><span class="tag green">Definition 2.4(i)</span><span class="tag">O⊥</span></div>
           </div>
-          <div class="card" id="f-perp-global-prime-strip-24">
+          <div class="card" id="f-perp-global-prime-strip-24-card">
             <h3>Global F⊥ and F variants</h3>
             <p>
               The global <span class="math">F⊥</span> and
@@ -40114,7 +40120,7 @@
             </p>
             <div class="tagRow"><span class="tag blue">Definition 2.4(iii)</span><span class="tag">global strip</span></div>
           </div>
-          <div class="card" id="multiradial-f-perp-env-241">
+          <div class="card" id="multiradial-f-perp-env-241-card">
             <h3>Inherited multiradiality</h3>
             <p>
               Remark 2.4.1 says that the theta-monoid multiradiality of Corollary 2.3
@@ -40123,7 +40129,7 @@
             </p>
             <div class="tagRow"><span class="tag violet">Remark 2.4.1</span><span class="tag">inheritance</span></div>
           </div>
-          <div class="card" id="pilot-object-common-container-242">
+          <div class="card" id="pilot-object-common-container-242-card">
             <h3>Pilot-object common container</h3>
             <p>
               Remark 2.4.2 reconstructs the common Frobenioid container from
@@ -40133,7 +40139,7 @@
             </p>
             <div class="tagRow"><span class="tag green">Remark 2.4.2(v)-(vi)</span><span class="tag">common container</span></div>
           </div>
-          <div class="card" id="pilot-weights-rv-242">
+          <div class="card" id="pilot-weights-rv-242-card">
             <h3>Weights r_v</h3>
             <p>
               The local weights combine residue degree factors with either
@@ -40143,7 +40149,7 @@
             </p>
             <div class="tagRow"><span class="tag gold">Remark 2.4.2(ii)-(iv)</span><span class="tag">weights</span></div>
           </div>
-          <div class="card" id="positive-negative-pilot-warning-242">
+          <div class="card" id="positive-negative-pilot-warning-242-card">
             <h3>Positive/negative warning</h3>
             <p>
               Remark 2.4.2 warns that comparing positive and negative pilot choices
@@ -40169,6 +40175,294 @@
           <a href="#theta-pilot-q-pilot">theta/q pilot objects</a>
           <a href="#weighted-log-volume-measure">weighted log-volume measure</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="f-perp-subquotient-frobenioids-24" data-filter="iut iii definition 2.4 f perp subquotient frobenioids o perp o triangle torsion quotient good bad primes">
+        <h2>IUT III Definition 2.4(i): Subquotient Frobenioids</h2>
+        <p class="lede">
+          Definition 2.4(i) starts from an <span class="math">F⊢</span>-prime-strip
+          and replaces the split Frobenioid portion at each place by Frobenioids
+          determined by the subquotient monoids <span class="math">O⊥ ⊆ O◃</span>
+          and <span class="math">O</span>. At bad primes,
+          <span class="math">O</span> is obtained by quotienting
+          <span class="math">O⊥</span> by torsion; at good primes the unit subgroup
+          is trivial and <span class="math">O = O⊥</span>.
+        </p>
+        <div class="diagram fit" aria-label="Subquotient Frobenioids in Definition 2.4(i)">
+          <div class="diagramHeader">
+            <strong>Local Replacement</strong>
+            <span>from split Frobenioid portions to O⊥ and torsion-quotient Frobenioids</span>
+          </div>
+          <svg viewBox="0 0 960 300" role="img">
+            <defs>
+              <marker id="arrowFperpSub24" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="58" y="72" width="230" height="92"></rect>
+            <text class="nodeTitle" x="173" y="104" text-anchor="middle">F⊢ local strip</text>
+            <text class="tinyText" x="173" y="132" text-anchor="middle">split Frobenioid portion</text>
+            <rect class="nodeBox green" x="368" y="72" width="230" height="92"></rect>
+            <text class="nodeTitle" x="483" y="104" text-anchor="middle">O⊥ ⊆ O◃</text>
+            <text class="tinyText" x="483" y="132" text-anchor="middle">submonoid data</text>
+            <rect class="nodeBox gold" x="678" y="72" width="230" height="92"></rect>
+            <text class="nodeTitle" x="793" y="104" text-anchor="middle">O quotient</text>
+            <text class="tinyText" x="793" y="132" text-anchor="middle">bad: quotient by torsion</text>
+            <path d="M290 118 H366" class="edge blue" marker-end="url(#arrowFperpSub24)"></path>
+            <path d="M600 118 H676" class="edge green" marker-end="url(#arrowFperpSub24)"></path>
+            <text class="tinyText" x="793" y="210" text-anchor="middle">good primes: unit subgroup trivial, so O = O⊥</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Place type</th><th>Source construction</th><th>Formal distinction</th></tr>
+          <tr><td>Bad nonarchimedean</td><td><span class="math">O⊥ ⊆ O◃</span>, then quotient <span class="math">O⊥</span> by torsion.</td><td>Torsion must remain explicit because it feeds the later <span class="math">×μ</span> separation.</td></tr>
+          <tr><td>Good nonarchimedean</td><td>The unit subgroup is trivial, and <span class="math">O = O⊥</span>.</td><td>Do not import the bad-prime torsion quotient into this case.</td></tr>
+          <tr><td>Output notation</td><td>Collections <span class="math">F⊢⊥</span> and <span class="math">F⊢</span>.</td><td>These are local replacements of the split Frobenioid portion, not new Hodge theaters.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Definition 2.4(i)</a>
+          Related: <a href="#f-perp-prime-strips-pilot-iii24">F-perp overview</a>
+          <a href="#bad-prime-radial-insulation-22">bad-prime radial insulation</a>
+          <a href="#log-shell-variants-prop12-iii">log-shell variants</a>
+        </div>
+      </section>
+
+      <section id="f-perp-global-prime-strip-24" data-filter="iut iii definition 2.4 global f perp prime strip c prime c v local strip rho maps">
+        <h2>IUT III Definition 2.4(ii)-(iii): Global F⊥ Variants</h2>
+        <p class="lede">
+          Definition 2.4(ii) defines local <span class="math">F⊢⊥</span> and
+          <span class="math">F⊢</span> prime-strips as collections over
+          <span class="math">V</span>. Definition 2.4(iii) then defines global
+          <span class="math">F⊥</span> and <span class="math">F</span> prime-strips
+          by retaining the usual global spine
+          <span class="math">(C, Prime(C) ≃ V, local strip, ρ_v)</span> and replacing
+          the local <span class="math">F⊢</span> portion by the corresponding
+          <span class="math">F⊢⊥</span> or <span class="math">F⊢</span> variant.
+        </p>
+        <div class="diagram fit" aria-label="Global F perp prime-strip spine">
+          <div class="diagramHeader">
+            <strong>Global Spine</strong>
+            <span>the global container is preserved while the local strip type changes</span>
+          </div>
+          <svg viewBox="0 0 1000 320" role="img">
+            <defs>
+              <marker id="arrowFperpGlobal24" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="72" width="210" height="82"></rect>
+            <text class="nodeTitle" x="175" y="104" text-anchor="middle">global C</text>
+            <text class="tinyText" x="175" y="128" text-anchor="middle">realified Frobenioid</text>
+            <rect class="nodeBox green" x="340" y="72" width="210" height="82"></rect>
+            <text class="nodeTitle" x="445" y="104" text-anchor="middle">Prime(C) ≃ V</text>
+            <text class="tinyText" x="445" y="128" text-anchor="middle">place indexing</text>
+            <rect class="nodeBox gold" x="610" y="72" width="210" height="82"></rect>
+            <text class="nodeTitle" x="715" y="104" text-anchor="middle">local F⊢⊥/F⊢</text>
+            <text class="tinyText" x="715" y="128" text-anchor="middle">Definition 2.4(ii)</text>
+            <rect class="nodeBox violet" x="404" y="218" width="210" height="72"></rect>
+            <text class="nodeTitle" x="509" y="248" text-anchor="middle">ρ_v maps</text>
+            <text class="tinyText" x="509" y="272" text-anchor="middle">comparison data</text>
+            <path d="M282 113 H338" class="edge blue" marker-end="url(#arrowFperpGlobal24)"></path>
+            <path d="M552 113 H608" class="edge green" marker-end="url(#arrowFperpGlobal24)"></path>
+            <path d="M715 156 C690 194 626 212 560 228" class="edge gold" marker-end="url(#arrowFperpGlobal24)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Level</th><th>Definition 2.4 data</th><th>Audit point</th></tr>
+          <tr><td>Local nonarchimedean</td><td>A Frobenioid isomorphic to the corresponding <span class="math">F⊢⊥</span> or <span class="math">F⊢</span> local object.</td><td>The placewise type is part of the data.</td></tr>
+          <tr><td>Local archimedean</td><td>A Frobenioid plus an object of <span class="math">TM⊢</span>.</td><td>Archimedean structure is not silently identified with the nonarchimedean case.</td></tr>
+          <tr><td>Global</td><td><span class="math">C</span>, <span class="math">Prime(C) ≃ V</span>, local strip data, and <span class="math">ρ_v</span>.</td><td>This is the global container used by pilot-object reconstruction.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Definition 2.4(ii)-(iii)</a>
+          Related: <a href="#f-perp-subquotient-frobenioids-24">subquotient Frobenioids</a>
+          <a href="#pilot-object-common-container-242">pilot common container</a>
+          <a href="#global-realified-theater-35-36">global realified theater</a>
+        </div>
+      </section>
+
+      <section id="multiradial-f-perp-env-241" data-filter="iut iii remark 2.4.1 f perp env inherited multiradiality f env d greater o perp theorem 2.2">
+        <h2>IUT III Remark 2.4.1: Inherited F⊥ Multiradiality</h2>
+        <p class="lede">
+          Remark 2.4.1 says that applying Definition 2.4(i) to the
+          <span class="math">Fenv(D&gt;)</span> prime-strips of Corollary 2.3 gives
+          corresponding multiradiality for
+          <span class="math">F⊥env(D&gt;)</span>. At bad primes, the
+          <span class="math">O⊥</span> submonoids sit naturally inside the
+          <span class="math">∞Ψ⊥env(D&gt;)_v</span> monoids of Theorem 2.2(ii).
+        </p>
+        <div class="diagram fit" aria-label="Inherited F perp multiradiality">
+          <div class="diagramHeader">
+            <strong>Inheritance</strong>
+            <span>Definition 2.4 does not create a new independent bridge</span>
+          </div>
+          <svg viewBox="0 0 980 300" role="img">
+            <defs>
+              <marker id="arrowFperpInherit241" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="70" width="250" height="90"></rect>
+            <text class="nodeTitle" x="195" y="102" text-anchor="middle">Corollary 2.3</text>
+            <text class="tinyText" x="195" y="130" text-anchor="middle">multiradial Fenv(D&gt;)</text>
+            <rect class="nodeBox green" x="392" y="70" width="250" height="90"></rect>
+            <text class="nodeTitle" x="517" y="102" text-anchor="middle">Definition 2.4(i)</text>
+            <text class="tinyText" x="517" y="130" text-anchor="middle">replace by O⊥/O quotient</text>
+            <rect class="nodeBox gold" x="714" y="70" width="210" height="90"></rect>
+            <text class="nodeTitle" x="819" y="102" text-anchor="middle">F⊥env(D&gt;)</text>
+            <text class="tinyText" x="819" y="130" text-anchor="middle">inherited multiradiality</text>
+            <rect class="nodeBox red" x="356" y="216" width="270" height="62"></rect>
+            <text class="nodeTitle" x="491" y="244" text-anchor="middle">bad prime O⊥ ⊆ ∞Ψ⊥env(D&gt;)_v</text>
+            <text class="tinyText" x="491" y="264" text-anchor="middle">compatibility with Rbad</text>
+            <path d="M322 115 H390" class="edge blue" marker-end="url(#arrowFperpInherit241)"></path>
+            <path d="M644 115 H712" class="edge green" marker-end="url(#arrowFperpInherit241)"></path>
+            <path d="M517 162 V214" class="edge red" marker-end="url(#arrowFperpInherit241)"></path>
+          </svg>
+        </div>
+        <div class="callout">
+          <strong>Formalization guardrail.</strong> The <span class="math">F⊥</span>
+          layer should be linked back to Corollary 2.3 and Theorem 2.2(ii). Treating
+          it as a fresh assumed multiradial bridge would hide the source dependency.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 2.4.1</a>
+          Related: <a href="#radial-coric-etale-picture-23">radial/coric etale picture</a>
+          <a href="#f-perp-subquotient-frobenioids-24">subquotient Frobenioids</a>
+          <a href="#bad-prime-radial-insulation-22">bad-prime radial insulation</a>
+        </div>
+      </section>
+
+      <section id="pilot-object-common-container-242" data-filter="iut iii remark 2.4.2 pilot object common container pic c ordered monoid realified frobenioid">
+        <h2>IUT III Remark 2.4.2(v)-(vi): Pilot-Object Common Container</h2>
+        <p class="lede">
+          Remark 2.4.2 uses <span class="math">Pic(C)</span>, with its ordered
+          monoid structure, to reconstruct the common realified Frobenioid container
+          <span class="math">C</span> and its prime set. A negative pilot element then
+          reconstructs the additional local constant-divisor monoids and
+          <span class="math">ρ_v</span> maps. Distinct negative pilot choices can be
+          compared inside the same container.
+        </p>
+        <div class="diagram fit" aria-label="Pilot object common container">
+          <div class="diagramHeader">
+            <strong>Common Container</strong>
+            <span>Pic(C) reconstructs C; negative pilots add rigidification</span>
+          </div>
+          <svg viewBox="0 0 1020 340" role="img">
+            <defs>
+              <marker id="arrowPilotContainer242" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="70" y="72" width="240" height="84"></rect>
+            <text class="nodeTitle" x="190" y="104" text-anchor="middle">M = Pic(C)</text>
+            <text class="tinyText" x="190" y="130" text-anchor="middle">ordered monoid ≃ R</text>
+            <rect class="nodeBox blue" x="390" y="72" width="240" height="84"></rect>
+            <text class="nodeTitle" x="510" y="104" text-anchor="middle">C, Prime(C) ≃ V</text>
+            <text class="tinyText" x="510" y="130" text-anchor="middle">common container</text>
+            <rect class="nodeBox gold" x="710" y="72" width="240" height="84"></rect>
+            <text class="nodeTitle" x="830" y="104" text-anchor="middle">negative η_M</text>
+            <text class="tinyText" x="830" y="130" text-anchor="middle">further rigidification</text>
+            <rect class="nodeBox violet" x="390" y="228" width="240" height="74"></rect>
+            <text class="nodeTitle" x="510" y="258" text-anchor="middle">compare pilots in C</text>
+            <text class="tinyText" x="510" y="282" text-anchor="middle">only same orientation</text>
+            <path d="M312 114 H388" class="edge green" marker-end="url(#arrowPilotContainer242)"></path>
+            <path d="M632 114 H708" class="edge blue" marker-end="url(#arrowPilotContainer242)"></path>
+            <path d="M830 158 C796 206 676 232 632 252" class="edge gold" marker-end="url(#arrowPilotContainer242)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Input</th><th>Reconstructed output</th><th>Meaning</th></tr>
+          <tr><td><span class="math">M ≃ R</span> as ordered monoid</td><td><span class="math">C, Prime(C) ≃ V</span></td><td>The common realified Frobenioid container.</td></tr>
+          <tr><td><span class="math">(M, η_M&lt;0)</span></td><td>Local constant divisor monoids and <span class="math">ρ_v</span> maps</td><td>The pilot rigidification.</td></tr>
+          <tr><td>Distinct negative pilots</td><td>Comparable rigidifications in the same <span class="math">C</span></td><td>The common-container comparison used downstream.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 2.4.2(v)-(vi)</a>
+          Related: <a href="#pilot-weights-rv-242">pilot weights</a>
+          <a href="#positive-negative-pilot-warning-242">positive/negative warning</a>
+          <a href="#gt-common-container-analogy-page">common containers</a>
+        </div>
+      </section>
+
+      <section id="pilot-weights-rv-242" data-filter="iut iii remark 2.4.2 weights rv log pv ord q negative pilot rho eta">
+        <h2>IUT III Remark 2.4.2(ii)-(iv): Pilot Weights r_v</h2>
+        <p class="lede">
+          Remark 2.4.2 defines local weights
+          <span class="math">r_v</span> using residue-degree factors and either
+          <span class="math">log(p_v)</span> at good primes or
+          <span class="math">ord_v(q_v)log(p_v)</span> at bad primes. For an ordered
+          monoid <span class="math">M ≃ R</span>, the local maps
+          <span class="math">ρ_{M_v}</span> multiply by <span class="math">r_v</span>
+          and reverse the order; with a negative pilot element,
+          <span class="math">ρ_v(η_v)=r_vη</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Place</th><th>Weight</th><th>Use</th></tr>
+          <tr><td>Good</td><td><span class="math">[(Fmod)_v : Q_{v_Q}] · log(p_v)</span></td><td>Ordinary local residue-degree/log-prime factor.</td></tr>
+          <tr><td>Bad</td><td><span class="math">[(Fmod)_v : Q_{v_Q}] · ord_v(q_v) · log(p_v)</span></td><td>Includes the Tate parameter valuation.</td></tr>
+          <tr><td>All places</td><td><span class="math">ρ_v(η_v)=r_vη</span></td><td>Relates local pilot generators to the global pilot element.</td></tr>
+        </table>
+        <div class="callout">
+          <strong>Sign convention.</strong> The source uses a negative pilot element.
+          This is why the local submonoids are generated by negative-direction data
+          even though the weights <span class="math">r_v</span> themselves are
+          nonnegative real factors.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 2.4.2(ii)-(iv)</a>
+          Related: <a href="#pilot-object-common-container-242">pilot common container</a>
+          <a href="#weighted-log-volume-measure">weighted log-volume measure</a>
+          <a href="#theta-pilot-q-pilot">theta/q pilot objects</a>
+        </div>
+      </section>
+
+      <section id="positive-negative-pilot-warning-242" data-filter="iut iii remark 2.4.2 positive negative pilot warning order reversal pre steps ambient category heights">
+        <h2>IUT III Remark 2.4.2(vi): Positive/Negative Pilot Warning</h2>
+        <p class="lede">
+          Remark 2.4.2 warns against comparing constructions built from positive and
+          negative pilot elements. Reversing the order on
+          <span class="math">M = Pic(C)</span> reverses the direction of the
+          Frobenioid pre-steps. Embedding both versions into a larger category where
+          these pre-steps are invertible makes the arithmetic degree/height
+          distinction meaningless.
+        </p>
+        <div class="diagram fit" aria-label="Positive versus negative pilot warning">
+          <div class="diagramHeader">
+            <strong>Orientation Warning</strong>
+            <span>do not compare opposite pilot signs by inverting the pre-steps</span>
+          </div>
+          <svg viewBox="0 0 980 300" role="img">
+            <defs>
+              <marker id="arrowPilotWarn242" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox green" x="72" y="70" width="230" height="88"></rect>
+            <text class="nodeTitle" x="187" y="102" text-anchor="middle">negative η</text>
+            <text class="tinyText" x="187" y="130" text-anchor="middle">source orientation</text>
+            <rect class="nodeBox red" x="376" y="70" width="230" height="88"></rect>
+            <text class="nodeTitle" x="491" y="102" text-anchor="middle">positive η</text>
+            <text class="tinyText" x="491" y="130" text-anchor="middle">reversed order</text>
+            <rect class="nodeBox gold" x="680" y="70" width="230" height="88"></rect>
+            <text class="nodeTitle" x="795" y="102" text-anchor="middle">ambient inversion</text>
+            <text class="tinyText" x="795" y="130" text-anchor="middle">objects become isomorphic</text>
+            <path d="M304 114 H374" class="edge red" marker-end="url(#arrowPilotWarn242)"></path>
+            <path d="M608 114 H678" class="edge red" marker-end="url(#arrowPilotWarn242)"></path>
+            <text class="tinyText" x="491" y="218" text-anchor="middle">height distinction is lost if pre-steps are forced invertible</text>
+          </svg>
+        </div>
+        <div class="callout warn">
+          <strong>Audit rule.</strong> A formal model should reject an interface that
+          compares positive and negative pilot choices by passing to a category in
+          which all pre-steps are isomorphisms. That move destroys the degree data
+          needed by the later height inequalities.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 2.4.2(vi)</a>
+          Related: <a href="#pilot-object-common-container-242">pilot common container</a>
+          <a href="#pilot-weights-rv-242">pilot weights</a>
+          <a href="#discrete-rigidity-no-z-completion-211">discrete rigidity/positivity</a>
         </div>
       </section>
 
