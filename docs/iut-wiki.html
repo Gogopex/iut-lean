@@ -79,7 +79,11 @@
       line-height: 1.05;
       letter-spacing: 0;
     }
-    .brand { margin-bottom: 14px; }
+    .brand {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
 
     .searchBox {
       margin: 0 0 16px;
@@ -125,6 +129,10 @@
     nav a:hover, nav a.active {
       background: #eef1ed;
       border-color: #dfe3dc;
+    }
+    nav a.active {
+      color: var(--blue);
+      font-weight: 700;
     }
 
     .sourceLinks {
@@ -200,6 +208,7 @@
     section {
       display: none;
       padding: 30px 0 42px;
+      min-height: calc(100vh - 124px);
       scroll-margin-top: 14px;
     }
     section[hidden] { display: none !important; }
@@ -209,6 +218,16 @@
     body:not(.wiki-ready) main section#home { display: block; }
     main section.active-page.hero,
     body:not(.wiki-ready) main section#home.hero { display: grid; }
+    body.wiki-ready main section.active-page {
+      animation: pageIn 120ms ease-out;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.wiki-ready main section.active-page { animation: none; }
+    }
+    @keyframes pageIn {
+      from { opacity: 0.78; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     section h2 {
       margin: 0 0 12px;
       font-size: clamp(1.75rem, 3vw, 2.6rem);
@@ -578,9 +597,12 @@
     }
 
     @media (max-width: 620px) {
-      .layout { grid-template-columns: minmax(158px, 42vw) minmax(0, 1fr); }
-      aside { padding: 16px 10px; }
-      nav a { font-size: 0.74rem; }
+      .layout { grid-template-columns: 132px minmax(0, 1fr); }
+      aside { padding: 14px 8px; }
+      .brand h1 { font-size: 1.12rem; }
+      .searchBox { padding: 7px; }
+      .searchBox input { padding: 7px 6px; font-size: 0.78rem; }
+      nav a { font-size: 0.69rem; padding: 6px 5px; }
       .hero h2 { font-size: clamp(1.9rem, 8vw, 2.45rem); }
       .hero p { font-size: 1rem; }
       .heroActions { flex-direction: column; align-items: stretch; }
@@ -1291,7 +1313,7 @@
               <a class="button secondary" href="#formalization">Lean efforts</a>
             </div>
           </div>
-          <div class="diagram" aria-label="IUT concept map">
+          <div class="diagram fit" aria-label="IUT concept map">
             <div class="diagramHeader">
               <strong>Global route</strong>
               <span>source objects to Diophantine bounds</span>
@@ -1362,7 +1384,7 @@
           global ring or scheme history. The vocabulary is unusual because the comparison
           method is unusual.
         </p>
-        <div class="grid3">
+        <div class="grid4">
           <div class="card">
             <h3>Objects</h3>
             <p>
@@ -1377,6 +1399,14 @@
               The central motion is through <a href="#theta-log-links">theta links and log
               links</a>, arranged in the <a href="#log-theta-lattice">log-theta lattice</a>.
               These links compare weakened data rather than ordinary scheme identities.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Category Layer</h3>
+            <p>
+              Collas' account is useful as an orientation layer for IUT's categorical
+              replacement of unavailable global scheme-theoretic objects. Use it as a
+              guide, then check every technical object against IUT I-IV.
             </p>
           </div>
           <div class="card">
@@ -1395,6 +1425,7 @@
         </div>
         <div class="related">
           Related: <a href="#reading-map">reading map</a>
+          <a href="#collas-category-perspective">Collas category view</a>
           <a href="#source-library">source library</a>
           <a href="#glossary">glossary</a>
         </div>
@@ -56896,7 +56927,7 @@
       </section>
 
       <footer>
-        IUT Wiki. Local offline edition updated 31 May 2026. Source PDFs are mirrored in <code>docs/papers/</code>; online project links remain external.
+        IUT Wiki. Local offline edition updated 1 June 2026. Source PDFs are mirrored in <code>docs/papers/</code>; online project links remain external.
       </footer>
     </main>
   </div>
@@ -56907,6 +56938,7 @@
     const sectionIds = new Set(sections.map(section => section.id));
     const idOwners = new Map();
     const idElements = new Map();
+    const baseTitle = "IUT Wiki";
     document.querySelectorAll("main [id]").forEach(el => {
       idElements.set(el.id, el);
       const owner = el.closest("section[id]");
@@ -56926,7 +56958,16 @@
 
       navLinks.forEach(a => a.classList.remove("active"));
       const active = navLinks.find(a => a.getAttribute("href") === "#" + page.id);
-      if (active) active.classList.add("active");
+      if (active) {
+        active.classList.add("active");
+        active.setAttribute("aria-current", "page");
+      }
+      navLinks.filter(a => a !== active).forEach(a => a.removeAttribute("aria-current"));
+
+      const heading = page.querySelector("h2, h1");
+      document.title = page.id === "home" || !heading
+        ? baseTitle
+        : `${heading.textContent.trim()} | ${baseTitle}`;
 
       if (sectionIds.has(requested)) {
         history.replaceState(null, "", "#" + page.id);
