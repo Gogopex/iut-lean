@@ -423,6 +423,11 @@ The packet-correspondence source itself can now be built from this reduced
 target data together with the source packet/product calibration.  Thus the
 correspondence constructor no longer needs a completed target-calibration
 record when the target entry and theta-target alignment are available.
+The same reduction has been lifted through the realified-Frobenioid packet
+source: realified Kummer compatibility still supplies the
+\(\mathrm{holomorphicF}\to\mathrm{holomorphicD}\to D^\vdash\) transfer, while
+the target face is now generated from the packet-normalized entry target and
+theta-target alignment.
 The first-pass Gaussian route also has a one-correspondence form: it consumes
 a finite log-Kummer packet-correspondence source and projects the source
 packet/product calibration and target packet-normalized calibration from that
@@ -860,6 +865,10 @@ The project currently proves the following source-facing results in \Lean{}:
   theta-target alignment.  The q-pilot non-interference, source equality, and
   target equality endpoint is then recovered from this constructed
   correspondence.
+\item The realified-Frobenioid log-Kummer packet source has the same reduced
+  target-data constructor: Frobenioid compatibility yields the Kummer and
+  forgetting transfers, while packet-normalized target data is generated from
+  the entry-target source and theta-target alignment.
 \item The finite sign-unit/root-of-unity part of Remark 3.11.4 is formalized:
   sign-unit action preserves full cusp labels, full-label log-volume readings,
   Gaussian degrees, and averaged Gaussian log-volume.
