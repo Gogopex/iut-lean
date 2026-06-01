@@ -555,15 +555,15 @@ theorem thetaPossibleImagesWeightedDeterminant_endpoint
     (q_subset_approximant : qPilotRegion ⊆ approximant.approximant)
     (determinantSource :
       IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
-    (approximant_eq_weighted_normalized :
-      hullData.logVolume approximant.approximant =
-        determinantSource.normalizedLogVolume) :
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        approximant determinantSource) :
     let data :
       IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι :=
       IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow.ofWeightedDeterminant
           hullData possibleThetaImage qPilotRegion
           approximant q_subset_approximant determinantSource
-          approximant_eq_weighted_normalized;
+          compatibility;
     data.thetaImageUnionLogVolume <= data.approximantLogVolume ∧
       data.approximantLogVolume <= data.thetaHullLogVolume ∧
       data.qPilotLogVolume <= data.approximantLogVolume ∧
@@ -573,7 +573,7 @@ theorem thetaPossibleImagesWeightedDeterminant_endpoint
   IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow.ofWeightedDeterminant_endpoint
     hullData possibleThetaImage qPilotRegion approximant
     q_subset_approximant determinantSource
-    approximant_eq_weighted_normalized
+    compatibility
 
 theorem realifiedFrobenioidLogKummerPacket_endpoint
     {coric : Type u}

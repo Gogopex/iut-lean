@@ -2496,6 +2496,69 @@ theorem endpoint
 end IUTStage1ArithmeticVectorBundleWeightedDeterminantSource
 
 /--
+Log-volume compatibility between a hull approximant and a weighted determinant
+source.
+
+Remark 3.9.5(vii), (Ob3-3), permits omitting the intermediate determinant
+operation when the argument only computes log-volumes.  This record is the
+finite compatibility certificate used by the current Stage 1 route: the
+approximant log-volume is identified with the normalized log-volume derived
+from the weighted determinant source.
+-/
+structure IUTStage1HullApproximantWeightedDeterminantCompatibility
+    {α : Type u} {β : Type v} [Fintype β]
+    {hullData : IUTStage1HolomorphicHullLogVolumeShadow α}
+    {region : Set α}
+    (approximant : IUTStage1HullLogVolumeApproximant hullData region)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) where
+  approximant_eq_weighted_normalized :
+    hullData.logVolume approximant.approximant =
+      determinantSource.normalizedLogVolume
+
+namespace IUTStage1HullApproximantWeightedDeterminantCompatibility
+
+variable {α : Type u} {β : Type v} [Fintype β]
+variable {hullData : IUTStage1HolomorphicHullLogVolumeShadow α}
+variable {region : Set α}
+variable {approximant : IUTStage1HullLogVolumeApproximant hullData region}
+variable {determinantSource :
+  IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β}
+
+theorem approximant_eq_determinantLogVolume
+    (data :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        approximant determinantSource) :
+    hullData.logVolume approximant.approximant =
+      determinantSource.determinantLogVolume := by
+  rw [data.approximant_eq_weighted_normalized,
+    determinantSource.normalizedLogVolume_eq_determinantLogVolume]
+
+theorem approximant_eq_projected_normalized
+    (data :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        approximant determinantSource) :
+    hullData.logVolume approximant.approximant =
+      determinantSource.toDeterminantLogVolume.normalizedLogVolume :=
+  data.approximant_eq_weighted_normalized
+
+theorem endpoint
+    (data :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        approximant determinantSource) :
+    hullData.logVolume approximant.approximant =
+        determinantSource.normalizedLogVolume ∧
+      hullData.logVolume approximant.approximant =
+        determinantSource.determinantLogVolume ∧
+      hullData.logVolume approximant.approximant =
+        determinantSource.toDeterminantLogVolume.normalizedLogVolume :=
+  ⟨data.approximant_eq_weighted_normalized,
+    data.approximant_eq_determinantLogVolume,
+    data.approximant_eq_projected_normalized⟩
+
+end IUTStage1HullApproximantWeightedDeterminantCompatibility
+
+/--
 Step (xi-e)/(xi-f) upper-ray comparison after hull, determinant, and normalized
 log-volume.
 
@@ -2841,9 +2904,9 @@ noncomputable def ofWeightedDeterminant
     (q_subset_approximant : qPilotRegion ⊆ approximant.approximant)
     (determinantSource :
       IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
-    (approximant_eq_weighted_normalized :
-      hullData.logVolume approximant.approximant =
-        determinantSource.normalizedLogVolume) :
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        approximant determinantSource) :
     IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι :=
   { hullData := hullData,
     possibleThetaImage := possibleThetaImage,
@@ -2852,7 +2915,7 @@ noncomputable def ofWeightedDeterminant
     determinant := determinantSource.toDeterminantLogVolume,
     q_subset_approximant := q_subset_approximant,
     approximant_eq_normalized_determinant :=
-      approximant_eq_weighted_normalized }
+      compatibility.approximant_eq_projected_normalized }
 
 def thetaImageUnion
     (data :
@@ -2986,13 +3049,13 @@ theorem ofWeightedDeterminant_endpoint
     (q_subset_approximant : qPilotRegion ⊆ approximant.approximant)
     (determinantSource :
       IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
-    (approximant_eq_weighted_normalized :
-      hullData.logVolume approximant.approximant =
-        determinantSource.normalizedLogVolume) :
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        approximant determinantSource) :
     let data :=
       ofWeightedDeterminant hullData possibleThetaImage qPilotRegion
         approximant q_subset_approximant determinantSource
-        approximant_eq_weighted_normalized;
+        compatibility;
     data.thetaImageUnionLogVolume <= data.approximantLogVolume ∧
       data.approximantLogVolume <= data.thetaHullLogVolume ∧
       data.qPilotLogVolume <= data.approximantLogVolume ∧
