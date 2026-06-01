@@ -451,6 +451,35 @@
       white-space: normal;
       word-break: break-word;
     }
+    table.sourceTable4 > tbody {
+      table-layout: fixed;
+      min-width: min(1040px, 100%);
+    }
+    table.sourceTable4 th,
+    table.sourceTable4 td {
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+    table.sourceTable4 th:first-child,
+    table.sourceTable4 td:first-child {
+      width: 8%;
+      white-space: normal;
+    }
+    table.sourceTable4 th:nth-child(2),
+    table.sourceTable4 td:nth-child(2) {
+      width: 28%;
+      min-width: 0;
+    }
+    table.sourceTable4 th:nth-child(3),
+    table.sourceTable4 td:nth-child(3) {
+      width: 44%;
+      min-width: 0;
+    }
+    table.sourceTable4 th:last-child,
+    table.sourceTable4 td:last-child {
+      width: 20%;
+      min-width: 0;
+    }
 
     .sourceCard {
       display: grid;
@@ -521,11 +550,21 @@
       table.sourceTable3 {
         overflow-x: visible;
       }
+      table.sourceTable4 {
+        overflow-x: visible;
+      }
       table.sourceTable3 > tbody {
         display: block;
         min-width: 0;
       }
+      table.sourceTable4 > tbody {
+        display: block;
+        min-width: 0;
+      }
       table.sourceTable3 tr:first-child {
+        display: none;
+      }
+      table.sourceTable4 tr:first-child {
         display: none;
       }
       table.sourceTable3 tr {
@@ -533,13 +572,32 @@
         border-bottom: 1px solid var(--line);
         padding: 10px 12px;
       }
+      table.sourceTable4 tr {
+        display: block;
+        border-bottom: 1px solid var(--line);
+        padding: 10px 12px;
+      }
       table.sourceTable3 tr:last-child {
+        border-bottom: none;
+      }
+      table.sourceTable4 tr:last-child {
         border-bottom: none;
       }
       table.sourceTable3 td,
       table.sourceTable3 td:first-child,
       table.sourceTable3 td:nth-child(2),
       table.sourceTable3 td:last-child {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        border-bottom: none;
+        padding: 4px 0 10px;
+      }
+      table.sourceTable4 td,
+      table.sourceTable4 td:first-child,
+      table.sourceTable4 td:nth-child(2),
+      table.sourceTable4 td:nth-child(3),
+      table.sourceTable4 td:last-child {
         display: block;
         width: 100%;
         min-width: 0;
@@ -555,9 +613,22 @@
         letter-spacing: .05em;
         text-transform: uppercase;
       }
+      table.sourceTable4 td::before {
+        display: block;
+        margin-bottom: 2px;
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 760;
+        letter-spacing: .05em;
+        text-transform: uppercase;
+      }
       table.sourceTable3 td:nth-child(1)::before { content: "Item"; }
       table.sourceTable3 td:nth-child(2)::before { content: "Paper content"; }
       table.sourceTable3 td:nth-child(3)::before { content: "Wiki consequence"; }
+      table.sourceTable4 td:nth-child(1)::before { content: "No."; }
+      table.sourceTable4 td:nth-child(2)::before { content: "Paper"; }
+      table.sourceTable4 td:nth-child(3)::before { content: "Wiki role"; }
+      table.sourceTable4 td:nth-child(4)::before { content: "Local source"; }
       table.auditTable3 td:nth-child(1)::before { content: "Theme"; }
       table.auditTable3 td:nth-child(2)::before { content: "Audit reading"; }
       table.auditTable3 td:nth-child(3)::before { content: "Formal source"; }
@@ -628,6 +699,7 @@
         <a href="#orientation">Orientation</a>
         <a href="#reading-map">Reading map</a>
         <a href="#official-corpus">Official corpus</a>
+        <a href="#preparatory-corpus">Preparatory corpus</a>
         <a href="#invitation-expanded-route">Invitation route</a>
         <a href="#panoramic-route">Panoramic route</a>
         <a href="#bogomolov-szpiro-analogy">Bogomolov-Szpiro analogy</a>
@@ -1592,7 +1664,7 @@
           these as the primary source spine; auxiliary papers are used for orientation,
           critique, formalization, and independent checks.
         </p>
-        <table>
+        <table class="sourceTable4">
           <tr><th>No.</th><th>Paper</th><th>Wiki role</th><th>Local source</th></tr>
           <tr><td>1</td><td>IUT I: Construction of Hodge Theaters</td><td>Initial theta data, Frobenioids, theta-Hodge theaters, D-prime-strips.</td><td><a href="papers/mochizuki-iut-i.pdf" target="_blank">PDF</a></td></tr>
           <tr><td>2</td><td>IUT II: Hodge-Arakelov-theoretic Evaluation</td><td>Theta evaluation, mono-theta environments, Gaussian monoids, theta links.</td><td><a href="papers/mochizuki-iut-ii.pdf" target="_blank">PDF</a></td></tr>
@@ -1612,8 +1684,93 @@
         </div>
         <div class="related">
           Related: <a href="#source-library">full source library</a>
+          <a href="#preparatory-corpus">preparatory corpus</a>
           <a href="#formalization">formalization route</a>
           <a href="#iut-i-atlas">paper atlases</a>
+        </div>
+      </section>
+
+      <section id="preparatory-corpus" data-filter="preparatory corpus frobenioids etale theta absolute anabelian topics official iut summit">
+        <h2>Preparatory Corpus</h2>
+        <p class="lede">
+          The 2021 IUT Summit page lists four preparatory papers next to IUT I-IV:
+          Frobenioids I, Frobenioids II, the etale theta function paper, and Topics in
+          Absolute Anabelian Geometry III. These sources supply infrastructure that the
+          four IUT papers repeatedly invoke, so the offline wiki mirrors them locally.
+        </p>
+        <div class="grid2">
+          <div class="card">
+            <h3>Frobenioids I</h3>
+            <p>
+              Develops the general theory of Frobenioids as categorical abstractions of
+              divisor and line-bundle arithmetic, including Frobenius degree, divisor
+              monoids, model Frobenioids, perfection, realification, and
+              birationalization.
+            </p>
+            <div class="tagRow"><span class="tag blue">FrdI</span><span class="tag">general theory</span></div>
+          </div>
+          <div class="card">
+            <h3>Frobenioids II</h3>
+            <p>
+              Continues the Frobenioid framework in the poly-Frobenioid direction,
+              supplying categorical infrastructure for later prime-strip and
+              Frobenius-like constructions.
+            </p>
+            <div class="tagRow"><span class="tag green">FrdII</span><span class="tag">poly-Frobenioids</span></div>
+          </div>
+          <div class="card">
+            <h3>Etale theta function</h3>
+            <p>
+              Provides the etale theta function and its Frobenioid-theoretic
+              manifestations. This is the source behind theta evaluation and the
+              theta-function rigidity that IUT II and later effective-estimate pages use.
+            </p>
+            <div class="tagRow"><span class="tag gold">EtTh</span><span class="tag">theta evaluation</span></div>
+          </div>
+          <div class="card">
+            <h3>Absolute Anabelian Topics III</h3>
+            <p>
+              Supplies absolute anabelian reconstruction input used by the
+              theta-approach and by IUT's recurring distinction between
+              group-theoretic containers and reconstructed ring/scheme data.
+            </p>
+            <div class="tagRow"><span class="tag violet">AbsTopIII</span><span class="tag">reconstruction</span></div>
+          </div>
+        </div>
+        <table>
+          <tr><th>Summit label</th><th>Local source</th><th>Wiki dependency</th></tr>
+          <tr>
+            <td>FrdI</td>
+            <td><a href="papers/mochizuki-frobenioids-i.pdf" target="_blank">The Geometry of Frobenioids I</a></td>
+            <td><a href="#iut-i-frobenioid-package">IUT I Frobenioid package</a>, <a href="#bad-nonarch-frobenioids-32">bad Frobenioids</a></td>
+          </tr>
+          <tr>
+            <td>FrdII</td>
+            <td><a href="papers/mochizuki-frobenioids-ii.pdf" target="_blank">The Geometry of Frobenioids II</a></td>
+            <td><a href="#iut-i-frobenioid-prime-strips-52">Frobenioid prime-strips</a>, <a href="#global-packet-frobenioids-iii36-38">global packet Frobenioids</a></td>
+          </tr>
+          <tr>
+            <td>EtTh</td>
+            <td><a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">The Etale Theta Function and its Frobenioid-theoretic Manifestations</a></td>
+            <td><a href="#theta-evaluation-sections-44-45">theta evaluation</a>, <a href="#explicit-mu6-evaluation-points-page">μ6 evaluation points</a></td>
+          </tr>
+          <tr>
+            <td>AbsTopIII</td>
+            <td><a href="papers/mochizuki-absolute-anabelian-topics-iii.pdf" target="_blank">Topics in Absolute Anabelian Geometry III</a></td>
+            <td><a href="#theta-approach-abs-top-319">theta approach to absolute anabelian algorithms</a>, <a href="#bad-frobenioid-reconstruction-iut-i32">Frobenioid reconstruction</a></td>
+          </tr>
+        </table>
+        <div class="callout">
+          Audit rule: when an IUT page says that a Frobenioid, theta function, or
+          reconstruction algorithm is available by earlier theory, the relevant local
+          preparatory paper should be cited here rather than silently treated as a black
+          box.
+        </div>
+        <div class="related">
+          Source: <a href="https://www.kurims.kyoto-u.ac.jp/~motizuki/ExpHorizIUT21/WS4/ExpHorizIUT21-IUTSummit-notes.html" target="_blank">RIMS IUT Summit 2021 source list</a>
+          Related: <a href="#official-corpus">official corpus</a>
+          <a href="#source-library">source library</a>
+          <a href="#anabelian-background">anabelian background</a>
         </div>
       </section>
 
@@ -60794,8 +60951,9 @@
         <h2>Source Library</h2>
         <p class="lede">
           Local PDF links open from the repository, so the wiki remains usable offline.
-          The ten official Mochizuki IUT-category papers are listed separately in the
-          corpus audit; this library also includes auxiliary surveys, critiques, and
+          The ten official Mochizuki IUT-category papers and the four preparatory papers
+          from the IUT Summit source list are listed separately in the corpus audits;
+          this library also includes auxiliary surveys, critiques, and
           formalization-adjacent papers.
         </p>
         <div class="grid2" id="source-cards">
@@ -60814,6 +60972,22 @@
           <div class="card sourceCard" data-filter="mochizuki iut iv log volume computations abc szpiro vojta">
             <div><h3>IUT IV: Log-Volume Computations and Set-Theoretic Foundations</h3><div class="sourceMeta">Shinichi Mochizuki, April 2020, 87 pp.</div><p>Log-volume estimates and their application to Diophantine consequences.</p></div>
             <a class="pdf" href="papers/mochizuki-iut-iv.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki frobenioids i preparatory divisor line bundle category theory">
+            <div><h3>The Geometry of Frobenioids I</h3><div class="sourceMeta">Shinichi Mochizuki, June 2008, 126 pp.</div><p>General Frobenioid theory: categorical abstraction of divisors, line bundles, Frobenius degree, divisor monoids, and model Frobenioids.</p></div>
+            <a class="pdf" href="papers/mochizuki-frobenioids-i.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki frobenioids ii preparatory poly frobenioids prime strips">
+            <div><h3>The Geometry of Frobenioids II</h3><div class="sourceMeta">Shinichi Mochizuki, 72 pp.</div><p>Continuation of the Frobenioid framework, including poly-Frobenioid infrastructure used around later prime-strip and Frobenius-like constructions.</p></div>
+            <a class="pdf" href="papers/mochizuki-frobenioids-ii.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki etale theta function frobenioid preparatory theta evaluation">
+            <div><h3>The Etale Theta Function</h3><div class="sourceMeta">Shinichi Mochizuki, 112 pp.</div><p>Etale theta functions and Frobenioid-theoretic manifestations; core input for theta evaluation and later μ6 modifications.</p></div>
+            <a class="pdf" href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">PDF</a>
+          </div>
+          <div class="card sourceCard" data-filter="mochizuki absolute anabelian topics iii preparatory reconstruction theta approach">
+            <div><h3>Topics in Absolute Anabelian Geometry III</h3><div class="sourceMeta">Shinichi Mochizuki, 164 pp.</div><p>Absolute anabelian reconstruction input used by the theta-approach and by the group-theoretic reconstruction side of IUT.</p></div>
+            <a class="pdf" href="papers/mochizuki-absolute-anabelian-topics-iii.pdf" target="_blank">PDF</a>
           </div>
           <div class="card sourceCard" data-filter="mochizuki panorama overview inter-universal teichmuller theory">
             <div><h3>Panoramic Overview</h3><div class="sourceMeta">Shinichi Mochizuki, survey, 45 pp.</div><p>Accessible survey of the motivation, non-scheme-theoretic deformation, and components of the log-theta lattice.</p></div>
