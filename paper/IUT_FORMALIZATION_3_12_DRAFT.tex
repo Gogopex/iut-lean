@@ -167,6 +167,11 @@ The current Theorem 3.11 source record now bundles structured
 the 0-column/1-column pilot distinction, distinct log-shell treatments, and the
 Hodge-theater history guard.  This is still a source interface, not a
 construction of Theorem 3.11.
+The \(\IPL\) layer has been separated into a typed log-volume transport datum:
+it carries the source and target Hodge-theater sides, identifies the prime-strip
+link endpoints with the input and output prime strips, records equality of the
+transported real log-volume, and retains the no-history-identification guard.
+It is not yet a construction of the full log-link.
 The final numerical step is elementary:
 \[
   -|\log(q)|\le -|\log(\Theta)|
@@ -531,6 +536,9 @@ The project currently proves the following source-facing results in \Lean{}:
   \(\IPL/\SHE/\APT\), coric output, possible theta images, pilot-column
   asymmetry, distinct log-shell treatments, and the no-history-identification
   guard.
+\item The \(\IPL\) source layer now has an explicit log-volume transport record
+  with source and target Hodge-theater sides, prime-strip endpoint
+  compatibility, log-volume preservation, and no-history-identification.
 \item The target-side theta-to-entry equality is no longer a direct input in the
   strongest route.  It is derived from a Step (x) theta-target alignment and
   calibration of the entry target with the upper-semi target value.

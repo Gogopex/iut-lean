@@ -324,6 +324,25 @@ theorem theorem311MultiradialSourceRecord_endpoint
     endpoint.2.2.2.2.2.2.1,
     endpoint.2.2.2.2.2.2.2.1⟩
 
+theorem iplLogVolumeTransport_endpoint
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    {record : IUTStage1Theorem311MultiradialSourceRecord package}
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    QualitativeData.HasStructuredIPL package.preLedger.output.family ∧
+      transport.iplDatum.link.source =
+        transport.iplDatum.inputPrimeStrip ∧
+      transport.iplDatum.link.target =
+        transport.iplDatum.outputPrimeStrip ∧
+      transport.targetLogVolume = transport.sourceLogVolume ∧
+      transport.sourceTheater.side ≠ transport.targetTheater.side :=
+  let endpoint := transport.transport_endpoint
+  ⟨endpoint.1,
+    endpoint.2.2.2.1,
+    endpoint.2.2.2.2.1,
+    endpoint.2.2.2.2.2.1,
+    endpoint.2.2.2.2.2.2⟩
+
 /-- Summary of the first diagnostic pass through the local `(Ind3)` route. -/
 structure Ind3FirstPassDashboard where
   missingRealAlignmentBlocks : Bool

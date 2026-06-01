@@ -22432,6 +22432,136 @@ theorem sourceRecord_endpoint
 end IUTStage1Theorem311MultiradialSourceRecord
 
 /--
+Typed IPL/log-link transport layer for the Theorem 3.11 source record.
+
+The paper treats the log-link/IPL passage as preserving the relevant log-volume
+information while relating distinct Hodge-theater sides.  This record replaces
+an undifferentiated `HasStructuredIPL` use by an explicit datum: the underlying
+IPL prime-strip link, the domain/codomain theaters taken from the structured
+Theorem 3.11 source record, the two real log-volume readings, the preservation
+equality, and the no-history-identification guard.
+-/
+structure IUTStage1IPLLogVolumeTransport
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    (record : IUTStage1Theorem311MultiradialSourceRecord package) where
+  iplDatum : QualitativeData.IPLDatum package.preLedger.output.family
+  sourceTheater : QualitativeData.HodgeTheaterId
+  targetTheater : QualitativeData.HodgeTheaterId
+  source_theater_eq :
+    sourceTheater =
+      record.bundle.structuredSHE.context.domainStructure.theater
+  target_theater_eq :
+    targetTheater =
+      record.bundle.structuredSHE.context.codomainStructure.theater
+  link_source_eq_input :
+    iplDatum.link.source = iplDatum.inputPrimeStrip
+  link_target_eq_output :
+    iplDatum.link.target = iplDatum.outputPrimeStrip
+  sourceLogVolume : Real
+  targetLogVolume : Real
+  targetLogVolume_eq_sourceLogVolume :
+    targetLogVolume = sourceLogVolume
+  histories_not_identified :
+    sourceTheater.side ≠ targetTheater.side
+
+namespace IUTStage1IPLLogVolumeTransport
+
+variable {source target : Copy} {index : Type u}
+variable {package : IUTStage1SourcePackage source target index}
+variable {record : IUTStage1Theorem311MultiradialSourceRecord package}
+
+def ofSourceRecord
+    (iplDatum : QualitativeData.IPLDatum package.preLedger.output.family)
+    (link_source_eq_input :
+      iplDatum.link.source = iplDatum.inputPrimeStrip)
+    (link_target_eq_output :
+      iplDatum.link.target = iplDatum.outputPrimeStrip)
+    (sourceLogVolume targetLogVolume : Real)
+    (targetLogVolume_eq_sourceLogVolume :
+      targetLogVolume = sourceLogVolume) :
+    IUTStage1IPLLogVolumeTransport record :=
+  { iplDatum := iplDatum,
+    sourceTheater :=
+      record.bundle.structuredSHE.context.domainStructure.theater,
+    targetTheater :=
+      record.bundle.structuredSHE.context.codomainStructure.theater,
+    source_theater_eq := rfl,
+    target_theater_eq := rfl,
+    link_source_eq_input := link_source_eq_input,
+    link_target_eq_output := link_target_eq_output,
+    sourceLogVolume := sourceLogVolume,
+    targetLogVolume := targetLogVolume,
+    targetLogVolume_eq_sourceLogVolume :=
+      targetLogVolume_eq_sourceLogVolume,
+    histories_not_identified := record.hodgeHistories_not_identified }
+
+theorem hasStructuredIPL
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    QualitativeData.HasStructuredIPL package.preLedger.output.family :=
+  ⟨transport.iplDatum⟩
+
+theorem sourceTheater_eq_domain
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    transport.sourceTheater =
+      record.bundle.structuredSHE.context.domainStructure.theater :=
+  transport.source_theater_eq
+
+theorem targetTheater_eq_codomain
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    transport.targetTheater =
+      record.bundle.structuredSHE.context.codomainStructure.theater :=
+  transport.target_theater_eq
+
+theorem targetLogVolume_preserved
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    transport.targetLogVolume = transport.sourceLogVolume :=
+  transport.targetLogVolume_eq_sourceLogVolume
+
+theorem sourceLogVolume_eq_targetLogVolume
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    transport.sourceLogVolume = transport.targetLogVolume :=
+  transport.targetLogVolume_preserved.symm
+
+theorem histories_not_identified'
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    transport.sourceTheater.side ≠ transport.targetTheater.side :=
+  transport.histories_not_identified
+
+theorem linkSource_eq_datum_source
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    transport.iplDatum.link.source = transport.iplDatum.inputPrimeStrip :=
+  transport.link_source_eq_input
+
+theorem linkTarget_eq_datum_target
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    transport.iplDatum.link.target = transport.iplDatum.outputPrimeStrip :=
+  transport.link_target_eq_output
+
+theorem transport_endpoint
+    (transport : IUTStage1IPLLogVolumeTransport record) :
+    QualitativeData.HasStructuredIPL package.preLedger.output.family ∧
+      transport.sourceTheater =
+        record.bundle.structuredSHE.context.domainStructure.theater ∧
+      transport.targetTheater =
+        record.bundle.structuredSHE.context.codomainStructure.theater ∧
+      transport.iplDatum.link.source =
+        transport.iplDatum.inputPrimeStrip ∧
+      transport.iplDatum.link.target =
+        transport.iplDatum.outputPrimeStrip ∧
+      transport.targetLogVolume = transport.sourceLogVolume ∧
+      transport.sourceTheater.side ≠ transport.targetTheater.side :=
+  ⟨transport.hasStructuredIPL,
+    transport.sourceTheater_eq_domain,
+    transport.targetTheater_eq_codomain,
+    transport.linkSource_eq_datum_source,
+    transport.linkTarget_eq_datum_target,
+    transport.targetLogVolume_preserved,
+    transport.histories_not_identified'⟩
+
+end IUTStage1IPLLogVolumeTransport
+
+/--
 Route-level wrapper for square-weighted full-label transport preservation.
 
 The underlying preservation audit from
