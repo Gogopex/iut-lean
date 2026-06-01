@@ -1180,6 +1180,7 @@
         <a href="#log-shell-radial-environment-ii18ix">Log-shell radial env. 1.8(ix)</a>
         <a href="#aut-gamma-separation-ii181">Aut/Gamma separation 1.8.1</a>
         <a href="#graph-functorial-algorithms-ii19">Graphs of algorithms 1.9</a>
+        <a href="#multiradial-parallel-transport-ii192">Multiradial parallel transport 1.9.2</a>
         <a href="#iut-ii-mono-theta-rigidity-110-112">Mono-theta rigidity 1.10-1.12</a>
         <a href="#mono-theta-rigidity-isomorphism-ii110">Mono-theta rigidity 1.10</a>
         <a href="#coric-unit-quotient-ii1102">Coric unit quotient 1.10.2</a>
@@ -32289,6 +32290,128 @@
           Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.9</a>
           Related: <a href="#concrete-radial-examples-ii18">concrete radial examples</a>
           <a href="#coric-uniradial-multiradial-taxonomy-ii-intro">radial taxonomy</a>
+        </div>
+      </section>
+
+      <section id="multiradial-parallel-transport-ii192" data-filter="iut ii remark 1.9.2 multiradial parallel transport arithmetic holomorphic structure mono analytic core tautological non tautological indeterminacy connections">
+        <h2>IUT II Remark 1.9.2: Multiradial Parallel Transport</h2>
+        <p class="lede">
+          Remark 1.9.2 is the conceptual bridge from the abstract graph construction of
+          Example 1.9 to the later rigidity corollaries. It says that a multiradial
+          functor still depends on an arithmetic holomorphic structure, but only through
+          a specified description of how that structure sits in, or is related to, the
+          mono-analytic core.
+        </p>
+        <div class="diagram fit" aria-label="IUT II Remark 1.9.2 multiradial parallel transport">
+          <div class="diagramHeader">
+            <strong>Parallel transport between alien arithmetic holomorphic structures</strong>
+            <span>IUT II, Remark 1.9.2</span>
+          </div>
+          <svg viewBox="0 0 1120 560" role="img">
+            <defs>
+              <marker id="arrowRemark192" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="76" width="270" height="92"></rect>
+            <text class="nodeTitle" x="205" y="108" text-anchor="middle">spoke A</text>
+            <text class="tinyText" x="205" y="134" text-anchor="middle">arithmetic holomorphic structure</text>
+            <text class="tinyText" x="205" y="152" text-anchor="middle">radial data with alpha</text>
+
+            <rect class="nodeBox green" x="425" y="228" width="270" height="92"></rect>
+            <text class="nodeTitle" x="560" y="260" text-anchor="middle">mono-analytic core</text>
+            <text class="tinyText" x="560" y="286" text-anchor="middle">arithmetic real analytic structure</text>
+            <text class="tinyText" x="560" y="304" text-anchor="middle">coric comparison container</text>
+
+            <rect class="nodeBox gold" x="780" y="76" width="270" height="92"></rect>
+            <text class="nodeTitle" x="915" y="108" text-anchor="middle">spoke B</text>
+            <text class="tinyText" x="915" y="134" text-anchor="middle">alien arithmetic holomorphic structure</text>
+            <text class="tinyText" x="915" y="152" text-anchor="middle">read through same core</text>
+
+            <rect class="nodeBox violet" x="102" y="404" width="284" height="88"></rect>
+            <text class="nodeTitle" x="244" y="434" text-anchor="middle">tautological approach</text>
+            <text class="tinyText" x="244" y="458" text-anchor="middle">remember all possible labels</text>
+            <text class="tinyText" x="244" y="476" text-anchor="middle">general but weakly informative</text>
+
+            <rect class="nodeBox red" x="734" y="404" width="284" height="88"></rect>
+            <text class="nodeTitle" x="876" y="434" text-anchor="middle">non-tautological approach</text>
+            <text class="tinyText" x="876" y="458" text-anchor="middle">compute explicit indeterminacies</text>
+            <text class="tinyText" x="876" y="476" text-anchor="middle">used by rigidity corollaries</text>
+
+            <path class="edge blue" d="M340 122 C424 150 488 190 536 226" marker-end="url(#arrowRemark192)"></path>
+            <path class="edge gold" d="M780 122 C696 150 632 190 584 226" marker-end="url(#arrowRemark192)"></path>
+            <path class="edge violet" d="M506 322 C420 358 330 382 260 402" marker-end="url(#arrowRemark192)"></path>
+            <path class="edge red" d="M614 322 C700 358 790 382 860 402" marker-end="url(#arrowRemark192)"></path>
+            <path class="edge green" d="M696 274 H778" marker-end="url(#arrowRemark192)"></path>
+            <path class="edge green" d="M424 274 H342" marker-end="url(#arrowRemark192)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Remark 1.9.2 item</th><th>Paper content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>(i) taxonomy</td>
+            <td>
+              Uniradial functors depend strictly on one arithmetic holomorphic
+              structure; coric functors depend only on the underlying mono-analytic
+              structure; multiradial functors depend on a holomorphic structure only
+              through a specified relation to the mono-analytic core.
+            </td>
+            <td>
+              The wiki should not treat multiradiality as independence from the
+              holomorphic structure. It is dependence made transportable by explicit
+              container data.
+            </td>
+          </tr>
+          <tr>
+            <td>(ii) connection analogy</td>
+            <td>
+              A multiradial environment functions like parallel transport: it describes
+              one arithmetic holomorphic structure from the viewpoint of another
+              structure related only through the mono-analytic core.
+            </td>
+            <td>
+              This is the conceptual source for later "alien copy" pages and for the
+              Corollary 3.12 insistence on comparing through mono-analytic containers.
+            </td>
+          </tr>
+          <tr>
+            <td>(iii) tautological route</td>
+            <td>
+              The tautological construction records a collection of possible labels or
+              choices of arrows in the poly-morphism <span class="math">alpha</span>.
+              Mochizuki calls it useful but comparatively uninformative.
+            </td>
+            <td>
+              A formalization that merely stores all choices may be correct as
+              bookkeeping but does not yet encode the substantive IUT computation.
+            </td>
+          </tr>
+          <tr>
+            <td>(iii) non-tautological route</td>
+            <td>
+              The more interesting route computes explicit indeterminacies, giving a
+              description of an alien structure's data in terms of a given structure's
+              data.
+            </td>
+            <td>
+              Corollaries 1.10-1.12 should be read as computations of permitted
+              indeterminacy, not as arbitrary assumptions of cross-spoke compatibility.
+            </td>
+          </tr>
+        </table>
+        <div class="callout red">
+          Formalization guardrail: do not mark a construction as substantively
+          multiradial merely because a record stores all possible choices. The
+          source-level work is the explicit computation of the indeterminacy that makes
+          transport across alien arithmetic holomorphic structures possible.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 1.9.2 and Fig. 1.3</a>
+          Related: <a href="#graph-functorial-algorithms-ii19">graphs of algorithms</a>
+          <a href="#iut-ii-mono-theta-rigidity-110-112">mono-theta rigidity</a>
+          <a href="#coric-uniradial-multiradial-taxonomy-ii-intro">radial taxonomy</a>
+          <a href="#basepoints-inter-universality">basepoints and inter-universality</a>
+          <a href="#mutually-alien-copies">mutually alien copies</a>
         </div>
       </section>
 
