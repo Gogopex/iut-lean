@@ -793,6 +793,9 @@
         <a href="#alien-mlf-transport-212">Alien MLF transport 2.12</a>
         <a href="#alien-rational-function-monoids-213">Alien rational functions 2.13</a>
         <a href="#alien-finite-harmonic-214">Alien finite harmonic 2.14</a>
+        <a href="#alien-multiradiality-section-3">Alien multiradiality §3</a>
+        <a href="#alien-multiradiality-notion-31">Alien multiradiality 3.1</a>
+        <a href="#alien-multiradiality-examples-32">Alien multiradial examples 3.2</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
         <a href="#iut-i-base-bridges-evaluation-sections">Base bridges/evaluation sections</a>
         <a href="#iut-i-additive-base-bridges-61-610">Additive base bridges 6.1-6.10</a>
@@ -15921,6 +15924,191 @@
           Related: <a href="#invitation-hodge-arakelov">Hodge-Arakelov theory</a>
           <a href="#mono-theta-evaluation-env-ii28">mono-theta evaluation</a>
           <a href="#alien-kodaira-spencer-29">Kodaira-Spencer analogy</a>
+        </div>
+      </section>
+
+      <section id="alien-multiradiality-section-3" data-filter="mutually alien copies section 3 multiradiality abstract analogue parallel transport arithmetic coordinate changes polar cartesian comparison">
+        <h2>Alien Copies §3: Multiradiality</h2>
+        <p class="lede">
+          Section 3 shifts from general arithmetic coordinate changes to the particular
+          IUT coordinate changes. The guiding analogy is the passage from Cartesian to
+          polar coordinates in the Gaussian integral; the technical abstraction is
+          multiradiality, a fullness condition that lets two radial objects be compared
+          after they are expressed through common coric data.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source subsection</th><th>Concept</th><th>Wiki route</th></tr>
+          <tr>
+            <td>§3.1</td>
+            <td>Radial environments, multiradiality, switching, and the parallel-transport analogy.</td>
+            <td><a href="#alien-multiradiality-notion-31">Alien multiradiality 3.1</a></td>
+          </tr>
+          <tr>
+            <td>§3.2</td>
+            <td>Complex holomorphic structures and arithmetic fundamental groups as uniradial/multiradial prototypes.</td>
+            <td><a href="#alien-multiradiality-examples-32">Alien multiradial examples 3.2</a></td>
+          </tr>
+          <tr>
+            <td>§3.3 onward</td>
+            <td>Log-theta-lattice, Kummer decouplings, Galois evaluation, log-shells, and log-volume estimates.</td>
+            <td>Next pages in this source route.</td>
+          </tr>
+        </table>
+        <p>
+          The important discipline for the wiki is that "multiradial" is not just
+          "available in many copies". It is a concrete fullness or lifting property of
+          a radial functor, sometimes obtained by packaging orbit data. That distinction
+          matters for later IUT III statements where the allowed indeterminacies do real
+          work.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3</a>
+          Related: <a href="#multiradiality">general multiradiality page</a>
+          <a href="#tautological-multiradialization-ii17">tautological multiradialization</a>
+          <a href="#collas-log-theta-wandering-page">Collas log-theta wandering</a>
+        </div>
+      </section>
+
+      <section id="alien-multiradiality-notion-31" data-filter="mutually alien copies 3.1 notion of multiradiality radial environment coric data radial data fullness switching functor diagonal object connection parallel transport Kodaira Spencer">
+        <h2>Alien Copies 3.1: Notion of Multiradiality</h2>
+        <p class="lede">
+          Section 3.1 gives the abstract format. A radial environment has radial data,
+          coric data, and a functorial radial algorithm from radial to coric data.
+          It is multiradial precisely when the associated radial functor is full; it is
+          uniradial when fullness fails.
+        </p>
+        <div class="diagram fit" aria-label="Multiradiality as fullness and switching">
+          <div class="diagramHeader">
+            <strong>Fullness gives switching</strong>
+            <span>radial data can be compared through common coric data</span>
+          </div>
+          <svg viewBox="0 0 1000 420" role="img">
+            <defs>
+              <marker id="arrowAlien31" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="88" y="82" width="230" height="82"></rect>
+            <text class="nodeTitle" x="203" y="112" text-anchor="middle">radial data A</text>
+            <text class="tinyText" x="203" y="136" text-anchor="middle">finer holomorphic structure</text>
+            <rect class="nodeBox red" x="682" y="82" width="230" height="82"></rect>
+            <text class="nodeTitle" x="797" y="112" text-anchor="middle">radial data B</text>
+            <text class="tinyText" x="797" y="136" text-anchor="middle">alien radial copy</text>
+            <rect class="nodeBox green" x="360" y="258" width="280" height="82"></rect>
+            <text class="nodeTitle" x="500" y="288" text-anchor="middle">common coric data</text>
+            <text class="tinyText" x="500" y="312" text-anchor="middle">underlying structure after radial algorithm</text>
+            <path class="edge blue" d="M260 166 L430 256" marker-end="url(#arrowAlien31)"></path>
+            <path class="edge red" d="M740 166 L570 256" marker-end="url(#arrowAlien31)"></path>
+            <path class="edge gold" d="M322 122 H678" marker-end="url(#arrowAlien31)"></path>
+            <text class="edgeLabel" x="500" y="101" text-anchor="middle">switching/permutability if full</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Definition item</th><th>Source content</th><th>Formal reading</th></tr>
+          <tr>
+            <td>Type/species</td>
+            <td>A type of mathematical object determines a category in a universe, but the abstract category may forget data; rings isomorphic to <span class="math">Z/pZ</span> illustrate this loss.</td>
+            <td>Do not replace a species by the abstract category it happens to generate.</td>
+          </tr>
+          <tr>
+            <td>Radial environment</td>
+            <td>Radial data, coric data, and a functorial algorithm from radial to coric.</td>
+            <td>The algorithm is part of the structure, not an afterthought.</td>
+          </tr>
+          <tr>
+            <td>Multiradiality</td>
+            <td>The radial functor is full; equivalently, the switching construction preserves isomorphism classes, or objects over common coric data are diagonal up to isomorphism.</td>
+            <td>Later "license to confuse" claims must cite a real fullness/lifting result.</td>
+          </tr>
+          <tr>
+            <td>Connection analogy</td>
+            <td>Fullness acts like parallel transport between two fibers over a shared base path; lifting choices behave like monodromy.</td>
+            <td>Explains why indeterminacy is expected, not accidental.</td>
+          </tr>
+        </table>
+        <p>
+          The Kodaira-Spencer review in §3.1 recasts the classical argument as a
+          degenerate multiradial situation: a line bundle is compared across two
+          infinitesimally close alien factors by means of a common rank-two container.
+          When the two inclusions fail to coincide, the resulting discrepancy is the
+          Kodaira-Spencer morphism.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.1</a>
+          Related: <a href="#multiradial-fullness-ii17">multiradial fullness</a>
+          <a href="#alien-kodaira-spencer-29">Kodaira-Spencer analogy</a>
+          <a href="#category-species-example">category species example</a>
+        </div>
+      </section>
+
+      <section id="alien-multiradiality-examples-32" data-filter="mutually alien copies 3.2 fundamental examples multiradiality complex holomorphic structures GL2 orbits upper half plane arithmetic fundamental groups Aut G orbit local arithmetic holomorphic structures">
+        <h2>Alien Copies 3.2: Multiradial Examples</h2>
+        <p class="lede">
+          Section 3.2 gives two prototype pairs. Forgetting a single complex structure
+          on a real two-space is uniradial, while remembering the entire
+          <span class="math">GL(V)</span>-orbit is tautologically multiradial. Similarly,
+          a bare quotient <span class="math">Pi -> G</span> is uniradial, while adding an
+          <span class="math">Aut(G)</span>-orbit of identifications makes the local
+          arithmetic holomorphic structure multiradial.
+        </p>
+        <div class="diagram fit" aria-label="Fundamental examples of multiradiality">
+          <div class="diagramHeader">
+            <strong>Uniradial data becomes multiradial after orbit packaging</strong>
+            <span>complex and arithmetic prototypes in §3.2</span>
+          </div>
+          <svg viewBox="0 0 1000 430" role="img">
+            <defs>
+              <marker id="arrowAlien32" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="72" width="250" height="76"></rect>
+            <text class="nodeTitle" x="195" y="101" text-anchor="middle">C -> End(V)</text>
+            <text class="tinyText" x="195" y="125" text-anchor="middle">single complex structure: uniradial</text>
+            <rect class="nodeBox green" x="680" y="72" width="250" height="76"></rect>
+            <text class="nodeTitle" x="805" y="101" text-anchor="middle">GL(V)-orbit</text>
+            <text class="tinyText" x="805" y="125" text-anchor="middle">complex structures: multiradial</text>
+            <rect class="nodeBox blue" x="70" y="256" width="250" height="76"></rect>
+            <text class="nodeTitle" x="195" y="285" text-anchor="middle">Pi -> G</text>
+            <text class="tinyText" x="195" y="309" text-anchor="middle">bare quotient: uniradial</text>
+            <rect class="nodeBox green" x="680" y="256" width="250" height="76"></rect>
+            <text class="nodeTitle" x="805" y="285" text-anchor="middle">(Pi, G, alpha)</text>
+            <text class="tinyText" x="805" y="309" text-anchor="middle">Aut(G)-orbit: multiradial</text>
+            <path class="edge gold" d="M322 110 H678" marker-end="url(#arrowAlien32)"></path>
+            <text class="edgeLabel" x="500" y="88" text-anchor="middle">add orbit of structures</text>
+            <path class="edge gold" d="M322 294 H678" marker-end="url(#arrowAlien32)"></path>
+            <text class="edgeLabel" x="500" y="272" text-anchor="middle">add orbit of identifications</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Example</th><th>Uniradial form</th><th>Multiradial form</th></tr>
+          <tr>
+            <td>Complex holomorphic structures</td>
+            <td>One-dimensional <span class="math">C</span>-vector space mapped to its underlying two-dimensional <span class="math">R</span>-space.</td>
+            <td>A real two-space equipped with a <span class="math">GL(V)</span>-orbit of complex structures.</td>
+          </tr>
+          <tr>
+            <td>Teichmuller geometry signal</td>
+            <td>A single holomorphic structure is too rigid for switching.</td>
+            <td>The moduli of complex structures identifies with upper/lower half-planes and recalls dilation parameters.</td>
+          </tr>
+          <tr>
+            <td>Local arithmetic holomorphic structures</td>
+            <td>A topological group <span class="math">Pi</span> with its constructible quotient <span class="math">Pi -> G</span>.</td>
+            <td>A triple <span class="math">(Pi,G,alpha)</span>, where <span class="math">alpha</span> is an <span class="math">Aut(G)</span>-orbit of identifications.</td>
+          </tr>
+        </table>
+        <p>
+          These are deliberately "tautological" examples. They teach the mechanism:
+          adding orbit data can restore fullness, but the resulting multiradiality must
+          be accounted for as structure. This warning carries forward to IUT's
+          log-theta-lattice pages.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.2</a>
+          Related: <a href="#tautological-multiradialization-ii17">tautological multiradialization</a>
+          <a href="#alien-inter-universality-210">inter-universality</a>
+          <a href="#collas-category-perspective">Collas category view</a>
         </div>
       </section>
 
