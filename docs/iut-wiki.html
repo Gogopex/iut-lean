@@ -1408,6 +1408,8 @@
         <a href="#tensor-power-warning-312">3.12 tensor-power warning</a>
         <a href="#generalized-theta-links-3121">Generalized theta links 3.12.1</a>
         <a href="#remark-3122-intertwining">3.12.2 intertwining</a>
+        <a href="#real-line-toy-model-3122">3.12.2 real-line toy model</a>
+        <a href="#juggling-ind3-3122">3.12.2 juggling and Ind3</a>
         <a href="#columns-zero-one-difference">0/1 column difference</a>
         <a href="#metric-analogy-3123">Metric analogy 3.12.3</a>
         <a href="#padic-teich-analogy-3124">p-adic Teich analogy 3.12.4</a>
@@ -53785,6 +53787,110 @@
           Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.12.2(i)-(ii)</a>
           Related: <a href="#membership-step-xif-312">membership Step (xi-f)</a>
           <a href="#ipl-she-apt-source-311">IPL/SHE/APT</a>
+        </div>
+      </section>
+
+      <section id="real-line-toy-model-3122" data-filter="iut iii remark 3.12.2 real line toy model q theta labels abstract symbol upper ray h epsilon logical relation">
+        <h2>IUT III Remark 3.12.2: Real-Line Toy Model</h2>
+        <p class="lede">
+          Remark 3.12.2(ii) gives a deliberately rough toy model for the logical form of
+          Corollary 3.12. Use two labelled copies of the real line,
+          <span class="math">qR</span> and <span class="math">ThetaR</span>, together
+          with an abstract symbol. The labelled assignments to
+          <span class="math">-h</span> and <span class="math">-2h</span> are
+          incompatible if the labels are forgotten at the start. The source then
+          replaces the theta assignment by an upper ray with indeterminacy and asks for
+          it to be intrinsically associated to the q-assignment.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Labelled copies</strong>
+            <p><span class="math">qR</span> contains <span class="math">-h</span>; <span class="math">ThetaR</span> contains <span class="math">-2h</span>.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Forget too early</strong>
+            <p>Identifying both labelled copies with one <span class="math">R</span> makes <span class="math">-h</span> and <span class="math">-2h</span> contradict.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Add indeterminacy</strong>
+            <p>Replace the theta point by the ray <span class="math">{x | x &lt;= -2h+eps}</span>.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Formal inequality</strong>
+            <p>If <span class="math">-h</span> belongs to that ray, then <span class="math">h &lt;= eps</span>.</p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Toy step</th><th>Paper content</th><th>3.12 reading</th></tr>
+          <tr>
+            <td>(atoy)-(ctoy)</td>
+            <td>Distinct labels and an abstract symbol make simultaneous q/theta assignments logically valid.</td>
+            <td>The labelled-copy discipline prevents immediate contradiction.</td>
+          </tr>
+          <tr>
+            <td>(dtoy)</td>
+              <td>The theta assignment is weakened to an upper ray <span class="math">{x | x &lt;= -2h+eps}</span>.</td>
+            <td>This models theta-side output with indeterminacies rather than a fixed point.</td>
+          </tr>
+          <tr>
+            <td>(etoy)</td>
+            <td>The weakened theta assignment is constructed as intrinsically associated to the q-assignment, even after identifying copies of <span class="math">R</span>.</td>
+            <td>This is the toy analogue of IPL/SHE plus the subquotient corridor.</td>
+          </tr>
+          <tr>
+            <td>(ftoy)</td>
+              <td>Membership <span class="math">-h in {x | x &lt;= -2h+eps}</span> gives <span class="math">h &lt;= eps</span>.</td>
+            <td>Once membership is established, the final inequality is formal.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          <strong>Toy model only.</strong> The source says this model is very rough. It
+          illustrates the logical shape of Step (xi-f); it does not replace the
+          hull, determinant, log-Kummer, and log-volume constructions.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.12.2(ii), (atoy)-(ftoy)</a>
+          Related: <a href="#membership-step-xif-312">membership Step (xi-f)</a>
+          <a href="#distinct-labels-tradeoff-3111">distinct-labels tradeoff</a>
+          <a href="#hull-det-closed-loop-iii395">hull/determinant closed loop</a>
+        </div>
+      </section>
+
+      <section id="juggling-ind3-3122" data-filter="iut iii remark 3.12.2 log link juggling ind3 upper semi compatibility arithmetic holomorphic structure vertical line">
+        <h2>IUT III Remark 3.12.2: Log-Link Juggling and Ind3</h2>
+        <p class="lede">
+          Remark 3.12.2(iii) identifies one mechanism that makes reassembly possible:
+          the log-links vertically "juggle" the separated unit/value and
+          additive/multiplicative dimensions. Mochizuki describes this as a
+          combinatorial representation of the arithmetic holomorphic structure of a
+          vertical line. At archimedean primes, he compares it to multiplication by
+          <span class="math">±i</span>, a classical way to encode holomorphic structure.
+          The same juggling is exactly what produces the upper-semi compatibility
+          indeterminacy Ind3.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source point</th><th>Meaning</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Vertical log-links</td>
+            <td>They encode arithmetic holomorphic structure by repeatedly translating between the separated combinatorial dimensions.</td>
+            <td>The vertical direction cannot be collapsed to an inert bookkeeping axis.</td>
+          </tr>
+          <tr>
+            <td>Archimedean analogy</td>
+            <td>The juggling is compared to multiplication by <span class="math">±i</span> as a representation of holomorphic structure.</td>
+            <td>The analogy explains why the mechanism is structural, not a notational artifact.</td>
+          </tr>
+          <tr>
+            <td>Ind3</td>
+            <td>The same log-link juggling gives rise to upper semi-compatibility.</td>
+            <td>Ind3 should be modeled as a consequence of the log-link mechanism, not as a free error term.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.12.2(iii)</a>
+          Related: <a href="#upper-semi-compatibility-card">upper semi-compatibility</a>
+          <a href="#ind1-ind2-ind3-311">Ind1/Ind2/Ind3</a>
+          <a href="#columns-zero-one-difference">0/1 column difference</a>
         </div>
       </section>
 
