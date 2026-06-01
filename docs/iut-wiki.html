@@ -1398,6 +1398,7 @@
         <a href="#bad-prime-radial-insulation-22">Bad-prime radial insulation 2.2</a>
         <a href="#mono-theta-vs-mlf-rigidity-221">Mono-theta vs MLF rigidity</a>
         <a href="#no-naive-power-map-222">No naive power map 2.2.2</a>
+        <a href="#iut-iii-cor23-cluster">Corollary 2.3 cluster</a>
         <a href="#radial-coric-etale-picture-23">Radial/coric etale picture 2.3</a>
         <a href="#spoke-symmetry-23">Spoke symmetry 2.3</a>
         <a href="#f-perp-prime-strips-pilot-iii24">F-perp prime-strips 2.4</a>
@@ -9083,6 +9084,11 @@
             <td><a href="#iut-iii-log-theta-local-cluster">IUT III §1 log-theta cluster</a></td>
             <td>Pages exist for local log-links, log-shell variants, Hodge-theater log-links, Gaussian log-theta lattices, vertical/horizontal coricity, and bi-cores.</td>
             <td>Needs continued source-order expansion of the fine remarks, especially the single-isomorphism synchronization and bi-coricity restrictions.</td>
+          </tr>
+          <tr>
+            <td><a href="#iut-iii-cor23-cluster">IUT III Corollary 2.3 cluster</a></td>
+            <td>Pages now group the radial/coric algorithm, spoke symmetry, polar-coordinate interpretation, <span class="math">∞κ</span>-coric analogue, and theta/number-field container comparison.</td>
+            <td>Needs continued expansion through Remark 2.3.4 and the transition into the F⊥/pilot-object pages.</td>
           </tr>
           <tr>
             <td><a href="#iut-iv-output-cluster">IUT IV output cluster</a></td>
@@ -48105,6 +48111,147 @@
         </div>
       </section>
 
+      <section id="iut-iii-cor23-cluster" data-filter="iut iii corollary 2.3 source cluster radial coric etale picture spokes polar coordinates infinity kappa theta number field geometric container">
+        <h2>IUT III Corollary 2.3 Cluster: Radial/Coric Etale-Picture</h2>
+        <p class="lede">
+          Corollary 2.3 and Remarks 2.3.1-2.3.3 form one source unit. The
+          corollary states the radial-to-coric algorithm and the spoke symmetry of
+          its etale-picture; the remarks explain why this is a canonical splitting
+          of the theta-monoid portion of the Gaussian log-theta lattice, how an
+          analogous <span class="math">∞κ</span>-coric statement fits, and why the
+          theta and number-field outputs differ with respect to the
+          <span class="math">j ∈ F_l</span> labels.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Radial-to-coric algorithm</h3>
+            <p>
+              The radial package consists of a D-Theta±ellNF theater,
+              <span class="math">Fenv(D&gt;)</span>, bad-prime data from Theorem
+              2.2(ii), an <span class="math">F⊢×μ</span> target, and a full
+              poly-isomorphism to that target. The algorithm returns the coric
+              <span class="math">D⊢_△</span> and
+              <span class="math">F⊢×μ_△</span> data.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#radial-coric-etale-picture-23">Cor. 2.3(i)</a>
+              <a class="tag" href="#bad-prime-radial-insulation-22">Theorem 2.2 input</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Spoke symmetry</h3>
+            <p>
+              Vertical arrows identify radial data along a column; horizontal arrows
+              identify the coric data. After this separation, the etale-picture has
+              arbitrary permutation symmetries among the radial spokes indexed by
+              <span class="math">n ∈ Z</span>.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#spoke-symmetry-23">Cor. 2.3(ii)-(iv)</a>
+              <a class="tag" href="#gaussian-log-theta-lattice-source">log-theta lattice</a>
+            </div>
+          </div>
+          <div class="card" id="theta-etale-polar-coordinate-231" data-filter="iut iii remark 2.3.1 polar coordinates gaussian integral etale picture canonical splitting theta monoids">
+            <h3>Polar-coordinate analogy</h3>
+            <p>
+              Remark 2.3.1 compares Figure 2.4 to the polar-coordinate
+              representation of the Gaussian integral. In this analogy, the
+              etale-picture is the canonical splitting of the theta-monoid part of
+              the Gaussian log-theta lattice, not a collapse of the lattice into one
+              holomorphic coordinate system.
+            </p>
+            <div class="tagRow">
+              <span class="tag gold">Remark 2.3.1</span>
+              <a class="tag" href="#theta-values-q-j-squared-intro-ii">theta values</a>
+            </div>
+          </div>
+          <div class="card" id="infinity-kappa-coric-analogue-232" data-filter="iut iii remark 2.3.2 infinity kappa coric localization polymorphisms galois evaluation radial coric decoupling">
+            <h3>∞κ-coric analogue</h3>
+            <p>
+              Remark 2.3.2 says that a similar result may be formulated for
+              <span class="math">∞κ</span>-coric structures by using the
+              localization polymorphisms of IUT II Corollary 4.8. The reconstruction
+              of <span class="math">∞κ</span> from
+              <span class="math">∞κ×</span> via restrictions of Kummer classes is
+              treated as an analogue of the radial/coric decoupling for theta data.
+            </p>
+            <div class="tagRow">
+              <span class="tag violet">Remark 2.3.2</span>
+              <a class="tag" href="#infinity-kappa-pseudomonoids-iut-i317">∞κ pseudo-monoids</a>
+              <a class="tag" href="#infinity-kappa-structures-iut-i51">∞κ structures</a>
+            </div>
+          </div>
+          <div class="card" id="theta-numberfield-container-comparison-233" data-filter="iut iii remark 2.3.3 theta number field multiradial geometric container belyi cuspidalization galois evaluation descent data">
+            <h3>Theta vs number-field containers</h3>
+            <p>
+              Remark 2.3.3 compares two multiradial geometric containers. In the
+              theta case, etale theta functions on Tate curves supply a container
+              for the values <span class="math">q_v^{j^2}</span>. In the
+              number-field case, absolute-anabelian Belyi cuspidalizations supply a
+              container for copies of <span class="math">Fmod</span>. Both pass from
+              the geometric container to radial arithmetic data by Galois evaluation.
+            </p>
+            <div class="tagRow">
+              <span class="tag green">Remark 2.3.3(i)-(ii)</span>
+              <a class="tag" href="#abs-anabelian-reconstruction-page">Belyi cuspidalization</a>
+            </div>
+          </div>
+          <div class="card" id="label-dependence-cyclotomic-rigidity-233" data-filter="iut iii remark 2.3.3 labels j fl theta values number field output cyclotomic rigidity symmetric rational function">
+            <h3>Label dependence</h3>
+            <p>
+              The theta output <span class="math">q^{j^2}</span> depends essentially
+              on labels <span class="math">j ∈ F_l</span>, while the number-field
+              output copies of <span class="math">Fmod</span> do not. Remark
+              2.3.3 uses this distinction to emphasize the nontrivial
+              compatibility between mono-theta cyclotomic rigidity,
+              <span class="math">F_l^{±}</span>-symmetry, and Galois evaluation.
+            </p>
+            <div class="tagRow">
+              <span class="tag red">Remark 2.3.3(iv)-(x)</span>
+              <a class="tag" href="#mono-theta-rigidity-five-properties-211">mono-theta rigidity</a>
+              <a class="tag" href="#no-naive-power-map-222">no naive Kummer shortcut</a>
+            </div>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>What it contributes</th><th>Why grouped here</th></tr>
+          <tr>
+            <td>Corollary 2.3</td>
+            <td>Radial algorithm, full and essentially surjective functor, vertical and horizontal identifications, spoke permutations, and equivariance.</td>
+            <td>This is the structural theorem whose explanatory remarks are unpacked below.</td>
+          </tr>
+          <tr>
+            <td>Remark 2.3.1</td>
+            <td>Polar-coordinate analogy and canonical splitting interpretation of the theta-monoid part of the Gaussian log-theta lattice.</td>
+            <td>It explains how to read the etale-picture geometrically.</td>
+          </tr>
+          <tr>
+            <td>Remark 2.3.2</td>
+            <td>Parallel <span class="math">∞κ</span>-coric formulation using IUT II Corollary 4.8 and Kummer-class restrictions.</td>
+            <td>It prevents treating Corollary 2.3 as isolated from the number-field/Kummer side.</td>
+          </tr>
+          <tr>
+            <td>Remark 2.3.3</td>
+            <td>Comparison between theta-value containers and number-field containers, including the role of Belyi cuspidalization and label dependence.</td>
+            <td>It links the theta-monoid split to the broader multiradial geometry of IUT.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Grouping rule.</strong> This page keeps the detailed pages
+          searchable and directly linkable while giving the reader one coherent
+          route through the corollary and its explanatory remarks. This is the
+          preferred pattern for source units that otherwise fragment into many tiny
+          pages.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 2.3 and Remarks 2.3.1-2.3.3</a>
+          Related: <a href="#theta-monoid-multiradiality-iii22">theta monoid multiradiality</a>
+          <a href="#radial-coric-etale-picture-23">radial/coric etale picture</a>
+          <a href="#spoke-symmetry-23">spoke symmetry</a>
+          <a href="#f-perp-prime-strips-pilot-iii24">F⊥ transition</a>
+        </div>
+      </section>
+
       <section id="radial-coric-etale-picture-23" data-filter="iut iii corollary 2.3 etale picture radial data coric data radial algorithm full essentially surjective">
         <h2>IUT III Corollary 2.3: Radial/Coric Etale Picture</h2>
         <p class="lede">
@@ -48152,7 +48299,8 @@
         </table>
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 2.3(i)</a>
-          Related: <a href="#bad-prime-radial-insulation-22">bad-prime radial insulation</a>
+          Related: <a href="#iut-iii-cor23-cluster">Corollary 2.3 cluster</a>
+          <a href="#bad-prime-radial-insulation-22">bad-prime radial insulation</a>
           <a href="#spoke-symmetry-23">spoke symmetry</a>
           <a href="#multiradiality">multiradiality overview</a>
         </div>
@@ -48209,7 +48357,8 @@
         </table>
         <div class="related">
           Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 2.3(ii)-(iv)</a>
-          Related: <a href="#radial-coric-etale-picture-23">radial/coric etale picture</a>
+          Related: <a href="#iut-iii-cor23-cluster">Corollary 2.3 cluster</a>
+          <a href="#radial-coric-etale-picture-23">radial/coric etale picture</a>
           <a href="#gaussian-log-theta-lattice-source">Gaussian log-theta lattice</a>
           <a href="#theta-monoid-multiradiality-iii22">theta monoid multiradiality</a>
         </div>
