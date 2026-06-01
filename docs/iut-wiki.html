@@ -38,6 +38,9 @@
       line-height: 1.58;
       overflow-x: hidden;
     }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
 
     a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 2px; }
     code, .math {
@@ -132,6 +135,22 @@
     nav a.active {
       color: var(--blue);
       font-weight: 700;
+    }
+    nav a.subLink {
+      margin-left: 10px;
+      padding-left: 16px;
+      color: #4f565d;
+      font-size: 0.84rem;
+      position: relative;
+    }
+    nav a.subLink::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 50%;
+      width: 5px;
+      height: 1px;
+      background: #aeb7ad;
     }
 
     .sourceLinks {
@@ -725,9 +744,24 @@
     }
 
     @media (max-width: 620px) {
-      .layout { grid-template-columns: 112px minmax(0, 1fr); }
-      aside { padding: 14px 7px; }
-      main { width: calc(100vw - 112px); max-width: calc(100vw - 112px); overflow-x: hidden; }
+      .layout { display: block; }
+      aside {
+        position: relative;
+        height: auto;
+        max-height: 42vh;
+        overflow: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding: 14px 10px;
+      }
+      main { width: 100vw; max-width: 100vw; overflow-x: hidden; padding: 22px 12px 70px; }
+      main section.active-page > h2,
+      main section.active-page > .lede,
+      main section.active-page .card,
+      main section.active-page .callout,
+      main section.active-page .related {
+        max-width: calc(100vw - 24px);
+      }
       .brand h1 { font-size: 1.12rem; }
       .searchBox { padding: 7px; }
       .searchBox input { padding: 7px 6px; font-size: 0.78rem; }
@@ -824,7 +858,9 @@
         <a href="#iut-i-initial-theta-cluster">IUT I initial theta cluster</a>
         <a href="#iut-i-frobenioid-theater-cluster">IUT I Frobenioid/theater cluster</a>
         <a href="#iut-i-prime-strip-bridge-cluster">IUT I prime-strip/bridge cluster</a>
+        <a href="#iut-iii-log-theta-local-cluster">IUT III §1 log-theta cluster</a>
         <a href="#cor312-log-theta-cluster">Corollary 3.12 corridor cluster</a>
+        <a href="#iut-iv-output-cluster">IUT IV output cluster</a>
         <h2>Paper Atlases</h2>
         <a href="#iut-i-atlas">IUT I atlas</a>
         <a href="#iut-i-orbicurve-cover-package">IUT I orbicurve covers 1</a>
@@ -1300,26 +1336,26 @@
         <a href="#iut-iii-theorem-b-page">IUT III Theorem B</a>
         <a href="#iut-iii-ab-pipeline-page">Theorem A/B pipeline</a>
         <a href="#local-log-link-mechanism-iii11">Local log-link mechanism 1.1</a>
-        <a href="#vertical-horizontal-coricity-page-iii">Vertical/horizontal coricity</a>
-        <a href="#upper-semi-log-kummer-iii">Upper-semi Log-Kummer</a>
-        <a href="#tautological-full-log-link-page-iii112">Tautological/full log-link</a>
-        <a href="#unit-only-log-link">Unit-only log-link domain</a>
-        <a href="#f-perp-times-mu-log-shells">F⊢×μ log-shells</a>
-        <a href="#mono-analytic-log-shells">Mono-analytic log-shells</a>
-        <a href="#coric-holomorphic-log-shells">Coric holomorphic log-shells</a>
-        <a href="#log-link-frobenius-picture">Log-link Frobenius-picture</a>
-        <a href="#log-wall-ring-incompatibility-iii124">Log-wall ring incompatibility</a>
-        <a href="#root-unity-additive-indeterminacy-iii123">Root-unity indeterminacy 1.2.3</a>
-        <a href="#birational-affine-basepoint-triangle-iii124">Basepoint triangle 1.2.4</a>
-        <a href="#fixed-reference-model-coricity-iii125">Reference-model coricity 1.2.5</a>
+        <a class="subLink" href="#vertical-horizontal-coricity-page-iii">Vertical/horizontal coricity</a>
+        <a class="subLink" href="#upper-semi-log-kummer-iii">Upper-semi Log-Kummer</a>
+        <a class="subLink" href="#tautological-full-log-link-page-iii112">Tautological/full log-link</a>
+        <a class="subLink" href="#unit-only-log-link">Unit-only log-link domain</a>
+        <a class="subLink" href="#f-perp-times-mu-log-shells">F⊢×μ log-shells</a>
+        <a class="subLink" href="#mono-analytic-log-shells">Mono-analytic log-shells</a>
+        <a class="subLink" href="#coric-holomorphic-log-shells">Coric holomorphic log-shells</a>
+        <a class="subLink" href="#log-link-frobenius-picture">Log-link Frobenius-picture</a>
+        <a class="subLink" href="#log-wall-ring-incompatibility-iii124">Log-wall ring incompatibility</a>
+        <a class="subLink" href="#root-unity-additive-indeterminacy-iii123">Root-unity indeterminacy 1.2.3</a>
+        <a class="subLink" href="#birational-affine-basepoint-triangle-iii124">Basepoint triangle 1.2.4</a>
+        <a class="subLink" href="#fixed-reference-model-coricity-iii125">Reference-model coricity 1.2.5</a>
         <a href="#log-shell-variants-prop12-iii">Log-shell variants 1.2</a>
         <a href="#hodge-theater-log-link">Hodge-theater log-link 1.3</a>
         <a href="#gaussian-log-theta-lattice-source">Gaussian log-theta lattice 1.4</a>
         <a href="#vertical-horizontal-coricity">Vertical/horizontal coricity 1.5</a>
-        <a href="#bicoric-f-perp-times-mu-prime-strips">Bi-coric F⊢×μ prime-strips</a>
-        <a href="#bicoric-monoanalytic-log-shells">Bi-coric log-shells</a>
-        <a href="#bicoric-realified-frobenioids">Bi-coric realified Frobenioids</a>
-        <a href="#bi-cores-log-theta-lattice-iii15">Bi-cores 1.5</a>
+        <a class="subLink" href="#bicoric-f-perp-times-mu-prime-strips">Bi-coric F⊢×μ prime-strips</a>
+        <a class="subLink" href="#bicoric-monoanalytic-log-shells">Bi-coric log-shells</a>
+        <a class="subLink" href="#bicoric-realified-frobenioids">Bi-coric realified Frobenioids</a>
+        <a class="subLink" href="#bi-cores-log-theta-lattice-iii15">Bi-cores 1.5</a>
         <a href="#essential-logical-structure">Logical structure</a>
         <a href="#esslgc-limits-integration-21">Logic 2.1 limits/integration</a>
         <a href="#esslgc-derivative-integral-22">Logic 2.2 derivative/integral</a>
@@ -1461,37 +1497,37 @@
         <a href="#higuchi-step-xif-no-go-page">Higuchi Step (xi-f)</a>
         <a href="#dupuy-hilado-initial-theta-page">Dupuy-Hilado initial theta</a>
         <a href="#iut-iv-local-log-volume-estimates-11-15">IUT IV local estimates hub 1.1-1.5</a>
-        <a href="#iut-iv-proposition-11-tensor-differents">Prop. 1.1 tensor/differents</a>
-        <a href="#iut-iv-proposition-12-logarithm-differents">Prop. 1.2 log/differents</a>
-        <a href="#iut-iv-proposition-13-different-estimates">Prop. 1.3 different estimates</a>
-        <a href="#iut-iv-proposition-14-nonarch-log-volume">Prop. 1.4 nonarch log-volume</a>
-        <a href="#iut-iv-proposition-15-arch-metric-estimates">Prop. 1.5 arch metrics</a>
+        <a class="subLink" href="#iut-iv-proposition-11-tensor-differents">Prop. 1.1 tensor/differents</a>
+        <a class="subLink" href="#iut-iv-proposition-12-logarithm-differents">Prop. 1.2 log/differents</a>
+        <a class="subLink" href="#iut-iv-proposition-13-different-estimates">Prop. 1.3 different estimates</a>
+        <a class="subLink" href="#iut-iv-proposition-14-nonarch-log-volume">Prop. 1.4 nonarch log-volume</a>
+        <a class="subLink" href="#iut-iv-proposition-15-arch-metric-estimates">Prop. 1.5 arch metrics</a>
         <a href="#iut-iv-prime-averaging-16-17">IUT IV prime/averaging 1.6-1.7</a>
-        <a href="#iut-iv-proposition-16-prime-number-theorem">Prop. 1.6 prime estimate</a>
-        <a href="#iut-iv-proposition-17-weighted-averages">Prop. 1.7 weighted averages</a>
+        <a class="subLink" href="#iut-iv-proposition-16-prime-number-theorem">Prop. 1.6 prime estimate</a>
+        <a class="subLink" href="#iut-iv-proposition-17-weighted-averages">Prop. 1.7 weighted averages</a>
         <a href="#iut-iv-elliptic-torsion-18">IUT IV elliptic torsion hub 1.8</a>
-        <a href="#iut-iv-proposition-18-torsion-rigidity">Prop. 1.8 torsion rigidity</a>
-        <a href="#iut-iv-proposition-18-descent-sections">Prop. 1.8 descent sections</a>
-        <a href="#iut-iv-proposition-18-reduction-gates">Prop. 1.8 reduction gates</a>
+        <a class="subLink" href="#iut-iv-proposition-18-torsion-rigidity">Prop. 1.8 torsion rigidity</a>
+        <a class="subLink" href="#iut-iv-proposition-18-descent-sections">Prop. 1.8 descent sections</a>
+        <a class="subLink" href="#iut-iv-proposition-18-reduction-gates">Prop. 1.8 reduction gates</a>
         <a href="#iut-iv-arithmetic-divisors-19">IUT IV arithmetic divisors hub 1.9</a>
-        <a href="#iut-iv-definition-19-degree-map">Def. 1.9 degree map</a>
-        <a href="#iut-iv-definition-19-localized-degree">Def. 1.9 localized degree</a>
+        <a class="subLink" href="#iut-iv-definition-19-degree-map">Def. 1.9 degree map</a>
+        <a class="subLink" href="#iut-iv-definition-19-localized-degree">Def. 1.9 localized degree</a>
         <a href="#iut-iv-theorem-a-page">IUT IV Theorem A</a>
         <a href="#iut-iv-theorem-110-theta-pilot-estimate">IUT IV Theorem 1.10 hub</a>
-        <a href="#iut-iv-theorem-110-hypotheses">Theorem 1.10 hypotheses</a>
-        <a href="#iut-iv-theorem-110-local-steps">Theorem 1.10 local steps</a>
-        <a href="#iut-iv-theorem-110-final-bound">Theorem 1.10 final bound</a>
+        <a class="subLink" href="#iut-iv-theorem-110-hypotheses">Theorem 1.10 hypotheses</a>
+        <a class="subLink" href="#iut-iv-theorem-110-local-steps">Theorem 1.10 local steps</a>
+        <a class="subLink" href="#iut-iv-theorem-110-final-bound">Theorem 1.10 final bound</a>
         <a href="#iut-iv-proposition-21-estimates">Prop. 2.1 estimates</a>
         <a href="#iut-iv-suitable-initial-theta-data-22">Cor. 2.2 unified gate</a>
-        <a href="#iut-iv-corollary-22-lambda-j">Cor. 2.2 lambda/j gate</a>
-        <a href="#iut-iv-corollary-22-bd-heights">Cor. 2.2 BD heights</a>
-        <a href="#iut-iv-corollary-22-exceptions">Cor. 2.2 exceptions</a>
-        <a href="#iut-iv-corollary-22-prime-galois">Cor. 2.2 prime/Galois</a>
-        <a href="#iut-iv-corollary-22-c1-c2">Cor. 2.2 C1/C2 output</a>
-        <a href="#iut-iv-remark-221-rh-weight">Remark 2.2.1 RH weight</a>
-        <a href="#iut-iv-remark-222-semitwist">Remark 2.2.2 semi-twist</a>
-        <a href="#iut-iv-remark-223-uniform-abc">Remark 2.2.3 uniform abc</a>
-        <a href="#iut-iv-remark-224-padic-teich">Remark 2.2.4 p-adic Teich</a>
+        <a class="subLink" href="#iut-iv-corollary-22-lambda-j">Cor. 2.2 lambda/j gate</a>
+        <a class="subLink" href="#iut-iv-corollary-22-bd-heights">Cor. 2.2 BD heights</a>
+        <a class="subLink" href="#iut-iv-corollary-22-exceptions">Cor. 2.2 exceptions</a>
+        <a class="subLink" href="#iut-iv-corollary-22-prime-galois">Cor. 2.2 prime/Galois</a>
+        <a class="subLink" href="#iut-iv-corollary-22-c1-c2">Cor. 2.2 C1/C2 output</a>
+        <a class="subLink" href="#iut-iv-remark-221-rh-weight">Remark 2.2.1 RH weight</a>
+        <a class="subLink" href="#iut-iv-remark-222-semitwist">Remark 2.2.2 semi-twist</a>
+        <a class="subLink" href="#iut-iv-remark-223-uniform-abc">Remark 2.2.3 uniform abc</a>
+        <a class="subLink" href="#iut-iv-remark-224-padic-teich">Remark 2.2.4 p-adic Teich</a>
         <a href="#iut-iv-diophantine-inequalities-23">IUT IV Diophantine inequalities 2.3</a>
         <a href="#iut-iv-corollary-23-statement">Cor. 2.3 statement</a>
         <a href="#iut-iv-corollary-23-genell">Cor. 2.3 GenEll boundary</a>
@@ -9035,6 +9071,16 @@
             <td>IUT II and IUT III still need much denser page-by-page coverage before the corridor can be called source-complete.</td>
           </tr>
           <tr>
+            <td><a href="#iut-iii-log-theta-local-cluster">IUT III §1 log-theta cluster</a></td>
+            <td>Pages exist for local log-links, log-shell variants, Hodge-theater log-links, Gaussian log-theta lattices, vertical/horizontal coricity, and bi-cores.</td>
+            <td>Needs continued source-order expansion of the fine remarks, especially the single-isomorphism synchronization and bi-coricity restrictions.</td>
+          </tr>
+          <tr>
+            <td><a href="#iut-iv-output-cluster">IUT IV output cluster</a></td>
+            <td>Section 1 estimate pages, Theorem 1.10, Corollary 2.2, Corollary 2.3, and Section 3 species pages now have grouped routes plus atomic subpages.</td>
+            <td>Needs deeper references to the external GenEll and explicit-estimates inputs, and eventual Lean-facing theorem-interface extraction.</td>
+          </tr>
+          <tr>
             <td>Context papers and formalization</td>
             <td>Local PDF library and pages for Mochizuki formalization, RIMS route, LANA, Scholze-Stix, Mochizuki response, Collas, Hoshi, and related papers exist.</td>
             <td>Needs deeper extraction of each paper's distinct contribution and tighter links from context pages back to exact IUT source concepts.</td>
@@ -9329,6 +9375,109 @@
         </div>
       </section>
 
+      <section id="iut-iii-log-theta-local-cluster" data-filter="iut iii section 1 source cluster local log links log shells gaussian log theta lattice vertical horizontal coricity bi cores">
+        <h2>IUT III §1 Source Cluster: Log-Links, Log-Shells, and Bi-Cores</h2>
+        <p class="lede">
+          This cluster groups the detailed pages for IUT III §1. The section builds
+          the vertical log-link side of the log-theta lattice, replaces ring/scheme
+          history by log-shell and mono-analytic data, and then identifies the bi-coric
+          objects that can be carried through both vertical and horizontal directions.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>Local log-link mechanism</h3>
+            <p>
+              Proposition 1.1 and its surrounding remarks explain the vertical passage
+              through local logarithms: unit data moves through additive log images,
+              while ordinary ring compatibility is not part of the transported object.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#local-log-link-mechanism-iii11">1.1 route</a>
+              <a class="tag" href="#tautological-full-log-link-page-iii112">tautological/full link</a>
+              <a class="tag" href="#unit-only-log-link">unit domain</a>
+              <a class="tag" href="#upper-semi-log-kummer-iii">upper-semi Log-Kummer</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Log-shell replacements</h3>
+            <p>
+              Proposition 1.2 supplies the mono-analytic log-shell interfaces. These
+              are the objects that can serve as common receptacles after the log-wall
+              has removed the original ring/scheme interpretation.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#log-shell-variants-prop12-iii">1.2 variants</a>
+              <a class="tag" href="#f-perp-times-mu-log-shells">F⊢×μ shells</a>
+              <a class="tag" href="#mono-analytic-log-shells">mono-analytic shells</a>
+              <a class="tag" href="#coric-holomorphic-log-shells">coric shells</a>
+              <a class="tag" href="#log-wall-ring-incompatibility-iii124">log-wall warning</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Hodge-theater log-links</h3>
+            <p>
+              Proposition 1.3 lifts the local log-link mechanism to
+              Theta±ellNF-Hodge theaters. The source emphasizes that the construction
+              is first made for a single theater isomorphism before full poly-isomorphism
+              language is imposed, so synchronization data is not lost.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#hodge-theater-log-link">1.3 theater link</a>
+              <a class="tag" href="#log-link-frobenius-picture">Frobenius-picture</a>
+              <a class="tag" href="#root-unity-additive-indeterminacy-iii123">root-unity indeterminacy</a>
+              <a class="tag" href="#fixed-reference-model-coricity-iii125">reference coricity</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Gaussian log-theta lattice</h3>
+            <p>
+              Definition 1.4 arranges Hodge theaters in a two-dimensional lattice.
+              Vertical arrows are log-links; horizontal arrows are theta links. The
+              noncommutativity of these directions is the structural reason the wiki
+              does not collapse the diagram into a single chain of ordinary morphisms.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#gaussian-log-theta-lattice-source">1.4 lattice</a>
+              <a class="tag" href="#log-theta-lattice">lattice overview</a>
+              <a class="tag" href="#vertical-horizontal-coricity-page-iii">coricity overview</a>
+              <a class="tag" href="#birational-affine-basepoint-triangle-iii124">basepoint triangle</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Bi-coric output</h3>
+            <p>
+              Theorem 1.5 identifies the objects that remain coric in both directions:
+              certain F⊢×μ prime-strips, mono-analytic log-shells, and global realified
+              Frobenioids. It also records negative information, such as the absence of
+              a full bi-coric solvable/ring reconstruction object.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#vertical-horizontal-coricity">1.5 coricity</a>
+              <a class="tag" href="#bicoric-f-perp-times-mu-prime-strips">prime-strips</a>
+              <a class="tag" href="#bicoric-monoanalytic-log-shells">log-shells</a>
+              <a class="tag" href="#bicoric-realified-frobenioids">realified Frobenioids</a>
+              <a class="tag" href="#bi-cores-log-theta-lattice-iii15">bi-cores</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Why this is one unit</h3>
+            <p>
+              The local log-link, log-shell, lattice, and bi-core pages all describe
+              what survives when horizontal theta movement and vertical log movement
+              are both present. This is the first local form of the discipline later
+              needed near Theorem 3.11 and Corollary 3.12.
+            </p>
+            <div class="tagRow"><span class="tag red">survival discipline</span><span class="tag">IUT III §1</span></div>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III §1</a>
+          Related: <a href="#iut-iii-atlas">IUT III atlas</a>
+          <a href="#cor312-log-theta-cluster">3.12 corridor cluster</a>
+          <a href="#source-coverage-map">coverage map</a>
+        </div>
+      </section>
+
       <section id="cor312-log-theta-cluster" data-filter="iut iii corollary 3.12 source cluster log theta lattice hodge theaters log links kummer theorem 3.11">
         <h2>Corollary 3.12 Corridor Source Cluster</h2>
         <p class="lede">
@@ -9427,6 +9576,117 @@
           Related: <a href="#source-coverage-map">coverage map</a>
           <a href="#dispute">dispute overview</a>
           <a href="#formalization">formalization overview</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-output-cluster" data-filter="iut iv source cluster output estimates theorem 1.10 corollary 2.2 corollary 2.3 species mutations">
+        <h2>IUT IV Source Cluster: Estimates, Output Gates, and Species</h2>
+        <p class="lede">
+          This cluster groups the IUT IV pages into the source units a reader should
+          traverse before using the detailed leaf pages. The atomic pages remain
+          available for search and direct citation; this page explains how they fit
+          together in the paper's route from the IUT III log-volume comparison to
+          Diophantine output and then to the set-theoretic language of species.
+        </p>
+        <div class="grid3">
+          <div class="card">
+            <h3>§1 local and global estimates</h3>
+            <p>
+              Propositions 1.1-1.9 build the numerical environment: tensor-product
+              differents, nonarchimedean and archimedean log-volume estimates, prime
+              distribution, weighted averages, elliptic torsion input, and arithmetic
+              divisor degrees.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#iut-iv-local-log-volume-estimates-11-15">local estimates</a>
+              <a class="tag" href="#iut-iv-prime-averaging-16-17">prime/averaging</a>
+              <a class="tag" href="#iut-iv-elliptic-torsion-18">elliptic torsion</a>
+              <a class="tag" href="#iut-iv-arithmetic-divisors-19">arithmetic divisors</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Theorem 1.10 gate</h3>
+            <p>
+              Theorem 1.10 is the numerical point where the IUT III comparison
+              machinery is consumed. Its pages separate hypotheses, local estimate
+              steps, and the final theta-pilot bound so that a formalization does not
+              hide the Corollary 3.12 dependency inside elementary estimates.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#iut-iv-theorem-110-theta-pilot-estimate">1.10 hub</a>
+              <a class="tag" href="#iut-iv-theorem-110-hypotheses">hypotheses</a>
+              <a class="tag" href="#iut-iv-theorem-110-local-steps">local steps</a>
+              <a class="tag" href="#iut-iv-theorem-110-final-bound">final bound</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Corollary 2.2 grouped gate</h3>
+            <p>
+              Corollary 2.2 is best read as one application gate: lambda-line input,
+              bounded-discrepancy height comparison, finite exceptions, auxiliary-prime
+              and Galois-image selection, and the C1/C2 numerical output.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#iut-iv-suitable-initial-theta-data-22">unified page</a>
+              <a class="tag" href="#iut-iv-corollary-22-lambda-j">lambda/j</a>
+              <a class="tag" href="#iut-iv-corollary-22-bd-heights">BD heights</a>
+              <a class="tag" href="#iut-iv-corollary-22-exceptions">exceptions</a>
+              <a class="tag" href="#iut-iv-corollary-22-prime-galois">prime/Galois</a>
+              <a class="tag" href="#iut-iv-corollary-22-c1-c2">C1/C2</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Corollary 2.3 output</h3>
+            <p>
+              Corollary 2.3 transfers the lambda-line output to the Vojta-style
+              Diophantine inequality, with GenEll marking the external boundary between
+              IUT IV's estimate and general hyperbolic-curve consequences.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#iut-iv-diophantine-inequalities-23">2.3 hub</a>
+              <a class="tag" href="#iut-iv-corollary-23-statement">statement</a>
+              <a class="tag" href="#iut-iv-corollary-23-genell">GenEll boundary</a>
+              <a class="tag" href="#iut-iv-remarks-233-235-comparisons">comparison remarks</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>§3 species and mutations</h3>
+            <p>
+              Section 3 is not a numerical afterthought. It supplies the formal
+              vocabulary for species, mutation, model-free specimens, and universe
+              changes that later formalization discussions use to describe
+              inter-universal transport without identifying incompatible structures.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#species-mutations">species hub</a>
+              <a class="tag" href="#iut-iv-zfcg-universes-31">universes</a>
+              <a class="tag" href="#iut-iv-zero-one-species-31">0/1-species</a>
+              <a class="tag" href="#iut-iv-mutations-33">mutations</a>
+              <a class="tag" href="#iut-iv-ring-incompatibility-363">ring incompatibility</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Why this is one unit</h3>
+            <p>
+              IUT IV has two connected functions in the wiki: it records how the
+              Corollary 3.12 comparison is turned into explicit Diophantine inequalities,
+              and it records the set-theoretic language used to keep inter-universal
+              object types separate.
+            </p>
+            <div class="tagRow"><span class="tag red">application layer</span><span class="tag">type discipline</span></div>
+          </div>
+        </div>
+        <div class="callout violet">
+          Reading rule: for Corollary 2.2-style material, prefer the grouped page first.
+          Use the leaf pages when checking a particular hypothesis, finite-exception
+          step, or numerical output condition.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV</a>
+          Related: <a href="#iut-iv-atlas">IUT IV atlas</a>
+          <a href="#iut-iv-suitable-initial-theta-data-22">Corollary 2.2 unified gate</a>
+          <a href="#cor312-log-theta-cluster">3.12 corridor cluster</a>
+          <a href="#source-coverage-map">coverage map</a>
         </div>
       </section>
 
