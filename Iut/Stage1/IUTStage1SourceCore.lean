@@ -4407,6 +4407,77 @@ theorem constant_distribution_endpoint
 end IUTStage1RealifiedFrobenioidIndexDistribution
 
 /--
+Finite pivotal realified Frobenioid distribution.
+
+IUT I, Example 5.4(vii) calls the `j = 1` restriction object a pivotal
+distribution.  Remark 5.4.2 then distinguishes the averaged interpretation of
+log-volumes from the summed interpretation, differing by the cardinality of
+the index set.  This finite model records a chosen pivotal index and a
+diagonal distribution whose common value is read at that index.
+-/
+structure IUTStage1PivotalRealifiedFrobenioidDistribution
+    (J : Type u) [Fintype J] where
+  pivot : J
+  distribution : IUTStage1RealifiedFrobenioidIndexDistribution J
+  pivotalLogVolume : Real
+  pivotal_logVolume_eq : distribution.logVolume pivot = pivotalLogVolume
+  diagonal_is_constant : distribution.isConstantWith pivotalLogVolume
+
+namespace IUTStage1PivotalRealifiedFrobenioidDistribution
+
+variable {J : Type u} [Fintype J]
+
+def totalLogVolume
+    (source : IUTStage1PivotalRealifiedFrobenioidDistribution J) : Real :=
+  source.distribution.totalLogVolume
+
+noncomputable def averagedLogVolume
+    (source : IUTStage1PivotalRealifiedFrobenioidDistribution J) : Real :=
+  (Fintype.card J : Real)⁻¹ * source.totalLogVolume
+
+theorem card_ne_zero
+    (source : IUTStage1PivotalRealifiedFrobenioidDistribution J) :
+    (Fintype.card J : Real) ≠ 0 := by
+  have hcard_pos : 0 < Fintype.card J :=
+    Fintype.card_pos_iff.mpr ⟨source.pivot⟩
+  exact_mod_cast ne_of_gt hcard_pos
+
+theorem totalLogVolume_eq_card_mul_pivotal
+    (source : IUTStage1PivotalRealifiedFrobenioidDistribution J) :
+    source.totalLogVolume =
+      (Fintype.card J : Real) * source.pivotalLogVolume :=
+  IUTStage1RealifiedFrobenioidIndexDistribution.totalLogVolume_eq_card_mul_of_constant
+      source.distribution source.diagonal_is_constant
+
+theorem averagedLogVolume_eq_pivotal
+    (source : IUTStage1PivotalRealifiedFrobenioidDistribution J) :
+    source.averagedLogVolume = source.pivotalLogVolume := by
+  rw [averagedLogVolume, source.totalLogVolume_eq_card_mul_pivotal]
+  rw [← mul_assoc, inv_mul_cancel₀ source.card_ne_zero, one_mul]
+
+theorem totalLogVolume_eq_card_mul_average
+    (source : IUTStage1PivotalRealifiedFrobenioidDistribution J) :
+    source.totalLogVolume =
+      (Fintype.card J : Real) * source.averagedLogVolume := by
+  rw [source.averagedLogVolume_eq_pivotal,
+    source.totalLogVolume_eq_card_mul_pivotal]
+
+theorem pivotalDistribution_endpoint
+    (source : IUTStage1PivotalRealifiedFrobenioidDistribution J) :
+    source.distribution.logVolume source.pivot = source.pivotalLogVolume ∧
+      source.totalLogVolume =
+        (Fintype.card J : Real) * source.pivotalLogVolume ∧
+      source.averagedLogVolume = source.pivotalLogVolume ∧
+      source.totalLogVolume =
+        (Fintype.card J : Real) * source.averagedLogVolume :=
+  ⟨source.pivotal_logVolume_eq,
+    source.totalLogVolume_eq_card_mul_pivotal,
+    source.averagedLogVolume_eq_pivotal,
+    source.totalLogVolume_eq_card_mul_average⟩
+
+end IUTStage1PivotalRealifiedFrobenioidDistribution
+
+/--
 Source-facing global realified Frobenioid calibration package.
 
 It consumes the local `p_v^N` source package but fixes the exponent selected by

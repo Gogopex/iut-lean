@@ -198,6 +198,17 @@ theorem realifiedFrobenioidArbitraryDistribution_notDiagonal
     ¬ ∃ value : Real, distribution.isConstantWith value :=
   distribution.not_constantWith_of_pair_ne hneq
 
+theorem pivotalRealifiedFrobenioidDistribution_endpoint
+    {J : Type u} [Fintype J]
+    (source : IUTStage1PivotalRealifiedFrobenioidDistribution J) :
+    source.distribution.logVolume source.pivot = source.pivotalLogVolume ∧
+      source.totalLogVolume =
+        (Fintype.card J : Real) * source.pivotalLogVolume ∧
+      source.averagedLogVolume = source.pivotalLogVolume ∧
+      source.totalLogVolume =
+        (Fintype.card J : Real) * source.averagedLogVolume :=
+  source.pivotalDistribution_endpoint
+
 theorem thetaRootKummerForgettingSource_feedsNonarchimedeanEntry
     {coric : Type u}
     {audited :

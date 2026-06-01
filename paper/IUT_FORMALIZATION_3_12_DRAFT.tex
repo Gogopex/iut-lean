@@ -443,6 +443,11 @@ log-volume distinction.  A diagonal distribution has total log-volume
 \(|J|\) times its common value, with the realified restriction factor
 propagated through this sum; a distribution with two unequal coordinates is
 proved not to come from a diagonal constant distribution.
+\IUT{} I, Example 5.4(vii) and Remark 5.4.2 are represented by a finite
+pivotal distribution object: a chosen pivotal index supplies the common
+diagonal log-volume, the summed interpretation gives total
+\(|J|\) times this pivotal value, and the averaged interpretation recovers the
+pivotal value itself.
 This layer is now connected to the nonarchimedean packet correspondence:
 a realified-Frobenioid log-Kummer packet source projects the Frobenioid
 compatibility data to the Kummer \(F\to D\) transfer and to the
@@ -637,6 +642,9 @@ The project currently proves the following source-facing results in \Lean{}:
   diagonal distributions are constant in \(j\), their total is
   \(|J|\) times the common restricted value, and a two-coordinate mismatch
   cannot be represented as diagonal.
+\item The pivotal distribution of \IUT{} I, Example 5.4(vii), is modeled by a
+  chosen index in a diagonal distribution; \Lean{} proves the summed
+  log-volume formula and the normalized averaged formula of Remark 5.4.2.
 \item The realified Frobenioid layer now feeds the nonarchimedean
   log-Kummer packet source: Kummer and mono-analytic forgetting transfers are
   projected from Frobenioid compatibility before the packet correspondence
