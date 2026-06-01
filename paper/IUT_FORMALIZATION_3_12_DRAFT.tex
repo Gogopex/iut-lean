@@ -441,6 +441,9 @@ The bounded-family version of Remark 3.9.5(v)--(vi) is now represented by a
 family-hull quotient source.  For a family \(P_\beta\), the code forms the hull
 of the union, uses it as the collapsed subset in the upper-semi quotient, and
 proves that any two nonempty possible regions have the same quotient image.
+The Corollary 3.12 possible-image approximant source projects to this
+family-hull quotient source, so the possible-image family used in the
+upper-ray route also carries the corresponding choice-independence theorem.
 The same approximant now feeds the Step (xi) upper-ray constructor.  If the
 \(q\)-pilot region lies in an approximant \(H\), and if
 \(\mu_{\log}(H)\) is the determinant-normalized log-volume, then \Lean{}
@@ -734,6 +737,9 @@ The project currently proves the following source-facing results in \Lean{}:
   represented: each possible region lies in the hull of the family union, and
   any two nonempty possible regions have identical images in the quotient that
   collapses this family hull.
+\item The Corollary 3.12 possible-image approximant source now projects to
+  this bounded-family quotient source, yielding the same quotient-image
+  equality for nonempty possible theta-image choices.
 \item Such a certified hull-approximant now also constructs the Step (xi)
   upper-ray datum: if the \(q\)-pilot region is contained in the approximant
   and the approximant log-volume is determinant-normalized, then \Lean{}

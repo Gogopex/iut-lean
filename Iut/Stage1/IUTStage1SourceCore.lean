@@ -3117,6 +3117,13 @@ def thetaImageUnion
     Set α :=
   ⋃ i, data.possibleThetaImage i
 
+def toBoundedFamilyHullQuotientSource
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    IUTStage1BoundedFamilyHullQuotientSource α ι :=
+  { hullData := data.hullData,
+    possibleRegion := data.possibleThetaImage }
+
 def thetaHull
     (data :
       IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
@@ -3231,6 +3238,22 @@ theorem endpoint
     data.qPilotLogVolume_le_thetaHullLogVolume,
     data.toUpperRay_qPilot_mem_upperRay,
     data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume_le_determinant⟩
+
+theorem boundedFamilyQuotient_endpoint
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι)
+    (i j : ι)
+    (hnei : (data.possibleThetaImage i).Nonempty)
+    (hnej : (data.possibleThetaImage j).Nonempty) :
+    data.toBoundedFamilyHullQuotientSource.possibleRegion i ⊆
+        data.toBoundedFamilyHullQuotientSource.familyHull ∧
+      data.toBoundedFamilyHullQuotientSource.possibleRegion j ⊆
+        data.toBoundedFamilyHullQuotientSource.familyHull ∧
+      data.toBoundedFamilyHullQuotientSource.quotientMap ''
+          data.toBoundedFamilyHullQuotientSource.possibleRegion i =
+        data.toBoundedFamilyHullQuotientSource.quotientMap ''
+          data.toBoundedFamilyHullQuotientSource.possibleRegion j :=
+  data.toBoundedFamilyHullQuotientSource.endpoint i j hnei hnej
 
 theorem ofWeightedDeterminant_endpoint
     {β : Type w} [Fintype β]
