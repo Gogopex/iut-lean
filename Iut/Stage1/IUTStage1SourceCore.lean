@@ -4150,6 +4150,89 @@ theorem shiftedLogVolume_lt_calibrated_iff_shiftTerm_lt_zero
 end IUTStage1GlobalFrobenioidLogVolumeCalibration
 
 /--
+Global-to-local restriction for realified Frobenioid prime log-volumes.
+
+IUT I, Example 3.5 identifies the local realified divisor monoid with
+`R_{\ge 0}` and states that the restriction functor sends the global prime
+element to `1 / [K_v : (F_mod)_v]` times the corresponding local prime element.
+This finite record keeps only the degree-normalized log-volume content of that
+statement.
+-/
+structure IUTStage1GlobalToLocalRealifiedFrobenioidRestriction where
+  extensionDegree : Nat
+  extensionDegree_pos : 0 < extensionDegree
+  localPrimeLogVolume : Real
+  restrictedGlobalPrimeLogVolume : Real
+  restricted_global_prime_eq :
+    restrictedGlobalPrimeLogVolume =
+      (extensionDegree : Real)⁻¹ * localPrimeLogVolume
+
+namespace IUTStage1GlobalToLocalRealifiedFrobenioidRestriction
+
+theorem extensionDegree_ne_zero
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    (restriction.extensionDegree : Real) ≠ 0 := by
+  exact_mod_cast ne_of_gt restriction.extensionDegree_pos
+
+theorem restrictedGlobalPrimeLogVolume_eq
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    restriction.restrictedGlobalPrimeLogVolume =
+      (restriction.extensionDegree : Real)⁻¹ *
+        restriction.localPrimeLogVolume :=
+  restriction.restricted_global_prime_eq
+
+theorem extensionDegree_mul_restrictedGlobalPrimeLogVolume
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    (restriction.extensionDegree : Real) *
+        restriction.restrictedGlobalPrimeLogVolume =
+      restriction.localPrimeLogVolume := by
+  rw [restriction.restrictedGlobalPrimeLogVolume_eq]
+  rw [← mul_assoc, mul_inv_cancel₀ restriction.extensionDegree_ne_zero, one_mul]
+
+theorem restrictedGlobalPrimeLogVolume_eq_local_iff_degree_one
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction)
+    (hlocal : restriction.localPrimeLogVolume ≠ 0) :
+    restriction.restrictedGlobalPrimeLogVolume =
+        restriction.localPrimeLogVolume ↔
+      (restriction.extensionDegree : Real) = 1 := by
+  constructor
+  · intro h
+    have hdegree_mul :
+        (restriction.extensionDegree : Real) *
+            restriction.localPrimeLogVolume =
+          restriction.localPrimeLogVolume := by
+      calc
+        (restriction.extensionDegree : Real) *
+            restriction.localPrimeLogVolume =
+          (restriction.extensionDegree : Real) *
+            restriction.restrictedGlobalPrimeLogVolume := by
+          rw [h]
+        _ = restriction.localPrimeLogVolume :=
+          restriction.extensionDegree_mul_restrictedGlobalPrimeLogVolume
+    have hmul :
+        restriction.localPrimeLogVolume *
+            (restriction.extensionDegree : Real) =
+          restriction.localPrimeLogVolume * 1 := by
+      rw [mul_comm, hdegree_mul, mul_one]
+    exact mul_left_cancel₀ hlocal hmul
+  · intro h
+    rw [restriction.restrictedGlobalPrimeLogVolume_eq, h]
+    simp
+
+theorem restriction_endpoint
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    restriction.restrictedGlobalPrimeLogVolume =
+        (restriction.extensionDegree : Real)⁻¹ *
+          restriction.localPrimeLogVolume ∧
+      (restriction.extensionDegree : Real) *
+          restriction.restrictedGlobalPrimeLogVolume =
+        restriction.localPrimeLogVolume :=
+  ⟨restriction.restrictedGlobalPrimeLogVolume_eq,
+    restriction.extensionDegree_mul_restrictedGlobalPrimeLogVolume⟩
+
+end IUTStage1GlobalToLocalRealifiedFrobenioidRestriction
+
+/--
 Source-facing global realified Frobenioid calibration package.
 
 It consumes the local `p_v^N` source package but fixes the exponent selected by

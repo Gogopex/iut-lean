@@ -148,6 +148,16 @@ theorem globalRealifiedCalibrationSource_rejectsNonautomorphicLocalShift
     source.calibratedLogVolume ≠ source.localSource.shiftedLogVolume :=
   source.calibrated_ne_local_shifted_of_not_automorphism hnot hStep
 
+theorem globalToLocalRealifiedFrobenioidRestriction_endpoint
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    restriction.restrictedGlobalPrimeLogVolume =
+        (restriction.extensionDegree : Real)⁻¹ *
+          restriction.localPrimeLogVolume ∧
+      (restriction.extensionDegree : Real) *
+          restriction.restrictedGlobalPrimeLogVolume =
+        restriction.localPrimeLogVolume :=
+  restriction.restriction_endpoint
+
 theorem thetaRootKummerForgettingSource_feedsNonarchimedeanEntry
     {coric : Type u}
     {audited :

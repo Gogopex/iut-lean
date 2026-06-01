@@ -427,6 +427,11 @@ equality of realified Frobenioid log-volumes, while retaining the
 Hodge-theater history guard.  This is still a finite degree-level shadow, not
 a construction of Mochizuki's Frobenioids, but it moves one equality source
 below the packet-correspondence interface.
+The global-to-local realified restriction from \IUT{} I, Example 3.5 is also
+encoded at degree level: the restricted global prime log-volume is
+\([K_v:(F_{\mathrm{mod}})_v]^{-1}\) times the local prime log-volume, and
+\Lean{} proves that multiplying by the extension degree recovers the local
+prime log-volume.
 This layer is now connected to the nonarchimedean packet correspondence:
 a realified-Frobenioid log-Kummer packet source projects the Frobenioid
 compatibility data to the Kummer \(F\to D\) transfer and to the
@@ -611,6 +616,9 @@ The project currently proves the following source-facing results in \Lean{}:
   divisor degree, unit log-volume, and realified log-volume are proved to add.
   A tensor-packet source certified by this Frobenioid product inherits
   product-log-volume additivity.
+\item The global-to-local realified Frobenioid restriction factor of \IUT{} I,
+  Example 3.5 is formalized as inverse-extension-degree scaling of the local
+  prime log-volume, with the degree-normalization identity proved in \Lean{}.
 \item The realified Frobenioid layer now feeds the nonarchimedean
   log-Kummer packet source: Kummer and mono-analytic forgetting transfers are
   projected from Frobenioid compatibility before the packet correspondence
