@@ -4605,6 +4605,135 @@ theorem nfBridgeModeComparison_endpoint
 end IUTStage1NFBridgeRealifiedLogVolume
 
 /--
+Finite log-volume shadow of the Θ-bridge of IUT I, Definition 5.5(ii).
+
+The full object contains a Θ-Hodge theater and a tautologically associated
+F-prime-strip.  Here we record only the capsule distribution and the target
+log-volume read on the Θ-side F-prime-strip.
+-/
+structure IUTStage1ThetaBridgeRealifiedLogVolume
+    (J : Type u) [Fintype J] where
+  indexWitness : J
+  theater : QualitativeData.HodgeTheaterId
+  capsuleDistribution : IUTStage1RealifiedFrobenioidIndexDistribution J
+  thetaTargetLogVolume : Real
+  theta_target_eq_total :
+    thetaTargetLogVolume = capsuleDistribution.totalLogVolume
+
+namespace IUTStage1ThetaBridgeRealifiedLogVolume
+
+variable {J : Type u} [Fintype J]
+
+theorem thetaTargetLogVolume_eq_total
+    (bridge : IUTStage1ThetaBridgeRealifiedLogVolume J) :
+    bridge.thetaTargetLogVolume =
+      bridge.capsuleDistribution.totalLogVolume :=
+  bridge.theta_target_eq_total
+
+theorem card_ne_zero
+    (bridge : IUTStage1ThetaBridgeRealifiedLogVolume J) :
+    (Fintype.card J : Real) ≠ 0 := by
+  have hcard_pos : 0 < Fintype.card J :=
+    Fintype.card_pos_iff.mpr ⟨bridge.indexWitness⟩
+  exact_mod_cast ne_of_gt hcard_pos
+
+end IUTStage1ThetaBridgeRealifiedLogVolume
+
+/--
+Finite index-compatibility shadow for ΘNF-Hodge theater morphisms.
+
+Definition 5.5(iii) requires the NF- and Θ-bridge morphisms to induce the same
+bijection between the index sets of their capsules.  This record keeps exactly
+that finite datum.
+-/
+structure IUTStage1ThetaNFBridgeIndexCompatibility
+    (J K : Type u) [Fintype J] [Fintype K] where
+  nfIndexBijection : J ≃ K
+  thetaIndexBijection : J ≃ K
+  same_index_bijection : nfIndexBijection = thetaIndexBijection
+
+namespace IUTStage1ThetaNFBridgeIndexCompatibility
+
+variable {J K : Type u} [Fintype J] [Fintype K]
+
+theorem nfIndex_eq_thetaIndex
+    (compat : IUTStage1ThetaNFBridgeIndexCompatibility J K) :
+    compat.nfIndexBijection = compat.thetaIndexBijection :=
+  compat.same_index_bijection
+
+theorem nfIndex_apply_eq_thetaIndex_apply
+    (compat : IUTStage1ThetaNFBridgeIndexCompatibility J K)
+    (j : J) :
+    compat.nfIndexBijection j = compat.thetaIndexBijection j := by
+  rw [compat.same_index_bijection]
+
+end IUTStage1ThetaNFBridgeIndexCompatibility
+
+/--
+Finite realified log-volume compatibility of the NF- and Θ-bridge halves of a
+ΘNF-Hodge theater.
+
+This records the shared capsule condition from Definition 5.5(iii), together
+with the common index bijection condition for morphisms.  It does not construct
+the Hodge theater; it proves the finite log-volume consequence of gluing the
+two bridge halves over the same capsule.
+-/
+structure IUTStage1ThetaNFBridgeRealifiedCompatibility
+    {J : Type u} [Fintype J]
+    (nfBridge : IUTStage1NFBridgeRealifiedLogVolume J)
+    (thetaBridge : IUTStage1ThetaBridgeRealifiedLogVolume J) where
+  indexCompatibility :
+    IUTStage1ThetaNFBridgeIndexCompatibility J J
+  capsule_eq :
+    nfBridge.capsuleDistribution = thetaBridge.capsuleDistribution
+
+namespace IUTStage1ThetaNFBridgeRealifiedCompatibility
+
+variable {J : Type u} [Fintype J]
+variable {nfBridge : IUTStage1NFBridgeRealifiedLogVolume J}
+variable {thetaBridge : IUTStage1ThetaBridgeRealifiedLogVolume J}
+
+theorem thetaTarget_eq_nfSummedTarget
+    (compat :
+      IUTStage1ThetaNFBridgeRealifiedCompatibility nfBridge thetaBridge)
+    (hmode : nfBridge.mode = IUTStage1NFBridgeLogVolumeMode.summed) :
+    thetaBridge.thetaTargetLogVolume = nfBridge.targetLogVolume := by
+  calc
+    thetaBridge.thetaTargetLogVolume =
+        thetaBridge.capsuleDistribution.totalLogVolume :=
+      thetaBridge.thetaTargetLogVolume_eq_total
+    _ = nfBridge.capsuleDistribution.totalLogVolume := by
+      rw [← compat.capsule_eq]
+    _ = nfBridge.targetLogVolume :=
+      (nfBridge.targetLogVolume_eq_total_of_summed hmode).symm
+
+theorem thetaTarget_eq_card_mul_nfAveragedTarget
+    (compat :
+      IUTStage1ThetaNFBridgeRealifiedCompatibility nfBridge thetaBridge)
+    (hmode : nfBridge.mode = IUTStage1NFBridgeLogVolumeMode.averaged) :
+    thetaBridge.thetaTargetLogVolume =
+      (Fintype.card J : Real) * nfBridge.targetLogVolume := by
+  calc
+    thetaBridge.thetaTargetLogVolume =
+        thetaBridge.capsuleDistribution.totalLogVolume :=
+      thetaBridge.thetaTargetLogVolume_eq_total
+    _ = nfBridge.capsuleDistribution.totalLogVolume := by
+      rw [← compat.capsule_eq]
+    _ = (Fintype.card J : Real) * nfBridge.targetLogVolume :=
+      (nfBridge.card_mul_targetLogVolume_eq_total_of_averaged hmode).symm
+
+theorem thetaNFBridgeCompatibility_endpoint
+    (compat :
+      IUTStage1ThetaNFBridgeRealifiedCompatibility nfBridge thetaBridge) :
+    compat.indexCompatibility.nfIndexBijection =
+        compat.indexCompatibility.thetaIndexBijection ∧
+      nfBridge.capsuleDistribution = thetaBridge.capsuleDistribution :=
+  ⟨compat.indexCompatibility.nfIndex_eq_thetaIndex,
+    compat.capsule_eq⟩
+
+end IUTStage1ThetaNFBridgeRealifiedCompatibility
+
+/--
 Source-facing global realified Frobenioid calibration package.
 
 It consumes the local `p_v^N` source package but fixes the exponent selected by

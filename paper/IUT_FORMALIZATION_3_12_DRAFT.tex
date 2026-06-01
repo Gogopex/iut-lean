@@ -454,6 +454,13 @@ log-volume or the normalized averaged capsule log-volume.  For the same
 capsule distribution, \Lean{} proves that the summed bridge target is
 \(|J|\) times the averaged bridge target; for a pivotal distribution, these
 specialize to \(|J|\) times the pivotal value and to the pivotal value itself.
+The adjacent \(\Theta\)-bridge and \(\Theta\mathrm{NF}\)-gluing condition of
+Definition 5.5(iii) are formalized at the same finite level: the \(\Theta\)
+side reads the common capsule total, and a compatibility record requires the
+NF- and \(\Theta\)-bridge morphisms to use the same index bijection and the
+same capsule distribution.  Lean then proves that a summed NF target equals
+the \(\Theta\)-target, while an averaged NF target becomes the \(\Theta\)-target
+after multiplication by \(|J|\).
 This layer is now connected to the nonarchimedean packet correspondence:
 a realified-Frobenioid log-Kummer packet source projects the Frobenioid
 compatibility data to the Kummer \(F\to D\) transfer and to the
@@ -654,6 +661,10 @@ The project currently proves the following source-facing results in \Lean{}:
 \item The finite NF-bridge log-volume model of \IUT{} I, Definition 5.5,
   separates summed and averaged bridge targets and proves their \(|J|\)
   scaling relation for a common capsule distribution.
+\item The finite \(\Theta\mathrm{NF}\)-bridge compatibility model records the
+  same-index-bijection and same-capsule requirements of Definition 5.5(iii),
+  and proves the corresponding \(\Theta\)-target equalities for summed and
+  averaged NF modes.
 \item The realified Frobenioid layer now feeds the nonarchimedean
   log-Kummer packet source: Kummer and mono-analytic forgetting transfers are
   projected from Frobenioid compatibility before the packet correspondence

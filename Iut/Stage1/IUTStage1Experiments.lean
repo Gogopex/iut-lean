@@ -243,6 +243,38 @@ theorem nfBridgePivotalAveragedTarget_endpoint
     bridge.targetLogVolume = pivotal.pivotalLogVolume :=
   bridge.pivotal_averagedTarget_eq_pivotal pivotal hmode hcapsule
 
+theorem thetaNFBridgeCompatibility_endpoint
+    {J : Type u} [Fintype J]
+    {nfBridge : IUTStage1NFBridgeRealifiedLogVolume J}
+    {thetaBridge : IUTStage1ThetaBridgeRealifiedLogVolume J}
+    (compat :
+      IUTStage1ThetaNFBridgeRealifiedCompatibility nfBridge thetaBridge) :
+    compat.indexCompatibility.nfIndexBijection =
+        compat.indexCompatibility.thetaIndexBijection ∧
+      nfBridge.capsuleDistribution = thetaBridge.capsuleDistribution :=
+  compat.thetaNFBridgeCompatibility_endpoint
+
+theorem thetaNFBridgeSummedTarget_endpoint
+    {J : Type u} [Fintype J]
+    {nfBridge : IUTStage1NFBridgeRealifiedLogVolume J}
+    {thetaBridge : IUTStage1ThetaBridgeRealifiedLogVolume J}
+    (compat :
+      IUTStage1ThetaNFBridgeRealifiedCompatibility nfBridge thetaBridge)
+    (hmode : nfBridge.mode = IUTStage1NFBridgeLogVolumeMode.summed) :
+    thetaBridge.thetaTargetLogVolume = nfBridge.targetLogVolume :=
+  compat.thetaTarget_eq_nfSummedTarget hmode
+
+theorem thetaNFBridgeAveragedTarget_endpoint
+    {J : Type u} [Fintype J]
+    {nfBridge : IUTStage1NFBridgeRealifiedLogVolume J}
+    {thetaBridge : IUTStage1ThetaBridgeRealifiedLogVolume J}
+    (compat :
+      IUTStage1ThetaNFBridgeRealifiedCompatibility nfBridge thetaBridge)
+    (hmode : nfBridge.mode = IUTStage1NFBridgeLogVolumeMode.averaged) :
+    thetaBridge.thetaTargetLogVolume =
+      (Fintype.card J : Real) * nfBridge.targetLogVolume :=
+  compat.thetaTarget_eq_card_mul_nfAveragedTarget hmode
+
 theorem thetaRootKummerForgettingSource_feedsNonarchimedeanEntry
     {coric : Type u}
     {audited :
