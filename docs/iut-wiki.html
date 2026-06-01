@@ -1400,6 +1400,7 @@
         <a href="#iut-iv-arithmetic-divisors-19">IUT IV arithmetic divisors 1.9</a>
         <a href="#iut-iv-definition-19-degree-map">Def. 1.9 degree map</a>
         <a href="#iut-iv-definition-19-localized-degree">Def. 1.9 localized degree</a>
+        <a href="#iut-iv-theorem-a-page">IUT IV Theorem A</a>
         <a href="#iut-iv-theorem-110-theta-pilot-estimate">IUT IV theta-pilot estimate 1.10</a>
         <a href="#iut-iv-theorem-110-hypotheses">Theorem 1.10 hypotheses</a>
         <a href="#iut-iv-theorem-110-local-steps">Theorem 1.10 local steps</a>
@@ -10820,6 +10821,116 @@
           <a href="#iut-iii-theorem-b-page">Theorem B</a>
           <a href="#kummer-detachment-310">Kummer detachment</a>
           <a href="#corollary-312-proof-steps">3.12 proof steps</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-theorem-a-page" data-filter="iut iv introduction theorem a diophantine inequalities vojta abc szpiro bounded discrepancy canonical height logarithmic different conductor hyperbolic curve">
+        <h2>IUT IV Theorem A: Diophantine Inequalities</h2>
+        <p class="lede">
+          Theorem A is the Introduction-level statement of the final application of
+          the IUT series. It states a bounded-discrepancy Vojta-form inequality for
+          hyperbolic curves over number fields. Mochizuki then identifies Vojta for
+          hyperbolic curves, the abc conjecture, and Szpiro for elliptic curves as
+          special cases of this statement.
+        </p>
+        <div class="diagram fit" aria-label="IUT IV Theorem A dependency route">
+          <div class="diagramHeader">
+            <strong>From the IUT III estimate to the IUT IV output theorem</strong>
+            <span>IUT IV Introduction, Theorem A</span>
+          </div>
+          <svg viewBox="0 0 1080 460" role="img">
+            <defs>
+              <marker id="arrowIut4TheoremA" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="78" width="230" height="86"></rect>
+            <text class="nodeTitle" x="185" y="108" text-anchor="middle">IUT III Theorem B</text>
+            <text class="tinyText" x="185" y="132" text-anchor="middle">Theta/q pilot log-volume</text>
+            <text class="tinyText" x="185" y="150" text-anchor="middle">Corollary 3.12 estimate</text>
+
+            <rect class="nodeBox green" x="424" y="78" width="230" height="86"></rect>
+            <text class="nodeTitle" x="539" y="108" text-anchor="middle">IUT IV Theorem 1.10</text>
+            <text class="tinyText" x="539" y="132" text-anchor="middle">explicit theta-pilot estimate</text>
+            <text class="tinyText" x="539" y="150" text-anchor="middle">sufficiently general position</text>
+
+            <rect class="nodeBox gold" x="778" y="78" width="230" height="86"></rect>
+            <text class="nodeTitle" x="893" y="108" text-anchor="middle">IUT IV Corollary 2.2</text>
+            <text class="tinyText" x="893" y="132" text-anchor="middle">suitable initial theta data</text>
+            <text class="tinyText" x="893" y="150" text-anchor="middle">lambda-line reduction</text>
+
+            <rect class="nodeBox violet" x="266" y="294" width="260" height="90"></rect>
+            <text class="nodeTitle" x="396" y="326" text-anchor="middle">GenEll reduction</text>
+            <text class="tinyText" x="396" y="350" text-anchor="middle">general elliptic/hyperbolic input</text>
+            <text class="tinyText" x="396" y="368" text-anchor="middle">bounded discrepancy language</text>
+
+            <rect class="nodeBox red" x="616" y="294" width="260" height="90"></rect>
+            <text class="nodeTitle" x="746" y="326" text-anchor="middle">Theorem A</text>
+            <text class="tinyText" x="746" y="350" text-anchor="middle">Vojta-form inequality</text>
+            <text class="tinyText" x="746" y="368" text-anchor="middle">abc and Szpiro special cases</text>
+
+            <path class="edge blue" d="M302 121 H422" marker-end="url(#arrowIut4TheoremA)"></path>
+            <path class="edge green" d="M656 121 H776" marker-end="url(#arrowIut4TheoremA)"></path>
+            <path class="edge gold" d="M893 166 C874 238 812 268 758 292" marker-end="url(#arrowIut4TheoremA)"></path>
+            <path class="edge violet" d="M526 339 H614" marker-end="url(#arrowIut4TheoremA)"></path>
+            <path class="edge blue" d="M539 166 C512 232 446 266 406 292" marker-end="url(#arrowIut4TheoremA)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Theorem component</th><th>Source statement</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Input curve</td>
+            <td>
+              <span class="math">X</span> is smooth, proper, geometrically connected
+              over a number field; <span class="math">D subset X</span> is reduced;
+              <span class="math">U_X = X \\ D</span> is hyperbolic.
+            </td>
+            <td>The final theorem is not only an elliptic-curve statement; elliptic input enters through the reduction route.</td>
+          </tr>
+          <tr>
+            <td>Bounded-degree domain</td>
+            <td>
+              The functions are considered on <span class="math">U_X(Q)_{<= d}</span>
+              for a fixed positive integer <span class="math">d</span>.
+            </td>
+            <td>The bounded-degree parameter must remain visible in any statement of the final output.</td>
+          </tr>
+          <tr>
+            <td>Inequality</td>
+            <td>
+              <span class="math">ht_{omega_X(D)} <= (1+epsilon)(log-diff_X + log-cond_D)</span>
+              in bounded-discrepancy classes.
+            </td>
+            <td>Do not read this as pointwise literal inequality without the bounded-discrepancy convention.</td>
+          </tr>
+          <tr>
+            <td>Meaning of BD</td>
+            <td>
+              The right-hand side minus the height is bounded below by a constant on
+              the bounded-degree point set.
+            </td>
+            <td>This fixes the direction of the bounded-discrepancy comparison.</td>
+          </tr>
+          <tr>
+            <td>Special cases</td>
+            <td>
+              The text names Vojta for hyperbolic curves, abc, and Szpiro for elliptic
+              curves as consequences.
+            </td>
+            <td>Downstream pages should distinguish this final application layer from the Corollary 3.12 dispute.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Dependency boundary.</strong> Theorem A packages the final application.
+          It depends on the IUT III log-volume corridor and IUT IV's numerical and
+          reduction work; it is not itself an independent proof of Corollary 3.12.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV Introduction, Theorem A</a>
+          Related: <a href="#iut-iii-theorem-b-page">IUT III Theorem B</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">Theorem 1.10</a>
+          <a href="#iut-iv-corollary-22-c1-c2">Corollary 2.2 C1/C2</a>
+          <a href="#iut-iv-corollary-23-statement">Corollary 2.3 statement</a>
         </div>
       </section>
 
