@@ -232,6 +232,8 @@
       font-size: clamp(1.75rem, 3vw, 2.6rem);
       line-height: 1.05;
       letter-spacing: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
     section h3 {
       margin: 30px 0 10px;
@@ -602,6 +604,7 @@
       .searchBox { padding: 7px; }
       .searchBox input { padding: 7px 6px; font-size: 0.78rem; }
       nav a { font-size: 0.69rem; padding: 6px 5px; }
+      section h2 { font-size: clamp(1.65rem, 7vw, 2rem); }
       .hero h2 { font-size: clamp(1.9rem, 8vw, 2.45rem); }
       .hero p { font-size: 1rem; }
       .heroActions { flex-direction: column; align-items: stretch; }
@@ -645,8 +648,11 @@
         <a href="#gt-common-container-analogy-page">GT common containers</a>
         <a href="#gt-n-power-iut-analogy-page">GT N-power IUT analogy</a>
         <a href="#gt-ficsp-decomposition-page">GT FICSP/decomposition</a>
+        <a href="#gt-genus-zero-quotient-page">GT genus-zero quotient</a>
+        <a href="#gt-function-space-page">GT function spaces</a>
         <a href="#cat-idempotent-function-page">CAT idempotents</a>
         <a href="#cat-miraculous-rotation-page">CAT miraculous rotation</a>
+        <a href="#cat-chebotarev-hilbertian-page">CAT Chb/Hlb tools</a>
         <a href="#hoshi-introduction-route">Hoshi introduction route</a>
         <a href="#hoshi-cyclotome-synchronization-page">Hoshi cyclotomes</a>
         <a href="#hoshi-kummer-transport-page">Hoshi Kummer transport</a>
@@ -4958,6 +4964,137 @@
         </div>
       </section>
 
+      <section id="gt-genus-zero-quotient-page" data-filter="gt genus zero quotient tripod fundamental group pi0 outc cuspidal inertia belyi injectivity expected theorem a combinatorial anabelian">
+        <h2>GT Genus-Zero Quotient</h2>
+        <p class="lede">
+          In the 2025 GT species notes, Mochizuki defines a genus-zero quotient
+          <span class="math">Pi_X^0</span> of the geometric fundamental group of a
+          genus-zero hyperbolic curve. The expected Theorem A says that, for the
+          tripod over <span class="math">Q</span>, the natural action
+          <span class="math">GT -> Out(Pi_X^0)</span> is faithful.
+        </p>
+        <div class="diagram fit" aria-label="GT genus zero quotient and expected faithful action">
+          <div class="diagramHeader">
+            <strong>Genus-zero quotient route</strong>
+            <span>GT species §3</span>
+          </div>
+          <svg viewBox="0 0 1040 430" role="img">
+            <defs>
+              <marker id="arrowGTGenusZero" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="76" width="220" height="88"></rect>
+            <text class="nodeTitle" x="182" y="108" text-anchor="middle">tripod X</text>
+            <text class="tinyText" x="182" y="132" text-anchor="middle">type (0,3) over Q</text>
+            <text class="tinyText" x="182" y="150" text-anchor="middle">cuspidal inertia visible</text>
+
+            <rect class="nodeBox green" x="410" y="76" width="220" height="88"></rect>
+            <text class="nodeTitle" x="520" y="108" text-anchor="middle">Pi_X^0</text>
+            <text class="tinyText" x="520" y="132" text-anchor="middle">quotient by genus-zero cover kernel</text>
+            <text class="tinyText" x="520" y="150" text-anchor="middle">not trivial in the profinite case</text>
+
+            <rect class="nodeBox violet" x="748" y="76" width="220" height="88"></rect>
+            <text class="nodeTitle" x="858" y="108" text-anchor="middle">GT action</text>
+            <text class="tinyText" x="858" y="132" text-anchor="middle">Expected Theorem A</text>
+            <text class="tinyText" x="858" y="150" text-anchor="middle">faithful into Out(Pi_X^0)</text>
+
+            <rect class="nodeBox gold" x="225" y="270" width="270" height="84"></rect>
+            <text class="nodeTitle" x="360" y="300" text-anchor="middle">configuration spaces</text>
+            <text class="tinyText" x="360" y="324" text-anchor="middle">Pi_Xn+1 -> Pi_Xn -> ...</text>
+            <text class="tinyText" x="360" y="342" text-anchor="middle">fiber-subgroup preserving automorphisms</text>
+
+            <rect class="nodeBox red" x="560" y="270" width="270" height="84"></rect>
+            <text class="nodeTitle" x="695" y="300" text-anchor="middle">Belyi variant</text>
+            <text class="tinyText" x="695" y="324" text-anchor="middle">maps points to rational points</text>
+            <text class="tinyText" x="695" y="342" text-anchor="middle">unramified outside finite rational set</text>
+
+            <path class="edge blue" d="M294 120 H408" marker-end="url(#arrowGTGenusZero)"></path>
+            <path class="edge green" d="M632 120 H746" marker-end="url(#arrowGTGenusZero)"></path>
+            <path class="edge gold" d="M520 166 C486 222 410 244 370 268" marker-end="url(#arrowGTGenusZero)"></path>
+            <path class="edge red" d="M520 166 C570 222 650 244 688 268" marker-end="url(#arrowGTGenusZero)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source object</th><th>Meaning</th><th>Wiki handling</th></tr>
+          <tr>
+            <td><span class="math">Pi_X^0</span></td>
+            <td>Quotient of <span class="math">Pi_X</span> by the intersection of open subgroups corresponding to genus-zero finite etale covers.</td>
+            <td>Keep separate from the full geometric fundamental group.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Out_C(Pi_X)</span></td>
+            <td>Outer automorphisms preserving cuspidal inertia subgroups.</td>
+            <td>Cuspidal data remains part of the typed GT object.</td>
+          </tr>
+          <tr>
+            <td>Expected Theorem A</td>
+            <td>Faithfulness of <span class="math">GT -> Out(Pi_X^0)</span>.</td>
+            <td>Record as expected/work-in-progress context, not a settled source theorem.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-gt-theory-species-teichmuller-2025.pdf" target="_blank">GT species paper §3</a>
+          Related: <a href="#gt-ficsp-decomposition-page">GT FICSP/decomposition</a>
+          <a href="#collas-current-anabelian-work">Collas current anabelian work</a>
+          <a href="#cat-chebotarev-hilbertian-page">CAT Chb/Hlb tools</a>
+        </div>
+      </section>
+
+      <section id="gt-function-space-page" data-filter="gt decomposition groups function spaces ficsp cof belyi cuspidalization s3 field structure algebraic functions standard coordinate">
+        <h2>GT Function Spaces from Decomposition Groups</h2>
+        <p class="lede">
+          GT species §4 explains how, assuming the FICSP/COF synchronization condition,
+          <span class="math">G</span>-decomposition groups can reconstruct the point set
+          of genus-zero finite etale covers, recover the field structure through
+          <span class="math">S_3</span> symmetries, and produce function spaces
+          <span class="math">Fn(Y(Q), Q)</span> with algebraic functions inside them.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Decomposition groups</strong>
+            <p>GT-style decomposition groups are obtained by combinatorial arithmetic Belyi cuspidalization.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Point and field recovery</strong>
+            <p>The point set and <span class="math">Q</span>-field structure are read using genus-zero <span class="math">S_3</span> symmetries.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Function-space container</strong>
+            <p>The recovered points support <span class="math">Fn(Y(Q), Q)</span>, standard coordinate functions, and a natural action.</p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Construction step</th><th>Source role</th><th>IUT analogy boundary</th></tr>
+          <tr>
+            <td>Belyi cuspidalization</td>
+            <td>Builds decomposition groups in a purely combinatorial/group-theoretic fashion.</td>
+            <td>Analogous in spirit to reconstruction, but not part of IUT III Step (xi).</td>
+          </tr>
+          <tr>
+            <td><span class="math">S_3</span> symmetries</td>
+            <td>Operations such as <span class="math">t -> t^{-1}</span> and <span class="math">t -> 1-t</span> recover field structure.</td>
+            <td>Genus-zero symmetry replaces any direct ring-structure identification.</td>
+          </tr>
+          <tr>
+            <td>Function spaces</td>
+            <td>Standard coordinate functions sit inside <span class="math">Fn(Y(Q), Q)</span>.</td>
+            <td>The notes compare these with degree-one theta functions, but this is GT context.</td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          The function-space construction is conditional on FICSP/COF and appears in
+          expected GT-side results. It should be used as a comparison layer, not as a
+          replacement for the IUT multiradial construction.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-gt-theory-species-teichmuller-2025.pdf" target="_blank">GT species paper §4</a>
+          Related: <a href="#gt-ficsp-decomposition-page">GT FICSP/decomposition</a>
+          <a href="#gt-common-container-analogy-page">GT common containers</a>
+          <a href="#cat-miraculous-rotation-page">CAT miraculous rotation</a>
+        </div>
+      </section>
+
       <section id="gms-gcg-motivation">
         <h2>GMS/GCG Motivation</h2>
         <p class="lede">
@@ -6017,6 +6154,96 @@
           Related: <a href="#cat-idempotent-function-page">CAT idempotents</a>
           <a href="#gt-ficsp-decomposition-page">GT FICSP/decomposition</a>
           <a href="#collas-log-theta-wandering-page">Collas log-theta wandering</a>
+        </div>
+      </section>
+
+      <section id="cat-chebotarev-hilbertian-page" data-filter="cat chebotarev hilbertian tools decomposition subgroups tensor direct sum combinatorial anabelian belyi cuspidalization varying hues">
+        <h2>CAT Chb/Hlb Tools</h2>
+        <p class="lede">
+          Varying Hues §4 singles out Chebotarev-type arguments and the Hilbertian
+          property as technical inputs for combinatorial algebraization theory. Their
+          role is to give enough pointwise decomposition-subgroup control to compare
+          multiplicative tensor-product actions with additive scheme-theoretic actions.
+        </p>
+        <div class="diagram fit" aria-label="CAT Chebotarev and Hilbertian tools">
+          <div class="diagramHeader">
+            <strong>Pointwise control for CAT algebraization</strong>
+            <span>Chb/Hlb in Varying Hues §4</span>
+          </div>
+          <svg viewBox="0 0 1060 430" role="img">
+            <defs>
+              <marker id="arrowCATTools" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="52" y="74" width="250" height="88"></rect>
+            <text class="nodeTitle" x="177" y="106" text-anchor="middle">decomposition points</text>
+            <text class="tinyText" x="177" y="130" text-anchor="middle">subgroups attached to p</text>
+            <text class="tinyText" x="177" y="148" text-anchor="middle">pointwise comparison locus</text>
+
+            <rect class="nodeBox green" x="405" y="74" width="250" height="88"></rect>
+            <text class="nodeTitle" x="530" y="106" text-anchor="middle">Chb / Hlb input</text>
+            <text class="tinyText" x="530" y="130" text-anchor="middle">Chebotarev and Hilbertian supply</text>
+            <text class="tinyText" x="530" y="148" text-anchor="middle">enough arithmetic points</text>
+
+            <rect class="nodeBox violet" x="758" y="74" width="250" height="88"></rect>
+            <text class="nodeTitle" x="883" y="106" text-anchor="middle">tensor action</text>
+            <text class="tinyText" x="883" y="130" text-anchor="middle">multiplicative group action</text>
+            <text class="tinyText" x="883" y="148" text-anchor="middle">computed pointwise</text>
+
+            <rect class="nodeBox gold" x="228" y="276" width="250" height="84"></rect>
+            <text class="nodeTitle" x="353" y="306" text-anchor="middle">additive action</text>
+            <text class="tinyText" x="353" y="330" text-anchor="middle">scheme-theoretic direct-sum side</text>
+            <text class="tinyText" x="353" y="348" text-anchor="middle">visible at points</text>
+
+            <rect class="nodeBox red" x="582" y="276" width="250" height="84"></rect>
+            <text class="nodeTitle" x="707" y="306" text-anchor="middle">CAT rotation</text>
+            <text class="tinyText" x="707" y="330" text-anchor="middle">finite-quotient comparison</text>
+            <text class="tinyText" x="707" y="348" text-anchor="middle">gap becomes harmless</text>
+
+            <path class="edge blue" d="M304 118 H403" marker-end="url(#arrowCATTools)"></path>
+            <path class="edge green" d="M657 118 H756" marker-end="url(#arrowCATTools)"></path>
+            <path class="edge gold" d="M530 164 C492 224 418 248 360 274" marker-end="url(#arrowCATTools)"></path>
+            <path class="edge violet" d="M883 164 C844 224 768 248 716 274" marker-end="url(#arrowCATTools)"></path>
+            <path class="edge red" d="M480 318 H580" marker-end="url(#arrowCATTools)"></path>
+          </svg>
+        </div>
+        <table>
+          <tr><th>Tool</th><th>Source role</th><th>Wiki interpretation</th></tr>
+          <tr>
+            <td>Chebotarev</td>
+            <td>Applied over number fields and over function fields over finite fields.</td>
+            <td>Supplies enough decomposition subgroups of points to test the action.</td>
+          </tr>
+          <tr>
+            <td>Hilbertian property</td>
+            <td>Used for rational varieties over number fields.</td>
+            <td>Controls specialization points in the <span class="math">Out(Pi_X)</span> setting.</td>
+          </tr>
+          <tr>
+            <td>Configuration-space anabelian geometry</td>
+            <td>Uses isomorphisms between <span class="math">Out_F(Pi_{X_{n+1}})</span> and <span class="math">Out_F(Pi_{X_n})</span>.</td>
+            <td>Moves from toral/multiplicative nodes to tripod/additive symmetries.</td>
+          </tr>
+          <tr>
+            <td>Cyclotomic Belyi cuspidalization</td>
+            <td>Provides group-theoretic cuspidalization data.</td>
+            <td>Plays the CAT analogue of theta-function/elliptic cuspidalization input.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Boundary.</strong> This is a CAT comparison page, not a claim that
+          Chebotarev or Hilbertian arguments by themselves prove the IUT
+          Corollary 3.12 estimate. The relevance is methodological: both CAT and IUT
+          need a way to replace an alien comparison by data visible in a fixed
+          combinatorial container.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-teichmuller-dilations-varying-hues-2025-marked.pdf" target="_blank">Varying Hues §4</a>
+          Related: <a href="#cat-miraculous-rotation-page">CAT miraculous rotation</a>
+          <a href="#cat-idempotent-function-page">CAT idempotents</a>
+          <a href="#gt-function-space-page">GT function spaces</a>
+          <a href="#gt-genus-zero-quotient-page">GT genus-zero quotient</a>
         </div>
       </section>
 
