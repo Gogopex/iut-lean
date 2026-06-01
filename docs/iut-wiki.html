@@ -809,6 +809,11 @@
         <a class="subLink" href="#etale-theta-cor218-group-construction-page">EtTh Cor. 2.18 construction</a>
         <a class="subLink" href="#etale-theta-cor219-rigidity-package-page">EtTh Cor. 2.19 rigidity</a>
         <a class="subLink" href="#etale-theta-first-power-origin-page">EtTh first-power origin</a>
+        <a class="subLink" href="#etale-theta-tempered-frobenioids-page">EtTh §3 tempered Frobenioids</a>
+        <a class="subLink" href="#etale-theta-log-divisor-filter-page">EtTh log-divisor filters</a>
+        <a class="subLink" href="#etale-theta-tempered-frobenioid-definition-page">EtTh tempered Frobenioid definition</a>
+        <a class="subLink" href="#etale-theta-tempered-frobenioid-preservation-page">EtTh Frobenioid preservation</a>
+        <a class="subLink" href="#etale-theta-theta-frobenioid-example-page">EtTh theta Frobenioid example</a>
         <a href="#frobenioid-standard-model-page">Frobenioid standard model</a>
         <a href="#frobenioid-reconstruction-page">Frobenioid reconstruction</a>
         <a href="#frobenioid-operations-page">Frobenioid operations</a>
@@ -2095,6 +2100,11 @@
               theory, then specializes it back to the etale theta function.
             </td>
             <td>
+              <a href="#etale-theta-tempered-frobenioids-page">tempered Frobenioids</a>,
+              <a href="#etale-theta-log-divisor-filter-page">log-divisor filters</a>,
+              <a href="#etale-theta-tempered-frobenioid-definition-page">tempered Frobenioid definition</a>,
+              <a href="#etale-theta-tempered-frobenioid-preservation-page">preservation of hulls</a>,
+              <a href="#etale-theta-theta-frobenioid-example-page">theta Frobenioid example</a>,
               <a href="#etale-theta-bi-kummer-page">bi-Kummer theory</a>,
               <a href="#mono-theta-frobenioid-route-ii12">IUT II Frobenioid route</a>
             </td>
@@ -2767,6 +2777,226 @@
           Related: <a href="#etale-theta-cor219-rigidity-package-page">Corollary 2.19 rigidity</a>
           <a href="#mono-theta-cyclotomic-compatibility-ii13">IUT II cyclotomic compatibility</a>
           <a href="#tensor-power-warning-312">3.12 tensor-power warning</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-tempered-frobenioids-page" data-filter="etale theta section 3 tempered frobenioids log divisors tempered filters base field hull preservation theta functions">
+        <h2>EtTh §3: Tempered Frobenioids</h2>
+        <p class="lede">
+          Section 3 constructs Frobenioids from line bundles and log-meromorphic
+          functions on tempered coverings of a p-adic curve. It is the bridge from the
+          tempered fundamental-group construction of Sections 1-2 to the Frobenioid
+          translation used in Sections 4-5.
+        </p>
+        <div class="callout blue">
+          This is the parent page for EtTh §3. The section should be read as a
+          construction pipeline: universal combinatorial coverings supply log-divisors;
+          tempered filters turn them into functorial monoids; Definition 3.6 packages the
+          data as tempered Frobenioids; Theorem 3.7 and Corollary 3.8 prove the categorical
+          properties needed before bi-Kummer theory begins.
+        </div>
+        <table class="sourceTable3">
+          <tr><th>EtTh §3 unit</th><th>Source content</th><th>Wiki leaf page</th></tr>
+          <tr>
+            <td>Definition 3.1 and Proposition 3.2</td>
+            <td>Define log-divisors and log-meromorphic functions on universal combinatorial coverings; prove Cartier/perfection control, constancy of regular functions, and no nontrivial infinitely divisible meromorphic function.</td>
+            <td><a href="#etale-theta-log-divisor-filter-page">log-divisor filters</a></td>
+          </tr>
+          <tr>
+            <td>Definition 3.3 and Proposition 3.4</td>
+            <td>Use tempered filters to define <span class="math">Phi_0</span>, <span class="math">B_0</span>, constants, and divisor/rational-function monoids with perf-factorial and non-dilating behavior.</td>
+            <td><a href="#etale-theta-log-divisor-filter-page">log-divisor filters</a></td>
+          </tr>
+          <tr>
+            <td>Definition 3.6 and Lemma 3.5</td>
+            <td>Define tempered Frobenioids from group-saturated subfunctors of realified log-divisor monoids; isolate the base-field-theoretic hull and cuspidal purity.</td>
+            <td><a href="#etale-theta-tempered-frobenioid-definition-page">tempered Frobenioid definition</a></td>
+          </tr>
+          <tr>
+            <td>Theorem 3.7 and Corollary 3.8</td>
+            <td>Establish basic type properties and show that equivalences preserve base-field-theoretic morphisms, hulls, and cuspidal/non-cuspidal pre-steps under the stated hypotheses.</td>
+            <td><a href="#etale-theta-tempered-frobenioid-preservation-page">preservation of hulls</a></td>
+          </tr>
+          <tr>
+            <td>Example 3.9</td>
+            <td>Specialize the tempered Frobenioid construction to the theta-function orbicurves from Section 2 and obtain rationally standard tempered Frobenioids.</td>
+            <td><a href="#etale-theta-theta-frobenioid-example-page">theta Frobenioid example</a></td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, §3</a>
+          Related: <a href="#etale-theta-source-cluster">EtTh source cluster</a>
+          <a href="#frobenioid-standard-model-page">Frobenioid standard model</a>
+          <a href="#etale-theta-bi-kummer-page">bi-Kummer theory</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-log-divisor-filter-page" data-filter="etale theta definition 3.1 definition 3.3 proposition 3.2 proposition 3.4 log divisors log meromorphic functions tempered filters phi0 b0 constants">
+        <h2>EtTh §3.1-§3.4: Log-Divisors, Tempered Filters, and Divisor Monoids</h2>
+        <p class="lede">
+          The first half of §3 turns the universal combinatorial covering of a stable
+          p-adic curve into functorial divisor and rational-function monoids. This is the
+          divisor substrate of the later tempered Frobenioid.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source item</th><th>Construction or theorem</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Definition 3.1</td>
+            <td>Defines non-cuspidal log-divisors, cuspidal log-divisors, log-divisors, Cartier versions, and log-meromorphic functions on <span class="math">Z_infty</span>.</td>
+            <td>Keep support type explicit; cuspidal and non-cuspidal components are later preserved separately.</td>
+          </tr>
+          <tr>
+            <td>Proposition 3.2(i)</td>
+            <td>Some positive integer clears Cartier denominators, giving a natural identification of perfections of Cartier and Weil-style effective log-divisor monoids.</td>
+            <td>Explains why perfection is safe here but depends on the nodal local form and finite list of exponents.</td>
+          </tr>
+          <tr>
+            <td>Proposition 3.2(ii)-(iii)</td>
+            <td>Regular functions on <span class="math">Z_infty</span> are constants, and a log-meromorphic function with compatible roots of every degree is equal to <span class="math">1</span>.</td>
+            <td>Blocks a false “all roots” collapse in the divisor-function layer.</td>
+          </tr>
+          <tr>
+            <td>Definition 3.3</td>
+            <td>A tempered filter is a countable system of characteristic open subgroups with co-free closures; it defines <span class="math">Phi_0</span>, <span class="math">B_0</span>, constants, and the log-divisor map.</td>
+            <td>The construction is functorial over connected tempered coverings and should not be represented as an arbitrary chosen monoid.</td>
+          </tr>
+          <tr>
+            <td>Proposition 3.4</td>
+            <td><span class="math">Phi_0</span> is perf-factorial and non-dilating; units and constants are identified with the expected local-field monoids when the covering is geometrically connected over a finite extension.</td>
+            <td>This is the exact entry point for applying Frobenioid reconstruction and standard-type theorems.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Definition 3.1, Proposition 3.2, Definition 3.3, Proposition 3.4</a>
+          Related: <a href="#etale-theta-tempered-frobenioids-page">tempered Frobenioids hub</a>
+          <a href="#frobenioid-reconstruction-page">Frobenioid reconstruction</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-tempered-frobenioid-definition-page" data-filter="etale theta definition 3.6 lemma 3.5 tempered frobenioid monoid type base field theoretic hull cuspidally pure perfection realification">
+        <h2>EtTh Definition 3.6: Tempered Frobenioids and Base-Field Hulls</h2>
+        <p class="lede">
+          Definition 3.6 packages the functorial divisor data into a model Frobenioid.
+          The key inputs are a connected totally epimorphic base category over tempered
+          coverings, a group-saturated perf-factorial divisorial monoid, and a nonzero
+          constant part. The resulting Frobenioid has a base-field-theoretic hull.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Component</th><th>Source role</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Monoid types <span class="math">Z,Q,R</span></td>
+            <td>Definition 3.6 forms integral, perfected, and realified versions of divisor and rational-function monoids.</td>
+            <td>Separates exact integral data from rationalized and real-valued log-volume containers.</td>
+          </tr>
+          <tr>
+            <td>Group-saturated <span class="math">Phi</span></td>
+            <td><span class="math">Phi</span> is a subfunctor of the realified log-divisor monoid satisfying perf-factorial divisorial hypotheses.</td>
+            <td>Lemma 3.5 shows why group saturation is needed for injections into perfections and realifications.</td>
+          </tr>
+          <tr>
+            <td>Base-field hull <span class="math">C_bs-fld</span></td>
+            <td>The constant/base-field submonoid defines a p-adic Frobenioid included faithfully in the tempered Frobenioid.</td>
+            <td>This hull is the part preserved and compared in Corollary 3.8 and later Kummer theory.</td>
+          </tr>
+          <tr>
+            <td>Cuspidal purity</td>
+            <td>Non-cuspidal primary elements are bounded by base-field elements, and all primes split into non-cuspidal or cuspidal primes.</td>
+            <td>This gives the source condition for preserving cuspidal and non-cuspidal pre-steps.</td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          Remark 3.6.4 and Remark 3.6.5 say that perfection and realification of a
+          tempered Frobenioid remain tempered and are compatible with passage to the
+          base-field-theoretic hull. This is why §3 can later feed both integral and
+          realified IUT constructions.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Lemma 3.5 and Definition 3.6 with Remarks 3.6.1-3.6.6</a>
+          Related: <a href="#etale-theta-log-divisor-filter-page">log-divisor filters</a>
+          <a href="#global-realified-cmod-iut-i35">global realification in IUT I</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-tempered-frobenioid-preservation-page" data-filter="etale theta theorem 3.7 corollary 3.8 basic properties tempered frobenioids standard type base field morphisms hull preservation cuspidal noncuspidal">
+        <h2>EtTh Theorem 3.7 and Corollary 3.8: Properties and Preservation</h2>
+        <p class="lede">
+          Theorem 3.7 proves that tempered Frobenioids have the Frobenioid-theoretic
+          properties needed for reconstruction. Corollary 3.8 then states the invariance
+          results: under suitable hypotheses, equivalences preserve base-field-theoretic
+          morphisms, base-field hulls, and cuspidal/non-cuspidal pre-steps.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Result</th><th>Source content</th><th>Audit reading</th></tr>
+          <tr>
+            <td>Theorem 3.7(i)</td>
+            <td>Tempered Frobenioids are isotropic, model, birationally Frobenius-normalized, sub-quasi-Frobenius-trivial, and not group-like; integral type is unit-profinite and real type is unit-trivial.</td>
+            <td>These type properties are preconditions for invoking Frobenioid reconstruction theorems.</td>
+          </tr>
+          <tr>
+            <td>Theorem 3.7(ii)</td>
+            <td>For FSMFF base category and non-dilating divisor monoid, the Frobenioid is standard; rational monoids give rationally standard type.</td>
+            <td>Marks the route from §3 divisor monoids to standard-type Frobenioids.</td>
+          </tr>
+          <tr>
+            <td>Theorem 3.7(iii)-(iv)</td>
+            <td>Automorphism actions on unit monoids factor through the constant/base-field category; slimness transfers under stated monoid types.</td>
+            <td>Connects tempered Frobenioids back to absolute Galois/base-field data.</td>
+          </tr>
+          <tr>
+            <td>Corollary 3.8(i)-(ii)</td>
+            <td>Equivalences preserve base-field-theoretic morphisms, and under Div-slimness induce compatible equivalences of base-field-theoretic hulls.</td>
+            <td>Prevents the hull from being an arbitrary extra structure detached from the category.</td>
+          </tr>
+          <tr>
+            <td>Corollary 3.8(iii)</td>
+            <td>With cuspidal purity, equivalences preserve non-cuspidal and cuspidal pre-steps; for rational monoids, the induced divisor-monoid isomorphism preserves the corresponding elements and primes.</td>
+            <td>Provides the categorical invariance needed before applying the construction to theta divisors.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Theorem 3.7 and Corollary 3.8</a>
+          Related: <a href="#etale-theta-tempered-frobenioid-definition-page">tempered Frobenioid definition</a>
+          <a href="#frobenioid-reconstruction-page">Frobenioid reconstruction</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-theta-frobenioid-example-page" data-filter="etale theta example 3.9 theta functions tempered frobenioids elliptic coverings orbicurves phi ell rationally standard type">
+        <h2>EtTh Example 3.9: Theta Functions and Tempered Frobenioids</h2>
+        <p class="lede">
+          Example 3.9 applies the tempered Frobenioid machinery to the orbicurves used
+          earlier for the etale theta function. It constructs the elliptic-covering
+          subcategories and the divisor monoids generated by universal combinatorial
+          coverings, then observes that theta functions make the resulting monoids
+          rational.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Step</th><th>Source content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Covering square</td>
+            <td>For the orbicurves of Definition 2.5, choose a finite log-etale Galois covering square <span class="math">U -> X</span>, <span class="math">Y -> W</span> with Galois group of order at most <span class="math">2</span> and <span class="math">Y</span> genus <span class="math">1</span>.</td>
+            <td>Connects the Section 2 orbicurve setup with the Section 3 Frobenioid base categories.</td>
+          </tr>
+          <tr>
+            <td>Elliptic subcategories</td>
+            <td>Define full subcategories of tempered coverings unramified over the cusps of <span class="math">Y</span> and <span class="math">W</span>, with left adjoints back from the full covering categories.</td>
+            <td>Separates the underlying elliptic-covering part from cusp-ramified data.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Phi_W^ell</span></td>
+            <td>Define the perfect group-saturated divisor monoid generated by universal combinatorial coverings of the elliptic part; induced maps on perf-saturations are bijective.</td>
+            <td>Gives a canonical divisor monoid independent of the chosen tempered filter up to natural isomorphism.</td>
+          </tr>
+          <tr>
+            <td>Rationally standard output</td>
+            <td>The zero/pole description of the theta functions from Proposition 1.4 makes the monoid rational; hence the associated tempered Frobenioid is of rationally standard type with perfect divisor monoid.</td>
+            <td>This is the explicit EtTh bridge from theta functions to the Frobenioid category used in the next section.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Example 3.9</a>
+          Related: <a href="#etale-theta-tempered-frobenioids-page">tempered Frobenioids hub</a>
+          <a href="#etale-theta-classical-kummer-page">etale theta class</a>
+          <a href="#etale-theta-bi-kummer-page">bi-Kummer theory</a>
         </div>
       </section>
 
