@@ -278,6 +278,21 @@ theorem realifiedFrobenioidTensorProduct_endpoint
         source.realifiedLogVolume + target.realifiedLogVolume :=
   source.tensorProduct_endpoint target object
 
+theorem realifiedFrobenioidTensorProductPacket_endpoint
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    {left right product :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j}
+    (source :
+      IUTStage1RealifiedFrobenioidTensorProductPacketSource
+        left right product) :
+    product.frobenioidDegree.realifiedLogVolume =
+        left.frobenioidDegree.realifiedLogVolume +
+          right.frobenioidDegree.realifiedLogVolume ∧
+      product.toRealized.product.productLogVolume =
+        left.toRealized.product.productLogVolume +
+          right.toRealized.product.productLogVolume :=
+  source.tensorProductPacket_endpoint
+
 theorem realifiedFrobenioidLogKummerPacket_endpoint
     {coric : Type u}
     {audited :

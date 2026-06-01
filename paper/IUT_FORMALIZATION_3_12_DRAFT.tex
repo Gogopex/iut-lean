@@ -417,7 +417,10 @@ log-volume, and their realified log-volume; a tensor-packet product may be
 declared to have product log-volume equal to this realified value.  A
 finite tensor-product operation on these degree objects adds divisor degrees
 and unit log-volumes, and \Lean{} proves that the realified log-volume of the
-tensor product is the sum of the two realified log-volumes.  A
+tensor product is the sum of the two realified log-volumes.  This operation is
+also lifted to the tensor-packet source layer: if an existing tensor-packet
+product source is certified to carry the tensor-product Frobenioid degree,
+\Lean{} derives additivity of its packet product log-volume.  A
 Frobenioid Kummer-compatibility certificate then projects to the older coric
 tensor-packet transfer by deriving equality of product log-volumes from
 equality of realified Frobenioid log-volumes, while retaining the
@@ -606,6 +609,8 @@ The project currently proves the following source-facing results in \Lean{}:
   used by the tensor-packet coric transfer, with theater histories still kept
   distinct.  The degree object also has a finite tensor-product operation:
   divisor degree, unit log-volume, and realified log-volume are proved to add.
+  A tensor-packet source certified by this Frobenioid product inherits
+  product-log-volume additivity.
 \item The realified Frobenioid layer now feeds the nonarchimedean
   log-Kummer packet source: Kummer and mono-analytic forgetting transfers are
   projected from Frobenioid compatibility before the packet correspondence

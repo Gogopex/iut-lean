@@ -1643,6 +1643,76 @@ theorem productLogVolume_eq_of_realifiedLogVolume_eq
 end IUTStage1RealifiedFrobenioidTensorPacketProductSource
 
 /--
+Tensor-product source at the realized tensor-packet layer.
+
+The record does not manufacture a product of base-valuation packets.  Instead it
+certifies that an already supplied realized tensor-packet product has the
+Frobenioid degree obtained by tensoring two source degrees.  This matches the
+current finite interface: product-log-volume additivity is then a theorem about
+the Frobenioid degree source, not an independent packet equality.
+-/
+structure IUTStage1RealifiedFrobenioidTensorProductPacketSource
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    (left right product :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j) where
+  productObject : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean
+  productDegree_eq_tensor :
+    product.frobenioidDegree =
+      left.frobenioidDegree.tensorProduct right.frobenioidDegree productObject
+
+namespace IUTStage1RealifiedFrobenioidTensorProductPacketSource
+
+variable {kind : IUTStage1PlaceKind} {j : Nat}
+variable {left right product :
+  IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j}
+
+theorem productDegree_realifiedLogVolume_eq_sum
+    (source :
+      IUTStage1RealifiedFrobenioidTensorProductPacketSource
+        left right product) :
+    product.frobenioidDegree.realifiedLogVolume =
+      left.frobenioidDegree.realifiedLogVolume +
+        right.frobenioidDegree.realifiedLogVolume := by
+  rw [source.productDegree_eq_tensor]
+  rfl
+
+theorem productLogVolume_eq_sum
+    (source :
+      IUTStage1RealifiedFrobenioidTensorProductPacketSource
+        left right product) :
+    product.toRealized.product.productLogVolume =
+      left.toRealized.product.productLogVolume +
+        right.toRealized.product.productLogVolume := by
+  calc
+    product.toRealized.product.productLogVolume =
+        product.frobenioidDegree.realifiedLogVolume :=
+      product.toRealized_productLogVolume_eq_realified
+    _ =
+        left.frobenioidDegree.realifiedLogVolume +
+          right.frobenioidDegree.realifiedLogVolume :=
+      source.productDegree_realifiedLogVolume_eq_sum
+    _ =
+        left.toRealized.product.productLogVolume +
+          right.toRealized.product.productLogVolume := by
+      rw [left.toRealized_productLogVolume_eq_realified,
+        right.toRealized_productLogVolume_eq_realified]
+
+theorem tensorProductPacket_endpoint
+    (source :
+      IUTStage1RealifiedFrobenioidTensorProductPacketSource
+        left right product) :
+    product.frobenioidDegree.realifiedLogVolume =
+        left.frobenioidDegree.realifiedLogVolume +
+          right.frobenioidDegree.realifiedLogVolume ∧
+      product.toRealized.product.productLogVolume =
+        left.toRealized.product.productLogVolume +
+          right.toRealized.product.productLogVolume :=
+  ⟨source.productDegree_realifiedLogVolume_eq_sum,
+    source.productLogVolume_eq_sum⟩
+
+end IUTStage1RealifiedFrobenioidTensorProductPacketSource
+
+/--
 Finite log-volume shadow of the Kummer/coric transfer from one realized
 tensor-packet product to another.
 
