@@ -1071,6 +1071,12 @@
         <a href="#bad-prime-to-global-37">Bad-prime data to global objects</a>
         <a href="#theta-q-pilot-objects-38">Theta/q pilot objects 3.8</a>
         <a href="#lgp-lgp-log-theta-lattice-iii38">LGP/lgp lattice 3.8</a>
+        <a href="#theta-mu-lgp-link-38">Theta×mu_LGP link 3.8</a>
+        <a href="#theta-mu-lgp-lowercase-link-38">Theta×mu_lgp link 3.8</a>
+        <a href="#lattice-arrow-dependence-38">Lattice arrow dependence</a>
+        <a href="#lgp-vs-lgp-lowercase-38">LGP versus lgp</a>
+        <a href="#formal-transfer-38">Formal transfer 3.8.2</a>
+        <a href="#log-shells-alone-not-enough-38">Log-shells alone not enough</a>
         <a href="#packet-procession-log-volume-iii39">Packet log-volume 3.9</a>
         <a href="#global-kummer-noninterference-iii310">Global Kummer 3.10</a>
         <a href="#theorem-311-lgp-algorithms">Theorem 3.11 algorithms</a>
@@ -42542,7 +42548,7 @@
         </table>
 
         <div class="grid3">
-          <div class="card" id="theta-mu-lgp-link-38">
+          <div class="card" id="theta-mu-lgp-link-38-card">
             <h3>Theta×mu_LGP link</h3>
             <p>
               The LGP horizontal arrow is the full poly-isomorphism of
@@ -42551,7 +42557,7 @@
             </p>
             <div class="tagRow"><span class="tag blue">Definition 3.8(ii)</span><span class="tag">LGP</span></div>
           </div>
-          <div class="card" id="theta-mu-lgp-lowercase-link-38">
+          <div class="card" id="theta-mu-lgp-lowercase-link-38-card">
             <h3>Theta×mu_lgp link</h3>
             <p>
               The lgp horizontal arrow is built analogously from the
@@ -42560,7 +42566,7 @@
             </p>
             <div class="tagRow"><span class="tag green">Definition 3.8(ii)</span><span class="tag">lgp</span></div>
           </div>
-          <div class="card" id="lattice-arrow-dependence-38">
+          <div class="card" id="lattice-arrow-dependence-38-card">
             <h3>Horizontal arrows depend on vertical log-links</h3>
             <p>
               In Definition 3.8(iii), the horizontal arrow from
@@ -42570,7 +42576,7 @@
             </p>
             <div class="tagRow"><span class="tag gold">Definition 3.8(iii)</span><span class="tag">grid</span></div>
           </div>
-          <div class="card" id="lgp-vs-lgp-lowercase-38">
+          <div class="card" id="lgp-vs-lgp-lowercase-38-card">
             <h3>LGP versus lgp</h3>
             <p>
               The later theory is mainly organized around the LGP lattice, while the lgp
@@ -42579,7 +42585,7 @@
             </p>
             <div class="tagRow"><span class="tag violet">Remark 3.8.1</span><span class="tag">do not merge</span></div>
           </div>
-          <div class="card" id="formal-transfer-38">
+          <div class="card" id="formal-transfer-38-card">
             <h3>Formal transfer</h3>
             <p>
               Vertical coricity, theta-monoid Kummer theory, multiradiality, and
@@ -42588,7 +42594,7 @@
             </p>
             <div class="tagRow"><span class="tag green">Remark 3.8.2</span><span class="tag">reuse</span></div>
           </div>
-          <div class="card" id="log-shells-alone-not-enough-38">
+          <div class="card" id="log-shells-alone-not-enough-38-card">
             <h3>Log-shells alone are not enough</h3>
             <p>
               Remark 3.8.3 blocks a common simplification: trivial Galois action on
@@ -42611,6 +42617,197 @@
           <a href="#theta-q-pilot-objects-38">theta/q pilot objects</a>
           <a href="#lgp-gaussian-log-theta-lattice">LGP Gaussian log-theta lattice</a>
           <a href="#log-shells-not-enough">log-shells warning</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="theta-mu-lgp-link-38" data-filter="iut iii definition 3.8 theta times mu lgp link full poly isomorphism f times mu prime strip relative log link">
+        <h2>IUT III Definition 3.8(ii): Theta×mu_LGP Link</h2>
+        <p class="lede">
+          Given a log-link <span class="math">‡HT → †HT</span> and a target Hodge
+          theater <span class="math">*HT</span>, Definition 3.8(ii) defines the
+          <span class="math">Θ×μ_LGP</span>-link as the full poly-isomorphism of
+          <span class="math">F×μ</span>-prime-strips
+          <span class="math">†F^×μ_LGP ≃ *F^×μ_△</span>. The link is explicitly
+          relative to the preceding log-link; it is not a free-standing identification
+          of theaters.
+        </p>
+        <div class="diagram fit" aria-label="Theta times mu LGP link">
+          <div class="diagramHeader">
+            <strong>Theta×mu_LGP</strong>
+            <span>horizontal link defined relative to a vertical log-link</span>
+          </div>
+          <svg viewBox="0 0 980 300" role="img">
+            <defs>
+              <marker id="arrowThetaMuLGP38" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="70" width="230" height="84"></rect>
+            <text class="nodeTitle" x="185" y="102" text-anchor="middle">‡HT → †HT</text>
+            <text class="tinyText" x="185" y="128" text-anchor="middle">vertical log-link input</text>
+            <rect class="nodeBox green" x="384" y="70" width="230" height="84"></rect>
+            <text class="nodeTitle" x="499" y="102" text-anchor="middle">†F^×μ_LGP</text>
+            <text class="tinyText" x="499" y="128" text-anchor="middle">from C_LGP and F_LGP</text>
+            <rect class="nodeBox gold" x="698" y="70" width="230" height="84"></rect>
+            <text class="nodeTitle" x="813" y="102" text-anchor="middle">*F^×μ_△</text>
+            <text class="tinyText" x="813" y="128" text-anchor="middle">delta target strip</text>
+            <path d="M302 112 H382" class="edge blue" marker-end="url(#arrowThetaMuLGP38)"></path>
+            <path d="M616 112 H696" class="edge green" marker-end="url(#arrowThetaMuLGP38)"></path>
+            <text class="tinyText" x="656" y="92" text-anchor="middle">full poly-isomorphism</text>
+          </svg>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Definition 3.8(ii)</a>
+          Related: <a href="#global-realified-lgp-lgp-37">global realified LGP/lgp</a>
+          <a href="#theta-mu-lgp-lowercase-link-38">Theta×mu_lgp link</a>
+          <a href="#lattice-arrow-dependence-38">lattice arrow dependence</a>
+        </div>
+      </section>
+
+      <section id="theta-mu-lgp-lowercase-link-38" data-filter="iut iii definition 3.8 theta times mu lgp lowercase link full poly isomorphism f times mu prime strip">
+        <h2>IUT III Definition 3.8(ii): Theta×mu_lgp Link</h2>
+        <p class="lede">
+          The <span class="math">Θ×μ_lgp</span>-link is the analogous full
+          poly-isomorphism
+          <span class="math">†F^×μ_lgp ≃ *F^×μ_△</span>. It uses the
+          <span class="math">lgp</span> prime-strip rather than the
+          <span class="math">LGP</span> prime-strip. Remark 3.8.1 later says this
+          lower-case link is essential in the computation of the
+          <span class="math">Θ×μ_LGP</span>-link.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Link</th><th>Source prime-strip</th><th>Target</th></tr>
+          <tr><td><span class="math">Θ×μ_lgp</span></td><td><span class="math">†F^×μ_lgp</span></td><td><span class="math">*F^×μ_△</span></td></tr>
+          <tr><td>Relative datum</td><td colspan="2">The same preceding log-link <span class="math">‡HT → †HT</span>.</td></tr>
+          <tr><td>Role</td><td colspan="2">Auxiliary but essential for computing the uppercase LGP link and pilot-object passage.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Definition 3.8(ii) and Remark 3.8.1</a>
+          Related: <a href="#theta-mu-lgp-link-38">Theta×mu_LGP link</a>
+          <a href="#lgp-vs-lgp-lowercase-38">LGP versus lgp</a>
+          <a href="#theta-q-pilot-objects-38">theta/q pilot objects</a>
+        </div>
+      </section>
+
+      <section id="lattice-arrow-dependence-38" data-filter="iut iii definition 3.8 gaussian log theta lattice horizontal arrows depend on vertical full log links">
+        <h2>IUT III Definition 3.8(iii): Lattice Arrow Dependence</h2>
+        <p class="lede">
+          Definition 3.8(iii) arranges theaters in a <span class="math">Z×Z</span>
+          grid. Vertical arrows are full log-links. The horizontal arrow from
+          <span class="math">n,mHT</span> to <span class="math">n+1,mHT</span> is the
+          LGP or lgp link defined relative to the preceding vertical full log-link
+          <span class="math">n,m-1HT → n,mHT</span>. Thus horizontal motion depends
+          on vertical log-link context.
+        </p>
+        <div class="diagram fit" aria-label="Horizontal arrows depend on vertical log-links">
+          <div class="diagramHeader">
+            <strong>Arrow Dependence</strong>
+            <span>horizontal links are defined relative to the prior vertical log-link</span>
+          </div>
+          <svg viewBox="0 0 940 360" role="img">
+            <defs>
+              <marker id="arrowDepend38" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox violet" x="120" y="70" width="210" height="76"></rect>
+            <text class="nodeTitle" x="225" y="100" text-anchor="middle">n,m HT</text>
+            <text class="tinyText" x="225" y="124" text-anchor="middle">horizontal source</text>
+            <rect class="nodeBox violet" x="610" y="70" width="210" height="76"></rect>
+            <text class="nodeTitle" x="715" y="100" text-anchor="middle">n+1,m HT</text>
+            <text class="tinyText" x="715" y="124" text-anchor="middle">horizontal target</text>
+            <rect class="nodeBox blue" x="120" y="230" width="210" height="76"></rect>
+            <text class="nodeTitle" x="225" y="260" text-anchor="middle">n,m-1 HT</text>
+            <text class="tinyText" x="225" y="284" text-anchor="middle">vertical predecessor</text>
+            <path d="M225 228 V148" class="edge blue" marker-end="url(#arrowDepend38)"></path>
+            <path d="M332 108 H608" class="edge gold" marker-end="url(#arrowDepend38)"></path>
+            <text class="tinyText" x="470" y="88" text-anchor="middle">Θ×μ_LGP or Θ×μ_lgp</text>
+            <text class="tinyText" x="356" y="190" text-anchor="middle">defined relative to this log-link</text>
+          </svg>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Definition 3.8(iii)</a>
+          Related: <a href="#theta-mu-lgp-link-38">Theta×mu_LGP link</a>
+          <a href="#theta-mu-lgp-lowercase-link-38">Theta×mu_lgp link</a>
+          <a href="#log-theta-lattice">log-theta lattice</a>
+        </div>
+      </section>
+
+      <section id="lgp-vs-lgp-lowercase-38" data-filter="iut iii remark 3.8.1 lgp versus lowercase lgp lattice theta pilot q pilot computation">
+        <h2>IUT III Remark 3.8.1: LGP Versus lgp</h2>
+        <p class="lede">
+          Remark 3.8.1 says the LGP-Gaussian and lgp-Gaussian log-theta-lattices are
+          closely related, but the later theory mainly uses the
+          <span class="math">LGP</span> lattice. Nevertheless, the computation of the
+          <span class="math">Θ×μ_LGP</span>-link uses the
+          <span class="math">Θ×μ_lgp</span>-link and related theta-pilot objects in an
+          essential way. Both link types map theta-pilot objects to q-pilot objects.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Lattice/link</th><th>Remark 3.8.1 role</th><th>Audit consequence</th></tr>
+          <tr><td><span class="math">LGP</span></td><td>Main lattice for the subsequent theory.</td><td>Primary route into later log-volume estimates.</td></tr>
+          <tr><td><span class="math">lgp</span></td><td>Needed to compute the <span class="math">LGP</span> link.</td><td>Cannot be dropped as merely duplicate notation.</td></tr>
+          <tr><td>Theta/q pilots</td><td>Both link types map theta-pilots to q-pilots.</td><td>Preserve the pilot-object correspondence in formal models.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.8.1</a>
+          Related: <a href="#theta-q-pilot-objects-38">theta/q pilot objects</a>
+          <a href="#theta-mu-lgp-link-38">Theta×mu_LGP link</a>
+          <a href="#theta-mu-lgp-lowercase-link-38">Theta×mu_lgp link</a>
+        </div>
+      </section>
+
+      <section id="formal-transfer-38" data-filter="iut iii remark 3.8.2 formal transfer theorem 1.5 proposition 2.1 corollary 2.3 proposition 3.5 lgp lgp lattice">
+        <h2>IUT III Remark 3.8.2: Formal Transfer</h2>
+        <p class="lede">
+          Remark 3.8.2 states that Theorem 1.5, Proposition 2.1, Corollary 2.3, and
+          Proposition 3.5 generalize formally to LGP- and lgp-Gaussian log-theta
+          lattices. The reason is not that the new lattices are identical to the old
+          Gaussian lattice; rather, the substantive portions used by those results are
+          unaffected by the transition to LGP/lgp.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Transferred result</th><th>Previously established role</th><th>LGP/lgp consequence</th></tr>
+          <tr><td>Theorem 1.5</td><td>Vertical/horizontal coricity and log-theta lattice structure.</td><td>Applies formally to LGP/lgp lattices.</td></tr>
+          <tr><td>Proposition 2.1 and Corollary 2.3</td><td>Theta-monoid Kummer and multiradiality machinery.</td><td>Reusable in the LGP/lgp setting.</td></tr>
+          <tr><td>Proposition 3.5</td><td>Vertically coric LGP and upper-semi compatibility.</td><td>Transfers because relevant portions are substantively unchanged.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.8.2</a>
+          Related: <a href="#vertical-horizontal-coricity">vertical/horizontal coricity</a>
+          <a href="#theta-monoid-multiradiality-iii22">theta monoid multiradiality</a>
+          <a href="#vertically-coric-lgp-iii35">vertically coric LGP</a>
+        </div>
+      </section>
+
+      <section id="log-shells-alone-not-enough-38" data-filter="iut iii remark 3.8.3 log shells alone not enough unit portions f times mu prime strips nontrivial galois action kummer theory">
+        <h2>IUT III Remark 3.8.3: Log-Shells Alone Are Not Enough</h2>
+        <p class="lede">
+          Remark 3.8.3 blocks a tempting simplification. One cannot replace the unit
+          portions of the <span class="math">F×μ</span>-prime-strips in the horizontal
+          arrows by the associated log-shells alone. Although local Galois groups act
+          trivially on those log-shell containers, the nontrivial Galois action on the
+          local unit portions is necessary for the Kummer theory of the local and global
+          objects contained by the log-shells.
+        </p>
+        <div class="callout warn">
+          <strong>3.12 guardrail.</strong> A model that retains only log-shell
+          containers but discards the unit portions of the
+          <span class="math">F×μ</span>-prime-strips has lost source data explicitly
+          required for Frobenius-like/etale-like Kummer comparison.
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Candidate simplification</th><th>Source verdict</th><th>Reason</th></tr>
+          <tr><td>Replace unit portions by log-shells</td><td>Insufficient.</td><td>Log-shells have trivial local Galois action at nonarchimedean places.</td></tr>
+          <tr><td>Keep <span class="math">F×μ</span> unit portions</td><td>Necessary.</td><td>Nontrivial local Galois action is needed for Kummer theory.</td></tr>
+          <tr><td>Role of log-shells</td><td>Containers, not substitutes.</td><td>They contain objects whose Kummer theory still depends on unit data.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.8.3</a>
+          Related: <a href="#f-perp-times-mu-log-shells">F⊢×mu log-shells</a>
+          <a href="#log-kummer-correspondences">log-Kummer correspondences</a>
+          <a href="#single-kummer-map-not-enough-35">total log-Kummer correspondence</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
         </div>
       </section>
