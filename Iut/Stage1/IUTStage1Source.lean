@@ -4257,6 +4257,143 @@ theorem localObject_endpoint
 end IUTStage1ZModCuspFullLabel
 
 /--
+Stage 1 source package connecting the IUT I bad-local theta-root data to the
+`|F_l|` full-label model used by the Corollary 3.12 corridor.
+
+IUT I, Definition 3.1(e),(f), supplies at a bad place local theta-root models
+of type `(1,(Z/lZ)_Theta)` and `(1,(Z/lZ)_Theta)^±`, together with the
+condition that the local cusp comes from the canonical generator, up to sign, of
+the quotient `Z`.  This package uses the quotient-`Z` coordinate carried by
+`BadLocalThetaRootData` to produce the Stage 1 zero/nonzero full label.
+-/
+structure IUTStage1ThetaRootCuspLabelSourcePackage
+    (l : PrimeGeFive) {F : Type u} [Field F]
+    (X C : HyperbolicOrbicurveModel F) where
+  thetaRootData : BadLocalThetaRootData l X C
+
+namespace IUTStage1ThetaRootCuspLabelSourcePackage
+
+variable {l : PrimeGeFive} {F : Type u} [Field F]
+variable {X C : HyperbolicOrbicurveModel F}
+variable (package : IUTStage1ThetaRootCuspLabelSourcePackage l X C)
+
+def quotientZData : BadLocalQuotientZData l :=
+  package.thetaRootData.quotientZData
+
+def localLabCuspModel : LocalLabCuspModel l :=
+  package.quotientZData.toLocalLabCuspModel
+
+def cuspLabelClassData : CuspLabelClassData l :=
+  CuspLabelClassData.canonical package.localLabCuspModel
+
+def canonicalGenerator : CanonicalGeneratorUpToSignElement :=
+  package.quotientZData.canonicalGeneratorUpToSignElement
+
+def canonicalCoordinate : ZMod l.value :=
+  package.quotientZData.canonicalCoordinateZ
+
+theorem canonicalCoordinate_ne_zero :
+    package.canonicalCoordinate ≠ 0 :=
+  package.quotientZData.canonicalCoordinateZ_ne_zero
+
+def canonicalFullLabel : IUTStage1ZModCuspFullLabel l :=
+  IUTStage1ZModCuspFullLabel.fromCoordinate l package.canonicalCoordinate
+
+theorem quotientZData_constructedFromThetaRoot :
+    package.thetaRootData.quotientZData_constructedFromThetaRoot :=
+  package.thetaRootData.quotientZDataSource
+
+theorem thetaRootXType_holds :
+    package.thetaRootData.thetaRootXType.hasType :=
+  package.thetaRootData.thetaRootXType_holds
+
+theorem thetaRootCType_holds :
+    package.thetaRootData.thetaRootCType.hasType :=
+  package.thetaRootData.thetaRootCType_holds
+
+theorem canonicalGeneratorUpToSign :
+    package.canonicalGenerator.canonicalGeneratorUpToSign :=
+  package.quotientZData.canonicalGeneratorUpToSign
+
+theorem localLabCuspModel_eq_quotientZ :
+    package.localLabCuspModel =
+      package.thetaRootData.quotientZData.toLocalLabCuspModel :=
+  rfl
+
+theorem cuspLabelClass_eq_model_canonical :
+    package.cuspLabelClassData.labelClass =
+      package.localLabCuspModel.canonicalSignLabel :=
+  rfl
+
+theorem cuspLabelClass_eq_model_quotient :
+    package.cuspLabelClassData.labelClass =
+      package.localLabCuspModel.signAction.toSignLabelQuotient
+        package.localLabCuspModel.canonicalNonzeroLabel :=
+  CuspLabelClassData.labelClass_eq_model_quotient package.cuspLabelClassData
+
+theorem canonicalFullLabel_eq_nonzero :
+    package.canonicalFullLabel =
+      IUTStage1ZModCuspFullLabel.nonzero
+        (zmodSignLabelFromCoordinate l package.canonicalCoordinate
+          package.canonicalCoordinate_ne_zero) := by
+  rw [canonicalFullLabel]
+  exact
+    IUTStage1ZModCuspFullLabel.fromCoordinate_nonzero
+      l package.canonicalCoordinate package.canonicalCoordinate_ne_zero
+
+theorem canonicalFullLabel_ne_zero :
+    package.canonicalFullLabel ≠ IUTStage1ZModCuspFullLabel.zero := by
+  rw [canonicalFullLabel,
+    IUTStage1ZModCuspFullLabel.fromCoordinate_ne_zero_iff]
+  exact package.canonicalCoordinate_ne_zero
+
+/--
+The concrete `ZMod l` quotient-`Z` case gives the canonical nonzero full label.
+
+This is the point at which the abstract bad-local theta-root package feeds the
+Stage 1 `|F_l|` label model: once its quotient-`Z` data is the concrete
+`ZMod l` package, the canonical generator up to sign maps to the full label
+coming from coordinate `1`.
+-/
+theorem canonicalFullLabel_eq_zmodCanonical_of_quotientZData_eq_zmod
+    (hquot : package.quotientZData = zmodBadLocalQuotientZData l) :
+    package.canonicalFullLabel =
+      IUTStage1ZModCuspFullLabel.nonzero
+        (zmodCanonicalSignLabelQuotient l) := by
+  have hcoord : package.canonicalCoordinate = (1 : ZMod l.value) := by
+    change package.quotientZData.canonicalCoordinateZ = (1 : ZMod l.value)
+    rw [hquot]
+    rfl
+  rw [canonicalFullLabel, hcoord]
+  exact IUTStage1ZModCuspFullLabel.fromCoordinate_one l
+
+theorem thetaRootCuspLabelSource_endpoint :
+    package.thetaRootData.quotientZData_constructedFromThetaRoot ∧
+      package.canonicalGenerator.canonicalGeneratorUpToSign ∧
+      package.canonicalFullLabel ≠ IUTStage1ZModCuspFullLabel.zero ∧
+      package.cuspLabelClassData.labelClass =
+        package.localLabCuspModel.signAction.toSignLabelQuotient
+          package.localLabCuspModel.canonicalNonzeroLabel :=
+  ⟨package.quotientZData_constructedFromThetaRoot,
+    package.canonicalGeneratorUpToSign,
+    package.canonicalFullLabel_ne_zero,
+    package.cuspLabelClass_eq_model_quotient⟩
+
+def ofBadLocalOrbicurveTypeData
+    (typeData : BadLocalOrbicurveTypeData l X C) :
+    IUTStage1ThetaRootCuspLabelSourcePackage l X C :=
+  { thetaRootData := typeData.thetaRootData }
+
+theorem ofBadLocalOrbicurveTypeData_canonicalGenerator_eq
+    (typeData : BadLocalOrbicurveTypeData l X C) :
+    (ofBadLocalOrbicurveTypeData typeData).canonicalGenerator =
+      typeData.canonicalGenerator := by
+  rw [canonicalGenerator, quotientZData, ofBadLocalOrbicurveTypeData]
+  exact typeData.canonicalGeneratorEqModel.symm
+
+end IUTStage1ThetaRootCuspLabelSourcePackage
+
+/--
 Compatibility between a `ZMod l`-indexed normalized log-volume family and a
 description by nonzero cusp sign-label classes.
 

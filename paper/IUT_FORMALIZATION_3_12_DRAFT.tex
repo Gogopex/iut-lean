@@ -251,6 +251,13 @@ The code defines a finite \(\F_\ell\)-label model, the quotient
 \[
   j=0,\ldots,(\ell-1)/2 .
 \]
+The Stage 1 label model is now connected to the bad-local theta-root data of
+\IUT{} I, Definition 3.1(e),(f).  A new source package consumes the
+quotient-\(\mathbb{Z}\) data of a bad local theta-root model and derives the
+Stage 1 full label from its canonical coordinate.  It also carries the
+canonical-generator-up-to-sign witness.  In the concrete \(Z/\ell Z\) quotient
+case this derived full label is exactly the nonzero canonical full label
+corresponding to coordinate \(1\).
 It proves, for the descended full-label degree model:
 \[
   \deg(\Theta_j)=j^2\deg(q)
@@ -432,6 +439,9 @@ The project currently proves the following source-facing results in \Lean{}:
 \begin{enumerate}
 \item The finite \(q^{j^2}\) degree rule, sign quotient, half-range
   representatives, zero/nonzero split, and average formulas are formalized.
+\item The bad-local theta-root quotient-\(\mathbb{Z}\) package now feeds the
+  Stage 1 \(|F_\ell|\) full-label model through its canonical coordinate; the
+  concrete \(Z/\ell Z\) case yields the canonical nonzero full label.
 \item A single label-independent scalar cannot absorb all representative
   \(j^2\)-degrees when \(\deg(q)\ne0\).
 \item The raw representative branch does not descend to the sign quotient,

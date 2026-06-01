@@ -101,6 +101,32 @@ theorem ind3LocalOrientations_differ :
       IUTStage1Ind3LocalOrientation.theta_le_packet :=
   IUTStage1Ind3LocalOrientation.packet_le_theta_ne_theta_le_packet
 
+/--
+First theta-root cusp-label source check.
+
+The bad-local theta-root package of IUT I, Definition 3.1(e),(f), now feeds a
+nonzero Stage 1 `|F_l|` full label through its quotient-`Z` canonical
+coordinate, while retaining the canonical-generator-up-to-sign witness.
+-/
+theorem thetaRootCuspLabelSource_feedsFullLabel
+    {l : PrimeGeFive} {F : Type u} [Field F]
+    {X C : HyperbolicOrbicurveModel F}
+    (package : IUTStage1ThetaRootCuspLabelSourcePackage l X C) :
+    package.canonicalGenerator.canonicalGeneratorUpToSign ∧
+      package.canonicalFullLabel ≠ IUTStage1ZModCuspFullLabel.zero :=
+  ⟨package.canonicalGeneratorUpToSign,
+    package.canonicalFullLabel_ne_zero⟩
+
+theorem thetaRootCuspLabelSource_zmodQuotient_feedsCanonicalFullLabel
+    {l : PrimeGeFive} {F : Type u} [Field F]
+    {X C : HyperbolicOrbicurveModel F}
+    (package : IUTStage1ThetaRootCuspLabelSourcePackage l X C)
+    (hquot : package.quotientZData = zmodBadLocalQuotientZData l) :
+    package.canonicalFullLabel =
+      IUTStage1ZModCuspFullLabel.nonzero
+        (zmodCanonicalSignLabelQuotient l) :=
+  package.canonicalFullLabel_eq_zmodCanonical_of_quotientZData_eq_zmod hquot
+
 /-- Summary of the first diagnostic pass through the local `(Ind3)` route. -/
 structure Ind3FirstPassDashboard where
   missingRealAlignmentBlocks : Bool
