@@ -1475,6 +1475,14 @@
         <a href="#iut-iv-mutation-morphisms-33">Mutation morphisms 3.3</a>
         <a href="#iut-iv-membership-loops-331">Membership loops 3.3.1</a>
         <a href="#iut-iv-nested-local-systems-332">Nested local systems 3.3.2</a>
+        <a href="#iut-iv-programs-not-outputs-312">Programs not outputs 3.1.2</a>
+        <a href="#iut-iv-choice-free-canonicality-313">Choice-free canonicality 3.1.3</a>
+        <a href="#iut-iv-universe-extension-immunity-314">Universe-extension immunity 3.1.4</a>
+        <a href="#iut-iv-category-nspecies-321">Category species and n-species 3.2</a>
+        <a href="#iut-iv-mutation-equivalence-33">Mutation equivalence 3.3</a>
+        <a href="#iut-iv-simple-species-loop-331">Simple species loops 3.3.1</a>
+        <a href="#iut-iv-monoid-frobenius-36">Monoid Frobenius 3.6</a>
+        <a href="#iut-iv-choice-explosion-362">Choice explosion 3.6.2</a>
         <a href="#species-vs-categories-iv31">Species vs categories 3.1</a>
         <a href="#mutation-histories-cores-iv33">Mutation histories/cores 3.3</a>
         <a href="#same-species-parity-iv36">Same-species parity 3.6</a>
@@ -60104,6 +60112,402 @@
           Related: <a href="#iut-iv-atlas">IUT IV atlas</a>
           <a href="#log-theta-lattice">log-theta lattice</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-programs-not-outputs-312" data-filter="iut iv remark 3.1.2 species programs software output data deterministic algorithm varieties schemes abstract groups matrices quotient internal modifications">
+        <h2>IUT IV Remark 3.1.2: Programs, Not Output Data</h2>
+        <p class="lede">
+          Remark 3.1.2 is one of the basic guardrails for reading species. The species is
+          not the particular set of specimens obtained in one ZFC-model. Its essence is
+          the set-theoretic formula, or program, that constructs specimens in an
+          unspecified model.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Formula-program</strong>
+            <p>
+              The source compares a species to software: the rules determine what is
+              constructed, while the output sets depend on the model in which the rules
+              are interpreted.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Model output</strong>
+            <p>
+              Objects and morphisms in a fixed ZFC-model are representations of the
+              abstract species, just as matrices can represent an abstract group.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Do not quotient programs away</strong>
+            <p>
+              Identifying all programs with the same output would introduce internal
+              program indeterminacy that the paper explicitly leaves outside its scope.
+            </p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Remark item</th><th>Source content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>3.1.2(i)</td>
+            <td>The mathematical content of a species lies in formulas governing construction in an indeterminate ZFC-model.</td>
+            <td>Concept pages should record construction rules, not merely one specimen or final isomorphism class.</td>
+          </tr>
+          <tr>
+            <td>3.1.2(ii)</td>
+            <td>The fixed-model/species distinction is compared to varieties/schemes and concrete matrix groups/abstract groups.</td>
+            <td>When the wiki says "same species", it means same rule-governed type, not equality of representatives.</td>
+          </tr>
+          <tr>
+            <td>3.1.2(iii)</td>
+            <td>Quotienting programs by equality of final output creates intractable internal-program indeterminacy.</td>
+            <td>A formalization should avoid replacing species-level algorithms by bare output equivalence.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Remark 3.1.2</a>
+          Related: <a href="#species-mutations">species and mutations</a>
+          <a href="#iut-iv-choice-free-canonicality-313">choice-free canonicality</a>
+          <a href="#leanform-species-mutations-page">LeanForm species/mutations</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-choice-free-canonicality-313" data-filter="iut iv remark 3.1.3 arbitrary choices set-theoretic formulas canonicality axiom of choice canonical norm non-canonical objects">
+        <h2>IUT IV Remark 3.1.3: Choice-Free Canonicality</h2>
+        <p class="lede">
+          Remark 3.1.3 explains how the paper intends to use conventional mathematical
+          descriptions without writing every formula. A conventional description is
+          admissible only when it is well-defined and does not depend on arbitrary
+          choices that are not themselves formula-describable.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Check</th><th>Accepted</th><th>Rejected or flagged</th></tr>
+          <tr>
+            <td>Conventional description</td>
+            <td>A standard construction whose underlying set-theoretic formula is understood.</td>
+            <td>A construction that silently chooses representatives without a formula-level rule.</td>
+          </tr>
+          <tr>
+            <td>Canonicality</td>
+            <td>Formula-defined data has a canonical status across models and universe extensions.</td>
+            <td>Objects selected by an invocation of choice in one model are not automatically inter-universal.</td>
+          </tr>
+          <tr>
+            <td>Audit role</td>
+            <td>The wiki may summarize a standard construction, but should expose where canonicity is being used.</td>
+            <td>A page that says "choose an isomorphism" must specify whether the choice is formula-governed or an indeterminacy.</td>
+          </tr>
+        </table>
+        <div class="callout violet">
+          This page is a local accuracy rule for the whole wiki. Mochizuki does not
+          require every formula to be written out in IUT IV, but he does require that
+          the conventional description determine a well-defined formula without hidden
+          arbitrary choice.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Remark 3.1.3</a>
+          Related: <a href="#iut-iv-programs-not-outputs-312">programs not outputs</a>
+          <a href="#iut-iv-choice-explosion-362">choice explosion</a>
+          <a href="#iut-iv-alien-algorithms-362">alien algorithms</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-universe-extension-immunity-314" data-filter="iut iv remark 3.1.4 universe extension immunity inter-universal geometry distinct universes species formula absolute">
+        <h2>IUT IV Remark 3.1.4: Immunity Under Universe Extension</h2>
+        <p class="lede">
+          Remark 3.1.4 gives the local meaning of "inter-universal" in IUT IV §3:
+          because a species is formula-defined, the mathematical notion is unaffected
+          by enlarging the universe in which the specimens are interpreted.
+        </p>
+        <div class="diagram fit" aria-label="Universe extension immunity for formula-defined species">
+          <div class="diagramHeader">
+            <strong>Same rule across larger universes</strong>
+            <span>Remark 3.1.4</span>
+          </div>
+          <svg viewBox="0 0 980 340" role="img">
+            <defs>
+              <marker id="arrowUniverse314" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="80" width="220" height="82"></rect>
+            <text class="nodeTitle" x="180" y="110" text-anchor="middle">universe V</text>
+            <text class="tinyText" x="180" y="134" text-anchor="middle">formula interpreted here</text>
+            <rect class="nodeBox green" x="390" y="80" width="220" height="82"></rect>
+            <text class="nodeTitle" x="500" y="110" text-anchor="middle">larger universe W</text>
+            <text class="tinyText" x="500" y="134" text-anchor="middle">same formula, same validity</text>
+            <rect class="nodeBox gold" x="710" y="80" width="220" height="82"></rect>
+            <text class="nodeTitle" x="820" y="110" text-anchor="middle">species notion</text>
+            <text class="tinyText" x="820" y="134" text-anchor="middle">unaffected by enlargement</text>
+            <path d="M292 121 H388" class="edge blue" marker-end="url(#arrowUniverse314)"></path>
+            <path d="M612 121 H708" class="edge green" marker-end="url(#arrowUniverse314)"></path>
+            <text class="edgeLabel" x="340" y="101" text-anchor="middle">V in W</text>
+            <text class="edgeLabel" x="660" y="101" text-anchor="middle">absolute rule</text>
+            <text class="smallText" x="490" y="248" text-anchor="middle">Inter-universal comparison is made at the level of rule-governed notions, not by placing all histories inside one ordinary scheme.</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Source requirement</th><th>Meaning</th><th>IUT use</th></tr>
+          <tr>
+            <td>Formula absoluteness</td>
+            <td>Validity for data in one universe agrees after interpretation in a larger universe.</td>
+            <td>Species-level data can be compared across universe extension.</td>
+          </tr>
+          <tr>
+            <td>Immunity under extension</td>
+            <td>The mathematical notion constituted by the species is unaffected by ascending chains of universes.</td>
+            <td>This supplies the formal foundation-language sense of inter-universal geometry.</td>
+          </tr>
+          <tr>
+            <td>Distinct geometries</td>
+            <td>Formula-defined notions allow one to relate geometries occurring in distinct universes.</td>
+            <td>Later alien-copy pages should distinguish this from ordinary scheme-theoretic gluing.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Remark 3.1.4</a>
+          Related: <a href="#iut-iv-zfcg-universes-31">ZFCG universes</a>
+          <a href="#iut-iv-model-free-specimens-31">model-free specimens</a>
+          <a href="#set-theoretic-copies">set-theoretic copies</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-category-nspecies-321" data-filter="iut iv example 3.2 remark 3.2.1 categories functors isomorphism classes n-species 2-species unnecessary complexity equivalence of categories">
+        <h2>IUT IV Example 3.2 and Remark 3.2.1: Category Species</h2>
+        <p class="lede">
+          Example 3.2 supplies the first concrete species. Small categories are
+          0-specimens; isomorphism classes of functors are 1-specimens. Remark 3.2.1
+          explains why the paper does not develop a full hierarchy of 2-species,
+          3-species, and higher species for its purposes.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Level</th><th>Species reading</th><th>Reason for the convention</th></tr>
+          <tr>
+            <td>0-species</td>
+            <td>The notion of a small category, represented set-theoretically by arrows and composition relations.</td>
+            <td>This makes ordinary categories specimens of a formula-defined species.</td>
+          </tr>
+          <tr>
+            <td>1-species</td>
+            <td>Isomorphism classes of covariant functors between small categories.</td>
+            <td>Species-isomorphisms between 0-specimens correspond to equivalences of categories up to isomorphism.</td>
+          </tr>
+          <tr>
+            <td>Higher species</td>
+            <td>One could introduce 2-specimens via functor isomorphisms and continue to n-species.</td>
+            <td>The paper avoids this extra complexity by taking functors up to isomorphism at the 1-species level.</td>
+          </tr>
+        </table>
+        <div class="callout green">
+          This convention matters downstream: when a page says a category-valued object
+          is a species-level core, the morphism side is already quotienting functors by
+          isomorphism in the sense of Example 3.2.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Example 3.2 and Remark 3.2.1</a>
+          Related: <a href="#iut-iv-category-species-32">category species</a>
+          <a href="#topological-fundamental-group-mutation">fundamental group mutation</a>
+          <a href="#frobenius-etale-mutation-36">etale-site core</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-mutation-equivalence-33" data-filter="iut iv definition 3.3 mutation equivalence quasi-inverse isomorphism of mutations species-isomorphism bijection full faithfulness">
+        <h2>IUT IV Definition 3.3: Mutation Equivalence</h2>
+        <p class="lede">
+          Definition 3.3 does not stop at mutations and morphisms of mutations. It also
+          defines mutation-equivalence: a mutation equipped with a quasi-inverse up to
+          isomorphism of mutations. This is the species-theoretic form of reconstruction.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Mutation</strong>
+            <p>A formula-defined transformation between species, functorial inside any fixed ZFC-model.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Isomorphism of mutations</strong>
+            <p>A mutation morphism whose components are species-isomorphisms, equivalently invertible by another mutation morphism.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Mutation-equivalence</strong>
+            <p>A mutation with a quasi-inverse so that both composites are isomorphic to the relevant identity mutations.</p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Definition 3.3 item</th><th>Source content</th><th>Use in the wiki</th></tr>
+          <tr>
+            <td>(ii)</td>
+            <td>An isomorphism of mutations is a morphism of mutations whose objectwise components are species-isomorphisms.</td>
+            <td>Natural-transformation-like data must be retained, not replaced by a bare equality.</td>
+          </tr>
+          <tr>
+            <td>(iii)</td>
+            <td>A mutation-equivalence has a mutation quasi-inverse with composite isomorphisms to identity mutations.</td>
+            <td>Absolute anabelian reconstruction pages should present reconstruction as algorithmic quasi-inverse data.</td>
+          </tr>
+          <tr>
+            <td>(iii)</td>
+            <td>A mutation-equivalence induces bijections between species-isomorphisms of source objects and of their images.</td>
+            <td>This is the exact bridge to the usual fully-faithful language, but with formula-defined algorithmic history retained.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Definition 3.3(ii)-(iii)</a>
+          Related: <a href="#absolute-anabelian-mutation-35">absolute anabelian mutation</a>
+          <a href="#mutation-histories-cores-iv33">mutation histories/cores</a>
+          <a href="#abs-anabelian-cores-telecores-page">cores and telecores</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-simple-species-loop-331" data-filter="iut iv remark 3.3.1 simple species loops membership hierarchy categories schemes geometry of categories absolute anabelian galois categories cores non-coric observables">
+        <h2>IUT IV Remark 3.3.1: Simple Species and Loops</h2>
+        <p class="lede">
+          Remark 3.3.1 explains why categories and group-like data are useful in a
+          theory that wants to simulate loops through a membership hierarchy. The
+          simpler the species, the easier it is to form loop-like comparisons without
+          violating foundation.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Remark item</th><th>Source content</th><th>IUT role</th></tr>
+          <tr>
+            <td>3.3.1(i)</td>
+            <td>Species-isomorphisms can compare objects at different membership levels, simulating membership loops without actual membership loops.</td>
+            <td>Alien copies can be compared by type and reconstruction data without collapsing their histories.</td>
+          </tr>
+          <tr>
+            <td>3.3.1(ii)</td>
+            <td>Loops are easier to construct for simpler species, such as categories, than for schemes.</td>
+            <td>This motivates the geometry of categories and absolute anabelian geometry as a reconstruction medium.</td>
+          </tr>
+          <tr>
+            <td>3.3.1(iii)</td>
+            <td>Cores record portions left unaltered by mutations and can be used to describe altered non-coric observables.</td>
+            <td>This is the local species-theoretic origin of using coric containers for non-coric theta/log data.</td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          The page separates two claims that are easy to conflate: species let one
+          simulate loop-like comparison across membership levels, while cores explain
+          how invariant portions can describe non-invariant portions along such
+          mutation histories.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Remark 3.3.1</a>
+          Related: <a href="#iut-iv-membership-loops-331">membership loops</a>
+          <a href="#iut-iv-nested-local-systems-332">nested local systems</a>
+          <a href="#iut-coric-noncoric-principle-361">coric/non-coric principle</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-monoid-frobenius-36" data-filter="iut iv example 3.6 monoid frobenius torsion-free abelian monoid pM p-perfection core non-coric contravariant observable log schemes">
+        <h2>IUT IV Example 3.6: Monoid Frobenius and p-Perfection</h2>
+        <p class="lede">
+          The monoid version of Example 3.6 is the closest species-theoretic toy model
+          for the log/theta monoid phenomena later used in IUT. It replaces schemes by
+          torsion-free abelian monoids, Frobenius by multiplication by
+          <span class="math">p</span>, and the invariant core by p-perfection.
+        </p>
+        <div class="diagram fit" aria-label="Monoid Frobenius mutation and p-perfection core">
+          <div class="diagramHeader">
+            <strong>Combinatorial Frobenius prototype</strong>
+            <span>Example 3.6(iii)</span>
+          </div>
+          <svg viewBox="0 0 980 360" role="img">
+            <defs>
+              <marker id="arrowMonoid36" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="72" width="180" height="72"></rect>
+            <text class="nodeTitle" x="160" y="101" text-anchor="middle">M</text>
+            <text class="tinyText" x="160" y="124" text-anchor="middle">torsion-free abelian monoid</text>
+            <rect class="nodeBox blue" x="390" y="72" width="180" height="72"></rect>
+            <text class="nodeTitle" x="480" y="101" text-anchor="middle">pM</text>
+            <text class="tinyText" x="480" y="124" text-anchor="middle">monoid-Frobenius target</text>
+            <rect class="nodeBox green" x="710" y="72" width="180" height="72"></rect>
+            <text class="nodeTitle" x="800" y="101" text-anchor="middle">M_pf</text>
+            <text class="tinyText" x="800" y="124" text-anchor="middle">p-perfection core</text>
+            <path d="M252 108 H388" class="edge blue" marker-end="url(#arrowMonoid36)"></path>
+            <text class="edgeLabel" x="320" y="88" text-anchor="middle">F_mon</text>
+            <path d="M572 108 H708" class="edge green" marker-end="url(#arrowMonoid36)"></path>
+            <text class="edgeLabel" x="640" y="88" text-anchor="middle">inductive limit</text>
+            <rect class="nodeBox red" x="230" y="230" width="250" height="68"></rect>
+            <text class="nodeTitle" x="355" y="256" text-anchor="middle">non-coric observable</text>
+            <text class="tinyText" x="355" y="278" text-anchor="middle">natural inclusion pM -> M</text>
+            <rect class="nodeBox gold" x="560" y="230" width="250" height="68"></rect>
+            <text class="nodeTitle" x="685" y="256" text-anchor="middle">coric comparison</text>
+            <text class="tinyText" x="685" y="278" text-anchor="middle">M -> M_pf relates to the core</text>
+            <path d="M480 146 C448 186 400 206 358 228" class="edge red" marker-end="url(#arrowMonoid36)"></path>
+            <path d="M800 146 C770 190 724 210 690 228" class="edge gold" marker-end="url(#arrowMonoid36)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Definition in Example 3.6(iii)</th><th>Conceptual function</th></tr>
+          <tr>
+            <td><span class="math">S_mon</span></td>
+            <td>Species of torsion-free abelian monoids and monoid morphisms.</td>
+            <td>Combinatorial/log-scheme analogue of the Frobenius scheme story.</td>
+          </tr>
+          <tr>
+            <td><span class="math">M(p) = pM</span></td>
+            <td>Submonoid obtained by multiplying elements by <span class="math">p</span>.</td>
+            <td>Defines the monoid-Frobenius mutation history.</td>
+          </tr>
+          <tr>
+            <td>Non-coric observable</td>
+            <td>The inclusion <span class="math">M(p) -> M</span> with identity observation mutations.</td>
+            <td>Models altered data that is not invariant under the mutation.</td>
+          </tr>
+          <tr>
+            <td>p-perfection core</td>
+            <td>The inductive limit along multiplication-by-<span class="math">p</span> inclusions.</td>
+            <td>Provides a coric object through which the non-coric observable is related.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Example 3.6(iii)</a>
+          Related: <a href="#frobenius-etale-mutation-36">Frobenius/etale mutation</a>
+          <a href="#iut-coric-noncoric-principle-361">coric/non-coric principle</a>
+          <a href="#theta-monoid-multiradiality-iii22">theta monoid multiradiality</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-choice-explosion-362" data-filter="iut iv remark 3.6.2 arbitrary choice catalogue large cardinality set-theoretic exponentiation p-adic integration canonical connection canonical lifting minimal complexity">
+        <h2>IUT IV Remark 3.6.2: Choice Explosion</h2>
+        <p class="lede">
+          Remark 3.6.2(iii) gives a concrete warning against replacing formula-defined
+          algorithms by catalogues of arbitrary choices. Such catalogues grow by
+          set-theoretic exponentiation and destroy the clean inter-universal
+          calculability that species are meant to preserve.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Comparison</th><th>Formula-defined route</th><th>Arbitrary-choice route</th></tr>
+          <tr>
+            <td>Set-theoretic size</td>
+            <td>Use a canonical rule whose interpretation is stable under universe extension.</td>
+            <td>Catalogue possible choices, producing large sets such as power sets of already large data.</td>
+          </tr>
+          <tr>
+            <td>p-adic analogy</td>
+            <td>Canonical connections resemble canonical liftings in p-adic Teichmuller theory.</td>
+            <td>Arbitrary integration resembles denominators with rapidly growing p-adic valuations.</td>
+          </tr>
+          <tr>
+            <td>IUT consequence</td>
+            <td>Track the specific reconstruction or rigidity algorithm that controls component interrelations.</td>
+            <td>Do not replace the algorithm by the set of all possible outcomes unless the source says that indeterminacy is intended.</td>
+          </tr>
+        </table>
+        <div class="callout red">
+          This is not just a philosophical preference. In Remark 3.6.2 the choice-free
+          algorithm is what allows an operation performed in one universe to be
+          calculated from the viewpoint of an alien universe.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Remark 3.6.2(iii)</a>
+          Related: <a href="#iut-iv-choice-free-canonicality-313">choice-free canonicality</a>
+          <a href="#iut-iv-alien-algorithms-362">alien algorithms</a>
+          <a href="#mono-theta-cyclotomic-compatibility-ii13">cyclotomic rigidity</a>
         </div>
       </section>
 
