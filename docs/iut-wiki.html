@@ -220,6 +220,37 @@
     body.wiki-ready main section.active-page {
       animation: pageIn 120ms ease-out;
     }
+    body.focus-mode main section.active-page.hero { display: block; }
+    body.focus-mode main section.active-page > :not(.focusShell) { display: none !important; }
+    body.focus-mode main section.active-page > .focusShell { display: block !important; }
+    .focusShell {
+      display: none;
+      max-width: 980px;
+    }
+    .focusBack {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+    .focusTitle {
+      margin: 0 0 18px;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      line-height: 1.02;
+    }
+    .focusClone {
+      margin-top: 10px;
+    }
+    .focusClone.card {
+      max-width: 900px;
+    }
+    .focusClone .diagram svg,
+    .focusClone svg {
+      max-width: 100%;
+      height: auto;
+    }
     @media (prefers-reduced-motion: reduce) {
       body.wiki-ready main section.active-page { animation: none; }
     }
@@ -1208,6 +1239,9 @@
         <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
         <a href="#theta-log-links">Theta and log links</a>
         <a href="#log-theta-lattice">Log-theta lattice</a>
+        <a href="#iut-iii-theorem-a-page">IUT III Theorem A</a>
+        <a href="#iut-iii-theorem-b-page">IUT III Theorem B</a>
+        <a href="#iut-iii-ab-pipeline-page">Theorem A/B pipeline</a>
         <a href="#local-log-link-mechanism-iii11">Local log-link mechanism 1.1</a>
         <a href="#vertical-horizontal-coricity-page-iii">Vertical/horizontal coricity</a>
         <a href="#upper-semi-log-kummer-iii">Upper-semi Log-Kummer</a>
@@ -10458,6 +10492,215 @@
           Related: <a href="#log-theta-lattice">log-theta lattice</a>
           <a href="#corollary-312">Corollary 3.12</a>
           <a href="#dispute">dispute</a>
+        </div>
+      </section>
+
+      <section id="iut-iii-theorem-a-page" data-filter="iut iii introduction theorem a multiradial algorithms logarithmic gaussian procession monoids lgp theorem 3.11 ind1 ind2 ind3">
+        <h2>IUT III Theorem A: Multiradial LGP Algorithms</h2>
+        <p class="lede">
+          Theorem A is Mochizuki's Introduction-level summary of IUT III Theorem 3.11.
+          It packages the multiradial representation of logarithmic Gaussian procession
+          data: tensor packets of log-shells, splitting monoids of LGP-monoids acting on
+          those packets, and labelled copies of <span class="math">F_mod^×</span> acting on
+          the same packet containers.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Clause</th><th>Source content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Theorem A(i)</td>
+            <td>
+              Constructs <span class="math">R_LGP</span> from processions of
+              <span class="math">D⊢</span>-prime-strips, functorially for
+              isomorphisms of those processions, modulo Ind1 and Ind2.
+            </td>
+            <td>
+              The multiradial representation is procession-based. It is not merely a
+              set of possible theta values.
+            </td>
+          </tr>
+          <tr>
+            <td>Theorem A(ii)</td>
+            <td>
+              Gives the log-Kummer correspondence: inverse Kummer isomorphisms from the
+              vertically coric packet/LGP/field data to Frobenioid-theoretic data in
+              each Hodge theater, with tensor packets subject to upper-semi Ind3.
+            </td>
+            <td>
+              Splitting monoids and field copies are non-interfering; tensor packets
+              carry the one-sided upper-semi behavior.
+            </td>
+          </tr>
+          <tr>
+            <td>Theorem A(iii)</td>
+            <td>
+              States compatibility of the Kummer isomorphisms with horizontal
+              <span class="math">Θ×μ_LGP</span>-links, including the unit-group portion
+              and cyclotomic rigidity used for LGP monoids and field copies.
+            </td>
+            <td>
+              Horizontal compatibility is a theorem-level source obligation, not an
+              ambient equality of ring histories.
+            </td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Coverage note.</strong> Theorem A is the paper's bridge from the
+          construction layers of IUT III §§1-3 to the proof-critical theorem statement.
+          It should be read together with Theorem 3.11, not as a separate simplified
+          proof.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III Introduction, Theorem A</a>
+          Related: <a href="#theorem-311-lgp-algorithms">Theorem 3.11 algorithms</a>
+          <a href="#theorem-311-data-abc">3.11 data (a),(b),(c)</a>
+          <a href="#ind1-ind2-ind3-311">Ind1/Ind2/Ind3</a>
+          <a href="#iut-iii-theorem-b-page">Theorem B</a>
+        </div>
+      </section>
+
+      <section id="iut-iii-theorem-b-page" data-filter="iut iii introduction theorem b log-volume estimates multiradially represented splitting monoids lgp theta pilot q pilot corollary 3.12">
+        <h2>IUT III Theorem B: Log-Volume Estimate</h2>
+        <p class="lede">
+          Theorem B is the Introduction-level summary of Corollary 3.12. It compares
+          the procession-normalized mono-analytic log-volume of the holomorphic hull of
+          all possible images of the Theta-pilot, subject to Ind1/Ind2/Ind3, with the
+          corresponding q-pilot log-volume, which is not treated as subject to those
+          indeterminacies.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Quantity</th><th>Source definition</th><th>Audit point</th></tr>
+          <tr>
+            <td><span class="math">-|log(Θ)|</span></td>
+            <td>
+              Procession-normalized mono-analytic log-volume of the holomorphic hull of
+              the union of possible images of a Theta-pilot in the multiradial
+              representation.
+            </td>
+            <td>
+              Includes the possible-image union, the holomorphic hull, and the
+              Ind1/Ind2/Ind3 envelope.
+            </td>
+          </tr>
+          <tr>
+            <td><span class="math">-|log(q)|</span></td>
+            <td>
+              Procession-normalized mono-analytic log-volume of the image of a q-pilot
+              object in the same multiradial representation.
+            </td>
+            <td>
+              The source explicitly says this q-pilot quantity is not regarded as
+              subject to Ind1/Ind2/Ind3.
+            </td>
+          </tr>
+          <tr>
+            <td>Conclusion</td>
+            <td>
+              <span class="math">-|log(Θ)| ∈ R</span> and
+              <span class="math">-|log(Θ)| ≥ -|log(q)|</span>, equivalently
+              <span class="math">C_Θ ≥ -1</span> under the stated convention.
+            </td>
+            <td>
+              The sign convention is essential: the page should not silently reverse
+              the inequality.
+            </td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          Theorem B is stated as an estimate for a hull of possible Theta-pilot images.
+          It should therefore not be paraphrased as a direct equality between a single
+          theta object and a single q object.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III Introduction, Theorem B</a>
+          Related: <a href="#corollary-312">Corollary 3.12 corridor</a>
+          <a href="#cor312-statement-setup">3.12 statement setup</a>
+          <a href="#hull-det-logvol-step-xid-312">hull/det/log-volume</a>
+          <a href="#iut-iii-ab-pipeline-page">Theorem A/B pipeline</a>
+        </div>
+      </section>
+
+      <section id="iut-iii-ab-pipeline-page" data-filter="iut iii introduction theorem a theorem b pipeline multiradial representation kummer detachment theta pilot q pilot figure i8">
+        <h2>IUT III Theorem A/B Pipeline</h2>
+        <p class="lede">
+          The Introduction describes Theorem A and Theorem B as one pipeline. Theorem A
+          builds the multiradial representation and records its compatibility with
+          log-Kummer and horizontal <span class="math">Θ×μ_LGP</span> links. Theorem B then
+          applies that representation to compute an upper bound for the q-pilot
+          log-volume through the holomorphic hull of possible Theta-pilot images.
+        </p>
+        <div class="diagram fit" aria-label="Theorem A to Theorem B pipeline">
+          <div class="diagramHeader">
+            <strong>From multiradial representation to log-volume estimate</strong>
+            <span>IUT III Introduction, Theorems A-B and Fig. I.8</span>
+          </div>
+          <svg viewBox="0 0 1080 460" role="img">
+            <defs>
+              <marker id="arrowIut3AB" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="62" y="76" width="230" height="88"></rect>
+            <text class="nodeTitle" x="177" y="108" text-anchor="middle">processions</text>
+            <text class="tinyText" x="177" y="132" text-anchor="middle">D⊢-prime-strips</text>
+            <text class="tinyText" x="177" y="150" text-anchor="middle">Ind1 source</text>
+
+            <rect class="nodeBox green" x="334" y="76" width="230" height="88"></rect>
+            <text class="nodeTitle" x="449" y="108" text-anchor="middle">R_LGP</text>
+            <text class="tinyText" x="449" y="132" text-anchor="middle">packets, LGP monoids</text>
+            <text class="tinyText" x="449" y="150" text-anchor="middle">and F_mod^× copies</text>
+
+            <rect class="nodeBox gold" x="606" y="76" width="230" height="88"></rect>
+            <text class="nodeTitle" x="721" y="108" text-anchor="middle">log-Kummer</text>
+            <text class="tinyText" x="721" y="132" text-anchor="middle">Ind3 for packets</text>
+            <text class="tinyText" x="721" y="150" text-anchor="middle">non-interference elsewhere</text>
+
+            <rect class="nodeBox violet" x="334" y="286" width="230" height="88"></rect>
+            <text class="nodeTitle" x="449" y="318" text-anchor="middle">Theta-pilot hull</text>
+            <text class="tinyText" x="449" y="342" text-anchor="middle">union of possible images</text>
+            <text class="tinyText" x="449" y="360" text-anchor="middle">subject to Ind1/2/3</text>
+
+            <rect class="nodeBox red" x="606" y="286" width="230" height="88"></rect>
+            <text class="nodeTitle" x="721" y="318" text-anchor="middle">q-pilot log-volume</text>
+            <text class="tinyText" x="721" y="342" text-anchor="middle">computed in codomain</text>
+            <text class="tinyText" x="721" y="360" text-anchor="middle">comparison target</text>
+
+            <rect class="nodeBox green" x="862" y="286" width="170" height="88"></rect>
+            <text class="nodeTitle" x="947" y="318" text-anchor="middle">estimate</text>
+            <text class="tinyText" x="947" y="342" text-anchor="middle">-|log(Theta)|</text>
+            <text class="tinyText" x="947" y="360" text-anchor="middle">>= -|log(q)|</text>
+
+            <path class="edge blue" d="M294 120 H332" marker-end="url(#arrowIut3AB)"></path>
+            <path class="edge green" d="M566 120 H604" marker-end="url(#arrowIut3AB)"></path>
+            <path class="edge gold" d="M721 166 C690 226 568 256 484 284" marker-end="url(#arrowIut3AB)"></path>
+            <path class="edge violet" d="M566 330 H604" marker-end="url(#arrowIut3AB)"></path>
+            <path class="edge red" d="M838 330 H860" marker-end="url(#arrowIut3AB)"></path>
+            <path class="edge gold" d="M449 166 V284" marker-end="url(#arrowIut3AB)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Pipeline stage</th><th>Source role</th><th>What can go wrong in a wiki/model</th></tr>
+          <tr>
+            <td>Multiradial representation</td>
+            <td>Built from processions and functorial for procession isomorphisms.</td>
+            <td>Replacing processions by an unindexed list loses the Ind1 source.</td>
+          </tr>
+          <tr>
+            <td>Kummer detachment</td>
+            <td>Moves from Frobenius-like objects needed for the link to etale-like multiradial objects.</td>
+            <td>Using a single Kummer isomorphism ignores the full log-Kummer correspondence.</td>
+          </tr>
+          <tr>
+            <td>Holomorphic hull/log-volume</td>
+            <td>Computes the hull of all possible Theta-pilot images, then takes the signed log-volume estimate.</td>
+            <td>Reading the result as a pointwise identity misses the hull and possible-image construction.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III Introduction, Fig. I.8 and Theorems A-B</a>
+          Related: <a href="#iut-iii-theorem-a-page">Theorem A</a>
+          <a href="#iut-iii-theorem-b-page">Theorem B</a>
+          <a href="#kummer-detachment-310">Kummer detachment</a>
+          <a href="#corollary-312-proof-steps">3.12 proof steps</a>
         </div>
       </section>
 
@@ -61702,18 +61945,76 @@
     }
 
     function canonicalHash(hash) {
-      const { page } = routePage(hash);
-      return "#" + page.id;
+      const { requested, page } = routePage(hash);
+      return idElements.has(requested) ? "#" + requested : "#" + page.id;
+    }
+
+    function removeIds(el) {
+      el.removeAttribute("id");
+      el.querySelectorAll("[id]").forEach(child => child.removeAttribute("id"));
+    }
+
+    function focusHeading(target) {
+      const heading = target.matches("h2, h3, h4, dt")
+        ? target
+        : target.querySelector("h2, h3, h4, dt, strong");
+      return heading ? heading.textContent.trim() : "Concept";
+    }
+
+    function ensureFocusShell(page) {
+      let shell = page.querySelector(":scope > .focusShell");
+      if (!shell) {
+        shell = document.createElement("div");
+        shell.className = "focusShell";
+        page.prepend(shell);
+      }
+      return shell;
+    }
+
+    function clearFocusShells() {
+      sections.forEach(section => {
+        section.classList.remove("has-focus-shell");
+        const shell = section.querySelector(":scope > .focusShell");
+        if (shell) shell.replaceChildren();
+      });
+    }
+
+    function buildFocusedConcept(page, target) {
+      clearFocusShells();
+      const shell = ensureFocusShell(page);
+      const back = document.createElement("a");
+      back.className = "focusBack";
+      back.href = "#" + page.id;
+      back.textContent = "Back to " + focusHeading(page);
+
+      const title = document.createElement("h2");
+      title.className = "focusTitle";
+      title.textContent = focusHeading(target);
+
+      const clone = target.cloneNode(true);
+      removeIds(clone);
+      clone.classList.add("focusClone");
+
+      shell.append(back, title, clone);
+      page.classList.add("has-focus-shell");
     }
 
     function setActivePage(hash, shouldScroll = true) {
-      const { requested, page } = routePage(hash);
+      const { requested, target, page } = routePage(hash);
+      const knownTarget = idElements.has(requested);
+      const focusedConcept = knownTarget && target !== page;
       sections.forEach(section => {
         const isCurrent = section === page;
         section.hidden = !isCurrent;
         section.classList.toggle("active-page", isCurrent);
         section.setAttribute("aria-hidden", String(!isCurrent));
       });
+      document.body.classList.toggle("focus-mode", focusedConcept);
+      if (focusedConcept) {
+        buildFocusedConcept(page, target);
+      } else {
+        clearFocusShells();
+      }
 
       navLinks.forEach(a => a.classList.remove("active"));
       const active = navLinks.find(a => a.getAttribute("href") === "#" + page.id);
@@ -61724,12 +62025,17 @@
       navLinks.filter(a => a !== active).forEach(a => a.removeAttribute("aria-current"));
 
       const heading = page.querySelector("h2, h1");
-      document.title = page.id === "home" || !heading
+      const focusedTitle = focusedConcept ? focusHeading(target) : "";
+      document.title = focusedConcept
+        ? `${focusedTitle} | ${baseTitle}`
+        : page.id === "home" || !heading
         ? baseTitle
         : `${heading.textContent.trim()} | ${baseTitle}`;
 
-      if (!sectionIds.has(requested) || location.hash !== "#" + page.id) {
+      if (!knownTarget) {
         history.replaceState(null, "", "#" + page.id);
+      } else if (location.hash !== "#" + requested) {
+        history.replaceState(null, "", "#" + requested);
       }
       if (shouldScroll) {
         window.scrollTo({ top: 0, behavior: "auto" });
