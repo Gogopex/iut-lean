@@ -1258,6 +1258,9 @@
         <a href="#iut-iv-proposition-16-prime-number-theorem">Prop. 1.6 prime estimate</a>
         <a href="#iut-iv-proposition-17-weighted-averages">Prop. 1.7 weighted averages</a>
         <a href="#iut-iv-elliptic-torsion-18">IUT IV elliptic torsion 1.8</a>
+        <a href="#iut-iv-proposition-18-torsion-rigidity">Prop. 1.8 torsion rigidity</a>
+        <a href="#iut-iv-proposition-18-descent-sections">Prop. 1.8 descent sections</a>
+        <a href="#iut-iv-proposition-18-reduction-gates">Prop. 1.8 reduction gates</a>
         <a href="#iut-iv-arithmetic-divisors-19">IUT IV arithmetic divisors 1.9</a>
         <a href="#iut-iv-theorem-110-theta-pilot-estimate">IUT IV theta-pilot estimate 1.10</a>
         <a href="#iut-iv-suitable-initial-theta-data-22">IUT IV suitable theta data 2.2</a>
@@ -52302,6 +52305,188 @@
           <a href="#arithmetic-divisors">arithmetic divisors</a>
           <a href="#iut-iv-theorem-110-theta-pilot-estimate">theta-pilot estimate</a>
           <a href="#iut-iv-diophantine-output">IUT IV output route</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-proposition-18-torsion-rigidity" data-filter="iut iv proposition 1.8 torsion rigidity serre criterion automorphisms l torsion rational torsion uniqueness">
+        <h2>IUT IV Proposition 1.8: Torsion Rigidity</h2>
+        <p class="lede">
+          The torsion-rigidity part of Proposition 1.8 consists of Serre's criterion
+          and the uniqueness consequence for elliptic-curve descents with rational
+          <span class="math">l</span>-torsion. It is the point where finite torsion
+          data becomes strong enough to pin down model ambiguity.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Serre criterion</strong>
+            <p>
+              For <span class="math">l >= 3</span>, an automorphism of a polarized
+              abelian variety over an algebraically closed field is detected by its
+              action on <span class="math">l</span>-torsion.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Kernel condition</strong>
+            <p>
+              A descended elliptic model with rational <span class="math">l</span>-torsion
+              corresponds to a section whose image lies in the kernel of the torsion
+              representation.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Uniqueness</strong>
+            <p>
+              Since the geometric automorphism subgroup injects into torsion
+              automorphisms, the descended model with rational
+              <span class="math">l</span>-torsion is unique up to isomorphism.
+            </p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Assertion</th><th>Paper content</th><th>Why it is a separate gate</th></tr>
+          <tr>
+            <td>1.8(i)</td>
+            <td>The natural map <span class="math">Aut(A,lambda) -> Aut(A[l])</span> is injective for <span class="math">l >= 3</span>.</td>
+            <td>It prevents hidden automorphisms from surviving after passage to level structure.</td>
+          </tr>
+          <tr>
+            <td>Proof input</td>
+            <td>The proof uses the l-adic Tate module and the fact that an algebraic-integer root of unity congruent to <span class="math">1 mod l</span> is trivial for <span class="math">l >= 3</span>.</td>
+            <td>The statement is classical but not definitional; formalization should import or prove it as an elliptic/abelian-variety lemma.</td>
+          </tr>
+          <tr>
+            <td>1.8(iv)</td>
+            <td>Two descended elliptic curves over <span class="math">k</span> with all <span class="math">l</span>-torsion rational are isomorphic over <span class="math">k</span>.</td>
+            <td>This is the uniqueness gate used before constructing the fields and models in Theorem 1.10 and Corollary 2.2.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Proposition 1.8(i),(iv)</a>
+          Related: <a href="#iut-iv-elliptic-torsion-18">Proposition 1.8 overview</a>
+          <a href="#iut-iv-proposition-18-descent-sections">descent sections</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">Theorem 1.10</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-proposition-18-descent-sections" data-filter="iut iv proposition 1.8 descent sections field of moduli galois image j invariant two torsion">
+        <h2>IUT IV Proposition 1.8: Descent Sections</h2>
+        <p class="lede">
+          Proposition 1.8(ii)-(iii) converts elliptic-curve descent into sections of an
+          automorphism-to-Galois exact sequence. This is why the later tripodal and
+          field-of-moduli fields are not just labels: they are tied to an actual
+          Galois image and torsion representation.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Exact sequence</strong>
+            <p>
+              Automorphisms of the geometric elliptic curve fit into
+              <span class="math">1 -> Aut_k(E) -> Aut_kbar(E) -> G_k</span>, with open
+              image <span class="math">G_E</span>.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Models as sections</strong>
+            <p>
+              A model over the extension corresponding to a closed subgroup
+              <span class="math">H subset G_k</span> is equivalent to a section over
+              <span class="math">H</span>.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>2-torsion factor</strong>
+            <p>
+              If <span class="math">Aut_kbar(E)={+/-1}</span>, the 2-torsion
+              representation factors through <span class="math">G_E</span>.
+            </p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Assertion</th><th>Paper content</th><th>Use in the wiki route</th></tr>
+          <tr>
+            <td>1.8(ii)</td>
+            <td>The finite extension determined by <span class="math">G_E</span> is the minimal field of definition, generated by the <span class="math">j</span>-invariant.</td>
+            <td>Links the field-of-moduli notation to a concrete elliptic-curve invariant.</td>
+          </tr>
+          <tr>
+            <td>1.8(ii)</td>
+            <td>Descent data over <span class="math">k_H</span> is equivalent to a section of <span class="math">Aut(E) -> G_k</span> over <span class="math">H</span>.</td>
+            <td>Provides a typed interface for model choices instead of treating descents as opaque labels.</td>
+          </tr>
+          <tr>
+            <td>1.8(iii)</td>
+            <td>When geometric automorphisms are <span class="math">{+/-1}</span>, the representation on <span class="math">E[2]</span> factors through <span class="math">G_E</span>.</td>
+            <td>Feeds the Legendre-form descent condition in 1.8(vi) and the tripodal field in Theorem 1.10.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Proposition 1.8(ii)-(iii)</a>
+          Related: <a href="#iut-iv-proposition-18-torsion-rigidity">torsion rigidity</a>
+          <a href="#iut-iv-proposition-18-reduction-gates">reduction gates</a>
+          <a href="#iut-iv-suitable-initial-theta-data-22">suitable theta data</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-proposition-18-reduction-gates" data-filter="iut iv proposition 1.8 semistable reduction legendre form good reduction unramified bad multiplicative tame">
+        <h2>IUT IV Proposition 1.8: Reduction Gates</h2>
+        <p class="lede">
+          Proposition 1.8(v)-(vii) supplies the reduction and ramification gates used
+          after the torsion/descent setup: rational level structure gives semistable
+          reduction, trivial 2-torsion gives a Legendre-form model, and reduction type
+          controls ramification on prime-to-residue-characteristic torsion.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Rational level</strong>
+            <p>
+              Full rational <span class="math">l</span>-torsion over a complete
+              discrete valuation field implies semistable reduction.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Legendre gate</strong>
+            <p>
+              Trivial <span class="math">G_E -> Aut(E[2])</span> action and
+              <span class="math">G_E=G_k</span> give a Legendre-form model, after at
+              most a quadratic extension for semistability.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Ramification split</strong>
+            <p>
+              Good reduction gives unramified torsion action; bad multiplicative
+              reduction gives tame ramification.
+            </p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Assertion</th><th>Reduction statement</th><th>Downstream consequence</th></tr>
+          <tr>
+            <td>1.8(v)</td>
+            <td>Full rational <span class="math">l</span>-torsion with <span class="math">l >= 3</span> and invertible in the valuation ring implies semistable reduction.</td>
+            <td>Supports the reduction hypotheses needed when Theorem 1.10 estimates bad and good places separately.</td>
+          </tr>
+          <tr>
+            <td>1.8(vi)</td>
+            <td>Trivial 2-torsion action yields a Legendre-form model; semistability is reached after degree at most two, and no extension is needed if good reduction already holds.</td>
+            <td>Provides the Legendre/lambda-line input used in Corollary 2.2 and suitable initial theta data.</td>
+          </tr>
+          <tr>
+            <td>1.8(vii)</td>
+            <td>Good reduction makes torsion action unramified; bad multiplicative reduction makes it tame.</td>
+            <td>Feeds the ramification and different estimates that appear in Theorem 1.10.</td>
+          </tr>
+        </table>
+        <div class="callout violet">
+          Formalization checkpoint: the reduction gates should remain separate from the
+          torsion-rigidity gates. The former control ramification and semistability;
+          the latter control uniqueness and descent.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Proposition 1.8(v)-(vii)</a>
+          Related: <a href="#iut-iv-proposition-13-different-estimates">different estimates</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">Theorem 1.10</a>
+          <a href="#iut-iv-diophantine-inequalities-23">Diophantine inequalities</a>
         </div>
       </section>
 
