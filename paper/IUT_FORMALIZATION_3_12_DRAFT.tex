@@ -435,6 +435,14 @@ prime log-volume.  The same restricted value now normalizes the local
 \(p_v^N\)-shift source: the local shift is expressed with this restricted
 global prime step, and the automorphism-or-zero-step criterion is restated in
 terms of the restricted realified prime log-volume.
+\IUT{} I, Example 5.1 and Remark 5.1.1 distinguish the diagonal Frobenioid
+\(F_{\langle J\rangle}\) from the product of underlying categories \(F_J\):
+the former carries constant distributions in \(j\), while the latter allows
+arbitrary distributions.  The code now models this finite realified
+log-volume distinction.  A diagonal distribution has total log-volume
+\(|J|\) times its common value, with the realified restriction factor
+propagated through this sum; a distribution with two unequal coordinates is
+proved not to come from a diagonal constant distribution.
 This layer is now connected to the nonarchimedean packet correspondence:
 a realified-Frobenioid log-Kummer packet source projects the Frobenioid
 compatibility data to the Kummer \(F\to D\) transfer and to the
@@ -624,6 +632,11 @@ The project currently proves the following source-facing results in \Lean{}:
   prime log-volume, with the degree-normalization identity proved in \Lean{}.
   This restricted value is connected to the local \(p_v^N\)-shift source used
   in the Step (xii) diagnostic.
+\item The diagonal/arbitrary distribution distinction of \IUT{} I, Example 5.1
+  and Remark 5.1.1 is formalized at finite realified log-volume level:
+  diagonal distributions are constant in \(j\), their total is
+  \(|J|\) times the common restricted value, and a two-coordinate mismatch
+  cannot be represented as diagonal.
 \item The realified Frobenioid layer now feeds the nonarchimedean
   log-Kummer packet source: Kummer and mono-analytic forgetting transfers are
   projected from Frobenioid compatibility before the packet correspondence

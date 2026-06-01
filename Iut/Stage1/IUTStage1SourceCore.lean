@@ -4294,6 +4294,119 @@ theorem restrictionNormalizedLocalSource_endpoint
 end IUTStage1RestrictionNormalizedLocalFrobenioidSource
 
 /--
+Finite realified Frobenioid distribution over a label/index set.
+
+IUT I, Example 5.1 and Remark 5.1.1 distinguish the diagonal Frobenioid
+`F_{\langle J\rangle}` from the product of underlying categories `F_J`: the
+former corresponds to divisors whose dependence on `j ∈ J` is constant, while
+the latter allows arbitrary distributions.  This finite record keeps the
+realified log-volume component of that distinction.
+-/
+structure IUTStage1RealifiedFrobenioidIndexDistribution
+    (J : Type u) [Fintype J] where
+  logVolume : J -> Real
+
+namespace IUTStage1RealifiedFrobenioidIndexDistribution
+
+variable {J : Type u} [Fintype J]
+
+def constant (value : Real) :
+    IUTStage1RealifiedFrobenioidIndexDistribution J :=
+  { logVolume := fun _ => value }
+
+def isConstantWith
+    (distribution : IUTStage1RealifiedFrobenioidIndexDistribution J)
+    (value : Real) : Prop :=
+  ∀ j : J, distribution.logVolume j = value
+
+def fromRestriction
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    IUTStage1RealifiedFrobenioidIndexDistribution J :=
+  constant restriction.restrictedGlobalPrimeLogVolume
+
+theorem constant_isConstantWith
+    (value : Real) :
+    (constant (J := J) value).isConstantWith value :=
+  fun _ => rfl
+
+theorem fromRestriction_isConstantWith
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    (fromRestriction (J := J) restriction).isConstantWith
+      restriction.restrictedGlobalPrimeLogVolume :=
+  constant_isConstantWith restriction.restrictedGlobalPrimeLogVolume
+
+def totalLogVolume
+    (distribution : IUTStage1RealifiedFrobenioidIndexDistribution J) :
+    Real :=
+  Finset.univ.sum distribution.logVolume
+
+theorem totalLogVolume_eq_card_mul_of_constant
+    (distribution : IUTStage1RealifiedFrobenioidIndexDistribution J)
+    {value : Real}
+    (hconstant : distribution.isConstantWith value) :
+    distribution.totalLogVolume = (Fintype.card J : Real) * value := by
+  classical
+  unfold totalLogVolume
+  calc
+    Finset.univ.sum distribution.logVolume =
+        Finset.univ.sum (fun _ : J => value) := by
+      apply Finset.sum_congr rfl
+      intro j _hj
+      exact hconstant j
+    _ = (Fintype.card J : Real) * value := by
+      simp [Finset.sum_const, nsmul_eq_mul]
+
+theorem fromRestriction_totalLogVolume
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    (fromRestriction (J := J) restriction).totalLogVolume =
+      (Fintype.card J : Real) *
+        restriction.restrictedGlobalPrimeLogVolume :=
+  totalLogVolume_eq_card_mul_of_constant
+    (fromRestriction (J := J) restriction)
+    (fromRestriction_isConstantWith restriction)
+
+theorem extensionDegree_mul_fromRestriction_totalLogVolume
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    (restriction.extensionDegree : Real) *
+        (fromRestriction (J := J) restriction).totalLogVolume =
+      (Fintype.card J : Real) * restriction.localPrimeLogVolume := by
+  rw [fromRestriction_totalLogVolume]
+  calc
+    (restriction.extensionDegree : Real) *
+        ((Fintype.card J : Real) *
+          restriction.restrictedGlobalPrimeLogVolume) =
+      (Fintype.card J : Real) *
+        ((restriction.extensionDegree : Real) *
+          restriction.restrictedGlobalPrimeLogVolume) := by
+      ring
+    _ = (Fintype.card J : Real) * restriction.localPrimeLogVolume := by
+      rw [restriction.extensionDegree_mul_restrictedGlobalPrimeLogVolume]
+
+theorem not_constantWith_of_pair_ne
+    (distribution : IUTStage1RealifiedFrobenioidIndexDistribution J)
+    {left right : J}
+    (hneq : distribution.logVolume left ≠ distribution.logVolume right) :
+    ¬ ∃ value : Real, distribution.isConstantWith value := by
+  rintro ⟨value, hconstant⟩
+  exact hneq (by rw [hconstant left, hconstant right])
+
+theorem constant_distribution_endpoint
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    (fromRestriction (J := J) restriction).isConstantWith
+        restriction.restrictedGlobalPrimeLogVolume ∧
+      (fromRestriction (J := J) restriction).totalLogVolume =
+        (Fintype.card J : Real) *
+          restriction.restrictedGlobalPrimeLogVolume ∧
+      (restriction.extensionDegree : Real) *
+          (fromRestriction (J := J) restriction).totalLogVolume =
+        (Fintype.card J : Real) * restriction.localPrimeLogVolume :=
+  ⟨fromRestriction_isConstantWith restriction,
+    fromRestriction_totalLogVolume restriction,
+    extensionDegree_mul_fromRestriction_totalLogVolume restriction⟩
+
+end IUTStage1RealifiedFrobenioidIndexDistribution
+
+/--
 Source-facing global realified Frobenioid calibration package.
 
 It consumes the local `p_v^N` source package but fixes the exponent selected by

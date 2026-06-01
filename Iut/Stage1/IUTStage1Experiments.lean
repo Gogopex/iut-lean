@@ -173,6 +173,31 @@ theorem restrictionNormalizedLocalFrobenioidSource_endpoint
           source.restriction.restrictedGlobalPrimeLogVolume = 0) :=
   source.restrictionNormalizedLocalSource_endpoint
 
+theorem realifiedFrobenioidConstantDistribution_endpoint
+    {J : Type u} [Fintype J]
+    (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :
+    (IUTStage1RealifiedFrobenioidIndexDistribution.fromRestriction
+        (J := J) restriction).isConstantWith
+        restriction.restrictedGlobalPrimeLogVolume ∧
+      (IUTStage1RealifiedFrobenioidIndexDistribution.fromRestriction
+        (J := J) restriction).totalLogVolume =
+        (Fintype.card J : Real) *
+          restriction.restrictedGlobalPrimeLogVolume ∧
+      (restriction.extensionDegree : Real) *
+          (IUTStage1RealifiedFrobenioidIndexDistribution.fromRestriction
+            (J := J) restriction).totalLogVolume =
+        (Fintype.card J : Real) * restriction.localPrimeLogVolume :=
+  IUTStage1RealifiedFrobenioidIndexDistribution.constant_distribution_endpoint
+    restriction
+
+theorem realifiedFrobenioidArbitraryDistribution_notDiagonal
+    {J : Type u} [Fintype J]
+    (distribution : IUTStage1RealifiedFrobenioidIndexDistribution J)
+    {left right : J}
+    (hneq : distribution.logVolume left ≠ distribution.logVolume right) :
+    ¬ ∃ value : Real, distribution.isConstantWith value :=
+  distribution.not_constantWith_of_pair_ne hneq
+
 theorem thetaRootKummerForgettingSource_feedsNonarchimedeanEntry
     {coric : Type u}
     {audited :
