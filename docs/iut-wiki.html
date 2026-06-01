@@ -1115,6 +1115,15 @@
         <a href="#tautological-multiradialization-ii17">Tautological multiradialization</a>
         <a href="#parallel-transport-radial-ii171">Radial parallel transport</a>
         <a href="#concrete-radial-examples-ii18">Concrete radial examples 1.8</a>
+        <a href="#basic-pi-g-radial-environment-ii18i">Basic Pi/G radial env. 1.8(i)</a>
+        <a href="#tm-pair-radial-environment-ii18ii">TM-pair radial env. 1.8(ii)</a>
+        <a href="#unit-orbit-radial-environment-ii18iii">Unit-orbit radial env. 1.8(iii)</a>
+        <a href="#cyclotomic-cocyclotomic-radial-environment-ii18iv">Cyclotomic/co-cyclotomic 1.8(iv)</a>
+        <a href="#torsion-to-cocyclotomic-radial-environment-ii18v">Torsion-to-co-cyclotomic 1.8(v)</a>
+        <a href="#exterior-cyclotomic-radial-environment-ii18vi">Exterior cyclotomic 1.8(vi)</a>
+        <a href="#groupification-radial-environment-ii18vii-viii">Groupification radial env. 1.8(vii-viii)</a>
+        <a href="#log-shell-radial-environment-ii18ix">Log-shell radial env. 1.8(ix)</a>
+        <a href="#aut-gamma-separation-ii181">Aut/Gamma separation 1.8.1</a>
         <a href="#graph-functorial-algorithms-ii19">Graphs of algorithms 1.9</a>
         <a href="#iut-ii-mono-theta-rigidity-110-112">Mono-theta rigidity 1.10-1.12</a>
         <a href="#mono-theta-rigidity-isomorphism-ii110">Mono-theta rigidity 1.10</a>
@@ -30853,16 +30862,367 @@
         </p>
         <table class="sourceTable3">
           <tr><th>Example item</th><th>Coric output</th><th>Role</th></tr>
-          <tr><td>1.8(i)</td><td><span class="math">G</span></td><td>Different arithmetic holomorphic structures on a single coric G.</td></tr>
-          <tr><td>1.8(ii)</td><td><span class="math">G O^triangleright(G)</span></td><td>Monoid version after sacrificing ring structure.</td></tr>
-          <tr><td>1.8(iii)-(iv)</td><td><span class="math">G O^x(G)</span>, <span class="math">G O^xmu(G)</span></td><td>Unit and co-cyclotomic variants with allowed isometry/orbit indeterminacy.</td></tr>
-          <tr><td>1.8(vi)</td><td>Exterior-cyclotomic version</td><td>Replaces <span class="math">M_TM^mu</span> by <span class="math">Pi_mu(MTheta_*) tensor Q/Z</span>.</td></tr>
-          <tr><td>1.8(ix)</td><td>Log-shell version</td><td>Adds the log-shell <span class="math">I(G) subset O^xmu(G)</span>.</td></tr>
+          <tr><td><a href="#basic-pi-g-radial-environment-ii18i">1.8(i)</a></td><td><span class="math">G</span></td><td>Different arithmetic holomorphic structures on a single coric G.</td></tr>
+          <tr><td><a href="#tm-pair-radial-environment-ii18ii">1.8(ii)</a></td><td><span class="math">G O^triangleright(G)</span></td><td>Monoid version after sacrificing ring structure.</td></tr>
+          <tr><td><a href="#unit-orbit-radial-environment-ii18iii">1.8(iii)</a>, <a href="#cyclotomic-cocyclotomic-radial-environment-ii18iv">1.8(iv)</a></td><td><span class="math">G O^x(G)</span>, <span class="math">G O^xmu(G)</span></td><td>Unit and co-cyclotomic variants with allowed isometry/orbit indeterminacy.</td></tr>
+          <tr><td><a href="#torsion-to-cocyclotomic-radial-environment-ii18v">1.8(v)</a>, <a href="#exterior-cyclotomic-radial-environment-ii18vi">1.8(vi)</a></td><td><span class="math">G O^xmu(G)</span></td><td>Torsion and exterior-cyclotomic routes into the co-cyclotomic coric object.</td></tr>
+          <tr><td><a href="#groupification-radial-environment-ii18vii-viii">1.8(vii)-(viii)</a></td><td><span class="math">G O^xmu(G)</span></td><td>Groupification/profinite-completion variant tied back to the same coric output.</td></tr>
+          <tr><td><a href="#log-shell-radial-environment-ii18ix">1.8(ix)</a></td><td>Log-shell version</td><td>Adds the log-shell <span class="math">I(G) subset O^xmu(G)</span>.</td></tr>
+          <tr><td><a href="#aut-gamma-separation-ii181">Remark 1.8.1</a></td><td>separation of automorphism sources</td><td>Aut(G)-induced automorphisms of <span class="math">O^xmu(G)</span> do not coincide with nontrivial Gamma-actions.</td></tr>
         </table>
+        <div class="grid3">
+          <div class="card">
+            <h3>Basic spoke/core layer</h3>
+            <p>
+              Start with <span class="math">(Pi,G,alpha)->G</span>, then add the
+              MLF-Galois TM-pair. These two pages explain the basic spoke-to-core
+              pattern before unit and cyclotomic quotients enter.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#basic-pi-g-radial-environment-ii18i">Pi/G</a>
+              <a class="tag" href="#tm-pair-radial-environment-ii18ii">TM-pair</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Unit quotient layer</h3>
+            <p>
+              The unit, cyclotomic, co-cyclotomic, and exterior-cyclotomic variants
+              determine which scalar or torsion ambiguity is allowed in a multiradial
+              comparison.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#unit-orbit-radial-environment-ii18iii">units</a>
+              <a class="tag" href="#cyclotomic-cocyclotomic-radial-environment-ii18iv">quotients</a>
+              <a class="tag" href="#exterior-cyclotomic-radial-environment-ii18vi">exterior</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Log-shell layer</h3>
+            <p>
+              The final variants prepare the IUT III log-shell machinery by replacing
+              bare <span class="math">O^xmu(G)</span> data with
+              <span class="math">(O^xmu(G), I(G))</span>.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#groupification-radial-environment-ii18vii-viii">groupification</a>
+              <a class="tag" href="#log-shell-radial-environment-ii18ix">log-shell</a>
+              <a class="tag" href="#aut-gamma-separation-ii181">Aut/Gamma</a>
+            </div>
+          </div>
+        </div>
         <div class="related">
           Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8</a>
           Related: <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
           <a href="#theta-env-kummer-package-ii15">theta_env package</a>
+        </div>
+      </section>
+
+      <section id="basic-pi-g-radial-environment-ii18i" data-filter="iut ii example 1.8 i basic radial environment Pi G alpha arithmetic holomorphic structures coric G">
+        <h2>IUT II Example 1.8(i): Basic Pi/G Radial Environment</h2>
+        <p class="lede">
+          The first concrete radial environment consists of radial data
+          <span class="math">(Pi,G,alpha)</span>: a topological group
+          <span class="math">Pi</span> isomorphic to the local tempered group, a
+          topological group <span class="math">G</span> isomorphic to the base-field
+          Galois group, and a full poly-isomorphism
+          <span class="math">alpha : Pi/Delta ~= G</span>. The coric data is just the
+          isomorphism class of <span class="math">G</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Piece</th><th>Source role</th><th>Conceptual reading</th></tr>
+          <tr>
+            <td><span class="math">Pi</span></td>
+            <td>One spoke: a topological group isomorphic to the tempered fundamental group.</td>
+            <td>Represents one arithmetic holomorphic structure.</td>
+          </tr>
+          <tr>
+            <td><span class="math">G</span></td>
+            <td>The common coric output, known only up to isomorphism.</td>
+            <td>Represents the underlying mono-analytic core shared by the spokes.</td>
+          </tr>
+          <tr>
+            <td><span class="math">alpha</span></td>
+            <td>A full poly-isomorphism from <span class="math">Pi/Delta</span> to <span class="math">G</span>.</td>
+            <td>Records how the spoke is viewed from the coric core.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          This is the formal version of several arithmetic holomorphic structures
+          arranged around one coric <span class="math">G</span>. It is the base model
+          for the later radial environments of Example 1.8.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8(i)</a>
+          Related: <a href="#concrete-radial-examples-ii18">Example 1.8 overview</a>
+          <a href="#radial-environment-definition-ii17">radial environment</a>
+          <a href="#graph-functorial-algorithms-ii19">algorithm graphs</a>
+        </div>
+      </section>
+
+      <section id="tm-pair-radial-environment-ii18ii" data-filter="iut ii example 1.8 ii MLF Galois TM pair MTM O triangleright ring structure sacrificed coric monoid">
+        <h2>IUT II Example 1.8(ii): TM-Pair Radial Environment</h2>
+        <p class="lede">
+          The second environment replaces the bare group comparison by MLF-Galois
+          TM-pair data. From <span class="math">Pi</span> one has
+          <span class="math">Pi MTM(Pi)</span>; from <span class="math">G</span> one
+          has <span class="math">G O^triangleright(G)</span>. The comparison
+          <span class="math">alpha^triangleright</span> is induced by the quotient
+          <span class="math">Pi -> Pi/Delta</span> and the basic
+          <span class="math">Pi/Delta ~= G</span> poly-isomorphism.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Algorithm</th><th>Output</th><th>Source warning</th></tr>
+          <tr>
+            <td><span class="math">Pi -> Pi MTM(Pi)</span></td>
+            <td>MLF-Galois TM-pair with a natural ring structure on the monoid plus zero.</td>
+            <td>The ring structure belongs to the spoke-side anabelian reconstruction.</td>
+          </tr>
+          <tr>
+            <td><span class="math">G -> G O^triangleright(G)</span></td>
+            <td>MLF-Galois TM-pair attached to the base-field Galois group.</td>
+            <td>Mochizuki says this route sacrifices the ring structure.</td>
+          </tr>
+          <tr>
+            <td>radial algorithm</td>
+            <td><span class="math">(Pi MTM(Pi), G O^triangleright(G), alpha^triangleright) -> G O^triangleright(G)</span></td>
+            <td>The coric output is the <span class="math">G</span>-side monoid package, not the full spoke ring history.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8(ii)</a>
+          Related: <a href="#basic-pi-g-radial-environment-ii18i">basic Pi/G environment</a>
+          <a href="#post-anabelian-algorithm-content-ii1113">algorithm content</a>
+        </div>
+      </section>
+
+      <section id="unit-orbit-radial-environment-ii18iii" data-filter="iut ii example 1.8 iii unit radial environment O times Gamma orbit Z times O times G M times TM">
+        <h2>IUT II Example 1.8(iii): Unit-Orbit Radial Environment</h2>
+        <p class="lede">
+          Example 1.8(iii) restricts the monoid packages to their invertible parts.
+          A closed subgroup <span class="math">Gamma subset Z^x</span> acts trivially
+          on <span class="math">G</span> and by its natural action on
+          <span class="math">O^x(G)</span>. The comparison
+          <span class="math">alpha^x</span> is the <span class="math">Gamma</span>-orbit
+          of the unit part of the TM-pair comparison.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Role</th><th>Why separate it?</th></tr>
+          <tr>
+            <td><span class="math">M_TM^x(Pi)</span></td>
+            <td>Unit part of the spoke-side reconstructed monoid.</td>
+            <td>It is still tied to the arithmetic holomorphic structure of <span class="math">Pi</span>.</td>
+          </tr>
+          <tr>
+            <td><span class="math">O^x(G)</span></td>
+            <td>Coric unit object on the <span class="math">G</span>-side.</td>
+            <td>It is compared only up to the permitted <span class="math">Gamma</span>-multiple.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Gamma</span>-orbit</td>
+            <td>Allowed ambiguity in the unit comparison.</td>
+            <td>This is the first explicit scalar indeterminacy in the Example 1.8 ladder.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8(iii)</a>
+          Related: <a href="#cyclotomic-cocyclotomic-radial-environment-ii18iv">cyclotomic/co-cyclotomic variant</a>
+          <a href="#mlf-galois-rigidity-indeterminacies-ii111">MLF-Galois indeterminacies</a>
+        </div>
+      </section>
+
+      <section id="cyclotomic-cocyclotomic-radial-environment-ii18iv" data-filter="iut ii example 1.8 iv cyclotomic co cyclotomic O mu O xmu Ism Im Z times quotient roots of unity">
+        <h2>IUT II Example 1.8(iv): Cyclotomic and Co-Cyclotomic Variants</h2>
+        <p class="lede">
+          Example 1.8(iv) forms the torsion and torsion-quotient variants of the unit
+          environment. The cyclotomic version uses
+          <span class="math">M_TM^mu</span> and <span class="math">O^mu(G)</span>. The
+          co-cyclotomic version uses
+          <span class="math">M_TM^xmu = M_TM^x/M_TM^mu</span> and
+          <span class="math">O^xmu(G)=O^x(G)/O^mu(G)</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Variant</th><th>Construction</th><th>Allowed ambiguity</th></tr>
+          <tr>
+            <td>cyclotomic</td>
+            <td>Replace unit objects by their torsion submodules.</td>
+            <td>Uses the corresponding torsion comparison.</td>
+          </tr>
+          <tr>
+            <td>co-cyclotomic</td>
+            <td>Quotient units by roots of unity.</td>
+            <td>May replace <span class="math">Gamma</span> by a closed subgroup <span class="math">Gamma^xmu subset Ism</span>.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Ism</span></td>
+            <td>All <span class="math">G</span>-equivariant isometries of <span class="math">O^xmu(G)</span> preserving invariant lattices.</td>
+            <td>Contains both the full isometry choice and the image of <span class="math">Z^x</span>.</td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          The co-cyclotomic quotient is central later because roots of unity have been
+          divided out. This is why Corollary 1.10 and Corollary 1.12 repeatedly use
+          <span class="math">O^xmu</span>-style coric data.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8(iv)</a>
+          Related: <a href="#coric-unit-quotient-ii1102">coric unit quotient</a>
+          <a href="#aut-gamma-separation-ii181">Aut/Gamma separation</a>
+        </div>
+      </section>
+
+      <section id="torsion-to-cocyclotomic-radial-environment-ii18v" data-filter="iut ii example 1.8 v torsion to co cyclotomic alpha mu xmu trivial homomorphism M mu to O xmu">
+        <h2>IUT II Example 1.8(v): Torsion-to-Co-Cyclotomic Environment</h2>
+        <p class="lede">
+          Example 1.8(v) deliberately maps torsion-side spoke data into the
+          co-cyclotomic coric object. The radial data is
+          <span class="math">(Pi M_TM^mu(Pi), G O^xmu(G), alpha^{mu,xmu})</span>,
+          where <span class="math">alpha^{mu,xmu}</span> is determined by the basic
+          <span class="math">Pi/Delta ~= G</span> comparison and the trivial
+          homomorphism <span class="math">M_TM^mu(Pi) -> O^xmu(G)</span>.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Torsion input</strong>
+            <p><span class="math">M_TM^mu(Pi)</span> records the spoke-side torsion submodule.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Co-cyclotomic output</strong>
+            <p><span class="math">O^xmu(G)</span> has already quotiented by roots of unity.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Trivial map</strong>
+            <p>The torsion contribution maps trivially into the quotient coric object.</p>
+          </div>
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8(v)</a>
+          Related: <a href="#cyclotomic-cocyclotomic-radial-environment-ii18iv">co-cyclotomic quotient</a>
+          <a href="#mono-theta-rigidity-isomorphism-ii110">Corollary 1.10</a>
+        </div>
+      </section>
+
+      <section id="exterior-cyclotomic-radial-environment-ii18vi" data-filter="iut ii example 1.8 vi exterior cyclotomic Pi_mu MTheta tensor Q Z mono theta exterior cyclotome">
+        <h2>IUT II Example 1.8(vi): Exterior-Cyclotomic Version</h2>
+        <p class="lede">
+          Example 1.8(vi) replaces the spoke-side torsion module
+          <span class="math">M_TM^mu(Pi)</span> of Example 1.8(v) by the exterior
+          cyclotome package
+          <span class="math">Pi_mu(MTheta_*(Pi)) tensor Q/Z</span>. This is the
+          radial environment used directly by Corollary 1.10 for mono-theta
+          cyclotomic rigidity.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Replacement</th><th>Reason</th><th>Downstream use</th></tr>
+          <tr>
+            <td><span class="math">M_TM^mu(Pi)</span> replaced by <span class="math">Pi_mu(MTheta_*(Pi)) tensor Q/Z</span></td>
+            <td>The exterior cyclotome is recovered from the projective mono-theta environment.</td>
+            <td>Corollary 1.10 compares it with <span class="math">l·DeltaTheta(Pi)</span>.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8(vi)</a>
+          Related: <a href="#mono-theta-rigidity-isomorphism-ii110">Corollary 1.10</a>
+          <a href="#theta-env-kummer-package-ii15">theta_env package</a>
+        </div>
+      </section>
+
+      <section id="groupification-radial-environment-ii18vii-viii" data-filter="iut ii example 1.8 vii viii groupification profinite completions Ogp Mgp alpha gp diagram alpha triangleright xmu">
+        <h2>IUT II Example 1.8(vii)-(viii): Groupification Variant</h2>
+        <p class="lede">
+          Example 1.8(vii) passes from monoids to groupifications and to inductive
+          limits of profinite completions of invariant groupifications. Example 1.8(viii)
+          then uses this groupified comparison to build a radial environment whose
+          radial data contains <span class="math">Pi MTM(Pi)</span>,
+          <span class="math">G O^gp(G)</span>, and a diagram of poly-morphisms
+          connecting <span class="math">MTM</span>, groupifications, units, and
+          <span class="math">O^xmu(G)</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Stage</th><th>Construction</th><th>Coric output</th></tr>
+          <tr>
+            <td>1.8(vii)</td>
+            <td>Form <span class="math">M_TM^gp</span>, <span class="math">O^gp</span>, and the profinite-completed inductive-limit variants.</td>
+            <td>Provides the groupified comparison <span class="math">alpha^gp</span>.</td>
+          </tr>
+          <tr>
+            <td>1.8(viii)</td>
+            <td>Use a diagram from <span class="math">MTM(Pi)</span> through groupifications and units to <span class="math">O^xmu(G)</span>.</td>
+            <td>The radial algorithm still lands in <span class="math">G O^xmu(G)</span>.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          This variant is important because it records that the same co-cyclotomic
+          coric output can be reached through a larger monoid/groupification diagram,
+          not only through direct unit quotients.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8(vii)-(viii)</a>
+          Related: <a href="#torsion-to-cocyclotomic-radial-environment-ii18v">torsion-to-co-cyclotomic route</a>
+          <a href="#log-shell-radial-environment-ii18ix">log-shell version</a>
+        </div>
+      </section>
+
+      <section id="log-shell-radial-environment-ii18ix" data-filter="iut ii example 1.8 ix log shell I G subset O xmu G AbsTopIII Proposition 5.8">
+        <h2>IUT II Example 1.8(ix): Log-Shell Radial Environment</h2>
+        <p class="lede">
+          Example 1.8(ix) attaches the log-shell
+          <span class="math">I(G) subset O^xmu(G)</span> to the co-cyclotomic coric
+          object. Replacing <span class="math">G O^xmu(G)</span> by the pair
+          <span class="math">(G O^xmu(G), I(G) subset O^xmu(G))</span> gives
+          log-shell versions of the environments of Example 1.8(v), (vi), and (viii).
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Added data</th><th>Source construction</th><th>Why it matters</th></tr>
+          <tr>
+            <td><span class="math">I(G)</span></td>
+            <td>The log-shell inside <span class="math">O^xmu(G)</span>, constructed from the <span class="math">G</span>-invariants of <span class="math">O^x(G)</span>.</td>
+            <td>This is the bridge to the log-shell machinery of IUT III and AbsTopIII.</td>
+          </tr>
+          <tr>
+            <td>log-shell versions</td>
+            <td>Apply the replacement to the co-cyclotomic, exterior-cyclotomic, and groupification variants.</td>
+            <td>The radial/coric framework now carries the analytic container used for log-volume estimates.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Example 1.8(ix)</a>
+          Related: <a href="#frobenioids-log-shells">Frobenioids/log-shells</a>
+          <a href="#mono-analytic-log-shells">mono-analytic log-shells</a>
+          <a href="#log-theta-lattice">log-theta lattice</a>
+        </div>
+      </section>
+
+      <section id="aut-gamma-separation-ii181" data-filter="iut ii remark 1.8.1 Aut G Gamma Z times p adic logarithm cyclotomic character separation O xmu">
+        <h2>IUT II Remark 1.8.1: Aut/Gamma Separation</h2>
+        <p class="lede">
+          Remark 1.8.1 states that automorphisms of
+          <span class="math">O^xmu(G)</span> induced by elements of
+          <span class="math">Aut(G)</span> do not coincide with automorphisms induced
+          by elements of <span class="math">Gamma</span> whose image in
+          <span class="math">Z_p^x</span> is nontrivial.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Action source</th><th>Effect detected by the source</th><th>Consequence</th></tr>
+          <tr>
+            <td><span class="math">Aut(G)</span></td>
+            <td>Acts trivially on the <span class="math">Q_p</span> quotient obtained from the p-adic logarithm of the cyclotomic character.</td>
+            <td>Aut-induced ambiguity is not the same as scalar <span class="math">Gamma</span>-ambiguity.</td>
+          </tr>
+          <tr>
+            <td><span class="math">Gamma subset Z^x</span></td>
+            <td>Acts through the natural image in <span class="math">Z_p^x</span> on that quotient.</td>
+            <td>Nontrivial <span class="math">Gamma</span> image remains visible after passing to <span class="math">O^xmu(G)</span>.</td>
+          </tr>
+        </table>
+        <div class="callout warn">
+          This separation is an audit guardrail for indeterminacies: an
+          <span class="math">Aut(G)</span>-orbit and a nontrivial scalar orbit should
+          not be merged as one undifferentiated automorphism slot.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 1.8.1</a>
+          Related: <a href="#unit-orbit-radial-environment-ii18iii">unit-orbit environment</a>
+          <a href="#mlf-galois-rigidity-indeterminacies-ii111">MLF-Galois indeterminacies</a>
         </div>
       </section>
 
