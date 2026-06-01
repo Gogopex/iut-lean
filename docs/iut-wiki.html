@@ -1274,6 +1274,10 @@
         <a href="#iut-iv-corollary-22-exceptions">Cor. 2.2 exceptions</a>
         <a href="#iut-iv-corollary-22-prime-galois">Cor. 2.2 prime/Galois</a>
         <a href="#iut-iv-corollary-22-c1-c2">Cor. 2.2 C1/C2 output</a>
+        <a href="#iut-iv-remark-221-rh-weight">Remark 2.2.1 RH weight</a>
+        <a href="#iut-iv-remark-222-semitwist">Remark 2.2.2 semi-twist</a>
+        <a href="#iut-iv-remark-223-uniform-abc">Remark 2.2.3 uniform abc</a>
+        <a href="#iut-iv-remark-224-padic-teich">Remark 2.2.4 p-adic Teich</a>
         <a href="#iut-iv-diophantine-inequalities-23">IUT IV Diophantine inequalities 2.3</a>
         <a href="#iut-iv-corollary-23-statement">Cor. 2.3 statement</a>
         <a href="#iut-iv-corollary-23-genell">Cor. 2.3 GenEll boundary</a>
@@ -53910,6 +53914,252 @@
           Related: <a href="#iut-iv-theorem-110-final-bound">Theorem 1.10 final bound</a>
           <a href="#iut-iv-corollary-22-exceptions">exceptional sets</a>
           <a href="#iut-iv-diophantine-inequalities-23">Corollary 2.3</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-remark-221-rh-weight" data-filter="iut iv remark 2.2.1 riemann hypothesis weight one half abc inequality canonical number mellin transform">
+        <h2>IUT IV Remark 2.2.1: Weight One-Half and RH Analogies</h2>
+        <p class="lede">
+          Remark 2.2.1 interprets the error term in Corollary 2.2(ii) as a
+          weight-one-half phenomenon. Mochizuki explicitly compares the square-root
+          term in the height estimate with classical formulations of the Riemann
+          hypothesis and asks whether a future inter-universal analogue of the Mellin
+          transform could relate the theory to zeta functions.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Simplified bound</strong>
+            <p>
+              With <span class="math">F_tpd=Q</span>, write
+              <span class="math">h=log(q_all)</span> and
+              <span class="math">delta=log-cond_D</span>; the bound has an
+              error term of size <span class="math">delta^{1/2} log(delta)</span>.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Weight interpretation</strong>
+            <p>
+              A logarithmic line-bundle height is assigned the weight of one Tate
+              twist; square roots of such heights are therefore read as weight
+              <span class="math">1/2</span>.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Arithmetic duality</strong>
+            <p>
+              The square-root balance is traced to the competition between an
+              archimedean term decreasing with <span class="math">ell</span> and a
+              nonarchimedean term increasing with <span class="math">ell</span>.
+            </p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Point</th><th>Paper content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>RH analogy</td>
+            <td>The critical-line value <span class="math">s=1/2</span> is compared with square roots of logarithmic heights.</td>
+            <td>This is an analogy about asymptotic form, not an asserted proof of RH.</td>
+          </tr>
+          <tr>
+            <td>Compactly bounded limitation</td>
+            <td>Corollary 2.2 controls abc sums in the chosen compactly bounded subset <span class="math">KV</span>.</td>
+            <td>The wiki must keep the <span class="math">KV</span> restriction visible before discussing uniform abc.</td>
+          </tr>
+          <tr>
+            <td>Inter-universal Mellin transform</td>
+            <td>Mochizuki speculates about an extension relating the theory to the Riemann zeta function.</td>
+            <td>This belongs on an analogy page, not in the proof dependency chain.</td>
+          </tr>
+          <tr>
+            <td>Canonical number</td>
+            <td>The paper asks whether a RH-type inequality could be viewed as an ABC inequality restricted to a suitable abstract canonical abc sum.</td>
+            <td>This is a future-direction heuristic and should not be promoted to a theorem.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Remark 2.2.1</a>
+          Related: <a href="#iut-iv-corollary-22-c1-c2">C1/C2 output</a>
+          <a href="#iut-iv-remark-222-semitwist">semi-twist analogy</a>
+          <a href="#iut-iv-remark-224-padic-teich">p-adic Teichmuller analogy</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-remark-222-semitwist" data-filter="iut iv remark 2.2.2 gaussian integral tate semi twist hodge arakelov theta group quadratic form weight one half">
+        <h2>IUT IV Remark 2.2.2: Gaussian Semi-Twist</h2>
+        <p class="lede">
+          Remark 2.2.2 relates the weight-one-half interpretation to the Gaussian
+          integral, scheme-theoretic Hodge-Arakelov theory, IUT, and the Riemann
+          hypothesis. The common motif is a Tate semi-twist, heuristically represented
+          by arithmetic analogues of <span class="math">sqrt(pi)</span>.
+        </p>
+        <div class="diagram fit" aria-label="Weight one-half analogies in IUT IV Remark 2.2.2">
+          <div class="diagramHeader">
+            <strong>Weight 1/2 analogy cluster</strong>
+            <span>Gaussian, Hodge-Arakelov, IUT, and RH</span>
+          </div>
+          <svg viewBox="0 0 980 330" role="img">
+            <defs>
+              <marker id="arrowRemark222" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="54" y="54" width="190" height="72"></rect>
+            <text class="nodeTitle" x="149" y="82" text-anchor="middle">Gaussian integral</text>
+            <text class="tinyText" x="149" y="106" text-anchor="middle">sqrt(pi), quadratic exponent</text>
+
+            <rect class="nodeBox green" x="288" y="54" width="190" height="72"></rect>
+            <text class="nodeTitle" x="383" y="82" text-anchor="middle">Hodge-Arakelov</text>
+            <text class="tinyText" x="383" y="106" text-anchor="middle">scheme-theoretic semi-twist</text>
+
+            <rect class="nodeBox gold" x="522" y="54" width="190" height="72"></rect>
+            <text class="nodeTitle" x="617" y="82" text-anchor="middle">IUT estimates</text>
+            <text class="tinyText" x="617" y="106" text-anchor="middle">quadratic epsilon balance</text>
+
+            <rect class="nodeBox violet" x="756" y="54" width="170" height="72"></rect>
+            <text class="nodeTitle" x="841" y="82" text-anchor="middle">RH analogy</text>
+            <text class="tinyText" x="841" y="106" text-anchor="middle">critical-line weight</text>
+
+            <path d="M246 90 H286" class="edge blue" marker-end="url(#arrowRemark222)"></path>
+            <path d="M480 90 H520" class="edge green" marker-end="url(#arrowRemark222)"></path>
+            <path d="M714 90 H754" class="edge gold" marker-end="url(#arrowRemark222)"></path>
+
+            <rect class="nodeBox red" x="178" y="204" width="250" height="70"></rect>
+            <text class="nodeTitle" x="303" y="232" text-anchor="middle">theta-function quadraticity</text>
+            <text class="tinyText" x="303" y="254" text-anchor="middle">series exponents and theta-group commutators</text>
+
+            <rect class="nodeBox blue" x="552" y="204" width="250" height="70"></rect>
+            <text class="nodeTitle" x="677" y="232" text-anchor="middle">epsilon-term balance</text>
+            <text class="tinyText" x="677" y="254" text-anchor="middle">terms like delta/ell plus ell</text>
+
+            <path d="M384 126 C368 164 340 184 316 202" class="edge green" marker-end="url(#arrowRemark222)"></path>
+            <path d="M617 126 C626 162 650 184 670 202" class="edge gold" marker-end="url(#arrowRemark222)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Phenomenon</th><th>Paper role</th><th>Audit note</th></tr>
+          <tr>
+            <td>Gaussian integral</td>
+            <td>Serves as a concrete model for a Tate semi-twist.</td>
+            <td>The analogy is explanatory; no Gaussian integral is used as a proof step in Corollary 2.2.</td>
+          </tr>
+          <tr>
+            <td>Hodge-Arakelov theory</td>
+            <td>Presented as a scheme-theoretic representation of the same semi-twist motif.</td>
+            <td>This links IUT II theta-function technology to the later estimate pages.</td>
+          </tr>
+          <tr>
+            <td>Quadratic forms</td>
+            <td>The paper points to theta-series exponents, theta-group commutators, and the quadratic shape of the error term.</td>
+            <td>These should be cross-linked to theta-value and multiradiality pages.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Remark 2.2.2</a>
+          Related: <a href="#iut-iv-remark-221-rh-weight">RH weight analogy</a>
+          <a href="#theta-values-q-j-squared-intro-ii">theta values q^j^2</a>
+          <a href="#multiradiality">multiradiality</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-remark-223-uniform-abc" data-filter="iut iv remark 2.2.3 weak uniform abc conjecture compactly bounded kv degree d exceptional sets">
+        <h2>IUT IV Remark 2.2.3: Weak Uniform abc</h2>
+        <p class="lede">
+          Remark 2.2.3 says that if the degree parameter in Corollary 2.2(ii)-(iii)
+          is allowed to vary, the estimates resemble a weak form of the uniform abc
+          conjecture. The weakness is explicit: the estimates are restricted to
+          compactly bounded subsets and the exceptional bounds depend on the degree.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Uniform-abc aspect</th><th>What Corollary 2.2 gives</th><th>Why it is weak</th></tr>
+          <tr>
+            <td>Variable degree</td>
+            <td>One may consider arbitrary positive integers <span class="math">d</span> in the Corollary 2.2 context.</td>
+            <td>Corollary 2.3 later fixes <span class="math">d</span> for bounded-degree points.</td>
+          </tr>
+          <tr>
+            <td>Height control</td>
+            <td>The C2 inequality controls <span class="math">log(q_all)</span> by different and conductor terms.</td>
+            <td>The control is stated on the selected compactly bounded set <span class="math">KV</span>.</td>
+          </tr>
+          <tr>
+            <td>Exceptional sets</td>
+            <td>Bounds for <span class="math">Exc_d</span> and <span class="math">Exc_{epsilon,d}</span> are available.</td>
+            <td>Those bounds depend on <span class="math">d</span>; this prevents a full uniform statement.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          This page is intentionally conservative: Remark 2.2.3 is a comparison with
+          uniform abc, not the final abc/Szpiro consequence route. The latter runs
+          through Corollary 2.3 and its GenEll boundary.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Remark 2.2.3</a>
+          Related: <a href="#iut-iv-corollary-22-c1-c2">C1/C2 output</a>
+          <a href="#iut-iv-corollary-22-exceptions">exceptional sets</a>
+          <a href="#iut-iv-corollary-23-statement">Corollary 2.3 statement</a>
+        </div>
+      </section>
+
+      <section id="iut-iv-remark-224-padic-teich" data-filter="iut iv remark 2.2.4 p-adic teichmuller theory canonical frobenius lifting log link moduli stack bernoulli numbers">
+        <h2>IUT IV Remark 2.2.4: p-adic Teichmuller Analogy</h2>
+        <p class="lede">
+          Remark 2.2.4 compares the gap between Corollary 2.2's compactly bounded
+          arithmetic domains and a hypothetical canonical arithmetic measure with the
+          gap between specialized canonical curves and full modular Frobenius liftings
+          in p-adic Teichmuller theory.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Canonical number</strong>
+            <p>
+              The speculative object from Remark 2.2.1 is compared with modular
+              Frobenius liftings in p-adic Teichmuller theory.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>Log-link distortion</strong>
+            <p>
+              The log-link corresponds, under the analogy, to Frobenius distortion in
+              positive characteristic.
+            </p>
+          </div>
+          <div class="flowStep">
+            <strong>From discrete to continuous</strong>
+            <p>
+              Letting <span class="math">ell</span> grow is compared with passing from
+              an <span class="math">ell</span>-torsion discretization to a fuller
+              continuous theory.
+            </p>
+          </div>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Analogy point</th><th>Paper content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Perfect versus non-perfect bases</td>
+            <td>The p-adic theory distinguishes canonical curves over perfect bases from the nonspecialized moduli-stack theory.</td>
+            <td>This parallels the gap between compactly bounded <span class="math">KV</span> and a putative arithmetic measure over all additions.</td>
+          </tr>
+          <tr>
+            <td>Prime number theorem term</td>
+            <td>The <span class="math">* ell</span> contribution is related to summing log-shell volumes over nonarchimedean primes.</td>
+            <td>The estimate pages should keep prime-counting input separate from IUT comparison input.</td>
+          </tr>
+          <tr>
+            <td>GenEll bridge</td>
+            <td>The gap from <span class="math">KV</span> to broader algebraic-point domains is later bridged by GenEll Theorem 2.1.</td>
+            <td>This prepares the reader for Corollary 2.3's dependency on GenEll.</td>
+          </tr>
+          <tr>
+            <td>Bernoulli/difference analogy</td>
+            <td>The passage from discrete difference operators to continuous derivatives is linked to Bernoulli numbers and zeta values.</td>
+            <td>This remains analogy material and should not be mixed with formal theorem dependencies.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iv.pdf" target="_blank">IUT IV, Remark 2.2.4</a>
+          Related: <a href="#iut-iv-remark-221-rh-weight">canonical number analogy</a>
+          <a href="#theta-log-links">theta/log links</a>
+          <a href="#iut-iv-corollary-23-genell">GenEll boundary</a>
         </div>
       </section>
 
