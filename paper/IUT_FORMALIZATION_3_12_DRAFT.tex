@@ -458,6 +458,14 @@ one source object carries the family of possible theta images, the union
   \qquad
   \mu_{\log}(q)\le\mu_{\log}(H)\le\det_{\mathrm{norm}}.
 \]
+The determinant side has also been sharpened at finite log-volume level.
+Following Remark 3.9.5(vii), (Ob3-1)--(Ob3-3), a localization summand now
+carries a rank \(>1\), a bundle log-volume, a structure-sheaf adjustment, and
+a positive weight.  A determinant source forms the finite weighted sum of the
+adjusted summands, then derives the positive tensor-power log-volume and the
+normalized determinant log-volume by definition.  This replaces supplied
+tensor-power and normalized values for this new route, but it remains a
+log-volume skeleton rather than a construction of arithmetic vector bundles.
 Below the packet layer, the code now has a first realified Frobenioid degree
 source.  A finite Frobenioid object carries a divisor degree, a unit
 log-volume, and their realified log-volume; a tensor-packet product may be
@@ -714,6 +722,11 @@ The project currently proves the following source-facing results in \Lean{}:
   family, its union, the chosen hull-approximant, q-pilot containment in that
   approximant, and determinant normalization; the experiment endpoint returns
   the union/approximant/hull and q-pilot/determinant inequalities.
+\item The determinant input can now be produced from a finite weighted
+  localization source: adjusted vector-bundle summand log-volumes are summed,
+  the positive tensor-power value is derived, and normalization is proved to
+  return the determinant log-volume before projecting to the older determinant
+  interface.
 \item A first realified Frobenioid degree layer is present: equality of
   realified Frobenioid log-volumes now derives the product-log-volume equality
   used by the tensor-packet coric transfer, with theater histories still kept

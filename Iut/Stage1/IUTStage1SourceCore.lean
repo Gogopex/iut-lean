@@ -2345,6 +2345,157 @@ theorem determinantNormalization_endpoint
 end IUTStage1ArithmeticVectorBundleDeterminantLogVolume
 
 /--
+Finite log-volume source for one localized arithmetic vector-bundle summand in
+Remark 3.9.5(vii), (Ob3-1).
+
+The `structureSheafLogVolume` term records the normalization adjustment from
+(Ob3-1-2), while `weight` records the weighted tensor-power contribution from
+(Ob3-1-1).  This is still a log-volume skeleton: it does not construct the
+underlying arithmetic vector bundle.
+-/
+structure IUTStage1ArithmeticVectorBundleLocalizationLogVolume where
+  rank : Nat
+  rank_gt_one : 1 < rank
+  bundleLogVolume : Real
+  structureSheafLogVolume : Real
+  weight : Nat
+  weight_pos : 0 < weight
+
+namespace IUTStage1ArithmeticVectorBundleLocalizationLogVolume
+
+def adjustedLogVolume
+    (data : IUTStage1ArithmeticVectorBundleLocalizationLogVolume) :
+    Real :=
+  (data.weight : Real) *
+    (data.bundleLogVolume - data.structureSheafLogVolume)
+
+theorem weight_ne_zero
+    (data : IUTStage1ArithmeticVectorBundleLocalizationLogVolume) :
+    (data.weight : Real) ≠ 0 := by
+  exact_mod_cast Nat.ne_of_gt data.weight_pos
+
+theorem rank_pos
+    (data : IUTStage1ArithmeticVectorBundleLocalizationLogVolume) :
+    0 < data.rank :=
+  lt_trans Nat.zero_lt_one data.rank_gt_one
+
+theorem adjustedLogVolume_eq
+    (data : IUTStage1ArithmeticVectorBundleLocalizationLogVolume) :
+    data.adjustedLogVolume =
+      (data.weight : Real) *
+        (data.bundleLogVolume - data.structureSheafLogVolume) :=
+  rfl
+
+end IUTStage1ArithmeticVectorBundleLocalizationLogVolume
+
+/--
+Finite determinant source for Remark 3.9.5(vii), (Ob3).
+
+The determinant log-volume is constructed as the finite weighted sum of
+structure-sheaf-normalized localization contributions.  The positive tensor
+power and normalized log-volume are then derived by definitions before being
+projected to the older determinant interface.
+-/
+structure IUTStage1ArithmeticVectorBundleWeightedDeterminantSource
+    (β : Type u) [Fintype β] where
+  summand : β -> IUTStage1ArithmeticVectorBundleLocalizationLogVolume
+  anchor : β
+  positiveTensorPower : Nat
+  tensor_power_pos : 0 < positiveTensorPower
+
+namespace IUTStage1ArithmeticVectorBundleWeightedDeterminantSource
+
+variable {β : Type u} [Fintype β]
+
+def determinantLogVolume
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    Real :=
+  Finset.univ.sum fun index => (data.summand index).adjustedLogVolume
+
+def tensorPowerLogVolume
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    Real :=
+  (data.positiveTensorPower : Real) * data.determinantLogVolume
+
+noncomputable def normalizedLogVolume
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    Real :=
+  data.tensorPowerLogVolume / (data.positiveTensorPower : Real)
+
+noncomputable def toDeterminantLogVolume
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    IUTStage1ArithmeticVectorBundleDeterminantLogVolume :=
+  { rank := (data.summand data.anchor).rank,
+    rank_gt_one := (data.summand data.anchor).rank_gt_one,
+    determinantLogVolume := data.determinantLogVolume,
+    positiveTensorPower := data.positiveTensorPower,
+    tensor_power_pos := data.tensor_power_pos,
+    tensorPowerLogVolume := data.tensorPowerLogVolume,
+    tensor_power_eq := rfl,
+    normalizedLogVolume := data.normalizedLogVolume,
+    normalized_eq := rfl }
+
+theorem determinantLogVolume_eq_sum
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    data.determinantLogVolume =
+      Finset.univ.sum fun index =>
+        (data.summand index).adjustedLogVolume :=
+  rfl
+
+theorem tensorPowerLogVolume_eq
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    data.tensorPowerLogVolume =
+      (data.positiveTensorPower : Real) * data.determinantLogVolume :=
+  rfl
+
+theorem normalizedLogVolume_eq_determinantLogVolume
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    data.normalizedLogVolume = data.determinantLogVolume :=
+  data.toDeterminantLogVolume.normalizedLogVolume_eq_determinant
+
+theorem toDeterminantLogVolume_determinantLogVolume_eq
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    data.toDeterminantLogVolume.determinantLogVolume =
+      data.determinantLogVolume :=
+  rfl
+
+theorem toDeterminantLogVolume_normalizedLogVolume_eq
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    data.toDeterminantLogVolume.normalizedLogVolume =
+      data.determinantLogVolume :=
+  data.toDeterminantLogVolume.normalizedLogVolume_eq_determinant
+
+theorem endpoint
+    (data :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    data.determinantLogVolume =
+        (Finset.univ.sum fun index =>
+          (data.summand index).adjustedLogVolume) ∧
+      data.tensorPowerLogVolume =
+        (data.positiveTensorPower : Real) * data.determinantLogVolume ∧
+      data.normalizedLogVolume = data.determinantLogVolume ∧
+      data.toDeterminantLogVolume.determinantLogVolume =
+        data.determinantLogVolume ∧
+      data.toDeterminantLogVolume.normalizedLogVolume =
+        data.determinantLogVolume :=
+  ⟨data.determinantLogVolume_eq_sum,
+    data.tensorPowerLogVolume_eq,
+    data.normalizedLogVolume_eq_determinantLogVolume,
+    data.toDeterminantLogVolume_determinantLogVolume_eq,
+    data.toDeterminantLogVolume_normalizedLogVolume_eq⟩
+
+end IUTStage1ArithmeticVectorBundleWeightedDeterminantSource
+
+/--
 Step (xi-e)/(xi-f) upper-ray comparison after hull, determinant, and normalized
 log-volume.
 

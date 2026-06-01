@@ -529,6 +529,21 @@ theorem thetaPossibleImagesHullApproximant_endpoint
         data.determinant.determinantLogVolume :=
   data.endpoint
 
+theorem weightedDeterminantSource_endpoint
+    {β : Type u} [Fintype β]
+    (data : IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
+    data.determinantLogVolume =
+        (Finset.univ.sum fun index =>
+          (data.summand index).adjustedLogVolume) ∧
+      data.tensorPowerLogVolume =
+        (data.positiveTensorPower : Real) * data.determinantLogVolume ∧
+      data.normalizedLogVolume = data.determinantLogVolume ∧
+      data.toDeterminantLogVolume.determinantLogVolume =
+        data.determinantLogVolume ∧
+      data.toDeterminantLogVolume.normalizedLogVolume =
+        data.determinantLogVolume :=
+  data.endpoint
+
 theorem realifiedFrobenioidLogKummerPacket_endpoint
     {coric : Type u}
     {audited :
