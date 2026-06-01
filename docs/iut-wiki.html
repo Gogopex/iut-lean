@@ -1144,6 +1144,8 @@
         <h2>Context</h2>
         <a href="#current-situation-reports">Current situation reports</a>
         <a href="#dispute">Scholze-Stix and responses</a>
+        <a href="#scholze-stix-critique-page">Scholze-Stix critique page</a>
+        <a href="#mochizuki-response-page">Mochizuki response page</a>
         <a href="#formalization">RIMS Lean effort</a>
         <a href="#leanform-communication-page">LeanForm communication</a>
         <a href="#leanform-species-mutations-page">LeanForm species/mutations</a>
@@ -51557,6 +51559,196 @@
           Sources: <a href="papers/scholze-stix-why-abc-is-still-a-conjecture.pdf" target="_blank">Scholze-Stix note</a>
           <a href="papers/mochizuki-report-discussions-2018.pdf" target="_blank">2018 discussion report</a>
           <a href="papers/mochizuki-iut-report-2025-10.pdf" target="_blank">2025 current situation report</a>
+          Related: <a href="#scholze-stix-critique-page">Scholze-Stix critique page</a>
+          <a href="#mochizuki-response-page">Mochizuki response page</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="scholze-stix-critique-page" data-filter="scholze stix critique abc conjecture corollary 3.12 real line weights monodromy simplification collapse">
+        <h2>Scholze-Stix Critique</h2>
+        <p class="lede">
+          Scholze and Stix isolate the comparison near IUT III Corollary 3.12 as the
+          decisive point for the abc application. Their note argues that after a
+          simplification to the relevant real-vector-space and labeling data, the
+          proposed comparison no longer yields the nontrivial numerical inequality
+          required downstream.
+        </p>
+        <div class="diagram fit" aria-label="Scholze-Stix critique route">
+          <div class="diagramHeader">
+            <strong>Critique route</strong>
+            <span>consistent charts, weights, and loss of nontrivial comparison</span>
+          </div>
+          <svg viewBox="0 0 1040 420" role="img">
+            <defs>
+              <marker id="arrowScholzeStix" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="60" y="74" width="245" height="86"></rect>
+            <text class="nodeTitle" x="182" y="104" text-anchor="middle">simplified setting</text>
+            <text class="tinyText" x="182" y="128" text-anchor="middle">ordered real vector spaces</text>
+            <text class="tinyText" x="182" y="146" text-anchor="middle">explicit identifications</text>
+
+            <rect class="nodeBox gold" x="398" y="74" width="245" height="86"></rect>
+            <text class="nodeTitle" x="520" y="104" text-anchor="middle">weight comparison</text>
+            <text class="tinyText" x="520" y="128" text-anchor="middle">j^2-type factors</text>
+            <text class="tinyText" x="520" y="146" text-anchor="middle">monodromy or collapse problem</text>
+
+            <rect class="nodeBox red" x="736" y="74" width="245" height="86"></rect>
+            <text class="nodeTitle" x="858" y="104" text-anchor="middle">claimed obstruction</text>
+            <text class="tinyText" x="858" y="128" text-anchor="middle">no nontrivial inequality</text>
+            <text class="tinyText" x="858" y="146" text-anchor="middle">from this comparison</text>
+
+            <path class="edge blue" d="M307 117 H396" marker-end="url(#arrowScholzeStix)"></path>
+            <path class="edge gold" d="M645 117 H734" marker-end="url(#arrowScholzeStix)"></path>
+
+            <rect class="nodeBox violet" x="238" y="266" width="250" height="88"></rect>
+            <text class="nodeTitle" x="363" y="298" text-anchor="middle">formalization demand</text>
+            <text class="tinyText" x="363" y="322" text-anchor="middle">state every chart and transport</text>
+            <text class="tinyText" x="363" y="340" text-anchor="middle">separate equality from inequality</text>
+
+            <rect class="nodeBox green" x="552" y="266" width="250" height="88"></rect>
+            <text class="nodeTitle" x="677" y="298" text-anchor="middle">neutral wiki treatment</text>
+            <text class="tinyText" x="677" y="322" text-anchor="middle">record the objection exactly</text>
+            <text class="tinyText" x="677" y="340" text-anchor="middle">do not resolve by wording</text>
+
+            <path class="edge red" d="M520 162 C500 210 436 238 380 264" marker-end="url(#arrowScholzeStix)"></path>
+            <path class="edge green" d="M858 162 C838 222 764 246 694 264" marker-end="url(#arrowScholzeStix)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Critique point</th><th>Content</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Explicit charts</td>
+            <td>
+              The comparison of one-dimensional ordered real vector spaces must specify
+              the identifications used to compare quantities.
+            </td>
+            <td>Keep chart data separate from the ordered-real inequality target.</td>
+          </tr>
+          <tr>
+            <td>Weights</td>
+            <td>
+              In the simplified reading, the factors intended to produce a nontrivial
+              inequality either disappear under consistent identification or produce
+              incompatible monodromy.
+            </td>
+            <td>Do not hide weight transport inside a generic indeterminacy label.</td>
+          </tr>
+          <tr>
+            <td>Numerical bridge</td>
+            <td>
+              Blurring or quotienting alone is not enough unless it supplies the final
+              numerical membership or inequality.
+            </td>
+            <td>Separate source construction, common container, and final inequality proof.</td>
+          </tr>
+        </table>
+        <div class="callout red">
+          <strong>Neutral reading.</strong> This page records the critique as a precise
+          formalization challenge. It does not assume the simplification is legitimate;
+          that question is exactly what the source-faithful 3.11 to 3.12 route must test.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/scholze-stix-why-abc-is-still-a-conjecture.pdf" target="_blank">Scholze-Stix note</a>
+          Related: <a href="#mochizuki-response-page">Mochizuki response page</a>
+          <a href="#single-theta-link-312">single theta link 3.12</a>
+          <a href="#membership-step-xif-312">membership step (xi-f)</a>
+        </div>
+      </section>
+
+      <section id="mochizuki-response-page" data-filter="mochizuki hoshi response scholze stix hodge theaters histories indeterminacies corollary 3.12 report discussions">
+        <h2>Mochizuki Response</h2>
+        <p class="lede">
+          Mochizuki's response, including the 2019 report on the March 2018 discussions
+          and later situation reports, says that the simplification used by Scholze and
+          Stix identifies structures that IUT deliberately keeps separate. The response
+          centers on weakened Hodge-theater histories, log-Kummer transport, and the
+          controlled indeterminacies used before making the final numerical comparison.
+        </p>
+        <div class="diagram fit" aria-label="Mochizuki-side response route">
+          <div class="diagramHeader">
+            <strong>Response route</strong>
+            <span>do not collapse histories before the IUT comparison permits it</span>
+          </div>
+          <svg viewBox="0 0 1040 420" role="img">
+            <defs>
+              <marker id="arrowMochizukiResponse" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="70" y="74" width="230" height="86"></rect>
+            <text class="nodeTitle" x="185" y="104" text-anchor="middle">distinct histories</text>
+            <text class="tinyText" x="185" y="128" text-anchor="middle">alien Hodge theaters</text>
+            <text class="tinyText" x="185" y="146" text-anchor="middle">labels and basepoints</text>
+
+            <rect class="nodeBox green" x="405" y="74" width="230" height="86"></rect>
+            <text class="nodeTitle" x="520" y="104" text-anchor="middle">permitted weakening</text>
+            <text class="tinyText" x="520" y="128" text-anchor="middle">mono-analytic containers</text>
+            <text class="tinyText" x="520" y="146" text-anchor="middle">log-Kummer transport</text>
+
+            <rect class="nodeBox violet" x="740" y="74" width="230" height="86"></rect>
+            <text class="nodeTitle" x="855" y="104" text-anchor="middle">comparison output</text>
+            <text class="tinyText" x="855" y="128" text-anchor="middle">Ind1, Ind2, Ind3</text>
+            <text class="tinyText" x="855" y="146" text-anchor="middle">signed log-volume bound</text>
+
+            <path class="edge blue" d="M302 117 H403" marker-end="url(#arrowMochizukiResponse)"></path>
+            <path class="edge green" d="M637 117 H738" marker-end="url(#arrowMochizukiResponse)"></path>
+
+            <rect class="nodeBox gold" x="196" y="266" width="270" height="88"></rect>
+            <text class="nodeTitle" x="331" y="298" text-anchor="middle">A/B model warning</text>
+            <text class="tinyText" x="331" y="322" text-anchor="middle">do not impose A = B</text>
+            <text class="tinyText" x="331" y="340" text-anchor="middle">before the source route justifies it</text>
+
+            <rect class="nodeBox red" x="574" y="266" width="270" height="88"></rect>
+            <text class="nodeTitle" x="709" y="298" text-anchor="middle">formalization burden</text>
+            <text class="tinyText" x="709" y="322" text-anchor="middle">make weakening and transport explicit</text>
+            <text class="tinyText" x="709" y="340" text-anchor="middle">then test the numerical bridge</text>
+
+            <path class="edge gold" d="M185 162 C205 220 268 246 324 264" marker-end="url(#arrowMochizukiResponse)"></path>
+            <path class="edge red" d="M855 162 C835 220 770 246 716 264" marker-end="url(#arrowMochizukiResponse)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Response point</th><th>Content</th><th>Wiki/formalization consequence</th></tr>
+          <tr>
+            <td>Non-identification</td>
+            <td>
+              Hodge-theater and set-theoretic histories should not be identified merely
+              because later weakened data can be compared.
+            </td>
+            <td>Keep labels, histories, and weakened outputs as distinct fields.</td>
+          </tr>
+          <tr>
+            <td>A/B model</td>
+            <td>
+              Mochizuki's report uses a simplified A/B model to argue that imposing
+              equality of the two quantities is an extraneous simplification.
+            </td>
+            <td>Represent equality assumptions separately from IUT-supplied comparison data.</td>
+          </tr>
+          <tr>
+            <td>Lean role</td>
+            <td>
+              Later reports argue that formalization can record the intended logical
+              structure and avoid conversational ambiguity.
+            </td>
+            <td>Use Lean and the wiki to expose exact source obligations, not to settle by paraphrase.</td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          <strong>Neutral reading.</strong> This page records the response as a
+          source-discipline requirement: if the Scholze-Stix simplification collapses
+          data that IUT says must remain separated, the formalization should make that
+          collapse visible as an additional assumption.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-report-discussions-2018.pdf" target="_blank">2018 discussion report</a>
+          <a href="papers/mochizuki-iut-report-2025-10.pdf" target="_blank">2025 current situation report</a>
+          Related: <a href="#scholze-stix-critique-page">Scholze-Stix critique page</a>
+          <a href="#collas-formalization-audit-page">Collas audit guide</a>
+          <a href="#coarse-space-step-x-312">coarse space step (x)</a>
         </div>
       </section>
 
