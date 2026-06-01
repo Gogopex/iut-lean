@@ -1078,6 +1078,12 @@
         <a href="#formal-transfer-38">Formal transfer 3.8.2</a>
         <a href="#log-shells-alone-not-enough-38">Log-shells alone not enough</a>
         <a href="#packet-procession-log-volume-iii39">Packet log-volume 3.9</a>
+        <a href="#packet-normalization-39">Packet normalization 3.9</a>
+        <a href="#mono-analytic-transfer-39">Mono-analytic transfer 3.9</a>
+        <a href="#global-degree-log-volume-39">Global degree log-volume</a>
+        <a href="#forced-procession-average-39">Forced procession average</a>
+        <a href="#realified-semisimplification-39">Realified semi-simplification</a>
+        <a href="#no-log-volume-period-39">No log-volume period</a>
         <a href="#global-kummer-noninterference-iii310">Global Kummer 3.10</a>
         <a href="#theorem-311-lgp-algorithms">Theorem 3.11 algorithms</a>
         <a href="#tensor-log-volume-corridor">Tensor/log-volume corridor</a>
@@ -43007,7 +43013,7 @@
         </table>
 
         <div class="grid3">
-          <div class="card" id="packet-normalization-39">
+          <div class="card" id="packet-normalization-39-card">
             <h3>Packet normalization</h3>
             <p>
               Proposition 3.9(i) defines local packet log-volumes with integral
@@ -43017,7 +43023,7 @@
             </p>
             <div class="tagRow"><span class="tag blue">3.9(i)</span><span class="tag">local packets</span></div>
           </div>
-          <div class="card" id="mono-analytic-transfer-39">
+          <div class="card" id="mono-analytic-transfer-39-card">
             <h3>Mono-analytic transfer</h3>
             <p>
               The same log-volume layer is transported to
@@ -43027,7 +43033,7 @@
             </p>
             <div class="tagRow"><span class="tag green">3.9(ii)</span><span class="tag">log-shells</span></div>
           </div>
-          <div class="card" id="global-degree-log-volume-39">
+          <div class="card" id="global-degree-log-volume-39-card">
             <h3>Global degree link</h3>
             <p>
               The global packet log-volume is a finite-support sum over
@@ -43037,7 +43043,7 @@
             </p>
             <div class="tagRow"><span class="tag gold">3.9(iii)</span><span class="tag">degree</span></div>
           </div>
-          <div class="card" id="forced-procession-average-39">
+          <div class="card" id="forced-procession-average-39-card">
             <h3>Forced procession average</h3>
             <p>
               Remark 3.9.3 gives a specific no-go statement: unequal capsule weights
@@ -43046,7 +43052,7 @@
             </p>
             <div class="tagRow"><span class="tag red">Remark 3.9.3</span><span class="tag">no weighted choice</span></div>
           </div>
-          <div class="card" id="realified-semisimplification-39">
+          <div class="card" id="realified-semisimplification-39-card">
             <h3>Realified semi-simplification</h3>
             <p>
               Remark 3.9.4 packages measure spaces into commutative monoids with
@@ -43056,7 +43062,7 @@
             </p>
             <div class="tagRow"><span class="tag violet">Remark 3.9.4</span><span class="tag">Rss</span></div>
           </div>
-          <div class="card" id="no-log-volume-period-39">
+          <div class="card" id="no-log-volume-period-39-card">
             <h3>No log-volume period</h3>
             <p>
               If log-links introduced a nontrivial volume dilation
@@ -43082,6 +43088,173 @@
           <a href="#packet-log-volume-definition">packet log-volume card</a>
           <a href="#procession-average-forced">procession average card</a>
           <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="packet-normalization-39" data-filter="iut iii proposition 3.9 packet normalization local holomorphic log volume pv minus log pv archimedean e">
+        <h2>IUT III Proposition 3.9(i): Packet Normalization</h2>
+        <p class="lede">
+          Proposition 3.9(i) defines local holomorphic packet log-volumes on packet
+          fields and normalizes each local holomorphic integral structure to have
+          log-volume zero. At nonarchimedean places, multiplication by
+          <span class="math">p_v</span> adds <span class="math">-log(p_v)</span>. At
+          archimedean places, multiplication by <span class="math">e</span> adds
+          <span class="math">1</span>. Packet log-volumes are invariant under
+          permutations of the packet label set <span class="math">A</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Place type</th><th>Normalization</th><th>Integral structure</th></tr>
+          <tr><td>Nonarchimedean</td><td>Multiplication by <span class="math">p_v</span> adds <span class="math">-log(p_v)</span>.</td><td>Local holomorphic integral structures have log-volume zero.</td></tr>
+          <tr><td>Archimedean</td><td>Multiplication by <span class="math">e</span> adds <span class="math">1</span>.</td><td>Products of complex integral structures have log-volume zero.</td></tr>
+          <tr><td>Processions</td><td>Average over capsules.</td><td>Defines procession-normalized log-volumes.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Proposition 3.9(i)</a>
+          Related: <a href="#packet-integral-structure-31">packet integral structures</a>
+          <a href="#forced-procession-average-39">forced procession average</a>
+          <a href="#packet-procession-log-volume-iii39">packet log-volume overview</a>
+        </div>
+      </section>
+
+      <section id="mono-analytic-transfer-39" data-filter="iut iii proposition 3.9 mono analytic compatibility d perp f perp times mu log shells discrepancy holomorphic integral structures">
+        <h2>IUT III Proposition 3.9(ii): Mono-Analytic Transfer</h2>
+        <p class="lede">
+          Proposition 3.9(ii) transfers the log-volume layer to mono-analytic packet
+          objects by applying the relevant local log-volumes to the log-shells
+          <span class="math">I(D⊢_v)</span>, then adjusting for the discrepancy between
+          local holomorphic integral structures and mono-analytic integral structures.
+          The resulting log-volumes are compatible with Proposition 3.2 poly-isomorphisms
+          and have an analogous <span class="math">F⊢×μ</span> version.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Side</th><th>Construction</th><th>Compatibility</th></tr>
+          <tr><td><span class="math">D⊢</span></td><td>Apply local log-volume to mono-analytic log-shells and adjust discrepancy.</td><td>Compatible with holomorphic packet log-volumes via Proposition 3.2.</td></tr>
+          <tr><td>Processions</td><td>Average packet-normalized mono-analytic log-volumes.</td><td>Compatible with holomorphic procession-normalized log-volumes.</td></tr>
+          <tr><td><span class="math">F⊢×μ</span></td><td>Replace <span class="math">D⊢</span> by <span class="math">F⊢×μ</span>.</td><td>Compatible via the natural poly-isomorphisms.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Proposition 3.9(ii) and Remark 3.9.1</a>
+          Related: <a href="#mono-analytic-packet-compatibility-32">mono-analytic packets</a>
+          <a href="#mono-analytic-log-shells">mono-analytic log-shells</a>
+          <a href="#global-degree-log-volume-39">global degree log-volume</a>
+        </div>
+      </section>
+
+      <section id="global-degree-log-volume-39" data-filter="iut iii proposition 3.9 global compatibility finite support sum arithmetic line bundle degree fmod fractional ideals">
+        <h2>IUT III Proposition 3.9(iii): Global Degree Log-Volume</h2>
+        <p class="lede">
+          Proposition 3.9(iii) forms a global log-volume by summing the local packet
+          log-volumes over <span class="math">v_Q∈V_Q</span>, restricted to elements
+          whose components have zero log-volume for all but finitely many
+          <span class="math">v_Q</span>. For fractional-ideal objects of
+          <span class="math">(Fmod)_α</span>, this global log-volume recovers the
+          degree of the associated arithmetic line bundle, with the source normalization.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Feature</th><th>Source statement</th><th>Use</th></tr>
+          <tr><td>Finite support</td><td>Only finitely many local components have nonzero log-volume.</td><td>Makes the global sum defined.</td></tr>
+          <tr><td>Invariance</td><td>Invariant under multiplication by <span class="math">(Mmod)_α=(MMOD)_α</span> and permutations of <span class="math">A</span>.</td><td>Stabilizes the global packet measure under source symmetries.</td></tr>
+          <tr><td>Degree link</td><td>For fractional-ideal objects, log-volume equals arithmetic line-bundle degree.</td><td>Connects packet regions to the Frobenioid degree layer.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Proposition 3.9(iii)</a>
+          Related: <a href="#single-packet-global-frobenioids-37">single packet global Frobenioids</a>
+          <a href="#bad-prime-to-global-37">bad-prime global objects</a>
+          <a href="#theta-q-pilot-objects-38">theta/q pilot objects</a>
+        </div>
+      </section>
+
+      <section id="forced-procession-average-39" data-filter="iut iii remark 3.9.3 forced procession average equal weights capsules log shell labels inclusion morphisms">
+        <h2>IUT III Remark 3.9.3: Forced Procession Average</h2>
+        <p class="lede">
+          Remark 3.9.3 says general weighted averages over procession capsules are not
+          available. A log-shell label <span class="math">j'</span> may contribute to
+          multiple capsule index sets <span class="math">S_{j_1+1}^±</span> and
+          <span class="math">S_{j_2+1}^±</span>. Compatibility with the procession
+          inclusion morphisms forces equal weights for the relevant capsules.
+        </p>
+        <div class="callout warn">
+          <strong>No tuning parameter.</strong> The procession average cannot be
+          adjusted to obtain a more convenient numerical estimate. Equal capsule weights
+          are a source constraint.
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Potential variation</th><th>Source answer</th><th>Reason</th></tr>
+          <tr><td>Arbitrary weighted capsule average</td><td>No.</td><td>The same log-shell label occurs in different procession capsules.</td></tr>
+          <tr><td>Equal average</td><td>Forced.</td><td>Needed for compatibility with inclusion morphisms.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.3</a>
+          Related: <a href="#packet-normalization-39">packet normalization</a>
+          <a href="#procession-normalization">procession normalization</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="realified-semisimplification-39" data-filter="iut iii remark 3.9.4 realified semi simplification measure spaces fn m rss r greater zero action">
+        <h2>IUT III Remark 3.9.4: Realified Semi-Simplification</h2>
+        <p class="lede">
+          Remark 3.9.4 formulates log-link/log-volume compatibility through a
+          realified semi-simplification of measure spaces. From a measure space
+          <span class="math">(M, μ_M)</span>, finite-valued nonnegative measurable
+          functions with relatively compact support form a monoid with
+          <span class="math">R_{&gt;0}</span>-action. Integration produces a quotient
+          <span class="math">Rss(M)</span> naturally isomorphic to
+          <span class="math">R_{≥0}</span>.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Definition role</th><th>Compatibility role</th></tr>
+          <tr><td><span class="math">Sub(M)</span></td><td>Pre-ample relatively compact Borel subsets.</td><td>Characteristic functions embed into <span class="math">Fn(M)</span>.</td></tr>
+          <tr><td><span class="math">Fn(M)</span></td><td>Finite-valued nonnegative measurable functions with compact positive support.</td><td>Monoid with <span class="math">R_{&gt;0}</span>-action.</td></tr>
+          <tr><td><span class="math">Rss(M)</span></td><td>Quotient determined by integration.</td><td>Realified semi-simplification used to compare volumes.</td></tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.4(i)</a>
+          Related: <a href="#no-log-volume-period-39">no log-volume period</a>
+          <a href="#log-shells-alone-not-enough-38">log-shells warning</a>
+          <a href="#packet-procession-log-volume-iii39">packet log-volume overview</a>
+        </div>
+      </section>
+
+      <section id="no-log-volume-period-39" data-filter="iut iii remark 3.9.4 no log volume period dilation lambda r modulo z log lambda real valued estimates corollary 3.12">
+        <h2>IUT III Remark 3.9.4: No Log-Volume Period</h2>
+        <p class="lede">
+          Remark 3.9.4 explains why log-link/log-volume compatibility cannot allow a
+          nontrivial dilation ambiguity. If log-links preserved volumes only up to a
+          factor <span class="math">λ</span>, log-volumes would be defined only modulo
+          <span class="math">Z log(λ)</span>. The later Corollary 3.12 comparison
+          requires ordinary real-valued estimates, so this periodic ambiguity is
+          excluded.
+        </p>
+        <div class="diagram fit" aria-label="No log-volume period ambiguity">
+          <div class="diagramHeader">
+            <strong>No Period Ambiguity</strong>
+            <span>Corollary 3.12 needs real-valued log-volume estimates</span>
+          </div>
+          <svg viewBox="0 0 920 280" role="img">
+            <defs>
+              <marker id="arrowNoPeriod39" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox red" x="70" y="70" width="230" height="84"></rect>
+            <text class="nodeTitle" x="185" y="102" text-anchor="middle">nontrivial λ</text>
+            <text class="tinyText" x="185" y="128" text-anchor="middle">volume dilation</text>
+            <rect class="nodeBox gold" x="364" y="70" width="230" height="84"></rect>
+            <text class="nodeTitle" x="479" y="102" text-anchor="middle">R / Z log(λ)</text>
+            <text class="tinyText" x="479" y="128" text-anchor="middle">periodic log-volume</text>
+            <rect class="nodeBox green" x="658" y="70" width="210" height="84"></rect>
+            <text class="nodeTitle" x="763" y="102" text-anchor="middle">not acceptable</text>
+            <text class="tinyText" x="763" y="128" text-anchor="middle">3.12 needs R-valued bounds</text>
+            <path d="M302 112 H362" class="edge red" marker-end="url(#arrowNoPeriod39)"></path>
+            <path d="M596 112 H656" class="edge gold" marker-end="url(#arrowNoPeriod39)"></path>
+          </svg>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.9.4</a>
+          Related: <a href="#realified-semisimplification-39">realified semi-simplification</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">IUT IV theta-pilot estimate</a>
         </div>
       </section>
 
