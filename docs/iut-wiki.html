@@ -820,6 +820,10 @@
         <a href="#etale-theta-mono-environment-page">Etale theta mono-env</a>
         <a href="#etale-theta-rigidity-triad-page">Etale theta rigidity</a>
         <a href="#etale-theta-bi-kummer-page">Bi-Kummer theory</a>
+        <a class="subLink" href="#etale-theta-fraction-pairs-page">EtTh fraction-pairs 4.1</a>
+        <a class="subLink" href="#etale-theta-bikummer-roots-page">EtTh bi-Kummer roots 4.2-4.3</a>
+        <a class="subLink" href="#etale-theta-bikummer-category-page">EtTh category-theoreticity 4.4</a>
+        <a class="subLink" href="#etale-theta-no-reciprocity-page">EtTh no reciprocity 4.4.1</a>
         <a href="#abs-anabelian-reconstruction-page">Absolute anabelian algorithms</a>
         <a href="#abs-anabelian-cores-telecores-page">Cores and telecores</a>
         <a href="#abs-anabelian-log-frobenius-page">Log-Frobenius compatibility</a>
@@ -3311,16 +3315,225 @@
             <p>The theta function becomes accessible through this categorical Kummer route.</p>
           </div>
         </div>
+        <table class="sourceTable3">
+          <tr><th>EtTh Section 4 unit</th><th>Source content</th><th>Leaf page</th></tr>
+          <tr>
+            <td>Definition 4.1</td>
+            <td>Defines fraction-pairs, right and left fraction-pairs, H-ample objects, saturation, and base-Frobenius type morphisms.</td>
+            <td><a href="#etale-theta-fraction-pairs-page">fraction-pairs and saturation</a></td>
+          </tr>
+          <tr>
+            <td>Proposition 4.2</td>
+            <td>Constructs N-th roots of fraction-pairs and proves uniqueness up to the stated isomorphism and mu_N ambiguity.</td>
+            <td><a href="#etale-theta-bikummer-roots-page">roots of fraction-pairs</a></td>
+          </tr>
+          <tr>
+            <td>Proposition 4.3</td>
+            <td>Turns roots of fraction-pairs into bi-Kummer roots, i.e. paired group homomorphism data whose difference is the Kummer class.</td>
+            <td><a href="#etale-theta-bikummer-roots-page">bi-Kummer roots</a></td>
+          </tr>
+          <tr>
+            <td>Theorem 4.4</td>
+            <td>Shows that fraction-pairs, roots, saturation, Kummer classes, and bi-Kummer roots are preserved by equivalences of suitable tempered Frobenioids.</td>
+            <td><a href="#etale-theta-bikummer-category-page">category-theoreticity</a></td>
+          </tr>
+          <tr>
+            <td>Remark 4.4.1</td>
+            <td>Explains why tempered bi-Kummer theory has no reciprocity map and still depends on the Frobenioid-theoretic cyclotome.</td>
+            <td><a href="#etale-theta-no-reciprocity-page">no reciprocity warning</a></td>
+          </tr>
+        </table>
         <div class="callout">
-          This page is a preparatory dependency page. The later IUT II pages record the
-          specific theta and Gaussian monoids; this page records the underlying
-          Kummer-theoretic construction principle.
+          This page is the parent page for EtTh Section 4. The essential distinction from
+          ordinary Kummer theory is that the input is a pair of line-bundle sections
+          representing numerator and denominator data, and the output remains tied to a
+          Frobenioid-theoretic cyclotome.
         </div>
         <div class="related">
-          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">Etale Theta, §§4-5</a>
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">Etale Theta, Section 4</a>
           Related: <a href="#frobenioid-theta-monoids-example-ii32-page">Frobenioid theta monoids</a>
           <a href="#iut-ii-kummer-evaluation-square-intro">Kummer evaluation square</a>
           <a href="#etale-theta-rigidity-triad-page">etale theta rigidity</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-fraction-pairs-page" data-filter="etale theta definition 4.1 fraction pair right left fraction pair h ample saturation base frobenius type">
+        <h2>EtTh Definition 4.1: Fraction-Pairs and Saturation</h2>
+        <p class="lede">
+          Definition 4.1 is the formal input layer for bi-Kummer theory. A rational
+          function is represented by a base-equivalent pair of pre-steps whose zero and
+          pole divisors have disjoint supports. The same definition fixes the Galois
+          amplitude and saturation conditions needed for taking roots inside a tempered
+          Frobenioid.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Definition 4.1 item</th><th>Source content</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Fraction-pair</td>
+            <td>A base-equivalent pair of pre-steps <span class="math">s_top,s_bot : A -> B</span> represents <span class="math">f</span> when <span class="math">s_top * s_bot^{-1}=f</span> in the birationalization and the two divisors have disjoint supports.</td>
+            <td>Do not model the input as a single rational function alone; numerator and denominator arrows are part of the data.</td>
+          </tr>
+          <tr>
+            <td>Right/left direction</td>
+            <td>The same pair is read as a right fraction-pair over the domain and a left fraction-pair after restriction to the codomain.</td>
+            <td>The direction matters in Proposition 4.2 uniqueness and in later mono-theta restrictions.</td>
+          </tr>
+          <tr>
+            <td>H-ample object</td>
+            <td>For a Galois object, the subgroup <span class="math">H_A</span> in automorphisms of <span class="math">A</span> must match the image of the chosen normal subgroup in the base category.</td>
+            <td>The Kummer class is attached to controlled automorphism groups, not arbitrary automorphism data.</td>
+          </tr>
+          <tr>
+            <td><span class="math">(N,H,f)</span>-saturation</td>
+            <td>The object must admit enough base-field saturation and an <span class="math">N</span>-th root of <span class="math">f</span>.</td>
+            <td>This is the exact hypothesis consumed by root construction in Proposition 4.2.</td>
+          </tr>
+          <tr>
+            <td>Base-Frobenius type</td>
+            <td>A morphism is base-Frobenius type if it factors through the prescribed base-Frobenius pair, quotient group, and Frobenius-degree data.</td>
+            <td>Root diagrams must record the Frobenius-degree morphism, not only the existence of roots.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Definition 4.1 and Remark 4.1.1</a>
+          Related: <a href="#etale-theta-bi-kummer-page">bi-Kummer hub</a>
+          <a href="#etale-theta-tempered-frobenioid-definition-page">tempered Frobenioids</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-bikummer-roots-page" data-filter="etale theta proposition 4.2 proposition 4.3 roots fraction pairs bi kummer roots kummer class mu n simultaneous nonsimultaneous conjugation">
+        <h2>EtTh Propositions 4.2-4.3: Roots of Fraction-Pairs and Bi-Kummer Roots</h2>
+        <p class="lede">
+          Propositions 4.2 and 4.3 build the actual bi-Kummer object. First one takes an
+          <span class="math">N</span>-th root of a fraction-pair as a pair of Frobenioid
+          diagrams. Then base-Frobenius pairs turn the two rooted arrows into group
+          homomorphisms whose difference is the Kummer cohomology class.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Result</th><th>Source content</th><th>Audit reading</th></tr>
+          <tr>
+            <td>4.2(i)-(ii)</td>
+            <td>Right and left fraction-pairs representing the same function are unique up to a unique isomorphism of the codomain or domain.</td>
+            <td>This prevents arbitrary replacement of numerator/denominator arrows.</td>
+          </tr>
+          <tr>
+            <td>4.2(iii)</td>
+            <td>An <span class="math">N</span>-th root consists of commutative diagrams with Frobenius-degree <span class="math">N</span> isometries, base-Frobenius type, saturation, and rooted numerator/denominator pre-steps.</td>
+            <td>The root is diagrammatic Frobenioid data, not merely an element satisfying <span class="math">g^N=f</span>.</td>
+          </tr>
+          <tr>
+            <td>4.2(iv)</td>
+            <td>Two roots are isomorphic after a possible <span class="math">mu_N</span> adjustment; the domain isomorphism is unique up to <span class="math">mu_N</span>.</td>
+            <td>This is the first explicit indeterminacy that later has to be transported categorically.</td>
+          </tr>
+          <tr>
+            <td>4.3(i)</td>
+            <td>A base-Frobenius section on the N-domain induces two group homomorphisms on the N-codomain, one for each side of the fraction-pair.</td>
+            <td>The "bi" object is a pair of homomorphisms, not only a cohomology class.</td>
+          </tr>
+          <tr>
+            <td>4.3(ii)</td>
+            <td>The collection of bi-Kummer roots is obtained by simultaneous conjugation by units and non-simultaneous conjugation by <span class="math">mu_N</span>.</td>
+            <td>Records the exact equivalence relation on roots.</td>
+          </tr>
+          <tr>
+            <td>4.3(iii)</td>
+            <td>The difference of the two homomorphisms is a twisted homomorphism to <span class="math">mu_N</span> and equals the Kummer class of the rooted function.</td>
+            <td>This is the bridge from Frobenioid arrow data to cohomological Kummer data.</td>
+          </tr>
+          <tr>
+            <td>Remark 4.3.2</td>
+            <td>Compatible roots for varying <span class="math">N</span> give compatible Kummer classes; by Proposition 3.2(iii), such a compatible system distinguishes the function.</td>
+            <td>Records why projective systems of roots carry real information about the rational function.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Propositions 4.2-4.3 and Remarks 4.3.1-4.3.2</a>
+          Related: <a href="#etale-theta-fraction-pairs-page">fraction-pairs</a>
+          <a href="#etale-theta-bikummer-category-page">category-theoreticity</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-bikummer-category-page" data-filter="etale theta theorem 4.4 category theoreticity bi kummer data equivalence tempered frobenioids fraction pairs roots saturation kummer classes">
+        <h2>EtTh Theorem 4.4: Category-Theoreticity of Bi-Kummer Data</h2>
+        <p class="lede">
+          Theorem 4.4 states that the bi-Kummer construction is invariant under
+          equivalences of suitable tempered Frobenioids. It is the Section 4 analogue of
+          the "constructed from the abstract category" principle: the theorem preserves
+          the objects, roots, saturation, cohomology classes, and paired homomorphism data.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Clause</th><th>Source content</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>4.4(i)</td>
+            <td>Equivalences preserve the distinguished Frobenius-trivial objects and H-ample objects, and induce the corresponding isomorphism on the normal subgroups of tempered fundamental groups up to inner automorphism.</td>
+            <td>The base group data is recovered through the category, not passed as unrelated external input.</td>
+          </tr>
+          <tr>
+            <td>4.4(ii)</td>
+            <td>The equivalence induces a compatible equivalence of birationalizations, preserves right and left fraction-pairs, and maps N-th roots to N-th roots.</td>
+            <td>The root diagrams are categorical objects.</td>
+          </tr>
+          <tr>
+            <td>4.4(iii)</td>
+            <td><span class="math">(N,H,f)</span>-saturation is preserved, and the induced cohomology isomorphism sends the Kummer class of <span class="math">f_1</span> to the Kummer class of <span class="math">f_2</span>.</td>
+            <td>Saturation and Kummer classes are not extra annotations; they are invariant under the allowed equivalence.</td>
+          </tr>
+          <tr>
+            <td>4.4(iv)</td>
+            <td>Bi-Kummer N-th roots are preserved up to the simultaneous and non-simultaneous conjugation operations of Proposition 4.3(ii).</td>
+            <td>Preservation must be stated modulo the correct indeterminacy, not as literal equality of chosen representatives.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          The proof uses the standard/isotropic/non-group-like properties from Theorem
+          3.7, Frobenioid reconstruction, preservation of pre-steps and Frobenius degrees,
+          and the category-theoreticity of prime supports. This page therefore depends on
+          the §3 pages, not only on the local Definition 4.1 data.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Theorem 4.4</a>
+          Related: <a href="#etale-theta-tempered-frobenioid-preservation-page">tempered Frobenioid preservation</a>
+          <a href="#etale-theta-bikummer-roots-page">bi-Kummer roots</a>
+        </div>
+      </section>
+
+      <section id="etale-theta-no-reciprocity-page" data-filter="etale theta remark 4.4.1 no reciprocity map tempered frobenioid cyclotome zhat powers coefficient cyclotome">
+        <h2>EtTh Remark 4.4.1: No Reciprocity Map and the Cyclotome Problem</h2>
+        <p class="lede">
+          Remark 4.4.1 marks a central limitation of the tempered Frobenioid version of
+          Kummer theory. Unlike the p-adic Frobenioid case, there is no reciprocity map:
+          the tempered group is not a profinite cohomological-dimension-two group with the
+          required duality theory.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Point</th><th>Source content</th><th>IUT relevance</th></tr>
+          <tr>
+            <td>No reciprocity map</td>
+            <td>The tempered bi-Kummer setting lacks the reciprocity map available for p-adic Frobenioids.</td>
+            <td>One cannot replace the Frobenioid input by bare tempered fundamental-group cohomology.</td>
+          </tr>
+          <tr>
+            <td>Cyclotome dependence</td>
+            <td>The Kummer classes still depend on the Frobenioid-theoretic coefficient cyclotome <span class="math">mu_N(-)</span>.</td>
+            <td>The coefficient cyclotome is a proof-critical structure, not a harmless choice of coefficients.</td>
+          </tr>
+          <tr>
+            <td>Only up to isomorphism</td>
+            <td>Recovering the cyclotome merely up to multiplication by <span class="math">(Z/NZ)^x</span> corresponds to recovering rational functions only up to <span class="math">Zhat^x</span>-powers.</td>
+            <td>This is unacceptable when one needs a specific theta function rather than a power orbit.</td>
+          </tr>
+          <tr>
+            <td>Section 5 task</td>
+            <td>The rigidity of the Frobenioid-theoretic cyclotome is deferred to Section 5.</td>
+            <td>This sets up the Frobenioid-theoretic cyclotomic rigidity theorem used for theta.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-etale-theta-frobenioid.pdf" target="_blank">EtTh, Remark 4.4.1</a>
+          Related: <a href="#etale-theta-bikummer-category-page">category-theoreticity</a>
+          <a href="#etale-theta-first-power-origin-page">first-power origin</a>
+          <a href="#mono-theta-cyclotomic-compatibility-ii13">IUT II cyclotomic compatibility</a>
         </div>
       </section>
 
