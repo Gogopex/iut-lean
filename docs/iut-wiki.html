@@ -779,6 +779,13 @@
         <a href="#alien-jacobian-infinitesimals-15">Alien Jacobian 1.5</a>
         <a href="#alien-polar-decoupling-16">Alien polar decoupling 1.6</a>
         <a href="#alien-error-factor-17">Alien error factor 1.7</a>
+        <a href="#alien-heights-abc-szpiro-21">Alien heights/abc 2.1</a>
+        <a href="#alien-arithmetic-degrees-22">Alien arithmetic degrees 2.2</a>
+        <a href="#alien-global-multiplicative-subspaces-23">Alien GMS 2.3</a>
+        <a href="#alien-frobenius-number-field-24">Alien Frobenius/NF 2.4</a>
+        <a href="#alien-frobenius-lifting-25">Alien Frobenius lifting 2.5</a>
+        <a href="#alien-positive-characteristic-transport-26">Alien positive-char transport 2.6</a>
+        <a href="#alien-mono-anabelian-transport-27">Alien mono-anabelian transport 2.7</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
         <a href="#iut-i-base-bridges-evaluation-sections">Base bridges/evaluation sections</a>
         <a href="#iut-i-additive-base-bridges-61-610">Additive base bridges 6.1-6.10</a>
@@ -2571,7 +2578,14 @@
               <a href="#alien-plane-integral-14">plane integral 1.4</a>,
               <a href="#alien-jacobian-infinitesimals-15">Jacobian/infinitesimals 1.5</a>,
               <a href="#alien-polar-decoupling-16">polar decoupling 1.6</a>,
-              <a href="#alien-error-factor-17">error factor 1.7</a>
+              <a href="#alien-error-factor-17">error factor 1.7</a>,
+              <a href="#alien-heights-abc-szpiro-21">heights/abc 2.1</a>,
+              <a href="#alien-arithmetic-degrees-22">arithmetic degrees 2.2</a>,
+              <a href="#alien-global-multiplicative-subspaces-23">GMS 2.3</a>,
+              <a href="#alien-frobenius-number-field-24">Frobenius/NF 2.4</a>,
+              <a href="#alien-frobenius-lifting-25">Frobenius lifting 2.5</a>,
+              <a href="#alien-positive-characteristic-transport-26">positive-characteristic transport 2.6</a>,
+              <a href="#alien-mono-anabelian-transport-27">mono-anabelian transport 2.7</a>
             </td>
             <td>Mutually Alien Copies, Sections 1-3</td>
           </tr>
@@ -15214,6 +15228,289 @@
           Related: <a href="#theta-log-links">theta/log links</a>
           <a href="#indeterminacies">indeterminacies</a>
           <a href="#membership-step-xif-312">membership step (xi-f)</a>
+        </div>
+      </section>
+
+      <section id="alien-heights-abc-szpiro-21" data-filter="mutually alien copies 2.1 heights abc szpiro conjecture projective line minus three points q parameters valuations compact exceptional">
+        <h2>Alien Copies 2.1: Heights, abc, and Szpiro</h2>
+        <p class="lede">
+          Section 2.1 translates the Gaussian motivation into the Diophantine target.
+          For the projective line minus three points, the height problem is read through
+          the q-parameters of associated elliptic curves at nonarchimedean valuations of
+          potentially multiplicative reduction.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Item</th><th>Source content</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>abc/Szpiro setting</td>
+            <td>The projective line minus three points connects rational-point heights to abc and to Szpiro via the Legendre lambda line.</td>
+            <td>Keep the Diophantine target tied to elliptic-curve q-parameters.</td>
+          </tr>
+          <tr>
+            <td>Local compact control</td>
+            <td>At any prescribed finite set of valuations, rational points may be restricted to compact subsets up to the usual reduction.</td>
+            <td>Separate bounded local discrepancies from the main height contribution.</td>
+          </tr>
+          <tr>
+            <td>Exceptional valuations</td>
+            <td>Archimedean and selected exceptional nonarchimedean contributions may be ignored up to bounded discrepancies.</td>
+            <td>Do not confuse bounded error control with the main log-volume inequality.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.1</a>
+          Related: <a href="#iut-iv-diophantine-inequalities-23">IUT IV Diophantine inequalities</a>
+          <a href="#iut-iv-suitable-initial-theta-data-22">suitable theta data</a>
+          <a href="#probabilistic-szpiro">Probabilistic Szpiro</a>
+        </div>
+      </section>
+
+      <section id="alien-arithmetic-degrees-22" data-filter="mutually alien copies 2.2 arithmetic degrees global integrals log volumes adelic regions etale-like Frobenius-like zero positive mass">
+        <h2>Alien Copies 2.2: Arithmetic Degrees as Global Integrals</h2>
+        <p class="lede">
+          Section 2.2 interprets heights as arithmetic degrees, and from an idelic
+          viewpoint as log-volumes of regions in the adele ring. This is the arithmetic
+          analogue of the Gaussian integral over a space: global mass is assembled from
+          local masses indexed by valuations.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Analogy</th><th>Source role</th><th>IUT reading</th></tr>
+          <tr>
+            <td>Height</td>
+            <td>Arithmetic degree of an arithmetic line bundle.</td>
+            <td>Final estimates are statements about arithmetic degrees/log-volumes.</td>
+          </tr>
+          <tr>
+            <td>Adelic log-volume</td>
+            <td>Global log-volume is a sum of local log-volumes over valuations.</td>
+            <td>The log-volume formalism is the arithmetic analogue of net mass.</td>
+          </tr>
+          <tr>
+            <td>Etale/Frobenius mass</td>
+            <td>Etale-like structures are treated as zero-mass containers; Frobenius-like structures carry positive mass.</td>
+            <td>Keep container structure distinct from the mass-bearing data being measured.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.2</a>
+          Related: <a href="#global-degree-log-volume-39">global degree/log-volume</a>
+          <a href="#coarse-space-step-x-312">coarse log-volume space</a>
+          <a href="#frobenius-versus-etale-order-411">Frobenius/etale order</a>
+        </div>
+      </section>
+
+      <section id="alien-global-multiplicative-subspaces-23" data-filter="mutually alien copies 2.3 global multiplicative subspace GMS l torsion Tate uniformization q to q l height inequality">
+        <h2>Alien Copies 2.3: Global Multiplicative Subspaces</h2>
+        <p class="lede">
+          Section 2.3 explains the motivating height-bound mechanism. If a suitable
+          global multiplicative subspace of the <span class="math">l</span>-torsion existed,
+          quotienting by it would replace q-parameters by their
+          <span class="math">l</span>-th powers and produce a height inequality of the
+          desired shape.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Mechanism</th><th>Source content</th><th>IUT consequence</th></tr>
+          <tr>
+            <td>GMS existence</td>
+            <td>A rank-one global multiplicative subspace matches the local Tate-uniformization multiplicative subspace.</td>
+            <td>This is the ideal object IUT must simulate when it is absent.</td>
+          </tr>
+          <tr>
+            <td>q-power effect</td>
+            <td>The quotient elliptic curve has q-parameters that are roughly <span class="math">l</span>-th powers.</td>
+            <td>Models the desired scaling of heights.</td>
+          </tr>
+          <tr>
+            <td>Differentials</td>
+            <td>The effect on logarithmic differentials supplies the error term of order <span class="math">log(l)</span>.</td>
+            <td>Connects height scaling to infinitesimal/Jacobian discipline.</td>
+          </tr>
+        </table>
+        <div class="callout gold">
+          <strong>Core motivation.</strong> The source states that such a global
+          multiplicative subspace generally does not exist; simulating it is one
+          fundamental theme of IUT.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.3</a>
+          Related: <a href="#gms-gcg-motivation">GMS/GCG motivation</a>
+          <a href="#collas-gms-categorification-page">Collas GMS categorification</a>
+          <a href="#iut-iv-theorem-110-theta-pilot-estimate">theta-pilot estimate</a>
+        </div>
+      </section>
+
+      <section id="alien-frobenius-number-field-24" data-filter="mutually alien copies 2.4 Frobenius morphism number field Gaussian Frobenius q j squared Hodge theaters Fl additive multiplicative symmetries">
+        <h2>Alien Copies 2.4: Frobenius for Number Fields</h2>
+        <p class="lede">
+          Section 2.4 reframes the missing global multiplicative subspace as the desire
+          for a Frobenius-like operation on a number field: an operation that would send
+          heights to multiples of themselves and q-parameters to powers. IUT replaces
+          this nonexistent scheme-theoretic operation by a non-scheme-theoretic
+          Gaussian Frobenius mechanism.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source object</th><th>Meaning</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td>Hypothetical NF Frobenius</td>
+            <td>Would act as <span class="math">h ↦ N h</span> and <span class="math">q ↦ q^N</span>.</td>
+            <td>Explains why ordinary scheme theory is insufficient.</td>
+          </tr>
+          <tr>
+            <td>Gaussian assignment</td>
+            <td>IUT ultimately uses the family <span class="math">{q^{j^2}}</span> rather than one fixed power.</td>
+            <td>Connects Hodge-Arakelov theta values to the Gaussian analogy.</td>
+          </tr>
+          <tr>
+            <td>Hodge theaters</td>
+            <td>Theater machinery is built to simulate the missing global operation.</td>
+            <td>Do not present Hodge theaters as decorative copies; they implement this simulation problem.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.4</a>
+          Related: <a href="#theta-values-q-j-squared-intro-ii">theta values q^j^2</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#gt-n-power-iut-analogy-page">N-power IUT analogy</a>
+        </div>
+      </section>
+
+      <section id="alien-frobenius-lifting-25" data-filter="mutually alien copies 2.5 Frobenius lifting derivative differentials curve positive characteristic global degrees change of coordinates">
+        <h2>Alien Copies 2.5: Frobenius Lifting Derivative</h2>
+        <p class="lede">
+          Section 2.5 gives the basic positive-characteristic differential model:
+          a Frobenius lifting on a smooth proper curve acts on differentials, and the
+          induced degree computation yields a strong inequality. This is the arithmetic
+          analogue of computing the effect of a coordinate change on infinitesimals.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Source content</th><th>IUT analogy</th></tr>
+          <tr>
+            <td>Frobenius lifting</td>
+            <td>A lifting reduces to Frobenius modulo <span class="math">p</span>.</td>
+            <td>Prototype for a mass-changing arithmetic coordinate change.</td>
+          </tr>
+          <tr>
+            <td>Derivative divided by p</td>
+            <td>The derivative gives a morphism of differential line bundles after normalization.</td>
+            <td>Tracks infinitesimal data in the coordinate change.</td>
+          </tr>
+          <tr>
+            <td>Degree inequality</td>
+            <td>Taking global degrees shows hyperbolic curves cannot admit such a lifting.</td>
+            <td>Shows how infinitesimal transport can produce a global numerical obstruction.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.5</a>
+          Related: <a href="#alien-jacobian-infinitesimals-15">Jacobian/infinitesimals</a>
+          <a href="#global-degree-log-volume-39">global degree/log-volume</a>
+        </div>
+      </section>
+
+      <section id="alien-positive-characteristic-transport-26" data-filter="mutually alien copies 2.6 positive characteristic mono anabelian transport Frobenius Galois groups cyclotomes Kummer rigidity">
+        <h2>Alien Copies 2.6: Positive-Characteristic Transport</h2>
+        <p class="lede">
+          Section 2.6 replaces literal differentiation by a group-theoretic anabelian
+          model. In positive characteristic, Frobenius is not an isomorphism of curves,
+          but it induces isomorphisms on suitable Galois and fundamental groups. This is
+          the prototype for transporting information through etale-like containers.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Object</th><th>Source role</th><th>IUT reading</th></tr>
+          <tr>
+            <td>Frobenius on groups</td>
+            <td>Frobenius has degree greater than one geometrically but induces group isomorphisms.</td>
+            <td>Models etale-like zero-mass transport across a mass-changing link.</td>
+          </tr>
+          <tr>
+            <td>Uchida/class field reconstruction</td>
+            <td>A group-theoretic algorithm reconstructs field-like data from the abstract Galois group.</td>
+            <td>Introduces the mono-anabelian recovery pattern.</td>
+          </tr>
+          <tr>
+            <td>Cyclotomic rigidity/Kummer</td>
+            <td>Cyclotomes and Kummer embeddings link multiplicative data to group cohomology.</td>
+            <td>Prefigures the Kummer-detachment machinery of IUT.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.6</a>
+          Related: <a href="#mono-theta-cyclotomes-ii11">interior/exterior cyclotomes</a>
+          <a href="#log-kummer-correspondences">Log-Kummer correspondences</a>
+          <a href="#absolute-anabelian-mutation-35">absolute anabelian mutation</a>
+        </div>
+      </section>
+
+      <section id="alien-mono-anabelian-transport-27" data-filter="mutually alien copies 2.7 mono anabelian transport links walls filters Frobenius-like etale-like coric Kummer detachment">
+        <h2>Alien Copies 2.7: Mono-Anabelian Transport</h2>
+        <p class="lede">
+          Section 2.7 names the transport apparatus inspired by the positive
+          characteristic model. Links are walls between mutually alien copies;
+          Frobenius-like objects carry positive mass on one side; etale-like objects are
+          zero-mass containers transported by anabelian rigidity; Kummer isomorphisms
+          detach and reattach the mass-bearing objects.
+        </p>
+        <div class="diagram fit" aria-label="Mono-anabelian transport pattern">
+          <div class="diagramHeader">
+            <strong>Mono-anabelian transport</strong>
+            <span>Kummer detachment, etale transport, inverse Kummer reattachment</span>
+          </div>
+          <svg viewBox="0 0 1000 430" role="img">
+            <defs>
+              <marker id="arrowAlien27" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="82" y="260" width="220" height="80"></rect>
+            <text class="nodeTitle" x="192" y="290" text-anchor="middle">Frobenius-like source</text>
+            <text class="tinyText" x="192" y="314" text-anchor="middle">positive mass</text>
+            <rect class="nodeBox green" x="82" y="78" width="220" height="80"></rect>
+            <text class="nodeTitle" x="192" y="108" text-anchor="middle">etale-like source</text>
+            <text class="tinyText" x="192" y="132" text-anchor="middle">zero-mass container</text>
+            <rect class="nodeBox green" x="698" y="78" width="220" height="80"></rect>
+            <text class="nodeTitle" x="808" y="108" text-anchor="middle">etale-like target</text>
+            <text class="tinyText" x="808" y="132" text-anchor="middle">anabelian rigidity</text>
+            <rect class="nodeBox red" x="698" y="260" width="220" height="80"></rect>
+            <text class="nodeTitle" x="808" y="290" text-anchor="middle">Frobenius-like target</text>
+            <text class="tinyText" x="808" y="314" text-anchor="middle">computed effect</text>
+            <path class="edge blue" d="M192 258 V160" marker-end="url(#arrowAlien27)"></path>
+            <text class="edgeLabel" x="247" y="214" text-anchor="middle">Kummer</text>
+            <path class="edge green" d="M304 118 H696" marker-end="url(#arrowAlien27)"></path>
+            <text class="edgeLabel" x="500" y="96" text-anchor="middle">mono-anabelian rigidity</text>
+            <path class="edge red" d="M808 160 V258" marker-end="url(#arrowAlien27)"></path>
+            <text class="edgeLabel" x="865" y="214" text-anchor="middle">Kummer^{-1}</text>
+            <path class="edge gold" d="M304 300 H696" marker-end="url(#arrowAlien27)"></path>
+            <text class="edgeLabel" x="500" y="330" text-anchor="middle">link/change of coordinates</text>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Term</th><th>Source meaning</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Link</td>
+            <td>A wall/filter between mutually alien copies of conventional scheme theory.</td>
+            <td>Represent theta/log links as typed transitions, not ambient equalities.</td>
+          </tr>
+          <tr>
+            <td>Frobenius-like</td>
+            <td>Positive-mass object defined on one side of a link, not automatically isomorphic across it.</td>
+            <td>Keep side labels and mass/log-volume data explicit.</td>
+          </tr>
+          <tr>
+            <td>Etale-like/coric</td>
+            <td>Zero-mass container transported across the link up to isomorphism and indeterminacy.</td>
+            <td>Separate coric transport from Frobenius-like mass transport.</td>
+          </tr>
+          <tr>
+            <td>Kummer detachment</td>
+            <td>Pass from Frobenius-like objects to etale-like objects before transport.</td>
+            <td>This is a source obligation, not a boolean flag.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §2.7</a>
+          Related: <a href="#mono-anabelian-transport-page">mono-anabelian transport card</a>
+          <a href="#kummer-detachment">Kummer detachment</a>
+          <a href="#frobenius-etale-versions-ii-intro">Frobenius/etale versions</a>
         </div>
       </section>
 
