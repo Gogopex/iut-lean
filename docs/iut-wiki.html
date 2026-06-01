@@ -1449,6 +1449,8 @@
         <a href="#bad-prime-root-unity-zero-35">Root-of-unity becomes zero</a>
         <a href="#global-packet-frobenioids-iii36-38">Global packets 3.6-3.8</a>
         <a href="#fmod-fmod-two-models-36">FMOD/Fmod two models 3.6</a>
+        <a class="subLink" href="#fmod-realification-determinacy-36">Perfection/realification determinacy</a>
+        <a class="subLink" href="#fmod-beta-subquotients-361">β_v subquotients 3.6.1</a>
         <a href="#additive-structure-warning-36">Additive structure warning 3.6.2</a>
         <a href="#single-packet-global-frobenioids-37">Single packet global Frobenioids</a>
         <a href="#global-realified-lgp-lgp-37">Global realified LGP/lgp</a>
@@ -50654,6 +50656,8 @@
             </p>
             <div class="tagRow">
               <a class="tag" href="#fmod-fmod-two-models-36">FMOD/Fmod</a>
+              <a class="tag" href="#fmod-realification-determinacy-36">realifications</a>
+              <a class="tag" href="#fmod-beta-subquotients-361">β_v</a>
               <a class="tag" href="#single-packet-global-frobenioids-37">single packets</a>
               <a class="tag" href="#global-realified-lgp-lgp-37">realified LGP/lgp</a>
               <a class="tag" href="#theta-q-pilot-objects-38">pilot objects</a>
@@ -50774,6 +50778,33 @@
               A formal model must not replace <span class="math">Fmod</span> by an
               arbitrary multiplicative subgroup when additive object-level comparison is
               required.
+            </td>
+          </tr>
+          <tr>
+            <td>Remark 3.6.1</td>
+            <td>
+              The local homomorphisms <span class="math">β_v : Fmod^× -> K_v^×/O_{K_v}^×</span>
+              may be regarded as subquotients of the perfection
+              <span class="math">(Fmod^×)^pf</span>, each equipped with a nonnegative
+              submonoid.
+            </td>
+            <td>
+              The local valuation data are not arbitrary choices; the source says they
+              are determined by the ring structure of <span class="math">Fmod</span>
+              as the field of moduli.
+            </td>
+          </tr>
+          <tr>
+            <td>Example 3.6(iii)</td>
+            <td>
+              The natural isomorphism <span class="math">Fmod ≃ FMOD</span> induces the
+              identity on rational-function monoids. The Frobenioid isomorphism itself
+              need not be determined by this condition, but the induced isomorphism on
+              perfections, hence on realifications, is determined by it.
+            </td>
+            <td>
+              This is the exact determinacy level used later when global realified
+              Frobenioids enter the LGP/lgp corridor.
             </td>
           </tr>
           <tr>
@@ -50959,6 +50990,81 @@
           Related: <a href="#global-packet-frobenioids-iii36-38">global packet overview</a>
           <a href="#additive-structure-warning-36">additive structure warning</a>
           <a href="#single-packet-global-frobenioids-37">single packet global Frobenioids</a>
+        </div>
+      </section>
+
+      <section id="fmod-realification-determinacy-36" data-filter="iut iii example 3.6 iii fmod fmod fmod perfection realification rational function monoid identity determinacy">
+        <h2>IUT III Example 3.6(iii): Perfection and Realification Determinacy</h2>
+        <p class="lede">
+          Example 3.6(iii) composes the two Frobenioid isomorphisms from the torsor
+          model and the fractional-ideal model. The resulting
+          <span class="math">Fmod ≃ FMOD</span> induces the identity on the rational
+          function monoid <span class="math">Fmod^×</span>. The source adds a precise
+          caveat: this condition need not determine the Frobenioid isomorphism itself,
+          but it does determine the induced isomorphism on perfections and therefore on
+          realifications.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Level</th><th>Source statement</th><th>Formalization consequence</th></tr>
+          <tr>
+            <td>Frobenioid isomorphism</td>
+            <td>Natural isomorphism <span class="math">Fmod ≃ FMOD</span> inducing the identity on rational-function monoids.</td>
+            <td>Do not claim uniqueness of the full Frobenioid isomorphism from the monoid condition alone.</td>
+          </tr>
+          <tr>
+            <td>Perfection</td>
+            <td>The induced isomorphism on respective perfections is completely determined by the identity condition on <span class="math">Fmod^×</span>.</td>
+            <td>This is the determinacy level suitable for later perfection-based comparisons.</td>
+          </tr>
+          <tr>
+            <td>Realification</td>
+            <td>The same determinacy passes to realifications.</td>
+            <td>The LGP/lgp realified global objects may use this rigidified comparison without asserting a stronger uniqueness statement.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Example 3.6(iii)</a>
+          Related: <a href="#fmod-fmod-two-models-36">FMOD/Fmod two models</a>
+          <a href="#global-realified-lgp-lgp-37">global realified LGP/lgp</a>
+          <a href="#fmod-fmod-bias-310">FMOD/Fmod bias</a>
+        </div>
+      </section>
+
+      <section id="fmod-beta-subquotients-361" data-filter="iut iii remark 3.6.1 beta v subquotients perfection fmod ring structure field of moduli nonnegative monoids">
+        <h2>IUT III Remark 3.6.1: Local Valuation Maps as Perfection Subquotients</h2>
+        <p class="lede">
+          Remark 3.6.1 explains that the homomorphisms
+          <span class="math">β_v : Fmod^× -> K_v^×/O_{K_v}^×</span> used in the
+          torsor model may be viewed as subquotients of the perfection
+          <span class="math">(Fmod^×)^pf</span>. Each such subquotient carries a
+          submonoid of nonnegative elements, and the collection is completely
+          determined by the ring structure of <span class="math">Fmod</span> as the
+          field of moduli.
+        </p>
+        <div class="flowDiagram">
+          <div class="flowStep">
+            <strong>Ring structure</strong>
+            <p><span class="math">Fmod</span> is used as the field of moduli of the initial theta data.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Perfection</strong>
+            <p>The multiplicative monoid gives subquotients of <span class="math">(Fmod^×)^pf</span>.</p>
+          </div>
+          <div class="flowStep">
+            <strong>Local valuation data</strong>
+            <p>Each place <span class="math">v</span> yields a quotient with a nonnegative submonoid.</p>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>Audit consequence.</strong> The <span class="math">β_v</span> maps
+          are not free local parameters in the FMOD model. The source treats them as
+          data determined by the global ring structure of <span class="math">Fmod</span>.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.6.1</a>
+          Related: <a href="#fmod-fmod-two-models-36">FMOD/Fmod two models</a>
+          <a href="#fmod-realification-determinacy-36">perfection/realification determinacy</a>
+          <a href="#global-packet-frobenioids-iii36-38">global packet Frobenioids</a>
         </div>
       </section>
 
