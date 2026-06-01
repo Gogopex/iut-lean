@@ -1413,6 +1413,11 @@
         <a href="#columns-zero-one-difference">0/1 column difference</a>
         <a href="#metric-analogy-3123">Metric analogy 3.12.3</a>
         <a href="#padic-teich-analogy-3124">p-adic Teich analogy 3.12.4</a>
+        <a href="#gauss-bonnet-ind3-3123">Gauss-Bonnet and Ind3</a>
+        <a href="#ordinary-supersingular-3124">Ordinary/supersingular analogy</a>
+        <a href="#log-shell-teich-reps-3124">Log-shell Teich reps</a>
+        <a href="#theta-label-witt-gap-3124">Theta labels/Witt gap</a>
+        <a href="#frobenius-conjugate-inequality-3124">Frobenius-conjugate inequality</a>
         <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
         <a href="#pajo-scale-free-no-go-page">Pajo scale-free no-go</a>
         <a href="#higuchi-step-xif-no-go-page">Higuchi Step (xi-f)</a>
@@ -54007,6 +54012,202 @@
           Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.12.4 and Fig. 3.10</a>
           Related: <a href="#metric-analogy-3123">metric analogy 3.12.3</a>
           <a href="#ind1-ind2-ind3-311">Ind3</a>
+        </div>
+      </section>
+
+      <section id="gauss-bonnet-ind3-3123" data-filter="iut iii remark 3.12.3 gauss bonnet hyperbolic riemann surface euler characteristic positivity metric ind3 upper semi compatibility">
+        <h2>IUT III Remark 3.12.3: Gauss-Bonnet and Ind3</h2>
+        <p class="lede">
+          Remark 3.12.3(i) compares the Corollary 3.12 inequality with the classical
+          negativity of the Euler characteristic of a hyperbolic Riemann surface. The
+          source analogy is not just "there is an inequality"; it traces the inequality
+          to local positivity or incompatibility. In the classical case this is the
+          positivity of the Poincare metric. In the IUT case it is the maximal
+          incompatibility between Kummer isomorphisms and corically constructed
+          Frobenius-picture data, expressed in Theorem 3.11 as Ind3.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Classical metric side</th><th>IUT side</th><th>Shared role</th></tr>
+          <tr>
+            <td><span class="math">chi<sub>S</sub> = - integral<sub>S</sub> dmu<sub>S</sub> &lt; 0</span> by Gauss-Bonnet and positivity of the Poincare metric.</td>
+            <td>Corollary 3.12 is a signed log-volume inequality arising from upper semi-compatibility.</td>
+            <td>A local positivity/incompatibility condition becomes a global numerical sign statement.</td>
+          </tr>
+          <tr>
+            <td>Kodaira-Spencer isomorphism and ordinarity of a Frobenius lifting in the p-adic analogy.</td>
+            <td>Maximal incompatibility between Kummer isomorphisms and coric Frobenius-picture data.</td>
+            <td>The source locates Ind3 in the same conceptual slot as the metric positivity mechanism.</td>
+          </tr>
+          <tr>
+            <td>Canonical relation between distinct holomorphic structures minimizes conformal distortion.</td>
+            <td>Theorem 3.11's canonical algorithms relate alien arithmetic holomorphic structures and constrain log-volume distortion.</td>
+            <td>The analogy is about controlled deformation, not about ordinary equality of structures.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.12.3</a>
+          Related: <a href="#metric-analogy-3123">metric analogy overview</a>
+          <a href="#ind1-ind2-ind3-311">Ind3</a>
+          <a href="#juggling-ind3-3122">log-link juggling</a>
+        </div>
+      </section>
+
+      <section id="ordinary-supersingular-3124" data-filter="iut iii remark 3.12.4 bad primes good primes ordinary locus supersingular locus canonical coordinates splitting monoids">
+        <h2>IUT III Remark 3.12.4: Ordinary and Supersingular Analogy</h2>
+        <p class="lede">
+          Remark 3.12.4(i) places the bad-prime splitting monoids of Theorem 3.11 in
+          the p-adic Teichmuller analogy. Splitting monoids at
+          <span class="math">v in V<sub>bad</sub></span> are compared to canonical coordinates on
+          the ordinary locus of a canonical curve. Accordingly,
+          <span class="math">V<sub>bad</sub></span> corresponds to the ordinary locus, while
+          <span class="math">V<sub>good</sub></span> corresponds to the supersingular locus.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>IUT object</th><th>p-adic Teichmuller analogue</th><th>Consequence</th></tr>
+          <tr>
+            <td>Splitting monoids at bad primes.</td>
+            <td>Canonical coordinates over the ordinary locus.</td>
+            <td>Bad primes are the active coordinate-bearing part of the analogy.</td>
+          </tr>
+          <tr>
+            <td><span class="math">V<sub>bad</sub></span>.</td>
+            <td>Ordinary locus of a canonical curve.</td>
+            <td>This is where the canonical-coordinate comparison lives.</td>
+          </tr>
+          <tr>
+            <td><span class="math">V<sub>good</sub></span>.</td>
+            <td>Supersingular locus of a canonical curve.</td>
+            <td>Good primes are positioned as the complementary locus in the analogy.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.12.4(i)</a>
+          Related: <a href="#padic-teich-analogy-3124">p-adic Teich overview</a>
+          <a href="#bad-prime-lgp-splittings-34">bad-prime LGP splittings</a>
+          <a href="#theorem-311-data-abc">Theorem 3.11 data</a>
+        </div>
+      </section>
+
+      <section id="log-shell-teich-reps-3124" data-filter="iut iii remark 3.12.4 mono analytic log shells teichmuller representatives witt rings local holomorphic units uniradial mixed characteristic">
+        <h2>IUT III Remark 3.12.4: Log-Shells as Teichmuller Representatives</h2>
+        <p class="lede">
+          Remark 3.12.4(ii) compares the bi-coric mono-analytic log-shells
+          <span class="math">O<sup>x</sup><sub>mu</sub></span> in Theorem 3.11 tensor packets with
+          multiplicative Teichmuller representatives in Witt rings. Inside a fixed
+          arithmetic holomorphic structure, these log-shells arise from local
+          holomorphic units subject to <span class="math">F<sub>l</sub><sup>±</sup></span>-symmetry. Their
+          uniradial nature is compared to the mixed-characteristic nature of Witt
+          rings, namely the incompatibility of Teichmuller representatives with
+          addition.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>IUT side</th><th>p-adic side</th><th>Why it matters</th></tr>
+          <tr>
+            <td>Bi-coric mono-analytic log-shells <span class="math">O<sup>x</sup><sub>mu</sub></span>.</td>
+            <td>Multiplicative Teichmuller representatives.</td>
+            <td>Both provide multiplicative constants that are not additive coordinates.</td>
+          </tr>
+          <tr>
+            <td>Local holomorphic units <span class="math">O<sup>x</sup></span> under <span class="math">F<sub>l</sub><sup>±</sup></span>-symmetry.</td>
+            <td>Positive-characteristic ring structures on reductions of Teichmuller representatives.</td>
+            <td>This explains why the local-unit layer is holomorphic-structure dependent.</td>
+          </tr>
+          <tr>
+            <td>Uniradial local holomorphic units.</td>
+            <td>Mixed-characteristic Witt rings and additive incompatibility of Teichmuller representatives.</td>
+            <td>The analogy supports the need for multiradial log-shell processing in 3.11.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.12.4(ii)</a>
+          Related: <a href="#mono-analytic-transfer-39">mono-analytic transfer</a>
+          <a href="#log-shells-alone-not-enough-38">log-shells alone not enough</a>
+          <a href="#teichmuller-analogy-iut-i">IUT I Teichmuller analogy</a>
+        </div>
+      </section>
+
+      <section id="theta-label-witt-gap-3124" data-filter="iut iii remark 3.12.4 theta value labels fl witt vectors mod p mod p squared gap procession averages derivative canonical frobenius lifting absolute moduli f1">
+        <h2>IUT III Remark 3.12.4: Theta Labels and the Witt-Vector Gap</h2>
+        <p class="lede">
+          Remark 3.12.4(iii),(iv) gives a more specific p-adic analogy for the
+          <span class="math">F<sub>l</sub></span> theta-value labels. They correspond first to
+          the factor <span class="math">p</span> in the gap between the mod
+          <span class="math">p</span> and mod <span class="math">p<sup>2</sup></span> portions of
+          Witt vectors. Procession-normalized averaging over labels is compared to
+          dividing by <span class="math">p</span>. The same labels may also be read as
+          infinitesimal moduli, or absolute moduli over an <span class="math">F<sub>1</sub></span>
+          heuristic.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source analogy</th><th>Interpretation</th><th>Wiki consequence</th></tr>
+          <tr>
+            <td><span class="math">F<sub>l</sub></span> theta-value labels.</td>
+            <td>Factor <span class="math">p</span> in the mod <span class="math">p</span> / mod <span class="math">p<sup>2</sup></span> gap of Witt vectors.</td>
+            <td>The labels mark a deformation gap, not just a finite indexing set.</td>
+          </tr>
+          <tr>
+            <td>Procession averages over <span class="math">j in F<sub>l</sub></span>.</td>
+            <td>Dividing by <span class="math">p</span> to compare the gap with the characteristic-<span class="math">p</span> layer.</td>
+            <td>This is one reason the source is careful about the forced averaging convention.</td>
+          </tr>
+          <tr>
+            <td>Multiradial representation via <span class="math">F<sub>l</sub></span>-labelled log-shells.</td>
+            <td>Derivative of a canonical Frobenius lifting.</td>
+            <td>The comparison of splitting monoids to absolute log-shell constants yields Ind1 and Ind2.</td>
+          </tr>
+          <tr>
+            <td>Horizontal deformation dimension.</td>
+            <td>Infinitesimal moduli of the positive-characteristic curve, or absolute moduli over <span class="math">F<sub>1</sub></span>.</td>
+            <td>The horizontal label dimension is canonical, not an arbitrary parameter.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.12.4(iii),(iv)</a>
+          Related: <a href="#forced-procession-average-39">forced procession average</a>
+          <a href="#label-discipline-311">label discipline</a>
+          <a href="#teichmuller-analogy-ii4114">IUT II Teichmuller analogy</a>
+        </div>
+      </section>
+
+      <section id="frobenius-conjugate-inequality-3124" data-filter="iut iii remark 3.12.4 frobenius conjugates derivative canonical frobenius lifting hasse invariant omega inclusion inequality ind3">
+        <h2>IUT III Remark 3.12.4: Frobenius-Conjugate Inequality</h2>
+        <p class="lede">
+          Remark 3.12.4(v) gives the p-adic inequality analogue explicitly. For a
+          canonical p-adic curve over Witt vectors, the derivative of the canonical
+          Frobenius lifting on the ordinary locus must handle interference among
+          Frobenius conjugates such as <span class="math">t<sup>p<sup>n</sup></sup></span>. After
+          dividing by <span class="math">p</span>, the derivative gives an inclusion of
+          line bundles, not an isomorphism. This yields a degree inequality analogous
+          to the Ind3-based inequality of Corollary 3.12.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>p-adic object</th><th>Statement</th><th>IUT analogue</th></tr>
+          <tr>
+            <td>Frobenius conjugates <span class="math">t<sup>p<sup>n</sup></sup></span>.</td>
+            <td>They interfere when computing the derivative of the canonical Frobenius lifting.</td>
+            <td>Vertical log-theta-lattice dimension and log-link iterates create Ind3-type upper-semi behavior.</td>
+          </tr>
+          <tr>
+            <td>Line-bundle inclusion.</td>
+            <td><span class="math">omega(X_k) -> Phi<sup>*</sup> omega(X_k)</span>, also read as the square Hasse invariant.</td>
+            <td>The comparison gives an inclusion/upper estimate, not a strict equality.</td>
+          </tr>
+          <tr>
+            <td>Global degree inequality.</td>
+            <td><span class="math">(1-p)(2g<sub>X</sub>-2) &lt;= 0</span>.</td>
+            <td>It mirrors the way Corollary 3.12 is driven by upper semi-compatibility rather than exact commutativity.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Source role.</strong> This page explains why the p-adic analogy points
+          toward inequalities from interference phenomena. It is not an independent
+          proof of Corollary 3.12; it records Mochizuki's structural comparison.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Remark 3.12.4(v),(vi)</a>
+          Related: <a href="#gauss-bonnet-ind3-3123">Gauss-Bonnet and Ind3</a>
+          <a href="#juggling-ind3-3122">log-link juggling</a>
+          <a href="#iut-iv-remark-224-padic-teich">IUT IV p-adic Teich analogy</a>
         </div>
       </section>
 
