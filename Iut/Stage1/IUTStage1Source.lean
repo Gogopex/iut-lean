@@ -36587,6 +36587,123 @@ theorem packetCorrespondence_endpoint
 end NonarchimedeanLogKummerPacketCorrespondenceSource
 
 /--
+Finite-label root-of-unity invisibility for the Stage 1 log-Kummer packet
+correspondence.
+
+IUT III, Remark 3.11.4 explains that the root-of-unity indeterminacies produced
+by forgetting Frobenius-like labels are invisible for the relevant theta and
+number-field data.  At the present finite-label level this is modeled by a unit
+whose action lies in the sign subgroup `{1, -1}`; such an action preserves the
+zero/nonzero full cusp label and hence preserves every log-volume expression
+which factors through that full label.
+-/
+structure NonarchimedeanLogKummerRootUnityInvisibility
+    (l : PrimeGeFive) where
+  unit : (ZMod l.value)ˣ
+  unit_mem_signSubgroup : unit ∈ zmodSignUnitSubgroup l
+
+namespace NonarchimedeanLogKummerRootUnityInvisibility
+
+variable {l : PrimeGeFive}
+
+open IUTStage1ZModCuspLabelLogVolumeCompatibility
+
+/-- The coordinate permutation induced by the finite root-of-unity unit. -/
+def coordinateEquiv
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l) :
+    ZMod l.value ≃ ZMod l.value :=
+  IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodUnitSmulEquiv
+    l invisibility.unit
+
+theorem fullLabelMapPreserving
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+      (l := l) invisibility.coordinateEquiv := by
+  exact
+    fullLabelMapPreserving_unitSmul_of_signSubgroup
+      (l := l) invisibility.unit_mem_signSubgroup
+
+theorem fullLabel_eq
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l)
+    (j : ZMod l.value) :
+    IUTStage1ZModCuspFullLabel.fromCoordinate l
+        ((zmodUnitActionData l).smul invisibility.unit j) =
+      IUTStage1ZModCuspFullLabel.fromCoordinate l j := by
+  have hmap := invisibility.fullLabelMapPreserving j
+  simpa [coordinateEquiv,
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodUnitSmulEquiv_apply]
+    using hmap
+
+theorem logVolume_eq
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l)
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (j : ZMod l.value) :
+    compat.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          ((zmodUnitActionData l).smul invisibility.unit j)) =
+      compat.fullLabelLogVolume
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  rw [invisibility.fullLabel_eq j]
+
+theorem gaussianDegree_eq
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l)
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (j : ZMod l.value) :
+    evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          ((zmodUnitActionData l).smul invisibility.unit j)) =
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l j) := by
+  rw [invisibility.fullLabel_eq j]
+
+theorem coordinateAveragedLogVolume_eq
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l)
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l) :
+    ((Finset.univ.sum fun j : ZMod l.value =>
+      evaluation.gaussianDegree
+        (IUTStage1ZModCuspFullLabel.fromCoordinate l
+          ((zmodUnitActionData l).smul invisibility.unit j))) /
+        (l.value : Real)) =
+      evaluation.coordinateAveragedLogVolume.averageLogVolume := by
+  have h :=
+    evaluation.coordinateAveragedLogVolume_average_unitAffine_eq
+      invisibility.unit (0 : ZMod l.value)
+  simpa [zmodLabelTranslate_zero] using h
+
+theorem rootUnityInvisibility_endpoint
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l)
+    (evaluation :
+      IUTStage1ZModSquareWeightProfile.GaussianMonoidDegreeEvaluation l)
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (j : ZMod l.value) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) invisibility.coordinateEquiv ∧
+      compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            ((zmodUnitActionData l).smul invisibility.unit j)) =
+        compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) ∧
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            ((zmodUnitActionData l).smul invisibility.unit j)) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) ∧
+      ((Finset.univ.sum fun k : ZMod l.value =>
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            ((zmodUnitActionData l).smul invisibility.unit k))) /
+          (l.value : Real)) =
+        evaluation.coordinateAveragedLogVolume.averageLogVolume :=
+  ⟨invisibility.fullLabelMapPreserving,
+    invisibility.logVolume_eq compat j,
+    invisibility.gaussianDegree_eq evaluation j,
+    invisibility.coordinateAveragedLogVolume_eq evaluation⟩
+
+end NonarchimedeanLogKummerRootUnityInvisibility
+
+/--
 Packet-normalized nonarchimedean upper-semi constructor attached to the
 theta-root/Kummer source chain.
 

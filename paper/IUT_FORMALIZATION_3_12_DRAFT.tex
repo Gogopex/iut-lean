@@ -403,6 +403,15 @@ log-Kummer packet-correspondence source carrying the q-pilot column and
 non-interference guard.  Its target face carries the common packet-normalized
 capsule value, and \Lean{} derives the direct theta-to-entry, theta-to-packet,
 and entry-to-\((\Ind3)\)-target equalities consumed by the upper-semi route.
+\IUT{} III, Remark 3.11.4 further says that the root-of-unity and cyclotomic
+indeterminacies arising from forgetting Frobenius-like labels are invisible
+for the objects under consideration.  The present code formalizes the finite
+sign-unit part of this assertion: a unit in the subgroup \(\{1,-1\}\subset
+(\mathbb{Z}/\ell\mathbb{Z})^\times\) preserves the zero/nonzero full cusp
+label, every full-label log-volume expression, and the averaged Gaussian
+log-volume.  This is not yet a construction of the full cyclotomic rigidity
+isomorphism; it is the finite-label component that the current Stage 1
+interface can prove without an additional Frobenioid/cyclotome layer.
 The integrated route now composes the Hodge--Arakelov theta-value sources with
 this packet-target nonarchimedean source.  The resulting theorem derives the
 same boundary/strict \(C_\Theta\) dichotomy from source-facing Gaussian
@@ -551,6 +560,9 @@ The project currently proves the following source-facing results in \Lean{}:
   non-interference guard.  Its projections derive the theta-to-packet,
   theta-to-entry, entry-to-\((\Ind3)\)-target, and packet-normalized target
   equalities used by the route.
+\item The finite sign-unit/root-of-unity part of Remark 3.11.4 is formalized:
+  sign-unit action preserves full cusp labels, full-label log-volume readings,
+  Gaussian degrees, and averaged Gaussian log-volume.
 \item The current integrated route composes Hodge--Arakelov theta-value sources
   with the packet-target nonarchimedean source to obtain the same
   \(C_\Theta=-1\) boundary alternative or strict \(C_\Theta>-1\) conclusion.

@@ -206,6 +206,32 @@ theorem logKummerPacketCorrespondenceSource_endpoint
         audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
   correspondence.packetCorrespondence_endpoint kummer forgetting
 
+theorem logKummerRootUnityInvisibility_endpoint
+    {l : PrimeGeFive}
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l)
+    (evaluation : GaussianMonoidDegreeEvaluation l)
+    (compat : IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (j : ZMod l.value) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) invisibility.coordinateEquiv ∧
+      compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            ((zmodUnitActionData l).smul invisibility.unit j)) =
+        compat.fullLabelLogVolume
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) ∧
+      evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            ((zmodUnitActionData l).smul invisibility.unit j)) =
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l j) ∧
+      ((Finset.univ.sum fun k : ZMod l.value =>
+        evaluation.gaussianDegree
+          (IUTStage1ZModCuspFullLabel.fromCoordinate l
+            ((zmodUnitActionData l).smul invisibility.unit k))) /
+          (l.value : Real)) =
+        evaluation.coordinateAveragedLogVolume.averageLogVolume :=
+  invisibility.rootUnityInvisibility_endpoint evaluation compat j
+
 theorem hodgeArakelovThetaValueSource_constructsGaussianEvaluation
     {l : PrimeGeFive} {F : Type u} [Field F]
     {X C : HyperbolicOrbicurveModel F}
