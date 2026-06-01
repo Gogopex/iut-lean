@@ -36704,6 +36704,26 @@ def ofCalibrations
     sourceCalibration := sourceCalibration,
     targetCalibration := targetCalibration }
 
+def ofEntryTargetThetaAlignment
+    (entrySource :
+      NonarchimedeanPacketNormalizedEntryTargetSource audited)
+    (sourceCalibration :
+      NonarchimedeanLogKummerPacketSourceCalibration
+        audited logKummer entrySource.toEntry
+        holomorphicF holomorphicD monoAnalyticD)
+    (thetaAverage_eq_packetNormalized :
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (thetaAverage_eq_ind3Target :
+      thetaAverage =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume) :
+    NonarchimedeanLogKummerPacketCorrespondenceSource
+      audited thetaAverage logKummer entrySource.toEntry
+      holomorphicF holomorphicD monoAnalyticD :=
+  ofCalibrations sourceCalibration
+    (NonarchimedeanLogKummerPacketTargetCalibration.ofPacketNormalizedEntryTargetAndThetaTarget
+      entrySource thetaAverage_eq_packetNormalized thetaAverage_eq_ind3Target)
+
 theorem qPilotLogKummerNonInterference
     (correspondence :
       NonarchimedeanLogKummerPacketCorrespondenceSource
@@ -36769,6 +36789,38 @@ theorem packetCorrespondence_endpoint
     correspondence.entrySource_eq_ind3Source kummer forgetting,
     correspondence.thetaAverage_eq_entryTarget,
     correspondence.entryTarget_eq_ind3Target⟩
+
+theorem ofEntryTargetThetaAlignment_endpoint
+    (entrySource :
+      NonarchimedeanPacketNormalizedEntryTargetSource audited)
+    (sourceCalibration :
+      NonarchimedeanLogKummerPacketSourceCalibration
+        audited logKummer entrySource.toEntry
+        holomorphicF holomorphicD monoAnalyticD)
+    (thetaAverage_eq_packetNormalized :
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume)
+    (thetaAverage_eq_ind3Target :
+      thetaAverage =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume)
+    (kummer :
+      IUTStage1KummerFTensorPacketToDTensorPacketTransfer
+        holomorphicF holomorphicD)
+    (forgetting :
+      IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+        holomorphicD monoAnalyticD) :
+    IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogKummerNonInterference =
+        true ∧
+      entrySource.toEntry.sourceLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume ∧
+      thetaAverage = entrySource.toEntry.targetLogVolume.finiteLogVolume ∧
+      entrySource.toEntry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
+  by
+    let correspondence :=
+      ofEntryTargetThetaAlignment entrySource sourceCalibration
+        thetaAverage_eq_packetNormalized thetaAverage_eq_ind3Target
+    exact correspondence.packetCorrespondence_endpoint kummer forgetting
 
 end NonarchimedeanLogKummerPacketCorrespondenceSource
 

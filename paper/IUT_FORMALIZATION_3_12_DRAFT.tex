@@ -419,6 +419,10 @@ The latter can now be reduced further: if the Step (x) target-side
 target, then \Lean{} derives the \((\Ind3)\)-target-to-packet-normalized
 equality from this alignment and the theta-average-to-packet-normalized
 equality.
+The packet-correspondence source itself can now be built from this reduced
+target data together with the source packet/product calibration.  Thus the
+correspondence constructor no longer needs a completed target-calibration
+record when the target entry and theta-target alignment are available.
 The first-pass Gaussian route also has a one-correspondence form: it consumes
 a finite log-Kummer packet-correspondence source and projects the source
 packet/product calibration and target packet-normalized calibration from that
@@ -851,6 +855,11 @@ The project currently proves the following source-facing results in \Lean{}:
   \((\Ind3)\)-target-to-packet-normalized equality from theta-target alignment
   and theta-average packet normalization, instead of accepting that equality
   directly.
+\item The log-Kummer packet-correspondence source can now be constructed from
+  source packet/product calibration plus the packet-normalized entry target and
+  theta-target alignment.  The q-pilot non-interference, source equality, and
+  target equality endpoint is then recovered from this constructed
+  correspondence.
 \item The finite sign-unit/root-of-unity part of Remark 3.11.4 is formalized:
   sign-unit action preserves full cusp labels, full-label log-volume readings,
   Gaussian degrees, and averaged Gaussian log-volume.
