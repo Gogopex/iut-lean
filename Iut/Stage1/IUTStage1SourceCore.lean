@@ -2653,6 +2653,156 @@ theorem thetaHullLogVolume_le_closed_of_possibleImages_subset
 end IUTStage1ThetaPossibleImagesHullLogVolumeShadow
 
 /--
+Step (xi) possible-image hull source with a chosen hull approximant.
+
+This is the same possible-image union as in
+`IUTStage1ThetaPossibleImagesHullLogVolumeShadow`, but the upper-ray bound is
+produced through a certified approximant \(H\in\Phi(P)\) for
+`P = ⋃ i, possibleThetaImage i`.  Thus the data records the source-paper order
+`P ≤ H ≤ φ(P)` and asks separately for q-pilot containment in `H`.
+-/
+structure IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
+    (α : Type u) (ι : Type v) where
+  hullData : IUTStage1HolomorphicHullLogVolumeShadow α
+  possibleThetaImage : ι -> Set α
+  qPilotRegion : Set α
+  approximant :
+    IUTStage1HullLogVolumeApproximant
+      hullData (⋃ i, possibleThetaImage i)
+  determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume
+  q_subset_approximant : qPilotRegion ⊆ approximant.approximant
+  approximant_eq_normalized_determinant :
+    hullData.logVolume approximant.approximant =
+      determinant.normalizedLogVolume
+
+namespace IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
+
+variable {α : Type u} {ι : Type v}
+
+def thetaImageUnion
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    Set α :=
+  ⋃ i, data.possibleThetaImage i
+
+def thetaHull
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    Set α :=
+  data.hullData.hullRegion data.thetaImageUnion
+
+def approximantRegion
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    Set α :=
+  data.approximant.approximant
+
+def thetaImageUnionLogVolume
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    Real :=
+  data.hullData.logVolume data.thetaImageUnion
+
+def approximantLogVolume
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    Real :=
+  data.hullData.logVolume data.approximantRegion
+
+def thetaHullLogVolume
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    Real :=
+  data.hullData.logVolume data.thetaHull
+
+def qPilotLogVolume
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    Real :=
+  data.hullData.logVolume data.qPilotRegion
+
+theorem thetaImageUnionLogVolume_le_approximantLogVolume
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.thetaImageUnionLogVolume <= data.approximantLogVolume :=
+  data.approximant.region_logVolume_le
+
+theorem approximantLogVolume_le_thetaHullLogVolume
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.approximantLogVolume <= data.thetaHullLogVolume :=
+  data.approximant.approximant_logVolume_le_hull
+
+theorem qPilotLogVolume_le_approximantLogVolume
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.qPilotLogVolume <= data.approximantLogVolume :=
+  data.hullData.logVolume_mono data.q_subset_approximant
+
+theorem qPilotLogVolume_le_thetaHullLogVolume
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.qPilotLogVolume <= data.thetaHullLogVolume :=
+  le_trans data.qPilotLogVolume_le_approximantLogVolume
+    data.approximantLogVolume_le_thetaHullLogVolume
+
+theorem approximantLogVolume_eq_normalized_determinant
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.approximantLogVolume = data.determinant.normalizedLogVolume := by
+  simpa [approximantLogVolume, approximantRegion] using
+    data.approximant_eq_normalized_determinant
+
+def toHullDetPilotUpperRayLogVolume
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    IUTStage1HullDetPilotUpperRayLogVolume :=
+  IUTStage1HullDetPilotUpperRayLogVolume.ofHullApproximant
+    data.approximant data.qPilotRegion data.q_subset_approximant
+    data.determinant data.approximantLogVolume_eq_normalized_determinant
+
+theorem toUpperRay_qPilotLogVolume_eq
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume =
+      data.qPilotLogVolume :=
+  rfl
+
+theorem toUpperRay_thetaHullLogVolume_eq_approximant
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.toHullDetPilotUpperRayLogVolume.thetaHullLogVolume =
+      data.approximantLogVolume :=
+  rfl
+
+theorem toUpperRay_qPilot_mem_upperRay
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume ∈
+      data.toHullDetPilotUpperRayLogVolume.upperRay :=
+  data.toHullDetPilotUpperRayLogVolume.qPilot_mem_upperRay
+
+theorem endpoint
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.thetaImageUnionLogVolume <= data.approximantLogVolume ∧
+      data.approximantLogVolume <= data.thetaHullLogVolume ∧
+      data.qPilotLogVolume <= data.approximantLogVolume ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume ∈
+        data.toHullDetPilotUpperRayLogVolume.upperRay ∧
+      data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume <=
+        data.determinant.determinantLogVolume :=
+  ⟨data.thetaImageUnionLogVolume_le_approximantLogVolume,
+    data.approximantLogVolume_le_thetaHullLogVolume,
+    data.qPilotLogVolume_le_approximantLogVolume,
+    data.qPilotLogVolume_le_thetaHullLogVolume,
+    data.toUpperRay_qPilot_mem_upperRay,
+    data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume_le_determinant⟩
+
+end IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
+
+/--
 Step (xi-g) tautological two-computation view of the q-pilot log-volume.
 
 After Step (xi-f), the same q-pilot log-volume is read from the input

@@ -515,6 +515,20 @@ theorem hullApproximantUpperRay_endpoint
       ⟨hq_theta, htheta_hull, hq_hull,
         upperRay.qPilotLogVolume_le_determinant⟩
 
+theorem thetaPossibleImagesHullApproximant_endpoint
+    {α : Type u} {ι : Type v}
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.thetaImageUnionLogVolume <= data.approximantLogVolume ∧
+      data.approximantLogVolume <= data.thetaHullLogVolume ∧
+      data.qPilotLogVolume <= data.approximantLogVolume ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume ∈
+        data.toHullDetPilotUpperRayLogVolume.upperRay ∧
+      data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume <=
+        data.determinant.determinantLogVolume :=
+  data.endpoint
+
 theorem realifiedFrobenioidLogKummerPacket_endpoint
     {coric : Type u}
     {audited :

@@ -448,6 +448,16 @@ derives
 \]
 Thus this part of the corridor no longer has to use only the canonical hull
 itself; it can use any certified hull-approximant inside \(\phi(P)\).
+This has now been specialized to the possible-image union in Corollary 3.12:
+one source object carries the family of possible theta images, the union
+\(P\), a certified approximant \(H\in\Phi(P)\), q-pilot containment
+\(q\subseteq H\), and determinant normalization of \(\mu_{\log}(H)\).
+\Lean{} then derives the whole chain
+\[
+  \mu_{\log}(P)\le\mu_{\log}(H)\le\mu_{\log}(\phi(P)),
+  \qquad
+  \mu_{\log}(q)\le\mu_{\log}(H)\le\det_{\mathrm{norm}}.
+\]
 Below the packet layer, the code now has a first realified Frobenioid degree
 source.  A finite Frobenioid object carries a divisor degree, a unit
 log-volume, and their realified log-volume; a tensor-packet product may be
@@ -699,6 +709,11 @@ The project currently proves the following source-facing results in \Lean{}:
   and the approximant log-volume is determinant-normalized, then \Lean{}
   derives the \(q\)-pilot bound by the approximant, by the canonical hull, and
   by the determinant log-volume.
+\item The approximant route is now specialized to the Corollary 3.12
+  possible-image union.  A single source object binds the possible theta-image
+  family, its union, the chosen hull-approximant, q-pilot containment in that
+  approximant, and determinant normalization; the experiment endpoint returns
+  the union/approximant/hull and q-pilot/determinant inequalities.
 \item A first realified Frobenioid degree layer is present: equality of
   realified Frobenioid log-volumes now derives the product-log-volume equality
   used by the tensor-packet coric transfer, with theater histories still kept
