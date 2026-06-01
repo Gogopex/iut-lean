@@ -772,6 +772,13 @@
         <a href="#theta-plus-minus-ell-nf-613">Theta±ellNF 6.13</a>
         <a href="#hodge-theaters">Hodge theaters</a>
         <a href="#mutually-alien-copies">Mutually alien copies</a>
+        <a href="#alien-gaussian-overview-11">Alien Gaussian overview 1.1</a>
+        <a href="#alien-naive-coordinate-change-12">Alien naive coordinate change 1.2</a>
+        <a href="#alien-two-copy-introduction-13">Alien two-copy method 1.3</a>
+        <a href="#alien-plane-integral-14">Alien plane integral 1.4</a>
+        <a href="#alien-jacobian-infinitesimals-15">Alien Jacobian 1.5</a>
+        <a href="#alien-polar-decoupling-16">Alien polar decoupling 1.6</a>
+        <a href="#alien-error-factor-17">Alien error factor 1.7</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
         <a href="#iut-i-base-bridges-evaluation-sections">Base bridges/evaluation sections</a>
         <a href="#iut-i-additive-base-bridges-61-610">Additive base bridges 6.1-6.10</a>
@@ -2557,7 +2564,14 @@
               <a href="#theta-link-q-power-model">q-power model</a>,
               <a href="#mono-anabelian-transport-page">mono-anabelian transport</a>,
               <a href="#closed-loop-prime-strip">closed-loop prime-strip</a>,
-              <a href="#and-or-alien-model">AND/OR alien model</a>
+              <a href="#and-or-alien-model">AND/OR alien model</a>,
+              <a href="#alien-gaussian-overview-11">Gaussian overview 1.1</a>,
+              <a href="#alien-naive-coordinate-change-12">naive coordinate change 1.2</a>,
+              <a href="#alien-two-copy-introduction-13">two-copy method 1.3</a>,
+              <a href="#alien-plane-integral-14">plane integral 1.4</a>,
+              <a href="#alien-jacobian-infinitesimals-15">Jacobian/infinitesimals 1.5</a>,
+              <a href="#alien-polar-decoupling-16">polar decoupling 1.6</a>,
+              <a href="#alien-error-factor-17">error factor 1.7</a>
             </td>
             <td>Mutually Alien Copies, Sections 1-3</td>
           </tr>
@@ -14939,6 +14953,267 @@
           <a href="#theta-log-links">theta and log links</a>
           <a href="#multiradiality">multiradiality</a>
           <a href="#corollary-312">Corollary 3.12</a>
+        </div>
+      </section>
+
+      <section id="alien-gaussian-overview-11" data-filter="mutually alien copies 1.1 gaussian integral overview high school student game plan IUT structural analogy">
+        <h2>Alien Copies 1.1: Gaussian Overview</h2>
+        <p class="lede">
+          Section 1.1 states the pedagogical plan of the paper. Mochizuki uses the
+          classical Gaussian integral as an accessible model for IUT: the reader starts
+          from a familiar one-variable integral, then learns why the successful
+          computation passes through a larger two-copy world before returning to a
+          numerical value.
+        </p>
+        <div class="diagram fit" aria-label="Gaussian integral route as an IUT analogy">
+          <div class="diagramHeader">
+            <strong>Gaussian route used as an IUT model</strong>
+            <span>one copy, two alien copies, larger space, decoupling, numerical output</span>
+          </div>
+          <svg viewBox="0 0 1040 390" role="img">
+            <defs>
+              <marker id="arrowAlien11" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="54" y="70" width="190" height="78"></rect>
+            <text class="nodeTitle" x="149" y="100" text-anchor="middle">one integral</text>
+            <text class="tinyText" x="149" y="124" text-anchor="middle">intractable directly</text>
+            <rect class="nodeBox green" x="302" y="70" width="190" height="78"></rect>
+            <text class="nodeTitle" x="397" y="100" text-anchor="middle">two copies</text>
+            <text class="tinyText" x="397" y="124" text-anchor="middle">identical but independent</text>
+            <rect class="nodeBox gold" x="550" y="70" width="190" height="78"></rect>
+            <text class="nodeTitle" x="645" y="100" text-anchor="middle">plane integral</text>
+            <text class="tinyText" x="645" y="124" text-anchor="middle">larger total space</text>
+            <rect class="nodeBox violet" x="798" y="70" width="190" height="78"></rect>
+            <text class="nodeTitle" x="893" y="100" text-anchor="middle">polar split</text>
+            <text class="tinyText" x="893" y="124" text-anchor="middle">radial and angular parts</text>
+            <rect class="nodeBox red" x="394" y="250" width="252" height="78"></rect>
+            <text class="nodeTitle" x="520" y="280" text-anchor="middle">IUT analogy</text>
+            <text class="tinyText" x="520" y="304" text-anchor="middle">alien Hodge theaters and weaker common data</text>
+            <path class="edge blue" d="M246 109 H300" marker-end="url(#arrowAlien11)"></path>
+            <path class="edge green" d="M494 109 H548" marker-end="url(#arrowAlien11)"></path>
+            <path class="edge gold" d="M742 109 H796" marker-end="url(#arrowAlien11)"></path>
+            <path class="edge red" d="M397 150 C410 198 462 224 502 248" marker-end="url(#arrowAlien11)"></path>
+            <path class="edge red" d="M645 150 C630 200 580 224 536 248" marker-end="url(#arrowAlien11)"></path>
+            <path class="edge red" d="M893 150 C844 224 710 248 648 286" marker-end="url(#arrowAlien11)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Gaussian step</th><th>Source role</th><th>IUT analogy</th></tr>
+          <tr>
+            <td>Start with one integral</td>
+            <td>The direct one-variable computation resists naive methods.</td>
+            <td>One ordinary scheme-theoretic copy is not enough for the desired height comparison.</td>
+          </tr>
+          <tr>
+            <td>Introduce two copies</td>
+            <td>The square of the integral creates independent coordinates.</td>
+            <td>Mutually alien copies allow comparison without identifying ring histories.</td>
+          </tr>
+          <tr>
+            <td>Return numerically</td>
+            <td>The computation ends with a numerical value only after the larger-space detour.</td>
+            <td>The final log-volume comparison is downstream of the multiradial detour.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §1.1</a>
+          Related: <a href="#mutually-alien-copies">mutually alien copies overview</a>
+          <a href="#alien-two-copy-introduction-13">two-copy method</a>
+          <a href="#corollary-312">Corollary 3.12 corridor</a>
+        </div>
+      </section>
+
+      <section id="alien-naive-coordinate-change-12" data-filter="mutually alien copies 1.2 naive coordinate change partial integration gaussian dx infinitesimal error">
+        <h2>Alien Copies 1.2: Naive Coordinate Change</h2>
+        <p class="lede">
+          Section 1.2 records the failed first approach: trying to substitute
+          <span class="math">e^{-x^2}</span> directly into a one-variable integral mishandles
+          the infinitesimal. Iterated partial integration also does not repair the
+          problem. This is the warning against forcing the computation to stay in the
+          original one-copy setting.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Attempt</th><th>Failure mode</th><th>IUT reading</th></tr>
+          <tr>
+            <td>Direct substitution</td>
+            <td>The integrand can be transformed, but the infinitesimal is not transported correctly.</td>
+            <td>A formal similarity of values does not license a comparison unless the transport data is present.</td>
+          </tr>
+          <tr>
+            <td>Partial integration</td>
+            <td>Repeated integration by parts creates complexity without the needed structural move.</td>
+            <td>Adding algebraic manipulations inside one universe does not replace the inter-universal detour.</td>
+          </tr>
+        </table>
+        <div class="callout">
+          <strong>Formalization warning.</strong> This page is the Gaussian analogue of
+          a bad shortcut: a Lean model must track the data transformed by a link, not
+          merely the expression before and after a desired substitution.
+        </div>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §1.2</a>
+          Related: <a href="#esslgc-limits-integration-21">limits/integration model</a>
+          <a href="#scholze-stix-critique-page">critique page</a>
+        </div>
+      </section>
+
+      <section id="alien-two-copy-introduction-13" data-filter="mutually alien copies 1.3 identical but mutually alien independent copies gaussian square two copies">
+        <h2>Alien Copies 1.3: Two-Copy Method</h2>
+        <p class="lede">
+          Section 1.3 introduces the decisive move: replace the single Gaussian
+          integral by a product of two identical but independent copies. The point is
+          not that the two copies differ internally; it is that their independence
+          creates the two-coordinate setting needed for the later transformation.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Feature</th><th>Source role</th><th>IUT reading</th></tr>
+          <tr>
+            <td>Identical</td>
+            <td>The two integrals have the same internal formula.</td>
+            <td>Alien Hodge-theater copies may be internally isomorphic.</td>
+          </tr>
+          <tr>
+            <td>Independent</td>
+            <td>The coordinates are kept separate as <span class="math">x</span> and <span class="math">y</span>.</td>
+            <td>Labels and histories remain distinct until the source supplies a comparison.</td>
+          </tr>
+          <tr>
+            <td>Conceptual resistance</td>
+            <td>The move looks unhelpful from the one-variable viewpoint.</td>
+            <td>IUT's alien-copy move can look artificial unless the later common-container route is kept in view.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §1.3</a>
+          Related: <a href="#alien-two-copy-method">two-copy method card</a>
+          <a href="#hodge-theaters">Hodge theaters</a>
+          <a href="#esslgc-segments-loops-23">segments/loops model</a>
+        </div>
+      </section>
+
+      <section id="alien-plane-integral-14" data-filter="mutually alien copies 1.4 two dimensional Euclidean plane total space Gaussian product R2 mass infinitesimals">
+        <h2>Alien Copies 1.4: Plane Integral</h2>
+        <p class="lede">
+          Section 1.4 passes from the product of two one-dimensional integrals to one
+          integral over the Euclidean plane. This is the first larger-container step:
+          the copied coordinates become a total space where a coordinate change can act
+          on both variables together.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Construction</th><th>Source role</th><th>IUT reading</th></tr>
+          <tr>
+            <td>Product to total space</td>
+            <td>The two Gaussian copies become one integral over <span class="math">R^2</span>.</td>
+            <td>Alien copies can be compared only after passing through an appropriate container.</td>
+          </tr>
+          <tr>
+            <td>Mass/inﬁnitesimal viewpoint</td>
+            <td>Integration over a space is viewed as a limiting sum of small mass contributions.</td>
+            <td>Final log-volume is a coarse numerical operation applied after structural preparation.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §1.4</a>
+          Related: <a href="#common-container-chain">common-container chain</a>
+          <a href="#hull-det-logvol-step-xid-312">hull/determinant/log-volume</a>
+        </div>
+      </section>
+
+      <section id="alien-jacobian-infinitesimals-15" data-filter="mutually alien copies 1.5 Jacobian infinitesimals coordinate change determinant linearization parallelograms">
+        <h2>Alien Copies 1.5: Jacobian and Infinitesimals</h2>
+        <p class="lede">
+          Section 1.5 explains why a coordinate change changes infinitesimals by a
+          Jacobian determinant. The conceptual role is that a legitimate coordinate
+          change must transport the measure/infinitesimal data, not only the visible
+          formula in the integrand.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Layer</th><th>Source content</th><th>IUT reading</th></tr>
+          <tr>
+            <td>Local linearization</td>
+            <td>Near a point, a differentiable coordinate change is approximated by a linear map.</td>
+            <td>Local comparison data must be tracked before global numerical output.</td>
+          </tr>
+          <tr>
+            <td>Determinant</td>
+            <td>The determinant measures how small parallelogram areas transform.</td>
+            <td>The log-volume stage needs the correct transformation of the underlying container.</td>
+          </tr>
+          <tr>
+            <td>Infinitesimal discipline</td>
+            <td>The successful route repairs the error of §1.2 by transporting infinitesimals correctly.</td>
+            <td>Formalization must carry bridge data, not just endpoint expressions.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §1.5</a>
+          Related: <a href="#vertical-shift-cost-312">vertical shift cost</a>
+          <a href="#global-degree-log-volume-39">global degree/log-volume</a>
+        </div>
+      </section>
+
+      <section id="alien-polar-decoupling-16" data-filter="mutually alien copies 1.6 polar coordinates radial angular decoupling logarithm unit value gaussian">
+        <h2>Alien Copies 1.6: Polar Decoupling</h2>
+        <p class="lede">
+          Section 1.6 performs the successful polar-coordinate computation. The radial
+          and angular variables decouple: the radial integral is evaluated by the
+          substitution that failed in the original one-copy setting, while the angular
+          integral is read through the logarithmic coordinate.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Component</th><th>Gaussian role</th><th>IUT analogy</th></tr>
+          <tr>
+            <td>Radial part</td>
+            <td>The quadratic exponent becomes computable after the two-copy polar detour.</td>
+            <td>Value-group/radial data is estimated only after the multiradial setup.</td>
+          </tr>
+          <tr>
+            <td>Angular part</td>
+            <td>The angular integral is tied to the imaginary part of the logarithm.</td>
+            <td>Unit-group/log-shell data is handled through logarithmic geometry.</td>
+          </tr>
+          <tr>
+            <td>No precise one-copy split</td>
+            <td>The radial/angular parts are not identifiable as explicit portions of the original single integral.</td>
+            <td>Do not demand one-copy scheme-theoretic pieces corresponding to every final comparison component.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §1.6</a>
+          Related: <a href="#multiplicative-additive-bridges">multiplicative/additive bridges</a>
+          <a href="#frobenioids-log-shells">log-shells</a>
+          <a href="#coarse-space-step-x-312">coarse space step</a>
+        </div>
+      </section>
+
+      <section id="alien-error-factor-17" data-filter="mutually alien copies 1.7 error factor sqrt pi Gaussian distribution exponential additive multiplicative Lie groups">
+        <h2>Alien Copies 1.7: Error Factor</h2>
+        <p class="lede">
+          Section 1.7 summarizes the payoff: the naive substitution becomes justified
+          only after passing through two independent copies and a larger coordinate
+          system, and the remaining discrepancy appears as the Gaussian error factor.
+          Mochizuki stresses that this technique is special to the Gaussian distribution.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Point</th><th>Source content</th><th>IUT reading</th></tr>
+          <tr>
+            <td>Error factor</td>
+            <td>The direct naive idea is recovered only up to the factor produced by the larger-space computation.</td>
+            <td>IUT's final inequality comes after paying for indeterminacies and common-container passage.</td>
+          </tr>
+          <tr>
+            <td>Gaussian specialness</td>
+            <td>The method is tied to the exponential relation between additive and positive multiplicative Lie groups.</td>
+            <td>The analogy points to why theta/log structures are special, not generic bookkeeping.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §1.7</a>
+          Related: <a href="#theta-log-links">theta/log links</a>
+          <a href="#indeterminacies">indeterminacies</a>
+          <a href="#membership-step-xif-312">membership step (xi-f)</a>
         </div>
       </section>
 
