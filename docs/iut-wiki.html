@@ -1508,26 +1508,26 @@
         <a href="#tensor-log-volume-corridor">Tensor/log-volume corridor</a>
         <a href="#corollary-312">Corollary 3.12 corridor</a>
         <a href="#corollary-312-proof-steps">3.12 proof steps</a>
-        <a href="#cor312-statement-setup">3.12 statement setup</a>
-        <a href="#single-theta-link-312">3.12 single theta-link</a>
-        <a href="#vertical-shift-cost-312">3.12 vertical shift cost</a>
-        <a href="#coarse-space-step-x-312">3.12 coarse space Step (x)</a>
-        <a href="#hull-det-logvol-step-xid-312">3.12 hull/det/log-volume</a>
-        <a href="#membership-step-xif-312">3.12 membership Step (xi-f)</a>
-        <a href="#global-frobenioids-required-312">3.12 global Frobenioids required</a>
-        <a href="#tensor-power-warning-312">3.12 tensor-power warning</a>
-        <a href="#generalized-theta-links-3121">Generalized theta links 3.12.1</a>
-        <a href="#remark-3122-intertwining">3.12.2 intertwining</a>
-        <a href="#real-line-toy-model-3122">3.12.2 real-line toy model</a>
-        <a href="#juggling-ind3-3122">3.12.2 juggling and Ind3</a>
-        <a href="#columns-zero-one-difference">0/1 column difference</a>
-        <a href="#metric-analogy-3123">Metric analogy 3.12.3</a>
-        <a href="#padic-teich-analogy-3124">p-adic Teich analogy 3.12.4</a>
-        <a href="#gauss-bonnet-ind3-3123">Gauss-Bonnet and Ind3</a>
-        <a href="#ordinary-supersingular-3124">Ordinary/supersingular analogy</a>
-        <a href="#log-shell-teich-reps-3124">Log-shell Teich reps</a>
-        <a href="#theta-label-witt-gap-3124">Theta labels/Witt gap</a>
-        <a href="#frobenius-conjugate-inequality-3124">Frobenius-conjugate inequality</a>
+        <a class="subLink" href="#cor312-statement-setup">3.12 · statement setup</a>
+        <a class="subLink" href="#single-theta-link-312">3.12 · single theta-link</a>
+        <a class="subLink" href="#vertical-shift-cost-312">3.12 · vertical shift cost</a>
+        <a class="subLink" href="#coarse-space-step-x-312">3.12 · coarse space Step (x)</a>
+        <a class="subLink" href="#hull-det-logvol-step-xid-312">3.12 · hull/det/log-volume</a>
+        <a class="subLink" href="#membership-step-xif-312">3.12 · membership Step (xi-f)</a>
+        <a class="subLink" href="#global-frobenioids-required-312">3.12 · global Frobenioids</a>
+        <a class="subLink" href="#tensor-power-warning-312">3.12 · tensor-power warning</a>
+        <a class="subLink" href="#generalized-theta-links-3121">3.12.1 · generalized links</a>
+        <a class="subLink" href="#remark-3122-intertwining">3.12.2 · intertwining</a>
+        <a class="subLink" href="#real-line-toy-model-3122">3.12.2 · real-line toy model</a>
+        <a class="subLink" href="#juggling-ind3-3122">3.12.2 · juggling and Ind3</a>
+        <a class="subLink" href="#columns-zero-one-difference">3.12.2 · 0/1 columns</a>
+        <a class="subLink" href="#metric-analogy-3123">3.12.3 · metric analogy</a>
+        <a class="subLink" href="#padic-teich-analogy-3124">3.12.4 · p-adic Teich analogy</a>
+        <a class="subLink" href="#gauss-bonnet-ind3-3123">3.12.3 · Gauss-Bonnet</a>
+        <a class="subLink" href="#ordinary-supersingular-3124">3.12.4 · ordinary/supersingular</a>
+        <a class="subLink" href="#log-shell-teich-reps-3124">3.12.4 · log-shell Teich reps</a>
+        <a class="subLink" href="#theta-label-witt-gap-3124">3.12.4 · theta-label Witt gap</a>
+        <a class="subLink" href="#frobenius-conjugate-inequality-3124">3.12.4 · Frobenius inequality</a>
         <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
         <a href="#pajo-scale-free-no-go-page">Pajo scale-free no-go</a>
         <a href="#higuchi-step-xif-no-go-page">Higuchi Step (xi-f)</a>
@@ -56568,6 +56568,95 @@
           the membership assertion
           <span class="math">-|log(q)| in R_{&lt;= -|log(Theta)|}</span>.
         </p>
+
+        <div class="callout blue">
+          This is the canonical grouped page for Corollary 3.12. Start here for the
+          unified proof route; use the child pages for the individual source moves that
+          are too easy to blur together in the disputed passage.
+        </div>
+
+        <div class="grid3">
+          <div class="card" id="cor312-cluster-setup">
+            <h3>Setup and single-link discipline</h3>
+            <p>
+              The statement and Steps (i)-(iv) fix the signed log-volume quantities,
+              restrict possible images to prime-strip data, and require one
+              <span class="math">Theta×mu_LGP</span> link for unit and value portions.
+              The vertical-shift problem is then routed through log-Kummer
+              correspondences, producing Ind3.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#cor312-statement-setup">statement</a>
+              <a class="tag" href="#single-theta-link-312">single link</a>
+              <a class="tag" href="#vertical-shift-cost-312">vertical shift</a>
+            </div>
+          </div>
+          <div class="card" id="cor312-cluster-containers">
+            <h3>Containers and rigidity inputs</h3>
+            <p>
+              Steps (v)-(ix) explain how bi-coric units and log-shells become
+              multiradial containers, and why splitting monoids, global Frobenioids,
+              cyclotomic rigidity, and the <span class="math">FMOD/Fmod</span>
+              distinction are part of the proof rather than optional background.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#ipl-she-apt-source-311">IPL/SHE/APT</a>
+              <a class="tag" href="#global-log-kummer-totality-310">log-Kummer</a>
+              <a class="tag" href="#fmod-fmod-bias-310">FMOD/Fmod</a>
+            </div>
+          </div>
+          <div class="card" id="cor312-cluster-numerical">
+            <h3>Coarse numerical comparison</h3>
+            <p>
+              Step (x) forms the coarse ordered-real object: Ind1 and Ind2 become
+              invariance, while Ind3 becomes an upper inequality. Step (xi) then uses
+              IPL, SHE, APT, hulls, determinants, and log-volume to state the q-pilot
+              membership in the theta upper ray.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#coarse-space-step-x-312">Step (x)</a>
+              <a class="tag" href="#hull-det-logvol-step-xid-312">hull/det/log-volume</a>
+              <a class="tag" href="#membership-step-xif-312">membership</a>
+            </div>
+          </div>
+          <div class="card" id="cor312-cluster-boundaries">
+            <h3>Boundary warnings</h3>
+            <p>
+              Step (xi-h) rejects routine tensor-power extrapolation, and Step (xii)
+              rejects a local-Frobenioid-only route because it loses scale. These are
+              proof-boundary warnings, not side comments.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#tensor-power-warning-312">tensor powers</a>
+              <a class="tag" href="#global-frobenioids-required-312">global Frobenioids</a>
+              <a class="tag" href="#corollary-312-diagnostics">diagnostics</a>
+            </div>
+          </div>
+          <div class="card" id="cor312-cluster-remarks">
+            <h3>Remarks 3.12.1-3.12.4</h3>
+            <p>
+              The remarks organize generalized links, intertwining of value and unit
+              dimensions, real-line toy models, 0/1-column differences, and Teichmuller
+              analogies. They clarify the intended reading of the proof corridor.
+            </p>
+            <div class="tagRow">
+              <a class="tag" href="#generalized-theta-links-3121">3.12.1</a>
+              <a class="tag" href="#remark-3122-intertwining">3.12.2</a>
+              <a class="tag" href="#metric-analogy-3123">3.12.3</a>
+              <a class="tag" href="#padic-teich-analogy-3124">3.12.4</a>
+            </div>
+          </div>
+          <div class="card" id="cor312-cluster-use-policy">
+            <h3>How to use the leaf pages</h3>
+            <p>
+              The grouped page gives the proof route in one pass. Leaf pages remain
+              separate when they isolate an audit-sensitive move: a source statement,
+              a noncommutative constraint, a one-sided indeterminacy, or the exact
+              membership assertion.
+            </p>
+            <div class="tagRow"><span class="tag red">grouped unit</span><span class="tag">source audit</span></div>
+          </div>
+        </div>
 
         <div class="diagram fit" aria-label="Corollary 3.12 proof steps">
           <div class="diagramHeader">
