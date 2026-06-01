@@ -830,6 +830,13 @@
         <a href="#alien-hodge-filtration-theta-391">Alien Hodge filtration 3.9(i)</a>
         <a href="#alien-ha-iut-comparison-392">Alien HA/IUT comparison 3.9(ii)</a>
         <a href="#alien-analytic-torsion-393">Alien analytic torsion 3.9(iii)</a>
+        <a href="#alien-tripodal-transport-310">Alien tripodal transport 3.10</a>
+        <a href="#alien-tripodal-template-3101">Alien tripodal template 3.10(i)</a>
+        <a href="#alien-iut-tripodal-3102">Alien IUT tripodal 3.10(ii)</a>
+        <a href="#alien-padic-tripodal-3103">Alien p-adic tripodal 3.10(iii)</a>
+        <a href="#alien-ha-tripodal-3104">Alien HA tripodal 3.10(iv)</a>
+        <a href="#alien-combinatorial-tripodal-3105">Alien combinatorial tripodal 3.10(v)</a>
+        <a href="#alien-bogomolov-tripodal-3106">Alien Bogomolov tripodal 3.10(vi)</a>
         <a href="#prime-strips-bridges">Prime strips and bridges</a>
         <a href="#iut-i-base-bridges-evaluation-sections">Base bridges/evaluation sections</a>
         <a href="#iut-i-additive-base-bridges-61-610">Additive base bridges 6.1-6.10</a>
@@ -17554,6 +17561,295 @@
           Related: <a href="#alien-mono-anabelian-transport-27">mono-anabelian transport</a>
           <a href="#mono-analytic-log-shells">mono-analytic log-shells</a>
           <a href="#collas-category-perspective">Collas category view</a>
+        </div>
+      </section>
+
+      <section id="alien-tripodal-transport-310" data-filter="mutually alien copies 3.10 tripodal transport IUT p-adic Teichmuller Hodge Arakelov combinatorial anabelian Bogomolov Szpiro">
+        <h2>Alien Copies 3.10: Tripodal Transport</h2>
+        <p class="lede">
+          §3.10 presents tripodal transport as a recurring proof pattern: reduce a hard
+          property for a given arithmetic holomorphic structure to an alternative
+          property that can be transported to, and checked on, a tripod. Mochizuki then
+          reads IUT, p-adic Teichmuller theory, scheme-theoretic Hodge-Arakelov
+          theory, combinatorial anabelian geometry, and Bogomolov's proof through
+          this template.
+        </p>
+        <div class="diagram fit" aria-label="Tripodal transport template">
+          <div class="diagramHeader">
+            <strong>Tripodal transport pattern</strong>
+            <span>Mutually Alien Copies §3.10</span>
+          </div>
+          <svg viewBox="0 0 1080 470" role="img">
+            <defs>
+              <marker id="arrowTripodal310" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="64" y="76" width="250" height="90"></rect>
+            <text class="nodeTitle" x="189" y="106" text-anchor="middle">Given structure</text>
+            <text class="tinyText" x="189" y="132" text-anchor="middle">hard property desired</text>
+            <text class="tinyText" x="189" y="150" text-anchor="middle">fixed holomorphic context</text>
+
+            <rect class="nodeBox gold" x="414" y="76" width="250" height="90"></rect>
+            <text class="nodeTitle" x="539" y="106" text-anchor="middle">Transport mechanism</text>
+            <text class="tinyText" x="539" y="132" text-anchor="middle">not scheme/ring compatible</text>
+            <text class="tinyText" x="539" y="150" text-anchor="middle">powered by rigidity</text>
+
+            <rect class="nodeBox green" x="764" y="76" width="250" height="90"></rect>
+            <text class="nodeTitle" x="889" y="106" text-anchor="middle">Tripod</text>
+            <text class="tinyText" x="889" y="132" text-anchor="middle">alternative property checked</text>
+            <text class="tinyText" x="889" y="150" text-anchor="middle">P1 minus {0,1,infty}</text>
+
+            <path d="M316 120 H412" class="edge blue" marker-end="url(#arrowTripodal310)"></path>
+            <path d="M666 120 H762" class="edge gold" marker-end="url(#arrowTripodal310)"></path>
+
+            <rect class="nodeBox violet" x="194" y="278" width="260" height="82"></rect>
+            <text class="nodeTitle" x="324" y="306" text-anchor="middle">Relatively trivial part</text>
+            <text class="tinyText" x="324" y="332" text-anchor="middle">stays in given structure</text>
+
+            <rect class="nodeBox red" x="626" y="278" width="260" height="82"></rect>
+            <text class="nodeTitle" x="756" y="306" text-anchor="middle">Nontrivial part</text>
+            <text class="tinyText" x="756" y="332" text-anchor="middle">proved via tripod geometry</text>
+
+            <path d="M455 319 H624" class="edge violet" marker-end="url(#arrowTripodal310)"></path>
+          </svg>
+        </div>
+        <table class="sourceTable3">
+          <tr><th>Subsection</th><th>Role</th><th>Page</th></tr>
+          <tr><td>§3.10(i)</td><td>General five-step template and the need to sacrifice fixed scheme/ring compatibility.</td><td><a href="#alien-tripodal-template-3101">template</a></td></tr>
+          <tr><td>§3.10(ii)</td><td>IUT's 3.12 estimate as tripodal transport through the multiradial representation.</td><td><a href="#alien-iut-tripodal-3102">IUT</a></td></tr>
+          <tr><td>§3.10(iii)-(iv)</td><td>Earlier p-adic Teichmuller and Hodge-Arakelov examples.</td><td><a href="#alien-padic-tripodal-3103">p-adic</a> / <a href="#alien-ha-tripodal-3104">HA</a></td></tr>
+          <tr><td>§3.10(v)-(vi)</td><td>Combinatorial anabelian geometry and Bogomolov-Szpiro analogy.</td><td><a href="#alien-combinatorial-tripodal-3105">anabelian</a> / <a href="#alien-bogomolov-tripodal-3106">Bogomolov</a></td></tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.10</a>
+          Related: <a href="#alien-iut-tripodal-3102">IUT tripodal reading</a>
+          <a href="#bogomolov-szpiro-analogy">Bogomolov-Szpiro analogy</a>
+          <a href="#collas-category-perspective">Collas category view</a>
+        </div>
+      </section>
+
+      <section id="alien-tripodal-template-3101" data-filter="mutually alien copies 3.10 i tripodal transport template rigidity parallel transport tripod scheme ring incompatibility Frobenius-like etale-like">
+        <h2>Alien Copies 3.10(i): Tripodal Template</h2>
+        <p class="lede">
+          The template has five steps: start with a nontrivial property for a given
+          arithmetic holomorphic structure; split it into a relatively trivial local part
+          plus an alternative property; use a non-holomorphic transport mechanism to
+          move the alternative property to a tripod; verify it there; and return to the
+          original property.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Step cluster</th><th>Meaning</th><th>Warning</th></tr>
+          <tr>
+            <td>(1trp)-(2trp)</td>
+            <td>Identify the hard property and separate a comparatively simple piece from an alternative property.</td>
+            <td>The simple piece remains tied to the original holomorphic structure.</td>
+          </tr>
+          <tr>
+            <td>(3trp)-(4trp)</td>
+            <td>Transport the alternative property to the tripod and prove it there.</td>
+            <td>The transport is typically not compatible with the fixed scheme/ring structure.</td>
+          </tr>
+          <tr>
+            <td>(5trp)</td>
+            <td>Recombine the simple part and transported alternative property.</td>
+            <td>The method depends on rigidity strong enough to compensate for discarded structure.</td>
+          </tr>
+        </table>
+        <p>
+          Mochizuki ties the need to abandon fixed scheme/ring compatibility to the
+          Frobenius-like versus etale-like distinction: one gains transport only by
+          working with structures whose intrinsic rigidity survives outside the original
+          scheme-theoretic interpretation.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.10(i)</a>
+          Related: <a href="#alien-terminology-28">Frobenius-like/etale-like terminology</a>
+          <a href="#alien-inter-universality-210">inter-universality</a>
+        </div>
+      </section>
+
+      <section id="alien-iut-tripodal-3102" data-filter="mutually alien copies 3.10 ii IUT tripodal transport log volume estimate 12est theta function Tate curve multiradial representation IPL SHE APT HIS">
+        <h2>Alien Copies 3.10(ii): IUT via Tripodal Transport</h2>
+        <p class="lede">
+          Mochizuki recasts the 3.7 log-volume estimate as a tripodal-transport
+          argument. The relatively simple part is carried out on the RHS arithmetic
+          holomorphic structure of the theta-link; the nontrivial transport is supplied
+          by the multiradial representation, whose input-side rigidity is built from the
+          Tate-curve theta function and mono-anabelian reconstruction.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Tripodal role</th><th>IUT reading</th></tr>
+          <tr>
+            <td>Desired property</td>
+            <td>The fundamental log-volume estimate, identified with the §3.7(12est) target.</td>
+          </tr>
+          <tr>
+            <td>Relatively simple RHS part</td>
+            <td>Operations such as forming the holomorphic hull inside the fixed RHS arithmetic holomorphic structure.</td>
+          </tr>
+          <tr>
+            <td>Parallel transport mechanism</td>
+            <td>The multiradial representation of Theorem 3.11, with the IPL/SHE/APT/HIS properties cited in the source.</td>
+          </tr>
+          <tr>
+            <td>Tripod-side rigidity</td>
+            <td>The theta function on the Tate curve, understood as function-theoretic p-adic arithmetic geometry of a tripod with the 0 and infinity cusps interchanged by symmetry.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.10(ii)</a>
+          Related: <a href="#alien-theorem-311-representation-371">3.11 multiradial representation</a>
+          <a href="#alien-corollary-312-estimate-372">3.12 estimate</a>
+          <a href="#alien-theta-function-rigidity-343">theta-function rigidity</a>
+        </div>
+      </section>
+
+      <section id="alien-padic-tripodal-3103" data-filter="mutually alien copies 3.10 iii p-adic Teichmuller tripodal transport canonical indigenous bundles Frobenius liftings PGL2 ordinary locus p-curvature">
+        <h2>Alien Copies 3.10(iii): p-adic Teichmuller Example</h2>
+        <p class="lede">
+          The p-adic Teichmuller example transports canonical objects from the
+          tautological elliptic family over the tripod to general p-adic hyperbolic
+          curves. The source emphasizes canonical indigenous bundles, canonical
+          Frobenius liftings, and associated Galois representations.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Tool</th><th>Tripodal-transport role</th></tr>
+          <tr>
+            <td>Ordinary Frobenius lifting</td>
+            <td>A p-adic generalization of the basic map <span class="math">T -> T^p</span> on the tripod.</td>
+          </tr>
+          <tr>
+            <td>Nilcurve moduli morphism</td>
+            <td>Finite, flat, local complete intersection structure supplies a transportable moduli mechanism.</td>
+          </tr>
+          <tr>
+            <td>Ordinary-locus rigidity</td>
+            <td>Strong deformation rigidity supplies the transport potency.</td>
+          </tr>
+          <tr>
+            <td>p-curvature and differentials</td>
+            <td>These replace anabelian rigidity as the technical source of control in this example.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.10(iii)</a>
+          Related: <a href="#alien-tripodal-template-3101">tripodal template</a>
+          <a href="#gt-species-perspective">GT species perspective</a>
+        </div>
+      </section>
+
+      <section id="alien-ha-tripodal-3104" data-filter="mutually alien copies 3.10 iv scheme theoretic Hodge Arakelov tripodal transport Tate curves theta derivatives compactified moduli stack Frobenius Verschiebung">
+        <h2>Alien Copies 3.10(iv): Hodge-Arakelov via Tripodal Transport</h2>
+        <p class="lede">
+          In the Hodge-Arakelov example, the evaluation morphism for sections at
+          torsion points is proved to be an isomorphism by checking Tate curves through
+          explicit theta-derivative computations and then transporting the result over
+          the compactified moduli stack by degree calculations.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Component</th><th>Source reading</th></tr>
+          <tr>
+            <td>Tripod check</td>
+            <td>Tate-curve theta-function computations represent the tripod-side verification.</td>
+          </tr>
+          <tr>
+            <td>Transport over moduli</td>
+            <td>Degree comparison for vector bundles on the compactified moduli stack transports the isomorphism.</td>
+          </tr>
+          <tr>
+            <td>Alternative transport</td>
+            <td>Mochizuki also points to an approach using Frobenius and Verschiebung in positive characteristic.</td>
+          </tr>
+          <tr>
+            <td>IUT relation</td>
+            <td>This theory is not logically anabelian, but is presented as a key motivation for the later anabelian reformulation.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.10(iv)</a>
+          Related: <a href="#alien-hodge-arakelov-relation-39">Hodge-Arakelov relation</a>
+          <a href="#alien-hodge-filtration-theta-391">Hodge filtration/theta trivialization</a>
+        </div>
+      </section>
+
+      <section id="alien-combinatorial-tripodal-3105" data-filter="mutually alien copies 3.10 v combinatorial anabelian geometry tripodal transport configuration spaces etale fundamental groups OutFC Belyi cuspidal inertia">
+        <h2>Alien Copies 3.10(v): Combinatorial Anabelian Example</h2>
+        <p class="lede">
+          The combinatorial anabelian example is Mochizuki's most transparent
+          prototype. It concerns injectivity of an outer Galois representation attached
+          to etale fundamental groups of configuration spaces, reduced to tripods and
+          totally degenerate pointed stable curves.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Move</th><th>Meaning</th></tr>
+          <tr>
+            <td>Factor through configuration-space levels</td>
+            <td>The original representation factors through higher configuration-space automorphism groups.</td>
+          </tr>
+          <tr>
+            <td>Reduce injectivity of forgetful maps</td>
+            <td>Injectivity depends only on type <span class="math">(g,r)</span> and can be checked on totally degenerate curves glued from tripods.</td>
+          </tr>
+          <tr>
+            <td>Use tripod homomorphism</td>
+            <td>A natural map to the tripod automorphism group reduces one part to Belyi's injectivity theorem.</td>
+          </tr>
+          <tr>
+            <td>Conceptual point</td>
+            <td>The scheme-morphism route looks intractable; the group-theoretic decomposition route supplies the transport.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.10(v)</a>
+          Related: <a href="#anabelian-background">anabelian background</a>
+          <a href="#collas-current-anabelian-work">current anabelian work</a>
+        </div>
+      </section>
+
+      <section id="alien-bogomolov-tripodal-3106" data-filter="mutually alien copies 3.10 vi Bogomolov proof geometric Szpiro SL2R SL2Z universal cover delta sup chi Ind1 Ind2 Ind3 log shells">
+        <h2>Alien Copies 3.10(vi): Bogomolov Proof as Tripodal Transport</h2>
+        <p class="lede">
+          Mochizuki also reads Bogomolov's proof of the geometric Szpiro conjecture
+          over the complex numbers as a generalized tripodal-transport argument. The
+          tripod is viewed as an algebraic version of the circle, and the proof compares
+          holomorphic <span class="math">SL2(Z)</span>-data with real-analytic
+          <span class="math">SL2(R)</span>-data.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Bogomolov side</th><th>IUT-side correspondence stated in §3.10(vi)</th></tr>
+          <tr>
+            <td>Canonical lifts of unipotent elements to the universal cover of <span class="math">SL2(Z)</span>.</td>
+            <td>Etale theta-function theory.</td>
+          </tr>
+          <tr>
+            <td>Aut<span class="math">_+(S^1)</span>-invariant geometry and the conjugacy-invariant displacement map.</td>
+            <td>Mono-analytic log-shells and log-volume estimates.</td>
+          </tr>
+          <tr>
+            <td>Additive and multiplicative dimensions confused in the single circle dimension.</td>
+            <td>Indeterminacies <span class="math">Ind1</span>, <span class="math">Ind2</span>, and <span class="math">Ind3</span>.</td>
+          </tr>
+          <tr>
+            <td><span class="math">SL2(R)</span> side</td>
+            <td>IUT III Theorem 3.11.</td>
+          </tr>
+          <tr>
+            <td><span class="math">SL2(Z)</span> side plus character <span class="math">chi</span></td>
+            <td>The derivation of IUT III Corollary 3.12 from Theorem 3.11.</td>
+          </tr>
+        </table>
+        <p>
+          This page is especially relevant to the formalization project: it states a
+          source-side analogy between a transport estimate and the 3.11-to-3.12
+          corridor, but it is still an analogy. The Lean corridor must encode the actual
+          IUT structures and inequalities separately.
+        </p>
+        <div class="related">
+          Source: <a href="papers/mochizuki-mutually-alien-copies.pdf" target="_blank">Mutually Alien Copies §3.10(vi)</a>
+          Related: <a href="#bogomolov-szpiro-analogy">Bogomolov-Szpiro analogy</a>
+          <a href="#alien-theorem-311-representation-371">Theorem 3.11 representation</a>
+          <a href="#alien-corollary-312-estimate-372">Corollary 3.12 estimate</a>
         </div>
       </section>
 
