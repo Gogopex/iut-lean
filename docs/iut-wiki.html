@@ -1105,6 +1105,12 @@
         <a href="#tensor-log-volume-corridor">Tensor/log-volume corridor</a>
         <a href="#corollary-312">Corollary 3.12 corridor</a>
         <a href="#corollary-312-proof-steps">3.12 proof steps</a>
+        <a href="#cor312-statement-setup">3.12 statement setup</a>
+        <a href="#single-theta-link-312">3.12 single theta-link</a>
+        <a href="#vertical-shift-cost-312">3.12 vertical shift cost</a>
+        <a href="#coarse-space-step-x-312">3.12 coarse space Step (x)</a>
+        <a href="#hull-det-logvol-step-xid-312">3.12 hull/det/log-volume</a>
+        <a href="#membership-step-xif-312">3.12 membership Step (xi-f)</a>
         <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
         <a href="#iut-iv-local-log-volume-estimates-11-15">IUT IV local estimates 1.1-1.5</a>
         <a href="#iut-iv-prime-averaging-16-17">IUT IV prime/averaging 1.6-1.7</a>
@@ -44307,7 +44313,7 @@
         <table class="sourceTable3">
           <tr><th>Side</th><th>Compatibility status</th><th>Reason</th></tr>
           <tr>
-            <td><span class="math">MMOD/FM0D/F^R_MOD</span></td>
+            <td><span class="math">MMOD/FMOD/F^R_MOD</span></td>
             <td>Mutually compatible with log-links as <span class="math">m</span> varies.</td>
             <td>Roots-of-unity non-interference makes adjacent ambiguity harmless.</td>
           </tr>
@@ -46416,7 +46422,7 @@
             </td>
           </tr>
           <tr>
-            <td id="single-theta-link-312">Steps (i)-(iii)</td>
+            <td id="single-theta-link-312-table">Steps (i)-(iii)</td>
             <td>
               Fix one <span class="math">Theta×mu_LGP</span> link from
               <span class="math">(0,0)</span> to <span class="math">(1,0)</span>, with a
@@ -46482,7 +46488,7 @@
             </td>
           </tr>
           <tr>
-            <td id="coarse-space-step-x-312">Step (x)</td>
+            <td id="coarse-space-step-x-312-table">Step (x)</td>
             <td>
               Kummer-detachment relates Frobenius-like structures at
               <span class="math">(0,0)</span> to the multiradial representation but
@@ -46534,7 +46540,7 @@
             </td>
           </tr>
           <tr>
-            <td id="membership-step-xif-312">Step (xi-f)</td>
+            <td id="membership-step-xif-312-table">Step (xi-f)</td>
             <td>
               The construction of output possibilities is said to include, perhaps up
               to approximation from indeterminacies, the pilot-object log-volume of the
@@ -46575,7 +46581,7 @@
         </table>
 
         <div class="grid3">
-          <div class="card" id="single-theta-link-rule-312">
+          <div class="card" id="single-theta-link-rule-312-card">
             <h3>Single theta-link rule</h3>
             <p>
               Steps (i)-(iii) force the proof to use one horizontal
@@ -46583,15 +46589,17 @@
               portions. The noncommutativity of the lattice is exactly why a
               two-link simplification is not source-faithful.
             </p>
+            <p><a href="#single-theta-link-312">Open the single-link page</a></p>
             <div class="tagRow"><span class="tag green">Steps (i)-(iii)</span><span class="tag">one link</span></div>
           </div>
-          <div class="card" id="vertical-shift-cost-312">
+          <div class="card" id="vertical-shift-cost-312-card">
             <h3>Vertical-shift cost</h3>
             <p>
               Step (iv) says the vertical shift needed for unit-group computation is
               implemented through vertically coric structures and log-Kummer
               correspondences. The cost is Ind3, i.e. upper-semi compatibility.
             </p>
+            <p><a href="#vertical-shift-cost-312">Open the vertical-shift page</a></p>
             <div class="tagRow"><span class="tag red">Step (iv)</span><span class="tag">Ind3</span></div>
           </div>
           <div class="card" id="rigidity-inputs-step-vi-312">
@@ -46603,25 +46611,27 @@
             </p>
             <div class="tagRow"><span class="tag blue">Step (vi)</span><span class="tag">EtTh</span></div>
           </div>
-          <div class="card" id="coarse-space-card-step-x-312">
+          <div class="card" id="coarse-space-card-step-x-312-card">
             <h3>Coarse numerical space</h3>
             <p>
               Step (x) is the transition from indeterminacy-laden multiradial data to
               real log-volumes: Ind1 and Ind2 become invariance, and Ind3 becomes an
               upper inequality.
             </p>
+            <p><a href="#coarse-space-step-x-312">Open the coarse-space page</a></p>
             <div class="tagRow"><span class="tag gold">Step (x)</span><span class="tag">log-volume</span></div>
           </div>
-          <div class="card" id="hull-det-logvol-step-xid-312">
+          <div class="card" id="hull-det-logvol-step-xid-312-card">
             <h3>Hull, determinant, log-volume</h3>
             <p>
               Step (xi-d) explains why output regions must pass through holomorphic
               hulls, determinants, and log-volumes before they can be compared with the
               q-pilot arithmetic line-bundle value.
             </p>
+            <p><a href="#hull-det-logvol-step-xid-312">Open the hull/determinant page</a></p>
             <div class="tagRow"><span class="tag violet">Step (xi-d)</span><span class="tag">comparable objects</span></div>
           </div>
-          <div class="card" id="membership-card-step-xif-312">
+          <div class="card" id="membership-card-step-xif-312-card">
             <h3>Membership assertion</h3>
             <p>
               Step (xi-f) is the exact numerical bridge:
@@ -46629,6 +46639,7 @@
               ray <span class="math">R_{&lt;= -|log(Theta)|}</span>. The inequality is
               then immediate.
             </p>
+            <p><a href="#membership-step-xif-312">Open the membership page</a></p>
             <div class="tagRow"><span class="tag red">Step (xi-f)</span><span class="tag">audit point</span></div>
           </div>
         </div>
@@ -46646,6 +46657,230 @@
           <a href="#theorem-311-log-kummer">3.11 log-Kummer card</a>
           <a href="#packet-procession-log-volume-iii39">packet log-volume</a>
           <a href="#corollary-312-diagnostics">3.12 diagnostics</a>
+        </div>
+      </section>
+
+      <section id="cor312-statement-setup">
+        <h2>IUT III Corollary 3.12: Statement Setup</h2>
+        <p class="lede">
+          Corollary 3.12 defines two procession-normalized mono-analytic log-volumes.
+          The theta quantity is the log-volume of the holomorphic hull of possible
+          theta-pilot images in the multiradial representation. The q quantity is the
+          log-volume of the image of the q-pilot object and is not treated as subject
+          to Ind1, Ind2, or Ind3 in the statement.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Quantity</th><th>Source definition</th><th>Audit status</th></tr>
+          <tr>
+            <td><span class="math">-|log(Theta)|</span></td>
+            <td>Procession-normalized log-volume of the holomorphic hull of possible theta-pilot images.</td>
+            <td>Subject to the Theorem 3.11 indeterminacies and may initially be <span class="math">+∞</span>; the proof establishes finiteness in the relevant case.</td>
+          </tr>
+          <tr>
+            <td><span class="math">-|log(q)|</span></td>
+            <td>Procession-normalized log-volume of the q-pilot image.</td>
+            <td>Fixed real comparison value with <span class="math">|log(q)| &gt; 0</span>, computed from bad-prime q-parameters.</td>
+          </tr>
+          <tr>
+            <td>Conclusion</td>
+            <td><span class="math">-|log(Theta)| >= -|log(q)|</span>.</td>
+            <td>Equivalent to <span class="math">C_Theta >= -1</span> under the stated normalization.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 3.12 statement</a>
+          Related: <a href="#corollary-312-proof-steps">3.12 proof steps</a>
+          <a href="#packet-procession-log-volume-iii39">packet/procession log-volume</a>
+        </div>
+      </section>
+
+      <section id="single-theta-link-312">
+        <h2>IUT III Corollary 3.12 Steps (i)-(iii): Single Theta-Link</h2>
+        <p class="lede">
+          The proof fixes one <span class="math">Theta×mu_LGP</span> link from
+          <span class="math">(0,0)</span> to <span class="math">(1,0)</span>. Its unit
+          portion and value-group portion must be treated through this same horizontal
+          link. Using different horizontal positions for unit and value portions would
+          lose the noncommutative log-theta-lattice constraint identified in Remark
+          3.11.3.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Portion</th><th>Source role</th><th>Constraint</th></tr>
+          <tr>
+            <td>Unit portion</td>
+            <td>Full poly-isomorphism of <span class="math">F⊢×mu</span> prime-strips.</td>
+            <td>Subject to Aut <span class="math">F⊢×mu</span> indeterminacies and later bi-coric log-shell treatment.</td>
+          </tr>
+          <tr>
+            <td>Value portion</td>
+            <td>Full poly-isomorphism of <span class="math">F</span>-prime-strips.</td>
+            <td>Maps theta-pilot objects at <span class="math">(0,0)</span> to q-pilot objects at <span class="math">(1,0)</span>.</td>
+          </tr>
+          <tr>
+            <td>Single-link rule</td>
+            <td>Both portions are read through the same <span class="math">(0,0)->(1,0)</span> link.</td>
+            <td>Prevents a two-link simplification that would assume commutativity not present in the source lattice.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 3.12 proof Steps (i)-(iii)</a>
+          Related: <a href="#noncommutative-single-link-3113">Remark 3.11.3 single-link rule</a>
+          <a href="#theta-mu-lgp-link-38">Theta×mu_LGP link</a>
+        </div>
+      </section>
+
+      <section id="vertical-shift-cost-312">
+        <h2>IUT III Corollary 3.12 Step (iv): Vertical-Shift Cost</h2>
+        <p class="lede">
+          Step (iv) explains the tension: computing the 0-column theta-pilot from the
+          1-column arithmetic holomorphic structure requires vertically once-shifted
+          unit data, but Steps (i)-(iii) require a single theta-link. The proof resolves
+          this by using vertically coric structures and the Theorem 3.11 log-Kummer
+          correspondence, at the cost of Ind3.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Requirement</th><th>Resolution</th><th>Cost</th></tr>
+          <tr>
+            <td>Use bi-coric units/log-shells to compute theta-side data from the 1-column.</td>
+            <td>Move through vertically coric <span class="math">(0,◦)</span> structures.</td>
+            <td>The original Frobenius-like structures are no longer compared by one exact local Kummer equality.</td>
+          </tr>
+          <tr>
+            <td>Keep one horizontal theta-link for units and values.</td>
+            <td>Use the total log-Kummer correspondence along the 0-column.</td>
+            <td>Local packet comparisons become upper-semi-compatible: Ind3.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 3.12 proof Step (iv)</a>
+          Related: <a href="#log-kummer-reconciliation-3113">log-Kummer reconciliation</a>
+          <a href="#ind1-ind2-ind3-311">3.11 indeterminacies</a>
+        </div>
+      </section>
+
+      <section id="coarse-space-step-x-312">
+        <h2>IUT III Corollary 3.12 Step (x): Coarse Numerical Space</h2>
+        <p class="lede">
+          Step (x) interprets Ind1, Ind2, and Ind3 as a formal quotient. The
+          procession-normalized mono-analytic log-volumes act as a coarse numerical
+          object associated to that quotient: they are invariant under Ind1 and Ind2,
+          and convert Ind3 into an inequality from above.
+        </p>
+        <div class="diagram" aria-label="Coarse space in Corollary 3.12 Step x">
+          <div class="diagramHeader">
+            <strong>Step (x)</strong>
+            <span>formal quotient to ordered-real comparison object</span>
+          </div>
+          <svg viewBox="0 0 900 290" role="img">
+            <defs>
+              <marker id="arrowCoarse312" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="54" y="82" width="210" height="86"></rect>
+            <text class="nodeTitle" x="159" y="114" text-anchor="middle">formal quotient</text>
+            <text class="tinyText" x="159" y="138" text-anchor="middle">Ind1, Ind2, Ind3</text>
+            <rect class="nodeBox green" x="346" y="82" width="210" height="86"></rect>
+            <text class="nodeTitle" x="451" y="114" text-anchor="middle">log-volume</text>
+            <text class="tinyText" x="451" y="138" text-anchor="middle">procession-normalized</text>
+            <rect class="nodeBox gold" x="638" y="82" width="210" height="86"></rect>
+            <text class="nodeTitle" x="743" y="114" text-anchor="middle">coarse ordered value</text>
+            <text class="tinyText" x="743" y="138" text-anchor="middle">Ind3 becomes upper bound</text>
+            <path d="M266 125 H344" class="edge blue" marker-end="url(#arrowCoarse312)"></path>
+            <path d="M558 125 H636" class="edge green" marker-end="url(#arrowCoarse312)"></path>
+          </svg>
+        </div>
+        <p>
+          The source also ties the averaging over <span class="math">j∈F_l</span> to
+          the <span class="math">F_l</span>-symmetry acting on theta-value labels and
+          to the forced procession averaging of Remark 3.9.3.
+        </p>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 3.12 proof Step (x)</a>
+          Related: <a href="#forced-procession-average-39">forced procession average</a>
+          <a href="#ind1-ind2-ind3-311">Ind1/Ind2/Ind3</a>
+        </div>
+      </section>
+
+      <section id="hull-det-logvol-step-xid-312">
+        <h2>IUT III Corollary 3.12 Step (xi-d): Hull, Determinant, Log-Volume</h2>
+        <p class="lede">
+          Step (xi-d) turns possible output data into comparable ordered-real objects.
+          The multiradial algorithm first yields output data in the 1-column; taking
+          the holomorphic hull expresses it through localizations of arithmetic vector
+          bundles. Since those bundles have rank greater than one, determinants and
+          then log-volume are needed before comparison with the q-pilot arithmetic
+          line-bundle value.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Operation</th><th>Source purpose</th><th>Output</th></tr>
+          <tr>
+            <td>Holomorphic hull</td>
+            <td>Pass from possible regions to data expressible through localizations of arithmetic vector bundles.</td>
+            <td><span class="math">1,◦U</span> in a form comparable with q-pilot data.</td>
+          </tr>
+          <tr>
+            <td>Determinant</td>
+            <td>Convert higher-rank arithmetic vector bundle data to line-bundle-level data.</td>
+            <td>A comparable global arithmetic-degree object.</td>
+          </tr>
+          <tr>
+            <td>Log-volume</td>
+            <td>Apply the normalized log-volume scale to theta-side hull and q-pilot region.</td>
+            <td><span class="math">R_{&lt;= -|log(Theta)|}</span> and <span class="math">-|log(q)|</span>.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 3.12 proof Step (xi-d)</a>
+          Related: <a href="#global-degree-log-volume-39">global degree log-volume</a>
+          <a href="#tensor-log-volume-corridor">tensor/log-volume corridor</a>
+        </div>
+      </section>
+
+      <section id="membership-step-xif-312">
+        <h2>IUT III Corollary 3.12 Step (xi-f): Membership Assertion</h2>
+        <p class="lede">
+          Step (xi-f) is the proof's exact numerical bridge. The construction of the
+          theta-side possible log-volumes is said to include, perhaps up to
+          approximation caused by indeterminacies, the pilot-object log-volume of the
+          input <span class="math">F×mu</span>-prime-strip. Therefore
+          <span class="math">-|log(q)| ∈ R_{&lt;= -|log(Theta)|}</span>, and the ordered
+          inequality follows formally.
+        </p>
+        <div class="diagram" aria-label="Corollary 3.12 membership assertion">
+          <div class="diagramHeader">
+            <strong>Step (xi-f)</strong>
+            <span>membership is the bridge; inequality is formal afterwards</span>
+          </div>
+          <svg viewBox="0 0 900 260" role="img">
+            <defs>
+              <marker id="arrowMembership312" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="72" y="82" width="230" height="78"></rect>
+            <text class="nodeTitle" x="187" y="112" text-anchor="middle">q-pilot log-volume</text>
+            <text class="tinyText" x="187" y="136" text-anchor="middle">-|log(q)|</text>
+            <rect class="nodeBox red" x="386" y="82" width="230" height="78"></rect>
+            <text class="nodeTitle" x="501" y="112" text-anchor="middle">theta upper ray</text>
+            <text class="tinyText" x="501" y="136" text-anchor="middle">R_{<= -|log(Theta)|}</text>
+            <rect class="nodeBox green" x="700" y="82" width="150" height="78"></rect>
+            <text class="nodeTitle" x="775" y="112" text-anchor="middle">inequality</text>
+            <text class="tinyText" x="775" y="136" text-anchor="middle">-|log(q)| <= -|log(Theta)|</text>
+            <path d="M304 121 H384" class="edge blue" marker-end="url(#arrowMembership312)"></path>
+            <path d="M618 121 H698" class="edge red" marker-end="url(#arrowMembership312)"></path>
+          </svg>
+        </div>
+        <div class="callout warn">
+          The wiki treats this as the central audit point. Once membership is supplied,
+          the final ordered-real inequality is elementary; the substantive issue is
+          whether the source construction justifies this membership.
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-iii.pdf" target="_blank">IUT III, Corollary 3.12 proof Step (xi-f)</a>
+          Related: <a href="#corollary-312-diagnostics">formal diagnostics</a>
+          <a href="#hull-det-logvol-step-xid-312">hull/determinant/log-volume</a>
+          <a href="#corollary-312">3.12 corridor</a>
         </div>
       </section>
 
