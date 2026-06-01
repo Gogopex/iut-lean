@@ -987,6 +987,10 @@
         <a href="#prime-tree-dismantling-4112">Prime-tree dismantling</a>
         <a href="#line-bundle-log-wall-juggling-ii4113">Line-bundle log-wall juggling 4.11.3</a>
         <a href="#teichmuller-analogy-ii4114">Teichmuller analogy 4.11.4</a>
+        <a href="#torsion-finite-approximation-4114">Torsion finite approximation</a>
+        <a href="#canonical-lifting-analogy-4114">Canonical lifting analogy</a>
+        <a href="#monodromy-symmetry-dictionary-4114">Monodromy/symmetry dictionary</a>
+        <a href="#tate-twist-correction-4115">Tate twist correction 4.11.5</a>
         <a href="#theta-evaluation-kummer-route">Theta evaluation route</a>
         <a href="#gaussian-frobenioid-theory">Gaussian Frobenioids</a>
         <a href="#frobenioids-log-shells">Frobenioids and log-shells</a>
@@ -35259,6 +35263,160 @@
           Related: <a href="#frobenius-picture-chain-ii410">Frobenius-picture chain</a>
           <a href="#theta-nf-fl-symmetry-ii47">ThetaNF Fl symmetry</a>
           <a href="#theta-evaluation-kummer-route">theta evaluation route</a>
+        </div>
+      </section>
+
+      <section id="torsion-finite-approximation-4114">
+        <h2>IUT II Remark 4.11.4(i): Torsion Labels as Finite Approximation</h2>
+        <p class="lede">
+          Remark 4.11.4(i) reads the <span class="math">l</span>-torsion evaluation
+          points as a rough finite approximation to the real deformation dimensions
+          that appear in scheme-theoretic Hodge-Arakelov theory. In the IUT setting,
+          the possible theta values at those labels represent possible deformations of
+          holomorphic structure, while the actual theta values give a specific
+          deformation profile.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Source phrase</th><th>Wiki interpretation</th><th>Constraint</th></tr>
+          <tr>
+            <td><span class="math">l</span>-torsion points</td>
+            <td>Finite approximation to two real deformation dimensions.</td>
+            <td>They are labels for deformation data, not disposable indices.</td>
+          </tr>
+          <tr>
+            <td><span class="math">0 != t in LabCusp^±</span> descends to <span class="math">j in F_l</span></td>
+            <td>The linear cusp label becomes a quadratic-style finite-field label.</td>
+            <td>This is why <span class="math">j^2</span>-weighted theta values matter.</td>
+          </tr>
+          <tr>
+            <td>Theta function as continuous version</td>
+            <td>Analogue of a deformation between identity and Frobenius.</td>
+            <td>The discrete Gaussian profile records a finite shadow of that deformation.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 4.11.4(i)</a>
+          Related: <a href="#theta-values-q-j-squared-intro-ii">theta values q^j^2</a>
+          <a href="#theta-exponent-commutativity-4111">theta-exponent commutativity</a>
+          <a href="#value-group-distortion-410">value-group distortion</a>
+        </div>
+      </section>
+
+      <section id="canonical-lifting-analogy-4114">
+        <h2>IUT II Remark 4.11.4(ii): Canonical Lifting Analogy</h2>
+        <p class="lede">
+          Remark 4.11.4(ii) compares the semi-infinite
+          <span class="math">Theta×μ</span> chain with canonical liftings in
+          p-adic Teichmuller theory. The theta functions specify a canonical
+          deformation, while Hodge-Arakelov evaluation passes to a
+          <span class="math">Theta×μ_gau</span> chain analogous to passing from
+          <span class="math">MF∇</span>-objects to Galois representations.
+        </p>
+        <div class="diagram fit" aria-label="Canonical lifting analogy in Remark 4.11.4">
+          <div class="diagramHeader">
+            <strong>Canonical-lifting analogy</strong>
+            <span>theta-chain to Gaussian-chain as MF∇ object to Galois representation</span>
+          </div>
+          <svg viewBox="0 0 900 360" role="img">
+            <defs>
+              <marker id="arrowCanLift4114" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+                <path d="M0,0 L10,4 L0,8 Z" fill="#5f676d"></path>
+              </marker>
+            </defs>
+            <rect class="nodeBox blue" x="62" y="82" width="230" height="78"></rect>
+            <text class="nodeTitle" x="177" y="112" text-anchor="middle">Theta×μ chain</text>
+            <text class="tinyText" x="177" y="136" text-anchor="middle">canonical deformation side</text>
+            <rect class="nodeBox green" x="604" y="82" width="230" height="78"></rect>
+            <text class="nodeTitle" x="719" y="112" text-anchor="middle">Theta×μ_gau chain</text>
+            <text class="tinyText" x="719" y="136" text-anchor="middle">representation-facing side</text>
+            <rect class="nodeBox gold" x="62" y="224" width="230" height="64"></rect>
+            <text class="nodeTitle" x="177" y="250" text-anchor="middle">MF∇ object</text>
+            <text class="tinyText" x="177" y="270" text-anchor="middle">canonical indigenous bundle analogue</text>
+            <rect class="nodeBox violet" x="604" y="224" width="230" height="64"></rect>
+            <text class="nodeTitle" x="719" y="250" text-anchor="middle">Galois representation</text>
+            <text class="tinyText" x="719" y="270" text-anchor="middle">crystalline representation analogue</text>
+            <path d="M294 121 H602" class="edge green" marker-end="url(#arrowCanLift4114)"></path>
+            <path d="M294 256 H602" class="edge violet" marker-end="url(#arrowCanLift4114)"></path>
+            <path d="M177 162 V222" class="edge gold" marker-end="url(#arrowCanLift4114)"></path>
+            <path d="M719 162 V222" class="edge violet" marker-end="url(#arrowCanLift4114)"></path>
+            <text class="tinyText" x="448" y="104" text-anchor="middle">Hodge-Arakelov evaluation</text>
+            <text class="tinyText" x="448" y="238" text-anchor="middle">p-adic Teichmuller comparison</text>
+          </svg>
+        </div>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 4.11.4(ii)</a>
+          Related: <a href="#theta-xmu-links-ii410">Theta×μ links</a>
+          <a href="#theta-gau-multiradiality-4102">Theta×μ_gau multiradiality</a>
+          <a href="#gaussian-bridge-review-4112">Gaussian bridge</a>
+        </div>
+      </section>
+
+      <section id="monodromy-symmetry-dictionary-4114">
+        <h2>IUT II Remark 4.11.4(iii)(c): Monodromy/Symmetry Dictionary</h2>
+        <p class="lede">
+          Remark 4.11.4(iii)(c) gives a dictionary between IUT's two finite-field
+          symmetries and monodromy patterns from p-adic Teichmuller theory. The
+          additive <span class="math">F_l^±</span>-symmetry is compared with ordinary
+          unipotent monodromy; the multiplicative <span class="math">F_l</span>
+          symmetry is compared with supersingular toral monodromy.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>IUT symmetry</th><th>p-adic Teichmuller analogue</th><th>Formal role</th></tr>
+          <tr>
+            <td><span class="math">F_l^±</span></td>
+            <td>Unipotent monodromy over the ordinary locus; additive group.</td>
+            <td>Uniradial, tied to unit/conjugate-synchronization behavior.</td>
+          </tr>
+          <tr>
+            <td><span class="math">F_l</span></td>
+            <td>Toral monodromy at supersingular points; multiplicative group.</td>
+            <td>Multiradial, tied to value-group and NF-bridge behavior.</td>
+          </tr>
+          <tr>
+            <td>Two-dimensional symmetry</td>
+            <td>Vanishing of <span class="math">H^0(Ad(-))</span> as an analogy.</td>
+            <td>Supports the separation of additive and multiplicative dimensions.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 4.11.4(iii)(c)</a>
+          Related: <a href="#fl-versus-fpm-role-4112">F_l/F_l± roles</a>
+          <a href="#theta-nf-fl-symmetry-ii47">ThetaNF F_l symmetry</a>
+          <a href="#value-group-distortion-410">value-group distortion</a>
+        </div>
+      </section>
+
+      <section id="tate-twist-correction-4115">
+        <h2>IUT II Remark 4.11.5: Tate-Twist Correction</h2>
+        <p class="lede">
+          Remark 4.11.5 corrects notational errors in the canonical-lifting reference
+          used by Remark 4.11.4(iii)(d). Mochizuki says the corrections do not change
+          the proof, but the wiki records them because later formal references to this
+          analogy must use the corrected signs and cohomology submodule.
+        </p>
+        <table class="sourceTable3">
+          <tr><th>Correction</th><th>Corrected form</th><th>Effect</th></tr>
+          <tr>
+            <td>Subquotient notation</td>
+            <td><span class="math">G_2(M)</span> becomes <span class="math">G_{-2}(M)</span>; <span class="math">G_{-1}</span> becomes <span class="math">G_1</span>.</td>
+            <td>Fixes the indexing used in the cited condition.</td>
+          </tr>
+          <tr>
+            <td>Tate twists</td>
+            <td><span class="math">G_{-2}(M)</span> uses <span class="math">F_p(-2)</span>; <span class="math">G_1</span> uses <span class="math">F_p(1)</span>.</td>
+            <td>Replaces the sign convention cited in Remark 4.11.4(iii)(d).</td>
+          </tr>
+          <tr>
+            <td>Cohomology module</td>
+            <td>Use the submodule satisfying the stated upper-triangular cuspidal-inertia restriction.</td>
+            <td>Lowers the relevant dimension from <span class="math">3g-3+2r</span> to <span class="math">3g-3+r</span>.</td>
+          </tr>
+        </table>
+        <div class="related">
+          Sources: <a href="papers/mochizuki-iut-ii.pdf" target="_blank">IUT II, Remark 4.11.5</a>
+          Related: <a href="#canonical-lifting-analogy-4114">canonical lifting analogy</a>
+          <a href="#monodromy-symmetry-dictionary-4114">monodromy/symmetry dictionary</a>
+          <a href="#conjugate-synchronization-units-4112">conjugate synchronization</a>
         </div>
       </section>
 
