@@ -7779,6 +7779,62 @@ theorem endpoint
 end IUTStage1ColumnLogKummerCorrespondence
 
 /--
+Finite Frobenioid-theoretic column log-Kummer compatibility.
+
+Proposition 3.10(iii) says that the log-Kummer correspondence induces
+Frobenioid and realified-Frobenioid isomorphisms that are mutually compatible,
+as `m : ℤ` varies, with the log-links of the LGP-Gaussian log-theta-lattice.
+At the current realified degree level, this is represented by a family of
+realified Frobenioid degree objects indexed by `m`, together with the theorem
+that translating along the column preserves the extracted realified
+log-volume.
+-/
+structure IUTStage1ColumnFrobenioidLogKummerCompatibility where
+  frobenioidObject : Int -> IUTStage1RealifiedFrobenioidDegreeObject
+  translate_realifiedLogVolume_eq :
+    ∀ shift m : Int,
+      (frobenioidObject (m + shift)).realifiedLogVolume =
+        (frobenioidObject m).realifiedLogVolume
+
+namespace IUTStage1ColumnFrobenioidLogKummerCompatibility
+
+theorem translate_preserves_realifiedLogVolume
+    (compat : IUTStage1ColumnFrobenioidLogKummerCompatibility)
+    (shift m : Int) :
+    (compat.frobenioidObject (m + shift)).realifiedLogVolume =
+      (compat.frobenioidObject m).realifiedLogVolume :=
+  compat.translate_realifiedLogVolume_eq shift m
+
+theorem adjacent_logLink_preserves_realifiedLogVolume
+    (compat : IUTStage1ColumnFrobenioidLogKummerCompatibility)
+    (m : Int) :
+    (compat.frobenioidObject (m + 1)).realifiedLogVolume =
+      (compat.frobenioidObject m).realifiedLogVolume :=
+  compat.translate_preserves_realifiedLogVolume 1 m
+
+theorem negative_adjacent_logLink_preserves_realifiedLogVolume
+    (compat : IUTStage1ColumnFrobenioidLogKummerCompatibility)
+    (m : Int) :
+    (compat.frobenioidObject (m + (-1))).realifiedLogVolume =
+      (compat.frobenioidObject m).realifiedLogVolume :=
+  compat.translate_preserves_realifiedLogVolume (-1) m
+
+theorem endpoint
+    (compat : IUTStage1ColumnFrobenioidLogKummerCompatibility)
+    (shift m : Int) :
+    (compat.frobenioidObject (m + shift)).realifiedLogVolume =
+        (compat.frobenioidObject m).realifiedLogVolume ∧
+      (compat.frobenioidObject (m + 1)).realifiedLogVolume =
+        (compat.frobenioidObject m).realifiedLogVolume ∧
+      (compat.frobenioidObject (m + (-1))).realifiedLogVolume =
+        (compat.frobenioidObject m).realifiedLogVolume :=
+  ⟨compat.translate_preserves_realifiedLogVolume shift m,
+    compat.adjacent_logLink_preserves_realifiedLogVolume m,
+    compat.negative_adjacent_logLink_preserves_realifiedLogVolume m⟩
+
+end IUTStage1ColumnFrobenioidLogKummerCompatibility
+
+/--
 Finite `D^{⊢}` core of the etale-picture of IUT II, Corollary 4.11.
 
 Corollary 4.11(i) says that the associated `D^{⊢}`-prime-strip is a constant

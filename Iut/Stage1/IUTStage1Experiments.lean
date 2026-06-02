@@ -312,6 +312,17 @@ theorem columnLogKummerCorrespondence_endpoint
         corr.action m g x :=
   corr.endpoint shift m g x
 
+theorem columnFrobenioidLogKummerCompatibility_endpoint
+    (compat : IUTStage1ColumnFrobenioidLogKummerCompatibility)
+    (shift m : Int) :
+    (compat.frobenioidObject (m + shift)).realifiedLogVolume =
+        (compat.frobenioidObject m).realifiedLogVolume ∧
+      (compat.frobenioidObject (m + 1)).realifiedLogVolume =
+        (compat.frobenioidObject m).realifiedLogVolume ∧
+      (compat.frobenioidObject (m + (-1))).realifiedLogVolume =
+        (compat.frobenioidObject m).realifiedLogVolume :=
+  compat.endpoint shift m
+
 theorem etalePictureDCore_endpoint
     {Core Spoke : Type u}
     (picture : IUTStage1EtalePictureDCore Core Spoke) :
