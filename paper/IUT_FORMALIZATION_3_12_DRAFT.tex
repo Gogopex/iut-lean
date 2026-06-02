@@ -712,7 +712,10 @@ input: the family is \(i\mapsto P_i\) from the Theorem 3.11 source record, and
 Below the packet layer, the code now has a first realified Frobenioid degree
 source.  A finite Frobenioid object carries a divisor degree, a unit
 log-volume, and their realified log-volume; a tensor-packet product may be
-declared to have product log-volume equal to this realified value.  A
+declared to have product log-volume equal to this realified value.  A finite
+divisor-monoid source now computes this divisor degree from prime
+multiplicities and prime degrees, matching the finite shadow of the divisor
+monoid in \IUT{} I, Example 3.5.  A
 finite tensor-product operation on these degree objects adds divisor degrees
 and unit log-volumes, and \Lean{} proves that the realified log-volume of the
 tensor product is the sum of the two realified log-volumes.  This operation is
@@ -1077,6 +1080,9 @@ The project currently proves the following source-facing results in \Lean{}:
   divisor degree, unit log-volume, and realified log-volume are proved to add.
   A tensor-packet source certified by this Frobenioid product inherits
   product-log-volume additivity.
+\item The realified Frobenioid degree object can now be constructed from a
+  finite divisor-monoid source: \Lean{} computes the divisor degree as
+  \(\sum_p m_p\deg(p)\) before adding the unit log-volume.
 \item The realified Frobenioid degree layer now has finite morphisms: divisor
   and unit shifts determine the target realified log-volume, identity has zero
   shift, and composition adds both shifts.

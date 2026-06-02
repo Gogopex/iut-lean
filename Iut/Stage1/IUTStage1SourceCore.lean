@@ -1485,6 +1485,37 @@ structure IUTStage1RealizedTensorPacketProductLogVolume
   product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j
 
 /--
+Finite realified Frobenioid divisor source.
+
+IUT I, Example 3.5 describes the global realified Frobenioid through its
+divisor monoid, whose primes are indexed by the relevant set of valuations, and
+through realified degree/log-volume readings.  This finite source keeps the
+Stage 1 shadow at the divisor-monoid level: a divisor is a finite family of
+prime multiplicities, and its degree is computed as the finite weighted sum of
+the prime degrees.
+-/
+structure IUTStage1FiniteRealifiedFrobenioidDivisorSource
+    (π : Type u) [Fintype π] where
+  object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean
+  primeMultiplicity : π -> Nat
+  primeDegree : π -> Int
+  unitLogVolume : Real
+
+namespace IUTStage1FiniteRealifiedFrobenioidDivisorSource
+
+variable {π : Type u} [Fintype π]
+
+def divisorDegree
+    (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π) : Int :=
+  ∑ p : π, (source.primeMultiplicity p : Int) * source.primeDegree p
+
+def realifiedLogVolume
+    (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π) : Real :=
+  (source.divisorDegree : Real) + source.unitLogVolume
+
+end IUTStage1FiniteRealifiedFrobenioidDivisorSource
+
+/--
 Finite realified Frobenioid degree object.
 
 IUT III treats the relevant global/non-realified and realified Frobenioids as
@@ -1499,6 +1530,48 @@ structure IUTStage1RealifiedFrobenioidDegreeObject where
   realifiedLogVolume : Real
   realified_logVolume_eq :
     realifiedLogVolume = (divisorDegree : Real) + unitLogVolume
+
+namespace IUTStage1FiniteRealifiedFrobenioidDivisorSource
+
+variable {π : Type u} [Fintype π]
+
+def toDegreeObject
+    (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π) :
+    IUTStage1RealifiedFrobenioidDegreeObject :=
+  { object := source.object,
+    divisorDegree := source.divisorDegree,
+    unitLogVolume := source.unitLogVolume,
+    realifiedLogVolume := source.realifiedLogVolume,
+    realified_logVolume_eq := rfl }
+
+theorem toDegreeObject_divisorDegree
+    (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π) :
+    source.toDegreeObject.divisorDegree =
+      ∑ p : π, (source.primeMultiplicity p : Int) * source.primeDegree p :=
+  rfl
+
+theorem toDegreeObject_realifiedLogVolume_eq
+    (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π) :
+    source.toDegreeObject.realifiedLogVolume =
+      ((∑ p : π,
+          (source.primeMultiplicity p : Int) * source.primeDegree p) : Real) +
+        source.unitLogVolume :=
+  by
+    simp [toDegreeObject, realifiedLogVolume, divisorDegree]
+
+theorem endpoint
+    (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π) :
+    source.toDegreeObject.divisorDegree =
+        ∑ p : π, (source.primeMultiplicity p : Int) * source.primeDegree p ∧
+      source.toDegreeObject.unitLogVolume = source.unitLogVolume ∧
+      source.toDegreeObject.realifiedLogVolume =
+        ((∑ p : π,
+            (source.primeMultiplicity p : Int) * source.primeDegree p) : Real) +
+          source.unitLogVolume :=
+  ⟨source.toDegreeObject_divisorDegree, rfl,
+    source.toDegreeObject_realifiedLogVolume_eq⟩
+
+end IUTStage1FiniteRealifiedFrobenioidDivisorSource
 
 namespace IUTStage1RealifiedFrobenioidDegreeObject
 

@@ -562,6 +562,18 @@ theorem logKummerNoFurtherIndeterminacy_endpoint
   NonarchimedeanLogKummerRootUnityInvisibility.noFurtherIndeterminacy_endpoint
     evaluation henv a t
 
+theorem finiteRealifiedFrobenioidDivisorSource_endpoint
+    {π : Type u} [Fintype π]
+    (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π) :
+    source.toDegreeObject.divisorDegree =
+        ∑ p : π, (source.primeMultiplicity p : Int) * source.primeDegree p ∧
+      source.toDegreeObject.unitLogVolume = source.unitLogVolume ∧
+      source.toDegreeObject.realifiedLogVolume =
+        ((∑ p : π,
+            (source.primeMultiplicity p : Int) * source.primeDegree p) : Real) +
+          source.unitLogVolume :=
+  source.endpoint
+
 theorem realifiedFrobenioidKummerCompatibility_endpoint
     {kind : IUTStage1PlaceKind} {j : Nat}
     {source target :
