@@ -820,6 +820,10 @@ monoid in \IUT{} I, Example 3.5.  The same source now has a divisor-level
 tensor product that adds multiplicities and realified log-volumes when the
 prime-degree data agree; its projection to the degree-object layer agrees with
 the existing degree-object tensor product.
+It also has the Ob4 naive Frobenius tensor-power operation: multiplying the
+divisor multiplicities and unit log-volume by \(M\) constructs a new finite
+Frobenioid object whose divisor degree and realified log-volume are proved to
+be \(M\) times the original values.
 The theta-version of \IUT{} I, Example 3.5(ii), is now represented at this
 finite level: the same divisor degree is read through a formal
 \(\log(\Theta)\)-generator, and normalization of this generator to \(1\)
@@ -1265,6 +1269,10 @@ The project currently proves the following source-facing results in \Lean{}:
 \item The finite divisor-monoid source now has its own tensor product:
   multiplicities and unit log-volumes add, and \Lean{} proves additivity of the
   induced divisor degree and realified log-volume.
+\item The same finite divisor-monoid source now has an Ob4-style naive
+  Frobenius tensor-power operation: multiplicities and unit log-volume are
+  multiplied by \(M\), and \Lean{} proves the induced divisor degree and
+  realified log-volume are multiplied by \(M\).
 \item The projection of this divisor-level tensor product to the realified
   degree-object layer agrees with the existing degree-object tensor product,
   preventing these two Frobenioid shadows from drifting apart.

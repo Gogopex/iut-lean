@@ -777,6 +777,17 @@ theorem finiteRealifiedFrobenioidDivisorTensorProduct_endpoint
   ⟨left.tensorProduct_divisorDegree_eq_add right object hprime,
     left.tensorProduct_realifiedLogVolume_eq_add right object hprime⟩
 
+theorem finiteRealifiedFrobenioidNaiveTensorPower_endpoint
+    {π : Type u} [Fintype π]
+    (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π)
+    (tensorDegree : Nat)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean) :
+    (source.naiveFrobeniusTensorPower tensorDegree object).divisorDegree =
+        (tensorDegree : Int) * source.divisorDegree ∧
+      (source.naiveFrobeniusTensorPower tensorDegree object).realifiedLogVolume =
+        (tensorDegree : Real) * source.realifiedLogVolume :=
+  source.naiveFrobeniusTensorPower_endpoint tensorDegree object
+
 theorem finiteRealifiedFrobenioidDivisorTensorProductProjection_endpoint
     {π : Type u} [Fintype π]
     (left right : IUTStage1FiniteRealifiedFrobenioidDivisorSource π)
