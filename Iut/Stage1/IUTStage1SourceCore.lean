@@ -4907,6 +4907,42 @@ namespace IUTStage1ThetaPossibleImagesHullLogVolumeShadow
 
 variable {α : Type u} {ι : Type v}
 
+def ofQSubsetThetaImageUnion
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (q_subset_thetaImageUnion : qPilotRegion ⊆ ⋃ i, possibleThetaImage i)
+    (theta_hull_eq_normalized_determinant :
+      hullData.logVolume (hullData.hullRegion (⋃ i, possibleThetaImage i)) =
+        determinant.normalizedLogVolume) :
+    IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι :=
+  { hullData := hullData,
+    possibleThetaImage := possibleThetaImage,
+    qPilotRegion := qPilotRegion,
+    determinant := determinant,
+    q_subset_theta_hull := fun _ hx =>
+      hullData.region_subset_hull (⋃ i, possibleThetaImage i)
+        (q_subset_thetaImageUnion hx),
+    theta_hull_eq_normalized_determinant :=
+      theta_hull_eq_normalized_determinant }
+
+def ofQSubsetPossibleThetaImage
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (i : ι)
+    (q_subset_possibleThetaImage : qPilotRegion ⊆ possibleThetaImage i)
+    (theta_hull_eq_normalized_determinant :
+      hullData.logVolume (hullData.hullRegion (⋃ i, possibleThetaImage i)) =
+        determinant.normalizedLogVolume) :
+    IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι :=
+  ofQSubsetThetaImageUnion hullData possibleThetaImage qPilotRegion determinant
+    (fun _ hx => Set.mem_iUnion.mpr
+      ⟨i, q_subset_possibleThetaImage hx⟩)
+    theta_hull_eq_normalized_determinant
+
 def thetaImageUnion
     (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
     Set α :=
@@ -4931,6 +4967,24 @@ theorem qPilotLogVolume_le_thetaHullLogVolume
     (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
     data.qPilotLogVolume <= data.thetaHullLogVolume :=
   data.hullData.logVolume_le_of_subset_hull data.q_subset_theta_hull
+
+theorem qPilotRegion_subset_thetaHull_of_subset_thetaImageUnion
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    (q_subset_thetaImageUnion : data.qPilotRegion ⊆ data.thetaImageUnion) :
+    data.qPilotRegion ⊆ data.thetaHull :=
+  fun _ hx =>
+    data.hullData.region_subset_hull data.thetaImageUnion
+      (q_subset_thetaImageUnion hx)
+
+theorem qPilotRegion_subset_thetaHull_of_subset_possibleThetaImage
+    (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι)
+    (i : ι)
+    (q_subset_possibleThetaImage :
+      data.qPilotRegion ⊆ data.possibleThetaImage i) :
+    data.qPilotRegion ⊆ data.thetaHull :=
+  data.qPilotRegion_subset_thetaHull_of_subset_thetaImageUnion
+    (fun _ hx =>
+      Set.mem_iUnion.mpr ⟨i, q_subset_possibleThetaImage hx⟩)
 
 theorem thetaImageUnion_subset_thetaHull
     (data : IUTStage1ThetaPossibleImagesHullLogVolumeShadow α ι) :
@@ -5032,6 +5086,58 @@ theorem thetaHullLogVolume_le_closed_of_possibleImages_subset
   data.hullData.logVolume_mono
     (data.thetaHull_subset_closed_of_possibleImages_subset himages hclosed)
 
+theorem ofQSubsetThetaImageUnion_endpoint
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (q_subset_thetaImageUnion : qPilotRegion ⊆ ⋃ i, possibleThetaImage i)
+    (theta_hull_eq_normalized_determinant :
+      hullData.logVolume (hullData.hullRegion (⋃ i, possibleThetaImage i)) =
+        determinant.normalizedLogVolume) :
+    let data :=
+      ofQSubsetThetaImageUnion hullData possibleThetaImage qPilotRegion
+        determinant q_subset_thetaImageUnion
+        theta_hull_eq_normalized_determinant;
+    data.qPilotRegion ⊆ data.thetaImageUnion ∧
+      data.qPilotRegion ⊆ data.thetaHull ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaHullLogVolume = determinant.normalizedLogVolume :=
+  by
+    intro data
+    exact
+      ⟨q_subset_thetaImageUnion,
+        data.q_subset_theta_hull,
+        data.qPilotLogVolume_le_thetaHullLogVolume,
+        data.thetaHullLogVolume_eq_normalized_determinant⟩
+
+theorem ofQSubsetPossibleThetaImage_endpoint
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (determinant : IUTStage1ArithmeticVectorBundleDeterminantLogVolume)
+    (i : ι)
+    (q_subset_possibleThetaImage : qPilotRegion ⊆ possibleThetaImage i)
+    (theta_hull_eq_normalized_determinant :
+      hullData.logVolume (hullData.hullRegion (⋃ i, possibleThetaImage i)) =
+        determinant.normalizedLogVolume) :
+    let data :=
+      ofQSubsetPossibleThetaImage hullData possibleThetaImage qPilotRegion
+        determinant i q_subset_possibleThetaImage
+        theta_hull_eq_normalized_determinant;
+    data.qPilotRegion ⊆ data.possibleThetaImage i ∧
+      data.qPilotRegion ⊆ data.thetaImageUnion ∧
+      data.qPilotRegion ⊆ data.thetaHull ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume :=
+  by
+    intro data
+    exact
+      ⟨q_subset_possibleThetaImage,
+        fun _ hx => Set.mem_iUnion.mpr
+          ⟨i, q_subset_possibleThetaImage hx⟩,
+        data.q_subset_theta_hull,
+        data.qPilotLogVolume_le_thetaHullLogVolume⟩
+
 end IUTStage1ThetaPossibleImagesHullLogVolumeShadow
 
 /--
@@ -5127,6 +5233,48 @@ noncomputable def ofCanonicalHullWeightedDeterminant
     (IUTStage1HullLogVolumeApproximant.canonical
       hullData (⋃ i, possibleThetaImage i))
     q_subset_hull determinantSource compatibility
+
+noncomputable def ofCanonicalHullWeightedDeterminantOfQSubsetUnion
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (q_subset_thetaImageUnion : qPilotRegion ⊆ ⋃ i, possibleThetaImage i)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        (IUTStage1HullLogVolumeApproximant.canonical
+          hullData (⋃ i, possibleThetaImage i))
+        determinantSource) :
+    IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι :=
+  ofCanonicalHullWeightedDeterminant
+    hullData possibleThetaImage qPilotRegion
+    (fun _ hx =>
+      hullData.region_subset_hull (⋃ i, possibleThetaImage i)
+        (q_subset_thetaImageUnion hx))
+    determinantSource compatibility
+
+noncomputable def ofCanonicalHullWeightedDeterminantOfQSubsetPossibleImage
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (i : ι)
+    (q_subset_possibleThetaImage : qPilotRegion ⊆ possibleThetaImage i)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        (IUTStage1HullLogVolumeApproximant.canonical
+          hullData (⋃ i, possibleThetaImage i))
+        determinantSource) :
+    IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι :=
+  ofCanonicalHullWeightedDeterminantOfQSubsetUnion
+    hullData possibleThetaImage qPilotRegion
+    (fun _ hx => Set.mem_iUnion.mpr
+      ⟨i, q_subset_possibleThetaImage hx⟩)
+    determinantSource compatibility
 
 noncomputable def canonicalHullWeightedDeterminantFamilyHullDetLogVolumeSource
     {β : Type w} [Fintype β]
@@ -5578,6 +5726,85 @@ theorem ofCanonicalHullWeightedDeterminant_endpoint
           simpa [data, ofCanonicalHullWeightedDeterminant, ofWeightedDeterminant]
             using data.thetaImageUnionLogVolume_le_determinant⟩
 
+theorem ofCanonicalHullWeightedDeterminantOfQSubsetUnion_endpoint
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (q_subset_thetaImageUnion : qPilotRegion ⊆ ⋃ i, possibleThetaImage i)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        (IUTStage1HullLogVolumeApproximant.canonical
+          hullData (⋃ i, possibleThetaImage i))
+        determinantSource) :
+    let data :=
+      ofCanonicalHullWeightedDeterminantOfQSubsetUnion
+        hullData possibleThetaImage qPilotRegion q_subset_thetaImageUnion
+        determinantSource compatibility;
+    data.qPilotRegion ⊆ data.thetaImageUnion ∧
+      data.qPilotRegion ⊆ data.thetaHull ∧
+      data.approximantRegion = data.thetaHull ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.approximantLogVolume =
+        determinantSource.determinantLogVolume :=
+  by
+    intro data
+    have hcanonical :=
+      ofCanonicalHullWeightedDeterminant_endpoint
+        hullData possibleThetaImage qPilotRegion
+        (fun _ hx =>
+          hullData.region_subset_hull (⋃ i, possibleThetaImage i)
+            (q_subset_thetaImageUnion hx))
+        determinantSource compatibility
+    exact
+      ⟨q_subset_thetaImageUnion,
+        data.qPilotRegion_subset_thetaHull,
+        hcanonical.1,
+        hcanonical.2.2.2.1,
+        hcanonical.2.2.2.2.1⟩
+
+theorem ofCanonicalHullWeightedDeterminantOfQSubsetPossibleImage_endpoint
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (i : ι)
+    (q_subset_possibleThetaImage : qPilotRegion ⊆ possibleThetaImage i)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        (IUTStage1HullLogVolumeApproximant.canonical
+          hullData (⋃ i, possibleThetaImage i))
+        determinantSource) :
+    let data :=
+      ofCanonicalHullWeightedDeterminantOfQSubsetPossibleImage
+        hullData possibleThetaImage qPilotRegion i q_subset_possibleThetaImage
+        determinantSource compatibility;
+    data.qPilotRegion ⊆ data.possibleThetaImage i ∧
+      data.qPilotRegion ⊆ data.thetaImageUnion ∧
+      data.qPilotRegion ⊆ data.thetaHull ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.approximantLogVolume =
+        determinantSource.determinantLogVolume :=
+  by
+    intro data
+    exact
+      ⟨q_subset_possibleThetaImage,
+        fun _ hx => Set.mem_iUnion.mpr
+          ⟨i, q_subset_possibleThetaImage hx⟩,
+        data.qPilotRegion_subset_thetaHull,
+        data.qPilotLogVolume_le_thetaHullLogVolume,
+        by
+          simpa [data,
+            ofCanonicalHullWeightedDeterminantOfQSubsetPossibleImage,
+            ofCanonicalHullWeightedDeterminantOfQSubsetUnion,
+            ofCanonicalHullWeightedDeterminant, ofWeightedDeterminant,
+            approximantLogVolume, approximantRegion]
+            using compatibility.approximant_eq_determinantLogVolume⟩
+
 theorem canonicalHullWeightedDeterminantFamilyHullDetLogVolume_endpoint
     {β : Type w} [Fintype β]
     (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
@@ -5697,6 +5924,31 @@ noncomputable def toCanonicalHullWeightedDeterminant
     hullData images.possibleImageSet qPilotRegion.toSet q_subset_hull
     determinantSource compatibility
 
+noncomputable def toCanonicalHullWeightedDeterminantOfQSubsetUnion
+    {β : Type w} [Fintype β]
+    (images : IUTStage1ThetaPilotPossibleImages package)
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow (Point target))
+    (qPilotRegion : Region target)
+    (q_subset_thetaImageUnion :
+      qPilotRegion.toSet ⊆ images.thetaImageUnionSet)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        (IUTStage1HullLogVolumeApproximant.canonical
+          hullData images.thetaImageUnionSet)
+        determinantSource) :
+    IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
+      (Point target) index :=
+  ofCanonicalHullWeightedDeterminantOfQSubsetUnion
+    hullData images.possibleImageSet qPilotRegion.toSet
+    (by
+      intro x hx
+      simpa [thetaImageUnionSet] using q_subset_thetaImageUnion hx)
+    determinantSource
+    (by
+      simpa [thetaImageUnionSet] using compatibility)
+
 theorem canonicalHullWeightedDeterminant_endpoint
     {β : Type w} [Fintype β]
     (images : IUTStage1ThetaPilotPossibleImages package)
@@ -5737,6 +5989,50 @@ theorem canonicalHullWeightedDeterminant_endpoint
         hendpoint.1,
         hendpoint.2.2.2.1,
         hendpoint.2.2.2.2.1⟩
+
+theorem canonicalHullWeightedDeterminantOfQSubsetUnion_endpoint
+    {β : Type w} [Fintype β]
+    (images : IUTStage1ThetaPilotPossibleImages package)
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow (Point target))
+    (qPilotRegion : Region target)
+    (q_subset_thetaImageUnion :
+      qPilotRegion.toSet ⊆ images.thetaImageUnionSet)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        (IUTStage1HullLogVolumeApproximant.canonical
+          hullData images.thetaImageUnionSet)
+        determinantSource) :
+    let hullSource :=
+      images.toCanonicalHullWeightedDeterminantOfQSubsetUnion
+        hullData qPilotRegion q_subset_thetaImageUnion
+        determinantSource compatibility;
+    images.thetaPilot = package.thetaPilot ∧
+      hullSource.thetaImageUnion = images.thetaImageUnionSet ∧
+      qPilotRegion.toSet ⊆ hullSource.thetaImageUnion ∧
+      qPilotRegion.toSet ⊆ hullSource.thetaHull ∧
+      hullSource.approximantRegion = hullSource.thetaHull ∧
+      hullSource.qPilotLogVolume <= hullSource.thetaHullLogVolume ∧
+      hullSource.approximantLogVolume =
+        determinantSource.determinantLogVolume :=
+  by
+    intro hullSource
+    exact
+      ⟨images.thetaPilotMatchesPackage,
+        rfl,
+        q_subset_thetaImageUnion,
+        hullSource.qPilotRegion_subset_thetaHull,
+        rfl,
+        hullSource.qPilotLogVolume_le_thetaHullLogVolume,
+        by
+          simpa [hullSource,
+            toCanonicalHullWeightedDeterminantOfQSubsetUnion,
+            ofCanonicalHullWeightedDeterminantOfQSubsetUnion,
+            ofCanonicalHullWeightedDeterminant, ofWeightedDeterminant,
+            IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow.approximantLogVolume,
+            IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow.approximantRegion]
+            using compatibility.approximant_eq_determinantLogVolume⟩
 
 end IUTStage1ThetaPilotPossibleImages
 

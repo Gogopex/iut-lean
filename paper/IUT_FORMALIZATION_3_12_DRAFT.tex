@@ -786,9 +786,11 @@ Remark 3.9.5(vii), (Ob3), directly.  The determinant bound is stated for the
 weighted determinant log-volume, and \Lean{} derives the normalized determinant
 bound consumed by the canonical hull bridge.
 A further specialization constructs the approximant as the canonical hull
-\(\phi(P)\) itself.  In this route the q-pilot input is containment in
-\(\phi(P)\), and \Lean{} derives the approximant-equals-hull proof from the
-canonical approximant constructor instead of accepting it as a separate input.
+\(\phi(P)\) itself.  In the current route the q-pilot input may be containment
+in the possible-image union \(P=\bigcup_i P_i\); \Lean{} then derives
+q-pilot containment in \(\phi(P)\) from hull extensivity.  Thus direct
+containment in \(\phi(P)\) is no longer a primitive input for this canonical
+possible-image specialization.
 Remark 3.9.5(vii), (Ob4), is represented at the same finite level: a naive
 Frobenius/tensor-power log-volume object records the passage
 \(L\mapsto M L\) for \(M>0\), and \Lean{} proves that normalized log-volume
@@ -1645,6 +1647,10 @@ The project currently proves the following source-facing results in \Lean{}:
   canonical-hull input form: the approximant is definitionally \(\phi(P)\),
   q-pilot containment is imposed in this hull, and the endpoint exposes the
   derived approximant-region equality.
+\item The canonical possible-image route can now instead consume
+  \(q\subseteq P=\bigcup_i P_i\).  The containment \(q\subseteq\phi(P)\) used
+  by the upper-ray comparison is derived from hull extensivity, so the source
+  interface is closer to the Step (xi) possible-image construction.
 \item The canonical-hull route now has the same Ob4 tensor-power input form:
   a normalized tensor-power bound is converted to the determinant bound, while
   \Lean{} derives the approximant-equals-\(\phi(P)\) witness from the canonical
