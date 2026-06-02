@@ -15660,6 +15660,39 @@ theorem toLabelAveraged_averageLogVolume
     data.toLabelAveraged.averageLogVolume = data.normalizedLogVolume :=
   rfl
 
+def constantFromLocalObject
+    (localObject : IUTStage1FiniteLocalLogVolumeObject kind) :
+    IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind :=
+  { localObject := localObject,
+    capsule := fun _ =>
+      { capsuleLabel := "ZMod packet-local canonical capsule",
+        localObject := localObject,
+        logVolume := localObject.finiteLogVolume,
+        log_volume_eq := rfl },
+    capsule_local_object_eq := by
+      intro _j
+      rfl,
+    totalLogVolume := localObject.finiteLogVolume * (l.value : Real),
+    total_eq_sum := by
+      simp [ZMod.card, mul_comm],
+    normalizedLogVolume := localObject.finiteLogVolume,
+    normalized_eq_average := by
+      have hl : (l.value : Real) ≠ 0 := by
+        exact_mod_cast l.ne_zero
+      field_simp [hl] }
+
+theorem constantFromLocalObject_localObject
+    (localObject : IUTStage1FiniteLocalLogVolumeObject kind) :
+    (constantFromLocalObject (l := l) localObject).localObject =
+      localObject :=
+  rfl
+
+theorem constantFromLocalObject_normalizedLogVolume
+    (localObject : IUTStage1FiniteLocalLogVolumeObject kind) :
+    (constantFromLocalObject (l := l) localObject).normalizedLogVolume =
+      localObject.finiteLogVolume :=
+  rfl
+
 theorem zmodTranslation_total_eq
     (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
     (t : ZMod l.value) :
@@ -48703,6 +48736,70 @@ theorem boundarySignedEqualityOrStrictCTheta_of_hodgeDirectLabelledRealifiedEntr
     realifiedSource.realifiedEntrySource.packetSource.holomorphicStructureForgotten
     realifiedSource.realifiedEntrySource.packetSource.holomorphic_structure_forgotten
     realifiedSource.toPacketLocalSourceAlignment targetSource cTheta
+    thetaSigned_le_cTheta_absLogQ
+
+/--
+Canonical-labelled form of the realified Step (x) route.
+
+The labelled `ZMod l` capsule family is the constant family attached to the
+audited packet local object.  Hence the route no longer accepts an arbitrary
+labelled capsule source or a separate proof that its local object is the packet
+local object.
+-/
+theorem boundarySignedEqualityOrStrictCTheta_of_hodgeDirectCanonicalLabelledRealifiedEntryVerticalIQ
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    {record : IUTStage1Theorem311MultiradialSourceRecord packageN}
+    {F : Type v} [Field F] {X C : HyperbolicOrbicurveModel F}
+    (alignment :
+      IUTStage1HodgeSHEIPLHullRouteLogVolumeAlignment
+        part audited record X C)
+    (source_profile_eq :
+      profile = IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    (directNormalization :
+      IUTStage1DirectPacketNormalizationData
+        audited.choice.local_tensor_state.packetState)
+    (upperSemiEntry :
+      NonarchimedeanPacketNormalizedUpperSemiEntrySource audited)
+    (realifiedSource :
+      NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer l X C upperSemiEntry.toEntry
+        holomorphicF holomorphicD monoAnalyticD)
+    (targetSource :
+      NonarchimedeanLogKummerVerticalIQTargetSource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer upperSemiEntry.toEntry)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    targetSource.frobenioidMode.hasPreciseFrobenioidIsomorphisms = true ∧
+      ((packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+          packageN.preLedger.thetaSigned < 0) ∨
+        (-1 : Real) < cTheta) :=
+  let labelledAverage :=
+    IUTStage1ZModLabelledCapsuleFamilyLogVolume.constantFromLocalObject
+      (l := l)
+      audited.choice.local_tensor_state.packetState.localObject
+  part.boundarySignedEqualityOrStrictCTheta_of_hodgeDirectLabelledRealifiedEntryVerticalIQ
+    profile audited alignment source_profile_eq labelledAverage
+    directNormalization rfl upperSemiEntry realifiedSource targetSource cTheta
     thetaSigned_le_cTheta_absLogQ
 
 /--
