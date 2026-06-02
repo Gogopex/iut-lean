@@ -48631,6 +48631,81 @@ theorem boundarySignedEqualityOrStrictCTheta_of_hodgeDirectLabelledVerticalIQ
       thetaSigned_le_cTheta_absLogQ
 
 /--
+Hodge-derived labelled route through one realified log-Kummer entry source.
+
+The Step (x) packet/source calibration data is projected from the theta-root
+realified-Frobenioid log-Kummer source.  Thus the route no longer receives the
+Kummer/forgetting compatibilities, realization tags, forgetting assertion, or
+packet-local alignment as separate inputs.
+-/
+theorem boundarySignedEqualityOrStrictCTheta_of_hodgeDirectLabelledRealifiedEntryVerticalIQ
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    {record : IUTStage1Theorem311MultiradialSourceRecord packageN}
+    {F : Type v} [Field F] {X C : HyperbolicOrbicurveModel F}
+    (alignment :
+      IUTStage1HodgeSHEIPLHullRouteLogVolumeAlignment
+        part audited record X C)
+    (source_profile_eq :
+      profile = IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    (labelledAverage :
+      IUTStage1ZModLabelledCapsuleFamilyLogVolume
+        l IUTStage1PlaceKind.nonarchimedean)
+    (directNormalization :
+      IUTStage1DirectPacketNormalizationData
+        audited.choice.local_tensor_state.packetState)
+    (labelledLocalObject_eq_packetLocalObject :
+      labelledAverage.localObject =
+        audited.choice.local_tensor_state.packetState.localObject)
+    (upperSemiEntry :
+      NonarchimedeanPacketNormalizedUpperSemiEntrySource audited)
+    (realifiedSource :
+      NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer l X C upperSemiEntry.toEntry
+        holomorphicF holomorphicD monoAnalyticD)
+    (targetSource :
+      NonarchimedeanLogKummerVerticalIQTargetSource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer upperSemiEntry.toEntry)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    targetSource.frobenioidMode.hasPreciseFrobenioidIsomorphisms = true ∧
+      ((packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+          packageN.preLedger.thetaSigned < 0) ∨
+        (-1 : Real) < cTheta) :=
+  part.boundarySignedEqualityOrStrictCTheta_of_hodgeDirectLabelledVerticalIQ
+    profile audited alignment source_profile_eq
+    realifiedSource.thetaRootSource labelledAverage directNormalization
+    labelledLocalObject_eq_packetLocalObject upperSemiEntry
+    realifiedSource.realifiedEntrySource.packetSource.kummerCompatibility
+    realifiedSource.realifiedEntrySource.packetSource.forgettingCompatibility
+    realifiedSource.realifiedEntrySource.packetSource.holomorphicF_realization
+    realifiedSource.realifiedEntrySource.packetSource.holomorphicD_realization
+    realifiedSource.realifiedEntrySource.packetSource.monoAnalyticD_realization
+    realifiedSource.realifiedEntrySource.packetSource.holomorphicStructureForgotten
+    realifiedSource.realifiedEntrySource.packetSource.holomorphic_structure_forgotten
+    realifiedSource.toPacketLocalSourceAlignment targetSource cTheta
+    thetaSigned_le_cTheta_absLogQ
+
+/--
 Hodge/SHE/IPL/hull route through a packet-normalized Step (x) theta-source
 alignment.
 
