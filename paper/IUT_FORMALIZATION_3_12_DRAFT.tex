@@ -988,6 +988,11 @@ The project currently proves the following source-facing results in \Lean{}:
   its membership in the audited upper-semi inclusion family.  The route consumes
   this single source object rather than a constructed entry and separate
   membership proof.
+\item The source side of that Step (x) entry can now be supplied by a named
+  packet/product source calibration.  The route no longer receives the
+  packet-local/source and source/mono-analytic-product equalities separately;
+  they are projected from the calibration object before the realified
+  Frobenioid source is constructed.
 \item The finite sign-unit/root-of-unity part of Remark 3.11.4 is formalized:
   sign-unit action preserves full cusp labels, full-label log-volume readings,
   Gaussian degrees, and averaged Gaussian log-volume.
