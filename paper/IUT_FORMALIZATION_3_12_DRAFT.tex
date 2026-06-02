@@ -718,7 +718,11 @@ multiplicities and prime degrees, matching the finite shadow of the divisor
 monoid in \IUT{} I, Example 3.5.  The same source now has a divisor-level
 tensor product that adds multiplicities and realified log-volumes when the
 prime-degree data agree; its projection to the degree-object layer agrees with
-the existing degree-object tensor product.  A
+the existing degree-object tensor product.
+The theta-version of \IUT{} I, Example 3.5(ii), is now represented at this
+finite level: the same divisor degree is read through a formal
+\(\log(\Theta)\)-generator, and normalization of this generator to \(1\)
+recovers the ordinary finite divisor source.  A
 finite tensor-product operation on these degree objects adds divisor degrees
 and unit log-volumes, and \Lean{} proves that the realified log-volume of the
 tensor product is the sum of the two realified log-volumes.  This operation is
@@ -1092,6 +1096,10 @@ The project currently proves the following source-facing results in \Lean{}:
 \item The projection of this divisor-level tensor product to the realified
   degree-object layer agrees with the existing degree-object tensor product,
   preventing these two Frobenioid shadows from drifting apart.
+\item The theta-version of the finite divisor source is now represented: a
+  formal \(\log(\Theta)\)-generator scales the divisor degree, normalization to
+  \(1\) recovers the ordinary source, and tensor products preserve additivity
+  when the theta generators match.
 \item The realified Frobenioid degree layer now has finite morphisms: divisor
   and unit shifts determine the target realified log-volume, identity has zero
   shift, and composition adds both shifts.
