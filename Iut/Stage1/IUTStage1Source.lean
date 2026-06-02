@@ -45868,6 +45868,169 @@ theorem boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullRealifiedEntrySte
       route⟩
 
 /--
+Target-only `(Ind3)` alignment from one realified Step (x) source and an exact
+vertical-`IQ` target.
+
+The theta-average-to-packet-normalized equality is projected from the
+realified log-Kummer entry source, so the separate packet-normalized
+theta-source route is not needed at this boundary.
+-/
+def ind3ThetaTargetAlignmentOfRealifiedVerticalIQTarget
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {F : Type v} [Field F] {X C : HyperbolicOrbicurveModel F}
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    (realifiedSource :
+      NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD)
+    (targetSource :
+      NonarchimedeanLogKummerVerticalIQTargetSource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer entry) :
+    Ind3ThetaTargetAlignment part audited :=
+  let targetCalibration :=
+    realifiedSource.realifiedEntrySource.packetSource.targetCalibration
+  Ind3ThetaTargetAlignment.ofPacketNormalizedTarget
+    targetCalibration.thetaAverage_eq_packetNormalized
+    targetSource.ind3Target_eq_packetNormalized
+
+theorem realifiedVerticalIQTargetAlignment_endpoint
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {F : Type v} [Field F] {X C : HyperbolicOrbicurveModel F}
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    (realifiedSource :
+      NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD)
+    (targetSource :
+      NonarchimedeanLogKummerVerticalIQTargetSource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer entry) :
+    targetSource.frobenioidMode.hasPreciseFrobenioidIsomorphisms = true ∧
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
+  let targetCalibration :=
+    realifiedSource.realifiedEntrySource.packetSource.targetCalibration
+  ⟨targetSource.hasPreciseFrobenioidIsomorphisms,
+    targetCalibration.thetaAverage_eq_packetNormalized,
+    targetSource.ind3Target_eq_packetNormalized,
+    (ind3ThetaTargetAlignmentOfRealifiedVerticalIQTarget
+      realifiedSource targetSource).thetaSourceAverage_eq_ind3Target⟩
+
+/--
+Realified-source audit form with vertical-`IQ` target and no separate
+packet-normalized theta-source route.
+
+Both the source-side packet-local alignment and the theta-average
+packet-normalization are recovered from the single theta-root attached
+realified log-Kummer entry source.  The exact vertical-`IQ` target supplies the
+target-side packet-normalized equality and the \(FMOD\) guard.
+-/
+theorem boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullRealifiedEntryVerticalIQ_audit
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    {record : IUTStage1Theorem311MultiradialSourceRecord packageN}
+    {F : Type v} [Field F] {X C : HyperbolicOrbicurveModel F}
+    (alignment :
+      IUTStage1HodgeSHEIPLHullRouteLogVolumeAlignment
+        part audited record X C)
+    (source_profile_eq :
+      profile = IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    (realifiedSource :
+      NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD)
+    (targetSource :
+      NonarchimedeanLogKummerVerticalIQTargetSource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer entry)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    targetSource.frobenioidMode.hasPreciseFrobenioidIsomorphisms = true ∧
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume ∧
+      (let sourceCalibration :=
+          realifiedSource.realifiedEntrySource.packetSource.sourceCalibration;
+       let packetAlignment := realifiedSource.toPacketLocalSourceAlignment;
+       packetAlignment.packetLocalObject_eq_entrySource =
+            sourceCalibration.packetLocalObject_eq_entrySource ∧
+         packetAlignment.entrySource_eq_monoAnalyticProduct =
+            sourceCalibration.entrySource_eq_monoAnalyticProduct ∧
+         audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+            audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume) ∧
+      ((packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+          packageN.preLedger.thetaSigned < 0) ∨
+        (-1 : Real) < cTheta) := by
+  have targetAudit :=
+    realifiedVerticalIQTargetAlignment_endpoint
+      (packageN := packageN) realifiedSource targetSource
+  have sourceAudit := realifiedSource.thetaRootPacketLocalSourceAlignment_endpoint
+  have route :=
+    part.boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullRealifiedFrobenioidEntry
+      profile audited alignment source_profile_eq realifiedSource cTheta
+      thetaSigned_le_cTheta_absLogQ
+  exact
+    ⟨targetAudit.1, targetAudit.2.2.2,
+      ⟨sourceAudit.2.2.2.1, sourceAudit.2.2.2.2.1,
+        sourceAudit.2.2.2.2.2⟩,
+      route⟩
+
+/--
 Hodge/SHE/IPL/hull route through a vertical-`IQ` Step (x) target source.
 
 This is the target-side analogue of the source-calibrated route above.  The
