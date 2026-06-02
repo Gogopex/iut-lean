@@ -27150,6 +27150,123 @@ variable {source target : Copy} {index : Type u}
 variable {package : IUTStage1SourcePackage source target index}
 variable {record : IUTStage1Theorem311MultiradialSourceRecord package}
 
+theorem canonicalApproximantThetaUnion_eq_targetUnion
+    (approximantSource :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
+        (Point target) index)
+    (theta_union_eq_record :
+      approximantSource.thetaImageUnion =
+        record.thetaPossibleImages.union.toSet) :
+    approximantSource.thetaImageUnion =
+      package.preLedger.output.comparisons.targetUnion.toSet := by
+  calc
+    approximantSource.thetaImageUnion =
+        record.thetaPossibleImages.union.toSet :=
+      theta_union_eq_record
+    _ = package.preLedger.output.comparisons.targetUnion.toSet := by
+      rw [record.thetaImagesUnion_eq_targetUnion]
+
+def canonicalApproximantHullDetData
+    (operation : RealLineCopy.AlgorithmicOutput.HullDetOperationId)
+    (hullOperation : RealLineCopy.AlgorithmicOutput.HullOperationId)
+    (determinantOperation :
+      RealLineCopy.AlgorithmicOutput.DeterminantLogVolumeOperationId)
+    (approximantSource :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
+        (Point target) index)
+    (theta_union_eq_record :
+      approximantSource.thetaImageUnion =
+        record.thetaPossibleImages.union.toSet)
+    (approximant_eq_canonical_hull :
+      approximantSource.approximantRegion =
+        approximantSource.thetaHull)
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure =
+        approximantSource.hullData.toRegionMeasure)
+    (determinant_bound :
+      approximantSource.determinant.normalizedLogVolume <=
+        package.preLedger.thetaSigned) :
+    package.preLedger.output.HullDetBridgeData
+      package.preLedger.measure package.preLedger.thetaSigned :=
+  IUTStage1SourceHullDetData.canonicalApproximantHullDetBridgeData
+    (package := package)
+    operation hullOperation determinantOperation approximantSource
+    (canonicalApproximantThetaUnion_eq_targetUnion
+      (record := record) approximantSource theta_union_eq_record)
+    approximant_eq_canonical_hull measure_eq_hullLogVolume determinant_bound
+
+def hullDetDataOfCanonicalApproximant
+    (operation : RealLineCopy.AlgorithmicOutput.HullDetOperationId)
+    (hullOperation : RealLineCopy.AlgorithmicOutput.HullOperationId)
+    (determinantOperation :
+      RealLineCopy.AlgorithmicOutput.DeterminantLogVolumeOperationId)
+    (approximantSource :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
+        (Point target) index)
+    (theta_union_eq_record :
+      approximantSource.thetaImageUnion =
+        record.thetaPossibleImages.union.toSet)
+    (approximant_eq_canonical_hull :
+      approximantSource.approximantRegion =
+        approximantSource.thetaHull)
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure =
+        approximantSource.hullData.toRegionMeasure)
+    (determinant_bound :
+      approximantSource.determinant.normalizedLogVolume <=
+        package.preLedger.thetaSigned)
+    (hbridge :
+      package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge =
+        canonicalApproximantHullDetData (record := record)
+          operation hullOperation determinantOperation approximantSource
+          theta_union_eq_record approximant_eq_canonical_hull
+          measure_eq_hullLogVolume determinant_bound) :
+    IUTStage1SourceHullDetData package :=
+  IUTStage1SourceHullDetData.ofCanonicalApproximant
+    (package := package)
+    operation hullOperation determinantOperation approximantSource
+    (canonicalApproximantThetaUnion_eq_targetUnion
+      (record := record) approximantSource theta_union_eq_record)
+    approximant_eq_canonical_hull measure_eq_hullLogVolume determinant_bound
+    hbridge
+
+def ofCanonicalApproximant
+    (operation : RealLineCopy.AlgorithmicOutput.HullDetOperationId)
+    (hullOperation : RealLineCopy.AlgorithmicOutput.HullOperationId)
+    (determinantOperation :
+      RealLineCopy.AlgorithmicOutput.DeterminantLogVolumeOperationId)
+    (approximantSource :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
+        (Point target) index)
+    (theta_union_eq_record :
+      approximantSource.thetaImageUnion =
+        record.thetaPossibleImages.union.toSet)
+    (approximant_eq_canonical_hull :
+      approximantSource.approximantRegion =
+        approximantSource.thetaHull)
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure =
+        approximantSource.hullData.toRegionMeasure)
+    (determinant_bound :
+      approximantSource.determinant.normalizedLogVolume <=
+        package.preLedger.thetaSigned)
+    (hbridge :
+      package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge =
+        canonicalApproximantHullDetData (record := record)
+          operation hullOperation determinantOperation approximantSource
+          theta_union_eq_record approximant_eq_canonical_hull
+          measure_eq_hullLogVolume determinant_bound)
+    (q_pilot_positive : 0 < -package.preLedger.qSigned)
+    (normalization : package.preLedger.normalization) :
+    IUTStage1Theorem311HullDetSourceConstructor record :=
+  { hullDetData :=
+      hullDetDataOfCanonicalApproximant (record := record)
+        operation hullOperation determinantOperation approximantSource
+        theta_union_eq_record approximant_eq_canonical_hull
+        measure_eq_hullLogVolume determinant_bound hbridge,
+    q_pilot_positive := q_pilot_positive,
+    normalization := normalization }
+
 def toSourceObligations
     (constructor :
       IUTStage1Theorem311HullDetSourceConstructor record) :
@@ -27251,6 +27368,67 @@ theorem hullDetSource_endpoint
     constructor.recordPossibleImagesUnion_subset_hull,
     constructor.determinantVolumeBound,
     constructor.qSigned_le_thetaSigned⟩
+
+theorem ofCanonicalApproximant_endpoint
+    (operation : RealLineCopy.AlgorithmicOutput.HullDetOperationId)
+    (hullOperation : RealLineCopy.AlgorithmicOutput.HullOperationId)
+    (determinantOperation :
+      RealLineCopy.AlgorithmicOutput.DeterminantLogVolumeOperationId)
+    (approximantSource :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
+        (Point target) index)
+    (theta_union_eq_record :
+      approximantSource.thetaImageUnion =
+        record.thetaPossibleImages.union.toSet)
+    (approximant_eq_canonical_hull :
+      approximantSource.approximantRegion =
+        approximantSource.thetaHull)
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure =
+        approximantSource.hullData.toRegionMeasure)
+    (determinant_bound :
+      approximantSource.determinant.normalizedLogVolume <=
+        package.preLedger.thetaSigned)
+    (hbridge :
+      package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge =
+        canonicalApproximantHullDetData (record := record)
+          operation hullOperation determinantOperation approximantSource
+          theta_union_eq_record approximant_eq_canonical_hull
+          measure_eq_hullLogVolume determinant_bound)
+    (q_pilot_positive : 0 < -package.preLedger.qSigned)
+    (normalization : package.preLedger.normalization) :
+    let constructor :=
+      ofCanonicalApproximant (record := record)
+        operation hullOperation determinantOperation approximantSource
+        theta_union_eq_record approximant_eq_canonical_hull
+        measure_eq_hullLogVolume determinant_bound hbridge
+        q_pilot_positive normalization;
+    approximantSource.thetaImageUnion =
+        record.thetaPossibleImages.union.toSet ∧
+      approximantSource.thetaImageUnion =
+        package.preLedger.output.comparisons.targetUnion.toSet ∧
+      approximantSource.approximantLogVolume =
+        approximantSource.determinant.normalizedLogVolume ∧
+      package.preLedger.output.Certified ∧
+      Region.Subset record.thetaPossibleImages.union
+        (constructor.hullDetData.sourceData.structuredHullDet.applyHull
+          package.preLedger.certificate).hull ∧
+      RegionMeasure.HasVolumeAtMost package.preLedger.measure
+        (constructor.hullDetData.sourceData.structuredHullDet.applyHull
+          package.preLedger.certificate).hull
+        package.preLedger.thetaSigned ∧
+      package.preLedger.qSigned <= package.preLedger.thetaSigned :=
+  by
+    intro constructor
+    exact
+      ⟨theta_union_eq_record,
+        canonicalApproximantThetaUnion_eq_targetUnion
+          (record := record) approximantSource theta_union_eq_record,
+        approximantSource.approximantLogVolume_eq_normalized_determinant,
+        constructor.algorithmCertified,
+        constructor.recordPossibleImagesUnion_subset_hull,
+        constructor.determinantVolumeBound,
+        constructor.qSigned_le_thetaSigned⟩
 
 end IUTStage1Theorem311HullDetSourceConstructor
 

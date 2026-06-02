@@ -582,6 +582,11 @@ Region measure, and the normalized determinant value is at most
 \(\theta_{\mathrm{signed}}\), then \Lean{} constructs the same
 hull/determinant source data.  No general containment of an arbitrary
 approximant is assumed.
+This has been lifted to the Theorem 3.11 source constructor: the approximant
+union may be tied to the source record's theta possible-image union, and the
+record then supplies the equality with the package target union.  Thus the
+constructor no longer needs prebuilt hull/determinant source data in this
+canonical case.
 Remark 3.9.5(vii), (Ob4), is represented at the same finite level: a naive
 Frobenius/tensor-power log-volume object records the passage
 \(L\mapsto M L\) for \(M>0\), and \Lean{} proves that normalized log-volume
@@ -1005,6 +1010,9 @@ The project currently proves the following source-facing results in \Lean{}:
   hull/determinant bridge in the canonical case: the possible-image union must
   be the package target union, the approximant must be the canonical hull, and
   the normalized determinant value must be bounded by \(\theta_{\mathrm{signed}}\).
+\item The Theorem 3.11 hull/determinant constructor can now be built directly
+  from the source record plus this canonical approximant data, with the record's
+  possible-image union supplying the bridge to the package target union.
 \item The Step (x)-to-Step (xi) upper-ray bridge can now be built directly
   from a certified possible-image hull approximant.  The determinant
   normalization is read from the approximant/determinant compatibility, rather
