@@ -21870,6 +21870,93 @@ def ofUnionHull
         (data := package.preLedger)
         operation hullOperation determinantOperation operator hvolume hbridge }
 
+def holomorphicHullShadowVolumeBound
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow (Point target))
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure = hullData.toRegionMeasure)
+    (determinant_bound :
+      hullData.logVolume
+          (hullData.hullRegion
+            package.preLedger.output.comparisons.targetUnion.toSet) <=
+        package.preLedger.thetaSigned) :
+    RegionMeasure.HasVolumeAtMost package.preLedger.measure
+      ((hullData.toRegionHullOperator).hull
+        package.preLedger.output.comparisons.targetUnion)
+      package.preLedger.thetaSigned := by
+  unfold RegionMeasure.HasVolumeAtMost
+  rw [measure_eq_hullLogVolume]
+  simpa using determinant_bound
+
+def holomorphicHullShadowStructuredBridge
+    (operation : RealLineCopy.AlgorithmicOutput.HullDetOperationId)
+    (hullOperation : RealLineCopy.AlgorithmicOutput.HullOperationId)
+    (determinantOperation :
+      RealLineCopy.AlgorithmicOutput.DeterminantLogVolumeOperationId)
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow (Point target))
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure = hullData.toRegionMeasure)
+    (determinant_bound :
+      hullData.logVolume
+          (hullData.hullRegion
+            package.preLedger.output.comparisons.targetUnion.toSet) <=
+        package.preLedger.thetaSigned) :
+    package.preLedger.output.StructuredHullDetBridgeData
+      package.preLedger.measure package.preLedger.thetaSigned :=
+  RealLineCopy.AlgorithmicOutput.StructuredHullDetBridgeData.ofUnionHull
+    (output := package.preLedger.output)
+    (measure := package.preLedger.measure)
+    (bound := package.preLedger.thetaSigned)
+    operation hullOperation determinantOperation
+    hullData.toRegionHullOperator
+    (holomorphicHullShadowVolumeBound (package := package)
+      hullData measure_eq_hullLogVolume determinant_bound)
+
+def holomorphicHullShadowHullDetBridgeData
+    (operation : RealLineCopy.AlgorithmicOutput.HullDetOperationId)
+    (hullOperation : RealLineCopy.AlgorithmicOutput.HullOperationId)
+    (determinantOperation :
+      RealLineCopy.AlgorithmicOutput.DeterminantLogVolumeOperationId)
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow (Point target))
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure = hullData.toRegionMeasure)
+    (determinant_bound :
+      hullData.logVolume
+          (hullData.hullRegion
+            package.preLedger.output.comparisons.targetUnion.toSet) <=
+        package.preLedger.thetaSigned) :
+    package.preLedger.output.HullDetBridgeData
+      package.preLedger.measure package.preLedger.thetaSigned :=
+  (holomorphicHullShadowStructuredBridge (package := package)
+    operation hullOperation determinantOperation hullData
+    measure_eq_hullLogVolume determinant_bound)
+      |>.toHullDetHullBridgeData |>.toHullDetBridgeData
+
+def ofHolomorphicHullShadow
+    (operation : RealLineCopy.AlgorithmicOutput.HullDetOperationId)
+    (hullOperation : RealLineCopy.AlgorithmicOutput.HullOperationId)
+    (determinantOperation :
+      RealLineCopy.AlgorithmicOutput.DeterminantLogVolumeOperationId)
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow (Point target))
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure = hullData.toRegionMeasure)
+    (determinant_bound :
+      hullData.logVolume
+          (hullData.hullRegion
+            package.preLedger.output.comparisons.targetUnion.toSet) <=
+        package.preLedger.thetaSigned)
+    (hbridge :
+      package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge =
+        holomorphicHullShadowHullDetBridgeData (package := package)
+          operation hullOperation determinantOperation hullData
+          measure_eq_hullLogVolume determinant_bound) :
+    IUTStage1SourceHullDetData package :=
+  ofUnionHull (package := package)
+    operation hullOperation determinantOperation
+    hullData.toRegionHullOperator
+    (holomorphicHullShadowVolumeBound (package := package)
+      hullData measure_eq_hullLogVolume determinant_bound)
+    hbridge
+
 def stepAudit (data : IUTStage1SourceHullDetData package) :
     data.sourceData.structuredHullDet.StepAudit package.preLedger.certificate :=
   data.sourceData.stepAudit
@@ -21972,6 +22059,51 @@ theorem ofUnionHull_endpoint
     (data.sourceData.structuredHullDet.applyHull
         package.preLedger.certificate).hull =
         operator.hull package.preLedger.output.comparisons.targetUnion ∧
+      Region.Subset package.preLedger.output.comparisons.targetUnion
+        (data.sourceData.structuredHullDet.applyHull
+          package.preLedger.certificate).hull ∧
+      RegionMeasure.HasVolumeAtMost package.preLedger.measure
+        (data.sourceData.structuredHullDet.applyHull
+          package.preLedger.certificate).hull package.preLedger.thetaSigned ∧
+      RegionComparisonFamily.AllTargetsAtMost package.preLedger.measure
+        package.preLedger.output.comparisons package.preLedger.thetaSigned ∧
+      package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge =
+        data.sourceData.structuredHullDet.toHullDetHullBridgeData.toHullDetBridgeData :=
+  by
+    intro data
+    exact
+      ⟨rfl,
+        data.targetUnion_subset_hull,
+        data.determinantVolumeBound,
+        data.allTargetsAtMost,
+        data.hullDetBridge_eq⟩
+
+theorem ofHolomorphicHullShadow_endpoint
+    (operation : RealLineCopy.AlgorithmicOutput.HullDetOperationId)
+    (hullOperation : RealLineCopy.AlgorithmicOutput.HullOperationId)
+    (determinantOperation :
+      RealLineCopy.AlgorithmicOutput.DeterminantLogVolumeOperationId)
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow (Point target))
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure = hullData.toRegionMeasure)
+    (determinant_bound :
+      hullData.logVolume
+          (hullData.hullRegion
+            package.preLedger.output.comparisons.targetUnion.toSet) <=
+        package.preLedger.thetaSigned)
+    (hbridge :
+      package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge =
+        holomorphicHullShadowHullDetBridgeData (package := package)
+          operation hullOperation determinantOperation hullData
+          measure_eq_hullLogVolume determinant_bound) :
+    let data :=
+      ofHolomorphicHullShadow (package := package)
+        operation hullOperation determinantOperation hullData
+        measure_eq_hullLogVolume determinant_bound hbridge;
+    (data.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull.toSet =
+        hullData.hullRegion
+          package.preLedger.output.comparisons.targetUnion.toSet ∧
       Region.Subset package.preLedger.output.comparisons.targetUnion
         (data.sourceData.structuredHullDet.applyHull
           package.preLedger.certificate).hull ∧

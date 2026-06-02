@@ -616,6 +616,49 @@ theorem sourceHullDetDataFromUnionHull_endpoint
   IUTStage1SourceHullDetData.ofUnionHull_endpoint
     operation hullOperation determinantOperation operator hvolume hbridge
 
+theorem sourceHullDetDataFromHolomorphicHullShadow_endpoint
+    {source target : Copy} {index : Type u}
+    {package : IUTStage1SourcePackage source target index}
+    (operation : RealLineCopy.AlgorithmicOutput.HullDetOperationId)
+    (hullOperation : RealLineCopy.AlgorithmicOutput.HullOperationId)
+    (determinantOperation :
+      RealLineCopy.AlgorithmicOutput.DeterminantLogVolumeOperationId)
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow (Point target))
+    (measure_eq_hullLogVolume :
+      package.preLedger.measure = hullData.toRegionMeasure)
+    (determinant_bound :
+      hullData.logVolume
+          (hullData.hullRegion
+            package.preLedger.output.comparisons.targetUnion.toSet) <=
+        package.preLedger.thetaSigned)
+    (hbridge :
+      package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge =
+        IUTStage1SourceHullDetData.holomorphicHullShadowHullDetBridgeData
+          (package := package)
+          operation hullOperation determinantOperation hullData
+          measure_eq_hullLogVolume determinant_bound) :
+    let data :=
+      IUTStage1SourceHullDetData.ofHolomorphicHullShadow (package := package)
+        operation hullOperation determinantOperation hullData
+        measure_eq_hullLogVolume determinant_bound hbridge;
+    (data.sourceData.structuredHullDet.applyHull
+        package.preLedger.certificate).hull.toSet =
+        hullData.hullRegion
+          package.preLedger.output.comparisons.targetUnion.toSet ∧
+      Region.Subset package.preLedger.output.comparisons.targetUnion
+        (data.sourceData.structuredHullDet.applyHull
+          package.preLedger.certificate).hull ∧
+      RegionMeasure.HasVolumeAtMost package.preLedger.measure
+        (data.sourceData.structuredHullDet.applyHull
+          package.preLedger.certificate).hull package.preLedger.thetaSigned ∧
+      RegionComparisonFamily.AllTargetsAtMost package.preLedger.measure
+        package.preLedger.output.comparisons package.preLedger.thetaSigned ∧
+      package.preLedger.chartedContainer.commonContainer.hddShe.hdd.hullDetBridge =
+        data.sourceData.structuredHullDet.toHullDetHullBridgeData.toHullDetBridgeData :=
+  IUTStage1SourceHullDetData.ofHolomorphicHullShadow_endpoint
+    operation hullOperation determinantOperation hullData
+    measure_eq_hullLogVolume determinant_bound hbridge
+
 theorem weightedDeterminantSource_endpoint
     {β : Type u} [Fintype β]
     (data : IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β) :
