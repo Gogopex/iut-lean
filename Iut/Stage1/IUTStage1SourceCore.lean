@@ -3403,6 +3403,27 @@ noncomputable def ofWeightedDeterminant
     approximant_eq_normalized_determinant :=
       compatibility.approximant_eq_projected_normalized }
 
+noncomputable def ofCanonicalHullWeightedDeterminant
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (q_subset_hull :
+      qPilotRegion ⊆ hullData.hullRegion (⋃ i, possibleThetaImage i))
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        (IUTStage1HullLogVolumeApproximant.canonical
+          hullData (⋃ i, possibleThetaImage i))
+        determinantSource) :
+    IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι :=
+  ofWeightedDeterminant
+    hullData possibleThetaImage qPilotRegion
+    (IUTStage1HullLogVolumeApproximant.canonical
+      hullData (⋃ i, possibleThetaImage i))
+    q_subset_hull determinantSource compatibility
+
 def thetaImageUnion
     (data :
       IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
@@ -3625,6 +3646,69 @@ theorem ofWeightedDeterminant_endpoint
             using
               data.toHullDetPilotUpperRayLogVolume
                 |>.qPilotLogVolume_le_determinant⟩
+
+theorem ofCanonicalHullWeightedDeterminant_approximantRegion_eq_thetaHull
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (q_subset_hull :
+      qPilotRegion ⊆ hullData.hullRegion (⋃ i, possibleThetaImage i))
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        (IUTStage1HullLogVolumeApproximant.canonical
+          hullData (⋃ i, possibleThetaImage i))
+        determinantSource) :
+    let data :=
+      ofCanonicalHullWeightedDeterminant hullData possibleThetaImage
+        qPilotRegion q_subset_hull determinantSource compatibility;
+    data.approximantRegion = data.thetaHull :=
+  by
+    intro data
+    rfl
+
+theorem ofCanonicalHullWeightedDeterminant_endpoint
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (q_subset_hull :
+      qPilotRegion ⊆ hullData.hullRegion (⋃ i, possibleThetaImage i))
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        (IUTStage1HullLogVolumeApproximant.canonical
+          hullData (⋃ i, possibleThetaImage i))
+        determinantSource) :
+    let data :=
+      ofCanonicalHullWeightedDeterminant hullData possibleThetaImage
+        qPilotRegion q_subset_hull determinantSource compatibility;
+    data.approximantRegion = data.thetaHull ∧
+      data.thetaImageUnionLogVolume <= data.approximantLogVolume ∧
+      data.approximantLogVolume = data.thetaHullLogVolume ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.approximantLogVolume =
+        determinantSource.determinantLogVolume :=
+  by
+    intro data
+    exact
+      ⟨rfl,
+        data.thetaImageUnionLogVolume_le_approximantLogVolume,
+        le_antisymm data.approximantLogVolume_le_thetaHullLogVolume
+          (by
+            change
+              hullData.logVolume (hullData.hullRegion (⋃ i, possibleThetaImage i)) <=
+                hullData.logVolume
+                  (hullData.hullRegion (⋃ i, possibleThetaImage i))
+            exact le_rfl),
+        data.qPilotLogVolume_le_thetaHullLogVolume,
+        by
+          simpa [data, ofCanonicalHullWeightedDeterminant, ofWeightedDeterminant,
+            approximantLogVolume, approximantRegion]
+            using compatibility.approximant_eq_determinantLogVolume⟩
 
 end IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
 

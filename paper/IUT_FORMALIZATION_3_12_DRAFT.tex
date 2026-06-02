@@ -591,6 +591,10 @@ The same constructor now accepts the finite weighted determinant source from
 Remark 3.9.5(vii), (Ob3), directly.  The determinant bound is stated for the
 weighted determinant log-volume, and \Lean{} derives the normalized determinant
 bound consumed by the canonical hull bridge.
+A further specialization constructs the approximant as the canonical hull
+\(\phi(P)\) itself.  In this route the q-pilot input is containment in
+\(\phi(P)\), and \Lean{} derives the approximant-equals-hull proof from the
+canonical approximant constructor instead of accepting it as a separate input.
 Remark 3.9.5(vii), (Ob4), is represented at the same finite level: a naive
 Frobenius/tensor-power log-volume object records the passage
 \(L\mapsto M L\) for \(M>0\), and \Lean{} proves that normalized log-volume
@@ -888,6 +892,10 @@ The project currently proves the following source-facing results in \Lean{}:
   source and projects to the common upper-ray interface only after a named
   Ob3-3 compatibility certificate identifies the approximant log-volume with
   the weighted normalized determinant value.
+\item The weighted determinant route now has a canonical-hull specialization:
+  the approximant is constructed as \(\phi(P)\), q-pilot containment is stated
+  directly in this hull, and the approximant-equals-hull proof is derived by
+  \Lean{} rather than supplied as a separate route input.
 \item The Ob4 tensor-power passage is now represented at log-volume level:
   \(M\)-th tensor-power formation multiplies by \(M>0\), and normalization
   recovers the base log-volume.  The weighted determinant source projects to
@@ -1046,6 +1054,10 @@ The project currently proves the following source-facing results in \Lean{}:
   possible-image approximant backed by the finite weighted determinant source
   of Remark 3.9.5(vii), (Ob3).  The endpoint exposes the equality between the
   approximant log-volume and the weighted determinant log-volume.
+\item The canonical weighted determinant constructor now has the stronger
+  canonical-hull input form: the approximant is definitionally \(\phi(P)\),
+  q-pilot containment is imposed in this hull, and the endpoint exposes the
+  derived approximant-region equality.
 \item The Step (x)-to-Step (xi) upper-ray bridge can now be built directly
   from a certified possible-image hull approximant.  The determinant
   normalization is read from the approximant/determinant compatibility, rather
