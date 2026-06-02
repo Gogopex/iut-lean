@@ -13721,6 +13721,20 @@ theorem processionNormalizedLogVolume_endpoint
       data.toFiniteLocalLogVolumeObject = data.localObject :=
   data.processionNormalized_endpoint
 
+theorem zmodLabelledProcessionLogVolume_endpoint
+    {l : PrimeGeFive} {kind : IUTStage1PlaceKind}
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t : ZMod l.value) :
+    data.totalLogVolume =
+        (Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume) ∧
+      data.normalizedLogVolume =
+        (Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume) /
+          (l.value : Real) ∧
+      ((Finset.univ.sum fun j : ZMod l.value =>
+        (data.capsule (zmodLabelTranslate l t j)).logVolume) /
+          (l.value : Real)) = data.normalizedLogVolume :=
+  data.zmod_labelled_procession_endpoint t
+
 theorem localContainerLogVolume_endpoint
     {targetSigned localLogVolume : Real}
     (estimate :

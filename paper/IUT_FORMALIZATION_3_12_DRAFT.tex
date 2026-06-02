@@ -595,6 +595,11 @@ packet-normalized theta-source route at this boundary: theta packet
 normalization is projected from the same realified log-Kummer entry source,
 and the vertical-\(IQ\) target supplies only the \((\Ind3)\)-target
 packet-normalized equality.
+The procession-normalized log-volume layer now has a direct finite
+\(\mathbb{F}_\ell\)-labelled source: capsule log-volumes are indexed by
+\(ZMod(\ell)\), the total is the finite sum over all labels, the normalized
+value is this sum divided by \(\ell\), and \Lean{} proves invariance of the
+average under label translation.
 The vertical-\(IQ\) route can now also be instantiated with a finite
 divisor/Frobenioid packet product on the mono-analytic side.  In this form the
 route constructs the theta-root attached realified log-Kummer entry source
@@ -1339,6 +1344,11 @@ The project currently proves the following source-facing results in \Lean{}:
   local entry source and the divisor realified log-volume, \Lean{} derives the
   entry-source/mono-analytic-product equality used by the log-Kummer source
   calibration.
+\item The procession-normalized Step (x) average now has an
+  \(\mathbb{F}_\ell\)-labelled source object: \Lean{} computes the total as
+  \(\sum_{j\in ZMod(\ell)} v_j\), the normalized value as
+  \(\ell^{-1}\sum_j v_j\), and proves this average is unchanged by translating
+  all labels.
 \item The theta-root attached Step (x) source can now be constructed from the
   same finite divisor-product source and an exact vertical-\(IQ\) target.  The
   endpoint exposes the canonical bad-local theta-root label, Kummer/forgetting

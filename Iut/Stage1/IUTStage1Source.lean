@@ -15589,6 +15589,152 @@ theorem logVolume_eq
 end IUTStage1CapsuleLogVolumeObject
 
 /--
+`F_l`-labelled procession-normalized capsule log-volumes.
+
+Step (x) of the proof of IUT III, Corollary 3.12 uses procession-normalized
+mono-analytic log-volumes obtained by averaging over the labels
+`j ∈ F_l`.  This source object replaces an anonymous capsule count by the
+actual finite label set `ZMod l.value`; the total log-volume is the finite sum
+over this label set, and the normalized value is the average obtained by
+dividing by `l`.
+-/
+structure IUTStage1ZModLabelledCapsuleFamilyLogVolume
+    (l : PrimeGeFive) (kind : IUTStage1PlaceKind) where
+  localObject : IUTStage1FiniteLocalLogVolumeObject kind
+  capsule : ZMod l.value -> IUTStage1CapsuleLogVolumeObject kind
+  capsule_local_object_eq :
+    ∀ j : ZMod l.value, (capsule j).localObject = localObject
+  totalLogVolume : Real
+  total_eq_sum :
+    totalLogVolume =
+      Finset.univ.sum fun j : ZMod l.value => (capsule j).logVolume
+  normalizedLogVolume : Real
+  normalized_eq_average :
+    normalizedLogVolume = totalLogVolume / (l.value : Real)
+
+namespace IUTStage1ZModLabelledCapsuleFamilyLogVolume
+
+variable {l : PrimeGeFive} {kind : IUTStage1PlaceKind}
+
+def capsuleLogVolume
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind) :
+    ZMod l.value -> Real :=
+  fun j => (data.capsule j).logVolume
+
+theorem capsuleLocalObject_eq
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (j : ZMod l.value) :
+    (data.capsule j).localObject = data.localObject :=
+  data.capsule_local_object_eq j
+
+theorem total_eq
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind) :
+    data.totalLogVolume =
+      Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume :=
+  data.total_eq_sum
+
+theorem normalized_eq
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind) :
+    data.normalizedLogVolume =
+      data.totalLogVolume / (l.value : Real) :=
+  data.normalized_eq_average
+
+theorem normalized_eq_zmod_average
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind) :
+    data.normalizedLogVolume =
+      (Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume) /
+        (l.value : Real) := by
+  rw [data.normalized_eq, data.total_eq]
+
+def toLabelAveraged
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind) :
+    IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value) :=
+  { normalizedLogVolume := data.capsuleLogVolume,
+    averageLogVolume := data.normalizedLogVolume,
+    average_eq := by
+      rw [data.normalized_eq_zmod_average, ZMod.card]
+      rfl }
+
+theorem toLabelAveraged_averageLogVolume
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind) :
+    data.toLabelAveraged.averageLogVolume = data.normalizedLogVolume :=
+  rfl
+
+theorem zmodTranslation_total_eq
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t : ZMod l.value) :
+    (Finset.univ.sum fun j : ZMod l.value =>
+      (data.capsule (zmodLabelTranslate l t j)).logVolume) =
+      Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume :=
+  IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodTranslation_sum_eq
+    (l := l) t data.capsuleLogVolume
+
+theorem zmodUnitAffine_total_eq
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (a : (ZMod l.value)ˣ) (t : ZMod l.value) :
+    (Finset.univ.sum fun j : ZMod l.value =>
+      (data.capsule
+        (zmodLabelTranslate l t ((zmodUnitActionData l).smul a j))).logVolume) =
+      Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume :=
+  IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodUnitAffine_sum_eq
+    (l := l) a t data.capsuleLogVolume
+
+theorem zmodTranslation_average_eq
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t : ZMod l.value) :
+    ((Finset.univ.sum fun j : ZMod l.value =>
+      (data.capsule (zmodLabelTranslate l t j)).logVolume) /
+        (l.value : Real)) = data.normalizedLogVolume := by
+  rw [data.zmodTranslation_total_eq t]
+  exact data.normalized_eq_zmod_average.symm
+
+theorem zmodUnitAffine_average_eq
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (a : (ZMod l.value)ˣ) (t : ZMod l.value) :
+    ((Finset.univ.sum fun j : ZMod l.value =>
+      (data.capsule
+        (zmodLabelTranslate l t ((zmodUnitActionData l).smul a j))).logVolume) /
+        (l.value : Real)) = data.normalizedLogVolume := by
+  rw [data.zmodUnitAffine_total_eq a t]
+  exact data.normalized_eq_zmod_average.symm
+
+theorem const_le_normalizedLogVolume_of_capsule_le
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    {c : Real}
+    (hcapsule : ∀ j : ZMod l.value, c <= (data.capsule j).logVolume) :
+    c <= data.normalizedLogVolume := by
+  haveI : Nonempty (ZMod l.value) := ⟨0⟩
+  exact
+    IUTStage1LabelAveragedProcessionLogVolume.const_le_average_of_forall_le
+      data.toLabelAveraged hcapsule
+
+theorem normalizedLogVolume_le_const_of_capsule_le
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    {c : Real}
+    (hcapsule : ∀ j : ZMod l.value, (data.capsule j).logVolume <= c) :
+    data.normalizedLogVolume <= c := by
+  haveI : Nonempty (ZMod l.value) := ⟨0⟩
+  exact
+    IUTStage1LabelAveragedProcessionLogVolume.average_le_const_of_forall_le
+      data.toLabelAveraged hcapsule
+
+theorem zmod_labelled_procession_endpoint
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t : ZMod l.value) :
+    data.totalLogVolume =
+        (Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume) ∧
+      data.normalizedLogVolume =
+        (Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume) /
+          (l.value : Real) ∧
+      ((Finset.univ.sum fun j : ZMod l.value =>
+        (data.capsule (zmodLabelTranslate l t j)).logVolume) /
+          (l.value : Real)) = data.normalizedLogVolume :=
+  ⟨data.total_eq, data.normalized_eq_zmod_average,
+    data.zmodTranslation_average_eq t⟩
+
+end IUTStage1ZModLabelledCapsuleFamilyLogVolume
+
+/--
 Container estimate for one capsule log-volume entry.
 
 The local object used by the estimate must match the local object carried by
