@@ -9152,6 +9152,50 @@ theorem globalRealifiedCalibrationSource_endpoint
 
 end IUTStage1GlobalRealifiedFrobenioidCalibrationSource
 
+namespace IUTStage1RestrictionNormalizedLocalFrobenioidSource
+
+def toGlobalRealifiedFrobenioidCalibrationSource
+    (source : IUTStage1RestrictionNormalizedLocalFrobenioidSource)
+    (globalExponent : Int)
+    (global_exponent_eq_zero : globalExponent = 0) :
+    IUTStage1GlobalRealifiedFrobenioidCalibrationSource :=
+  { localSource := source.localSource,
+    globalExponent := globalExponent,
+    global_exponent_eq_zero := global_exponent_eq_zero }
+
+theorem restrictionNormalizedGlobalCalibration_endpoint
+    (source : IUTStage1RestrictionNormalizedLocalFrobenioidSource)
+    (globalExponent : Int)
+    (global_exponent_eq_zero : globalExponent = 0) :
+    let global :=
+      source.toGlobalRealifiedFrobenioidCalibrationSource
+        globalExponent global_exponent_eq_zero
+    global.toGlobalFrobenioidLogVolumeCalibration.calibratedLogVolume =
+        source.localSource.baseSubmodule.logVolume ∧
+      global.calibratedLogVolume =
+        source.localSource.baseSubmodule.logVolume ∧
+      source.localSource.shiftedLogVolume =
+        source.localSource.baseSubmodule.logVolume +
+          (source.localSource.localExponent : Real) *
+            source.restriction.restrictedGlobalPrimeLogVolume ∧
+      (global.calibratedLogVolume = source.localSource.shiftedLogVolume ↔
+        source.localSource.pPowerEndomorphismIsAutomorphism ∨
+          source.restriction.restrictedGlobalPrimeLogVolume = 0) := by
+  let global :=
+    source.toGlobalRealifiedFrobenioidCalibrationSource
+      globalExponent global_exponent_eq_zero
+  exact
+    ⟨global.toCalibration_calibrated_eq_base,
+      global.calibratedLogVolume_eq_base,
+      source.shiftedLogVolume_eq_restricted,
+      by
+        have h :=
+          global.calibrated_eq_local_shifted_iff_automorphism_or_zero_step
+        simpa [global, toGlobalRealifiedFrobenioidCalibrationSource,
+          source.localPrimeStep_eq_restricted] using h⟩
+
+end IUTStage1RestrictionNormalizedLocalFrobenioidSource
+
 theorem remark3122_ringStructureDimensionSplit_endpoint
     {kind : IUTStage1PlaceKind} {j : Nat}
     {source target :

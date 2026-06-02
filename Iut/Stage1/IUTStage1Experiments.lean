@@ -392,6 +392,27 @@ theorem restrictionNormalizedLocalFrobenioidSource_endpoint
           source.restriction.restrictedGlobalPrimeLogVolume = 0) :=
   source.restrictionNormalizedLocalSource_endpoint
 
+theorem restrictionNormalizedGlobalFrobenioidCalibration_endpoint
+    (source : IUTStage1RestrictionNormalizedLocalFrobenioidSource)
+    (globalExponent : Int)
+    (global_exponent_eq_zero : globalExponent = 0) :
+    let global :=
+      source.toGlobalRealifiedFrobenioidCalibrationSource
+        globalExponent global_exponent_eq_zero
+    global.toGlobalFrobenioidLogVolumeCalibration.calibratedLogVolume =
+        source.localSource.baseSubmodule.logVolume ∧
+      global.calibratedLogVolume =
+        source.localSource.baseSubmodule.logVolume ∧
+      source.localSource.shiftedLogVolume =
+        source.localSource.baseSubmodule.logVolume +
+          (source.localSource.localExponent : Real) *
+            source.restriction.restrictedGlobalPrimeLogVolume ∧
+      (global.calibratedLogVolume = source.localSource.shiftedLogVolume ↔
+        source.localSource.pPowerEndomorphismIsAutomorphism ∨
+          source.restriction.restrictedGlobalPrimeLogVolume = 0) :=
+  source.restrictionNormalizedGlobalCalibration_endpoint
+    globalExponent global_exponent_eq_zero
+
 theorem realifiedFrobenioidConstantDistribution_endpoint
     {J : Type u} [Fintype J]
     (restriction : IUTStage1GlobalToLocalRealifiedFrobenioidRestriction) :

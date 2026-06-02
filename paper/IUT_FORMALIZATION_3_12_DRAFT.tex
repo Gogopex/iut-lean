@@ -1106,7 +1106,10 @@ submodule carries a \(p_v^N\)-action whose log-volume effect is
 equivalent to \(N=0\).  The global realified Frobenioid calibration package
 selects exponent \(0\), hence its calibrated value is \(L_0\).  If the local
 endomorphism is not an automorphism and \(\delta\ne0\), \Lean{} proves that the
-local shifted value cannot equal the globally calibrated value.
+local shifted value cannot equal the globally calibrated value.  The same
+calibration can now be built from the restriction-normalized local source, so
+the local step is the restricted global prime log-volume rather than an
+independent real parameter.
 For the actual upper-ray quotient that collapses
 \(\{x\mid x\le \Theta_{\mathrm{hull}}\}\), \Lean{} proves the exact
 classification
@@ -1373,7 +1376,8 @@ The project currently proves the following source-facing results in \Lean{}:
   Example 3.5 is formalized as inverse-extension-degree scaling of the local
   prime log-volume, with the degree-normalization identity proved in \Lean{}.
   This restricted value is connected to the local \(p_v^N\)-shift source used
-  in the Step (xii) diagnostic.
+  in the Step (xii) diagnostic, and global calibration can now be constructed
+  from this restriction-normalized source.
 \item A finite local-global realified Frobenioid collection now models the
   degree/log-volume content of Remark 3.9.5(ix): each local object is a
   restricted global value, and extension-degree rescaling recovers the global
