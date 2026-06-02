@@ -451,6 +451,10 @@ and the realified-Frobenioid packet source are bundled together, and \Lean{}
 projects the Kummer transfer, mono-analytic forgetting transfer, source
 calibration, target packet calibration, and q-pilot non-interference guard from
 that single source object.
+There is now a reduced constructor for this entry source: entry membership,
+packet-local/source alignment, packet-local \((\Ind3)\)-source alignment,
+packet-normalized target data, and theta-target alignment construct the
+realified packet source internally and then derive the upper-semi inequality.
 The bad-local theta-root label source is now attached to this realified entry
 source.  The corresponding Hodge--Arakelov route consumes one object carrying
 the canonical nonzero theta-root label, the selected upper-semi entry, and the
@@ -894,6 +898,10 @@ The project currently proves the following source-facing results in \Lean{}:
   packet-local/source alignment and packet-local \((\Ind3)\)-source alignment
   generate the source packet calibration using the Frobenioid-derived Kummer
   and forgetting transfers.
+\item The realified Step (x) entry source has the same reduced boundary:
+  entry membership plus source/target alignment data constructs the packet
+  source internally and projects q-pilot non-interference, source equality,
+  target equality, and the upper-semi inequality.
 \item The finite sign-unit/root-of-unity part of Remark 3.11.4 is formalized:
   sign-unit action preserves full cusp labels, full-label log-volume readings,
   Gaussian degrees, and averaged Gaussian log-volume.
