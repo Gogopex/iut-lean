@@ -644,6 +644,10 @@ normalized log-volume, even when the tensor degrees differ.
 The package hull/determinant bridge now has an Ob4-shaped input form: a bound
 on the normalized tensor-power log-volume of the weighted determinant source is
 converted by \Lean{} to the determinant bound used by the canonical hull bridge.
+In the canonical-hull form, this Ob4 input also derives the
+approximant-equals-\(\phi(P)\) witness internally; the source input is q-pilot
+containment in \(\phi(P)\), tensor-power determinant compatibility, and the
+bridge equality with the package hull/determinant datum.
 Below the packet layer, the code now has a first realified Frobenioid degree
 source.  A finite Frobenioid object carries a divisor degree, a unit
 log-volume, and their realified log-volume; a tensor-packet product may be
@@ -1196,6 +1200,10 @@ The project currently proves the following source-facing results in \Lean{}:
   canonical-hull input form: the approximant is definitionally \(\phi(P)\),
   q-pilot containment is imposed in this hull, and the endpoint exposes the
   derived approximant-region equality.
+\item The canonical-hull route now has the same Ob4 tensor-power input form:
+  a normalized tensor-power bound is converted to the determinant bound, while
+  \Lean{} derives the approximant-equals-\(\phi(P)\) witness from the canonical
+  hull constructor.
 \item The Step (x)-to-Step (xi) upper-ray bridge can now be built directly
   from a certified possible-image hull approximant.  The determinant
   normalization is read from the approximant/determinant compatibility, rather
