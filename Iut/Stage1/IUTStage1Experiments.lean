@@ -436,6 +436,37 @@ theorem realifiedFrobenioidTensorProduct_endpoint
         source.realifiedLogVolume + target.realifiedLogVolume :=
   source.tensorProduct_endpoint target object
 
+theorem realifiedFrobenioidDegreeMorphism_identity_endpoint
+    (source : IUTStage1RealifiedFrobenioidDegreeObject) :
+    (IUTStage1RealifiedFrobenioidDegreeObject.DegreeMorphism.identity
+        source).divisorDegreeShift = 0 ∧
+      (IUTStage1RealifiedFrobenioidDegreeObject.DegreeMorphism.identity
+        source).unitLogVolumeShift = 0 ∧
+      source.realifiedLogVolume =
+        source.realifiedLogVolume +
+          (((IUTStage1RealifiedFrobenioidDegreeObject.DegreeMorphism.identity
+            source).divisorDegreeShift : Int) : Real) +
+          (IUTStage1RealifiedFrobenioidDegreeObject.DegreeMorphism.identity
+            source).unitLogVolumeShift :=
+  IUTStage1RealifiedFrobenioidDegreeObject.DegreeMorphism.identity_endpoint
+    source
+
+theorem realifiedFrobenioidDegreeMorphism_comp_endpoint
+    {source middle final : IUTStage1RealifiedFrobenioidDegreeObject}
+    (first :
+      IUTStage1RealifiedFrobenioidDegreeObject.DegreeMorphism source middle)
+    (second :
+      IUTStage1RealifiedFrobenioidDegreeObject.DegreeMorphism middle final) :
+    (first.comp second).divisorDegreeShift =
+        first.divisorDegreeShift + second.divisorDegreeShift ∧
+      (first.comp second).unitLogVolumeShift =
+        first.unitLogVolumeShift + second.unitLogVolumeShift ∧
+      final.realifiedLogVolume =
+        source.realifiedLogVolume +
+          (((first.comp second).divisorDegreeShift : Int) : Real) +
+          (first.comp second).unitLogVolumeShift :=
+  first.comp_endpoint second
+
 theorem realifiedFrobenioidTensorProductPacket_endpoint
     {kind : IUTStage1PlaceKind} {j : Nat}
     {left right product :

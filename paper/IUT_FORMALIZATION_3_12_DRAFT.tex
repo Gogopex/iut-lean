@@ -635,6 +635,12 @@ equality of realified Frobenioid log-volumes, while retaining the
 Hodge-theater history guard.  This is still a finite degree-level shadow, not
 a construction of Mochizuki's Frobenioids, but it moves one equality source
 below the packet-correspondence interface.
+The same degree layer now has finite Frobenioid morphisms.  A morphism records
+the divisor-degree shift and unit-log-volume shift between two realified
+objects; \Lean{} derives the corresponding shift in realified log-volume and
+proves identity and composition laws at this degree/log-volume level.  This
+models the additive content of the pull-back and structure morphisms appearing
+in Remark 3.9.5(ix), (cQ3).
 The Ob8/Ob9 vertical-shift issue is now attached directly to the Step (xi-g)
 handoff.  A log-Kummer vertical-shift calibration pairs the
 Step (x)-to-hull upper-ray source with the global realified Frobenioid
@@ -961,6 +967,9 @@ The project currently proves the following source-facing results in \Lean{}:
   divisor degree, unit log-volume, and realified log-volume are proved to add.
   A tensor-packet source certified by this Frobenioid product inherits
   product-log-volume additivity.
+\item The realified Frobenioid degree layer now has finite morphisms: divisor
+  and unit shifts determine the target realified log-volume, identity has zero
+  shift, and composition adds both shifts.
 \item The Ob8/Ob9 vertical-shift guard is now tied to the Step (xi-g)
   two-computation handoff: global realified Frobenioid calibration selects the
   hull upper-ray boundary, both q-pilot readings are bounded by it, and shifted

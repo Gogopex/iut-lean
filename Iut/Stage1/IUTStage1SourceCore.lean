@@ -1517,6 +1517,103 @@ theorem realifiedLogVolume_eq_of_degree_unit
     hdegree, hunit]
 
 /--
+Finite degree/log-volume morphism between realified Frobenioid objects.
+
+This is the finite shadow of the pull-back/base-change and structure morphisms
+that appear in IUT III, Remark 3.9.5(ix), (cQ3).  It records the change in
+divisor degree and unit log-volume and derives the corresponding change in
+realified log-volume.
+-/
+structure DegreeMorphism
+    (source target : IUTStage1RealifiedFrobenioidDegreeObject) where
+  divisorDegreeShift : Int
+  unitLogVolumeShift : Real
+  target_divisorDegree_eq :
+    target.divisorDegree = source.divisorDegree + divisorDegreeShift
+  target_unitLogVolume_eq :
+    target.unitLogVolume = source.unitLogVolume + unitLogVolumeShift
+
+namespace DegreeMorphism
+
+variable
+  {source target middle final :
+    IUTStage1RealifiedFrobenioidDegreeObject}
+
+theorem target_realifiedLogVolume_eq_source_plus_shifts
+    (morphism : DegreeMorphism source target) :
+    target.realifiedLogVolume =
+      source.realifiedLogVolume +
+        ((morphism.divisorDegreeShift : Int) : Real) +
+        morphism.unitLogVolumeShift := by
+  calc
+    target.realifiedLogVolume =
+        (target.divisorDegree : Real) + target.unitLogVolume :=
+      target.realifiedLogVolume_eq
+    _ =
+        ((source.divisorDegree + morphism.divisorDegreeShift : Int) : Real) +
+          (source.unitLogVolume + morphism.unitLogVolumeShift) := by
+      rw [morphism.target_divisorDegree_eq, morphism.target_unitLogVolume_eq]
+    _ =
+        source.realifiedLogVolume +
+          ((morphism.divisorDegreeShift : Int) : Real) +
+          morphism.unitLogVolumeShift := by
+      rw [source.realifiedLogVolume_eq]
+      norm_num [Int.cast_add]
+      ring
+
+def identity
+    (source : IUTStage1RealifiedFrobenioidDegreeObject) :
+    DegreeMorphism source source :=
+  { divisorDegreeShift := 0,
+    unitLogVolumeShift := 0,
+    target_divisorDegree_eq := by simp,
+    target_unitLogVolume_eq := by simp }
+
+def comp
+    (first : DegreeMorphism source middle)
+    (second : DegreeMorphism middle final) :
+    DegreeMorphism source final :=
+  { divisorDegreeShift :=
+      first.divisorDegreeShift + second.divisorDegreeShift,
+    unitLogVolumeShift :=
+      first.unitLogVolumeShift + second.unitLogVolumeShift,
+    target_divisorDegree_eq := by
+      rw [second.target_divisorDegree_eq, first.target_divisorDegree_eq,
+        Int.add_assoc],
+    target_unitLogVolume_eq := by
+      rw [second.target_unitLogVolume_eq, first.target_unitLogVolume_eq]
+      ring }
+
+theorem identity_endpoint
+    (source : IUTStage1RealifiedFrobenioidDegreeObject) :
+    (identity source).divisorDegreeShift = 0 ∧
+      (identity source).unitLogVolumeShift = 0 ∧
+      source.realifiedLogVolume =
+        source.realifiedLogVolume +
+          (((identity source).divisorDegreeShift : Int) : Real) +
+          (identity source).unitLogVolumeShift :=
+  ⟨rfl, rfl, by
+    change source.realifiedLogVolume =
+      source.realifiedLogVolume + ((0 : Int) : Real) + (0 : Real)
+    norm_num⟩
+
+theorem comp_endpoint
+    (first : DegreeMorphism source middle)
+    (second : DegreeMorphism middle final) :
+    (first.comp second).divisorDegreeShift =
+        first.divisorDegreeShift + second.divisorDegreeShift ∧
+      (first.comp second).unitLogVolumeShift =
+        first.unitLogVolumeShift + second.unitLogVolumeShift ∧
+      final.realifiedLogVolume =
+        source.realifiedLogVolume +
+          (((first.comp second).divisorDegreeShift : Int) : Real) +
+          (first.comp second).unitLogVolumeShift :=
+  ⟨rfl, rfl,
+    (first.comp second).target_realifiedLogVolume_eq_source_plus_shifts⟩
+
+end DegreeMorphism
+
+/--
 Finite tensor product of realified Frobenioid degree objects.
 
 This is the degree/log-volume shadow of tensor product of arithmetic line-bundle
