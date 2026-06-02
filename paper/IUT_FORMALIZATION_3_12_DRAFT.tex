@@ -847,7 +847,11 @@ same finite level by an evaluation package between two such compatible copy
 systems.  The package stores only the ordinary divisor-source identification;
 \Lean{} derives equality of the ordinary, theta, and log-shell log-volume
 readings across the environment and Gaussian sides from that identification
-and the copy-compatibility lemmas.  The same comparison is now connected to
+and the copy-compatibility lemmas.  The comparison is also stable under
+simultaneous Ob4 tensor-powering: the ordinary-source equality is preserved,
+the theta/log-shell comparison is rederived on the tensor-powered evaluation,
+and the two ordinary realified log-volume readings are multiplied by \(M\).
+The same comparison is now connected to
 the finite local-global restriction layer, reflecting the \(F\)-prime-strip
 formulation following Corollary 4.6(v): if the environment and Gaussian global
 objects are the degree projections of their ordinary divisor sources and their
@@ -1304,7 +1308,10 @@ The project currently proves the following source-facing results in \Lean{}:
   to \IUT{} II, Corollary 4.6(v), is now encoded as an evaluation package
   between two compatible copy systems.  The only stored bridge is equality of
   the ordinary divisor source; \Lean{} derives equality of the ordinary,
-  theta, and log-shell readings across the two sides.
+  theta, and log-shell readings across the two sides.  Simultaneous Ob4
+  tensor-powering preserves the stored ordinary-source equality, rederives the
+  theta/log-shell comparison, and multiplies the two ordinary realified
+  log-volume readings by \(M\).
 \item This evaluation package is now tied to the existing finite local-global
   restriction layer: if the two global objects are the degree projections of
   the ordinary environment/Gaussian divisor sources and the local restrictions

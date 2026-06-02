@@ -2010,6 +2010,45 @@ theorem endpoint
     evaluation.environmentThetaLogVolume_eq_gaussianThetaLogVolume,
     evaluation.environmentLogShellLogVolume_eq_gaussianLogShellLogVolume⟩
 
+def naiveFrobeniusTensorPower
+    (evaluation :
+      IUTStage1EnvironmentGaussianRealifiedFrobenioidEvaluation π)
+    (tensorDegree : Nat)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean) :
+    IUTStage1EnvironmentGaussianRealifiedFrobenioidEvaluation π :=
+  { environment :=
+      evaluation.environment.naiveFrobeniusTensorPower tensorDegree object,
+    gaussian := evaluation.gaussian.naiveFrobeniusTensorPower tensorDegree object,
+    evaluation_ordinary_eq := by
+      simp [
+        IUTStage1CompatibleRealifiedFrobenioidDivisorCopies.naiveFrobeniusTensorPower,
+        evaluation.evaluation_ordinary_eq] }
+
+theorem naiveFrobeniusTensorPower_endpoint
+    (evaluation :
+      IUTStage1EnvironmentGaussianRealifiedFrobenioidEvaluation π)
+    (tensorDegree : Nat)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean) :
+    let powered := evaluation.naiveFrobeniusTensorPower tensorDegree object
+    powered.gaussian.ordinary = powered.environment.ordinary ∧
+      powered.environment.theta.thetaDivisorLogVolume =
+        powered.gaussian.theta.thetaDivisorLogVolume ∧
+      powered.environment.logShell.logShellDivisorLogVolume =
+        powered.gaussian.logShell.logShellDivisorLogVolume ∧
+      powered.environment.ordinary.realifiedLogVolume =
+        (tensorDegree : Real) * evaluation.environment.ordinary.realifiedLogVolume ∧
+      powered.gaussian.ordinary.realifiedLogVolume =
+        (tensorDegree : Real) * evaluation.gaussian.ordinary.realifiedLogVolume := by
+  let powered := evaluation.naiveFrobeniusTensorPower tensorDegree object
+  exact
+    ⟨powered.evaluation_ordinary_eq,
+      powered.environmentThetaLogVolume_eq_gaussianThetaLogVolume,
+      powered.environmentLogShellLogVolume_eq_gaussianLogShellLogVolume,
+      evaluation.environment.ordinary.naiveFrobeniusTensorPower_realifiedLogVolume_eq_mul
+        tensorDegree object,
+      evaluation.gaussian.ordinary.naiveFrobeniusTensorPower_realifiedLogVolume_eq_mul
+        tensorDegree object⟩
+
 end IUTStage1EnvironmentGaussianRealifiedFrobenioidEvaluation
 
 /--

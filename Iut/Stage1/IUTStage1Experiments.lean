@@ -921,6 +921,24 @@ theorem environmentGaussianRealifiedFrobenioidEvaluation_endpoint
         evaluation.gaussian.logShell.logShellDivisorLogVolume :=
   evaluation.endpoint
 
+theorem environmentGaussianRealifiedFrobenioidNaiveTensorPower_endpoint
+    {π : Type u} [Fintype π]
+    (evaluation :
+      IUTStage1EnvironmentGaussianRealifiedFrobenioidEvaluation π)
+    (tensorDegree : Nat)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean) :
+    let powered := evaluation.naiveFrobeniusTensorPower tensorDegree object
+    powered.gaussian.ordinary = powered.environment.ordinary ∧
+      powered.environment.theta.thetaDivisorLogVolume =
+        powered.gaussian.theta.thetaDivisorLogVolume ∧
+      powered.environment.logShell.logShellDivisorLogVolume =
+        powered.gaussian.logShell.logShellDivisorLogVolume ∧
+      powered.environment.ordinary.realifiedLogVolume =
+        (tensorDegree : Real) * evaluation.environment.ordinary.realifiedLogVolume ∧
+      powered.gaussian.ordinary.realifiedLogVolume =
+        (tensorDegree : Real) * evaluation.gaussian.ordinary.realifiedLogVolume :=
+  evaluation.naiveFrobeniusTensorPower_endpoint tensorDegree object
+
 theorem realifiedFrobenioidKummerCompatibility_endpoint
     {kind : IUTStage1PlaceKind} {j : Nat}
     {source target :
