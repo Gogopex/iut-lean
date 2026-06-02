@@ -37219,6 +37219,51 @@ theorem realifiedFrobenioidPacket_endpoint
     source.forgetting_preserves_productLogVolume,
     source.packetCorrespondence_endpoint⟩
 
+/--
+Single-source Step (x) packet calibration endpoint.
+
+The realified-Frobenioid log-Kummer packet source now projects both faces of
+the packet correspondence: the source face identifies the packet local object
+with the `(Ind3)` source through the Kummer/forgetting product chain, while the
+target face identifies the theta average, `(Ind3)` target, and entry target
+with the packet-normalized capsule value.
+-/
+theorem realifiedFrobenioidPacket_calibration_endpoint
+    (source :
+      NonarchimedeanRealifiedFrobenioidLogKummerPacketSource
+        audited thetaAverage logKummer entry
+        holomorphicF holomorphicD monoAnalyticD) :
+    holomorphicD.toRealized.product.productLogVolume =
+        holomorphicF.toRealized.product.productLogVolume ∧
+      monoAnalyticD.toRealized.product.productLogVolume =
+        holomorphicD.toRealized.product.productLogVolume ∧
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        entry.sourceLogVolume.finiteLogVolume ∧
+      entry.sourceLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume ∧
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      thetaAverage = entry.targetLogVolume.finiteLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogKummerNonInterference =
+        true :=
+  ⟨source.kummer_preserves_productLogVolume,
+    source.forgetting_preserves_productLogVolume,
+    source.sourceCalibration.packetLocalObjectFinite_eq_entrySource,
+    source.toPacketCorrespondence.entrySource_eq_ind3Source
+      source.toKummerTransfer source.toForgettingTransfer,
+    source.targetCalibration.thetaAverage_eq_packetNormalized,
+    source.targetCalibration.ind3Target_eq_packetNormalized,
+    source.targetCalibration.entryTarget_eq_packetNormalized,
+    source.targetCalibration.thetaAverage_eq_entryTarget,
+    source.targetCalibration.entryTarget_eq_ind3Target,
+    source.toPacketCorrespondence.qPilotLogKummerNonInterference⟩
+
 theorem ofEntryTargetThetaAlignment_endpoint
     (entrySource :
       NonarchimedeanPacketNormalizedEntryTargetSource audited)
@@ -37721,6 +37766,57 @@ theorem thetaRootRealifiedEntry_endpoint
     source.realifiedEntrySource.thetaAverage_eq_entryTarget,
     source.realifiedEntrySource.entryTarget_eq_ind3Target,
     source.realifiedEntrySource.packetLocalObjectFinite_le_thetaAverage⟩
+
+/--
+Theta-root attached packet-calibration endpoint.
+
+This is the same source/target packet calibration as
+`realifiedFrobenioidPacket_calibration_endpoint`, with the bad-local
+theta-root label data included.  It is the current strongest Step (x) source
+projection before the Hodge/SHE/IPL/hull route consumes the entry.
+-/
+theorem thetaRootRealifiedEntry_packetCalibration_endpoint
+    (source :
+      NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
+        audited thetaAverage logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD) :
+    source.thetaRootSource.canonicalGenerator.canonicalGeneratorUpToSign ∧
+      source.thetaRootSource.canonicalFullLabel ≠
+        IUTStage1ZModCuspFullLabel.zero ∧
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        entry.sourceLogVolume.finiteLogVolume ∧
+      entry.sourceLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume ∧
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      thetaAverage = entry.targetLogVolume.finiteLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume ∧
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume <=
+        thetaAverage :=
+  by
+    rcases source.realifiedEntrySource.packetSource.realifiedFrobenioidPacket_calibration_endpoint
+      with
+      ⟨_kummer_preserves, _forgetting_preserves,
+        packet_eq_entry_source, entry_source_eq_ind3_source,
+        theta_eq_packet_normalized, ind3_target_eq_packet_normalized,
+        entry_target_eq_packet_normalized, theta_eq_entry_target,
+        entry_target_eq_ind3_target, _q_pilot_noninterference⟩
+    exact
+      ⟨source.thetaRootCanonicalGeneratorUpToSign,
+        source.thetaRootCanonicalFullLabel_ne_zero,
+        packet_eq_entry_source,
+        entry_source_eq_ind3_source,
+        theta_eq_packet_normalized,
+        ind3_target_eq_packet_normalized,
+        entry_target_eq_packet_normalized,
+        theta_eq_entry_target,
+        entry_target_eq_ind3_target,
+        source.realifiedEntrySource.packetLocalObjectFinite_le_thetaAverage⟩
 
 theorem ofThetaRootEntryMemPacketLocalAndTargetThetaAlignment_endpoint
     {logKummerId : LogKummerCorrespondenceId}

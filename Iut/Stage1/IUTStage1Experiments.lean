@@ -1213,6 +1213,43 @@ theorem realifiedFrobenioidLogKummerPacket_endpoint
         audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
   source.realifiedFrobenioidPacket_endpoint
 
+theorem realifiedFrobenioidLogKummerPacket_calibration_endpoint
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {thetaAverage : Real}
+    {logKummer : LogKummerCorrespondenceId}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    (source :
+      NonarchimedeanRealifiedFrobenioidLogKummerPacketSource
+        audited thetaAverage logKummer entry
+        holomorphicF holomorphicD monoAnalyticD) :
+    holomorphicD.toRealized.product.productLogVolume =
+        holomorphicF.toRealized.product.productLogVolume ∧
+      monoAnalyticD.toRealized.product.productLogVolume =
+        holomorphicD.toRealized.product.productLogVolume ∧
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        entry.sourceLogVolume.finiteLogVolume ∧
+      entry.sourceLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume ∧
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      thetaAverage = entry.targetLogVolume.finiteLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogKummerNonInterference =
+        true :=
+  source.realifiedFrobenioidPacket_calibration_endpoint
+
 theorem thetaRootRealifiedFrobenioidLogKummerEntry_endpoint
     {coric : Type u}
     {audited :
@@ -1244,6 +1281,44 @@ theorem thetaRootRealifiedFrobenioidLogKummerEntry_endpoint
       audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume <=
         thetaAverage :=
   source.thetaRootRealifiedEntry_endpoint
+
+theorem thetaRootRealifiedFrobenioidLogKummerEntry_calibration_endpoint
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {thetaAverage : Real}
+    {logKummer : LogKummerCorrespondenceId}
+    {l : PrimeGeFive} {F : Type u} [Field F]
+    {X C : HyperbolicOrbicurveModel F}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    (source :
+      NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
+        audited thetaAverage logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD) :
+    source.thetaRootSource.canonicalGenerator.canonicalGeneratorUpToSign ∧
+      source.thetaRootSource.canonicalFullLabel ≠
+        IUTStage1ZModCuspFullLabel.zero ∧
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        entry.sourceLogVolume.finiteLogVolume ∧
+      entry.sourceLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume ∧
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      thetaAverage = entry.targetLogVolume.finiteLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume ∧
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume <=
+        thetaAverage :=
+  source.thetaRootRealifiedEntry_packetCalibration_endpoint
 
 theorem hodgeArakelovThetaValueSource_constructsGaussianEvaluation
     {l : PrimeGeFive} {F : Type u} [Field F]
