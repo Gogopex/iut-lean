@@ -651,6 +651,9 @@ bridge equality with the package hull/determinant datum.
 The same endpoint is exposed at the Theorem 3.11 source-record level, so the
 possible-image union used by the canonical hull is the record's multiradial
 theta-image union before being identified with the package target union.
+A record-native specialization removes the arbitrary possible-image-family
+input: the family is \(i\mapsto P_i\) from the Theorem 3.11 source record, and
+\Lean{} proves that its set-theoretic union is the record's theta-image union.
 Below the packet layer, the code now has a first realified Frobenioid degree
 source.  A finite Frobenioid object carries a divisor degree, a unit
 log-volume, and their realified log-volume; a tensor-packet product may be
@@ -1210,6 +1213,9 @@ The project currently proves the following source-facing results in \Lean{}:
 \item This canonical-hull Ob4 endpoint is also public for the Theorem 3.11
   source constructor: the source record's theta possible-image union is the
   hull input before the package target-union identification is applied.
+\item A record-native specialization now derives that theta-image union from
+  the Theorem 3.11 record's own possible-image family, instead of accepting an
+  arbitrary image family plus a separate union equality.
 \item The Step (x)-to-Step (xi) upper-ray bridge can now be built directly
   from a certified possible-image hull approximant.  The determinant
   normalization is read from the approximant/determinant compatibility, rather
