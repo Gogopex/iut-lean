@@ -626,6 +626,11 @@ A further route removes the raw theta-source-to-labelled-average real equality:
 the labelled capsule source is aligned labelwise with the theta-source
 \(ZMod(\ell)\)-average, and \Lean{} derives equality of the two averages from
 the finite averaging formula.
+The labelled-average-to-packet-normalized equality is now also derived in the
+source layer: if each labelled capsule has the displayed local object, \Lean{}
+proves that the labelled average is that local object's finite log-volume, and
+direct packet-normalization then identifies it with the packet-normalized
+capsule value.
 The vertical-\(IQ\) route can now also be instantiated with a finite
 divisor/Frobenioid packet product on the mono-analytic side.  In this form the
 route constructs the theta-root attached realified log-Kummer entry source
@@ -1398,6 +1403,9 @@ The project currently proves the following source-facing results in \Lean{}:
 \item The theta-source-to-labelled-average equality can now be derived from
   labelwise agreement between the capsule-labelled source and the
   Hodge-descent theta-source \(ZMod(\ell)\)-average.
+\item The labelled-average-to-packet-normalized equality can now be derived
+  from labelled capsule local-object equality plus direct packet-normalization;
+  the integrated route exposes this stricter source boundary.
 \item The theta-root attached Step (x) source can now be constructed from the
   same finite divisor-product source and an exact vertical-\(IQ\) target.  The
   endpoint exposes the canonical bad-local theta-root label, Kummer/forgetting

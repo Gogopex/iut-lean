@@ -15775,6 +15775,32 @@ theorem normalizedLogVolume_le_const_of_capsule_le
     IUTStage1LabelAveragedProcessionLogVolume.average_le_const_of_forall_le
       data.toLabelAveraged hcapsule
 
+theorem capsuleLogVolume_eq_localObjectFinite
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (j : ZMod l.value) :
+    (data.capsule j).logVolume = data.localObject.finiteLogVolume := by
+  calc
+    (data.capsule j).logVolume =
+        (data.capsule j).localObject.finiteLogVolume :=
+      (data.capsule j).logVolume_eq
+    _ = data.localObject.finiteLogVolume := by
+      rw [data.capsule_local_object_eq j]
+
+theorem normalizedLogVolume_eq_localObjectFinite
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind) :
+    data.normalizedLogVolume = data.localObject.finiteLogVolume := by
+  haveI : Nonempty (ZMod l.value) := ⟨0⟩
+  have haverage :
+      data.toLabelAveraged.averageLogVolume =
+        (IUTStage1LabelAveragedProcessionLogVolume.constant
+          (label := ZMod l.value) data.localObject.finiteLogVolume).averageLogVolume :=
+    IUTStage1LabelAveragedProcessionLogVolume.average_eq_of_pointwise
+      (data₁ := data.toLabelAveraged)
+      (data₂ := IUTStage1LabelAveragedProcessionLogVolume.constant
+        (label := ZMod l.value) data.localObject.finiteLogVolume)
+      (fun j => data.capsuleLogVolume_eq_localObjectFinite j)
+  simpa [IUTStage1LabelAveragedProcessionLogVolume.constant] using haverage
+
 theorem zmod_labelled_procession_endpoint
     (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
     (t : ZMod l.value) :
@@ -18732,6 +18758,28 @@ theorem identifiedLogVolumeEstimate_localObject
   rfl
 
 end IUTStage1DirectPacketNormalizationData
+
+namespace IUTStage1ZModLabelledCapsuleFamilyLogVolume
+
+variable {l : PrimeGeFive} {kind : IUTStage1PlaceKind}
+
+theorem normalizedLogVolume_eq_packetState_normalizedLogVolume
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    {state : IUTStage1LocalTensorPacketLogVolumeState kind}
+    (directNormalization : IUTStage1DirectPacketNormalizationData state)
+    (localObject_eq_packetLocalObject :
+      data.localObject = state.localObject) :
+    data.normalizedLogVolume = state.capsuleFamily.normalizedLogVolume := by
+  calc
+    data.normalizedLogVolume = data.localObject.finiteLogVolume :=
+      data.normalizedLogVolume_eq_localObjectFinite
+    _ = state.localObject.finiteLogVolume := by
+      rw [localObject_eq_packetLocalObject]
+    _ = state.capsuleFamily.normalizedLogVolume :=
+      directNormalization.toPacketNormalizedCompatibility
+        |>.localObject_finiteLogVolume_eq_normalizedLogVolume
+
+end IUTStage1ZModLabelledCapsuleFamilyLogVolume
 
 namespace IUTStage1LocalTensorDirectSummandPacketState
 
@@ -39269,6 +39317,28 @@ variable
   {part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l}
   {audited : IUTStage1PlaceAuditedDirectSummandPacketChoice coric kind}
 
+def ofDirectPacketNormalization
+    (labelledAverage :
+      IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (directNormalization :
+      IUTStage1DirectPacketNormalizationData
+        audited.choice.local_tensor_state.packetState)
+    (labelledLocalObject_eq_packetLocalObject :
+      labelledAverage.localObject =
+        audited.choice.local_tensor_state.packetState.localObject)
+    (labelledAverage_eq_thetaSourceLabelwise :
+      ∀ j : ZMod l.value,
+        labelledAverage.toLabelAveraged.normalizedLogVolume j =
+          (part.insulated_route.theta_source.compatible_average.zmod_cusp_audit
+            |>.averaged_audit |>.averagedLogVolume audited).normalizedLogVolume j) :
+    StepXThetaSourceLabelledCapsuleAverageAlignment part audited :=
+  { labelledAverage := labelledAverage,
+    labelledAverage_eq_packetNormalized :=
+      labelledAverage.normalizedLogVolume_eq_packetState_normalizedLogVolume
+        directNormalization labelledLocalObject_eq_packetLocalObject,
+    labelledAverage_eq_thetaSourceLabelwise :=
+      labelledAverage_eq_thetaSourceLabelwise }
+
 theorem labelledAverage_average_eq_thetaSourceAverage
     (alignment :
       StepXThetaSourceLabelledCapsuleAverageAlignment part audited) :
@@ -39312,6 +39382,37 @@ theorem thetaSourceLabelledAverage_endpoint
   ⟨alignment.thetaSourceAverage_eq_labelledAverage,
     alignment.labelledAverage_eq_packetNormalized,
     alignment.thetaSourceAverage_eq_packetNormalized⟩
+
+theorem ofDirectPacketNormalization_endpoint
+    (labelledAverage :
+      IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (directNormalization :
+      IUTStage1DirectPacketNormalizationData
+        audited.choice.local_tensor_state.packetState)
+    (labelledLocalObject_eq_packetLocalObject :
+      labelledAverage.localObject =
+        audited.choice.local_tensor_state.packetState.localObject)
+    (labelledAverage_eq_thetaSourceLabelwise :
+      ∀ j : ZMod l.value,
+        labelledAverage.toLabelAveraged.normalizedLogVolume j =
+          (part.insulated_route.theta_source.compatible_average.zmod_cusp_audit
+            |>.averaged_audit |>.averagedLogVolume audited).normalizedLogVolume j) :
+    let alignment :=
+      ofDirectPacketNormalization
+        labelledAverage directNormalization labelledLocalObject_eq_packetLocalObject
+        labelledAverage_eq_thetaSourceLabelwise;
+    alignment.labelledAverage.normalizedLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        alignment.labelledAverage.normalizedLogVolume ∧
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  by
+    intro alignment
+    exact
+      ⟨alignment.labelledAverage_eq_packetNormalized,
+        alignment.thetaSourceAverage_eq_labelledAverage,
+        alignment.thetaSourceAverage_eq_packetNormalized⟩
 
 end StepXThetaSourceLabelledCapsuleAverageAlignment
 
@@ -47951,6 +48052,96 @@ theorem boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullSourceAlignedThet
     holomorphic_structure_forgotten sourceAlignment orderedAlignment
     thetaLabelledAlignment.thetaSourceAverage_eq_labelledAverage cTheta
     thetaSigned_le_cTheta_absLogQ
+
+/--
+Source-aligned labelled-average route with packet-normalized equality derived
+from direct packet normalization.
+
+The caller supplies the labelled capsule source, its local-object descent to
+the packet local object, direct packet-normalization data for that packet, and
+labelwise agreement with the Hodge-descent theta source.  The equality between
+the labelled average and the packet-normalized capsule value is then derived
+inside `StepXThetaSourceLabelledCapsuleAverageAlignment`.
+-/
+theorem boundarySignedEqualityOrStrictCTheta_of_sourceAlignedDirectLabelledAverage
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    {record : IUTStage1Theorem311MultiradialSourceRecord packageN}
+    {F : Type v} [Field F] {X C : HyperbolicOrbicurveModel F}
+    (alignment :
+      IUTStage1HodgeSHEIPLHullRouteLogVolumeAlignment
+        part audited record X C)
+    (source_profile_eq :
+      profile = IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    (thetaRootSource : IUTStage1ThetaRootCuspLabelSourcePackage l X C)
+    (labelledAverage :
+      IUTStage1ZModLabelledCapsuleFamilyLogVolume
+        l IUTStage1PlaceKind.nonarchimedean)
+    (directNormalization :
+      IUTStage1DirectPacketNormalizationData
+        audited.choice.local_tensor_state.packetState)
+    (labelledLocalObject_eq_packetLocalObject :
+      labelledAverage.localObject =
+        audited.choice.local_tensor_state.packetState.localObject)
+    (labelledAverage_eq_thetaSourceLabelwise :
+      ∀ j : ZMod l.value,
+        labelledAverage.toLabelAveraged.normalizedLogVolume j =
+          (part.insulated_route.theta_source.compatible_average.zmod_cusp_audit
+            |>.averaged_audit |>.averagedLogVolume audited).normalizedLogVolume j)
+    (upperSemiEntry :
+      NonarchimedeanPacketNormalizedUpperSemiEntrySource audited)
+    (kummerCompatibility :
+      IUTStage1RealifiedFrobenioidKummerCompatibility
+        holomorphicF holomorphicD)
+    (forgettingCompatibility :
+      IUTStage1RealifiedFrobenioidKummerCompatibility
+        holomorphicD monoAnalyticD)
+    (holomorphicF_realization :
+      holomorphicF.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.holomorphicF)
+    (holomorphicD_realization :
+      holomorphicD.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.holomorphicD)
+    (monoAnalyticD_realization :
+      monoAnalyticD.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.monoAnalyticD)
+    (holomorphicStructureForgotten : Prop)
+    (holomorphic_structure_forgotten : holomorphicStructureForgotten)
+    (sourceAlignment :
+      NonarchimedeanLogKummerPacketLocalSourceAlignment
+        audited upperSemiEntry.toEntry monoAnalyticD.toRealized)
+    (orderedAlignment : Ind3OrderedRealLineAlignment part audited)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    (packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+        packageN.preLedger.thetaSigned < 0) ∨
+      (-1 : Real) < cTheta :=
+  part.boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullSourceAlignedThetaLabelledAverage
+    profile audited alignment source_profile_eq thetaRootSource upperSemiEntry
+    kummerCompatibility forgettingCompatibility holomorphicF_realization
+    holomorphicD_realization monoAnalyticD_realization holomorphicStructureForgotten
+    holomorphic_structure_forgotten sourceAlignment orderedAlignment
+    (StepXThetaSourceLabelledCapsuleAverageAlignment.ofDirectPacketNormalization
+      labelledAverage directNormalization labelledLocalObject_eq_packetLocalObject
+      labelledAverage_eq_thetaSourceLabelwise)
+    cTheta thetaSigned_le_cTheta_absLogQ
 
 /--
 Hodge/SHE/IPL/hull route through a packet-normalized Step (x) theta-source
