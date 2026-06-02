@@ -2482,6 +2482,93 @@ theorem productLogVolume_eq_of_realifiedLogVolume_eq
 end IUTStage1RealifiedFrobenioidTensorPacketProductSource
 
 /--
+Finite divisor-degree source for a tensor-packet product.
+
+IUT III uses products over `v_Q` of tensor packets of log-shells to compute
+global arithmetic degrees of objects in the realified Frobenioid.  This finite
+source records the case in which each base-valuation packet factor is already
+the real reading of the corresponding divisor-prime contribution.  The global
+product log-volume is then derived from the finite divisor degree rather than
+stored as an independent Frobenioid compatibility assertion.
+-/
+structure IUTStage1FiniteDivisorTensorPacketProductSource
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    (product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j) where
+  divisor :
+    IUTStage1FiniteRealifiedFrobenioidDivisorSource (Fin product.baseCount)
+  unitLogVolume_zero : divisor.unitLogVolume = 0
+  packet_logVolume_eq_divisorContribution :
+    ∀ base : Fin product.baseCount,
+      (product.packet base).tensorPacketLogVolume =
+        ((divisor.primeMultiplicity base : Int) *
+          divisor.primeDegree base : Real)
+
+namespace IUTStage1FiniteDivisorTensorPacketProductSource
+
+variable {kind : IUTStage1PlaceKind} {j : Nat}
+variable {product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j}
+
+theorem productLogVolume_eq_divisorDegree
+    (source :
+      IUTStage1FiniteDivisorTensorPacketProductSource product) :
+    product.productLogVolume =
+      (source.divisor.divisorDegree : Real) := by
+  calc
+    product.productLogVolume =
+        Finset.univ.sum fun base : Fin product.baseCount =>
+          (product.packet base).tensorPacketLogVolume :=
+      product.product_eq_sum
+    _ =
+        Finset.univ.sum fun base : Fin product.baseCount =>
+          ((source.divisor.primeMultiplicity base : Int) *
+            source.divisor.primeDegree base : Real) := by
+      apply Finset.sum_congr rfl
+      intro base _hbase
+      exact source.packet_logVolume_eq_divisorContribution base
+    _ = (source.divisor.divisorDegree : Real) := by
+      simp [IUTStage1FiniteRealifiedFrobenioidDivisorSource.divisorDegree]
+
+theorem productLogVolume_eq_realified
+    (source :
+      IUTStage1FiniteDivisorTensorPacketProductSource product) :
+    product.productLogVolume =
+      source.divisor.realifiedLogVolume := by
+  rw [source.productLogVolume_eq_divisorDegree]
+  simp [IUTStage1FiniteRealifiedFrobenioidDivisorSource.realifiedLogVolume,
+    source.unitLogVolume_zero]
+
+def toRealifiedFrobenioidTensorPacketProductSource
+    (source :
+      IUTStage1FiniteDivisorTensorPacketProductSource product)
+    (realization : IUTStage1TensorPacketRealizationKind)
+    (theater : QualitativeData.HodgeTheaterId) :
+    IUTStage1RealifiedFrobenioidTensorPacketProductSource kind j :=
+  { realization := realization,
+    theater := theater,
+    product := product,
+    frobenioidDegree := source.divisor.toDegreeObject,
+    productLogVolume_eq_realified := by
+      exact source.productLogVolume_eq_realified }
+
+theorem toRealifiedFrobenioidTensorPacketProductSource_endpoint
+    (source :
+      IUTStage1FiniteDivisorTensorPacketProductSource product)
+    (realization : IUTStage1TensorPacketRealizationKind)
+    (theater : QualitativeData.HodgeTheaterId) :
+    let realified :=
+      source.toRealifiedFrobenioidTensorPacketProductSource realization theater
+    realified.product.productLogVolume =
+        source.divisor.realifiedLogVolume ∧
+      realified.frobenioidDegree =
+        source.divisor.toDegreeObject ∧
+      realified.toRealized.product = product :=
+  by
+    intro realified
+    exact ⟨source.productLogVolume_eq_realified, rfl, rfl⟩
+
+end IUTStage1FiniteDivisorTensorPacketProductSource
+
+/--
 Tensor-product source at the realized tensor-packet layer.
 
 The record does not manufacture a product of base-valuation packets.  Instead it

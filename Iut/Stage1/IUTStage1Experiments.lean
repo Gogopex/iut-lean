@@ -1098,6 +1098,23 @@ theorem environmentGaussianRealifiedFrobenioidNaiveTensorPower_endpoint
         (tensorDegree : Real) * evaluation.gaussian.ordinary.realifiedLogVolume :=
   evaluation.naiveFrobeniusTensorPower_endpoint tensorDegree object
 
+theorem finiteDivisorTensorPacketProductSource_endpoint
+    {kind : IUTStage1PlaceKind} {j : Nat}
+    {product : IUTStage1BaseValuationTensorPacketProductLogVolume kind j}
+    (source :
+      IUTStage1FiniteDivisorTensorPacketProductSource product)
+    (realization : IUTStage1TensorPacketRealizationKind)
+    (theater : QualitativeData.HodgeTheaterId) :
+    let realified :=
+      source.toRealifiedFrobenioidTensorPacketProductSource realization theater
+    realified.product.productLogVolume =
+        source.divisor.realifiedLogVolume ∧
+      realified.frobenioidDegree =
+        source.divisor.toDegreeObject ∧
+      realified.toRealized.product = product :=
+  source.toRealifiedFrobenioidTensorPacketProductSource_endpoint
+    realization theater
+
 theorem realifiedFrobenioidKummerCompatibility_endpoint
     {kind : IUTStage1PlaceKind} {j : Nat}
     {source target :

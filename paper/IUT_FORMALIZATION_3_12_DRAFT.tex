@@ -822,9 +822,12 @@ input: the family is \(i\mapsto P_i\) from the Theorem 3.11 source record, and
 \Lean{} proves that its set-theoretic union is the record's theta-image union.
 Below the packet layer, the code now has a first realified Frobenioid degree
 source.  A finite Frobenioid object carries a divisor degree, a unit
-log-volume, and their realified log-volume; a tensor-packet product may be
-declared to have product log-volume equal to this realified value.  A finite
-divisor-monoid source now computes this divisor degree from prime
+log-volume, and their realified log-volume.  A finite divisor-product source
+now records a tensor-packet product over base valuations whose packet factors
+are the real readings of the corresponding divisor-prime contributions; from
+these local equalities, \Lean{} derives that the packet product log-volume is
+the realified divisor log-volume.  A finite divisor-monoid source computes this
+divisor degree from prime
 multiplicities and prime degrees, matching the finite shadow of the divisor
 monoid in \IUT{} I, Example 3.5.  The same source now has a divisor-level
 tensor product that adds multiplicities and realified log-volumes when the
@@ -1306,6 +1309,11 @@ The project currently proves the following source-facing results in \Lean{}:
 \item The realified Frobenioid degree object can now be constructed from a
   finite divisor-monoid source: \Lean{} computes the divisor degree as
   \(\sum_p m_p\deg(p)\) before adding the unit log-volume.
+\item A finite divisor-product source now turns a base-valuation tensor-packet
+  product into a realified Frobenioid packet source when every packet factor is
+  the real reading of its divisor-prime contribution and the unit term is zero.
+  The equality between packet product log-volume and realified Frobenioid
+  log-volume is derived from the finite sum, not supplied as a separate field.
 \item The finite divisor-monoid source now has its own tensor product:
   multiplicities and unit log-volumes add, and \Lean{} proves additivity of the
   induced divisor degree and realified log-volume.
