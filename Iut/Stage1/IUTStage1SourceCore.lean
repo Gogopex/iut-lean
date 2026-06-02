@@ -4236,6 +4236,26 @@ noncomputable def ofWeightedDeterminant
     approximant_eq_normalized_determinant :=
       compatibility.approximant_eq_projected_normalized }
 
+noncomputable def ofExactWeightedDeterminant
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (exact :
+      IUTStage1ExactHullLogVolumeApproximant
+        hullData (⋃ i, possibleThetaImage i))
+    (q_subset_exact :
+      qPilotRegion ⊆ exact.approximant.approximant)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        exact.approximant determinantSource) :
+    IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι :=
+  ofWeightedDeterminant
+    hullData possibleThetaImage qPilotRegion exact.approximant
+    q_subset_exact determinantSource compatibility
+
 noncomputable def ofCanonicalHullWeightedDeterminant
     {β : Type w} [Fintype β]
     (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
@@ -4561,6 +4581,80 @@ theorem ofWeightedDeterminant_endpoint
             using data.thetaImageUnionLogVolume_le_determinant,
         by
           simpa [ofWeightedDeterminant]
+            using
+              data.toHullDetPilotUpperRayLogVolume
+                |>.qPilotLogVolume_le_determinant⟩
+
+theorem ofExactWeightedDeterminant_thetaImageUnionLogVolume_eq
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (exact :
+      IUTStage1ExactHullLogVolumeApproximant
+        hullData (⋃ i, possibleThetaImage i))
+    (q_subset_exact :
+      qPilotRegion ⊆ exact.approximant.approximant)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        exact.approximant determinantSource) :
+    let data :=
+      ofExactWeightedDeterminant hullData possibleThetaImage qPilotRegion
+        exact q_subset_exact determinantSource compatibility;
+    data.thetaImageUnionLogVolume = data.approximantLogVolume :=
+  by
+    intro data
+    simpa [data, ofExactWeightedDeterminant, ofWeightedDeterminant,
+      thetaImageUnionLogVolume, approximantLogVolume, approximantRegion]
+      using exact.regionLogVolume_eq_approximantLogVolume
+
+theorem ofExactWeightedDeterminant_endpoint
+    {β : Type w} [Fintype β]
+    (hullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (possibleThetaImage : ι -> Set α)
+    (qPilotRegion : Set α)
+    (exact :
+      IUTStage1ExactHullLogVolumeApproximant
+        hullData (⋃ i, possibleThetaImage i))
+    (q_subset_exact :
+      qPilotRegion ⊆ exact.approximant.approximant)
+    (determinantSource :
+      IUTStage1ArithmeticVectorBundleWeightedDeterminantSource β)
+    (compatibility :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        exact.approximant determinantSource) :
+    let data :=
+      ofExactWeightedDeterminant hullData possibleThetaImage qPilotRegion
+        exact q_subset_exact determinantSource compatibility;
+    data.thetaImageUnionLogVolume = data.approximantLogVolume ∧
+      data.approximantLogVolume <= data.thetaHullLogVolume ∧
+      data.qPilotLogVolume <= data.approximantLogVolume ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaImageUnionLogVolume =
+        determinantSource.determinantLogVolume ∧
+      data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume <=
+        determinantSource.determinantLogVolume :=
+  by
+    intro data
+    have htheta :
+        data.thetaImageUnionLogVolume = data.approximantLogVolume :=
+      ofExactWeightedDeterminant_thetaImageUnionLogVolume_eq
+        hullData possibleThetaImage qPilotRegion exact q_subset_exact
+        determinantSource compatibility
+    exact
+      ⟨htheta,
+        data.approximantLogVolume_le_thetaHullLogVolume,
+        data.qPilotLogVolume_le_approximantLogVolume,
+        data.qPilotLogVolume_le_thetaHullLogVolume,
+        by
+          rw [htheta]
+          simpa [data, ofExactWeightedDeterminant, ofWeightedDeterminant,
+            approximantLogVolume, approximantRegion]
+            using compatibility.approximant_eq_determinantLogVolume,
+        by
+          simpa [data, ofExactWeightedDeterminant, ofWeightedDeterminant]
             using
               data.toHullDetPilotUpperRayLogVolume
                 |>.qPilotLogVolume_le_determinant⟩

@@ -611,6 +611,10 @@ The \(\Xi(P)\)-part of Remark 3.9.5(iii) is now represented at the same
 finite level: an exact hull approximant is a \(\Phi(P)\)-approximant \(H\)
 with \(\mu_{\log}(H)=\mu_{\log}(P)\).  When \(P\) is already closed under
 the hull operator, \Lean{} constructs the canonical exact approximant.
+The possible-image Step (xi) source can now also be built from such an exact
+approximant and a weighted determinant source; in that route \Lean{} derives
+\(\mu_{\log}(P)=\mu_{\log}(H)=\det_{\log}\), rather than only the inequality
+\(\mu_{\log}(P)\le\mu_{\log}(H)\).
 The canonical hull \(\phi(P)\) is itself an approximant, and every approximant
 is fixed by hull formation.  This is the compactness guard emphasized in the
 paper: the indeterminacy in choosing a hull approximant remains inside
