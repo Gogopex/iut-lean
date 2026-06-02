@@ -6410,6 +6410,110 @@ theorem endpoint
 end IUTStage1EnvironmentGaussianLocalEvaluation
 
 /--
+Finite `F`-prime-strip evaluation for the environment/Gaussian comparison.
+
+In the prime-strip formulation following IUT II, Corollary 4.6(v), the
+environment and Gaussian realified Frobenioids give rise to `F`-prime-strips
+equipped with bijections `Prime(Cenv) ≃ V` and `Prime(Cgau) ≃ V`; the
+evaluation isomorphism between the prime-strips is compatible with these
+bijections.  This finite record keeps that prime-index skeleton and connects it
+to the local log-volume compatibility already proved for the corresponding
+environment/Gaussian local evaluation.
+-/
+structure IUTStage1EnvironmentGaussianFPrimeStripEvaluation
+    (Penv Pgau V : Type u) [Fintype Penv] [Fintype Pgau] [Fintype V] where
+  localEvaluation : IUTStage1EnvironmentGaussianLocalEvaluation V
+  environmentPrimeToPlace : Penv ≃ V
+  gaussianPrimeToPlace : Pgau ≃ V
+  primeEvaluation : Penv ≃ Pgau
+  prime_place_compatible :
+    ∀ p : Penv,
+      gaussianPrimeToPlace (primeEvaluation p) = environmentPrimeToPlace p
+
+namespace IUTStage1EnvironmentGaussianFPrimeStripEvaluation
+
+variable {Penv Pgau V : Type u} [Fintype Penv] [Fintype Pgau] [Fintype V]
+
+theorem gaussianPlaceOfEvaluation_eq_environmentPlace
+    (strip :
+      IUTStage1EnvironmentGaussianFPrimeStripEvaluation Penv Pgau V)
+    (p : Penv) :
+    strip.gaussianPrimeToPlace (strip.primeEvaluation p) =
+      strip.environmentPrimeToPlace p :=
+  strip.prime_place_compatible p
+
+theorem gaussianRestrictedLogVolume_at_evaluatedPrime_eq_environment
+    (strip :
+      IUTStage1EnvironmentGaussianFPrimeStripEvaluation Penv Pgau V)
+    (p : Penv) :
+    (strip.localEvaluation.gaussianLocal.localization
+        (strip.gaussianPrimeToPlace (strip.primeEvaluation p))).restrictedGlobalPrimeLogVolume =
+      (strip.localEvaluation.environmentLocal.localization
+        (strip.environmentPrimeToPlace p)).restrictedGlobalPrimeLogVolume := by
+  rw [strip.gaussianPlaceOfEvaluation_eq_environmentPlace p]
+  exact
+    strip.localEvaluation.localRestrictedLogVolume_eq_environment
+      (strip.environmentPrimeToPlace p)
+
+theorem gaussianExtensionDegree_at_evaluatedPrime_eq_environment
+    (strip :
+      IUTStage1EnvironmentGaussianFPrimeStripEvaluation Penv Pgau V)
+    (p : Penv) :
+    (strip.localEvaluation.gaussianLocal.localization
+        (strip.gaussianPrimeToPlace (strip.primeEvaluation p))).extensionDegree =
+      (strip.localEvaluation.environmentLocal.localization
+        (strip.environmentPrimeToPlace p)).extensionDegree := by
+  rw [strip.gaussianPlaceOfEvaluation_eq_environmentPlace p]
+  exact
+    strip.localEvaluation.localExtensionDegree_eq_environment
+      (strip.environmentPrimeToPlace p)
+
+theorem gaussianLocalLogVolume_at_evaluatedPrime_eq_environment
+    (strip :
+      IUTStage1EnvironmentGaussianFPrimeStripEvaluation Penv Pgau V)
+    (p : Penv) :
+    (strip.localEvaluation.gaussianLocal.localObject
+        (strip.gaussianPrimeToPlace (strip.primeEvaluation p))).realifiedLogVolume =
+      (strip.localEvaluation.environmentLocal.localObject
+        (strip.environmentPrimeToPlace p)).realifiedLogVolume := by
+  rw [strip.gaussianPlaceOfEvaluation_eq_environmentPlace p]
+  exact
+    strip.localEvaluation.gaussianLocalLogVolume_eq_environment
+      (strip.environmentPrimeToPlace p)
+
+theorem endpoint
+    (strip :
+      IUTStage1EnvironmentGaussianFPrimeStripEvaluation Penv Pgau V) :
+    strip.localEvaluation.gaussianLocal.globalObject.realifiedLogVolume =
+        strip.localEvaluation.environmentLocal.globalObject.realifiedLogVolume ∧
+      ∀ p : Penv,
+        strip.gaussianPrimeToPlace (strip.primeEvaluation p) =
+            strip.environmentPrimeToPlace p ∧
+          (strip.localEvaluation.gaussianLocal.localization
+              (strip.gaussianPrimeToPlace
+                (strip.primeEvaluation p))).restrictedGlobalPrimeLogVolume =
+            (strip.localEvaluation.environmentLocal.localization
+              (strip.environmentPrimeToPlace p)).restrictedGlobalPrimeLogVolume ∧
+          (strip.localEvaluation.gaussianLocal.localization
+              (strip.gaussianPrimeToPlace
+                (strip.primeEvaluation p))).extensionDegree =
+            (strip.localEvaluation.environmentLocal.localization
+              (strip.environmentPrimeToPlace p)).extensionDegree ∧
+          (strip.localEvaluation.gaussianLocal.localObject
+              (strip.gaussianPrimeToPlace
+                (strip.primeEvaluation p))).realifiedLogVolume =
+            (strip.localEvaluation.environmentLocal.localObject
+              (strip.environmentPrimeToPlace p)).realifiedLogVolume :=
+  ⟨strip.localEvaluation.gaussianGlobalLogVolume_eq_environment,
+    fun p =>
+      ⟨strip.gaussianPlaceOfEvaluation_eq_environmentPlace p,
+        strip.gaussianRestrictedLogVolume_at_evaluatedPrime_eq_environment p,
+        strip.gaussianExtensionDegree_at_evaluatedPrime_eq_environment p,
+        strip.gaussianLocalLogVolume_at_evaluatedPrime_eq_environment p⟩⟩
+
+end IUTStage1EnvironmentGaussianFPrimeStripEvaluation
+
+/--
 Local-global collection equipped with structure morphisms to the global object.
 
 Remark 3.9.5(ix), (cQ3), describes local Frobenioid objects equipped with

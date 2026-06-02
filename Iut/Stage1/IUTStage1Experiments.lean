@@ -187,6 +187,32 @@ theorem environmentGaussianLocalEvaluation_endpoint
             (comparison.environmentLocal.localObject v).realifiedLogVolume :=
   comparison.endpoint
 
+theorem environmentGaussianFPrimeStripEvaluation_endpoint
+    {Penv Pgau V : Type u} [Fintype Penv] [Fintype Pgau] [Fintype V]
+    (strip :
+      IUTStage1EnvironmentGaussianFPrimeStripEvaluation Penv Pgau V) :
+    strip.localEvaluation.gaussianLocal.globalObject.realifiedLogVolume =
+        strip.localEvaluation.environmentLocal.globalObject.realifiedLogVolume ∧
+      ∀ p : Penv,
+        strip.gaussianPrimeToPlace (strip.primeEvaluation p) =
+            strip.environmentPrimeToPlace p ∧
+          (strip.localEvaluation.gaussianLocal.localization
+              (strip.gaussianPrimeToPlace
+                (strip.primeEvaluation p))).restrictedGlobalPrimeLogVolume =
+            (strip.localEvaluation.environmentLocal.localization
+              (strip.environmentPrimeToPlace p)).restrictedGlobalPrimeLogVolume ∧
+          (strip.localEvaluation.gaussianLocal.localization
+              (strip.gaussianPrimeToPlace
+                (strip.primeEvaluation p))).extensionDegree =
+            (strip.localEvaluation.environmentLocal.localization
+              (strip.environmentPrimeToPlace p)).extensionDegree ∧
+          (strip.localEvaluation.gaussianLocal.localObject
+              (strip.gaussianPrimeToPlace
+                (strip.primeEvaluation p))).realifiedLogVolume =
+            (strip.localEvaluation.environmentLocal.localObject
+              (strip.environmentPrimeToPlace p)).realifiedLogVolume :=
+  strip.endpoint
+
 theorem localGlobalFrobenioidStructureMorphismCollection_endpoint
     {V : Type u} [Fintype V]
     (source :

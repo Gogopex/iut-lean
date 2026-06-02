@@ -740,8 +740,14 @@ formulation following Corollary 4.6(v): if the environment and Gaussian global
 objects are the degree projections of their ordinary divisor sources and their
 local restrictions agree pointwise, then \Lean{} derives equality of the
 global realified log-volumes and of all local restricted log-volume readings.
-A
-finite tensor-product operation on these degree objects adds divisor degrees
+The prime-index part of the same \(F\)-prime-strip statement is now explicit:
+finite prime-label types for \(C_{\mathrm{env}}\) and \(C_{\mathrm{gau}}\)
+come with bijections to the common valuation set \(V\), and the evaluation
+map between prime labels is required to commute with these bijections.
+\Lean{} then transports the local compatibility theorem along this
+prime-place square, deriving equality of restricted and local realified
+log-volumes at evaluated primes.
+A finite tensor-product operation on these degree objects adds divisor degrees
 and unit log-volumes, and \Lean{} proves that the realified log-volume of the
 tensor product is the sum of the two realified log-volumes.  This operation is
 also lifted to the tensor-packet source layer: if an existing tensor-packet
@@ -1135,6 +1141,12 @@ The project currently proves the following source-facing results in \Lean{}:
   the ordinary environment/Gaussian divisor sources and the local restrictions
   agree at every \(v\), then \Lean{} derives equality of the global realified
   log-volume and of the pointwise local restricted log-volume readings.
+\item The prime-index skeleton of the corresponding \(F\)-prime-strip
+  evaluation is now explicit: finite prime-label types for
+  \(C_{\mathrm{env}}\) and \(C_{\mathrm{gau}}\) carry bijections to \(V\), and
+  the evaluation equivalence between prime labels must commute with these
+  bijections.  \Lean{} transports the local compatibility theorem along this
+  square to obtain equality at evaluated primes.
 \item The realified Frobenioid degree layer now has finite morphisms: divisor
   and unit shifts determine the target realified log-volume, identity has zero
   shift, and composition adds both shifts.
