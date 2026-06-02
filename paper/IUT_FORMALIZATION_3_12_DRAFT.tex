@@ -539,6 +539,10 @@ single Step (x) alignment object: the constant \(ZMod(\ell)\)
 packet-normalized route and the proof that it has the same theta source as the
 Hodge-descent route are bundled before \Lean{} derives the
 theta-average-to-packet-normalized equality used by the final corridor.
+The ordered-real-line form now has the same source-aligned boundary: the
+packet-local source-alignment object and realified Kummer/forgetting
+compatibility construct the source calibration internally before the matched
+theta-target alignment is used.
 The Milestone 2 hull layer now contains a direct formalization of
 Remark 3.9.5(iii)'s approximant family.  For a region \(P\), an approximant
 record carries a hull \(H\), proves \(H\subseteq\phi(P)\), and proves
@@ -1186,6 +1190,10 @@ The project currently proves the following source-facing results in \Lean{}:
   theta-target \((\Ind3)\) real equalities are extracted from one matched-scale
   ordered transport alignment, so they are no longer accepted as unrelated
   route inputs at this boundary.
+\item The ordered packet-normalized route now has a source-aligned form:
+  packet-local source alignment plus realified Kummer/forgetting compatibility
+  construct the source calibration internally before the route enters the
+  theta-root attached Step (x) source.
 \item In the ordered form, the packet-normalized theta calibration can now be
   obtained from a constant \(ZMod(\ell)\) packet-normalized route.  The theorem
   requires equality of the Hodge-descent theta source with the packet-normalized
