@@ -2627,6 +2627,112 @@ theorem toRegionHullOperator_endpoint
 end IUTStage1HolomorphicHullLogVolumeShadow
 
 /--
+Finite Ob9 realified semi-simplification correspondence for hull log-volumes.
+
+Remark 3.9.5(vii), (Ob9), says that after passing to realified
+semi-simplifications, the quotient operation induces a natural bijection
+between log-volumes of hulls on the domain and codomain sides of the log-link.
+This record keeps exactly the finite hull-level content: closed hulls are sent
+to closed hulls in both directions, the two maps are inverse on closed hulls,
+and log-volume is preserved on closed hulls.
+-/
+structure IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+    {α : Type u} {β : Type v}
+    (sourceHullData : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (targetHullData : IUTStage1HolomorphicHullLogVolumeShadow β) where
+  forwardHull : Set α -> Set β
+  inverseHull : Set β -> Set α
+  forward_closed :
+    ∀ {H : Set α},
+      sourceHullData.hull.IsClosed H ->
+        targetHullData.hull.IsClosed (forwardHull H)
+  inverse_closed :
+    ∀ {K : Set β},
+      targetHullData.hull.IsClosed K ->
+        sourceHullData.hull.IsClosed (inverseHull K)
+  inverse_forward_on_closed :
+    ∀ {H : Set α},
+      sourceHullData.hull.IsClosed H ->
+        inverseHull (forwardHull H) = H
+  forward_inverse_on_closed :
+    ∀ {K : Set β},
+      targetHullData.hull.IsClosed K ->
+        forwardHull (inverseHull K) = K
+  forward_logVolume_eq :
+    ∀ {H : Set α},
+      sourceHullData.hull.IsClosed H ->
+        targetHullData.logVolume (forwardHull H) =
+          sourceHullData.logVolume H
+
+namespace IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+
+variable {α : Type u} {β : Type v}
+variable {sourceHullData : IUTStage1HolomorphicHullLogVolumeShadow α}
+variable {targetHullData : IUTStage1HolomorphicHullLogVolumeShadow β}
+
+theorem inverse_logVolume_eq
+    (corr :
+      IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+        sourceHullData targetHullData)
+    {K : Set β}
+    (hclosed : targetHullData.hull.IsClosed K) :
+    sourceHullData.logVolume (corr.inverseHull K) =
+      targetHullData.logVolume K := by
+  have hforward :=
+    corr.forward_logVolume_eq (corr.inverse_closed hclosed)
+  rw [corr.forward_inverse_on_closed hclosed] at hforward
+  exact hforward.symm
+
+theorem forward_hullRegion_closed
+    (corr :
+      IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+        sourceHullData targetHullData)
+    (region : Set α) :
+    targetHullData.hull.IsClosed
+      (corr.forwardHull (sourceHullData.hullRegion region)) :=
+  corr.forward_closed (sourceHullData.hull.isClosed_closure region)
+
+theorem forward_hullRegion_logVolume_eq
+    (corr :
+      IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+        sourceHullData targetHullData)
+    (region : Set α) :
+    targetHullData.logVolume
+        (corr.forwardHull (sourceHullData.hullRegion region)) =
+      sourceHullData.logVolume (sourceHullData.hullRegion region) :=
+  corr.forward_logVolume_eq (sourceHullData.hull.isClosed_closure region)
+
+theorem closedHull_endpoint
+    (corr :
+      IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+        sourceHullData targetHullData)
+    {H : Set α}
+    (hclosed : sourceHullData.hull.IsClosed H) :
+    targetHullData.hull.IsClosed (corr.forwardHull H) ∧
+      corr.inverseHull (corr.forwardHull H) = H ∧
+      targetHullData.logVolume (corr.forwardHull H) =
+        sourceHullData.logVolume H :=
+  ⟨corr.forward_closed hclosed,
+    corr.inverse_forward_on_closed hclosed,
+    corr.forward_logVolume_eq hclosed⟩
+
+theorem hullRegion_endpoint
+    (corr :
+      IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+        sourceHullData targetHullData)
+    (region : Set α) :
+    targetHullData.hull.IsClosed
+        (corr.forwardHull (sourceHullData.hullRegion region)) ∧
+      corr.inverseHull (corr.forwardHull (sourceHullData.hullRegion region)) =
+        sourceHullData.hullRegion region ∧
+      targetHullData.logVolume
+          (corr.forwardHull (sourceHullData.hullRegion region)) =
+        sourceHullData.logVolume (sourceHullData.hullRegion region) :=
+  corr.closedHull_endpoint (sourceHullData.hull.isClosed_closure region)
+
+end IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+
+/--
 Remark 3.9.5(iii) hull approximant.
 
 For a region `P`, Mochizuki's set `Φ(P)` consists of hulls contained in
@@ -4238,6 +4344,43 @@ theorem ob5_endpoint
     data.familyUnionLogVolume_le_determinant,
     data.tensorPower_normalizedLogVolume_eq_familyHullLogVolume,
     data.tensorPowerLogVolume_eq_scaled_familyHullLogVolume⟩
+
+theorem familyHull_closed
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β) :
+    data.hullData.hull.IsClosed data.familyHull := by
+  change data.hullData.hull.IsClosed
+    (data.hullData.hullRegion data.familyUnion)
+  exact data.hullData.hull.isClosed_closure data.familyUnion
+
+theorem realifiedSemiSimplification_familyHullLogVolume_eq_determinant
+    {δ : Type x}
+    {targetHullData : IUTStage1HolomorphicHullLogVolumeShadow δ}
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β)
+    (corr :
+      IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+        data.hullData targetHullData) :
+    targetHullData.logVolume (corr.forwardHull data.familyHull) =
+      data.determinantSource.determinantLogVolume := by
+  rw [corr.forward_logVolume_eq data.familyHull_closed]
+  simpa [familyHullLogVolume] using data.familyHullLogVolume_eq_determinant
+
+theorem ob9_endpoint
+    {δ : Type x}
+    {targetHullData : IUTStage1HolomorphicHullLogVolumeShadow δ}
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β)
+    (corr :
+      IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+        data.hullData targetHullData) :
+    targetHullData.hull.IsClosed (corr.forwardHull data.familyHull) ∧
+      corr.inverseHull (corr.forwardHull data.familyHull) = data.familyHull ∧
+      targetHullData.logVolume (corr.forwardHull data.familyHull) =
+        data.familyHullLogVolume ∧
+      targetHullData.logVolume (corr.forwardHull data.familyHull) =
+        data.determinantSource.determinantLogVolume :=
+  ⟨corr.forward_closed data.familyHull_closed,
+    corr.inverse_forward_on_closed data.familyHull_closed,
+    corr.forward_logVolume_eq data.familyHull_closed,
+    data.realifiedSemiSimplification_familyHullLogVolume_eq_determinant corr⟩
 
 end IUTStage1BoundedFamilyHullDetLogVolumeSource
 

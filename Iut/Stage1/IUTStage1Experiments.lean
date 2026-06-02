@@ -1426,6 +1426,22 @@ theorem boundedFamilyHullDetLogVolumeOb5_endpoint
         (data.tensorPower.tensorDegree : Real) * data.familyHullLogVolume :=
   data.ob5_endpoint hneA hneB
 
+theorem boundedFamilyHullDetLogVolumeOb9_endpoint
+    {α : Type u} {ι : Type v} {β : Type w} {δ : Type x}
+    [Fintype β]
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β)
+    {targetHullData : IUTStage1HolomorphicHullLogVolumeShadow δ}
+    (corr :
+      IUTStage1RealifiedSemiSimplificationHullLogVolumeCorrespondence
+        data.hullData targetHullData) :
+    targetHullData.hull.IsClosed (corr.forwardHull data.familyHull) ∧
+      corr.inverseHull (corr.forwardHull data.familyHull) = data.familyHull ∧
+      targetHullData.logVolume (corr.forwardHull data.familyHull) =
+        data.familyHullLogVolume ∧
+      targetHullData.logVolume (corr.forwardHull data.familyHull) =
+        data.determinantSource.determinantLogVolume :=
+  data.ob9_endpoint corr
+
 theorem boundedFamilyHullQuotient_endpoint
     {α : Type u} {ι : Type v}
     (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
