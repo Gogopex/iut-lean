@@ -408,6 +408,49 @@ theorem logKummerPacketCorrespondenceSource_endpoint
         audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
   correspondence.packetCorrespondence_endpoint kummer forgetting
 
+theorem logKummerPacketCorrespondenceSource_transferChain_endpoint
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {thetaAverage : Real}
+    {logKummer : LogKummerCorrespondenceId}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealizedTensorPacketProductLogVolume
+        IUTStage1PlaceKind.nonarchimedean j}
+    (correspondence :
+      NonarchimedeanLogKummerPacketCorrespondenceSource
+        audited thetaAverage logKummer entry
+        holomorphicF holomorphicD monoAnalyticD)
+    (kummer :
+      IUTStage1KummerFTensorPacketToDTensorPacketTransfer
+        holomorphicF holomorphicD)
+    (forgetting :
+      IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+        holomorphicD monoAnalyticD) :
+    holomorphicD.product.productLogVolume =
+        holomorphicF.product.productLogVolume ∧
+      monoAnalyticD.product.productLogVolume =
+        holomorphicD.product.productLogVolume ∧
+      entry.sourceLogVolume.finiteLogVolume =
+        monoAnalyticD.product.productLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume =
+        holomorphicF.product.productLogVolume ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogKummerNonInterference =
+        true ∧
+      entry.sourceLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume ∧
+      thetaAverage = entry.targetLogVolume.finiteLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume ∧
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  correspondence.packetCorrespondence_transferChain_endpoint kummer forgetting
+
 theorem logKummerVerticalIQTargetSource_endpoint
     {coric : Type u}
     {audited :

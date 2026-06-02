@@ -39820,6 +39820,47 @@ theorem packetCorrespondence_endpoint
     correspondence.thetaAverage_eq_entryTarget,
     correspondence.entryTarget_eq_ind3Target⟩
 
+theorem packetCorrespondence_transferChain_endpoint
+    (correspondence :
+      NonarchimedeanLogKummerPacketCorrespondenceSource
+        audited thetaAverage logKummer entry
+        holomorphicF holomorphicD monoAnalyticD)
+    (kummer :
+      IUTStage1KummerFTensorPacketToDTensorPacketTransfer
+        holomorphicF holomorphicD)
+    (forgetting :
+      IUTStage1MonoAnalyticTensorPacketForgettingTransfer
+        holomorphicD monoAnalyticD) :
+    holomorphicD.product.productLogVolume =
+        holomorphicF.product.productLogVolume ∧
+      monoAnalyticD.product.productLogVolume =
+        holomorphicD.product.productLogVolume ∧
+      entry.sourceLogVolume.finiteLogVolume =
+        monoAnalyticD.product.productLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume =
+        holomorphicF.product.productLogVolume ∧
+      IUTStage1LogThetaVerticalColumn.oneQPilot.hasLogKummerNonInterference =
+        true ∧
+      entry.sourceLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume ∧
+      thetaAverage = entry.targetLogVolume.finiteLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume ∧
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  ⟨kummer.preserves_productLogVolume,
+    forgetting.preserves_productLogVolume,
+    correspondence.sourceCalibration.entrySource_eq_monoAnalyticProduct,
+    correspondence.sourceCalibration.ind3Source_eq_holomorphicFProduct,
+    correspondence.qPilotLogKummerNonInterference,
+    correspondence.entrySource_eq_ind3Source kummer forgetting,
+    correspondence.thetaAverage_eq_entryTarget,
+    correspondence.entryTarget_eq_ind3Target,
+    correspondence.targetCalibration.thetaAverage_eq_packetNormalized,
+    correspondence.targetCalibration.ind3Target_eq_packetNormalized⟩
+
 theorem ofEntryTargetThetaAlignment_endpoint
     (entrySource :
       NonarchimedeanPacketNormalizedEntryTargetSource audited)
