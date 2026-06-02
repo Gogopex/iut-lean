@@ -635,6 +635,9 @@ The labelled route can now replace its remaining target-side ordered-real
 alignment by an exact vertical-\(IQ\) target: \Lean{} derives the
 \((\Ind3)\)-target equality from the same packet-normalized value used by the
 labelled theta-source alignment.
+In the finite-divisor variant, the source packet-local alignment is now
+constructed from the finite divisor/Frobenioid tensor packet product before
+the direct-labelled vertical-\(IQ\) route is applied.
 The vertical-\(IQ\) route can now also be instantiated with a finite
 divisor/Frobenioid packet product on the mono-analytic side.  In this form the
 route constructs the theta-root attached realified log-Kummer entry source
@@ -1413,6 +1416,9 @@ The project currently proves the following source-facing results in \Lean{}:
 \item The direct-labelled route now has an exact vertical-\(IQ\) target form:
   the target-side \((\Ind3)\) equality is derived through the common
   packet-normalized value, not passed as ordered-real alignment data.
+\item The direct-labelled vertical-\(IQ\) route now has a finite-divisor form:
+  source packet-local alignment is constructed from finite divisor/Frobenioid
+  product data rather than supplied as a separate alignment record.
 \item The theta-root attached Step (x) source can now be constructed from the
   same finite divisor-product source and an exact vertical-\(IQ\) target.  The
   endpoint exposes the canonical bad-local theta-root label, Kummer/forgetting
