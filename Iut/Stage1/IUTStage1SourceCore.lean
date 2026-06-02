@@ -8488,6 +8488,72 @@ theorem structureMorphism_endpoint
     ⟨source.structureMorphism_realifiedLogVolume v,
       source.structureMorphism_shift_eq_localization_rescaling v⟩
 
+def naiveFrobeniusTensorPower
+    (source :
+      IUTStage1LocalGlobalFrobenioidStructureMorphismCollection V)
+    (tensorDegree : Nat)
+    (globalObject :
+      IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean)
+    (localObject :
+      V -> IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean) :
+    IUTStage1LocalGlobalFrobenioidStructureMorphismCollection V :=
+  { collection :=
+      source.collection.naiveFrobeniusTensorPower
+        tensorDegree globalObject localObject,
+    structureMorphism := fun v =>
+      (source.structureMorphism v).naiveFrobeniusTensorPower
+        tensorDegree (localObject v) globalObject }
+
+theorem naiveFrobeniusTensorPower_endpoint
+    (source :
+      IUTStage1LocalGlobalFrobenioidStructureMorphismCollection V)
+    (tensorDegree : Nat)
+    (globalObject :
+      IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean)
+    (localObject :
+      V -> IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean) :
+    let powered :=
+      source.naiveFrobeniusTensorPower
+        tensorDegree globalObject localObject
+    ∀ v : V,
+      (powered.structureMorphism v).divisorDegreeShift =
+          (tensorDegree : Int) *
+            (source.structureMorphism v).divisorDegreeShift ∧
+        (powered.structureMorphism v).unitLogVolumeShift =
+          (tensorDegree : Real) *
+            (source.structureMorphism v).unitLogVolumeShift ∧
+        powered.collection.globalObject.realifiedLogVolume =
+          (powered.collection.localObject v).realifiedLogVolume +
+            (((powered.structureMorphism v).divisorDegreeShift : Int) : Real) +
+            (powered.structureMorphism v).unitLogVolumeShift ∧
+        (((powered.structureMorphism v).divisorDegreeShift : Int) : Real) +
+            (powered.structureMorphism v).unitLogVolumeShift =
+          (((powered.collection.localization v).extensionDegree : Real) - 1) *
+            (powered.collection.localObject v).realifiedLogVolume := by
+  let powered :=
+    source.naiveFrobeniusTensorPower
+      tensorDegree globalObject localObject
+  change ∀ v : V,
+    (powered.structureMorphism v).divisorDegreeShift =
+        (tensorDegree : Int) *
+          (source.structureMorphism v).divisorDegreeShift ∧
+      (powered.structureMorphism v).unitLogVolumeShift =
+        (tensorDegree : Real) *
+          (source.structureMorphism v).unitLogVolumeShift ∧
+      powered.collection.globalObject.realifiedLogVolume =
+        (powered.collection.localObject v).realifiedLogVolume +
+          (((powered.structureMorphism v).divisorDegreeShift : Int) : Real) +
+          (powered.structureMorphism v).unitLogVolumeShift ∧
+      (((powered.structureMorphism v).divisorDegreeShift : Int) : Real) +
+          (powered.structureMorphism v).unitLogVolumeShift =
+        (((powered.collection.localization v).extensionDegree : Real) - 1) *
+          (powered.collection.localObject v).realifiedLogVolume
+  intro v
+  exact
+    ⟨rfl, rfl,
+      powered.structureMorphism_realifiedLogVolume v,
+      powered.structureMorphism_shift_eq_localization_rescaling v⟩
+
 end IUTStage1LocalGlobalFrobenioidStructureMorphismCollection
 
 /--

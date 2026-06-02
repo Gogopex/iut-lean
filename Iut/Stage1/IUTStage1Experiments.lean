@@ -396,6 +396,36 @@ theorem localGlobalFrobenioidStructureMorphismCollection_endpoint
             (source.collection.localObject v).realifiedLogVolume :=
   source.structureMorphism_endpoint
 
+theorem localGlobalFrobenioidStructureMorphismCollectionNaiveTensorPower_endpoint
+    {V : Type u} [Fintype V]
+    (source :
+      IUTStage1LocalGlobalFrobenioidStructureMorphismCollection V)
+    (tensorDegree : Nat)
+    (globalObject :
+      IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean)
+    (localObject :
+      V -> IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean) :
+    let powered :=
+      source.naiveFrobeniusTensorPower
+        tensorDegree globalObject localObject
+    ∀ v : V,
+      (powered.structureMorphism v).divisorDegreeShift =
+          (tensorDegree : Int) *
+            (source.structureMorphism v).divisorDegreeShift ∧
+        (powered.structureMorphism v).unitLogVolumeShift =
+          (tensorDegree : Real) *
+            (source.structureMorphism v).unitLogVolumeShift ∧
+        powered.collection.globalObject.realifiedLogVolume =
+          (powered.collection.localObject v).realifiedLogVolume +
+            (((powered.structureMorphism v).divisorDegreeShift : Int) : Real) +
+            (powered.structureMorphism v).unitLogVolumeShift ∧
+        (((powered.structureMorphism v).divisorDegreeShift : Int) : Real) +
+            (powered.structureMorphism v).unitLogVolumeShift =
+          (((powered.collection.localization v).extensionDegree : Real) - 1) *
+            (powered.collection.localObject v).realifiedLogVolume :=
+  source.naiveFrobeniusTensorPower_endpoint
+    tensorDegree globalObject localObject
+
 theorem localGlobalFrobenioidCompatibleMorphism_endpoint
     {V : Type u} [Fintype V]
     {source target :

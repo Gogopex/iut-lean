@@ -979,7 +979,10 @@ the finite Frobenioid degree category.  For each \(v\), a degree morphism from
 the local object to the global object records divisor and unit shifts.
 \Lean{} proves that the resulting morphism shift is exactly the additive form
 of the localization rescaling.  This models the degree/log-volume content of
-the ``structure poly-morphism'' language in Remark 3.9.5(ix), (cQ3).
+the ``structure poly-morphism'' language in Remark 3.9.5(ix), (cQ3).  The
+structure-morphism collection now transports through Ob4 tensor-powering:
+the underlying local-global collection is tensor-powered, and every structure
+morphism acquires divisor and unit shifts multiplied by \(M\).
 The same finite category now has compatible morphisms between two such
 local-global structure collections.  A compatible morphism consists of local
 morphisms at each \(v\), one global morphism, and a commutativity condition:
@@ -1393,7 +1396,9 @@ The project currently proves the following source-facing results in \Lean{}:
   cQ3 and cQ4 Step (xi) boundaries.
 \item The local-global collection now carries finite structure morphisms from
   local objects to the global determinant object.  The morphism divisor/unit
-  shift is proved equal to the additive localization rescaling term.
+  shift is proved equal to the additive localization rescaling term.  The
+  structure-morphism collection is stable under Ob4 tensor-powering, with every
+  structure-morphism shift multiplied by \(M\).
 \item Compatible morphisms between local-global structure collections are now
   represented: local-then-structure and structure-then-global paths have equal
   divisor/unit shifts and hence equal total realified log-volume shift.
