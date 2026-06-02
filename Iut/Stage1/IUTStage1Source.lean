@@ -37854,6 +37854,68 @@ theorem packetNormalizedEntryTarget_endpoint
 end NonarchimedeanPacketNormalizedEntryTargetSource
 
 /--
+Packet-normalized nonarchimedean Step (x) entry together with its membership in
+the audited upper-semi inclusion family.
+
+The constructed packet-normalized entry does not by itself prove that the
+audited upper-semi family selected it.  This record keeps the construction and
+the membership certificate paired, preventing later route theorems from mixing
+an entry source with unrelated membership evidence.
+-/
+structure NonarchimedeanPacketNormalizedUpperSemiEntrySource
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean) where
+  entrySource : NonarchimedeanPacketNormalizedEntryTargetSource audited
+  entry_mem :
+    entrySource.toEntry ∈
+      audited.choice.upper_semi_state.nonarchimedeanInclusions
+
+namespace NonarchimedeanPacketNormalizedUpperSemiEntrySource
+
+variable
+  {audited :
+    IUTStage1PlaceAuditedDirectSummandPacketChoice
+      coric IUTStage1PlaceKind.nonarchimedean}
+
+def toEntry
+    (source : NonarchimedeanPacketNormalizedUpperSemiEntrySource audited) :
+    IUTStage1NonarchimedeanInclusionData :=
+  source.entrySource.toEntry
+
+theorem toEntry_mem
+    (source : NonarchimedeanPacketNormalizedUpperSemiEntrySource audited) :
+    source.toEntry ∈
+      audited.choice.upper_semi_state.nonarchimedeanInclusions :=
+  source.entry_mem
+
+theorem toEntry_targetLogVolume_eq_packetNormalized
+    (source : NonarchimedeanPacketNormalizedUpperSemiEntrySource audited) :
+    source.toEntry.targetLogVolume.finiteLogVolume =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  source.entrySource.toEntry_targetLogVolume_eq_packetNormalized
+
+theorem toEntry_logVolume_le
+    (source : NonarchimedeanPacketNormalizedUpperSemiEntrySource audited) :
+    source.toEntry.sourceLogVolume.finiteLogVolume <=
+      source.toEntry.targetLogVolume.finiteLogVolume :=
+  source.entrySource.toEntry_logVolume_le
+
+theorem packetNormalizedUpperSemiEntry_endpoint
+    (source : NonarchimedeanPacketNormalizedUpperSemiEntrySource audited) :
+    source.toEntry ∈
+        audited.choice.upper_semi_state.nonarchimedeanInclusions ∧
+      source.toEntry.targetLogVolume.finiteLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      source.toEntry.sourceLogVolume.finiteLogVolume <=
+        source.toEntry.targetLogVolume.finiteLogVolume :=
+  ⟨source.toEntry_mem,
+    source.toEntry_targetLogVolume_eq_packetNormalized,
+    source.toEntry_logVolume_le⟩
+
+end NonarchimedeanPacketNormalizedUpperSemiEntrySource
+
+/--
 Target-side packet-normalized calibration for the nonarchimedean Step (x)
 log-Kummer corridor.
 
@@ -41774,6 +41836,87 @@ theorem boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullThetaRootPacketLo
       entrySource_eq_monoAnalyticProduct orderedAlignment
       thetaSourceAverage_eq_packetNormalized cTheta
       thetaSigned_le_cTheta_absLogQ
+
+/--
+Hodge/SHE/IPL/hull route through a packet-normalized upper-semi Step (x) entry.
+
+This is the same `ZMod l` packet-normalized route as above, but the selected
+nonarchimedean entry is supplied as a single source object containing both the
+packet-normalized target construction and its upper-semi membership.
+-/
+theorem boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullUpperSemiEntryZMod
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    {record : IUTStage1Theorem311MultiradialSourceRecord packageN}
+    {F : Type v} [Field F] {X C : HyperbolicOrbicurveModel F}
+    (alignment :
+      IUTStage1HodgeSHEIPLHullRouteLogVolumeAlignment
+        part audited record X C)
+    (source_profile_eq :
+      profile = IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    (thetaRootSource : IUTStage1ThetaRootCuspLabelSourcePackage l X C)
+    (upperSemiEntry :
+      NonarchimedeanPacketNormalizedUpperSemiEntrySource audited)
+    (kummerCompatibility :
+      IUTStage1RealifiedFrobenioidKummerCompatibility
+        holomorphicF holomorphicD)
+    (forgettingCompatibility :
+      IUTStage1RealifiedFrobenioidKummerCompatibility
+        holomorphicD monoAnalyticD)
+    (holomorphicF_realization :
+      holomorphicF.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.holomorphicF)
+    (holomorphicD_realization :
+      holomorphicD.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.holomorphicD)
+    (monoAnalyticD_realization :
+      monoAnalyticD.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.monoAnalyticD)
+    (holomorphicStructureForgotten : Prop)
+    (holomorphic_structure_forgotten : holomorphicStructureForgotten)
+    (packetLocalObject_eq_entrySource :
+      audited.choice.local_tensor_state.packetState.localObject =
+        upperSemiEntry.toEntry.sourceLogVolume)
+    (entrySource_eq_monoAnalyticProduct :
+      upperSemiEntry.toEntry.sourceLogVolume.finiteLogVolume =
+        monoAnalyticD.toRealized.product.productLogVolume)
+    (orderedAlignment : Ind3OrderedRealLineAlignment part audited)
+    (packetRoute :
+      audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (theta_source_eq :
+      part.insulated_route.theta_source = packetRoute.theta_source)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    (packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+        packageN.preLedger.thetaSigned < 0) ∨
+      (-1 : Real) < cTheta := by
+  exact
+    part.boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullThetaRootPacketLocalZMod
+      profile audited alignment source_profile_eq thetaRootSource
+      upperSemiEntry.entrySource upperSemiEntry.toEntry_mem
+      kummerCompatibility forgettingCompatibility
+      holomorphicF_realization holomorphicD_realization
+      monoAnalyticD_realization holomorphicStructureForgotten
+      holomorphic_structure_forgotten packetLocalObject_eq_entrySource
+      entrySource_eq_monoAnalyticProduct orderedAlignment packetRoute
+      theta_source_eq cTheta thetaSigned_le_cTheta_absLogQ
 
 theorem bridgeSource_eq_hodgeTheaterDescentPacketTransport
     (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l) :
