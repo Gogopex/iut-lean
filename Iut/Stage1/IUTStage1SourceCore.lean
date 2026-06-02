@@ -3391,6 +3391,31 @@ theorem quotientMap_image_under_map_between_possibleRegions
       (data.possibleRegion_subset_familyHull j)
       hf
 
+theorem quotientMap_two_regions_collapse_iff
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    {A B : Set α}
+    (hneA : A.Nonempty)
+    (hneB : B.Nonempty) :
+    data.quotientMap '' A =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ∧
+        data.quotientMap '' B =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ↔
+      A ⊆ data.familyHull ∧ B ⊆ data.familyHull := by
+  simpa [quotientMap] using
+    IUTStage1UpperSemiSetQuotient.quotientMap_two_images_collapse_iff
+      (S := data.familyHull) hneA hneB
+
+theorem quotientMap_possibleRegion_collapse_iff
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    (i : ι)
+    (hne : (data.possibleRegion i).Nonempty) :
+    data.quotientMap '' data.possibleRegion i =
+        {IUTStage1UpperSemiSetQuotient.collapsed} ↔
+      data.possibleRegion i ⊆ data.familyHull := by
+  simpa [quotientMap] using
+    IUTStage1UpperSemiSetQuotient.quotientMap_image_eq_singleton_collapsed_iff
+      (S := data.familyHull) hne
+
 theorem endpoint
     (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
     (i j : ι)

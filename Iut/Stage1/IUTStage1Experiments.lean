@@ -1430,6 +1430,19 @@ theorem boundedFamilyHullQuotientMapBetween_endpoint
   data.quotientMap_image_under_map_between_possibleRegions
     i j f hnei hf
 
+theorem boundedFamilyHullQuotientExpectedRelation_endpoint
+    {α : Type u} {ι : Type v}
+    (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
+    {A B : Set α}
+    (hneA : A.Nonempty)
+    (hneB : B.Nonempty) :
+    data.quotientMap '' A =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ∧
+        data.quotientMap '' B =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ↔
+      A ⊆ data.familyHull ∧ B ⊆ data.familyHull :=
+  data.quotientMap_two_regions_collapse_iff hneA hneB
+
 theorem upperSemiFormalIntersection_endpoint
     {E : Type u} {S : Set E} {κ : Type v}
     (system :
