@@ -45135,6 +45135,109 @@ theorem ofThetaRootUpperSemiEntrySourceAlignedAndVerticalIQTarget_precise_endpoi
 end NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
 
 /--
+Theta-root realified log-Kummer entry source with its exact vertical-`IQ`
+target retained.
+
+The broader realified entry source stores the packet target calibration after
+it has been projected from the exact target.  This refinement keeps the exact
+vertical-`IQ` object itself, including the `FMOD` exactness guard, so downstream
+routes can consume one Step (x) source without losing the distinction between
+exact vertical-`IQ` data and merely packet-normalized target equalities.
+-/
+structure NonarchimedeanThetaRootExactVerticalIQRealifiedEntrySource
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    (thetaAverage : Real)
+    (logKummer : LogKummerCorrespondenceId)
+    (l : PrimeGeFive) {F : Type v} [Field F]
+    (X C : HyperbolicOrbicurveModel F)
+    (entry : IUTStage1NonarchimedeanInclusionData)
+    {j : Nat}
+    (holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j) where
+  realifiedSource :
+    NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
+      audited thetaAverage logKummer l X C entry
+      holomorphicF holomorphicD monoAnalyticD
+  targetSource :
+    NonarchimedeanLogKummerVerticalIQTargetSource
+      audited thetaAverage logKummer entry
+
+namespace NonarchimedeanThetaRootExactVerticalIQRealifiedEntrySource
+
+variable
+  {audited :
+    IUTStage1PlaceAuditedDirectSummandPacketChoice
+      coric IUTStage1PlaceKind.nonarchimedean}
+  {thetaAverage : Real}
+  {logKummer : LogKummerCorrespondenceId}
+  {l : PrimeGeFive} {F : Type v} [Field F]
+  {X C : HyperbolicOrbicurveModel F}
+  {entry : IUTStage1NonarchimedeanInclusionData}
+  {j : Nat}
+  {holomorphicF holomorphicD monoAnalyticD :
+    IUTStage1RealifiedFrobenioidTensorPacketProductSource
+      IUTStage1PlaceKind.nonarchimedean j}
+
+theorem hasPreciseFrobenioidIsomorphisms
+    (source :
+      NonarchimedeanThetaRootExactVerticalIQRealifiedEntrySource
+        audited thetaAverage logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD) :
+    source.targetSource.frobenioidMode.hasPreciseFrobenioidIsomorphisms =
+      true :=
+  source.targetSource.hasPreciseFrobenioidIsomorphisms
+
+theorem thetaAverage_eq_packetNormalized
+    (source :
+      NonarchimedeanThetaRootExactVerticalIQRealifiedEntrySource
+        audited thetaAverage logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD) :
+    thetaAverage =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  source.targetSource.thetaAverage_eq_packetNormalized
+
+theorem ind3Target_eq_packetNormalized
+    (source :
+      NonarchimedeanThetaRootExactVerticalIQRealifiedEntrySource
+        audited thetaAverage logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD) :
+    audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  source.targetSource.ind3Target_eq_packetNormalized
+
+theorem entryTarget_eq_packetNormalized
+    (source :
+      NonarchimedeanThetaRootExactVerticalIQRealifiedEntrySource
+        audited thetaAverage logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD) :
+    entry.targetLogVolume.finiteLogVolume =
+      audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  source.targetSource.entryTarget_eq_packetNormalized
+
+theorem exactVerticalIQ_endpoint
+    (source :
+      NonarchimedeanThetaRootExactVerticalIQRealifiedEntrySource
+        audited thetaAverage logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD) :
+    source.targetSource.frobenioidMode.hasPreciseFrobenioidIsomorphisms =
+        true ∧
+      thetaAverage =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      entry.targetLogVolume.finiteLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
+  ⟨source.hasPreciseFrobenioidIsomorphisms,
+    source.thetaAverage_eq_packetNormalized,
+    source.ind3Target_eq_packetNormalized,
+    source.entryTarget_eq_packetNormalized⟩
+
+end NonarchimedeanThetaRootExactVerticalIQRealifiedEntrySource
+
+/--
 Finite-label root-of-unity invisibility for the Stage 1 log-Kummer packet
 correspondence.
 
@@ -48800,6 +48903,63 @@ theorem boundarySignedEqualityOrStrictCTheta_of_hodgeDirectCanonicalLabelledReal
   part.boundarySignedEqualityOrStrictCTheta_of_hodgeDirectLabelledRealifiedEntryVerticalIQ
     profile audited alignment source_profile_eq labelledAverage
     directNormalization rfl upperSemiEntry realifiedSource targetSource cTheta
+    thetaSigned_le_cTheta_absLogQ
+
+/--
+Canonical-labelled route through an exact vertical-`IQ` realified source.
+
+This is the current tightest Step (x) boundary for the labelled route: the
+theta-root realified entry source and the exact vertical-`IQ` target are
+consumed as one source object, so the route keeps the `FMOD` exactness guard
+while no longer receiving target calibration as a separate argument.
+-/
+theorem boundarySignedEqualityOrStrictCTheta_of_hodgeDirectCanonicalExactVerticalIQ
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    {record : IUTStage1Theorem311MultiradialSourceRecord packageN}
+    {F : Type v} [Field F] {X C : HyperbolicOrbicurveModel F}
+    (alignment :
+      IUTStage1HodgeSHEIPLHullRouteLogVolumeAlignment
+        part audited record X C)
+    (source_profile_eq :
+      profile = IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    (directNormalization :
+      IUTStage1DirectPacketNormalizationData
+        audited.choice.local_tensor_state.packetState)
+    (upperSemiEntry :
+      NonarchimedeanPacketNormalizedUpperSemiEntrySource audited)
+    (exactSource :
+      NonarchimedeanThetaRootExactVerticalIQRealifiedEntrySource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer l X C upperSemiEntry.toEntry
+        holomorphicF holomorphicD monoAnalyticD)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    exactSource.targetSource.frobenioidMode.hasPreciseFrobenioidIsomorphisms =
+        true ∧
+      ((packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+          packageN.preLedger.thetaSigned < 0) ∨
+        (-1 : Real) < cTheta) :=
+  part.boundarySignedEqualityOrStrictCTheta_of_hodgeDirectCanonicalLabelledRealifiedEntryVerticalIQ
+    profile audited alignment source_profile_eq directNormalization upperSemiEntry
+    exactSource.realifiedSource exactSource.targetSource cTheta
     thetaSigned_le_cTheta_absLogQ
 
 /--
