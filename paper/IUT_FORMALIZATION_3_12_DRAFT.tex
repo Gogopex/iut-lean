@@ -747,6 +747,13 @@ map between prime labels is required to commute with these bijections.
 \Lean{} then transports the local compatibility theorem along this
 prime-place square, deriving equality of restricted and local realified
 log-volumes at evaluated primes.
+The next functorial step toward the \(\Theta^{\times\mu}\)- and
+\(\Theta^{\times\mu}_{\mathrm{gau}}\)-links of Corollary 4.7(iii) is also
+represented at finite level.  A lift to an \(F^{\times\mu}\)-prime-strip
+stores an environment-side unit character; the Gaussian-side unit character is
+defined by transport along the prime-evaluation equivalence.  Thus \Lean{}
+proves unit-character compatibility at evaluated primes rather than accepting
+it as an independent bridge field.
 A finite tensor-product operation on these degree objects adds divisor degrees
 and unit log-volumes, and \Lean{} proves that the realified log-volume of the
 tensor product is the sum of the two realified log-volumes.  This operation is
@@ -1147,6 +1154,12 @@ The project currently proves the following source-facing results in \Lean{}:
   the evaluation equivalence between prime labels must commute with these
   bijections.  \Lean{} transports the local compatibility theorem along this
   square to obtain equality at evaluated primes.
+\item The finite \(F^{\times\mu}\)-prime-strip lift used by the
+  \(\Theta^{\times\mu}\)- and \(\Theta^{\times\mu}_{\mathrm{gau}}\)-links is
+  now represented by transport of a unit character along the prime-evaluation
+  equivalence.  The Gaussian unit character is constructed from the
+  environment unit character, and \Lean{} proves compatibility at evaluated
+  primes.
 \item The realified Frobenioid degree layer now has finite morphisms: divisor
   and unit shifts determine the target realified log-volume, identity has zero
   shift, and composition adds both shifts.

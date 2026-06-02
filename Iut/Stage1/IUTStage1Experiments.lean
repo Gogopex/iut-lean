@@ -213,6 +213,25 @@ theorem environmentGaussianFPrimeStripEvaluation_endpoint
               (strip.environmentPrimeToPlace p)).realifiedLogVolume :=
   strip.endpoint
 
+theorem environmentGaussianThetaMuPrimeStripLift_endpoint
+    {Penv Pgau V : Type u} {μ : Type v}
+    [Fintype Penv] [Fintype Pgau] [Fintype V]
+    (lift :
+      IUTStage1EnvironmentGaussianThetaMuPrimeStripLift Penv Pgau V μ) :
+    lift.base.localEvaluation.gaussianLocal.globalObject.realifiedLogVolume =
+        lift.base.localEvaluation.environmentLocal.globalObject.realifiedLogVolume ∧
+      ∀ p : Penv,
+        lift.base.gaussianPrimeToPlace (lift.base.primeEvaluation p) =
+            lift.base.environmentPrimeToPlace p ∧
+          (lift.base.localEvaluation.gaussianLocal.localObject
+              (lift.base.gaussianPrimeToPlace
+                (lift.base.primeEvaluation p))).realifiedLogVolume =
+            (lift.base.localEvaluation.environmentLocal.localObject
+              (lift.base.environmentPrimeToPlace p)).realifiedLogVolume ∧
+          lift.gaussianUnitCharacter (lift.base.primeEvaluation p) =
+            lift.environmentUnitCharacter p :=
+  lift.endpoint
+
 theorem localGlobalFrobenioidStructureMorphismCollection_endpoint
     {V : Type u} [Fintype V]
     (source :

@@ -6514,6 +6514,72 @@ theorem endpoint
 end IUTStage1EnvironmentGaussianFPrimeStripEvaluation
 
 /--
+Finite `F^{×μ}` lift of the environment/Gaussian prime-strip evaluation.
+
+IUT II, Corollary 4.7(iii), uses the functorial algorithm from
+`F`-prime-strips to `F^{×μ}`-prime-strips to obtain the `Θ^{×μ}`- and
+Gaussian `Θ^{×μ}`-links.  At the finite level, the new datum is the unit
+character attached to prime labels.  The Gaussian unit character is not an
+independent field: it is transported from the environment side along the
+already encoded prime-strip evaluation equivalence.
+-/
+structure IUTStage1EnvironmentGaussianThetaMuPrimeStripLift
+    (Penv Pgau V : Type u) (μ : Type v)
+    [Fintype Penv] [Fintype Pgau] [Fintype V] where
+  base : IUTStage1EnvironmentGaussianFPrimeStripEvaluation Penv Pgau V
+  environmentUnitCharacter : Penv -> μ
+
+namespace IUTStage1EnvironmentGaussianThetaMuPrimeStripLift
+
+variable {Penv Pgau V : Type u} {μ : Type v}
+variable [Fintype Penv] [Fintype Pgau] [Fintype V]
+
+def gaussianUnitCharacter
+    (lift :
+      IUTStage1EnvironmentGaussianThetaMuPrimeStripLift Penv Pgau V μ) :
+    Pgau -> μ :=
+  fun q => lift.environmentUnitCharacter (lift.base.primeEvaluation.symm q)
+
+theorem gaussianUnitCharacter_at_evaluatedPrime
+    (lift :
+      IUTStage1EnvironmentGaussianThetaMuPrimeStripLift Penv Pgau V μ)
+    (p : Penv) :
+    lift.gaussianUnitCharacter (lift.base.primeEvaluation p) =
+      lift.environmentUnitCharacter p := by
+  simp [gaussianUnitCharacter]
+
+theorem environmentUnitCharacter_at_inverseEvaluatedPrime
+    (lift :
+      IUTStage1EnvironmentGaussianThetaMuPrimeStripLift Penv Pgau V μ)
+    (q : Pgau) :
+    lift.environmentUnitCharacter (lift.base.primeEvaluation.symm q) =
+      lift.gaussianUnitCharacter q := by
+  rfl
+
+theorem endpoint
+    (lift :
+      IUTStage1EnvironmentGaussianThetaMuPrimeStripLift Penv Pgau V μ) :
+    lift.base.localEvaluation.gaussianLocal.globalObject.realifiedLogVolume =
+        lift.base.localEvaluation.environmentLocal.globalObject.realifiedLogVolume ∧
+      ∀ p : Penv,
+        lift.base.gaussianPrimeToPlace (lift.base.primeEvaluation p) =
+            lift.base.environmentPrimeToPlace p ∧
+          (lift.base.localEvaluation.gaussianLocal.localObject
+              (lift.base.gaussianPrimeToPlace
+                (lift.base.primeEvaluation p))).realifiedLogVolume =
+            (lift.base.localEvaluation.environmentLocal.localObject
+              (lift.base.environmentPrimeToPlace p)).realifiedLogVolume ∧
+          lift.gaussianUnitCharacter (lift.base.primeEvaluation p) =
+            lift.environmentUnitCharacter p :=
+  ⟨lift.base.localEvaluation.gaussianGlobalLogVolume_eq_environment,
+    fun p =>
+      ⟨lift.base.gaussianPlaceOfEvaluation_eq_environmentPlace p,
+        lift.base.gaussianLocalLogVolume_at_evaluatedPrime_eq_environment p,
+        lift.gaussianUnitCharacter_at_evaluatedPrime p⟩⟩
+
+end IUTStage1EnvironmentGaussianThetaMuPrimeStripLift
+
+/--
 Local-global collection equipped with structure morphisms to the global object.
 
 Remark 3.9.5(ix), (cQ3), describes local Frobenioid objects equipped with
