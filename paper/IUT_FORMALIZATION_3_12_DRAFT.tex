@@ -426,6 +426,9 @@ point.  The packet-target calibration is then constructed from this
 vertical-\(IQ\) source, so the corresponding theta-to-entry and
 entry-to-\((\Ind3)\)-target equalities are derived from common-target
 compatibility rather than passed as separate target-calibration inputs.
+This object is guarded by the exact \(FMOD\) side of Proposition 3.10(iii) and
+Remark 3.10.1: the one-sided \(Fmod\) upper-semi mode is classified separately
+and is not accepted as an exact vertical-\(IQ\) target calibration.
 The local entry target can now also be constructed from the packet-normalized
 capsule value itself.  A packet-normalized entry-target source builds a
 nonarchimedean upper-semi entry whose target finite log-volume is definitionally
@@ -1056,6 +1059,9 @@ The project currently proves the following source-facing results in \Lean{}:
   of the log-Kummer correspondence in Proposition 3.10(ii).  It derives the
   theta-average, \((\Ind3)\)-target, and entry-target packet-normalized
   equalities used by the packet target calibration.
+\item The vertical-\(IQ\) source carries an \(FMOD\)-exactness guard, reflecting
+  Remark 3.10.1's distinction between exact \(FMOD\) Frobenioid
+  compatibility and one-sided \(Fmod\) upper semi-compatibility.
 \item The log-Kummer packet-correspondence source can now be constructed from
   source packet/product calibration plus the packet-normalized entry target and
   theta-target alignment.  The q-pilot non-interference, source equality, and

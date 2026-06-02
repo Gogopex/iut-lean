@@ -38610,6 +38610,47 @@ structure NonarchimedeanLogKummerPacketTargetCalibration
       audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume
 
 /--
+Frobenioid side of the Step (x) log-Kummer correspondence.
+
+IUT III, Remark 3.10.1 distinguishes the exact `FMOD` Frobenioid side from the
+`Fmod` side whose local monoids only satisfy upper semi-compatibility.  The
+vertical-`IQ` target calibration below is allowed only in the exact `FMOD`
+case.
+-/
+inductive IUTStage1LogKummerFrobenioidComparisonMode where
+  | FMODExact
+  | FmodUpperSemi
+deriving DecidableEq
+
+namespace IUTStage1LogKummerFrobenioidComparisonMode
+
+def hasPreciseFrobenioidIsomorphisms :
+    IUTStage1LogKummerFrobenioidComparisonMode -> Bool
+  | FMODExact => true
+  | FmodUpperSemi => false
+
+theorem FMODExact_hasPreciseFrobenioidIsomorphisms :
+    hasPreciseFrobenioidIsomorphisms FMODExact = true :=
+  rfl
+
+theorem FmodUpperSemi_lacksPreciseFrobenioidIsomorphisms :
+    hasPreciseFrobenioidIsomorphisms FmodUpperSemi = false :=
+  rfl
+
+theorem FMODExact_ne_FmodUpperSemi :
+    FMODExact ≠ FmodUpperSemi := by
+  intro h
+  cases h
+
+theorem exact_iff_hasPreciseFrobenioidIsomorphisms
+    (mode : IUTStage1LogKummerFrobenioidComparisonMode) :
+    mode = FMODExact ↔
+      hasPreciseFrobenioidIsomorphisms mode = true := by
+  cases mode <;> simp [hasPreciseFrobenioidIsomorphisms]
+
+end IUTStage1LogKummerFrobenioidComparisonMode
+
+/--
 Vertical `IQ` target of the nonarchimedean log-Kummer correspondence.
 
 This finite Stage 1 object records the exact side of IUT III, Proposition
@@ -38627,6 +38668,9 @@ structure NonarchimedeanLogKummerVerticalIQTargetSource
     (thetaAverage : Real)
     (logKummer : LogKummerCorrespondenceId)
     (entry : IUTStage1NonarchimedeanInclusionData) where
+  frobenioidMode : IUTStage1LogKummerFrobenioidComparisonMode
+  frobenioidMode_eq_FMODExact :
+    frobenioidMode = IUTStage1LogKummerFrobenioidComparisonMode.FMODExact
   iqCarrier : Type u
   iqValue : iqCarrier -> Real
   packetNormalizedPoint : iqCarrier
@@ -38673,6 +38717,15 @@ theorem thetaAverage_eq_packetNormalized
       source.thetaPoint_value_eq_packetNormalized
     _ = audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume :=
       source.packetNormalized_value_eq
+
+theorem hasPreciseFrobenioidIsomorphisms
+    (source :
+      NonarchimedeanLogKummerVerticalIQTargetSource
+        audited thetaAverage logKummer entry) :
+    source.frobenioidMode.hasPreciseFrobenioidIsomorphisms = true := by
+  rw [source.frobenioidMode_eq_FMODExact]
+  exact
+    IUTStage1LogKummerFrobenioidComparisonMode.FMODExact_hasPreciseFrobenioidIsomorphisms
 
 theorem ind3Target_eq_packetNormalized
     (source :
@@ -38725,7 +38778,8 @@ theorem verticalIQTarget_endpoint
     (source :
       NonarchimedeanLogKummerVerticalIQTargetSource
         audited thetaAverage logKummer entry) :
-    thetaAverage =
+    source.frobenioidMode.hasPreciseFrobenioidIsomorphisms = true ∧
+      thetaAverage =
         audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
       audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
         audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
@@ -38734,7 +38788,8 @@ theorem verticalIQTarget_endpoint
       thetaAverage = entry.targetLogVolume.finiteLogVolume ∧
       entry.targetLogVolume.finiteLogVolume =
         audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
-  ⟨source.thetaAverage_eq_packetNormalized,
+  ⟨source.hasPreciseFrobenioidIsomorphisms,
+    source.thetaAverage_eq_packetNormalized,
     source.ind3Target_eq_packetNormalized,
     source.entryTarget_eq_packetNormalized,
     source.thetaAverage_eq_entryTarget,

@@ -419,7 +419,8 @@ theorem logKummerVerticalIQTargetSource_endpoint
     (source :
       NonarchimedeanLogKummerVerticalIQTargetSource
         audited thetaAverage logKummer entry) :
-    thetaAverage =
+    source.frobenioidMode.hasPreciseFrobenioidIsomorphisms = true ∧
+      thetaAverage =
         audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
       audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
         audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
