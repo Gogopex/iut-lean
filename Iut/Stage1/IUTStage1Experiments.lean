@@ -2010,6 +2010,87 @@ theorem hodgeSHEIPLHullThetaRootPacketLocalEntryOrderedAlignment_cThetaDichotomy
     entrySource_eq_monoAnalyticProduct orderedAlignment
     thetaSourceAverage_eq_packetNormalized cTheta thetaSigned_le_cTheta_absLogQ
 
+/--
+Corollary 3.12 first-pass `C_Theta` dichotomy through the theta-root
+packet-local Step (x) route, with ordered `(Ind3)` alignment and
+packet-normalized theta calibration derived from a constant `ZMod l`
+packet-normalized route.
+-/
+theorem hodgeSHEIPLHullThetaRootPacketLocalZMod_cThetaDichotomy
+    {source target : Copy} {coric : Type u}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    {record : IUTStage1Theorem311MultiradialSourceRecord package}
+    {F : Type u} [Field F] {X C : HyperbolicOrbicurveModel F}
+    (alignment :
+      IUTStage1HodgeSHEIPLHullRouteLogVolumeAlignment
+        part audited record X C)
+    (source_profile_eq :
+      profile = IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    (thetaRootSource : IUTStage1ThetaRootCuspLabelSourcePackage l X C)
+    (entrySource : NonarchimedeanPacketNormalizedEntryTargetSource audited)
+    (entry_mem :
+      entrySource.toEntry ∈
+        audited.choice.upper_semi_state.nonarchimedeanInclusions)
+    (kummerCompatibility :
+      IUTStage1RealifiedFrobenioidKummerCompatibility
+        holomorphicF holomorphicD)
+    (forgettingCompatibility :
+      IUTStage1RealifiedFrobenioidKummerCompatibility
+        holomorphicD monoAnalyticD)
+    (holomorphicF_realization :
+      holomorphicF.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.holomorphicF)
+    (holomorphicD_realization :
+      holomorphicD.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.holomorphicD)
+    (monoAnalyticD_realization :
+      monoAnalyticD.toRealized.realization =
+        IUTStage1TensorPacketRealizationKind.monoAnalyticD)
+    (holomorphicStructureForgotten : Prop)
+    (holomorphic_structure_forgotten : holomorphicStructureForgotten)
+    (packetLocalObject_eq_entrySource :
+      audited.choice.local_tensor_state.packetState.localObject =
+        entrySource.toEntry.sourceLogVolume)
+    (entrySource_eq_monoAnalyticProduct :
+      entrySource.toEntry.sourceLogVolume.finiteLogVolume =
+        monoAnalyticD.toRealized.product.productLogVolume)
+    (orderedAlignment : Ind3OrderedRealLineAlignment part audited)
+    (packetRoute :
+      audit.FLZModCuspLabelThetaConstantZModPacketNormalizedRouteAudit l)
+    (theta_source_eq :
+      part.insulated_route.theta_source = packetRoute.theta_source)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      package.preLedger.thetaSigned <=
+        cTheta * (-package.preLedger.qSigned)) :
+    (package.preLedger.qSigned = package.preLedger.thetaSigned ∧
+        package.preLedger.thetaSigned < 0) ∨
+      (-1 : Real) < cTheta :=
+  part.boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullThetaRootPacketLocalZMod
+    profile audited alignment source_profile_eq thetaRootSource entrySource
+    entry_mem kummerCompatibility forgettingCompatibility
+    holomorphicF_realization holomorphicD_realization
+    monoAnalyticD_realization holomorphicStructureForgotten
+    holomorphic_structure_forgotten packetLocalObject_eq_entrySource
+    entrySource_eq_monoAnalyticProduct orderedAlignment packetRoute
+    theta_source_eq cTheta thetaSigned_le_cTheta_absLogQ
+
 theorem theorem311MultiradialSourceRecord_endpoint
     {source target : Copy} {index : Type u}
     {package : IUTStage1SourcePackage source target index}
