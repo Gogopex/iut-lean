@@ -49486,25 +49486,23 @@ theorem boundarySignedEqualityOrStrictCTheta_of_hodgeFiniteDivisorCanonicalExact
       ((packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
           packageN.preLedger.thetaSigned < 0) ∨
         (-1 : Real) < cTheta) := by
-  let monoAnalyticD :=
-    divisorPacket.toRealifiedFrobenioidTensorPacketProductSource
-      IUTStage1TensorPacketRealizationKind.monoAnalyticD
-      monoAnalyticTheater
-  let sourceAlignment :
-      NonarchimedeanLogKummerPacketLocalSourceAlignment
-        audited upperSemiEntry.toEntry monoAnalyticD.toRealized :=
-    open NonarchimedeanLogKummerPacketLocalSourceAlignment in
-    ofFiniteDivisorTensorPacketProduct
-        divisorPacket IUTStage1TensorPacketRealizationKind.monoAnalyticD
-        monoAnalyticTheater packetLocalObject_eq_entrySource
-        packetLocalObjectFinite_eq_divisorRealified
-        packetLocalObjectFinite_eq_ind3Source
+  let finiteSource :
+      NonarchimedeanFiniteDivisorPacketLocalSource
+        audited upperSemiEntry.toEntry product :=
+    { divisorPacket := divisorPacket,
+      monoAnalyticTheater := monoAnalyticTheater,
+      packetLocalObject_eq_entrySource := packetLocalObject_eq_entrySource,
+      packetLocalObjectFinite_eq_divisorRealified :=
+        packetLocalObjectFinite_eq_divisorRealified,
+      packetLocalObjectFinite_eq_ind3Source :=
+        packetLocalObjectFinite_eq_ind3Source }
   exact
     part.boundarySignedEqualityOrStrictCTheta_of_hodgeConstructedCanonicalExactVerticalIQ
       profile audited alignment source_profile_eq thetaRootSource upperSemiEntry
       kummerCompatibility forgettingCompatibility holomorphicF_realization
       holomorphicD_realization rfl holomorphicStructureForgotten
-      holomorphic_structure_forgotten sourceAlignment targetSource cTheta
+      holomorphic_structure_forgotten finiteSource.toPacketLocalSourceAlignment
+      targetSource cTheta
       thetaSigned_le_cTheta_absLogQ
 
 /--
@@ -49676,18 +49674,23 @@ theorem boundarySignedEqualityOrStrictCTheta_of_hodgeFiniteDivisorCanonicalExact
           packageN.preLedger.thetaSigned < 0) ∨
         (-1 : Real) < cTheta) := by
   intro monoAnalyticD
-  rcases
-    (open NonarchimedeanLogKummerPacketLocalSourceAlignment in
-      ofFiniteDivisorTensorPacketProduct_endpoint
-          divisorPacket IUTStage1TensorPacketRealizationKind.monoAnalyticD
-          monoAnalyticTheater packetLocalObject_eq_entrySource
-          packetLocalObjectFinite_eq_divisorRealified
-          packetLocalObjectFinite_eq_ind3Source) with
-    ⟨packet_eq_entry, entry_eq_product, product_eq_realified,
-      packet_eq_ind3, upper_semi⟩
+  let finiteSource :
+      NonarchimedeanFiniteDivisorPacketLocalSource
+        audited upperSemiEntry.toEntry product :=
+    { divisorPacket := divisorPacket,
+      monoAnalyticTheater := monoAnalyticTheater,
+      packetLocalObject_eq_entrySource := packetLocalObject_eq_entrySource,
+      packetLocalObjectFinite_eq_divisorRealified :=
+        packetLocalObjectFinite_eq_divisorRealified,
+      packetLocalObjectFinite_eq_ind3Source :=
+        packetLocalObjectFinite_eq_ind3Source }
   exact
-    ⟨packet_eq_entry, entry_eq_product, product_eq_realified,
-      packet_eq_ind3, upper_semi, targetSource.hasPreciseFrobenioidIsomorphisms,
+    ⟨finiteSource.source_endpoint.1,
+      finiteSource.source_endpoint.2.1,
+      finiteSource.source_endpoint.2.2.1,
+      finiteSource.source_endpoint.2.2.2.1,
+      finiteSource.source_endpoint.2.2.2.2,
+      targetSource.hasPreciseFrobenioidIsomorphisms,
       (part.boundarySignedEqualityOrStrictCTheta_of_hodgeFiniteDivisorCanonicalExactVerticalIQ
         profile audited alignment source_profile_eq thetaRootSource upperSemiEntry
         divisorPacket monoAnalyticTheater kummerCompatibility forgettingCompatibility
