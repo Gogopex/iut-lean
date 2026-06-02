@@ -957,6 +957,23 @@ theorem hullLogVolumeApproximantFamily_endpoint
         data.logVolume (data.hullRegion region) :=
   family.endpoint
 
+theorem exactHullLogVolumeApproximantFamily_endpoint
+    {α : Type u} {κ : Type v}
+    {data : IUTStage1HolomorphicHullLogVolumeShadow α}
+    {region : Set α}
+    (family :
+      IUTStage1ExactHullLogVolumeApproximantFamily data region κ)
+    (k : κ) :
+    family.familyUnion ⊆ data.hullRegion region ∧
+      data.hullRegion region ⊆ family.familyUnion ∧
+      family.familyUnion = data.hullRegion region ∧
+      data.logVolume
+          ((family.exactApproximant k).approximant).approximant =
+        data.logVolume region ∧
+      data.logVolume family.familyUnion =
+        data.logVolume (data.hullRegion region) :=
+  family.endpoint k
+
 theorem holomorphicHullMapLaws_endpoint
     {α : Type u}
     (data : IUTStage1HolomorphicHullLogVolumeShadow α)

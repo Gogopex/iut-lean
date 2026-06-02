@@ -2922,6 +2922,142 @@ theorem canonical_endpoint
 end IUTStage1HullLogVolumeApproximantFamily
 
 /--
+Remark 3.9.5(iv) finite exact-approximant family.
+
+This is the `Xi(P)` analogue of `IUTStage1HullLogVolumeApproximantFamily`.
+Each member has the exact log-volume of `P`; if the family contains the
+canonical hull, its union is again `phi(P)`.  When `P` itself is closed under
+the hull operator, the canonical one-point exact family has union `P`.
+-/
+structure IUTStage1ExactHullLogVolumeApproximantFamily
+    {α : Type u}
+    (data : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (region : Set α)
+    (κ : Type v) where
+  exactApproximant :
+    κ -> IUTStage1ExactHullLogVolumeApproximant data region
+  canonicalIndex : κ
+  canonical_approximant_eq_hull :
+    ((exactApproximant canonicalIndex).approximant).approximant =
+      data.hullRegion region
+
+namespace IUTStage1ExactHullLogVolumeApproximantFamily
+
+variable {α : Type u} {κ : Type v}
+variable {data : IUTStage1HolomorphicHullLogVolumeShadow α}
+variable {region : Set α}
+
+def canonicalOfClosed
+    (data : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (region : Set α)
+    (hclosed : data.hull.IsClosed region) :
+    IUTStage1ExactHullLogVolumeApproximantFamily data region PUnit :=
+  { exactApproximant := fun _ =>
+      IUTStage1ExactHullLogVolumeApproximant.canonicalOfClosed
+        data region hclosed,
+    canonicalIndex := PUnit.unit,
+    canonical_approximant_eq_hull :=
+      IUTStage1HullLogVolumeApproximant.canonical_approximant_eq_hull
+        data region }
+
+def familyUnion
+    (family :
+      IUTStage1ExactHullLogVolumeApproximantFamily data region κ) :
+    Set α :=
+  ⋃ k, ((family.exactApproximant k).approximant).approximant
+
+theorem exactApproximant_subset_hull
+    (family :
+      IUTStage1ExactHullLogVolumeApproximantFamily data region κ)
+    (k : κ) :
+    ((family.exactApproximant k).approximant).approximant ⊆
+      data.hullRegion region :=
+  (family.exactApproximant k).approximant_subset_hull
+
+theorem exactApproximant_logVolume_eq_region
+    (family :
+      IUTStage1ExactHullLogVolumeApproximantFamily data region κ)
+    (k : κ) :
+    data.logVolume
+        ((family.exactApproximant k).approximant).approximant =
+      data.logVolume region :=
+  (family.exactApproximant k).exact_logVolume
+
+theorem familyUnion_subset_hull
+    (family :
+      IUTStage1ExactHullLogVolumeApproximantFamily data region κ) :
+    family.familyUnion ⊆ data.hullRegion region := by
+  intro x hx
+  rcases Set.mem_iUnion.mp hx with ⟨k, hxk⟩
+  exact family.exactApproximant_subset_hull k hxk
+
+theorem hull_subset_familyUnion
+    (family :
+      IUTStage1ExactHullLogVolumeApproximantFamily data region κ) :
+    data.hullRegion region ⊆ family.familyUnion := by
+  intro x hx
+  exact Set.mem_iUnion.mpr
+    ⟨family.canonicalIndex,
+      by
+        rw [family.canonical_approximant_eq_hull]
+        exact hx⟩
+
+theorem familyUnion_eq_hull
+    (family :
+      IUTStage1ExactHullLogVolumeApproximantFamily data region κ) :
+    family.familyUnion = data.hullRegion region :=
+  Set.Subset.antisymm family.familyUnion_subset_hull
+    family.hull_subset_familyUnion
+
+theorem logVolume_familyUnion_eq_hull
+    (family :
+      IUTStage1ExactHullLogVolumeApproximantFamily data region κ) :
+    data.logVolume family.familyUnion =
+      data.logVolume (data.hullRegion region) := by
+  rw [family.familyUnion_eq_hull]
+
+theorem endpoint
+    (family :
+      IUTStage1ExactHullLogVolumeApproximantFamily data region κ)
+    (k : κ) :
+    family.familyUnion ⊆ data.hullRegion region ∧
+      data.hullRegion region ⊆ family.familyUnion ∧
+      family.familyUnion = data.hullRegion region ∧
+      data.logVolume
+          ((family.exactApproximant k).approximant).approximant =
+        data.logVolume region ∧
+      data.logVolume family.familyUnion =
+        data.logVolume (data.hullRegion region) :=
+  ⟨family.familyUnion_subset_hull,
+    family.hull_subset_familyUnion,
+    family.familyUnion_eq_hull,
+    family.exactApproximant_logVolume_eq_region k,
+    family.logVolume_familyUnion_eq_hull⟩
+
+theorem canonicalOfClosed_endpoint
+    (data : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (region : Set α)
+    (hclosed : data.hull.IsClosed region) :
+    let family := canonicalOfClosed data region hclosed;
+    family.familyUnion = data.hullRegion region ∧
+      data.hullRegion region = region ∧
+      family.familyUnion = region ∧
+      data.logVolume family.familyUnion = data.logVolume region :=
+  by
+    intro family
+    have hUnion : family.familyUnion = data.hullRegion region :=
+      family.familyUnion_eq_hull
+    have hHull : data.hullRegion region = region :=
+      data.hull_fix_of_closed hclosed
+    exact
+      ⟨hUnion,
+        hHull,
+        hUnion.trans hHull,
+        by rw [hUnion, hHull]⟩
+
+end IUTStage1ExactHullLogVolumeApproximantFamily
+
+/--
 Remark 3.9.5(v) upper-semi set quotient.
 
 For a subset `S ⊆ E`, the paper considers the quotient `E^S` that identifies
