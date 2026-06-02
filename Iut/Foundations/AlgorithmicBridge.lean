@@ -480,6 +480,19 @@ def ofUnionSubset
     hullBridge := hullBridge,
     determinantBridge := { bound := fun _ => hvolume } }
 
+def ofUnionHull
+    (operation : HullDetOperationId)
+    (hullOperation : HullOperationId)
+    (determinantOperation : DeterminantLogVolumeOperationId)
+    (operator : HullOperator target)
+    (hvolume :
+      RegionMeasure.HasVolumeAtMost measure
+        (operator.hull output.comparisons.targetUnion) bound) :
+    StructuredHullDetBridgeData output measure bound :=
+  ofUnionSubset operation hullOperation determinantOperation
+    (operator.hull output.comparisons.targetUnion)
+    (operator.extensive output.comparisons.targetUnion) hvolume
+
 def commonTargetHullBridge
     (data : StructuredHullDetBridgeData output measure bound) :
     output.StructuredCommonTargetHullBridge measure bound :=
@@ -559,6 +572,51 @@ theorem ofUnionSubset_endpoint
       by
         simpa [data, ofUnionSubset] using hvolume,
       data.allTargetsAtMost certificate⟩
+
+theorem ofUnionHull_applyHull_eq
+    (operation : HullDetOperationId)
+    (hullOperation : HullOperationId)
+    (determinantOperation : DeterminantLogVolumeOperationId)
+    (operator : HullOperator target)
+    (hvolume :
+      RegionMeasure.HasVolumeAtMost measure
+        (operator.hull output.comparisons.targetUnion) bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    (ofUnionHull (output := output) (measure := measure) (bound := bound)
+      operation hullOperation determinantOperation operator hvolume).applyHull
+        certificate =
+      output.comparisons.commonTargetHullOfUnionHull operator :=
+  rfl
+
+theorem ofUnionHull_endpoint
+    (operation : HullDetOperationId)
+    (hullOperation : HullOperationId)
+    (determinantOperation : DeterminantLogVolumeOperationId)
+    (operator : HullOperator target)
+    (hvolume :
+      RegionMeasure.HasVolumeAtMost measure
+        (operator.hull output.comparisons.targetUnion) bound)
+    (certificate : QualitativeData.StructuredCertificate output.family) :
+    let data :=
+      ofUnionHull (output := output) (measure := measure) (bound := bound)
+        operation hullOperation determinantOperation operator hvolume;
+    (data.applyHull certificate).hull =
+        operator.hull output.comparisons.targetUnion ∧
+      Region.Subset output.comparisons.targetUnion
+        (data.applyHull certificate).hull ∧
+      RegionMeasure.HasVolumeAtMost measure
+        (data.applyHull certificate).hull bound ∧
+      RegionComparisonFamily.AllTargetsAtMost measure output.comparisons bound :=
+  by
+    intro data
+    exact
+      ⟨rfl,
+        by
+          simpa [data, ofUnionHull, ofUnionSubset] using
+            operator.extensive output.comparisons.targetUnion,
+        by
+          simpa [data, ofUnionHull, ofUnionSubset] using hvolume,
+        data.allTargetsAtMost certificate⟩
 
 /-- Audit view of the internal hull and determinant/log-volume split. -/
 structure StepAudit

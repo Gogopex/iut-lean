@@ -559,6 +559,11 @@ constructed from a concrete common hull \(K\), a proof
 all-target bounds, and equality between the package's named hull/determinant
 bridge and this constructed bridge.  Thus the remaining source obligation is
 the construction of \(K\) and its bound, not an opaque common-bound bridge.
+A more source-shaped constructor specializes \(K\) to
+\(\phi(P_{\mathrm{out}})\) for an abstract hull operator \(\phi\).  Its
+endpoint proves that the bridge hull is definitionally this hull of the target
+union, and reduces the source input to the determinant/log-volume estimate for
+\(\phi(P_{\mathrm{out}})\) plus equality with the package's named bridge.
 Remark 3.9.5(vii), (Ob4), is represented at the same finite level: a naive
 Frobenius/tensor-power log-volume object records the passage
 \(L\mapsto M L\) for \(M>0\), and \Lean{} proves that normalized log-volume
@@ -966,6 +971,10 @@ The project currently proves the following source-facing results in \Lean{}:
   determinant/log-volume bound for that hull.  The experiment endpoint returns
   target-union containment, the determinant bound, all-target bounds, and
   equality with the package's named hull/determinant bridge.
+\item The same source bridge has a hull-operator specialization: the common
+  hull is \(\phi(P_{\mathrm{out}})\) for the target-union region
+  \(P_{\mathrm{out}}\), and the endpoint records this equality before deriving
+  containment, determinant, and all-target bounds.
 \item The Step (x)-to-Step (xi) upper-ray bridge can now be built directly
   from a certified possible-image hull approximant.  The determinant
   normalization is read from the approximant/determinant compatibility, rather
