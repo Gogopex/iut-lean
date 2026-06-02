@@ -1513,6 +1513,36 @@ def realifiedLogVolume
     (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π) : Real :=
   (source.divisorDegree : Real) + source.unitLogVolume
 
+def tensorProduct
+    (left right : IUTStage1FiniteRealifiedFrobenioidDivisorSource π)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean) :
+    IUTStage1FiniteRealifiedFrobenioidDivisorSource π :=
+  { object := object,
+    primeMultiplicity := fun p =>
+      left.primeMultiplicity p + right.primeMultiplicity p,
+    primeDegree := left.primeDegree,
+    unitLogVolume := left.unitLogVolume + right.unitLogVolume }
+
+theorem tensorProduct_divisorDegree_eq_add
+    (left right : IUTStage1FiniteRealifiedFrobenioidDivisorSource π)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean)
+    (hprime : left.primeDegree = right.primeDegree) :
+    (left.tensorProduct right object).divisorDegree =
+      left.divisorDegree + right.divisorDegree := by
+  simp [tensorProduct, divisorDegree, Finset.sum_add_distrib,
+    right_distrib, hprime]
+
+theorem tensorProduct_realifiedLogVolume_eq_add
+    (left right : IUTStage1FiniteRealifiedFrobenioidDivisorSource π)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean)
+    (hprime : left.primeDegree = right.primeDegree) :
+    (left.tensorProduct right object).realifiedLogVolume =
+      left.realifiedLogVolume + right.realifiedLogVolume := by
+  rw [realifiedLogVolume, realifiedLogVolume, realifiedLogVolume,
+    tensorProduct_divisorDegree_eq_add left right object hprime]
+  simp [tensorProduct]
+  ring_nf
+
 end IUTStage1FiniteRealifiedFrobenioidDivisorSource
 
 /--

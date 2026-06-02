@@ -574,6 +574,18 @@ theorem finiteRealifiedFrobenioidDivisorSource_endpoint
           source.unitLogVolume :=
   source.endpoint
 
+theorem finiteRealifiedFrobenioidDivisorTensorProduct_endpoint
+    {π : Type u} [Fintype π]
+    (left right : IUTStage1FiniteRealifiedFrobenioidDivisorSource π)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean)
+    (hprime : left.primeDegree = right.primeDegree) :
+    (left.tensorProduct right object).divisorDegree =
+        left.divisorDegree + right.divisorDegree ∧
+      (left.tensorProduct right object).realifiedLogVolume =
+        left.realifiedLogVolume + right.realifiedLogVolume :=
+  ⟨left.tensorProduct_divisorDegree_eq_add right object hprime,
+    left.tensorProduct_realifiedLogVolume_eq_add right object hprime⟩
+
 theorem realifiedFrobenioidKummerCompatibility_endpoint
     {kind : IUTStage1PlaceKind} {j : Nat}
     {source target :
