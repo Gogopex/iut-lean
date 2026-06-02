@@ -597,6 +597,37 @@ theorem logKummerVerticalIQTargetSource_endpoint
         audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
   source.verticalIQTarget_endpoint
 
+theorem ind3ThetaTargetAlignmentFromStepXVerticalIQ_endpoint
+    {source target : Copy} {coric : Type u}
+    {package :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations package}
+    {endpoint : package.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    {logKummer : LogKummerCorrespondenceId}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    (stepXAlignment : StepXPacketNormalizedThetaSourceAlignment part)
+    (targetSource :
+      NonarchimedeanLogKummerVerticalIQTargetSource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        logKummer entry) :
+    targetSource.frobenioidMode.hasPreciseFrobenioidIsomorphisms = true ∧
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
+  stepXVerticalIQTargetAlignment_endpoint
+    stepXAlignment targetSource
+
 theorem logKummerPacketCorrespondenceSource_ofVerticalIQTarget_endpoint
     {coric : Type u}
     {audited :

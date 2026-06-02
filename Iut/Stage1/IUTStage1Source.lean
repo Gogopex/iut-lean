@@ -39521,6 +39521,74 @@ theorem verticalIQTarget_endpoint
 
 end NonarchimedeanLogKummerVerticalIQTargetSource
 
+/--
+Construct the target-only `(Ind3)` alignment from Step (x) packet
+normalization and an exact vertical-`IQ` target.
+
+The Step (x) theta-source alignment gives
+`thetaAverage = packetNormalized`; the vertical-`IQ` target gives
+`Ind3Target = packetNormalized`.  Therefore the target-side equality consumed
+by the source-aligned Hodge/SHE/IPL/hull route is no longer an independent
+ordered-real input when exact vertical-`IQ` target data is present.
+-/
+def ind3ThetaTargetAlignmentOfStepXVerticalIQTarget
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {logKummer : LogKummerCorrespondenceId}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    (stepXAlignment : StepXPacketNormalizedThetaSourceAlignment part)
+    (targetSource :
+      NonarchimedeanLogKummerVerticalIQTargetSource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        logKummer entry) :
+    Ind3ThetaTargetAlignment part audited :=
+  Ind3ThetaTargetAlignment.ofPacketNormalizedTarget
+    (stepXAlignment.thetaSourceAverage_eq_packetNormalized audited)
+    targetSource.ind3Target_eq_packetNormalized
+
+theorem stepXVerticalIQTargetAlignment_endpoint
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    {part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {logKummer : LogKummerCorrespondenceId}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    (stepXAlignment : StepXPacketNormalizedThetaSourceAlignment part)
+    (targetSource :
+      NonarchimedeanLogKummerVerticalIQTargetSource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        logKummer entry) :
+    targetSource.frobenioidMode.hasPreciseFrobenioidIsomorphisms = true ∧
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume =
+        audited.choice.local_tensor_state.packetState.capsuleFamily.normalizedLogVolume ∧
+      part.insulated_route.theta_source.thetaSourceAverage audited =
+        audited.choice.upper_semi_state.logVolumeCompatibility.targetLogVolume :=
+  ⟨targetSource.hasPreciseFrobenioidIsomorphisms,
+    stepXAlignment.thetaSourceAverage_eq_packetNormalized audited,
+    targetSource.ind3Target_eq_packetNormalized,
+    (ind3ThetaTargetAlignmentOfStepXVerticalIQTarget
+      stepXAlignment targetSource).thetaSourceAverage_eq_ind3Target⟩
+
 namespace NonarchimedeanLogKummerPacketTargetCalibration
 
 variable
