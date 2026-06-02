@@ -5903,6 +5903,113 @@ theorem structureMorphism_endpoint
 end IUTStage1LocalGlobalFrobenioidStructureMorphismCollection
 
 /--
+Finite morphism between local-global structure-morphism collections.
+
+This is the degree/log-volume shadow of Remark 3.9.5(ix), (cQ3), item (lc2):
+morphisms between local Frobenioid objects are compatible with the structure
+poly-morphisms to the determinant object.  Compatibility is expressed by
+equality of the composed local-then-structure morphism and
+structure-then-global morphism shifts.
+-/
+structure IUTStage1LocalGlobalFrobenioidCompatibleMorphism
+    {V : Type u} [Fintype V]
+    (source target :
+      IUTStage1LocalGlobalFrobenioidStructureMorphismCollection V) where
+  globalMorphism :
+    IUTStage1RealifiedFrobenioidDegreeObject.DegreeMorphism
+      source.collection.globalObject target.collection.globalObject
+  localMorphism :
+    ∀ v : V,
+      IUTStage1RealifiedFrobenioidDegreeObject.DegreeMorphism
+        (source.collection.localObject v) (target.collection.localObject v)
+  compatible_divisorShift :
+    ∀ v : V,
+      ((localMorphism v).comp (target.structureMorphism v)).divisorDegreeShift =
+        ((source.structureMorphism v).comp globalMorphism).divisorDegreeShift
+  compatible_unitShift :
+    ∀ v : V,
+      ((localMorphism v).comp (target.structureMorphism v)).unitLogVolumeShift =
+        ((source.structureMorphism v).comp globalMorphism).unitLogVolumeShift
+
+namespace IUTStage1LocalGlobalFrobenioidCompatibleMorphism
+
+variable {V : Type u} [Fintype V]
+variable
+  {source target :
+    IUTStage1LocalGlobalFrobenioidStructureMorphismCollection V}
+
+theorem local_then_structure_realifiedLogVolume
+    (morphism :
+      IUTStage1LocalGlobalFrobenioidCompatibleMorphism source target)
+    (v : V) :
+    target.collection.globalObject.realifiedLogVolume =
+      (source.collection.localObject v).realifiedLogVolume +
+        ((((morphism.localMorphism v).comp
+          (target.structureMorphism v)).divisorDegreeShift : Int) : Real) +
+        ((morphism.localMorphism v).comp
+          (target.structureMorphism v)).unitLogVolumeShift :=
+  ((morphism.localMorphism v).comp
+    (target.structureMorphism v)).target_realifiedLogVolume_eq_source_plus_shifts
+
+theorem structure_then_global_realifiedLogVolume
+    (morphism :
+      IUTStage1LocalGlobalFrobenioidCompatibleMorphism source target)
+    (v : V) :
+    target.collection.globalObject.realifiedLogVolume =
+      (source.collection.localObject v).realifiedLogVolume +
+        ((((source.structureMorphism v).comp
+          morphism.globalMorphism).divisorDegreeShift : Int) : Real) +
+        ((source.structureMorphism v).comp
+          morphism.globalMorphism).unitLogVolumeShift :=
+  ((source.structureMorphism v).comp
+    morphism.globalMorphism).target_realifiedLogVolume_eq_source_plus_shifts
+
+theorem compatible_totalShift
+    (morphism :
+      IUTStage1LocalGlobalFrobenioidCompatibleMorphism source target)
+    (v : V) :
+    ((((morphism.localMorphism v).comp
+          (target.structureMorphism v)).divisorDegreeShift : Int) : Real) +
+        ((morphism.localMorphism v).comp
+          (target.structureMorphism v)).unitLogVolumeShift =
+      ((((source.structureMorphism v).comp
+          morphism.globalMorphism).divisorDegreeShift : Int) : Real) +
+        ((source.structureMorphism v).comp
+          morphism.globalMorphism).unitLogVolumeShift := by
+  rw [morphism.compatible_divisorShift v, morphism.compatible_unitShift v]
+
+theorem compatibleMorphism_endpoint
+    (morphism :
+      IUTStage1LocalGlobalFrobenioidCompatibleMorphism source target) :
+    ∀ v : V,
+      target.collection.globalObject.realifiedLogVolume =
+          (source.collection.localObject v).realifiedLogVolume +
+            ((((morphism.localMorphism v).comp
+              (target.structureMorphism v)).divisorDegreeShift : Int) : Real) +
+            ((morphism.localMorphism v).comp
+              (target.structureMorphism v)).unitLogVolumeShift ∧
+        target.collection.globalObject.realifiedLogVolume =
+          (source.collection.localObject v).realifiedLogVolume +
+            ((((source.structureMorphism v).comp
+              morphism.globalMorphism).divisorDegreeShift : Int) : Real) +
+            ((source.structureMorphism v).comp
+              morphism.globalMorphism).unitLogVolumeShift ∧
+        ((((morphism.localMorphism v).comp
+              (target.structureMorphism v)).divisorDegreeShift : Int) : Real) +
+            ((morphism.localMorphism v).comp
+              (target.structureMorphism v)).unitLogVolumeShift =
+          ((((source.structureMorphism v).comp
+              morphism.globalMorphism).divisorDegreeShift : Int) : Real) +
+            ((source.structureMorphism v).comp
+              morphism.globalMorphism).unitLogVolumeShift :=
+  fun v =>
+    ⟨morphism.local_then_structure_realifiedLogVolume v,
+      morphism.structure_then_global_realifiedLogVolume v,
+      morphism.compatible_totalShift v⟩
+
+end IUTStage1LocalGlobalFrobenioidCompatibleMorphism
+
+/--
 Local `p_v^N` Frobenioid source normalized by the global realified restriction.
 
 This connects the Step (xii) local shift model to the source-backed restriction

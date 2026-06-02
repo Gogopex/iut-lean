@@ -188,6 +188,35 @@ theorem localGlobalFrobenioidStructureMorphismCollection_endpoint
             (source.collection.localObject v).realifiedLogVolume :=
   source.structureMorphism_endpoint
 
+theorem localGlobalFrobenioidCompatibleMorphism_endpoint
+    {V : Type u} [Fintype V]
+    {source target :
+      IUTStage1LocalGlobalFrobenioidStructureMorphismCollection V}
+    (morphism :
+      IUTStage1LocalGlobalFrobenioidCompatibleMorphism source target) :
+    ∀ v : V,
+      target.collection.globalObject.realifiedLogVolume =
+          (source.collection.localObject v).realifiedLogVolume +
+            ((((morphism.localMorphism v).comp
+              (target.structureMorphism v)).divisorDegreeShift : Int) : Real) +
+            ((morphism.localMorphism v).comp
+              (target.structureMorphism v)).unitLogVolumeShift ∧
+        target.collection.globalObject.realifiedLogVolume =
+          (source.collection.localObject v).realifiedLogVolume +
+            ((((source.structureMorphism v).comp
+              morphism.globalMorphism).divisorDegreeShift : Int) : Real) +
+            ((source.structureMorphism v).comp
+              morphism.globalMorphism).unitLogVolumeShift ∧
+        ((((morphism.localMorphism v).comp
+              (target.structureMorphism v)).divisorDegreeShift : Int) : Real) +
+            ((morphism.localMorphism v).comp
+              (target.structureMorphism v)).unitLogVolumeShift =
+          ((((source.structureMorphism v).comp
+              morphism.globalMorphism).divisorDegreeShift : Int) : Real) +
+            ((source.structureMorphism v).comp
+              morphism.globalMorphism).unitLogVolumeShift :=
+  morphism.compatibleMorphism_endpoint
+
 theorem restrictionNormalizedLocalFrobenioidSource_endpoint
     (source : IUTStage1RestrictionNormalizedLocalFrobenioidSource) :
     source.localSource.shiftedLogVolume =
