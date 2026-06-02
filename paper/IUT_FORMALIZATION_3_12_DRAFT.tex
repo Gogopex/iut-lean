@@ -600,6 +600,11 @@ The procession-normalized log-volume layer now has a direct finite
 \(ZMod(\ell)\), the total is the finite sum over all labels, the normalized
 value is this sum divided by \(\ell\), and \Lean{} proves invariance of the
 average under label translation.
+At this finite-label boundary, the \((\Ind1)\)/\((\Ind2)\) preservation step no
+longer has to be represented as pointwise equality of labelled summands:
+\Lean{} proves preservation of the normalized average by reindexing the
+\(ZMod(\ell)\)-sum, after which a pointwise upper bound on the twice-translated
+family gives the one-sided \((\Ind3)\) bound for the original average.
 The vertical-\(IQ\) route can now also be instantiated with a finite
 divisor/Frobenioid packet product on the mono-analytic side.  In this form the
 route constructs the theta-root attached realified log-Kummer entry source
@@ -1349,6 +1354,10 @@ The project currently proves the following source-facing results in \Lean{}:
   \(\sum_{j\in ZMod(\ell)} v_j\), the normalized value as
   \(\ell^{-1}\sum_j v_j\), and proves this average is unchanged by translating
   all labels.
+\item The corresponding finite-label indeterminacy endpoint proves that two
+  successive label translations preserve the normalized average by finite
+  reindexing; an upper bound on the twice-translated summands then yields the
+  \((\Ind3)\) upper bound for the original average.
 \item The theta-root attached Step (x) source can now be constructed from the
   same finite divisor-product source and an exact vertical-\(IQ\) target.  The
   endpoint exposes the canonical bad-local theta-root label, Kummer/forgetting

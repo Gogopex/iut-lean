@@ -15698,6 +15698,63 @@ theorem zmodUnitAffine_average_eq
   rw [data.zmodUnitAffine_total_eq a t]
   exact data.normalized_eq_zmod_average.symm
 
+noncomputable def translatedLabelAveraged
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t : ZMod l.value) :
+    IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value) :=
+  { normalizedLogVolume :=
+      fun j : ZMod l.value =>
+        (data.capsule (zmodLabelTranslate l t j)).logVolume,
+    averageLogVolume := data.normalizedLogVolume,
+    average_eq := by
+      rw [ZMod.card]
+      exact (data.zmodTranslation_average_eq t).symm }
+
+noncomputable def doubleTranslatedLabelAveraged
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t₁ t₂ : ZMod l.value) :
+    IUTStage1LabelAveragedProcessionLogVolume (ZMod l.value) :=
+  { normalizedLogVolume :=
+      fun j : ZMod l.value =>
+        (data.capsule
+          (zmodLabelTranslate l t₂ (zmodLabelTranslate l t₁ j))).logVolume,
+    averageLogVolume := data.normalizedLogVolume,
+    average_eq := by
+      rw [ZMod.card]
+      have hsum :
+          (Finset.univ.sum fun j : ZMod l.value =>
+            (data.capsule
+              (zmodLabelTranslate l t₂ (zmodLabelTranslate l t₁ j))).logVolume) =
+            Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume := by
+        calc
+          (Finset.univ.sum fun j : ZMod l.value =>
+            (data.capsule
+              (zmodLabelTranslate l t₂ (zmodLabelTranslate l t₁ j))).logVolume) =
+              Finset.univ.sum fun j : ZMod l.value =>
+                (data.capsule (zmodLabelTranslate l t₂ j)).logVolume :=
+            IUTStage1ZModCuspLabelLogVolumeCompatibility.zmodTranslation_sum_eq
+              (l := l) t₁
+              (fun j : ZMod l.value =>
+                (data.capsule (zmodLabelTranslate l t₂ j)).logVolume)
+          _ = Finset.univ.sum fun j : ZMod l.value => (data.capsule j).logVolume :=
+            data.zmodTranslation_total_eq t₂
+      rw [hsum]
+      exact data.normalized_eq_zmod_average }
+
+theorem translatedLabelAveraged_averageLogVolume
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t : ZMod l.value) :
+    (data.translatedLabelAveraged t).averageLogVolume =
+      data.normalizedLogVolume :=
+  rfl
+
+theorem doubleTranslatedLabelAveraged_averageLogVolume
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t₁ t₂ : ZMod l.value) :
+    (data.doubleTranslatedLabelAveraged t₁ t₂).averageLogVolume =
+      data.normalizedLogVolume :=
+  rfl
+
 theorem const_le_normalizedLogVolume_of_capsule_le
     (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
     {c : Real}
@@ -15731,6 +15788,43 @@ theorem zmod_labelled_procession_endpoint
           (l.value : Real)) = data.normalizedLogVolume :=
   ⟨data.total_eq, data.normalized_eq_zmod_average,
     data.zmodTranslation_average_eq t⟩
+
+/--
+Step (x) finite-label indeterminacy endpoint.
+
+Two successive `F_l` label translations preserve the procession-normalized
+average by finite reindexing.  A pointwise upper bound after these translations
+therefore gives the one-sided `(Ind3)` upper bound for the original average.
+-/
+theorem zmod_labelled_translation_indeterminacy_endpoint
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t₁ t₂ : ZMod l.value)
+    {ind3UpperBound : Real}
+    (hind3 :
+      ∀ j : ZMod l.value,
+        (data.capsule
+          (zmodLabelTranslate l t₂ (zmodLabelTranslate l t₁ j))).logVolume <=
+          ind3UpperBound) :
+    (data.translatedLabelAveraged t₁).averageLogVolume =
+        data.normalizedLogVolume ∧
+      (data.doubleTranslatedLabelAveraged t₁ t₂).averageLogVolume =
+        data.normalizedLogVolume ∧
+      (data.doubleTranslatedLabelAveraged t₁ t₂).averageLogVolume <=
+        ind3UpperBound ∧
+      data.normalizedLogVolume <= ind3UpperBound := by
+  haveI : Nonempty (ZMod l.value) := ⟨0⟩
+  have hafter2 :
+      (data.doubleTranslatedLabelAveraged t₁ t₂).averageLogVolume <=
+        ind3UpperBound :=
+    IUTStage1LabelAveragedProcessionLogVolume.average_le_const_of_forall_le
+      (data.doubleTranslatedLabelAveraged t₁ t₂) hind3
+  exact
+    ⟨data.translatedLabelAveraged_averageLogVolume t₁,
+      data.doubleTranslatedLabelAveraged_averageLogVolume t₁ t₂,
+      hafter2,
+      by
+        rw [← data.doubleTranslatedLabelAveraged_averageLogVolume t₁ t₂]
+        exact hafter2⟩
 
 end IUTStage1ZModLabelledCapsuleFamilyLogVolume
 

@@ -13735,6 +13735,25 @@ theorem zmodLabelledProcessionLogVolume_endpoint
           (l.value : Real)) = data.normalizedLogVolume :=
   data.zmod_labelled_procession_endpoint t
 
+theorem zmodLabelledProcessionTranslationIndeterminacy_endpoint
+    {l : PrimeGeFive} {kind : IUTStage1PlaceKind}
+    (data : IUTStage1ZModLabelledCapsuleFamilyLogVolume l kind)
+    (t₁ t₂ : ZMod l.value)
+    {ind3UpperBound : Real}
+    (hind3 :
+      ∀ j : ZMod l.value,
+        (data.capsule
+          (zmodLabelTranslate l t₂ (zmodLabelTranslate l t₁ j))).logVolume <=
+          ind3UpperBound) :
+    (data.translatedLabelAveraged t₁).averageLogVolume =
+        data.normalizedLogVolume ∧
+      (data.doubleTranslatedLabelAveraged t₁ t₂).averageLogVolume =
+        data.normalizedLogVolume ∧
+      (data.doubleTranslatedLabelAveraged t₁ t₂).averageLogVolume <=
+        ind3UpperBound ∧
+      data.normalizedLogVolume <= ind3UpperBound :=
+  data.zmod_labelled_translation_indeterminacy_endpoint t₁ t₂ hind3
+
 theorem localContainerLogVolume_endpoint
     {targetSigned localLogVolume : Real}
     (estimate :
