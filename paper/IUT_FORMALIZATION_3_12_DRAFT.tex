@@ -582,6 +582,10 @@ That target-only alignment is now constructible from Step (x)
 packet-normalized theta-source alignment together with an exact vertical-\(IQ\)
 target: \Lean{} derives both sides through the common packet-normalized value
 and keeps the \(FMOD\)-exactness guard visible.
+The corresponding realified-source audit removes the independent
+packet-local source-alignment parameter: the alignment is recovered from the
+theta-root attached realified log-Kummer entry source, while the exact
+vertical-\(IQ\) target supplies the target-side equality and \(FMOD\) guard.
 The Milestone 2 hull layer now contains a direct formalization of
 Remark 3.9.5(iii)'s approximant family.  For a region \(P\), an approximant
 record carries a hull \(H\), proves \(H\subseteq\phi(P)\), and proves
@@ -1422,6 +1426,10 @@ The project currently proves the following source-facing results in \Lean{}:
 \item The target-only \((\Ind3)\) alignment can now be constructed from a
   Step (x) packet-normalized theta-source alignment and an exact
   vertical-\(IQ\) target source.
+\item The realified-source vertical-\(IQ\) audit recovers the packet-local
+  source-alignment object from the theta-root attached realified
+  log-Kummer entry source, so this route boundary no longer accepts that
+  source alignment as an independent input.
 \item In the ordered form, the packet-normalized theta calibration can now be
   obtained from a constant \(ZMod(\ell)\) packet-normalized route.  The theorem
   requires equality of the Hodge-descent theta source with the packet-normalized
