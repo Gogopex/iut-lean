@@ -160,6 +160,18 @@ theorem globalToLocalRealifiedFrobenioidRestriction_endpoint
         restriction.localPrimeLogVolume :=
   restriction.restriction_endpoint
 
+theorem logLinkProductFormulaCompatibility_endpoint
+    {V : Type u} [Fintype V]
+    (compat : IUTStage1LogLinkProductFormulaCompatibility V) :
+    (∀ v : V,
+      compat.targetLocalLogVolume v = compat.sourceLocalLogVolume v ∧
+        compat.targetConversionRatio v = compat.sourceConversionRatio v ∧
+        compat.targetConversionRatio v * compat.targetLocalLogVolume v =
+          compat.sourceConversionRatio v * compat.sourceLocalLogVolume v) ∧
+      compat.targetGlobalArithmeticDegree =
+        compat.sourceGlobalArithmeticDegree :=
+  compat.endpoint
+
 theorem localGlobalRealifiedFrobenioidCollection_endpoint
     {V : Type u} [Fintype V]
     (collection : IUTStage1LocalGlobalRealifiedFrobenioidCollection V) :

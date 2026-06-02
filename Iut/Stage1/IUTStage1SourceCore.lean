@@ -7065,6 +7065,72 @@ theorem restriction_endpoint
 end IUTStage1GlobalToLocalRealifiedFrobenioidRestriction
 
 /--
+Finite product-formula compatibility for the log-link.
+
+Remark 3.9.6 says that log-link compatibility for the relevant sufficiently
+small local regions implies compatibility of the product-formula conversion
+ratios, hence compatibility of the resulting global arithmetic degrees.  This
+finite version records local log-volume equality and equality of the conversion
+ratios at each place, then derives equality of the weighted global sums.
+-/
+structure IUTStage1LogLinkProductFormulaCompatibility
+    (V : Type u) [Fintype V] where
+  sourceLocalLogVolume : V -> Real
+  targetLocalLogVolume : V -> Real
+  sourceConversionRatio : V -> Real
+  targetConversionRatio : V -> Real
+  local_logVolume_eq :
+    ∀ v : V, targetLocalLogVolume v = sourceLocalLogVolume v
+  conversion_ratio_eq :
+    ∀ v : V, targetConversionRatio v = sourceConversionRatio v
+
+namespace IUTStage1LogLinkProductFormulaCompatibility
+
+variable {V : Type u} [Fintype V]
+
+def sourceGlobalArithmeticDegree
+    (compat : IUTStage1LogLinkProductFormulaCompatibility V) :
+    Real :=
+  Finset.univ.sum fun v =>
+    compat.sourceConversionRatio v * compat.sourceLocalLogVolume v
+
+def targetGlobalArithmeticDegree
+    (compat : IUTStage1LogLinkProductFormulaCompatibility V) :
+    Real :=
+  Finset.univ.sum fun v =>
+    compat.targetConversionRatio v * compat.targetLocalLogVolume v
+
+theorem localWeightedLogVolume_eq
+    (compat : IUTStage1LogLinkProductFormulaCompatibility V)
+    (v : V) :
+    compat.targetConversionRatio v * compat.targetLocalLogVolume v =
+      compat.sourceConversionRatio v * compat.sourceLocalLogVolume v := by
+  rw [compat.conversion_ratio_eq v, compat.local_logVolume_eq v]
+
+theorem globalArithmeticDegree_eq
+    (compat : IUTStage1LogLinkProductFormulaCompatibility V) :
+    compat.targetGlobalArithmeticDegree =
+      compat.sourceGlobalArithmeticDegree :=
+  Finset.sum_congr rfl (fun v _ => compat.localWeightedLogVolume_eq v)
+
+theorem endpoint
+    (compat : IUTStage1LogLinkProductFormulaCompatibility V) :
+    (∀ v : V,
+      compat.targetLocalLogVolume v = compat.sourceLocalLogVolume v ∧
+        compat.targetConversionRatio v = compat.sourceConversionRatio v ∧
+        compat.targetConversionRatio v * compat.targetLocalLogVolume v =
+          compat.sourceConversionRatio v * compat.sourceLocalLogVolume v) ∧
+      compat.targetGlobalArithmeticDegree =
+        compat.sourceGlobalArithmeticDegree :=
+  ⟨fun v =>
+      ⟨compat.local_logVolume_eq v,
+        compat.conversion_ratio_eq v,
+        compat.localWeightedLogVolume_eq v⟩,
+    compat.globalArithmeticDegree_eq⟩
+
+end IUTStage1LogLinkProductFormulaCompatibility
+
+/--
 Finite local-global realified Frobenioid collection.
 
 IUT III, Remark 3.9.5(ix), describes local-global collections consisting of a
