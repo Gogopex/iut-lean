@@ -2721,6 +2721,97 @@ theorem endpoint
 end IUTStage1HullLogVolumeApproximant
 
 /--
+Remark 3.9.5(iii) exact hull approximant.
+
+This is the finite skeleton of an element of `Xi(P)`: it is a hull
+approximant whose log-volume is exactly the log-volume of the original region
+`P`.  The definition deliberately keeps this weaker than uniqueness; uniqueness
+of exact approximants is not available from the present order/log-volume
+skeleton alone.
+-/
+structure IUTStage1ExactHullLogVolumeApproximant
+    {α : Type u}
+    (data : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (region : Set α) where
+  approximant : IUTStage1HullLogVolumeApproximant data region
+  exact_logVolume :
+    data.logVolume approximant.approximant = data.logVolume region
+
+namespace IUTStage1ExactHullLogVolumeApproximant
+
+variable {α : Type u}
+variable {data : IUTStage1HolomorphicHullLogVolumeShadow α}
+variable {region : Set α}
+
+def canonicalOfClosed
+    (data : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (region : Set α)
+    (hclosed : data.hull.IsClosed region) :
+    IUTStage1ExactHullLogVolumeApproximant data region :=
+  { approximant := IUTStage1HullLogVolumeApproximant.canonical data region,
+    exact_logVolume := by
+      rw [IUTStage1HullLogVolumeApproximant.canonical_approximant_eq_hull,
+        data.hull_fix_of_closed hclosed] }
+
+theorem approximant_subset_hull
+    (exact : IUTStage1ExactHullLogVolumeApproximant data region) :
+    exact.approximant.approximant ⊆ data.hullRegion region :=
+  exact.approximant.approximant_subset_compactCarrier
+
+theorem approximant_hull_eq_self
+    (exact : IUTStage1ExactHullLogVolumeApproximant data region) :
+    data.hullRegion exact.approximant.approximant =
+      exact.approximant.approximant :=
+  exact.approximant.approximant_hull_eq_self
+
+theorem regionLogVolume_eq_approximantLogVolume
+    (exact : IUTStage1ExactHullLogVolumeApproximant data region) :
+    data.logVolume region = data.logVolume exact.approximant.approximant :=
+  exact.exact_logVolume.symm
+
+theorem exactLogVolume_le_hullLogVolume
+    (exact : IUTStage1ExactHullLogVolumeApproximant data region) :
+    data.logVolume exact.approximant.approximant <=
+      data.logVolume (data.hullRegion region) :=
+  exact.approximant.approximant_logVolume_le_hull
+
+theorem endpoint
+    (exact : IUTStage1ExactHullLogVolumeApproximant data region) :
+    exact.approximant.approximant ⊆ data.hullRegion region ∧
+      data.logVolume exact.approximant.approximant =
+        data.logVolume region ∧
+      data.logVolume region =
+        data.logVolume exact.approximant.approximant ∧
+      data.logVolume exact.approximant.approximant <=
+        data.logVolume (data.hullRegion region) ∧
+      data.hullRegion exact.approximant.approximant =
+        exact.approximant.approximant :=
+  ⟨exact.approximant_subset_hull,
+    exact.exact_logVolume,
+    exact.regionLogVolume_eq_approximantLogVolume,
+    exact.exactLogVolume_le_hullLogVolume,
+    exact.approximant_hull_eq_self⟩
+
+theorem canonicalOfClosed_endpoint
+    (data : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (region : Set α)
+    (hclosed : data.hull.IsClosed region) :
+    let exact := canonicalOfClosed data region hclosed;
+    exact.approximant.approximant = data.hullRegion region ∧
+      data.hullRegion region = region ∧
+      data.logVolume exact.approximant.approximant =
+        data.logVolume region :=
+  by
+    intro exact
+    exact
+      ⟨IUTStage1HullLogVolumeApproximant.canonical_approximant_eq_hull
+          data region,
+        data.hull_fix_of_closed hclosed,
+        exact.exact_logVolume⟩
+
+end IUTStage1ExactHullLogVolumeApproximant
+
+/--
 Remark 3.9.5(v) upper-semi set quotient.
 
 For a subset `S ⊆ E`, the paper considers the quotient `E^S` that identifies

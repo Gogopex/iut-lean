@@ -913,6 +913,37 @@ theorem hullLogVolumeApproximant_endpoint
       data.hullRegion approximant.approximant = approximant.approximant :=
   approximant.endpoint
 
+theorem exactHullLogVolumeApproximant_endpoint
+    {α : Type u}
+    {data : IUTStage1HolomorphicHullLogVolumeShadow α}
+    {region : Set α}
+    (exact : IUTStage1ExactHullLogVolumeApproximant data region) :
+    exact.approximant.approximant ⊆ data.hullRegion region ∧
+      data.logVolume exact.approximant.approximant =
+        data.logVolume region ∧
+      data.logVolume region =
+        data.logVolume exact.approximant.approximant ∧
+      data.logVolume exact.approximant.approximant <=
+        data.logVolume (data.hullRegion region) ∧
+      data.hullRegion exact.approximant.approximant =
+        exact.approximant.approximant :=
+  exact.endpoint
+
+theorem exactHullLogVolumeApproximantCanonicalClosed_endpoint
+    {α : Type u}
+    (data : IUTStage1HolomorphicHullLogVolumeShadow α)
+    (region : Set α)
+    (hclosed : data.hull.IsClosed region) :
+    let exact :=
+      IUTStage1ExactHullLogVolumeApproximant.canonicalOfClosed
+        data region hclosed;
+    exact.approximant.approximant = data.hullRegion region ∧
+      data.hullRegion region = region ∧
+      data.logVolume exact.approximant.approximant =
+        data.logVolume region :=
+  IUTStage1ExactHullLogVolumeApproximant.canonicalOfClosed_endpoint
+    data region hclosed
+
 theorem holomorphicHullMapLaws_endpoint
     {α : Type u}
     (data : IUTStage1HolomorphicHullLogVolumeShadow α)
