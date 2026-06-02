@@ -727,6 +727,8 @@ theorem thetaPossibleImagesHullApproximant_endpoint
       data.approximantLogVolume <= data.thetaHullLogVolume ∧
       data.qPilotLogVolume <= data.approximantLogVolume ∧
       data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaImageUnionLogVolume <=
+        data.determinant.determinantLogVolume ∧
       data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume ∈
         data.toHullDetPilotUpperRayLogVolume.upperRay ∧
       data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume <=
@@ -1107,6 +1109,8 @@ theorem thetaPossibleImagesWeightedDeterminant_endpoint
       data.approximantLogVolume <= data.thetaHullLogVolume ∧
       data.qPilotLogVolume <= data.approximantLogVolume ∧
       data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaImageUnionLogVolume <=
+        determinantSource.determinantLogVolume ∧
       data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume <=
         determinantSource.determinantLogVolume :=
   IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow.ofWeightedDeterminant_endpoint

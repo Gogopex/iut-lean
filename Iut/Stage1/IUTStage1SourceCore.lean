@@ -3780,6 +3780,15 @@ theorem approximantLogVolume_eq_normalized_determinant
   simpa [approximantLogVolume, approximantRegion] using
     data.approximant_eq_normalized_determinant
 
+theorem thetaImageUnionLogVolume_le_determinant
+    (data :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
+    data.thetaImageUnionLogVolume <= data.determinant.determinantLogVolume :=
+  data.thetaImageUnionLogVolume_le_approximantLogVolume.trans
+    (le_of_eq
+      (data.approximantLogVolume_eq_normalized_determinant.trans
+        data.determinant.normalizedLogVolume_eq_determinant))
+
 def toHullDetPilotUpperRayLogVolume
     (data :
       IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι) :
@@ -3816,6 +3825,8 @@ theorem endpoint
       data.approximantLogVolume <= data.thetaHullLogVolume ∧
       data.qPilotLogVolume <= data.approximantLogVolume ∧
       data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaImageUnionLogVolume <=
+        data.determinant.determinantLogVolume ∧
       data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume ∈
         data.toHullDetPilotUpperRayLogVolume.upperRay ∧
       data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume <=
@@ -3824,6 +3835,7 @@ theorem endpoint
     data.approximantLogVolume_le_thetaHullLogVolume,
     data.qPilotLogVolume_le_approximantLogVolume,
     data.qPilotLogVolume_le_thetaHullLogVolume,
+    data.thetaImageUnionLogVolume_le_determinant,
     data.toUpperRay_qPilot_mem_upperRay,
     data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume_le_determinant⟩
 
@@ -3907,6 +3919,8 @@ theorem ofWeightedDeterminant_endpoint
       data.approximantLogVolume <= data.thetaHullLogVolume ∧
       data.qPilotLogVolume <= data.approximantLogVolume ∧
       data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaImageUnionLogVolume <=
+        determinantSource.determinantLogVolume ∧
       data.toHullDetPilotUpperRayLogVolume.qPilotLogVolume <=
         determinantSource.determinantLogVolume :=
   by
@@ -3916,6 +3930,9 @@ theorem ofWeightedDeterminant_endpoint
         data.approximantLogVolume_le_thetaHullLogVolume,
         data.qPilotLogVolume_le_approximantLogVolume,
         data.qPilotLogVolume_le_thetaHullLogVolume,
+        by
+          simpa [ofWeightedDeterminant]
+            using data.thetaImageUnionLogVolume_le_determinant,
         by
           simpa [ofWeightedDeterminant]
             using
@@ -3966,6 +3983,8 @@ theorem ofCanonicalHullWeightedDeterminant_endpoint
       data.approximantLogVolume = data.thetaHullLogVolume ∧
       data.qPilotLogVolume <= data.thetaHullLogVolume ∧
       data.approximantLogVolume =
+        determinantSource.determinantLogVolume ∧
+      data.thetaImageUnionLogVolume <=
         determinantSource.determinantLogVolume :=
   by
     intro data
@@ -3983,7 +4002,10 @@ theorem ofCanonicalHullWeightedDeterminant_endpoint
         by
           simpa [data, ofCanonicalHullWeightedDeterminant, ofWeightedDeterminant,
             approximantLogVolume, approximantRegion]
-            using compatibility.approximant_eq_determinantLogVolume⟩
+            using compatibility.approximant_eq_determinantLogVolume,
+        by
+          simpa [data, ofCanonicalHullWeightedDeterminant, ofWeightedDeterminant]
+            using data.thetaImageUnionLogVolume_le_determinant⟩
 
 theorem canonicalHullWeightedDeterminantFamilyHullDetLogVolume_endpoint
     {β : Type w} [Fintype β]
