@@ -516,6 +516,10 @@ Conversely, a source packet/product calibration together with the Kummer and
 mono-analytic forgetting transfers reconstructs this packet-local alignment
 object; the packet-local/\((\Ind3)\)-source equality is derived through the
 transfer chain rather than supplied as a parallel datum.
+When the mono-analytic packet product is supplied by the finite
+divisor/Frobenioid product source, \Lean{} now derives the
+entry-source/mono-analytic-product equality from the packet-local object
+identification and the finite divisor realified log-volume computation.
 This recovery has now been lifted to the realified-Frobenioid packet source:
 \Lean{} uses the source object's own Kummer and mono-analytic forgetting
 compatibilities to reconstruct the packet-local source alignment.
@@ -1323,6 +1327,11 @@ The project currently proves the following source-facing results in \Lean{}:
   log-volume.
   The equality between packet product log-volume and realified Frobenioid
   log-volume is derived from the finite sum, not supplied as a separate field.
+\item The Step (x) packet-local source alignment can now consume this finite
+  divisor-product source: after identifying the packet-local object with the
+  local entry source and the divisor realified log-volume, \Lean{} derives the
+  entry-source/mono-analytic-product equality used by the log-Kummer source
+  calibration.
 \item The finite divisor-monoid source now has its own tensor product:
   multiplicities and unit log-volumes add, and \Lean{} proves additivity of the
   induced divisor degree and realified log-volume.
@@ -1611,6 +1620,10 @@ The project currently proves the following source-facing results in \Lean{}:
   packet-local/source and source/mono-analytic-product equalities separately;
   they are projected from the calibration object before the realified
   Frobenioid source is constructed.
+\item Below that calibration, the source/mono-analytic-product equality can now
+  be derived from the finite divisor/Frobenioid packet product source whenever
+  the packet-local object is identified with the entry source and the finite
+  divisor realified log-volume.
 \item The finite sign-unit/root-of-unity part of Remark 3.11.4 is formalized:
   sign-unit action preserves full cusp labels, full-label log-volume readings,
   Gaussian degrees, and averaged Gaussian log-volume.

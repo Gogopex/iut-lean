@@ -955,12 +955,51 @@ theorem finiteRealifiedFrobenioidDivisorTensorProductProjection_endpoint
         (left.toDegreeObject.tensorProduct
           right.toDegreeObject object).divisorDegree ∧
       (left.tensorProduct right object).toDegreeObject.unitLogVolume =
-        (left.toDegreeObject.tensorProduct
-          right.toDegreeObject object).unitLogVolume ∧
+      (left.toDegreeObject.tensorProduct
+        right.toDegreeObject object).unitLogVolume ∧
       (left.tensorProduct right object).toDegreeObject.realifiedLogVolume =
         (left.toDegreeObject.tensorProduct
           right.toDegreeObject object).realifiedLogVolume :=
   left.toDegreeObject_tensorProduct_endpoint right object hprime
+
+theorem logKummerPacketLocalSourceAlignment_ofFiniteDivisorProduct_endpoint
+    {coric : Type u}
+    {audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    {j : Nat}
+    {product :
+      IUTStage1BaseValuationTensorPacketProductLogVolume
+        IUTStage1PlaceKind.nonarchimedean j}
+    (divisorPacket : IUTStage1FiniteDivisorTensorPacketProductSource product)
+    (realization : IUTStage1TensorPacketRealizationKind)
+    (theater : QualitativeData.HodgeTheaterId)
+    (packetLocalObject_eq_entrySource :
+      audited.choice.local_tensor_state.packetState.localObject =
+        entry.sourceLogVolume)
+    (packetLocalObjectFinite_eq_divisorRealified :
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        divisorPacket.divisor.realifiedLogVolume)
+    (packetLocalObjectFinite_eq_ind3Source :
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume) :
+    let realified :=
+      divisorPacket.toRealifiedFrobenioidTensorPacketProductSource
+        realization theater;
+    audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        entry.sourceLogVolume.finiteLogVolume ∧
+      entry.sourceLogVolume.finiteLogVolume =
+        realified.toRealized.product.productLogVolume ∧
+      product.productLogVolume = divisorPacket.divisor.realifiedLogVolume ∧
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume ∧
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume <=
+        entry.targetLogVolume.finiteLogVolume :=
+  NonarchimedeanLogKummerPacketLocalSourceAlignment.ofFiniteDivisorTensorPacketProduct_endpoint
+    divisorPacket realization theater packetLocalObject_eq_entrySource
+    packetLocalObjectFinite_eq_divisorRealified
+    packetLocalObjectFinite_eq_ind3Source
 
 theorem finiteRealifiedFrobenioidNaiveTensorPowerProjection_endpoint
     {π : Type u} [Fintype π]
