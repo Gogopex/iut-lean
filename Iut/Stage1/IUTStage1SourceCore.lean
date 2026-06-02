@@ -5655,6 +5655,83 @@ theorem restriction_endpoint
 end IUTStage1GlobalToLocalRealifiedFrobenioidRestriction
 
 /--
+Finite local-global realified Frobenioid collection.
+
+IUT III, Remark 3.9.5(ix), describes local-global collections consisting of a
+local object at each `v`, a global object in the global realified Frobenioid,
+and localization isomorphisms relating the local realifications to the
+localized global object.  This record keeps the degree/log-volume shadow of
+that structure: each local object is identified with the restricted global
+prime log-volume, and the extension degree rescales it back to the global
+realified log-volume.
+-/
+structure IUTStage1LocalGlobalRealifiedFrobenioidCollection
+    (V : Type u) [Fintype V] where
+  globalObject : IUTStage1RealifiedFrobenioidDegreeObject
+  localObject : V -> IUTStage1RealifiedFrobenioidDegreeObject
+  localization : V -> IUTStage1GlobalToLocalRealifiedFrobenioidRestriction
+  local_realified_eq_restricted :
+    ∀ v : V,
+      (localObject v).realifiedLogVolume =
+        (localization v).restrictedGlobalPrimeLogVolume
+  global_realified_eq_localPrime :
+    ∀ v : V,
+      globalObject.realifiedLogVolume =
+        (localization v).localPrimeLogVolume
+
+namespace IUTStage1LocalGlobalRealifiedFrobenioidCollection
+
+variable {V : Type u} [Fintype V]
+
+theorem localRealifiedLogVolume_eq_restricted
+    (collection : IUTStage1LocalGlobalRealifiedFrobenioidCollection V)
+    (v : V) :
+    (collection.localObject v).realifiedLogVolume =
+      (collection.localization v).restrictedGlobalPrimeLogVolume :=
+  collection.local_realified_eq_restricted v
+
+theorem globalRealifiedLogVolume_eq_localPrime
+    (collection : IUTStage1LocalGlobalRealifiedFrobenioidCollection V)
+    (v : V) :
+    collection.globalObject.realifiedLogVolume =
+      (collection.localization v).localPrimeLogVolume :=
+  collection.global_realified_eq_localPrime v
+
+theorem extensionDegree_mul_localRealifiedLogVolume
+    (collection : IUTStage1LocalGlobalRealifiedFrobenioidCollection V)
+    (v : V) :
+    ((collection.localization v).extensionDegree : Real) *
+        (collection.localObject v).realifiedLogVolume =
+      collection.globalObject.realifiedLogVolume := by
+  rw [collection.localRealifiedLogVolume_eq_restricted v]
+  rw [(collection.localization v).extensionDegree_mul_restrictedGlobalPrimeLogVolume]
+  exact (collection.globalRealifiedLogVolume_eq_localPrime v).symm
+
+theorem totalLocalRealifiedLogVolume_eq_totalRestricted
+    (collection : IUTStage1LocalGlobalRealifiedFrobenioidCollection V) :
+    (∑ v : V, (collection.localObject v).realifiedLogVolume) =
+      ∑ v : V, (collection.localization v).restrictedGlobalPrimeLogVolume :=
+  Finset.sum_congr rfl
+    (fun v _ => collection.localRealifiedLogVolume_eq_restricted v)
+
+theorem localGlobalCollection_endpoint
+    (collection : IUTStage1LocalGlobalRealifiedFrobenioidCollection V) :
+    (∀ v : V,
+      (collection.localObject v).realifiedLogVolume =
+          (collection.localization v).restrictedGlobalPrimeLogVolume ∧
+        ((collection.localization v).extensionDegree : Real) *
+            (collection.localObject v).realifiedLogVolume =
+          collection.globalObject.realifiedLogVolume) ∧
+      (∑ v : V, (collection.localObject v).realifiedLogVolume) =
+        ∑ v : V, (collection.localization v).restrictedGlobalPrimeLogVolume :=
+  ⟨fun v =>
+      ⟨collection.localRealifiedLogVolume_eq_restricted v,
+        collection.extensionDegree_mul_localRealifiedLogVolume v⟩,
+    collection.totalLocalRealifiedLogVolume_eq_totalRestricted⟩
+
+end IUTStage1LocalGlobalRealifiedFrobenioidCollection
+
+/--
 Local `p_v^N` Frobenioid source normalized by the global realified restriction.
 
 This connects the Step (xii) local shift model to the source-backed restriction

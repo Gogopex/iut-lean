@@ -658,6 +658,13 @@ prime log-volume.  The same restricted value now normalizes the local
 \(p_v^N\)-shift source: the local shift is expressed with this restricted
 global prime step, and the automorphism-or-zero-step criterion is restated in
 terms of the restricted realified prime log-volume.
+Remark 3.9.5(ix)'s local-global collection language is represented at the same
+finite degree level.  A collection contains a local realified Frobenioid object
+for each \(v\), one global realified Frobenioid object, and localization
+restriction factors.  \Lean{} proves that each local log-volume is the
+restricted global value and that multiplying by the corresponding extension
+degree recovers the global log-volume.  This is a finite log-volume shadow of
+the local-global category, not a construction of the category itself.
 \IUT{} I, Example 5.1 and Remark 5.1.1 distinguish the diagonal Frobenioid
 \(F_{\langle J\rangle}\) from the product of underlying categories \(F_J\):
 the former carries constant distributions in \(j\), while the latter allows
@@ -961,6 +968,10 @@ The project currently proves the following source-facing results in \Lean{}:
   prime log-volume, with the degree-normalization identity proved in \Lean{}.
   This restricted value is connected to the local \(p_v^N\)-shift source used
   in the Step (xii) diagnostic.
+\item A finite local-global realified Frobenioid collection now models the
+  degree/log-volume content of Remark 3.9.5(ix): each local object is a
+  restricted global value, and extension-degree rescaling recovers the global
+  realified log-volume.
 \item The diagonal/arbitrary distribution distinction of \IUT{} I, Example 5.1
   and Remark 5.1.1 is formalized at finite realified log-volume level:
   diagonal distributions are constant in \(j\), their total is

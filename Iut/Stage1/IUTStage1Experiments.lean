@@ -160,6 +160,19 @@ theorem globalToLocalRealifiedFrobenioidRestriction_endpoint
         restriction.localPrimeLogVolume :=
   restriction.restriction_endpoint
 
+theorem localGlobalRealifiedFrobenioidCollection_endpoint
+    {V : Type u} [Fintype V]
+    (collection : IUTStage1LocalGlobalRealifiedFrobenioidCollection V) :
+    (∀ v : V,
+      (collection.localObject v).realifiedLogVolume =
+          (collection.localization v).restrictedGlobalPrimeLogVolume ∧
+        ((collection.localization v).extensionDegree : Real) *
+            (collection.localObject v).realifiedLogVolume =
+          collection.globalObject.realifiedLogVolume) ∧
+      (∑ v : V, (collection.localObject v).realifiedLogVolume) =
+        ∑ v : V, (collection.localization v).restrictedGlobalPrimeLogVolume :=
+  collection.localGlobalCollection_endpoint
+
 theorem restrictionNormalizedLocalFrobenioidSource_endpoint
     (source : IUTStage1RestrictionNormalizedLocalFrobenioidSource) :
     source.localSource.shiftedLogVolume =
