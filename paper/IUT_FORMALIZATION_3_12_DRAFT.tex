@@ -597,9 +597,11 @@ and the vertical-\(IQ\) target supplies only the \((\Ind3)\)-target
 packet-normalized equality.
 The vertical-\(IQ\) route can now also be instantiated with a finite
 divisor/Frobenioid packet product on the mono-analytic side.  In this form the
-route constructs the packet-local source alignment from the finite divisor
-realified log-volume before applying the existing Hodge/\(\SHE/\IPL\)/hull
-endpoint.
+route constructs the theta-root attached realified log-Kummer entry source
+from the finite divisor packet product and the exact vertical-\(IQ\) target
+before applying the Hodge/\(\SHE/\IPL\)/hull endpoint.  The packet-local source
+alignment is now recovered inside that source object, not passed as a separate
+route input.
 The Milestone 2 hull layer now contains a direct formalization of
 Remark 3.9.5(ii)--(iii)'s hull-map skeleton and approximant family.  The hull
 map \(\phi(P)\) is represented by a closure operator; \Lean{} exposes the
@@ -1337,6 +1339,11 @@ The project currently proves the following source-facing results in \Lean{}:
   local entry source and the divisor realified log-volume, \Lean{} derives the
   entry-source/mono-analytic-product equality used by the log-Kummer source
   calibration.
+\item The theta-root attached Step (x) source can now be constructed from the
+  same finite divisor-product source and an exact vertical-\(IQ\) target.  The
+  endpoint exposes the canonical bad-local theta-root label, Kummer/forgetting
+  product equalities, finite divisor product equality, target packet
+  normalization, q-pilot non-interference, and the upper-semi bound.
 \item The finite divisor-monoid source now has its own tensor product:
   multiplicities and unit log-volumes add, and \Lean{} proves additivity of the
   induced divisor degree and realified log-volume.
@@ -1608,6 +1615,11 @@ The project currently proves the following source-facing results in \Lean{}:
   theta-average packet normalization from that same source, removing the
   separate Step (x) packet-normalized theta-source route from the audit
   boundary.
+\item The finite-divisor vertical-\(IQ\) route now constructs this theta-root
+  attached realified source internally from the finite divisor/Frobenioid
+  packet product, then invokes the realified-source audit.  Thus the integrated
+  route no longer reconstructs a packet-local alignment independently of the
+  source object.
 \item In the ordered form, the packet-normalized theta calibration can now be
   obtained from a constant \(ZMod(\ell)\) packet-normalized route.  The theorem
   requires equality of the Hodge-descent theta source with the packet-normalized
