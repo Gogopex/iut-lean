@@ -4129,6 +4129,20 @@ theorem quotientMap_images_eq
   data.toBoundedFamilyHullQuotientSource.quotientMap_images_eq
     i j hnei hnej
 
+theorem quotientMap_two_regions_collapse_iff
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β)
+    {A B : Set α}
+    (hneA : A.Nonempty)
+    (hneB : B.Nonempty) :
+    data.quotientMap '' A =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ∧
+        data.quotientMap '' B =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ↔
+      A ⊆ data.familyHull ∧ B ⊆ data.familyHull := by
+  simpa [quotientMap, familyHull] using
+    data.toBoundedFamilyHullQuotientSource
+      |>.quotientMap_two_regions_collapse_iff hneA hneB
+
 theorem familyHullLogVolume_eq_normalized
     (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β) :
     data.familyHullLogVolume = data.determinantSource.normalizedLogVolume := by
@@ -4196,6 +4210,30 @@ theorem endpoint
   ⟨data.possibleRegion_subset_familyHull i,
     data.possibleRegion_subset_familyHull j,
     data.quotientMap_images_eq i j hnei hnej,
+    data.familyHullLogVolume_eq_determinant,
+    data.familyUnionLogVolume_le_determinant,
+    data.tensorPower_normalizedLogVolume_eq_familyHullLogVolume,
+    data.tensorPowerLogVolume_eq_scaled_familyHullLogVolume⟩
+
+theorem ob5_endpoint
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β)
+    {A B : Set α}
+    (hneA : A.Nonempty)
+    (hneB : B.Nonempty) :
+    (data.quotientMap '' A =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ∧
+        data.quotientMap '' B =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ↔
+      A ⊆ data.familyHull ∧ B ⊆ data.familyHull) ∧
+      data.familyHullLogVolume =
+        data.determinantSource.determinantLogVolume ∧
+      data.familyUnionLogVolume <=
+        data.determinantSource.determinantLogVolume ∧
+      data.tensorPower.normalizedLogVolume =
+        data.familyHullLogVolume ∧
+      data.tensorPower.tensorPowerLogVolume =
+        (data.tensorPower.tensorDegree : Real) * data.familyHullLogVolume :=
+  ⟨data.quotientMap_two_regions_collapse_iff hneA hneB,
     data.familyHullLogVolume_eq_determinant,
     data.familyUnionLogVolume_le_determinant,
     data.tensorPower_normalizedLogVolume_eq_familyHullLogVolume,

@@ -1405,6 +1405,27 @@ theorem boundedFamilyHullDetLogVolume_endpoint
         (data.tensorPower.tensorDegree : Real) * data.familyHullLogVolume :=
   data.endpoint i j hnei hnej
 
+theorem boundedFamilyHullDetLogVolumeOb5_endpoint
+    {α : Type u} {ι : Type v} {β : Type w} [Fintype β]
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β)
+    {A B : Set α}
+    (hneA : A.Nonempty)
+    (hneB : B.Nonempty) :
+    (data.quotientMap '' A =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ∧
+        data.quotientMap '' B =
+          {IUTStage1UpperSemiSetQuotient.collapsed} ↔
+      A ⊆ data.familyHull ∧ B ⊆ data.familyHull) ∧
+      data.familyHullLogVolume =
+        data.determinantSource.determinantLogVolume ∧
+      data.familyUnionLogVolume <=
+        data.determinantSource.determinantLogVolume ∧
+      data.tensorPower.normalizedLogVolume =
+        data.familyHullLogVolume ∧
+      data.tensorPower.tensorPowerLogVolume =
+        (data.tensorPower.tensorDegree : Real) * data.familyHullLogVolume :=
+  data.ob5_endpoint hneA hneB
+
 theorem boundedFamilyHullQuotient_endpoint
     {α : Type u} {ι : Type v}
     (data : IUTStage1BoundedFamilyHullQuotientSource α ι)
