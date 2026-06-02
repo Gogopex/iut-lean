@@ -44876,6 +44876,74 @@ theorem boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullRealifiedFrobenio
       alignment.sourceLogVolumeEq alignment.targetLogVolumeEqTheta realifiedSource
       alignment.qPilotPositive cTheta thetaSigned_le_cTheta_absLogQ
 
+/--
+Route-level Step (x) source-alignment audit.
+
+The final Hodge/SHE/IPL/hull route consumes one theta-root attached realified
+Step (x) source.  This endpoint exposes, at the same route boundary, the
+packet-local source alignment recovered from that source together with the
+Corollary 3.12 dichotomy.
+-/
+theorem boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullRealifiedEntryWithSourceAudit
+    {packageN :
+      IUTStage1SourcePackage source target
+        (IUTStage1PlaceAuditedDirectSummandPacketChoice
+          coric IUTStage1PlaceKind.nonarchimedean)}
+    {obligations : IUTStage1SourceHullDetObligations packageN}
+    {endpoint : packageN.PlaceAuditedMultiradialThetaHullEndpoint obligations}
+    {audit : endpoint.LogVolumeChartAudit}
+    {l : PrimeGeFive}
+    (part : audit.FLZModCuspLabelThetaHodgeDescentPacketTransportAudit l)
+    (profile : IUTStage1ZModSquareWeightProfile l)
+    (audited :
+      IUTStage1PlaceAuditedDirectSummandPacketChoice
+        coric IUTStage1PlaceKind.nonarchimedean)
+    {record : IUTStage1Theorem311MultiradialSourceRecord packageN}
+    {F : Type v} [Field F] {X C : HyperbolicOrbicurveModel F}
+    (alignment :
+      IUTStage1HodgeSHEIPLHullRouteLogVolumeAlignment
+        part audited record X C)
+    (source_profile_eq :
+      profile = IUTStage1ZModSquareWeightProfile.canonicalSquareWeights l)
+    {j : Nat}
+    {holomorphicF holomorphicD monoAnalyticD :
+      IUTStage1RealifiedFrobenioidTensorPacketProductSource
+        IUTStage1PlaceKind.nonarchimedean j}
+    {entry : IUTStage1NonarchimedeanInclusionData}
+    (realifiedSource :
+      NonarchimedeanThetaRootRealifiedFrobenioidLogKummerEntrySource
+        audited (part.insulated_route.theta_source.thetaSourceAverage audited)
+        packageN.logKummer l X C entry
+        holomorphicF holomorphicD monoAnalyticD)
+    (cTheta : Real)
+    (thetaSigned_le_cTheta_absLogQ :
+      packageN.preLedger.thetaSigned <=
+        cTheta * (-packageN.preLedger.qSigned)) :
+    let sourceCalibration :=
+      realifiedSource.realifiedEntrySource.packetSource.sourceCalibration;
+    let packetAlignment := realifiedSource.toPacketLocalSourceAlignment;
+    packetAlignment.packetLocalObject_eq_entrySource =
+        sourceCalibration.packetLocalObject_eq_entrySource ∧
+      packetAlignment.entrySource_eq_monoAnalyticProduct =
+        sourceCalibration.entrySource_eq_monoAnalyticProduct ∧
+      audited.choice.local_tensor_state.packetState.localObject.finiteLogVolume =
+        audited.choice.upper_semi_state.logVolumeCompatibility.sourceLogVolume ∧
+      ((packageN.preLedger.qSigned = packageN.preLedger.thetaSigned ∧
+          packageN.preLedger.thetaSigned < 0) ∨
+        (-1 : Real) < cTheta) := by
+  intro sourceCalibration packetAlignment
+  have sourceAudit :=
+    realifiedSource.thetaRootPacketLocalSourceAlignment_endpoint
+  rcases sourceAudit with
+    ⟨_canonical_generator, _canonical_label_ne_zero, _entry_mem,
+      packet_eq_entry, entry_eq_product, packet_eq_ind3_source⟩
+  have route :=
+    part.boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullRealifiedFrobenioidEntry
+      profile audited alignment source_profile_eq realifiedSource cTheta
+      thetaSigned_le_cTheta_absLogQ
+  exact
+    ⟨packet_eq_entry, entry_eq_product, packet_eq_ind3_source, route⟩
+
 theorem boundarySignedEqualityOrStrictCTheta_of_hodgeSHEIPLHullThetaRootPacketLocalEntry
     {packageN :
       IUTStage1SourcePackage source target
