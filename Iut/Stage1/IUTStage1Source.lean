@@ -43635,6 +43635,64 @@ theorem noFurtherIndeterminacy_endpoint
     gaussianPointwise_unitAffine_iff_noFurtherIndeterminacy
       evaluation henv a t⟩
 
+theorem coordinateSquarePreserving_iff_unit_eq_one
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l) :
+    IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) invisibility.coordinateEquiv ↔
+      invisibility.unit = 1 := by
+  have hiff :=
+    IUTStage1ZModSquareWeightProfile.coordinateSquarePreserving_unitAffine_iff
+      (l := l) invisibility.unit (0 : ZMod l.value)
+  constructor
+  · intro hcoord
+    have hcoord_affine :
+        IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+          (l := l) (zmodUnitAffineEquiv l invisibility.unit (0 : ZMod l.value)) := by
+      intro j
+      have h := hcoord j
+      simpa [coordinateEquiv, zmodUnitAffineEquiv_apply,
+        zmodUnitSmulEquiv_apply, zmodLabelTranslate_zero] using h
+    exact (hiff.mp hcoord_affine).2
+  · intro hunit j
+    have hcoord_affine :
+        IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+          (l := l) (zmodUnitAffineEquiv l invisibility.unit (0 : ZMod l.value)) :=
+      hiff.mpr ⟨rfl, hunit⟩
+    have h := hcoord_affine j
+    simpa [coordinateEquiv, zmodUnitAffineEquiv_apply,
+      zmodUnitSmulEquiv_apply, zmodLabelTranslate_zero] using h
+
+theorem factoredSquareFullLabelPreserving_iff_unit_eq_one
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l) :
+    (IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+        (l := l) invisibility.coordinateEquiv ∧
+      IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) invisibility.coordinateEquiv) ↔
+      invisibility.unit = 1 := by
+  constructor
+  · intro hpres
+    exact (invisibility.coordinateSquarePreserving_iff_unit_eq_one).mp hpres.1
+  · intro hunit
+    exact
+      ⟨(invisibility.coordinateSquarePreserving_iff_unit_eq_one).mpr hunit,
+        invisibility.fullLabelMapPreserving⟩
+
+theorem rootUnitySquareBoundary_endpoint
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) invisibility.coordinateEquiv ∧
+      (IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+          (l := l) invisibility.coordinateEquiv ↔
+        invisibility.unit = 1) ∧
+      ((IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+          (l := l) invisibility.coordinateEquiv ∧
+        IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+          (l := l) invisibility.coordinateEquiv) ↔
+        invisibility.unit = 1) :=
+  ⟨invisibility.fullLabelMapPreserving,
+    invisibility.coordinateSquarePreserving_iff_unit_eq_one,
+    invisibility.factoredSquareFullLabelPreserving_iff_unit_eq_one⟩
+
 end NonarchimedeanLogKummerRootUnityInvisibility
 
 /--

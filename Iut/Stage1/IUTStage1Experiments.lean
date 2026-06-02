@@ -896,6 +896,21 @@ theorem logKummerNoFurtherIndeterminacy_endpoint
   NonarchimedeanLogKummerRootUnityInvisibility.noFurtherIndeterminacy_endpoint
     evaluation henv a t
 
+theorem logKummerRootUnitySquareBoundary_endpoint
+    {l : PrimeGeFive}
+    (invisibility : NonarchimedeanLogKummerRootUnityInvisibility l) :
+    IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+        (l := l) invisibility.coordinateEquiv ∧
+      (IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+          (l := l) invisibility.coordinateEquiv ↔
+        invisibility.unit = 1) ∧
+      ((IUTStage1ZModSquareWeightProfile.CoordinateSquarePreserving
+          (l := l) invisibility.coordinateEquiv ∧
+        IUTStage1ZModCuspLabelLogVolumeCompatibility.FullLabelMapPreserving
+          (l := l) invisibility.coordinateEquiv) ↔
+        invisibility.unit = 1) :=
+  invisibility.rootUnitySquareBoundary_endpoint
+
 theorem finiteRealifiedFrobenioidDivisorSource_endpoint
     {π : Type u} [Fintype π]
     (source : IUTStage1FiniteRealifiedFrobenioidDivisorSource π) :

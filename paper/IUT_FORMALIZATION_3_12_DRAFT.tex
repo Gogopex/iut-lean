@@ -1061,6 +1061,12 @@ invisibility certificate.  For nonzero Gaussian environment degree, the same
 classification is equivalent to pointwise preservation of the Gaussian
 degree profile.  Thus the current code has a finite analogue of the
 ``no further indeterminacies'' assertion of Remark 3.11.4(ii).
+It also separates this cyclotomic invisibility from the stronger
+square-weight preservation used by the factored \(\SHE\) layer: a root-unit
+invisibility action always preserves the full-label map, but it preserves the
+raw representative-square profile, equivalently the combined
+square/full-label preservation package, if and only if the root unit is the
+identity.
 The integrated route now composes the Hodge--Arakelov theta-value sources with
 this packet-target nonarchimedean source.  The resulting theorem derives the
 same boundary/strict \(C_\Theta\) dichotomy from source-facing Gaussian
@@ -1612,6 +1618,10 @@ The project currently proves the following source-facing results in \Lean{}:
   full-label preservation is equivalent to zero translation plus a sign-unit
   invisibility certificate; under nonzero Gaussian environment degree this is
   also equivalent to pointwise Gaussian-degree preservation.
+\item The root-unit action preserves the raw representative-square profile,
+  equivalently the factored square/full-label package, only for the identity
+  unit; root-of-unity invisibility is therefore not silently promoted to
+  \(\SHE\) square-weight preservation.
 \item The current integrated route composes Hodge--Arakelov theta-value sources
   with the packet-target nonarchimedean source to obtain the same
   \(C_\Theta=-1\) boundary alternative or strict \(C_\Theta>-1\) conclusion.
