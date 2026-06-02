@@ -803,9 +803,10 @@ The package hull/determinant bridge now has an Ob4-shaped input form: a bound
 on the normalized tensor-power log-volume of the weighted determinant source is
 converted by \Lean{} to the determinant bound used by the canonical hull bridge.
 In the canonical-hull form, this Ob4 input also derives the
-approximant-equals-\(\phi(P)\) witness internally; the source input is q-pilot
-containment in \(\phi(P)\), tensor-power determinant compatibility, and the
-bridge equality with the package hull/determinant datum.
+approximant-equals-\(\phi(P)\) witness internally.  At the package boundary
+the same canonical Ob4 route can now start from q-pilot containment in the
+possible-image union \(P\); \Lean{} derives containment in \(\phi(P)\) before
+constructing the hull/determinant bridge.
 The same endpoint is exposed at the Theorem 3.11 source-record level, so the
 possible-image union used by the canonical hull is the record's multiradial
 theta-image union before being identified with the package target union.
@@ -1655,6 +1656,10 @@ The project currently proves the following source-facing results in \Lean{}:
   a normalized tensor-power bound is converted to the determinant bound, while
   \Lean{} derives the approximant-equals-\(\phi(P)\) witness from the canonical
   hull constructor.
+\item The package-level canonical Ob4 route now has a \(q\subseteq P\) source
+  form: bridge construction, determinant normalization, target-union
+  containment, and the signed-volume hull bound are all exposed after \Lean{}
+  derives \(q\subseteq\phi(P)\).
 \item This canonical-hull Ob4 endpoint is also public for the Theorem 3.11
   source constructor: the source record's theta possible-image union is the
   hull input before the package target-union identification is applied.
