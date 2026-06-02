@@ -623,6 +623,31 @@ theorem thetaRealifiedFrobenioidDivisorTensorProduct_endpoint
       left.thetaDivisorLogVolume + right.thetaDivisorLogVolume :=
   left.tensorProduct_thetaDivisorLogVolume_eq_add right object hprime htheta
 
+theorem logShellRealifiedFrobenioidDivisorSource_endpoint
+    {π : Type u} [Fintype π]
+    (source : IUTStage1LogShellRealifiedFrobenioidDivisorSource π)
+    (hnorm : source.normalizedFrobeniusLogVolume = 1) :
+    source.normalizedFrobeniusLogVolume =
+        source.localFrobeniusLogVolume / (source.extensionDegree : Real) ∧
+      source.logShellDivisorLogVolume =
+        (source.base.divisorDegree : Real) *
+          source.normalizedFrobeniusLogVolume +
+          source.base.unitLogVolume ∧
+      source.logShellDivisorLogVolume = source.base.realifiedLogVolume :=
+  source.endpoint hnorm
+
+theorem logShellRealifiedFrobenioidDivisorTensorProduct_endpoint
+    {π : Type u} [Fintype π]
+    (left right : IUTStage1LogShellRealifiedFrobenioidDivisorSource π)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean)
+    (hprime : left.base.primeDegree = right.base.primeDegree)
+    (hnorm :
+      left.normalizedFrobeniusLogVolume =
+        right.normalizedFrobeniusLogVolume) :
+    (left.tensorProduct right object).logShellDivisorLogVolume =
+      left.logShellDivisorLogVolume + right.logShellDivisorLogVolume :=
+  left.tensorProduct_logShellDivisorLogVolume_eq_add right object hprime hnorm
+
 theorem realifiedFrobenioidKummerCompatibility_endpoint
     {kind : IUTStage1PlaceKind} {j : Nat}
     {source target :

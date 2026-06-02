@@ -1610,6 +1610,91 @@ theorem endpoint
 end IUTStage1ThetaRealifiedFrobenioidDivisorSource
 
 /--
+Finite `D`/log-shell realified Frobenioid divisor source.
+
+IUT I, Example 3.5(iii) forms a `D`-version, or log-shell version, of the
+global realified divisor data.  The local copy is read through a distinguished
+Frobenius/log-shell element and normalized by the local extension degree.  This
+finite record keeps only that degree/log-volume content.
+-/
+structure IUTStage1LogShellRealifiedFrobenioidDivisorSource
+    (π : Type u) [Fintype π] where
+  base : IUTStage1FiniteRealifiedFrobenioidDivisorSource π
+  extensionDegree : Nat
+  extensionDegree_pos : 0 < extensionDegree
+  localFrobeniusLogVolume : Real
+
+namespace IUTStage1LogShellRealifiedFrobenioidDivisorSource
+
+variable {π : Type u} [Fintype π]
+
+noncomputable def normalizedFrobeniusLogVolume
+    (source : IUTStage1LogShellRealifiedFrobenioidDivisorSource π) : Real :=
+  source.localFrobeniusLogVolume / (source.extensionDegree : Real)
+
+noncomputable def logShellDivisorLogVolume
+    (source : IUTStage1LogShellRealifiedFrobenioidDivisorSource π) : Real :=
+  (source.base.divisorDegree : Real) * source.normalizedFrobeniusLogVolume +
+    source.base.unitLogVolume
+
+def tensorProduct
+    (left right : IUTStage1LogShellRealifiedFrobenioidDivisorSource π)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean) :
+    IUTStage1LogShellRealifiedFrobenioidDivisorSource π :=
+  { base := left.base.tensorProduct right.base object,
+    extensionDegree := left.extensionDegree,
+    extensionDegree_pos := left.extensionDegree_pos,
+    localFrobeniusLogVolume := left.localFrobeniusLogVolume }
+
+theorem normalizedFrobeniusLogVolume_eq
+    (source : IUTStage1LogShellRealifiedFrobenioidDivisorSource π) :
+    source.normalizedFrobeniusLogVolume =
+      source.localFrobeniusLogVolume / (source.extensionDegree : Real) :=
+  rfl
+
+theorem logShellDivisorLogVolume_eq_base_realified_of_normalized_one
+    (source : IUTStage1LogShellRealifiedFrobenioidDivisorSource π)
+    (hnorm : source.normalizedFrobeniusLogVolume = 1) :
+    source.logShellDivisorLogVolume = source.base.realifiedLogVolume := by
+  simp [logShellDivisorLogVolume,
+    IUTStage1FiniteRealifiedFrobenioidDivisorSource.realifiedLogVolume,
+    hnorm]
+
+theorem tensorProduct_logShellDivisorLogVolume_eq_add
+    (left right : IUTStage1LogShellRealifiedFrobenioidDivisorSource π)
+    (object : IUTStage1LocalObjectId IUTStage1PlaceKind.nonarchimedean)
+    (hprime : left.base.primeDegree = right.base.primeDegree)
+    (hnorm :
+      left.normalizedFrobeniusLogVolume =
+        right.normalizedFrobeniusLogVolume) :
+    (left.tensorProduct right object).logShellDivisorLogVolume =
+      left.logShellDivisorLogVolume + right.logShellDivisorLogVolume := by
+  simp only [tensorProduct]
+  rw [logShellDivisorLogVolume, logShellDivisorLogVolume,
+    logShellDivisorLogVolume,
+    IUTStage1FiniteRealifiedFrobenioidDivisorSource.tensorProduct_divisorDegree_eq_add
+      left.base right.base object hprime]
+  rw [← hnorm]
+  simp [normalizedFrobeniusLogVolume,
+    IUTStage1FiniteRealifiedFrobenioidDivisorSource.tensorProduct]
+  ring_nf
+
+theorem endpoint
+    (source : IUTStage1LogShellRealifiedFrobenioidDivisorSource π)
+    (hnorm : source.normalizedFrobeniusLogVolume = 1) :
+    source.normalizedFrobeniusLogVolume =
+        source.localFrobeniusLogVolume / (source.extensionDegree : Real) ∧
+      source.logShellDivisorLogVolume =
+        (source.base.divisorDegree : Real) *
+          source.normalizedFrobeniusLogVolume +
+          source.base.unitLogVolume ∧
+      source.logShellDivisorLogVolume = source.base.realifiedLogVolume :=
+  ⟨rfl, rfl,
+    source.logShellDivisorLogVolume_eq_base_realified_of_normalized_one hnorm⟩
+
+end IUTStage1LogShellRealifiedFrobenioidDivisorSource
+
+/--
 Finite realified Frobenioid degree object.
 
 IUT III treats the relevant global/non-realified and realified Frobenioids as

@@ -722,7 +722,10 @@ the existing degree-object tensor product.
 The theta-version of \IUT{} I, Example 3.5(ii), is now represented at this
 finite level: the same divisor degree is read through a formal
 \(\log(\Theta)\)-generator, and normalization of this generator to \(1\)
-recovers the ordinary finite divisor source.  A
+recovers the ordinary finite divisor source.
+The \(D\)-, or log-shell, version of Example 3.5(iii) is represented similarly:
+a distinguished local Frobenius/log-shell reading is divided by the extension
+degree before it is applied to the finite divisor degree.  A
 finite tensor-product operation on these degree objects adds divisor degrees
 and unit log-volumes, and \Lean{} proves that the realified log-volume of the
 tensor product is the sum of the two realified log-volumes.  This operation is
@@ -1100,6 +1103,10 @@ The project currently proves the following source-facing results in \Lean{}:
   formal \(\log(\Theta)\)-generator scales the divisor degree, normalization to
   \(1\) recovers the ordinary source, and tensor products preserve additivity
   when the theta generators match.
+\item The \(D\)/log-shell version is also represented at finite level:
+  \Lean{} normalizes a distinguished local Frobenius log-volume by the
+  extension degree, recovers the ordinary source when this normalized value is
+  \(1\), and proves tensor-product additivity when normalized values match.
 \item The realified Frobenioid degree layer now has finite morphisms: divisor
   and unit shifts determine the target realified log-volume, identity has zero
   shift, and composition adds both shifts.
