@@ -3021,6 +3021,14 @@ theorem endpoint
     data.approximant_eq_determinantLogVolume,
     data.approximant_eq_projected_normalized⟩
 
+theorem region_logVolume_le_determinantLogVolume
+    (data :
+      IUTStage1HullApproximantWeightedDeterminantCompatibility
+        approximant determinantSource) :
+    hullData.logVolume region <= determinantSource.determinantLogVolume :=
+  approximant.region_logVolume_le.trans
+    (le_of_eq data.approximant_eq_determinantLogVolume)
+
 end IUTStage1HullApproximantWeightedDeterminantCompatibility
 
 /--
@@ -3185,6 +3193,11 @@ def familyHullLogVolume
     Real :=
   data.hullData.logVolume data.familyHull
 
+def familyUnionLogVolume
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β) :
+    Real :=
+  data.hullData.logVolume data.familyUnion
+
 noncomputable def tensorPower
     (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β) :
     IUTStage1NaiveFrobeniusTensorPowerLogVolume :=
@@ -3228,6 +3241,18 @@ theorem familyHullLogVolume_eq_determinant
   rw [data.familyHullLogVolume_eq_normalized,
     data.determinantSource.normalizedLogVolume_eq_determinantLogVolume]
 
+theorem familyUnionLogVolume_le_familyHullLogVolume
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β) :
+    data.familyUnionLogVolume <= data.familyHullLogVolume :=
+  data.hullData.logVolume_le_hullLogVolume data.familyUnion
+
+theorem familyUnionLogVolume_le_determinant
+    (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β) :
+    data.familyUnionLogVolume <=
+      data.determinantSource.determinantLogVolume :=
+  data.familyUnionLogVolume_le_familyHullLogVolume.trans
+    (le_of_eq data.familyHullLogVolume_eq_determinant)
+
 theorem tensorPower_baseLogVolume_eq_familyHullLogVolume
     (data : IUTStage1BoundedFamilyHullDetLogVolumeSource α ι β) :
     data.tensorPower.baseLogVolume = data.familyHullLogVolume := by
@@ -3259,6 +3284,8 @@ theorem endpoint
         data.quotientMap '' data.possibleRegion j ∧
       data.familyHullLogVolume =
         data.determinantSource.determinantLogVolume ∧
+      data.familyUnionLogVolume <=
+        data.determinantSource.determinantLogVolume ∧
       data.tensorPower.normalizedLogVolume =
         data.familyHullLogVolume ∧
       data.tensorPower.tensorPowerLogVolume =
@@ -3267,6 +3294,7 @@ theorem endpoint
     data.possibleRegion_subset_familyHull j,
     data.quotientMap_images_eq i j hnei hnej,
     data.familyHullLogVolume_eq_determinant,
+    data.familyUnionLogVolume_le_determinant,
     data.tensorPower_normalizedLogVolume_eq_familyHullLogVolume,
     data.tensorPowerLogVolume_eq_scaled_familyHullLogVolume⟩
 
@@ -4000,7 +4028,7 @@ theorem canonicalHullWeightedDeterminantFamilyHullDetLogVolume_endpoint
         hendpoint.2.1,
         hendpoint.2.2.1,
         hendpoint.2.2.2.1,
-        hendpoint.2.2.2.2.1⟩
+        hendpoint.2.2.2.2.2.1⟩
 
 end IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow
 

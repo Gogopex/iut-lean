@@ -1030,6 +1030,8 @@ theorem boundedFamilyHullDetLogVolume_endpoint
         data.quotientMap '' data.possibleRegion j ∧
       data.familyHullLogVolume =
         data.determinantSource.determinantLogVolume ∧
+      data.familyUnionLogVolume <=
+        data.determinantSource.determinantLogVolume ∧
       data.tensorPower.normalizedLogVolume =
         data.familyHullLogVolume ∧
       data.tensorPower.tensorPowerLogVolume =

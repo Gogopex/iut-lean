@@ -570,6 +570,9 @@ The Ob5 compatibility of this quotient formalism with
 at finite log-volume level: the same family hull that collapses the possible
 regions is identified with the weighted determinant log-volume, and the
 associated tensor-power normalization recovers this family-hull log-volume.
+\Lean{} now also derives
+\(\mu_{\log}(\bigcup_\beta P_\beta)\le\det_{\log}\) from hull monotonicity and
+this determinant identification.
 This has also been specialized to the Corollary 3.12 possible theta-image
 family, so the possible-image hull used by the upper-ray route and the Ob5
 family-hull quotient/determinant source are definitionally the same hull.
@@ -1050,6 +1053,9 @@ The project currently proves the following source-facing results in \Lean{}:
   recovers the base log-volume.  The weighted determinant source projects to
   this tensor-power object, and two tensor-power presentations with the same
   base log-volume have equal normalized log-volume.
+\item The bounded-family hull/determinant source now proves the direct
+  estimate from possible-image union to determinant log-volume:
+  \(\mu_{\log}(\bigcup_\beta P_\beta)\le\det_{\log}\).
 \item The package-level hull/determinant bridge can now be built from the
   Ob4-normalized tensor-power bound associated to a weighted determinant
   source.  The conversion to the determinant bound is a Lean theorem, not a
