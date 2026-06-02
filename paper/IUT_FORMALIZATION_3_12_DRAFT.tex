@@ -951,6 +951,10 @@ The project currently proves the following source-facing results in \Lean{}:
   constructor: source obligations are derived from the source record where
   possible, the record's theta possible-image union is tied to the hull endpoint,
   and the determinant bound yields \(q_{\mathrm{signed}}\le\theta_{\mathrm{signed}}\).
+\item The Step (x)-to-Step (xi) upper-ray bridge can now be built directly
+  from a certified possible-image hull approximant.  The determinant
+  normalization is read from the approximant/determinant compatibility, rather
+  than supplied as a separate equality at the bridge boundary.
 \item A Hodge/\(\SHE/\IPL\)/hull packet-target route now derives the target-side
   log-volume equality from \(\SHE\) synchronization and reads \(q\)-positivity
   from the hull constructor; the source-side theta/Hodge equality is derived

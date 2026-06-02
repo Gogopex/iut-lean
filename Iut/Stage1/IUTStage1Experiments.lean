@@ -5841,6 +5841,44 @@ theorem zmodCuspLabelLogVolumeCompatibility_stepXToHull_endpoint
     determinant thetaHullLogVolume theta_eq_ind3Upper
     theta_eq_normalized_determinant
 
+theorem zmodCuspLabelLogVolumeCompatibility_stepXToHullApproximant_endpoint
+    {l : PrimeGeFive} {α : Type u} {ι : Type v}
+    (before afterInd1 afterInd2 :
+      IUTStage1ZModCuspLabelLogVolumeCompatibility l)
+    (ind3UpperBound : Real)
+    (hind1 :
+      ∀ j : ZMod l.value,
+        before.normalizedLogVolume j =
+          afterInd1.normalizedLogVolume j)
+    (hind2 :
+      ∀ j : ZMod l.value,
+        afterInd1.normalizedLogVolume j =
+          afterInd2.normalizedLogVolume j)
+    (hzero : afterInd2.zeroLogVolume <= ind3UpperBound)
+    (hcusp : ∀ label : (zmodSignAction l).SignLabelQuotient,
+      afterInd2.cuspClassLogVolume label <= ind3UpperBound)
+    (hullSource :
+      IUTStage1ThetaPossibleImagesHullApproximantLogVolumeShadow α ι)
+    (theta_eq_ind3Upper :
+      hullSource.approximantLogVolume = ind3UpperBound)
+    (q_eq_beforeAverage :
+      hullSource.qPilotLogVolume = before.toLabelAveraged.averageLogVolume) :
+    let data :=
+      open IUTStage1StepXToHullUpperRayLogVolume in
+        ofZModCuspLabelLogVolumeCompatibilitiesAndHullApproximant
+          before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+          hullSource theta_eq_ind3Upper q_eq_beforeAverage
+    data.qPilotLogVolume = hullSource.qPilotLogVolume ∧
+      data.thetaHullLogVolume = hullSource.approximantLogVolume ∧
+      hullSource.thetaImageUnionLogVolume <= data.thetaHullLogVolume ∧
+      data.qPilotLogVolume <= data.thetaHullLogVolume ∧
+      data.thetaHullLogVolume = hullSource.determinant.normalizedLogVolume :=
+  by
+    open IUTStage1StepXToHullUpperRayLogVolume in
+      exact ofZModCuspLabelLogVolumeCompatibilitiesAndHullApproximant_endpoint
+        before afterInd1 afterInd2 ind3UpperBound hind1 hind2 hzero hcusp
+        hullSource theta_eq_ind3Upper q_eq_beforeAverage
+
 theorem zmodCuspLabelLogVolumeCompatibility_stepXToHull_q_mem
     {l : PrimeGeFive}
     (before afterInd1 afterInd2 :
